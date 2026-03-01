@@ -14,7 +14,7 @@ namespace mRemoteNG.Tools
     [SupportedOSPlatform("windows")]
     public class ConnectionsTreeToMenuItemsConverter
     {
-        public MouseEventHandler MouseUpEventHandler { get; set; }
+        public MouseEventHandler? MouseUpEventHandler { get; set; }
 
 
         public IEnumerable<ToolStripDropDownItem> CreateToolStripDropDownItems(ConnectionTreeModel connectionTreeModel)
@@ -55,8 +55,7 @@ namespace mRemoteNG.Tools
                 Tag = node
             };
 
-            ContainerInfo nodeAsContainer = node as ContainerInfo;
-            if (nodeAsContainer != null)
+            if (node is ContainerInfo nodeAsContainer)
             {
                 menuItem.Image = Properties.Resources.FolderClosed_16x;
                 menuItem.Tag = nodeAsContainer;

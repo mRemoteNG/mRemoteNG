@@ -8,12 +8,15 @@ using LiteDB;
 using mRemoteNG.Config.MachineIdentifier;
 using System.Runtime.Versioning;
 
+namespace mRemoteNG.Config.Settings;
+
 [SupportedOSPlatform("windows")]
 public class LocalDBManager
 {
+    private static readonly JsonSerializerOptions s_jsonOptions = new() { WriteIndented = true };
     private readonly string _dbPath;
     private readonly string _schemaPath;
-    private readonly string _mRIdentifier;
+    private readonly string _mRIdentifier = string.Empty; // Initialize to non-null default
     private readonly bool? _useEncryption;
 
   
@@ -23,7 +26,7 @@ public class LocalDBManager
     /// <param name="dbPath">The path to the database file.</param>
     /// <param name="useEncryption">Indicates whether to use encryption for the database. If null, no change is made to an existing database.</param>
     /// <param name="schemaFilePath">Optional path to a schema file for creating the database structure.</param>
-    public LocalDBManager(string dbPath = null, bool? useEncryption = null, string schemaFilePath = null)
+    public LocalDBManager(string? dbPath = null, bool? useEncryption = null, string? schemaFilePath = null)
     {
         _dbPath = string.IsNullOrWhiteSpace(dbPath) ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mRemoteNG.appSettings") : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dbPath);
         _schemaPath = string.IsNullOrWhiteSpace(schemaFilePath) ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Schemas\\mremoteng_default_settings_v1_0.json") : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, schemaFilePath);
@@ -42,10 +45,12 @@ public class LocalDBManager
         catch (PlatformNotSupportedException ex)
         {
             Console.WriteLine(ex.Message);
+            _mRIdentifier = string.Empty; // Ensure initialization on error
         }
         catch (Exception ex)
         {
             Console.WriteLine($"An error occurred: {ex.Message}");
+            _mRIdentifier = string.Empty; // Ensure initialization on error
         }
 
 
@@ -124,7 +129,7 @@ public class LocalDBManager
     /// Creates the database using the machine identifier as a password if encryption is enabled.
     /// </summary>
     /// <param name="schemaFilePath">Path to the schema file for creating the database structure.</param>
-    private void CreateDatabase(string schemaFilePath = null)
+    private void CreateDatabase(string? schemaFilePath = null)
     {
         var connectionString = _useEncryption.HasValue && _useEncryption.Value
             ? $"Filename={_dbPath};Password={_mRIdentifier}"
@@ -133,16 +138,16 @@ public class LocalDBManager
         {
             if (!string.IsNullOrWhiteSpace(schemaFilePath) && File.Exists(schemaFilePath))
             {
-                if (schemaFilePath == null || schemaFilePath.Contains("../") || schemaFilePath.Contains(@"..\"))
+                if (string.IsNullOrWhiteSpace(schemaFilePath) || schemaFilePath.Contains("../", StringComparison.Ordinal) || schemaFilePath.Contains(@"..\", StringComparison.Ordinal))
                 {
-                    throw new ArgumentException("Invalid file path");
+                    throw new ArgumentException("Invalid file path", nameof(schemaFilePath));
                 }
                 var schemaJson = File.ReadAllText(schemaFilePath);
                 using (JsonDocument doc = JsonDocument.Parse(schemaJson))
                 {
                     foreach (JsonElement table in doc.RootElement.GetProperty("tables").EnumerateArray())
                     {
-                        string tableName = table.GetProperty("name").GetString();
+                        string tableName = table.GetProperty("name").GetString() ?? string.Empty;
                         var collection = db.GetCollection<Setting>(tableName);
                         Console.WriteLine($"Table '{tableName}' created with structure from schema.");
 
@@ -156,13 +161,13 @@ public class LocalDBManager
                                     Id = Guid.NewGuid(),
                                     Timestamp = DateTime.UtcNow,
                                     Group = "default",
-                                    Key = column.GetProperty("name").GetString(),
+                                    Key = column.GetProperty("name").GetString() ?? string.Empty,
                                     Value = column.GetProperty("value").ToString()
                                 };
                                 collection.Insert(settingsData);
                                 Console.WriteLine($"Inserted default setting '{settingsData.Key}' for table '{tableName}'.");
                             }
-                        };
+                        }
                         Console.WriteLine($"Inserted default settings for table '{tableName}'.");
                     }
                 }
@@ -273,12 +278,17 @@ public void EncryptDatabase()
     {
         if (File.Exists(jsonFilePath))
         {
-            if (jsonFilePath == null || jsonFilePath.Contains("../") || jsonFilePath.Contains(@"..\"))
+            if (jsonFilePath == null || jsonFilePath.Contains("../", StringComparison.Ordinal) || jsonFilePath.Contains(@"..\", StringComparison.Ordinal))
             {
-                throw new ArgumentException("Invalid file path");
+                throw new ArgumentException("Invalid file path", nameof(jsonFilePath));
             }
             var json = File.ReadAllText(jsonFilePath);
             var settingsData = JsonSerializer.Deserialize<Dictionary<string, List<Setting>>>(json);
+            if (settingsData == null)
+            {
+                Console.WriteLine("Failed to deserialize settings from JSON file.");
+                return;
+            }
 
             foreach (var table in settingsData.Keys)
             {
@@ -307,7 +317,7 @@ public void EncryptDatabase()
 
         using (var db = new LiteDatabase(connectionString))
         {
-            var settingsData = new Dictionary<string, List<Setting>>();
+            var settingsData = new Dictionary<string, List<Setting>>(StringComparer.Ordinal);
 
             foreach (var tableName in db.GetCollectionNames())
             {
@@ -315,10 +325,10 @@ public void EncryptDatabase()
                 settingsData[tableName] = new List<Setting>(settings);
             }
 
-            var json = JsonSerializer.Serialize(settingsData, new JsonSerializerOptions { WriteIndented = true });
-            if (jsonFilePath == null || jsonFilePath.Contains("../") || jsonFilePath.Contains(@"..\"))
+            var json = JsonSerializer.Serialize(settingsData, s_jsonOptions);
+            if (jsonFilePath == null || jsonFilePath.Contains("../", StringComparison.Ordinal) || jsonFilePath.Contains(@"..\", StringComparison.Ordinal))
             {
-                throw new ArgumentException("Invalid file path");
+                throw new ArgumentException("Invalid file path", nameof(jsonFilePath));
             }
             File.WriteAllText(jsonFilePath, json);
             Console.WriteLine("Settings successfully exported to JSON file.");
@@ -409,8 +419,8 @@ public void EncryptDatabase()
     {
         public Guid Id { get; set; }
         public DateTime Timestamp { get; set; }
-        public string Group { get; set; }
-        public string Key { get; set; }
-        public string Value { get; set; }
+        public string Group { get; set; } = string.Empty;
+        public string Key { get; set; } = string.Empty;
+        public string Value { get; set; } = string.Empty;
     }
 }

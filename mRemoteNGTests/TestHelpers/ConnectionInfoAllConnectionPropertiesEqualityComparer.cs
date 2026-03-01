@@ -22,8 +22,8 @@ namespace mRemoteNGTests.TestHelpers
 			unchecked // Overflow is fine, just wrap
 			{
 				return allProperties
-					.Aggregate(17, 
-						(current, prop) => current * 23 + prop.GetValue(connectionInfo).GetHashCode());
+					.Aggregate(17,
+						(current, prop) => current * 23 + (prop.GetValue(connectionInfo)?.GetHashCode() ?? 0));
 			}
 		}
 	}

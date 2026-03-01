@@ -15,7 +15,7 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
 
         private IntPtr _handle;
         private readonly ConnectionInfo _connectionInfo = connectionInfo;
-        private ConsoleControl.ConsoleControl _consoleControl;
+        private ConsoleControl.ConsoleControl? _consoleControl;
 
         #endregion
 
@@ -188,20 +188,19 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
 
                 // Setup process for script with arguments
                 //* The -NoProfile parameter would be a valuable addition but should be able to be deactivated.
-                string arguments = $@"-NoExit -Command ""& {{ {psScriptBlock} }}"" -Hostname ""'{_connectionInfo.Hostname}'"" -Username ""'{psUsername}'"" -Password ""'{_connectionInfo.Password}'"" -LoginAttempts {psLoginAttempts}";
-                string hostname = _connectionInfo.Hostname.Trim().ToLower();
-                bool useLocalHost = hostname == "" || hostname.Equals("localhost");
+                string arguments = $@"-NoExit -Command ""& {{ {psScriptBlock} }}"" -Hostname ""'{EscapePsString(_connectionInfo.Hostname)}'"" -Username ""'{EscapePsString(psUsername)}'"" -Password ""'{EscapePsString(_connectionInfo.Password)}'"" -LoginAttempts {psLoginAttempts}";
+                string hostname = _connectionInfo.Hostname.Trim().ToLowerInvariant();
+                bool useLocalHost = hostname == "" || hostname.Equals("localhost", StringComparison.Ordinal);
                 if (useLocalHost)
                 {
                     arguments = $@"-NoExit";
                 }
                 _consoleControl.StartProcess(psExe, arguments);
 
-                while (!_consoleControl.IsHandleCreated) break;
                 _handle = _consoleControl.Handle;
                 NativeMethods.SetParent(_handle, InterfaceControl.Handle);
 
-                Resize(this, new EventArgs());
+                Resize(this, EventArgs.Empty);
                 base.Connect();
                 return true;
             }
@@ -243,6 +242,16 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
                 Runtime.MessageCollector.AddExceptionMessage(Language.IntAppResizeFailed, ex);
             }
         }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Escapes a value for embedding in a PowerShell single-quoted string literal.
+        /// Single quotes are escaped by doubling them, preventing injection via crafted values.
+        /// </summary>
+        private static string EscapePsString(string value) => value.Replace("'", "''", StringComparison.Ordinal);
 
         #endregion
 

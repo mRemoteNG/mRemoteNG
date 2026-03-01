@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using System;
+using Microsoft.Win32;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.OpenSsl;
@@ -54,7 +55,7 @@ public class PasswordstateInterface
                 f.tbServerURL.Text = url;
 
                 var b = key.GetValue("SSO");
-                if (b == null || (string)b != "True")
+                if (b == null || !string.Equals((string)b, "True", StringComparison.Ordinal))
                     ssSSO = false;
                 else
                     ssSSO = true;
@@ -73,6 +74,13 @@ public class PasswordstateInterface
                     ssPassword = f.tbAPIKey.Text;
                     ssUrl = f.tbServerURL.Text;
                     ssSSO = f.cbUseSSO.Checked;
+
+                    // Require HTTPS for vault connections
+                    if (!ssUrl.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+                    {
+                        MessageBox.Show("Passwordstate server URL must use HTTPS for secure communication.", "Security Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        continue;
+                    }
                     ssOTP = f.tbOTP.Text;
                     ssOTPTimeStampExpiration = DateTime.Now.AddSeconds(30);
                     // check connection first
@@ -122,7 +130,7 @@ public class PasswordstateInterface
             client.DefaultRequestHeaders.Add("User-Agent", "mRemote");
             client.DefaultRequestHeaders.Add("OTP", CPSConnectionData.ssOTP);
 
-            var json = client.GetStringAsync(url).Result;
+            var json = Task.Run(() => client.GetStringAsync(url)).GetAwaiter().GetResult();
             JsonNode? data = JsonSerializer.Deserialize<JsonNode>(json);
             if (data == null)
                 return false;
@@ -137,7 +145,7 @@ public class PasswordstateInterface
             client.DefaultRequestHeaders.Add("APIKey", CPSConnectionData.ssPassword);
             client.DefaultRequestHeaders.Add("OTP", CPSConnectionData.ssOTP);
 
-            var json = client.GetStringAsync(url).Result;
+            var json = Task.Run(() => client.GetStringAsync(url)).GetAwaiter().GetResult();
             JsonNode? data = JsonSerializer.Deserialize<JsonNode>(json);
             if (data == null)
                 return false;
@@ -154,7 +162,7 @@ public class PasswordstateInterface
         client.DefaultRequestHeaders.Add("User-Agent", "mRemote");
         client.DefaultRequestHeaders.Add("OTP", CPSConnectionData.ssOTP);
 
-        var json = client.GetStringAsync(url).Result;
+        var json = Task.Run(() => client.GetStringAsync(url)).GetAwaiter().GetResult();
         JsonNode? data = JsonSerializer.Deserialize<JsonNode>(json);
         if (data == null)
             return null;
@@ -171,7 +179,7 @@ public class PasswordstateInterface
         client.DefaultRequestHeaders.Add("APIKey", CPSConnectionData.ssPassword);
         client.DefaultRequestHeaders.Add("OTP", CPSConnectionData.ssOTP);
 
-        var json = client.GetStringAsync(url).Result;
+        var json = Task.Run(() => client.GetStringAsync(url)).GetAwaiter().GetResult();
         JsonNode? data = JsonSerializer.Deserialize<JsonNode>(json);
         if (data == null)
             return null;

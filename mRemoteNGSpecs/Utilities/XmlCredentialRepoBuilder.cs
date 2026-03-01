@@ -16,8 +16,7 @@ namespace mRemoteNGSpecs.Utilities
 
         public ICredentialRepository BuildXmlCredentialRepo()
         {
-            var xmlFileBuilder = new CredRepoXmlFileBuilder();
-            var xmlFileContent = xmlFileBuilder.Build(CryptographyProvider.Encrypt("someheaderdata", EncryptionKey));
+            var xmlFileContent = CredRepoXmlFileBuilder.Build(CryptographyProvider.Encrypt("someheaderdata", EncryptionKey));
             var dataProvider = new InMemoryStringDataProvider(xmlFileContent);
             var encryptor = new XmlCredentialPasswordEncryptorDecorator(
                 CryptographyProvider,

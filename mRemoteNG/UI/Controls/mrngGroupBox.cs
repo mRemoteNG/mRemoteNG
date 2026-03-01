@@ -10,7 +10,7 @@ namespace mRemoteNG.UI.Controls
     //This clas completely repaints the control
     public class MrngGroupBox : GroupBox
     {
-        private ThemeManager _themeManager;
+        private ThemeManager? _themeManager;
 
         public MrngGroupBox()
         {
@@ -30,22 +30,29 @@ namespace mRemoteNG.UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!_themeManager.ActiveAndExtended)
+            if (_themeManager is null || !_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;
             }
 
             //Reusing the textbox colors
-            Color titleColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Foreground");
-            //var backColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Backgorund");
-            Color lineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Line");
+            var palette = _themeManager.ActiveTheme.ExtendedPalette;
+            if (palette is null)
+            {
+                base.OnPaint(e);
+                return;
+            }
+
+            Color titleColor = palette.getColor("GroupBox_Foreground");
+            //var backColor = palette.getColor("GroupBox_Backgorund");
+            Color lineColor = palette.getColor("GroupBox_Line");
 
             if (!Enabled)
             {
-                titleColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Disabled_Foreground");
-                //backColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Disabled_Background");
-                lineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Disabled_Line");
+                titleColor = palette.getColor("GroupBox_Disabled_Foreground");
+                //backColor = palette.getColor("GroupBox_Disabled_Background");
+                lineColor = palette.getColor("GroupBox_Disabled_Line");
             }
 
 

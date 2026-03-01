@@ -32,6 +32,9 @@ namespace mRemoteNG.Connection.Protocol
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Https))]
         HTTPS = 8,
 
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Serial))]
+        Serial = 9,
+
         [LocalizedAttributes.LocalizedDescription(nameof(Language.PowerShell))]
         PowerShell = 10,
 
@@ -47,11 +50,23 @@ namespace mRemoteNG.Connection.Protocol
         [LocalizedAttributes.LocalizedDescription(nameof(Language.AnyDesk))]
         AnyDesk = 14,
 
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Vmrc))]
+        VMRC = 15,
+
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Msra))]
+        MSRA = 16,
+
         [LocalizedAttributes.LocalizedDescription(nameof(Language.ExternalTool))]
-        IntApp = 20
+        IntApp = 20,
+
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.OpenSsh))]
+        OpenSSH = 22,
+
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Winbox))]
+        Winbox = 21
     }
 
-    public class ProtocolFeature
+    public static class ProtocolFeature
     {
         public static bool SupportBlankHostname(ProtocolType protocolType)
         {

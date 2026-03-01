@@ -1,4 +1,4 @@
-﻿using System.Runtime.Versioning;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection.Protocol.Serial
 {
@@ -13,6 +13,30 @@ namespace mRemoteNG.Connection.Protocol.Serial
         public enum Defaults
         {
             Port = 9600
+        }
+
+        public enum Parity
+        {
+            None,
+            Odd,
+            Even,
+            Mark,
+            Space
+        }
+
+        public enum StopBits
+        {
+            One,
+            OnePointFive,
+            Two
+        }
+
+        public enum FlowControl
+        {
+            None,
+            XonXoff,
+            RtsCts,
+            DsrDtr
         }
     }
 }

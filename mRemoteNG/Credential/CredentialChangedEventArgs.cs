@@ -9,11 +9,8 @@ namespace mRemoteNG.Credential
 
         public CredentialChangedEventArgs(ICredentialRecord credentialRecord, ICredentialRepository repository)
         {
-            if (credentialRecord == null)
-                throw new ArgumentNullException(nameof(credentialRecord));
-            if (repository == null)
-                throw new ArgumentNullException(nameof(repository));
-
+            ArgumentNullException.ThrowIfNull(credentialRecord);
+            ArgumentNullException.ThrowIfNull(repository);
             CredentialRecord = credentialRecord;
             Repository = repository;
         }

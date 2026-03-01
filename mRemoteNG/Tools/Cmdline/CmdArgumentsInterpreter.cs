@@ -25,14 +25,14 @@ namespace mRemoteNG.Tools.Cmdline
         private readonly StringDictionary _parameters;
 
         // Retrieve a parameter value if it exists
-        public string this[string param] => (_parameters[param]);
+        public string? this[string param] => _parameters[param];
 
         public CmdArgumentsInterpreter(IEnumerable<string> args)
         {
             _parameters = [];
             Regex spliter = new("^-{1,2}|^/|=|:", RegexOptions.IgnoreCase | RegexOptions.Compiled);
             Regex remover = new("^[\'\"]?(.*?)[\'\"]?$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-            string parameter = null;
+            string? parameter = null;
 
             // Valid parameters forms:
             // {-,/,--}param{ ,=,:}((",')value(",'))

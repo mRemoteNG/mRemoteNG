@@ -53,6 +53,11 @@ namespace mRemoteNG.Config.Settings.Registry
         /// </summary>
         public WinRegistryEntry<bool> BindConnectionsAndConfigPanels { get; private set; }
 
+        /// <summary>
+        /// Specifies whether empty panels are auto-closed after the last tab is closed.
+        /// </summary>
+        public WinRegistryEntry<bool> AutoClosePanelOnLastTabClose { get; private set; }
+
         public OptRegistryTabsPanelsPage()
         {
             RegistryHive hive = WindowsRegistryInfo.Hive;
@@ -67,6 +72,7 @@ namespace mRemoteNG.Config.Settings.Registry
             CreateEmptyPanelOnStartUp = new WinRegistryEntry<bool>(hive, subKey, nameof(CreateEmptyPanelOnStartUp)).Read();
             StartUpPanelName = new WinRegistryEntry<string>(hive, subKey, nameof(StartUpPanelName)).Read();
             BindConnectionsAndConfigPanels = new WinRegistryEntry<bool>(hive, subKey, nameof(BindConnectionsAndConfigPanels)).Read();
+            AutoClosePanelOnLastTabClose = new WinRegistryEntry<bool>(hive, subKey, nameof(AutoClosePanelOnLastTabClose)).Read();
 
             SetupValidation();
             Apply();
@@ -75,9 +81,9 @@ namespace mRemoteNG.Config.Settings.Registry
         /// <summary>
         /// Configures validation settings for various parameters
         /// </summary>
-        private void SetupValidation()
+        private static void SetupValidation()
         {
-
+            // No validation rules required for tabs/panels settings at this time.
         }
 
         /// <summary>
@@ -94,6 +100,7 @@ namespace mRemoteNG.Config.Settings.Registry
             ApplyCreateEmptyPanelOnStartUp();
             ApplyStartUpPanelName();
             ApplyBindConnectionsAndConfigPanels();
+            ApplyAutoClosePanelOnLastTabClose();
         }
 
         private void ApplyAlwaysShowPanelTabs()
@@ -148,6 +155,12 @@ namespace mRemoteNG.Config.Settings.Registry
         {
             if (BindConnectionsAndConfigPanels.IsSet)
                 Properties.OptionsTabsPanelsPage.Default.BindConnectionsAndConfigPanels = BindConnectionsAndConfigPanels.Value;
+        }
+
+        private void ApplyAutoClosePanelOnLastTabClose()
+        {
+            if (AutoClosePanelOnLastTabClose.IsSet)
+                Properties.OptionsTabsPanelsPage.Default.AutoClosePanelOnLastTabClose = AutoClosePanelOnLastTabClose.Value;
         }
     }
 }

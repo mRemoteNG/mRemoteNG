@@ -32,19 +32,26 @@ namespace mRemoteNG.UI.Forms
             this.rdoExportSelectedConnection = new mRemoteNG.UI.Controls.MrngRadioButton();
             this.rdoExportSelectedFolder = new mRemoteNG.UI.Controls.MrngRadioButton();
             this.rdoExportEverything = new mRemoteNG.UI.Controls.MrngRadioButton();
+            this.grpEncryption = new System.Windows.Forms.GroupBox();
+            this.chkEncrypt = new MrngCheckBox();
+            this.lblPassword = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtPassword = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblConfirm = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtConfirm = new mRemoteNG.UI.Controls.MrngTextBox();
             this.grpProperties.SuspendLayout();
             this.grpFile.SuspendLayout();
             this.grpItems.SuspendLayout();
+            this.grpEncryption.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel._mice = MrngButton.MouseState.HOVER;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(447, 473);
+            this.btnCancel.Location = new System.Drawing.Point(447, 583);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 3;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -52,10 +59,10 @@ namespace mRemoteNG.UI.Forms
             // btnOK
             // 
             this.btnOK._mice = MrngButton.MouseState.HOVER;
-            this.btnOK.Location = new System.Drawing.Point(366, 473);
+            this.btnOK.Location = new System.Drawing.Point(366, 583);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 2;
+            this.btnOK.TabIndex = 5;
             this.btnOK.Text = "&OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -155,10 +162,10 @@ namespace mRemoteNG.UI.Forms
             this.grpProperties.Controls.Add(this.chkUsername);
             this.grpProperties.Controls.Add(this.chkDomain);
             this.grpProperties.Controls.Add(this.chkPassword);
-            this.grpProperties.Location = new System.Drawing.Point(12, 304);
+            this.grpProperties.Location = new System.Drawing.Point(12, 410);
             this.grpProperties.Name = "grpProperties";
             this.grpProperties.Size = new System.Drawing.Size(510, 163);
-            this.grpProperties.TabIndex = 1;
+            this.grpProperties.TabIndex = 4;
             this.grpProperties.TabStop = false;
             this.grpProperties.Text = "Export Properties";
             // 
@@ -229,7 +236,7 @@ namespace mRemoteNG.UI.Forms
             this.grpItems.Location = new System.Drawing.Point(12, 158);
             this.grpItems.Name = "grpItems";
             this.grpItems.Size = new System.Drawing.Size(510, 140);
-            this.grpItems.TabIndex = 4;
+            this.grpItems.TabIndex = 1;
             this.grpItems.TabStop = false;
             this.grpItems.Text = "Export Items";
             // 
@@ -288,14 +295,77 @@ namespace mRemoteNG.UI.Forms
             this.rdoExportEverything.Text = "Export everything";
             this.rdoExportEverything.UseVisualStyleBackColor = true;
             // 
+            // grpEncryption
+            // 
+            this.grpEncryption.Controls.Add(this.chkEncrypt);
+            this.grpEncryption.Controls.Add(this.lblPassword);
+            this.grpEncryption.Controls.Add(this.txtPassword);
+            this.grpEncryption.Controls.Add(this.lblConfirm);
+            this.grpEncryption.Controls.Add(this.txtConfirm);
+            this.grpEncryption.Location = new System.Drawing.Point(12, 304);
+            this.grpEncryption.Name = "grpEncryption";
+            this.grpEncryption.Size = new System.Drawing.Size(510, 100);
+            this.grpEncryption.TabIndex = 3;
+            this.grpEncryption.TabStop = false;
+            this.grpEncryption.Text = "Encryption";
+            // 
+            // chkEncrypt
+            // 
+            this.chkEncrypt._mice = MrngCheckBox.MouseState.HOVER;
+            this.chkEncrypt.AutoSize = true;
+            this.chkEncrypt.Location = new System.Drawing.Point(15, 25);
+            this.chkEncrypt.Name = "chkEncrypt";
+            this.chkEncrypt.Size = new System.Drawing.Size(83, 17);
+            this.chkEncrypt.TabIndex = 0;
+            this.chkEncrypt.Text = "Encrypt File";
+            this.chkEncrypt.UseVisualStyleBackColor = true;
+            this.chkEncrypt.CheckedChanged += new System.EventHandler(this.chkEncrypt_CheckedChanged);
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Location = new System.Drawing.Point(15, 53);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(56, 13);
+            this.lblPassword.TabIndex = 1;
+            this.lblPassword.Text = "Password:";
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPassword.Location = new System.Drawing.Point(100, 50);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(150, 22);
+            this.txtPassword.TabIndex = 2;
+            this.txtPassword.UseSystemPasswordChar = true;
+            // 
+            // lblConfirm
+            // 
+            this.lblConfirm.AutoSize = true;
+            this.lblConfirm.Location = new System.Drawing.Point(270, 53);
+            this.lblConfirm.Name = "lblConfirm";
+            this.lblConfirm.Size = new System.Drawing.Size(51, 13);
+            this.lblConfirm.TabIndex = 3;
+            this.lblConfirm.Text = "Confirm:";
+            // 
+            // txtConfirm
+            // 
+            this.txtConfirm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtConfirm.Location = new System.Drawing.Point(330, 50);
+            this.txtConfirm.Name = "txtConfirm";
+            this.txtConfirm.Size = new System.Drawing.Size(150, 22);
+            this.txtConfirm.TabIndex = 4;
+            this.txtConfirm.UseSystemPasswordChar = true;
+            // 
             // ExportForm
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(534, 508);
+            this.ClientSize = new System.Drawing.Size(534, 620);
             this.Controls.Add(this.grpItems);
+            this.Controls.Add(this.grpEncryption);
             this.Controls.Add(this.grpFile);
             this.Controls.Add(this.grpProperties);
             this.Controls.Add(this.btnCancel);
@@ -315,6 +385,8 @@ namespace mRemoteNG.UI.Forms
             this.grpFile.PerformLayout();
             this.grpItems.ResumeLayout(false);
             this.grpItems.PerformLayout();
+            this.grpEncryption.ResumeLayout(false);
+            this.grpEncryption.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -338,6 +410,12 @@ namespace mRemoteNG.UI.Forms
 		private Controls.MrngRadioButton rdoExportSelectedConnection;
 		private Controls.MrngRadioButton rdoExportSelectedFolder;
 		private Controls.MrngRadioButton rdoExportEverything;
+        private System.Windows.Forms.GroupBox grpEncryption;
+        private MrngCheckBox chkEncrypt;
+        private Controls.MrngLabel lblPassword;
+        private Controls.MrngTextBox txtPassword;
+        private Controls.MrngLabel lblConfirm;
+        private Controls.MrngTextBox txtConfirm;
         #endregion
 
         private MrngCheckBox chkAssignedCredential;

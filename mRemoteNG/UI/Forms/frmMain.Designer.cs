@@ -40,6 +40,7 @@ namespace mRemoteNG.UI.Forms
             this.fileMenu = new mRemoteNG.UI.Menu.FileMenu();
             this.sessionsMenu = new mRemoteNG.UI.Menu.SessionsMenu();
             this.viewMenu = new mRemoteNG.UI.Menu.ViewMenu();
+            this.connectionsMenu = new mRemoteNG.UI.Menu.ConnectionsMenu();
             this.toolsMenu = new mRemoteNG.UI.Menu.ToolsMenu();
             this.helpMenu = new mRemoteNG.UI.Menu.HelpMenu();
             this.mMenSep3 = new System.Windows.Forms.ToolStripSeparator();
@@ -59,6 +60,8 @@ namespace mRemoteNG.UI.Forms
             // 
             // pnlDock
             // 
+            this.pnlDock.AccessibleName = "Connection Panel";
+            this.pnlDock.AccessibleDescription = "Main docking panel for connection windows and tool panels";
             this.pnlDock.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDock.DockBackColor = System.Drawing.SystemColors.Control;
             this.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
@@ -78,12 +81,15 @@ namespace mRemoteNG.UI.Forms
             this.fileMenu,
             this.sessionsMenu,
             this.viewMenu,
+            this.connectionsMenu,
             this.toolsMenu,
             this.helpMenu});
             this.msMain.Location = new System.Drawing.Point(3, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.msMain.Size = new System.Drawing.Size(212, 25);
+            this.msMain.AccessibleName = "Main Menu";
+            this.msMain.AccessibleDescription = "Main menu bar with File, Sessions, View, Connections, Tools, and Help menus";
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 0;
             this.msMain.Text = "Main Toolbar";
@@ -115,6 +121,13 @@ namespace mRemoteNG.UI.Forms
             this.viewMenu.TsMultiSsh = null;
             this.viewMenu.TsQuickConnect = null;
             this.viewMenu.DropDownOpening += new System.EventHandler(this.ViewMenu_Opening);
+            // 
+            // connectionsMenu
+            // 
+            this.connectionsMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.connectionsMenu.Name = "mMenConnections";
+            this.connectionsMenu.Size = new System.Drawing.Size(86, 19);
+            this.connectionsMenu.Text = "Connections";
             // 
             // toolsMenu
             // 
@@ -162,6 +175,8 @@ namespace mRemoteNG.UI.Forms
             // 
             // _quickConnectToolStrip
             // 
+            this._quickConnectToolStrip.AccessibleName = "Quick Connect";
+            this._quickConnectToolStrip.AccessibleDescription = "Quick connect toolbar for connecting to hosts by hostname";
             this._quickConnectToolStrip.BackColor = System.Drawing.SystemColors.Control;
             this._quickConnectToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._quickConnectToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -172,6 +187,8 @@ namespace mRemoteNG.UI.Forms
             // 
             // _multiSshToolStrip
             // 
+            this._multiSshToolStrip.AccessibleName = "Multi SSH";
+            this._multiSshToolStrip.AccessibleDescription = "Multi SSH toolbar for sending commands to multiple sessions";
             this._multiSshToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._multiSshToolStrip.Location = new System.Drawing.Point(3, 0);
             this._multiSshToolStrip.MinimumSize = new System.Drawing.Size(300, 0);
@@ -181,6 +198,8 @@ namespace mRemoteNG.UI.Forms
             // 
             // _externalToolsToolStrip
             // 
+            this._externalToolsToolStrip.AccessibleName = "External Tools";
+            this._externalToolsToolStrip.AccessibleDescription = "External tools toolbar for launching external applications";
             this._externalToolsToolStrip.BackColor = System.Drawing.SystemColors.Control;
             this._externalToolsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._externalToolsToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -242,18 +261,7 @@ namespace mRemoteNG.UI.Forms
             this.ResumeLayout(false);
 		}
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == (Keys.Alt | Keys.Menu))
-            {
-                if(!msMain.Visible)
-                {
-                    msMain.Visible = true;
-                }
-            }
 
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
 
         internal WeifenLuo.WinFormsUI.Docking.DockPanel pnlDock;
 		internal System.Windows.Forms.MenuStrip msMain;
@@ -264,6 +272,7 @@ namespace mRemoteNG.UI.Forms
         private Menu.FileMenu fileMenu;
         private Menu.SessionsMenu sessionsMenu;
         private Menu.ViewMenu viewMenu;
+        private Menu.ConnectionsMenu connectionsMenu;
         private Menu.ToolsMenu toolsMenu;
         private Menu.HelpMenu helpMenu;
         internal mRemoteNG.UI.Controls.QuickConnectToolStrip _quickConnectToolStrip;

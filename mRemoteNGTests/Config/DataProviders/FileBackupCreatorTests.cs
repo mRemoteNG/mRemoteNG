@@ -35,7 +35,7 @@ public class FileBackupCreatorTests
     public void BackupCreatedWhenFileAlreadyExists()
     {
         File.WriteAllText(_testFilePath, "");
-        _fileBackupCreator.CreateBackupFile(_testFilePath);
+        FileBackupCreator.CreateBackupFile(_testFilePath);
         var rollingBackupFiles = Directory.GetFiles(_testFileDirectory, _testFileRollingBackup);
         Assert.That(rollingBackupFiles.Length, Is.EqualTo(1));
     }
@@ -43,7 +43,7 @@ public class FileBackupCreatorTests
     [Test]
     public void BackupNotCreatedIfFileDidntAlreadyExist()
     {
-        _fileBackupCreator.CreateBackupFile(_testFilePath);
+        FileBackupCreator.CreateBackupFile(_testFilePath);
         var backupFileExists = File.Exists(_testFilePathBackup);
         Assert.That(backupFileExists, Is.False);
     }
@@ -52,13 +52,13 @@ public class FileBackupCreatorTests
     public void CreateBackupFile_WithPathTraversal_ThrowsArgumentException()
     {
         string maliciousPath = @"..\..\..\Windows\System32\config.xml";
-        Assert.Throws<ArgumentException>(() => _fileBackupCreator.CreateBackupFile(maliciousPath));
+        Assert.Throws<ArgumentException>(() => FileBackupCreator.CreateBackupFile(maliciousPath));
     }
 
     [Test]
     public void CreateBackupFile_WithForwardSlashTraversal_ThrowsArgumentException()
     {
         string maliciousPath = @"../../../etc/passwd";
-        Assert.Throws<ArgumentException>(() => _fileBackupCreator.CreateBackupFile(maliciousPath));
+        Assert.Throws<ArgumentException>(() => FileBackupCreator.CreateBackupFile(maliciousPath));
     }
 }

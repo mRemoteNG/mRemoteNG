@@ -1,4 +1,6 @@
-﻿using System.Threading;
+using System;
+using System.Threading;
+using System.Windows.Forms;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -10,38 +12,74 @@ namespace mRemoteNGTests.Tree
 {
     public class ConnectionTreeTests
     {
-        private ConnectionTree _connectionTree;
-        private ConnectionTreeModel _connectionTreeModel;
-
-        [SetUp]
-        public void Setup()
+        /// <summary>
+        /// Runs the given action on a dedicated STA thread with a WinForms message pump.
+        /// Required because ConnectionTree inherits from TreeListView/ObjectListView
+        /// which forces native Win32 handle creation in its constructor.
+        /// On .NET (Core), this deadlocks without an active message pump on the owning STA thread.
+        /// </summary>
+        private static void RunWithMessagePump(Action<ConnectionTree> testAction)
         {
-            _connectionTreeModel = CreateConnectionTreeModel();
-            _connectionTree = new ConnectionTree
+            Exception caught = null;
+            var thread = new Thread(() =>
             {
-                PostSetupActions = new IConnectionTreeDelegate[] {new RootNodeExpander()}
-            };
+                var form = new Form
+                {
+                    Width = 400, Height = 300,
+                    ShowInTaskbar = false,
+                    StartPosition = FormStartPosition.Manual,
+                    Location = new System.Drawing.Point(-10000, -10000)
+                };
+                form.Load += (s, e) =>
+                {
+                    try
+                    {
+                        var tree = new ConnectionTree
+                        {
+                            PostSetupActions = new IConnectionTreeDelegate[] {new RootNodeExpander()},
+                            Dock = DockStyle.Fill
+                        };
+                        form.Controls.Add(tree);
+                        Application.DoEvents();
+                        testAction(tree);
+                    }
+                    catch (Exception ex)
+                    {
+                        caught = ex;
+                    }
+                    finally
+                    {
+                        form.Close();
+                    }
+                };
+                Application.Run(form);
+            });
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+            if (!thread.Join(TimeSpan.FromSeconds(30)))
+            {
+                thread.Interrupt();
+                Assert.Fail("Test timed out after 30 seconds (message pump deadlock)");
+            }
+            if (caught != null)
+                throw caught;
         }
 
-        [TearDown]
-        public void Teardown()
+        [Test]
+        public void CanDeleteLastFolderInTheTree() => RunWithMessagePump(tree =>
         {
-            _connectionTree.Dispose();
-        }
-
-
-        [Test, Apartment(ApartmentState.STA)]
-        public void CanDeleteLastFolderInTheTree()
-        {
+            var connectionTreeModel = CreateConnectionTreeModel();
             var lastFolder = new ContainerInfo();
-            _connectionTreeModel.RootNodes[0].AddChild(lastFolder);
-            _connectionTree.ConnectionTreeModel = _connectionTreeModel;
-            _connectionTree.SelectObject(lastFolder);
-            _connectionTree.DeleteSelectedNode();
-            Assert.That(_connectionTree.GetRootConnectionNode().HasChildren, Is.False);
-        }
+            connectionTreeModel.RootNodes[0].AddChild(lastFolder);
+            tree.ConnectionTreeModel = connectionTreeModel;
+            Application.DoEvents();
+            tree.SelectObject(lastFolder);
+            Application.DoEvents();
+            tree.DeleteSelectedNode();
+            Assert.That(tree.GetRootConnectionNode().HasChildren, Is.False);
+        });
 
-        private ConnectionTreeModel CreateConnectionTreeModel()
+        private static ConnectionTreeModel CreateConnectionTreeModel()
         {
             var connectionTreeModel = new ConnectionTreeModel();
             connectionTreeModel.AddRootNode(new RootNodeInfo(RootNodeType.Connection));

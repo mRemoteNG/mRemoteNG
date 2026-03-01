@@ -21,7 +21,7 @@ namespace mRemoteNG.Config.Connections
         public XmlConnectionsSaver(string connectionFileName, SaveFilter saveFilter)
         {
             if (string.IsNullOrEmpty(connectionFileName))
-                throw new ArgumentException($"Argument '{nameof(connectionFileName)}' cannot be null or empty");
+                throw new ArgumentException($"Argument '{nameof(connectionFileName)}' cannot be null or empty", nameof(connectionFileName));
             _connectionFileName = connectionFileName;
             _saveFilter = saveFilter ?? throw new ArgumentNullException(nameof(saveFilter));
         }
@@ -31,12 +31,15 @@ namespace mRemoteNG.Config.Connections
             try
             {
                 ICryptographyProvider cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
-                XmlConnectionSerializerFactory serializerFactory = new();
+                Serializers.ISerializer<Connection.ConnectionInfo, string> xmlConnectionsSerializer = XmlConnectionSerializerFactory.Build(cryptographyProvider, connectionTreeModel, _saveFilter, Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile);
 
-                Serializers.ISerializer<Connection.ConnectionInfo, string> xmlConnectionsSerializer = serializerFactory.Build(cryptographyProvider, connectionTreeModel, _saveFilter, Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile);
-
-                RootNodeInfo rootNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
+                RootNodeInfo? rootNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().FirstOrDefault();
+                if (rootNode == null)
+                    throw new InvalidOperationException("Connection tree has no root node");
                 string xml = xmlConnectionsSerializer.Serialize(rootNode);
+
+                if (string.IsNullOrEmpty(xml))
+                    throw new InvalidOperationException("Serialized XML is empty");
 
                 FileDataProviderWithRollingBackup fileDataProvider = new(_connectionFileName);
                 fileDataProvider.Save(xml);

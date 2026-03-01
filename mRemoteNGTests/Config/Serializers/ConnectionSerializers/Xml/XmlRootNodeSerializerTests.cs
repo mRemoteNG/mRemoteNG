@@ -12,7 +12,6 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml;
 
 public class XmlRootNodeSerializerTests
 {
-    private XmlRootNodeSerializer _rootNodeSerializer;
     private ICryptographyProvider _cryptographyProvider;
     private RootNodeInfo _rootNodeInfo;
     private Version _version;
@@ -20,7 +19,6 @@ public class XmlRootNodeSerializerTests
     [SetUp]
     public void Setup()
     {
-        _rootNodeSerializer = new XmlRootNodeSerializer();
         _cryptographyProvider = new AeadCryptographyProvider();
         _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
         _version = new Version(99, 1);
@@ -29,7 +27,7 @@ public class XmlRootNodeSerializerTests
     [Test]
     public void RootElementNamedConnections()
     {
-        var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
+        var element = XmlRootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
         Assert.That(element.Name.LocalName, Is.EqualTo("Connections"));
     }
 
@@ -37,7 +35,9 @@ public class XmlRootNodeSerializerTests
     [SetUICulture("en-US")]
     public void RootNodeInfoNameSerialized()
     {
-        var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
+        // Create RootNodeInfo inside the test so SetUICulture("en-US") is active
+        var rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
+        var element = XmlRootNodeSerializer.SerializeRootNodeInfo(rootNodeInfo, _cryptographyProvider, _version);
         var attributeValue = element.Attribute(XName.Get("Name"))?.Value;
         Assert.That(attributeValue, Is.EqualTo("Connections"));
     }
@@ -46,7 +46,7 @@ public class XmlRootNodeSerializerTests
     public void EncryptionEngineSerialized(BlockCipherEngines engine, BlockCipherModes mode)
     {
         var cryptoProvider = new CryptoProviderFactory(engine, mode).Build();
-        var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, cryptoProvider, _version);
+        var element = XmlRootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, cryptoProvider, _version);
         var attributeValue = element.Attribute(XName.Get("EncryptionEngine"))?.Value;
         Assert.That(attributeValue, Is.EqualTo(engine.ToString()));
     }
@@ -55,7 +55,7 @@ public class XmlRootNodeSerializerTests
     public void EncryptionModeSerialized(BlockCipherEngines engine, BlockCipherModes mode)
     {
         var cryptoProvider = new CryptoProviderFactory(engine, mode).Build();
-        var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, cryptoProvider, _version);
+        var element = XmlRootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, cryptoProvider, _version);
         var attributeValue = element.Attribute(XName.Get("BlockCipherMode"))?.Value;
         Assert.That(attributeValue, Is.EqualTo(mode.ToString()));
     }
@@ -67,7 +67,7 @@ public class XmlRootNodeSerializerTests
     public void KdfIterationsSerialized(int iterations)
     {
         _cryptographyProvider.KeyDerivationIterations = iterations;
-        var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
+        var element = XmlRootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
         var attributeValue = element.Attribute(XName.Get("KdfIterations"))?.Value;
         Assert.That(attributeValue, Is.EqualTo(iterations.ToString()));
     }
@@ -77,10 +77,20 @@ public class XmlRootNodeSerializerTests
     public void FullFileEncryptionFlagSerialized(bool fullFileEncryption)
     {
         var element =
-            _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version,
+            XmlRootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version,
                 fullFileEncryption);
         var attributeValue = element.Attribute(XName.Get("FullFileEncryption"))?.Value;
         Assert.That(bool.Parse(attributeValue), Is.EqualTo(fullFileEncryption));
+    }
+
+    [TestCase(true)]
+    [TestCase(false)]
+    public void AutoLockOnMinimizeSerialized(bool autoLockOnMinimize)
+    {
+        _rootNodeInfo.AutoLockOnMinimize = autoLockOnMinimize;
+        var element = XmlRootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
+        var attributeValue = element.Attribute(XName.Get("AutoLockOnMinimize"))?.Value;
+        Assert.That(bool.Parse(attributeValue), Is.EqualTo(autoLockOnMinimize));
     }
 
     [TestCase("", "ThisIsNotProtected")]
@@ -90,7 +100,7 @@ public class XmlRootNodeSerializerTests
     public void ProtectedStringSerialized(string customPassword, string expectedPlainText)
     {
         _rootNodeInfo.PasswordString = customPassword;
-        var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
+        var element = XmlRootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
         var attributeValue = element.Attribute(XName.Get("Protected"))?.Value;
         var attributeValuePlainText =
             _cryptographyProvider.Decrypt(attributeValue, _rootNodeInfo.PasswordString.ConvertToSecureString());
@@ -103,7 +113,7 @@ public class XmlRootNodeSerializerTests
         // Simulate edge case where Password property is set to true directly
         // without setting PasswordString (leaving _customPassword empty)
         _rootNodeInfo.Password = true;
-        var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
+        var element = XmlRootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
         var attributeValue = element.Attribute(XName.Get("Protected"))?.Value;
         // Should use default password and serialize as "ThisIsNotProtected"
         var attributeValuePlainText =
@@ -117,7 +127,7 @@ public class XmlRootNodeSerializerTests
         // Simulate edge case where Password property is set to true directly
         // This should not cause encryption to fail
         _rootNodeInfo.Password = true;
-        var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version, fullFileEncryption: true);
+        var element = XmlRootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version, fullFileEncryption: true);
         var fullFileEncryptionValue = element.Attribute(XName.Get("FullFileEncryption"))?.Value;
         Assert.That(bool.Parse(fullFileEncryptionValue), Is.True);
         // Verify Protected attribute can be decrypted successfully
@@ -130,7 +140,7 @@ public class XmlRootNodeSerializerTests
     [Test]
     public void ConfVersionSerialized()
     {
-        var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
+        var element = XmlRootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
         var attributeValue = element.Attribute(XName.Get("ConfVersion"))?.Value ?? "";
         var confVersion = Version.Parse(attributeValue);
         Assert.That(confVersion, Is.EqualTo(_version));

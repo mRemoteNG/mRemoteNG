@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Runtime.Versioning;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -38,9 +39,9 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
         }
 
 
-        private void SetConnectionInfoParameter(ConnectionInfo connectionInfo, string key, string value)
+        private static void SetConnectionInfoParameter(ConnectionInfo connectionInfo, string key, string value)
         {
-            switch (key.ToLower())
+            switch (key.ToLowerInvariant())
             {
                 case "full address":
                     Uri uri = new("dummyscheme" + Uri.SchemeDelimiter + value);
@@ -50,7 +51,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                         connectionInfo.Port = uri.Port;
                     break;
                 case "server port":
-                    connectionInfo.Port = Convert.ToInt32(value);
+                    connectionInfo.Port = Convert.ToInt32(value, CultureInfo.InvariantCulture);
                     break;
                 case "username":
                     connectionInfo.Username = value;
@@ -79,48 +80,48 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                     }
                     break;
                 case "bitmapcachepersistenable":
-                    connectionInfo.CacheBitmaps = value == "1";
+                    connectionInfo.CacheBitmaps = string.Equals(value, "1", StringComparison.Ordinal);
                     break;
                 case "screen mode id":
-                    connectionInfo.Resolution = value == "2"
+                    connectionInfo.Resolution = string.Equals(value, "2", StringComparison.Ordinal)
                         ? RDPResolutions.Fullscreen
                         : RDPResolutions.FitToWindow;
                     break;
                 case "connect to console":
-                    connectionInfo.UseConsoleSession = value == "1";
+                    connectionInfo.UseConsoleSession = string.Equals(value, "1", StringComparison.Ordinal);
                     break;
                 case "disable wallpaper":
-                    connectionInfo.DisplayWallpaper = value == "1";
+                    connectionInfo.DisplayWallpaper = string.Equals(value, "1", StringComparison.Ordinal);
                     break;
                 case "disable themes":
-                    connectionInfo.DisplayThemes = value == "1";
+                    connectionInfo.DisplayThemes = string.Equals(value, "1", StringComparison.Ordinal);
                     break;
                 case "allow font smoothing":
-                    connectionInfo.EnableFontSmoothing = value == "1";
+                    connectionInfo.EnableFontSmoothing = string.Equals(value, "1", StringComparison.Ordinal);
                     break;
                 case "allow desktop composition":
-                    connectionInfo.EnableDesktopComposition = value == "1";
+                    connectionInfo.EnableDesktopComposition = string.Equals(value, "1", StringComparison.Ordinal);
                     break;
                 case "keyboardhook":
-                    connectionInfo.RedirectKeys = value == "1";
+                    connectionInfo.RedirectKeys = string.Equals(value, "1", StringComparison.Ordinal);
                     break;
                 case "redirectsmartcards":
-                    connectionInfo.RedirectSmartCards = value == "1";
+                    connectionInfo.RedirectSmartCards = string.Equals(value, "1", StringComparison.Ordinal);
                     break;
                 case "redirectdrives":
-                    connectionInfo.RedirectDiskDrives = (value == "1" ? RDPDiskDrives.Local : RDPDiskDrives.None);
+                    connectionInfo.RedirectDiskDrives = (string.Equals(value, "1", StringComparison.Ordinal) ? RDPDiskDrives.Local : RDPDiskDrives.None);
                     break;
                 case "redirectdrivescustom":
                     connectionInfo.RedirectDiskDrivesCustom = value;
                     break;
                 case "redirectcomports":
-                    connectionInfo.RedirectPorts = value == "1";
+                    connectionInfo.RedirectPorts = string.Equals(value, "1", StringComparison.Ordinal);
                     break;
                 case "redirectprinters":
-                    connectionInfo.RedirectPrinters = value == "1";
+                    connectionInfo.RedirectPrinters = string.Equals(value, "1", StringComparison.Ordinal);
                     break;
                 case "redirectclipboard":
-                    connectionInfo.RedirectClipboard = value == "1";
+                    connectionInfo.RedirectClipboard = string.Equals(value, "1", StringComparison.Ordinal);
                     break;
                 case "audiomode":
                     switch (value)
@@ -137,7 +138,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                     }
                     break;
                 case "redirectaudiocapture":
-                    connectionInfo.RedirectAudioCapture = value == "1";
+                    connectionInfo.RedirectAudioCapture = string.Equals(value, "1", StringComparison.Ordinal);
                     break;
                 case "loadbalanceinfo":
                     connectionInfo.LoadBalanceInfo = value;

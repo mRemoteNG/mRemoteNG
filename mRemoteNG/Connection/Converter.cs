@@ -14,7 +14,7 @@ namespace mRemoteNG.Connection
         {
             try
             {
-                return (ProtocolType)Enum.Parse(typeof(ProtocolType), protocol, true);
+                return Enum.Parse<ProtocolType>(protocol, true);
             }
             catch (Exception)
             {

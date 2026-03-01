@@ -2,6 +2,381 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.81.0-beta.6] - 2026-03-01
+
+### Highlight: Zero Analyzer Warnings + CI Hardening
+
+Complete code quality sweep: **5,247 analyzer warnings eliminated** (CA/MA/RCS rules from Roslynator + Meziantou), all GitHub Actions pinned to full commit SHAs, SonarCloud hotspots resolved, and CI smoke test failures fixed.
+
+### Fixed
+- **5,247 analyzer warnings → 0** across 100+ files (CA1507 nameof, CA1822 static, CA1305 IFormatProvider, MA0006 string.Equals, CA1510 ThrowIfNull, etc.)
+- **Nightly Build smoke test** — replaced `dotnet restore` + `msbuild` with `msbuild /restore` (COM reference handling)
+- **PR_Validation x86 smoke test** — skip on 64-bit runner (no x86 .NET Desktop Runtime available)
+- **NUnit filter leak** — `!~` operator silently ignored by NUnit3TestAdapter; replaced with `Name!=` exclusion
+- **SonarCloud bug** — removed redundant null check in PuttySessionsFileProvider.cs
+- **Dead code** — removed unused `_isVista` field and unreachable Vista font tweak in frmTaskDialog
+- **Useless assignment** — removed null assignment to `unsecuredPassword` in SecureStringExtensions
+
+### Security
+- **GitHub Actions SHA pinning** — all 7 workflows now use full commit SHAs instead of mutable version tags
+- **Secrets not expanded in run blocks** — SonarCloud and Build workflows use `env:` variables instead of inline `${{ secrets.* }}`
+
+### Code Quality
+- 46 analyzer rules suppressed in `.editorconfig` for legacy WinForms architectural patterns
+- Empty method bodies annotated with explanatory comments (SonarCloud S1186)
+- Test count: 5,963 passed, 0 failures
+
+## [1.81.0-beta.5] - 2026-02-27
+
+### Highlight: Manual Testing Catches 7 AI-Introduced Regressions
+
+First hands-on testing session after the orchestrator's 585-issue automated run. Found and fixed **7 regressions** — subtle UX and data-integrity bugs that passed all 2,916 automated tests but broke real-world usage. Key lesson: AI agents can introduce regressions that only manual testing catches, especially in focus handling, save/load round-trips, and COM object lifecycle.
+
+### Fixed
+- **Preview-on-select disabled** — clicking a tree node no longer opens phantom tabs or steals focus from the property grid. Connections open only on double-click (standard behavior)
+- **Focus steal on tab switch removed** — `ActivateConnection()` was calling `Protocol.Focus()` on every `ActiveDocumentChanged`, yanking focus from the connection tree
+- **PuTTY root save skip** — PuTTY sessions root (read-only, empty Filename) was overwriting `confCons.xml` with only PuTTY data, destroying all saved connections
+- **Tab close without hang** — tabs in disconnected state (no active protocol) no longer hang on close; added `hasActiveProtocol` check and `CloseProtocolSafe()` wrapper
+- **COM RCW exception handling** — `InvalidComObjectException` caught in `InterfaceControl.Dispose()` and `ConnectionTab.Dispose()` when RDP ActiveX is already detached
+- **PORTABLE define on all configurations** — Debug and Release configs were missing the `PORTABLE` constant; settings were silently going to `%AppData%` instead of local `Settings/` directory
+- **PortableSettingsInitializer** — new programmatic wiring of `ChooseProvider` on all 17 settings classes before any `.Default` access, bypassing `SettingsProviderAttribute` resolution issues in .NET 10
+
+### Added
+- `deploy-test-profile.ps1` — script to deploy test profile (settings + connections) to build output for manual testing
+- `.gitignore` entries for `.test-profile/` and `provider_debug.log`
+
+### Known Issues
+- **Antivirus false positives** — mRemoteNG uses Windows APIs (`SendInput`, DPAPI, COM Interop, P/Invoke) that trigger AV heuristics. In beta.5 we replaced `keybd_event` with `SendInput`, added `DefaultDllImportSearchPaths(System32)`, removed unused `WH_KEYBOARD_LL`, and constrained `AssemblyResolve` — reducing AV scores. BitDefender ATD specifically quarantines `mRemoteNG.dll` after repeated build cycles (247 builds in 31h); fix requires restore from quarantine + exclusion on ALL BD modules + reboot. See [docs/ANTIVIRUS_FALSE_POSITIVE.md](docs/ANTIVIRUS_FALSE_POSITIVE.md).
+
+### Lessons Learned: AI Orchestrator Regressions
+- **Automated tests are necessary but not sufficient** — all 7 regressions passed 2,916 tests
+- **Focus handling is fragile** — AI agents adding event handlers (e.g., `SelectionChanged`) or calling `Focus()` in lifecycle events creates cascading UX issues
+- **Save/load round-trip testing is critical** — the PuTTY root save bug would have silently destroyed user data on next save
+- **COM interop needs defensive coding** — RDP ActiveX control lifecycle doesn't follow .NET Dispose patterns
+- **Orchestrator rules needed:**
+  - Do NOT add event handlers on `SelectionChanged` without explicit approval
+  - Do NOT call `Protocol.Focus()` outside explicit user action
+  - Validate save/load round-trip (confCons.xml must survive save→load→save)
+  - Do NOT modify `WndProc`, message handling, or `Dispose` patterns without review
+
+## [1.81.0-beta.3] - 2026-02-24
+
+### Highlight: 585 Issues Addressed — Marching to Zero Backlog
+
+This release represents the largest single-cycle effort in mRemoteNG history: **744 commits**, **585 issues addressed**, and **2,817 tests** passing with 0 failures. The entire upstream backlog of 838 issues has been triaged, and 70% have been addressed in code. The orchestrator was rearchitectured as a Claude-only engine with Sonnet → Opus model escalation, a self-healing supervisor (12 failure modes), and chain context reuse across sessions.
+
+**By the numbers:**
+- **744 commits** since v1.81.0-beta.2 (2026-02-15)
+- **585 issues addressed** out of 838 tracked (70%)
+- **2,817 tests** — up from 2,349 (+468 new tests), 0 failures
+- **67 upstream commits merged** from v1.78.2-dev
+- **25 issues released** with upstream notifications
+
+### New Features
+- **Issue #1233**: Added "Reconnect" option to connection tree context menu
+- **Issue #3083**: Folder path displayed on tab names for better identification
+- **Issue #738**: ADMX/ADML Group Policy templates for enterprise deployment
+- **VMRC protocol**: VMware Remote Console support
+- **MSRA protocol**: Microsoft Remote Assistance integration
+- **OpenSSH protocol**: Native Windows OpenSSH client support
+- **Winbox protocol**: MikroTik Winbox router management
+- **AnyDesk protocol**: Enhanced AnyDesk integration with ID validation
+- **WSL protocol**: Windows Subsystem for Linux terminal sessions
+- **Terminal protocol**: Generic terminal emulator support
+- **Serial protocol**: Serial port / COM port connections
+
+### Security
+- **4 GitHub code scanning alerts fixed**: SOCKS5 proxy auth bypass, ReDoS in regex patterns, workflow permission escalation, insecure deserialization
+- **CVE-2020-0765 mitigation**: RDP ActiveX control hardening
+- **PBKDF2 improvements**: Enhanced key derivation with configurable iterations
+- **Encryption upgrades**: Thread-safe BouncyCastle GCM implementation
+- **Process.Start hardening**: Strict argument validation across all protocol launchers
+
+### Performance
+- **81s → milliseconds**: Deserialization fix for large connection files (#12) — eliminated O(n^2) XML parsing bottleneck for 570+ connections
+- **Thread-safe parallel decryption**: BouncyCastle GCM is not thread-safe; added per-thread cipher instances for parallel connection loading
+- **Build time**: 24s → 9s no-op builds via `Directory.Build.props` (shared Roslyn compilation, CA1416 suppression)
+
+### Bug Fixes
+
+**RDP (~80 fixes)**
+- SmartSize focus loss on resize, fullscreen toggle guard, refocus after exit, RCW disconnect safety
+- Monitor hot-plug auto-resize, gateway credential handling, NLA authentication improvements
+- Session reconnection logic, multi-monitor spanning, RemoteApp integration fixes
+
+**VNC (~40 fixes)**
+- NotImplementedException crashes in StartChat/StartFileTransfer replaced with graceful messages
+- Color depth negotiation, scaling improvements, clipboard sync fixes
+- Authentication method fallback chain, encoding selection stability
+
+**SSH/PuTTY (~30 fixes)**
+- CJK session name decoding (EUC-KR/CJK on .NET 10), provider failure handling
+- SSH tunnel port allocation TOCTOU race condition fix
+- Key exchange algorithm negotiation, SFTP transfer improvements
+
+**UI/UX (~60 fixes)**
+- Close panel race condition, tab drag autoscroll, tab close race under resize
+- Empty panel close after last tab disconnects, config panel splitter width reset
+- Inheritance label width, connections panel focus, theme consistency
+- Options panel Cancel properly reverts, SQL fields enable correctly
+
+**Credentials & Security (~40 fixes)**
+- 1Password parser and fallback fix, default credential provider selection
+- Master password autolock on minimize/idle, password verification before disabling protection
+- Vault clients (Passwordstate, Secret Server) HTTPS enforcement
+
+**Database & Config (~50 fixes)**
+- SQL schema compatibility for legacy databases, SqlClient SNI runtime references
+- Startup path fallback when config directory inaccessible, XML recovery for corrupt configs
+- TRUNCATE → DELETE for MySQL transaction safety, save operation wrapped in transactions
+
+**Connection Management (~80 fixes)**
+- Main form close cancel behavior, PROTOCOL external tool token support
+- Settings path logging and observability, startup XML recovery
+- Quick connect history persistence, connection audit logging
+
+**External Tools (~30 fixes)**
+- Batch file password comma splitting fix, environment variable token expansion
+- `%PUTTYSESSION%`, `%ENVIRONMENTTAGS%`, `%SSHOPTIONS%` tokens added
+
+**Themes (~20 fixes)**
+- Live theme switching without restart, dark theme debug message colors
+- VS2015 theme consistency, DockPanel theme integration
+
+**Window Management (~30 fixes)**
+- Tab drag autoscroll on overflow, empty panel close, config panel splitter
+- DPI PerMonitorV2 support, WPF splash screen dispatcher cleanup
+- Window focus on startup (BringToFront/Activate)
+
+### Architecture & Testability
+- **Orchestrator v2**: Claude-only engine with Sonnet → Opus model escalation (Sonnet primary, Opus for complex fallback)
+- **Self-healing supervisor**: Handles 12 failure modes (stale locks, multiple instances, phantom tests, rate-limit corruption, status corruption, hung process, crashed process, stale editors, dirty git state, all agents blocked, no progress, build infra failure)
+- **Chain context reuse**: Previous session context feeds into next session for continuity
+- **Token usage tracking**: Per-agent, per-session token consumption monitoring
+- **Duplicate commit prevention**: SHA-based deduplication prevents re-committing identical changes
+- **Test hygiene phase**: Automated identification and removal of flaky/interactive tests
+- **Decoupled connection loaders**: SqlConnectionsLoader and XmlConnectionsLoader use Dependency Injection
+- **Interface extraction**: ISqlDatabaseMetaDataRetriever, ISqlDatabaseVersionVerifier abstractions
+
+### Lessons Learned (Knowledge Base)
+- **Windows subprocess timeout deadlock**: `process.communicate()` with timeout prevents orphan processes
+- **31-hour post-mortem**: Phantom test failures caused by stale DLLs, circuit breakers added to prevent cascading retries
+- **Fast Fix Map**: MSB4803 (COM refs need full MSBuild), PATH corruption, Unicode em-dash in PS1, API rate limit backoff
+- **Parallel test execution rules**: Multi-process isolation required for shared mutable singletons
+
+### Dependencies
+- Microsoft.NET.Test.Sdk 18.0.1 → 18.3.0
+- actions/checkout v4 → v6
+- actions/upload-artifact v4 → v6
+- actions/download-artifact v4 → v7
+- signpath/github-actions-sign v1 → v2
+- Upstream merge: 67 commits from v1.78.2-dev (bug fixes, security patches)
+
+### Testing
+- **2,817 tests** (up from 2,349), 0 failures, 0 skipped
+- **Multi-process parallel runner v2** with TRX logging and 5-second per-test timeout
+- **100% DLL coverage enforcement** — exit code 96 if any namespace uncovered
+- **468 new tests** covering new protocols, security fixes, and edge cases
+
+## [1.81.0-beta.2] - 2026-02-15
+
+### Highlight: Zero Nullable Warnings — AI Orchestrator Session
+
+This release eliminates **all 2,338 nullable warnings** (CS8600/CS8602/CS8604/CS8618/CS8625) from the codebase, reaching **100% nullable cleanliness**. The work was performed by the **IIS Orchestrator** — a custom Python-based automation system that coordinates AI agents (Claude Code + Gemini CLI) as sub-agents to fix warnings file-by-file with automated build+test verification after each change.
+
+**By the numbers:**
+- **2,554 warnings fixed** across **242 files** in **247 commits**
+- **353 files changed**, 4,367 insertions, 1,908 deletions
+- **4 orchestrator sessions** over 2 days (Feb 14–15)
+- **Zero test regressions** — every commit verified by build + test gate
+- **Session 1 (Gemini CLI):** 659/852 CS8618 warnings resolved in one pass
+- **Sessions 2–4 (Claude Code via IIS Orchestrator):** remaining warnings driven to zero
+
+The IIS Orchestrator (`orchestrate.py`) runs as a continuous loop: parse build warnings → group by file → delegate fix to AI agent → verify build+test → commit or revert → next file. Full source in `.project-roadmap/scripts/`.
+
+### Testing
+- **Multi-process parallel test runner** (`run-tests.ps1`): 4 isolated `dotnet test` processes run simultaneously, grouped by namespace. Auto-detects CPU cores. Reduces test time from 95s to 46s (2.1x speedup) on 24-core Threadripper.
+- **5-second per-test timeout** via `.runsettings` — catches hanging/interactive tests immediately
+- **Removed interactive test**: `IntegratedProgramTests.CanStartExternalApp` launched real `notepad.exe`; replaced with `InitializeSucceedsWhenExternalToolExists` (non-interactive)
+- **Process cleanup**: `run-tests.ps1` kills stale `testhost.exe` and `notepad.exe` before and after test runs
+
+### Architecture & Testability
+- **Decoupled Connection Loaders**: Refactor of `SqlConnectionsLoader` and `XmlConnectionsLoader` to use Dependency Injection. They are no longer hardcoded to trigger interactive UI (password dialogs) or require a live SQL Server instance.
+- **Interface Extraction**: Introduced `ISqlDatabaseMetaDataRetriever` and `ISqlDatabaseVersionVerifier` interfaces to abstract SQL infrastructure details.
+- **Autonomous Integration Tests**: Implemented comprehensive, fully automated integration tests for encrypted XML and SQL connection loading. These tests run in headless environments (CI) with zero user interaction.
+
+### Security
+- **AnyDesk command injection prevention**: Added strict validation via `IsValidAnydeskId()` to ensure AnyDesk IDs contain only alphanumeric characters and dashes before process execution.
+- Bumped `System.Drawing.Common` to 10.0.3 in ObjectListView nuspec (addresses potential GDI+ vulnerabilities)
+
+### Changed
+- Synced with upstream `v1.78.2-dev` (#3142 AlwaysShowPanelTabs fix — already included since v1.80.2)
+- Version bumped to 1.81.0-beta.2
+
+### Added
+- **IIS Orchestrator** (`orchestrate.py`): automated issue resolution and warning cleanup system with live status monitoring, parallel AI agent coordination, and git-integrated commit workflow
+
+## [1.81.0-beta.1] - 2026-02-14
+
+### Fixed
+- **P0: Issue #3044** - Enhanced argument parsing for batch files (.cmd/.bat) to correctly handle special characters like commas in passwords by enforcing automatic double-quoting.
+- **P1: Issue #1085** - Improved security in CSV exports by masking all passwords (including Gateway and Proxy passwords) with '********'.
+- **P1: Issue #2274** - Verified cryptographic support for special characters (like '§') in passwords through new unit tests.
+
+### Added
+- **P1: Issue #918** - Added "Reveal Password" functionality in the Connection Properties grid via a new modal editor.
+- **Beta-First Release Strategy**: Adopted a high-velocity development model where new features are released as Beta/Pre-releases.
+- Stability Guarantee: Full "Stable" releases will now occur only after a cycle of at least 5 successful Beta iterations.
+
+## [1.80.2] - 2026-02-14 (Maintenance Release)
+
+### Fixed
+- UI: "Always show panel tabs" setting not respected at application launch (#3142)
+- Startup: Corrected AlwaysShowPanelTabs initialization order in SettingsLoader
+
+## [1.80.1] - 2026-02-13 (Security Patch)
+
+### Security
+- AnyDesk command injection prevention — `IsValidAnydeskId()` validates IDs before passing to process (upstream fix)
+- Process.Start hardening across all UI forms — `ProcessStartInfo` with `UseShellExecute` instead of direct shell execution (upstream fix)
+- URL format validation in FrmAbout — rejects non-HTTP(S) URLs (upstream fix)
+- Path validation in NotificationsPage — prevents command injection via log file paths (upstream fix)
+
+### Changed
+- .NET SDK updated from 10.0.2 to 10.0.3 (runtime patch)
+- Removed 27 redundant System.* NuGet packages now included in .NET 10
+- Updated AWS SDK packages (EC2, S3, Secrets Manager, SSO)
+- ObjectListView: removed deprecated `[SecurityPermission]` attribute, fixed tooltip and virtuallist
+- Authenticode: migrated to modern `X509CertificateLoader` API (replaces deprecated constructor)
+- CI workflow: added self-contained build matrix (6 builds: 3 framework-dependent + 3 self-contained)
+- CI workflow: updated to `actions/setup-dotnet@v5`, `actions/upload-artifact@v4`
+
+### Fixed
+- FrmAbout: null checks for version and update channel display
+- CommandButton: null safety in GetLargeText/GetSmallText
+- PuttySessionInfo: nullable EventHandler and Site property
+- SSHTunnelTypeConverter: nullable context parameter
+- frmMain: window focus on startup (BringToFront/Activate)
+
+## [1.80.0] - 2026-02-10 (Community Edition)
+
+### Added
+- Self-contained (.NET embedded) build variant — no .NET runtime installation required (#2998)
+- JSON export format for connection data alongside existing XML/CSV
+- Protocol/tag tree filtering: search with `protocol:RDP` or `tag:production` prefixes
+- `%ENVIRONMENTTAGS%`, `%SSHOPTIONS%`, and `%PUTTYSESSION%` external tool tokens (#2046)
+- Quick connect history persistence across application restarts (quickConnectHistory.xml)
+- Connection audit log (connectionAudit.log) — logs connect/disconnect/error events with timestamps
+
+### Security
+- Hardcoded legacy encryption key extracted to `ConnectionFileDefaults.LegacyEncryptionKey` constant (no more magic strings in source)
+- RDP default authentication level changed from NoAuth to WarnOnFailedAuth
+- Master password minimum length increased from 3 to 8 characters with complexity requirement (upper, lower, digit)
+- PBKDF2 key derivation iterations increased from 1,000/10,000 to 600,000 (existing files auto-upgrade on save)
+- SSH temporary private key files securely wiped (zeroed) before deletion
+- Vault clients (Passwordstate, Secret Server) now require HTTPS URLs
+
+### Fixed
+- VNC: replaced NotImplementedException crash with graceful messages in StartChat/StartFileTransfer; hidden unsupported menu items
+- RDP ActiveX creation: added 10-second timeout guard to prevent infinite DoEvents loop on hung controls
+- SSH tunnel port allocation: added retry loop to mitigate TOCTOU race condition on ephemeral ports
+- SQL data safety: replaced TRUNCATE with DELETE to prevent implicit commits in MySQL; wrapped save operations in transactions with rollback
+- Localization: fixed OpeningCommand placeholder ("TODO" → actual description text)
+- PuTTY CJK session names: register CodePagesEncodingProvider at startup for correct EUC-KR/CJK decoding on .NET 10 (#2785)
+- SecurityPage KDF iterations NumericUpDown Maximum increased from 50,000 to 1,000,000 to match new 600K default
+- Dark theme: debug/info messages in ErrorAndInfoWindow no longer use hardcoded LightSteelBlue
+- GDI resource leaks in MrngButton and MrngComboBox (SolidBrush/Pen disposal)
+- UI thread deadlocks in external credential providers (VaultOpenbao, SecretServer, Passwordstate) — async calls now run on thread pool
+- TaskCanceledException crash when closing WPF splash screen from multiple code paths (ProgramRoot, frmMain, CompatibilityChecker, Runtime)
+- RDP connections now auto-resize when monitor is connected/disconnected (HDMI/DisplayPort hot-plug) (#2142)
+- OptionsPage Dispose crash on non-STA finalizer thread (NullReferenceException in Control.ContextMenuStrip) — fixes test host crashes
+- Stopwatch namespace bug in ConnectionInitiator SSH tunnel wait loop (System.Net.Sockets → System.Diagnostics)
+- External tool: password with comma no longer splits into multiple args in batch files (#3044)
+- Options panel: Cancel button now properly reverts theme and other preview changes (#2914)
+- Options panel: "Always show panel tabs" no longer corrupts Options display (#2910)
+- SQL Server options: fields now properly enable when SQL mode is activated (#2913)
+- SQL Server options: checkbox font normalized from 12pt to 9pt for consistent layout (#2913)
+
+### UI/UX
+- Live theme switching: changing themes no longer requires an application restart
+- Keyboard shortcuts reference panel: Help > Keyboard Shortcuts shows all available shortcuts
+- Accessibility: added AccessibleName/AccessibleDescription to main form controls, connection tree, quick connect toolbar, and search box
+- Middle-click on connection tree node opens connection (standard browser UX)
+- Middle-click on tab closes the connection tab (standard browser UX)
+- Crash dialog "Submit Error" button: auto-submits GitHub issue via API (CI builds with token) or pre-fills browser (dev builds) — zero-click crash reporting in release builds
+
+### Tooling
+- **Issue Intelligence System**: git-tracked JSON database for GitHub issue lifecycle management
+  - Syncs issues + comments from both upstream and fork repos via `gh` CLI
+  - Per-issue JSON files with full iteration tracking (fix → user feedback → re-fix cycle)
+  - Automated lifecycle transitions: `new → triaged → roadmap → in-progress → testing → released`
+  - Templated GitHub comment posting on status transitions
+  - Markdown report generation for triage sessions and releases
+  - Scripts: `Sync-Issues.ps1`, `Analyze-Issues.ps1`, `Update-Status.ps1`, `Generate-Report.ps1`
+
+### Documentation
+- CONTRIBUTING.md: developer onboarding guide with build instructions and PR workflow
+- ARCHITECTURE.md: system layers diagram with component descriptions and data flow
+- docs/TROUBLESHOOTING.md: common issues and solutions for installation, connections, security, and builds
+- Security/README.md: encryption subsystem documentation with KDF details and flow diagrams
+- XML doc comments added to 6 core types: ConnectionInfo, ProtocolBase, ContainerInfo, ConnectionInitiator, ConnectionTreeModel, AeadCryptographyProvider, ThemeManager
+
+### Improved
+- RDP initialization: replaced blocking Application.DoEvents loop with async InitializeAsync using Task.Delay
+- SQL save: entire connection save operation wrapped in a single transaction for atomicity
+- CI/CD: split release workflow into build + aggregate release job to prevent matrix race on tag creation
+- XmlConnectionsLoader: injectable MessageCollector for testability; 2 previously-ignored tests re-enabled
+- Removed dead code: RDM CSV serializer partial class, RDP Gateway decrypt methods (zero callers)
+- `[Serializable]` removed from SupportedCultures singleton (never serialized)
+- SQL connection hierarchy building optimized from O(n²) to O(n) via Dictionary lookup
+- PuTTY sessions provider: removed unnecessary .ToList() materialization per call
+- GetRecursiveChildList/GetRecursiveFavoriteChildList converted to yield return (zero allocations)
+- MessageCollector capped at 10,000 messages to prevent unbounded memory growth
+- CI/CD: dual-build matrix — 6 builds per release (3 framework-dependent + 3 self-contained)
+- CI/CD: mandatory Authenticode code signing via SignPath Foundation — no unsigned releases
+- Self-contained build: fixed missing .NET runtime (now uses `-t:Publish` for correct packaging)
+- WPF splash screen: properly shutdown Dispatcher to prevent mouse input interference
+- DPI: added `Application.SetHighDpiMode(HighDpiMode.PerMonitorV2)` for .NET 10 compatibility
+
+## [1.79.0] - 2026-02-08 (Community Edition)
+
+### Security
+- #3105: LDAP filter sanitizer and XML importer guardrails
+- #3109: ProcessStart argument hardening and shell escaping
+
+### Fixed
+- #3106: Close panel race condition causing crash on tab close (#3069)
+- #3107: 1Password parser and fallback fix (#3092)
+- #3108: Default external credential provider selection (#2972)
+- #3110: SqlClient SNI runtime references for .NET 10 (#3005)
+- #3111: SQL schema compatibility hardening for legacy databases (#1916)
+- #3112: Config panel splitter width reset on resize (#850)
+- #3113: Startup path fallback when config directory is inaccessible (#1969)
+- #3114: PuTTY provider failure handling and resilience (#822)
+- #3115: PuTTY CJK session name decoding (#2785)
+- #3116: RDP SmartSize focus loss on resize (#2735)
+- #3117: RDP fullscreen toggle guard for RedirectKeys (#847)
+- #3118: RDP refocus after fullscreen exit (#1650)
+- #3119: RDP SmartSize RCW disconnect safety (#2510)
+- #3120: Settings path logging and observability (#2987)
+- #3121: Require password verification before disabling protection (#2673)
+- #3122: Master password autolock on minimize and idle (#1649)
+- #3123: PROTOCOL external tool token support (#1634)
+- #3124: Main form close cancel behavior (#2270)
+- #3125: Startup XML recovery for corrupt config files (#811)
+- #3126: Empty panel close after last tab disconnects (#2160)
+- #3127: Tab drag autoscroll on overflow (#2161)
+- #3128: Config connections panel focus and tree layout (#2171)
+- #3129: Tab close race condition under resize (#2166)
+- #3130: Inheritance label width fix (#2155)
+
+### Improved
+- CueBanner text get/set defensive handle validation
+- 81 pre-existing test failures resolved (upstream v1.78.2-dev baseline)
+- 28 new test coverage tests added across 5 areas
+- 2176/2176 tests passing, zero flaky
+
 ## [1.78.2]
 ### Fixed
 - #2939: fixed SQL injection vulnerabilities via parameterized queries 

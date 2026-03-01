@@ -31,14 +31,14 @@ public class FileBackupPrunerTests
     public void PruneBackupFiles_WithPathTraversal_ThrowsArgumentException()
     {
         string maliciousPath = @"..\..\..\Windows\System32\config.xml";
-        Assert.Throws<ArgumentException>(() => _fileBackupPruner.PruneBackupFiles(maliciousPath, 5));
+        Assert.Throws<ArgumentException>(() => FileBackupPruner.PruneBackupFiles(maliciousPath, 5));
     }
 
     [Test]
     public void PruneBackupFiles_WithForwardSlashTraversal_ThrowsArgumentException()
     {
         string maliciousPath = @"../../../etc/passwd";
-        Assert.Throws<ArgumentException>(() => _fileBackupPruner.PruneBackupFiles(maliciousPath, 5));
+        Assert.Throws<ArgumentException>(() => FileBackupPruner.PruneBackupFiles(maliciousPath, 5));
     }
 
     [Test]
@@ -47,6 +47,6 @@ public class FileBackupPrunerTests
         // Create the test file
         File.WriteAllText(_testFilePath, "test");
         
-        Assert.DoesNotThrow(() => _fileBackupPruner.PruneBackupFiles(_testFilePath, 5));
+        Assert.DoesNotThrow(() => FileBackupPruner.PruneBackupFiles(_testFilePath, 5));
     }
 }

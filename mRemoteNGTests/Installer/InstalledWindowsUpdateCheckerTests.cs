@@ -18,8 +18,8 @@ namespace mRemoteNGTests.Installer
             
             // Use reflection to access private methods for testing
             var type = typeof(CustomActions.InstalledWindowsUpdateChecker);
-            _sanitizeKbIdMethod = type.GetMethod("SanitizeKbId", BindingFlags.NonPublic | BindingFlags.Instance);
-            _buildWhereClauseMethod = type.GetMethod("BuildWhereClauseFromKbList", BindingFlags.NonPublic | BindingFlags.Instance);
+            _sanitizeKbIdMethod = type.GetMethod("SanitizeKbId", BindingFlags.NonPublic | BindingFlags.Static);
+            _buildWhereClauseMethod = type.GetMethod("BuildWhereClauseFromKbList", BindingFlags.NonPublic | BindingFlags.Static);
         }
 
         #region SanitizeKbId Tests
@@ -195,12 +195,12 @@ namespace mRemoteNGTests.Installer
 
         private string InvokeSanitizeKbId(string input)
         {
-            return (string)_sanitizeKbIdMethod.Invoke(_checker, new object[] { input });
+            return (string)_sanitizeKbIdMethod.Invoke(null, new object[] { input });
         }
 
         private string InvokeBuildWhereClause(string[] kbList)
         {
-            return (string)_buildWhereClauseMethod.Invoke(_checker, new object[] { kbList });
+            return (string)_buildWhereClauseMethod.Invoke(null, new object[] { kbList });
         }
 
         #endregion

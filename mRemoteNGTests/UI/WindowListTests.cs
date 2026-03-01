@@ -6,6 +6,7 @@ using mRemoteNG.UI.Window;
 namespace mRemoteNGTests.UI
 {
     [TestFixture]
+    [NUnit.Framework.Apartment(System.Threading.ApartmentState.STA)]
     public class WindowListTests
     {
         private WindowList _windowList;

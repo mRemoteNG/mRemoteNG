@@ -51,7 +51,8 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUsername),
                         nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayPassword),
                         nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayDomain),
-                        nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUseConnectionCredentials)
+                        nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUseConnectionCredentials),
+                        nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayAccessToken)
                     });
                     break;
                 case RDGatewayUseConnectionCredentials.SmartCard:
@@ -85,6 +86,32 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             ExpectedPropertyList.Add(nameof(mRemoteNG.Connection.ConnectionInfo.AutomaticResize));
 
             RunVerification();
+        }
+
+        [Test]
+        public void ResolutionWidthAndHeightShown_WhenResolutionIsCustom()
+        {
+            ConnectionInfo.Resolution = RDPResolutions.Custom;
+            ExpectedPropertyList.Add(nameof(mRemoteNG.Connection.ConnectionInfo.ResolutionWidth));
+            ExpectedPropertyList.Add(nameof(mRemoteNG.Connection.ConnectionInfo.ResolutionHeight));
+
+            RunVerification();
+        }
+
+        [TestCase(RDPResolutions.Res800x600)]
+        [TestCase(RDPResolutions.Res1920x1080)]
+        [TestCase(RDPResolutions.FitToWindow)]
+        [TestCase(RDPResolutions.Fullscreen)]
+        [TestCase(RDPResolutions.SmartSize)]
+        public void ResolutionWidthAndHeightHidden_WhenResolutionIsNotCustom(RDPResolutions resolution)
+        {
+            ConnectionInfo.Resolution = resolution;
+
+            ConfigWindow.SelectedTreeNode = ConnectionInfo;
+            var visibleProperties = ConfigWindow.VisibleObjectProperties;
+
+            Assert.That(visibleProperties, Does.Not.Contain(nameof(mRemoteNG.Connection.ConnectionInfo.ResolutionWidth)));
+            Assert.That(visibleProperties, Does.Not.Contain(nameof(mRemoteNG.Connection.ConnectionInfo.ResolutionHeight)));
         }
     }
 }

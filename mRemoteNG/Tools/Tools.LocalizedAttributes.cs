@@ -1,12 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using mRemoteNG.Resources.Language;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Tools
 {
-    public class LocalizedAttributes
+    public static class LocalizedAttributes
     {
         [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
         public class LocalizedCategoryAttribute(string value, int Order = 1) : CategoryAttribute(value)
@@ -19,17 +20,17 @@ namespace mRemoteNG.Tools
                 string OrderPrefix = "";
                 for (int x = 0; x <= MaxOrder - Order; x++)
                 {
-                    OrderPrefix += Convert.ToString("\t");
+                    OrderPrefix += Convert.ToString("\t", CultureInfo.InvariantCulture);
                 }
 
-                return OrderPrefix + Language.ResourceManager.GetString(value);
+                return OrderPrefix + Language.ResourceManager.GetString(value, CultureInfo.CurrentCulture);
             }
         }
 
         [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
         public class LocalizedDisplayNameAttribute(string value) : DisplayNameAttribute(value)
         {
-            private bool Localized = false;
+            private bool Localized;
 
             public override string DisplayName
             {
@@ -38,7 +39,7 @@ namespace mRemoteNG.Tools
                     if (!Localized)
                     {
                         Localized = true;
-                        DisplayNameValue = Language.ResourceManager.GetString(DisplayNameValue);
+                        DisplayNameValue = Language.ResourceManager.GetString(DisplayNameValue, CultureInfo.CurrentCulture) ?? DisplayNameValue;
                     }
 
                     return base.DisplayName;
@@ -49,7 +50,7 @@ namespace mRemoteNG.Tools
         [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
         public class LocalizedDescriptionAttribute(string value) : DescriptionAttribute(value)
         {
-            private bool Localized = false;
+            private bool Localized;
 
             public override string Description
             {
@@ -58,7 +59,7 @@ namespace mRemoteNG.Tools
                     if (!Localized)
                     {
                         Localized = true;
-                        DescriptionValue = Language.ResourceManager.GetString(DescriptionValue);
+                        DescriptionValue = Language.ResourceManager.GetString(DescriptionValue, CultureInfo.CurrentCulture) ?? DescriptionValue;
                     }
 
                     return base.Description;
@@ -67,7 +68,7 @@ namespace mRemoteNG.Tools
         }
 
         [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
-        public class LocalizedDefaultValueAttribute(string name) : DefaultValueAttribute(Language.ResourceManager.GetString(name))
+        public class LocalizedDefaultValueAttribute(string name) : DefaultValueAttribute(Language.ResourceManager.GetString(name, CultureInfo.CurrentCulture))
         {
 
             // This allows localized attributes in a derived class to override a matching
@@ -80,7 +81,7 @@ namespace mRemoteNG.Tools
         [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
         public class LocalizedDisplayNameInheritAttribute(string value) : DisplayNameAttribute(value)
         {
-            private bool Localized = false;
+            private bool Localized;
 
             public override string DisplayName
             {
@@ -89,8 +90,8 @@ namespace mRemoteNG.Tools
                     if (!Localized)
                     {
                         Localized = true;
-                        DisplayNameValue = string.Format(Language.FormatInherit,
-                                                         Language.ResourceManager.GetString(DisplayNameValue));
+                        DisplayNameValue = string.Format(CultureInfo.CurrentCulture, Language.FormatInherit,
+                                                         Language.ResourceManager.GetString(DisplayNameValue, CultureInfo.CurrentCulture));
                     }
 
                     return base.DisplayName;
@@ -101,7 +102,7 @@ namespace mRemoteNG.Tools
         [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
         public class LocalizedDescriptionInheritAttribute(string value) : DescriptionAttribute(value)
         {
-            private bool Localized = false;
+            private bool Localized;
 
             public override string Description
             {
@@ -110,8 +111,8 @@ namespace mRemoteNG.Tools
                     if (!Localized)
                     {
                         Localized = true;
-                        DescriptionValue = string.Format(Language.FormatInheritDescription,
-                                                         Language.ResourceManager.GetString(DescriptionValue));
+                        DescriptionValue = string.Format(CultureInfo.CurrentCulture, Language.FormatInheritDescription,
+                                                         Language.ResourceManager.GetString(DescriptionValue, CultureInfo.CurrentCulture));
                     }
 
                     return base.Description;

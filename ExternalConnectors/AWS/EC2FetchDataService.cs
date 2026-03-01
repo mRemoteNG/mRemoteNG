@@ -1,4 +1,5 @@
-﻿using Amazon;
+﻿using System;
+using Amazon;
 using Amazon.EC2;
 using Amazon.EC2.Model;
 using Microsoft.Win32;
@@ -53,7 +54,7 @@ namespace ExternalConnectors.AWS
                         string vmname = "";
                         foreach (var tag in instance.Tags)
                         {
-                            if (tag.Key == "Name")
+                            if (string.Equals(tag.Key, "Name", StringComparison.Ordinal))
                             {
                                 vmname = tag.Value;
                             }

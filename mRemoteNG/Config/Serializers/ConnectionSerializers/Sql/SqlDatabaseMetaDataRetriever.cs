@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data;
 using System.Data.Common;
+using System.Data.SqlTypes;
 using System.Globalization;
 using System.Runtime.Versioning;
 using System.Security;
@@ -15,12 +17,12 @@ using mRemoteNG.Tree.Root;
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
 {
     [SupportedOSPlatform("windows")]
-    public class SqlDatabaseMetaDataRetriever
+    public class SqlDatabaseMetaDataRetriever : ISqlDatabaseMetaDataRetriever
     {
-        public SqlConnectionListMetaData GetDatabaseMetaData(IDatabaseConnector databaseConnector)
+        public SqlConnectionListMetaData? GetDatabaseMetaData(IDatabaseConnector databaseConnector)
         {
             SqlConnectionListMetaData metaData;
-            DbDataReader dbDataReader = null;
+            DbDataReader? dbDataReader = null;
 
             try
             {
@@ -29,8 +31,25 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
 
                 if (!DoesDbTableExist(databaseConnector, "tblRoot"))
                 {
-                    // database exists but is empty, initialize it with the schema
+                    // tblRoot is absent.  Before wiping anything, check whether tblCons
+                    // already exists — if it does the database is in an inconsistent state
+                    // (metadata lost but connections are present).  Attempting to
+                    // InitializeDatabaseSchema would DROP tblCons and erase all connections,
+                    // so throw instead to surface the problem without causing data loss (#1784).
+                    if (DoesDbTableExist(databaseConnector, "tblCons"))
+                    {
+                        throw new InvalidOperationException(
+                            "Database is in an inconsistent state: tblCons exists but tblRoot is missing. " +
+                            "Load aborted to prevent data loss. Please restore the tblRoot table or " +
+                            "recreate the database schema manually.");
+                    }
+
+                    // Truly new/empty database — safe to initialize the schema.
                     InitializeDatabaseSchema(databaseConnector);
+                }
+                else
+                {
+                    UpgradeSchema(databaseConnector);
                 }
 
                 DbCommand dbCommand = databaseConnector.DbCommand("SELECT * FROM tblRoot");
@@ -49,7 +68,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 {
                     Name = dbDataReader["Name"] as string ?? "",
                     Protected = dbDataReader["Protected"] as string ?? "",
-                    Export = dbDataReader["Export"].Equals(1),
+                    Export = dbDataReader["Export"] != DBNull.Value && Convert.ToBoolean(dbDataReader["Export"], CultureInfo.InvariantCulture),
                     ConfVersion = new Version(Convert.ToString(dbDataReader["confVersion"], CultureInfo.InvariantCulture) ?? string.Empty)
                 };
             }
@@ -69,8 +88,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
 
         public void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
         {
-            // TODO: use transaction
+            WriteDatabaseMetaData(rootTreeNode, databaseConnector, null);
+        }
 
+        public void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector, DbTransaction? transaction)
+        {
             LegacyRijndaelCryptographyProvider cryptographyProvider = new();
 
             string strProtected;
@@ -93,38 +115,70 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
             }
 
-            DbCommand cmd = databaseConnector.DbCommand("TRUNCATE TABLE tblRoot");
-            cmd.ExecuteNonQuery();
-
-            if (rootTreeNode != null)
+            bool mustDisposeTransaction = false;
+            if (transaction == null)
             {
-                cmd = databaseConnector.DbCommand(
-                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(@Name, 0, @Protected, @ConfVersion)");
-
-                DbParameter nameParam = cmd.CreateParameter();
-                nameParam.ParameterName = "@Name";
-                nameParam.Value = rootTreeNode.Name;
-                cmd.Parameters.Add(nameParam);
-
-                DbParameter protectedParam = cmd.CreateParameter();
-                protectedParam.ParameterName = "@Protected";
-                protectedParam.Value = strProtected;
-                cmd.Parameters.Add(protectedParam);
-
-                DbParameter confVersionParam = cmd.CreateParameter();
-                confVersionParam.ParameterName = "@ConfVersion";
-                confVersionParam.Value = ConnectionsFileInfo.ConnectionFileVersion.ToString();
-                cmd.Parameters.Add(confVersionParam);
-
-                cmd.ExecuteNonQuery();
+                transaction = databaseConnector.DbConnection().BeginTransaction();
+                mustDisposeTransaction = true;
             }
-            else
+
+            try
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
+                DbCommand cmd = databaseConnector.DbCommand("DELETE FROM tblRoot");
+                cmd.Transaction = transaction;
+                cmd.ExecuteNonQuery();
+
+                if (rootTreeNode != null)
+                {
+                    cmd = databaseConnector.DbCommand(
+                            "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(@Name, 0, @Protected, @ConfVersion)");
+                    cmd.Transaction = transaction;
+
+                    DbParameter nameParam = cmd.CreateParameter();
+                    nameParam.ParameterName = "@Name";
+                    nameParam.Value = rootTreeNode.Name;
+                    cmd.Parameters.Add(nameParam);
+
+                    DbParameter protectedParam = cmd.CreateParameter();
+                    protectedParam.ParameterName = "@Protected";
+                    protectedParam.Value = strProtected;
+                    cmd.Parameters.Add(protectedParam);
+
+                    DbParameter confVersionParam = cmd.CreateParameter();
+                    confVersionParam.ParameterName = "@ConfVersion";
+                    confVersionParam.Value = ConnectionsFileInfo.ConnectionFileVersion.ToString();
+                    cmd.Parameters.Add(confVersionParam);
+
+                    cmd.ExecuteNonQuery();
+                }
+                else
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
+                }
+
+                if (mustDisposeTransaction)
+                {
+                    transaction.Commit();
+                }
+            }
+            catch
+            {
+                if (mustDisposeTransaction)
+                {
+                    transaction.Rollback();
+                }
+                throw;
+            }
+            finally
+            {
+                if (mustDisposeTransaction)
+                {
+                    transaction.Dispose();
+                }
             }
         }
 
-        private bool IsValidTableName(string tableName)
+        private static bool IsValidTableName(string tableName)
         {
             // Table names should only contain alphanumeric characters and underscores
             // This prevents SQL injection when table names must be used directly in queries
@@ -140,7 +194,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             return true;
         }
 
-        private bool DoesDbTableExist(IDatabaseConnector databaseConnector, string tableName)
+        private static bool DoesDbTableExist(IDatabaseConnector databaseConnector, string tableName)
         {
             bool exists;
 
@@ -160,8 +214,27 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 databaseNameParam.Value = database_name;
                 cmd.Parameters.Add(databaseNameParam);
 
-                short cmdResult = Convert.ToInt16(cmd.ExecuteScalar());
+                short cmdResult = Convert.ToInt16(cmd.ExecuteScalar(), CultureInfo.InvariantCulture);
                 exists = (cmdResult == 1);
+
+                // If information_schema reports the table as absent, verify with a direct
+                // query before concluding it doesn't exist.  This guards against false
+                // negatives caused by schema-name case-sensitivity (Linux MySQL) or
+                // insufficient information_schema permissions — either of which would
+                // otherwise trigger InitializeDatabaseSchema and erase all data (#1784).
+                if (!exists && IsValidTableName(tableName))
+                {
+                    try
+                    {
+                        DbCommand verifyCmd = databaseConnector.DbCommand($"select 1 from {tableName} where 1 = 0");
+                        verifyCmd.ExecuteNonQuery();
+                        exists = true; // table is reachable — information_schema was wrong
+                    }
+                    catch
+                    {
+                        exists = false; // table truly does not exist
+                    }
+                }
             }
             catch
             {
@@ -190,11 +263,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             return exists;
         }
 
-        private void InitializeDatabaseSchema(IDatabaseConnector databaseConnector)
+        private static void InitializeDatabaseSchema(IDatabaseConnector databaseConnector)
         {
             string sql;
             
-            if (databaseConnector.GetType() == typeof(MSSqlDatabaseConnector))
+            if (databaseConnector.GetType() == typeof(MSSqlDatabaseConnector)
+                || databaseConnector.GetType() == typeof(OdbcDatabaseConnector))
             {
                 // *********************************
                 // ********* MICROSOFT SQL *********
@@ -215,84 +289,84 @@ drop table [dbo].[tblUpdate]
 
 CREATE TABLE [dbo].[tblCons] (
     [ID] int NOT NULL IDENTITY(1,1),
-    [ConstantID] varchar(128) NOT NULL PRIMARY KEY,
+    [ConstantID] nvarchar(128) NOT NULL PRIMARY KEY,
     [PositionID] int NOT NULL,
-    [ParentID] varchar(128),
+    [ParentID] nvarchar(128),
     [LastChange] datetime NOT NULL,
-    [Name] varchar(128) NOT NULL,
-    [Type] varchar(32) NOT NULL,
+    [Name] nvarchar(128) NOT NULL,
+    [Type] nvarchar(32) NOT NULL,
     [Expanded] bit NOT NULL,
     [AutomaticResize] bit NOT NULL DEFAULT ((1)),
     [CacheBitmaps] bit NOT NULL,
-    [Colors] varchar(32) NOT NULL,
+    [Colors] nvarchar(32) NOT NULL,
     [ConnectToConsole] bit NOT NULL,
     [Connected] bit NOT NULL,
-    [Description] varchar(1024),
+    [Description] nvarchar(1024),
     [DisableCursorBlinking] bit NOT NULL,
     [DisableCursorShadow] bit NOT NULL,
     [DisableFullWindowDrag] bit NOT NULL,
     [DisableMenuAnimations] bit NOT NULL,
     [DisplayThemes] bit NOT NULL,
     [DisplayWallpaper] bit NOT NULL,
-    [Domain] varchar(512),
+    [Domain] nvarchar(512),
     [EnableDesktopComposition] bit NOT NULL,
     [EnableFontSmoothing] bit NOT NULL,
-    [ExtApp] varchar(256),
+    [ExtApp] nvarchar(256),
     [Favorite] tinyint NOT NULL,
-    [Hostname] varchar(512),
-    [Icon] varchar(128) NOT NULL,
-    [LoadBalanceInfo] varchar(1024),
-    [MacAddress] varchar(32),
-    [OpeningCommand] varchar(512),
-    [Panel] varchar(128) NOT NULL,
-    [Password] varchar(1024),
+    [Hostname] nvarchar(512),
+    [Icon] nvarchar(128) NOT NULL,
+    [LoadBalanceInfo] nvarchar(1024),
+    [MacAddress] nvarchar(32),
+    [OpeningCommand] nvarchar(512),
+    [Panel] nvarchar(128) NOT NULL,
+    [Password] nvarchar(1024),
     [Port] int NOT NULL,
-    [PostExtApp] varchar(256),
-    [PreExtApp] varchar(256),
-    [Protocol] varchar(32) NOT NULL,
-    [PuttySession] varchar(128),
-    [RDGatewayDomain] varchar(512),
-    [RDGatewayHostname] varchar(512),
-    [RDGatewayPassword] varchar(1024),
-    [RDGatewayUsageMethod] varchar(32) NOT NULL,
-    [RDGatewayUseConnectionCredentials] varchar(32) NOT NULL,
-    [RDGatewayUsername] varchar(512),
+    [PostExtApp] nvarchar(256),
+    [PreExtApp] nvarchar(256),
+    [Protocol] nvarchar(32) NOT NULL,
+    [PuttySession] nvarchar(128),
+    [RDGatewayDomain] nvarchar(512),
+    [RDGatewayHostname] nvarchar(512),
+    [RDGatewayPassword] nvarchar(1024),
+    [RDGatewayUsageMethod] nvarchar(32) NOT NULL,
+    [RDGatewayUseConnectionCredentials] nvarchar(32) NOT NULL,
+    [RDGatewayUsername] nvarchar(512),
     [RDPAlertIdleTimeout] bit NOT NULL,
-    [RDPAuthenticationLevel] varchar(32) NOT NULL,
+    [RDPAuthenticationLevel] nvarchar(32) NOT NULL,
     [RDPMinutesToIdleTimeout] int NOT NULL,
-    [RdpVersion] varchar(10) NULL,
+    [RdpVersion] nvarchar(10) NULL,
     [RedirectAudioCapture] bit NOT NULL,
     [RedirectClipboard] bit NOT NULL,
-    [RedirectDiskDrives] varchar(32) DEFAULT NULL,
-    [RedirectDiskDrivesCustom] varchar(32) DEFAULT NULL,
+    [RedirectDiskDrives] nvarchar(32) DEFAULT NULL,
+    [RedirectDiskDrivesCustom] nvarchar(32) DEFAULT NULL,
     [RedirectKeys] bit NOT NULL,
     [RedirectPorts] bit NOT NULL,
     [RedirectPrinters] bit NOT NULL,
     [RedirectSmartCards] bit NOT NULL,
-    [RedirectSound] varchar(64) NOT NULL,
-    [RenderingEngine] varchar(32) NULL,
-    [Resolution] varchar(32) NOT NULL,
-    [SSHOptions] varchar(1024) NOT NULL,
-    [SSHTunnelConnectionName] varchar(128) NOT NULL,
-    [SoundQuality] varchar(20) NOT NULL,
+    [RedirectSound] nvarchar(64) NOT NULL,
+    [RenderingEngine] nvarchar(32) NULL,
+    [Resolution] nvarchar(32) NOT NULL,
+    [SSHOptions] nvarchar(1024) NOT NULL,
+    [SSHTunnelConnectionName] nvarchar(128) NOT NULL,
+    [SoundQuality] nvarchar(20) NOT NULL,
     [UseCredSsp] bit NOT NULL,
     [UseEnhancedMode] bit NOT NULL,
     [UseVmId] bit NOT NULL,
-    [UserField] varchar(256) NULL,
-    [Username] varchar(512) NULL,
-    [VNCAuthMode] varchar(10) NULL,
-    [VNCColors] varchar(10) NULL,
-    [VNCCompression] varchar(10) NULL,
-    [VNCEncoding] varchar(20) NULL,
-    [VNCProxyIP] varchar(128) NULL,
-    [VNCProxyPassword] varchar(1024) NULL,
+    [UserField] nvarchar(256) NULL,
+    [Username] nvarchar(512) NULL,
+    [VNCAuthMode] nvarchar(10) NULL,
+    [VNCColors] nvarchar(10) NULL,
+    [VNCCompression] nvarchar(10) NULL,
+    [VNCEncoding] nvarchar(20) NULL,
+    [VNCProxyIP] nvarchar(128) NULL,
+    [VNCProxyPassword] nvarchar(1024) NULL,
     [VNCProxyPort] int NULL,
-    [VNCProxyType] varchar(20) NULL,
-    [VNCProxyUsername] varchar(512) NULL,
-    [VNCSmartSizeMode] varchar(20) NULL,
+    [VNCProxyType] nvarchar(20) NULL,
+    [VNCProxyUsername] nvarchar(512) NULL,
+    [VNCSmartSizeMode] nvarchar(20) NULL,
     [VNCViewOnly] bit NOT NULL,
-    [VmId] varchar(100) NULL,
-    [ICAEncryptionStrength] varchar(32) NOT NULL,
+    [VmId] nvarchar(100) NULL,
+    [ICAEncryptionStrength] nvarchar(32) NOT NULL,
     [InheritAutomaticResize] bit NOT NULL,
     [InheritCacheBitmaps] bit NOT NULL,
     [InheritColors] bit NOT NULL,
@@ -370,24 +444,44 @@ CREATE TABLE [dbo].[tblCons] (
     [InheritVNCSmartSizeMode] bit NOT NULL,
     [InheritVNCViewOnly] bit NOT NULL,
     [InheritVmId] bit NOT NULL,
-    [StartProgram] varchar(512) NULL,
-    [StartProgramWorkDir] varchar(512) NULL,
-    [EC2Region] varchar(32) NULL,
-    [EC2InstanceId] varchar(32) NULL,
-    [ExternalCredentialProvider] varchar(256) NULL,
-    [ExternalAddressProvider] varchar(256) NULL,
-    [UserViaAPI] varchar(512) NOT NULL,
+    [StartProgram] nvarchar(512) NULL,
+    [StartProgramWorkDir] nvarchar(512) NULL,
+    [EC2Region] nvarchar(32) NULL,
+    [EC2InstanceId] nvarchar(32) NULL,
+    [ExternalCredentialProvider] nvarchar(256) NULL,
+    [ExternalAddressProvider] nvarchar(256) NULL,
+    [UserViaAPI] nvarchar(512) NOT NULL,
+    [User] nvarchar(512) NULL,
+    [Role] nvarchar(512) NULL,
+    [RowVersion] rowversion NOT NULL
 ) ON [PRIMARY]
 
 CREATE TABLE [dbo].[tblRoot] (
-        [Name] [varchar] (2048) NOT NULL,
+        [Name] [nvarchar] (2048) NOT NULL,
         [Export] [bit] NOT NULL,
-        [Protected] [varchar] (4048) NOT NULL,
-        [ConfVersion] [varchar] (15) NOT NULL
+        [Protected] [nvarchar] (4048) NOT NULL,
+        [ConfVersion] [nvarchar] (15) NOT NULL
 ) ON [PRIMARY]
 
 CREATE TABLE [dbo].[tblUpdate] (
         [LastUpdate] [datetime] NULL
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[tblExternalTools] (
+        [ID] int NOT NULL IDENTITY(1,1),
+        [DisplayName] [nvarchar] (256) NOT NULL,
+        [FileName] [nvarchar] (1024) NOT NULL,
+        [IconPath] [nvarchar] (1024) NOT NULL DEFAULT '',
+        [Arguments] [nvarchar] (2048) NOT NULL DEFAULT '',
+        [WorkingDir] [nvarchar] (1024) NOT NULL DEFAULT '',
+        [WaitForExit] [bit] NOT NULL DEFAULT 0,
+        [TryIntegrate] [bit] NOT NULL DEFAULT 0,
+        [RunElevated] [bit] NOT NULL DEFAULT 0,
+        [ShowOnToolbar] [bit] NOT NULL DEFAULT 1,
+        [Category] [nvarchar] (256) NOT NULL DEFAULT '',
+        [RunOnStartup] [bit] NOT NULL DEFAULT 0,
+        [StopOnShutdown] [bit] NOT NULL DEFAULT 0,
+        [Hotkey] [int] NOT NULL DEFAULT 0
 ) ON [PRIMARY]
 ";
             }
@@ -580,6 +674,9 @@ CREATE TABLE `tblCons` (
     `ExternalCredentialProvider` varchar(256) DEFAULT NULL,
     `ExternalAddressProvider` varchar(256) DEFAULT NULL,
     `UserViaAPI` varchar(512) NOT NULL,
+    `User` varchar(512) DEFAULT NULL,
+    `Role` varchar(512) DEFAULT NULL,
+    `RowVersion` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`ConstantID`),
     UNIQUE KEY `ID_UNIQUE` (`ID`),
     UNIQUE KEY `ConstantID_UNIQUE` (`ConstantID`)
@@ -613,6 +710,32 @@ CREATE TABLE `tblUpdate` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `tblExternalTools`
+--
+
+DROP TABLE IF EXISTS `tblExternalTools`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tblExternalTools` (
+    `ID` int NOT NULL AUTO_INCREMENT,
+    `DisplayName` varchar(256) NOT NULL,
+    `FileName` varchar(1024) NOT NULL,
+    `IconPath` varchar(1024) NOT NULL DEFAULT '',
+    `Arguments` varchar(2048) NOT NULL DEFAULT '',
+    `WorkingDir` varchar(1024) NOT NULL DEFAULT '',
+    `WaitForExit` tinyint NOT NULL DEFAULT 0,
+    `TryIntegrate` tinyint NOT NULL DEFAULT 0,
+    `RunElevated` tinyint NOT NULL DEFAULT 0,
+    `ShowOnToolbar` tinyint NOT NULL DEFAULT 1,
+    `Category` varchar(256) NOT NULL DEFAULT '',
+    `RunOnStartup` tinyint NOT NULL DEFAULT 0,
+    `StopOnShutdown` tinyint NOT NULL DEFAULT 0,
+    `Hotkey` int NOT NULL DEFAULT 0,
+    PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -627,11 +750,124 @@ CREATE TABLE `tblUpdate` (
             }
             else
             {
-                throw new Exception("Unknown database backend");
+                throw new NotSupportedException("Unknown database backend");
             }
 
             DbCommand cmd = databaseConnector.DbCommand(sql);
             cmd.ExecuteNonQuery();
+        }
+
+        private static void UpgradeSchema(IDatabaseConnector databaseConnector)
+        {
+            try
+            {
+                if (databaseConnector.GetType() == typeof(MSSqlDatabaseConnector))
+                {
+                    UpgradeMssqlSchema(databaseConnector);
+                }
+
+                if (!DoesColumnExist(databaseConnector, "tblCons", "User"))
+                {
+                    string sql = databaseConnector.GetType() == typeof(MySqlDatabaseConnector)
+                        ? "ALTER TABLE tblCons ADD COLUMN `User` varchar(512) DEFAULT NULL"
+                        : "ALTER TABLE tblCons ADD [User] nvarchar(512) NULL";
+                    databaseConnector.DbCommand(sql).ExecuteNonQuery();
+                }
+
+                if (!DoesColumnExist(databaseConnector, "tblCons", "Role"))
+                {
+                    string sql = databaseConnector.GetType() == typeof(MySqlDatabaseConnector)
+                        ? "ALTER TABLE tblCons ADD COLUMN `Role` varchar(512) DEFAULT NULL"
+                        : "ALTER TABLE tblCons ADD [Role] nvarchar(512) NULL";
+                    databaseConnector.DbCommand(sql).ExecuteNonQuery();
+                }
+
+                if (databaseConnector.GetType() == typeof(MSSqlDatabaseConnector))
+                {
+                     if (!DoesColumnExist(databaseConnector, "tblCons", "RowVersion"))
+                     {
+                         databaseConnector.DbCommand("ALTER TABLE tblCons ADD [RowVersion] rowversion NOT NULL").ExecuteNonQuery();
+                     }
+                }
+                else if (databaseConnector.GetType() == typeof(MySqlDatabaseConnector))
+                {
+                    if (!DoesColumnExist(databaseConnector, "tblCons", "RowVersion"))
+                    {
+                        databaseConnector.DbCommand("ALTER TABLE tblCons ADD COLUMN `RowVersion` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP").ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("Schema upgrade failed", ex);
+            }
+        }
+
+        private static void UpgradeMssqlSchema(IDatabaseConnector databaseConnector)
+        {
+            DataTable expectedSchema = DataTableSerializer.GetExpectedSchema();
+
+            foreach (DataColumn expectedColumn in expectedSchema.Columns)
+            {
+                if (DoesColumnExist(databaseConnector, "tblCons", expectedColumn.ColumnName))
+                {
+                    continue;
+                }
+
+                string sqlType = expectedColumn.DataType switch
+                {
+                    Type t when t == typeof(bool) => "bit",
+                    Type t when t == typeof(int) => "int",
+                    Type t when t == typeof(SqlDateTime) || t == typeof(DateTime) => "datetime",
+                    Type t when t == typeof(string) => "nvarchar(4000)",
+                    _ => "nvarchar(4000)",
+                };
+
+                databaseConnector.DbCommand($"ALTER TABLE [tblCons] ADD [{expectedColumn.ColumnName}] {sqlType} NULL").ExecuteNonQuery();
+            }
+        }
+
+        private static bool DoesColumnExist(IDatabaseConnector databaseConnector, string tableName, string columnName)
+        {
+             try
+             {
+                 string databaseName = Properties.OptionsDBsPage.Default.SQLDatabaseName;
+                 // INFORMATION_SCHEMA is standard
+                 string sql = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @TableName AND COLUMN_NAME = @ColumnName";
+                 
+                 // However, some DBs might need database name filter if table names are not unique across schemas
+                 if (databaseConnector.GetType() == typeof(MySqlDatabaseConnector))
+                 {
+                     sql += " AND TABLE_SCHEMA = @DatabaseName";
+                 }
+
+                 DbCommand cmd = databaseConnector.DbCommand(sql);
+                 
+                 DbParameter tableNameParam = cmd.CreateParameter();
+                 tableNameParam.ParameterName = "@TableName";
+                 tableNameParam.Value = tableName;
+                 cmd.Parameters.Add(tableNameParam);
+
+                 DbParameter columnNameParam = cmd.CreateParameter();
+                 columnNameParam.ParameterName = "@ColumnName";
+                 columnNameParam.Value = columnName;
+                 cmd.Parameters.Add(columnNameParam);
+
+                 if (databaseConnector.GetType() == typeof(MySqlDatabaseConnector))
+                 {
+                     DbParameter dbNameParam = cmd.CreateParameter();
+                     dbNameParam.ParameterName = "@DatabaseName";
+                     dbNameParam.Value = databaseName;
+                     cmd.Parameters.Add(dbNameParam);
+                 }
+
+                 object? result = cmd.ExecuteScalar();
+                 return result != null && Convert.ToInt32(result, CultureInfo.InvariantCulture) > 0;
+             }
+             catch
+             {
+                 return false;
+             }
         }
         
     }

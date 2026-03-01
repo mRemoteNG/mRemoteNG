@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   revision="1.0"
+                   schemaVersion="1.0"
+                   xmlns="http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions">
+
+  <policyNamespaces>
+    <target prefix="mremoteng" namespace="mRemoteNG.Policies" />
+    <using prefix="windows" namespace="Microsoft.Policies.Windows" />
+  </policyNamespaces>
+
+  <resources minRequiredRevision="1.0" />
+
+  <supportedOn>
+    <definitions>
+      <definition name="SUPPORTED_mRemoteNG_1_81"
+                  displayName="$(string.SUPPORTED_mRemoteNG_1_81)" />
+    </definitions>
+  </supportedOn>
+
+  <categories>
+    <category name="mRemoteNG"
+              displayName="$(string.Cat_mRemoteNG)"
+              explainText="$(string.Cat_mRemoteNG_Help)" />
+
+    <category name="Credentials"
+              displayName="$(string.Cat_Credentials)"
+              explainText="$(string.Cat_Credentials_Help)">
+      <parentCategory ref="mRemoteNG" />
+    </category>
+
+    <category name="Updates"
+              displayName="$(string.Cat_Updates)"
+              explainText="$(string.Cat_Updates_Help)">
+      <parentCategory ref="mRemoteNG" />
+    </category>
+
+    <category name="Notifications"
+              displayName="$(string.Cat_Notifications)"
+              explainText="$(string.Cat_Notifications_Help)">
+      <parentCategory ref="mRemoteNG" />
+    </category>
+  </categories>
+
+  <policies>
+
+    <!-- ============================================================ -->
+    <!-- CREDENTIALS                                                   -->
+    <!-- ============================================================ -->
+
+    <policy name="AllowSavePasswords"
+            class="Machine"
+            displayName="$(string.AllowSavePasswords)"
+            explainText="$(string.AllowSavePasswords_Help)"
+            key="SOFTWARE\mRemoteNG\Credentials"
+            valueName="AllowSavePasswords">
+      <parentCategory ref="Credentials" />
+      <supportedOn ref="SUPPORTED_mRemoteNG_1_81" />
+      <enabledValue><decimal value="1" /></enabledValue>
+      <disabledValue><decimal value="0" /></disabledValue>
+    </policy>
+
+    <policy name="AllowSaveUsernames"
+            class="Machine"
+            displayName="$(string.AllowSaveUsernames)"
+            explainText="$(string.AllowSaveUsernames_Help)"
+            key="SOFTWARE\mRemoteNG\Credentials"
+            valueName="AllowSaveUsernames">
+      <parentCategory ref="Credentials" />
+      <supportedOn ref="SUPPORTED_mRemoteNG_1_81" />
+      <enabledValue><decimal value="1" /></enabledValue>
+      <disabledValue><decimal value="0" /></disabledValue>
+    </policy>
+
+    <policy name="AllowExportPasswords"
+            class="Machine"
+            displayName="$(string.AllowExportPasswords)"
+            explainText="$(string.AllowExportPasswords_Help)"
+            key="SOFTWARE\mRemoteNG\Credentials"
+            valueName="AllowExportPasswords">
+      <parentCategory ref="Credentials" />
+      <supportedOn ref="SUPPORTED_mRemoteNG_1_81" />
+      <enabledValue><decimal value="1" /></enabledValue>
+      <disabledValue><decimal value="0" /></disabledValue>
+    </policy>
+
+    <policy name="AllowExportUsernames"
+            class="Machine"
+            displayName="$(string.AllowExportUsernames)"
+            explainText="$(string.AllowExportUsernames_Help)"
+            key="SOFTWARE\mRemoteNG\Credentials"
+            valueName="AllowExportUsernames">
+      <parentCategory ref="Credentials" />
+      <supportedOn ref="SUPPORTED_mRemoteNG_1_81" />
+      <enabledValue><decimal value="1" /></enabledValue>
+      <disabledValue><decimal value="0" /></disabledValue>
+    </policy>
+
+    <!-- ============================================================ -->
+    <!-- UPDATES                                                       -->
+    <!-- ============================================================ -->
+
+    <policy name="AllowCheckForUpdates"
+            class="Machine"
+            displayName="$(string.AllowCheckForUpdates)"
+            explainText="$(string.AllowCheckForUpdates_Help)"
+            key="SOFTWARE\mRemoteNG\Updates"
+            valueName="AllowCheckForUpdates">
+      <parentCategory ref="Updates" />
+      <supportedOn ref="SUPPORTED_mRemoteNG_1_81" />
+      <enabledValue><decimal value="1" /></enabledValue>
+      <disabledValue><decimal value="0" /></disabledValue>
+    </policy>
+
+    <policy name="AllowCheckForUpdatesAutomatical"
+            class="Machine"
+            displayName="$(string.AllowCheckForUpdatesAutomatical)"
+            explainText="$(string.AllowCheckForUpdatesAutomatical_Help)"
+            key="SOFTWARE\mRemoteNG\Updates"
+            valueName="AllowCheckForUpdatesAutomatical">
+      <parentCategory ref="Updates" />
+      <supportedOn ref="SUPPORTED_mRemoteNG_1_81" />
+      <enabledValue><decimal value="1" /></enabledValue>
+      <disabledValue><decimal value="0" /></disabledValue>
+    </policy>
+
+    <policy name="AllowCheckForUpdatesManual"
+            class="Machine"
+            displayName="$(string.AllowCheckForUpdatesManual)"
+            explainText="$(string.AllowCheckForUpdatesManual_Help)"
+            key="SOFTWARE\mRemoteNG\Updates"
+            valueName="AllowCheckForUpdatesManual">
+      <parentCategory ref="Updates" />
+      <supportedOn ref="SUPPORTED_mRemoteNG_1_81" />
+      <enabledValue><decimal value="1" /></enabledValue>
+      <disabledValue><decimal value="0" /></disabledValue>
+    </policy>
+
+    <!-- ============================================================ -->
+    <!-- NOTIFICATIONS                                                 -->
+    <!-- ============================================================ -->
+
+    <policy name="AllowLogging"
+            class="Machine"
+            displayName="$(string.AllowLogging)"
+            explainText="$(string.AllowLogging_Help)"
+            key="SOFTWARE\mRemoteNG\Notifications"
+            valueName="AllowLogging">
+      <parentCategory ref="Notifications" />
+      <supportedOn ref="SUPPORTED_mRemoteNG_1_81" />
+      <enabledValue><decimal value="1" /></enabledValue>
+      <disabledValue><decimal value="0" /></disabledValue>
+    </policy>
+
+    <policy name="AllowNotifications"
+            class="Machine"
+            displayName="$(string.AllowNotifications)"
+            explainText="$(string.AllowNotifications_Help)"
+            key="SOFTWARE\mRemoteNG\Notifications"
+            valueName="AllowNotifications">
+      <parentCategory ref="Notifications" />
+      <supportedOn ref="SUPPORTED_mRemoteNG_1_81" />
+      <enabledValue><decimal value="1" /></enabledValue>
+      <disabledValue><decimal value="0" /></disabledValue>
+    </policy>
+
+    <policy name="AllowPopups"
+            class="Machine"
+            displayName="$(string.AllowPopups)"
+            explainText="$(string.AllowPopups_Help)"
+            key="SOFTWARE\mRemoteNG\Notifications"
+            valueName="AllowPopups">
+      <parentCategory ref="Notifications" />
+      <supportedOn ref="SUPPORTED_mRemoteNG_1_81" />
+      <enabledValue><decimal value="1" /></enabledValue>
+      <disabledValue><decimal value="0" /></disabledValue>
+    </policy>
+
+  </policies>
+
+</policyDefinitions>

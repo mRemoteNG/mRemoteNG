@@ -3,26 +3,94 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Security;
 using System.Runtime.Versioning;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Security;
+using mRemoteNG.Resources.Language;
+using mRemoteNG.Tools;
+using mRemoteNG.PluginSystem;
 using mRemoteNG.Tree;
 
 namespace mRemoteNG.Container
 {
+    /// <summary>
+    /// Represents a folder in the connection tree that can contain child
+    /// <see cref="ConnectionInfo"/> nodes and other <see cref="ContainerInfo"/> folders.
+    /// Extends <see cref="ConnectionInfo"/> so that folder-level defaults can be
+    /// inherited by child connections via the inheritance system.
+    /// Implements <see cref="INotifyCollectionChanged"/> to notify the tree view
+    /// when children are added, removed, or reordered.
+    /// </summary>
     [SupportedOSPlatform("windows")]
     [DefaultProperty("Name")]
-    public class ContainerInfo : ConnectionInfo, INotifyCollectionChanged
+    public class ContainerInfo : ConnectionInfo, INotifyCollectionChanged, IConnectionNode, ITreeNodeContainer
     {
         private bool _isExpanded;
+        private bool _autoSort;
+        private bool _excludeFromSearch;
+        private SecureString? _containerPassword;
+
+        #region IConnectionNode Implementation
+        IEnumerable<IConnectionNode> IConnectionNode.Children => Children;
+        #endregion
 
         [Browsable(false)] public List<ConnectionInfo> Children { get; } = [];
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.General)),
+         DisplayName("Folder Password"),
+         Description("Password to protect this folder."),
+         PasswordPropertyText(true),
+         Browsable(true)]
+        public string ContainerPassword
+        {
+            get => _containerPassword?.ConvertToUnsecureString() ?? string.Empty;
+            set
+            {
+                string password = value ?? string.Empty;
+                if (string.Equals(_containerPassword?.ConvertToUnsecureString() ?? string.Empty, password, StringComparison.Ordinal))
+                    return;
+
+                _containerPassword?.Dispose();
+                _containerPassword = password.ConvertToSecureString();
+            }
+        }
+
+        [Browsable(false)]
+        public bool IsUnlocked { get; set; }
 
         [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(""), DesignOnly(false)]
         public bool IsExpanded
         {
             get => _isExpanded;
-            set => SetField(ref _isExpanded, value, "IsExpanded");
+            set => SetField(ref _isExpanded, value, nameof(IsExpanded));
+        }
+
+        /// <summary>
+        /// When true, this folder and all its children are excluded from connection tree search results.
+        /// </summary>
+        [Browsable(false)]
+        public bool ExcludeFromSearch
+        {
+            get => _excludeFromSearch;
+            set => SetField(ref _excludeFromSearch, value, nameof(ExcludeFromSearch));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.General)),
+         DisplayName("Automatic Sort"),
+         Description("Automatically sort child nodes by name when items are added, moved, or renamed."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool AutoSort
+        {
+            get => GetPropertyValue(nameof(AutoSort), _autoSort);
+            set
+            {
+                bool wasAutoSortEnabled = AutoSort;
+                SetField(ref _autoSort, value, nameof(AutoSort));
+                if (!wasAutoSortEnabled && AutoSort)
+                    Sort();
+            }
         }
 
         [Browsable(false)]
@@ -31,6 +99,33 @@ namespace mRemoteNG.Container
             get => true;
             set { }
         }
+
+        [Browsable(false)]
+        public bool IsEntity { get; set; }
+
+        [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(DynamicSourceType.None), DesignOnly(false)]
+        public DynamicSourceType DynamicSource
+        {
+            get => _dynamicSource;
+            set => SetField(ref _dynamicSource, value, nameof(DynamicSource));
+        }
+        private DynamicSourceType _dynamicSource;
+
+        [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(""), DesignOnly(false)]
+        public string DynamicSourceValue
+        {
+            get => _dynamicSourceValue;
+            set => SetField(ref _dynamicSourceValue, value, nameof(DynamicSourceValue));
+        }
+        private string _dynamicSourceValue = string.Empty;
+
+        [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(0), DesignOnly(false)]
+        public int DynamicRefreshInterval
+        {
+            get => _dynamicRefreshInterval;
+            set => SetField(ref _dynamicRefreshInterval, value, nameof(DynamicRefreshInterval));
+        }
+        private int _dynamicRefreshInterval;
 
         public ContainerInfo(string uniqueId)
             : base(uniqueId)
@@ -45,7 +140,7 @@ namespace mRemoteNG.Container
 
         public override TreeNodeType GetTreeNodeType()
         {
-            return TreeNodeType.Container;
+            return IsEntity ? TreeNodeType.Entity : TreeNodeType.Container;
         }
 
         public bool HasChildren()
@@ -81,6 +176,13 @@ namespace mRemoteNG.Container
             newChildItem.Parent = this;
             Children.Insert(index, newChildItem);
             SubscribeToChildEvents(newChildItem);
+
+            if (AutoSort)
+            {
+                Sort();
+                return;
+            }
+
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newChildItem));
         }
 
@@ -116,6 +218,13 @@ namespace mRemoteNG.Container
             Children.Remove(child);
             if (newIndex > Children.Count) newIndex = Children.Count;
             Children.Insert(newIndex, child);
+
+            if (AutoSort)
+            {
+                Sort();
+                return;
+            }
+
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, child, newIndex, originalIndex));
         }
 
@@ -195,6 +304,8 @@ namespace mRemoteNG.Container
         {
             ContainerInfo newContainer = new();
             newContainer.CopyFrom(this);
+            newContainer._autoSort = _autoSort;
+            newContainer._excludeFromSearch = _excludeFromSearch;
             newContainer.OpenConnections = [];
             newContainer.Inheritance = Inheritance.Clone(newContainer);
             foreach (ConnectionInfo child in Children.ToArray())
@@ -215,44 +326,29 @@ namespace mRemoteNG.Container
 
         public IEnumerable<ConnectionInfo> GetRecursiveChildList()
         {
-            List<ConnectionInfo> childList = new();
             foreach (ConnectionInfo child in Children)
             {
-                childList.Add(child);
-                ContainerInfo childContainer = child as ContainerInfo;
-                if (childContainer != null)
-                    childList.AddRange(GetRecursiveChildList(childContainer));
+                yield return child;
+                if (child is ContainerInfo childContainer)
+                {
+                    foreach (ConnectionInfo descendant in childContainer.GetRecursiveChildList())
+                        yield return descendant;
+                }
             }
-
-            return childList;
-        }
-
-        private IEnumerable<ConnectionInfo> GetRecursiveChildList(ContainerInfo container)
-        {
-            List<ConnectionInfo> childList = new();
-            foreach (ConnectionInfo child in container.Children)
-            {
-                childList.Add(child);
-                ContainerInfo childContainer = child as ContainerInfo;
-                if (childContainer != null)
-                    childList.AddRange(GetRecursiveChildList(childContainer));
-            }
-
-            return childList;
         }
 
         public IEnumerable<ConnectionInfo> GetRecursiveFavoriteChildList()
         {
-            List<ConnectionInfo> childList = new();
             foreach (ConnectionInfo child in Children)
             {
                 if (child.Favorite && child.GetTreeNodeType() == TreeNodeType.Connection)
-                    childList.Add(child);
-                ContainerInfo childContainer = child as ContainerInfo;
-                if (childContainer != null)
-                    childList.AddRange(GetRecursiveFavoritChildList(childContainer));
+                    yield return child;
+                if (child is ContainerInfo childContainer)
+                {
+                    foreach (ConnectionInfo descendant in childContainer.GetRecursiveFavoriteChildList())
+                        yield return descendant;
+                }
             }
-            return childList;
         }
 
         /// <summary>
@@ -261,7 +357,9 @@ namespace mRemoteNG.Container
         /// </summary>
         public void ApplyConnectionPropertiesToChildren()
         {
-            IEnumerable<ConnectionInfo> children = GetRecursiveChildList();
+            // Materialize the list to avoid "Collection was modified" when
+            // CopyFrom triggers PropertyChanged -> auto-sort on parent containers.
+            List<ConnectionInfo> children = GetRecursiveChildList().ToList();
 
             foreach (ConnectionInfo child in children)
             {
@@ -275,7 +373,8 @@ namespace mRemoteNG.Container
         /// </summary>
         public void ApplyInheritancePropertiesToChildren()
         {
-            IEnumerable<ConnectionInfo> children = GetRecursiveChildList();
+            // Materialize the list to avoid "Collection was modified" during iteration.
+            List<ConnectionInfo> children = GetRecursiveChildList().ToList();
 
             foreach (ConnectionInfo child in children)
             {
@@ -283,41 +382,41 @@ namespace mRemoteNG.Container
             }
         }
 
-        private IEnumerable<ConnectionInfo> GetRecursiveFavoritChildList(ContainerInfo container)
-        {
-            List<ConnectionInfo> childList = new();
-            foreach (ConnectionInfo child in container.Children)
-            {
-                if (child.Favorite && child.GetTreeNodeType() == TreeNodeType.Connection)
-                    childList.Add(child);
-                ContainerInfo childContainer = child as ContainerInfo;
-                if (childContainer != null)
-                    childList.AddRange(GetRecursiveFavoritChildList(childContainer));
-            }
-            return childList;
-        }
-
         protected virtual void SubscribeToChildEvents(ConnectionInfo child)
         {
-            child.PropertyChanged += RaisePropertyChangedEvent;
-            ContainerInfo childAsContainer = child as ContainerInfo;
+            child.PropertyChanged += OnChildPropertyChanged;
+            ContainerInfo? childAsContainer = child as ContainerInfo;
             if (childAsContainer == null) return;
             childAsContainer.CollectionChanged += RaiseCollectionChangedEvent;
         }
 
         protected virtual void UnsubscribeToChildEvents(ConnectionInfo child)
         {
-            child.PropertyChanged -= RaisePropertyChangedEvent;
-            ContainerInfo childAsContainer = child as ContainerInfo;
+            child.PropertyChanged -= OnChildPropertyChanged;
+            ContainerInfo? childAsContainer = child as ContainerInfo;
             if (childAsContainer == null) return;
             childAsContainer.CollectionChanged -= RaiseCollectionChangedEvent;
         }
 
         public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
+        private void OnChildPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            RaisePropertyChangedEvent(sender, args);
+
+            if (args.PropertyName != nameof(ConnectionInfo.Name))
+                return;
+            if (sender is not ConnectionInfo child || !Children.Contains(child))
+                return;
+            if (!AutoSort)
+                return;
+
+            Sort();
+        }
+
         private void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
         {
-            CollectionChanged?.Invoke(sender, args);
+            CollectionChanged?.Invoke(this, args);
         }
     }
 }

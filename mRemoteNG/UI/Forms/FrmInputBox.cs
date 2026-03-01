@@ -8,7 +8,7 @@ namespace mRemoteNG.UI.Forms
     [SupportedOSPlatform("windows")]
     public sealed partial class FrmInputBox : Form
     {
-        internal string returnValue;
+        internal string? returnValue;
 
         public FrmInputBox(string title, string promptText, string value)
         {
@@ -21,6 +21,15 @@ namespace mRemoteNG.UI.Forms
             ApplyTheme();
         }
 
+        public FrmInputBox(string title, string promptText, string value, bool isPassword)
+            : this(title, promptText, value)
+        {
+            if (isPassword)
+            {
+                textBox.UseSystemPasswordChar = true;
+            }
+        }
+
         private void ApplyLanguage()
         {
             _Ok.Text = Language._Ok;
@@ -31,8 +40,8 @@ namespace mRemoteNG.UI.Forms
         {
             ThemeManager _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ActiveAndExtended) return;
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette?.getColor("Dialog_Background") ?? BackColor;
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette?.getColor("Dialog_Foreground") ?? ForeColor;
         }
 
         private void _Ok_Click(object sender, System.EventArgs e)

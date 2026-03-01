@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
@@ -15,23 +16,26 @@ namespace mRemoteNG.Tree
     {
         private readonly Color DropAllowedFeedbackColor = Color.Green;
         private readonly Color DropDeniedFeedbackColor = Color.Red;
-        private string _infoMessage;
+        private string? _infoMessage;
         private Color _currentFeedbackColor;
         private bool _enableFeedback;
 
 
-        public void HandleEvent_ModelDropped(object sender, ModelDropEventArgs e)
+        public void OnModelDropped(object sender, ModelDropEventArgs e)
         {
-            if (!(e.TargetModel is ConnectionInfo dropTarget)) return;
-            foreach(ConnectionInfo dropSource in e.SourceModels.Cast<ConnectionInfo>())
+            if (Properties.Settings.Default.DisableTreeDragAndDrop || Properties.OptionsDBsPage.Default.SQLReadOnly) return;
+            if (e.TargetModel is not ConnectionInfo dropTarget) return;
+
+            IEnumerable<ConnectionInfo> dropSources = e.SourceModels?.OfType<ConnectionInfo>() ?? [];
+            foreach (ConnectionInfo dropSource in dropSources)
             {
                 DropModel(dropSource, dropTarget, e.DropTargetLocation);
-            }           
-            
+            }
+
             e.Handled = true;
         }
 
-        public void DropModel(ConnectionInfo dropSource,
+        public static void DropModel(ConnectionInfo dropSource,
                               ConnectionInfo dropTarget,
                               DropTargetLocation dropTargetLocation)
         {
@@ -49,43 +53,73 @@ namespace mRemoteNG.Tree
             }
         }
 
-        private void DropModelOntoTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
+        private static void DropModelOntoTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
         {
             if (!(dropTarget is ContainerInfo dropTargetAsContainer)) return;
             dropSource.SetParent(dropTargetAsContainer);
         }
 
-        private void DropModelAboveTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
+        private static void DropModelAboveTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
         {
+            if (dropSource.Parent is null || dropTarget.Parent is null) return;
             if (!dropSource.Parent.Equals(dropTarget.Parent))
                 dropTarget.Parent.AddChildAbove(dropSource, dropTarget);
             else
                 dropTarget.Parent.SetChildAbove(dropSource, dropTarget);
         }
 
-        private void DropModelBelowTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
+        private static void DropModelBelowTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
         {
+            if (dropSource.Parent is null || dropTarget.Parent is null) return;
             if (!dropSource.Parent.Equals(dropTarget.Parent))
                 dropTarget.Parent.AddChildBelow(dropSource, dropTarget);
             else
                 dropTarget.Parent.SetChildBelow(dropSource, dropTarget);
         }
 
-        public void HandleEvent_ModelCanDrop(object sender, ModelDropEventArgs e)
+        public void OnModelCanDrop(object sender, ModelDropEventArgs e)
         {
+            if (Properties.Settings.Default.DisableTreeDragAndDrop || Properties.OptionsDBsPage.Default.SQLReadOnly)
+            {
+                e.Effect = DragDropEffects.None;
+                e.Handled = true;
+                return;
+            }
+
             _enableFeedback = true;
             _currentFeedbackColor = DropDeniedFeedbackColor;
             _infoMessage = null;
-            foreach (ConnectionInfo dropSource in e.SourceModels.Cast<ConnectionInfo>())
-            {
-                ConnectionInfo dropTarget = e.TargetModel as ConnectionInfo;
 
-                e.Effect = CanModelDrop(dropSource, dropTarget, e.DropTargetLocation);
-                e.InfoMessage = _infoMessage;
-                e.DropSink.EnableFeedback = _enableFeedback;
-                e.DropSink.FeedbackColor = _currentFeedbackColor;
+            if (e.TargetModel is not ConnectionInfo dropTarget)
+            {
+                e.Effect = DragDropEffects.None;
             }
+            else
+            {
+                IEnumerable<ConnectionInfo> dropSources = e.SourceModels?.OfType<ConnectionInfo>() ?? [];
+                e.Effect = CanModelsDrop(dropSources, dropTarget, e.DropTargetLocation);
+            }
+
+            e.InfoMessage = _infoMessage;
+            e.DropSink.EnableFeedback = _enableFeedback;
+            e.DropSink.FeedbackColor = _currentFeedbackColor;
             e.Handled = true;
+        }
+
+        public DragDropEffects CanModelsDrop(IEnumerable<ConnectionInfo> dropSources,
+                                             ConnectionInfo dropTarget,
+                                             DropTargetLocation dropTargetLocation)
+        {
+            bool hadDropSource = false;
+            foreach (ConnectionInfo dropSource in dropSources)
+            {
+                hadDropSource = true;
+                DragDropEffects dragDropEffect = CanModelDrop(dropSource, dropTarget, dropTargetLocation);
+                if (dragDropEffect == DragDropEffects.None)
+                    return DragDropEffects.None;
+            }
+
+            return hadDropSource ? DragDropEffects.Move : DragDropEffects.None;
         }
 
         public DragDropEffects CanModelDrop(ConnectionInfo dropSource,
@@ -160,23 +194,23 @@ namespace mRemoteNG.Tree
             return validDrag;
         }
 
-        private bool NodeIsDraggable(ConnectionInfo node)
+        private static bool NodeIsDraggable(ConnectionInfo node)
         {
             return node != null && !(node is RootNodeInfo) && !(node is PuttySessionInfo);
         }
 
-        private bool NodeDraggingOntoSelf(ConnectionInfo source, ConnectionInfo target)
+        private static bool NodeDraggingOntoSelf(ConnectionInfo source, ConnectionInfo target)
         {
             return source.Equals(target);
         }
 
-        private bool AncestorDraggingOntoChild(ConnectionInfo source, ConnectionInfo target)
+        private static bool AncestorDraggingOntoChild(ConnectionInfo source, ConnectionInfo target)
         {
             return source is ContainerInfo sourceAsContainer &&
                    sourceAsContainer.GetRecursiveChildList().Contains(target);
         }
 
-        private bool DraggingOntoCurrentParent(ConnectionInfo source, ConnectionInfo target)
+        private static bool DraggingOntoCurrentParent(ConnectionInfo source, ConnectionInfo target)
         {
             return target is ContainerInfo targetAsContainer && targetAsContainer.Children.Contains(source);
         }

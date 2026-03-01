@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -18,8 +19,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
         #region Private Fields
 
-        private AppUpdater _appUpdate;
-        private OptRegistryUpdatesPage pageRegSettingsInstance;
+        private AppUpdater? _appUpdate;
+        private OptRegistryUpdatesPage? pageRegSettingsInstance;
 
         #endregion
 
@@ -99,7 +100,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup = chkCheckForUpdatesOnStartup.Checked;
 
-            string UpdateCheckFrequency = cboUpdateCheckFrequency.SelectedItem?.ToString();
+            string? UpdateCheckFrequency = cboUpdateCheckFrequency.SelectedItem?.ToString();
             if (UpdateCheckFrequency == Language.Never)
             {
                 Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup = false;
@@ -245,7 +246,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             // Enables/disables proxy authentication controls
             bool useProxyAuth = chkUseProxyAuthentication.Checked;
-            bool useProxyAuthRegIsSet = pageRegSettingsInstance.UseProxyAuthentication?.IsSet ?? false;
+            bool useProxyAuthRegIsSet = pageRegSettingsInstance?.UseProxyAuthentication?.IsSet ?? false;
             chkUseProxyAuthentication.Enabled = useProxy && !useProxyAuthRegIsSet;
             tblProxyAuthentication.Enabled = useProxy && useProxyAuth && !useProxyAuthRegIsSet;
         }
@@ -275,12 +276,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
                 btnTestProxy.Enabled = true;
                 btnTestProxy.Text = Language.TestProxy;
-                CTaskDialog.ShowCommandBox(this, Application.ProductName, Language.ProxyTestSucceeded, "",
+                CTaskDialog.ShowCommandBox(this, Application.ProductName ?? string.Empty, Language.ProxyTestSucceeded, "",
                     Language._Ok, false);
             }
             catch (Exception ex)
             {
-                CTaskDialog.ShowCommandBox(this, Application.ProductName, Language.ProxyTestFailed,
+                CTaskDialog.ShowCommandBox(this, Application.ProductName ?? string.Empty, Language.ProxyTestFailed,
                     MiscTools.GetExceptionMessageRecursive(ex), "", "", "", Language._Ok,
                     false,
                     ESysIcons.Error,
@@ -340,7 +341,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                         break;
                     default:
                         int nCustom =
-                            cboUpdateCheckFrequency.Items.Add(string.Format(Language.UpdateFrequencyCustom, Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays));
+                            cboUpdateCheckFrequency.Items.Add(string.Format(CultureInfo.CurrentCulture, Language.UpdateFrequencyCustom, Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays));
                         cboUpdateCheckFrequency.SelectedIndex = nCustom;
                         break;
                 }
@@ -360,12 +361,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             int stable = cboReleaseChannel.Items.Add(UpdateChannelInfo.STABLE);
             int beta = cboReleaseChannel.Items.Add(UpdateChannelInfo.PREVIEW);
             int dev = cboReleaseChannel.Items.Add(UpdateChannelInfo.NIGHTLY);
+            int github = cboReleaseChannel.Items.Add(UpdateChannelInfo.GITHUB);
             cboReleaseChannel.SelectedIndex = Properties.OptionsUpdatesPage.Default.UpdateChannel switch
             {
                 UpdateChannelInfo.STABLE => stable,
                 UpdateChannelInfo.PREVIEW => beta,
                 UpdateChannelInfo.NIGHTLY => dev,
-                _ => stable,
+                UpdateChannelInfo.GITHUB => github,
+                _ => github,
             };
         }
 
@@ -386,14 +389,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             return !CommonRegistrySettings.AllowCheckForUpdatesAutomatical
                 || !CommonRegistrySettings.AllowCheckForUpdatesManual
-                || pageRegSettingsInstance.CheckForUpdatesFrequencyDays.IsSet
-                || pageRegSettingsInstance.UpdateChannel.IsSet
-                || pageRegSettingsInstance.UseProxyForUpdates.IsSet
-                || pageRegSettingsInstance.ProxyAddress.IsSet
-                || pageRegSettingsInstance.ProxyPort.IsSet
-                || pageRegSettingsInstance.UseProxyAuthentication.IsSet
-                || pageRegSettingsInstance.ProxyAuthUser.IsSet
-                || pageRegSettingsInstance.ProxyAuthPass.IsSet;
+                || pageRegSettingsInstance?.CheckForUpdatesFrequencyDays.IsSet == true
+                || pageRegSettingsInstance?.UpdateChannel.IsSet == true
+                || pageRegSettingsInstance?.UseProxyForUpdates.IsSet == true
+                || pageRegSettingsInstance?.ProxyAddress.IsSet == true
+                || pageRegSettingsInstance?.ProxyPort.IsSet == true
+                || pageRegSettingsInstance?.UseProxyAuthentication.IsSet == true
+                || pageRegSettingsInstance?.ProxyAuthUser.IsSet == true
+                || pageRegSettingsInstance?.ProxyAuthPass.IsSet == true;
         }
 
         #endregion

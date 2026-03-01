@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using AxMSTSCLib;
 using mRemoteNG.App;
@@ -20,22 +21,23 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		*/
     public class RdpProtocol8 : RdpProtocol7
     {
-        private MsRdpClient8NotSafeForScripting RdpClient8 => (MsRdpClient8NotSafeForScripting)((AxHost)Control).GetOcx();
+        private MsRdpClient8NotSafeForScripting? RdpClient8 => ((AxHost?)Control)?.GetOcx() as MsRdpClient8NotSafeForScripting;
 
         protected override RdpVersion RdpProtocolVersion => RDP.RdpVersion.Rdc8;
         protected FormWindowState LastWindowState = FormWindowState.Minimized;
 
         // Debounce timer to reduce flickering during resize
-        private System.Timers.Timer _resizeDebounceTimer;
+        private System.Timers.Timer? _resizeDebounceTimer;
         private Size _pendingResizeSize;
-        private bool _hasPendingResize = false;
+        private bool _hasPendingResize;
 
         public RdpProtocol8()
         {
-            _frmMain.ResizeEnd += ResizeEnd;
+            // ResizeEnd events are forwarded by ConnectionWindow/ConnectionTab.
+            // Avoid wiring FrmMain directly to prevent duplicate and unrelated resize-end handling.
 
-            // Initialize debounce timer (300ms delay)
-            _resizeDebounceTimer = new System.Timers.Timer(300);
+            // Initialize debounce timer (100ms delay)
+            _resizeDebounceTimer = new System.Timers.Timer(100);
             _resizeDebounceTimer.AutoReset = false;
             _resizeDebounceTimer.Elapsed += ResizeDebounceTimer_Elapsed;
         }
@@ -45,6 +47,19 @@ namespace mRemoteNG.Connection.Protocol.RDP
             if (!base.Initialize())
                 return false;
 
+            return PostInitialize();
+        }
+
+        public override async System.Threading.Tasks.Task<bool> InitializeAsync()
+        {
+            if (!await base.InitializeAsync())
+                return false;
+
+            return PostInitialize();
+        }
+
+        private bool PostInitialize()
+        {
             if (RdpVersion < Versions.RDC81) return false; // minimum dll version checked, loaded MSTSCLIB dll version is not capable
 
             // https://learn.microsoft.com/en-us/windows/win32/termserv/imsrdpextendedsettings-property
@@ -57,7 +72,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 SetExtendedProperty("DisableCredentialsDelegation", true);
                 SetExtendedProperty("RedirectedAuthentication", true);
             }
-            
+
             return true;
         }
 
@@ -75,8 +90,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             if (_frmMain == null) return;
 
-            // Skip resize entirely when minimized or minimizing
-            if (_frmMain.WindowState == FormWindowState.Minimized) return;
+            // Skip resize entirely when minimized or minimizing, but track state
+            if (_frmMain.WindowState == FormWindowState.Minimized)
+            {
+                LastWindowState = FormWindowState.Minimized;
+                return;
+            }
 
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
                 $"Resize() called - WindowState={_frmMain.WindowState}, LastWindowState={LastWindowState}");
@@ -89,15 +108,39 @@ namespace mRemoteNG.Connection.Protocol.RDP
             // Manual drag-resizing will be handled by ResizeEnd()
             if (LastWindowState != _frmMain.WindowState)
             {
+                bool wasMinimized = LastWindowState == FormWindowState.Minimized;
+
                 Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
                     $"Resize() - Window state changed from {LastWindowState} to {_frmMain.WindowState}, calling DoResizeClient()");
                 LastWindowState = _frmMain.WindowState;
+
+                if (wasMinimized)
+                {
+                    // After restoring from minimize, the RDP ActiveX control may not
+                    // properly restore its layout. Force a re-dock cycle to ensure
+                    // the control fills its container correctly. Also re-apply
+                    // SmartSizing which may be lost during minimize/restore (#662).
+                    if (Control != null && !Control.IsDisposed && Control.Dock == DockStyle.Fill)
+                    {
+                        Control.Dock = DockStyle.None;
+                        Control.Dock = DockStyle.Fill;
+                    }
+
+                    EnsureSmartSizing();
+                }
+
                 DoResizeClient();
             }
             else
             {
+                // Window state unchanged but size may have changed (e.g. jump-host RDP session
+                // reconnect at a different resolution). WM_EXITSIZEMOVE / ResizeEnd() is not
+                // fired for programmatic resizes, so schedule a debounced resize here too.
+                // The debounce timer ensures only one resize fires even if Resize() + ResizeEnd()
+                // both fire during a normal user-drag.
                 Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                    $"Resize() - Window state unchanged ({_frmMain.WindowState}), deferring to ResizeEnd()");
+                    $"Resize() - Window state unchanged ({_frmMain.WindowState}), scheduling debounced resize");
+                ScheduleDebouncedResize();
             }
         }
 
@@ -134,7 +177,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             _resizeDebounceTimer?.Start();
 
             Runtime.MessageCollector?.AddMessage(MessageClass.DebugMsg,
-                $"Resize debounced - will resize to {_pendingResizeSize.Width}x{_pendingResizeSize.Height} after 300ms");
+                $"Resize debounced - will resize to {_pendingResizeSize.Width}x{_pendingResizeSize.Height} after 100ms");
         }
 
         private void ResizeDebounceTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -157,6 +200,17 @@ namespace mRemoteNG.Connection.Protocol.RDP
             DoResizeClient();
         }
 
+        public override void OnDisplaySettingsChanged()
+        {
+            if (_frmMain == null || _frmMain.WindowState == FormWindowState.Minimized) return;
+
+            Runtime.MessageCollector?.AddMessage(MessageClass.DebugMsg,
+                $"DisplaySettingsChanged for '{connectionInfo?.Hostname}' — scheduling resize");
+
+            DoResizeControl();
+            ScheduleDebouncedResize();
+        }
+
         protected override AxHost CreateActiveXRdpClientControl()
         {
             return new AxMsRdpClient8NotSafeForScripting();
@@ -168,6 +222,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
                     $"Resize skipped for '{connectionInfo.Hostname}': Login not complete");
+                return;
+            }
+
+            if (Control == null || InterfaceControl == null || Control.IsDisposed || InterfaceControl.IsDisposed)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                    $"Resize skipped for '{connectionInfo.Hostname}': RDP controls are no longer available");
                 return;
             }
 
@@ -203,6 +264,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 Size size = Fullscreen
                     ? Screen.FromControl(Control).Bounds.Size
                     : InterfaceControl.Size;
+                
+                if (size.Width <= 0 || size.Height <= 0)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                        $"Resize skipped for '{connectionInfo.Hostname}': Invalid size {size.Width}x{size.Height}");
+                    return;
+                }
 
                 Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
                     $"Calling UpdateSessionDisplaySettings({size.Width}, {size.Height}) for '{connectionInfo.Hostname}' (Control.Size={Control.Size}, InterfaceControl.Size={InterfaceControl.Size})");
@@ -215,7 +283,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage(
-                    string.Format(Language.ChangeConnectionResolutionError, connectionInfo.Hostname),
+                    string.Format(CultureInfo.InvariantCulture, Language.ChangeConnectionResolutionError, connectionInfo.Hostname),
                     ex, MessageClass.WarningMsg, false);
             }
         }
@@ -268,6 +336,31 @@ namespace mRemoteNG.Connection.Protocol.RDP
             return true;
         }
 
+        /// <summary>
+        /// Re-applies SmartSizing based on the connection's configured settings.
+        /// Called after restore from minimize to ensure the COM property wasn't lost (#662).
+        /// </summary>
+        private void EnsureSmartSizing()
+        {
+            if (connectionInfo == null) return;
+
+            var sizingMode = connectionInfo.RDPSizingMode;
+            if (connectionInfo.Resolution == RDPResolutions.SmartSize)
+                sizingMode = RDPSizingMode.SmartSize;
+            else if (connectionInfo.Resolution == RDPResolutions.SmartSizeAspect)
+                sizingMode = RDPSizingMode.SmartSizeAspect;
+
+            bool shouldBeSmartSized = sizingMode == RDPSizingMode.SmartSize ||
+                                     sizingMode == RDPSizingMode.SmartSizeAspect;
+
+            if (shouldBeSmartSized && !SmartSize)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                    $"EnsureSmartSizing - Re-applying SmartSizing for '{connectionInfo.Hostname}' after restore");
+                SmartSize = true;
+            }
+        }
+
         protected virtual void UpdateSessionDisplaySettings(uint width, uint height)
         {
             if (RdpClient8 != null)
@@ -278,6 +371,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         public override void Close()
         {
+            _frmMain.ResizeEnd -= ResizeEnd;
+
             // Clean up debounce timer
             if (_resizeDebounceTimer != null)
             {

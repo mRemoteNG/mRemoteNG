@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
@@ -12,7 +13,7 @@ namespace mRemoteNG.UI.Controls
     [SupportedOSPlatform("windows")]
     public class QuickConnectComboBox : ToolStripComboBox
     {
-        private readonly ComboBox _comboBox;
+        private readonly ComboBox? _comboBox;
         private bool _ignoreEnter;
 
         public QuickConnectComboBox()
@@ -31,7 +32,7 @@ namespace mRemoteNG.UI.Controls
 
         private void ComboBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter & _comboBox.DroppedDown)
+            if (e.KeyCode == Keys.Enter & (_comboBox?.DroppedDown ?? false))
             {
                 _ignoreEnter = true;
             }
@@ -45,22 +46,27 @@ namespace mRemoteNG.UI.Controls
                 // Only connect if Enter was not pressed while the combo box was dropped down
                 if (!_ignoreEnter)
                 {
-                    OnConnectRequested(new ConnectRequestedEventArgs(_comboBox.Text));
+                    OnConnectRequested(new ConnectRequestedEventArgs(_comboBox?.Text ?? string.Empty));
                 }
 
                 _ignoreEnter = false;
                 e.Handled = true;
             }
-            else if (e.KeyCode == Keys.Delete & _comboBox.DroppedDown)
+            else if (e.KeyCode == Keys.Escape && !(_comboBox?.DroppedDown ?? false))
+            {
+                Text = string.Empty;
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Delete && _comboBox != null && _comboBox.DroppedDown)
             {
                 if (_comboBox.SelectedIndex != -1)
                 {
                     // Items can't be removed from the ComboBox while it is dropped down without possibly causing
                     // an exception so we must close it, delete the item, and then drop it down again. When we
                     // close it programmatically, the SelectedItem may revert to Nothing, so we must save it first.
-                    object item = _comboBox.SelectedItem;
+                    object? item = _comboBox.SelectedItem;
                     _comboBox.DroppedDown = false;
-                    _comboBox.Items.Remove(item);
+                    if (item != null) _comboBox.Items.Remove(item);
                     _comboBox.SelectedIndex = -1;
                     if (_comboBox.Items.Count != 0)
                     {
@@ -74,7 +80,7 @@ namespace mRemoteNG.UI.Controls
 
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!(_comboBox.SelectedItem is HistoryItem))
+            if (_comboBox == null || _comboBox.SelectedItem is not HistoryItem)
             {
                 return;
             }
@@ -85,29 +91,38 @@ namespace mRemoteNG.UI.Controls
 
         private static void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
-            ComboBox comboBox = sender as ComboBox;
-            if (comboBox == null)
+            if (sender is not ComboBox comboBox)
             {
                 return;
             }
 
-            object drawItem = comboBox.Items[e.Index];
+            object? drawItem = comboBox.Items[e.Index];
 
             string drawString;
-            if (drawItem is HistoryItem)
+            if (drawItem is HistoryItem historyItem)
             {
-                HistoryItem historyItem = (HistoryItem)drawItem;
                 drawString = historyItem.ToString(true);
             }
             else
             {
-                drawString = drawItem.ToString();
+                drawString = drawItem?.ToString() ?? string.Empty;
             }
 
             e.DrawBackground();
-            e.Graphics.DrawString(drawString, e.Font, new SolidBrush(e.ForeColor),
+            Font drawFont = e.Font ?? SystemFonts.DefaultFont;
+            e.Graphics.DrawString(drawString, drawFont, new SolidBrush(e.ForeColor),
                                   new RectangleF(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height));
             e.DrawFocusRectangle();
+        }
+
+        /// <summary>
+        /// Public data class for persisting history items.
+        /// </summary>
+        public struct HistoryItemData
+        {
+            public string Hostname { get; set; }
+            public int Port { get; set; }
+            public ProtocolType Protocol { get; set; }
         }
 
         private struct HistoryItem : IEquatable<HistoryItem>
@@ -148,39 +163,52 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        private bool Exists(HistoryItem searchItem)
-        {
-            foreach (object item in _comboBox.Items)
-            {
-                if (!(item is HistoryItem))
-                {
-                    continue;
-                }
-
-                HistoryItem historyItem = (HistoryItem)item;
-                if (historyItem.Equals(searchItem))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+        private const int MaxHistoryItems = 20;
 
         public void Add(ConnectionInfo connectionInfo)
         {
             try
             {
-                HistoryItem historyItem = new() { ConnectionInfo = connectionInfo};
-                if (!Exists(historyItem))
+                if (_comboBox == null) return;
+                HistoryItem historyItem = new() { ConnectionInfo = connectionInfo };
+
+                // Remove existing entry so the item is promoted to the top (MRU behaviour).
+                for (int i = _comboBox.Items.Count - 1; i >= 0; i--)
                 {
-                    _comboBox.Items.Insert(0, historyItem);
+                    if (_comboBox.Items[i] is HistoryItem existing && existing.Equals(historyItem))
+                    {
+                        _comboBox.Items.RemoveAt(i);
+                        break;
+                    }
                 }
+
+                _comboBox.Items.Insert(0, historyItem);
+
+                // Trim to the maximum history size.
+                while (_comboBox.Items.Count > MaxHistoryItems)
+                    _comboBox.Items.RemoveAt(_comboBox.Items.Count - 1);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage(Language.QuickConnectAddFailed, ex);
             }
+        }
+
+        public IEnumerable<HistoryItemData> GetHistoryItems()
+        {
+            List<HistoryItemData> items = new();
+            if (_comboBox == null) return items;
+            foreach (object item in _comboBox.Items)
+            {
+                if (item is not HistoryItem historyItem) continue;
+                items.Add(new HistoryItemData
+                {
+                    Hostname = historyItem.ConnectionInfo.Hostname,
+                    Port = historyItem.ConnectionInfo.Port,
+                    Protocol = historyItem.ConnectionInfo.Protocol
+                });
+            }
+            return items;
         }
 
         #region Events
@@ -192,12 +220,12 @@ namespace mRemoteNG.UI.Controls
 
         public delegate void ConnectRequestedEventHandler(object sender, ConnectRequestedEventArgs e);
 
-        private ConnectRequestedEventHandler ConnectRequestedEvent;
+        private ConnectRequestedEventHandler? ConnectRequestedEvent;
 
         public event ConnectRequestedEventHandler ConnectRequested
         {
-            add => ConnectRequestedEvent = (ConnectRequestedEventHandler)Delegate.Combine(ConnectRequestedEvent, value);
-            remove => ConnectRequestedEvent = (ConnectRequestedEventHandler)Delegate.Remove(ConnectRequestedEvent, value);
+            add => ConnectRequestedEvent = (ConnectRequestedEventHandler?)Delegate.Combine(ConnectRequestedEvent, value);
+            remove => ConnectRequestedEvent = (ConnectRequestedEventHandler?)Delegate.Remove(ConnectRequestedEvent, value);
         }
 
 
@@ -214,12 +242,12 @@ namespace mRemoteNG.UI.Controls
 
         public delegate void ProtocolChangedEventHandler(object sender, ProtocolChangedEventArgs e);
 
-        private ProtocolChangedEventHandler ProtocolChangedEvent;
+        private ProtocolChangedEventHandler? ProtocolChangedEvent;
 
         public event ProtocolChangedEventHandler ProtocolChanged
         {
-            add => ProtocolChangedEvent = (ProtocolChangedEventHandler)Delegate.Combine(ProtocolChangedEvent, value);
-            remove => ProtocolChangedEvent = (ProtocolChangedEventHandler)Delegate.Remove(ProtocolChangedEvent, value);
+            add => ProtocolChangedEvent = (ProtocolChangedEventHandler?)Delegate.Combine(ProtocolChangedEvent, value);
+            remove => ProtocolChangedEvent = (ProtocolChangedEventHandler?)Delegate.Remove(ProtocolChangedEvent, value);
         }
 
 

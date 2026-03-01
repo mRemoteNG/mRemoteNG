@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Globalization;
 using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI
@@ -8,7 +9,7 @@ namespace mRemoteNG.UI
     {
         #region Public Properties
 
-        public BaseWindow this[object Index]
+        public BaseWindow? this[object Index]
         {
             get
             {
@@ -16,7 +17,7 @@ namespace mRemoteNG.UI
                 if (Index is BaseWindow)
                     return IndexByObject(Index);
                 if (Index is int)
-                    return IndexByNumber(Convert.ToInt32(Index));
+                    return IndexByNumber(Convert.ToInt32(Index, CultureInfo.InvariantCulture));
 
                 return null;
             }
@@ -54,14 +55,15 @@ namespace mRemoteNG.UI
             List.Remove(uiWindow);
         }
 
-        public BaseWindow FromString(string uiWindow)
+        public BaseWindow? FromString(string uiWindow)
         {
             CleanUp();
             for (int i = 0; i < List.Count; i++)
             {
-                if (this[i].Text == uiWindow.Replace("&", "&&"))
+                BaseWindow? window = this[i];
+                if (string.Equals(window?.Text, uiWindow.Replace("&", "&&", StringComparison.Ordinal), StringComparison.Ordinal))
                 {
-                    return this[i];
+                    return window;
                 }
             }
 
@@ -81,7 +83,7 @@ namespace mRemoteNG.UI
                     return;
                 }
 
-                BaseWindow baseWindow = List[i] as BaseWindow;
+                BaseWindow? baseWindow = List[i] as BaseWindow;
                 if (baseWindow != null && !baseWindow.IsDisposed) continue;
                 List.RemoveAt(i);
                 CleanUp();
@@ -89,7 +91,7 @@ namespace mRemoteNG.UI
             }
         }
 
-        private BaseWindow IndexByObject(object Index)
+        private BaseWindow? IndexByObject(object Index)
         {
             try
             {
@@ -102,7 +104,7 @@ namespace mRemoteNG.UI
             }
         }
 
-        private BaseWindow IndexByNumber(int Index)
+        private BaseWindow? IndexByNumber(int Index)
         {
             try
             {

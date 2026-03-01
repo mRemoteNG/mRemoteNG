@@ -27,8 +27,12 @@ namespace mRemoteNG.UI.Controls
 
             Rectangle dropDownButtonBoundsClient = DropDownButtonBounds; // Relative to the ToolStripSplitButton
             dropDownButtonBoundsClient.Offset(Bounds.Location); // Relative to the parent of the ToolStripSplitButton
+            ToolStrip? parent = GetCurrentParent();
+            if (parent == null)
+                return;
+
             Rectangle dropDownButtonBoundsScreen =
-                GetCurrentParent().RectangleToScreen(dropDownButtonBoundsClient); // Relative to the screen
+                parent.RectangleToScreen(dropDownButtonBoundsClient); // Relative to the screen
 
             if (dropDownButtonBoundsScreen.Contains(Control.MousePosition))
             {

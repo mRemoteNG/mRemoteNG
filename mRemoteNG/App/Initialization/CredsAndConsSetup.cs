@@ -1,21 +1,25 @@
 ﻿using System.IO;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Connections;
+using mRemoteNG.Connection;
 using mRemoteNG.Properties;
 
 namespace mRemoteNG.App.Initialization
 {
     [SupportedOSPlatform("windows")]
-    public class CredsAndConsSetup
+    public static class CredsAndConsSetup
     {
-        public void LoadCredsAndCons()
+        public static void LoadCredsAndCons()
         {
-            new SaveConnectionsOnEdit(Runtime.ConnectionsService);
+            _ = new SaveConnectionsOnEdit(Runtime.ConnectionsService);
 
-            if (Properties.App.Default.FirstStart && !Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation && !File.Exists(Runtime.ConnectionsService.GetStartupConnectionFileName()))
-                Runtime.ConnectionsService.NewConnectionsFile(Runtime.ConnectionsService.GetStartupConnectionFileName());
+            if (Properties.App.Default.FirstStart && !Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation && !File.Exists(ConnectionsService.GetStartupConnectionFileName()))
+                Runtime.ConnectionsService.NewConnectionsFile(ConnectionsService.GetStartupConnectionFileName());
 
             Runtime.LoadConnections();
+
+            // Restore additional connection files from previous session (#2331)
+            Runtime.ConnectionsService.LoadAdditionalConnectionFiles();
         }
     }
 }

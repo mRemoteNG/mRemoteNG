@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Globalization;
+using System.IO;
 using System.Management;
 using System.Runtime.Versioning;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
 using mRemoteNG.Resources.Language;
 
@@ -16,6 +19,7 @@ namespace mRemoteNG.App.Initialization
         public void LogStartupData()
         {
             LogApplicationData();
+            LogSettingsData();
             LogCmdLineArgs();
             LogSystemData();
             LogClrData();
@@ -42,7 +46,7 @@ namespace mRemoteNG.App.Initialization
                     .Get())
                 {
                     ManagementObject managementObject = (ManagementObject)o;
-                    osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption"))?.Trim();
+                    osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption"), CultureInfo.InvariantCulture)?.Trim() ?? string.Empty;
                     servicePack = GetOSServicePack(servicePack, managementObject);
                 }
             }
@@ -55,9 +59,9 @@ namespace mRemoteNG.App.Initialization
             return osData;
         }
 
-        private string GetOSServicePack(string servicePack, ManagementObject managementObject)
+        private static string GetOSServicePack(string servicePack, ManagementObject managementObject)
         {
-            int servicePackNumber = Convert.ToInt32(managementObject.GetPropertyValue("ServicePackMajorVersion"));
+            int servicePackNumber = Convert.ToInt32(managementObject.GetPropertyValue("ServicePackMajorVersion"), CultureInfo.InvariantCulture);
             if (servicePackNumber != 0)
             {
                 servicePack = $"Service Pack {servicePackNumber}";
@@ -74,7 +78,7 @@ namespace mRemoteNG.App.Initialization
                 foreach (ManagementBaseObject o in new ManagementObjectSearcher("SELECT AddressWidth FROM Win32_Processor WHERE DeviceID=\'CPU0\'").Get())
                 {
                     ManagementObject managementObject = (ManagementObject)o;
-                    int addressWidth = Convert.ToInt32(managementObject.GetPropertyValue("AddressWidth"));
+                    int addressWidth = Convert.ToInt32(managementObject.GetPropertyValue("AddressWidth"), CultureInfo.InvariantCulture);
                     architecture = $"{addressWidth}-bit";
                 }
             }
@@ -93,6 +97,32 @@ namespace mRemoteNG.App.Initialization
                 data += $" {Language.PortableEdition}";
             data += " starting.";
             _messageCollector.AddMessage(MessageClass.InformationMsg, data, true);
+        }
+
+        private void LogSettingsData()
+        {
+            if (string.IsNullOrWhiteSpace(SettingsFileInfo.UserSettingsFilePath))
+            {
+                _messageCollector.AddMessage(MessageClass.InformationMsg,
+                    "User settings file path could not be determined.", true);
+                return;
+            }
+
+            string path = SettingsFileInfo.UserSettingsFilePath;
+            string detail;
+            try
+            {
+                FileInfo fi = new(path);
+                detail = fi.Exists
+                    ? $"User settings file: {path} (size: {fi.Length} bytes, modified: {fi.LastWriteTime:yyyy-MM-dd HH:mm:ss})"
+                    : $"User settings file: {path} (file does not exist — using defaults)";
+            }
+            catch (Exception ex)
+            {
+                detail = $"User settings file: {path} (could not read file info: {ex.Message})";
+            }
+
+            _messageCollector.AddMessage(MessageClass.InformationMsg, detail, true);
         }
 
         private void LogCmdLineArgs()

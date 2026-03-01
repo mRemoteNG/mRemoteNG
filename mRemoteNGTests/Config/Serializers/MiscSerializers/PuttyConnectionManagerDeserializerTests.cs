@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -106,7 +107,7 @@ public class PuttyConnectionManagerDeserializerTests
 
     private ConnectionInfo GetSshConnection()
     {
-        var sshFolder = _rootImportedFolder.Children.OfType<ContainerInfo>().First(node => node.Name == "SSHFolder");
+        var sshFolder = _rootImportedFolder.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "SSHFolder", StringComparison.Ordinal));
         return sshFolder.Children.First();
     }
 }

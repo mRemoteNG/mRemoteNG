@@ -12,9 +12,9 @@ namespace mRemoteNG.UI.Window
     [SupportedOSPlatform("windows")]
     public partial class OptionsWindow : BaseWindow
     {
-        private FrmOptions _optionsForm;
-        private bool _isInitialized = false;
-        private bool _isFontOverrideApplied = false;
+        private FrmOptions? _optionsForm;
+        private bool _isInitialized;
+        private bool _isFontOverrideApplied;
 
         #region Public Methods
 

@@ -146,7 +146,7 @@ namespace mRemoteNG.Config.Settings.Registry
                  Properties.OptionsUpdatesPage.Default.CheckForUpdatesAsked = true;              
         }
 
-        private void ApplyCheckForUpdatesOnStartup()
+        private static void ApplyCheckForUpdatesOnStartup()
         {
             if (!CommonRegistrySettings.AllowCheckForUpdatesAutomatical)
                 Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup = false;

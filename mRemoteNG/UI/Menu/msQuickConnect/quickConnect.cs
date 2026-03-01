@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Menu.msQuickConnect
             Initialize();
         }
 
-        private void Initialize()
+        private static void Initialize()
         {
         }
     }

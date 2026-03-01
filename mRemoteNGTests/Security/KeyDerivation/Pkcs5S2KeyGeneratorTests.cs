@@ -75,6 +75,32 @@ namespace mRemoteNGTests.Security.KeyDerivation
             Assert.That(key1, Is.Not.EquivalentTo(key2));
         }
 
+        [Test]
+        public void PasswordWithSpecialCharactersParagraphSignProducesConsistentKey()
+        {
+            // Regression test for GitHub issue #2274:
+            // Passwords containing non-ASCII characters (e.g. §) must produce
+            // the same key on every call so that stored passwords can be
+            // decrypted correctly.
+            var keyDerivationFunction = new Pkcs5S2KeyGenerator();
+            var salt = new byte[] { 1, 2, 3, 4 };
+            var key1 = keyDerivationFunction.DeriveKey("foo§bar", salt);
+            var key2 = keyDerivationFunction.DeriveKey("foo§bar", salt);
+            Assert.That(key1, Is.EquivalentTo(key2));
+        }
+
+        [Test]
+        public void PasswordWithSpecialCharactersParagraphSignProducesDifferentKeyThanWithoutIt()
+        {
+            // Regression test for GitHub issue #2274:
+            // Ensure § is not silently dropped or truncated during key derivation.
+            var keyDerivationFunction = new Pkcs5S2KeyGenerator();
+            var salt = new byte[] { 1, 2, 3, 4 };
+            var keyWith = keyDerivationFunction.DeriveKey("foo§bar", salt);
+            var keyWithout = keyDerivationFunction.DeriveKey("foobar", salt);
+            Assert.That(keyWith, Is.Not.EquivalentTo(keyWithout));
+        }
+
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(8)]

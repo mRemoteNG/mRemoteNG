@@ -11,7 +11,7 @@ namespace mRemoteNG.UI.Controls.Adapters
     [SupportedOSPlatform("windows")]
     public class CredentialRecordListAdaptor : UITypeEditor
     {
-        private IWindowsFormsEditorService _editorService;
+        private IWindowsFormsEditorService? _editorService;
 
         public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext? context)
         {
@@ -44,7 +44,7 @@ namespace mRemoteNG.UI.Controls.Adapters
 
         private void ListBoxOnSelectedValueChanged([NotNull] object? sender, EventArgs eventArgs)
         {
-            _editorService.CloseDropDown();
+            _editorService?.CloseDropDown();
         }
     }
 }

@@ -5,10 +5,10 @@ using System.Runtime.Versioning; // Add for SupportedOSPlatform
 
 namespace mRemoteNG.App.Update
 {
-    public class VCppRuntimeCheck
+    public static class VCppRuntimeCheck
     {
         [SupportedOSPlatform("windows")]
-        public static List<string> GetInstalledVcRedistVersions()
+        public static IList<string> GetInstalledVcRedistVersions()
         {
             var installedVersions = new List<string>();
             var baseKeys = new[]

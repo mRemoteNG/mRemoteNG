@@ -22,6 +22,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
         }
 
         [TestCase(ProtocolVNC.ProxyType.ProxyHTTP)]
+        [TestCase(ProtocolVNC.ProxyType.ProxySocks4)]
         [TestCase(ProtocolVNC.ProxyType.ProxySocks5)]
         [TestCase(ProtocolVNC.ProxyType.ProxyUltra)]
         public void ProxyPropertiesShown_WhenProxyModeIsNotNone(ProtocolVNC.ProxyType proxyType)

@@ -25,9 +25,7 @@ namespace mRemoteNG.UI.TaskDialog
 
         private readonly List<MrngRadioButton> _radioButtonCtrls = [];
         private readonly DisplayProperties _display = new();
-        private Control _focusControl;
-
-        private bool _isVista = false;
+        private Control? _focusControl;
 
         private int _mainInstructionLeftMargin;
         private int _mainInstructionRightMargin;
@@ -86,7 +84,7 @@ namespace mRemoteNG.UI.TaskDialog
             {
                 foreach (MrngRadioButton rb in _radioButtonCtrls)
                     if (rb.Checked)
-                        return (int)rb.Tag;
+                        return rb.Tag is int index ? index : -1;
                 return -1;
             }
         }
@@ -121,8 +119,7 @@ namespace mRemoteNG.UI.TaskDialog
         {
             InitializeComponent();
 
-            // _isVista = VistaTaskDialog.IsAvailableOnThisOS;
-            if (!_isVista && CTaskDialog.UseToolWindowOnXp) // <- shall we use the smaller toolbar?
+            if (CTaskDialog.UseToolWindowOnXp)
                 FormBorderStyle = FormBorderStyle.FixedToolWindow;
 
             MainInstruction = "Main Instruction";
@@ -164,7 +161,7 @@ namespace mRemoteNG.UI.TaskDialog
                     imgMain.Image = SystemIcons.Error.ToBitmap();
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(MainIcon), MainIcon, null);
             }
 
             lbMainInstruction.Text = _mainInstruction;
@@ -244,8 +241,6 @@ namespace mRemoteNG.UI.TaskDialog
                     {
                         Parent = pnlCommandButtons, Location = new Point(_display.ScaleWidth(50), t)
                     };
-                    if (_isVista) // <- tweak font if vista
-                        btn.Font = new Font(btn.Font, FontStyle.Regular);
                     btn.Text = arr[i];
                     btn.Size = new Size(Width - btn.Left - _display.ScaleWidth(15), btn.GetBestHeight());
                     t += btn.Height;
@@ -313,19 +308,39 @@ namespace mRemoteNG.UI.TaskDialog
                     bt3.DialogResult = DialogResult.Cancel;
                     CancelButton = bt3;
                     break;
+                case ETaskDialogButtons.DisconnectCancel:
+                    bt1.Visible = false;
+                    bt2.Text = Language.Disconnect;
+                    bt2.DialogResult = DialogResult.Yes;
+                    bt3.Text = Language._Cancel;
+                    bt3.DialogResult = DialogResult.No;
+                    AcceptButton = bt2;
+                    CancelButton = bt3;
+                    break;
+                case ETaskDialogButtons.DeleteCancel:
+                    bt1.Visible = false;
+                    bt2.Text = Language.Delete;
+                    bt2.DialogResult = DialogResult.Yes;
+                    bt3.Text = Language._Cancel;
+                    bt3.DialogResult = DialogResult.No;
+                    AcceptButton = bt2;
+                    CancelButton = bt3;
+                    break;
                 case ETaskDialogButtons.None:
                     bt1.Visible = false;
                     bt2.Visible = false;
                     bt3.Visible = false;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(Buttons), Buttons, null);
             }
 
             ControlBox = Buttons == ETaskDialogButtons.Cancel ||
                          Buttons == ETaskDialogButtons.Close ||
                          Buttons == ETaskDialogButtons.OkCancel ||
-                         Buttons == ETaskDialogButtons.YesNoCancel;
+                         Buttons == ETaskDialogButtons.YesNoCancel ||
+                         Buttons == ETaskDialogButtons.DisconnectCancel ||
+                         Buttons == ETaskDialogButtons.DeleteCancel;
 
             if (!showVerifyCheckbox && ExpandedInfo == "" && Buttons == ETaskDialogButtons.None)
                 pnlButtons.Visible = false;
@@ -352,7 +367,7 @@ namespace mRemoteNG.UI.TaskDialog
                         imgFooter.Image = ResizeBitmap(SystemIcons.Error.ToBitmap(), 16, 16);
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new ArgumentOutOfRangeException(nameof(FooterIcon), FooterIcon, null);
                 }
 
                 formHeight += pnlFooter.Height;
@@ -369,34 +384,29 @@ namespace mRemoteNG.UI.TaskDialog
         {
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
 
-            pnlButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            panel2.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            panel2.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlFooter.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlFooter.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            panel5.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            panel5.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            panel3.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            panel3.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlCommandButtons.BackColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlCommandButtons.ForeColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlMainInstruction.BackColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlMainInstruction.ForeColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlContent.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlContent.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlExpandedInfo.BackColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlExpandedInfo.ForeColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlRadioButtons.BackColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlRadioButtons.ForeColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            var palette = ThemeManager.getInstance().ActiveTheme.ExtendedPalette;
+            if (palette is null) return;
+
+            pnlButtons.BackColor = palette.getColor("Dialog_Background");
+            pnlButtons.ForeColor = palette.getColor("Dialog_Foreground");
+            panel2.BackColor = palette.getColor("Dialog_Background");
+            panel2.ForeColor = palette.getColor("Dialog_Foreground");
+            pnlFooter.BackColor = palette.getColor("Dialog_Background");
+            pnlFooter.ForeColor = palette.getColor("Dialog_Foreground");
+            panel5.BackColor = palette.getColor("Dialog_Background");
+            panel5.ForeColor = palette.getColor("Dialog_Foreground");
+            panel3.BackColor = palette.getColor("Dialog_Background");
+            panel3.ForeColor = palette.getColor("Dialog_Foreground");
+            pnlCommandButtons.BackColor = palette.getColor("Dialog_Background");
+            pnlCommandButtons.ForeColor = palette.getColor("Dialog_Foreground");
+            pnlMainInstruction.BackColor = palette.getColor("Dialog_Background");
+            pnlMainInstruction.ForeColor = palette.getColor("Dialog_Foreground");
+            pnlContent.BackColor = palette.getColor("Dialog_Background");
+            pnlContent.ForeColor = palette.getColor("Dialog_Foreground");
+            pnlExpandedInfo.BackColor = palette.getColor("Dialog_Background");
+            pnlExpandedInfo.ForeColor = palette.getColor("Dialog_Foreground");
+            pnlRadioButtons.BackColor = palette.getColor("Dialog_Background");
+            pnlRadioButtons.ForeColor = palette.getColor("Dialog_Foreground");
         }
 
         //--------------------------------------------------------------------------------
@@ -444,7 +454,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         private void CommandButton_Click(object sender, EventArgs e)
         {
-            CommandButtonClickedIndex = (int)((CommandButton)sender).Tag;
+            CommandButtonClickedIndex = ((CommandButton)sender).Tag is int index ? index : -1;
             DialogResult = DialogResult.OK;
         }
 
@@ -453,7 +463,7 @@ namespace mRemoteNG.UI.TaskDialog
         protected override void OnShown(EventArgs e)
         {
             if (!_formBuilt)
-                throw new Exception("frmTaskDialog : Please call .BuildForm() before showing the TaskDialog");
+                throw new InvalidOperationException("frmTaskDialog : Please call .BuildForm() before showing the TaskDialog");
             base.OnShown(e);
         }
 
@@ -513,7 +523,7 @@ namespace mRemoteNG.UI.TaskDialog
                         System.Media.SystemSounds.Exclamation.Play();
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new ArgumentOutOfRangeException(null, MainIcon, "Unexpected MainIcon value.");
                 }
             }
 

@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools.WindowsRegistry;
 
@@ -69,8 +70,9 @@ namespace mRemoteNG.Config.Settings.Registry
         {
             SQLServerType.SetValidation(
                 new string[] {
-                    "mssql",
-                    "mysql"
+                    DatabaseConnectorFactory.MsSqlType,
+                    DatabaseConnectorFactory.MySqlType,
+                    DatabaseConnectorFactory.OdbcType
                 });
         }
 
@@ -91,6 +93,15 @@ namespace mRemoteNG.Config.Settings.Registry
             ApplySQLUser();
             ApplySQLPassword();
             ApplySQLReadOnly();
+
+            // If UseSQLServer was enabled by registry but essential connection parameters are
+            // missing, disable SQL Server mode to avoid an unexpected password prompt on
+            // startup (e.g. leftover registry key on a new/clean install — #2048).
+            if (string.IsNullOrEmpty(Properties.OptionsDBsPage.Default.SQLHost) ||
+                string.IsNullOrEmpty(Properties.OptionsDBsPage.Default.SQLDatabaseName))
+            {
+                Properties.OptionsDBsPage.Default.UseSQLServer = false;
+            }
         }
 
         private void ApplyUseSQLServer()
@@ -100,9 +111,8 @@ namespace mRemoteNG.Config.Settings.Registry
 
         private void ApplySQLServerType()
         {
-            if (SQLServerType.IsValid)
-                Properties.OptionsDBsPage.Default.SQLServerType = SQLServerType.Value;
-            
+            if (SQLServerType.IsSet)
+                Properties.OptionsDBsPage.Default.SQLServerType = DatabaseConnectorFactory.NormalizeType(SQLServerType.Value);
         }
 
         private void ApplySQLHost()

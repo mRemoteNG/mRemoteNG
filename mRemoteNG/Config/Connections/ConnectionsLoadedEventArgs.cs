@@ -42,13 +42,9 @@ namespace mRemoteNG.Config.Connections
                                           bool newSourceIsDatabase,
                                           string newSourcePath)
         {
-            if (previousTreeModelModel == null)
-                throw new ArgumentNullException(nameof(previousTreeModelModel));
-            if (newTreeModelModel == null)
-                throw new ArgumentNullException(nameof(newTreeModelModel));
-            if (newSourcePath == null)
-                throw new ArgumentNullException(nameof(newSourcePath));
-
+            ArgumentNullException.ThrowIfNull(previousTreeModelModel);
+            ArgumentNullException.ThrowIfNull(newTreeModelModel);
+            ArgumentNullException.ThrowIfNull(newSourcePath);
             PreviousConnectionTreeModel = previousTreeModelModel;
             PreviousSourceWasDatabase = previousSourceWasDatabase;
             NewConnectionTreeModel = newTreeModelModel;

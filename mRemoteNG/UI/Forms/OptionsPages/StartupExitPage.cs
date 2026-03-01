@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Runtime.Versioning;
+using System.Windows.Forms;
+using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.Config.Settings.Registry;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.Tools.WindowsRegistry;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -12,7 +15,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
         #region Private Fields
 
-        private OptRegistryStartupExitPage pageRegSettingsInstance;
+        private OptRegistryStartupExitPage? pageRegSettingsInstance;
+
+        private const string WindowsRunKey = @"Software\Microsoft\Windows\CurrentVersion\Run";
+        private const string WindowsRunValueName = "mRemoteNG";
 
         #endregion
 
@@ -36,6 +42,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkReconnectOnStart.Text = Language.ReconnectAtStartup;
             chkSingleInstance.Text = Language.AllowOnlySingleInstance;
             chkStartMinimized.Text = Language.StartMinimized;
+            chkStartWithWindows.Text = Language.StartWithWindows;
             lblRegistrySettingsUsedInfo.Text = Language.OptionsCompanyPolicyMessage;
         }
 
@@ -57,6 +64,43 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsStartupExitPage.Default.StartMinimized = chkStartMinimized.Checked;
             Properties.OptionsStartupExitPage.Default.StartFullScreen = chkStartFullScreen.Checked;
             Properties.OptionsStartupExitPage.Default.DisableRefocus = chkDisableRefocus.Checked;
+
+            ApplyStartWithWindowsSetting(chkStartWithWindows.Checked);
+        }
+
+        private static bool IsStartWithWindowsEnabled()
+        {
+            try
+            {
+                using RegistryKey? key = Registry.CurrentUser.OpenSubKey(WindowsRunKey, false);
+                return key?.GetValue(WindowsRunValueName) != null;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Log?.Warn($"[StartupExitPage] Could not read Windows startup registry entry: {ex.Message}");
+                return false;
+            }
+        }
+
+        private static void ApplyStartWithWindowsSetting(bool enable)
+        {
+            try
+            {
+                var winRegistry = new WinRegistry();
+                if (enable)
+                {
+                    string executablePath = Application.ExecutablePath;
+                    winRegistry.SetValue(RegistryHive.CurrentUser, WindowsRunKey, WindowsRunValueName, executablePath, RegistryValueKind.String);
+                }
+                else
+                {
+                    winRegistry.DeleteRegistryValue(RegistryHive.CurrentUser, WindowsRunKey, WindowsRunValueName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Log?.Warn($"[StartupExitPage] Could not update Windows startup registry entry: {ex.Message}");
+            }
         }
 
         public override void LoadRegistrySettings()
@@ -111,10 +155,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         /// </summary>
         private bool ShowRegistrySettingsUsedInfo()
         {
-            return pageRegSettingsInstance.OpenConnectionsFromLastSession.IsSet
-                || pageRegSettingsInstance.EnforceSingleApplicationInstance.IsSet
-                || pageRegSettingsInstance.StartupBehavior.IsSet;
+            return (pageRegSettingsInstance?.OpenConnectionsFromLastSession.IsSet ?? false)
+                || (pageRegSettingsInstance?.EnforceSingleApplicationInstance.IsSet ?? false)
+                || (pageRegSettingsInstance?.StartupBehavior.IsSet ?? false);
         }
+
+        private void StartupExitPage_Load(object sender, EventArgs e)
+        {
+            chkStartWithWindows.Checked = IsStartWithWindowsEnabled();
+        }
+
 
         private void chkStartFullScreen_CheckedChanged(object sender, EventArgs e)
         {

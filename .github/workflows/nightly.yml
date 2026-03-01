@@ -1,0 +1,117 @@
+name: Nightly Build
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: nightly-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  nightly:
+    name: Build & Test (x64)
+    runs-on: windows-2025-vs2026
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 # v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2
+        with:
+          vs-version: "[18.0,19.0)"
+
+      - name: Cache NuGet
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-x64-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-x64-nuget-
+
+      - name: Build x64 Release
+        run: msbuild mRemoteNG.sln /restore -m /verbosity:minimal -p:Configuration=Release -p:Platform=x64
+
+      - name: Smoke test (app starts)
+        shell: pwsh
+        run: |
+          # WinExe app needs Start-Process (no attached console for & operator)
+          $proc = Start-Process -FilePath ".\mRemoteNG\bin\x64\Release\mRemoteNG.exe" -ArgumentList "--version" -Wait -PassThru -WindowStyle Hidden
+          if ($proc.ExitCode -ne 0) { throw "Smoke test failed: exit code $($proc.ExitCode)" }
+          Write-Host "Smoke test passed (exit code: $($proc.ExitCode))"
+
+      - name: Run tests
+        shell: bash
+        run: bash run-tests-core.sh
+
+      - name: Compute version & create ZIP
+        id: meta
+        shell: pwsh
+        run: |
+          # Read version from csproj
+          $csproj = Get-Content "mRemoteNG/mRemoteNG.csproj" -Raw
+          if ($csproj -match '<Version>([^<]+)</Version>') {
+            $version = $matches[1].Trim()
+          } else {
+            throw "Could not find <Version> in csproj"
+          }
+
+          $date = Get-Date -Format "yyyyMMdd"
+          $sha = "${{ github.sha }}".Substring(0, 7)
+          $zipName = "mRemoteNG-nightly-$date-v$version-$sha-x64.zip"
+
+          # Create ZIP (framework-dependent, x64)
+          $sourceDir = "mRemoteNG\bin\x64\Release"
+          $items = Get-ChildItem -Path $sourceDir | Where-Object {
+            $_.Name -notin @('ref','publish','win-x64','win-x86','win-arm64','win-x64-sc')
+          }
+          Compress-Archive -Path $items.FullName -DestinationPath $zipName -Force
+          Write-Host "Created: $zipName ($('{0:N1} MB' -f ((Get-Item $zipName).Length / 1MB)))"
+
+          echo "zipname=$zipName" >> $env:GITHUB_OUTPUT
+          echo "version=$version" >> $env:GITHUB_OUTPUT
+          echo "date=$date" >> $env:GITHUB_OUTPUT
+          echo "sha=$sha" >> $env:GITHUB_OUTPUT
+
+      - name: Delete previous nightly release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete nightly --yes --cleanup-tag 2>/dev/null || true
+
+      - name: Create nightly release
+        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: nightly
+          name: "Nightly Build — ${{ steps.meta.outputs.date }} (v${{ steps.meta.outputs.version }})"
+          files: ${{ steps.meta.outputs.zipname }}
+          body: |
+            ## Nightly Build
+
+            **Version:** v${{ steps.meta.outputs.version }}
+            **Date:** ${{ steps.meta.outputs.date }}
+            **Commit:** [${{ steps.meta.outputs.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+            **Architecture:** x64 (framework-dependent)
+            **Tests:** All passed
+
+            > [!WARNING]
+            > This is an automated build from the `main` branch. It includes the latest changes but may not be fully tested in production scenarios. For stable releases, use the [latest beta](https://github.com/${{ github.repository }}/releases/tag/v1.81.0-beta.3) or [stable](https://github.com/${{ github.repository }}/releases/tag/v1.76.20).
+
+            Requires [.NET Desktop Runtime 10.0](https://dotnet.microsoft.com/download/dotnet/10.0).
+
+            This release is automatically replaced on every push to `main`.
+          draft: false
+          prerelease: true

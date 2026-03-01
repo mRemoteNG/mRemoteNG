@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -13,7 +14,7 @@ using System.Runtime.Versioning;
 namespace mRemoteNG.UI
 {
     [SupportedOSPlatform("windows")]
-    public class DialogFactory
+    public static class DialogFactory
     {
         public static OpenFileDialog BuildLoadConnectionsDialog()
         {
@@ -56,9 +57,11 @@ namespace mRemoteNG.UI
                     {
                         case 0: // New
                             SaveFileDialog saveAsDialog = ConnectionsSaveAsDialog();
-                            saveAsDialog.ShowDialog();
-                            Runtime.ConnectionsService.NewConnectionsFile(saveAsDialog.FileName);
-                            answered = true;
+                            if (saveAsDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                Runtime.ConnectionsService.NewConnectionsFile(saveAsDialog.FileName);
+                                answered = true;
+                            }
                             break;
                         case 1: // Load
                             Runtime.LoadConnections(true);
@@ -75,7 +78,7 @@ namespace mRemoteNG.UI
                 }
                 catch (Exception exception)
                 {
-                    Runtime.MessageCollector.AddExceptionMessage(string .Format(Language.ConnectionsFileCouldNotBeLoadedNew, connectionFileName), exception, MessageClass.WarningMsg);
+                    Runtime.MessageCollector.AddExceptionMessage(string.Format(CultureInfo.InvariantCulture, Language.ConnectionsFileCouldNotBeLoadedNew, connectionFileName), exception, MessageClass.WarningMsg);
                 }
             }
         }

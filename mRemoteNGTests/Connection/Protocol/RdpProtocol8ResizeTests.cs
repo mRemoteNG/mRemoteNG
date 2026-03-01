@@ -313,7 +313,11 @@ namespace mRemoteNGTests.Connection.Protocol
             public void SimulateResize(object sender, EventArgs e)
             {
                 // Replicate the logic from RdpProtocol8.Resize()
-                if (_mainForm.WindowState == FormWindowState.Minimized) return;
+                if (_mainForm.WindowState == FormWindowState.Minimized)
+                {
+                    _lastWindowState = FormWindowState.Minimized;
+                    return;
+                }
 
                 DoResizeControl();
 

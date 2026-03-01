@@ -13,7 +13,7 @@ namespace mRemoteNG.Config.Settings
     [SupportedOSPlatform("windows")]
     public static class SettingsSaver
     {
-        public static void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, MultiSshToolStrip multiSshToolStrip, FrmMain frmMain)
+        public static void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, MultiSshToolStrip multiSshToolStrip, MenuStrip mainMenu, FrmMain frmMain)
         {
             try
             {
@@ -47,6 +47,7 @@ namespace mRemoteNG.Config.Settings
                 SaveExternalAppsToolbarLocation(externalToolsToolStrip);
                 SaveQuickConnectToolbarLocation(quickConnectToolStrip);
                 SaveMultiSshToolbarLocation(multiSshToolStrip);
+                SaveMainMenuToolbarLocation(mainMenu);
 
                 Properties.App.Default.Save();
                 Properties.AppUI.Default.Save();
@@ -65,8 +66,8 @@ namespace mRemoteNG.Config.Settings
                 
                 Properties.Settings.Default.Save();
 
-                SaveDockPanelLayout();
                 SaveExternalApps();
+                SaveQuickConnectHistory(quickConnectToolStrip as QuickConnectToolStrip);
             }
             catch (Exception ex)
             {
@@ -108,7 +109,17 @@ namespace mRemoteNG.Config.Settings
             }
         }
 
-        private static void SaveDockPanelLayout()
+        private static void SaveMainMenuToolbarLocation(MenuStrip mainMenu)
+        {
+            Properties.Settings.Default.MainMenuLocation = mainMenu.Location;
+
+            if (mainMenu.Parent != null)
+            {
+                Properties.Settings.Default.MainMenuParentDock = mainMenu.Parent.Dock.ToString();
+            }
+        }
+
+        public static void SaveDockPanelLayout()
         {
             string panelLayoutXmlFilePath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName;
             DockPanelLayoutSaver panelLayoutSaver = new(
@@ -120,8 +131,13 @@ namespace mRemoteNG.Config.Settings
 
         private static void SaveExternalApps()
         {
-            ExternalAppsSaver externalAppsSaver = new();
-            externalAppsSaver.Save(Runtime.ExternalToolsService.ExternalTools);
+            ExternalAppsSaver.Save(Runtime.ExternalToolsService.ExternalTools);
+        }
+
+        private static void SaveQuickConnectHistory(QuickConnectToolStrip? quickConnectToolStrip)
+        {
+            if (quickConnectToolStrip?.QuickConnectComboBox == null) return;
+            QuickConnectHistorySaver.Save(quickConnectToolStrip.QuickConnectComboBox);
         }
     }
 }

@@ -2,9 +2,12 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Messages;
+using mRemoteNG.Properties;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
+using mRemoteNG.UI.Tabs;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 
@@ -13,9 +16,9 @@ namespace mRemoteNG.UI.Controls
     [SupportedOSPlatform("windows")]
     public class ExternalToolsToolStrip : ToolStrip
     {
-        private IContainer components;
-        private ContextMenuStrip _cMenExtAppsToolbar;
-        internal ToolStripMenuItem CMenToolbarShowText;
+        private IContainer components = null!;
+        private ContextMenuStrip _cMenExtAppsToolbar = null!;
+        internal ToolStripMenuItem CMenToolbarShowText = null!;
 
         public ExternalToolsToolStrip()
         {
@@ -84,6 +87,9 @@ namespace mRemoteNG.UI.Controls
                             : ToolStripItemDisplayStyle.ImageAndText;
 
                     button.Tag = tool;
+                    button.ToolTipText = string.IsNullOrEmpty(tool.Arguments)
+                        ? tool.FileName
+                        : $"{tool.FileName} {tool.Arguments}";
                 }
             }
             catch (Exception ex)
@@ -98,12 +104,27 @@ namespace mRemoteNG.UI.Controls
 
         private static void TsExtAppEntry_Click(object sender, EventArgs e)
         {
-            ExternalTool extA = (ExternalTool)((ToolStripButton)sender).Tag;
+            if (((ToolStripButton)sender).Tag is not ExternalTool extA)
+                return;
 
-            Connection.ConnectionInfo selectedTreeNode = AppWindows.TreeForm.SelectedNode;
-            if (selectedTreeNode != null && selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection ||
-                selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession)
-                extA.Start(selectedTreeNode);
+            ConnectionInfo? connectionInfo = null;
+
+            if (OptionsTabsPanelsPage.Default.ExternalToolsUseActiveTab)
+            {
+                ConnectionTab? activeTab = TabHelper.Instance.CurrentTab;
+                if (activeTab?.Tag is InterfaceControl ic)
+                    connectionInfo = ic.Info;
+                else if (activeTab?.Tag is ConnectionInfo ci)
+                    connectionInfo = ci;
+            }
+            else
+            {
+                connectionInfo = AppWindows.TreeForm?.SelectedNode;
+            }
+
+            if (connectionInfo != null && (connectionInfo.GetTreeNodeType() == TreeNodeType.Connection ||
+                connectionInfo.GetTreeNodeType() == TreeNodeType.PuttySession))
+                extA.Start(connectionInfo);
             else
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "No connection was selected, external tool may return errors.", true);

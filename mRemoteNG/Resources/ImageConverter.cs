@@ -4,7 +4,7 @@ using System.Runtime.Versioning;
 namespace mRemoteNG.Resources
 {
     [SupportedOSPlatform("windows")]
-    class ImageConverter
+    static class ImageConverter
     {
         /// <summary>
         /// Draws an Icon from a Bitmap

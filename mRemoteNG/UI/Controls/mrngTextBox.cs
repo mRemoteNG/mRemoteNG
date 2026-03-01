@@ -11,7 +11,7 @@ namespace mRemoteNG.UI.Controls
     //There are some glitches on the initial draw of some controls
     public class MrngTextBox : TextBox
     {
-        private ThemeManager _themeManager;
+        private ThemeManager? _themeManager;
 
         public MrngTextBox()
         {
@@ -24,10 +24,10 @@ namespace mRemoteNG.UI.Controls
             base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ActiveAndExtended) return;
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor(ReadOnly
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette?.getColor("TextBox_Foreground") ?? ForeColor;
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette?.getColor(ReadOnly
                                                                                ? "TextBox_Disabled_Background"
-                                                                               : "TextBox_Background");
+                                                                               : "TextBox_Background") ?? BackColor;
             Invalidate();
         }
 
@@ -39,12 +39,12 @@ namespace mRemoteNG.UI.Controls
             {
                 if (Enabled)
                 {
-                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette?.getColor("TextBox_Foreground") ?? ForeColor;
+                    BackColor = _themeManager.ActiveTheme.ExtendedPalette?.getColor("TextBox_Background") ?? BackColor;
                 }
                 else
                 {
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Background");
+                    BackColor = _themeManager.ActiveTheme.ExtendedPalette?.getColor("TextBox_Disabled_Background") ?? BackColor;
                 }
             }
 

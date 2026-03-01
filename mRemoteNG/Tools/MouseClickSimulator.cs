@@ -7,7 +7,7 @@ using mRemoteNG.App;
 namespace mRemoteNG.Tools
 {
     [SupportedOSPlatform("windows")]
-    public class MouseClickSimulator
+    public static class MouseClickSimulator
     {
         public static void Click(Control controlToClick, Point currentMousePosition)
         {

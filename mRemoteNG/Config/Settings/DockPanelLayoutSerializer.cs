@@ -13,8 +13,7 @@ namespace mRemoteNG.Config.Settings
 
         public string Serialize(DockPanel dockPanel)
         {
-            if (dockPanel == null)
-                throw new ArgumentNullException(nameof(dockPanel));
+            ArgumentNullException.ThrowIfNull(dockPanel);
 
             XDocument xdoc;
             using (MemoryStream memoryStream = new())

@@ -15,7 +15,7 @@ namespace mRemoteNG.UI.Controls
     //
     public class MrngCheckBox : CheckBox
     {
-        private ThemeManager _themeManager;
+        private ThemeManager? _themeManager;
         private readonly Size _checkboxSize;
         private readonly int _checkboxYCoord;
         private readonly int _textXCoord;
@@ -37,7 +37,9 @@ namespace mRemoteNG.UI.Controls
             OUT
         }
 
+#pragma warning disable CA1707 // Designer-generated code uses this name; renaming would break .Designer.cs files
         public MouseState _mice { get; set; }
+#pragma warning restore CA1707
 
 
         protected override void OnCreateControl()
@@ -73,11 +75,18 @@ namespace mRemoteNG.UI.Controls
         }
 
 
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs pevent)
         {
-            if (!_themeManager.ActiveAndExtended)
+            if (_themeManager is null || !_themeManager.ActiveAndExtended)
             {
-                base.OnPaint(e);
+                base.OnPaint(pevent);
+                return;
+            }
+
+            var palette = _themeManager.ActiveTheme.ExtendedPalette;
+            if (palette is null)
+            {
+                base.OnPaint(pevent);
                 return;
             }
 
@@ -86,49 +95,50 @@ namespace mRemoteNG.UI.Controls
             Color glyph;
             Color checkBorder;
 
-            Color back = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
+            Color back = palette.getColor("CheckBox_Background");
             if (Enabled)
             {
-                glyph = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Glyph");
-                fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text");
+                glyph = palette.getColor("CheckBox_Glyph");
+                fore = palette.getColor("CheckBox_Text");
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (_mice)
                 {
                     case MouseState.HOVER:
-                        checkBorder = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Hover");
+                        checkBorder = palette.getColor("CheckBox_Border_Hover");
                         break;
                     case MouseState.DOWN:
-                        checkBorder = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Pressed");
+                        checkBorder = palette.getColor("CheckBox_Border_Pressed");
                         break;
                     default:
-                        checkBorder = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border");
+                        checkBorder = palette.getColor("CheckBox_Border");
                         break;
                 }
             }
             else
             {
-                fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text_Disabled");
-                glyph = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Glyph_Disabled");
-                checkBorder = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Disabled");
+                fore = palette.getColor("CheckBox_Text_Disabled");
+                glyph = palette.getColor("CheckBox_Glyph_Disabled");
+                checkBorder = palette.getColor("CheckBox_Border_Disabled");
             }
 
-            e.Graphics.Clear(Parent.BackColor);
+            Color parentBack = Parent?.BackColor ?? BackColor;
+            pevent.Graphics.Clear(parentBack);
 
             using (Pen p = new(checkBorder))
             {
                 Rectangle boxRect = new(0, _checkboxYCoord, _checkboxSize.Width, _checkboxSize.Height);
-                e.Graphics.FillRectangle(new SolidBrush(back), boxRect);
-                e.Graphics.DrawRectangle(p, boxRect);
+                pevent.Graphics.FillRectangle(new SolidBrush(back), boxRect);
+                pevent.Graphics.DrawRectangle(p, boxRect);
             }
 
             if (Checked)
             {
                 // | \uE001 | &#xE001; |  |  is the tick/check mark and it exists in Segoe UI Symbol at least...
-                e.Graphics.DrawString("\uE001", new Font("Segoe UI Symbol", 7.75f), new SolidBrush(glyph), -4, 0);
+                pevent.Graphics.DrawString("\uE001", new Font("Segoe UI Symbol", 7.75f), new SolidBrush(glyph), -4, 0);
             }
 
             Rectangle textRect = new(_textXCoord, 0, Width - 16, Height);
-            TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor,
+            TextRenderer.DrawText(pevent.Graphics, Text, Font, textRect, fore, parentBack,
                                   TextFormatFlags.PathEllipsis);
         }
 

@@ -42,7 +42,8 @@ UPDATE tblRoot SET ConfVersion='2.8';";
 
                 DbCommand dbCommand;
 
-                if (_databaseConnector.GetType() == typeof(MSSqlDatabaseConnector))
+                if (_databaseConnector.GetType() == typeof(MSSqlDatabaseConnector)
+                    || _databaseConnector.GetType() == typeof(OdbcDatabaseConnector))
                 {
                     dbCommand = _databaseConnector.DbCommand(msSqlText1);
                     dbCommand.ExecuteNonQuery();
@@ -52,7 +53,7 @@ UPDATE tblRoot SET ConfVersion='2.8';";
                     dbCommand = _databaseConnector.DbCommand(mySqlText1);
                 } else
                 {
-                    throw new Exception("Unknown database backend");
+                    throw new NotSupportedException("Unknown database backend");
                 }
             
                 dbCommand.ExecuteNonQuery();

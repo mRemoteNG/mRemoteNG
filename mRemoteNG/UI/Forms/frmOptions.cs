@@ -23,9 +23,9 @@ namespace mRemoteNG.UI.Forms
         private readonly DisplayProperties _display = new();
         private readonly List<string> _optionPageObjectNames;
         private bool _isLoading = true;
-        private bool _isInitialized = false;
-        private bool _isFontOverrideApplied = false;
-        private bool _isHandlingSelectionChange = false; // Guard flag to prevent recursive event handling
+        private bool _isInitialized;
+        private bool _isFontOverrideApplied;
+        private bool _isHandlingSelectionChange; // Guard flag to prevent recursive event handling
 
         /// <summary>
         /// Raised when the user clicks OK or Cancel, signalling the host window to hide.
@@ -58,10 +58,39 @@ namespace mRemoteNG.UI.Forms
                 nameof(ThemePage),
                 nameof(SecurityPage),
                 nameof(AdvancedPage),
-                nameof(BackupPage)
+                nameof(BackupPage),
+                nameof(ConfigurationPage)
             ];
 
             InitOptionsPagesToListView();
+        }
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // Dispose all option pages to prevent resource leaks (GDI handles, etc.)
+                // This is critical as inactive pages are not in the Controls collection
+                // and would otherwise not be disposed.
+                foreach (var page in _optionPages)
+                {
+                    if (page != null && !page.IsDisposed)
+                    {
+                        page.Dispose();
+                    }
+                }
+                _optionPages.Clear();
+
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
         }
 
         private void FrmOptions_Load(object sender, EventArgs e)
@@ -116,9 +145,10 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            var themeManager = ThemeManager.getInstance();
+            if (!themeManager.ActiveAndExtended) return;
+            BackColor = themeManager.ActiveTheme.ExtendedPalette?.getColor("Dialog_Background") ?? BackColor;
+            ForeColor = themeManager.ActiveTheme.ExtendedPalette?.getColor("Dialog_Foreground") ?? ForeColor;
         }
 
 #if false
@@ -165,92 +195,97 @@ namespace mRemoteNG.UI.Forms
 
         private void InitOptionsPage(string pageName)
         {
-            OptionsPage page = null;
+            OptionsPage? page = null;
 
             switch (pageName)
             {
                 case "StartupExitPage":
                     {
                         if (Properties.OptionsStartupExitPage.Default.cbStartupExitPageInOptionMenu ||
-                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
+                            string.Equals(Properties.OptionsRbac.Default.ActiveRole, "AdminRole", StringComparison.Ordinal))
                             page = new StartupExitPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "AppearancePage":
                     {
                         if (Properties.OptionsAppearancePage.Default.cbAppearancePageInOptionMenu ||
-                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
+                            string.Equals(Properties.OptionsRbac.Default.ActiveRole, "AdminRole", StringComparison.Ordinal))
                             page = new AppearancePage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "ConnectionsPage":
                     {
                         if (Properties.OptionsConnectionsPage.Default.cbConnectionsPageInOptionMenu ||
-                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
+                            string.Equals(Properties.OptionsRbac.Default.ActiveRole, "AdminRole", StringComparison.Ordinal))
                             page = new ConnectionsPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "TabsPanelsPage":
                     {
                         if (Properties.OptionsTabsPanelsPage.Default.cbTabsPanelsPageInOptionMenu ||
-                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
+                            string.Equals(Properties.OptionsRbac.Default.ActiveRole, "AdminRole", StringComparison.Ordinal))
                             page = new TabsPanelsPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "NotificationsPage":
                     {
                         if (Properties.OptionsNotificationsPage.Default.cbNotificationsPageInOptionMenu ||
-                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
+                            string.Equals(Properties.OptionsRbac.Default.ActiveRole, "AdminRole", StringComparison.Ordinal))
                             page = new NotificationsPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "CredentialsPage":
                     {
                         if (Properties.OptionsCredentialsPage.Default.cbCredentialsPageInOptionMenu ||
-                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
+                            string.Equals(Properties.OptionsRbac.Default.ActiveRole, "AdminRole", StringComparison.Ordinal))
                             page = new CredentialsPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "SqlServerPage":
                     {
                         if (Properties.OptionsDBsPage.Default.cbDBsPageInOptionMenu ||
-                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
+                            string.Equals(Properties.OptionsRbac.Default.ActiveRole, "AdminRole", StringComparison.Ordinal))
                             page = new SqlServerPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "UpdatesPage":
                     {
                         if (Properties.OptionsUpdatesPage.Default.cbUpdatesPageInOptionMenu ||
-                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
+                            string.Equals(Properties.OptionsRbac.Default.ActiveRole, "AdminRole", StringComparison.Ordinal))
                             page = new UpdatesPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "ThemePage":
                     {
                         if (Properties.OptionsThemePage.Default.cbThemePageInOptionMenu ||
-                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
+                            string.Equals(Properties.OptionsRbac.Default.ActiveRole, "AdminRole", StringComparison.Ordinal))
                             page = new ThemePage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "SecurityPage":
                     {
                         if (Properties.OptionsSecurityPage.Default.cbSecurityPageInOptionMenu ||
-                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
+                            string.Equals(Properties.OptionsRbac.Default.ActiveRole, "AdminRole", StringComparison.Ordinal))
                             page = new SecurityPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "AdvancedPage":
                     {
                         if (Properties.OptionsAdvancedPage.Default.cbAdvancedPageInOptionMenu ||
-                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
+                            string.Equals(Properties.OptionsRbac.Default.ActiveRole, "AdminRole", StringComparison.Ordinal))
                             page = new AdvancedPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "BackupPage":
                     {
                         if (Properties.OptionsBackupPage.Default.cbBacupPageInOptionMenu ||
-                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
+                            string.Equals(Properties.OptionsRbac.Default.ActiveRole, "AdminRole", StringComparison.Ordinal))
                             page = new BackupPage { Dock = DockStyle.Fill };
+                        break;
+                    }
+                case "ConfigurationPage":
+                    {
+                        page = new ConfigurationPage { Dock = DockStyle.Fill };
                         break;
                     }
             }
@@ -268,11 +303,11 @@ namespace mRemoteNG.UI.Forms
 
         private object ImageGetter(object rowobject)
         {
-            OptionsPage page = rowobject as OptionsPage;
+            OptionsPage? page = rowobject as OptionsPage;
             return page?.PageIcon == null ? _display.ScaleImage(Properties.Resources.F1Help_16x) : _display.ScaleImage(page.PageIcon);
         }
 
-        public void SetActivatedPage(string pageName = default)
+        public void SetActivatedPage(string? pageName = default)
         {
             _pageName = pageName ?? Language.StartupExit;
 
@@ -293,7 +328,7 @@ namespace mRemoteNG.UI.Forms
             bool isSet = false;
             for (int i = 0; i < lstOptionPages.Items.Count; i++)
             {
-                if (!lstOptionPages.Items[i].Text.Equals(_pageName)) continue;
+                if (!lstOptionPages.Items[i].Text.Equals(_pageName, StringComparison.Ordinal)) continue;
                 lstOptionPages.Items[i].Selected = true;
                 isSet = true;
                 break;
@@ -398,6 +433,7 @@ namespace mRemoteNG.UI.Forms
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             Logger.Instance.Log?.Debug($"[BtnCancel_Click] START");
+
             ReloadAllSettings();
             CloseRequested?.Invoke(this, EventArgs.Empty);
             Logger.Instance.Log?.Debug($"[BtnCancel_Click] END");
@@ -487,8 +523,8 @@ namespace mRemoteNG.UI.Forms
             if (_isLoading) return;
             
             // Find the parent OptionsPage
-            Control current = control;
-            while (current != null && !(current is OptionsPage))
+            Control? current = control;
+            while (current != null && current is not OptionsPage)
             {
                 current = current.Parent;
             }
@@ -505,6 +541,60 @@ namespace mRemoteNG.UI.Forms
             {
                 page.HasChanges = false;
             }
+        }
+
+        private void ValidateControlState()
+        {
+            Logger.Instance.Log?.Debug($"[ValidateControlState] START - Items.Count: {lstOptionPages.Items.Count}, pnlMain.Controls.Count: {pnlMain.Controls.Count}");
+
+            // Ensure we have pages loaded
+            if (lstOptionPages.Items.Count == 0)
+            {
+                Logger.Instance.Log?.Debug($"[ValidateControlState] No items loaded - returning");
+                return;
+            }
+
+            OptionsPage? currentPage = lstOptionPages.SelectedObject as OptionsPage;
+            Logger.Instance.Log?.Debug($"[ValidateControlState] Current page: {(currentPage != null ? currentPage.PageName : "NULL")}");
+
+            if (currentPage == null)
+            {
+                Logger.Instance.Log?.Warn($"[ValidateControlState] SelectedObject is NULL - this may indicate a selection issue");
+                // Don't try to fix this - let the normal selection handling deal with it
+                return;
+            }
+
+            if (currentPage.IsDisposed)
+            {
+                Logger.Instance.Log?.Warn($"[ValidateControlState] Page '{currentPage.PageName}' is disposed");
+                return;
+            }
+
+            Logger.Instance.Log?.Debug($"[ValidateControlState] Page '{currentPage.PageName}' is valid - IsHandleCreated: {currentPage.IsHandleCreated}");
+
+            // Ensure the page has a valid window handle
+            if (!currentPage.IsHandleCreated)
+            {
+                Logger.Instance.Log?.Debug($"[ValidateControlState] Creating handle for page '{currentPage.PageName}'");
+                // Force handle creation
+                var handle = currentPage.Handle;
+                Logger.Instance.Log?.Debug($"[ValidateControlState] Handle created: {handle}");
+            }
+
+            // Ensure the page is displayed in the panel
+            if (!pnlMain.Controls.Contains(currentPage))
+            {
+                Logger.Instance.Log?.Debug($"[ValidateControlState] Page '{currentPage.PageName}' not in pnlMain - adding it now");
+                pnlMain.Controls.Clear();
+                pnlMain.Controls.Add(currentPage);
+                Logger.Instance.Log?.Debug($"[ValidateControlState] Page added. pnlMain.Controls.Count: {pnlMain.Controls.Count}");
+            }
+            else
+            {
+                Logger.Instance.Log?.Debug($"[ValidateControlState] Page '{currentPage.PageName}' already in pnlMain - OK");
+            }
+
+            Logger.Instance.Log?.Debug($"[ValidateControlState] END");
         }
     }
 }

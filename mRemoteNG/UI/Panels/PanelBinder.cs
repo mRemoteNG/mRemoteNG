@@ -2,8 +2,8 @@
 using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.Properties;
+using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
-using mRemoteNG.UI;
 using System.Windows.Forms;
 using System.ComponentModel;
 
@@ -27,7 +27,7 @@ namespace mRemoteNG.UI.Panels
         private DockState _configFormDockedState = DockState.Unknown;
         
         // Track if panels are temporarily pinned
-        private bool _panelsTemporarilyPinned = false;
+        private bool _panelsTemporarilyPinned;
         
         // Timer to check for focus loss
         private Timer _focusCheckTimer;
@@ -201,10 +201,9 @@ namespace mRemoteNG.UI.Panels
         {
             if (AppWindows.TreeForm != null)
             {
-                AppWindows.TreeForm.VisibleChanged += OnTreeFormVisibleChanged;
                 AppWindows.TreeForm.DockStateChanged += OnTreeFormDockStateChanged;
                 AppWindows.TreeForm.Enter += OnPanelEnter;
-                
+
                 // Store initial dock state if not auto-hide
                 if (!IsAutoHideState(AppWindows.TreeForm.DockState))
                     _treeFormDockedState = AppWindows.TreeForm.DockState;
@@ -212,15 +211,22 @@ namespace mRemoteNG.UI.Panels
 
             if (AppWindows.ConfigForm != null)
             {
-                AppWindows.ConfigForm.VisibleChanged += OnConfigFormVisibleChanged;
                 AppWindows.ConfigForm.DockStateChanged += OnConfigFormDockStateChanged;
                 AppWindows.ConfigForm.Enter += OnPanelEnter;
-                
+
                 // Store initial dock state if not auto-hide
                 if (!IsAutoHideState(AppWindows.ConfigForm.DockState))
                     _configFormDockedState = AppWindows.ConfigForm.DockState;
             }
-            
+
+            // Hook into DockPanel.ActiveContentChanged — this fires reliably when
+            // auto-hidden panels are activated via the auto-hide strip, unlike
+            // DockContent.Enter/VisibleChanged which may not fire for overlay panels.
+            if (FrmMain.IsCreated)
+            {
+                FrmMain.Default.pnlDock.ActiveContentChanged += OnDockPanelActiveContentChanged;
+            }
+
             // Apply initial binding state based on option
             if (OptionsTabsPanelsPage.Default.BindConnectionsAndConfigPanels)
             {
@@ -230,13 +236,16 @@ namespace mRemoteNG.UI.Panels
 
         private void OnTreeFormDockStateChanged(object? sender, EventArgs e)
         {
+            if (AppWindows.TreeForm == null)
+                return;
+
             // Save auto-hide state if it's an auto-hide state
             if (IsAutoHideState(AppWindows.TreeForm.DockState))
             {
                 _treeFormAutoHideState = AppWindows.TreeForm.DockState;
             }
             // Save docked state if it's a docked state
-            else if (AppWindows.TreeForm.DockState != DockState.Hidden && 
+            else if (AppWindows.TreeForm.DockState != DockState.Hidden &&
                      AppWindows.TreeForm.DockState != DockState.Unknown)
             {
                 _treeFormDockedState = AppWindows.TreeForm.DockState;
@@ -245,46 +254,19 @@ namespace mRemoteNG.UI.Panels
 
         private void OnConfigFormDockStateChanged(object? sender, EventArgs e)
         {
+            if (AppWindows.ConfigForm == null)
+                return;
+
             // Save auto-hide state if it's an auto-hide state
             if (IsAutoHideState(AppWindows.ConfigForm.DockState))
             {
                 _configFormAutoHideState = AppWindows.ConfigForm.DockState;
             }
             // Save docked state if it's a docked state
-            else if (AppWindows.ConfigForm.DockState != DockState.Hidden && 
+            else if (AppWindows.ConfigForm.DockState != DockState.Hidden &&
                      AppWindows.ConfigForm.DockState != DockState.Unknown)
             {
                 _configFormDockedState = AppWindows.ConfigForm.DockState;
-            }
-        }
-
-        private void OnTreeFormVisibleChanged(object? sender, EventArgs e)
-        {
-            // Only act when binding is enabled and not already processing
-            if (!OptionsTabsPanelsPage.Default.BindConnectionsAndConfigPanels || _isProcessing)
-                return;
-
-            // If the panel was just made visible and both are in auto-hide mode
-            if (AppWindows.TreeForm.Visible && 
-                IsPanelAutoHidden(AppWindows.TreeForm) && 
-                IsPanelAutoHidden(AppWindows.ConfigForm))
-            {
-                OnPanelEnter(AppWindows.TreeForm, EventArgs.Empty);
-            }
-        }
-
-        private void OnConfigFormVisibleChanged(object? sender, EventArgs e)
-        {
-            // Only act when binding is enabled and not already processing
-            if (!OptionsTabsPanelsPage.Default.BindConnectionsAndConfigPanels || _isProcessing)
-                return;
-
-            // If the panel was just made visible and both are in auto-hide mode
-            if (AppWindows.ConfigForm.Visible && 
-                IsPanelAutoHidden(AppWindows.TreeForm) && 
-                IsPanelAutoHidden(AppWindows.ConfigForm))
-            {
-                OnPanelEnter(AppWindows.ConfigForm, EventArgs.Empty);
             }
         }
 
@@ -293,7 +275,34 @@ namespace mRemoteNG.UI.Panels
         /// </summary>
         private void OnPanelEnter(object? sender, EventArgs e)
         {
+            TryBindPanels();
+        }
+
+        /// <summary>
+        /// Handles when the DockPanel's active content changes — fires reliably
+        /// for auto-hidden panels activated via the auto-hide strip.
+        /// </summary>
+        private void OnDockPanelActiveContentChanged(object? sender, EventArgs e)
+        {
+            if (!FrmMain.IsCreated)
+                return;
+
+            IDockContent? active = FrmMain.Default.pnlDock.ActiveContent;
+            if (active == AppWindows.TreeForm || active == AppWindows.ConfigForm)
+            {
+                TryBindPanels();
+            }
+        }
+
+        /// <summary>
+        /// Attempts to bind both panels together when both are auto-hidden
+        /// </summary>
+        private void TryBindPanels()
+        {
             if (!OptionsTabsPanelsPage.Default.BindConnectionsAndConfigPanels || _isProcessing)
+                return;
+
+            if (AppWindows.TreeForm == null || AppWindows.ConfigForm == null)
                 return;
 
             // Check if both panels are in auto-hide mode
@@ -306,13 +315,13 @@ namespace mRemoteNG.UI.Panels
                 // Store current auto-hide states if not already stored
                 if (_treeFormAutoHideState == DockState.Unknown)
                     _treeFormAutoHideState = AppWindows.TreeForm.DockState;
-                
+
                 if (_configFormAutoHideState == DockState.Unknown)
                     _configFormAutoHideState = AppWindows.ConfigForm.DockState;
-                
+
                 // Pin both panels temporarily (make them normal docked)
                 TemporarilyPinPanels();
-                
+
                 // Start checking for focus loss
                 _focusCheckTimer.Start();
             }
@@ -437,7 +446,7 @@ namespace mRemoteNG.UI.Panels
         /// <summary>
         /// Checks if a dock state is an auto-hide state
         /// </summary>
-        private bool IsAutoHideState(DockState state)
+        private static bool IsAutoHideState(DockState state)
         {
             return state == DockState.DockLeftAutoHide ||
                    state == DockState.DockRightAutoHide ||
@@ -448,7 +457,7 @@ namespace mRemoteNG.UI.Panels
         /// <summary>
         /// Checks if a panel is in auto-hide state
         /// </summary>
-        private bool IsPanelAutoHidden(DockContent panel)
+        private static bool IsPanelAutoHidden(DockContent panel)
         {
             if (panel == null)
                 return false;

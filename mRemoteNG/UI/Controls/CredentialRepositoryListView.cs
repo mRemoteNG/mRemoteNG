@@ -26,9 +26,9 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        public Func<ICredentialRepository, bool> RepositoryFilter { get; set; }
-        public ICredentialRepository SelectedRepository => GetSelectedRepository();
-        public Func<ICredentialRepository, bool> DoubleClickHandler { get; set; }
+        public Func<ICredentialRepository, bool>? RepositoryFilter { get; set; }
+        public ICredentialRepository? SelectedRepository => GetSelectedRepository();
+        public Func<ICredentialRepository, bool>? DoubleClickHandler { get; set; }
 
         public CredentialRepositoryListView()
         {
@@ -70,17 +70,17 @@ namespace mRemoteNG.UI.Controls
             if (mouseEventArgs.Clicks < 2) return;
             OLVColumn column;
             OLVListItem listItem = objectListView1.GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-            ICredentialRepository clickedNode = listItem.RowObject as ICredentialRepository;
+            ICredentialRepository? clickedNode = listItem.RowObject as ICredentialRepository;
             if (clickedNode == null) return;
             DoubleClickHandler?.Invoke(clickedNode);
         }
 
-        private ICredentialRepository GetSelectedRepository()
+        private ICredentialRepository? GetSelectedRepository()
         {
             return objectListView1.SelectedObject as ICredentialRepository;
         }
 
-        public event EventHandler SelectionChanged;
+        public event EventHandler? SelectionChanged;
 
         private void RaiseSelectionChangedEvent()
         {

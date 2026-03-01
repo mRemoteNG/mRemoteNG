@@ -119,12 +119,12 @@ namespace mRemoteNG.Tools
             throw new NotSupportedException();
         }
 
-        public MenuCommand FindCommand(CommandID commandId)
+        public MenuCommand FindCommand(CommandID commandID)
         {
             throw new NotSupportedException();
         }
 
-        public bool GlobalInvoke(CommandID commandId)
+        public bool GlobalInvoke(CommandID commandID)
         {
             throw new NotSupportedException();
         }
@@ -139,7 +139,7 @@ namespace mRemoteNG.Tools
             throw new NotSupportedException();
         }
 
-        public void ShowContextMenu(CommandID menuId, int x, int y)
+        public void ShowContextMenu(CommandID menuID, int x, int y)
         {
             throw new NotSupportedException();
         }

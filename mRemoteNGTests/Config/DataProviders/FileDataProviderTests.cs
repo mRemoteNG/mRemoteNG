@@ -72,6 +72,17 @@ public class FileDataProviderTests
     }
 
     [Test]
+    public void SaveProducesNonEmptyFileForNonEmptyContent()
+    {
+        var content = new string('X', 10000);
+        _dataProvider.Save(content);
+        var fileInfo = new FileInfo(_testFilePath);
+        Assert.That(fileInfo.Exists, Is.True);
+        Assert.That(fileInfo.Length, Is.GreaterThan(0));
+        Assert.That(File.ReadAllText(_testFilePath), Is.EqualTo(content));
+    }
+
+    [Test]
     public void MoveTo_WithPathTraversal_ThrowsArgumentException()
     {
         string maliciousPath = @"..\..\..\Windows\System32\config.xml";

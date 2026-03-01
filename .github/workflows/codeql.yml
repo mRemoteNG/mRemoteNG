@@ -1,0 +1,51 @@
+name: CodeQL Security Analysis
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * 1'  # Weekly on Monday at 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: CodeQL Analysis
+    runs-on: windows-2025-vs2026
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 # v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2
+        with:
+          vs-version: "[18.0,19.0)"
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@bb471cdcf4dda2c934c5b656f554d43c1434ed13 # v4
+        with:
+          languages: csharp
+          build-mode: manual
+
+      - name: Build with MSBuild
+        shell: pwsh
+        run: |
+          msbuild "$env:GITHUB_WORKSPACE\mRemoteNG.sln" /restore /m /verbosity:minimal -p:Configuration=Release -p:Platform=x64 /p:TreatWarningsAsErrors=false
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@bb471cdcf4dda2c934c5b656f554d43c1434ed13 # v4
+        with:
+          category: "/language:csharp"

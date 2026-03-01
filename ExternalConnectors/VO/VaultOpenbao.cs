@@ -27,7 +27,7 @@ namespace ExternalConnectors.VO {
             IAuthMethodInfo authMethod = new TokenAuthMethodInfo(token);
             var vaultClientSettings = new VaultClientSettings(url, authMethod);
             VaultClient client = new(vaultClientSettings);
-            var sysInfo = client.V1.System.GetInitStatusAsync().Result;
+            var sysInfo = Task.Run(() => client.V1.System.GetInitStatusAsync()).GetAwaiter().GetResult();
             if (!sysInfo) {
                 MessageBox.Show("Test connection failed", "Vault Openbao", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw new VaultOpenbaoException("Url not working");
@@ -36,7 +36,7 @@ namespace ExternalConnectors.VO {
             return client;
         }
         private static void TestMountType(VaultClient vaultClient, string mount, int VaultOpenbaoSecretEngine) {
-            switch (vaultClient.V1.System.GetSecretBackendAsync(mount).Result.Data.Type.Type) {
+            switch (Task.Run(() => vaultClient.V1.System.GetSecretBackendAsync(mount)).GetAwaiter().GetResult().Data.Type.Type) {
                 case "kv" when VaultOpenbaoSecretEngine != 0:
                     throw new VaultOpenbaoException($"Backend of type kv does not match expected type {VaultOpenbaoSecretEngine}");
                 case "ldap" when VaultOpenbaoSecretEngine != 1 && VaultOpenbaoSecretEngine != 2:
@@ -50,7 +50,7 @@ namespace ExternalConnectors.VO {
             TestMountType(vaultClient, mount, 3);
             if (!IPAddress.TryParse(address, out _)) {
                 try {
-                    var addrs = Dns.GetHostAddressesAsync(address).Result;
+                        var addrs = Task.Run(() => Dns.GetHostAddressesAsync(address)).GetAwaiter().GetResult();
                     if (addrs == null || addrs.Length == 0) {
                         throw new VaultOpenbaoException($"Could not resolve address '{address}'");
                     }
@@ -61,7 +61,7 @@ namespace ExternalConnectors.VO {
                     throw new VaultOpenbaoException($"Failed to resolve address '{address}'", ex.Message);
                 }
             }
-            var otp = vaultClient.V1.Secrets.SSH.GetCredentialsAsync(role, address, username, mount).Result;
+            var otp = Task.Run(() => vaultClient.V1.Secrets.SSH.GetCredentialsAsync(role, address, username, mount)).GetAwaiter().GetResult();
             password = otp.Data.Key;
 
         }
@@ -70,7 +70,7 @@ namespace ExternalConnectors.VO {
             TestMountType(vaultClient, mount, secretEngine);
             switch (secretEngine) {
                 case 0:
-                    var kv = vaultClient.V1.Secrets.KeyValue.V2.ReadSecretAsync(role, mountPoint: mount).Result;
+                    var kv = Task.Run(() => vaultClient.V1.Secrets.KeyValue.V2.ReadSecretAsync(role, mountPoint: mount)).GetAwaiter().GetResult();
                     password = kv.Data.Data[username].ToString() ?? string.Empty;
                     return;
                 default:
@@ -82,16 +82,16 @@ namespace ExternalConnectors.VO {
             TestMountType(vaultClient, mount, secretEngine);
             switch (secretEngine) {
                 case 0:
-                    var kv = vaultClient.V1.Secrets.KeyValue.V2.ReadSecretAsync(role, mountPoint: mount).Result;
+                    var kv = Task.Run(() => vaultClient.V1.Secrets.KeyValue.V2.ReadSecretAsync(role, mountPoint: mount)).GetAwaiter().GetResult();
                     password = kv.Data.Data[username].ToString() ?? string.Empty;
                     return;
                 case 1:
-                    var ldapd = vaultClient.V1.Secrets.OpenLDAP.GetDynamicCredentialsAsync(role, mount).Result;
+                    var ldapd = Task.Run(() => vaultClient.V1.Secrets.OpenLDAP.GetDynamicCredentialsAsync(role, mount)).GetAwaiter().GetResult();
                     username = ldapd.Data.Username;
                     password = ldapd.Data.Password;
                     return;
                 case 2:
-                    var ldaps = vaultClient.V1.Secrets.OpenLDAP.GetStaticCredentialsAsync(role, mount).Result;
+                    var ldaps = Task.Run(() => vaultClient.V1.Secrets.OpenLDAP.GetStaticCredentialsAsync(role, mount)).GetAwaiter().GetResult();
                     username = ldaps.Data.Username;
                     password = ldaps.Data.Password;
                     return;

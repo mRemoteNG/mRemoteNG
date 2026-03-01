@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using System;
+using Microsoft.Win32;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.OpenSsl;
@@ -45,7 +46,7 @@ public class SecretServerInterface
                 f.tbSSURL.Text = url;
 
                 var b = key.GetValue("SSO");
-                if (b == null || (string)b != "True")
+                if (b == null || !string.Equals((string)b, "True", StringComparison.Ordinal))
                     ssSSO = false;
                 else
                     ssSSO = true;
@@ -64,6 +65,13 @@ public class SecretServerInterface
                     ssPassword = f.tbPassword.Text;
                     ssUrl = f.tbSSURL.Text;
                     ssSSO = f.cbUseSSO.Checked;
+
+                    // Require HTTPS for vault connections
+                    if (!ssUrl.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+                    {
+                        MessageBox.Show("Secret Server URL must use HTTPS for secure communication.", "Security Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        continue;
+                    }
                     ssOTP = f.tbOTP.Text;
                     // check connection first
                     try
@@ -150,7 +158,7 @@ public class SecretServerInterface
     private static void FetchSecret(int secretID, out string secretUsername, out string secretPassword, out string secretDomain, out string privatekey)
     {
         var client = ConstructSecretsServiceClient();
-        SecretModel secret = client.GetSecretAsync(false, true, secretID, null).Result;
+        SecretModel secret = Task.Run(() => client.GetSecretAsync(false, true, secretID, null)).GetAwaiter().GetResult();
 
         // clear return variables
         secretDomain = "";
@@ -162,19 +170,19 @@ public class SecretServerInterface
         // parse data and extract what we need
         foreach (var item in secret.Items)
         {
-            if (item.FieldName.ToLower().Equals("domain"))
+            if (item.FieldName.Equals("domain", StringComparison.OrdinalIgnoreCase))
                 secretDomain = item.ItemValue;
-            else if (item.FieldName.ToLower().Equals("username"))
+            else if (item.FieldName.Equals("username", StringComparison.OrdinalIgnoreCase))
                 secretUsername = item.ItemValue;
-            else if (item.FieldName.ToLower().Equals("password"))
+            else if (item.FieldName.Equals("password", StringComparison.OrdinalIgnoreCase))
                 secretPassword = item.ItemValue;
-            else if (item.FieldName.ToLower().Equals("private key"))
+            else if (item.FieldName.Equals("private key", StringComparison.OrdinalIgnoreCase))
             {
                 client.ReadResponseNoJSONConvert = true;
-                privatekey = client.GetFieldAsync(false, false, secretID, "private-key").Result;
+                privatekey = Task.Run(() => client.GetFieldAsync(false, false, secretID, "private-key")).GetAwaiter().GetResult();
                 client.ReadResponseNoJSONConvert = false;
             }
-            else if (item.FieldName.ToLower().Equals("private key passphrase"))
+            else if (item.FieldName.Equals("private key passphrase", StringComparison.OrdinalIgnoreCase))
                 privatekeypassphrase = item.ItemValue;
         }
 
@@ -268,7 +276,7 @@ public class SecretServerInterface
                 TokenResponse token = new();
                 try
                 {
-                    token = tokenClient.AuthorizeAsync(Grant_type.Refresh_token, null, null, SSConnectionData.ssTokenRefresh, null).Result;
+                    token = Task.Run(() => tokenClient.AuthorizeAsync(Grant_type.Refresh_token, null, null, SSConnectionData.ssTokenRefresh, null)).GetAwaiter().GetResult();
                     var tokenResult = token.Access_token;
 
                     SSConnectionData.ssTokenBearer = tokenResult;
@@ -307,7 +315,7 @@ public class SecretServerInterface
             // Authenticate:
             var tokenClient = new OAuth2ServiceClient(SSConnectionData.ssUrl, httpClient);
             // call below will throw an exception if the creds are invalid
-            var token = tokenClient.AuthorizeAsync(Grant_type.Password, SSConnectionData.ssUsername, SSConnectionData.ssPassword, null, SSConnectionData.ssOTP).Result;
+            var token = Task.Run(() => tokenClient.AuthorizeAsync(Grant_type.Password, SSConnectionData.ssUsername, SSConnectionData.ssPassword, null, SSConnectionData.ssOTP)).GetAwaiter().GetResult();
             // here we can be sure the creds are ok - return success state                   
             var tokenResult = token.Access_token;
 

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MenuItem_About" xml:space="preserve">
-    <value>About</value>
+    <value>About...</value>
   </data>
   <data name="_Sessions" xml:space="preserve">
     <value>&amp;Sessions</value>
@@ -173,6 +173,9 @@
   </data>
   <data name="AnyDesk" xml:space="preserve">
     <value>AnyDesk</value>
+  </data>
+  <data name="Msra" xml:space="preserve">
+    <value>MSRA (Microsoft Remote Assistance)</value>
   </data>
   <data name="Ard" xml:space="preserve">
     <value>ARD (Apple Remote Desktop)</value>
@@ -330,6 +333,9 @@
   <data name="CommandOpenConnectionFile" xml:space="preserve">
     <value>&amp;Open a connection file</value>
   </data>
+  <data name="CommandStartWithEmptyConnections" xml:space="preserve">
+    <value>&amp;Start with empty connections</value>
+  </data>
   <data name="_TryAgain" xml:space="preserve">
     <value>&amp;Try again</value>
   </data>
@@ -365,6 +371,12 @@
   </data>
   <data name="ConfirmDisconnectConnection" xml:space="preserve">
     <value>Are you sure you want to disconnect "{0}"?</value>
+  </data>
+  <data name="ConfirmReconnectConnection" xml:space="preserve">
+    <value>Are you sure you want to reconnect "{0}"? The current session will be terminated.</value>
+  </data>
+  <data name="ConfirmReconnectAllConnections" xml:space="preserve">
+    <value>Are you sure you want to reconnect all open connections? All current sessions will be terminated.</value>
   </data>
   <data name="ConfirmDeleteExternalTool" xml:space="preserve">
     <value>Are you sure you want to delete the external tool, "{0}"?</value>
@@ -581,6 +593,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="FilterPuttyConnectionManager" xml:space="preserve">
     <value>PuTTY Connection Manager files</value>
   </data>
+  <data name="FilterNetscapeBookmarks" xml:space="preserve">
+    <value>Netscape Bookmarks (*.html)</value>
+  </data>
   <data name="FilterRdgFiles" xml:space="preserve">
     <value>Remote Desktop Connection Manager files (*.rdg)</value>
   </data>
@@ -598,6 +613,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="Fullscreen" xml:space="preserve">
     <value>Fullscreen</value>
+  </data>
+  <data name="MoveToMonitor" xml:space="preserve">
+    <value>Move to Monitor</value>
   </data>
   <data name="General" xml:space="preserve">
     <value>General</value>
@@ -642,7 +660,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Identify quick connect tabs by adding the prefix "Quick:"</value>
   </data>
   <data name="ImportAD" xml:space="preserve">
-    <value>Import from Active Directory</value>
+    <value>Import from Active Directory...</value>
   </data>
   <data name="ImportFileFailedContent" xml:space="preserve">
     <value>An error occurred while importing the file "{0}".</value>
@@ -651,7 +669,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Import from &amp;File...</value>
   </data>
   <data name="ImportPortScan" xml:space="preserve">
-    <value>Import from Port Scan</value>
+    <value>Import from Port Scan...</value>
   </data>
   <data name="Informations" xml:space="preserve">
     <value>Informations</value>
@@ -747,7 +765,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Add Connection Panel</value>
   </data>
   <data name="MenuItem_CheckForUpdates" xml:space="preserve">
-    <value>Check for Updates</value>
+    <value>Check for Updates...</value>
   </data>
   <data name="Config" xml:space="preserve">
     <value>Config</value>
@@ -760,6 +778,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="CtrlAltDel" xml:space="preserve">
     <value>Ctrl-Alt-Del</value>
+  </data>
+  <data name="CtrlAltEnd" xml:space="preserve">
+    <value>Ctrl+Alt+End</value>
   </data>
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
@@ -779,6 +800,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="ExternalToolsToolbar" xml:space="preserve">
     <value>External Tools Toolbar</value>
   </data>
+  <data name="ExternalToolsUseActiveTab" xml:space="preserve">
+    <value>External tools use active connection tab instead of selected tree node</value>
+  </data>
   <data name="_File" xml:space="preserve">
     <value>&amp;File</value>
   </data>
@@ -792,7 +816,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Launch External Tool</value>
   </data>
   <data name="NewConnectionFile" xml:space="preserve">
-    <value>New Connection File</value>
+    <value>New Connection File...</value>
   </data>
   <data name="NewExternalTool" xml:space="preserve">
     <value>New External Tool</value>
@@ -812,8 +836,14 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="Options" xml:space="preserve">
     <value>Options</value>
   </data>
+  <data name="OptionsMenuItem" xml:space="preserve">
+    <value>Options...</value>
+  </data>
   <data name="PortScan" xml:space="preserve">
     <value>Port Scan</value>
+  </data>
+  <data name="PortScanMenuItem" xml:space="preserve">
+    <value>Port Scan...</value>
   </data>
   <data name="QuickConnectToolbar" xml:space="preserve">
     <value>Quick Connect Toolbar</value>
@@ -829,6 +859,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="MenuItem_ReportIssue" xml:space="preserve">
     <value>Report an Issue</value>
+  </data>
+  <data name="SubmitErrorReport" xml:space="preserve">
+    <value>Submit Error</value>
   </data>
   <data name="ResetLayout" xml:space="preserve">
     <value>Reset layout</value>
@@ -853,6 +886,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="SshFileTransfer" xml:space="preserve">
     <value>SSH File Transfer</value>
+  </data>
+  <data name="SshFileTransferMenuItem" xml:space="preserve">
+    <value>SSH File Transfer...</value>
   </data>
   <data name="StartChat" xml:space="preserve">
     <value>Start Chat (VNC)</value>
@@ -880,6 +916,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="MoveDown" xml:space="preserve">
     <value>Move down</value>
+  </data>
+  <data name="MoveToFolder" xml:space="preserve">
+    <value>Move to Folder...</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
     <value>Move up</value>
@@ -961,7 +1000,37 @@ If you run into such an error, please create a new connection file!</value>
     <value>Both passwords must match.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>The password must be at least 3 characters long.</value>
+    <value>The password must be at least 8 characters long.</value>
+  </data>
+  <data name="PasswordStatusNeedsComplexity" xml:space="preserve">
+    <value>Password must contain uppercase, lowercase, and a digit.</value>
+  </data>
+  <data name="PasswordRequirements" xml:space="preserve">
+    <value>Minimum 8 characters with uppercase, lowercase, and a digit.</value>
+  </data>
+  <data name="PasswordStrengthWeak" xml:space="preserve">
+    <value>Weak</value>
+  </data>
+  <data name="PasswordStrengthFair" xml:space="preserve">
+    <value>Fair</value>
+  </data>
+  <data name="PasswordStrengthGood" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="PasswordStrengthStrong" xml:space="preserve">
+    <value>Strong</value>
+  </data>
+  <data name="RequireCustomPassword" xml:space="preserve">
+    <value>Require custom master password</value>
+  </data>
+  <data name="RequireCustomPasswordTooltip" xml:space="preserve">
+    <value>When enabled, a custom master password must be set before connections can be saved. This prevents using the default (insecure) encryption key.</value>
+  </data>
+  <data name="CustomPasswordRequired" xml:space="preserve">
+    <value>A custom master password is required before saving connections. Please set a master password now.</value>
+  </data>
+  <data name="CustomPasswordRequiredTitle" xml:space="preserve">
+    <value>Master Password Required</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>Please fill all fields</value>
@@ -1050,6 +1119,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyDescriptionPassword" xml:space="preserve">
     <value>Enter your password.</value>
   </data>
+  <data name="PropertyDescriptionHttpPath" xml:space="preserve">
+    <value>Optional URL path to append after the host and port (e.g. /admin). Leave empty to connect to the root.</value>
+  </data>
   <data name="PropertyDescriptionPort" xml:space="preserve">
     <value>Enter the port the selected protocol is listening on.</value>
   </data>
@@ -1102,7 +1174,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>Select one of the available rendering engines that will be used to display HTML.</value>
   </data>
   <data name="PropertyDescriptionResolution" xml:space="preserve">
-    <value>Choose the resolution or mode this connection will open in.</value>
+    <value>Choose the resolution or mode this connection will open in. For RDP zoom, use "Zoom Level (Desktop Scale Factor)" in the Appearance section.</value>
   </data>
   <data name="PropertyDescriptionSmartSizeMode" xml:space="preserve">
     <value>Select the SmartSize mode to be used.</value>
@@ -1145,6 +1217,24 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="PropertyDescriptionVNCProxyUsername" xml:space="preserve">
     <value>Enter your username for authenticating against the proxy.</value>
+  </data>
+  <data name="RDPProxy" xml:space="preserve">
+    <value>RDP Proxy</value>
+  </data>
+  <data name="PropertyDescriptionRDPProxyType" xml:space="preserve">
+    <value>Select the proxy type used to tunnel RDP connections (HTTP CONNECT or SOCKS5).</value>
+  </data>
+  <data name="PropertyDescriptionRDPProxyAddress" xml:space="preserve">
+    <value>Enter the proxy server address for RDP connections.</value>
+  </data>
+  <data name="PropertyDescriptionRDPProxyPort" xml:space="preserve">
+    <value>Enter the port the proxy server listens on.</value>
+  </data>
+  <data name="PropertyDescriptionRDPProxyUsername" xml:space="preserve">
+    <value>Enter your username for authenticating against the proxy (SOCKS5 or HTTP).</value>
+  </data>
+  <data name="PropertyDescriptionRDPProxyPassword" xml:space="preserve">
+    <value>Enter your password for authenticating against the proxy.</value>
   </data>
   <data name="HostnameIp" xml:space="preserve">
     <value>Hostname/IP</value>
@@ -1194,6 +1284,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="ExternalTool" xml:space="preserve">
     <value>External Tool</value>
   </data>
+  <data name="ExternalToolsMenuItem" xml:space="preserve">
+    <value>External Tools...</value>
+  </data>
   <data name="ExternalToolAfter" xml:space="preserve">
     <value>External Tool After</value>
   </data>
@@ -1217,6 +1310,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="HttpPath" xml:space="preserve">
+    <value>Path</value>
   </data>
   <data name="Port" xml:space="preserve">
     <value>Port</value>
@@ -1442,13 +1538,16 @@ If you run into such an error, please create a new connection file!</value>
     <value>An out-of-memory error has occurred.</value>
   </data>
   <data name="RdpErrorUnknown" xml:space="preserve">
-    <value>An unknown error has occurred.</value>
+    <value>An unknown error has occurred on {0} (Error {1}).</value>
   </data>
   <data name="RdpErrorWindowCreation" xml:space="preserve">
     <value>A window-creation error has occurred.</value>
   </data>
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Winsock initialization error.</value>
+  </data>
+  <data name="RdpError3334" xml:space="preserve">
+    <value>Protocol error (3334). Try changing the RDP version in the connection settings.</value>
   </data>
   <data name="FitToPanel" xml:space="preserve">
     <value>Fit To Panel</value>
@@ -1531,6 +1630,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="Rlogin" xml:space="preserve">
     <value>Rlogin</value>
   </data>
+  <data name="Serial" xml:space="preserve">
+    <value>Serial (via PuTTY)</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
@@ -1612,11 +1714,20 @@ If you run into such an error, please create a new connection file!</value>
   <data name="ShowProtocolOnTabs" xml:space="preserve">
     <value>Show protocols on tab names</value>
   </data>
+  <data name="ShowFolderPathOnTabs" xml:space="preserve">
+    <value>Show folder path on tab names</value>
+  </data>
   <data name="SingleClickOnConnectionOpensIt" xml:space="preserve">
     <value>Single click on connection opens it</value>
   </data>
   <data name="SingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
     <value>Single click on opened connection in Connection Tree switches to opened Connection Tab</value>
+  </data>
+  <data name="Socks4" xml:space="preserve">
+    <value>Socks 4</value>
+  </data>
+  <data name="Socks4a" xml:space="preserve">
+    <value>Socks 4a</value>
   </data>
   <data name="Socks5" xml:space="preserve">
     <value>Socks 5</value>
@@ -1880,6 +1991,9 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="PasswordLengthConstraintHint" xml:space="preserve">
     <value>Password length must be between {0} and {1}</value>
   </data>
+  <data name="PasswordMinimumLengthConstraintHint" xml:space="preserve">
+    <value>Password length must be at least {0}</value>
+  </data>
   <data name="ChooseLogPath" xml:space="preserve">
     <value>Choose a path for the mRemoteNG log file</value>
   </data>
@@ -2042,6 +2156,9 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="UltraVNCSingleClick" xml:space="preserve">
     <value>UltraVNC SingleClick</value>
   </data>
+  <data name="UltraVNCSingleClickMenuItem" xml:space="preserve">
+    <value>UltraVNC SingleClick...</value>
+  </data>
   <data name="DisconnectOthersRight" xml:space="preserve">
     <value>Disconnect Tabs To The Right</value>
   </data>
@@ -2050,6 +2167,9 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="ConfirmCloseConnectionOthersInstruction" xml:space="preserve">
     <value>Are you sure you want to close all connections except for "{0}"?</value>
+  </data>
+  <data name="ConfirmCloseConnectionOthersRightInstruction" xml:space="preserve">
+    <value>Are you sure you want to close all connections to the right of "{0}"?</value>
   </data>
   <data name="AutomaticReconnectError" xml:space="preserve">
     <value>An error occurred while trying to reconnect to RDP host '{0}'</value>
@@ -2074,6 +2194,12 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="CopyHostname" xml:space="preserve">
     <value>Copy Hostname</value>
+  </data>
+  <data name="CopyUsername" xml:space="preserve">
+    <value>Copy Username</value>
+  </data>
+  <data name="CopyPassword" xml:space="preserve">
+    <value>Copy Password</value>
   </data>
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
     <value>Place search bar above connection tree</value>
@@ -2106,6 +2232,12 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="PropertyDescriptionFavorite" xml:space="preserve">
     <value>Show this connection in the favorites menu.</value>
+  </data>
+  <data name="DynamicTabName" xml:space="preserve">
+    <value>Dynamic Tab Name</value>
+  </data>
+  <data name="PropertyDescriptionDynamicTabName" xml:space="preserve">
+    <value>When enabled, the tab title will automatically update to reflect the remote window title (e.g. PuTTY session title changes).</value>
   </data>
   <data name="Favorite" xml:space="preserve">
     <value>Favorite</value>
@@ -2152,6 +2284,15 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="VmId" xml:space="preserve">
     <value>VM ID</value>
   </data>
+  <data name="Vmrc" xml:space="preserve">
+    <value>VMRC (VMware Remote Console)</value>
+  </data>
+  <data name="VmrcVmId" xml:space="preserve">
+    <value>ESXi VM ID</value>
+  </data>
+  <data name="PropertyDescriptionVmrcVmId" xml:space="preserve">
+    <value>The VM ID on the ESXi host (e.g. "1" or "vm-123"). Obtain via vim-cmd vmsvc/getallvms on the ESXi CLI.</value>
+  </data>
   <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
     <value>Could not create RDP client. RDP protocol version {0} is not supported on this machine. Please choose an older protocol version.</value>
   </data>
@@ -2187,6 +2328,9 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="StartMinimized" xml:space="preserve">
     <value>Start minimized</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>Start automatically with Windows</value>
   </data>
   <data name="PropertyDescriptionPasswordProtect" xml:space="preserve">
     <value>Set a password needed to encrypt the connection file with. You will be prompted to enter your passcode before starting mRemoteNG.</value>
@@ -2236,6 +2380,9 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="HttpCEF" xml:space="preserve">
     <value>Edge Chromium</value>
   </data>
+  <data name="HttpExternalBrowser" xml:space="preserve">
+    <value>External Browser</value>
+  </data>
   <data name="HttpFailedUrlBuild" xml:space="preserve">
     <value>Failed to contruct the URL to load</value>
   </data>
@@ -2261,7 +2408,7 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <comment>Command what will be run after connection</comment>
   </data>
   <data name="PropertyDescriptionOpeningCommand" xml:space="preserve">
-    <value>Description of OpeningCommand TODO</value>
+    <value>Command to execute after the connection is established.</value>
   </data>
   <data name="RedirectDrives" xml:space="preserve">
     <value>Disk Drives</value>
@@ -2359,8 +2506,23 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="ECPOnePasswordCommandLine" xml:space="preserve">
     <value>1Password command line</value>
   </data>
+  <data name="ECPPasswordSafe" xml:space="preserve">
+    <value>Password Safe</value>
+  </data>
+  <data name="ECPPasswordSafeReadFailed" xml:space="preserve">
+    <value>Password Safe read failed</value>
+  </data>
+  <data name="ECPPasswordSafeCommandLine" xml:space="preserve">
+    <value>Password Safe command line</value>
+  </data>
   <data name="ECPNone" xml:space="preserve">
     <value>None</value>
+  </data>
+  <data name="ECPLAPS" xml:space="preserve">
+    <value>LAPS (Active Directory)</value>
+  </data>
+  <data name="ECPLAPSQueryFailed" xml:space="preserve">
+    <value>LAPS query failed</value>
   </data>
   <data name="EAPAmazonWebServices" xml:space="preserve">
     <value>AmazonEC2</value>
@@ -2432,6 +2594,9 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="FilterSecureCRT" xml:space="preserve">
     <value>SecureCRT (*.xml)</value>
   </data>
+  <data name="FilterRoyalTS" xml:space="preserve">
+    <value>Royal TS (*.rtsx)</value>
+  </data>
   <data name="OptionsCompanyPolicyMessage" xml:space="preserve">
     <value>*Some settings are determined by your company. For further information, please contact your administrator</value>
   </data>
@@ -2449,6 +2614,12 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="RdpConnectionTimeout" xml:space="preserve">
     <value>RDP connection timeout</value>
+  </data>
+  <data name="DefaultRdpResolution" xml:space="preserve">
+    <value>Default RDP resolution:</value>
+  </data>
+  <data name="DefaultVncSmartSizeMode" xml:space="preserve">
+    <value>Default VNC SmartSize mode:</value>
   </data>
   <data name="WhenClosingConnections" xml:space="preserve">
     <value>WhenClosingConnections</value>
@@ -2568,7 +2739,76 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="Wsl" xml:space="preserve">
     <value>WSL</value>
   </data>
+  <data name="OpenSsh" xml:space="preserve">
+    <value>OpenSSH</value>
+  </data>
   <data name="VaultOpenbaoSecretEngineSSHOTP" xml:space="preserve">
     <value>SSH engine OTP mode</value>
+  </data>
+  <data name="WakeOnLan" xml:space="preserve">
+    <value>Wake On LAN</value>
+  </data>
+  <data name="Winbox" xml:space="preserve">
+    <value>Winbox</value>
+  </data>
+  <data name="TypeUsername" xml:space="preserve">
+    <value>Type Username</value>
+  </data>
+  <data name="TypePassword" xml:space="preserve">
+    <value>Type Password</value>
+  </data>
+  <data name="TypeClipboard" xml:space="preserve">
+    <value>Type Clipboard Text</value>
+  </data>
+  <data name="LockWindowSize" xml:space="preserve">
+    <value>Lock window size</value>
+  </data>
+  <data name="DoNotRestoreOnRdpMinimize" xml:space="preserve">
+    <value>Do not dock to tab when minimizing from Full screen</value>
+  </data>
+  <data name="QuickConnectNoHostname" xml:space="preserve">
+    <value>No hostname specified!</value>
+  </data>
+  <data name="MenuItem_ForkGitHub" xml:space="preserve">
+    <value>Fork: GitHub Page</value>
+  </data>
+  <data name="MenuItem_ForkReleases" xml:space="preserve">
+    <value>Fork: Releases &amp;&amp; Downloads</value>
+  </data>
+  <data name="MenuItem_ForkReportIssue" xml:space="preserve">
+    <value>Fork: Report an Issue</value>
+  </data>
+  <data name="MenuItem_OriginalWebsite" xml:space="preserve">
+    <value>Original Project Website</value>
+  </data>
+  <data name="MenuItem_OriginalForum" xml:space="preserve">
+    <value>Original Project Forum</value>
+  </data>
+  <data name="MenuItem_OriginalChat" xml:space="preserve">
+    <value>Original Project Chat</value>
+  </data>
+  <data name="MenuItem_OriginalCommunity" xml:space="preserve">
+    <value>Original Project Community</value>
+  </data>
+  <data name="MenuItem_OriginalDonate" xml:space="preserve">
+    <value>Donate (Original Project)</value>
+  </data>
+  <data name="ForkHeader" xml:space="preserve">
+    <value>This Fork</value>
+  </data>
+  <data name="ForkGitHubPage" xml:space="preserve">
+    <value>GitHub Page</value>
+  </data>
+  <data name="ForkReleases" xml:space="preserve">
+    <value>Releases</value>
+  </data>
+  <data name="ForkChangelog" xml:space="preserve">
+    <value>Changelog</value>
+  </data>
+  <data name="OriginalChangelog" xml:space="preserve">
+    <value>Original Changelog</value>
+  </data>
+  <data name="OriginalCredits" xml:space="preserve">
+    <value>Original Credits</value>
   </data>
 </root>

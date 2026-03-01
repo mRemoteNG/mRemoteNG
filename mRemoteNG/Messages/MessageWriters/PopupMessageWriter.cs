@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using mRemoteNG.Resources.Language;
 
@@ -11,23 +12,23 @@ namespace mRemoteNG.Messages.MessageWriters
             switch (message.Class)
             {
                 case MessageClass.DebugMsg:
-                    MessageBox.Show(message.Text, string.Format(Language.TitleInformation, message.Date),
+                    MessageBox.Show(message.Text, string.Format(CultureInfo.CurrentCulture, Language.TitleInformation, message.Date),
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case MessageClass.InformationMsg:
-                    MessageBox.Show(message.Text, string.Format(Language.TitleInformation, message.Date),
+                    MessageBox.Show(message.Text, string.Format(CultureInfo.CurrentCulture, Language.TitleInformation, message.Date),
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case MessageClass.WarningMsg:
-                    MessageBox.Show(message.Text, string.Format(Language.TitleWarning, message.Date),
+                    MessageBox.Show(message.Text, string.Format(CultureInfo.CurrentCulture, Language.TitleWarning, message.Date),
                                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
                 case MessageClass.ErrorMsg:
-                    MessageBox.Show(message.Text, string.Format(Language.TitleError, message.Date),
+                    MessageBox.Show(message.Text, string.Format(CultureInfo.CurrentCulture, Language.TitleError, message.Date),
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(message), message.Class, null);
             }
         }
     }

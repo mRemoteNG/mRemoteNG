@@ -24,15 +24,30 @@ using mRemoteNG.Config.Serializers.ConnectionSerializers.Sql;
 namespace mRemoteNG.Config.Connections
 {
     [SupportedOSPlatform("windows")]
-    public class SqlConnectionsSaver(SaveFilter saveFilter, ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> localPropertieSerializer, IDataProvider<string> localPropertiesDataProvider) : ISaver<ConnectionTreeModel>
+    public class SqlConnectionsSaver : ISaver<ConnectionTreeModel>
     {
-        private readonly SaveFilter _saveFilter = saveFilter ?? throw new ArgumentNullException(nameof(saveFilter));
-        private readonly ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> _localPropertiesSerializer = localPropertieSerializer.ThrowIfNull(nameof(localPropertieSerializer));
-        private readonly IDataProvider<string> _dataProvider = localPropertiesDataProvider.ThrowIfNull(nameof(localPropertiesDataProvider));
+        private readonly SaveFilter _saveFilter;
+        private readonly ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> _localPropertiesSerializer;
+        private readonly IDataProvider<string> _dataProvider;
+
+        public SqlConnectionsSaver(SaveFilter saveFilter, ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> localPropertieSerializer, IDataProvider<string> localPropertiesDataProvider)
+        {
+            ArgumentNullException.ThrowIfNull(saveFilter);
+            ArgumentNullException.ThrowIfNull(localPropertieSerializer);
+            ArgumentNullException.ThrowIfNull(localPropertiesDataProvider);
+            _saveFilter = saveFilter;
+            _localPropertiesSerializer = localPropertieSerializer;
+            _dataProvider = localPropertiesDataProvider;
+        }
 
         public void Save(ConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")
         {
-            RootNodeInfo rootTreeNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
+            RootNodeInfo? rootTreeNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().FirstOrDefault();
+            if (rootTreeNode == null)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SQL save aborted: connection tree has no root node.");
+                return;
+            }
 
             UpdateLocalConnectionProperties(rootTreeNode);
 
@@ -53,18 +68,49 @@ namespace mRemoteNG.Config.Connections
                 dbConnector.Connect();
                 SqlDatabaseVersionVerifier databaseVersionVerifier = new(dbConnector);
                 SqlDatabaseMetaDataRetriever metaDataRetriever = new();
-                SqlConnectionListMetaData metaData = metaDataRetriever.GetDatabaseMetaData(dbConnector);
+                SqlConnectionListMetaData? metaData = metaDataRetriever.GetDatabaseMetaData(dbConnector);
 
-                if (!databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion))
+                // metaData == null means a brand-new database whose schema was just
+                // initialized (tblRoot exists but has no rows yet). In that case skip
+                // the version check — WriteDatabaseMetaData will insert the tblRoot row
+                // with the current version during this save. (#1883)
+                if (metaData != null && !databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion))
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ErrorConnectionListSaveFailed);
-                    return;
+                    throw new InvalidOperationException(Language.ErrorConnectionListSaveFailed);
                 }
 
-                metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector);
-                UpdateConnectionsTable(rootTreeNode, dbConnector);
-                UpdateUpdatesTable(dbConnector);
+                // Safety check: prevent truncating a non-empty database when the in-memory
+                // tree is empty — this indicates a failed or incomplete load (#1351)
+                int connectionCount = rootTreeNode.GetRecursiveChildList().Count();
+                if (connectionCount == 0)
+                {
+                    SqlDataProvider checkProvider = new(dbConnector);
+                    DataTable existingData = checkProvider.Load();
+                    if (existingData.Rows.Count > 0)
+                    {
+                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                            $"SQL save aborted: in-memory connection tree is empty but database contains " +
+                            $"{existingData.Rows.Count} connection(s). This may indicate the connection tree " +
+                            "was not loaded properly. Database data has been preserved. (See issue #1351)");
+                        return;
+                    }
+                }
 
+                using DbTransaction transaction = dbConnector.DbConnection().BeginTransaction();
+                try
+                {
+                    metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector, transaction);
+                    UpdateConnectionsTable(rootTreeNode, dbConnector, transaction);
+                    UpdateUpdatesTable(dbConnector, transaction);
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    Runtime.MessageCollector.AddExceptionStackTrace(Language.ErrorConnectionListSaveFailed, ex);
+                    throw;
+                }
             }
 
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Saved connections to database");
@@ -78,7 +124,7 @@ namespace mRemoteNG.Config.Connections
         /// The name of the property that triggered the save event
         /// </param>
         /// <returns></returns>
-        private bool PropertyIsLocalOnly(string property)
+        private static bool PropertyIsLocalOnly(string property)
         {
             return property == nameof(ConnectionInfo.OpenConnections) ||
                    property == nameof(ContainerInfo.IsExpanded) ||
@@ -100,9 +146,13 @@ namespace mRemoteNG.Config.Connections
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Saved local connection properties");
         }
 
-        private void UpdateRootNodeTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
+        private static void UpdateRootNodeTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
         {
-            // TODO: use transaction, but method not used at all?
+            UpdateRootNodeTable(rootTreeNode, databaseConnector, null);
+        }
+
+        private static void UpdateRootNodeTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector, DbTransaction? transaction)
+        {
             LegacyRijndaelCryptographyProvider cryptographyProvider = new();
             string strProtected;
             if (rootTreeNode != null)
@@ -122,34 +172,66 @@ namespace mRemoteNG.Config.Connections
                 strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
             }
 
-            System.Data.Common.DbCommand dbQuery = databaseConnector.DbCommand("TRUNCATE TABLE tblRoot");
-            dbQuery.ExecuteNonQuery();
-
-            if (rootTreeNode != null)
+            bool mustDisposeTransaction = false;
+            if (transaction == null)
             {
-                dbQuery = databaseConnector.DbCommand(
-                    "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(@Name, 0, @Protected, @Version)");
-                DbParameter nameParam = dbQuery.CreateParameter();
-                nameParam.ParameterName = "@Name";
-                nameParam.Value = rootTreeNode.Name;
-                DbParameter protectedParam = dbQuery.CreateParameter();
-                protectedParam.ParameterName = "@Protected";
-                protectedParam.Value = strProtected;
-                DbParameter versionParam = dbQuery.CreateParameter();
-                versionParam.ParameterName = "@Version";
-                versionParam.Value = ConnectionsFileInfo.ConnectionFileVersion;
-                dbQuery.Parameters.Add(nameParam);
-                dbQuery.Parameters.Add(protectedParam);
-                dbQuery.Parameters.Add(versionParam);
-                dbQuery.ExecuteNonQuery();
+                transaction = databaseConnector.DbConnection().BeginTransaction();
+                mustDisposeTransaction = true;
             }
-            else
+
+            try
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
+                DbCommand dbQuery = databaseConnector.DbCommand("DELETE FROM tblRoot");
+                dbQuery.Transaction = transaction;
+                dbQuery.ExecuteNonQuery();
+
+                if (rootTreeNode != null)
+                {
+                    dbQuery = databaseConnector.DbCommand(
+                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(@Name, 0, @Protected, @Version)");
+                    dbQuery.Transaction = transaction;
+                    DbParameter nameParam = dbQuery.CreateParameter();
+                    nameParam.ParameterName = "@Name";
+                    nameParam.Value = rootTreeNode.Name;
+                    DbParameter protectedParam = dbQuery.CreateParameter();
+                    protectedParam.ParameterName = "@Protected";
+                    protectedParam.Value = strProtected;
+                    DbParameter versionParam = dbQuery.CreateParameter();
+                    versionParam.ParameterName = "@Version";
+                    versionParam.Value = ConnectionsFileInfo.ConnectionFileVersion;
+                    dbQuery.Parameters.Add(nameParam);
+                    dbQuery.Parameters.Add(protectedParam);
+                    dbQuery.Parameters.Add(versionParam);
+                    dbQuery.ExecuteNonQuery();
+                }
+                else
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
+                }
+
+                if (mustDisposeTransaction)
+                {
+                    transaction.Commit();
+                }
+            }
+            catch
+            {
+                if (mustDisposeTransaction)
+                {
+                    transaction.Rollback();
+                }
+                throw;
+            }
+            finally
+            {
+                if (mustDisposeTransaction)
+                {
+                    transaction.Dispose();
+                }
             }
         }
 
-        private void UpdateConnectionsTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
+        private void UpdateConnectionsTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector, DbTransaction? transaction = null)
         {
             SqlDataProvider dataProvider = new(databaseConnector);
             DataTable currentDataTable = dataProvider.Load();
@@ -160,27 +242,57 @@ namespace mRemoteNG.Config.Connections
 
             DataTable dataTable = serializer.Serialize(rootTreeNode);
             
-            dataProvider.Save(dataTable);
+            dataProvider.Save(dataTable, transaction);
         }
 
-        private void UpdateUpdatesTable(IDatabaseConnector databaseConnector)
+        private static void UpdateUpdatesTable(IDatabaseConnector databaseConnector, DbTransaction? transaction = null)
         {
-            // TODO: use transaction
-            System.Data.Common.DbCommand dbQuery = databaseConnector.DbCommand("TRUNCATE TABLE tblUpdate");
-            dbQuery.ExecuteNonQuery();
-            dbQuery = databaseConnector.DbCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(@LastUpdate)");
-            
-            DbParameter lastUpdateParam = dbQuery.CreateParameter();
-            lastUpdateParam.ParameterName = "@LastUpdate";
-            // Use DBTimeStampNow() instead of DBDate() - the column is datetime type, not string
-            // DBTimeStampNow() returns the database-specific .NET type: DateTime for MSSQL, MySqlDateTime for MySQL
-            lastUpdateParam.Value = MiscTools.DBTimeStampNow();
-            dbQuery.Parameters.Add(lastUpdateParam);
-            
-            dbQuery.ExecuteNonQuery();
+            bool mustDisposeTransaction = false;
+            if (transaction == null)
+            {
+                transaction = databaseConnector.DbConnection().BeginTransaction();
+                mustDisposeTransaction = true;
+            }
+
+            try
+            {
+                DbCommand dbQuery = databaseConnector.DbCommand("DELETE FROM tblUpdate");
+                dbQuery.Transaction = transaction;
+                dbQuery.ExecuteNonQuery();
+
+                dbQuery = databaseConnector.DbCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(@LastUpdate)");
+                dbQuery.Transaction = transaction;
+
+                DbParameter lastUpdateParam = dbQuery.CreateParameter();
+                lastUpdateParam.ParameterName = "@LastUpdate";
+                lastUpdateParam.Value = MiscTools.DBTimeStampNow();
+                dbQuery.Parameters.Add(lastUpdateParam);
+
+                dbQuery.ExecuteNonQuery();
+                
+                if (mustDisposeTransaction)
+                {
+                    transaction.Commit();
+                }
+            }
+            catch
+            {
+                if (mustDisposeTransaction)
+                {
+                    transaction.Rollback();
+                }
+                throw;
+            }
+            finally
+            {
+                if (mustDisposeTransaction)
+                {
+                    transaction.Dispose();
+                }
+            }
         }
 
-        private bool SqlUserIsReadOnly()
+        private static bool SqlUserIsReadOnly()
         {
             return Properties.OptionsDBsPage.Default.SQLReadOnly;
         }

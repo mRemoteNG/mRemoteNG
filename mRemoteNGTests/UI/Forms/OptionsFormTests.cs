@@ -1,175 +1,123 @@
 ﻿using NUnit.Framework;
+using System;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.UI.Forms;
 using mRemoteNGTests.TestHelpers;
 using System.Linq;
 
 namespace mRemoteNGTests.UI.Forms
 {
+    /// <summary>
+    /// Tests for FrmOptions. CRITICAL: Only ONE test allowed per fixture.
+    /// FrmOptions + ObjectListView leaks native Win32 resources (GDI handles,
+    /// window class registrations). Even 2 tests that touch FrmOptions in the
+    /// same testhost process crash it. All assertions are in a single test.
+    /// </summary>
     [TestFixture]
     [Apartment(ApartmentState.STA)]
-    public class OptionsFormTests : OptionsFormSetupAndTeardown
+    public class OptionsFormTests
     {
-        [Test]
-        public void ClickingCloseButtonClosesTheForm()
+        private static void RunWithMessagePump(Action<FrmOptions> testAction)
         {
-            bool eventFired = false;
-            _optionsForm.FormClosed += (o, e) => eventFired = true;
-            Button cancelButton = _optionsForm.FindControl<Button>("btnCancel");
-            cancelButton.PerformClick();
-            Assert.That(eventFired, Is.True);
-        }
-
-        [Test]
-        public void ClickingOKButtonSetsDialogResult()
-        {
-            Button cancelButton = _optionsForm.FindControl<Button>("btnOK");
-            cancelButton.PerformClick();
-            Assert.That(_optionsForm.DialogResult, Is.EqualTo(DialogResult.OK));
-        }
-
-        [Test]
-        public void ListViewContainsOptionsPages()
-        {
-            ListViewTester listViewTester = new("lstOptionPages", _optionsForm);
-            Assert.That(listViewTester.Items.Count, Is.EqualTo(12));
-        }
-
-        [Test]
-        public void ChangingOptionMarksPageAsChanged()
-        {
-            // Wait for all pages to load
-            System.Threading.Thread.Sleep(500);
-            Application.DoEvents();
-
-            // Get the options panel
-            var pnlMain = _optionsForm.FindControl<Panel>("pnlMain");
-            Assert.That(pnlMain, Is.Not.Null);
-
-            if (pnlMain.Controls.Count > 0)
+            Exception caught = null;
+            var thread = new Thread(() =>
             {
-                var optionsPage = pnlMain.Controls[0] as mRemoteNG.UI.Forms.OptionsPages.OptionsPage;
-                Assert.That(optionsPage, Is.Not.Null);
-
-                // Find a checkbox in the options page
-                var checkBoxes = optionsPage.Controls.Find("", true).OfType<CheckBox>().ToList();
-                
-                if (checkBoxes.Count > 0)
+                FrmOptions optionsForm = null;
+                try
                 {
-                    var checkBox = checkBoxes[0];
-                    bool originalValue = checkBox.Checked;
-                    checkBox.Checked = !originalValue;
-                    Application.DoEvents();
-                    
-                    // Verify the page is marked as changed
-                    Assert.That(optionsPage.HasChanges, Is.True);
+                    optionsForm = new FrmOptions();
+                    optionsForm.Load += (s, e) =>
+                    {
+                        optionsForm.BeginInvoke(() =>
+                        {
+                            try
+                            {
+                                Application.DoEvents();
+                                testAction(optionsForm);
+                            }
+                            catch (Exception ex)
+                            {
+                                caught = ex;
+                            }
+                            finally
+                            {
+                                Application.ExitThread();
+                            }
+                        });
+                    };
+                    Application.Run(optionsForm);
                 }
-            }
-        }
-
-        [Test]
-        public void MultipleOpenCloseWithoutConnectionsDoesNotFreeze()
-        {
-            // Test for issue #2907: Options panel should not freeze after multiple open/close cycles
-            for (int i = 0; i < 25; i++)
-            {
-                // Show the form
-                _optionsForm.Show();
-                Application.DoEvents();
-                System.Threading.Thread.Sleep(50);
-
-                // Verify panel has content
-                var pnlMain = _optionsForm.FindControl<Panel>("pnlMain");
-                Assert.That(pnlMain, Is.Not.Null, $"pnlMain is null on iteration {i}");
-                Assert.That(pnlMain.Controls.Count, Is.GreaterThan(0), $"pnlMain has no controls on iteration {i}");
-
-                // Hide the form (simulating OK/Cancel)
-                _optionsForm.Visible = false;
-                Application.DoEvents();
-            }
-
-            // Final check - form should still be responsive
-            _optionsForm.Show();
-            Application.DoEvents();
-            var finalPanel = _optionsForm.FindControl<Panel>("pnlMain");
-            Assert.That(finalPanel.Controls.Count, Is.GreaterThan(0), "Final pnlMain has no controls after 25 cycles");
-        }
-
-        [Test]
-        public void OptionsFormHasValidSelectedPageAfterMultipleShows()
-        {
-            // Test for issue #2907: lstOptionPages.SelectedObject should remain valid
-            for (int i = 0; i < 10; i++)
-            {
-                _optionsForm.Show();
-                Application.DoEvents();
-
-                // Use reflection to check lstOptionPages.SelectedObject
-                var lstOptionPages = _optionsForm.GetType()
-                    .GetField("lstOptionPages", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                    ?.GetValue(_optionsForm);
-
-                Assert.That(lstOptionPages, Is.Not.Null, $"lstOptionPages is null on iteration {i}");
-
-                var selectedObject = lstOptionPages.GetType()
-                    .GetProperty("SelectedObject")
-                    ?.GetValue(lstOptionPages);
-
-                Assert.That(selectedObject, Is.Not.Null, $"SelectedObject is null on iteration {i}");
-
-                _optionsForm.Visible = false;
-                Application.DoEvents();
-            }
-        }
-
-        [Test]
-        public void OptionsFormControlStateRemainsValidAfterHideShow()
-        {
-            // Test for issue #2907: Control handles should remain valid after hide/show
-            _optionsForm.Show();
-            Application.DoEvents();
-            System.Threading.Thread.Sleep(500); // Wait for all pages to load
-
-            var pnlMain = _optionsForm.FindControl<Panel>("pnlMain");
-            Assert.That(pnlMain.Controls.Count, Is.GreaterThan(0));
-
-            var firstPage = pnlMain.Controls[0];
-            Assert.That(firstPage.IsHandleCreated, Is.True, "Page handle should be created initially");
-
-            // Hide and show multiple times
-            for (int i = 0; i < 5; i++)
-            {
-                _optionsForm.Visible = false;
-                Application.DoEvents();
-                _optionsForm.Show();
-                Application.DoEvents();
-
-                var currentPanel = _optionsForm.FindControl<Panel>("pnlMain");
-                Assert.That(currentPanel.Controls.Count, Is.GreaterThan(0), $"Panel should have controls on iteration {i}");
-
-                var currentPage = currentPanel.Controls[0];
-                Assert.That(currentPage.IsHandleCreated, Is.True, $"Page handle should remain valid on iteration {i}");
-                Assert.That(currentPage.IsDisposed, Is.False, $"Page should not be disposed on iteration {i}");
-            }
-        }
-
-        [Test]
-        public void RapidOpenCloseDoesNotCauseNullReference()
-        {
-            // Test for issue #2907: Rapid open/close should not cause null reference exceptions
-            for (int i = 0; i < 50; i++)
-            {
-                _optionsForm.Show();
-                _optionsForm.Visible = false;
-                Application.DoEvents();
-            }
-
-            // Should be able to show normally after rapid cycles
-            Assert.DoesNotThrow(() =>
-            {
-                _optionsForm.Show();
-                Application.DoEvents();
+                catch (Exception ex)
+                {
+                    if (caught == null) caught = ex;
+                }
+                finally
+                {
+                    try { optionsForm?.Dispose(); } catch { }
+                }
             });
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+            if (!thread.Join(TimeSpan.FromSeconds(30)))
+            {
+                thread.Interrupt();
+                Assert.Fail("Test timed out after 30 seconds (message pump deadlock)");
+            }
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+
+            if (caught != null)
+                throw caught;
         }
+
+        /// <summary>
+        /// Single test that validates FrmOptions construction, controls, ListView,
+        /// page selection, OK button, and change tracking.
+        /// </summary>
+        [Test]
+        public void FormBehavior() => RunWithMessagePump(optionsForm =>
+        {
+            // 1. Controls are created
+            var pnlMain = optionsForm.FindControl<Panel>("pnlMain");
+            Assert.That(pnlMain, Is.Not.Null, "pnlMain should exist");
+            Assert.That(pnlMain.Controls.Count, Is.GreaterThan(0), "pnlMain should have child controls");
+
+            // 2. First page is not disposed
+            var firstPage = pnlMain.Controls[0];
+            Assert.That(firstPage.IsDisposed, Is.False, "Page should not be disposed");
+
+            // 3. ListView has all 13 options pages
+            ListViewTester listViewTester = new("lstOptionPages", optionsForm);
+            Assert.That(listViewTester.Items.Count, Is.EqualTo(13));
+
+            // 4. SelectedObject is set
+            var lstOptionPages = optionsForm.GetType()
+                .GetField("lstOptionPages", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                ?.GetValue(optionsForm);
+            Assert.That(lstOptionPages, Is.Not.Null, "lstOptionPages should exist");
+            var selectedObject = lstOptionPages.GetType()
+                .GetProperty("SelectedObject")
+                ?.GetValue(lstOptionPages);
+            Assert.That(selectedObject, Is.Not.Null, "SelectedObject should not be null");
+
+            // 5. OK button sets DialogResult
+            Button okButton = optionsForm.FindControl<Button>("btnOK");
+            okButton.PerformClick();
+            Assert.That(optionsForm.DialogResult, Is.EqualTo(DialogResult.OK));
+
+            // 6. Change tracking - toggle a checkbox
+            Application.DoEvents();
+            var optionsPage = pnlMain.Controls[0] as mRemoteNG.UI.Forms.OptionsPages.OptionsPage;
+            Assert.That(optionsPage, Is.Not.Null, "First control in pnlMain should be an OptionsPage");
+            var checkBoxes = optionsPage.GetAllControls().OfType<CheckBox>().ToList();
+            Assert.That(checkBoxes.Count, Is.GreaterThan(0), "Options page should have at least one checkbox");
+            var checkBox = checkBoxes[0];
+            checkBox.Checked = !checkBox.Checked;
+            Application.DoEvents();
+            Assert.That(optionsPage.HasChanges, Is.True, "Toggling a checkbox should mark the page as having changes");
+        });
     }
 }

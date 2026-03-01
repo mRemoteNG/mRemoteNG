@@ -21,8 +21,10 @@ namespace mRemoteNG.UI.Window
         private ControlLayout _layout = ControlLayout.Vertical;
         private readonly ThemeManager _themeManager;
         private readonly DisplayProperties _display;
+        private readonly System.Collections.Generic.List<ListViewItem> _allItems = new();
+        private int _unreadCount;
 
-        public DockContent PreviousActiveForm { get; set; }
+        public DockContent? PreviousActiveForm { get; set; }
 
         public ErrorAndInfoWindow() : this(new DockContent())
         {
@@ -42,6 +44,7 @@ namespace mRemoteNG.UI.Window
             LayoutVertical();
             FillImageList();
             ApplyLanguage();
+            lvErrorCollector.Enter += LvErrorCollector_Enter;
         }
 
         #region Form Stuff
@@ -55,8 +58,21 @@ namespace mRemoteNG.UI.Window
             clmMessage.Text = Language.Message;
             cMenMCCopy.Text = Language.CopyAll;
             cMenMCDelete.Text = Language.DeleteAll;
-            TabText = Language.Notifications;
-            Text = Language.Notifications;
+            UpdateTabTitle();
+        }
+
+        private void UpdateTabTitle()
+        {
+            string baseTitle = Language.Notifications;
+            string title = _unreadCount > 0 ? $"{baseTitle} ({_unreadCount})" : baseTitle;
+            TabText = title;
+            Text = title;
+        }
+
+        private void LvErrorCollector_Enter(object? sender, EventArgs e)
+        {
+            _unreadCount = 0;
+            UpdateTabTitle();
         }
 
         #endregion
@@ -66,15 +82,16 @@ namespace mRemoteNG.UI.Window
         private new void ApplyTheme()
         {
             if (!_themeManager.ActiveAndExtended) return;
-            lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            var palette = _themeManager.ActiveTheme.ExtendedPalette!;
+            lvErrorCollector.BackColor = palette.getColor("TextBox_Background");
+            lvErrorCollector.ForeColor = palette.getColor("TextBox_Foreground");
 
-            pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            lblMsgDate.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            lblMsgDate.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlErrorMsg.BackColor = palette.getColor("Dialog_Background");
+            pnlErrorMsg.ForeColor = palette.getColor("Dialog_Foreground");
+            txtMsgText.BackColor = palette.getColor("TextBox_Background");
+            txtMsgText.ForeColor = palette.getColor("TextBox_Foreground");
+            lblMsgDate.BackColor = palette.getColor("Dialog_Background");
+            lblMsgDate.ForeColor = palette.getColor("Dialog_Foreground");
         }
 
         private void FillImageList()
@@ -90,14 +107,15 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
+                int toolbarHeight = tsFilter.Height;
                 pnlErrorMsg.Location = new Point(0, Height - _display.ScaleHeight(200));
                 pnlErrorMsg.Size = new Size(Width, Height - pnlErrorMsg.Top);
                 pnlErrorMsg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
                 txtMsgText.Size = new Size(
                                            pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8),
                                            pnlErrorMsg.Height - _display.ScaleHeight(20));
-                lvErrorCollector.Location = new Point(0, 0);
-                lvErrorCollector.Size = new Size(Width, Height - pnlErrorMsg.Height - _display.ScaleHeight(5));
+                lvErrorCollector.Location = new Point(0, toolbarHeight);
+                lvErrorCollector.Size = new Size(Width, Height - pnlErrorMsg.Height - toolbarHeight - _display.ScaleHeight(5));
                 lvErrorCollector.Anchor =
                     AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 
@@ -115,15 +133,16 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                pnlErrorMsg.Location = new Point(0, 0);
-                pnlErrorMsg.Size = new Size(_display.ScaleWidth(200), Height);
+                int toolbarHeight = tsFilter.Height;
+                pnlErrorMsg.Location = new Point(0, toolbarHeight);
+                pnlErrorMsg.Size = new Size(_display.ScaleWidth(200), Height - toolbarHeight);
                 pnlErrorMsg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top;
 
                 txtMsgText.Size = new Size(
                                            pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8),
                                            pnlErrorMsg.Height - _display.ScaleHeight(20));
-                lvErrorCollector.Location = new Point(pnlErrorMsg.Width + _display.ScaleWidth(5), 0);
-                lvErrorCollector.Size = new Size(Width - pnlErrorMsg.Width - _display.ScaleWidth(5), Height);
+                lvErrorCollector.Location = new Point(pnlErrorMsg.Width + _display.ScaleWidth(5), toolbarHeight);
+                lvErrorCollector.Size = new Size(Width - pnlErrorMsg.Width - _display.ScaleWidth(5), Height - toolbarHeight);
                 lvErrorCollector.Anchor =
                     AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 
@@ -166,11 +185,15 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                var palette = _themeManager.ActiveTheme.ExtendedPalette;
+                if (palette != null)
+                {
+                    pnlErrorMsg.BackColor = palette.getColor("Dialog_Background");
+                    txtMsgText.BackColor = palette.getColor("TextBox_Background");
+                    lblMsgDate.BackColor = palette.getColor("Dialog_Background");
+                }
                 pbError.Image = null;
-                txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
                 txtMsgText.Text = "";
-                lblMsgDate.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
                 lblMsgDate.Text = "";
             }
             catch (Exception ex)
@@ -192,11 +215,11 @@ namespace mRemoteNG.UI.Window
                     if (PreviousActiveForm != null)
                         PreviousActiveForm.Show(FrmMain.Default.pnlDock);
                     else
-                        AppWindows.TreeForm.Show(FrmMain.Default.pnlDock);
+                        AppWindows.TreeForm?.Show(FrmMain.Default.pnlDock);
                 }
                 catch (Exception)
                 {
-                    // ignored
+                    _ = 0; // ignored
                 }
             }
             catch (Exception ex)
@@ -217,27 +240,29 @@ namespace mRemoteNG.UI.Window
                     return;
                 }
 
-                ListViewItem sItem = lvErrorCollector.SelectedItems[0];
-                Message eMsg = (Message)sItem.Tag;
+                ListViewItem? sItem = lvErrorCollector.SelectedItems[0];
+                if (sItem?.Tag is not Message eMsg) return;
                 switch (eMsg.Class)
                 {
                     case MessageClass.DebugMsg:
                         pbError.Image = _display.ScaleImage(Properties.Resources.Test_16x);
-                        if (_themeManager.ThemingActive)
+                        if (_themeManager.ActiveAndExtended)
                         {
-                            pnlErrorMsg.BackColor = Color.LightSteelBlue;
-                            txtMsgText.BackColor = Color.LightSteelBlue;
-                            lblMsgDate.BackColor = Color.LightSteelBlue;
+                            var palette = _themeManager.ActiveTheme.ExtendedPalette!;
+                            pnlErrorMsg.BackColor = palette.getColor("Dialog_Background");
+                            txtMsgText.BackColor = palette.getColor("TextBox_Background");
+                            lblMsgDate.BackColor = palette.getColor("Dialog_Background");
                         }
 
                         break;
                     case MessageClass.InformationMsg:
                         pbError.Image = _display.ScaleImage(Properties.Resources.StatusInformation_16x);
-                        if (_themeManager.ThemingActive)
+                        if (_themeManager.ActiveAndExtended)
                         {
-                            pnlErrorMsg.BackColor = Color.LightSteelBlue;
-                            txtMsgText.BackColor = Color.LightSteelBlue;
-                            lblMsgDate.BackColor = Color.LightSteelBlue;
+                            var palette = _themeManager.ActiveTheme.ExtendedPalette!;
+                            pnlErrorMsg.BackColor = palette.getColor("Dialog_Background");
+                            txtMsgText.BackColor = palette.getColor("TextBox_Background");
+                            lblMsgDate.BackColor = palette.getColor("Dialog_Background");
                         }
 
                         break;
@@ -246,18 +271,13 @@ namespace mRemoteNG.UI.Window
                         if (_themeManager.ActiveAndExtended)
                         {
                             //Inverse colors for dramatic effect
-                            pnlErrorMsg.BackColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
-                            pnlErrorMsg.ForeColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
-                            txtMsgText.BackColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
-                            txtMsgText.ForeColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
-                            lblMsgDate.BackColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
-                            lblMsgDate.ForeColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
+                            var palette = _themeManager.ActiveTheme.ExtendedPalette!;
+                            pnlErrorMsg.BackColor = palette.getColor("WarningText_Foreground");
+                            pnlErrorMsg.ForeColor = palette.getColor("WarningText_Background");
+                            txtMsgText.BackColor = palette.getColor("WarningText_Foreground");
+                            txtMsgText.ForeColor = palette.getColor("WarningText_Background");
+                            lblMsgDate.BackColor = palette.getColor("WarningText_Foreground");
+                            lblMsgDate.ForeColor = palette.getColor("WarningText_Background");
                         }
 
                         break;
@@ -265,18 +285,13 @@ namespace mRemoteNG.UI.Window
                         pbError.Image = _display.ScaleImage(Properties.Resources.LogError_16x);
                         if (_themeManager.ActiveAndExtended)
                         {
-                            pnlErrorMsg.BackColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
-                            pnlErrorMsg.ForeColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
-                            txtMsgText.BackColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
-                            txtMsgText.ForeColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
-                            lblMsgDate.BackColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
-                            lblMsgDate.ForeColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
+                            var palette = _themeManager.ActiveTheme.ExtendedPalette!;
+                            pnlErrorMsg.BackColor = palette.getColor("ErrorText_Foreground");
+                            pnlErrorMsg.ForeColor = palette.getColor("ErrorText_Background");
+                            txtMsgText.BackColor = palette.getColor("ErrorText_Foreground");
+                            txtMsgText.ForeColor = palette.getColor("ErrorText_Background");
+                            lblMsgDate.BackColor = palette.getColor("ErrorText_Foreground");
+                            lblMsgDate.ForeColor = palette.getColor("ErrorText_Background");
                         }
 
                         break;
@@ -385,11 +400,17 @@ namespace mRemoteNG.UI.Window
 
                 if (lvErrorCollector.SelectedItems.Count > 0)
                 {
-                    foreach (ListViewItem item in lvErrorCollector.SelectedItems)
+                    var selected = new ListViewItem[lvErrorCollector.SelectedItems.Count];
+                    lvErrorCollector.SelectedItems.CopyTo(selected, 0);
+                    foreach (ListViewItem item in selected)
+                    {
+                        _allItems.Remove(item);
                         item.Remove();
+                    }
                 }
                 else
                 {
+                    _allItems.Clear();
                     lvErrorCollector.Items.Clear();
                 }
 
@@ -398,6 +419,9 @@ namespace mRemoteNG.UI.Window
                     pbError.Visible = false;
                     txtMsgText.Visible = false;
                 }
+
+                _unreadCount = 0;
+                UpdateTabTitle();
             }
             catch (Exception ex)
             {
@@ -409,6 +433,66 @@ namespace mRemoteNG.UI.Window
             {
                 lvErrorCollector.EndUpdate();
             }
+        }
+
+        public void AddMessage(ListViewItem item)
+        {
+            _allItems.Insert(0, item);
+
+            string filterText = tstbSearch.Text;
+            if (string.IsNullOrEmpty(filterText) ||
+                item.Text.Contains(filterText, StringComparison.OrdinalIgnoreCase))
+            {
+                lvErrorCollector.Items.Insert(0, item);
+            }
+
+            if (lvErrorCollector.Items.Count > 0)
+                pbError.Visible = true;
+
+            if (!lvErrorCollector.Focused)
+            {
+                _unreadCount++;
+                UpdateTabTitle();
+            }
+        }
+
+        private void ApplyFilter()
+        {
+            lvErrorCollector.BeginUpdate();
+            lvErrorCollector.Items.Clear();
+
+            string filterText = tstbSearch.Text;
+            foreach (var item in _allItems)
+            {
+                if (string.IsNullOrEmpty(filterText) ||
+                    item.Text.Contains(filterText, StringComparison.OrdinalIgnoreCase))
+                {
+                    lvErrorCollector.Items.Add(item);
+                }
+            }
+
+            lvErrorCollector.EndUpdate();
+            pbError.Visible = lvErrorCollector.Items.Count > 0;
+            tsbSearch.Checked = !string.IsNullOrEmpty(filterText);
+        }
+
+        private void tsbSearch_Click(object sender, EventArgs e)
+        {
+            tstbSearch.Visible = tsbSearch.Checked;
+            if (!tsbSearch.Checked)
+            {
+                tstbSearch.Text = string.Empty;
+                ApplyFilter();
+            }
+            else
+            {
+                tstbSearch.Focus();
+            }
+        }
+
+        private void tstbSearch_TextChanged(object sender, EventArgs e)
+        {
+            ApplyFilter();
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.DirectoryServices;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using mRemoteNG.App;
 using mRemoteNG.Config.Import;
@@ -18,47 +19,8 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
     [SupportedOSPlatform("windows")]
     public class ActiveDirectoryDeserializer(string ldapPath, bool importSubOu)
     {
-        private readonly string _ldapPath = SanitizeLdapPath(ldapPath.ThrowIfNullOrEmpty(nameof(ldapPath)));
+        private readonly string _ldapPath = LdapPathSanitizer.SanitizeLdapPath(ldapPath.ThrowIfNullOrEmpty(nameof(ldapPath)));
         private readonly bool _importSubOu = importSubOu;
-
-        private static string SanitizeLdapPath(string ldapPath)
-        {
-            // Validate the LDAP path format
-            if (!LdapPathSanitizer.IsValidDistinguishedNameFormat(ldapPath))
-            {
-                throw new ArgumentException("Invalid LDAP path format", nameof(ldapPath));
-            }
-
-            // For LDAP paths (URIs like LDAP://...), we need to sanitize the DN portion
-            // If it starts with LDAP:// or LDAPS://, extract and sanitize the DN part
-            if (ldapPath.StartsWith("LDAP://", StringComparison.OrdinalIgnoreCase) ||
-                ldapPath.StartsWith("LDAPS://", StringComparison.OrdinalIgnoreCase))
-            {
-                int schemeEndIndex = ldapPath.IndexOf("://", StringComparison.OrdinalIgnoreCase) + 3;
-                if (schemeEndIndex < ldapPath.Length)
-                {
-                    // Find the server/domain part (before the first /)
-                    int pathStartIndex = ldapPath.IndexOf('/', schemeEndIndex);
-                    if (pathStartIndex > 0)
-                    {
-                        string scheme = ldapPath.Substring(0, schemeEndIndex);
-                        string serverPart = ldapPath.Substring(schemeEndIndex, pathStartIndex - schemeEndIndex);
-                        string dnPart = ldapPath.Substring(pathStartIndex + 1);
-                        
-                        // Sanitize the DN part
-                        string sanitizedDn = LdapPathSanitizer.SanitizeDistinguishedName(dnPart);
-                        return scheme + serverPart + "/" + sanitizedDn;
-                    }
-                }
-                // If no DN part found, return the path as-is (just the server)
-                return ldapPath;
-            }
-            else
-            {
-                // For plain DN strings, sanitize directly
-                return LdapPathSanitizer.SanitizeDistinguishedName(ldapPath);
-            }
-        }
 
         public ConnectionTreeModel Deserialize()
         {
@@ -92,6 +54,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                     ldapSearcher.SearchRoot = new DirectoryEntry(ldapPath);
                     ldapSearcher.Filter = ldapFilter;
                     ldapSearcher.SearchScope = SearchScope.OneLevel;
+                    ldapSearcher.PageSize = 1000;
                     ldapSearcher.PropertiesToLoad.AddRange(new[] {"securityEquals", "cn", "objectClass"});
 
                     SearchResultCollection ldapResults = ldapSearcher.FindAll();
@@ -120,11 +83,11 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             }
         }
 
-        private void DeserializeConnection(DirectoryEntry directoryEntry, ContainerInfo parentContainer)
+        private static void DeserializeConnection(DirectoryEntry directoryEntry, ContainerInfo parentContainer)
         {
-            string displayName = Convert.ToString(directoryEntry.Properties["cn"].Value);
-            string description = Convert.ToString(directoryEntry.Properties["Description"].Value);
-            string hostName = Convert.ToString(directoryEntry.Properties["dNSHostName"].Value);
+            string displayName = Convert.ToString(directoryEntry.Properties["cn"].Value, CultureInfo.InvariantCulture) ?? string.Empty;
+            string description = Convert.ToString(directoryEntry.Properties["Description"].Value, CultureInfo.InvariantCulture) ?? string.Empty;
+            string hostName = Convert.ToString(directoryEntry.Properties["dNSHostName"].Value, CultureInfo.InvariantCulture) ?? string.Empty;
 
             ConnectionInfo newConnectionInfo = new()
             {

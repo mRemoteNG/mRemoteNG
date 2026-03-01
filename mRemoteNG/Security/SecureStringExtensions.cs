@@ -16,14 +16,13 @@ namespace mRemoteNG.Security
         /// <returns></returns>
         public static string ConvertToUnsecureString(this SecureString securePassword)
         {
-            if (securePassword == null)
-                throw new ArgumentNullException(nameof(securePassword));
+            ArgumentNullException.ThrowIfNull(securePassword);
 
             IntPtr unmanagedString = IntPtr.Zero;
             try
             {
                 unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(securePassword);
-                return Marshal.PtrToStringUni(unmanagedString);
+                return Marshal.PtrToStringUni(unmanagedString)!;
             }
             finally
             {
@@ -33,14 +32,11 @@ namespace mRemoteNG.Security
 
         public static SecureString ConvertToSecureString(this string unsecuredPassword)
         {
-            if (unsecuredPassword == null)
-                throw new ArgumentNullException(nameof(unsecuredPassword));
+            ArgumentNullException.ThrowIfNull(unsecuredPassword);
 
             SecureString secureString = new();
-            foreach (char character in unsecuredPassword.ToCharArray())
+            foreach (char character in unsecuredPassword)
                 secureString.AppendChar(character);
-            // ReSharper disable once RedundantAssignment
-            unsecuredPassword = null;
             return secureString;
         }
 

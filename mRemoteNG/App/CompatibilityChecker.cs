@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using mRemoteNG.App.Info;
@@ -23,6 +25,15 @@ namespace mRemoteNG.App
 
         private static void CheckFipsPolicy(MessageCollector messageCollector)
         {
+            // .NET 5+ uses CNG crypto implementations that are FIPS-validated.
+            // The legacy FIPS warning only applied to .NET Framework's managed implementations
+            // (e.g. RijndaelManaged, MD5CryptoServiceProvider) which are no longer used.
+            if (Environment.Version.Major >= 5)
+            {
+                messageCollector.AddMessage(MessageClass.InformationMsg, "FIPS check skipped: .NET 5+ uses FIPS-validated CNG implementations", true);
+                return;
+            }
+
             if (Settings.Default.OverrideFIPSCheck)
             {
                 messageCollector.AddMessage(MessageClass.InformationMsg, "OverrideFIPSCheck is set. Will skip check", true);
@@ -35,13 +46,32 @@ namespace mRemoteNG.App
 
             if (!FipsPolicyEnabledForServer2003() && !FipsPolicyEnabledForServer2008AndNewer()) return;
 
-            string errorText = string.Format(Language.ErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName);
+            string errorText = string.Format(CultureInfo.CurrentCulture, Language.ErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName);
             messageCollector.AddMessage(MessageClass.ErrorMsg, errorText, true);
 
             //About to pop up a message, let's not block it...
-            FrmSplashScreenNew.GetInstance().Close();
+            try
+            {
+                var splash = FrmSplashScreenNew.GetInstance();
+                if (!splash.Dispatcher.HasShutdownStarted)
+                    splash.Dispatcher.Invoke(() => { splash.Close(); splash.Dispatcher.InvokeShutdown(); });
+            }
+            catch (TaskCanceledException)
 
-            DialogResult ShouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName, Language.CompatibilityProblemDetected, errorText, "", "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.OkCancel, ESysIcons.Warning, ESysIcons.Warning);
+            {
+
+                _ = 0; // Intentionally empty
+
+            }
+            catch (OperationCanceledException)
+
+            {
+
+                _ = 0; // Intentionally empty
+
+            }
+
+            DialogResult ShouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName ?? string.Empty, Language.CompatibilityProblemDetected, errorText, "", "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.OkCancel, ESysIcons.Warning, ESysIcons.Warning);
             if (CTaskDialog.VerificationChecked && ShouldIStayOrShouldIGo == DialogResult.OK)
             {
                 messageCollector.AddMessage(MessageClass.ErrorMsg, "User requests that FIPS check be overridden", true);
@@ -56,7 +86,7 @@ namespace mRemoteNG.App
 
         private static bool FipsPolicyEnabledForServer2003()
         {
-            RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Lsa");
+            RegistryKey? regKey = Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Lsa");
             if (!(regKey?.GetValue("FIPSAlgorithmPolicy") is int fipsPolicy))
                 return false;
             return fipsPolicy != 0;
@@ -64,7 +94,7 @@ namespace mRemoteNG.App
 
         private static bool FipsPolicyEnabledForServer2008AndNewer()
         {
-            RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy");
+            RegistryKey? regKey = Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy");
             if (!(regKey?.GetValue("Enabled") is int fipsPolicy))
                 return false;
             return fipsPolicy != 0;
@@ -77,7 +107,7 @@ namespace mRemoteNG.App
             if (!Settings.Default.CompatibilityWarnLenovoAutoScrollUtility)
                 return;
 
-            Process[] proccesses = new Process[] { };
+            Process[] proccesses = Array.Empty<Process>();
             try
             {
                 proccesses = Process.GetProcessesByName("virtscrl");
@@ -95,8 +125,8 @@ namespace mRemoteNG.App
 
             messageCollector.AddMessage(MessageClass.WarningMsg, "Lenovo AutoScroll Utility found", true);
 
-            CTaskDialog.MessageBox(Application.ProductName, Language.CompatibilityProblemDetected,
-                                   string.Format(Language.CompatibilityLenovoAutoScrollUtilityDetected,
+            CTaskDialog.MessageBox(Application.ProductName ?? string.Empty, Language.CompatibilityProblemDetected,
+                                   string.Format(CultureInfo.CurrentCulture, Language.CompatibilityLenovoAutoScrollUtilityDetected,
                                                  Application.ProductName), "",
                                    "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.Ok,
                                    ESysIcons.Warning,

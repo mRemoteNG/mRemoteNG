@@ -1,4 +1,9 @@
-﻿namespace mRemoteNG.Config.Settings
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("mRemoteNGTests")]
+[assembly: InternalsVisibleTo("mRemoteNGSpecs")]
+
+namespace mRemoteNG.Config.Settings
 {
     // This class allows you to handle specific events on the settings class:
     //  The SettingChanging event is raised before a setting's value is changed.

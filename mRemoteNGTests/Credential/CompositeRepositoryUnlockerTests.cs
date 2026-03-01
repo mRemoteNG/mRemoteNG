@@ -93,7 +93,7 @@ namespace mRemoteNGTests.Credential
             Assert.That(repositoryUnlocker.SelectedRepository, Is.EqualTo(repo[0]));
         }
 
-        private IList<ICredentialRepository> BuildRepos(int count)
+        private static IList<ICredentialRepository> BuildRepos(int count)
         {
             var list = new List<ICredentialRepository>();
             for (var i=0; i < count; i++)

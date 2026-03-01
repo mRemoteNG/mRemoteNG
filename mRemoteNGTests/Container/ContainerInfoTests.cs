@@ -363,6 +363,59 @@ namespace mRemoteNGTests.Container
         }
 
         [Test]
+        public void AddChildAutomaticallySortsWhenAutoSortEnabled()
+        {
+            _containerInfo.AutoSort = true;
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con3);
+            var orderAfterSort = _containerInfo.Children.ToArray();
+            Assert.That(orderAfterSort, Is.Ordered.Ascending.By(nameof(ConnectionInfo.Name)));
+        }
+
+        [Test]
+        public void RenamingChildAutomaticallySortsWhenAutoSortEnabled()
+        {
+            _containerInfo.AutoSort = true;
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con2);
+
+            _con2.Name = "0";
+
+            Assert.That(_containerInfo.Children[0], Is.EqualTo(_con2));
+        }
+
+        [Test]
+        public void SetChildPositionAutomaticallyResortsWhenAutoSortEnabled()
+        {
+            _containerInfo.AutoSort = true;
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con3);
+
+            _containerInfo.SetChildPosition(_con3, 0);
+
+            var orderAfterSort = _containerInfo.Children.ToArray();
+            Assert.That(orderAfterSort, Is.Ordered.Ascending.By(nameof(ConnectionInfo.Name)));
+        }
+
+        [Test]
+        public void AutoSortCanBeInheritedByChildContainer()
+        {
+            var parentContainer = new ContainerInfo { AutoSort = true };
+            var childContainer = new ContainerInfo();
+            childContainer.Inheritance.AutoSort = true;
+            parentContainer.AddChild(childContainer);
+
+            Assert.That(childContainer.AutoSort, Is.True);
+
+            childContainer.AddChild(new ConnectionInfo { Name = "z" });
+            childContainer.AddChild(new ConnectionInfo { Name = "a" });
+            var orderAfterSort = childContainer.Children.ToArray();
+            Assert.That(orderAfterSort, Is.Ordered.Ascending.By(nameof(ConnectionInfo.Name)));
+        }
+
+        [Test]
         public void SortOnConstantIdAscendingSortsCorrectly()
         {
             _containerInfo.AddChild(_con2);

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace mRemoteNGTests.TestHelpers
@@ -15,6 +16,19 @@ namespace mRemoteNGTests.TestHelpers
         public static T FindControl<T>(this Form form, string name) where T : Control
         {
             return form.Controls.Find(name, true).SingleOrDefault() as T;
+        }
+
+        /// <summary>
+        /// Recursively gets all child controls of a control.
+        /// </summary>
+        public static IEnumerable<Control> GetAllControls(this Control control)
+        {
+            foreach (Control child in control.Controls)
+            {
+                yield return child;
+                foreach (var grandChild in child.GetAllControls())
+                    yield return grandChild;
+            }
         }
     }
 }

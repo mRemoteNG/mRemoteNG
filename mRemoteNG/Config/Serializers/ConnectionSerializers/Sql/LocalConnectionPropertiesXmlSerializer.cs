@@ -39,7 +39,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                    .Where(e => e.Attribute("ConnectionId") != null)
                    .Select(e => new LocalConnectionPropertiesModel
                    {
-                       ConnectionId = e.Attribute("ConnectionId")?.Value,
+                       ConnectionId = e.Attribute("ConnectionId")?.Value ?? string.Empty,
                        Connected = bool.Parse(e.Attribute("Connected")?.Value ?? "False"),
                        Expanded = bool.Parse(e.Attribute("Expanded")?.Value ?? "False"),
                        Favorite = bool.Parse(e.Attribute("Favorite")?.Value ?? "False")

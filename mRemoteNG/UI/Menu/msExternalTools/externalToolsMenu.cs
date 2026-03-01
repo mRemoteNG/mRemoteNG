@@ -26,7 +26,7 @@ namespace mRemoteNG.UI.Menu.msExternalTools
             Initialize();
         }
 
-        private void Initialize()
+        private static void Initialize()
         {
         }
     }

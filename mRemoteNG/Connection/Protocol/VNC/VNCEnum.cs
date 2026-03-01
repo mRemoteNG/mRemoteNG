@@ -60,6 +60,9 @@ namespace mRemoteNG.Connection.Protocol.VNC
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Http))]
         ProxyHTTP,
 
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Socks4))]
+        ProxySocks4,
+
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Socks5))]
         ProxySocks5,
 
@@ -70,8 +73,10 @@ namespace mRemoteNG.Connection.Protocol.VNC
     public enum Colors
     {
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Normal))]
-        ColNormal,
-        [Description("8-bit")] Col8Bit
+        ColNormal = 0,
+        [Description("8-bit")] Col8Bit = 8,
+        [Description("16-bit")] Col16Bit = 16,
+        [Description("32-bit")] Col32Bit = 32
     }
 
     public enum SmartSizeMode

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -19,7 +20,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     public sealed partial class SecurityPage : OptionsPage
     {
         #region Private Fields
-        private OptRegistrySecurityPage pageRegSettingsInstance;
+        private OptRegistrySecurityPage? pageRegSettingsInstance;
 
         private readonly Timer clipboardClearTimer = new() { Interval = 1000 };
         private const int clipboardClearSeconds = 30;
@@ -57,17 +58,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void LoadSettings()
         {
             chkEncryptCompleteFile.Checked = Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile;
-            comboBoxEncryptionEngine.Text = Enum.GetName(typeof(BlockCipherEngines), Properties.OptionsSecurityPage.Default.EncryptionEngine);
+            comboBoxEncryptionEngine.Text = Enum.GetName<BlockCipherEngines>(Properties.OptionsSecurityPage.Default.EncryptionEngine);
             comboBoxBlockCipher.Text =
-                Enum.GetName(typeof(BlockCipherModes), Properties.OptionsSecurityPage.Default.EncryptionBlockCipherMode);
+                Enum.GetName<BlockCipherModes>(Properties.OptionsSecurityPage.Default.EncryptionBlockCipherMode);
             numberBoxKdfIterations.Value = Properties.OptionsSecurityPage.Default.EncryptionKeyDerivationIterations;
         }
 
         public override void SaveSettings()
         {
             Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile = chkEncryptCompleteFile.Checked;
-            Properties.OptionsSecurityPage.Default.EncryptionEngine = (BlockCipherEngines)comboBoxEncryptionEngine.SelectedItem;
-            Properties.OptionsSecurityPage.Default.EncryptionBlockCipherMode = (BlockCipherModes)comboBoxBlockCipher.SelectedItem;
+            if (comboBoxEncryptionEngine.SelectedItem is BlockCipherEngines engine)
+                Properties.OptionsSecurityPage.Default.EncryptionEngine = engine;
+            if (comboBoxBlockCipher.SelectedItem is BlockCipherModes mode)
+                Properties.OptionsSecurityPage.Default.EncryptionBlockCipherMode = mode;
             Properties.OptionsSecurityPage.Default.EncryptionKeyDerivationIterations = (int)numberBoxKdfIterations.Value;
         }
 
@@ -107,10 +110,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private bool ShowRegistrySettingsUsedInfo()
         {
-            return pageRegSettingsInstance.EncryptCompleteConnectionsFile.IsSet
+            return pageRegSettingsInstance != null
+                && (pageRegSettingsInstance.EncryptCompleteConnectionsFile.IsSet
                 || pageRegSettingsInstance.EncryptionEngine.IsSet
                 || pageRegSettingsInstance.EncryptionBlockCipherMode.IsSet
-                || pageRegSettingsInstance.EncryptionKeyDerivationIterations.IsSet;
+                || pageRegSettingsInstance.EncryptionKeyDerivationIterations.IsSet);
         }
 
         public override void RevertSettings()
@@ -119,27 +123,27 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void PopulateEncryptionEngineDropDown()
         {
-            comboBoxEncryptionEngine.DataSource = Enum.GetValues(typeof(BlockCipherEngines));
+            comboBoxEncryptionEngine.DataSource = Enum.GetValues<BlockCipherEngines>();
         }
 
         private void PopulateBlockCipherDropDown()
         {
-            comboBoxBlockCipher.DataSource = Enum.GetValues(typeof(BlockCipherModes));
+            comboBoxBlockCipher.DataSource = Enum.GetValues<BlockCipherModes>();
         }
 
         private void BtnTestSettings_Click(object sender, EventArgs e)
         {
-            Tree.ConnectionTreeModel connectionTree = Runtime.ConnectionsService.ConnectionTreeModel;
-            if (!connectionTree.RootNodes.Any())
+            Tree.ConnectionTreeModel? connectionTree = Runtime.ConnectionsService.ConnectionTreeModel;
+            if (connectionTree == null || !connectionTree.RootNodes.Any())
                 return;
 
-            BlockCipherEngines engine = (BlockCipherEngines)comboBoxEncryptionEngine.SelectedItem;
-            BlockCipherModes mode = (BlockCipherModes)comboBoxBlockCipher.SelectedItem;
+            if (comboBoxEncryptionEngine.SelectedItem is not BlockCipherEngines engine
+                || comboBoxBlockCipher.SelectedItem is not BlockCipherModes mode)
+                return;
             ICryptographyProvider cryptographyProvider = new CryptoProviderFactory(engine, mode).Build();
             cryptographyProvider.KeyDerivationIterations = (int)numberBoxKdfIterations.Value;
 
-            XmlConnectionSerializerFactory serializerFactory = new();
-            Config.Serializers.ISerializer<Connection.ConnectionInfo, string> serializer = serializerFactory.Build(cryptographyProvider, connectionTree, useFullEncryption: chkEncryptCompleteFile.Checked);
+            Config.Serializers.ISerializer<Connection.ConnectionInfo, string> serializer = XmlConnectionSerializerFactory.Build(cryptographyProvider, connectionTree, useFullEncryption: chkEncryptCompleteFile.Checked);
             int nodeCount = connectionTree.GetRecursiveChildList().Count;
 
             Stopwatch timer = Stopwatch.StartNew();
@@ -148,7 +152,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             timer.Stop();
 
             MessageBox.Show(this,
-                string.Format(Language.EncryptionTestResultMessage,
+                string.Format(CultureInfo.CurrentCulture, Language.EncryptionTestResultMessage,
                 nodeCount, engine, mode, numberBoxKdfIterations.Value, timer.Elapsed.TotalSeconds),
                 Language.EncryptionTest,
                 MessageBoxButtons.OK,

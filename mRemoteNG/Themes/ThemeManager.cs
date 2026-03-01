@@ -1,4 +1,5 @@
 ﻿using mRemoteNG.App;
+using Microsoft.Win32;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
 using WeifenLuo.WinFormsUI.Docking;
@@ -13,19 +15,25 @@ using System.Runtime.Versioning;
 
 namespace mRemoteNG.Themes
 {
-    [SupportedOSPlatform("windows")]
     /// <summary>
-    /// Main class of the theming component. Centralizes creation, loading and deletion of themes
-    /// Implemented as a singleton
+    /// Singleton manager for the theming subsystem. Centralizes loading, creation,
+    /// deletion, and live switching of visual themes. Themes are stored as
+    /// <c>.vstheme</c> XML files and can be either built-in (VS2015 Light/Dark/Blue)
+    /// or user-created extensions. Fires <see cref="ThemeChanged"/> events to notify
+    /// all subscribed UI components to refresh their appearance.
+    /// As of v1.80.0, theme changes are applied live without requiring a restart.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class ThemeManager
     {
         #region Private Variables
 
-        private ThemeInfo _activeTheme;
-        private Hashtable themes;
+        private ThemeInfo _activeTheme = null!;
+        private ThemeInfo? _highContrastTheme;
+        private bool _highContrastActive;
+        private Hashtable themes = null!;
         private bool _themeActive;
-        private static ThemeManager themeInstance;
+        private static ThemeManager? themeInstance;
         private readonly string themePath = App.Info.SettingsFileInfo.ThemeFolder;
 
         #endregion
@@ -34,15 +42,32 @@ namespace mRemoteNG.Themes
 
         private ThemeManager()
         {
+            _highContrastActive = SystemInformation.HighContrast;
+            SystemEvents.UserPreferenceChanged += OnUserPreferenceChanged;
+
             LoadThemes();
             SetActive();
             _themeActive = true;
         }
 
+        private void OnUserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+        {
+            if (e.Category == UserPreferenceCategory.Accessibility || e.Category == UserPreferenceCategory.Color)
+            {
+                bool newState = SystemInformation.HighContrast;
+                if (_highContrastActive != newState)
+                {
+                    _highContrastActive = newState;
+                    NotifyThemeChanged(this, new PropertyChangedEventArgs("HighContrast"));
+                }
+            }
+        }
+
         private void SetActive()
         {
-            if (themes[Properties.OptionsThemePage.Default.ThemeName] != null)
-                ActiveTheme = (ThemeInfo)themes[Properties.OptionsThemePage.Default.ThemeName];
+            var themeName = Properties.OptionsThemePage.Default.ThemeName;
+            if (themeName != null && themes[themeName] is ThemeInfo savedTheme)
+                ActiveTheme = savedTheme;
             else
             {
                 ActiveTheme = DefaultTheme;
@@ -66,11 +91,9 @@ namespace mRemoteNG.Themes
         }
 
 
-        public ThemeInfo getTheme(string themeName)
+        public ThemeInfo? getTheme(string themeName)
         {
-            if (themes[themeName] != null)
-                return (ThemeInfo)themes[themeName];
-            return null;
+            return themes[themeName] as ThemeInfo;
         }
 
         private bool ThemeDirExists()
@@ -103,7 +126,7 @@ namespace mRemoteNG.Themes
             return false;
         }
 
-        private ThemeInfo LoadDefaultTheme()
+        private ThemeInfo? LoadDefaultTheme()
         {
             try
             {
@@ -135,7 +158,7 @@ namespace mRemoteNG.Themes
         }
 
         //The manager precharges all the themes at once
-        public List<ThemeInfo> LoadThemes()
+        public IList<ThemeInfo> LoadThemes()
         {
             if (themes != null) return themes.Values.OfType<ThemeInfo>().ToList();
             themes = [];
@@ -149,19 +172,20 @@ namespace mRemoteNG.Themes
                     string[] themeFiles = Directory.GetFiles(themePath, "*.vstheme");
 
                     //First we load the default base theme, its vs2015lightNG
-                    ThemeInfo defaultTheme = LoadDefaultTheme();
+                    ThemeInfo? defaultTheme = LoadDefaultTheme();
+                    if (defaultTheme?.Name == null) return themes.Values.OfType<ThemeInfo>().ToList();
                     themes.Add(defaultTheme.Name, defaultTheme);
                     //Then the rest
                     foreach (string themeFile in themeFiles)
                     {
                         // Skip the default theme here, since it will get loaded again without the *NG below...
-                        if (themeFile.Contains("vs2015light.vstheme")) continue;
+                        if (themeFile.Contains("vs2015light.vstheme", StringComparison.Ordinal)) continue;
                         //filter default one
                         ThemeInfo extTheme = ThemeSerializer.LoadFromXmlFile(themeFile, defaultTheme);
-                        if (extTheme.Theme == null || themes.ContainsKey(extTheme.Name)) continue;
+                        if (extTheme.Theme == null || extTheme.Name == null || themes.ContainsKey(extTheme.Name)) continue;
 
-                        if (extTheme.Name.Equals("darcula") || extTheme.Name.Equals("vs2015blue") ||
-                            extTheme.Name.Equals("vs2015dark"))
+                        if (extTheme.Name.Equals("darcula", StringComparison.Ordinal) || extTheme.Name.Equals("vs2015blue", StringComparison.Ordinal) ||
+                            extTheme.Name.Equals("vs2015dark", StringComparison.Ordinal))
                             extTheme.Name = $"{extTheme.Name}NG";
 
                         themes.Add(extTheme.Name, extTheme);
@@ -170,12 +194,25 @@ namespace mRemoteNG.Themes
                     //Load the embedded themes, extended palettes are taken from the vs2015 themes, trying to match the color theme
 
                     // 2015
-                    ThemeInfo vs2015Light = new("vs2015Light", new VS2015LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)themes["vs2015lightNG"]).ExtendedPalette);
-                    themes.Add(vs2015Light.Name, vs2015Light);
-                    ThemeInfo vs2015Dark = new("vs2015Dark", new VS2015DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)themes["vs2015darkNG"]).ExtendedPalette);
-                    themes.Add(vs2015Dark.Name, vs2015Dark);
-                    ThemeInfo vs2015Blue = new("vs2015Blue", new VS2015BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)themes["vs2015blueNG"]).ExtendedPalette);
-                    themes.Add(vs2015Blue.Name, vs2015Blue);
+                    var lightNG = themes["vs2015lightNG"] as ThemeInfo;
+                    var darkNG = themes["vs2015darkNG"] as ThemeInfo;
+                    var blueNG = themes["vs2015blueNG"] as ThemeInfo;
+
+                    if (lightNG != null)
+                    {
+                        ThemeInfo vs2015Light = new("vs2015Light", lightNG.Theme, "", VisualStudioToolStripExtender.VsVersion.Vs2015, lightNG.ExtendedPalette);
+                        themes.Add(vs2015Light.Name!, vs2015Light);
+                    }
+                    if (darkNG != null)
+                    {
+                        ThemeInfo vs2015Dark = new("vs2015Dark", darkNG.Theme, "", VisualStudioToolStripExtender.VsVersion.Vs2015, darkNG.ExtendedPalette);
+                        themes.Add(vs2015Dark.Name!, vs2015Dark);
+                    }
+                    if (blueNG != null)
+                    {
+                        ThemeInfo vs2015Blue = new("vs2015Blue", blueNG.Theme, "", VisualStudioToolStripExtender.VsVersion.Vs2015, blueNG.ExtendedPalette);
+                        themes.Add(vs2015Blue.Name!, vs2015Blue);
+                    }
                 }
             }
             catch (Exception ex)
@@ -192,14 +229,25 @@ namespace mRemoteNG.Themes
         /// <param name="baseTheme"></param>
         /// <param name="newThemeName"></param>
         /// <returns></returns>
-        public ThemeInfo addTheme(ThemeInfo baseTheme, string newThemeName)
+        public ThemeInfo? addTheme(ThemeInfo baseTheme, string newThemeName)
         {
             if (themes.Contains(newThemeName)) return null;
+
+            // Embedded themes (vs2015Light/Dark/Blue) have empty URIs because they are built-in.
+            // Resolve the corresponding NG file-based variant to use as the copy template.
+            ThemeInfo fileBase = baseTheme;
+            if (string.IsNullOrEmpty(fileBase.URI) && baseTheme.Name != null)
+            {
+                string ngName = baseTheme.Name.ToLowerInvariant() + "NG";
+                if (themes[ngName] is ThemeInfo ngTheme && !string.IsNullOrEmpty(ngTheme.URI))
+                    fileBase = ngTheme;
+            }
+
             ThemeInfo modifiedTheme = (ThemeInfo)baseTheme.Clone();
             modifiedTheme.Name = newThemeName;
             modifiedTheme.IsExtendable = true;
             modifiedTheme.IsThemeBase = false;
-            ThemeSerializer.SaveToXmlFile(modifiedTheme, baseTheme);
+            ThemeSerializer.SaveToXmlFile(modifiedTheme, fileBase);
             themes.Add(newThemeName, modifiedTheme);
             return modifiedTheme;
         }
@@ -207,7 +255,7 @@ namespace mRemoteNG.Themes
         //Delete a theme from memory and disk
         public void deleteTheme(ThemeInfo themeToDelete)
         {
-            if (!themes.Contains(themeToDelete.Name)) return;
+            if (themeToDelete.Name == null || !themes.Contains(themeToDelete.Name)) return;
             if (ActiveTheme == themeToDelete)
                 ActiveTheme = DefaultTheme;
             themes.Remove(themeToDelete.Name);
@@ -215,7 +263,7 @@ namespace mRemoteNG.Themes
         }
 
         //Synchronize the theme XML values from memory to disk
-        public void updateTheme(ThemeInfo themeToUpdate)
+        public static void updateTheme(ThemeInfo themeToUpdate)
         {
             ThemeSerializer.UpdateThemeXMLValues(themeToUpdate);
         }
@@ -241,23 +289,31 @@ namespace mRemoteNG.Themes
 
         public delegate void ThemeChangedEventHandler();
 
-        private ThemeChangedEventHandler ThemeChangedEvent;
+        private ThemeChangedEventHandler? ThemeChangedEvent;
 
         public event ThemeChangedEventHandler ThemeChanged
         {
-            add => ThemeChangedEvent = (ThemeChangedEventHandler)Delegate.Combine(ThemeChangedEvent, value);
-            remove => ThemeChangedEvent = (ThemeChangedEventHandler)Delegate.Remove(ThemeChangedEvent, value);
+            add => ThemeChangedEvent = (ThemeChangedEventHandler?)Delegate.Combine(ThemeChangedEvent, value);
+            remove => ThemeChangedEvent = (ThemeChangedEventHandler?)Delegate.Remove(ThemeChangedEvent, value);
         }
 
         // ReSharper disable once UnusedParameter.Local
         private void NotifyThemeChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Name")
+            if (string.Equals(e.PropertyName, "Name", StringComparison.Ordinal))
             {
                 return;
             }
 
-            ThemeChangedEvent?.Invoke();
+            try
+            {
+                ThemeChangedEvent?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                // Ensure we don't crash the whole app if one listener fails
+                Debug.WriteLine($"Error in ThemeChangedEvent: {ex.Message}");
+            }
         }
 
         #endregion
@@ -269,7 +325,7 @@ namespace mRemoteNG.Themes
             get => _themeActive;
             set
             {
-                if (themes.Count == 0) return;
+                if (themes == null || themes.Count == 0) return;
                 _themeActive = value;
                 Properties.OptionsThemePage.Default.ThemingActive = value;
                 NotifyThemeChanged(this, new PropertyChangedEventArgs(""));
@@ -277,32 +333,42 @@ namespace mRemoteNG.Themes
         }
 
         public ThemeInfo DefaultTheme =>
-            themes != null && ThemesCount > 0
-                ? (ThemeInfo)themes["vs2015Light"]
+            themes != null && themes.ContainsKey("vs2015Light") && themes["vs2015Light"] is ThemeInfo cached
+                ? cached
                 : new ThemeInfo("vs2015Light", new VS2015LightTheme(), "",
                                 VisualStudioToolStripExtender.VsVersion.Vs2015);
+
+        public ThemeInfo HighContrastTheme =>
+             _highContrastTheme ??= new ThemeInfo("HighContrast", new VS2005Theme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, false);
 
         public ThemeInfo ActiveTheme
         {
             // default if themes are not enabled
-            get => ThemingActive == false ? DefaultTheme : _activeTheme;
+            get
+            {
+                if (_highContrastActive) return HighContrastTheme;
+
+                if (!ThemingActive) return DefaultTheme;
+                return _activeTheme ?? DefaultTheme;
+            }
             set
             {
                 // You can only enable theming if there are themes loaded
                 // Default accordingly...
                 if (value == null)
                 {
-                    bool changed = !Properties.OptionsThemePage.Default.ThemeName.Equals(DefaultTheme.Name);
+                    if (_activeTheme != null && _activeTheme.Name == DefaultTheme.Name) return;
 
                     Properties.OptionsThemePage.Default.ThemeName = DefaultTheme.Name;
                     _activeTheme = DefaultTheme;
 
-                    if (changed)
-                        NotifyThemeChanged(this, new PropertyChangedEventArgs("theme"));
+                    NotifyThemeChanged(this, new PropertyChangedEventArgs("theme"));
 
                     Properties.OptionsThemePage.Default.Save();
                     return;
                 }
+
+                if (_activeTheme != null && string.Equals(_activeTheme.Name, value.Name, StringComparison.Ordinal)) return;
 
                 _activeTheme = value;
                 Properties.OptionsThemePage.Default.ThemeName = value.Name;

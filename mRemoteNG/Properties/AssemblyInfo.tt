@@ -25,9 +25,9 @@ using System.Resources;
 // Compute version values
 <#
     int major = 1;
-    int minor = 78;
+    int minor = 80;
     int revision = 2;
-    string channel = "Nightly Build";
+    string channel = "Release";
     DateTime lastReleaseDate = new DateTime(2019, 9, 2);
     TimeSpan elapsed = DateTime.UtcNow - lastReleaseDate;
     int build = (int)(elapsed.TotalMinutes / 1000);

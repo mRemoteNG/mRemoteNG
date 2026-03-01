@@ -1,5 +1,6 @@
 ﻿using mRemoteNG.App;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 using mRemoteNG.Tools;
@@ -18,26 +19,26 @@ namespace mRemoteNG.UI.Window
     {
         #region Form Init
 
-        private MrngProgressBar pbStatus;
-        private MrngButton btnTransfer;
-        private MrngTextBox txtUser;
-        private MrngTextBox txtPassword;
-        private MrngTextBox txtHost;
-        private MrngTextBox txtPort;
-        private MrngLabel lblHost;
-        private MrngLabel lblPort;
-        private MrngLabel lblUser;
-        private MrngLabel lblPassword;
-        private MrngLabel lblProtocol;
-        private MrngRadioButton radProtSCP;
-        private MrngRadioButton radProtSFTP;
-        private MrngGroupBox grpConnection;
-        private MrngButton btnBrowse;
-        private MrngLabel lblRemoteFile;
-        private MrngTextBox txtRemoteFile;
-        private MrngTextBox txtLocalFile;
-        private MrngLabel lblLocalFile;
-        private MrngGroupBox grpFiles;
+        private MrngProgressBar pbStatus = null!;
+        private MrngButton btnTransfer = null!;
+        private MrngTextBox txtUser = null!;
+        private MrngTextBox txtPassword = null!;
+        private MrngTextBox txtHost = null!;
+        private MrngTextBox txtPort = null!;
+        private MrngLabel lblHost = null!;
+        private MrngLabel lblPort = null!;
+        private MrngLabel lblUser = null!;
+        private MrngLabel lblPassword = null!;
+        private MrngLabel lblProtocol = null!;
+        private MrngRadioButton radProtSCP = null!;
+        private MrngRadioButton radProtSFTP = null!;
+        private MrngGroupBox grpConnection = null!;
+        private MrngButton btnBrowse = null!;
+        private MrngLabel lblRemoteFile = null!;
+        private MrngTextBox txtRemoteFile = null!;
+        private MrngTextBox txtLocalFile = null!;
+        private MrngLabel lblLocalFile = null!;
+        private MrngGroupBox grpFiles = null!;
 
         private void InitializeComponent()
         {
@@ -353,7 +354,8 @@ namespace mRemoteNG.UI.Window
             ApplyLanguage();
             Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.SyncArrow_16x);
             DisplayProperties display = new();
-            btnTransfer.Image = display.ScaleImage(btnTransfer.Image);
+            if (btnTransfer.Image is not null)
+                btnTransfer.Image = display.ScaleImage(btnTransfer.Image);
         }
 
         private void ApplyLanguage()
@@ -377,7 +379,7 @@ namespace mRemoteNG.UI.Window
 
         #region Private Methods
 
-        private SecureTransfer st;
+        private SecureTransfer? st;
 
         private void StartTransfer(SecureTransfer.SSHTransferProtocol Protocol)
         {
@@ -395,7 +397,7 @@ namespace mRemoteNG.UI.Window
 
             try
             {
-                st = new SecureTransfer(txtHost.Text, txtUser.Text, txtPassword.Text, int.Parse(txtPort.Text), Protocol,
+                st = new SecureTransfer(txtHost.Text, txtUser.Text, txtPassword.Text, int.Parse(txtPort.Text, CultureInfo.InvariantCulture), Protocol,
                                         txtLocalFile.Text, txtRemoteFile.Text);
 
                 // Connect creates the protocol objects and makes the initial connection.
@@ -404,7 +406,8 @@ namespace mRemoteNG.UI.Window
                 switch (Protocol)
                 {
                     case SecureTransfer.SSHTransferProtocol.SCP:
-                        st.ScpClt.Uploading += ScpClt_Uploading;
+                        if (st.ScpClt is not null)
+                            st.ScpClt.Uploading += ScpClt_Uploading;
                         break;
                     case SecureTransfer.SSHTransferProtocol.SFTP:
                         st.asyncCallback = AsyncCallback;
@@ -444,6 +447,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
+                if (st is null) return;
                 DisableButtons();
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
                                                     $"Transfer of {Path.GetFileName(st.SrcFile)} started.", true);
@@ -453,7 +457,7 @@ namespace mRemoteNG.UI.Window
                 if (st.Protocol == SecureTransfer.SSHTransferProtocol.SFTP)
                 {
                     FileInfo fi = new(st.SrcFile);
-                    while (!st.asyncResult.IsCompleted)
+                    while (st.asyncResult is not null && !st.asyncResult.IsCompleted)
                     {
                         int max = fi.Length > int.MaxValue
                             ? Convert.ToInt32(fi.Length / 1024)
@@ -496,10 +500,10 @@ namespace mRemoteNG.UI.Window
                     }
                 }
 
-                if (txtRemoteFile.Text.EndsWith("/") || txtRemoteFile.Text.EndsWith("\\"))
+                if (txtRemoteFile.Text.EndsWith('/') || txtRemoteFile.Text.EndsWith('\\'))
                 {
                     txtRemoteFile.Text +=
-                        txtLocalFile.Text.Substring(txtLocalFile.Text.LastIndexOf("\\", StringComparison.Ordinal) + 1);
+                        txtLocalFile.Text.Substring(txtLocalFile.Text.LastIndexOf('\\') + 1);
                 }
 
                 return true;

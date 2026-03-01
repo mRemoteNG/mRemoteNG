@@ -1,13 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.Versioning;
 using mRemoteNG.Connection;
+using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
 
 
 namespace mRemoteNGTests.Connection
 {
+    [SupportedOSPlatform("windows")]
 	public class DefaultConnectionInheritanceTests
     {
+        private TestScope? _scope;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _scope = TestScope.Begin();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _scope?.Dispose();
+        }
+
 	    [TestCaseSource(nameof(GetInheritanceProperties))]
 		public void LoadingDefaultInheritanceUpdatesAllProperties(PropertyInfo property)
         {
@@ -15,7 +32,7 @@ namespace mRemoteNGTests.Connection
             inheritanceSource.TurnOnInheritanceCompletely();
 	        DefaultConnectionInheritance.Instance.TurnOffInheritanceCompletely();
 
-            DefaultConnectionInheritance.Instance.LoadFrom(inheritanceSource);
+            DefaultConnectionInheritance.LoadFrom(inheritanceSource);
 
 	        var valueInDestination = property.GetValue(DefaultConnectionInheritance.Instance);
 	        var valueInSource = property.GetValue(inheritanceSource);
@@ -29,7 +46,7 @@ namespace mRemoteNGTests.Connection
 	        saveTarget.TurnOffInheritanceCompletely();
 	        DefaultConnectionInheritance.Instance.TurnOnInheritanceCompletely();
 
-	        DefaultConnectionInheritance.Instance.SaveTo(saveTarget);
+	        DefaultConnectionInheritance.SaveTo(saveTarget);
 
 	        var valueInDestination = property.GetValue(saveTarget);
 	        var valueInSource = property.GetValue(DefaultConnectionInheritance.Instance);
@@ -57,7 +74,7 @@ namespace mRemoteNGTests.Connection
 
 	    private static IEnumerable<PropertyInfo> GetInheritanceProperties()
 	    {
-		    return new ConnectionInfoInheritance(new ConnectionInfo(), true).GetProperties();
+		    return ConnectionInfoInheritance.GetProperties();
 	    }
 	}
 }

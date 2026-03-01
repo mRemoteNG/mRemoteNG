@@ -72,7 +72,7 @@ public class XmlConnectionsSerializerTests
         Assert.That(attributeValue, Is.EqualTo(expectedValue));
     }
 
-    private ConnectionTreeModel SetupConnectionTreeModel()
+    private static ConnectionTreeModel SetupConnectionTreeModel()
     {
         /*
          * Root

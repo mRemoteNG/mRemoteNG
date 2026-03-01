@@ -32,7 +32,7 @@ namespace mRemoteNGTests.TestHelpers
 		internal static ConnectionInfoInheritance GetRandomizedInheritance(ConnectionInfo parent)
 		{
 			var inheritance = new ConnectionInfoInheritance(parent, true);
-			foreach (var property in inheritance.GetProperties())
+			foreach (var property in ConnectionInfoInheritance.GetProperties())
 			{
 				property.SetValue(inheritance, Randomizer.RandomBool());
 			}

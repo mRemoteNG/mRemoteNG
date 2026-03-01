@@ -97,6 +97,30 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Auto")]
+        public string ConDefaultDesktopScaleFactor {
+            get {
+                return ((string)(this["ConDefaultDesktopScaleFactor"]));
+            }
+            set {
+                this["ConDefaultDesktopScaleFactor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultDesktopScaleFactor {
+            get {
+                return ((bool)(this["InhDefaultDesktopScaleFactor"]));
+            }
+            set {
+                this["InhDefaultDesktopScaleFactor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("FitToWindow")]
         public string ConDefaultResolution {
             get {
@@ -208,7 +232,7 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ConDefaultRedirectClipboard {
             get {
                 return ((bool)(this["ConDefaultRedirectClipboard"]));
@@ -311,6 +335,18 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["ExtAppsTBParentDock"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ExtAppsLayout {
+            get {
+                return ((string)(this["ExtAppsLayout"]));
+            }
+            set {
+                this["ExtAppsLayout"] = value;
             }
         }
         
@@ -625,7 +661,19 @@ namespace mRemoteNG.Properties {
                 this["InhDefaultPanel"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultEverythingInherited {
+            get {
+                return ((bool)(this["InhDefaultEverythingInherited"]));
+            }
+            set {
+                this["InhDefaultEverythingInherited"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -964,7 +1012,7 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("NoAuth")]
+        [global::System.Configuration.DefaultSettingValueAttribute("WarnOnFailedAuth")]
         public string ConDefaultRDPAuthenticationLevel {
             get {
                 return ((string)(this["ConDefaultRDPAuthenticationLevel"]));
@@ -1783,7 +1831,7 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool UseFilterSearch {
             get {
                 return ((bool)(this["UseFilterSearch"]));
@@ -1802,6 +1850,18 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["LockToolbars"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LockWindowSize {
+            get {
+                return ((bool)(this["LockWindowSize"]));
+            }
+            set {
+                this["LockWindowSize"] = value;
             }
         }
         
@@ -1838,6 +1898,30 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["MultiSshToolbarVisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point MainMenuLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["MainMenuLocation"]));
+            }
+            set {
+                this["MainMenuLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Top")]
+        public string MainMenuParentDock {
+            get {
+                return ((string)(this["MainMenuParentDock"]));
+            }
+            set {
+                this["MainMenuParentDock"] = value;
             }
         }
         
@@ -1900,7 +1984,31 @@ namespace mRemoteNG.Properties {
                 this["InhDefaultFavorite"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultRetryOnFirstConnect {
+            get {
+                return ((bool)(this["ConDefaultRetryOnFirstConnect"]));
+            }
+            set {
+                this["ConDefaultRetryOnFirstConnect"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRetryOnFirstConnect {
+            get {
+                return ((bool)(this["InhDefaultRetryOnFirstConnect"]));
+            }
+            set {
+                this["InhDefaultRetryOnFirstConnect"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -2380,5 +2488,161 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultRDGatewayExternalCredentialProvider"] = value;
             }
         }
-    }
-}
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultColor {
+            get {
+                return ((bool)(this["InhDefaultColor"]));
+            }
+            set {
+                this["InhDefaultColor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultTabColor {
+            get {
+                return ((bool)(this["InhDefaultTabColor"]));
+            }
+            set {
+                this["InhDefaultTabColor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultConnectionFrameColor {
+            get {
+                return ((bool)(this["InhDefaultConnectionFrameColor"]));
+            }
+            set {
+                this["InhDefaultConnectionFrameColor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRedirectDiskDrivesCustom {
+            get {
+                return ((bool)(this["InhDefaultRedirectDiskDrivesCustom"]));
+            }
+            set {
+                this["InhDefaultRedirectDiskDrivesCustom"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRDGatewayExternalCredentialProvider {
+            get {
+                return ((bool)(this["InhDefaultRDGatewayExternalCredentialProvider"]));
+            }
+            set {
+                this["InhDefaultRDGatewayExternalCredentialProvider"] = value;
+            }
+        }
+
+                [global::System.Configuration.UserScopedSettingAttribute()]
+                [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+                [global::System.Configuration.DefaultSettingValueAttribute("False")]    
+                public bool InhDefaultRDGatewayUserViaAPI {
+                    get {
+                        return ((bool)(this["InhDefaultRDGatewayUserViaAPI"]));
+                    }
+                    set {
+                        this["InhDefaultRDGatewayUserViaAPI"] = value;
+                    }
+                }
+        
+                [global::System.Configuration.UserScopedSettingAttribute()]
+                [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+                [global::System.Configuration.DefaultSettingValueAttribute("False")]
+                public bool DoubleClickOpensNewConnection {
+                    get {
+                        return ((bool)(this["DoubleClickOpensNewConnection"]));
+                    }
+                    set {
+                        this["DoubleClickOpensNewConnection"] = value;
+                    }
+                }
+        
+                [global::System.Configuration.UserScopedSettingAttribute()]
+                [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+                [global::System.Configuration.DefaultSettingValueAttribute("")]
+                public string ConDefaultPrivateKeyPath {
+                    get {
+                        return ((string)(this["ConDefaultPrivateKeyPath"]));
+                    }
+                    set {
+                        this["ConDefaultPrivateKeyPath"] = value;
+                    }
+                }
+
+                [global::System.Configuration.UserScopedSettingAttribute()]
+                [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+                [global::System.Configuration.DefaultSettingValueAttribute("True")]
+                public bool InhDefaultPrivateKeyPath {
+                    get {
+                        return ((bool)(this["InhDefaultPrivateKeyPath"]));
+                    }
+                    set {
+                        this["InhDefaultPrivateKeyPath"] = value;
+                    }
+                }
+
+                [global::System.Configuration.UserScopedSettingAttribute()]
+                [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+                [global::System.Configuration.DefaultSettingValueAttribute("False")]
+                public bool ConDefaultUsePersistentBrowser {
+                    get {
+                        return ((bool)(this["ConDefaultUsePersistentBrowser"]));
+                    }
+                    set {
+                        this["ConDefaultUsePersistentBrowser"] = value;
+                    }
+                }
+
+                [global::System.Configuration.UserScopedSettingAttribute()]
+                [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+                [global::System.Configuration.DefaultSettingValueAttribute("False")]
+                public bool DisableTreeDragAndDrop {
+                    get {
+                        return ((bool)(this["DisableTreeDragAndDrop"]));
+                    }
+                    set {
+                        this["DisableTreeDragAndDrop"] = value;
+                    }
+                }
+
+                [global::System.Configuration.UserScopedSettingAttribute()]
+                [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+                [global::System.Configuration.DefaultSettingValueAttribute("")]
+                public string CustomConfigurationPath {
+                    get {
+                        return ((string)(this["CustomConfigurationPath"]));
+                    }
+                    set {
+                        this["CustomConfigurationPath"] = value;
+                    }
+                }
+
+                [global::System.Configuration.UserScopedSettingAttribute()]
+                [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+                [global::System.Configuration.DefaultSettingValueAttribute("")]
+                public string CustomExtAppsFilePath {
+                    get {
+                        return ((string)(this["CustomExtAppsFilePath"]));
+                    }
+                    set {
+                        this["CustomExtAppsFilePath"] = value;
+                    }
+                }
+            }
+        }

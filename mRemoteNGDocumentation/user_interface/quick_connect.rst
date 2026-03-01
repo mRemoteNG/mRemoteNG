@@ -16,6 +16,8 @@ Using QuickConnect
 .. tip::
 
     You can input username and hostname simultaneously when using user@domain as connection string.
+    To use a custom port, append it to the hostname as hostname:port.
+    You can combine both formats as username@hostname:port.
 
 To use Quick Connect, ensure the Quick Connect toolbar is enabled by selecting View and then Quick Connect Toolbar.
 Next, input a DNS host name or IP address into the box labeled "Connect". This box will also save previous entries during your session.
@@ -38,4 +40,4 @@ All default properties are used `except` for:
 
 - Hostname
 - Protocol
-- Port (the default port for the selected protocol is used)
+- Port (the default port for the selected protocol is used unless you enter hostname:port)

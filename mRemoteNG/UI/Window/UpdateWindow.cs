@@ -19,7 +19,7 @@ namespace mRemoteNG.UI.Window
     [SupportedOSPlatform("windows")]
     public partial class UpdateWindow : BaseWindow
     {
-        private AppUpdater _appUpdate;
+        private AppUpdater? _appUpdate;
         //private bool _isUpdateDownloadHandlerDeclared;
 
         #region Public Methods
@@ -62,8 +62,8 @@ namespace mRemoteNG.UI.Window
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
 
             base.ApplyTheme();
-            txtChangeLog.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            txtChangeLog.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            txtChangeLog.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette?.getColor("Dialog_Background") ?? txtChangeLog.BackColor;
+            txtChangeLog.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette?.getColor("Dialog_Foreground") ?? txtChangeLog.ForeColor;
         }
 
         private void ApplyLanguage()
@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.Window
 
         private void pbUpdateImage_Click(object sender, EventArgs e)
         {
-            Uri linkUri = pbUpdateImage.Tag as Uri;
+            Uri? linkUri = pbUpdateImage.Tag as Uri;
             if (linkUri == null || linkUri.IsFile || linkUri.IsUnc || linkUri.IsLoopback)
             {
                 return;
@@ -148,8 +148,9 @@ namespace mRemoteNG.UI.Window
                     lblStatus.ForeColor = Color.OrangeRed;
                     SetVisibilityOfUpdateControls(true);
 
-                    UpdateInfo updateInfo = _appUpdate.CurrentUpdateInfo;
-                    lblLatestVersion.Text = updateInfo.Version.ToString();
+                    UpdateInfo? updateInfo = _appUpdate.CurrentUpdateInfo;
+                    if (updateInfo == null) return;
+                    lblLatestVersion.Text = updateInfo.Version?.ToString() ?? string.Empty;
                     lblLatestVersionLabel.Visible = true;
                     lblLatestVersion.Visible = true;
 
@@ -164,14 +165,21 @@ namespace mRemoteNG.UI.Window
                         pbUpdateImage.Visible = true;
                     }
 
-                    try
+                    if (updateInfo.IsGitHubSource && !string.IsNullOrEmpty(updateInfo.ChangeLogBody))
                     {
-                        string changeLog = await _appUpdate.GetChangeLogAsync();
-                        txtChangeLog.Text = changeLog.Replace("\n", Environment.NewLine);
+                        txtChangeLog.Text = updateInfo.ChangeLogBody.Replace("\n", Environment.NewLine);
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateGetChangeLogFailed, ex);
+                        try
+                        {
+                            string changeLog = await _appUpdate.GetChangeLogAsync();
+                            txtChangeLog.Text = changeLog.Replace("\n", Environment.NewLine);
+                        }
+                        catch (Exception ex)
+                        {
+                            Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateGetChangeLogFailed, ex);
+                        }
                     }
 
                     btnDownload.Focus();
@@ -210,10 +218,19 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
+                if (_appUpdate?.CurrentUpdateInfo?.IsGitHubSource == true)
+                {
+                    Uri? releasePageUrl = _appUpdate.CurrentUpdateInfo.ReleasePageUrl;
+                    if (releasePageUrl != null && !releasePageUrl.IsFile && !releasePageUrl.IsUnc && !releasePageUrl.IsLoopback)
+                        Process.Start(new ProcessStartInfo { FileName = releasePageUrl.ToString(), UseShellExecute = true });
+                    return;
+                }
+
                 btnDownload.Enabled = false;
                 prgbDownload.Visible = true;
                 prgbDownload.Value = 0;
 
+                if (_appUpdate == null) return;
                 await _appUpdate.DownloadUpdateAsync(new Progress<int>(progress => prgbDownload.Value = progress));
 
                 btnDownload.Enabled = true;
@@ -224,14 +241,15 @@ namespace mRemoteNG.UI.Window
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
                 {
+                    string? updateFilePath = _appUpdate.CurrentUpdateInfo?.UpdateFilePath;
                     if (MessageBox.Show(Language.UpdateDownloadComplete, Language.MenuItem_CheckForUpdates,
                             MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
+                        Shutdown.Quit(updateFilePath);
                     }
-                    else
+                    else if (updateFilePath != null)
                     {
-                        File.Delete(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
+                        File.Delete(updateFilePath);
                     }
                 }
             }

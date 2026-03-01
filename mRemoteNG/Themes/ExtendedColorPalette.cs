@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace mRemoteNG.Themes
@@ -6,11 +7,11 @@ namespace mRemoteNG.Themes
     /// <summary>
     /// Class used for the UI to display the color tables,as the Dictionary value keys cannot be directly replaced
     /// </summary>
-    public class PseudoKeyColor(string _key, Color _value)
+    public class PseudoKeyColor(string key, Color value)
     {
-        public string Key { get; set; } = _key;
+        public string Key { get; set; } = key;
 
-        public Color Value { get; set; } = _value;
+        public Color Value { get; set; } = value;
     }
 
 
@@ -29,9 +30,8 @@ namespace mRemoteNG.Themes
 
         public ExtendedColorPalette()
         {
-            ExtColorPalette = [];
-            DefaultColorPalette =
-                []; // If this is the default palette, it will not have a default-default palette
+            ExtColorPalette = new Dictionary<string, Color>(StringComparer.Ordinal);
+            DefaultColorPalette = new Dictionary<string, Color>(StringComparer.Ordinal); // If this is the default palette, it will not have a default-default palette
         }
 
         #endregion
@@ -53,12 +53,12 @@ namespace mRemoteNG.Themes
         /// <returns></returns>
         public Color getColor(string colorKey)
         {
-            Color retColor = ExtColorPalette.ContainsKey(colorKey) ? ExtColorPalette[colorKey] : Color.Empty;
+            Color retColor = ExtColorPalette.TryGetValue(colorKey, out Color extColor) ? extColor : Color.Empty;
             //Invisible colors are not good, might  indicate missing color from the palette as is represented by 00000000
             if (retColor != Color.Empty && retColor.A != 0) return retColor;
             if (DefaultColorPalette != null)
             {
-                retColor = DefaultColorPalette.ContainsKey(colorKey) ? DefaultColorPalette[colorKey] : Color.Empty;
+                retColor = DefaultColorPalette.TryGetValue(colorKey, out Color defColor) ? defColor : Color.Empty;
             }
 
             //why are we here?, just avoid a crash
@@ -92,9 +92,9 @@ namespace mRemoteNG.Themes
             ExtColorPalette[colorKey] = inColor;
         }
 
-        public Dictionary<string, Color> DefaultColorPalette { get; set; }
+        public IDictionary<string, Color> DefaultColorPalette { get; set; }
 
 
-        public Dictionary<string, Color> ExtColorPalette { get; set; }
+        public IDictionary<string, Color> ExtColorPalette { get; set; }
     }
 }

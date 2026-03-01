@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Management;
-using System.Net;
 using System.Runtime.Versioning;
 using System.Security.Principal;
 using Microsoft.Win32;
@@ -17,21 +16,20 @@ namespace mRemoteNG.Config.Putty
     public class PuttySessionsRegistryProvider : AbstractPuttySessionsProvider
     {
         private const string PuttySessionsKey = "Software\\SimonTatham\\PuTTY\\Sessions";
-        private string CurrentUserSid { get; } = WindowsIdentity.GetCurrent().User?.Value;
-        private static ManagementEventWatcher _eventWatcher;
+        private string? CurrentUserSid { get; } = WindowsIdentity.GetCurrent().User?.Value;
+        private static ManagementEventWatcher? _eventWatcher;
 
         #region Public Methods
 
         public override string[] GetSessionNames(bool raw = false)
         {
-            RegistryKey sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
+            RegistryKey? sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
             if (sessionsKey == null) return Array.Empty<string>();
 
             List<string> sessionNames = new();
             foreach (string sessionName in sessionsKey.GetSubKeyNames())
             {
-                sessionNames.Add(raw ? sessionName
-                                     : WebUtility.UrlDecode(sessionName.Replace("+", "%2B")));
+                sessionNames.Add(raw ? sessionName : PuttySessionNameDecoder.Decode(sessionName));
             }
 
             if (raw && !sessionNames.Contains("Default%20Settings"))
@@ -42,16 +40,16 @@ namespace mRemoteNG.Config.Putty
             return sessionNames.ToArray();
         }
 
-        public override PuttySessionInfo GetSession(string sessionName)
+        public override PuttySessionInfo? GetSession(string sessionName)
         {
             if (string.IsNullOrEmpty(sessionName))
                 return null;
 
-            RegistryKey sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
-            RegistryKey sessionKey = sessionsKey?.OpenSubKey(sessionName);
+            RegistryKey? sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
+            RegistryKey? sessionKey = sessionsKey?.OpenSubKey(sessionName);
             if (sessionKey == null) return null;
 
-            sessionName = WebUtility.UrlDecode(sessionName.Replace("+", "%2B"));
+            sessionName = PuttySessionNameDecoder.Decode(sessionName);
 
             PuttySessionInfo sessionInfo = new()
             {
@@ -62,9 +60,9 @@ namespace mRemoteNG.Config.Putty
             };
 
 
-            string protocol = string.IsNullOrEmpty(sessionKey.GetValue("Protocol")?.ToString())
-                ? "ssh"
-                : sessionKey.GetValue("Protocol").ToString();
+            string protocol = sessionKey.GetValue("Protocol")?.ToString() is { Length: > 0 } p
+                ? p
+                : "ssh";
 
             switch (protocol.ToLowerInvariant())
             {
@@ -77,7 +75,7 @@ namespace mRemoteNG.Config.Putty
                 case "serial":
                     return null;
                 case "ssh":
-                    int.TryParse(sessionKey.GetValue("SshProt")?.ToString(), out int sshVersion);
+                    _ = int.TryParse(sessionKey.GetValue("SshProt")?.ToString(), out int sshVersion);
                     /* Per PUTTY.H in PuTTYNG & PuTTYNG Upstream (PuTTY proper currently)
                      * expect 0 for SSH1, 3 for SSH2 ONLY
                      * 1 for SSH1 with a 2 fallback
@@ -94,7 +92,7 @@ namespace mRemoteNG.Config.Putty
                     return null;
             }
 
-            int.TryParse(sessionKey.GetValue("PortNumber")?.ToString(), out int portNumber);
+            _ = int.TryParse(sessionKey.GetValue("PortNumber")?.ToString(), out int portNumber);
             if (portNumber == default(int))
                 sessionInfo.SetDefaultPort();
             else
@@ -109,8 +107,8 @@ namespace mRemoteNG.Config.Putty
 
             try
             {
-                string keyName = string.Join("\\", CurrentUserSid, PuttySessionsKey).Replace("\\", "\\\\");
-                RegistryKey sessionsKey = Registry.Users.OpenSubKey(keyName);
+                string keyName = string.Join("\\", CurrentUserSid, PuttySessionsKey).Replace("\\", "\\\\", StringComparison.Ordinal);
+                RegistryKey? sessionsKey = Registry.Users.OpenSubKey(keyName);
                 if (sessionsKey == null)
                 {
                     Registry.Users.CreateSubKey(keyName);

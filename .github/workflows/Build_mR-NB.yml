@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - v1.78.2-dev
+      - release/1.80
+      - main
+    tags:
+      - 'v*'
 
   workflow_dispatch:
     inputs:
@@ -11,118 +15,181 @@ on:
         required: false
         default: 'true'
 
-permissions:
-  contents: write
-  
+permissions: {}
+
 jobs:
-  NB-Build-and-Release:
+  # ============================================================
+  # Job 1: Build all platform variants
+  # ============================================================
+  build:
+    name: Build ${{ matrix.arch }}${{ matrix.suffix }}
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
     strategy:
+      fail-fast: false
       matrix:
         include:
-          # Framework-Dependent builds (requires .NET runtime on user machine)
-          - runner: windows-latest
+          # Framework-dependent builds (requires .NET runtime on target)
+          - runner: windows-2025-vs2026
+            platform: x86
+            arch: x86
+            selfcontained: false
+            suffix: ""
+          - runner: windows-2025-vs2026
             platform: x64
             arch: x64
-            deployment: framework-dependent
-            deploy_suffix: FD
+            selfcontained: false
+            suffix: ""
           - runner: windows-11-arm
             platform: ARM64
             arch: arm64
-            deployment: framework-dependent
-            deploy_suffix: FD
-          # Self-Contained builds (includes .NET runtime)
-          - runner: windows-latest
+            selfcontained: false
+            suffix: ""
+          # Self-contained builds (embeds .NET runtime, no install required)
+          - runner: windows-2025-vs2026
+            platform: x86
+            arch: x86
+            selfcontained: true
+            suffix: "-selfcontained"
+          - runner: windows-2025-vs2026
             platform: x64
             arch: x64
-            deployment: self-contained
-            deploy_suffix: SC
+            selfcontained: true
+            suffix: "-selfcontained"
           - runner: windows-11-arm
             platform: ARM64
             arch: arm64
-            deployment: self-contained
-            deploy_suffix: SC
+            selfcontained: true
+            suffix: "-selfcontained"
     runs-on: ${{ matrix.runner }}
-    # Only run if:
-    # - manual dispatch, OR
-    # - push event AND commit message contains "NB release"
     if: >
       github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'push' && contains(github.event.head_commit.message, 'NB release'))
+      (github.event_name == 'push' && (
+        startsWith(github.ref, 'refs/tags/v') ||
+        github.ref == 'refs/heads/release/1.80' ||
+        contains(github.event.head_commit.message, 'NB release')
+      ))
 
     steps:
       - name: (01) Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
-        # 2. Auto-detect solution file (Supports legacy .sln modern VS2026 .slnx)
-      - name: (02) Find solution file
-        shell: pwsh
-        run: |
-          Write-Host "Locating solution file (.sln or .slnx)..."
-          $sln = Get-ChildItem -Path . -Filter "*.sln*" -File -Recurse | 
-                 Where-Object { $_.Extension -match '^\.slnx?$' } | 
-                 Select-Object -First 1
-
-          if ($sln) {
-            "SOLUTION_FILE=$($sln.Name)" | Out-File -FilePath $env:GITHUB_ENV -Append
-            Write-Host "Located file: $($sln.Name)" -ForegroundColor Green
-          } else {
-            Write-Host "ERROR: Could not locate a .sln or .slnx file!" -ForegroundColor Red
-            exit 1
-          }
-
-      - name: (02) Install .NET 10 SDK
-        uses: actions/setup-dotnet@v5
+      - name: (02) Setup dotnet
+        uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 # v5
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: 10.0.x
 
-      # 6. Install Visual Studio 2026 Build Tools
-      - name: (03) Install Visual Studio 2026 Build Tools
+      - name: (03) Setup MSBuild
+        uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2
+        with:
+          vs-version: ${{ matrix.platform == 'ARM64' && '17.14.12' || '[18.0,19.0)' }}
+
+      - name: (04) Generate AssemblyInfo.cs from T4 template values
         shell: pwsh
         run: |
-          Write-Host "Installing VS 2026 Build Tools..."
-          choco install visualstudio2026buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --includeRecommended --quiet" -y --ignore-package-exit-codes=3010
-          Write-Host "VS 2026 Build Tools installation completed"
-          
-      - name: (04) Install and run dotnet-t4 to transform T4 templates
-        shell: pwsh
-        run: |
-          dotnet tool install --global dotnet-t4
-          # Refresh PATH to include global tools
-          $env:PATH += ";$env:USERPROFILE\.dotnet\tools"
-          $ttFile = "$env:GITHUB_WORKSPACE\mRemoteNG\Properties\AssemblyInfo.tt"
-          # VS Enterprise 2022 assemblies
-          $vsPath = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\PublicAssemblies"
-          Write-Host "Transforming T4 template"
-          t4 $ttFile -P platformType=${{ matrix.platform }} -r:"$vsPath\EnvDTE.dll" -r:"$vsPath\Microsoft.VisualStudio.Interop.dll"
-        env:
-          PLATFORM: '${{ matrix.platform }}'
-  
+          # Read version from mRemoteNG.csproj (single source of truth)
+          $csprojPath = "$env:GITHUB_WORKSPACE/mRemoteNG/mRemoteNG.csproj"
+          $csprojContent = Get-Content $csprojPath -Raw
+          if ($csprojContent -match '<Version>([^<]+)</Version>') {
+            $csprojVersion = $matches[1].Trim()
+          } else {
+            throw "Could not find <Version> element in csproj"
+          }
+          Write-Host "Version from csproj: $csprojVersion"
+
+          # Parse version: supports both "1.81.0" and "1.81.0-beta.2" formats
+          if ($csprojVersion -match '^(\d+)\.(\d+)\.(\d+)') {
+            $major = [int]$matches[1]; $minor = [int]$matches[2]; $revision = [int]$matches[3]
+          } else {
+            throw "Could not parse version from csproj: $csprojVersion"
+          }
+          # Preserve prerelease suffix (e.g. "-beta.2") for informational version
+          $prerelease = if ($csprojVersion -match '-(.+)$') { "-$($matches[1])" } else { "" }
+          $channel = if ($prerelease) { "Pre-release" } else { "Release" }
+
+          $base = [datetime]"2019-09-02"
+          $build = [int](([datetime]::UtcNow - $base).TotalMinutes / 1000)
+          $platform = "${{ matrix.platform }}"
+          $year = [datetime]::UtcNow.Year
+          $content = @"
+          //Generated for platform: $platform
+          using System.Reflection;
+          using System.Resources;
+          //Build nr: $build
+          [assembly: AssemblyTitle("mRemoteNG")]
+          [assembly: AssemblyDescription("Multi-Remote Next Generation Connection Manager")]
+          [assembly: AssemblyConfiguration("$platform")]
+          [assembly: AssemblyCompany("Profi-KOM Ltd.")]
+          [assembly: AssemblyProduct("mRemoteNG Connection Manager")]
+          [assembly: AssemblyCopyright("(c) $year mRemoteNG")]
+          [assembly: AssemblyTrademark("Profi-KOM LTd.")]
+          [assembly: AssemblyCulture("")]
+          [assembly: AssemblyVersion("$major.$minor.$revision.$build")]
+          [assembly: AssemblyFileVersion("$major.$minor.$revision.$build")]
+          [assembly: NeutralResourcesLanguageAttribute("en-US")]
+          [assembly: AssemblyInformationalVersion("$major.$minor.$revision$prerelease ($channel $build) $platform")]
+          "@
+          $outPath = "$env:GITHUB_WORKSPACE\mRemoteNG\Properties\AssemblyInfo.cs"
+          Set-Content -Path $outPath -Value $content -Encoding UTF8
+          Write-Host "Generated AssemblyInfo.cs: v$major.$minor.$revision$prerelease.$build ($channel) $platform"
+          echo "version=$major.$minor.$revision$prerelease" >> $env:GITHUB_OUTPUT
+          echo "build=$build" >> $env:GITHUB_OUTPUT
+        id: version_info
+
       - name: (05) Cache NuGet Packages
-        uses: actions/cache@v5
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5
         with:
           path: ~/.nuget/packages
-          key: ${{ runner.os }}-${{ matrix.arch }}-${{ matrix.deployment }}-nuget-${{ hashFiles('**/*.csproj') }}
+          key: ${{ runner.os }}-${{ matrix.arch }}-nuget-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
-            ${{ runner.os }}-${{ matrix.arch }}-${{ matrix.deployment }}-nuget-
             ${{ runner.os }}-${{ matrix.arch }}-nuget-
-            
+
       - name: (06) Restore NuGet Packages
         shell: pwsh
-        run: dotnet restore
-        
-      - name: (07) Build Framework-Dependent Release
-        if: matrix.deployment == 'framework-dependent'
-        shell: pwsh
         run: |
-          msbuild "$Env:GITHUB_WORKSPACE\$($sln.Name)" -p:Configuration="Release" -p:Platform=${{ matrix.platform }} /verbosity:minimal
+          if ('${{ matrix.selfcontained }}' -eq 'true') {
+            dotnet restore mRemoteNG.sln --runtime win-${{ matrix.arch }} /p:PublishReadyToRun=true
+          } else {
+            dotnet restore mRemoteNG.sln
+          }
 
-      - name: (08) Build Self-Contained Release
-        if: matrix.deployment == 'self-contained'
+      - name: (07) Build Release
+        shell: pwsh
+        env:
+          CRASH_REPORT_TOKEN: ${{ secrets.CRASH_REPORT_TOKEN }}
+        run: |
+          $msbuildArgs = @(
+            "`"$Env:GITHUB_WORKSPACE\mRemoteNG.sln`""
+            "-p:Configuration=Release"
+            "-p:Platform=${{ matrix.platform }}"
+            "-p:CrashReportToken=$env:CRASH_REPORT_TOKEN"
+            "/verbosity:minimal"
+          )
+          if ('${{ matrix.selfcontained }}' -eq 'true') {
+            $msbuildArgs += "-p:SelfContained=true"
+            $msbuildArgs += "-p:RuntimeIdentifier=win-${{ matrix.arch }}"
+            $msbuildArgs += "-p:PublishDir=bin\${{ matrix.platform }}\Release\publish\"
+            $msbuildArgs += "-t:Publish"
+          }
+          $cmd = "msbuild " + ($msbuildArgs -join " ")
+          Write-Host "Running: $cmd"
+          Invoke-Expression $cmd
+
+      - name: (07b) Smoke test (app starts)
         shell: pwsh
         run: |
-          msbuild "$Env:GITHUB_WORKSPACE\mRemoteNG.sln" /t:Publish /p:Configuration="Release Self-Contained" -p:Platform=${{ matrix.platform }} /verbosity:minimal /p:SelfContained=true /p:PublishDir="bin\${{ matrix.platform }}\Release"
-                
-      - name: (09) Release Information
+          if ('${{ matrix.selfcontained }}' -eq 'true') {
+            $exe = ".\mRemoteNG\bin\${{ matrix.platform }}\Release\publish\mRemoteNG.exe"
+          } else {
+            $exe = ".\mRemoteNG\bin\${{ matrix.platform }}\Release\mRemoteNG.exe"
+          }
+          $output = & $exe --version 2>&1
+          if ($LASTEXITCODE -ne 0) { throw "Smoke test failed: exit code $LASTEXITCODE" }
+          Write-Host "Smoke test passed: $output"
+
+      - name: (08) Release Information
         id: version
         shell: pwsh
         run: |
@@ -134,106 +201,157 @@ jobs:
           } else {
             throw "Could not extract version and build number"
           }
+          # Include prerelease suffix from step (04)
+          $fullVersion = "${{ steps.version_info.outputs.version }}"
           $date = Get-Date -Format "yyyyMMdd"
-          $zipName = "mRemoteNG-$date-v$version-NB-$build-${{ matrix.arch }}-${{ matrix.deploy_suffix }}.zip"
-          $tag = "$date-v$version-NB-($build)"
-          $message = git log -1 --pretty=%B
-          echo "message=$message" >> $env:GITHUB_OUTPUT
+          $suffix = "${{ matrix.suffix }}"
+          $zipName = "mRemoteNG-$date-v$fullVersion-NB-$build-${{ matrix.arch }}$suffix.zip"
           echo "zipname=$zipName" >> $env:GITHUB_OUTPUT
-          echo "version=$version" >> $env:GITHUB_OUTPUT
+          echo "version=$fullVersion" >> $env:GITHUB_OUTPUT
           echo "build=$build" >> $env:GITHUB_OUTPUT
-          echo "tag=$tag" >> $env:GITHUB_OUTPUT
-          echo "deployment=${{ matrix.deployment }}" >> $env:GITHUB_OUTPUT
 
-      - name: (10) Extract Changelog Section
-        id: changelog
+      - name: (09) Create unsigned ZIP
         shell: pwsh
         run: |
-          $changelogPath = "$env:GITHUB_WORKSPACE\CHANGELOG.md"
-          $lines = Get-Content $changelogPath
-      
-          $startIndex = -1
-          for ($i = 0; $i -lt $lines.Count; $i++) {
-            if ($lines[$i] -match '^## \[') {
-              $startIndex = $i
-              break
-            }
-          }
-      
-          if ($startIndex -eq -1) {
-            throw "No version header found in CHANGELOG.md"
-          }
-      
-          $section = @()
-          for ($i = $startIndex + 1; $i -lt $lines.Count; $i++) {
-            if ($lines[$i] -match '^## ') {
-              break
-            }
-            $section += $lines[$i]
-          }
-      
-          $joined = $section -join "`n"
-          echo "log<<EOF" >> $env:GITHUB_OUTPUT
-          echo $joined >> $env:GITHUB_OUTPUT
-          echo "EOF" >> $env:GITHUB_OUTPUT
-                
-      - name: (11) Create Zip File
-        shell: pwsh
-        run: |
-          $sourceDir = "$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\Release"
-          Compress-Archive -Path "$sourceDir\*" -DestinationPath ${{ steps.version.outputs.zipname }}
-          echo "File: ${{ steps.version.outputs.zipname }}"
-          
-          # Show file size
-          $fileSize = (Get-Item ${{ steps.version.outputs.zipname }}).Length / 1MB
-          echo "Size: $([math]::Round($fileSize, 2)) MB"
-
-      - name: (10) Upload artifacts for combination
-        uses: actions/upload-artifact@v7
-        with:
-          name: release-${{ matrix.arch }}-${{ matrix.deploy_suffix }}
-          path: ${{ steps.version.outputs.zipname }}
-          retention-days: 1
-
-  Create-Combined-Release:
-    needs: NB-Build-and-Release
-    runs-on: windows-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v6
-
-      - name: Download all artifacts
-        uses: actions/download-artifact@v8
-        with:
-          path: artifacts
-
-      - name: Extract version info
-        id: version
-        shell: pwsh
-        run: |
-          $assemblyInfoPath = "${{ github.workspace }}\mRemoteNG\Properties\AssemblyInfo.cs"
-          $line = Get-Content $assemblyInfoPath | Where-Object { $_ -match 'AssemblyVersion\("(.+?)"\)' }
-          if ($line -match 'AssemblyVersion\("(?<ver>\d+\.\d+\.\d+)\.(?<build>\d+)"\)') {
-            $version = $matches['ver']
-            $build = $matches['build']
+          if ('${{ matrix.selfcontained }}' -eq 'true') {
+            $sourceDir = "$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\Release\publish"
           } else {
-            throw "Could not extract version and build number"
+            $sourceDir = "$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\Release"
           }
+          # Exclude build intermediates from ZIP
+          $items = Get-ChildItem -Path $sourceDir | Where-Object { $_.Name -notin @('ref','publish','win-x64','win-x86','win-arm64','win-x64-sc') }
+          Compress-Archive -Path $items.FullName -DestinationPath "$Env:GITHUB_WORKSPACE\${{ steps.version.outputs.zipname }}" -Force
+          Write-Host "Created unsigned ZIP: ${{ steps.version.outputs.zipname }}"
+
+      # --------------------------------------------------------
+      # VirusTotal scan (optional — requires VIRUSTOTAL_API_KEY secret)
+      # --------------------------------------------------------
+      - name: (09b) Scan with VirusTotal
+        if: env.VIRUSTOTAL_API_KEY != ''
+        continue-on-error: true
+        shell: pwsh
+        env:
+          VIRUSTOTAL_API_KEY: ${{ secrets.VIRUSTOTAL_API_KEY }}
+        run: |
+          $zipPath = "$Env:GITHUB_WORKSPACE\${{ steps.version.outputs.zipname }}"
+          Write-Host "Uploading $zipPath to VirusTotal..."
+          $headers = @{ "x-apikey" = $env:VIRUSTOTAL_API_KEY }
+          $form = @{ file = Get-Item $zipPath }
+          try {
+            $response = Invoke-RestMethod -Uri "https://www.virustotal.com/api/v3/files" `
+              -Method Post -Headers $headers -Form $form -TimeoutSec 300
+            $analysisId = $response.data.id
+            Write-Host "Analysis submitted: $analysisId"
+            Write-Host "View at: https://www.virustotal.com/gui/file-analysis/$analysisId"
+            # Poll for results (max 5 minutes)
+            $maxWait = 300; $elapsed = 0
+            while ($elapsed -lt $maxWait) {
+              Start-Sleep -Seconds 30; $elapsed += 30
+              $result = Invoke-RestMethod -Uri "https://www.virustotal.com/api/v3/analyses/$analysisId" `
+                -Headers $headers -TimeoutSec 60
+              $status = $result.data.attributes.status
+              if ($status -eq "completed") {
+                $stats = $result.data.attributes.stats
+                Write-Host "VirusTotal results: malicious=$($stats.malicious) suspicious=$($stats.suspicious) undetected=$($stats.undetected) harmless=$($stats.harmless)"
+                if ($stats.malicious -gt 3) {
+                  Write-Warning "HIGH detection count ($($stats.malicious) engines flagged). Review before release."
+                }
+                break
+              }
+              Write-Host "Waiting for analysis... ($elapsed s)"
+            }
+          } catch {
+            Write-Warning "VirusTotal scan failed: $_"
+          }
+
+      # --------------------------------------------------------
+      # Upload build artifact (unsigned)
+      # --------------------------------------------------------
+      - name: (10a) Upload build artifact
+        id: upload-build
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: build-${{ matrix.arch }}${{ matrix.suffix }}
+          path: ${{ steps.version.outputs.zipname }}
+          retention-days: 5
+
+      # --------------------------------------------------------
+      # CODE SIGNING — SignPath Foundation (OPTIONAL)
+      # Skipped when SIGNPATH_API_TOKEN secret is not configured.
+      # --------------------------------------------------------
+      - name: (10b) Submit signing request to SignPath
+        id: sign
+        continue-on-error: true
+        uses: signpath/github-action-submit-signing-request@3f9250c56651ff692d6729a2fbb0603a42d7d322 # v2
+        with:
+          api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
+          organization-id: '${{ secrets.SIGNPATH_ORGANIZATION_ID }}'
+          project-slug: 'mRemoteNG'
+          signing-policy-slug: 'release-signing'
+          github-artifact-id: '${{ steps.upload-build.outputs.artifact-id }}'
+          wait-for-completion: true
+          output-artifact-directory: '${{ github.workspace }}/signed'
+          wait-for-completion-timeout-in-seconds: 600
+
+      - name: (10c) Upload signed artifact (if signing succeeded)
+        if: steps.sign.outcome == 'success'
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: signed-${{ matrix.arch }}${{ matrix.suffix }}
+          path: ${{ github.workspace }}/signed/*
+          retention-days: 5
+
+  # ============================================================
+  # Job 2: Aggregate signed artifacts into a single release
+  # ============================================================
+  release:
+    name: Create Release
+    needs: build
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: (01) Checkout Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: (02) Compute release metadata
+        id: meta
+        shell: pwsh
+        run: |
+          # Read version from mRemoteNG.csproj (single source of truth)
+          $csprojPath = "$env:GITHUB_WORKSPACE/mRemoteNG/mRemoteNG.csproj"
+          $csprojContent = Get-Content $csprojPath -Raw
+          if ($csprojContent -match '<Version>([^<]+)</Version>') {
+            $csprojVersion = $matches[1].Trim()
+          } else {
+            throw "Could not find <Version> element in csproj"
+          }
+          Write-Host "Version from csproj: $csprojVersion"
+
+          if ($csprojVersion -match '^(\d+)\.(\d+)\.(\d+)') {
+            $major = [int]$matches[1]; $minor = [int]$matches[2]; $revision = [int]$matches[3]
+          } else {
+            throw "Could not parse version from csproj: $csprojVersion"
+          }
+          $prerelease = if ($csprojVersion -match '-(.+)$') { "-$($matches[1])" } else { "" }
+
+          $base = [datetime]"2019-09-02"
+          $build = [int](([datetime]::UtcNow - $base).TotalMinutes / 1000)
           $date = Get-Date -Format "yyyyMMdd"
-          $tag = "$date-v$version-NB-($build)"
+          $tag = "$date-v$major.$minor.$revision$prerelease-NB-($build)"
           $message = git log -1 --pretty=%B
-          echo "version=$version" >> $env:GITHUB_OUTPUT
-          echo "build=$build" >> $env:GITHUB_OUTPUT
           echo "tag=$tag" >> $env:GITHUB_OUTPUT
+          echo "version=$major.$minor.$revision$prerelease" >> $env:GITHUB_OUTPUT
+          echo "build=$build" >> $env:GITHUB_OUTPUT
           echo "message=$message" >> $env:GITHUB_OUTPUT
 
-      - name: Extract Changelog
+      - name: (03) Extract Changelog Section
         id: changelog
         shell: pwsh
         run: |
-          $changelogPath = "$env:GITHUB_WORKSPACE\CHANGELOG.md"
+          $changelogPath = "$env:GITHUB_WORKSPACE/CHANGELOG.md"
           $lines = Get-Content $changelogPath
-      
+
           $startIndex = -1
           for ($i = 0; $i -lt $lines.Count; $i++) {
             if ($lines[$i] -match '^## \[') {
@@ -241,11 +359,11 @@ jobs:
               break
             }
           }
-      
+
           if ($startIndex -eq -1) {
             throw "No version header found in CHANGELOG.md"
           }
-      
+
           $section = @()
           for ($i = $startIndex + 1; $i -lt $lines.Count; $i++) {
             if ($lines[$i] -match '^## ') {
@@ -253,52 +371,80 @@ jobs:
             }
             $section += $lines[$i]
           }
-      
+
           $joined = $section -join "`n"
           echo "log<<EOF" >> $env:GITHUB_OUTPUT
           echo $joined >> $env:GITHUB_OUTPUT
           echo "EOF" >> $env:GITHUB_OUTPUT
 
-      - name: Collect all release files
+      - name: (04) Download build artifacts
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          pattern: build-*
+          path: release-assets
+          merge-multiple: true
+
+      - name: (06) List release assets
+        shell: bash
+        run: |
+          echo "Release assets:"
+          ls -lh release-assets/
+
+      - name: (06b) Generate SHA256 checksums
+        id: checksums
         shell: pwsh
         run: |
-          Get-ChildItem -Path artifacts -Recurse -Filter "*.zip" | ForEach-Object {
-            Copy-Item $_.FullName -Destination .
-            echo "Found: $($_.Name)"
+          $checksumFile = "release-assets/checksums-SHA256.txt"
+          $lines = @()
+          $files = Get-ChildItem -Path release-assets -Filter *.zip
+          foreach ($file in $files | Sort-Object Name) {
+            $hash = (Get-FileHash -Path $file.FullName -Algorithm SHA256).Hash.ToLower()
+            $line = "$hash  $($file.Name)"
+            $lines += $line
           }
+          $lines | Set-Content -Path $checksumFile -Encoding UTF8
+          Write-Host "Generated checksums:"
+          Get-Content $checksumFile
+          # Export for release body
+          $joined = $lines -join "`n"
+          echo "sha256<<EOF" >> $env:GITHUB_OUTPUT
+          echo $joined >> $env:GITHUB_OUTPUT
+          echo "EOF" >> $env:GITHUB_OUTPUT
 
-      - name: Create combined release
+      - name: (07) Create release
         uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.version.outputs.tag }}
-          name: "mRemoteNG ${{ steps.version.outputs.version }} NB ${{ steps.version.outputs.build }}"
-          files: '*.zip'
+          tag_name: ${{ steps.meta.outputs.tag }}
+          name: "mRemoteNG ${{ steps.meta.outputs.version }} NB ${{ steps.meta.outputs.build }}"
+          files: release-assets/*
           body: |
-            ## mRemoteNG ${{ steps.version.outputs.version }} NB Build ${{ steps.version.outputs.build }}
-            
-            ### 📦 Available Downloads
-            
-            **Framework-Dependent (FD)** - Requires .NET 10 Runtime installed:
+            ## mRemoteNG ${{ steps.meta.outputs.version }} NB Build ${{ steps.meta.outputs.build }}
+
+            ### Available Downloads
+
+            **Framework-Dependent** - Requires .NET 10 Runtime installed:
             - Smaller download size (~15-25 MB)
             - Requires .NET 10 Desktop Runtime on user machine
-            - Files: `*-FD.zip`
-            
-            **Self-Contained (SC)** - Portable, no installation required:
+
+            **Self-Contained** - Portable, no installation required:
             - Larger download size (~80-150 MB)
             - Includes .NET 10 runtime - no installation needed
-            - Files: `*-SC.zip`
-            
-            Both versions are available for **x64** and **ARM64** architectures.
-            
-            ---
-            
-            ### 📝 Changes in this Release
-            ${{ steps.changelog.outputs.log }}
-            
-            ### 💬 Last Commit Message
-            ${{ steps.version.outputs.message }}
 
+            Both versions are available for **x64**, **x86**, and **ARM64** architectures.
+
+            ---
+
+            ### Changes in this Release
+            ${{ steps.changelog.outputs.log }}
+
+            ### SHA256 Checksums
+            ```
+            ${{ steps.checksums.outputs.sha256 }}
+            ```
+
+            Last Commit Message:
+            ${{ steps.meta.outputs.message }}
           draft: false
           prerelease: true

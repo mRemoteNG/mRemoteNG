@@ -7,6 +7,7 @@
         Container = 2,
         Connection = 3,
         PuttyRoot = 4,
-        PuttySession = 5
+        PuttySession = 5,
+        Entity = 6
     }
 }

@@ -115,7 +115,7 @@ namespace mRemoteNG.UI.Controls
             return keyValuePair.Value.Config.Title;
         }
 
-        private KeyValuePair<ICredentialRecord, ICredentialRepository> CastRowObject(object model)
+        private static KeyValuePair<ICredentialRecord, ICredentialRepository> CastRowObject(object model)
         {
             if (!(model is KeyValuePair<ICredentialRecord, ICredentialRepository>))
                 return default(KeyValuePair<ICredentialRecord, ICredentialRepository>);
@@ -137,18 +137,18 @@ namespace mRemoteNG.UI.Controls
             SetObjectList();
         }
 
-        public event EventHandler SelectionChanged;
+        public event EventHandler? SelectionChanged;
 
         private void RaiseSelectionChangedEvent()
         {
             SelectionChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        public event EventHandler<CellClickEventArgs> CellClick;
+        public event EventHandler<CellClickEventArgs>? CellClick;
 
         private void RaiseCellClickEvent(object sender, CellClickEventArgs args)
         {
-            CellClick?.Invoke(sender, args);
+            CellClick?.Invoke(this, args);
         }
     }
 }

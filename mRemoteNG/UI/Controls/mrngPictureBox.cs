@@ -8,7 +8,7 @@ namespace mRemoteNG.UI.Controls
     [SupportedOSPlatform("windows")]
     public partial class MrngPictureBox : PictureBox
     {
-        private ThemeManager _themeManager;
+        private ThemeManager? _themeManager;
 
         public MrngPictureBox()
         {
@@ -27,8 +27,8 @@ namespace mRemoteNG.UI.Controls
             base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ActiveAndExtended) return;
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette?.getColor("TextBox_Foreground") ?? ForeColor;
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette?.getColor("TextBox_Background") ?? BackColor;
             Invalidate();
         }
     }

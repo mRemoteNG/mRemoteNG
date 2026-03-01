@@ -16,7 +16,7 @@ namespace mRemoteNG.Connection.Protocol.WSL
 
         private IntPtr _handle;
         private readonly ConnectionInfo _connectionInfo = connectionInfo;
-        private ConsoleControl.ConsoleControl _consoleControl;
+        private ConsoleControl.ConsoleControl? _consoleControl;
 
         #endregion
 
@@ -54,11 +54,10 @@ namespace mRemoteNG.Connection.Protocol.WSL
 
                 _consoleControl.StartProcess(wslExe, arguments);
 
-                while (!_consoleControl.IsHandleCreated) break;
                 _handle = _consoleControl.Handle;
                 NativeMethods.SetParent(_handle, InterfaceControl.Handle);
 
-                Resize(this, new EventArgs());
+                Resize(this, EventArgs.Empty);
                 base.Connect();
                 return true;
             }
@@ -69,7 +68,7 @@ namespace mRemoteNG.Connection.Protocol.WSL
             }
         }
 
-        private bool IsWslInstalled()
+        private static bool IsWslInstalled()
         {
             try
             {

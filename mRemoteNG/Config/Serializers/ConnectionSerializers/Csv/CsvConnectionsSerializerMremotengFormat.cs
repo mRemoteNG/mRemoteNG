@@ -23,8 +23,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
         public CsvConnectionsSerializerMremotengFormat(SaveFilter saveFilter,
                                                        ICredentialRepositoryList credentialRepositoryList)
         {
-            saveFilter.ThrowIfNull(nameof(saveFilter));
-            credentialRepositoryList.ThrowIfNull(nameof(credentialRepositoryList));
+            ArgumentNullException.ThrowIfNull(saveFilter);
+            ArgumentNullException.ThrowIfNull(credentialRepositoryList);
 
             _saveFilter = saveFilter;
             _credentialRepositoryList = credentialRepositoryList;
@@ -32,7 +32,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
-            connectionTreeModel.ThrowIfNull(nameof(connectionTreeModel));
+            ArgumentNullException.ThrowIfNull(connectionTreeModel);
 
             ContainerInfo rootNode = connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
             return Serialize(rootNode);
@@ -40,7 +40,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
         public string Serialize(ConnectionInfo serializationTarget)
         {
-            serializationTarget.ThrowIfNull(nameof(serializationTarget));
+            ArgumentNullException.ThrowIfNull(serializationTarget);
             StringBuilder sb = new();
 
             WriteCsvHeader(sb);
@@ -58,30 +58,35 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             if (_saveFilter.SaveDomain)
                 sb.Append("Domain;");
 
-            sb.Append("Hostname;Port;VmId;Protocol;SSHTunnelConnectionName;OpeningCommand;SSHOptions;PuttySession;ConnectToConsole;UseCredSsp;UseRestrictedAdmin;UseRCG;UseVmId;UseEnhancedMode;RenderingEngine;RDPAuthenticationLevel;" +
+            sb.Append("Hostname;AlternativeAddress;Port;VmId;Protocol;SSHTunnelConnectionName;OpeningCommand;SSHOptions;PuttySession;ConnectToConsole;UseCredSsp;UseRestrictedAdmin;UseRCG;UseVmId;UseEnhancedMode;RenderingEngine;RDPAuthenticationLevel;" +
                       "LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;DisableFullWindowDrag;DisableMenuAnimations;DisableCursorShadow;DisableCursorBlinking;" +
-                      "CacheBitmaps;RedirectDiskDrives;RedirectDiskDrivesCustomRedirectPorts;RedirectPrinters;RedirectClipboard;RedirectSmartCards;RedirectSound;RedirectKeys;" +
-                      "PreExtApp;PostExtApp;MacAddress;UserField;EnvironmentTags;ExtApp;Favorite;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;" +
-                      "VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;" +
-                      "RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;RDGatewayExternalCredentialProvider;RDGatewayUserViaAPI;RedirectAudioCapture;RdpVersion;RDPStartProgram;RDPStartProgramWorkDir;UserViaAPI;EC2InstanceId;EC2Region;ExternalCredentialProvider;ExternalAddressProvider;");
+                      "CacheBitmaps;RedirectDiskDrives;RedirectDiskDrivesCustom;RedirectPorts;RedirectPrinters;RedirectClipboard;RedirectSmartCards;RedirectSound;RedirectKeys;" +
+                      "PreExtApp;PostExtApp;MacAddress;UserField;UserField1;UserField2;UserField3;UserField4;UserField5;UserField6;UserField7;UserField8;UserField9;UserField10;EnvironmentTags;ExtApp;Favorite;AutoSort;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;" +
+                      "VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;VNCClipboardRedirect;RDGatewayUsageMethod;RDGatewayHostname;" +
+                      "RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;RDGatewayExternalCredentialProvider;RDGatewayUserViaAPI;RedirectAudioCapture;RdpVersion;RDPStartProgram;RDPStartProgramWorkDir;UserViaAPI;EC2InstanceId;EC2Region;ExternalCredentialProvider;ExternalAddressProvider;PrivateKeyPath;UsePersistentBrowser;ScriptErrorsSuppressed;DesktopScaleFactor;CredentialId;RDPSignScope;RDPSignature;RDPSizingMode;ResolutionWidth;ResolutionHeight;RDPUseMultimon;Notes;RetryOnFirstConnect;WaitForIPAvailability;WaitForIPTimeout;ConnectionAddressPrimary;IPAddress;");
 
             if (_saveFilter.SaveInheritance)
                 sb.Append("InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;" +
-                          "InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDisableFullWindowDrag;InheritDisableMenuAnimations;InheritDisableCursorShadow;InheritDisableCursorBlinking;InheritDomain;InheritIcon;InheritPanel;InheritTabColor;InheritConnectionFrameColor;InheritPassword;InheritPort;" +
+                          "InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDisableFullWindowDrag;InheritDisableMenuAnimations;InheritDisableCursorShadow;InheritDisableCursorBlinking;InheritDomain;InheritIcon;InheritPanel;InheritTabColor;InheritConnectionFrameColor;InheritColor;InheritPassword;InheritPort;InheritAlternativeAddress;" +
                           "InheritProtocol;InheritSSHTunnelConnectionName;InheritOpeningCommand;InheritSSHOptions;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectDiskDrivesCustom;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;" +
                           "InheritRedirectClipboard;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;" +
                           "InheritUseConsoleSession;InheritUseCredSsp;InheritUseRestrictedAdmin;InheritUseRCG;InheritUseVmId;InheritUseEnhancedMode;InheritVmId;InheritRenderingEngine;InheritUsername;" +
                           "InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;" +
-                          "InheritEnvironmentTags;InheritFavorite;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;" +
-                          "InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;" +
+                          "InheritUserField1;InheritUserField2;InheritUserField3;InheritUserField4;InheritUserField5;InheritUserField6;InheritUserField7;InheritUserField8;InheritUserField9;InheritUserField10;InheritHostname;" +
+                          "InheritEnvironmentTags;InheritFavorite;InheritAutoSort;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;" +
+                          "InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;InheritVNCClipboardRedirect;" +
                           "InheritRDGatewayUsageMethod;InheritRDGatewayHostname;InheritRDGatewayUseConnectionCredentials;InheritRDGatewayUsername;" +
                           "InheritRDGatewayPassword;InheritRDGatewayDomain;InheritRDGatewayExternalCredentialProvider;InheritRDGatewayUserViaAPI;InheritRDPAlertIdleTimeout;InheritRDPMinutesToIdleTimeout;InheritSoundQuality;InheritUserViaAPI;" +
-                          "InheritRedirectAudioCapture;InheritRdpVersion;InheritExternalCredentialProvider");
+                          "InheritRedirectAudioCapture;InheritRdpVersion;InheritExternalCredentialProvider;" +
+                          "InheritPrivateKeyPath;InheritScriptErrorsSuppressed;InheritDesktopScaleFactor;" +
+                          "InheritIPAddress;InheritConnectionAddressPrimary;InheritRDPSignScope;InheritRDPSignature;" +
+                          "InheritRDPSizingMode;InheritResolutionWidth;InheritResolutionHeight;InheritRDPUseMultimon;" +
+                          "InheritNotes;InheritRetryOnFirstConnect;InheritWaitForIPAvailability;InheritWaitForIPTimeout");
         }
 
         private void SerializeNodesRecursive(ConnectionInfo node, StringBuilder sb)
         {
-            ContainerInfo nodeAsContainer = node as ContainerInfo;
+            ContainerInfo? nodeAsContainer = node as ContainerInfo;
             if (nodeAsContainer != null)
             {
                 foreach (ConnectionInfo child in nodeAsContainer.Children)
@@ -114,13 +119,13 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 sb.Append(FormatForCsv(con.Username));
 
             if (_saveFilter.SavePassword)
-                //sb.Append(con.Password?.ConvertToUnsecureString() + ";");
-                sb.Append(con.Password + ";");
+                sb.Append(FormatForCsv(con.Password));
 
             if (_saveFilter.SaveDomain)
                 sb.Append(FormatForCsv(con.Domain));
 
             sb.Append(FormatForCsv(con.Hostname))
+              .Append(FormatForCsv(con.AlternativeAddress))
               .Append(FormatForCsv(con.Port))
               .Append(FormatForCsv(con.VmId))
               .Append(FormatForCsv(con.Protocol))
@@ -161,9 +166,20 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.PostExtApp))
               .Append(FormatForCsv(con.MacAddress))
               .Append(FormatForCsv(con.UserField))
+              .Append(FormatForCsv(con.UserField1))
+              .Append(FormatForCsv(con.UserField2))
+              .Append(FormatForCsv(con.UserField3))
+              .Append(FormatForCsv(con.UserField4))
+              .Append(FormatForCsv(con.UserField5))
+              .Append(FormatForCsv(con.UserField6))
+              .Append(FormatForCsv(con.UserField7))
+              .Append(FormatForCsv(con.UserField8))
+              .Append(FormatForCsv(con.UserField9))
+              .Append(FormatForCsv(con.UserField10))
               .Append(FormatForCsv(con.EnvironmentTags))
               .Append(FormatForCsv(con.ExtApp))
               .Append(FormatForCsv(con.Favorite))
+              .Append(FormatForCsv(con is ContainerInfo containerInfo ? containerInfo.AutoSort : false))
               .Append(FormatForCsv(con.VNCCompression))
               .Append(FormatForCsv(con.VNCEncoding))
               .Append(FormatForCsv(con.VNCAuthMode))
@@ -175,6 +191,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.VNCColors))
               .Append(FormatForCsv(con.VNCSmartSizeMode))
               .Append(FormatForCsv(con.VNCViewOnly))
+              .Append(FormatForCsv(con.VNCClipboardRedirect))
               .Append(FormatForCsv(con.RDGatewayUsageMethod))
               .Append(FormatForCsv(con.RDGatewayHostname))
               .Append(FormatForCsv(con.RDGatewayUseConnectionCredentials))
@@ -192,6 +209,23 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.EC2Region))
               .Append(FormatForCsv(con.ExternalCredentialProvider))
               .Append(FormatForCsv(con.ExternalAddressProvider))
+              .Append(FormatForCsv(con.PrivateKeyPath))
+              .Append(FormatForCsv(con.UsePersistentBrowser))
+              .Append(FormatForCsv(con.ScriptErrorsSuppressed))
+              .Append(FormatForCsv(con.DesktopScaleFactor))
+              .Append(FormatForCsv(con.CredentialId))
+              .Append(FormatForCsv(con.RDPSignScope))
+              .Append(FormatForCsv(con.RDPSignature))
+              .Append(FormatForCsv(con.RDPSizingMode))
+              .Append(FormatForCsv(con.ResolutionWidth))
+              .Append(FormatForCsv(con.ResolutionHeight))
+              .Append(FormatForCsv(con.RDPUseMultimon))
+              .Append(FormatForCsv(con.Notes))
+              .Append(FormatForCsv(con.RetryOnFirstConnect))
+              .Append(FormatForCsv(con.WaitForIPAvailability))
+              .Append(FormatForCsv(con.WaitForIPTimeout))
+              .Append(FormatForCsv(con.ConnectionAddressPrimary))
+              .Append(FormatForCsv(con.IPAddress))
               ;
 
 
@@ -214,8 +248,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.Inheritance.Panel))
               .Append(FormatForCsv(con.Inheritance.TabColor))
               .Append(FormatForCsv(con.Inheritance.ConnectionFrameColor))
+              .Append(FormatForCsv(con.Inheritance.Color))
               .Append(FormatForCsv(con.Inheritance.Password))
               .Append(FormatForCsv(con.Inheritance.Port))
+              .Append(FormatForCsv(con.Inheritance.AlternativeAddress))
               .Append(FormatForCsv(con.Inheritance.Protocol))
               .Append(FormatForCsv(con.Inheritance.SSHTunnelConnectionName))
               .Append(FormatForCsv(con.Inheritance.OpeningCommand))
@@ -246,8 +282,20 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.Inheritance.PostExtApp))
               .Append(FormatForCsv(con.Inheritance.MacAddress))
               .Append(FormatForCsv(con.Inheritance.UserField))
+              .Append(FormatForCsv(con.Inheritance.UserField1))
+              .Append(FormatForCsv(con.Inheritance.UserField2))
+              .Append(FormatForCsv(con.Inheritance.UserField3))
+              .Append(FormatForCsv(con.Inheritance.UserField4))
+              .Append(FormatForCsv(con.Inheritance.UserField5))
+              .Append(FormatForCsv(con.Inheritance.UserField6))
+              .Append(FormatForCsv(con.Inheritance.UserField7))
+              .Append(FormatForCsv(con.Inheritance.UserField8))
+              .Append(FormatForCsv(con.Inheritance.UserField9))
+              .Append(FormatForCsv(con.Inheritance.UserField10))
+              .Append(FormatForCsv(con.Inheritance.Hostname))
               .Append(FormatForCsv(con.Inheritance.EnvironmentTags))
               .Append(FormatForCsv(con.Inheritance.Favorite))
+              .Append(FormatForCsv(con.Inheritance.AutoSort))
               .Append(FormatForCsv(con.Inheritance.ExtApp))
               .Append(FormatForCsv(con.Inheritance.VNCCompression))
               .Append(FormatForCsv(con.Inheritance.VNCEncoding))
@@ -260,6 +308,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.Inheritance.VNCColors))
               .Append(FormatForCsv(con.Inheritance.VNCSmartSizeMode))
               .Append(FormatForCsv(con.Inheritance.VNCViewOnly))
+              .Append(FormatForCsv(con.Inheritance.VNCClipboardRedirect))
               .Append(FormatForCsv(con.Inheritance.RDGatewayUsageMethod))
               .Append(FormatForCsv(con.Inheritance.RDGatewayHostname))
               .Append(FormatForCsv(con.Inheritance.RDGatewayUseConnectionCredentials))
@@ -274,13 +323,32 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.Inheritance.RedirectAudioCapture))
               .Append(FormatForCsv(con.Inheritance.RdpVersion))
               .Append(FormatForCsv(con.Inheritance.UserViaAPI))
-              .Append(FormatForCsv(con.Inheritance.ExternalCredentialProvider));
+              .Append(FormatForCsv(con.Inheritance.ExternalCredentialProvider))
+              .Append(FormatForCsv(con.Inheritance.PrivateKeyPath))
+              .Append(FormatForCsv(con.Inheritance.ScriptErrorsSuppressed))
+              .Append(FormatForCsv(con.Inheritance.DesktopScaleFactor))
+              .Append(FormatForCsv(con.Inheritance.IPAddress))
+              .Append(FormatForCsv(con.Inheritance.ConnectionAddressPrimary))
+              .Append(FormatForCsv(con.Inheritance.RDPSignScope))
+              .Append(FormatForCsv(con.Inheritance.RDPSignature))
+              .Append(FormatForCsv(con.Inheritance.RDPSizingMode))
+              .Append(FormatForCsv(con.Inheritance.ResolutionWidth))
+              .Append(FormatForCsv(con.Inheritance.ResolutionHeight))
+              .Append(FormatForCsv(con.Inheritance.RDPUseMultimon))
+              .Append(FormatForCsv(con.Inheritance.Notes))
+              .Append(FormatForCsv(con.Inheritance.RetryOnFirstConnect))
+              .Append(FormatForCsv(con.Inheritance.WaitForIPAvailability))
+              .Append(FormatForCsv(con.Inheritance.WaitForIPTimeout));
         }
 
-        private string FormatForCsv(object value)
+        private static string FormatForCsv(object value)
         {
-            string cleanedString = value.ToString().Replace(";", "");
-            return cleanedString + ";";
+            string text = value?.ToString() ?? string.Empty;
+            if (text.Contains(';') || text.Contains('"'))
+            {
+                text = "\"" + text.Replace("\"", "\"\"") + "\"";
+            }
+            return text + ";";
         }
     }
 }

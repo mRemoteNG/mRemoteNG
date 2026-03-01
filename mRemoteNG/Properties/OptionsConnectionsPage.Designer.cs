@@ -58,5 +58,29 @@ namespace mRemoteNG.Properties {
                 this["cbConnectionsPageInOptionMenu"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool WatchConnectionFile {
+            get {
+                return ((bool)(this["WatchConnectionFile"]));
+            }
+            set {
+                this["WatchConnectionFile"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AdditionalConnectionFiles {
+            get {
+                return ((string)(this["AdditionalConnectionFiles"]));
+            }
+            set {
+                this["AdditionalConnectionFiles"] = value;
+            }
+        }
     }
 }

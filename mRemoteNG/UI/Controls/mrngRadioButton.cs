@@ -11,7 +11,7 @@ namespace mRemoteNG.UI.Controls
     // and glyph color inconsistency
     class MrngRadioButton : RadioButton
     {
-        private ThemeManager _themeManager;
+        private ThemeManager? _themeManager;
         private readonly Rectangle _circle;
         private readonly Rectangle _circleSmall;
         private readonly int _textXCoord;
@@ -78,7 +78,7 @@ namespace mRemoteNG.UI.Controls
         //This class is painted with the checkbox colors, the glyph color is used for the radio inside
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!_themeManager.ActiveAndExtended)
+            if (_themeManager is not { ActiveAndExtended: true })
             {
                 base.OnPaint(e);
                 return;
@@ -88,36 +88,44 @@ namespace mRemoteNG.UI.Controls
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            Color fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text");
-            Color outline = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border");
-            Color centerBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
+            var palette = _themeManager.ActiveTheme.ExtendedPalette;
+            if (palette == null)
+            {
+                base.OnPaint(e);
+                return;
+            }
+
+            Color fore = palette.getColor("CheckBox_Text");
+            Color outline = palette.getColor("CheckBox_Border");
+            Color centerBack = palette.getColor("CheckBox_Background");
             Color center;
 
             // Overlay Graphic
-            e.Graphics.Clear(Parent.BackColor);
+            Color parentBack = Parent?.BackColor ?? BackColor;
+            e.Graphics.Clear(parentBack);
             if (Enabled)
             {
                 if (Checked)
                 {
-                    center = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Glyph");
+                    center = palette.getColor("CheckBox_Glyph");
                 }
                 else
                 {
                     center = Color.Transparent;
                     if (_mice == MouseState.HOVER)
                     {
-                        outline = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Hover");
+                        outline = palette.getColor("CheckBox_Border_Hover");
                     }
                 }
             }
             else
             {
                 center = Color.Transparent;
-                fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text_Disabled");
+                fore = palette.getColor("CheckBox_Text_Disabled");
             }
 
             Rectangle textRect = new(_textXCoord, Padding.Top, Width - 16, Height);
-            TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor,
+            TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, parentBack,
                                   TextFormatFlags.PathEllipsis);
 
             g.FillEllipse(new SolidBrush(centerBack), _circle);

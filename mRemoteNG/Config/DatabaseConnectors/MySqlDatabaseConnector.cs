@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.Common;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
@@ -9,7 +10,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
 {
     public class MySqlDatabaseConnector : IDatabaseConnector
     {
-        private DbConnection _dbConnection { get; set; } = default(MySqlConnection);
+        private DbConnection _dbConnection { get; set; } = null!;
         private string _dbConnectionString = "";
         private readonly string _dbHost;
         private readonly string _dbPort;
@@ -49,7 +50,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         private void BuildSqlConnectionString()
         {
-            _dbConnectionString = $"server={_dbHost};user={_dbUsername};database={_dbName};port={_dbPort};password={_dbPassword};";
+            _dbConnectionString = $"server={_dbHost};user={_dbUsername};database={_dbName};port={_dbPort};password={_dbPassword};CharSet=utf8mb4;";
         }
         
         public void Connect()
@@ -75,6 +76,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
         private void Dispose(bool itIsSafeToFreeManagedObjects)
         {

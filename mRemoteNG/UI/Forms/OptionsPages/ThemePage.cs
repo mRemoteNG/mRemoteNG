@@ -18,7 +18,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private readonly ThemeManager _themeManager;
         private readonly bool _oriActiveTheming;
-        private ThemeInfo _oriActiveTheme;
+        private ThemeInfo? _oriActiveTheme;
         private readonly List<ThemeInfo> modifiedThemes = [];
 
         #endregion
@@ -29,7 +29,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.AppearanceEditor_16x);
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
-            _themeManager = ThemeManager.getInstance();
             _themeManager.ThemeChanged += ApplyTheme;
             _oriActiveTheming = _themeManager.ThemingActive;
         }
@@ -46,7 +45,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             btnThemeDelete.Text = Language._Delete;
             btnThemeNew.Text = Language._New;
-            labelRestart.Text = Language.OptionsThemeChangeWarning;
+            labelRestart.Text = "Theme changes are applied live.";
         }
 
         private new void ApplyTheme()
@@ -63,15 +62,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnThemeDelete.Enabled = false;
             //Load the list of themes
             cboTheme.Items.Clear();
+            cboTheme.DisplayMember = "Name";
             // ReSharper disable once CoVariantArrayConversion
-            cboTheme.Items.AddRange(_themeManager.LoadThemes().OrderBy(x => x.Name).ToArray());
+            cboTheme.Items.AddRange(_themeManager.LoadThemes().OrderBy(x => x.Name, StringComparer.Ordinal).ToArray());
             cboTheme.SelectedItem = _themeManager.ActiveTheme;
             // Store the original active theme for reverting
             _oriActiveTheme = _themeManager.ActiveTheme;
-            cboTheme_SelectionChangeCommitted(this, new EventArgs());
-            cboTheme.DisplayMember = "Name";
+            cboTheme_SelectionChangeCommitted(this, EventArgs.Empty);
 
             listPalette.FormatCell += ListPalette_FormatCell; //Color cell formatter
+
+            // Apply the current theme to the panel on load
+            ApplyTheme();
         }
 
         private void ListPalette_FormatCell(object sender, FormatCellEventArgs e)
@@ -88,41 +90,42 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Properties.OptionsThemePage.Default.ThemingActive = true;
 
-            // Save the theme settings form close so we don't run into unexpected results while modifying...
-            // Prompt the user that a restart is required to apply the new theme...
-            if (cboTheme.SelectedItem != null
-            ) // LoadSettings calls SaveSettings, so these might be null the first time around
+            // Apply the selected theme live without requiring a restart
+            if (cboTheme.SelectedItem != null)
             {
-                if (!Properties.OptionsThemePage.Default.ThemeName.Equals(((ThemeInfo)cboTheme.SelectedItem).Name))
+                ThemeInfo selectedTheme = (ThemeInfo)cboTheme.SelectedItem;
+                if (!Properties.OptionsThemePage.Default.ThemeName.Equals(selectedTheme.Name, StringComparison.Ordinal))
                 {
-                    Properties.OptionsThemePage.Default.ThemeName = ((ThemeInfo)cboTheme.SelectedItem).Name;
-                    CTaskDialog.MessageBox("Theme Changed", "Restart Required.", "Please restart mRemoteNG to apply the selected theme.", ETaskDialogButtons.Ok, ESysIcons.Information);
+                    Properties.OptionsThemePage.Default.ThemeName = selectedTheme.Name;
+                    _themeManager.ActiveTheme = selectedTheme;
                 }
             }
 
             foreach (ThemeInfo updatedTheme in modifiedThemes)
             {
-                _themeManager.updateTheme(updatedTheme);
+                ThemeManager.updateTheme(updatedTheme);
             }
+
+            Properties.OptionsThemePage.Default.Save();
         }
 
         public override void RevertSettings()
         {
             base.RevertSettings();
             _themeManager.ThemingActive = _oriActiveTheming;
-            
+
             // Clear the modified themes list without saving
             modifiedThemes.Clear();
-            
+
             // Restore the original theme selection
             if (_oriActiveTheme != null)
             {
                 _themeManager.ActiveTheme = _oriActiveTheme;
                 // Reload the theme list to reflect the original state
                 cboTheme.Items.Clear();
-                cboTheme.Items.AddRange(_themeManager.LoadThemes().OrderBy(x => x.Name).ToArray());
+                cboTheme.Items.AddRange(_themeManager.LoadThemes().OrderBy(x => x.Name, StringComparer.Ordinal).ToArray());
                 cboTheme.SelectedItem = _oriActiveTheme;
-                cboTheme_SelectionChangeCommitted(this, new EventArgs());
+                cboTheme_SelectionChangeCommitted(this, EventArgs.Empty);
             }
         }
 
@@ -144,7 +147,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             btnThemeNew.Enabled = true;
 
-            ThemeInfo selectedTheme = (ThemeInfo)cboTheme.SelectedItem;
+            ThemeInfo? selectedTheme = cboTheme.SelectedItem as ThemeInfo;
 
             if (selectedTheme != null && selectedTheme.IsExtendable)
             {
@@ -155,6 +158,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 listPalette.Visible = true;
                 listPalette.CellClick += ListPalette_CellClick;
             }
+
+            // Apply selected theme as live preview
+            if (selectedTheme != null)
+                _themeManager.ActiveTheme = selectedTheme;
 
             if (selectedTheme != null && selectedTheme.IsThemeBase) return;
 
@@ -169,6 +176,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         /// <param name="e"></param>
         private void ListPalette_CellClick(object sender, CellClickEventArgs e)
         {
+            if (e.Model == null) return;
             PseudoKeyColor colorElem = (PseudoKeyColor)e.Model;
 
             ColorDialog colorDlg = new()
@@ -182,7 +190,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             if (colorDlg.ShowDialog() != DialogResult.OK) return;
             modifiedThemes.Add(_themeManager.ActiveTheme);
-            _themeManager.ActiveTheme.ExtendedPalette.replaceColor(colorElem.Key, colorDlg.Color);
+            _themeManager.ActiveTheme.ExtendedPalette?.replaceColor(colorElem.Key, colorDlg.Color);
             colorElem.Value = colorDlg.Color;
             listPalette.RefreshObject(e.Model);
             _themeManager.refreshUI();
@@ -190,20 +198,22 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void ColorMeList(ThemeInfo ti)
         {
+            if (ti.ExtendedPalette == null) return;
             foreach (KeyValuePair<string, System.Drawing.Color> colorElem in ti.ExtendedPalette.ExtColorPalette)
                 listPalette.AddObject(new PseudoKeyColor(colorElem.Key, colorElem.Value));
         }
 
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
-            using (FrmInputBox frmInputBox = new(Language.OptionsThemeNewThemeCaption, Language.OptionsThemeNewThemeText, _themeManager.ActiveTheme.Name))
+            using (FrmInputBox frmInputBox = new(Language.OptionsThemeNewThemeCaption, Language.OptionsThemeNewThemeText, _themeManager.ActiveTheme.Name ?? string.Empty))
             {
                 DialogResult dr = frmInputBox.ShowDialog();
                 if (dr != DialogResult.OK) return;
-                if (_themeManager.isThemeNameOk(frmInputBox.returnValue))
+                if (frmInputBox.returnValue != null && _themeManager.isThemeNameOk(frmInputBox.returnValue))
                 {
-                    ThemeInfo addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, frmInputBox.returnValue);
-                    _themeManager.ActiveTheme = addedTheme;
+                    ThemeInfo? addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, frmInputBox.returnValue);
+                    if (addedTheme != null)
+                        _themeManager.ActiveTheme = addedTheme;
                     LoadSettings();
                 }
                 else

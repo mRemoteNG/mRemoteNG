@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.Common;
+using System.Globalization;
 using System.Runtime.Versioning;
 using System.Threading;
 using mRemoteNG.App;
@@ -14,7 +15,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
     {
         private readonly IDatabaseConnector _dbConnector;
         private readonly DbCommand _dbQuery;
-        private DateTime LastUpdateTime => Runtime.ConnectionsService.LastSqlUpdate;
+        private static DateTime LastUpdateTime => Runtime.ConnectionsService.LastSqlUpdate;
         private DateTime _lastDatabaseUpdateTime;
 
 
@@ -62,7 +63,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
             return (lastUpdateInDb > LastUpdateTime && !amTheLastoneUpdated);
         }
 
-        private bool CheckIfIAmTheLastOneUpdated(DateTime lastUpdateInDb)
+        private static bool CheckIfIAmTheLastOneUpdated(DateTime lastUpdateInDb)
         {
             DateTime lastSqlUpdateWithoutMilliseconds = new(LastUpdateTime.Ticks - (LastUpdateTime.Ticks % TimeSpan.TicksPerSecond), LastUpdateTime.Kind);
             return lastUpdateInDb == lastSqlUpdateWithoutMilliseconds;
@@ -78,7 +79,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
                 sqlReader.Read();
                 if (sqlReader.HasRows)
                 {
-                    lastUpdateInDb = Convert.ToDateTime(sqlReader["LastUpdate"]);
+                    lastUpdateInDb = Convert.ToDateTime(sqlReader["LastUpdate"], CultureInfo.InvariantCulture);
                 }
                 sqlReader.Close();
             }
@@ -93,14 +94,14 @@ namespace mRemoteNG.Config.Connections.Multiuser
         }
 
 
-        public event EventHandler UpdateCheckStarted;
+        public event EventHandler? UpdateCheckStarted;
 
         private void RaiseUpdateCheckStartedEvent()
         {
             UpdateCheckStarted?.Invoke(this, EventArgs.Empty);
         }
 
-        public event UpdateCheckFinishedEventHandler UpdateCheckFinished;
+        public event UpdateCheckFinishedEventHandler? UpdateCheckFinished;
 
         private void RaiseUpdateCheckFinishedEvent(bool updateAvailable)
         {
@@ -108,7 +109,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
             UpdateCheckFinished?.Invoke(this, args);
         }
 
-        public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
+        public event ConnectionsUpdateAvailableEventHandler? ConnectionsUpdateAvailable;
 
         private void RaiseConnectionsUpdateAvailableEvent()
         {
@@ -120,6 +121,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         private void Dispose(bool itIsSafeToDisposeManagedObjects)

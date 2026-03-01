@@ -20,13 +20,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         public XmlConnectionNodeSerializer26(ICryptographyProvider cryptographyProvider, SecureString encryptionKey, SaveFilter saveFilter)
         {
-            if (cryptographyProvider == null)
-                throw new ArgumentNullException(nameof(cryptographyProvider));
-            if (encryptionKey == null)
-                throw new ArgumentNullException(nameof(encryptionKey));
-            if (saveFilter == null)
-                throw new ArgumentNullException(nameof(saveFilter));
-
+            ArgumentNullException.ThrowIfNull(cryptographyProvider);
+            ArgumentNullException.ThrowIfNull(encryptionKey);
+            ArgumentNullException.ThrowIfNull(saveFilter);
             _cryptographyProvider = cryptographyProvider;
             _encryptionKey = encryptionKey;
             _saveFilter = saveFilter;
@@ -42,7 +38,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         private void SetElementAttributes(XContainer element, ConnectionInfo connectionInfo)
         {
-            ContainerInfo nodeAsContainer = connectionInfo as ContainerInfo;
+            ContainerInfo? nodeAsContainer = connectionInfo as ContainerInfo;
             element.Add(new XAttribute("Name", connectionInfo.Name));
             element.Add(new XAttribute("Type", connectionInfo.GetTreeNodeType().ToString()));
             if (nodeAsContainer != null)
@@ -71,6 +67,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("SSHTunnelConnectionName", connectionInfo.SSHTunnelConnectionName));
             element.Add(new XAttribute("OpeningCommand", connectionInfo.OpeningCommand));
             element.Add(new XAttribute("SSHOptions", connectionInfo.SSHOptions));
+            element.Add(new XAttribute("PrivateKeyPath", connectionInfo.PrivateKeyPath));
             element.Add(new XAttribute("PuttySession", connectionInfo.PuttySession));
             element.Add(new XAttribute("Port", connectionInfo.Port));
             element.Add(new XAttribute("ConnectToConsole", connectionInfo.UseConsoleSession.ToString().ToLowerInvariant()));
@@ -176,6 +173,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     element.Add(new XAttribute("InheritOpeningCommand", inheritance.OpeningCommand.ToString().ToLowerInvariant()));
                 if (inheritance.SSHOptions)
                     element.Add(new XAttribute("InheritSSHOptions", inheritance.SSHOptions.ToString().ToLowerInvariant()));
+                if (inheritance.PrivateKeyPath)
+                    element.Add(new XAttribute("InheritPrivateKeyPath", inheritance.PrivateKeyPath.ToString().ToLowerInvariant()));
                 if (inheritance.PuttySession)
                     element.Add(new XAttribute("InheritPuttySession", inheritance.PuttySession.ToString().ToLowerInvariant()));
                 if (inheritance.RedirectDiskDrives)

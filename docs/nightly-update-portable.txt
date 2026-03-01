@@ -1,0 +1,3 @@
+Version=1.79.0
+dURL=https://github.com/robertpopa22/mRemoteNG/releases/download/v1.79.0/mRemoteNG-v1.79.0-x64.zip
+clURL=https://raw.githubusercontent.com/robertpopa22/mRemoteNG/codex/release-1.79-bootstrap/CHANGELOG.md

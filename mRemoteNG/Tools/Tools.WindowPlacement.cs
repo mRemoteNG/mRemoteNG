@@ -51,7 +51,7 @@ namespace mRemoteNG.Tools
         {
             if (_form == null)
             {
-                throw (new NullReferenceException("WindowPlacement.Form is not set."));
+                throw new InvalidOperationException("WindowPlacement.Form is not set.");
             }
 
             NativeMethods.WINDOWPLACEMENT windowPlacement = new();
@@ -71,7 +71,7 @@ namespace mRemoteNG.Tools
         {
             if (_form == null)
             {
-                throw (new NullReferenceException("WindowPlacement.Form is not set."));
+                throw new InvalidOperationException("WindowPlacement.Form is not set.");
             }
 
             windowPlacement.length = (uint)Marshal.SizeOf(windowPlacement);

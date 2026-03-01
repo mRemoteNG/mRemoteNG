@@ -9,12 +9,11 @@ namespace mRemoteNG.Tree.ClickHandlers
     public class TreeNodeCompositeClickHandler : ITreeNodeClickHandler<ConnectionInfo>
     {
         public IEnumerable<ITreeNodeClickHandler<ConnectionInfo>> ClickHandlers { get; set; } =
-            new ITreeNodeClickHandler<ConnectionInfo>[0];
+            Array.Empty<ITreeNodeClickHandler<ConnectionInfo>>();
 
         public void Execute(ConnectionInfo clickedNode)
         {
-            if (clickedNode == null)
-                throw new ArgumentNullException(nameof(clickedNode));
+            ArgumentNullException.ThrowIfNull(clickedNode);
             foreach (ITreeNodeClickHandler<ConnectionInfo> handler in ClickHandlers)
             {
                 handler.Execute(clickedNode);

@@ -13,7 +13,7 @@ namespace mRemoteNG.UI.Window
     [SupportedOSPlatform("windows")]
     public partial class ActiveDirectoryImportWindow : BaseWindow
     {
-        private string _currentDomain;
+        private string _currentDomain = "";
 
         public ActiveDirectoryImportWindow()
         {
@@ -24,10 +24,8 @@ namespace mRemoteNG.UI.Window
             FontOverrider.FontOverride(this);
             ApplyTheme();
             ApplyLanguage();
-            txtDomain.Text = _currentDomain;
+            txtDomain.Text = Environment.UserDomainName;
             EnableDisableImportButton();
-            // Domain doesn't refresh on load, so it defaults to DOMAIN without this...
-            _currentDomain = Environment.UserDomainName;
             ChangeDomain();
         }
 
@@ -37,21 +35,26 @@ namespace mRemoteNG.UI.Window
         {
             if (!ThemeManager.getInstance().ThemingActive) return;
             base.ApplyTheme();
-            if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            activeDirectoryTree.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("List_Background");
-            activeDirectoryTree.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
+            var themeManager = ThemeManager.getInstance();
+            if (!themeManager.ActiveAndExtended) return;
+            var palette = themeManager.ActiveTheme?.ExtendedPalette;
+            if (palette == null) return;
+            activeDirectoryTree.BackColor = palette.getColor("List_Background");
+            activeDirectoryTree.ForeColor = palette.getColor("List_Item_Foreground");
         }
 
         private void BtnImport_Click(object sender, EventArgs e)
         {
-            Connection.ConnectionInfo selectedNode = AppWindows.TreeForm.SelectedNode;
-            ContainerInfo importDestination;
+            Connection.ConnectionInfo? selectedNode = AppWindows.TreeForm?.SelectedNode;
+            ContainerInfo? importDestination;
             if (selectedNode != null)
                 importDestination = selectedNode as ContainerInfo ?? selectedNode.Parent;
             else
-                importDestination = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.First();
+                importDestination = Runtime.ConnectionsService.ConnectionTreeModel?.RootNodes.First();
 
-            Import.ImportFromActiveDirectory(activeDirectoryTree.AdPath, importDestination, chkSubOU.Checked);
+            var adPath = activeDirectoryTree.AdPath;
+            if (string.IsNullOrEmpty(adPath) || importDestination == null) return;
+            Import.ImportFromActiveDirectory(adPath, importDestination, chkSubOU.Checked);
         }
 
         private void TxtDomain_KeyDown(object sender, KeyEventArgs e)

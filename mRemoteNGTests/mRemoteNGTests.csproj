@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <LangVersion>preview</LangVersion>
     <IsPackable>false</IsPackable>
-    <Platforms>x64;arm64</Platforms>
+    <Platforms>x86;x64;arm64</Platforms>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Configurations>Debug;Release;Debug Portable;Release Portable;Release Installer;Deploy to github</Configurations>
     <SupportedOSPlatformVersion>10.0.26100.0</SupportedOSPlatformVersion>
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" />
@@ -26,50 +27,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.native.System" />
-    <PackageReference Include="runtime.native.System.IO.Compression" />
-    <PackageReference Include="runtime.native.System.Net.Http" />
-    <PackageReference Include="runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.opensuse.42.1-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="System.Buffers" />
-    <PackageReference Include="System.Collections.Immutable" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" />
-    <PackageReference Include="System.Console" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" />
-    <PackageReference Include="System.Diagnostics.EventLog" />
-    <PackageReference Include="System.Drawing.Common" />
-    <PackageReference Include="System.Formats.Asn1" />
-    <PackageReference Include="System.IO.Pipelines" />
-    <PackageReference Include="System.Net.Http" />
-    <PackageReference Include="System.Net.Primitives" />
-    <PackageReference Include="System.Net.Sockets" />
-    <PackageReference Include="System.Reflection.Emit" />
-    <PackageReference Include="System.Reflection.Emit.ILGeneration" />
-    <PackageReference Include="System.Reflection.Emit.Lightweight" />
-    <PackageReference Include="System.Reflection.Metadata" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" />
-    <PackageReference Include="System.Runtime.Extensions" />
-    <PackageReference Include="System.Security.Cryptography.Algorithms" />
-    <PackageReference Include="System.Security.Cryptography.Cng" />
-    <PackageReference Include="System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="System.Security.Cryptography.X509Certificates" />
-    <PackageReference Include="System.Security.Permissions" />
-    <PackageReference Include="System.Text.Encoding.CodePages" />
-    <PackageReference Include="System.Text.Json" />
-    <PackageReference Include="System.Text.RegularExpressions" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" />
-    <PackageReference Include="System.Windows.Extensions" />
-    <PackageReference Include="System.Xml.ReaderWriter" />
+    <PackageReference Include="System.Data.Odbc" />
     <PackageReference Include="ZstdSharp.Port" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\mRemoteNG\mRemoteNG.csproj" />
-    <ProjectReference Include="..\mRemoteNGInstaller\CustomActions\CustomActions.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\mRemoteNGInstaller\CustomActions\InstalledWindowsUpdateChecker.cs">
+      <Link>Installer\InstalledWindowsUpdateChecker.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

@@ -8,9 +8,7 @@ namespace mRemoteNG.Credential.Repositories
 
         public CredentialRepositoryChangedArgs(ICredentialRepository repository)
         {
-            if (repository == null)
-                throw new ArgumentNullException(nameof(repository));
-
+            ArgumentNullException.ThrowIfNull(repository);
             Repository = repository;
         }
     }

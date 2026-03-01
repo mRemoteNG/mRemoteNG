@@ -50,12 +50,7 @@ namespace mRemoteNG.Messages.MessageWriters
             }
             else
             {
-                _messageWindow.lvErrorCollector.Items.Insert(0, lvItem);
-
-                if (_messageWindow.lvErrorCollector.Items.Count > 0)
-                {
-                    _messageWindow.pbError.Visible = true;
-                }
+                _messageWindow.AddMessage(lvItem);
             }
         }
     }

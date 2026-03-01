@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Runtime.Serialization;
 using System.Runtime.Versioning;
 using mRemoteNG.Properties;
 
@@ -11,10 +10,9 @@ using mRemoteNG.Properties;
 namespace mRemoteNG.App
 {
     [SupportedOSPlatform("windows")]
-    [Serializable]
     public sealed class SupportedCultures : Dictionary<string, string>
     {
-        private static SupportedCultures _Instance;
+        private static SupportedCultures? _Instance;
 
         private static SupportedCultures SingletonInstance
         {
@@ -39,12 +37,6 @@ namespace mRemoteNG.App
             }
         }
 
-        // fix CA2229 - https://docs.microsoft.com/en-us/visualstudio/code-quality/ca2229-implement-serialization-constructors?view=vs-2017
-        private SupportedCultures(SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException();
-        }
-
         public static bool IsNameSupported(string CultureName)
         {
             return SingletonInstance.ContainsKey(CultureName);
@@ -55,7 +47,7 @@ namespace mRemoteNG.App
             return SingletonInstance.ContainsValue(CultureNativeName);
         }
 
-        public static string get_CultureName(string CultureNativeName)
+        public static string GetCultureName(string CultureNativeName)
         {
             string[] Names = new string[SingletonInstance.Count + 1];
             string[] NativeNames = new string[SingletonInstance.Count + 1];
@@ -74,12 +66,12 @@ namespace mRemoteNG.App
             throw (new KeyNotFoundException());
         }
 
-        public static string get_CultureNativeName(string CultureName)
+        public static string GetCultureNativeName(string CultureName)
         {
             return SingletonInstance[CultureName];
         }
 
-        public static List<string> CultureNativeNames
+        public static IList<string> CultureNativeNames
         {
             get
             {

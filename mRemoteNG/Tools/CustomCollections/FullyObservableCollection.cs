@@ -105,7 +105,7 @@ namespace mRemoteNG.Tools.CustomCollections
                 RaiseCollectionChangedEvent(ActionType.Updated, new[] {(T)sender});
         }
 
-        public event EventHandler<CollectionUpdatedEventArgs<T>> CollectionUpdated;
+        public event EventHandler<CollectionUpdatedEventArgs<T>>? CollectionUpdated;
 
         private void RaiseCollectionChangedEvent(ActionType action, IEnumerable<T> changedItems)
         {

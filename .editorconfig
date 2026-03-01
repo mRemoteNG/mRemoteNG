@@ -1,0 +1,37 @@
+# Root EditorConfig — applies to ALL projects in solution
+root = true
+
+[*.cs]
+# ===== Meziantou — suppress noisy rules globally =====
+# MA0004: Use Task.ConfigureAwait — WinForms needs UI context
+dotnet_diagnostic.MA0004.severity = none
+# MA0011: IFormatProvider — too pervasive in legacy code
+dotnet_diagnostic.MA0011.severity = none
+# MA0026: Fix TODO/HACK/FIXME comment
+dotnet_diagnostic.MA0026.severity = none
+# MA0028: Optimize StringBuilder — low priority
+dotnet_diagnostic.MA0028.severity = none
+# MA0037: Remove empty statement — legacy code
+dotnet_diagnostic.MA0037.severity = suggestion
+# MA0046: First parameter of event handler must be object — legacy interfaces
+dotnet_diagnostic.MA0046.severity = suggestion
+# MA0048: File name must match type name — legacy project
+dotnet_diagnostic.MA0048.severity = suggestion
+# MA0049: Type name should not match containing namespace — legacy naming
+dotnet_diagnostic.MA0049.severity = suggestion
+# MA0051: Method is too long
+dotnet_diagnostic.MA0051.severity = suggestion
+# MA0076: Do not use implicit culture-sensitive ToString
+dotnet_diagnostic.MA0076.severity = none
+
+# ===== Roslynator =====
+# RCS1194: Implement exception constructors
+dotnet_diagnostic.RCS1194.severity = none
+# RCS1090: Add ConfigureAwait
+dotnet_diagnostic.RCS1090.severity = none
+
+# ===== .NET Analyzers =====
+# CA1848: Use LoggerMessage source generation — not applicable (log4net)
+dotnet_diagnostic.CA1848.severity = none
+# CA2007: ConfigureAwait — WinForms needs SynchronizationContext
+dotnet_diagnostic.CA2007.severity = none

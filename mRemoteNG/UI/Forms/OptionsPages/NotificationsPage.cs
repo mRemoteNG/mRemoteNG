@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Versioning;
@@ -15,7 +15,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     public sealed partial class NotificationsPage
     {
         #region Private Fields
-        private OptRegistryNotificationsPage pageRegSettingsInstance;
+        private OptRegistryNotificationsPage? pageRegSettingsInstance;
         #endregion
 
         public NotificationsPage()
@@ -176,6 +176,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 return;
             }
 
+            if (pageRegSettingsInstance is null) return;
+
             // ***
             // Disable controls based on the registry settings.
             //
@@ -199,7 +201,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             if (pageRegSettingsInstance.SwitchToMCOnError.IsSet)
                 DisableControl(chkSwitchToMCErrors);
-            
+
         }
 
         private void LoadRegistryLoggingSettings()
@@ -209,6 +211,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 DisableControl(groupBoxLogging);
                 return;
             }
+
+            if (pageRegSettingsInstance is null) return;
 
             // ***
             // Disable controls based on the registry settings.
@@ -245,6 +249,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 return;
             }
 
+            if (pageRegSettingsInstance is null) return;
+
             // ***
             // Disable controls based on the registry settings.
             //
@@ -267,6 +273,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                    !CommonRegistrySettings.AllowNotifications
                 || !CommonRegistrySettings.AllowLogging
                 || !CommonRegistrySettings.AllowPopups;
+
+            if (pageRegSettingsInstance is null)
+                return CommonSettings;
 
             bool NotificationPanelSettings =
                    pageRegSettingsInstance.NfpWriteDebugMsgs.IsSet
@@ -297,7 +306,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void buttonSelectLogPath_Click(object sender, System.EventArgs e)
         {
             string currentFile = textBoxLogPath.Text;
-            string currentDirectory = Path.GetDirectoryName(currentFile);
+            string currentDirectory = Path.GetDirectoryName(currentFile) ?? string.Empty;
             saveFileDialogLogging.Title = Language.ChooseLogPath;
             saveFileDialogLogging.Filter = @"Log file|*.log";
             saveFileDialogLogging.InitialDirectory = currentDirectory;
@@ -345,7 +354,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 // Validate path to prevent command injection
                 PathValidator.ValidatePathOrThrow(path, nameof(path));
-                
+
                 // Open the file using the default application associated with its file type based on the user's preference
                 // Use ProcessStartInfo with UseShellExecute for better control
                 var startInfo = new ProcessStartInfo
@@ -357,7 +366,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 return true;
             }
             catch
-        {
+            {
                 // If necessary, the error can be logged here.
                 return false;
             }
@@ -374,7 +383,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 // Validate path to prevent command injection
                 PathValidator.ValidatePathOrThrow(path, nameof(path));
-                
+
                 // Open it in "Notepad" (Windows default editor).
                 // Usually available on all Windows systems
                 // Use ProcessStartInfo with ArgumentList for better security
@@ -405,7 +414,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 // Validate path to prevent command injection
                 PathValidator.ValidatePathOrThrow(path, nameof(path));
-                
+
                 // when all fails open filelocation to logfile...
                 // Open Windows Explorer to the directory containing the file
                 // Explorer expects /select,"path" as a single argument

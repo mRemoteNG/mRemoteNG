@@ -85,5 +85,15 @@ namespace mRemoteNGTests.Security
             var decryptedCipherText = _rijndaelCryptographyProvider.Decrypt("", _encryptionKey);
             Assert.That(decryptedCipherText, Is.EqualTo(""));
         }
+
+        [Test]
+        public void RoundTripWithSpecialCharacters_ParagraphSign()
+        {
+            // Issue #2274: paragraph sign causes decryption/encoding issues
+            var specialText = "pass§word";
+            var cipherText = _rijndaelCryptographyProvider.Encrypt(specialText, _encryptionKey);
+            var decryptedText = _rijndaelCryptographyProvider.Decrypt(cipherText, _encryptionKey);
+            Assert.That(decryptedText, Is.EqualTo(specialText));
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Csv;
@@ -50,17 +51,50 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
         }
 
         [Test]
+        public void MinimalCsvWithFewColumns_DeserializesCorrectly()
+        {
+            // A user-created CSV with only Name, Hostname, Protocol columns
+            // (much fewer than the full mRemoteNG format) should import cleanly.
+            const string csv = "Name;Hostname;Protocol\r\nMyServer;192.168.1.1;RDP";
+            var tree = _deserializer.Deserialize(csv);
+            var connection = tree.GetRecursiveChildList().FirstOrDefault();
+            Assert.That(connection, Is.Not.Null);
+            Assert.That(connection!.Name, Is.EqualTo("MyServer"));
+            Assert.That(connection.Hostname, Is.EqualTo("192.168.1.1"));
+        }
+
+        [Test]
+        public void CsvWithShortDataRow_DoesNotThrow()
+        {
+            // A data row with fewer columns than the header must not throw
+            // IndexOutOfRangeException — missing fields should default to empty.
+            const string csv = "Name;Hostname;Protocol;Port\r\nMyServer;192.168.1.1";
+            Assert.That(() => _deserializer.Deserialize(csv), Throws.Nothing);
+            var tree = _deserializer.Deserialize(csv);
+            var connection = tree.GetRecursiveChildList().FirstOrDefault();
+            Assert.That(connection, Is.Not.Null);
+            Assert.That(connection!.Name, Is.EqualTo("MyServer"));
+        }
+
+        [Test]
+        public void EmptyCsvContent_ReturnsEmptyTree()
+        {
+            var tree = _deserializer.Deserialize(string.Empty);
+            Assert.That(tree.GetRecursiveChildList(), Is.Empty);
+        }
+
+        [Test]
         public void TreeStructureDeserializedCorrectly()
         {
             //Root
             // |- folder1
             // |   |- Con1
             // |- Con2
-            var treeModel = new ConnectionTreeModelBuilder().Build();
+            var treeModel = ConnectionTreeModelBuilder.Build();
             var csv = _serializer.Serialize(treeModel);
             var deserializedConnections = _deserializer.Deserialize(csv);
-            var con1 = deserializedConnections.GetRecursiveChildList().First(info => info.Name == "Con1");
-            var folder1 = deserializedConnections.GetRecursiveChildList().First(info => info.Name == "folder1");
+            var con1 = deserializedConnections.GetRecursiveChildList().First(info => string.Equals(info.Name, "Con1", StringComparison.Ordinal));
+            var folder1 = deserializedConnections.GetRecursiveChildList().First(info => string.Equals(info.Name, "folder1", StringComparison.Ordinal));
             Assert.That(con1.Parent, Is.EqualTo(folder1));
         }
 
@@ -169,7 +203,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 
                 foreach (var property in properties)
                 {
-                    if (property.Name == "Password")
+                    if (string.Equals(property.Name, "Password", StringComparison.Ordinal))
                         continue;
 
                     testCases.Add(

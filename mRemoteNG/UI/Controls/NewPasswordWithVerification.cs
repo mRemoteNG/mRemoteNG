@@ -13,7 +13,7 @@ namespace mRemoteNG.UI.Controls
         private char _passwordChar;
 
 
-        [Browsable(false)] public SecureString SecureString { get; private set; }
+        [Browsable(false)] public SecureString? SecureString { get; private set; }
 
         [Browsable(false)] public bool PasswordsMatch { get; private set; }
 
@@ -95,7 +95,7 @@ namespace mRemoteNG.UI.Controls
             TogglePasswordMatchIndicator(PasswordsMatch);
         }
 
-        public event EventHandler Verified;
+        public event EventHandler? Verified;
 
         private void RaiseVerifiedEvent()
         {

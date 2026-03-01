@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.Globalization;
 using System.Runtime.Versioning;
 using mRemoteNG.App;
 
@@ -19,10 +20,9 @@ namespace mRemoteNG.Connection
             Inheritance = DefaultConnectionInheritance.Instance;
         }
 
-        public void LoadFrom<TSource>(TSource sourceInstance, Func<string, string> propertyNameMutator = null)
+        public void LoadFrom<TSource>(TSource sourceInstance, Func<string, string>? propertyNameMutator = null)
         {
-            if (propertyNameMutator == null)
-                propertyNameMutator = a => a;
+            propertyNameMutator ??= a => a;
 
             System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> connectionProperties = GetSerializableProperties();
             foreach (System.Reflection.PropertyInfo property in connectionProperties)
@@ -30,19 +30,20 @@ namespace mRemoteNG.Connection
                 try
                 {
                     string expectedPropertyName = propertyNameMutator(property.Name);
-                    System.Reflection.PropertyInfo propertyFromSource = typeof(TSource).GetProperty(expectedPropertyName);
+                    System.Reflection.PropertyInfo? propertyFromSource = typeof(TSource).GetProperty(expectedPropertyName);
                     if (propertyFromSource == null)
                         throw new SettingsPropertyNotFoundException($"No property with name '{expectedPropertyName}' found.");
 
-                    object valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
+                    object? valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
 
                     if (property.PropertyType.IsEnum)
                     {
-                        property.SetValue(Instance, Enum.Parse(property.PropertyType, valueFromSource.ToString()), null);
+                        string enumValue = valueFromSource?.ToString() ?? string.Empty;
+                        property.SetValue(Instance, Enum.Parse(property.PropertyType, enumValue), null);
                         continue;
                     }
 
-                    property.SetValue(Instance, Convert.ChangeType(valueFromSource, property.PropertyType), null);
+                    property.SetValue(Instance, Convert.ChangeType(valueFromSource, property.PropertyType, CultureInfo.InvariantCulture), null);
                 }
                 catch (Exception ex)
                 {
@@ -51,10 +52,9 @@ namespace mRemoteNG.Connection
             }
         }
 
-        public void SaveTo<TDestination>(TDestination destinationInstance, Func<string, string> propertyNameMutator = null)
+        public void SaveTo<TDestination>(TDestination destinationInstance, Func<string, string>? propertyNameMutator = null)
         {
-            if (propertyNameMutator == null)
-                propertyNameMutator = (a) => a;
+            propertyNameMutator ??= a => a;
 
             System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> connectionProperties = GetSerializableProperties();
 
@@ -63,13 +63,21 @@ namespace mRemoteNG.Connection
                 try
                 {
                     string expectedPropertyName = propertyNameMutator(property.Name);
-                    System.Reflection.PropertyInfo propertyFromDestination = typeof(TDestination).GetProperty(expectedPropertyName);
+                    System.Reflection.PropertyInfo? propertyFromDestination = typeof(TDestination).GetProperty(expectedPropertyName);
 
                     if (propertyFromDestination == null)
                         throw new SettingsPropertyNotFoundException($"No property with name '{expectedPropertyName}' found.");
 
                     // ensure value is of correct type
-                    object value = Convert.ChangeType(property.GetValue(Instance, null), propertyFromDestination.PropertyType);
+                    object? value;
+                    if (property.PropertyType.IsEnum && propertyFromDestination.PropertyType == typeof(string))
+                    {
+                        value = property.GetValue(Instance, null)?.ToString();
+                    }
+                    else
+                    {
+                        value = Convert.ChangeType(property.GetValue(Instance, null), propertyFromDestination.PropertyType, CultureInfo.InvariantCulture);
+                    }
 
                     propertyFromDestination.SetValue(destinationInstance, value, null);
                 }

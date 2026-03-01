@@ -51,7 +51,7 @@ namespace mRemoteNG.Config.Settings.Registry
         /// <summary>
         /// Configures validation settings for various parameters
         /// </summary>
-        private void SetupValidation()
+        private static void SetupValidation()
         {
 
         }

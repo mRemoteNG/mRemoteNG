@@ -14,6 +14,9 @@ namespace mRemoteNG.UI.Window
 		internal System.Windows.Forms.ContextMenuStrip cMenMC;
 		internal System.Windows.Forms.ToolStripMenuItem cMenMCCopy;
 		internal System.Windows.Forms.ToolStripMenuItem cMenMCDelete;
+        internal System.Windows.Forms.ToolStrip tsFilter;
+        internal System.Windows.Forms.ToolStripButton tsbSearch;
+        internal System.Windows.Forms.ToolStripTextBox tstbSearch;
 
         private void InitializeComponent()
 		{
@@ -28,9 +31,13 @@ namespace mRemoteNG.UI.Window
             this.imgListMC = new System.Windows.Forms.ImageList(this.components);
             this.lblMsgDate = new mRemoteNG.UI.Controls.MrngLabel();
             this.pnlErrorMsg = new System.Windows.Forms.Panel();
+            this.tsFilter = new System.Windows.Forms.ToolStrip();
+            this.tsbSearch = new System.Windows.Forms.ToolStripButton();
+            this.tstbSearch = new System.Windows.Forms.ToolStripTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbError)).BeginInit();
             this.cMenMC.SuspendLayout();
             this.pnlErrorMsg.SuspendLayout();
+            this.tsFilter.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtMsgText
@@ -116,11 +123,39 @@ namespace mRemoteNG.UI.Window
             this.cMenMCDelete.Click += new System.EventHandler(this.cMenMCDelete_Click);
             // 
             // imgListMC
-            // 
+            //
             this.imgListMC.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.imgListMC.ImageSize = new System.Drawing.Size(16, 16);
             this.imgListMC.TransparentColor = System.Drawing.Color.Transparent;
-            // 
+            //
+            // tsFilter
+            //
+            this.tsFilter.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsFilter.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                this.tsbSearch,
+                this.tstbSearch});
+            this.tsFilter.Name = "tsFilter";
+            this.tsFilter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tsFilter.Size = new System.Drawing.Size(617, 25);
+            this.tsFilter.TabStop = false;
+            //
+            // tsbSearch
+            //
+            this.tsbSearch.CheckOnClick = true;
+            this.tsbSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbSearch.Image = global::mRemoteNG.Properties.Resources.Search_16x;
+            this.tsbSearch.Name = "tsbSearch";
+            this.tsbSearch.Size = new System.Drawing.Size(23, 22);
+            this.tsbSearch.ToolTipText = "Filter messages";
+            this.tsbSearch.Click += new System.EventHandler(this.tsbSearch_Click);
+            //
+            // tstbSearch
+            //
+            this.tstbSearch.Name = "tstbSearch";
+            this.tstbSearch.Size = new System.Drawing.Size(150, 23);
+            this.tstbSearch.Visible = false;
+            this.tstbSearch.TextChanged += new System.EventHandler(this.tstbSearch_TextChanged);
+            //
             // lblMsgDate
             // 
             this.lblMsgDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -150,6 +185,7 @@ namespace mRemoteNG.UI.Window
             this.ClientSize = new System.Drawing.Size(617, 233);
             this.Controls.Add(this.lvErrorCollector);
             this.Controls.Add(this.pnlErrorMsg);
+            this.Controls.Add(this.tsFilter);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
             this.Name = "ErrorAndInfoWindow";
@@ -161,6 +197,8 @@ namespace mRemoteNG.UI.Window
             this.cMenMC.ResumeLayout(false);
             this.pnlErrorMsg.ResumeLayout(false);
             this.pnlErrorMsg.PerformLayout();
+            this.tsFilter.ResumeLayout(false);
+            this.tsFilter.PerformLayout();
             this.ResumeLayout(false);
 
 		}

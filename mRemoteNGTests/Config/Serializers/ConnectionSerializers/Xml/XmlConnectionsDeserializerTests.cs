@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
 
@@ -18,7 +20,7 @@ public class XmlConnectionsDeserializerTests
 
     public void Setup(string confCons, string password)
     {
-        _xmlConnectionsDeserializer = new XmlConnectionsDeserializer(() => password.ConvertToSecureString());
+        _xmlConnectionsDeserializer = new XmlConnectionsDeserializer("", () => password.ConvertToSecureString());
         _connectionTreeModel = _xmlConnectionsDeserializer.Deserialize(confCons);
     }
 
@@ -121,12 +123,40 @@ public class XmlConnectionsDeserializerTests
         Assert.That(folder1.IsExpanded, Is.True);
     }
 
-    private bool ContainsNodeNamed(string name, IEnumerable<ConnectionInfo> list)
+    [Test]
+    public void RootNodeAutoLockOnMinimizeGetsDeserialized()
+    {
+        string xml = Resources.confCons_v2_6.Replace("<Connections ", "<Connections AutoLockOnMinimize=\"true\" ",
+            System.StringComparison.Ordinal);
+
+        Setup(xml, "mR3m");
+        var rootNode = _connectionTreeModel.RootNodes[0] as RootNodeInfo;
+
+        Assert.That(rootNode, Is.Not.Null);
+        Assert.That(rootNode.AutoLockOnMinimize, Is.True);
+    }
+
+    [Test]
+    public void LegacyNumericRdGatewayUsageMethodFallsBackToSupportedEnumValue()
+    {
+        string xml = Resources.confCons_v2_6.Replace("RDGatewayUsageMethod=\"Never\"", "RDGatewayUsageMethod=\"4\"",
+            System.StringComparison.Ordinal);
+
+        Setup(xml, "mR3m");
+
+        ConnectionInfo firstConnection = _connectionTreeModel.GetRecursiveChildList()
+            .First(node => node is not ContainerInfo);
+
+        Assert.That(System.Enum.IsDefined(typeof(RDGatewayUsageMethod), firstConnection.RDGatewayUsageMethod), Is.True);
+        Assert.That(firstConnection.RDGatewayUsageMethod, Is.EqualTo(RDGatewayUsageMethod.Never));
+    }
+
+    private static bool ContainsNodeNamed(string name, IEnumerable<ConnectionInfo> list)
     {
         return list.Any(node => node.Name == name);
     }
 
-    private ContainerInfo GetFolderNamed(string name, IEnumerable<ConnectionInfo> list)
+    private static ContainerInfo GetFolderNamed(string name, IEnumerable<ConnectionInfo> list)
     {
         var folder = list.First(node => node is ContainerInfo && node.Name == name) as ContainerInfo;
         return folder;

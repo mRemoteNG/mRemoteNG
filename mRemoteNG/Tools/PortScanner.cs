@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Threading;
 using mRemoteNG.App;
@@ -18,11 +18,31 @@ namespace mRemoteNG.Tools
     {
         private readonly List<IPAddress> _ipAddresses = [];
         private readonly List<int> _ports = [];
-        private Thread _scanThread;
+        private Thread? _scanThread;
         private readonly List<ScanHost> _scannedHosts = [];
         private readonly int _timeoutInMilliseconds;
 
         #region Public Methods
+
+        public PortScanner(IPAddress ipAddress1,
+                           IPAddress ipAddress2,
+                           IEnumerable<int> ports,
+                           int timeoutInMilliseconds = 5000)
+        {
+            IPAddress ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
+            IPAddress ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
+
+            ArgumentOutOfRangeException.ThrowIfNegative(timeoutInMilliseconds);
+
+            _timeoutInMilliseconds = timeoutInMilliseconds;
+            _ports.Clear();
+            _ports.AddRange(ports);
+
+            _ipAddresses.Clear();
+            _ipAddresses.AddRange(IpAddressArrayFromRange(ipAddressStart, ipAddressEnd));
+
+            _scannedHosts.Clear();
+        }
 
         public PortScanner(IPAddress ipAddress1,
                            IPAddress ipAddress2,
@@ -41,8 +61,7 @@ namespace mRemoteNG.Tools
             if (portStart == 0)
                 portStart = portEnd;
 
-            if (timeoutInMilliseconds < 0)
-                throw new ArgumentOutOfRangeException(nameof(timeoutInMilliseconds));
+            ArgumentOutOfRangeException.ThrowIfNegative(timeoutInMilliseconds);
 
             _timeoutInMilliseconds = timeoutInMilliseconds;
             _ports.Clear();
@@ -71,7 +90,7 @@ namespace mRemoteNG.Tools
         {
             _scanThread = new Thread(ScanAsync);
 
-            if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            if(OperatingSystem.IsWindows())
                 _scanThread.SetApartmentState(ApartmentState.STA);
 
             _scanThread.IsBackground = true;
@@ -93,7 +112,7 @@ namespace mRemoteNG.Tools
         {
             try
             {
-                TcpClient tcpClient = new(hostname, Convert.ToInt32(port));
+                TcpClient tcpClient = new(hostname, Convert.ToInt32(port, CultureInfo.InvariantCulture));
                 tcpClient.Close();
                 return true;
             }
@@ -149,7 +168,7 @@ namespace mRemoteNG.Tools
             Ping p = (Ping)sender;
 
             // UserState is the IP Address
-            string ip = e.UserState.ToString();
+            string ip = e.UserState?.ToString() ?? string.Empty;
             ScanHost scanHost = new(ip);
             _hostCount++;
 
@@ -176,7 +195,7 @@ namespace mRemoteNG.Tools
                 scanHost.ClosedPorts.AddRange(_ports);
                 scanHost.SetAllProtocols(false);
             }
-            else if (e.Reply.Status == IPStatus.Success)
+            else if (e.Reply?.Status == IPStatus.Success)
             {
                 /* ping was successful, try to resolve the hostname */
                 try
@@ -241,10 +260,10 @@ namespace mRemoteNG.Tools
                     }
                 }
             }
-            else if (e.Reply.Status != IPStatus.Success)
+            else if (e.Reply?.Status != IPStatus.Success)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    $"Ping did not complete to {e.UserState} : {e.Reply.Status}", true);
+                                                    $"Ping did not complete to {e.UserState} : {e.Reply?.Status}", true);
                 scanHost.ClosedPorts.AddRange(_ports);
                 scanHost.SetAllProtocols(false);
             }
@@ -303,7 +322,7 @@ namespace mRemoteNG.Tools
         {
             if (ipAddress.AddressFamily != AddressFamily.InterNetwork)
             {
-                throw (new ArgumentException("ipAddress"));
+                throw new ArgumentException("Only IPv4 addresses are supported.", nameof(ipAddress));
             }
 
             byte[] addressBytes = ipAddress.GetAddressBytes(); // in network order (big-endian)
@@ -336,7 +355,7 @@ namespace mRemoteNG.Tools
 
         public delegate void BeginHostScanEventHandler(string host);
 
-        public event BeginHostScanEventHandler BeginHostScan;
+        public event BeginHostScanEventHandler? BeginHostScan;
 
         private void RaiseBeginHostScanEvent(IPAddress ipAddress)
         {
@@ -345,18 +364,18 @@ namespace mRemoteNG.Tools
 
         public delegate void HostScannedEventHandler(ScanHost scanHost, int scannedHostCount, int totalHostCount);
 
-        public event HostScannedEventHandler HostScanned;
+        public event HostScannedEventHandler? HostScanned;
 
         private void RaiseHostScannedEvent(ScanHost scanHost, int scannedHostCount, int totalHostCount)
         {
             HostScanned?.Invoke(scanHost, scannedHostCount, totalHostCount);
         }
 
-        public delegate void ScanCompleteEventHandler(List<ScanHost> hosts);
+        public delegate void ScanCompleteEventHandler(IList<ScanHost> hosts);
 
-        public event ScanCompleteEventHandler ScanComplete;
+        public event ScanCompleteEventHandler? ScanComplete;
 
-        private void RaiseScanCompleteEvent(List<ScanHost> hosts)
+        private void RaiseScanCompleteEvent(IList<ScanHost> hosts)
         {
             ScanComplete?.Invoke(hosts);
         }

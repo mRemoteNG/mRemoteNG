@@ -12,20 +12,33 @@ namespace mRemoteNG.App.Info
         public const string STABLE = "Stable";
         public const string PREVIEW = "Preview";
         public const string NIGHTLY = "Nightly";
+        public const string GITHUB = "GitHub";
 
-        public const string STABLE_PORTABLE = "update-portable.txt";
-        public const string PREVIEW_PORTABLE = "preview-update-portable.txt";
-        public const string NIGHTLY_PORTABLE = "nightly-update-portable.txt";
+        public const string StablePortable = "update-portable.txt";
+        public const string PreviewPortable = "preview-update-portable.txt";
+        public const string NightlyPortable = "nightly-update-portable.txt";
 
-        public const string STABLE_MSI = "update.txt";
-        public const string PREVIEW_MSI = "preview-update.txt";
-        public const string NIGHTLY_MSI = "nightly-update.txt";
+        public const string StableMsi = "update.txt";
+        public const string PreviewMsi = "preview-update.txt";
+        public const string NightlyMsi = "nightly-update.txt";
 
+        private const string GITHUB_API_URI = "https://api.github.com/repos/robertpopa22/mRemoteNG/releases/latest";
 
         public static Uri GetUpdateChannelInfo()
         {
-            string channel = IsValidChannel(Properties.OptionsUpdatesPage.Default.UpdateChannel) ? Properties.OptionsUpdatesPage.Default.UpdateChannel : STABLE;
+            string channel = IsValidChannel(Properties.OptionsUpdatesPage.Default.UpdateChannel)
+                ? Properties.OptionsUpdatesPage.Default.UpdateChannel
+                : GITHUB;
+
+            if (channel == GITHUB)
+                return new Uri(GITHUB_API_URI);
+
             return GetUpdateTxtUri(channel);
+        }
+
+        public static bool IsGitHubUri(Uri uri)
+        {
+            return uri.AbsoluteUri.Equals(GITHUB_API_URI, StringComparison.OrdinalIgnoreCase);
         }
 
         private static string GetChannelFileName(string channel)
@@ -40,13 +53,13 @@ namespace mRemoteNG.App.Info
             switch (channel)
             {
                 case STABLE:
-                    return STABLE_MSI;
+                    return StableMsi;
                 case PREVIEW:
-                    return PREVIEW_MSI;
+                    return PreviewMsi;
                 case NIGHTLY:
-                    return NIGHTLY_MSI;
+                    return NightlyMsi;
                 default:
-                    return STABLE_MSI;
+                    return StableMsi;
             }
         }
 
@@ -55,13 +68,13 @@ namespace mRemoteNG.App.Info
             switch (channel)
             {
                 case STABLE:
-                    return STABLE_PORTABLE;
+                    return StablePortable;
                 case PREVIEW:
-                    return PREVIEW_PORTABLE;
+                    return PreviewPortable;
                 case NIGHTLY:
-                    return NIGHTLY_PORTABLE;
+                    return NightlyPortable;
                 default:
-                    return STABLE_PORTABLE;
+                    return StablePortable;
             }
         }
 
@@ -73,7 +86,7 @@ namespace mRemoteNG.App.Info
 
         private static bool IsValidChannel(string s)
         {
-            return s.Equals(STABLE) || s.Equals(PREVIEW) || s.Equals(NIGHTLY);
+            return s.Equals(STABLE, StringComparison.Ordinal) || s.Equals(PREVIEW, StringComparison.Ordinal) || s.Equals(NIGHTLY, StringComparison.Ordinal) || s.Equals(GITHUB, StringComparison.Ordinal);
         }
     }
 }

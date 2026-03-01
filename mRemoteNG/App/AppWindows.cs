@@ -12,13 +12,16 @@ namespace mRemoteNG.App
     [SupportedOSPlatform("windows")]
     public static class AppWindows
     {
-        private static ActiveDirectoryImportWindow _adimportForm;
-        private static ExternalToolsWindow _externalappsForm;
-        private static PortScanWindow _portscanForm;
-        private static UltraVNCWindow _ultravncscForm;
-        private static ConnectionTreeWindow _treeForm;
+        private static ActiveDirectoryImportWindow? _adimportForm;
+        private static ExternalToolsWindow? _externalappsForm;
+        private static PortScanWindow? _portscanForm;
+        private static ConnectionTesterWindow? _connectionTesterForm;
+        private static UltraVNCWindow? _ultravncscForm;
+        private static ConnectionTreeWindow? _treeForm;
+        private static KeyboardShortcutsWindow? _keyboardShortcutsForm;
+        private static ActiveConnectionsWindow? _activeConnectionsForm;
 
-        internal static ConnectionTreeWindow TreeForm
+        internal static ConnectionTreeWindow? TreeForm
         {
             get => _treeForm ?? (_treeForm = new ConnectionTreeWindow());
             set => _treeForm = value;
@@ -28,7 +31,7 @@ namespace mRemoteNG.App
         internal static ErrorAndInfoWindow ErrorsForm { get; set; } = new ErrorAndInfoWindow();
         internal static UpdateWindow UpdateForm { get; set; } = new UpdateWindow();
         internal static SSHTransferWindow SshtransferForm { get; private set; } = new SSHTransferWindow();
-        internal static OptionsWindow OptionsFormWindow { get; private set; }
+        internal static OptionsWindow? OptionsFormWindow { get; private set; }
 
 
         public static void Show(WindowType windowType)
@@ -73,10 +76,26 @@ namespace mRemoteNG.App
                         _portscanForm = new PortScanWindow();
                         _portscanForm.Show(dockPanel);
                         break;
+                    case WindowType.ConnectionTester:
+                        if (_connectionTesterForm == null || _connectionTesterForm.IsDisposed)
+                            _connectionTesterForm = new ConnectionTesterWindow();
+                        _connectionTesterForm.Show(dockPanel);
+                        break;
                     case WindowType.UltraVNCSC:
                         if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
                             _ultravncscForm = new UltraVNCWindow();
                         _ultravncscForm.Show(dockPanel);
+                        break;
+                    case WindowType.KeyboardShortcuts:
+                        if (_keyboardShortcutsForm == null || _keyboardShortcutsForm.IsDisposed)
+                            _keyboardShortcutsForm = new KeyboardShortcutsWindow();
+                        _keyboardShortcutsForm.Show(dockPanel);
+                        break;
+                    case WindowType.ActiveConnections:
+                        if (_activeConnectionsForm == null || _activeConnectionsForm.IsDisposed)
+                            _activeConnectionsForm = new ActiveConnectionsWindow();
+                        _activeConnectionsForm.RefreshList();
+                        _activeConnectionsForm.Show(dockPanel);
                         break;
                 }
             }

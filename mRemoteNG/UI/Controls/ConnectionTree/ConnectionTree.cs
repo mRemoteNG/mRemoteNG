@@ -10,12 +10,16 @@ using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Properties;
+using System.Security;
 using mRemoteNG.Themes;
+using mRemoteNG.Tools;
 using mRemoteNG.Tools.Clipboard;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.ClickHandlers;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.Security;
+using mRemoteNG.UI.Forms;
 using System.Runtime.Versioning;
 
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -31,15 +35,17 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         private ThemeManager _themeManager;
 
         private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new();
+        private System.Collections.IEnumerable? _preFilterExpandedObjects;
 
         private bool _nodeInEditMode;
         private bool _allowEdit;
-        private ConnectionContextMenu _contextMenu;
-        private ConnectionTreeModel _connectionTreeModel;
+        private ConnectionContextMenu _contextMenu = null!;
+        private ConnectionTreeModel? _connectionTreeModel;
+        private List<ConnectionInfo> _clipboardNodes = new();
 
         public ConnectionInfo SelectedNode => (ConnectionInfo)SelectedObject;
 
-        public NodeSearcher NodeSearcher { get; private set; }
+        public NodeSearcher? NodeSearcher { get; private set; }
 
         public IConfirm<ConnectionInfo> NodeDeletionConfirmer { get; set; } = new AlwaysConfirmYes();
 
@@ -49,17 +55,20 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         public ITreeNodeClickHandler<ConnectionInfo> SingleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
 
+        public ITreeNodeClickHandler<ConnectionInfo> MiddleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
+
         public ConnectionTreeModel ConnectionTreeModel
         {
-            get { return _connectionTreeModel; }
+            get { return _connectionTreeModel!; }
             set
             {
                 if (_connectionTreeModel == value)
                 {
                     return;
                 }
-                
-                UnregisterModelUpdateHandlers(_connectionTreeModel);
+
+                if (_connectionTreeModel != null)
+                    UnregisterModelUpdateHandlers(_connectionTreeModel);
                 _connectionTreeModel = value;
                 PopulateTreeView(value);
             }
@@ -70,6 +79,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             InitializeComponent();
             SetupConnectionTreeView();
             UseOverlays = false;
+            UseWaitCursorWhenExpanding = false;
             _themeManager = ThemeManager.getInstance();
             _themeManager.ThemeChanged += ThemeManagerOnThemeChanged;
             ApplyTheme();
@@ -85,7 +95,8 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             if (!_themeManager.ActiveAndExtended)
                 return;
 
-            ExtendedColorPalette themePalette = _themeManager.ActiveTheme.ExtendedPalette;
+            ExtendedColorPalette? themePalette = _themeManager.ActiveTheme.ExtendedPalette;
+            if (themePalette == null) return;
 
             BackColor = themePalette.getColor("TreeView_Background");
             ForeColor = themePalette.getColor("TreeView_Foreground");
@@ -108,6 +119,26 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             base.Dispose(disposing);
         }
 
+        protected override void WndProc(ref Message m)
+        {
+            const int WM_SETFOCUS = 0x0007;
+            if (m.Msg == WM_SETFOCUS)
+            {
+                // Prevent the ListView from auto-scrolling to the focused item when the
+                // control gains focus (issue #1925). Save and restore the scroll position
+                // so that the user's current view is not disturbed.
+                System.Drawing.Point scrollPos = LowLevelScrollPosition;
+                base.WndProc(ref m);
+                System.Drawing.Point newScrollPos = LowLevelScrollPosition;
+                int dx = scrollPos.X - newScrollPos.X;
+                int dy = scrollPos.Y - newScrollPos.Y;
+                if (dx != 0 || dy != 0)
+                    LowLevelScroll(dx, dy);
+                return;
+            }
+            base.WndProc(ref m);
+        }
+
         #region ConnectionTree Setup
 
         private void SetupConnectionTreeView()
@@ -124,13 +155,14 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         private void AddColumns(ImageGetterDelegate imageGetterDelegate)
         {
             Columns.Add(new NameColumn(imageGetterDelegate));
+            Columns.Add(new DescriptionColumn());
         }
 
         private void LinkModelToView()
         {
             CanExpandGetter = item =>
             {
-                ContainerInfo itemAsContainer = item as ContainerInfo;
+                ContainerInfo? itemAsContainer = item as ContainerInfo;
                 return itemAsContainer?.Children.Count > 0;
             };
             ChildrenGetter = item => ((ContainerInfo)item).Children;
@@ -158,15 +190,43 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
                 container.IsExpanded = true;
                 AutoResizeColumn(Columns[0]);
             };
+            Expanding += OnExpanding;
             SelectionChanged += TvConnections_AfterSelect;
             MouseDoubleClick += OnMouse_DoubleClick;
             MouseClick += OnMouse_SingleClick;
+            MouseClick += OnMouse_MiddleClick;
             CellToolTipShowing += TvConnections_CellToolTipShowing;
-            ModelCanDrop += _dragAndDropHandler.HandleEvent_ModelCanDrop;
-            ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
+            ModelCanDrop += _dragAndDropHandler.OnModelCanDrop;
+            ModelDropped += _dragAndDropHandler.OnModelDropped;
             BeforeLabelEdit += OnBeforeLabelEdit;
             AfterLabelEdit += OnAfterLabelEdit;
             FormatCell += ConnectionTree_FormatCell;
+        }
+
+        private void OnExpanding(object? sender, TreeBranchExpandingEventArgs e)
+        {
+            if (e.Model is not ContainerInfo container) return;
+            if (string.IsNullOrEmpty(container.ContainerPassword)) return;
+            if (container.IsUnlocked) return;
+
+            using FrmPassword passwordForm = new(container.Name, false);
+            if (passwordForm.ShowDialog() == DialogResult.OK)
+            {
+                Optional<SecureString> key = passwordForm.GetKey();
+                if (key.Any() && key.First().ConvertToUnsecureString() == container.ContainerPassword)
+                {
+                    container.IsUnlocked = true;
+                }
+                else
+                {
+                    e.Canceled = true;
+                    MessageBox.Show("Incorrect password.", "Security", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                e.Canceled = true;
+            }
         }
 
         /// <summary>
@@ -197,10 +257,18 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         private void PopulateTreeView(ConnectionTreeModel newModel)
         {
-            SetObjects(newModel.RootNodes);
-            RegisterModelUpdateHandlers(newModel);
-            NodeSearcher = new NodeSearcher(newModel);
-            ExecutePostSetupActions();
+            BeginUpdate();
+            try
+            {
+                SetObjects(newModel.RootNodes);
+                RegisterModelUpdateHandlers(newModel);
+                NodeSearcher = new NodeSearcher(newModel);
+                ExecutePostSetupActions();
+            }
+            finally
+            {
+                EndUpdate();
+            }
             AutoResizeColumn(Columns[0]);
         }
 
@@ -231,10 +299,11 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             // for some reason property changed events are getting triggered twice for each changed property. should be just once. cant find source of duplication
             // Removed "TO DO" from above comment. Per #142 it apperas that this no longer occurs with ObjectListView 2.9.1
-            string property = propertyChangedEventArgs.PropertyName;
+            string? property = propertyChangedEventArgs.PropertyName;
             if (property != nameof(ConnectionInfo.Name)
              && property != nameof(ConnectionInfo.OpenConnections)
-             && property != nameof(ConnectionInfo.Icon))
+             && property != nameof(ConnectionInfo.Icon)
+             && property != nameof(ConnectionInfo.Description))
             {
                 return;
             }
@@ -283,8 +352,11 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             return Objects.OfType<RootPuttySessionsNodeInfo>();
         }
 
+        private static bool IsReadOnly => Properties.OptionsDBsPage.Default.SQLReadOnly;
+
         public void AddConnection()
         {
+            if (IsReadOnly) return;
             try
             {
                 AddNode(new ConnectionInfo());
@@ -297,9 +369,49 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         public void AddFolder()
         {
+            if (IsReadOnly) return;
             try
             {
                 AddNode(new ContainerInfo());
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.ErrorAddFolderFailed, ex);
+            }
+        }
+
+        public void AddEntity()
+        {
+            if (IsReadOnly) return;
+            try
+            {
+                ContainerInfo entity = new() { IsEntity = true, Name = "New Entity" };
+                AddNode(entity);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("Failed to add entity", ex);
+            }
+        }
+
+        public void AddRootFolder()
+        {
+            if (IsReadOnly) return;
+            try
+            {
+                ContainerInfo newFolder = new();
+                newFolder.IsRoot = true;
+                DefaultConnectionInfo.Instance.SaveTo(newFolder);
+                DefaultConnectionInheritance.SaveTo(newFolder.Inheritance);
+                if (Settings.Default.InhDefaultEverythingInherited)
+                    newFolder.Inheritance.TurnOnInheritanceCompletely();
+
+                ConnectionTreeModel.AddRootNode(newFolder);
+
+                SelectObject(newFolder, true);
+                EnsureModelVisible(newFolder);
+                _allowEdit = true;
+                SelectedItem.BeginEdit();
             }
             catch (Exception ex)
             {
@@ -319,10 +431,20 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             // use root node if no node is selected
             ConnectionInfo parentNode = SelectedNode ?? GetRootConnectionNode();
             DefaultConnectionInfo.Instance.SaveTo(newNode);
-            DefaultConnectionInheritance.Instance.SaveTo(newNode.Inheritance);
-            ContainerInfo selectedContainer = parentNode as ContainerInfo;
-            ContainerInfo parent = selectedContainer ?? parentNode?.Parent;
+            DefaultConnectionInheritance.SaveTo(newNode.Inheritance);
+            if (Settings.Default.InhDefaultEverythingInherited)
+                newNode.Inheritance.TurnOnInheritanceCompletely();
+            ContainerInfo? selectedContainer = parentNode as ContainerInfo;
+            ContainerInfo? parent = selectedContainer ?? parentNode.Parent;
+            if (parent == null) return;
             newNode.SetParent(parent);
+            // Default the new node's Panel to the parent folder's Panel (#1982)
+            if (!newNode.Inheritance.Panel)
+            {
+                string parentPanel = parent.Panel;
+                if (!string.IsNullOrEmpty(parentPanel))
+                    newNode.Panel = parentPanel;
+            }
             Expand(parent);
             SelectObject(newNode, true);
             EnsureModelVisible(newNode);
@@ -330,22 +452,109 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             SelectedItem.BeginEdit();
         }
 
+        internal List<ConnectionInfo> GetSelectedNodes()
+        {
+            List<ConnectionInfo> selectedNodes = SelectedObjects?.OfType<ConnectionInfo>().Distinct().ToList() ?? [];
+
+            if (selectedNodes.Count == 0 && SelectedNode != null)
+                selectedNodes.Add(SelectedNode);
+
+            return selectedNodes;
+        }
+
+        private static void ExecuteInBatchedSaveContext(Action action)
+        {
+            Runtime.ConnectionsService.BeginBatchingSaves();
+
+            try
+            {
+                action();
+            }
+            finally
+            {
+                Runtime.ConnectionsService.EndBatchingSaves();
+            }
+        }
+
         public void DuplicateSelectedNode()
         {
-            if (SelectedNode == null)
-                return;
+            if (IsReadOnly) return;
+            ExecuteInBatchedSaveContext(() =>
+            {
+                foreach (ConnectionInfo selectedNode in GetSelectedNodes())
+                {
+                    TreeNodeType selectedNodeType = selectedNode.GetTreeNodeType();
+                    if (selectedNodeType != TreeNodeType.Connection && selectedNodeType != TreeNodeType.Container)
+                        continue;
 
-            TreeNodeType selectedNodeType = SelectedNode.GetTreeNodeType();
-            if (selectedNodeType != TreeNodeType.Connection && selectedNodeType != TreeNodeType.Container)
-                return;
+                    ConnectionInfo newNode = selectedNode.Clone();
+                    if (selectedNode.Parent == null) continue;
+                    selectedNode.Parent.AddChildBelow(newNode, selectedNode);
+                    newNode.Parent?.SetChildBelow(newNode, selectedNode);
+                }
+            });
+        }
 
-            ConnectionInfo newNode = SelectedNode.Clone();
-            SelectedNode.Parent.AddChildBelow(newNode, SelectedNode);
-            newNode.Parent.SetChildBelow(newNode, SelectedNode);
+        public bool HasClipboardNodes => _clipboardNodes.Count > 0;
+
+        public void CopySelectedNodes()
+        {
+            _clipboardNodes = GetSelectedNodes()
+                .Where(n =>
+                {
+                    TreeNodeType type = n.GetTreeNodeType();
+                    return type == TreeNodeType.Connection || type == TreeNodeType.Container;
+                })
+                .ToList();
+        }
+
+        public void PasteNodes()
+        {
+            if (IsReadOnly) return;
+            if (_clipboardNodes.Count == 0) return;
+            ExecuteInBatchedSaveContext(() =>
+            {
+                foreach (ConnectionInfo copiedNode in _clipboardNodes)
+                {
+                    ConnectionInfo newNode = copiedNode.Clone();
+                    if (SelectedNode is ContainerInfo container)
+                    {
+                        container.AddChild(newNode);
+                    }
+                    else if (SelectedNode?.Parent != null)
+                    {
+                        SelectedNode.Parent.AddChildBelow(newNode, SelectedNode);
+                    }
+                }
+            });
+        }
+
+        public void CreateLinkToSelectedNode()
+        {
+            if (IsReadOnly) return;
+            ExecuteInBatchedSaveContext(() =>
+            {
+                foreach (ConnectionInfo selectedNode in GetSelectedNodes())
+                {
+                    if (selectedNode.GetTreeNodeType() != TreeNodeType.Connection)
+                        continue;
+
+                    if (selectedNode.Parent == null)
+                        continue;
+
+                    ConnectionInfo newNode = selectedNode.Clone();
+                    ConnectionInfo sourceNode = ConnectionTreeModel.ResolveLinkedConnection(selectedNode) ?? selectedNode;
+                    newNode.LinkedConnectionId = sourceNode.ConstantID;
+
+                    selectedNode.Parent.AddChildBelow(newNode, selectedNode);
+                    newNode.Parent?.SetChildBelow(newNode, selectedNode);
+                }
+            });
         }
 
         public void RenameSelectedNode()
         {
+            if (IsReadOnly) return;
             if (SelectedItem == null) return;
             _allowEdit = true;
             SelectedItem.BeginEdit();
@@ -353,9 +562,27 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         public void DeleteSelectedNode()
         {
-            if (SelectedNode is RootNodeInfo || SelectedNode is PuttySessionInfo) return;
-            if (!NodeDeletionConfirmer.Confirm(SelectedNode)) return;
-            ConnectionTreeModel.DeleteNode(SelectedNode);
+            if (IsReadOnly) return;
+            ExecuteInBatchedSaveContext(() =>
+            {
+                foreach (ConnectionInfo selectedNode in GetSelectedNodes())
+                {
+                    if (selectedNode is RootNodeInfo rootNode)
+                    {
+                        if (ConnectionTreeModel.RootNodes.Count > 1)
+                        {
+                            if (!NodeDeletionConfirmer.Confirm(selectedNode)) return;
+                            ConnectionTreeModel.RemoveRootNode(rootNode);
+                        }
+                        continue;
+                    }
+
+                    if (selectedNode is PuttySessionInfo) continue;
+                    if (selectedNode.Parent == null) continue;
+                    if (!NodeDeletionConfirmer.Confirm(selectedNode)) return;
+                    mRemoteNG.Tree.ConnectionTreeModel.DeleteNode(selectedNode);
+                }
+            });
         }
 
         /// <summary>
@@ -378,6 +605,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         public void SortRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)
         {
+            if (IsReadOnly) return;
             sortTarget ??= GetRootConnectionNode();
 
             Runtime.ConnectionsService.BeginBatchingSaves();
@@ -385,9 +613,96 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             if (sortTarget is ContainerInfo sortTargetAsContainer)
                 sortTargetAsContainer.SortRecursive(sortDirection);
             else
-                SelectedNode.Parent.SortRecursive(sortDirection);
+                SelectedNode?.Parent?.SortRecursive(sortDirection);
 
             Runtime.ConnectionsService.EndBatchingSaves();
+        }
+
+        public void SortSelectedNodesRecursive(ListSortDirection sortDirection)
+        {
+            if (IsReadOnly) return;
+            List<ContainerInfo> sortTargets = GetSelectedNodes()
+                .Select(selectedNode => selectedNode as ContainerInfo ?? selectedNode.Parent)
+                .Where(sortTarget => sortTarget != null)
+                .Distinct()
+                .Cast<ContainerInfo>()
+                .ToList();
+
+            if (sortTargets.Count == 0)
+            {
+                SortRecursive(SelectedNode, sortDirection);
+                return;
+            }
+
+            ExecuteInBatchedSaveContext(() =>
+            {
+                foreach (ContainerInfo sortTarget in sortTargets)
+                {
+                    sortTarget.SortRecursive(sortDirection);
+                }
+            });
+        }
+
+        public void SortSelectedNodesByTagRecursive(ListSortDirection sortDirection)
+        {
+            if (IsReadOnly) return;
+            List<ContainerInfo> sortTargets = GetSelectedNodes()
+                .Select(selectedNode => selectedNode as ContainerInfo ?? selectedNode.Parent)
+                .Where(sortTarget => sortTarget != null)
+                .Distinct()
+                .Cast<ContainerInfo>()
+                .ToList();
+
+            if (sortTargets.Count == 0)
+            {
+                if (GetRootConnectionNode() is ContainerInfo root)
+                    ExecuteInBatchedSaveContext(() => root.SortOnRecursive(ci => ci.EnvironmentTags ?? "", sortDirection));
+                return;
+            }
+
+            ExecuteInBatchedSaveContext(() =>
+            {
+                foreach (ContainerInfo sortTarget in sortTargets)
+                {
+                    sortTarget.SortOnRecursive(ci => ci.EnvironmentTags ?? "", sortDirection);
+                }
+            });
+        }
+
+        public void MoveSelectedNodesUp()
+        {
+            if (IsReadOnly) return;
+            ExecuteInBatchedSaveContext(() =>
+            {
+                foreach (IGrouping<ContainerInfo, ConnectionInfo> parentGroup in
+                         GetSelectedNodes()
+                             .Where(selectedNode => selectedNode.Parent != null)
+                             .GroupBy(selectedNode => selectedNode.Parent!))
+                {
+                    foreach (ConnectionInfo selectedNode in parentGroup.OrderBy(selectedNode => parentGroup.Key.Children.IndexOf(selectedNode)))
+                    {
+                        parentGroup.Key.PromoteChild(selectedNode);
+                    }
+                }
+            });
+        }
+
+        public void MoveSelectedNodesDown()
+        {
+            if (IsReadOnly) return;
+            ExecuteInBatchedSaveContext(() =>
+            {
+                foreach (IGrouping<ContainerInfo, ConnectionInfo> parentGroup in
+                         GetSelectedNodes()
+                             .Where(selectedNode => selectedNode.Parent != null)
+                             .GroupBy(selectedNode => selectedNode.Parent!))
+                {
+                    foreach (ConnectionInfo selectedNode in parentGroup.OrderByDescending(selectedNode => parentGroup.Key.Children.IndexOf(selectedNode)))
+                    {
+                        parentGroup.Key.DemoteChild(selectedNode);
+                    }
+                }
+            });
         }
 
         /// <summary>
@@ -401,14 +716,45 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         }
 
         /// <summary>
+        /// Expands all tree objects. If filtering is active, it ensures that
+        /// when the filter is removed, all objects remain expanded.
+        /// </summary>
+        public void UserExpandAll()
+        {
+            ExpandAll();
+
+            if (IsFiltering)
+            {
+                // Update the pre-filter expanded state to include all containers
+                // so that when the filter is cleared, everything stays expanded.
+                var allContainers = new List<ContainerInfo>();
+                if (ConnectionTreeModel != null)
+                {
+                    foreach (ContainerInfo root in ConnectionTreeModel.RootNodes)
+                    {
+                        allContainers.Add(root);
+                        allContainers.AddRange(root.GetRecursiveChildList().OfType<ContainerInfo>());
+                    }
+                }
+                _preFilterExpandedObjects = allContainers;
+            }
+        }
+
+        /// <summary>
         /// Filters tree items based on the given <see cref="filterText"/>
         /// </summary>
         /// <param name="filterText">The text to filter by</param>
         public void ApplyFilter(string filterText)
         {
+            if (!UseFiltering)
+            {
+                _preFilterExpandedObjects = ExpandedObjects;
+            }
+
             UseFiltering = true;
             _connectionTreeSearchTextFilter.FilterText = filterText;
             ModelFilter = _connectionTreeSearchTextFilter;
+            ExpandAll();
         }
 
         /// <summary>
@@ -418,6 +764,12 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             UseFiltering = false;
             ResetColumnFiltering();
+
+            if (_preFilterExpandedObjects != null)
+            {
+                ExpandedObjects = _preFilterExpandedObjects;
+                _preFilterExpandedObjects = null;
+            }
         }
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
@@ -431,7 +783,37 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
                 ResetColumnFiltering();
             }
 
-            RefreshObject(sender);
+            if (sender is ConnectionTreeModel)
+            {
+                switch (args.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        AddObjects(args.NewItems);
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        RemoveObjects(args.OldItems);
+                        break;
+                    case NotifyCollectionChangedAction.Reset:
+                        if (_connectionTreeModel != null)
+                            SetObjects(_connectionTreeModel.RootNodes);
+                        break;
+                }
+            }
+            else
+            {
+                RefreshObject(sender);
+
+                if (sender is ConnectionInfo connectionInfo)
+                {
+                    ContainerInfo? parent = connectionInfo.Parent;
+                    while (parent != null)
+                    {
+                        RefreshObject(parent);
+                        parent = parent.Parent;
+                    }
+                }
+            }
+
             AutoResizeColumn(Columns[0]);
 
             // turn filtering back on
@@ -450,7 +832,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             try
             {
-                AppWindows.ConfigForm.SelectedTreeNode = SelectedNode;
+                AppWindows.ConfigForm.SelectedTreeNodes = GetSelectedNodes();
             }
             catch (Exception ex)
             {
@@ -470,10 +852,19 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         private void OnMouse_SingleClick(object sender, MouseEventArgs mouseEventArgs)
         {
             if (mouseEventArgs.Clicks > 1) return;
+            if (mouseEventArgs.Button != MouseButtons.Left) return;
             // ReSharper disable once NotAccessedVariable
             OLVListItem listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out _);
             if (listItem?.RowObject is not ConnectionInfo clickedNode) return;
             SingleClickHandler.Execute(clickedNode);
+        }
+
+        private void OnMouse_MiddleClick(object sender, MouseEventArgs mouseEventArgs)
+        {
+            if (mouseEventArgs.Button != MouseButtons.Middle) return;
+            OLVListItem listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out _);
+            if (listItem?.RowObject is not ConnectionInfo clickedNode) return;
+            MiddleClickHandler.Execute(clickedNode);
         }
 
         private void TvConnections_CellToolTipShowing(object sender, ToolTipShowingEventArgs e)
@@ -488,7 +879,18 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
                 }
 
                 ConnectionInfo nodeProducingTooltip = (ConnectionInfo)e.Model;
-                e.Text = nodeProducingTooltip.Description;
+                string description = nodeProducingTooltip.Description;
+                string tags = nodeProducingTooltip.EnvironmentTags ?? "";
+                if (!string.IsNullOrWhiteSpace(tags))
+                {
+                    e.Text = string.IsNullOrWhiteSpace(description)
+                        ? $"Tags: {tags}"
+                        : $"{description}\nTags: {tags}";
+                }
+                else
+                {
+                    e.Text = description;
+                }
             }
             catch (Exception ex)
             {
@@ -503,7 +905,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             if (_nodeInEditMode || sender is not ConnectionTree)
                 return;
 
-            if (!_allowEdit || SelectedNode is PuttySessionInfo || SelectedNode is RootPuttySessionsNodeInfo)
+            if (IsReadOnly || !_allowEdit || SelectedNode is PuttySessionInfo || SelectedNode is RootPuttySessionsNodeInfo)
             {
                 e.CancelEdit = true;
                 return;
@@ -525,8 +927,9 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             try
             {
                 System.Drawing.ColorConverter converter = new();
-                System.Drawing.Color color = (System.Drawing.Color)converter.ConvertFromString(colorString);
-                e.SubItem.ForeColor = color;
+                object? converted = converter.ConvertFromString(colorString);
+                if (converted is System.Drawing.Color color)
+                    e.SubItem.ForeColor = color;
             }
             catch
             {
@@ -542,7 +945,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             try
             {
                 _contextMenu.EnableShortcutKeys();
-                ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
+                mRemoteNG.Tree.ConnectionTreeModel.RenameNode(SelectedNode, e.Label ?? string.Empty);
                 _nodeInEditMode = false;
                 _allowEdit = false;
                 // ensures that if we are filtering and a new item is added that doesn't match the filter, it will be filtered out

@@ -10,7 +10,7 @@ namespace mRemoteNG.App.Update
 
         // ReSharper disable MemberCanBePrivate.Local
         // ReSharper disable once MemberCanBePrivate.Global
-        public Dictionary<string, string> Items { get; } =
+        public IDictionary<string, string> Items { get; } =
             new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
 
         #endregion
@@ -36,7 +36,7 @@ namespace mRemoteNG.App.Update
 
             using (StringReader sr = new(content))
             {
-                string line;
+                string? line;
                 while ((line = sr.ReadLine()) != null)
                 {
                     string trimmedLine = line.Trim();
@@ -63,16 +63,16 @@ namespace mRemoteNG.App.Update
         private string GetString(string key)
         {
             // ReSharper restore MemberCanBePrivate.Local
-            return !Items.ContainsKey(key) ? string.Empty : Items[key];
+            return Items.TryGetValue(key, out string? value) ? value : string.Empty;
         }
 
-        public Version GetVersion(string key = "Version")
+        public Version? GetVersion(string key = "Version")
         {
             string value = GetString(key);
             return string.IsNullOrEmpty(value) ? null : new Version(value);
         }
 
-        public Uri GetUri(string key)
+        public Uri? GetUri(string key)
         {
             string value = GetString(key);
             return string.IsNullOrEmpty(value) ? null : new Uri(value);
@@ -80,7 +80,7 @@ namespace mRemoteNG.App.Update
 
         public string GetThumbprint(string key = "CertificateThumbprint")
         {
-            return GetString(key).Replace(" ", "").ToUpperInvariant();
+            return GetString(key).Replace(" ", "", StringComparison.Ordinal).ToUpperInvariant();
         }
 
         public string GetFileName()
@@ -92,7 +92,7 @@ namespace mRemoteNG.App.Update
 
         public string GetChecksum(string key = "Checksum")
         {
-            return GetString(key).Replace(" ", "").ToUpperInvariant();
+            return GetString(key).Replace(" ", "", StringComparison.Ordinal).ToUpperInvariant();
         }
 
         #endregion

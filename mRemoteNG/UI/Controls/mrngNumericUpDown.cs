@@ -14,8 +14,8 @@ namespace mRemoteNG.UI.Controls
     internal class MrngNumericUpDown : NumericUpDown
     {
         private readonly ThemeManager _themeManager;
-        private MrngButton Up;
-        private MrngButton Down;
+        private MrngButton? Up;
+        private MrngButton? Down;
 
         public MrngNumericUpDown()
         {
@@ -27,8 +27,10 @@ namespace mRemoteNG.UI.Controls
         {
             base.OnCreateControl();
             if (!_themeManager.ActiveAndExtended) return;
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            var palette = _themeManager.ActiveTheme.ExtendedPalette;
+            if (palette is null) return;
+            ForeColor = palette.getColor("TextBox_Foreground");
+            BackColor = palette.getColor("TextBox_Background");
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
 
             if (Controls.Count > 0)
@@ -36,7 +38,7 @@ namespace mRemoteNG.UI.Controls
                 for (int i = 0; i < Controls.Count; i++)
                 {
                     //Remove those non-themable buttons
-                    if (Controls[i].GetType().ToString().Equals("System.Windows.Forms.UpDownBase+UpDownButtons"))
+                    if (Controls[i].GetType().ToString().Equals("System.Windows.Forms.UpDownBase+UpDownButtons", StringComparison.Ordinal))
                         Controls.Remove(Controls[i]);
 
                     /* This is a bit of a hack.
@@ -46,7 +48,7 @@ namespace mRemoteNG.UI.Controls
                      * AddOptionsPagesToListView and then LstOptionPages_SelectedIndexChanged
                      */
                     if (!(Controls[i] is MrngButton)) continue;
-                    if (!Controls[i].Text.Equals("\u25B2") && !Controls[i].Text.Equals("\u25BC")) continue;
+                    if (!Controls[i].Text.Equals("\u25B2", StringComparison.Ordinal) && !Controls[i].Text.Equals("\u25BC", StringComparison.Ordinal)) continue;
                     Invalidate();
                     return;
                 }
@@ -86,14 +88,16 @@ namespace mRemoteNG.UI.Controls
         {
             if (_themeManager.ActiveAndExtended)
             {
+                var palette = _themeManager.ActiveTheme.ExtendedPalette;
+                if (palette is null) return;
                 if (Enabled)
                 {
-                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+                    ForeColor = palette.getColor("TextBox_Foreground");
+                    BackColor = palette.getColor("TextBox_Background");
                 }
                 else
                 {
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Background");
+                    BackColor = palette.getColor("TextBox_Disabled_Background");
                 }
             }
 
@@ -109,10 +113,11 @@ namespace mRemoteNG.UI.Controls
             if (!_themeManager.ActiveAndExtended) return;
             //Fix Border
             if (BorderStyle != BorderStyle.None)
-                e.Graphics.DrawRectangle(
-                                         new Pen(_themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Border"),
-                                                 1), 0, 0, Width - 1,
-                                         Height - 1);
+                if (_themeManager.ActiveTheme.ExtendedPalette is { } borderPalette)
+                    e.Graphics.DrawRectangle(
+                                             new Pen(borderPalette.getColor("TextBox_Border"),
+                                                     1), 0, 0, Width - 1,
+                                             Height - 1);
         }
 
         private void InitializeComponent()

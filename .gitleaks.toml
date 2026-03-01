@@ -1,0 +1,33 @@
+title = "mRemoteNG Gitleaks Configuration"
+
+[extend]
+# Use the default gitleaks ruleset as the base
+useDefault = true
+
+[allowlist]
+description = "Known intentional constants — not private credentials"
+
+# mR3m is the legacy default encryption key hard-coded into the confCons.xml
+# file format since the earliest versions of mRemoteNG.  It is a well-known,
+# documented constant (see mRemoteNG/Security/ConnectionFileDefaults.cs) used
+# only for backward compatibility with connection files that have no user-set
+# master password.  It does NOT limit public access to the project and is NOT
+# a private credential in the CII sense.
+#
+# mR3m0t3NG! is the default RBAC AdminRole password shipped in
+# OptionsRbac.settings.  Like the encryption key above, this is a public
+# default value — users are expected to change it before enabling RBAC.
+#
+# Both values are intentionally present in the source tree and are explicitly
+# listed here so that automated scanning does not produce false-positive
+# alerts that would mask real credential leaks.
+regexes = [
+  '''mR3m''',
+]
+
+# Test projects may contain synthetic credentials for unit-testing the
+# encryption / decryption code.  Allow the entire test trees.
+paths = [
+  '''mRemoteNGTests/''',
+  '''mRemoteNGSpecs/''',
+]

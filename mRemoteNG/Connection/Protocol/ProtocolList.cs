@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Runtime.Versioning;
 
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -10,15 +11,14 @@ namespace mRemoteNG.Connection.Protocol
     [SupportedOSPlatform("windows")]
     public class ProtocolList : CollectionBase, INotifyCollectionChanged
     {
-        public ProtocolBase this[object index]
+        public ProtocolBase? this[object index]
         {
             get
             {
-                ProtocolBase @base = index as ProtocolBase;
-                if (@base != null)
+                if (index is ProtocolBase @base)
                     return @base;
                 if (index is int)
-                    return (ProtocolBase)List[Convert.ToInt32(index)];
+                    return List[Convert.ToInt32(index, CultureInfo.InvariantCulture)] as ProtocolBase;
                 return null;
             }
         }
@@ -53,6 +53,7 @@ namespace mRemoteNG.Connection.Protocol
             }
             catch (Exception)
             {
+                _ = 0; // Intentionally empty
             }
         }
 
@@ -69,7 +70,7 @@ namespace mRemoteNG.Connection.Protocol
 
         private void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
         {
-            CollectionChanged?.Invoke(sender, args);
+            CollectionChanged?.Invoke(this, args);
         }
     }
 }

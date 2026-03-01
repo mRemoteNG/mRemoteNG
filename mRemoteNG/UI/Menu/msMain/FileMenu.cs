@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
@@ -14,16 +15,18 @@ namespace mRemoteNG.UI.Menu
     [SupportedOSPlatform("windows")]
     public class FileMenu : ToolStripMenuItem
     {
-        private ToolStripMenuItem _mMenToolsOptions;
-        private ToolStripMenuItem _mMenFileNew;
-        private ToolStripMenuItem _mMenFileLoad;
-        private ToolStripMenuItem _mMenFileSave;
-        private ToolStripMenuItem _mMenFileSaveAs;
-        private ToolStripMenuItem _mMenFileExit;
-        private ToolStripSeparator _mMenFileSep2;
-        private ToolStripSeparator _mMenFileSep1;
+        private ToolStripMenuItem _mMenToolsOptions = null!;
+        private ToolStripMenuItem _mMenNewConnection = null!;
+        private ToolStripMenuItem _mMenFileNew = null!;
+        private ToolStripMenuItem _mMenFileLoad = null!;
+        private ToolStripMenuItem _mMenFileSave = null!;
+        private ToolStripMenuItem _mMenRecentConnections = null!;
+        private ToolStripMenuItem _mMenFileSaveAs = null!;
+        private ToolStripMenuItem _mMenFileExit = null!;
+        private ToolStripSeparator _mMenFileSep2 = null!;
+        private ToolStripSeparator _mMenFileSep1 = null!;
 
-        public ConnectionTreeWindow TreeWindow { get; set; }
+        public ConnectionTreeWindow? TreeWindow { get; set; }
 
         public FileMenu()
         {
@@ -32,6 +35,7 @@ namespace mRemoteNG.UI.Menu
 
         private void Initialize()
         {
+            _mMenNewConnection = new ToolStripMenuItem();
             _mMenFileNew = new ToolStripMenuItem();
             _mMenFileLoad = new ToolStripMenuItem();
             _mMenFileSave = new ToolStripMenuItem();
@@ -40,14 +44,32 @@ namespace mRemoteNG.UI.Menu
             _mMenFileSep1 = new ToolStripSeparator();
             _mMenFileExit = new ToolStripMenuItem();
             _mMenToolsOptions = new ToolStripMenuItem();
+            _mMenRecentConnections = new ToolStripMenuItem();
+
+            _mMenRecentConnections.Name = "mMenRecentConnections";
+            _mMenRecentConnections.Text = "Recent Connections";
+
+            RecentConnectionsService.Instance.RecentConnectionsChanged += (s, e) =>
+            {
+                if (FrmMain.IsCreated && FrmMain.Default.InvokeRequired)
+                {
+                    FrmMain.Default.BeginInvoke(new Action(RebuildRecentConnectionsMenu));
+                }
+                else
+                {
+                    RebuildRecentConnectionsMenu();
+                }
+            };
 
             // 
             // mMenFile
             // 
             DropDownItems.AddRange(new ToolStripItem[]
             {
+                _mMenNewConnection,
                 _mMenFileNew,
                 _mMenFileLoad,
+                _mMenRecentConnections,
                 _mMenFileSave,
                 _mMenFileSaveAs,
                 _mMenFileSep1,
@@ -58,6 +80,15 @@ namespace mRemoteNG.UI.Menu
             Name = "mMenFile";
             Size = new System.Drawing.Size(37, 20);
             Text = Language._File;
+            DropDownOpening += mMenFile_DropDownOpening;
+            // 
+            // mMenNewConnection
+            // 
+            _mMenNewConnection.Image = Properties.Resources.AddItem_16x;
+            _mMenNewConnection.Name = "mMenNewConnection";
+            _mMenNewConnection.Size = new System.Drawing.Size(281, 22);
+            _mMenNewConnection.Text = Language.NewConnection;
+            _mMenNewConnection.Click += mMenNewConnection_Click;
             // 
             // mMenFileNew
             // 
@@ -84,6 +115,8 @@ namespace mRemoteNG.UI.Menu
             _mMenFileSave.Size = new System.Drawing.Size(281, 22);
             _mMenFileSave.Text = Language.SaveConnectionFile;
             _mMenFileSave.Click += mMenFileSave_Click;
+            
+            RebuildRecentConnectionsMenu();
             // 
             // mMenFileSaveAs
             // 
@@ -109,7 +142,7 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsOptions.Image = Properties.Resources.Settings_16x;
             _mMenToolsOptions.Name = "mMenToolsOptions";
             _mMenToolsOptions.Size = new System.Drawing.Size(184, 22);
-            _mMenToolsOptions.Text = Language.Options;
+            _mMenToolsOptions.Text = Language.OptionsMenuItem;
             _mMenToolsOptions.Click += mMenToolsOptions_Click;
             // 
             // mMenFileExit
@@ -125,15 +158,59 @@ namespace mRemoteNG.UI.Menu
         public void ApplyLanguage()
         {
             Text = Language._File;
+            _mMenNewConnection.Text = Language.NewConnection;
             _mMenFileNew.Text = Language.NewConnectionFile;
             _mMenFileLoad.Text = Language.OpenConnectionFile;
             _mMenFileSave.Text = Language.SaveConnectionFile;
             _mMenFileSaveAs.Text = Language.SaveConnectionFileAs;
-            _mMenToolsOptions.Text = Language.Options;
+            _mMenToolsOptions.Text = Language.OptionsMenuItem;
             _mMenFileExit.Text = Language.Exit;
+            _mMenRecentConnections.Text = "Recent Connections";
+        }
+
+        private void mMenFile_DropDownOpening(object sender, EventArgs e)
+        {
+            // Hide "Save As" when connections are stored in a database — saving to an
+            // XML file while the authoritative source is SQL is misleading and unsafe.
+            _mMenFileSaveAs.Visible = !Runtime.ConnectionsService.UsingDatabase;
+        }
+
+        private void RebuildRecentConnectionsMenu()
+        {
+            if (_mMenRecentConnections == null) return;
+            
+            _mMenRecentConnections.DropDownItems.Clear();
+            var recent = RecentConnectionsService.Instance.GetRecentConnections().ToList();
+
+            if (recent.Count == 0)
+            {
+                _mMenRecentConnections.Enabled = false;
+                return;
+            }
+
+            _mMenRecentConnections.Enabled = true;
+            foreach (var conn in recent)
+            {
+                var item = new ToolStripMenuItem(conn.Name);
+                item.Tag = conn;
+                item.Click += (s, e) =>
+                {
+                    if (s is ToolStripMenuItem menuItem && menuItem.Tag is ConnectionInfo connection)
+                    {
+                        Runtime.ConnectionInitiator.OpenConnection(connection);
+                    }
+                };
+                
+                _mMenRecentConnections.DropDownItems.Add(item);
+            }
         }
 
         #region File
+
+        private void mMenNewConnection_Click(object sender, EventArgs e)
+        {
+            TreeWindow?.ConnectionTree.AddConnection();
+        }
 
         private void mMenFileNew_Click(object sender, EventArgs e)
         {
@@ -152,17 +229,11 @@ namespace mRemoteNG.UI.Menu
         {
             if (Runtime.ConnectionsService.IsConnectionsFileLoaded)
             {
-                DialogResult msgBoxResult = MessageBox.Show(Language.SaveConnectionsFileBeforeOpeningAnother,
-                                                   Language.Save, MessageBoxButtons.YesNoCancel);
-                // ReSharper disable once SwitchStatementMissingSomeCases
-                switch (msgBoxResult)
-                {
-                    case DialogResult.Yes:
-                        Runtime.ConnectionsService.SaveConnections();
-                        break;
-                    case DialogResult.Cancel:
-                        return;
-                }
+                // Load as additional connection file — supports multiple files open simultaneously (#2331)
+                using OpenFileDialog loadDialog = DialogFactory.BuildLoadConnectionsDialog();
+                if (loadDialog.ShowDialog() != DialogResult.OK) return;
+                Runtime.ConnectionsService.LoadAdditionalConnectionFile(loadDialog.FileName);
+                return;
             }
 
             Runtime.LoadConnections(true);
@@ -182,9 +253,13 @@ namespace mRemoteNG.UI.Menu
 
                 string newFileName = saveFileDialog.FileName;
 
-                Runtime.ConnectionsService.SaveConnections(Runtime.ConnectionsService.ConnectionTreeModel, false, new SaveFilter(), newFileName);
+                var connectionTreeModel = Runtime.ConnectionsService.ConnectionTreeModel;
+                if (connectionTreeModel == null)
+                    return;
 
-                if (newFileName == Runtime.ConnectionsService.GetDefaultStartupConnectionFileName())
+                Runtime.ConnectionsService.SaveConnections(connectionTreeModel, false, new SaveFilter(), newFileName);
+
+                if (newFileName == ConnectionsService.GetDefaultStartupConnectionFileName())
                 {
                     Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = false;
                 }

@@ -5,6 +5,7 @@ using System.Reflection;
 using mRemoteNG.Connection;
 using mRemoteNG.Tools;
 using NUnit.Framework;
+using CategoryAttribute = System.ComponentModel.CategoryAttribute;
 
 namespace mRemoteNGTests.Connection
 {

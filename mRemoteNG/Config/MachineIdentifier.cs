@@ -39,18 +39,15 @@ namespace mRemoteNG.Config.MachineIdentifier
             string combined = $"{diskId}_{macAddress}_{biosUuid}_{machineName}";
 
             // Hash the combined string to ensure a fixed length and improve security
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(combined));
-                return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
-            }
+            byte[] hashBytes = SHA256.HashData(Encoding.UTF8.GetBytes(combined));
+            return Convert.ToHexStringLower(hashBytes);
         }
 
         /// <summary>
         /// Retrieves the serial number of the first physical disk using WMI.
         /// </summary>
         /// <returns>The disk serial number, or null if the serial number cannot be retrieved.</returns>
-        private static string GetDiskSerialNumber()
+        private static string? GetDiskSerialNumber()
         {
             try
             {
@@ -60,7 +57,7 @@ namespace mRemoteNG.Config.MachineIdentifier
                     {
                         if (wmi_HD["SerialNumber"] != null)
                         {
-                            string serialNumber = wmi_HD["SerialNumber"].ToString().Trim();
+                            string? serialNumber = wmi_HD["SerialNumber"].ToString()?.Trim();
                             if (!string.IsNullOrEmpty(serialNumber))
                             {
                                 return serialNumber;
@@ -81,7 +78,7 @@ namespace mRemoteNG.Config.MachineIdentifier
         /// Retrieves the MAC address of the first active network adapter.
         /// </summary>
         /// <returns>The MAC address, or null if the MAC address cannot be retrieved.</returns>
-        private static string GetMacAddress()
+        private static string? GetMacAddress()
         {
             try
             {
@@ -110,7 +107,7 @@ namespace mRemoteNG.Config.MachineIdentifier
         /// Retrieves the BIOS UUID of the machine using WMI.
         /// </summary>
         /// <returns>The BIOS UUID, or null if the UUID cannot be retrieved.</returns>
-        private static string GetBiosUuid()
+        private static string? GetBiosUuid()
         {
             try
             {
@@ -120,7 +117,7 @@ namespace mRemoteNG.Config.MachineIdentifier
                     {
                         if (wmi_HD["UUID"] != null)
                         {
-                            string uuid = wmi_HD["UUID"].ToString().Trim();
+                            string? uuid = wmi_HD["UUID"].ToString()?.Trim();
                             if (!string.IsNullOrEmpty(uuid))
                             {
                                 return uuid;

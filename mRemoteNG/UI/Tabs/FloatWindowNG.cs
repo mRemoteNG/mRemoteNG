@@ -63,18 +63,19 @@ namespace mRemoteNG.UI.Tabs
 
             base.WndProc(ref m);
         }
-    }
 
-    public class CustomFloatWindowFactory : DockPanelExtender.IFloatWindowFactory
-    {
-        public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane, Rectangle bounds)
+        protected override void OnShown(EventArgs e)
         {
-            return new FloatWindowNG(dockPanel, pane, bounds);
-        }
+            base.OnShown(e);
+            if (Owner != null)
+            {
+                Owner = null;
+            }
 
-        public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane)
-        {
-            return new FloatWindowNG(dockPanel, pane);
+            if (!ShowInTaskbar)
+            {
+                ShowInTaskbar = true;
+            }
         }
     }
 }

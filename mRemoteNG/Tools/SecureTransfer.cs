@@ -12,17 +12,17 @@ namespace mRemoteNG.Tools
     [SupportedOSPlatform("windows")]
     internal class SecureTransfer : IDisposable
     {
-        private readonly string Host;
-        private readonly string User;
-        private readonly string Password;
+        private readonly string Host = string.Empty;
+        private readonly string User = string.Empty;
+        private readonly string Password = string.Empty;
         private readonly int Port;
         public readonly SSHTransferProtocol Protocol;
-        public string SrcFile;
-        public string DstFile;
-        public ScpClient ScpClt;
-        public SftpClient SftpClt;
-        public SftpUploadAsyncResult asyncResult;
-        public AsyncCallback asyncCallback;
+        public string SrcFile = string.Empty;
+        public string DstFile = string.Empty;
+        public ScpClient? ScpClt;
+        public SftpClient? SftpClt;
+        public SftpUploadAsyncResult? asyncResult;
+        public AsyncCallback? asyncCallback;
 
 
         public SecureTransfer()
@@ -51,8 +51,8 @@ namespace mRemoteNG.Tools
             Password = pass;
             Port = port;
             Protocol = protocol;
-            SrcFile = source;
-            DstFile = dest;
+            SrcFile = source.Trim('"');
+            DstFile = dest.Trim('"');
         }
 
         public void Connect()
@@ -74,21 +74,24 @@ namespace mRemoteNG.Tools
         {
             if (Protocol == SSHTransferProtocol.SCP)
             {
-                ScpClt.Disconnect();
+                ScpClt?.Disconnect();
             }
 
             if (Protocol == SSHTransferProtocol.SFTP)
             {
-                SftpClt.Disconnect();
+                SftpClt?.Disconnect();
             }
         }
 
 
         public void Upload()
         {
+            var srcFile = SrcFile.Trim('"');
+            var dstFile = DstFile.Trim('"');
+
             if (Protocol == SSHTransferProtocol.SCP)
             {
-                if (!ScpClt.IsConnected)
+                if (ScpClt is null || !ScpClt.IsConnected)
                 {
                     Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
                         Language.SshTransferFailed + Environment.NewLine +
@@ -96,12 +99,12 @@ namespace mRemoteNG.Tools
                     return;
                 }
 
-                ScpClt.Upload(new FileInfo(SrcFile), $"{DstFile}");
+                ScpClt.Upload(new FileInfo(srcFile), dstFile);
             }
 
             if (Protocol == SSHTransferProtocol.SFTP)
             {
-                if (!SftpClt.IsConnected)
+                if (SftpClt is null || !SftpClt.IsConnected)
                 {
                     Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
                         Language.SshTransferFailed + Environment.NewLine +
@@ -110,7 +113,7 @@ namespace mRemoteNG.Tools
                 }
 
                 asyncResult =
-                    (SftpUploadAsyncResult)SftpClt.BeginUploadFile(new FileStream(SrcFile, Open), $"{DstFile}",
+                    (SftpUploadAsyncResult)SftpClt.BeginUploadFile(new FileStream(srcFile, Open), dstFile,
                         asyncCallback);
             }
         }
@@ -127,12 +130,12 @@ namespace mRemoteNG.Tools
 
             if (Protocol == SSHTransferProtocol.SCP)
             {
-                ScpClt.Dispose();
+                ScpClt?.Dispose();
             }
 
             if (Protocol == SSHTransferProtocol.SFTP)
             {
-                SftpClt.Dispose();
+                SftpClt?.Dispose();
             }
         }
 

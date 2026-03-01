@@ -5,7 +5,7 @@
         /// <summary>
         /// The unique Id of this tree node
         /// </summary>
-        public string ConnectionId { get; set; }
+        public string ConnectionId { get; set; } = string.Empty;
 
         /// <summary>
         /// Indicates whether this connection is connected

@@ -4,7 +4,7 @@ namespace mRemoteNG.Connection
 {
     public interface IHasParent
     {
-        ContainerInfo Parent { get; }
+        ContainerInfo? Parent { get; }
 
         void SetParent(ContainerInfo containerInfo);
 

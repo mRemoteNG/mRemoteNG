@@ -11,7 +11,7 @@ namespace mRemoteNG.UI.Controls
     //This is subclassed to avoid repeating the code in multiple places
     internal class MrngListView : ObjectListView
     {
-        private CellBorderDecoration deco;
+        private CellBorderDecoration? deco;
 
         //Control if the gridlines are styled, must be set before the OnCreateControl is fired
         public bool DecorateLines { get; set; } = true;
@@ -27,12 +27,14 @@ namespace mRemoteNG.UI.Controls
             base.OnCreateControl();
             ThemeManager _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ActiveAndExtended) return;
+            var palette = _themeManager.ActiveTheme.ExtendedPalette;
+            if (palette == null) return;
             //List back color
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Background");
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
+            BackColor = palette.getColor("List_Background");
+            ForeColor = palette.getColor("List_Item_Foreground");
             //Selected item
-            SelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Background");
-            SelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Foreground");
+            SelectedBackColor = palette.getColor("List_Item_Selected_Background");
+            SelectedForeColor = palette.getColor("List_Item_Selected_Foreground");
 
             //Header style
             HeaderUsesThemes = false;
@@ -40,8 +42,8 @@ namespace mRemoteNG.UI.Controls
             {
                 Normal =
                 {
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Background"),
-                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Foreground")
+                    BackColor = palette.getColor("List_Header_Background"),
+                    ForeColor = palette.getColor("List_Header_Foreground")
                 }
             };
             HeaderFormatStyle = headerStylo;
@@ -52,7 +54,7 @@ namespace mRemoteNG.UI.Controls
                 GridLines = false;
                 deco = new CellBorderDecoration
                 {
-                    BorderPen = new Pen(_themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Border")),
+                    BorderPen = new Pen(palette.getColor("List_Item_Border")),
                     FillBrush = null,
                     BoundsPadding = Size.Empty,
                     CornerRounding = 0

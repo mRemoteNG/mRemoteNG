@@ -18,12 +18,12 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <summary>
         /// Gets the value of a registry entry specified by its name.
         /// </summary>
-        string GetValue(RegistryHive hive, string path, string name);
+        string? GetValue(RegistryHive hive, string path, string? name);
 
         /// <summary>
         /// Gets the string value of a registry entry specified by its name.
         /// </summary>
-        string GetStringValue(RegistryHive hive, string path, string name, string defaultValue = null);
+        string? GetStringValue(RegistryHive hive, string path, string? name, string? defaultValue = null);
 
         /// <summary>
         /// Gets the boolean value of a registry entry specified by its name.
@@ -43,12 +43,12 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <summary>
         /// Retrieves a list of string-type registry entries from the Windows Registry under the specified path.
         /// </summary>
-        List<WinRegistryEntry<string>> GetEntries(RegistryHive hive, string path);
+        IList<WinRegistryEntry<string>> GetEntries(RegistryHive hive, string path);
 
         /// <summary>
         /// Retrieves a list of string-type registry entries from the Windows Registry under the specified path and its subkeys recursively.
         /// </summary>
-        List<WinRegistryEntry<string>> GetEntriesRecursive(RegistryHive hive, string path);
+        IList<WinRegistryEntry<string>> GetEntriesRecursive(RegistryHive hive, string path);
 
         #endregion
 
@@ -57,7 +57,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <summary>
         /// Sets the value of a registry entry.
         /// </summary>
-        void SetValue(RegistryHive hive, string path, string name, object value, RegistryValueKind valueKind);
+        void SetValue(RegistryHive hive, string path, string? name, object value, RegistryValueKind valueKind);
 
         /// <summary>
         /// Creates a new registry key.

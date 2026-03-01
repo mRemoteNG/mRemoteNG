@@ -4,6 +4,7 @@ using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using System;
 using System.Collections;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -13,9 +14,9 @@ using System.Runtime.Versioning;
 namespace mRemoteNG.UI.Panels
 {
     [SupportedOSPlatform("windows")]
-    public class PanelAdder
+    public static class PanelAdder
     {
-        public ConnectionWindow AddPanel(string title = "", bool showImmediately = true)
+        public static ConnectionWindow? AddPanel(string title = "", bool showImmediately = true)
         {
             try
             {
@@ -36,7 +37,7 @@ namespace mRemoteNG.UI.Panels
             }
         }
 
-        public bool DoesPanelExist(string panelName)
+        public static bool DoesPanelExist(string panelName)
         {
             return Runtime.WindowList?.OfType<ConnectionWindow>().Any(w => w.TabText == panelName)
                 ?? false;
@@ -55,8 +56,8 @@ namespace mRemoteNG.UI.Panels
         private static void SetConnectionWindowTitle(string title, ConnectionWindow connectionForm)
         {
             if (string.IsNullOrEmpty(title))
-                title = Language.NewPanel;
-            connectionForm.SetFormText(title.Replace("&", "&&"));
+                title = "New Panel";
+            connectionForm.SetFormText(title.Replace("&", "&&", StringComparison.Ordinal));
         }
 
         private static void BuildConnectionWindowContextMenu(DockContent pnlcForm)
@@ -106,15 +107,16 @@ namespace mRemoteNG.UI.Panels
             return cMenClose;
         }
 
-        private static void cMenConnectionPanelRename_Click(object sender, EventArgs e)
+        private static void cMenConnectionPanelRename_Click(object? sender, EventArgs e)
         {
             try
             {
-                ConnectionWindow conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
+                if (sender is not ToolStripMenuItem menuItem || menuItem.Tag is not ConnectionWindow conW)
+                    return;
 
                 using (FrmInputBox newTitle = new(Language.NewTitle, Language.NewTitle + ":", ""))
                     if (newTitle.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(newTitle.returnValue))
-                        conW.SetFormText(newTitle.returnValue.Replace("&", "&&"));
+                        conW.SetFormText(newTitle.returnValue.Replace("&", "&&", StringComparison.Ordinal));
             }
             catch (Exception ex)
             {
@@ -122,11 +124,12 @@ namespace mRemoteNG.UI.Panels
             }
         }
 
-        private static void cMenConnectionPanelClose_Click(object sender, EventArgs e)
+        private static void cMenConnectionPanelClose_Click(object? sender, EventArgs e)
         {
             try
             {
-                ConnectionWindow conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
+                if (sender is not ToolStripMenuItem menuItem || menuItem.Tag is not ConnectionWindow conW)
+                    return;
                 conW.Close();
             }
             catch (Exception ex)
@@ -135,16 +138,16 @@ namespace mRemoteNG.UI.Panels
             }
         }
 
-        private static void cMenConnectionPanelScreens_DropDownOpening(object sender, EventArgs e)
+        private static void cMenConnectionPanelScreens_DropDownOpening(object? sender, EventArgs e)
         {
             try
             {
-                ToolStripMenuItem cMenScreens = (ToolStripMenuItem)sender;
+                if (sender is not ToolStripMenuItem cMenScreens) return;
                 cMenScreens.DropDownItems.Clear();
 
                 for (int i = 0; i <= Screen.AllScreens.Length - 1; i++)
                 {
-                    ToolStripMenuItem cMenScreen = new(Language.Screen + " " + Convert.ToString(i + 1))
+                    ToolStripMenuItem cMenScreen = new(Language.Screen + " " + Convert.ToString(i + 1, CultureInfo.InvariantCulture))
                     {
                         Tag = new ArrayList(),
                         Image = Properties.Resources.Monitor_16x
@@ -161,27 +164,28 @@ namespace mRemoteNG.UI.Panels
             }
         }
 
-        private static void cMenConnectionPanelScreen_Click(object sender, EventArgs e)
+        private static void cMenConnectionPanelScreen_Click(object? sender, EventArgs e)
         {
-            Screen screen = null;
-            DockContent panel = null;
+            Screen? screen = null;
+            DockContent? panel = null;
             try
             {
-                IEnumerable tagEnumeration = (IEnumerable)((ToolStripMenuItem)sender).Tag;
-                if (tagEnumeration == null) return;
+                if (sender is not ToolStripMenuItem menuItem || menuItem.Tag is not IEnumerable tagEnumeration)
+                    return;
                 foreach (object obj in tagEnumeration)
                 {
                     if (obj is Screen screen1)
                     {
                         screen = screen1;
                     }
-                    else if (obj is DockContent)
+                    else if (obj is DockContent dockContent)
                     {
-                        panel = (DockContent)obj;
+                        panel = dockContent;
                     }
                 }
 
-                Screens.SendPanelToScreen(panel, screen);
+                if (panel != null && screen != null)
+                    Screens.SendPanelToScreen(panel, screen);
             }
             catch (Exception ex)
             {

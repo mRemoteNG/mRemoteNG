@@ -1,3 +1,5 @@
+.test-profile/
+provider_debug.log
 **/bin/
 **/obj/
 **/[Rr]elease [Pp]ortable/
@@ -286,3 +288,40 @@ InstallerProjects/Installer/Resources/License.rtf
 # mRemoteNG
 **/mRemoteNG/Properties/AssemblyInfo.tt
 **/mRemoteNG/Properties/AssemblyInfo.cs
+
+# Local build/test scripts
+build.ps1
+build.cmd
+build-and-test-baseline.ps1
+test.ps1
+run-tests.ps1
+CLAUDE.md
+GEMINI.md
+.gemini/
+agents.md
+
+# Temp test output
+test-output.txt
+test-results*.txt
+nul
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Orchestrator temp output
+triage_result.json
+output.json
+
+# Auto Claude data directory
+.auto-claude/
+
+# Auto Claude generated files
+.auto-claude-security.json
+.auto-claude-status
+.project-roadmap/scripts/orchestrator-status.json
+.project-roadmap/scripts/orchestrator.log
+.claude_settings.json
+.worktrees/
+.security-key
+logs/security/

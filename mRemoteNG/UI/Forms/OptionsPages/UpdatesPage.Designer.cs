@@ -20,7 +20,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
             finally
             {
-                base.Dispose(disposing);
+                try { base.Dispose(disposing); }
+                catch (System.NullReferenceException) { /* finalizer-safe: Control.ContextMenuStrip may be null on non-STA thread */ }
             }
         }
 

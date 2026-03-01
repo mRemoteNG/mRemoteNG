@@ -24,7 +24,7 @@ namespace ExternalConnectors.AWS
                 case 64: Status = "Stopping"; break;
                 case 80: Status = "Stopped"; break;
                 default: Status = "Unknown"; break;
-            };
+            }
 
             PublicIP = instance.PublicIpAddress ?? "";
             PrivateIP = instance.PrivateIpAddress ?? "";

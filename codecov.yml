@@ -1,0 +1,68 @@
+# Codecov configuration
+# https://docs.codecov.com/docs/codecov-yaml
+
+# Global upload settings
+codecov:
+  notify:
+    # Disable default notifications and rely on GitHub status checks
+    # Or, if you want email/slack, configure here
+    # email:
+    #   - "your-email@example.com"
+    # slack:
+    #   - "your-slack-channel"
+  # Don't require a token for public repos (useful for forks/PRs)
+  require_token: false
+
+# Coverage report upload options
+coverage:
+  # Minimum coverage percentage for the entire project
+  status:
+    project:
+      default:
+        target: 80%  # Require 80% coverage for the entire project
+        # allow_failures:
+        #   - patch # Allows failures for patch reports but not for overall project
+        # threshold: 5% # Increase/decrease coverage by 5% and still pass
+
+  # File/directory patterns to ignore when calculating coverage
+  ignore:
+    - "**/obj/**"        # Ignore object files
+    - "**/bin/**"        # Ignore compiled binaries
+    - "**/*.Designer.cs" # Ignore auto-generated designer files
+    - "**/*.g.cs"        # Ignore other generated code
+    - "**/*.g.i.cs"
+    - "**/*.Assemblyinfo.cs" # Ignore AssemblyInfo files
+    - "**/*.AssemblyAttributes.cs"
+    - "mRemoteNGTests/**" # Ignore test projects from coverage reporting (they generate coverage, but we typically measure coverage *of* the main project *by* the tests)
+    - "ExternalConnectors/**" # Example: If you don't want to measure coverage for external connectors
+    - "ObjectListView/**" # Example: If this is an external library/dependency
+    - "mRemoteNGInstaller/**" # Installer project
+    - "mRemoteNGSpecs/**" # SpecFlow project
+
+  # Upload only one report if multiple are generated (e.g., from different test suites)
+  # This can prevent multiple status checks if not desired
+  # upload_style: "diff"
+
+# Command-line options for the Codecov uploader
+# You might need to adjust these based on your CI setup
+# comment:
+#   layout: "header, diff, files"
+#   behavior: default
+#   require_changes: false
+#   require_base: false
+#   require_head: true
+#   branches: null
+#   paths: null
+
+# GitHub specific settings (optional)
+github_checks:
+  annotations: true # Add annotations to the GitHub PR files tab
+
+flags:
+  # Define flags for different types of coverage if needed (e.g., unit, integration)
+  # unit:
+  #   paths:
+  #     - "**/mRemoteNG.Tests.csproj"
+  # integration:
+  #   paths:
+  #     - "**/mRemoteNG.IntegrationTests.csproj"

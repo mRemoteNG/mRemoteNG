@@ -19,18 +19,30 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
         private const int DELETE = 0;
         private readonly ICryptographyProvider _cryptographyProvider = cryptographyProvider.ThrowIfNull(nameof(cryptographyProvider));
         private readonly SecureString _encryptionKey = encryptionKey.ThrowIfNull(nameof(encryptionKey));
-        private DataTable _dataTable;
-        private DataTable _sourceDataTable;
+        private DataTable _dataTable = null!;
+        private DataTable? _sourceDataTable;
         private readonly Dictionary<string, int> _sourcePrimaryKeyDict = [];
         private const string TABLE_NAME = "tblCons";
         private readonly SaveFilter _saveFilter = saveFilter.ThrowIfNull(nameof(saveFilter));
         private int _currentNodeIndex;
+        private IReadOnlyCollection<string>? _loadedConnectionIds;
 
         public Version Version { get; } = new Version(3, 0);
 
         public void SetSourceDataTable(DataTable sourceDataTable)
         {
             _sourceDataTable = sourceDataTable;
+        }
+
+        /// <summary>
+        /// Sets the connection IDs that were loaded from the database at load time.
+        /// When set, only connections that were in this set but are no longer in the
+        /// tree will be deleted from the database. Connections added by other users
+        /// (not in this set) will be preserved. (#1424 — SQL multiuser support)
+        /// </summary>
+        public void SetLoadedConnectionIds(IReadOnlyCollection<string> loadedConnectionIds)
+        {
+            _loadedConnectionIds = loadedConnectionIds;
         }
 
         public DataTable Serialize(ConnectionTreeModel connectionTreeModel)
@@ -51,6 +63,13 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             }
         }
 
+        internal static DataTable GetExpectedSchema()
+        {
+            DataTable dataTable = new(TABLE_NAME);
+            CreateSchema(dataTable);
+            return dataTable;
+        }
+
         public DataTable Serialize(ConnectionInfo serializationTarget)
         {
             _dataTable = BuildTable();
@@ -60,10 +79,16 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             // Register add or update row
             SerializeNodesRecursive(serializationTarget);
 
+            // Only delete connections that we knew about at load time but are no
+            // longer in the tree (user explicitly deleted them). Connections in the
+            // DB that we never loaded (added by other users) are preserved. (#1424)
             List<string> entryToDelete = _sourcePrimaryKeyDict.Keys.ToList();
 
             foreach (string entry in entryToDelete)
             {
+                if (_loadedConnectionIds != null && !_loadedConnectionIds.Contains(entry, StringComparer.Ordinal))
+                    continue; // Unknown to us — added by another user, don't delete
+
                 _dataTable.Rows.Find(entry)?.Delete();
             }
 
@@ -74,7 +99,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
         {
             DataTable dataTable = _sourceDataTable ?? new DataTable(TABLE_NAME);
 
-            if (dataTable.Columns.Count == 0) CreateSchema(dataTable);
+            EnsureSchemaCompatibility(dataTable);
 
             if (dataTable.PrimaryKey.Length == 0) SetPrimaryKey(dataTable);
 
@@ -86,11 +111,33 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             return dataTable;
         }
 
-        private void CreateSchema(DataTable dataTable)
+        private static void EnsureSchemaCompatibility(DataTable dataTable)
+        {
+            if (dataTable.Columns.Count == 0)
+            {
+                CreateSchema(dataTable);
+                return;
+            }
+
+            DataTable expectedSchemaTable = new(TABLE_NAME);
+            CreateSchema(expectedSchemaTable);
+
+            foreach (DataColumn expectedColumn in expectedSchemaTable.Columns)
+            {
+                if (dataTable.Columns.Contains(expectedColumn.ColumnName))
+                    continue;
+
+                DataColumn missingColumn = new(expectedColumn.ColumnName, expectedColumn.DataType);
+                dataTable.Columns.Add(missingColumn);
+            }
+        }
+
+        private static void CreateSchema(DataTable dataTable)
         {
             dataTable.Columns.Add("AutomaticResize", typeof(bool));
             dataTable.Columns.Add("CacheBitmaps", typeof(bool));
             dataTable.Columns.Add("Colors", typeof(string));
+            dataTable.Columns.Add("ConnectionFrameColor", typeof(string));
             dataTable.Columns.Add("ConnectToConsole", typeof(bool));
             dataTable.Columns.Add("Connected", typeof(bool));
             dataTable.Columns.Add("ConstantID", typeof(string));
@@ -115,9 +162,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataTable.Columns.Add("Hostname", typeof(string));
             dataTable.Columns.Add("ICAEncryptionStrength", typeof(string));
             dataTable.Columns.Add("Icon", typeof(string));
+            dataTable.Columns.Add("IsTemplate", typeof(bool));
             dataTable.Columns.Add("InheritAutomaticResize", typeof(bool));
             dataTable.Columns.Add("InheritCacheBitmaps", typeof(bool));
             dataTable.Columns.Add("InheritColors", typeof(bool));
+            dataTable.Columns.Add("InheritConnectionFrameColor", typeof(bool));
             dataTable.Columns.Add("InheritDescription", typeof(bool));
             dataTable.Columns.Add("InheritDisableCursorBlinking", typeof(bool));
             dataTable.Columns.Add("InheritDisableCursorShadow", typeof(bool));
@@ -135,6 +184,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataTable.Columns.Add("InheritICAEncryptionStrength", typeof(bool));
             dataTable.Columns.Add("InheritIcon", typeof(bool));
             dataTable.Columns.Add("InheritLoadBalanceInfo", typeof(bool));
+            dataTable.Columns.Add("InheritRDPSignScope", typeof(bool));
+            dataTable.Columns.Add("InheritRDPSignature", typeof(bool));
             dataTable.Columns.Add("InheritMacAddress", typeof(bool));
             dataTable.Columns.Add("InheritOpeningCommand", typeof(bool));
             dataTable.Columns.Add("InheritPanel", typeof(bool));
@@ -177,6 +228,16 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataTable.Columns.Add("InheritUseRestrictedAdmin", typeof(bool));
             dataTable.Columns.Add("InheritUseVmId", typeof(bool));
             dataTable.Columns.Add("InheritUserField", typeof(bool));
+            dataTable.Columns.Add("InheritUserField1", typeof(bool));
+            dataTable.Columns.Add("InheritUserField2", typeof(bool));
+            dataTable.Columns.Add("InheritUserField3", typeof(bool));
+            dataTable.Columns.Add("InheritUserField4", typeof(bool));
+            dataTable.Columns.Add("InheritUserField5", typeof(bool));
+            dataTable.Columns.Add("InheritUserField6", typeof(bool));
+            dataTable.Columns.Add("InheritUserField7", typeof(bool));
+            dataTable.Columns.Add("InheritUserField8", typeof(bool));
+            dataTable.Columns.Add("InheritUserField9", typeof(bool));
+            dataTable.Columns.Add("InheritUserField10", typeof(bool));
             dataTable.Columns.Add("InheritEnvironmentTags", typeof(bool));
             dataTable.Columns.Add("InheritUserViaAPI", typeof(bool));
             dataTable.Columns.Add("InheritUsername", typeof(bool));
@@ -191,9 +252,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataTable.Columns.Add("InheritVNCProxyUsername", typeof(bool));
             dataTable.Columns.Add("InheritVNCSmartSizeMode", typeof(bool));
             dataTable.Columns.Add("InheritVNCViewOnly", typeof(bool));
+            dataTable.Columns.Add("InheritVNCClipboardRedirect", typeof(bool));
             dataTable.Columns.Add("InheritVmId", typeof(bool));
             dataTable.Columns.Add("LastChange", MiscTools.DBTimeStampType());
             dataTable.Columns.Add("LoadBalanceInfo", typeof(string));
+            dataTable.Columns.Add("RDPSignScope", typeof(string));
+            dataTable.Columns.Add("RDPSignature", typeof(string));
             dataTable.Columns.Add("MacAddress", typeof(string));
             dataTable.Columns.Add("Name", typeof(string));
             dataTable.Columns.Add("OpeningCommand", typeof(string));
@@ -241,8 +305,20 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataTable.Columns.Add("UseRestrictedAdmin", typeof(bool));
             dataTable.Columns.Add("UseVmId", typeof(bool));
             dataTable.Columns.Add("UserField", typeof(string));
+            dataTable.Columns.Add("UserField1", typeof(string));
+            dataTable.Columns.Add("UserField2", typeof(string));
+            dataTable.Columns.Add("UserField3", typeof(string));
+            dataTable.Columns.Add("UserField4", typeof(string));
+            dataTable.Columns.Add("UserField5", typeof(string));
+            dataTable.Columns.Add("UserField6", typeof(string));
+            dataTable.Columns.Add("UserField7", typeof(string));
+            dataTable.Columns.Add("UserField8", typeof(string));
+            dataTable.Columns.Add("UserField9", typeof(string));
+            dataTable.Columns.Add("UserField10", typeof(string));
             dataTable.Columns.Add("EnvironmentTags", typeof(string));
             dataTable.Columns.Add("UserViaAPI", typeof(string));
+            dataTable.Columns.Add("User", typeof(string));
+            dataTable.Columns.Add("Role", typeof(string));
             dataTable.Columns.Add("Username", typeof(string));
             dataTable.Columns.Add("VNCAuthMode", typeof(string));
             dataTable.Columns.Add("VNCColors", typeof(string));
@@ -255,12 +331,13 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataTable.Columns.Add("VNCProxyUsername", typeof(string));
             dataTable.Columns.Add("VNCSmartSizeMode", typeof(string));
             dataTable.Columns.Add("VNCViewOnly", typeof(bool));
+            dataTable.Columns.Add("VNCClipboardRedirect", typeof(bool));
             dataTable.Columns.Add("VmId", typeof(string));
             dataTable.Columns[0].AutoIncrement = true;
             dataTable.Columns.Add("ID", typeof(int));
         }
 
-        private void SetPrimaryKey(DataTable dataTable)
+        private static void SetPrimaryKey(DataTable dataTable)
         {
             dataTable.PrimaryKey = new[] { dataTable.Columns["ConstantID"] };
         }
@@ -272,7 +349,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 SerializeConnectionInfo(connectionInfo);
             }
 
-            ContainerInfo containerInfo = connectionInfo as ContainerInfo;
+            ContainerInfo? containerInfo = connectionInfo as ContainerInfo;
             if (containerInfo == null) return;
 
             foreach (ConnectionInfo child in containerInfo.Children)
@@ -297,6 +374,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             isFieldNotChange = isFieldNotChange && dataRow["AutomaticResize"].Equals(connectionInfo.AutomaticResize);
             isFieldNotChange = isFieldNotChange && dataRow["CacheBitmaps"].Equals(connectionInfo.CacheBitmaps);
             isFieldNotChange = isFieldNotChange && dataRow["Colors"].Equals(connectionInfo.Colors.ToString());
+            isFieldNotChange = isFieldNotChange && dataRow["ConnectionFrameColor"].Equals(connectionInfo.ConnectionFrameColor.ToString());
             isFieldNotChange = isFieldNotChange && dataRow["ConnectToConsole"].Equals(connectionInfo.UseConsoleSession);
             isFieldNotChange = isFieldNotChange && dataRow["Connected"].Equals(false); // TODO: this column can eventually be removed. we now save this property locally
             isFieldNotChange = isFieldNotChange && dataRow["DisableCursorBlinking"].Equals(connectionInfo.DisableCursorBlinking);
@@ -313,7 +391,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             isFieldNotChange = isFieldNotChange && dataRow["ExternalAddressProvider"].Equals(connectionInfo.ExternalAddressProvider);
             isFieldNotChange = isFieldNotChange && dataRow["ExternalCredentialProvider"].Equals(connectionInfo.ExternalCredentialProvider);
             isFieldNotChange = isFieldNotChange && dataRow["Hostname"].Equals(connectionInfo.Hostname);
+            isFieldNotChange = isFieldNotChange && dataRow["IsTemplate"].Equals(connectionInfo.IsTemplate);
             isFieldNotChange = isFieldNotChange && dataRow["LoadBalanceInfo"].Equals(connectionInfo.LoadBalanceInfo);
+            isFieldNotChange = isFieldNotChange && dataRow["RDPSignScope"].Equals(connectionInfo.RDPSignScope);
+            isFieldNotChange = isFieldNotChange && dataRow["RDPSignature"].Equals(connectionInfo.RDPSignature);
             isFieldNotChange = isFieldNotChange && dataRow["MacAddress"].Equals(connectionInfo.MacAddress);
             isFieldNotChange = isFieldNotChange && dataRow["OpeningCommand"].Equals(connectionInfo.OpeningCommand);
             isFieldNotChange = isFieldNotChange && dataRow["Port"].Equals(connectionInfo.Port);
@@ -352,6 +433,16 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             isFieldNotChange = isFieldNotChange && dataRow["UseRestrictedAdmin"].Equals(connectionInfo.UseRestrictedAdmin);
             isFieldNotChange = isFieldNotChange && dataRow["UseVmId"].Equals(connectionInfo.UseVmId);
             isFieldNotChange = isFieldNotChange && dataRow["UserField"].Equals(connectionInfo.UserField);
+            isFieldNotChange = isFieldNotChange && dataRow["UserField1"].Equals(connectionInfo.UserField1);
+            isFieldNotChange = isFieldNotChange && dataRow["UserField2"].Equals(connectionInfo.UserField2);
+            isFieldNotChange = isFieldNotChange && dataRow["UserField3"].Equals(connectionInfo.UserField3);
+            isFieldNotChange = isFieldNotChange && dataRow["UserField4"].Equals(connectionInfo.UserField4);
+            isFieldNotChange = isFieldNotChange && dataRow["UserField5"].Equals(connectionInfo.UserField5);
+            isFieldNotChange = isFieldNotChange && dataRow["UserField6"].Equals(connectionInfo.UserField6);
+            isFieldNotChange = isFieldNotChange && dataRow["UserField7"].Equals(connectionInfo.UserField7);
+            isFieldNotChange = isFieldNotChange && dataRow["UserField8"].Equals(connectionInfo.UserField8);
+            isFieldNotChange = isFieldNotChange && dataRow["UserField9"].Equals(connectionInfo.UserField9);
+            isFieldNotChange = isFieldNotChange && dataRow["UserField10"].Equals(connectionInfo.UserField10);
             isFieldNotChange = isFieldNotChange && dataRow["UserViaAPI"].Equals(connectionInfo.UserViaAPI);
             isFieldNotChange = isFieldNotChange && dataRow["VNCAuthMode"].Equals(connectionInfo.VNCAuthMode.ToString());
             isFieldNotChange = isFieldNotChange && dataRow["VNCColors"].Equals(connectionInfo.VNCColors.ToString());
@@ -363,7 +454,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             isFieldNotChange = isFieldNotChange && dataRow["VNCProxyUsername"].Equals(connectionInfo.VNCProxyUsername);
             isFieldNotChange = isFieldNotChange && dataRow["VNCSmartSizeMode"].Equals(connectionInfo.VNCSmartSizeMode.ToString());
             isFieldNotChange = isFieldNotChange && dataRow["VNCViewOnly"].Equals(connectionInfo.VNCViewOnly);
+            isFieldNotChange = isFieldNotChange && dataRow["VNCClipboardRedirect"].Equals(connectionInfo.VNCClipboardRedirect);
             isFieldNotChange = isFieldNotChange && dataRow["VmId"].Equals(connectionInfo.VmId);
+            isFieldNotChange = isFieldNotChange && dataRow["User"].Equals(connectionInfo.User);
+            isFieldNotChange = isFieldNotChange && dataRow["Role"].Equals(connectionInfo.Role);
 
             bool isInheritanceFieldNotChange = false;
             if (_saveFilter.SaveInheritance)
@@ -372,6 +466,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                     dataRow["InheritAutomaticResize"].Equals(connectionInfo.Inheritance.AutomaticResize) &&
                     dataRow["InheritCacheBitmaps"].Equals(connectionInfo.Inheritance.CacheBitmaps) &&
                     dataRow["InheritColors"].Equals(connectionInfo.Inheritance.Colors) &&
+                    dataRow["InheritConnectionFrameColor"].Equals(connectionInfo.Inheritance.ConnectionFrameColor) &&
                     dataRow["InheritDescription"].Equals(connectionInfo.Inheritance.Description) &&
                     dataRow["InheritDisableCursorBlinking"].Equals(connectionInfo.Inheritance.DisableCursorBlinking) &&
                     dataRow["InheritDisableCursorShadow"].Equals(connectionInfo.Inheritance.DisableCursorShadow) &&
@@ -439,7 +534,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                     dataRow["InheritVNCProxyType"].Equals(connectionInfo.Inheritance.VNCProxyType) &&
                     dataRow["InheritVNCProxyUsername"].Equals(connectionInfo.Inheritance.VNCProxyUsername) &&
                     dataRow["InheritVNCSmartSizeMode"].Equals(connectionInfo.Inheritance.VNCSmartSizeMode) &&
-                    dataRow["InheritVNCViewOnly"].Equals(connectionInfo.Inheritance.VNCViewOnly);
+                    dataRow["InheritVNCViewOnly"].Equals(connectionInfo.Inheritance.VNCViewOnly) &&
+                    dataRow["InheritVNCClipboardRedirect"].Equals(connectionInfo.Inheritance.VNCClipboardRedirect);
             }
             else
             {
@@ -447,6 +543,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                     dataRow["InheritAutomaticResize"].Equals(false) &&
                     dataRow["InheritCacheBitmaps"].Equals(false) &&
                     dataRow["InheritColors"].Equals(false) &&
+                    dataRow["InheritConnectionFrameColor"].Equals(false) &&
                     dataRow["InheritDescription"].Equals(false) &&
                     dataRow["InheritDisableCursorBlinking"].Equals(false) &&
                     dataRow["InheritDisableCursorShadow"].Equals(false) &&
@@ -511,7 +608,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                     dataRow["InheritVNCProxyType"].Equals(false) &&
                     dataRow["InheritVNCProxyUsername"].Equals(false) &&
                     dataRow["InheritVNCSmartSizeMode"].Equals(false) &&
-                    dataRow["InheritVNCViewOnly"].Equals(false);
+                    dataRow["InheritVNCViewOnly"].Equals(false) &&
+                    dataRow["InheritVNCClipboardRedirect"].Equals(false);
             }
 
             //bool pwd = dataRow["Password"].Equals(_saveFilter.SavePassword ? _cryptographyProvider.Encrypt(connectionInfo.Password?.ConvertToUnsecureString(), _encryptionKey) : "") &&
@@ -527,7 +625,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
         {
             _currentNodeIndex++;
             bool isNewRow = false;
-            DataRow dataRow = _dataTable.Rows.Find(connectionInfo.ConstantID);
+            DataRow? dataRow = _dataTable.Rows.Find(connectionInfo.ConstantID);
             if (dataRow == null)
             {
                 dataRow = _dataTable.NewRow();
@@ -547,6 +645,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataRow["AutomaticResize"] = connectionInfo.AutomaticResize;
             dataRow["CacheBitmaps"] = connectionInfo.CacheBitmaps;
             dataRow["Colors"] = connectionInfo.Colors;
+            dataRow["ConnectionFrameColor"] = connectionInfo.ConnectionFrameColor.ToString();
             dataRow["ConnectToConsole"] = connectionInfo.UseConsoleSession;
             dataRow["Connected"] = false;
             dataRow["Description"] = connectionInfo.Description; // TODO: this column can eventually be removed. we now save this property locally
@@ -565,6 +664,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataRow["Hostname"] = connectionInfo.Hostname;
             dataRow["ICAEncryptionStrength"] = string.Empty;
             dataRow["Icon"] = connectionInfo.Icon;
+            dataRow["IsTemplate"] = connectionInfo.IsTemplate;
             dataRow["LastChange"] = MiscTools.DBTimeStampNow();
             dataRow["LoadBalanceInfo"] = connectionInfo.LoadBalanceInfo;
             dataRow["MacAddress"] = connectionInfo.MacAddress;
@@ -614,6 +714,16 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataRow["UseRestrictedAdmin"] = connectionInfo.UseRestrictedAdmin;
             dataRow["UseVmId"] = connectionInfo.UseVmId;
             dataRow["UserField"] = connectionInfo.UserField;
+            dataRow["UserField1"] = connectionInfo.UserField1;
+            dataRow["UserField2"] = connectionInfo.UserField2;
+            dataRow["UserField3"] = connectionInfo.UserField3;
+            dataRow["UserField4"] = connectionInfo.UserField4;
+            dataRow["UserField5"] = connectionInfo.UserField5;
+            dataRow["UserField6"] = connectionInfo.UserField6;
+            dataRow["UserField7"] = connectionInfo.UserField7;
+            dataRow["UserField8"] = connectionInfo.UserField8;
+            dataRow["UserField9"] = connectionInfo.UserField9;
+            dataRow["UserField10"] = connectionInfo.UserField10;
             dataRow["EnvironmentTags"] = connectionInfo.EnvironmentTags;
             dataRow["Username"] = _saveFilter.SaveUsername ? connectionInfo.Username : "";
             dataRow["VNCAuthMode"] = connectionInfo.VNCAuthMode;
@@ -627,13 +737,17 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataRow["VNCProxyUsername"] = connectionInfo.VNCProxyUsername;
             dataRow["VNCSmartSizeMode"] = connectionInfo.VNCSmartSizeMode;
             dataRow["VNCViewOnly"] = connectionInfo.VNCViewOnly; // TODO: this column can eventually be removed. we now save this property locally
+            dataRow["VNCClipboardRedirect"] = connectionInfo.VNCClipboardRedirect;
             dataRow["VmId"] = connectionInfo.VmId;
             dataRow["UserViaAPI"] = connectionInfo.UserViaAPI;
+            dataRow["User"] = connectionInfo.User;
+            dataRow["Role"] = connectionInfo.Role;
 
             if (_saveFilter.SaveInheritance)
             {
                 dataRow["InheritAutomaticResize"] = connectionInfo.Inheritance.AutomaticResize;
                 dataRow["InheritColors"] = connectionInfo.Inheritance.Colors;
+                dataRow["InheritConnectionFrameColor"] = connectionInfo.Inheritance.ConnectionFrameColor;
                 dataRow["InheritDescription"] = connectionInfo.Inheritance.Description;
                 dataRow["InheritDisableCursorBlinking"] = connectionInfo.Inheritance.DisableCursorBlinking;
                 dataRow["InheritDisableCursorShadow"] = connectionInfo.Inheritance.DisableCursorShadow;
@@ -693,6 +807,16 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 dataRow["InheritUseRestrictedAdmin"] = connectionInfo.Inheritance.UseRestrictedAdmin;
                 dataRow["InheritUseVmId"] = connectionInfo.Inheritance.UseVmId;
                 dataRow["InheritUserField"] = connectionInfo.Inheritance.UserField;
+                dataRow["InheritUserField1"] = connectionInfo.Inheritance.UserField1;
+                dataRow["InheritUserField2"] = connectionInfo.Inheritance.UserField2;
+                dataRow["InheritUserField3"] = connectionInfo.Inheritance.UserField3;
+                dataRow["InheritUserField4"] = connectionInfo.Inheritance.UserField4;
+                dataRow["InheritUserField5"] = connectionInfo.Inheritance.UserField5;
+                dataRow["InheritUserField6"] = connectionInfo.Inheritance.UserField6;
+                dataRow["InheritUserField7"] = connectionInfo.Inheritance.UserField7;
+                dataRow["InheritUserField8"] = connectionInfo.Inheritance.UserField8;
+                dataRow["InheritUserField9"] = connectionInfo.Inheritance.UserField9;
+                dataRow["InheritUserField10"] = connectionInfo.Inheritance.UserField10;
                 dataRow["InheritEnvironmentTags"] = connectionInfo.Inheritance.EnvironmentTags;
                 dataRow["InheritUserViaAPI"] = connectionInfo.Inheritance.UserViaAPI;
                 dataRow["InheritUsername"] = connectionInfo.Inheritance.Username;
@@ -707,6 +831,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 dataRow["InheritVNCProxyUsername"] = connectionInfo.Inheritance.VNCProxyUsername;
                 dataRow["InheritVNCSmartSizeMode"] = connectionInfo.Inheritance.VNCSmartSizeMode;
                 dataRow["InheritVNCViewOnly"] = connectionInfo.Inheritance.VNCViewOnly;
+                dataRow["InheritVNCClipboardRedirect"] = connectionInfo.Inheritance.VNCClipboardRedirect;
                 dataRow["InheritVmId"] = connectionInfo.Inheritance.VmId;
                 dataRow["UserViaAPI"] = connectionInfo.UserViaAPI;
                 dataRow["InheritCacheBitmaps"] = connectionInfo.Inheritance.CacheBitmaps;
@@ -715,6 +840,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             {
                 dataRow["InheritAutomaticResize"] = false;
                 dataRow["InheritColors"] = false;
+                dataRow["InheritConnectionFrameColor"] = false;
                 dataRow["InheritDescription"] = false;
                 dataRow["InheritDisableCursorBlinking"] = false;
                 dataRow["InheritDisableCursorShadow"] = false;
@@ -785,6 +911,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 dataRow["InheritVNCProxyUsername"] = false;
                 dataRow["InheritVNCSmartSizeMode"] = false;
                 dataRow["InheritVNCViewOnly"] = false;
+                dataRow["InheritVNCClipboardRedirect"] = false;
                 dataRow["InheritCacheBitmaps"] = false;
                 dataRow["UserViaAPI"] = "";
             }

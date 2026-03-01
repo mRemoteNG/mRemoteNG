@@ -33,8 +33,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         private RdpProtocol BuildHighestSupportedVersion()
         {
-            IEnumerable<RdpVersion> versions = Enum.GetValues(typeof(RdpVersion))
-                .OfType<RdpVersion>()
+            IEnumerable<RdpVersion> versions = Enum.GetValues<RdpVersion>()
                 .Except(new[] { RdpVersion.Highest })
                 .Reverse();
 
@@ -45,13 +44,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
                     return rdp;
             }
 
-            throw new ArgumentOutOfRangeException();
+            throw new InvalidOperationException("No supported RDP version found.");
         }
 
-        public List<RdpVersion> GetSupportedVersions()
+        public IList<RdpVersion> GetSupportedVersions()
         {
-            IEnumerable<RdpVersion> versions = Enum.GetValues(typeof(RdpVersion))
-                .OfType<RdpVersion>()
+            IEnumerable<RdpVersion> versions = Enum.GetValues<RdpVersion>()
                 .Except(new[] { RdpVersion.Highest });
 
             List<RdpVersion> supportedVersions = new();

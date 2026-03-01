@@ -68,8 +68,7 @@ namespace mRemoteNG.UI
         /// </remarks>
         public Bitmap ScaleImage(Image image)
         {
-            if (image == null)
-                throw new ArgumentNullException(nameof(image));
+            ArgumentNullException.ThrowIfNull(image);
 
             int width = ScaleWidth(image.Width);
             int height = ScaleHeight(image.Height);
@@ -98,8 +97,7 @@ namespace mRemoteNG.UI
 
         public Bitmap ScaleImage(Icon icon)
         {
-            if (icon == null)
-                throw new ArgumentNullException(nameof(icon));
+            ArgumentNullException.ThrowIfNull(icon);
 
             return ScaleImage(icon.ToBitmap());
         }
@@ -108,7 +106,7 @@ namespace mRemoteNG.UI
         /// Scale the given nominal height value by the <see cref="ResolutionScalingFactor"/>
         /// </summary>
         /// <param name="width"></param>
-        private int CalculateScaledValue(float value, float scalingValue)
+        private static int CalculateScaledValue(float value, float scalingValue)
         {
             return (int)Math.Round(value * scalingValue);
         }

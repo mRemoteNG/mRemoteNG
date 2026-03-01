@@ -11,7 +11,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
     [SupportedOSPlatform("windows")]
     public class RdpProtocol7 : RdpProtocol
     {
-        private MsRdpClient7NotSafeForScripting RdpClient7 => (MsRdpClient7NotSafeForScripting)((AxHost)Control).GetOcx();
+        private MsRdpClient7NotSafeForScripting? RdpClient7 => (Control as AxHost)?.GetOcx() as MsRdpClient7NotSafeForScripting;
         protected override RdpVersion RdpProtocolVersion => RDP.RdpVersion.Rdc7;
 
         public override bool Initialize()
@@ -19,32 +19,47 @@ namespace mRemoteNG.Connection.Protocol.RDP
             if (!base.Initialize())
                 return false;
 
+            return PostInitialize();
+        }
+
+        public override async System.Threading.Tasks.Task<bool> InitializeAsync()
+        {
+            if (!await base.InitializeAsync())
+                return false;
+
+            return PostInitialize();
+        }
+
+        private bool PostInitialize()
+        {
             try
             {
                 if (RdpVersion < Versions.RDC70) return false; // loaded MSTSCLIB dll version is not capable
 
-                RdpClient7.AdvancedSettings8.AudioQualityMode = (uint)connectionInfo.SoundQuality;
-                RdpClient7.AdvancedSettings8.AudioCaptureRedirectionMode = connectionInfo.RedirectAudioCapture;
-                RdpClient7.AdvancedSettings8.NetworkConnectionType = (int)RdpNetworkConnectionType.Modem;
+                var rdpClient = RdpClient7;
+                if (rdpClient == null) return false;
+
+                rdpClient.AdvancedSettings8.AudioQualityMode = (uint)connectionInfo.SoundQuality;
+                rdpClient.AdvancedSettings8.AudioCaptureRedirectionMode = connectionInfo.RedirectAudioCapture;
+                rdpClient.AdvancedSettings8.NetworkConnectionType = (int)RdpNetworkConnectionType.Modem;
 
                 if (connectionInfo.UseVmId)
                 {
                     SetExtendedProperty("DisableCredentialsDelegation", true);
-                    RdpClient7.AdvancedSettings7.AuthenticationServiceClass = "Microsoft Virtual Console Service";
-                    RdpClient7.AdvancedSettings8.EnableCredSspSupport = true;
-                    RdpClient7.AdvancedSettings8.NegotiateSecurityLayer = false;
-                    RdpClient7.AdvancedSettings7.PCB = $"{connectionInfo.VmId}";
+                    rdpClient.AdvancedSettings7.AuthenticationServiceClass = "Microsoft Virtual Console Service";
+                    rdpClient.AdvancedSettings8.EnableCredSspSupport = true;
+                    rdpClient.AdvancedSettings7.PCB = $"{connectionInfo.VmId}";
                     if (connectionInfo.UseEnhancedMode)
-                        RdpClient7.AdvancedSettings7.PCB += ";EnhancedMode=1";
+                        rdpClient.AdvancedSettings7.PCB += ";EnhancedMode=1";
                 }
 
                 if (connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.AccessToken)
                 {
                     string authToken = connectionInfo.RDGatewayAccessToken;
                     string encryptedAuthToken = RdGatewayAccessTokenHelper.EncryptAuthCookieString(authToken);
-                    RdpClient7.TransportSettings3.GatewayEncryptedAuthCookie = encryptedAuthToken;  
-                    RdpClient7.TransportSettings3.GatewayEncryptedAuthCookieSize = (uint)encryptedAuthToken.Length;
-                    RdpClient7.TransportSettings3.GatewayCredsSource = 5;
+                    rdpClient.TransportSettings3.GatewayEncryptedAuthCookie = encryptedAuthToken;
+                    rdpClient.TransportSettings3.GatewayEncryptedAuthCookieSize = (uint)encryptedAuthToken.Length;
+                    rdpClient.TransportSettings3.GatewayCredsSource = 5;
                 }
             }
             catch (Exception ex)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace mRemoteNG.App.Update
 {
-    public class InternetConnection
+    public static class InternetConnection
     {
         public static bool IsPosible()
         {

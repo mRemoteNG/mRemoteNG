@@ -64,7 +64,7 @@ namespace mRemoteNG.Security
             {
                 DtdProcessing = DtdProcessing.Prohibit, // Prohibit DTD processing
                 XmlResolver = null, // Disable external entity resolution
-                MaxCharactersFromEntities = 0, // Don't allow entity expansion
+                MaxCharactersFromEntities = 1024, // Allow standard XML character references but limit expansion
                 IgnoreProcessingInstructions = true, // Ignore processing instructions
                 IgnoreComments = true // Ignore comments
             };

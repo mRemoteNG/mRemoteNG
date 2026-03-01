@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 using mRemoteNG.Resources.Language;
@@ -112,7 +113,9 @@ namespace mRemoteNG.UI.Controls
         private void ApplyTheme()
         {
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            panel1.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            var palette = ThemeManager.getInstance().ActiveTheme.ExtendedPalette;
+            if (palette != null)
+                panel1.BackColor = palette.getColor("TextBox_Background");
         }
 
         protected override void Dispose(bool disposing)
@@ -268,7 +271,7 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                int theValue = int.Parse(inString);
+                int theValue = int.Parse(inString, CultureInfo.InvariantCulture);
                 if (theValue >= 0 && theValue <= 255)
                     return true;
 
@@ -288,13 +291,13 @@ namespace mRemoteNG.UI.Controls
         private void Box1_KeyPress(object? sender, KeyPressEventArgs e)
         {
             //Only Accept a '.', a numeral, or backspace
-            if (e.KeyChar.ToString() == "." || char.IsDigit(e.KeyChar) || e.KeyChar == 8)
+            if (e.KeyChar == '.' || char.IsDigit(e.KeyChar) || e.KeyChar == 8)
             {
                 //If the key pressed is a '.'
-                if (e.KeyChar.ToString() == ".")
+                if (e.KeyChar == '.')
                 {
                     //If the Text is a valid ip octet move to the next box
-                    if (Octet1.Text != "" && Octet1.Text.Length != Octet1.SelectionLength)
+                    if (!string.IsNullOrEmpty(Octet1.Text) && Octet1.Text.Length != Octet1.SelectionLength)
                     {
                         if (IsValid(Octet1.Text))
                             Octet2.Focus();
@@ -334,11 +337,11 @@ namespace mRemoteNG.UI.Controls
         {
             //Similar to Box1_KeyPress but in special case for backspace moves cursor
             //to the previous box (Box1)
-            if (e.KeyChar.ToString() == "." || char.IsDigit(e.KeyChar) || e.KeyChar == 8)
+            if (e.KeyChar == '.' || char.IsDigit(e.KeyChar) || e.KeyChar == 8)
             {
-                if (e.KeyChar.ToString() == ".")
+                if (e.KeyChar == '.')
                 {
-                    if (Octet2.Text != "" && Octet2.Text.Length != Octet2.SelectionLength)
+                    if (!string.IsNullOrEmpty(Octet2.Text) && Octet2.Text.Length != Octet2.SelectionLength)
                     {
                         if (IsValid(Octet1.Text))
                             Octet3.Focus();
@@ -378,11 +381,11 @@ namespace mRemoteNG.UI.Controls
         {
             //Identical to Box2_KeyPress except that previous box is Box2 and
             //next box is Box3
-            if (e.KeyChar.ToString() == "." || char.IsDigit(e.KeyChar) || e.KeyChar == 8)
+            if (e.KeyChar == '.' || char.IsDigit(e.KeyChar) || e.KeyChar == 8)
             {
-                if (e.KeyChar.ToString() == ".")
+                if (e.KeyChar == '.')
                 {
-                    if (Octet3.Text != "" && Octet3.SelectionLength != Octet3.Text.Length)
+                    if (!string.IsNullOrEmpty(Octet3.Text) && Octet3.SelectionLength != Octet3.Text.Length)
                     {
                         if (IsValid(Octet1.Text))
                             Octet4.Focus();

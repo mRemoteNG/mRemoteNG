@@ -11,11 +11,8 @@ namespace mRemoteNG.Messages.WriterDecorators
 
         public MessageTypeFilterDecorator(IMessageTypeFilteringOptions filter, IMessageWriter decoratedWriter)
         {
-            if (filter == null)
-                throw new ArgumentNullException(nameof(filter));
-            if (decoratedWriter == null)
-                throw new ArgumentNullException(nameof(decoratedWriter));
-
+            ArgumentNullException.ThrowIfNull(filter);
+            ArgumentNullException.ThrowIfNull(decoratedWriter);
             _filter = filter;
             _decoratedWriter = decoratedWriter;
         }

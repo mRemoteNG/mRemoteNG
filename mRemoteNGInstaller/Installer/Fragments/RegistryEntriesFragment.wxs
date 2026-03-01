@@ -6,6 +6,7 @@
         <RegistryKey Root="HKLM" Key="Software\mRemoteNG">
           <RegistryValue Type="string" Name="InstallDir" Value="[INSTALLDIR]" KeyPath="yes" />
         </RegistryKey>
+        <RemoveRegistryKey Id="RemoveHKLMMRemoteNGKey" Root="HKLM" Key="Software\mRemoteNG" Action="removeOnUninstall" />
       </Component>
     </DirectoryRef>
 	</Fragment>

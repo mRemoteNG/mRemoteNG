@@ -10,9 +10,7 @@ namespace mRemoteNG.Tools.CustomCollections
 
         public CollectionUpdatedEventArgs(ActionType action, IEnumerable<T> changedItems)
         {
-            if (changedItems == null)
-                throw new ArgumentNullException(nameof(changedItems));
-
+            ArgumentNullException.ThrowIfNull(changedItems);
             Action = action;
             ChangedItems = changedItems;
         }

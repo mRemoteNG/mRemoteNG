@@ -12,7 +12,7 @@ namespace mRemoteNG.UI.Controls
     //Extended button class, the button onPaint completely repaint the control
     public class MrngButton : Button
     {
-        private ThemeManager _themeManager;
+        private ThemeManager? _themeManager;
 
         /// <summary>
         /// Store the mouse state, required for coloring the component according to the mouse state
@@ -29,7 +29,9 @@ namespace mRemoteNG.UI.Controls
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
 
+#pragma warning disable CA1707 // Designer-generated code uses this name; renaming would break .Designer.cs files
         public MouseState _mice { get; set; }
+#pragma warning restore CA1707
 
         /// <summary>
         /// Rewrite the function to allow for coloring the component depending on the mouse state
@@ -74,13 +76,17 @@ namespace mRemoteNG.UI.Controls
         /// Repaint the componente, the elements considered are the clipping rectangle, text and an icon
         /// </summary>
         /// <param name="e"></param>
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs pevent)
         {
-            if (!_themeManager.ActiveAndExtended)
+            var themeManager = _themeManager;
+            if (themeManager is null || !themeManager.ActiveAndExtended)
             {
-                base.OnPaint(e);
+                base.OnPaint(pevent);
                 return;
             }
+
+            // ActiveAndExtended guarantees ExtendedPalette is non-null
+            var palette = themeManager.ActiveTheme.ExtendedPalette!;
 
             Color back;
             Color fore;
@@ -90,45 +96,47 @@ namespace mRemoteNG.UI.Controls
                 switch (_mice)
                 {
                     case MouseState.HOVER:
-                        back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Background");
-                        fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Foreground");
-                        border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Border");
+                        back = palette.getColor("Button_Hover_Background");
+                        fore = palette.getColor("Button_Hover_Foreground");
+                        border = palette.getColor("Button_Hover_Border");
                         break;
                     case MouseState.DOWN:
-                        back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Pressed_Background");
-                        fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Pressed_Foreground");
-                        border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Pressed_Border");
+                        back = palette.getColor("Button_Pressed_Background");
+                        fore = palette.getColor("Button_Pressed_Foreground");
+                        border = palette.getColor("Button_Pressed_Border");
                         break;
                     default:
-                        back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Background");
-                        fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Foreground");
-                        border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Border");
+                        back = palette.getColor("Button_Background");
+                        fore = palette.getColor("Button_Foreground");
+                        border = palette.getColor("Button_Border");
                         break;
                 }
             }
             else
             {
-                back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Background");
-                fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Foreground");
-                border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Border");
+                back = palette.getColor("Button_Disabled_Background");
+                fore = palette.getColor("Button_Disabled_Foreground");
+                border = palette.getColor("Button_Disabled_Border");
             }
 
 
-            e.Graphics.FillRectangle(new SolidBrush(back), e.ClipRectangle);
-            e.Graphics.DrawRectangle(new Pen(border, 1), 0, 0, Width - 1, Height - 1);
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+            using (SolidBrush backBrush = new(back))
+                pevent.Graphics.FillRectangle(backBrush, pevent.ClipRectangle);
+            using (Pen borderPen = new(border, 1))
+                pevent.Graphics.DrawRectangle(borderPen, 0, 0, Width - 1, Height - 1);
+            pevent.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            pevent.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
             //Warning. the app doesnt use many images in buttons so this positions are kinda tailored just for the used by the app
             //not by general usage of iamges in buttons
             if (Image != null)
             {
-                SizeF stringSize = e.Graphics.MeasureString(Text, Font);
+                SizeF stringSize = pevent.Graphics.MeasureString(Text, Font);
 
-                e.Graphics.DrawImageUnscaled(Image, Width / 2 - (int)stringSize.Width / 2 - Image.Width,
+                pevent.Graphics.DrawImageUnscaled(Image, Width / 2 - (int)stringSize.Width / 2 - Image.Width,
                                              Height / 2 - Image.Height / 2);
             }
 
-            TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, fore,
+            TextRenderer.DrawText(pevent.Graphics, Text, Font, ClientRectangle, fore,
                                   TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
         }
 

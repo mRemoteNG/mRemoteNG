@@ -18,6 +18,7 @@
         <Shortcut Id="ReadmeShortcut" Name="Readme" Target="[INSTALLDIR]Readme.txt" WorkingDirectory="INSTALLDIR" />
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\$(var.ProductName)" Name="ApplicationStartMenuShortcut" Type="integer" Value="1" KeyPath="yes"/>
+        <RemoveRegistryKey Id="RemoveHKCUMRemoteNGKey" Root="HKCU" Key="Software\$(var.ProductName)" Action="removeOnUninstall" />
       </Component>
     </DirectoryRef>
     

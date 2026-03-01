@@ -14,15 +14,13 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers;
 [SupportedOSPlatform("windows")]
 public class SecureCRTFileDeserializerTests
 {
-    private SecureCRTFileDeserializer _deserializer;
     private ConnectionTreeModel _connectionTreeModel;
 
     [OneTimeSetUp]
     public void OnetimeSetup()
     {
         var fileContents = Resources.test_securecrt;
-        _deserializer = new SecureCRTFileDeserializer();
-        _connectionTreeModel = _deserializer.Deserialize(fileContents);        
+        _connectionTreeModel = SecureCRTFileDeserializer.Deserialize(fileContents);
     }
 
     [Test]
@@ -150,17 +148,17 @@ public class SecureCRTFileDeserializerTests
         Assert.That(serverSubSubfolderNode.Children.Count, Is.EqualTo(2));
     }
 
-    private ContainerInfo GetContainerNamed(string name, IEnumerable<ConnectionInfo> list)
+    private static ContainerInfo GetContainerNamed(string name, IEnumerable<ConnectionInfo> list)
     {
         return list.First(node => node is ContainerInfo && node.Name == name) as ContainerInfo;
     }
 
-    private ConnectionInfo GetConnectionNamed(string name, IEnumerable<ConnectionInfo> list)
+    private static ConnectionInfo GetConnectionNamed(string name, IEnumerable<ConnectionInfo> list)
     {
         return list.First(node => node is ConnectionInfo && node.Name == name);
     }
 
-    private bool ContainsNodeNamed(string name, IEnumerable<ConnectionInfo> list)
+    private static bool ContainsNodeNamed(string name, IEnumerable<ConnectionInfo> list)
     {
         return list.Any(node => node.Name == name);
     }

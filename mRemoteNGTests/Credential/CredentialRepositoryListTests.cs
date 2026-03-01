@@ -86,5 +86,37 @@ namespace mRemoteNGTests.Credential
             var retrievedCredential = _credentialCatalog.GetCredentialRecord(Guid.NewGuid());
             Assert.That(retrievedCredential, Is.Null);
         }
+
+        [Test]
+        public void AddingRepoWithDuplicateSourceThrows()
+        {
+            var provider1 = Substitute.For<ICredentialRepository>();
+            provider1.Config.Id.Returns(Guid.NewGuid());
+            provider1.Config.Source.Returns(@"C:\creds\repo.xml");
+
+            var provider2 = Substitute.For<ICredentialRepository>();
+            provider2.Config.Id.Returns(Guid.NewGuid());
+            provider2.Config.Source.Returns(@"C:\creds\repo.xml");
+
+            _credentialCatalog.AddProvider(provider1);
+            Assert.Throws<ArgumentException>(() => _credentialCatalog.AddProvider(provider2));
+            Assert.That(_credentialCatalog.CredentialProviders.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void AddingRepoWithDifferentSourceSucceeds()
+        {
+            var provider1 = Substitute.For<ICredentialRepository>();
+            provider1.Config.Id.Returns(Guid.NewGuid());
+            provider1.Config.Source.Returns(@"C:\creds\repo1.xml");
+
+            var provider2 = Substitute.For<ICredentialRepository>();
+            provider2.Config.Id.Returns(Guid.NewGuid());
+            provider2.Config.Source.Returns(@"C:\creds\repo2.xml");
+
+            _credentialCatalog.AddProvider(provider1);
+            _credentialCatalog.AddProvider(provider2);
+            Assert.That(_credentialCatalog.CredentialProviders.Count(), Is.EqualTo(2));
+        }
     }
 }

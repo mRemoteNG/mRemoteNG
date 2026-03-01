@@ -17,7 +17,7 @@ namespace CustomActions
         }
 
 
-        public ManagementScope Connect()
+        public static ManagementScope Connect()
         {
             try
             {
@@ -57,7 +57,7 @@ namespace CustomActions
             return updateIsInstalled;
         }
 
-        private string BuildWhereClauseFromKbList(IEnumerable<string> kbList)
+        private static string BuildWhereClauseFromKbList(IEnumerable<string> kbList)
         {
             var whereClause = "";
             var counter = 0;
@@ -82,7 +82,7 @@ namespace CustomActions
         /// </summary>
         /// <param name="kbId">The KB ID to sanitize</param>
         /// <returns>The sanitized KB ID, or empty string if invalid</returns>
-        private string SanitizeKbId(string kbId)
+        private static string SanitizeKbId(string kbId)
         {
             if (string.IsNullOrWhiteSpace(kbId))
                 return string.Empty;

@@ -4,12 +4,12 @@ using Org.BouncyCastle.Security;
 
 namespace mRemoteNG.Security
 {
-    public class RandomGenerator
+    public static class RandomGenerator
     {
         public static string RandomString(int length)
         {
             if (length < 0)
-                throw new ArgumentException($"{nameof(length)} must be a positive integer");
+                throw new ArgumentException($"{nameof(length)} must be a positive integer", nameof(length));
 
             SecureRandom randomGen = new();
             StringBuilder stringBuilder = new();

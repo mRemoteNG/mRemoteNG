@@ -1,0 +1,83 @@
+name: SonarCloud Analysis
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sonarcloud-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sonarcloud:
+    name: SonarCloud Scan
+    runs-on: windows-2025-vs2026
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 # v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2
+        with:
+          vs-version: "[18.0,19.0)"
+
+      - name: Install SonarScanner
+        shell: pwsh
+        run: |
+          dotnet tool install --global dotnet-sonarscanner
+
+      - name: Install Java (required by SonarScanner)
+        uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4
+        with:
+          distribution: 'microsoft'
+          java-version: '21'
+
+      - name: Begin SonarCloud analysis
+        shell: pwsh
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          dotnet-sonarscanner begin `
+            /k:"robertpopa22_mRemoteNG" `
+            /o:"robertpopa22" `
+            /d:sonar.token="$env:SONAR_TOKEN" `
+            /d:sonar.host.url="https://sonarcloud.io" `
+            /d:sonar.cs.vscoveragexml.reportsPaths="**/coverage.opencover.xml" `
+            /d:sonar.exclusions="**/obj/**,**/bin/**,**/*.Designer.cs,**/Interop*.cs,ObjectListView/**,.project-roadmap/**"
+
+      - name: Build with MSBuild
+        shell: pwsh
+        run: |
+          msbuild "$env:GITHUB_WORKSPACE\mRemoteNG.sln" /restore /m /verbosity:minimal -p:Configuration=Release -p:Platform=x64
+
+      - name: Install coverage tool
+        shell: pwsh
+        run: dotnet tool install --global dotnet-coverage
+
+      - name: Run tests with coverage
+        shell: pwsh
+        continue-on-error: true
+        run: |
+          dotnet-coverage collect `
+            --output coverage.opencover.xml `
+            --output-format xml `
+            "dotnet test mRemoteNGTests/bin/x64/Release/mRemoteNGTests.dll --results-directory $env:TEMP/testresults --verbosity normal"
+
+      - name: End SonarCloud analysis
+        shell: pwsh
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          dotnet-sonarscanner end /d:sonar.token="$env:SONAR_TOKEN"

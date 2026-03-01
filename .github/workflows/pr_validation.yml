@@ -1,0 +1,97 @@
+name: PR_Validation
+
+on:
+  pull_request:
+    branches:
+      - v1.78.2-dev
+      - main
+  push:
+    branches:
+      - v1.78.2-dev
+      - main
+      - release/**
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: pr-validation-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-solution:
+    name: Build solution (${{ matrix.platform }})
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-2025-vs2026
+            platform: x86
+          - runner: windows-2025-vs2026
+            platform: x64
+          - runner: windows-11-arm
+            platform: ARM64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 # v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2
+        with:
+          vs-version: ${{ matrix.platform == 'ARM64' && '17.14.12' || '[18.0,19.0)' }}
+
+      - name: Build solution
+        shell: pwsh
+        run: |
+          msbuild "$env:GITHUB_WORKSPACE\mRemoteNG.sln" /restore /m /verbosity:minimal -p:Configuration=Release -p:Platform=${{ matrix.platform }}
+
+      - name: Smoke test (app starts)
+        if: matrix.platform != 'x86'
+        shell: pwsh
+        run: |
+          $output = & ".\mRemoteNG\bin\${{ matrix.platform }}\Release\mRemoteNG.exe" --version 2>&1
+          if ($LASTEXITCODE -ne 0) { throw "Smoke test failed: exit code $LASTEXITCODE" }
+          Write-Host "Smoke test passed: $output"
+
+  build-tests:
+    name: Build tests and specs (${{ matrix.platform }})
+    permissions:
+      contents: read
+    runs-on: windows-2025-vs2026
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: x86
+          - platform: x64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 # v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2
+        with:
+          vs-version: "[18.0,19.0)"
+
+      - name: Build mRemoteNGTests
+        shell: pwsh
+        run: |
+          msbuild "$env:GITHUB_WORKSPACE\mRemoteNGTests\mRemoteNGTests.csproj" /restore /m /verbosity:minimal -p:Configuration=Release -p:Platform=${{ matrix.platform }}
+
+      - name: Build mRemoteNGSpecs
+        shell: pwsh
+        run: |
+          msbuild "$env:GITHUB_WORKSPACE\mRemoteNGSpecs\mRemoteNGSpecs.csproj" /restore /m /verbosity:minimal -p:Configuration=Release -p:Platform=${{ matrix.platform }}

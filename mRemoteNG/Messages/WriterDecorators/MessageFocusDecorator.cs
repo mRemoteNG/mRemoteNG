@@ -73,25 +73,16 @@ namespace mRemoteNG.Messages.WriterDecorators
 
             _messageWindow.PreviousActiveForm = (DockContent)_frmMain.pnlDock.ActiveContent;
 
-            // Show the notifications panel solution:
-            // https://stackoverflow.com/questions/13843604/calling-up-dockpanel-suites-autohidden-dockcontent-programmatically
-            if (AutoHideEnabled(_messageWindow))
-                _frmMain.pnlDock.ActiveAutoHideContent = _messageWindow;
-            else
-                _messageWindow.Show(_frmMain.pnlDock);
+            // Use Activate() which properly handles all dock states including auto-hide.
+            // Previously, setting ActiveAutoHideContent for auto-hidden panels would open
+            // the peek popup but subsequent Focus() calls could cause it to close again.
+            // Activate() integrates with DockPanel's focus management correctly (#399).
+            _messageWindow.Activate();
 
             _messageWindow.lvErrorCollector.Focus();
             _messageWindow.lvErrorCollector.SelectedItems.Clear();
             _messageWindow.lvErrorCollector.Items[0].Selected = true;
             _messageWindow.lvErrorCollector.FocusedItem = _messageWindow.lvErrorCollector.Items[0];
-        }
-
-        private bool AutoHideEnabled(DockContent content)
-        {
-            return content.DockState == DockState.DockBottomAutoHide ||
-                   content.DockState == DockState.DockTopAutoHide ||
-                   content.DockState == DockState.DockLeftAutoHide ||
-                   content.DockState == DockState.DockRightAutoHide;
         }
     }
 }

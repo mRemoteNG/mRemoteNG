@@ -1,4 +1,4 @@
-﻿using mRemoteNG.App;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tools;
@@ -9,6 +9,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNGTests.Connection.Protocol;
 
+[NonParallelizable] // Uses shared Runtime.ExternalToolsService singleton
 public class IntegratedProgramTests
 {
     private readonly ExternalTool _extTool = new()
@@ -19,17 +20,50 @@ public class IntegratedProgramTests
         TryIntegrate = true
     };
 
-
     [Test]
-    public void CanStartExternalApp()
+    public void InitializeSucceedsWhenExternalToolExists()
     {
         SetExternalToolList(_extTool);
         var sut = new IntegratedProgram();
         sut.InterfaceControl = BuildInterfaceControl("notepad", sut);
-        sut.Initialize();
-        var appStarted = sut.Connect();
-        sut.Disconnect();
-        Assert.That(appStarted);
+
+        var initialized = sut.Initialize();
+
+        Assert.That(initialized, Is.True);
+    }
+
+    [TestCase("cmd")]
+    [TestCase("cmd.exe")]
+    [TestCase(@"C:\Windows\System32\cmd.exe")]
+    [TestCase("pwsh")]
+    [TestCase("pwsh.exe")]
+    [TestCase("powershell")]
+    [TestCase("powershell.exe")]
+    [TestCase("wsl")]
+    [TestCase("wsl.exe")]
+    [TestCase(@"C:\Windows\System32\wsl.exe")]
+    // WSL distribution launchers (issue #693: ubuntu terminal as external tool)
+    [TestCase("ubuntu")]
+    [TestCase("ubuntu.exe")]
+    [TestCase("ubuntu2004")]
+    [TestCase("ubuntu2004.exe")]
+    [TestCase("ubuntu2204")]
+    [TestCase("ubuntu2204.exe")]
+    [TestCase("debian")]
+    [TestCase("debian.exe")]
+    [TestCase("kali-linux")]
+    [TestCase("kali-linux.exe")]
+    [TestCase("kali")]
+    [TestCase("kali.exe")]
+    public void InitializeSucceedsForBuiltInShellPresetWhenExternalToolIsNotConfigured(string extAppName)
+    {
+        SetExternalToolList();
+        var sut = new IntegratedProgram();
+        sut.InterfaceControl = BuildInterfaceControl(extAppName, sut);
+
+        var initialized = sut.Initialize();
+
+        Assert.That(initialized, Is.True);
     }
 
     [Test]
@@ -42,12 +76,12 @@ public class IntegratedProgramTests
         Assert.That(appInitialized, Is.False);
     }
 
-    private void SetExternalToolList(ExternalTool externalTool)
+    private static void SetExternalToolList(params ExternalTool[] externalTools)
     {
-        Runtime.ExternalToolsService.ExternalTools = new FullyObservableCollection<ExternalTool> { externalTool };
+        Runtime.ExternalToolsService.ExternalTools = new FullyObservableCollection<ExternalTool>(externalTools);
     }
 
-    private InterfaceControl BuildInterfaceControl(string extAppName, ProtocolBase sut)
+    private static InterfaceControl BuildInterfaceControl(string extAppName, ProtocolBase sut)
     {
         var connectionWindow = new ConnectionWindow(new DockContent());
         var connectionInfo = new ConnectionInfo { ExtApp = extAppName, Protocol = ProtocolType.IntApp };

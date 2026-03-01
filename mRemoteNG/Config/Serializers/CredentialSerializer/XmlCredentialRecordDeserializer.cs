@@ -13,9 +13,10 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
 
         public IEnumerable<ICredentialRecord> Deserialize(string xml)
         {
-            if (string.IsNullOrEmpty(xml)) return new ICredentialRecord[0];
+            if (string.IsNullOrEmpty(xml)) return Array.Empty<ICredentialRecord>();
             XDocument xdoc = XDocument.Parse(xml);
-            XElement rootElement = xdoc.Root;
+            XElement rootElement = xdoc.Root
+                ?? throw new InvalidOperationException("XML document has no root element.");
             ValidateSchemaVersion(rootElement);
 
             IEnumerable<CredentialRecord> credentials = from element in xdoc.Descendants("Credential")
@@ -24,7 +25,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
                               {
                                   Title = element.Attribute("Title")?.Value ?? "",
                                   Username = element.Attribute("Username")?.Value ?? "",
-                                  Password = element.Attribute("Password")?.Value.ConvertToSecureString(),
+                                  Password = (element.Attribute("Password")?.Value ?? "").ConvertToSecureString(),
                                   Domain = element.Attribute("Domain")?.Value ?? ""
                               };
             return credentials.ToArray();
@@ -32,9 +33,9 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
 
         private void ValidateSchemaVersion(XElement rootElement)
         {
-            string docSchemaVersion = rootElement?.Attribute("SchemaVersion")?.Value;
+            string? docSchemaVersion = rootElement.Attribute("SchemaVersion")?.Value;
             if (docSchemaVersion != SchemaVersion)
-                throw new Exception($"The schema version of this document is not supported by this class. Document Version: {docSchemaVersion} Supported Version: {SchemaVersion}");
+                throw new NotSupportedException($"The schema version of this document is not supported by this class. Document Version: {docSchemaVersion} Supported Version: {SchemaVersion}");
         }
     }
 }

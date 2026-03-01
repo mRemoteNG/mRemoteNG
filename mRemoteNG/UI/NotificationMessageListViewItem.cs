@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using mRemoteNG.Messages;
 
@@ -8,10 +9,9 @@ namespace mRemoteNG.UI
     {
         public NotificationMessageListViewItem(IMessage message)
         {
-            if (message == null)
-                throw new ArgumentNullException(nameof(message));
+            ArgumentNullException.ThrowIfNull(message);
 
-            ImageIndex = Convert.ToInt32(message.Class);
+            ImageIndex = Convert.ToInt32(message.Class, CultureInfo.InvariantCulture);
             Text = message.Text.Replace(Environment.NewLine, "  ");
             Tag = message;
         }

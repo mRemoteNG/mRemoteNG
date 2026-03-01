@@ -8,12 +8,12 @@ using mRemoteNG.Tree.Root;
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 {
     [SupportedOSPlatform("windows")]
-    public class XmlConnectionSerializerFactory
+    public static class XmlConnectionSerializerFactory
     {
-        public ISerializer<ConnectionInfo, string> Build(
+        public static ISerializer<ConnectionInfo, string> Build(
             ICryptographyProvider cryptographyProvider,
             ConnectionTreeModel connectionTreeModel,
-            SaveFilter saveFilter = null,
+            SaveFilter? saveFilter = null,
             bool useFullEncryption = false)
         {
             System.Security.SecureString encryptionKey = connectionTreeModel

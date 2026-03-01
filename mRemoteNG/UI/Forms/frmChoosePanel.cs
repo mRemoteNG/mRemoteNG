@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Themes;
 using mRemoteNG.UI.Panels;
@@ -10,18 +11,17 @@ namespace mRemoteNG.UI.Forms
     [SupportedOSPlatform("windows")]
     public partial class FrmChoosePanel
     {
-        private readonly PanelAdder _panelAdder;
+
 
         public FrmChoosePanel()
         {
             InitializeComponent();
             Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Panel_16x);
-            _panelAdder = new PanelAdder();
         }
 
         public string Panel
         {
-            get => cbPanels.SelectedItem.ToString();
+            get => cbPanels.SelectedItem?.ToString() ?? string.Empty;
             set => cbPanels.SelectedItem = value;
         }
 
@@ -43,12 +43,12 @@ namespace mRemoteNG.UI.Forms
         private void ApplyTheme()
         {
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            lblDescription.BackColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            lblDescription.ForeColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            var palette = ThemeManager.getInstance().ActiveTheme.ExtendedPalette;
+            if (palette == null) return;
+            BackColor = palette.getColor("Dialog_Background");
+            ForeColor = palette.getColor("Dialog_Foreground");
+            lblDescription.BackColor = palette.getColor("Dialog_Background");
+            lblDescription.ForeColor = palette.getColor("Dialog_Foreground");
         }
 
         private void AddAvailablePanels()
@@ -57,7 +57,9 @@ namespace mRemoteNG.UI.Forms
 
             for (int i = 0; i <= Runtime.WindowList.Count - 1; i++)
             {
-                cbPanels.Items.Add(Runtime.WindowList[i].Text.Replace("&&", "&"));
+                var window = Runtime.WindowList[i];
+                if (window is null) continue;
+                cbPanels.Items.Add(window.Text.Replace("&&", "&", StringComparison.Ordinal));
             }
 
             if (cbPanels.Items.Count > 0)
@@ -80,7 +82,7 @@ namespace mRemoteNG.UI.Forms
             {
                 DialogResult dr = frmInputBox.ShowDialog();
                 if (dr != DialogResult.OK || string.IsNullOrEmpty(frmInputBox.returnValue)) return;
-                _panelAdder.AddPanel(frmInputBox.returnValue);
+                PanelAdder.AddPanel(frmInputBox.returnValue);
                 AddAvailablePanels();
                 cbPanels.SelectedItem = frmInputBox.returnValue;
                 cbPanels.Focus();

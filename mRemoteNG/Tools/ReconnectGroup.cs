@@ -2,15 +2,17 @@
 using System.Drawing;
 using Google.Protobuf;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning; // Added for SupportedOSPlatform attribute
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")] // Suppress CA1416 warnings for this Windows-only class
     public partial class ReconnectGroup
     {
         public ReconnectGroup()
         {
             InitializeComponent();
-            chkReconnectWhenReady.Checked = Properties.OptionsAdvancedPage.Default.NoReconnect;
+            chkReconnectWhenReady.Checked = !Properties.OptionsAdvancedPage.Default.NoReconnect;
         }
 
         private bool _ServerReady;
@@ -75,12 +77,12 @@ namespace mRemoteNG.Tools
 
         public delegate void CloseClickedEventHandler();
 
-        private CloseClickedEventHandler CloseClickedEvent;
+        private CloseClickedEventHandler? CloseClickedEvent;
 
         public event CloseClickedEventHandler CloseClicked
         {
             add => CloseClickedEvent = (CloseClickedEventHandler)Delegate.Combine(CloseClickedEvent, value);
-            remove => CloseClickedEvent = (CloseClickedEventHandler)Delegate.Remove(CloseClickedEvent, value);
+            remove => CloseClickedEvent = (CloseClickedEventHandler?)Delegate.Remove(CloseClickedEvent, value);
         }
 
 
@@ -123,7 +125,7 @@ namespace mRemoteNG.Tools
             }
         }
 
-        public void ReconnectGroup_Load(object sender, EventArgs e)
+        public void OnLoad(object sender, EventArgs e)
         {
             ApplyLanguage();
         }

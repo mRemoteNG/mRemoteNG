@@ -16,8 +16,11 @@ namespace mRemoteNG.UI.Tabs
         SWP_NOCOPYBITS = 0x0100,
         SWP_NOOWNERZORDER = 0x0200,
         SWP_NOSENDCHANGING = 0x0400,
+        // Win32 aliases: SWP_DRAWFRAME == SWP_FRAMECHANGED, SWP_NOREPOSITION == SWP_NOOWNERZORDER
+#pragma warning disable CA1069
         SWP_DRAWFRAME = 0x0020,
         SWP_NOREPOSITION = 0x0200,
+#pragma warning restore CA1069
         SWP_DEFERERASE = 0x2000,
         SWP_ASYNCWINDOWPOS = 0x4000
     }
@@ -26,10 +29,15 @@ namespace mRemoteNG.UI.Tabs
     {
         SW_HIDE = 0,
         SW_SHOWNORMAL = 1,
+        // Win32 aliases: SW_NORMAL == SW_SHOWNORMAL, SW_MAXIMIZE == SW_SHOWMAXIMIZED, SW_MAX == SW_FORCEMINIMIZE
+#pragma warning disable CA1069
         SW_NORMAL = 1,
+#pragma warning restore CA1069
         SW_SHOWMINIMIZED = 2,
         SW_SHOWMAXIMIZED = 3,
+#pragma warning disable CA1069
         SW_MAXIMIZE = 3,
+#pragma warning restore CA1069
         SW_SHOWNOACTIVATE = 4,
         SW_SHOW = 5,
         SW_MINIMIZE = 6,
@@ -38,7 +46,9 @@ namespace mRemoteNG.UI.Tabs
         SW_RESTORE = 9,
         SW_SHOWDEFAULT = 10,
         SW_FORCEMINIMIZE = 11,
+#pragma warning disable CA1069
         SW_MAX = 11
+#pragma warning restore CA1069
     }
 
     internal enum WindowStyles : uint
@@ -61,15 +71,21 @@ namespace mRemoteNG.UI.Tabs
         WS_THICKFRAME = 0x00040000,
         WS_GROUP = 0x00020000,
         WS_TABSTOP = 0x00010000,
+        // Win32 aliases: WS_MINIMIZEBOX==WS_GROUP, WS_MAXIMIZEBOX==WS_TABSTOP, WS_TILED==WS_OVERLAPPED,
+        // WS_ICONIC==WS_MINIMIZE, WS_SIZEBOX==WS_THICKFRAME, WS_TILEDWINDOW==WS_OVERLAPPEDWINDOW, WS_CHILDWINDOW==WS_CHILD
+#pragma warning disable CA1069
         WS_MINIMIZEBOX = 0x00020000,
         WS_MAXIMIZEBOX = 0x00010000,
         WS_TILED = 0x00000000,
         WS_ICONIC = 0x20000000,
         WS_SIZEBOX = 0x00040000,
+#pragma warning restore CA1069
         WS_POPUPWINDOW = 0x80880000,
         WS_OVERLAPPEDWINDOW = 0x00CF0000,
+#pragma warning disable CA1069
         WS_TILEDWINDOW = 0x00CF0000,
         WS_CHILDWINDOW = 0x40000000
+#pragma warning restore CA1069
     }
 
     [Flags]
@@ -88,9 +104,12 @@ namespace mRemoteNG.UI.Tabs
         WS_EX_RIGHT = 0x00001000,
         WS_EX_LEFT = 0x00000000,
         WS_EX_RTLREADING = 0x00002000,
+        // Win32 aliases: WS_EX_LTRREADING==WS_EX_LEFT, WS_EX_RIGHTSCROLLBAR==WS_EX_LEFT
+#pragma warning disable CA1069
         WS_EX_LTRREADING = 0x00000000,
         WS_EX_LEFTSCROLLBAR = 0x00004000,
         WS_EX_RIGHTSCROLLBAR = 0x00000000,
+#pragma warning restore CA1069
         WS_EX_CONTROLPARENT = 0x00010000,
         WS_EX_STATICEDGE = 0x00020000,
         WS_EX_APPWINDOW = 0x00040000,
@@ -125,7 +144,10 @@ namespace mRemoteNG.UI.Tabs
         WM_ENDSESSION = 0x0016,
         WM_SHOWWINDOW = 0x0018,
         WM_WININICHANGE = 0x001A,
+        // Win32 alias: WM_SETTINGCHANGE == WM_WININICHANGE
+#pragma warning disable CA1069
         WM_SETTINGCHANGE = 0x001A,
+#pragma warning restore CA1069
         WM_DEVMODECHANGE = 0x001B,
         WM_ACTIVATEAPP = 0x001C,
         WM_FONTCHANGE = 0x001D,
@@ -202,7 +224,10 @@ namespace mRemoteNG.UI.Tabs
         WM_IME_STARTCOMPOSITION = 0x010D,
         WM_IME_ENDCOMPOSITION = 0x010E,
         WM_IME_COMPOSITION = 0x010F,
+        // Win32 alias: WM_IME_KEYLAST == WM_IME_COMPOSITION
+#pragma warning disable CA1069
         WM_IME_KEYLAST = 0x010F,
+#pragma warning restore CA1069
         WM_INITDIALOG = 0x0110,
         WM_COMMAND = 0x0111,
         WM_SYSCOMMAND = 0x0112,
@@ -311,7 +336,11 @@ namespace mRemoteNG.UI.Tabs
         HTCAPTION = 2,
         HTSYSMENU = 3,
         HTGROWBOX = 4,
+        // Win32 aliases: HTSIZE==HTGROWBOX, HTREDUCE==HTMINBUTTON, HTZOOM==HTMAXBUTTON,
+        // HTSIZEFIRST==HTLEFT, HTSIZELAST==HTBOTTOMRIGHT
+#pragma warning disable CA1069
         HTSIZE = 4,
+#pragma warning restore CA1069
         HTMENU = 5,
         HTHSCROLL = 6,
         HTVSCROLL = 7,
@@ -326,10 +355,12 @@ namespace mRemoteNG.UI.Tabs
         HTBOTTOMLEFT = 16,
         HTBOTTOMRIGHT = 17,
         HTBORDER = 18,
+#pragma warning disable CA1069
         HTREDUCE = 8,
         HTZOOM = 9,
         HTSIZEFIRST = 10,
         HTSIZELAST = 17,
+#pragma warning restore CA1069
         HTOBJECT = 19,
         HTCLOSE = 20,
         HTHELP = 21
@@ -349,23 +380,4 @@ namespace mRemoteNG.UI.Tabs
         GWL_EXSTYLE = -20
     }
 
-    // Hook Types  
-    internal enum HookType
-    {
-        WH_JOURNALRECORD = 0,
-        WH_JOURNALPLAYBACK = 1,
-        WH_KEYBOARD = 2,
-        WH_GETMESSAGE = 3,
-        WH_CALLWNDPROC = 4,
-        WH_CBT = 5,
-        WH_SYSMSGFILTER = 6,
-        WH_MOUSE = 7,
-        WH_HARDWARE = 8,
-        WH_DEBUG = 9,
-        WH_SHELL = 10,
-        WH_FOREGROUNDIDLE = 11,
-        WH_CALLWNDPROCRET = 12,
-        WH_KEYBOARD_LL = 13,
-        WH_MOUSE_LL = 14
-    }
 }

@@ -25,6 +25,7 @@
     <Property Id='MINIMUM_RDP_VERSION_INSTALLED' Value='0' Secure='yes' />
     <Property Id='REQUIREDDOTNETFRAMEWORKVERSION' Value='$(var.RequiredDotNetFrameworkVersion)' />
     <Property Id='LEGACYVERSIONINSTALLED' Value='0' />
+    <Property Id='INSTALLDESKTOPSHORTCUT' Value='1' Secure='yes' />
     <PropertyRef Id="NETFRAMEWORK40FULL" />
     <PropertyRef Id="WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
     <Icon Id="AppIcon.ico" SourceFile="Resources\AppIcon.ico" />
@@ -79,6 +80,7 @@
     </Feature>
 
     <Feature Id="F.DesktopShortcut" Title="!(loc.Feature_DesktopShortcut)" Absent="allow" AllowAdvertise="no" Level="1">
+      <Condition Level="0"><![CDATA[INSTALLDESKTOPSHORTCUT = "0"]]></Condition>
       <ComponentRef Id="C.DesktopShortcut" Primary="yes" />
     </Feature>
 

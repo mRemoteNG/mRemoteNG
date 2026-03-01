@@ -30,12 +30,12 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="Hive">The RegistryHive where the subkeys are located.</param>
         /// <param name="Path">The path to the registry key containing the subkeys.</param>
         /// <returns>An array of strings containing the names of subkeys, or an empty array if no subkeys are found.</returns>
-        public string[] GetSubKeyNames(RegistryHive Hive, string Path)
+        public string[] GetSubKeyNames(RegistryHive hive, string path)
         {
-            ThrowIfHiveInvalid(Hive);
-            ThrowIfPathInvalid(Path);
+            ThrowIfHiveInvalid(hive);
+            ThrowIfPathInvalid(path);
 
-            using var key = RegistryKey.OpenBaseKey(Hive, RegistryView.Default).OpenSubKey(Path);
+            using var key = RegistryKey.OpenBaseKey(hive, RegistryView.Default).OpenSubKey(path);
             if (key != null)
                 return key.GetSubKeyNames();
             else
@@ -54,20 +54,20 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="Name">The name of the value. Null or Empty to get default.</param>
         /// <returns>The value data as a string, or null if the value is not found.</returns>
         /// <exception cref = "ArgumentException" > Thrown when the specified registry hive, path or name is invalid</exception>
-        public string GetValue(RegistryHive Hive, string Path, string Name)
+        public string? GetValue(RegistryHive hive, string path, string? name)
         {
-            ThrowIfHiveInvalid(Hive);
-            ThrowIfPathInvalid(Path);
+            ThrowIfHiveInvalid(hive);
+            ThrowIfPathInvalid(path);
 
-            using var key = RegistryKey.OpenBaseKey(Hive, RegistryView.Default).OpenSubKey(Path);
+            using var key = RegistryKey.OpenBaseKey(hive, RegistryView.Default).OpenSubKey(path);
             if (key == null)
                 return null;
 
             // Ensure name is null when null or empty to get defaults value
-            if (string.IsNullOrEmpty(Name))
-                Name = null;
+            if (string.IsNullOrEmpty(name))
+                name = null;
 
-            return key.GetValue(Name)?.ToString();
+            return key.GetValue(name)?.ToString();
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="Hive">The registry hive.</param>
         /// <param name="Path">The registry key path.</param>
         /// <returns>The value data as a string, or null if the value is not found.</returns>
-        public string GetDefaultValue(RegistryHive Hive, string Path)
+        public string? GetDefaultValue(RegistryHive Hive, string Path)
         {
             return GetValue(Hive, Path, null);
         }
@@ -89,10 +89,10 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="Name">The name of the value. Null or Empty to get default.</param>
         /// <param name="DefaultValue">The default value to return if the property is not found.</param>
         /// <returns>The value data as string, or the specified default value if the value is not found.</returns>
-        public string GetStringValue(RegistryHive Hive, string Path, string Name, string DefaultValue = null)
+        public string? GetStringValue(RegistryHive hive, string path, string? name, string? defaultValue = null)
         {
-            string value = GetValue(Hive, Path, Name);
-            return value ?? DefaultValue;
+            string? value = GetValue(hive, path, name);
+            return value ?? defaultValue;
         }
 
         /// <summary>
@@ -103,9 +103,9 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="Name">The name of the value.</param>
         /// <param name="DefaultValue">The default value to return if the property is not found or cannot be parsed. (Default = false)</param>
         /// <returns>The value data as bool, parsed from its REG_SZ or REG_DWORD representation if possible, or the specified default value if the value is not found or cannot be parsed.</returns>
-        public bool GetBoolValue(RegistryHive Hive, string Path, string Name, bool DefaultValue = false)
+        public bool GetBoolValue(RegistryHive hive, string path, string propertyName, bool defaultValue = false)
         {
-            string value = GetValue(Hive, Path, Name);
+            string? value = GetValue(hive, path, propertyName);
 
             if (!string.IsNullOrEmpty(value))
             {
@@ -115,7 +115,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
                     return boolValue;
             }
 
-            return DefaultValue;
+            return defaultValue;
         }
 
         /// <summary>
@@ -126,14 +126,14 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="Name">The name of the value.</param>
         /// <param name="DefaultValue">The default value to return if the property is not found or cannot be parsed. (Default = 0)</param>
         /// <returns>The value data as integer, parsed from its REG_DWORD representation if possible, or the specified default value if the value is not found or cannot be parsed.</returns>
-        public int GetIntegerValue(RegistryHive Hive, string Path, string Name, int DefaultValue = 0)
+        public int GetIntegerValue(RegistryHive hive, string path, string propertyName, int defaultValue = 0)
         {
-            string value = GetValue(Hive, Path, Name);
+            string? value = GetValue(hive, path, propertyName);
 
             if (int.TryParse(value, out int intValue))
                 return intValue;
 
-            return DefaultValue;
+            return defaultValue;
         }
 
         #endregion
@@ -160,7 +160,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="hive">The registry hive.</param>
         /// <param name="path">The registry key path.</param>
         /// <returns>A list of WinRegistryEntry<string> objects, each representing a value within the specified registry key path.</returns>
-        public List<WinRegistryEntry<string>> GetEntries(RegistryHive hive, string path)
+        public IList<WinRegistryEntry<string>> GetEntries(RegistryHive hive, string path)
         {
             using var key = RegistryKey.OpenBaseKey(hive, RegistryView.Default).OpenSubKey(path);
             if (key == null)
@@ -178,7 +178,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="hive">The registry hive.</param>
         /// <param name="path">The registry key path.</param>
         /// <returns>A list of WinRegistryEntry<string> objects, each representing a value within the specified registry key path.</returns>
-        public List<WinRegistryEntry<string>> GetEntriesRecursive(RegistryHive hive, string path)
+        public IList<WinRegistryEntry<string>> GetEntriesRecursive(RegistryHive hive, string path)
         {
             List<WinRegistryEntry<string>> list = new();
             using (var baseKey = RegistryKey.OpenBaseKey(hive, RegistryView.Default))
@@ -210,22 +210,22 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="Value">The value to set for the property.</param>
         /// <param name="ValueKind">The data type of the value to set.</param>
         /// <exception cref="InvalidOperationException">Thrown when an error occurs while writing to the Windows Registry key.</exception>
-        public void SetValue(RegistryHive Hive, string Path, string Name, object Value, RegistryValueKind ValueKind)
+        public void SetValue(RegistryHive hive, string path, string? name, object value, RegistryValueKind valueKind)
         {
-            ThrowIfHiveInvalid(Hive);
-            ThrowIfPathInvalid(Path);
+            ThrowIfHiveInvalid(hive);
+            ThrowIfPathInvalid(path);
 
-            string name = string.IsNullOrEmpty(Name) ? null : Name;
-            RegistryValueKind valueKind = string.IsNullOrEmpty(Name) ? RegistryValueKind.String : ValueKind;
+            string? resolvedName = string.IsNullOrEmpty(name) ? null : name;
+            RegistryValueKind resolvedValueKind = string.IsNullOrEmpty(name) ? RegistryValueKind.String : valueKind;
 
-            ThrowIfValueKindInvalid(valueKind);
+            ThrowIfValueKindInvalid(resolvedValueKind);
 
             try
             {
-                using RegistryKey baseKey = RegistryKey.OpenBaseKey(Hive, RegistryView.Default);
-                using RegistryKey registryKey = baseKey.CreateSubKey(Path, true);
+                using RegistryKey baseKey = RegistryKey.OpenBaseKey(hive, RegistryView.Default);
+                using RegistryKey registryKey = baseKey.CreateSubKey(path, true);
 
-                registryKey.SetValue(name, Value, valueKind);
+                registryKey.SetValue(resolvedName, value, resolvedValueKind);
             }
             catch (Exception ex)
             {
@@ -253,15 +253,15 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="Path">The path of the registry key to create.</param>
         /// <exception cref="ArgumentException">Thrown when the specified registry hive or path is invalid</exception>
         /// <exception cref="InvalidOperationException">Thrown when an error occurs while creating the Windows Registry key.</exception>
-        public void CreateKey(RegistryHive Hive, string Path)
+        public void CreateKey(RegistryHive hive, string path)
         {
-            ThrowIfHiveInvalid(Hive);
-            ThrowIfPathInvalid(Path);
+            ThrowIfHiveInvalid(hive);
+            ThrowIfPathInvalid(path);
 
             try
             {
-                using RegistryKey baseKey = RegistryKey.OpenBaseKey(Hive, RegistryView.Default);
-                baseKey.CreateSubKey(Path);
+                using RegistryKey baseKey = RegistryKey.OpenBaseKey(hive, RegistryView.Default);
+                baseKey.CreateSubKey(path);
             }
             catch (Exception ex)
             {
@@ -282,16 +282,16 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <exception cref="ArgumentException">Thrown when the specified registry hive, path or name is invalid</exception>
         /// <exception cref="UnauthorizedAccessException">Thrown when the user does not have the necessary permissions to delete the registry value.</exception>
         /// <exception cref="SecurityException">Thrown when the user does not have the necessary permissions to delete the registry value due to security restrictions.</exception>
-        public void DeleteRegistryValue(RegistryHive Hive, string Path, string Name)
+        public void DeleteRegistryValue(RegistryHive hive, string path, string name)
         {
-            ThrowIfHiveInvalid(Hive);
-            ThrowIfPathInvalid(Path);
-            ThrowIfNameInvalid(Name);
+            ThrowIfHiveInvalid(hive);
+            ThrowIfPathInvalid(path);
+            ThrowIfNameInvalid(name);
             try
             {
-                using RegistryKey baseKey = RegistryKey.OpenBaseKey(Hive, RegistryView.Default);
-                using RegistryKey key = baseKey.OpenSubKey(Path, true);
-                key?.DeleteValue(Name, true);
+                using RegistryKey baseKey = RegistryKey.OpenBaseKey(hive, RegistryView.Default);
+                using RegistryKey? key = baseKey.OpenSubKey(path, true);
+                key?.DeleteValue(name, true);
             }
             catch (SecurityException ex)
             {
@@ -303,7 +303,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while deleting the registry key or value.", ex);
+                throw new InvalidOperationException("An error occurred while deleting the registry key or value.", ex);
             }
         }
 
@@ -315,14 +315,14 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <exception cref="ArgumentException">Thrown when the specified registry hive or path is invalid</exception>
         /// <exception cref="UnauthorizedAccessException">Thrown when the user does not have the necessary permissions to delete the registry key.</exception>
         /// <exception cref="SecurityException">Thrown when the user does not have the necessary permissions to delete the registry key due to security restrictions.</exception>
-        public void DeleteTree(RegistryHive Hive, string Path)
+        public void DeleteTree(RegistryHive hive, string path)
         {
-            ThrowIfHiveInvalid(Hive);
-            ThrowIfPathInvalid(Path);
+            ThrowIfHiveInvalid(hive);
+            ThrowIfPathInvalid(path);
             try
             {
-                using RegistryKey baseKey = RegistryKey.OpenBaseKey(Hive, RegistryView.Default);
-                baseKey?.DeleteSubKeyTree(Path, true);
+                using RegistryKey baseKey = RegistryKey.OpenBaseKey(hive, RegistryView.Default);
+                baseKey?.DeleteSubKeyTree(path, true);
             }
             catch (SecurityException ex)
             {
@@ -334,7 +334,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while deleting the registry key or value.", ex);
+                throw new InvalidOperationException("An error occurred while deleting the registry key or value.", ex);
             }
         }
 
@@ -353,19 +353,19 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="HiveString">A string representation of a Registry Hive, not case-sensitive.</param>
         /// <returns>The RegistryHive enum value corresponding to the provided string representation.</returns>
         /// <exception cref="ArgumentException">Thrown if the provided string does not match a valid Registry Hive.</exception>
-        public RegistryHive ConvertStringToRegistryHive(string HiveString)
+        public RegistryHive ConvertStringToRegistryHive(string hiveString)
         {
-            if (string.IsNullOrEmpty(HiveString))
-                throw new ArgumentNullException(nameof(HiveString), "The registry hive string cannot be null or empty. Please provide a valid registry hive string.");
+            if (string.IsNullOrEmpty(hiveString))
+                throw new ArgumentNullException(nameof(hiveString), "The registry hive string cannot be null or empty. Please provide a valid registry hive string.");
 
-            return HiveString.ToLower() switch
+            return hiveString.ToLowerInvariant() switch
             {
                 "hkcr" or "hkey_classes_root" or "classesroot" => RegistryHive.ClassesRoot,
                 "hkcu" or "hkey_current_user" or "currentuser" => RegistryHive.CurrentUser,
                 "hklm" or "hkey_local_machine" or "localmachine" => RegistryHive.LocalMachine,
                 "hku" or "hkey_users" or "users" => RegistryHive.Users,
                 "hkcc" or "hkey_current_config" or "currentconfig" => RegistryHive.CurrentConfig,
-                _ => throw new ArgumentException("Invalid registry hive string.", nameof(HiveString)),
+                _ => throw new ArgumentException("Invalid registry hive string.", nameof(hiveString)),
             };
         }
 
@@ -375,12 +375,12 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="ValueType">A string representation of a RegistryValueKind, not case-sensitive.</param>
         /// <returns>The RegistryValueKind enum value corresponding to the provided string representation.</returns>
         /// <exception cref="ArgumentException">Thrown if the provided string does not match a valid RegistryValueKind.</exception>
-        public RegistryValueKind ConvertStringToRegistryValueKind(string ValueType)
+        public RegistryValueKind ConvertStringToRegistryValueKind(string valueType)
         {
-            if (string.IsNullOrEmpty(ValueType))
-                throw new ArgumentNullException(nameof(ValueType), "The registry value type string cannot be null or empty. Please provide a valid registry value type string.");
+            if (string.IsNullOrEmpty(valueType))
+                throw new ArgumentNullException(nameof(valueType), "The registry value type string cannot be null or empty. Please provide a valid registry value type string.");
 
-            return ValueType.ToLower() switch
+            return valueType.ToLowerInvariant() switch
             {
                 "string" or "reg_sz" => RegistryValueKind.String,
                 "dword" or "reg_dword" => RegistryValueKind.DWord,
@@ -388,7 +388,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
                 "qword" or "reg_qword" => RegistryValueKind.QWord,
                 "multistring" or "reg_multi_sz" => RegistryValueKind.MultiString,
                 "expandstring" or "reg_expand_sz" => RegistryValueKind.ExpandString,
-                _ => throw new ArgumentException("Invalid RegistryValueKind string representation.", nameof(ValueType)),
+                _ => throw new ArgumentException("Invalid RegistryValueKind string representation.", nameof(valueType)),
             };
         }
 
@@ -398,12 +398,12 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// </summary>
         /// <param name="ValueType">The .NET data type to convert.</param>
         /// <returns>The corresponding RegistryValueKind.</returns>
-        public RegistryValueKind ConvertTypeToRegistryValueKind(Type ValueType)
+        public RegistryValueKind ConvertTypeToRegistryValueKind(Type valueType)
         {
-            if (ValueType == null)
-                throw new ArgumentNullException(nameof(ValueType), "The value type argument cannot be null.");
+            if (valueType == null)
+                throw new ArgumentNullException(nameof(valueType), "The value type argument cannot be null.");
 
-            return Type.GetTypeCode(ValueType) switch
+            return Type.GetTypeCode(valueType) switch
             {
                 TypeCode.String => RegistryValueKind.String,
                 TypeCode.Int32 => RegistryValueKind.DWord,
@@ -426,9 +426,9 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// </summary>
         /// <param name="ValueKind">The RegistryValueKind value to be converted.</param>
         /// <returns>The .NET Type that corresponds to the given RegistryValueKind.</returns>
-        public Type ConvertRegistryValueKindToType(RegistryValueKind ValueKind)
+        public Type ConvertRegistryValueKindToType(RegistryValueKind valueKind)
         {
-            return ValueKind switch
+            return valueKind switch
             {
                 RegistryValueKind.String or RegistryValueKind.ExpandString => typeof(string),
                 RegistryValueKind.DWord => typeof(int),
@@ -450,7 +450,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <exception cref="ArgumentException">Thrown when an unknown or unsupported RegistryHive value is provided.</exception>
         private static void ThrowIfHiveInvalid(RegistryHive Hive)
         {
-            if (!Enum.IsDefined(typeof(RegistryHive), Hive) || Hive == RegistryHive.CurrentConfig || Hive == 0)
+            if (!Enum.IsDefined<RegistryHive>(Hive) || Hive == RegistryHive.CurrentConfig || Hive == 0)
                 throw new ArgumentException("Invalid parameter: Unknown or unsupported RegistryHive value.", nameof(Hive));
         }
 
@@ -482,7 +482,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <exception cref="InvalidOperationException">Thrown when the RegistryValueKind is Unknown.</exception>
         private static void ThrowIfValueKindInvalid(RegistryValueKind ValueKind)
         {
-            if (!Enum.IsDefined(typeof(RegistryValueKind), ValueKind) || ValueKind == RegistryValueKind.Unknown || ValueKind == RegistryValueKind.None)
+            if (!Enum.IsDefined<RegistryValueKind>(ValueKind) || ValueKind == RegistryValueKind.Unknown || ValueKind == RegistryValueKind.None)
                 throw new ArgumentException("Invalid parameter: Unknown or unsupported RegistryValueKind value.", nameof(ValueKind));
         }
 

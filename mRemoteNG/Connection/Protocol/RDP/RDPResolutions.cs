@@ -14,6 +14,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.SmartSize))]
         SmartSize,
+
+        [LocalizedAttributes.LocalizedDescription("Smart Size (Aspect Ratio)")]
+        SmartSizeAspect,
         [Description("800x600")] Res800x600,
         [Description("1024x768")] Res1024x768,
         [Description("1152x864")] Res1152x864,
@@ -27,9 +30,14 @@ namespace mRemoteNG.Connection.Protocol.RDP
         [Description("1920x1080")] Res1920x1080,
         [Description("1920x1200")] Res1920x1200,
         [Description("2048x1536")] Res2048x1536,
+        [Description("2560x1080")] Res2560x1080,
         [Description("2560x1440")] Res2560x1440,
         [Description("2560x1600")] Res2560x1600,
         [Description("2560x2048")] Res2560x2048,
-        [Description("3840x2160")] Res3840x2160
+        [Description("3440x1440")] Res3440x1440,
+        [Description("3840x2160")] Res3840x2160,
+
+        [LocalizedAttributes.LocalizedDescription("Custom")]
+        Custom
     }
 }

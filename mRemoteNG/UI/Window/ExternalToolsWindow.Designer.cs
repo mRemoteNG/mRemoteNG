@@ -16,12 +16,18 @@ namespace mRemoteNG.UI.Window
 	    internal BrightIdeasSoftware.OLVColumn RunElevateHeader;
 		internal Controls.MrngTextBox DisplayNameTextBox;
         internal BrightIdeasSoftware.OLVColumn ShowOnToolbarColumnHeader;
+        internal BrightIdeasSoftware.OLVColumn CategoryColumnHeader;
+        internal BrightIdeasSoftware.OLVColumn HiddenColumnHeader;
 		internal Controls.MrngLabel DisplayNameLabel;
 		internal Controls.MrngTextBox ArgumentsCheckBox;
 		internal Controls.MrngTextBox FilenameTextBox;
 		internal Controls.MrngLabel ArgumentsLabel;
 		internal Controls.MrngLabel FilenameLabel;
+		internal Controls.MrngLabel IconPathLabel;
+		internal Controls.MrngTextBox IconPathTextBox;
+		internal MrngButton BrowseIconButton; 
 		internal MrngButton BrowseButton; 
+        internal MrngButton VariablesButton;
 		internal System.Windows.Forms.ContextMenuStrip ToolsContextMenuStrip;
 		internal System.Windows.Forms.ToolStripMenuItem NewToolMenuItem;
 		internal System.Windows.Forms.ToolStripMenuItem DeleteToolMenuItem;
@@ -36,6 +42,22 @@ namespace mRemoteNG.UI.Window
 	    internal Controls.MrngTextBox WorkingDirTextBox;
 	    internal MrngButton BrowseWorkingDir;
 	    internal MrngCheckBox RunElevatedCheckBox;
+	    internal MrngCheckBox HiddenCheckBox;
+	    internal Controls.MrngLabel CategoryLabel;
+	    internal Controls.MrngTextBox CategoryTextBox;
+	    internal Controls.MrngLabel HotkeyLabel;
+	    internal Controls.MrngTextBox HotkeyTextBox;
+        internal Controls.MrngLabel AuthenticationTypeLabel;
+        internal Controls.MrngTextBox AuthenticationTypeTextBox;
+        internal Controls.MrngLabel AuthenticationUsernameLabel;
+        internal Controls.MrngTextBox AuthenticationUsernameTextBox;
+        internal Controls.MrngLabel AuthenticationPasswordLabel;
+        internal Controls.MrngTextBox AuthenticationPasswordTextBox;
+        internal Controls.MrngLabel PrivateKeyFileLabel;
+        internal Controls.MrngTextBox PrivateKeyFileTextBox;
+        internal MrngButton BrowsePrivateKeyButton;
+        internal Controls.MrngLabel PassphraseLabel;
+        internal Controls.MrngTextBox PassphraseTextBox;
 
         private void InitializeComponent()
 		{
@@ -50,6 +72,8 @@ namespace mRemoteNG.UI.Window
             this.TryToIntegrateColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.RunElevateHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ShowOnToolbarColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.CategoryColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.HiddenColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ToolsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.NewToolMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteToolMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,13 +89,31 @@ namespace mRemoteNG.UI.Window
             this.ArgumentsCheckBox = new mRemoteNG.UI.Controls.MrngTextBox();
             this.FilenameLabel = new mRemoteNG.UI.Controls.MrngLabel();
             this.RunElevatedCheckBox = new MrngCheckBox();
+            this.HiddenCheckBox = new MrngCheckBox();
             this.ArgumentsLabel = new mRemoteNG.UI.Controls.MrngLabel();
             this.TryToIntegrateCheckBox = new MrngCheckBox();
             this.WorkingDirLabel = new mRemoteNG.UI.Controls.MrngLabel();
             this.OptionsLabel = new mRemoteNG.UI.Controls.MrngLabel();
             this.WaitForExitCheckBox = new MrngCheckBox();
+            this.IconPathLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.IconPathTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.BrowseIconButton = new MrngButton();
             this.BrowseButton = new MrngButton();
+            this.VariablesButton = new MrngButton();
             this.BrowseWorkingDir = new MrngButton();
+            this.HotkeyLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.HotkeyTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.AuthenticationTypeLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.AuthenticationTypeTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.AuthenticationUsernameLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.AuthenticationUsernameTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.AuthenticationPasswordLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.AuthenticationPasswordTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.PrivateKeyFileLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.PrivateKeyFileTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.BrowsePrivateKeyButton = new MrngButton();
+            this.PassphraseLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.PassphraseTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
             this.ToolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.ToolStrip = new System.Windows.Forms.ToolStrip();
             this.NewToolToolstripButton = new System.Windows.Forms.ToolStripButton();
@@ -99,6 +141,8 @@ namespace mRemoteNG.UI.Window
             this.ToolsListObjView.AllColumns.Add(this.TryToIntegrateColumnHeader);
             this.ToolsListObjView.AllColumns.Add(this.RunElevateHeader);
             this.ToolsListObjView.AllColumns.Add(this.ShowOnToolbarColumnHeader);
+            this.ToolsListObjView.AllColumns.Add(this.CategoryColumnHeader);
+            this.ToolsListObjView.AllColumns.Add(this.HiddenColumnHeader);
             this.ToolsListObjView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -113,7 +157,9 @@ namespace mRemoteNG.UI.Window
             this.WaitForExitColumnHeader,
             this.TryToIntegrateColumnHeader,
             this.RunElevateHeader,
-            this.ShowOnToolbarColumnHeader});
+            this.ShowOnToolbarColumnHeader,
+            this.CategoryColumnHeader,
+            this.HiddenColumnHeader});
             this.ToolsListObjView.ContextMenuStrip = this.ToolsContextMenuStrip;
             this.ToolsListObjView.Cursor = System.Windows.Forms.Cursors.Default;
             this.ToolsListObjView.DecorateLines = true;
@@ -202,7 +248,24 @@ namespace mRemoteNG.UI.Window
             this.ShowOnToolbarColumnHeader.Groupable = false;
             this.ShowOnToolbarColumnHeader.Text = "Show On Toolbar";
             this.ShowOnToolbarColumnHeader.Width = 120;
-            // 
+            //
+            // CategoryColumnHeader
+            //
+            this.CategoryColumnHeader.AspectName = "Category";
+            this.CategoryColumnHeader.AutoCompleteEditor = false;
+            this.CategoryColumnHeader.AutoCompleteEditorMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.CategoryColumnHeader.Groupable = true;
+            this.CategoryColumnHeader.Text = "Category";
+            this.CategoryColumnHeader.Width = 100;
+            //
+            // HiddenColumnHeader
+            //
+            this.HiddenColumnHeader.AspectName = "Hidden";
+            this.HiddenColumnHeader.CheckBoxes = true;
+            this.HiddenColumnHeader.Groupable = false;
+            this.HiddenColumnHeader.Text = "Hidden";
+            this.HiddenColumnHeader.Width = 60;
+            //
             // ToolsContextMenuStrip
             // 
             this.ToolsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -254,7 +317,7 @@ namespace mRemoteNG.UI.Window
             this.PropertiesGroupBox.Enabled = false;
             this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 192);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(827, 184);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(827, 360);
             this.PropertiesGroupBox.TabIndex = 1;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "External Tool Properties";
@@ -268,24 +331,48 @@ namespace mRemoteNG.UI.Window
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.DisplayNameLabel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.ShowOnToolbarCheckBox, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.ShowOnToolbarCheckBox, 2, 7);
             this.tableLayoutPanel1.Controls.Add(this.WorkingDirTextBox, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.DisplayNameTextBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.FilenameTextBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.ArgumentsCheckBox, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.FilenameLabel, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.RunElevatedCheckBox, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.RunElevatedCheckBox, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.ArgumentsLabel, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.TryToIntegrateCheckBox, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.TryToIntegrateCheckBox, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.WorkingDirLabel, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.OptionsLabel, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.WaitForExitCheckBox, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.IconPathLabel, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.IconPathTextBox, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.BrowseIconButton, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.HotkeyLabel, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.HotkeyTextBox, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.OptionsLabel, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.WaitForExitCheckBox, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.BrowseButton, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.VariablesButton, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.BrowseWorkingDir, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.AuthenticationTypeLabel, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.AuthenticationTypeTextBox, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.AuthenticationUsernameLabel, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.AuthenticationUsernameTextBox, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.AuthenticationPasswordLabel, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.AuthenticationPasswordTextBox, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.PrivateKeyFileLabel, 0, 11);
+            this.tableLayoutPanel1.Controls.Add(this.PrivateKeyFileTextBox, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.BrowsePrivateKeyButton, 4, 11);
+            this.tableLayoutPanel1.Controls.Add(this.PassphraseLabel, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.PassphraseTextBox, 1, 12);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 18);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowCount = 14;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
@@ -293,7 +380,7 @@ namespace mRemoteNG.UI.Window
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(821, 163);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(821, 339);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
             // DisplayNameLabel
@@ -312,11 +399,11 @@ namespace mRemoteNG.UI.Window
             this.ShowOnToolbarCheckBox._mice = MrngCheckBox.MouseState.HOVER;
             this.ShowOnToolbarCheckBox.AutoSize = true;
             this.ShowOnToolbarCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ShowOnToolbarCheckBox.Location = new System.Drawing.Point(239, 133);
+            this.ShowOnToolbarCheckBox.Location = new System.Drawing.Point(239, 159);
             this.ShowOnToolbarCheckBox.Margin = new System.Windows.Forms.Padding(3, 3, 30, 3);
             this.ShowOnToolbarCheckBox.Name = "ShowOnToolbarCheckBox";
             this.ShowOnToolbarCheckBox.Size = new System.Drawing.Size(113, 20);
-            this.ShowOnToolbarCheckBox.TabIndex = 10;
+            this.ShowOnToolbarCheckBox.TabIndex = 12;
             this.ShowOnToolbarCheckBox.Text = "Show on toolbar";
             this.ShowOnToolbarCheckBox.UseVisualStyleBackColor = true;
             this.ShowOnToolbarCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
@@ -332,6 +419,42 @@ namespace mRemoteNG.UI.Window
             this.WorkingDirTextBox.Size = new System.Drawing.Size(607, 22);
             this.WorkingDirTextBox.TabIndex = 5;
             this.WorkingDirTextBox.Leave += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            // 
+            // IconPathLabel
+            // 
+            this.IconPathLabel.AutoSize = true;
+            this.IconPathLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.IconPathLabel.Location = new System.Drawing.Point(3, 104);
+            this.IconPathLabel.Name = "IconPathLabel";
+            this.IconPathLabel.Size = new System.Drawing.Size(104, 26);
+            this.IconPathLabel.TabIndex = 13;
+            this.IconPathLabel.Text = "Icon Path:";
+            this.IconPathLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // IconPathTextBox
+            // 
+            this.IconPathTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.IconPathTextBox, 3);
+            this.IconPathTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.IconPathTextBox.Location = new System.Drawing.Point(110, 106);
+            this.IconPathTextBox.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
+            this.IconPathTextBox.Name = "IconPathTextBox";
+            this.IconPathTextBox.Size = new System.Drawing.Size(607, 22);
+            this.IconPathTextBox.TabIndex = 6;
+            this.IconPathTextBox.Leave += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            // 
+            // BrowseIconButton
+            // 
+            this.BrowseIconButton._mice = MrngButton.MouseState.HOVER;
+            this.BrowseIconButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BrowseIconButton.Location = new System.Drawing.Point(723, 107);
+            this.BrowseIconButton.Name = "BrowseIconButton";
+            this.BrowseIconButton.Size = new System.Drawing.Size(95, 20);
+            this.BrowseIconButton.TabIndex = 7;
+            this.BrowseIconButton.Text = "Browse...";
+            this.BrowseIconButton.UseVisualStyleBackColor = true;
+            this.BrowseIconButton.Click += new System.EventHandler(this.BrowseIconButton_Click);
+
             // 
             // DisplayNameTextBox
             // 
@@ -385,11 +508,11 @@ namespace mRemoteNG.UI.Window
             this.RunElevatedCheckBox._mice = MrngCheckBox.MouseState.HOVER;
             this.RunElevatedCheckBox.AutoSize = true;
             this.RunElevatedCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RunElevatedCheckBox.Location = new System.Drawing.Point(113, 133);
+            this.RunElevatedCheckBox.Location = new System.Drawing.Point(113, 159);
             this.RunElevatedCheckBox.Margin = new System.Windows.Forms.Padding(3, 3, 30, 3);
             this.RunElevatedCheckBox.Name = "RunElevatedCheckBox";
             this.RunElevatedCheckBox.Size = new System.Drawing.Size(93, 20);
-            this.RunElevatedCheckBox.TabIndex = 9;
+            this.RunElevatedCheckBox.TabIndex = 11;
             this.RunElevatedCheckBox.Text = "Run Elevated";
             this.RunElevatedCheckBox.UseVisualStyleBackColor = true;
             this.RunElevatedCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
@@ -456,6 +579,19 @@ namespace mRemoteNG.UI.Window
             this.WaitForExitCheckBox.Click += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             this.WaitForExitCheckBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
+            // VariablesButton
+            // 
+            this.VariablesButton._mice = MrngButton.MouseState.HOVER;
+            this.VariablesButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.VariablesButton.Location = new System.Drawing.Point(723, 55);
+            this.VariablesButton.Name = "VariablesButton";
+            this.VariablesButton.Size = new System.Drawing.Size(95, 20);
+            this.VariablesButton.TabIndex = 5;
+            this.VariablesButton.Text = "Variables";
+            this.VariablesButton.UseVisualStyleBackColor = true;
+            this.VariablesButton.Click += new System.EventHandler(this.VariablesButton_Click);
+            this.VariablesButton.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            // 
             // BrowseButton
             // 
             this.BrowseButton._mice = MrngButton.MouseState.HOVER;
@@ -481,6 +617,133 @@ namespace mRemoteNG.UI.Window
             this.BrowseWorkingDir.UseVisualStyleBackColor = true;
             this.BrowseWorkingDir.Click += new System.EventHandler(this.BrowseWorkingDir_Click);
             // 
+            // AuthenticationTypeLabel
+            // 
+            this.AuthenticationTypeLabel.AutoSize = true;
+            this.AuthenticationTypeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AuthenticationTypeLabel.Location = new System.Drawing.Point(3, 208);
+            this.AuthenticationTypeLabel.Name = "AuthenticationTypeLabel";
+            this.AuthenticationTypeLabel.Size = new System.Drawing.Size(104, 26);
+            this.AuthenticationTypeLabel.TabIndex = 26;
+            this.AuthenticationTypeLabel.Text = "Authentication Type:";
+            this.AuthenticationTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // AuthenticationTypeTextBox
+            // 
+            this.AuthenticationTypeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.AuthenticationTypeTextBox, 3);
+            this.AuthenticationTypeTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AuthenticationTypeTextBox.Location = new System.Drawing.Point(110, 210);
+            this.AuthenticationTypeTextBox.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
+            this.AuthenticationTypeTextBox.Name = "AuthenticationTypeTextBox";
+            this.AuthenticationTypeTextBox.Size = new System.Drawing.Size(607, 22);
+            this.AuthenticationTypeTextBox.TabIndex = 13;
+            this.AuthenticationTypeTextBox.Leave += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            // 
+            // AuthenticationUsernameLabel
+            // 
+            this.AuthenticationUsernameLabel.AutoSize = true;
+            this.AuthenticationUsernameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AuthenticationUsernameLabel.Location = new System.Drawing.Point(3, 234);
+            this.AuthenticationUsernameLabel.Name = "AuthenticationUsernameLabel";
+            this.AuthenticationUsernameLabel.Size = new System.Drawing.Size(104, 26);
+            this.AuthenticationUsernameLabel.TabIndex = 27;
+            this.AuthenticationUsernameLabel.Text = "Authentication Username:";
+            this.AuthenticationUsernameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // AuthenticationUsernameTextBox
+            // 
+            this.AuthenticationUsernameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.AuthenticationUsernameTextBox, 3);
+            this.AuthenticationUsernameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AuthenticationUsernameTextBox.Location = new System.Drawing.Point(110, 236);
+            this.AuthenticationUsernameTextBox.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
+            this.AuthenticationUsernameTextBox.Name = "AuthenticationUsernameTextBox";
+            this.AuthenticationUsernameTextBox.Size = new System.Drawing.Size(607, 22);
+            this.AuthenticationUsernameTextBox.TabIndex = 14;
+            this.AuthenticationUsernameTextBox.Leave += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            // 
+            // AuthenticationPasswordLabel
+            // 
+            this.AuthenticationPasswordLabel.AutoSize = true;
+            this.AuthenticationPasswordLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AuthenticationPasswordLabel.Location = new System.Drawing.Point(3, 260);
+            this.AuthenticationPasswordLabel.Name = "AuthenticationPasswordLabel";
+            this.AuthenticationPasswordLabel.Size = new System.Drawing.Size(104, 26);
+            this.AuthenticationPasswordLabel.TabIndex = 28;
+            this.AuthenticationPasswordLabel.Text = "Authentication Password:";
+            this.AuthenticationPasswordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // AuthenticationPasswordTextBox
+            // 
+            this.AuthenticationPasswordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.AuthenticationPasswordTextBox, 3);
+            this.AuthenticationPasswordTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AuthenticationPasswordTextBox.Location = new System.Drawing.Point(110, 262);
+            this.AuthenticationPasswordTextBox.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
+            this.AuthenticationPasswordTextBox.Name = "AuthenticationPasswordTextBox";
+            this.AuthenticationPasswordTextBox.Size = new System.Drawing.Size(607, 22);
+            this.AuthenticationPasswordTextBox.TabIndex = 15;
+            this.AuthenticationPasswordTextBox.Leave += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            // 
+            // PrivateKeyFileLabel
+            // 
+            this.PrivateKeyFileLabel.AutoSize = true;
+            this.PrivateKeyFileLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PrivateKeyFileLabel.Location = new System.Drawing.Point(3, 286);
+            this.PrivateKeyFileLabel.Name = "PrivateKeyFileLabel";
+            this.PrivateKeyFileLabel.Size = new System.Drawing.Size(104, 26);
+            this.PrivateKeyFileLabel.TabIndex = 29;
+            this.PrivateKeyFileLabel.Text = "Private Key File:";
+            this.PrivateKeyFileLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // PrivateKeyFileTextBox
+            // 
+            this.PrivateKeyFileTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.PrivateKeyFileTextBox, 3);
+            this.PrivateKeyFileTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PrivateKeyFileTextBox.Location = new System.Drawing.Point(110, 288);
+            this.PrivateKeyFileTextBox.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
+            this.PrivateKeyFileTextBox.Name = "PrivateKeyFileTextBox";
+            this.PrivateKeyFileTextBox.Size = new System.Drawing.Size(607, 22);
+            this.PrivateKeyFileTextBox.TabIndex = 16;
+            this.PrivateKeyFileTextBox.Leave += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            // 
+            // BrowsePrivateKeyButton
+            // 
+            this.BrowsePrivateKeyButton._mice = MrngButton.MouseState.HOVER;
+            this.BrowsePrivateKeyButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BrowsePrivateKeyButton.Location = new System.Drawing.Point(723, 289);
+            this.BrowsePrivateKeyButton.Name = "BrowsePrivateKeyButton";
+            this.BrowsePrivateKeyButton.Size = new System.Drawing.Size(95, 20);
+            this.BrowsePrivateKeyButton.TabIndex = 17;
+            this.BrowsePrivateKeyButton.Text = "Browse...";
+            this.BrowsePrivateKeyButton.UseVisualStyleBackColor = true;
+            this.BrowsePrivateKeyButton.Click += new System.EventHandler(this.BrowsePrivateKeyButton_Click);
+            // 
+            // PassphraseLabel
+            // 
+            this.PassphraseLabel.AutoSize = true;
+            this.PassphraseLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PassphraseLabel.Location = new System.Drawing.Point(3, 312);
+            this.PassphraseLabel.Name = "PassphraseLabel";
+            this.PassphraseLabel.Size = new System.Drawing.Size(104, 26);
+            this.PassphraseLabel.TabIndex = 30;
+            this.PassphraseLabel.Text = "Passphrase:";
+            this.PassphraseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // PassphraseTextBox
+            // 
+            this.PassphraseTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.PassphraseTextBox, 3);
+            this.PassphraseTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PassphraseTextBox.Location = new System.Drawing.Point(110, 314);
+            this.PassphraseTextBox.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
+            this.PassphraseTextBox.Name = "PassphraseTextBox";
+            this.PassphraseTextBox.Size = new System.Drawing.Size(607, 22);
+            this.PassphraseTextBox.TabIndex = 18;
+            this.PassphraseTextBox.Leave += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            // 
             // ToolStripContainer
             // 
             // 
@@ -488,11 +751,11 @@ namespace mRemoteNG.UI.Window
             // 
             this.ToolStripContainer.ContentPanel.Controls.Add(this.PropertiesGroupBox);
             this.ToolStripContainer.ContentPanel.Controls.Add(this.ToolsListObjView);
-            this.ToolStripContainer.ContentPanel.Size = new System.Drawing.Size(827, 376);
+            this.ToolStripContainer.ContentPanel.Size = new System.Drawing.Size(827, 552);
             this.ToolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolStripContainer.Location = new System.Drawing.Point(0, 0);
             this.ToolStripContainer.Name = "ToolStripContainer";
-            this.ToolStripContainer.Size = new System.Drawing.Size(827, 401);
+            this.ToolStripContainer.Size = new System.Drawing.Size(827, 577);
             this.ToolStripContainer.TabIndex = 0;
             this.ToolStripContainer.Text = "ToolStripContainer";
             // 
@@ -557,7 +820,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(827, 401);
+            this.ClientSize = new System.Drawing.Size(827, 577);
             this.Controls.Add(this.ToolStripContainer);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ExternalToolsWindow";

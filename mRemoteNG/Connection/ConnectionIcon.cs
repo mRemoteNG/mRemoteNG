@@ -10,7 +10,7 @@ namespace mRemoteNG.Connection
     [SupportedOSPlatform("windows")]
     public class ConnectionIcon : StringConverter
     {
-        public static string[] Icons = { };
+        public static string[] Icons = Array.Empty<string>();
 
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
         {

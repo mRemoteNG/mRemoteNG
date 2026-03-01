@@ -19,7 +19,7 @@ namespace mRemoteNGTests.TestHelpers
         ///         |- con3
         /// </summary>
         /// <returns></returns>
-        public ConnectionTreeModel Build()
+        public static ConnectionTreeModel Build()
         {
             var model = new ConnectionTreeModel();
             var root = new RootNodeInfo(RootNodeType.Connection);

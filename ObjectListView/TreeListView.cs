@@ -1880,8 +1880,11 @@ namespace BrightIdeasSoftware
             /// </summary>
             public List<Branch> FilteredChildBranches {
                 get {
-                    if (!this.IsExpanded)
+                    if (!this.IsExpanded && !this.Tree.IsFiltering)
                         return new List<Branch>();
+
+                    if (this.Tree.IsFiltering && this.CanExpand)
+                        this.FetchChildren();
 
                     if (!this.Tree.IsFiltering)
                         return this.ChildBranches;

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Tree.Root;
-using System.Net;
 using System.Runtime.Versioning;
 
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -15,12 +15,12 @@ namespace mRemoteNG.Config.Putty
     {
         public virtual RootPuttySessionsNodeInfo RootInfo { get; } = new RootPuttySessionsNodeInfo();
 
-        protected virtual List<PuttySessionInfo> Sessions => RootInfo.Children.OfType<PuttySessionInfo>().ToList();
+        protected virtual IEnumerable<PuttySessionInfo> Sessions => RootInfo.Children.OfType<PuttySessionInfo>();
 
         #region Public Methods
 
         public abstract string[] GetSessionNames(bool raw = false);
-        public abstract PuttySessionInfo GetSession(string sessionName);
+        public abstract PuttySessionInfo? GetSession(string sessionName);
 
         public virtual IEnumerable<PuttySessionInfo> GetSessions()
         {
@@ -28,8 +28,9 @@ namespace mRemoteNG.Config.Putty
 
             foreach (string sessionName in GetSessionNamesToAdd(sessionNamesFromProvider))
             {
-                PuttySessionInfo sessionInfo = GetSession(sessionName);
-                AddSession(sessionInfo);
+                PuttySessionInfo? sessionInfo = GetSession(sessionName);
+                if (sessionInfo != null)
+                    AddSession(sessionInfo);
             }
 
             foreach (PuttySessionInfo session in GetSessionToRemove(sessionNamesFromProvider))
@@ -45,7 +46,7 @@ namespace mRemoteNG.Config.Putty
         {
             if (sessionNamesFromProvider == null) { return Enumerable.Empty<string>(); }
             IEnumerable<string> currentlyKnownSessionNames = Sessions.Select(session => session.Name);
-            IEnumerable<string> sessionNamesToAdd = sessionNamesFromProvider.Except(currentlyKnownSessionNames);
+            IEnumerable<string> sessionNamesToAdd = sessionNamesFromProvider.Except(currentlyKnownSessionNames, StringComparer.Ordinal);
             return sessionNamesToAdd;
         }
 
@@ -54,9 +55,9 @@ namespace mRemoteNG.Config.Putty
             if (sessionNamesFromProvider == null) return Enumerable.Empty<PuttySessionInfo>();
             IEnumerable<string> currentlyKnownSessionNames = Sessions.Select(session => session.Name);
             IEnumerable<string> normalizedSessionNames =
-                sessionNamesFromProvider.Select(name => WebUtility.UrlDecode(name));
-            IEnumerable<string> sessionNamesToRemove = currentlyKnownSessionNames.Except(normalizedSessionNames);
-            return Sessions.Where(session => sessionNamesToRemove.Contains(session.Name));
+                sessionNamesFromProvider.Select(name => PuttySessionNameDecoder.Decode(name));
+            IEnumerable<string> sessionNamesToRemove = currentlyKnownSessionNames.Except(normalizedSessionNames, StringComparer.Ordinal);
+            return Sessions.Where(session => sessionNamesToRemove.Contains(session.Name, StringComparer.Ordinal));
         }
 
         protected virtual void AddSession(PuttySessionInfo sessionInfo)
@@ -86,14 +87,14 @@ namespace mRemoteNG.Config.Putty
 
         public delegate void PuttySessionChangedEventHandler(object sender, PuttySessionChangedEventArgs e);
 
-        public event PuttySessionChangedEventHandler PuttySessionChanged;
+        public event PuttySessionChangedEventHandler? PuttySessionChanged;
 
         protected virtual void RaiseSessionChangedEvent(PuttySessionChangedEventArgs args)
         {
             PuttySessionChanged?.Invoke(this, args);
         }
 
-        public event NotifyCollectionChangedEventHandler PuttySessionsCollectionChanged;
+        public event NotifyCollectionChangedEventHandler? PuttySessionsCollectionChanged;
 
         protected void RaisePuttySessionCollectionChangedEvent(NotifyCollectionChangedEventArgs args)
         {

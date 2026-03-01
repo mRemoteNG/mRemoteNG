@@ -85,7 +85,7 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool RdpLoadBalanceInfoUseUtf8 {
             get {
                 return ((bool)(this["RdpLoadBalanceInfoUseUtf8"]));
@@ -116,6 +116,42 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["NoReconnect"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnableConnectionLogging {
+            get {
+                return ((bool)(this["EnableConnectionLogging"]));
+            }
+            set {
+                this["EnableConnectionLogging"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowPortScan {
+            get {
+                return ((bool)(this["ShowPortScan"]));
+            }
+            set {
+                this["ShowPortScan"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowPuttySavedSessions {
+            get {
+                return ((bool)(this["ShowPuttySavedSessions"]));
+            }
+            set {
+                this["ShowPuttySavedSessions"] = value;
             }
         }
     }

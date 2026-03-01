@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Security.Cryptography;
+using System.Text;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
@@ -13,24 +15,28 @@ namespace mRemoteNG.Security.KeyDerivation
 
         public Pkcs5S2KeyGenerator(int keyBitSize = 256, int iterations = 1000)
         {
-            if (iterations < 1000)
-                throw new ArgumentOutOfRangeException($"Minimum value of {nameof(iterations)} is 1000");
-            if (keyBitSize < 0)
-                throw new ArgumentOutOfRangeException($"{nameof(keyBitSize)} must be positive");
+            ArgumentOutOfRangeException.ThrowIfLessThan(iterations, 1000);
+            ArgumentOutOfRangeException.ThrowIfNegative(keyBitSize);
             _keyBitSize = keyBitSize;
             _iterations = iterations;
         }
 
         public byte[] DeriveKey(string password, byte[] salt)
         {
-            byte[] passwordInBytes = PbeParametersGenerator.Pkcs5PasswordToBytes(password.ToCharArray());
+            byte[] passwordInBytes = Encoding.UTF8.GetBytes(password);
+            try
+            {
+                Pkcs5S2ParametersGenerator keyGenerator = new();
+                keyGenerator.Init(passwordInBytes, salt, _iterations);
 
-            Pkcs5S2ParametersGenerator keyGenerator = new();
-            keyGenerator.Init(passwordInBytes, salt, _iterations);
-
-            KeyParameter keyParameter = (KeyParameter)keyGenerator.GenerateDerivedMacParameters(_keyBitSize);
-            byte[] keyBytes = keyParameter.GetKey();
-            return keyBytes;
+                KeyParameter keyParameter = (KeyParameter)keyGenerator.GenerateDerivedMacParameters(_keyBitSize);
+                byte[] keyBytes = keyParameter.GetKey();
+                return keyBytes;
+            }
+            finally
+            {
+                CryptographicOperations.ZeroMemory(passwordInBytes);
+            }
         }
     }
 }

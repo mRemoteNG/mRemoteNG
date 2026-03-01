@@ -319,7 +319,10 @@
                 <File Id="fil40CFB266222E83AA8796D378E810D9FE" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Windows.Extensions.dll" />
             </Component>
             <Component Id="cmp91AF0DA940C0C1686EBEA00C42E97303" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="filAE1365C3205BCB5594D58106D66B0EBC" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\VncSharpCore.dll" />
+                <File Id="filAE1365C3205BCB5594D58106D66B0EBC" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\RemoteViewing.dll" />
+            </Component>
+            <Component Id="cmp8E7A1F33A9B8433AB4570BB2AF8F0C0A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
+                <File Id="filD7DCCEA09FD24A33B7A9BFB26FB9857D" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\RemoteViewing.Windows.Forms.dll" />
             </Component>
             <Component Id="cmp9E24C15B81969DD04B9D2D35F3A3EFF6" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil280111F43B2FB1D062E5AEB78B2D53BF" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\WebView2Loader.dll" />

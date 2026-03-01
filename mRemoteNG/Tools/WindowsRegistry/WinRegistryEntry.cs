@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Versioning;
 using Microsoft.Win32;
@@ -59,8 +60,8 @@ namespace mRemoteNG.Tools.WindowsRegistry
             set
             {
                 privateHive =
-                    !Enum.IsDefined(typeof(RegistryHive), value) || value == RegistryHive.CurrentConfig || value == RegistryHive.ClassesRoot
-                    ? throw new ArgumentException("Invalid parameter: Unknown or unsupported RegistryHive value.", nameof(Hive))
+                    !Enum.IsDefined<RegistryHive>(value) || value == RegistryHive.CurrentConfig || value == RegistryHive.ClassesRoot
+                    ? throw new ArgumentException("Invalid parameter: Unknown or unsupported RegistryHive value.", nameof(value))
                     : value;
             }
         }
@@ -77,15 +78,15 @@ namespace mRemoteNG.Tools.WindowsRegistry
                 privatePath =
                     !string.IsNullOrWhiteSpace(value)
                     ? value
-                    : throw new ArgumentNullException(nameof(Path), "Invalid parameter: Path cannot be null, empty, or consist only of whitespace characters.");
+                    : throw new ArgumentNullException(nameof(value), "Invalid parameter: Path cannot be null, empty, or consist only of whitespace characters.");
             }
         }
-        private string privatePath;
+        private string privatePath = null!;
 
         /// <summary>
         /// Represents the name of the registry entry.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Represents the kind of data stored in the registry value.
@@ -103,23 +104,23 @@ namespace mRemoteNG.Tools.WindowsRegistry
                 privateValue = ValueValidationRules(value);
             }
         }
-        private T privateValue;
+        private T privateValue = default!;
 
         #endregion
 
         #region Aditional Fileds & Properties
 
-        private T[] AllowedValues;
+        private T[]? AllowedValues;
         private int? MinInt32Value;
         private int? MaxInt32Value;
         private long? MinInt64Value;
         private long? MaxInt64Value;
-        private Type EnumType;
+        private Type? EnumType;
 
         /// <summary>
         /// Represents the raw value retrieved directly from the registry.
         /// </summary>
-        private string RawValue;
+        private string? RawValue;
 
         /// <summary>
         /// Represents the type of the generic parameter T.
@@ -312,7 +313,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="allowedValues">The array of allowed integer values.</param>
         public WinRegistryEntry<T> SetValidation(int[] allowedValues)
         {
-            T[] mappedValues = allowedValues?.Select(value => (T)(object)value).ToArray();
+            T[] mappedValues = allowedValues?.Select(value => (T)(object)value).ToArray() ?? [];
             return SetValidation(mappedValues);
         }
 
@@ -322,7 +323,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="allowedValues">The array of allowed integer values.</param>
         public WinRegistryEntry<T> SetValidation(long[] allowedValues)
         {
-            T[] mappedValues = allowedValues?.Select(value => (T)(object)value).ToArray();
+            T[] mappedValues = allowedValues?.Select(value => (T)(object)value).ToArray() ?? [];
             return SetValidation(mappedValues);
         }
 
@@ -370,34 +371,34 @@ namespace mRemoteNG.Tools.WindowsRegistry
 
         public WinRegistryEntry<T> SetValidation(string minValue, string maxValue)
         {
-            if (string.IsNullOrEmpty(minValue) || minValue == "*")
+            if (string.IsNullOrEmpty(minValue) || string.Equals(minValue, "*", StringComparison.Ordinal))
                 minValue = "0";
-            if ((string.IsNullOrEmpty(maxValue) || maxValue == "*"))
+            if ((string.IsNullOrEmpty(maxValue) || string.Equals(maxValue, "*", StringComparison.Ordinal)))
                 maxValue = (ElementType == typeof(int))
-                    ? Int32.MaxValue.ToString()
-                    : Int64.MaxValue.ToString();
+                    ? Int32.MaxValue.ToString(CultureInfo.InvariantCulture)
+                    : Int64.MaxValue.ToString(CultureInfo.InvariantCulture);
 
             if (ElementType == typeof(int))
             {
                 if (!int.TryParse(minValue, out int minIntValue))
-                    throw new ArgumentException("Invalid minimum value for Int32.");
+                    throw new ArgumentException("Invalid minimum value for Int32.", nameof(minValue));
                 if (!int.TryParse(maxValue, out int maxIntValue))
-                    throw new ArgumentException("Invalid maximum value for Int32.");
+                    throw new ArgumentException("Invalid maximum value for Int32.", nameof(maxValue));
 
                 return SetValidation(minIntValue, maxIntValue);
             }
             else if (ElementType == typeof(long))
             {
                 if (!long.TryParse(minValue, out long minLongValue))
-                    throw new ArgumentException("Invalid minimum value for Int64.");
+                    throw new ArgumentException("Invalid minimum value for Int64.", nameof(minValue));
                 if (!long.TryParse(maxValue, out long maxLongValue))
-                    throw new ArgumentException("Invalid maximum value for Int64.");
+                    throw new ArgumentException("Invalid maximum value for Int64.", nameof(maxValue));
 
                 return SetValidation(minLongValue, maxLongValue);
             }
             else
             {
-                throw new ArgumentException("Registry entry type must be either a valid Int32 or Int64 to use this validation.");
+                throw new ArgumentException("Registry entry type must be either a valid Int32 or Int64 to use this validation.", (string?)null);
             }
         }
 
@@ -451,17 +452,19 @@ namespace mRemoteNG.Tools.WindowsRegistry
             if (!IsReadable())
                 throw new InvalidOperationException("Unable to read registry key. Hive, path, and name are required.");
 
-            string rawValue = null;
-            string name = string.IsNullOrEmpty(Name) ? null : Name;
+            string? rawValue = null;
+            string? name = string.IsNullOrEmpty(Name) ? null : Name;
 
             try
             {
                 using var key = RegistryKey.OpenBaseKey(Hive, RegistryView.Default).OpenSubKey(Path);
                 if (key != null)
+                {
                     RawValue = rawValue = key.GetValue(name)?.ToString();
 
-                if (rawValue != null)
-                    ValueKind = key.GetValueKind(name);
+                    if (rawValue != null)
+                        ValueKind = key.GetValueKind(name);
+                }
             }
             catch (Exception ex)
             {
@@ -500,19 +503,19 @@ namespace mRemoteNG.Tools.WindowsRegistry
             if (!IsWritable())
                 throw new InvalidOperationException("Unable to write registry key. Hive, path, name, value kind, and value are required.");
 
-            string name = string.IsNullOrEmpty(Name) ? null : Name;
+            string? name = string.IsNullOrEmpty(Name) ? null : Name;
             RegistryValueKind valueKind = string.IsNullOrEmpty(Name) ? RegistryValueKind.String : ValueKind;
 
             string value;
             if (typeof(T) == typeof(bool))
             {
-                value = (bool)(object)Value
+                value = (bool)(object)Value!
                     ? ValueKind == RegistryValueKind.DWord ? "1" : "True"
                     : ValueKind == RegistryValueKind.DWord ? "0" : "False";
             }
             else
             {
-                value = Value.ToString();
+                value = Value?.ToString() ?? string.Empty;
             }
 
             try
@@ -520,7 +523,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
                 using RegistryKey baseKey = RegistryKey.OpenBaseKey(Hive, RegistryView.Default);
                 using RegistryKey registryKey = baseKey.CreateSubKey(Path, true);
 
-                registryKey.SetValue(name, value, valueKind);
+                registryKey.SetValue(name, (object)value, valueKind);
             }
             catch (Exception ex)
             {
@@ -552,7 +555,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         public void Clear()
         {
             RawValue = null;
-            Value = default;
+            Value = default!;
             ReadOperationSucceeded = false;
         }
 
@@ -632,7 +635,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="message">The error message to log.</param>
         private static void LogInfo(string message)
         {
-            Console.WriteLine($"Info: {message}");
+            System.Diagnostics.Debug.WriteLine($"Info: {message}");
         }
 
         /// <summary>
@@ -645,7 +648,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         private T ValueValidationRules(T value)
         {
             // Boolean values are either string or DWORD. Mapping is needed to update ValueKind.
-            var booleanRegistryValueKindMap = new Dictionary<string, RegistryValueKind>
+            var booleanRegistryValueKindMap = new Dictionary<string, RegistryValueKind>(StringComparer.OrdinalIgnoreCase)
             {
                 { "true", RegistryValueKind.String },
                 { "false", RegistryValueKind.String },
@@ -661,7 +664,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
             // For boolean elements, check if the value is valid and convert it to the appropriate value kind.
             else if (ElementType == typeof(bool))
             {
-                if (!booleanRegistryValueKindMap.TryGetValue(value.ToString().ToLower(), out var valueKind))
+                if (!booleanRegistryValueKindMap.TryGetValue(value?.ToString()?.ToLowerInvariant() ?? string.Empty, out var valueKind))
                     throw new ArgumentException("Invalid value. Supported values are ci strings 'True'/'False' or numbers '0'/'1'.", nameof(value));
 
                 ValueKind = valueKind;
@@ -670,7 +673,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
             // For integer or long elements, ensure the value is not negative.
             else if (ElementType == typeof(int) || ElementType == typeof(long))
             {
-                if (Convert.ToInt64(value) < 0)
+                if (Convert.ToInt64(value, CultureInfo.InvariantCulture) < 0)
                     throw new ArgumentException("Value cannot be negative.", nameof(value));
                 return value;
             }
@@ -695,7 +698,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         {
             if (AllowedValues != null)
             {
-                T matchedValue = AllowedValues.FirstOrDefault(v => v.ToString().Equals(value.ToString(), StringComparison.OrdinalIgnoreCase));
+                T? matchedValue = AllowedValues.FirstOrDefault(v => v?.ToString()?.Equals(value?.ToString(), StringComparison.OrdinalIgnoreCase) == true);
 
                 if (matchedValue != null)
                     // Correct the Value to ensure the correct spelling and avoid user typing mistakes
@@ -705,11 +708,11 @@ namespace mRemoteNG.Tools.WindowsRegistry
             {
                 var matchedEnumValue = Enum.GetValues(EnumType)
                           .Cast<Enum>()
-                          .FirstOrDefault(e => e.ToString().Equals(value.ToString(), StringComparison.OrdinalIgnoreCase));
+                          .FirstOrDefault(e => e.ToString()?.Equals(value?.ToString(), StringComparison.OrdinalIgnoreCase) == true);
 
                 if (matchedEnumValue != null)
                     // Correct the Value to ensure the correct spelling and avoid user typing mistakes
-                    return ConvertValueBasedOnType(matchedEnumValue.ToString());
+                    return ConvertValueBasedOnType(matchedEnumValue.ToString()!);
             }
 
             return value;
@@ -729,14 +732,14 @@ namespace mRemoteNG.Tools.WindowsRegistry
             string type =
                 typeCode == typeof(int) ? "dword" :
                 typeCode == typeof(long) ? "qword"
-                : throw new ArgumentException("Registry entry type must be either Int32 or Int64 to use this validation.");
+                : throw new ArgumentException("Registry entry type must be either Int32 or Int64 to use this validation.", (string?)null);
 
             if (minValue.CompareTo(default(U)) < 0)
                 throw new ArgumentException($"Negative value not allowed for {type} parameter.", nameof(minValue));
             if (maxValue.CompareTo(default(U)) < 0)
                 throw new ArgumentException($"Negative value not allowed for {type} parameter.", nameof(maxValue));
             if (minValue.CompareTo(maxValue) > 0)
-                throw new ArgumentException("MinValue must be less than or equal to MaxValue.");
+                throw new ArgumentException("MinValue must be less than or equal to MaxValue.", nameof(minValue));
         }
 
         /// <summary>
@@ -748,7 +751,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <exception cref="ArgumentException">Thrown when Value type <typeparamref name="T"/> is not supported.</exception>
         private bool ValueKindValidationRule(RegistryValueKind valueKind)
         {
-            if (!Enum.IsDefined(typeof(RegistryValueKind), valueKind) || valueKind == RegistryValueKind.Unknown || valueKind == RegistryValueKind.None || valueKind == 0)
+            if (!Enum.IsDefined<RegistryValueKind>(valueKind) || valueKind == RegistryValueKind.Unknown || valueKind == RegistryValueKind.None || valueKind == 0)
                 throw new ArgumentException("Invalid parameter: Unknown or unsupported RegistryValueKind value.", nameof(valueKind));
 
             return Type.GetTypeCode(ElementType) switch
@@ -758,7 +761,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
                 TypeCode.Int64 => valueKind == RegistryValueKind.QWord,
                 TypeCode.Byte => valueKind == RegistryValueKind.Binary,
                 TypeCode.String => valueKind == RegistryValueKind.String || valueKind == RegistryValueKind.DWord || valueKind == RegistryValueKind.QWord, // Strings are compatible with most data types.
-                _ => throw new ArgumentException($"Value type '{ElementType.FullName}' is not supported.")
+                _ => throw new ArgumentException($"Value type '{ElementType.FullName}' is not supported.", nameof(valueKind))
             };
         }
 
@@ -815,7 +818,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
                 TypeCode.Boolean => true,
                 TypeCode.Int32 => ValidateInt32(),
                 TypeCode.Int64 => ValidateInt64(),
-                _ => throw new ArgumentException($"Value type '{ElementType.FullName}' is not supported."),
+                _ => throw new ArgumentException($"Value type '{ElementType.FullName}' is not supported.", nameof(ElementType)),
             };
         }
 
@@ -850,7 +853,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
             {
                 return Enum.GetValues(EnumType)
                            .Cast<Enum>()
-                           .Any(e => e.ToString().Equals(Value.ToString(), StringComparison.OrdinalIgnoreCase));
+                           .Any(e => e.ToString()?.Equals(Value?.ToString(), StringComparison.OrdinalIgnoreCase) == true);
             }
 
             return true;
@@ -862,7 +865,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <returns>True if the integer value is valid; otherwise, false.</returns>
         private bool ValidateInt32()
         {
-            int value = (int)(object)Value;
+            int value = (int)(object)Value!;
 
             if (AllowedValues != null)
                 return AllowedValues.Contains(Value);
@@ -874,7 +877,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
             {
                 foreach (object enumValue in Enum.GetValues(EnumType))
                 {
-                    if (Convert.ToInt32(enumValue) == value)
+                    if (Convert.ToInt32(enumValue, CultureInfo.InvariantCulture) == value)
                     {
                         return true;
                     }
@@ -891,7 +894,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <returns>True if the long integer value is valid; otherwise, false.</returns>
         private bool ValidateInt64()
         {
-            long value = (long)(object)Value;
+            long value = (long)(object)Value!;
 
             if (AllowedValues != null)
                 return AllowedValues.Contains(Value);

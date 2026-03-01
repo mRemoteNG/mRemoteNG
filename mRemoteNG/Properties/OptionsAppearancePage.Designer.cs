@@ -94,5 +94,29 @@ namespace mRemoteNG.Properties {
                 this["cbAppearancePageInOptionMenu"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ReplaceIconOnConnect {
+            get {
+                return ((bool)(this["ReplaceIconOnConnect"]));
+            }
+            set {
+                this["ReplaceIconOnConnect"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool BoldActiveConnections {
+            get {
+                return ((bool)(this["BoldActiveConnections"]));
+            }
+            set {
+                this["BoldActiveConnections"] = value;
+            }
+        }
     }
 }

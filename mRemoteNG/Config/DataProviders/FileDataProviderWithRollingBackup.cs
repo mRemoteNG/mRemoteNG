@@ -9,7 +9,7 @@ namespace mRemoteNG.Config.DataProviders
 
         public override void Save(string content)
         {
-            _fileBackupCreator.CreateBackupFile(FilePath);
+            FileBackupCreator.CreateBackupFile(FilePath);
             base.Save(content);
         }
     }

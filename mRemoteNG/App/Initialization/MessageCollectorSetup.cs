@@ -9,7 +9,7 @@ using mRemoteNG.Messages.WriterDecorators;
 namespace mRemoteNG.App.Initialization
 {
     [SupportedOSPlatform("windows")]
-    public class MessageCollectorSetup
+    public static class MessageCollectorSetup
     {
         public static void SetupMessageCollector(MessageCollector messageCollector, IList<IMessageWriter> messageWriterList)
         {

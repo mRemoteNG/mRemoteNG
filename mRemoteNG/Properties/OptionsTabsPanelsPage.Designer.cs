@@ -166,5 +166,197 @@ namespace mRemoteNG.Properties {
                 this["BindConnectionsAndConfigPanels"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowFolderPathOnTabs {
+            get {
+                return ((bool)(this["ShowFolderPathOnTabs"]));
+            }
+            set {
+                this["ShowFolderPathOnTabs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int SplitterSize {
+            get {
+                return ((int)(this["SplitterSize"]));
+            }
+            set {
+                this["SplitterSize"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int DockPadding {
+            get {
+                return ((int)(this["DockPadding"]));
+            }
+            set {
+                this["DockPadding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LockPanels {
+            get {
+                return ((bool)(this["LockPanels"]));
+            }
+            set {
+                this["LockPanels"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ExternalToolsUseActiveTab {
+            get {
+                return ((bool)(this["ExternalToolsUseActiveTab"]));
+            }
+            set {
+                this["ExternalToolsUseActiveTab"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConfirmClosePanel {
+            get {
+                return ((bool)(this["ConfirmClosePanel"]));
+            }
+            set {
+                this["ConfirmClosePanel"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AutoClosePanelOnLastTabClose {
+            get {
+                return ((bool)(this["AutoClosePanelOnLastTabClose"]));
+            }
+            set {
+                this["AutoClosePanelOnLastTabClose"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DoNotRestoreOnRdpMinimize {
+            get {
+                return ((bool)(this["DoNotRestoreOnRdpMinimize"]));
+            }
+            set {
+                this["DoNotRestoreOnRdpMinimize"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OpenTabsInTreeOrder {
+            get {
+                return ((bool)(this["OpenTabsInTreeOrder"]));
+            }
+            set {
+                this["OpenTabsInTreeOrder"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseCustomConnectionTabFont {
+            get {
+                return ((bool)(this["UseCustomConnectionTabFont"]));
+            }
+            set {
+                this["UseCustomConnectionTabFont"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConnectionTabFontName {
+            get {
+                return ((string)(this["ConnectionTabFontName"]));
+            }
+            set {
+                this["ConnectionTabFontName"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public float ConnectionTabFontSize {
+            get {
+                return ((float)(this["ConnectionTabFontSize"]));
+            }
+            set {
+                this["ConnectionTabFontSize"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseCustomConnectionTabColor {
+            get {
+                return ((bool)(this["UseCustomConnectionTabColor"]));
+            }
+            set {
+                this["UseCustomConnectionTabColor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConnectionTabColor {
+            get {
+                return ((string)(this["ConnectionTabColor"]));
+            }
+            set {
+                this["ConnectionTabColor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MinimizePanelsOnConnect {
+            get {
+                return ((bool)(this["MinimizePanelsOnConnect"]));
+            }
+            set {
+                this["MinimizePanelsOnConnect"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool KeepTabsOpenAfterDisconnect {
+            get {
+                return ((bool)(this["KeepTabsOpenAfterDisconnect"]));
+            }
+            set {
+                this["KeepTabsOpenAfterDisconnect"] = value;
+            }
+        }
     }
 }

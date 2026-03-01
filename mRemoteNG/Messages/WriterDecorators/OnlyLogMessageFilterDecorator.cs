@@ -9,9 +9,7 @@ namespace mRemoteNG.Messages.WriterDecorators
 
         public OnlyLogMessageFilter(IMessageWriter decoratedWriter)
         {
-            if (decoratedWriter == null)
-                throw new ArgumentNullException(nameof(decoratedWriter));
-
+            ArgumentNullException.ThrowIfNull(decoratedWriter);
             _decoratedWriter = decoratedWriter;
         }
 

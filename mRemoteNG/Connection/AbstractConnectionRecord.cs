@@ -1,14 +1,18 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Design;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.Serial;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Properties;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.Attributes;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.Security;
 using System.Runtime.Versioning;
 using System.Security;
 
@@ -19,61 +23,73 @@ namespace mRemoteNG.Connection
     {
         #region Fields
 
-        private string _name;
-        private string _description;
-        private string _icon;
-        private string _panel;
-        private string _color;
-        private string _tabColor;
+        private string _name = string.Empty;
+        private string _description = string.Empty;
+        private string _icon = string.Empty;
+        private string _panel = string.Empty;
+        private string _color = string.Empty;
+        private string _tabColor = string.Empty;
         private ConnectionFrameColor _connectionFrameColor;
 
-        private string _hostname;
+        private string _hostname = string.Empty;
+        private string _ipAddress = string.Empty;
+        private ConnectionAddressPrimary _connectionAddressPrimary;
+        private string _alternativeAddress = string.Empty;
         private ExternalAddressProvider _externalAddressProvider;
         private string _ec2InstanceId = "";
         private string _ec2Region = "";
         private ExternalCredentialProvider _externalCredentialProvider;
         private string _userViaAPI = "";
-        private string _username = "";
-        //private SecureString _password = null;
-        private string _password = null;
-        private string _vaultRole = null;
-        private string _vaultMount = null;
-        private VaultOpenbaoSecretEngine _vaultSecretEngine = VaultOpenbaoSecretEngine.Kv;
-        private string _domain = "";
-        private string _vmId = "";
+        private string _username = string.Empty;
+        private SecureString? _password;
+        private string _vaultRole = string.Empty;
+        private string _vaultMount = string.Empty;
+        private VaultOpenbaoSecretEngine _vaultSecretEngine;
+        private string _domain = string.Empty;
+        private string _vmId = string.Empty;
         private bool _useEnhancedMode;
-        
-        private string _sshTunnelConnectionName = "";
+
+        private string _sshTunnelConnectionName = string.Empty;
         private ProtocolType _protocol;
-        private RdpVersion _rdpProtocolVersion = RdpVersion.Rdc10;
-        private string _extApp;
+        private RdpVersion _rdpProtocolVersion;
+        private string _extApp = string.Empty;
         private int _port;
-        private string _sshOptions = "";
-        private string _puttySession;
+        private string _sshOptions = string.Empty;
+        private string _privateKeyPath = string.Empty;
+        private string _puttySession = string.Empty;
+        private string _httpPath = string.Empty;
         private bool _useConsoleSession;
         private AuthenticationLevel _rdpAuthenticationLevel;
         private int _rdpMinutesToIdleTimeout;
         private bool _rdpAlertIdleTimeout;
-        private string _loadBalanceInfo;
+        private string _loadBalanceInfo = string.Empty;
         private HTTPBase.RenderingEngine _renderingEngine;
+        private bool _scriptErrorsSuppressed = true;
+        private bool _usePersistentBrowser;
+        private bool _showBrowserNavigationBar;
         private bool _useCredSsp;
         private bool _useRestrictedAdmin;
         private bool _useRCG;
         private bool _useVmId;
 
         private RDGatewayUsageMethod _rdGatewayUsageMethod;
-        private string _rdGatewayHostname;
+        private string _rdGatewayHostname = string.Empty;
         private RDGatewayUseConnectionCredentials _rdGatewayUseConnectionCredentials;
-        private string _rdGatewayUsername;
-        private string _rdGatewayPassword;
-        private string _rdGatewayDomain;
-        private string _rdGatewayAccessToken;
+        private string _rdGatewayUsername = string.Empty;
+        private SecureString? _rdGatewayPassword;
+        private string _rdGatewayDomain = string.Empty;
+        private string _rdGatewayAccessToken = string.Empty;
         private ExternalCredentialProvider _rdGatewayExternalCredentialProvider;
         private string _rdGatewayUserViaAPI = "";
 
 
         private RDPResolutions _resolution;
+        private RDPSizingMode _rdpSizingMode;
+        private int _resolutionWidth;
+        private int _resolutionHeight;
+        private RDPDesktopScaleFactor _desktopScaleFactor;
         private bool _automaticResize;
+        private bool _rdpUseMultimon;
         private RDPColors _colors;
         private bool _cacheBitmaps;
         private bool _displayWallpaper;
@@ -87,7 +103,7 @@ namespace mRemoteNG.Connection
 
         private bool _redirectKeys;
         private RDPDiskDrives _redirectDiskDrives;
-        private string _redirectDiskDrivesCustom;
+        private string _redirectDiskDrivesCustom = string.Empty;
         private bool _redirectPrinters;
         private bool _redirectClipboard;
         private bool _redirectPorts;
@@ -96,27 +112,55 @@ namespace mRemoteNG.Connection
         private RDPSoundQuality _soundQuality;
         private bool _redirectAudioCapture;
 
-        private string _preExtApp;
-        private string _postExtApp;
-        private string _macAddress;
-        private string _openingCommand;
-        private string _userField;
+        private string _preExtApp = string.Empty;
+        private string _postExtApp = string.Empty;
+        private string _macAddress = string.Empty;
+        private string _openingCommand = string.Empty;
+        private string _userField = string.Empty;
+        private string _userField1 = string.Empty;
+        private string _userField2 = string.Empty;
+        private string _userField3 = string.Empty;
+        private string _userField4 = string.Empty;
+        private string _userField5 = string.Empty;
+        private string _userField6 = string.Empty;
+        private string _userField7 = string.Empty;
+        private string _userField8 = string.Empty;
+        private string _userField9 = string.Empty;
+        private string _userField10 = string.Empty;
+        private string _notes = string.Empty;
         private string _environmentTags = "";
-        private string _rdpStartProgram;
-        private string _rdpStartProgramWorkDir;
+        private string _rdpStartProgram = string.Empty;
+        private string _rdpStartProgramWorkDir = string.Empty;
+        private string _rdpRemoteAppProgram = string.Empty;
+        private string _rdpRemoteAppCmdLine = string.Empty;
+        private string _rdpSignScope = string.Empty;
+        private string _rdpSignature = string.Empty;
         private bool _favorite;
+        private bool _retryOnFirstConnect;
+        private bool _waitForIPAvailability;
+        private int _waitForIPTimeout = 60;
+        private bool _alwaysPromptForCredentials;
+        private bool _isTemplate;
 
         private ProtocolVNC.Compression _vncCompression;
         private ProtocolVNC.Encoding _vncEncoding;
         private ProtocolVNC.AuthMode _vncAuthMode;
         private ProtocolVNC.ProxyType _vncProxyType;
-        private string _vncProxyIp;
+        private string _vncProxyIp = string.Empty;
         private int _vncProxyPort;
-        private string _vncProxyUsername;
-        private string _vncProxyPassword;
+        private string _vncProxyUsername = string.Empty;
+        private SecureString? _vncProxyPassword;
         private ProtocolVNC.Colors _vncColors;
         private ProtocolVNC.SmartSizeMode _vncSmartSizeMode;
         private bool _vncViewOnly;
+        private bool _vncClipboardRedirect = true;
+
+        private string _credentialId = string.Empty;
+
+        private int _serialDataBits = 8;
+        private ProtocolSerial.Parity _serialParity;
+        private ProtocolSerial.StopBits _serialStopBits;
+        private ProtocolSerial.FlowControl _serialFlowControl;
 
         #endregion
 
@@ -130,7 +174,7 @@ namespace mRemoteNG.Connection
         public virtual string Name
         {
             get => _name;
-            set => SetField(ref _name, value, "Name");
+            set => SetField(ref _name, value, nameof(Name));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Display)),
@@ -142,14 +186,23 @@ namespace mRemoteNG.Connection
             set => SetField(ref _description, value, nameof(Description));
         }
 
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Display))]
+        [DisplayName("Is Template")]
+        [Description("If enabled, this connection serves as a template and cannot be initiated.")]
+        public virtual bool IsTemplate
+        {
+            get => GetPropertyValue(nameof(IsTemplate), _isTemplate);
+            set => SetField(ref _isTemplate, value, nameof(IsTemplate));
+        }
+
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Display)),
          TypeConverter(typeof(ConnectionIcon)),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Icon)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionIcon))]
         public virtual string Icon
         {
-            get => GetPropertyValue("Icon", _icon);
-            set => SetField(ref _icon, value, "Icon");
+            get => GetPropertyValue(nameof(Icon), _icon);
+            set => SetField(ref _icon, value, nameof(Icon));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Display)),
@@ -157,8 +210,8 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPanel))]
         public virtual string Panel
         {
-            get => GetPropertyValue("Panel", _panel);
-            set => SetField(ref _panel, value, "Panel");
+            get => GetPropertyValue(nameof(Panel), _panel);
+            set => SetField(ref _panel, value, nameof(Panel));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Display)),
@@ -168,8 +221,8 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.TabColorConverter))]
         public virtual string Color
         {
-            get => GetPropertyValue("Color", _color);
-            set => SetField(ref _color, value, "Color");
+            get => GetPropertyValue(nameof(Color), _color);
+            set => SetField(ref _color, value, nameof(Color));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Display)),
@@ -179,8 +232,8 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.TabColorConverter))]
         public virtual string TabColor
         {
-            get => GetPropertyValue("TabColor", _tabColor);
-            set => SetField(ref _tabColor, value, "TabColor");
+            get => GetPropertyValue(nameof(TabColor), _tabColor);
+            set => SetField(ref _tabColor, value, nameof(TabColor));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Display)),
@@ -189,8 +242,8 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public virtual ConnectionFrameColor ConnectionFrameColor
         {
-            get => GetPropertyValue("ConnectionFrameColor", _connectionFrameColor);
-            set => SetField(ref _connectionFrameColor, value, "ConnectionFrameColor");
+            get => GetPropertyValue(nameof(ConnectionFrameColor), _connectionFrameColor);
+            set => SetField(ref _connectionFrameColor, value, nameof(ConnectionFrameColor));
         }
 
         #endregion
@@ -203,18 +256,72 @@ namespace mRemoteNG.Connection
          AttributeUsedInAllProtocolsExcept()]
         public virtual string Hostname
         {
-            get => _hostname.Trim();
-            set => SetField(ref _hostname, value?.Trim(), "Hostname");
+            get => GetPropertyValue(nameof(Hostname), GetEffectiveHostname(_hostname));
+            set => SetField(ref _hostname, value?.Trim() ?? string.Empty, nameof(Hostname));
+        }
+
+        /// <summary>
+        /// Returns the effective hostname based on <see cref=nameof(ConnectionAddressPrimary)/> setting,
+        /// with <c>%name%</c> tokens expanded.
+        /// </summary>
+        private string GetEffectiveHostname(string hostname)
+        {
+            string raw = _connectionAddressPrimary == ConnectionAddressPrimary.IPAddress && !string.IsNullOrWhiteSpace(_ipAddress)
+                ? _ipAddress.Trim()
+                : hostname?.Trim() ?? string.Empty;
+            return ExpandHostnameVariables(raw);
+        }
+
+        /// <summary>
+        /// Expands <c>%name%</c> tokens in a hostname template to the connection's <see cref=nameof(Name)/> value.
+        /// Intentionally does not expand <c>%hostname%</c> to avoid circular references.
+        /// </summary>
+        private string ExpandHostnameVariables(string raw)
+        {
+            if (string.IsNullOrEmpty(raw) || !raw.Contains('%'))
+                return raw;
+            return raw.Replace("%name%", _name, StringComparison.OrdinalIgnoreCase);
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
+         DisplayName("IP Address"),
+         Description("IP address for this connection. When 'Primary Address' is set to 'IP Address', this is used for connecting instead of the Hostname field."),
+         AttributeUsedInAllProtocolsExcept()]
+        public virtual string IPAddress
+        {
+            get => GetPropertyValue(nameof(IPAddress), _ipAddress?.Trim() ?? string.Empty);
+            set => SetField(ref _ipAddress, value?.Trim() ?? string.Empty, nameof(IPAddress));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
+         DisplayName("Primary Address"),
+         Description("Determines which address field (Hostname or IP Address) is used when initiating a connection. Defaults to Hostname for backward compatibility."),
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         AttributeUsedInAllProtocolsExcept()]
+        public virtual ConnectionAddressPrimary ConnectionAddressPrimary
+        {
+            get => GetPropertyValue(nameof(ConnectionAddressPrimary), _connectionAddressPrimary);
+            set => SetField(ref _connectionAddressPrimary, value, nameof(ConnectionAddressPrimary));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
+         DisplayName("Alternative Hostname/IP"),
+         Description("Optional alternate hostname or IP address used when connecting with options."),
+         AttributeUsedInAllProtocolsExcept()]
+        public virtual string AlternativeAddress
+        {
+            get => GetPropertyValue(nameof(AlternativeAddress), _alternativeAddress?.Trim() ?? string.Empty);
+            set => SetField(ref _alternativeAddress, value?.Trim() ?? string.Empty, nameof(AlternativeAddress));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Port)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPort)),
-         AttributeUsedInAllProtocolsExcept()]
+         AttributeUsedInAllProtocolsExcept(ProtocolType.MSRA)]
         public virtual int Port
         {
-            get => GetPropertyValue("Port", _port);
-            set => SetField(ref _port, value, "Port");
+            get => GetPropertyValue(nameof(Port), _port);
+            set => SetField(ref _port, value, nameof(Port));
         }
 
         // external credential provider selector
@@ -225,8 +332,15 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2)]
         public ExternalCredentialProvider ExternalCredentialProvider
         {
-            get => GetPropertyValue("ExternalCredentialProvider", _externalCredentialProvider);
-            set => SetField(ref _externalCredentialProvider, value, "ExternalCredentialProvider");
+            get => GetPropertyValue(nameof(ExternalCredentialProvider), _externalCredentialProvider);
+            set => SetField(ref _externalCredentialProvider, value, nameof(ExternalCredentialProvider));
+        }
+
+        [Browsable(false)]
+        public virtual string CredentialId
+        {
+            get => GetPropertyValue(nameof(CredentialId), _credentialId);
+            set => SetField(ref _credentialId, value, nameof(CredentialId));
         }
 
         // credential record identifier for external credential provider
@@ -236,30 +350,31 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2)]
         public virtual string UserViaAPI
         {
-            get => GetPropertyValue("UserViaAPI", _userViaAPI);
-            set => SetField(ref _userViaAPI, value, "UserViaAPI");
+            get => GetPropertyValue(nameof(UserViaAPI), _userViaAPI);
+            set => SetField(ref _userViaAPI, value, nameof(UserViaAPI));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Username)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUsername)),
-         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2, ProtocolType.HTTP, ProtocolType.HTTPS, ProtocolType.IntApp)]
+         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2, ProtocolType.OpenSSH, ProtocolType.HTTP, ProtocolType.HTTPS, ProtocolType.IntApp, ProtocolType.Winbox, ProtocolType.VMRC)]
         public virtual string Username
         {
-            get => GetPropertyValue("Username", _username);
-            set => SetField(ref _username, Settings.Default.DoNotTrimUsername ? value : value?.Trim(), "Username");
+            get => GetPropertyValue(nameof(Username), _username);
+            set => SetField(ref _username, Settings.Default.DoNotTrimUsername ? value : (value?.Trim() ?? string.Empty), nameof(Username));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Password)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPassword)),
          PasswordPropertyText(true),
-         AttributeUsedInAllProtocolsExcept(ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW)]
+         Editor(typeof(UI.Controls.ConnectionInfoPropertyGrid.PasswordRevealEditor), typeof(UITypeEditor)),
+         AttributeUsedInAllProtocolsExcept(ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW, ProtocolType.MSRA)]
         //public virtual SecureString Password
         public virtual string Password
         {
-            get => GetPropertyValue("Password", _password);
-            set => SetField(ref _password, value, "Password");
+            get => GetPropertyValue(nameof(Password), _password?.ConvertToUnsecureString() ?? string.Empty);
+            set => SetSecureStringField(ref _password, value, nameof(Password));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
@@ -267,8 +382,8 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription(nameof(Language.VaultOpenbaoMountDescription)),
          AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2)]
         public virtual string VaultOpenbaoMount {
-            get => GetPropertyValue("VaultOpenbaoMount", _vaultMount);
-            set => SetField(ref _vaultMount, value, "VaultOpenbaoMount");
+            get => GetPropertyValue(nameof(VaultOpenbaoMount), _vaultMount);
+            set => SetField(ref _vaultMount, value, nameof(VaultOpenbaoMount));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
@@ -276,8 +391,8 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription(nameof(Language.VaultOpenbaoRoleDescription)),
          AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2)]
         public virtual string VaultOpenbaoRole {
-            get => GetPropertyValue("VaultOpenbaoRole", _vaultRole);
-            set => SetField(ref _vaultRole, value, "VaultOpenbaoRole");
+            get => GetPropertyValue(nameof(VaultOpenbaoRole), _vaultRole);
+            set => SetField(ref _vaultRole, value, nameof(VaultOpenbaoRole));
         }
 
         // external credential provider selector
@@ -287,19 +402,29 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
          AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2)]
         public VaultOpenbaoSecretEngine VaultOpenbaoSecretEngine {
-            get => GetPropertyValue("VaultOpenbaoSecretEngine", _vaultSecretEngine);
-            set => SetField(ref _vaultSecretEngine, value, "VaultOpenbaoSecretEngine");
+            get => GetPropertyValue(nameof(VaultOpenbaoSecretEngine), _vaultSecretEngine);
+            set => SetField(ref _vaultSecretEngine, value, nameof(VaultOpenbaoSecretEngine));
         }
 
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Domain)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionDomain)),
-         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.IntApp, ProtocolType.PowerShell, ProtocolType.WSL)]
+         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.IntApp, ProtocolType.PowerShell, ProtocolType.WSL, ProtocolType.VMRC)]
         public string Domain
         {
-            get => GetPropertyValue("Domain", _domain).Trim();
-            set => SetField(ref _domain, value?.Trim(), "Domain");
+            get => GetPropertyValue(nameof(Domain), ExpandDomainVariables(_domain))?.Trim() ?? string.Empty;
+            set => SetField(ref _domain, value?.Trim() ?? string.Empty, nameof(Domain));
+        }
+
+        /// <summary>
+        /// Expands <c>%name%</c> tokens in a domain template to the connection's <see cref=nameof(Name)/> value.
+        /// </summary>
+        private string ExpandDomainVariables(string raw)
+        {
+            if (string.IsNullOrEmpty(raw) || !raw.Contains('%'))
+                return raw;
+            return raw.Replace("%name%", _name, StringComparison.OrdinalIgnoreCase);
         }
 
 
@@ -311,8 +436,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH2)]
         public ExternalAddressProvider ExternalAddressProvider
         {
-            get => GetPropertyValue("ExternalAddressProvider", _externalAddressProvider);
-            set => SetField(ref _externalAddressProvider, value, "ExternalAddressProvider");
+            get => GetPropertyValue(nameof(ExternalAddressProvider), _externalAddressProvider);
+            set => SetField(ref _externalAddressProvider, value, nameof(ExternalAddressProvider));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
@@ -321,8 +446,8 @@ namespace mRemoteNG.Connection
         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH2)]
         public string EC2InstanceId
         {
-            get => GetPropertyValue("EC2InstanceId", _ec2InstanceId).Trim();
-            set => SetField(ref _ec2InstanceId, value?.Trim(), "EC2InstanceId");
+            get => GetPropertyValue(nameof(EC2InstanceId), _ec2InstanceId)?.Trim() ?? string.Empty;
+            set => SetField(ref _ec2InstanceId, value?.Trim() ?? string.Empty, nameof(EC2InstanceId));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
@@ -331,18 +456,18 @@ namespace mRemoteNG.Connection
         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH2)]
         public string EC2Region
         {
-            get => GetPropertyValue("EC2Region", _ec2Region).Trim();
-            set => SetField(ref _ec2Region, value?.Trim(), "EC2Region");
+            get => GetPropertyValue(nameof(EC2Region), _ec2Region)?.Trim() ?? string.Empty;
+            set => SetField(ref _ec2Region, value?.Trim() ?? string.Empty, nameof(EC2Region));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.VmId)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionVmId)),
-         AttributeUsedInProtocol(ProtocolType.RDP)]
+         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.VMRC)]
         public string VmId
         {
-            get => GetPropertyValue("VmId", _vmId).Trim();
-            set => SetField(ref _vmId, value?.Trim(), "VmId");
+            get => GetPropertyValue(nameof(VmId), _vmId)?.Trim() ?? string.Empty;
+            set => SetField(ref _vmId, value?.Trim() ?? string.Empty, nameof(VmId));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
@@ -352,8 +477,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInAllProtocolsExcept()]
         public string SSHTunnelConnectionName
         {
-            get => GetPropertyValue("SSHTunnelConnectionName", _sshTunnelConnectionName).Trim();
-            set => SetField(ref _sshTunnelConnectionName, value?.Trim(), "SSHTunnelConnectionName");
+            get => GetPropertyValue(nameof(SSHTunnelConnectionName), _sshTunnelConnectionName)?.Trim() ?? string.Empty;
+            set => SetField(ref _sshTunnelConnectionName, value?.Trim() ?? string.Empty, nameof(SSHTunnelConnectionName));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
@@ -362,8 +487,8 @@ namespace mRemoteNG.Connection
            AttributeUsedInProtocol(ProtocolType.SSH1, ProtocolType.SSH2)]
         public virtual string OpeningCommand
         {
-            get => GetPropertyValue("OpeningCommand", _openingCommand);
-            set => SetField(ref _openingCommand, value, "OpeningCommand");
+            get => GetPropertyValue(nameof(OpeningCommand), _openingCommand);
+            set => SetField(ref _openingCommand, value, nameof(OpeningCommand));
         }
         #endregion
 
@@ -375,8 +500,8 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public virtual ProtocolType Protocol
         {
-            get => GetPropertyValue("Protocol", _protocol);
-            set => SetField(ref _protocol, value, "Protocol");
+            get => GetPropertyValue(nameof(Protocol), _protocol);
+            set => SetField(ref _protocol, value, nameof(Protocol));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -386,7 +511,7 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public virtual RdpVersion RdpVersion
         {
-            get => GetPropertyValue("RdpVersion", _rdpProtocolVersion);
+            get => GetPropertyValue(nameof(RdpVersion), _rdpProtocolVersion);
             set => SetField(ref _rdpProtocolVersion, value, nameof(RdpVersion));
         }
 
@@ -397,8 +522,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.IntApp)]
         public string ExtApp
         {
-            get => GetPropertyValue("ExtApp", _extApp);
-            set => SetField(ref _extApp, value, "ExtApp");
+            get => GetPropertyValue(nameof(ExtApp), _extApp);
+            set => SetField(ref _extApp, value, nameof(ExtApp));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -409,18 +534,29 @@ namespace mRemoteNG.Connection
             ProtocolType.RAW, ProtocolType.Rlogin)]
         public virtual string PuttySession
         {
-            get => GetPropertyValue("PuttySession", _puttySession);
-            set => SetField(ref _puttySession, value, "PuttySession");
+            get => GetPropertyValue(nameof(PuttySession), _puttySession);
+            set => SetField(ref _puttySession, value, nameof(PuttySession));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.SshOptions)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSshOptions)),
-         AttributeUsedInProtocol(ProtocolType.SSH1, ProtocolType.SSH2)]
+         AttributeUsedInProtocol(ProtocolType.SSH1, ProtocolType.SSH2, ProtocolType.OpenSSH)]
         public virtual string SSHOptions
         {
-            get => GetPropertyValue("SSHOptions", _sshOptions);
-            set => SetField(ref _sshOptions, value, "SSHOptions");
+            get => GetPropertyValue(nameof(SSHOptions), _sshOptions);
+            set => SetField(ref _sshOptions, value, nameof(SSHOptions));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         DisplayName("Private Key File"),
+         Description("Path to a PuTTY private key (.ppk) file for SSH authentication. When set, the key is passed to PuTTY via the -i argument."),
+         Editor(typeof(UI.Controls.ConnectionInfoPropertyGrid.PrivateKeyFileEditor), typeof(System.Drawing.Design.UITypeEditor)),
+         AttributeUsedInProtocol(ProtocolType.SSH1, ProtocolType.SSH2, ProtocolType.OpenSSH)]
+        public virtual string PrivateKeyPath
+        {
+            get => GetPropertyValue(nameof(PrivateKeyPath), _privateKeyPath);
+            set => SetField(ref _privateKeyPath, value, nameof(PrivateKeyPath));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -430,8 +566,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool UseConsoleSession
         {
-            get => GetPropertyValue("UseConsoleSession", _useConsoleSession);
-            set => SetField(ref _useConsoleSession, value, "UseConsoleSession");
+            get => GetPropertyValue(nameof(UseConsoleSession), _useConsoleSession);
+            set => SetField(ref _useConsoleSession, value, nameof(UseConsoleSession));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -441,8 +577,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public AuthenticationLevel RDPAuthenticationLevel
         {
-            get => GetPropertyValue("RDPAuthenticationLevel", _rdpAuthenticationLevel);
-            set => SetField(ref _rdpAuthenticationLevel, value, "RDPAuthenticationLevel");
+            get => GetPropertyValue(nameof(RDPAuthenticationLevel), _rdpAuthenticationLevel);
+            set => SetField(ref _rdpAuthenticationLevel, value, nameof(RDPAuthenticationLevel));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -451,14 +587,14 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public virtual int RDPMinutesToIdleTimeout
         {
-            get => GetPropertyValue("RDPMinutesToIdleTimeout", _rdpMinutesToIdleTimeout);
+            get => GetPropertyValue(nameof(RDPMinutesToIdleTimeout), _rdpMinutesToIdleTimeout);
             set
             {
                 if (value < 0)
                     value = 0;
                 else if (value > 240)
                     value = 240;
-                SetField(ref _rdpMinutesToIdleTimeout, value, "RDPMinutesToIdleTimeout");
+                SetField(ref _rdpMinutesToIdleTimeout, value, nameof(RDPMinutesToIdleTimeout));
             }
         }
 
@@ -468,8 +604,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool RDPAlertIdleTimeout
         {
-            get => GetPropertyValue("RDPAlertIdleTimeout", _rdpAlertIdleTimeout);
-            set => SetField(ref _rdpAlertIdleTimeout, value, "RDPAlertIdleTimeout");
+            get => GetPropertyValue(nameof(RDPAlertIdleTimeout), _rdpAlertIdleTimeout);
+            set => SetField(ref _rdpAlertIdleTimeout, value, nameof(RDPAlertIdleTimeout));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -478,8 +614,28 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public string LoadBalanceInfo
         {
-            get => GetPropertyValue("LoadBalanceInfo", _loadBalanceInfo).Trim();
-            set => SetField(ref _loadBalanceInfo, value?.Trim(), "LoadBalanceInfo");
+            get => GetPropertyValue(nameof(LoadBalanceInfo), _loadBalanceInfo)?.Trim() ?? string.Empty;
+            set => SetField(ref _loadBalanceInfo, value?.Trim() ?? string.Empty, nameof(LoadBalanceInfo));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         DisplayName("RDP Sign Scope"),
+         Description("The signscope value from a signed RDP file. Defines which connection properties are covered by the signature."),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public string RDPSignScope
+        {
+            get => GetPropertyValue(nameof(RDPSignScope), _rdpSignScope);
+            set => SetField(ref _rdpSignScope, value, nameof(RDPSignScope));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         DisplayName("RDP Signature"),
+         Description("The signature value from a signed RDP file. Used by RD Connection Broker to validate that connection settings have not been tampered with."),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public string RDPSignature
+        {
+            get => GetPropertyValue(nameof(RDPSignature), _rdpSignature);
+            set => SetField(ref _rdpSignature, value, nameof(RDPSignature));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -489,8 +645,51 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.HTTP, ProtocolType.HTTPS)]
         public HTTPBase.RenderingEngine RenderingEngine
         {
-            get => GetPropertyValue("RenderingEngine", _renderingEngine);
-            set => SetField(ref _renderingEngine, value, "RenderingEngine");
+            get => GetPropertyValue(nameof(RenderingEngine), _renderingEngine);
+            set => SetField(ref _renderingEngine, value, nameof(RenderingEngine));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.HttpPath)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionHttpPath)),
+         AttributeUsedInProtocol(ProtocolType.HTTP, ProtocolType.HTTPS)]
+        public virtual string HttpPath
+        {
+            get => GetPropertyValue(nameof(HttpPath), _httpPath);
+            set => SetField(ref _httpPath, value ?? string.Empty, nameof(HttpPath));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         DisplayName("Suppress Script Errors"),
+         Description("If enabled, script errors in the browser will be suppressed."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.HTTP, ProtocolType.HTTPS)]
+        public bool ScriptErrorsSuppressed
+        {
+            get => GetPropertyValue(nameof(ScriptErrorsSuppressed), _scriptErrorsSuppressed);
+            set => SetField(ref _scriptErrorsSuppressed, value, nameof(ScriptErrorsSuppressed));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         DisplayName("Use Persistent Browser"),
+         Description("If enabled, browser cookies and data will be saved across sessions."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.HTTP, ProtocolType.HTTPS)]
+        public bool UsePersistentBrowser
+        {
+            get => GetPropertyValue(nameof(UsePersistentBrowser), _usePersistentBrowser);
+            set => SetField(ref _usePersistentBrowser, value, nameof(UsePersistentBrowser));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         DisplayName("Show Navigation Bar"),
+         Description("If enabled, a navigation bar with back/forward/refresh buttons and an address box is shown above the embedded browser."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.HTTP, ProtocolType.HTTPS)]
+        public bool ShowBrowserNavigationBar
+        {
+            get => GetPropertyValue(nameof(ShowBrowserNavigationBar), _showBrowserNavigationBar);
+            set => SetField(ref _showBrowserNavigationBar, value, nameof(ShowBrowserNavigationBar));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -500,8 +699,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool UseCredSsp
         {
-            get => GetPropertyValue("UseCredSsp", _useCredSsp);
-            set => SetField(ref _useCredSsp, value, "UseCredSsp");
+            get => GetPropertyValue(nameof(UseCredSsp), _useCredSsp);
+            set => SetField(ref _useCredSsp, value, nameof(UseCredSsp));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -511,8 +710,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool UseRestrictedAdmin
         {
-            get => GetPropertyValue("UseRestrictedAdmin", _useRestrictedAdmin);
-            set => SetField(ref _useRestrictedAdmin, value, "UseRestrictedAdmin");
+            get => GetPropertyValue(nameof(UseRestrictedAdmin), _useRestrictedAdmin);
+            set => SetField(ref _useRestrictedAdmin, value, nameof(UseRestrictedAdmin));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -522,8 +721,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool UseRCG
         {
-            get => GetPropertyValue("UseRCG", _useRCG);
-            set => SetField(ref _useRCG, value, "UseRCG");
+            get => GetPropertyValue(nameof(UseRCG), _useRCG);
+            set => SetField(ref _useRCG, value, nameof(UseRCG));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -533,8 +732,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool UseVmId
         {
-            get => GetPropertyValue("UseVmId", _useVmId);
-            set => SetField(ref _useVmId, value, "UseVmId");
+            get => GetPropertyValue(nameof(UseVmId), _useVmId);
+            set => SetField(ref _useVmId, value, nameof(UseVmId));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -544,8 +743,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool UseEnhancedMode
         {
-            get => GetPropertyValue("UseEnhancedMode", _useEnhancedMode);
-            set => SetField(ref _useEnhancedMode, value, "UseEnhancedMode");
+            get => GetPropertyValue(nameof(UseEnhancedMode), _useEnhancedMode);
+            set => SetField(ref _useEnhancedMode, value, nameof(UseEnhancedMode));
         }
         #endregion
 
@@ -558,8 +757,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public RDGatewayUsageMethod RDGatewayUsageMethod
         {
-            get => GetPropertyValue("RDGatewayUsageMethod", _rdGatewayUsageMethod);
-            set => SetField(ref _rdGatewayUsageMethod, value, "RDGatewayUsageMethod");
+            get => GetPropertyValue(nameof(RDGatewayUsageMethod), _rdGatewayUsageMethod);
+            set => SetField(ref _rdGatewayUsageMethod, value, nameof(RDGatewayUsageMethod));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
@@ -568,8 +767,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public string RDGatewayHostname
         {
-            get => GetPropertyValue("RDGatewayHostname", _rdGatewayHostname).Trim();
-            set => SetField(ref _rdGatewayHostname, value?.Trim(), "RDGatewayHostname");
+            get => GetPropertyValue(nameof(RDGatewayHostname), _rdGatewayHostname)?.Trim() ?? string.Empty;
+            set => SetField(ref _rdGatewayHostname, value?.Trim() ?? string.Empty, nameof(RDGatewayHostname));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
@@ -579,8 +778,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public RDGatewayUseConnectionCredentials RDGatewayUseConnectionCredentials
         {
-            get => GetPropertyValue("RDGatewayUseConnectionCredentials", _rdGatewayUseConnectionCredentials);
-            set => SetField(ref _rdGatewayUseConnectionCredentials, value, "RDGatewayUseConnectionCredentials");
+            get => GetPropertyValue(nameof(RDGatewayUseConnectionCredentials), _rdGatewayUseConnectionCredentials);
+            set => SetField(ref _rdGatewayUseConnectionCredentials, value, nameof(RDGatewayUseConnectionCredentials));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
@@ -589,8 +788,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public string RDGatewayUsername
         {
-            get => GetPropertyValue("RDGatewayUsername", _rdGatewayUsername).Trim();
-            set => SetField(ref _rdGatewayUsername, value?.Trim(), "RDGatewayUsername");
+            get => GetPropertyValue(nameof(RDGatewayUsername), _rdGatewayUsername)?.Trim() ?? string.Empty;
+            set => SetField(ref _rdGatewayUsername, value?.Trim() ?? string.Empty, nameof(RDGatewayUsername));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
@@ -600,8 +799,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public string RDGatewayPassword
         {
-            get => GetPropertyValue("RDGatewayPassword", _rdGatewayPassword);
-            set => SetField(ref _rdGatewayPassword, value, "RDGatewayPassword");
+            get => GetPropertyValue(nameof(RDGatewayPassword), _rdGatewayPassword?.ConvertToUnsecureString() ?? string.Empty);
+            set => SetSecureStringField(ref _rdGatewayPassword, value, nameof(RDGatewayPassword));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
@@ -611,8 +810,8 @@ namespace mRemoteNG.Connection
         AttributeUsedInProtocol(ProtocolType.RDP)]
         public string RDGatewayAccessToken
         {
-            get => GetPropertyValue("RDGatewayAccessToken", _rdGatewayAccessToken);
-            set => SetField(ref _rdGatewayAccessToken, value, "RDGatewayAccessToken");
+            get => GetPropertyValue(nameof(RDGatewayAccessToken), _rdGatewayAccessToken);
+            set => SetField(ref _rdGatewayAccessToken, value, nameof(RDGatewayAccessToken));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
@@ -621,8 +820,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public string RDGatewayDomain
         {
-            get => GetPropertyValue("RDGatewayDomain", _rdGatewayDomain).Trim();
-            set => SetField(ref _rdGatewayDomain, value?.Trim(), "RDGatewayDomain");
+            get => GetPropertyValue(nameof(RDGatewayDomain), _rdGatewayDomain)?.Trim() ?? string.Empty;
+            set => SetField(ref _rdGatewayDomain, value?.Trim() ?? string.Empty, nameof(RDGatewayDomain));
         }
         // external credential provider selector for rd gateway
         [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
@@ -632,8 +831,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public ExternalCredentialProvider RDGatewayExternalCredentialProvider
         {
-            get => GetPropertyValue("RDGatewayExternalCredentialProvider", _rdGatewayExternalCredentialProvider);
-            set => SetField(ref _rdGatewayExternalCredentialProvider, value, "RDGatewayExternalCredentialProvider");
+            get => GetPropertyValue(nameof(RDGatewayExternalCredentialProvider), _rdGatewayExternalCredentialProvider);
+            set => SetField(ref _rdGatewayExternalCredentialProvider, value, nameof(RDGatewayExternalCredentialProvider));
         }
 
         // credential record identifier for external credential provider
@@ -643,8 +842,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public virtual string RDGatewayUserViaAPI
         {
-            get => GetPropertyValue("RDGatewayUserViaAPI", _rdGatewayUserViaAPI);
-            set => SetField(ref _rdGatewayUserViaAPI, value, "RDGatewayUserViaAPI");
+            get => GetPropertyValue(nameof(RDGatewayUserViaAPI), _rdGatewayUserViaAPI);
+            set => SetField(ref _rdGatewayUserViaAPI, value, nameof(RDGatewayUserViaAPI));
         }
         #endregion
 
@@ -657,8 +856,50 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public RDPResolutions Resolution
         {
-            get => GetPropertyValue("Resolution", _resolution);
-            set => SetField(ref _resolution, value, "Resolution");
+            get => GetPropertyValue(nameof(Resolution), _resolution);
+            set => SetField(ref _resolution, value, nameof(Resolution));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
+         DisplayName("Sizing Mode"),
+         Description("Controls how the remote desktop is scaled to fit the panel. SmartSize stretches to fill; SmartSize (Aspect Ratio) preserves aspect ratio."),
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public RDPSizingMode RDPSizingMode
+        {
+            get => GetPropertyValue(nameof(RDPSizingMode), _rdpSizingMode);
+            set => SetField(ref _rdpSizingMode, value, nameof(RDPSizingMode));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
+         DisplayName("Resolution Width"),
+         Description("Custom resolution width in pixels (used when Resolution is set to Custom)."),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public int ResolutionWidth
+        {
+            get => GetPropertyValue(nameof(ResolutionWidth), _resolutionWidth);
+            set => SetField(ref _resolutionWidth, value, nameof(ResolutionWidth));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
+         DisplayName("Resolution Height"),
+         Description("Custom resolution height in pixels (used when Resolution is set to Custom)."),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public int ResolutionHeight
+        {
+            get => GetPropertyValue(nameof(ResolutionHeight), _resolutionHeight);
+            set => SetField(ref _resolutionHeight, value, nameof(ResolutionHeight));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
+         DisplayName("Zoom Level (Desktop Scale Factor)"),
+         Description("Controls RDP zoom for this connection. 'Auto' follows the local display scale; fixed values force a specific zoom level."),
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public RDPDesktopScaleFactor DesktopScaleFactor
+        {
+            get => GetPropertyValue(nameof(DesktopScaleFactor), _desktopScaleFactor);
+            set => SetField(ref _desktopScaleFactor, value, nameof(DesktopScaleFactor));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -668,8 +909,19 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool AutomaticResize
         {
-            get => GetPropertyValue("AutomaticResize", _automaticResize);
-            set => SetField(ref _automaticResize, value, "AutomaticResize");
+            get => GetPropertyValue(nameof(AutomaticResize), _automaticResize);
+            set => SetField(ref _automaticResize, value, nameof(AutomaticResize));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
+         DisplayName("Use Multiple Monitors"),
+         Description("When enabled and connecting in fullscreen, the RDP session spans all local monitors. Requires RDP 8.1 or later."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public bool RDPUseMultimon
+        {
+            get => GetPropertyValue(nameof(RDPUseMultimon), _rdpUseMultimon);
+            set => SetField(ref _rdpUseMultimon, value, nameof(RDPUseMultimon));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -679,8 +931,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public RDPColors Colors
         {
-            get => GetPropertyValue("Colors", _colors);
-            set => SetField(ref _colors, value, "Colors");
+            get => GetPropertyValue(nameof(Colors), _colors);
+            set => SetField(ref _colors, value, nameof(Colors));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -690,8 +942,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool CacheBitmaps
         {
-            get => GetPropertyValue("CacheBitmaps", _cacheBitmaps);
-            set => SetField(ref _cacheBitmaps, value, "CacheBitmaps");
+            get => GetPropertyValue(nameof(CacheBitmaps), _cacheBitmaps);
+            set => SetField(ref _cacheBitmaps, value, nameof(CacheBitmaps));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -701,8 +953,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool DisplayWallpaper
         {
-            get => GetPropertyValue("DisplayWallpaper", _displayWallpaper);
-            set => SetField(ref _displayWallpaper, value, "DisplayWallpaper");
+            get => GetPropertyValue(nameof(DisplayWallpaper), _displayWallpaper);
+            set => SetField(ref _displayWallpaper, value, nameof(DisplayWallpaper));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -712,8 +964,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool DisplayThemes
         {
-            get => GetPropertyValue("DisplayThemes", _displayThemes);
-            set => SetField(ref _displayThemes, value, "DisplayThemes");
+            get => GetPropertyValue(nameof(DisplayThemes), _displayThemes);
+            set => SetField(ref _displayThemes, value, nameof(DisplayThemes));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -723,8 +975,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool EnableFontSmoothing
         {
-            get => GetPropertyValue("EnableFontSmoothing", _enableFontSmoothing);
-            set => SetField(ref _enableFontSmoothing, value, "EnableFontSmoothing");
+            get => GetPropertyValue(nameof(EnableFontSmoothing), _enableFontSmoothing);
+            set => SetField(ref _enableFontSmoothing, value, nameof(EnableFontSmoothing));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -734,8 +986,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool EnableDesktopComposition
         {
-            get => GetPropertyValue("EnableDesktopComposition", _enableDesktopComposition);
-            set => SetField(ref _enableDesktopComposition, value, "EnableDesktopComposition");
+            get => GetPropertyValue(nameof(EnableDesktopComposition), _enableDesktopComposition);
+            set => SetField(ref _enableDesktopComposition, value, nameof(EnableDesktopComposition));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -745,8 +997,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool DisableFullWindowDrag
         {
-            get => GetPropertyValue("DisableFullWindowDrag", _disableFullWindowDrag);
-            set => SetField(ref _disableFullWindowDrag, value, "DisableFullWindowDrag");
+            get => GetPropertyValue(nameof(DisableFullWindowDrag), _disableFullWindowDrag);
+            set => SetField(ref _disableFullWindowDrag, value, nameof(DisableFullWindowDrag));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -756,8 +1008,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool DisableMenuAnimations
         {
-            get => GetPropertyValue("DisableMenuAnimations", _disableMenuAnimations);
-            set => SetField(ref _disableMenuAnimations, value, "DisableMenuAnimations");
+            get => GetPropertyValue(nameof(DisableMenuAnimations), _disableMenuAnimations);
+            set => SetField(ref _disableMenuAnimations, value, nameof(DisableMenuAnimations));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -767,8 +1019,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool DisableCursorShadow
         {
-            get => GetPropertyValue("DisableCursorShadow", _disableCursorShadow);
-            set => SetField(ref _disableCursorShadow, value, "DisableCursorShadow");
+            get => GetPropertyValue(nameof(DisableCursorShadow), _disableCursorShadow);
+            set => SetField(ref _disableCursorShadow, value, nameof(DisableCursorShadow));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -778,8 +1030,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool DisableCursorBlinking
         {
-            get => GetPropertyValue("DisableCursorBlinking", _disableCursorBlinking);
-            set => SetField(ref _disableCursorBlinking, value, "DisableCursorBlinking");
+            get => GetPropertyValue(nameof(DisableCursorBlinking), _disableCursorBlinking);
+            set => SetField(ref _disableCursorBlinking, value, nameof(DisableCursorBlinking));
         }
         #endregion
 
@@ -792,8 +1044,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool RedirectKeys
         {
-            get => GetPropertyValue("RedirectKeys", _redirectKeys);
-            set => SetField(ref _redirectKeys, value, "RedirectKeys");
+            get => GetPropertyValue(nameof(RedirectKeys), _redirectKeys);
+            set => SetField(ref _redirectKeys, value, nameof(RedirectKeys));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
@@ -803,8 +1055,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public RDPDiskDrives RedirectDiskDrives
         {
-            get => GetPropertyValue("RedirectDiskDrives", _redirectDiskDrives);
-            set => SetField(ref _redirectDiskDrives, value, "RedirectDiskDrives");
+            get => GetPropertyValue(nameof(RedirectDiskDrives), _redirectDiskDrives);
+            set => SetField(ref _redirectDiskDrives, value, nameof(RedirectDiskDrives));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
@@ -813,8 +1065,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public string RedirectDiskDrivesCustom
         {
-            get => GetPropertyValue("RedirectDiskDrivesCustom", _redirectDiskDrivesCustom);
-            set => SetField(ref _redirectDiskDrivesCustom, value, "RedirectDiskDrivesCustom");
+            get => GetPropertyValue(nameof(RedirectDiskDrivesCustom), _redirectDiskDrivesCustom);
+            set => SetField(ref _redirectDiskDrivesCustom, value, nameof(RedirectDiskDrivesCustom));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
@@ -824,8 +1076,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool RedirectPrinters
         {
-            get => GetPropertyValue("RedirectPrinters", _redirectPrinters);
-            set => SetField(ref _redirectPrinters, value, "RedirectPrinters");
+            get => GetPropertyValue(nameof(RedirectPrinters), _redirectPrinters);
+            set => SetField(ref _redirectPrinters, value, nameof(RedirectPrinters));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
@@ -835,8 +1087,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool RedirectClipboard
         {
-            get => GetPropertyValue("RedirectClipboard", _redirectClipboard);
-            set => SetField(ref _redirectClipboard, value, "RedirectClipboard");
+            get => GetPropertyValue(nameof(RedirectClipboard), _redirectClipboard);
+            set => SetField(ref _redirectClipboard, value, nameof(RedirectClipboard));
         }
 
 
@@ -847,8 +1099,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool RedirectPorts
         {
-            get => GetPropertyValue("RedirectPorts", _redirectPorts);
-            set => SetField(ref _redirectPorts, value, "RedirectPorts");
+            get => GetPropertyValue(nameof(RedirectPorts), _redirectPorts);
+            set => SetField(ref _redirectPorts, value, nameof(RedirectPorts));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
@@ -858,8 +1110,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool RedirectSmartCards
         {
-            get => GetPropertyValue("RedirectSmartCards", _redirectSmartCards);
-            set => SetField(ref _redirectSmartCards, value, "RedirectSmartCards");
+            get => GetPropertyValue(nameof(RedirectSmartCards), _redirectSmartCards);
+            set => SetField(ref _redirectSmartCards, value, nameof(RedirectSmartCards));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
@@ -869,8 +1121,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public RDPSounds RedirectSound
         {
-            get => GetPropertyValue("RedirectSound", _redirectSound);
-            set => SetField(ref _redirectSound, value, "RedirectSound");
+            get => GetPropertyValue(nameof(RedirectSound), _redirectSound);
+            set => SetField(ref _redirectSound, value, nameof(RedirectSound));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
@@ -880,8 +1132,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public RDPSoundQuality SoundQuality
         {
-            get => GetPropertyValue("SoundQuality", _soundQuality);
-            set => SetField(ref _soundQuality, value, "SoundQuality");
+            get => GetPropertyValue(nameof(SoundQuality), _soundQuality);
+            set => SetField(ref _soundQuality, value, nameof(SoundQuality));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
@@ -891,7 +1143,7 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool RedirectAudioCapture
         {
-            get => GetPropertyValue("RedirectAudioCapture", _redirectAudioCapture);
+            get => GetPropertyValue(nameof(RedirectAudioCapture), _redirectAudioCapture);
             set => SetField(ref _redirectAudioCapture, value, nameof(RedirectAudioCapture));
         }
 
@@ -907,8 +1159,8 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(ExternalToolsTypeConverter))]
         public virtual string PreExtApp
         {
-            get => GetPropertyValue("PreExtApp", _preExtApp);
-            set => SetField(ref _preExtApp, value, "PreExtApp");
+            get => GetPropertyValue(nameof(PreExtApp), _preExtApp);
+            set => SetField(ref _preExtApp, value, nameof(PreExtApp));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
@@ -917,8 +1169,8 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(ExternalToolsTypeConverter))]
         public virtual string PostExtApp
         {
-            get => GetPropertyValue("PostExtApp", _postExtApp);
-            set => SetField(ref _postExtApp, value, "PostExtApp");
+            get => GetPropertyValue(nameof(PostExtApp), _postExtApp);
+            set => SetField(ref _postExtApp, value, nameof(PostExtApp));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
@@ -926,8 +1178,8 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionMACAddress))]
         public virtual string MacAddress
         {
-            get => GetPropertyValue("MacAddress", _macAddress);
-            set => SetField(ref _macAddress, value, "MacAddress");
+            get => GetPropertyValue(nameof(MacAddress), _macAddress);
+            set => SetField(ref _macAddress, value, nameof(MacAddress));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
@@ -935,8 +1187,107 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUser1))]
         public virtual string UserField
         {
-            get => GetPropertyValue("UserField", _userField);
-            set => SetField(ref _userField, value, "UserField");
+            get => GetPropertyValue(nameof(UserField), _userField);
+            set => SetField(ref _userField, value, nameof(UserField));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName("User Field 1"),
+         Description("Additional user-defined field 1 for custom data. Available as %USERFIELD1% token in external tools.")]
+        public virtual string UserField1
+        {
+            get => GetPropertyValue(nameof(UserField1), _userField1);
+            set => SetField(ref _userField1, value, nameof(UserField1));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName("User Field 2"),
+         Description("Additional user-defined field 2 for custom data. Available as %USERFIELD2% token in external tools.")]
+        public virtual string UserField2
+        {
+            get => GetPropertyValue(nameof(UserField2), _userField2);
+            set => SetField(ref _userField2, value, nameof(UserField2));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName("User Field 3"),
+         Description("Additional user-defined field 3 for custom data. Available as %USERFIELD3% token in external tools.")]
+        public virtual string UserField3
+        {
+            get => GetPropertyValue(nameof(UserField3), _userField3);
+            set => SetField(ref _userField3, value, nameof(UserField3));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName("User Field 4"),
+         Description("Additional user-defined field 4 for custom data. Available as %USERFIELD4% token in external tools.")]
+        public virtual string UserField4
+        {
+            get => GetPropertyValue(nameof(UserField4), _userField4);
+            set => SetField(ref _userField4, value, nameof(UserField4));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName("User Field 5"),
+         Description("Additional user-defined field 5 for custom data. Available as %USERFIELD5% token in external tools.")]
+        public virtual string UserField5
+        {
+            get => GetPropertyValue(nameof(UserField5), _userField5);
+            set => SetField(ref _userField5, value, nameof(UserField5));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName("User Field 6"),
+         Description("Additional user-defined field 6 for custom data. Available as %USERFIELD6% token in external tools.")]
+        public virtual string UserField6
+        {
+            get => GetPropertyValue(nameof(UserField6), _userField6);
+            set => SetField(ref _userField6, value, nameof(UserField6));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName("User Field 7"),
+         Description("Additional user-defined field 7 for custom data. Available as %USERFIELD7% token in external tools.")]
+        public virtual string UserField7
+        {
+            get => GetPropertyValue(nameof(UserField7), _userField7);
+            set => SetField(ref _userField7, value, nameof(UserField7));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName("User Field 8"),
+         Description("Additional user-defined field 8 for custom data. Available as %USERFIELD8% token in external tools.")]
+        public virtual string UserField8
+        {
+            get => GetPropertyValue(nameof(UserField8), _userField8);
+            set => SetField(ref _userField8, value, nameof(UserField8));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName("User Field 9"),
+         Description("Additional user-defined field 9 for custom data. Available as %USERFIELD9% token in external tools.")]
+        public virtual string UserField9
+        {
+            get => GetPropertyValue(nameof(UserField9), _userField9);
+            set => SetField(ref _userField9, value, nameof(UserField9));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName("User Field 10"),
+         Description("Additional user-defined field 10 for custom data. Available as %USERFIELD10% token in external tools.")]
+        public virtual string UserField10
+        {
+            get => GetPropertyValue(nameof(UserField10), _userField10);
+            set => SetField(ref _userField10, value, nameof(UserField10));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName(nameof(Notes)),
+         Description("Free-form multiline notes for this connection.")]
+        public virtual string Notes
+        {
+            get => GetPropertyValue(nameof(Notes), _notes);
+            set => SetField(ref _notes, value, nameof(Notes));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
@@ -944,8 +1295,8 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionEnvironmentTags))]
         public virtual string EnvironmentTags
         {
-            get => GetPropertyValue("EnvironmentTags", _environmentTags);
-            set => SetField(ref _environmentTags, value, "EnvironmentTags");
+            get => GetPropertyValue(nameof(EnvironmentTags), _environmentTags);
+            set => SetField(ref _environmentTags, value, nameof(EnvironmentTags));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
@@ -954,8 +1305,51 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public virtual bool Favorite
         {
-            get => GetPropertyValue("Favorite", _favorite);
-            set => SetField(ref _favorite, value, "Favorite");
+            get => GetPropertyValue(nameof(Favorite), _favorite);
+            set => SetField(ref _favorite, value, nameof(Favorite));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName("Retry On First Connect"),
+         Description("If enabled, the reconnect dialog will be shown when the initial connection attempt fails, polling the server until it becomes available."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInAllProtocolsExcept()]
+        public bool RetryOnFirstConnect
+        {
+            get => GetPropertyValue(nameof(RetryOnFirstConnect), _retryOnFirstConnect);
+            set => SetField(ref _retryOnFirstConnect, value, nameof(RetryOnFirstConnect));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName("Wait For IP Availability"),
+         Description("If enabled, mRemoteNG will poll the host:port before connecting, waiting until it becomes reachable."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInAllProtocolsExcept()]
+        public bool WaitForIPAvailability
+        {
+            get => GetPropertyValue(nameof(WaitForIPAvailability), _waitForIPAvailability);
+            set => SetField(ref _waitForIPAvailability, value, nameof(WaitForIPAvailability));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         DisplayName("Wait For IP Timeout"),
+         Description("Timeout in seconds when waiting for a host to become reachable (default: 60)."),
+         AttributeUsedInAllProtocolsExcept()]
+        public int WaitForIPTimeout
+        {
+            get => GetPropertyValue(nameof(WaitForIPTimeout), _waitForIPTimeout);
+            set => SetField(ref _waitForIPTimeout, value, nameof(WaitForIPTimeout));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
+         DisplayName("Always Prompt For Credentials"),
+         Description("If enabled, a credential dialog will be shown every time this connection is opened, instead of using stored credentials."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInAllProtocolsExcept(ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW, ProtocolType.MSRA)]
+        public bool AlwaysPromptForCredentials
+        {
+            get => GetPropertyValue(nameof(AlwaysPromptForCredentials), _alwaysPromptForCredentials);
+            set => SetField(ref _alwaysPromptForCredentials, value, nameof(AlwaysPromptForCredentials));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
@@ -964,8 +1358,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public virtual string RDPStartProgram
         {
-            get => GetPropertyValue("RDPStartProgram", _rdpStartProgram);
-            set => SetField(ref _rdpStartProgram, value, "RDPStartProgram");
+            get => GetPropertyValue(nameof(RDPStartProgram), _rdpStartProgram);
+            set => SetField(ref _rdpStartProgram, value, nameof(RDPStartProgram));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
@@ -974,8 +1368,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public virtual string RDPStartProgramWorkDir
         {
-            get => GetPropertyValue("RDPStartProgramWorkDir", _rdpStartProgramWorkDir);
-            set => SetField(ref _rdpStartProgramWorkDir, value, "RDPStartProgramWorkDir");
+            get => GetPropertyValue(nameof(RDPStartProgramWorkDir), _rdpStartProgramWorkDir);
+            set => SetField(ref _rdpStartProgramWorkDir, value, nameof(RDPStartProgramWorkDir));
         }
 
         #endregion
@@ -991,8 +1385,8 @@ namespace mRemoteNG.Connection
          Browsable(false)]
         public ProtocolVNC.Compression VNCCompression
         {
-            get => GetPropertyValue("VNCCompression", _vncCompression);
-            set => SetField(ref _vncCompression, value, "VNCCompression");
+            get => GetPropertyValue(nameof(VNCCompression), _vncCompression);
+            set => SetField(ref _vncCompression, value, nameof(VNCCompression));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -1003,8 +1397,8 @@ namespace mRemoteNG.Connection
          Browsable(false)]
         public ProtocolVNC.Encoding VNCEncoding
         {
-            get => GetPropertyValue("VNCEncoding", _vncEncoding);
-            set => SetField(ref _vncEncoding, value, "VNCEncoding");
+            get => GetPropertyValue(nameof(VNCEncoding), _vncEncoding);
+            set => SetField(ref _vncEncoding, value, nameof(VNCEncoding));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
@@ -1015,8 +1409,8 @@ namespace mRemoteNG.Connection
          Browsable(false)]
         public ProtocolVNC.AuthMode VNCAuthMode
         {
-            get => GetPropertyValue("VNCAuthMode", _vncAuthMode);
-            set => SetField(ref _vncAuthMode, value, "VNCAuthMode");
+            get => GetPropertyValue(nameof(VNCAuthMode), _vncAuthMode);
+            set => SetField(ref _vncAuthMode, value, nameof(VNCAuthMode));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Proxy), 7),
@@ -1027,8 +1421,8 @@ namespace mRemoteNG.Connection
             Browsable(false)]
         public ProtocolVNC.ProxyType VNCProxyType
         {
-            get => GetPropertyValue("VNCProxyType", _vncProxyType);
-            set => SetField(ref _vncProxyType, value, "VNCProxyType");
+            get => GetPropertyValue(nameof(VNCProxyType), _vncProxyType);
+            set => SetField(ref _vncProxyType, value, nameof(VNCProxyType));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Proxy), 7),
@@ -1038,8 +1432,8 @@ namespace mRemoteNG.Connection
             Browsable(false)]
         public string VNCProxyIP
         {
-            get => GetPropertyValue("VNCProxyIP", _vncProxyIp);
-            set => SetField(ref _vncProxyIp, value, "VNCProxyIP");
+            get => GetPropertyValue(nameof(VNCProxyIP), _vncProxyIp);
+            set => SetField(ref _vncProxyIp, value, nameof(VNCProxyIP));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Proxy), 7),
@@ -1049,8 +1443,8 @@ namespace mRemoteNG.Connection
             Browsable(false)]
         public int VNCProxyPort
         {
-            get => GetPropertyValue("VNCProxyPort", _vncProxyPort);
-            set => SetField(ref _vncProxyPort, value, "VNCProxyPort");
+            get => GetPropertyValue(nameof(VNCProxyPort), _vncProxyPort);
+            set => SetField(ref _vncProxyPort, value, nameof(VNCProxyPort));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Proxy), 7),
@@ -1060,8 +1454,8 @@ namespace mRemoteNG.Connection
             Browsable(false)]
         public string VNCProxyUsername
         {
-            get => GetPropertyValue("VNCProxyUsername", _vncProxyUsername);
-            set => SetField(ref _vncProxyUsername, value, "VNCProxyUsername");
+            get => GetPropertyValue(nameof(VNCProxyUsername), _vncProxyUsername);
+            set => SetField(ref _vncProxyUsername, value, nameof(VNCProxyUsername));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Proxy), 7),
@@ -1072,20 +1466,19 @@ namespace mRemoteNG.Connection
             Browsable(false)]
         public string VNCProxyPassword
         {
-            get => GetPropertyValue("VNCProxyPassword", _vncProxyPassword);
-            set => SetField(ref _vncProxyPassword, value, "VNCProxyPassword");
+            get => GetPropertyValue(nameof(VNCProxyPassword), _vncProxyPassword?.ConvertToUnsecureString() ?? string.Empty);
+            set => SetSecureStringField(ref _vncProxyPassword, value, nameof(VNCProxyPassword));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Colors)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionColors)),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
-         AttributeUsedInProtocol(ProtocolType.VNC, ProtocolType.ARD),
-         Browsable(false)]
+         AttributeUsedInProtocol(ProtocolType.VNC, ProtocolType.ARD)]
         public ProtocolVNC.Colors VNCColors
         {
-            get => GetPropertyValue("VNCColors", _vncColors);
-            set => SetField(ref _vncColors, value, "VNCColors");
+            get => GetPropertyValue(nameof(VNCColors), _vncColors);
+            set => SetField(ref _vncColors, value, nameof(VNCColors));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -1095,8 +1488,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.VNC, ProtocolType.ARD)]
         public ProtocolVNC.SmartSizeMode VNCSmartSizeMode
         {
-            get => GetPropertyValue("VNCSmartSizeMode", _vncSmartSizeMode);
-            set => SetField(ref _vncSmartSizeMode, value, "VNCSmartSizeMode");
+            get => GetPropertyValue(nameof(VNCSmartSizeMode), _vncSmartSizeMode);
+            set => SetField(ref _vncSmartSizeMode, value, nameof(VNCSmartSizeMode));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
@@ -1106,8 +1499,20 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.VNC, ProtocolType.ARD)]
         public bool VNCViewOnly
         {
-            get => GetPropertyValue("VNCViewOnly", _vncViewOnly);
-            set => SetField(ref _vncViewOnly, value, "VNCViewOnly");
+            get => GetPropertyValue(nameof(VNCViewOnly), _vncViewOnly);
+            set => SetField(ref _vncViewOnly, value, nameof(VNCViewOnly));
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
+         Browsable(true),
+         DisplayName("VNC Clipboard Redirect"),
+         Description("If enabled, the local clipboard is shared with the remote VNC server."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.VNC, ProtocolType.ARD)]
+        public bool VNCClipboardRedirect
+        {
+            get => GetPropertyValue(nameof(VNCClipboardRedirect), _vncClipboardRedirect);
+            set => SetField(ref _vncClipboardRedirect, value, nameof(VNCClipboardRedirect));
         }
 
         #endregion
@@ -1115,21 +1520,42 @@ namespace mRemoteNG.Connection
 
         protected virtual TPropertyType GetPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
         {
-            return (TPropertyType)GetType().GetProperty(propertyName)?.GetValue(this, null);
+            var result = GetType().GetProperty(propertyName)?.GetValue(this, null);
+            return result is TPropertyType typed ? typed : value;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void RaisePropertyChangedEvent(object sender, PropertyChangedEventArgs args)
         {
-            PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(args.PropertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(args.PropertyName));
         }
 
-        protected void SetField<T>(ref T field, T value, string propertyName = null)
+        protected void SetField<T>(ref T field, T value, string? propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             RaisePropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private static string ConvertToUnsecureStringOrEmpty(SecureString? password)
+        {
+            return password?.ConvertToUnsecureString() ?? string.Empty;
+        }
+
+        private void SetSecureStringField(ref SecureString? field, string value, string? propertyName = null)
+        {
+            value ??= string.Empty;
+
+            if (string.Equals(ConvertToUnsecureStringOrEmpty(field), value, StringComparison.Ordinal))
+                return;
+
+            field?.Dispose();
+            field = value.ConvertToSecureString();
+
+            RaisePropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
+
+

@@ -39,7 +39,7 @@ public class XmlConnectionsDocumentEncryptorTests
         Assert.That(encryptedContent, Is.Not.EqualTo(string.Empty));
     }
 
-    private ConnectionTreeModel SetupConnectionTreeModel()
+    private static ConnectionTreeModel SetupConnectionTreeModel()
     {
         /*
          * Root

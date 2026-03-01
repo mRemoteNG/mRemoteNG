@@ -102,6 +102,27 @@ namespace mRemoteNGTests.IntegrationTests
         }
 
         [Test]
+        public void LinkedConnectionIdRoundTripsThroughSerialization()
+        {
+            var sourceConnectionInfo = new ConnectionInfo { Name = "source", Hostname = "source-host" };
+            var linkedConnectionInfo = sourceConnectionInfo.Clone();
+            linkedConnectionInfo.Name = "source-link";
+            linkedConnectionInfo.LinkedConnectionId = sourceConnectionInfo.ConstantID;
+
+            var rootNode = new RootNodeInfo(RootNodeType.Connection);
+            rootNode.AddChild(sourceConnectionInfo);
+            rootNode.AddChild(linkedConnectionInfo);
+            var connectionTreeModel = new ConnectionTreeModel();
+            connectionTreeModel.AddRootNode(rootNode);
+
+            var serializedContent = _serializer.Serialize(connectionTreeModel);
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
+            var deserializedLinkedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => string.Equals(node.Name, "source-link", StringComparison.Ordinal));
+
+            Assert.That(deserializedLinkedConnectionInfo.LinkedConnectionId, Is.EqualTo(sourceConnectionInfo.ConstantID));
+        }
+
+        [Test]
         public void AllPropertiesCorrectWhenSerializingThenDeserializing()
         {
             var originalConnectionInfo = new ConnectionInfo().RandomizeValues();
@@ -144,7 +165,7 @@ namespace mRemoteNGTests.IntegrationTests
                 .First(info => info.GetTreeNodeType() == TreeNodeType.Connection);
 
             var sb = new StringBuilder();
-            foreach (var property in originalConnectionInfo.Inheritance.GetProperties())
+            foreach (var property in ConnectionInfoInheritance.GetProperties())
             {
                 if (property.Name == nameof(originalConnectionInfo.Password))
                     continue;
@@ -162,7 +183,7 @@ namespace mRemoteNGTests.IntegrationTests
         }
 
 
-        private ConnectionTreeModel SetupConnectionTreeModel()
+        private static ConnectionTreeModel SetupConnectionTreeModel()
         {
             /*
              * Root

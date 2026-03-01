@@ -3,7 +3,7 @@
 namespace mRemoteNG.App.Info
 {
     [SupportedOSPlatform("windows")]
-    public class CredentialsFileInfo
+    public static class CredentialsFileInfo
     {
         public static readonly string CredentialsPath = SettingsFileInfo.SettingsPath;
         public static readonly string CredentialsFile = "confCreds.xml";

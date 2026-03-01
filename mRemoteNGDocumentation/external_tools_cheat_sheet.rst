@@ -30,9 +30,20 @@ Run a traceroute via cmdline.
 WinSCP is a free GUI Secure Copy program.
 
 - Filename: C:\\Program Files\\WinSCP\\WinSCP.exe (example path)
-- Arguments: scp://%Username%:%Password%@%Hostname%/
-- Optional Arguments - turn on compression and ignore any host key errors: -rawsetting Compression=1 -hostkey=*
+- Arguments: scp://%Username%:%Password%@%Hostname%:%Port%/
+- Optional Arguments - turn on compression and ignore any host key errors: ``-rawsetting Compression=1 -hostkey=*``
 - Can integrate: No
+
+**Non-standard SSH ports:** The ``%Port%`` token substitutes the port stored in the connection entry (default: 22).
+Including it ensures WinSCP connects on the correct port regardless of whether it is standard or not.
+
+**Passwords with special characters:** If the password contains characters that have special meaning in a URL
+(e.g. ``!``, ``#``, ``&``, ``+``), embedding it directly in the URL may cause a connection failure. Use the
+``/password`` switch to pass the password separately::
+
+    scp://%Username%@%Hostname%:%Port%/ /password=%Password%
+
+This avoids URL-encoding issues while keeping the port and username in the URL.
 
 `FileZilla S/FTP <https://filezilla-project.org/>`_
 ===================================================

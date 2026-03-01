@@ -15,6 +15,150 @@ charset = utf-8-bom
 # WFO1000: A property should determine its property content serialization with the DesignerSerializationVisibilityAttribute, DefaultValueAttribute or the ShouldSerializeProperty method
 dotnet_diagnostic.WFO1000.severity = silent
 
+# ===== Meziantou Analyzer =====
+# MA0004: Use Task.ConfigureAwait — too noisy for WinForms (needs UI context)
+dotnet_diagnostic.MA0004.severity = none
+# MA0006: Use String.Equals instead of == — too pervasive in legacy code
+dotnet_diagnostic.MA0006.severity = suggestion
+# MA0011: IFormatProvider — too noisy for legacy code
+dotnet_diagnostic.MA0011.severity = none
+# MA0026: Fix TODO/HACK/FIXME comment
+dotnet_diagnostic.MA0026.severity = none
+# MA0037: Remove empty statement — legacy code has some
+dotnet_diagnostic.MA0037.severity = suggestion
+# MA0046: The first parameter of event handler must be object — legacy interfaces
+dotnet_diagnostic.MA0046.severity = suggestion
+# MA0028: Optimize StringBuilder usage — low priority
+dotnet_diagnostic.MA0028.severity = none
+# MA0048: File name must match type name — legacy project, many violations
+dotnet_diagnostic.MA0048.severity = suggestion
+# MA0049: Type name should not match containing namespace — legacy naming
+dotnet_diagnostic.MA0049.severity = suggestion
+# MA0051: Method is too long — informational only
+dotnet_diagnostic.MA0051.severity = suggestion
+# MA0076: Do not use implicit culture-sensitive ToString — too pervasive
+dotnet_diagnostic.MA0076.severity = none
+
+# ===== Roslynator =====
+# RCS1194: Implement exception constructors — noisy for custom exceptions
+dotnet_diagnostic.RCS1194.severity = none
+# RCS1090: Add ConfigureAwait — same as MA0004
+dotnet_diagnostic.RCS1090.severity = none
+# RCS1021: Convert lambda to method group — style preference
+dotnet_diagnostic.RCS1021.severity = suggestion
+# RCS1036: Remove unnecessary blank line
+dotnet_diagnostic.RCS1036.severity = suggestion
+# RCS1037: Remove trailing white-space
+dotnet_diagnostic.RCS1037.severity = suggestion
+# RCS1118: Mark local variable as const — informational
+dotnet_diagnostic.RCS1118.severity = suggestion
+# RCS1161: Enum should declare explicit values
+dotnet_diagnostic.RCS1161.severity = suggestion
+
+# ===== .NET Analyzers (CA rules) =====
+# CA1848: Use LoggerMessage source generation — not applicable (log4net)
+dotnet_diagnostic.CA1848.severity = none
+# CA1860: Avoid using Enumerable.Any() extension method — suggestion only
+dotnet_diagnostic.CA1860.severity = suggestion
+# CA1861: Avoid constant arrays as arguments — suggestion only
+dotnet_diagnostic.CA1861.severity = suggestion
+# CA2007: ConfigureAwait — WinForms needs SynchronizationContext
+dotnet_diagnostic.CA2007.severity = none
+
+# ===== Suppress noisy/unfixable rules for legacy WinForms codebase =====
+# CA1711: Remove type suffix from identifiers (too risky to rename legacy API)
+dotnet_diagnostic.CA1711.severity = none
+# CA1051: Don't expose public fields (WinForms designer pattern uses public fields)
+dotnet_diagnostic.CA1051.severity = none
+# CA2211: Don't expose static mutable fields (singletons used throughout)
+dotnet_diagnostic.CA2211.severity = none
+# MA0069: Non-virtual public events (OK for WinForms)
+dotnet_diagnostic.MA0069.severity = none
+# MA0056: Don't call virtual in ctor (WinForms designer pattern requires this)
+dotnet_diagnostic.MA0056.severity = none
+# MA0134: Observe result of async (fire-and-forget is intentional in WinForms)
+dotnet_diagnostic.MA0134.severity = none
+# CA1716: Don't use language keywords as names (legacy API surface)
+dotnet_diagnostic.CA1716.severity = none
+# CA1001: Implement IDisposable (WinForms Designer.cs handles disposal)
+dotnet_diagnostic.CA1001.severity = none
+# CA1000: Don't expose static members on generic types
+dotnet_diagnostic.CA1000.severity = none
+# MA0009: Add regex timeout (internal use only, no user input)
+dotnet_diagnostic.MA0009.severity = none
+# MA0099: Use Regex source gen (requires partial class restructuring — too invasive)
+dotnet_diagnostic.MA0099.severity = none
+# CA1863: CompositeFormat — demote to suggestion (verbose, low-risk)
+dotnet_diagnostic.CA1863.severity = suggestion
+# CA1859: Use concrete type — demote to suggestion (needs careful analysis per site)
+dotnet_diagnostic.CA1859.severity = suggestion
+
+# ===== Suppress remaining architectural/legacy rules (batch 5) =====
+# MA0015: Invalid parameter name — false positives on legacy exception construction
+dotnet_diagnostic.MA0015.severity = none
+# MA0023: Add RegexOptions.ExplicitCapture — legacy regex patterns
+dotnet_diagnostic.MA0023.severity = none
+# MA0008: Add StructLayoutAttribute — P/Invoke structs, legacy interop
+dotnet_diagnostic.MA0008.severity = none
+# RCS1102: Make class static — would break instantiation/DI patterns
+dotnet_diagnostic.RCS1102.severity = suggestion
+# MA0047: Declare types in namespaces — legacy global types
+dotnet_diagnostic.MA0047.severity = none
+# MA0021: Use explicit StringComparer for GetHashCode — legacy comparers
+dotnet_diagnostic.MA0021.severity = none
+# MA0016: Prefer collection abstraction — we need List for AddRange/Sort
+dotnet_diagnostic.MA0016.severity = suggestion
+# RCS1203: Use AttributeUsageAttribute
+dotnet_diagnostic.RCS1203.severity = suggestion
+# MA0140: Both branches identical — code clarity, not a bug
+dotnet_diagnostic.MA0140.severity = suggestion
+# MA0097/MA0096/MA0095: IComparable/IEquatable completeness — legacy types
+dotnet_diagnostic.MA0097.severity = suggestion
+dotnet_diagnostic.MA0096.severity = suggestion
+dotnet_diagnostic.MA0095.severity = suggestion
+# MA0084: Local variable hides field — legacy naming
+dotnet_diagnostic.MA0084.severity = suggestion
+# MA0065: Default ValueType.Equals used — OK for simple structs
+dotnet_diagnostic.MA0065.severity = suggestion
+# MA0062: Non-flags enum with FlagsAttribute — legacy Win32 interop
+dotnet_diagnostic.MA0062.severity = none
+# MA0061: Method override changes default value — legacy API
+dotnet_diagnostic.MA0061.severity = suggestion
+# MA0060: Stream.Read return value unused — legacy pattern
+dotnet_diagnostic.MA0060.severity = suggestion
+# MA0055: Do not use finalizer — legacy cleanup pattern
+dotnet_diagnostic.MA0055.severity = suggestion
+# MA0025: TODO implement — tracked in issue backlog
+dotnet_diagnostic.MA0025.severity = suggestion
+# MA0010: Mark attributes with AttributeUsage — legacy attributes
+dotnet_diagnostic.MA0010.severity = suggestion
+# CA5351: Broken cryptographic algorithm (MD5) — legacy encryption, intentional
+dotnet_diagnostic.CA5351.severity = none
+# CA5350: Weak cryptographic algorithm (HMACSHA1) — TOTP spec requires it
+dotnet_diagnostic.CA5350.severity = none
+# CA5369: Use XmlReader for Deserialize — legacy serialization
+dotnet_diagnostic.CA5369.severity = suggestion
+# CA2020: Prevent behavioral change — checked arithmetic, OK
+dotnet_diagnostic.CA2020.severity = suggestion
+# CA1710: Identifiers should have correct suffix — legacy naming
+dotnet_diagnostic.CA1710.severity = none
+# CA1010: Collections should implement generic interface — legacy collections
+dotnet_diagnostic.CA1010.severity = suggestion
+# CA1838: Avoid StringBuilder P/Invoke parameters — legacy Win32 interop
+dotnet_diagnostic.CA1838.severity = none
+# CA1720: Identifier contains type name — legacy parameter naming
+dotnet_diagnostic.CA1720.severity = none
+# CA1715: Generic type prefix — legacy single-letter convention
+dotnet_diagnostic.CA1715.severity = none
+# CA1067: Override Equals for IEquatable — legacy types
+dotnet_diagnostic.CA1067.severity = suggestion
+# CA1050: Declare types in namespaces — same as MA0047
+dotnet_diagnostic.CA1050.severity = none
+# CA1036: Override comparison operators — legacy IComparable
+dotnet_diagnostic.CA1036.severity = suggestion
+# CA1018: Mark attributes with AttributeUsage — same as MA0010
+dotnet_diagnostic.CA1018.severity = suggestion
+
 # reStructuredText
 [*.rst]
 charset = utf-8
@@ -32,6 +176,13 @@ dotnet_style_qualification_for_field = false:none
 dotnet_style_qualification_for_property = false:none
 dotnet_style_qualification_for_method = false:none
 dotnet_style_qualification_for_event = false:none
+
+# Brace preferences
+csharp_preserve_single_line_blocks = true
+csharp_prefer_braces_for_statement_blocks = true
+
+# Member ordering preferences
+dotnet_sort_members_on_access = true
 
 # New line preferences
 csharp_new_line_before_open_brace = all

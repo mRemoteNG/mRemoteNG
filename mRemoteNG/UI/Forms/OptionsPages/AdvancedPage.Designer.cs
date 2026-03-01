@@ -19,7 +19,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
             finally
             {
-                base.Dispose(disposing);
+                try { base.Dispose(disposing); }
+                catch (System.NullReferenceException) { /* finalizer-safe: Control.ContextMenuStrip may be null on non-STA thread */ }
             }
         }
 
@@ -45,6 +46,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnBrowseCustomPuttyPath = new MrngButton();
             chkLoadBalanceInfoUseUtf8 = new MrngCheckBox();
             chkNoReconnect = new MrngCheckBox();
+            chkConnectionLogging = new MrngCheckBox();
+            chkShowPortScan = new MrngCheckBox();
+            chkShowPuttySavedSessions = new MrngCheckBox();
             ((System.ComponentModel.ISupportInitialize)numPuttyWaitTime).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numUVNCSCPort).BeginInit();
             SuspendLayout();
@@ -196,11 +200,50 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkNoReconnect.Text = "Automatically try to reconnect when disconnected from server (RDP && ICA only)";
             chkNoReconnect.UseVisualStyleBackColor = true;
             chkNoReconnect.CheckedChanged += chkNoReconnect_CheckedChanged;
-            // 
+            //
+            // chkConnectionLogging
+            //
+            chkConnectionLogging._mice = MrngCheckBox.MouseState.OUT;
+            chkConnectionLogging.AutoSize = true;
+            chkConnectionLogging.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            chkConnectionLogging.Location = new System.Drawing.Point(9, 230);
+            chkConnectionLogging.Name = "chkConnectionLogging";
+            chkConnectionLogging.Size = new System.Drawing.Size(400, 17);
+            chkConnectionLogging.TabIndex = 12;
+            chkConnectionLogging.Text = "Log connection open/close events to file (for auditing/billing)";
+            chkConnectionLogging.UseVisualStyleBackColor = true;
+            //
+            // chkShowPortScan
+            //
+            chkShowPortScan._mice = MrngCheckBox.MouseState.OUT;
+            chkShowPortScan.AutoSize = true;
+            chkShowPortScan.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            chkShowPortScan.Location = new System.Drawing.Point(9, 254);
+            chkShowPortScan.Name = "chkShowPortScan";
+            chkShowPortScan.Size = new System.Drawing.Size(300, 17);
+            chkShowPortScan.TabIndex = 13;
+            chkShowPortScan.Text = "Show port scan tool in Tools menu";
+            chkShowPortScan.UseVisualStyleBackColor = true;
+            //
+            // chkShowPuttySavedSessions
+            //
+            chkShowPuttySavedSessions._mice = MrngCheckBox.MouseState.OUT;
+            chkShowPuttySavedSessions.AutoSize = true;
+            chkShowPuttySavedSessions.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            chkShowPuttySavedSessions.Location = new System.Drawing.Point(9, 278);
+            chkShowPuttySavedSessions.Name = "chkShowPuttySavedSessions";
+            chkShowPuttySavedSessions.Size = new System.Drawing.Size(300, 17);
+            chkShowPuttySavedSessions.TabIndex = 14;
+            chkShowPuttySavedSessions.Text = "Show PuTTY saved sessions in connection tree";
+            chkShowPuttySavedSessions.UseVisualStyleBackColor = true;
+            //
             // AdvancedPage
-            // 
+            //
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            Controls.Add(chkShowPuttySavedSessions);
+            Controls.Add(chkShowPortScan);
+            Controls.Add(chkConnectionLogging);
             Controls.Add(chkNoReconnect);
             Controls.Add(chkLoadBalanceInfoUseUtf8);
             Controls.Add(lblMaximumPuttyWaitTime);
@@ -236,5 +279,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal MrngButton btnBrowseCustomPuttyPath;
         private MrngCheckBox chkLoadBalanceInfoUseUtf8;
         internal MrngCheckBox chkNoReconnect;
+        internal MrngCheckBox chkConnectionLogging;
+        internal MrngCheckBox chkShowPortScan;
+        internal MrngCheckBox chkShowPuttySavedSessions;
     }
 }

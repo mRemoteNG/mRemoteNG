@@ -14,7 +14,7 @@ namespace mRemoteNG.Tools
     {
         #region Public Methods
 
-        public bool Start(string fileName, CommandLineArguments arguments = null)
+        public bool Start(string fileName, CommandLineArguments? arguments = null)
         {
             // Validate the executable path to prevent command injection
             PathValidator.ValidateExecutablePathOrThrow(fileName, nameof(fileName));
@@ -43,7 +43,7 @@ namespace mRemoteNG.Tools
                 return false;
 
             uint nCmdShow = visible ? NativeMethods.SW_SHOW : NativeMethods.SW_HIDE;
-            NativeMethods.ShowWindow(controlHandle, (int)nCmdShow);
+            _ = NativeMethods.ShowWindow(controlHandle, (int)nCmdShow);
             return true;
         }
 
@@ -103,7 +103,7 @@ namespace mRemoteNG.Tools
 
         private readonly Process Process = new();
         private IntPtr Handle = IntPtr.Zero;
-        private List<IntPtr> Controls = [];
+        private IList<IntPtr> Controls = [];
 
         #endregion
 
@@ -148,7 +148,7 @@ namespace mRemoteNG.Tools
             IntPtr controlHandle = IntPtr.Zero;
             foreach (IntPtr control in Controls)
             {
-                NativeMethods.GetClassName(control, stringBuilder, stringBuilder.Capacity);
+                _ = NativeMethods.GetClassName(control, stringBuilder, stringBuilder.Capacity);
                 if (stringBuilder.ToString() != className) continue;
                 if (string.IsNullOrEmpty(text))
                 {

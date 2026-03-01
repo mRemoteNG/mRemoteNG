@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace mRemoteNG.UI
 {
     [SupportedOSPlatform("windows")]
-    public class FontOverrider
+    public static class FontOverrider
     {
         public static void FontOverride(Control ctlParent)
         {
@@ -14,9 +14,10 @@ namespace mRemoteNG.UI
             {
                 Control ctlChild = tempLoopVarCtlChild;
                 // Only create a new Font if the font name is different to avoid unnecessary GDI operations
-                if (ctlChild.Font.Name != SystemFonts.MessageBoxFont.Name)
+                string fontName = SystemFonts.MessageBoxFont?.Name ?? SystemFonts.DefaultFont.Name;
+                if (ctlChild.Font.Name != fontName)
                 {
-                    ctlChild.Font = new Font(SystemFonts.MessageBoxFont.Name, ctlChild.Font.Size, ctlChild.Font.Style,
+                    ctlChild.Font = new Font(fontName, ctlChild.Font.Size, ctlChild.Font.Style,
                                              ctlChild.Font.Unit, ctlChild.Font.GdiCharSet);
                 }
                 if (ctlChild.Controls.Count > 0)

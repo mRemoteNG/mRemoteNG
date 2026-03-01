@@ -16,15 +16,15 @@ namespace mRemoteNG.Config
         private readonly IEqualityComparer<ICredentialRecord> _credentialComparer = new CredentialDomainUserComparer();
 
         // maps a connectioninfo (by its id) to the credential object that was harvested
-        public Dictionary<Guid, ICredentialRecord> ConnectionToCredentialMap { get; } =
-            [];
+        public IDictionary<Guid, ICredentialRecord> ConnectionToCredentialMap { get; } =
+            new Dictionary<Guid, ICredentialRecord>();
 
         public IEnumerable<ICredentialRecord> Harvest(XDocument xDocument, SecureString decryptionKey)
         {
-            if (xDocument == null)
-                throw new ArgumentNullException(nameof(xDocument));
+            ArgumentNullException.ThrowIfNull(xDocument);
 
-            ICryptographyProvider cryptoProvider = new CryptoProviderFactoryFromXml(xDocument.Root).Build();
+            XElement root = xDocument.Root ?? throw new InvalidOperationException("XML document has no root element.");
+            ICryptographyProvider cryptoProvider = new CryptoProviderFactoryFromXml(root).Build();
 
             foreach (XElement element in xDocument.Descendants("Node"))
             {
@@ -32,7 +32,7 @@ namespace mRemoteNG.Config
                 ICredentialRecord newCredential = BuildCredential(element, cryptoProvider, decryptionKey);
 
                 Guid connectionId;
-                Guid.TryParse(element.Attribute("Id")?.Value, out connectionId);
+                _ = Guid.TryParse(element.Attribute("Id")?.Value, out connectionId);
                 if (connectionId == Guid.Empty)
                 {
                     //error
@@ -50,14 +50,17 @@ namespace mRemoteNG.Config
             return ConnectionToCredentialMap.Values.Distinct(_credentialComparer);
         }
 
-        private ICredentialRecord BuildCredential(XElement element, ICryptographyProvider cryptographyProvider, SecureString decryptionKey)
+        private static ICredentialRecord BuildCredential(XElement element, ICryptographyProvider cryptographyProvider, SecureString decryptionKey)
         {
+            string username = element.Attribute("Username")?.Value ?? string.Empty;
+            string domain = element.Attribute("Domain")?.Value ?? string.Empty;
+            string password = element.Attribute("Password")?.Value ?? string.Empty;
             CredentialRecord credential = new()
             {
-                Title = $"{element.Attribute("Username")?.Value}\\{element.Attribute("Domain")?.Value}",
-                Username = element.Attribute("Username")?.Value,
-                Domain = element.Attribute("Domain")?.Value,
-                Password = cryptographyProvider.Decrypt(element.Attribute("Password")?.Value, decryptionKey).ConvertToSecureString()
+                Title = $"{username}\\{domain}",
+                Username = username,
+                Domain = domain,
+                Password = cryptographyProvider.Decrypt(password, decryptionKey).ConvertToSecureString()
             };
             return credential;
         }

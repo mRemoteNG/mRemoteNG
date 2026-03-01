@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
@@ -29,7 +30,8 @@ namespace mRemoteNG.UI.Window
             DockPnl = new DockContent();
             ApplyTheme();
             DisplayProperties display = new();
-            btnScan.Image = display.ScaleImage(btnScan.Image);
+            if (btnScan.Image is not null)
+                btnScan.Image = display.ScaleImage(btnScan.Image);
         }
 
         #endregion
@@ -93,7 +95,7 @@ namespace mRemoteNG.UI.Window
 
         #region Private Fields
 
-        private PortScanner _portScanner;
+        private PortScanner? _portScanner;
         private bool _scanning;
 
         #endregion
@@ -110,7 +112,7 @@ namespace mRemoteNG.UI.Window
             {
                 olvHosts.Columns.AddRange(new ColumnHeader[]
                 {
-                    clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC, clmOpenPorts,
+                    clmHostIP, clmHostName, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC, clmOpenPorts,
                     clmClosedPorts
                 });
                 ShowImportControls(true);
@@ -154,8 +156,14 @@ namespace mRemoteNG.UI.Window
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            ProtocolType protocol =
-                (ProtocolType)Enum.Parse(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem), true);
+            string selectedItem = Convert.ToString(cbProtocol.SelectedItem, CultureInfo.InvariantCulture) ?? string.Empty;
+            if (string.Equals(selectedItem, "All detected", StringComparison.Ordinal))
+            {
+                importAllDetectedProtocols();
+                return;
+            }
+
+            ProtocolType protocol = Enum.Parse<ProtocolType>(selectedItem, true);
             importSelectedHosts(protocol);
         }
 
@@ -168,11 +176,13 @@ namespace mRemoteNG.UI.Window
             btnScan.Text = Language._Scan;
             btnImport.Text = Language._Import;
             lblOnlyImport.Text = Language.ProtocolToImport;
-            clmHost.Text = Language.HostnameIp;
+            clmHostIP.Text = "IP Address";
+            clmHostName.Text = "Hostname";
             clmOpenPorts.Text = Language.OpenPorts;
             clmClosedPorts.Text = Language.ClosedPorts;
             ngCheckFirstPort.Text = Language.FirstPort;
             ngCheckLastPort.Text = Language.LastPort;
+            lblCustomPorts.Text = "Custom ports (e.g. 22,80,443):";
             lblTimeout.Text = Language.TimeoutInSeconds;
             TabText = Language.PortScan;
             Text = Language.PortScan;
@@ -198,7 +208,21 @@ namespace mRemoteNG.UI.Window
                 IPAddress ipAddressStart = IPAddress.Parse(ipStart.Text);
                 IPAddress ipAddressEnd = IPAddress.Parse(ipEnd.Text);
 
-                if (!ngCheckFirstPort.Checked && !ngCheckLastPort.Checked)
+                string customPortsText = txtCustomPorts.Text.Trim();
+                if (!string.IsNullOrEmpty(customPortsText))
+                {
+                    List<int> customPorts = ParsePortList(customPortsText);
+                    if (customPorts.Count == 0)
+                    {
+                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.CannotStartPortScan);
+                        _scanning = false;
+                        SwitchButtonText();
+                        return;
+                    }
+                    _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, customPorts,
+                                                   (int)numericSelectorTimeout.Value * 1000);
+                }
+                else if (!ngCheckFirstPort.Checked && !ngCheckLastPort.Checked)
                     _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int)portStart.Value,
                                                    (int)portEnd.Value, (int)numericSelectorTimeout.Value * 1000, true);
                 else
@@ -219,13 +243,27 @@ namespace mRemoteNG.UI.Window
 
         private void StopScan()
         {
-            _portScanner.BeginHostScan -= PortScanner_BeginHostScan;
-            _portScanner.HostScanned -= PortScanner_HostScanned;
-            _portScanner.ScanComplete -= PortScanner_ScanComplete;
-
-            _portScanner?.StopScan();
+            if (_portScanner is not null)
+            {
+                _portScanner.BeginHostScan -= PortScanner_BeginHostScan;
+                _portScanner.HostScanned -= PortScanner_HostScanned;
+                _portScanner.ScanComplete -= PortScanner_ScanComplete;
+                _portScanner.StopScan();
+            }
             _scanning = false;
             SwitchButtonText();
+        }
+
+        private static List<int> ParsePortList(string portListText)
+        {
+            List<int> ports = new();
+            foreach (string part in portListText.Split(',', ';', ' '))
+            {
+                string trimmed = part.Trim();
+                if (int.TryParse(trimmed, out int port) && port >= 1 && port <= 65535)
+                    ports.Add(port);
+            }
+            return ports;
         }
 
         private void SwitchButtonText()
@@ -259,9 +297,9 @@ namespace mRemoteNG.UI.Window
             prgBar.Value = scannedCount;
         }
 
-        private delegate void PortScannerScanComplete(List<ScanHost> hosts);
+        private delegate void PortScannerScanComplete(IList<ScanHost> hosts);
 
-        private void PortScanner_ScanComplete(List<ScanHost> hosts)
+        private void PortScanner_ScanComplete(IList<ScanHost> hosts)
         {
             if (InvokeRequired)
             {
@@ -292,25 +330,68 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            ContainerInfo destinationContainer = GetDestinationContainerForImportedHosts();
+            ContainerInfo? destinationContainer = GetDestinationContainerForImportedHosts();
+            if (destinationContainer is null)
+                return;
             Import.ImportFromPortScan(hosts, protocol, destinationContainer);
+        }
+
+        private void importAllDetectedProtocols()
+        {
+            List<ScanHost> hosts = new();
+            foreach (ScanHost host in olvHosts.SelectedObjects)
+            {
+                hosts.Add(host);
+            }
+
+            if (hosts.Count < 1)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                    "Could not import host(s) from port scan context menu");
+                return;
+            }
+
+            ContainerInfo? destinationContainer = GetDestinationContainerForImportedHosts();
+            if (destinationContainer is null)
+                return;
+
+            (ProtocolType protocol, Func<ScanHost, bool> detected)[] protocolFilters =
+            [
+                (ProtocolType.SSH2, h => h.Ssh),
+                (ProtocolType.Telnet, h => h.Telnet),
+                (ProtocolType.HTTP, h => h.Http),
+                (ProtocolType.HTTPS, h => h.Https),
+                (ProtocolType.Rlogin, h => h.Rlogin),
+                (ProtocolType.RDP, h => h.Rdp),
+                (ProtocolType.VNC, h => h.Vnc),
+            ];
+
+            foreach (var (protocol, detected) in protocolFilters)
+            {
+                List<ScanHost> filtered = hosts.Where(detected).ToList();
+                if (filtered.Count > 0)
+                    Import.ImportFromPortScan(filtered, protocol, destinationContainer);
+            }
         }
 
         /// <summary>
         /// Determines where the imported hosts will be placed
         /// in the connection tree.
         /// </summary>
-        private ContainerInfo GetDestinationContainerForImportedHosts()
+        private static ContainerInfo? GetDestinationContainerForImportedHosts()
         {
-            ConnectionInfo selectedNode = AppWindows.TreeForm.SelectedNode ?? AppWindows.TreeForm.ConnectionTree.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
+            ConnectionInfo? selectedNode = AppWindows.TreeForm?.SelectedNode ?? AppWindows.TreeForm?.ConnectionTree.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
+
+            if (selectedNode is null)
+                return null;
 
             // if a putty node is selected, place imported connections in the root connection node
             if (selectedNode is RootPuttySessionsNodeInfo || selectedNode is PuttySessionInfo)
-                selectedNode = AppWindows.TreeForm.ConnectionTree.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>()
+                selectedNode = AppWindows.TreeForm!.ConnectionTree.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>()
                                       .First();
 
             // if the selected node is a connection, use its parent container
-            ContainerInfo selectedTreeNodeAsContainer = selectedNode as ContainerInfo ?? selectedNode.Parent;
+            ContainerInfo? selectedTreeNodeAsContainer = selectedNode as ContainerInfo ?? selectedNode.Parent;
 
             return selectedTreeNodeAsContainer;
         }

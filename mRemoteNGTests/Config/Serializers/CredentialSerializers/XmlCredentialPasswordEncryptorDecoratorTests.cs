@@ -58,7 +58,7 @@ public class XmlCredentialPasswordEncryptorDecoratorTests
         Assert.That(authField, Is.EqualTo(expectedValue.ToString()));
     }
 
-    private ISerializer<IEnumerable<ICredentialRecord>, string> SetupBaseSerializer()
+    private static ISerializer<IEnumerable<ICredentialRecord>, string> SetupBaseSerializer()
     {
         var baseSerializer = Substitute.For<ISerializer<IEnumerable<ICredentialRecord>, string>>();
         var randomString = Guid.NewGuid().ToString();
@@ -73,7 +73,7 @@ public class XmlCredentialPasswordEncryptorDecoratorTests
         return baseSerializer;
     }
 
-    private ICryptographyProvider SetupCryptoProvider()
+    private static ICryptographyProvider SetupCryptoProvider()
     {
         var cryptoProvider = Substitute.For<ICryptographyProvider>();
         cryptoProvider.CipherEngine.Returns(CipherEngine);

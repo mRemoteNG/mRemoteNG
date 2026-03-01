@@ -7,9 +7,9 @@ using mRemoteNG.Credential;
 
 namespace mRemoteNG.Config.Serializers.CredentialProviderSerializer
 {
-    public class CredentialRepositoryListSerializer
+    public static class CredentialRepositoryListSerializer
     {
-        public string Serialize(IEnumerable<ICredentialRepository> credentialProviderCatalog)
+        public static string Serialize(IEnumerable<ICredentialRepository> credentialProviderCatalog)
         {
             XDocument xmlDocument = new(new XDeclaration("1.0", "utf-8", null));
             XElement rootElement = new("CredentialRepositories",
@@ -22,7 +22,7 @@ namespace mRemoteNG.Config.Serializers.CredentialProviderSerializer
                                                               )
                                           );
             xmlDocument.Add(rootElement);
-            string declaration = xmlDocument.Declaration.ToString();
+            string declaration = xmlDocument.Declaration?.ToString() ?? string.Empty;
             string documentBody = xmlDocument.ToString();
             return string.Concat(declaration, Environment.NewLine, documentBody);
         }

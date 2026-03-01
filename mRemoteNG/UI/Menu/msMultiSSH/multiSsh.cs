@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Menu.msMultiSSH
             Initialize();
         }
 
-        private void Initialize()
+        private static void Initialize()
         {
         }
     }

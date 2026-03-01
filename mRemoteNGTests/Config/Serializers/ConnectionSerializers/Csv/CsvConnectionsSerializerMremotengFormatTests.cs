@@ -44,7 +44,7 @@ public class CsvConnectionsSerializerMremotengFormatTests
     public void DoesntSerializeTheRootNode()
     {
         var serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), _credentialRepositoryList);
-        var treeModel = new ConnectionTreeModelBuilder().Build();
+        var treeModel = ConnectionTreeModelBuilder.Build();
         var csv = serializer.Serialize(treeModel);
         Assert.That(csv, Does.Not.Match($"{treeModel.RootNodes[0].ConstantID};.*;{TreeNodeType.Root}"));
     }
@@ -122,8 +122,8 @@ public class CsvConnectionsSerializerMremotengFormatTests
     public void SerializationIncludesRawInheritedValuesIfObjectInheritsFromParentOutsideOfSerializationScope()
     {
         var serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), _credentialRepositoryList);
-        var treeModel = new ConnectionTreeModelBuilder().Build();
-        var serializationTarget = treeModel.GetRecursiveChildList().First(info => info.Name == "folder3");
+        var treeModel = ConnectionTreeModelBuilder.Build();
+        var serializationTarget = treeModel.GetRecursiveChildList().First(info => string.Equals(info.Name, "folder3", StringComparison.Ordinal));
         var csv = serializer.Serialize(serializationTarget);
         var lineWithFolder3 = csv.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
             .First(s => s.Contains(serializationTarget.Name));
@@ -133,7 +133,7 @@ public class CsvConnectionsSerializerMremotengFormatTests
         Assert.That(lineWithFolder3, Does.Contain(serializationTarget.Password));
     }
 
-    private ConnectionInfo BuildConnectionInfo()
+    private static ConnectionInfo BuildConnectionInfo()
     {
         return new ConnectionInfo
         {
@@ -146,7 +146,7 @@ public class CsvConnectionsSerializerMremotengFormatTests
         };
     }
 
-    private ContainerInfo BuildContainer()
+    private static ContainerInfo BuildContainer()
     {
         return new ContainerInfo
         {

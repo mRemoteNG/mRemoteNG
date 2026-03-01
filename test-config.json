@@ -1,0 +1,1911 @@
+{
+  "metadata": {
+    "total_expected": 5963,
+    "min_total_threshold": 5363,
+    "last_updated": "2026-02-27",
+    "stats": {
+      "unique_methods": 1249,
+      "static_test_cases": 1337,
+      "dynamic_source_methods": 22,
+      "note": "static_test_cases counts [Test] as 1, each [TestCase] as 1. dynamic_source_methods use [TestCaseSource] generating N cases at runtime. total_expected = static + dynamic_runtime_cases, updated after each test run."
+    }
+  },
+  "runner": {
+    "groups": [
+      {
+        "name": "Connection",
+        "filter": "FullyQualifiedName~mRemoteNGTests.Connection",
+        "expected": 1066
+      },
+      {
+        "name": "Config.Xml",
+        "filter": "FullyQualifiedName~mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml",
+        "expected": 124
+      },
+      {
+        "name": "Config.Other",
+        "filter": "FullyQualifiedName~mRemoteNGTests.Config&FullyQualifiedName\\!~Serializers.ConnectionSerializers.Xml",
+        "expected": 706
+      },
+      {
+        "name": "UI",
+        "filter": "FullyQualifiedName~mRemoteNGTests.UI&Name!=FormBehavior&Name!=AllPagesExistWithIconsAndLoadCorrectSettings",
+        "expected": 374
+      },
+      {
+        "name": "Tools",
+        "filter": "FullyQualifiedName~mRemoteNGTests.Tools",
+        "expected": 366
+      },
+      {
+        "name": "Security",
+        "filter": "FullyQualifiedName~mRemoteNGTests.Security",
+        "expected": 166
+      },
+      {
+        "name": "Tree+Container+Cred",
+        "filter": "FullyQualifiedName~mRemoteNGTests.Tree|FullyQualifiedName~mRemoteNGTests.Container|FullyQualifiedName~mRemoteNGTests.Credential",
+        "expected": 178
+      },
+      {
+        "name": "Remaining",
+        "filter": "FullyQualifiedName\\!~mRemoteNGTests.Connection&FullyQualifiedName\\!~mRemoteNGTests.Config&FullyQualifiedName\\!~mRemoteNGTests.UI&FullyQualifiedName\\!~mRemoteNGTests.Tools&FullyQualifiedName\\!~mRemoteNGTests.Security&FullyQualifiedName\\!~mRemoteNGTests.Tree&FullyQualifiedName\\!~mRemoteNGTests.Container&FullyQualifiedName\\!~mRemoteNGTests.Credential&FullyQualifiedName\\!~mRemoteNGTests.IntegrationTests&Name!=FormBehavior&Name!=AllPagesExistWithIconsAndLoadCorrectSettings",
+        "expected": 2960
+      },
+      {
+        "name": "Integration",
+        "filter": "FullyQualifiedName~mRemoteNGTests.IntegrationTests",
+        "expected": 21
+      }
+    ],
+    "isolated": [
+      {
+        "name": "FormBehavior",
+        "filter": "Name=FormBehavior"
+      },
+      {
+        "name": "AllPages",
+        "filter": "Name=AllPagesExistWithIconsAndLoadCorrectSettings"
+      }
+    ]
+  },
+  "inventory": {
+    "_root": {
+      "_classes": {
+        "BinaryFileTests": {
+          "LargeAddressAwareFlagIsSet": 1
+        }
+      }
+    },
+    "App": {
+      "_classes": {
+        "CommandLineParserTests": {
+          "ApplySwitches_SetsConnectionFilePath_WhenConsContainsEnvironmentVariable": 1,
+          "ApplySwitches_SetsCustomConfigurationPath_WhenSettingsSwitchIsProvided": 1,
+          "ApplySwitches_SetsLogFilePath_WhenLogSwitchIsProvided": 1,
+          "GetNormalizedArguments_ExpandsEnvironmentVariablesForConfiguredPathSwitches": 1
+        },
+        "ImportTests": {
+          "AnErrorInOneFileDoNotPreventOtherFilesFromProcessing": 1,
+          "ErrorHandlerCalledWhenUnsupportedFileExtensionFound": 1,
+          "TextListFileIsImported": 1
+        },
+        "UpdaterTests": {
+          "UpdateBetaChannel": 1,
+          "UpdateBetaPortableChannel": 1,
+          "UpdateDevChannel": 1,
+          "UpdateDevPortableChannel": 1,
+          "UpdateStableChannel": 1,
+          "UpdateStablePortableChannel": 1
+        }
+      },
+      "Tools": {
+        "_classes": {
+          "PluginManagerTests": {
+            "Instance_ShouldNotBeNull": 1,
+            "OnConnectionClosed_ShouldBeTriggered_WhenConnectionInitiatorFires": 1,
+            "OnConnectionOpened_ShouldBeTriggered_WhenConnectionInitiatorFires": 1,
+            "RootNodes_ShouldNotBeNull": 1
+          }
+        }
+      }
+    },
+    "Config": {
+      "_classes": {
+        "ConnectionPresetServiceTests": {
+          "ApplyPresetUpdatesTargetConnections": 1,
+          "SavePresetPersistsAndCanBeReloaded": 1
+        },
+        "CredentialHarvesterTests": {
+          "CredentialMapCorrectForSingleCredential": 1,
+          "CredentialMapDoesntContainDuplicateCredentialObjects": 1,
+          "DoesNotHarvestEmptyCredentials": 1,
+          "HarvestsAllCredentials": 1,
+          "HarvestsDomain": 1,
+          "HarvestsPassword": 1,
+          "HarvestsUsername": 1,
+          "OnlyReturnsUniqueCredentials": 1
+        },
+        "CredentialRecordLoaderTests": {
+          "DeserializesDataFromDataProvider": 1,
+          "LoadsFromDataProvider": 1
+        }
+      },
+      "Connections": {
+        "_classes": {
+          "SqlConnectionsLoaderIntegrationTests": {
+            "DatabaseConnectorFactory_WithMsSqlSqlAuthentication_UsesCustomCredentials": 1,
+            "DatabaseConnectorFactory_WithMsSqlWindowsAuthentication_UsesIntegratedSecurity": 1,
+            "DatabaseConnectorFactory_WithOdbcSelection_ReturnsOdbcConnector": 2,
+            "Load_CallsVersionVerifier_WithMetaDataVersion": 1,
+            "Load_WhenMetaDataIsNull_CallsWriteDatabaseMetaData": 1,
+            "Load_WhenMetaDataIsNull_WithOdbcConnector_CallsWriteDatabaseMetaData": 1,
+            "LoadsSqlConnections_WithCorrectPassword_Successfully": 1,
+            "LoadsSqlConnections_WithIncorrectPassword_ThrowsException": 1,
+            "LoadsSqlConnections_WithNoPasswordProvided_ThrowsException": 1,
+            "LoadsSqlConnections_WithOdbcConnector_Successfully": 1
+          },
+          "SqlDatabaseMetaDataRetrieverTests": {
+            "WriteDatabaseMetaData_OnFailure_RollsBackCreatedTransaction": 1,
+            "WriteDatabaseMetaData_WithExplicitTransaction_UsesProvidedTransaction": 1,
+            "WriteDatabaseMetaData_WithoutExplicitTransaction_CreatesAndCommitsTransaction": 1
+          },
+          "XmlConnectionsLoaderIntegrationTests": {
+            "LoadsEncryptedFile_WithCorrectPassword_Successfully": 1,
+            "LoadsEncryptedFile_WithIncorrectPassword_ReturnsNull": 1,
+            "LoadsEncryptedFile_WithNoPasswordProvided_ReturnsNull": 1
+          },
+          "XmlConnectionsLoaderTests": {
+            "FallsBackToNewestValidBackupWhenPrimaryFileHasInvalidXml": 1,
+            "FallsBackToValidBackupWhenPrimaryFileIsEmpty": 1,
+            "LoadsSuccessfullyWhenPrimaryFileIsValid": 1,
+            "ThrowsArgumentExceptionWhenFilePathIsEmpty": 1,
+            "ThrowsFileNotFound": 1,
+            "ThrowsWhenAllBackupsAreAlsoCorrupt": 1,
+            "ThrowsWhenNoBackupsExistAndPrimaryIsCorrupt": 1,
+            "ThrowsXmlExceptionForXxePayload": 1,
+            "ThrowsXmlExceptionWhenFileIsEmptyAndNoBackupsExist": 1
+          }
+        },
+        "Multiuser": {
+          "_classes": {
+            "ConnectionsUpdateAvailableEventArgsTests": {
+              "CanProvideNullDatabaseConnectorToCtor": 1,
+              "DatabaseConnectorPropertySet": 1,
+              "UpdateTimePropertySet": 1
+            },
+            "FileConnectionsUpdateCheckerTests": {
+              "IsUpdateAvailable_ReturnsFalse_WhenFileIsOlder": 1,
+              "IsUpdateAvailable_ReturnsFalse_WhenFileIsSameAge": 1,
+              "IsUpdateAvailable_ReturnsTrue_WhenFileIsNewer": 1
+            }
+          }
+        }
+      },
+      "DataProviders": {
+        "_classes": {
+          "FileBackupCreatorTests": {
+            "BackupCreatedWhenFileAlreadyExists": 1,
+            "BackupNotCreatedIfFileDidntAlreadyExist": 1,
+            "CreateBackupFile_WithForwardSlashTraversal_ThrowsArgumentException": 1,
+            "CreateBackupFile_WithPathTraversal_ThrowsArgumentException": 1
+          },
+          "FileBackupPrunerTests": {
+            "PruneBackupFiles_WithForwardSlashTraversal_ThrowsArgumentException": 1,
+            "PruneBackupFiles_WithPathTraversal_ThrowsArgumentException": 1,
+            "PruneBackupFiles_WithValidPath_DoesNotThrow": 1
+          },
+          "FileDataProviderTests": {
+            "Constructor_WithPathTraversal_ThrowsArgumentException": 1,
+            "FilePath_SetWithPathTraversal_ThrowsArgumentException": 1,
+            "LoadingFileThatDoesntExistProvidesEmptyString": 1,
+            "MoveTo_WithPathTraversal_ThrowsArgumentException": 1,
+            "SaveCreatesDirectoriesThatDontExist": 1,
+            "SaveProducesNonEmptyFileForNonEmptyContent": 1,
+            "SetsFileContent": 1
+          },
+          "FileDataProviderWithRollingBackupTests": {
+            "NoRollingBackupCreatedIfRegularFileDoesntExists": 1,
+            "RollingBackupCreatedIfRegularBackupExists": 1
+          }
+        }
+      },
+      "Import": {
+        "_classes": {
+          "BookmarksHtmlImporterTests": {
+            "Import_MissingFile_DoesNothing": 1,
+            "Import_ValidNetscapeBookmarks_CreatesStructure": 1
+          },
+          "CredentialImportHelperTests": {
+            "ExtractCredentials_ExtractsAndClearsCredentials": 1,
+            "ExtractCredentials_RecursesIntoContainers": 1
+          },
+          "MRemoteNGImportersTests": {
+            "CsvImporter_ReturnsWithoutCreatingMissingFile": 1,
+            "XmlImporter_ReturnsWithoutCreatingMissingFile": 1
+          },
+          "TextImporterTests": {
+            "Import_HandlesMissingFields": 1,
+            "Import_IgnoresEmptyLines": 1,
+            "Import_ParsesCommaSeparatedValues": 1,
+            "Import_ParsesMultipleLines_AddsMultipleConnections": 1,
+            "Import_ParsesSimpleLine_AddsConnection": 1
+          }
+        }
+      },
+      "Putty": {
+        "_classes": {
+          "PuttySessionNameDecoderTests": {
+            "Decode_DecodesUtf8PercentEncodedName": 1,
+            "Decode_FallsBackWhenUtf8DecodingFails": 1,
+            "Decode_HandlesLowercaseHexDigits": 1,
+            "Decode_HandlesMixedAsciiAndCjk": 1,
+            "Decode_HandlesTrailingPercentWithoutHexDigits": 1,
+            "Decode_PreservesPlainAsciiName": 1,
+            "Decode_PreservesPlusCharacter": 1,
+            "Decode_ReturnsEmptyStringForEmptyInput": 1,
+            "Decode_ReturnsEmptyStringForNull": 1
+          },
+          "PuttySessionsFileProviderTests": {
+            "GetSessionNames_ReturnsSessionNames": 1,
+            "GetSession_ReturnsCorrectSessionInfo": 1
+          }
+        }
+      },
+      "Serializers": {
+        "_classes": {
+          "ConfConsEnsureConnectionsHaveIdsTests": {
+            "IdAttributeIsAddedIfItDidntExist": 1,
+            "NewIdAttributeShouldNotBeAnEmptyGuid": 1
+          },
+          "CredentialProviderSerializerTests": {
+            "SerializeExists": 1
+          },
+          "DataTableDeserializerTests": {
+            "DeserializationDoesNotThrowWhenDomainColumnMissing": 1,
+            "DomainFieldRoundtripsCorrectly": 1,
+            "SerializedTableUsesDomainColumnNotDomainName": 1,
+            "WeCanDeserializeASingleEntry": 1,
+            "WeCanDeserializeATree": 1
+          },
+          "DataTableSerializerTests": {
+            "AllItemsSerialized": 1,
+            "CanSerializeEmptyConnectionInfo": 1,
+            "DomainNotSerializedWhenSaveSecurityDisabled": 1,
+            "DomainSerializedWhenSaveSecurityAllowsIt": 1,
+            "InheritanceNotSerializedWhenSaveSecurityDisabled": 1,
+            "InheritanceSerializedWhenSaveSecurityAllowsIt": 1,
+            "MissingColumnsAreAddedWhenSourceSqlSchemaIsOutdated": 1,
+            "PasswordNotSerializedWhenSaveSecurityDisabled": 1,
+            "PasswordSerializedWhenSaveSecurityAllowsIt": 1,
+            "ReturnsEmptyDataTableWhenGivenEmptyConnectionTreeModel": 1,
+            "UsernameNotSerializedWhenSaveSecurityDisabled": 1,
+            "UsernameSerializedWhenSaveSecurityAllowsIt": 1
+          }
+        },
+        "ConnectionSerializers": {
+          "Csv": {
+            "_classes": {
+              "CsvConnectionsDeserializerMremotengFormatDelimiterTests": {
+                "Deserialize_CommaSeparatedCsv_ReturnsCorrectModel": 1,
+                "Deserialize_SemicolonSeparatedCsv_ReturnsCorrectModel": 1
+              },
+              "CsvConnectionsDeserializerMremotengFormatTests": {
+                "TreeStructureDeserializedCorrectly": 1
+              },
+              "CsvConnectionsSerializerMremotengFormatTests": {
+                "CanSerializeEmptyConnectionInfo": 1,
+                "CantPassNullToConstructor": 1,
+                "CantPassNullToSerializeConnectionInfo": 1,
+                "CantPassNullToSerializeConnectionTreeModel": 1,
+                "CreatesCsv": 4,
+                "DoesntSerializeTheRootNode": 1,
+                "FoldersAreSerialized": 1,
+                "SerializationIncludesRawInheritedValuesIfObjectInheritsFromParentOutsideOfSerializationScope": 1,
+                "SerializerRespectsSaveFilterSettings": 4,
+                "SerializesNodeId": 1
+              }
+            }
+          },
+          "Json": {
+            "_classes": {
+              "JsonConnectionsSerializerTests": {
+                "Serialize_Container_IncludesChildren": 1,
+                "Serialize_DeeplyNestedStructure_SerializesCorrectly": 1,
+                "Serialize_NodeId_IsIncluded": 1,
+                "Serialize_SingleConnection_IncludesBasicProperties": 1,
+                "Serialize_WithCredentialsDisabled_ExcludesUsernameAndPassword": 1,
+                "Serialize_WithCredentialsEnabled_IncludesUsernameAndPassword": 1
+              }
+            }
+          },
+          "Sql": {
+            "_classes": {
+              "SqlDatabaseMetaDataRetrieverTests": {
+                "WriteDatabaseMetaData_OnFailure_RollsBackCreatedTransaction": 1,
+                "WriteDatabaseMetaData_WithExplicitTransaction_UsesProvidedTransaction": 1,
+                "WriteDatabaseMetaData_WithoutExplicitTransaction_CreatesAndCommitsTransaction": 1
+              }
+            }
+          },
+          "Xml": {
+            "_classes": {
+              "ValidateXmlSchemas": {
+                "ValidateSchema": 1
+              },
+              "XmlConnectionNodeSerializer28Tests": {
+                "Serialize_NullStringProperties_ShouldNotThrow": 1
+              },
+              "XmlConnectionPresetSerializerTests": {
+                "DeserializeEmptyStringReturnsEmptyCollection": 1,
+                "SerializeThenDeserializePreservesPresetValues": 1
+              },
+              "XmlConnectionsDeserializerTests": {
+                "LegacyNumericRdGatewayUsageMethodFallsBackToSupportedEnumValue": 1,
+                "RootNodeAutoLockOnMinimizeGetsDeserialized": 1
+              },
+              "XmlConnectionsDocumentCompilerTests": {
+                "ConnectionNodesSerializedRecursively": 1,
+                "DocumentHasRootConnectionElement": 1,
+                "XDocumentHasXmlDeclaration": 1,
+                "XmlContentEncryptedWhenFullFileEncryptionTurnedOn": 1
+              },
+              "XmlConnectionsDocumentEncryptorTests": {
+                "RootNodeValueIsEncrypted": 1
+              },
+              "XmlConnectionsSerializerTests": {
+                "ChildNestingSerializedCorrectly": 1,
+                "SerializerRespectsSaveFilterSettings": 4,
+                "SingleConnectionSerializedCorrectly": 1
+              },
+              "XmlRootNodeSerializerTests": {
+                "AutoLockOnMinimizeSerialized": 2,
+                "ConfVersionSerialized": 1,
+                "EncryptionEngineSerialized": "dynamic",
+                "EncryptionModeSerialized": "dynamic",
+                "FullFileEncryptionFlagSerialized": 2,
+                "FullFileEncryptionWorksWithPasswordPropertySetDirectly": 1,
+                "KdfIterationsSerialized": 4,
+                "ProtectedStringSerialized": 4,
+                "ProtectedStringSerializedWhenPasswordPropertySetDirectly": 1,
+                "RootElementNamedConnections": 1,
+                "RootNodeInfoNameSerialized": 1
+              }
+            }
+          }
+        },
+        "CredentialSerializers": {
+          "_classes": {
+            "XmlCredentialPasswordDecryptorDecoratorTests": {
+              "DecryptionThrowsExceptionWhenAuthHeaderNotFound": 1,
+              "OutputedCredentialHasDecryptedPassword": 1
+            },
+            "XmlCredentialPasswordEncryptorDecoratorTests": {
+              "CantPassNullCredentialList": 1,
+              "EncryptsPasswordAttributesInXml": 1,
+              "SetsRootNodeEncryptionAttributes": 4
+            },
+            "XmlCredentialRecordDeserializerTests": {
+              "CanDecryptNonStandardEncryptions": 1,
+              "DeserializesAllCredentials": 1,
+              "HasCorrectDomain": 1,
+              "HasCorrectId": 1,
+              "HasCorrectPassword": 1,
+              "HasCorrectTitle": 1,
+              "HasCorrectUsername": 1
+            },
+            "XmlCredentialSerializerTests": {
+              "AllCredentialsSerialized": 1,
+              "IncludesSchemaVersionParameter": 1,
+              "ProducesValidXml": 1
+            }
+          }
+        },
+        "MiscSerializers": {
+          "_classes": {
+            "PortScanDeserializerTests": {
+              "DisplayNameImported": 1,
+              "HostNameImported": 1,
+              "ProtocolImported": 1
+            },
+            "PuttyConnectionManagerDeserializerTests": {
+              "ConnectionDescriptionImported": 1,
+              "ConnectionDisplayNameImported": 1,
+              "ConnectionHostNameImported": 1,
+              "ConnectionPasswordImported": 1,
+              "ConnectionPortImported": 1,
+              "ConnectionProtocolTypeImported": 1,
+              "ConnectionPuttySessionImported": 1,
+              "ConnectionUsernameImported": 1,
+              "RootFolderImportedWithCorrectName": 1
+            },
+            "RemoteDesktopConnectionDeserializerTests": {
+              "BitmapCachingImportedCorrectly": 1,
+              "ConnectionTreeModelHasARootNode": 1,
+              "DesktopCompositionImportedCorrectly": 1,
+              "DisplayThemesImportedCorrectly": 1,
+              "DisplayWallpaperImportedCorrectly": 1,
+              "DomainImportedCorrectly": 1,
+              "DriveRedirectionImportedCorrectly": 1,
+              "FontSmoothingImportedCorrectly": 1,
+              "HostnameImportedCorrectly": 1,
+              "LoadBalanceInfoImportedCorrectly": 1,
+              "PortImportedCorrectly": 1,
+              "PortRedirectionImportedCorrectly": 1,
+              "PrinterRedirectionImportedCorrectly": 1,
+              "RdpColorsImportedCorrectly": 1,
+              "ResolutionImportedCorrectly": 1,
+              "RootNodeHasConnectionInfo": 1,
+              "SmartcardRedirectionImportedCorrectly": 1,
+              "SoundRedirectionImportedCorrectly": 1,
+              "StartProgramImportedCorrectly": 1,
+              "UsernameImportedCorrectly": 1
+            },
+            "RemoteDesktopConnectionManager27DeserializerTests": {
+              "AllSubRootFoldersImported": 1,
+              "ConnectionTreeModelHasARootNode": 1,
+              "ExceptionThrownOnBadSchemaVersion": 1,
+              "ExceptionThrownOnNoVersion": 1,
+              "ExceptionThrownOnUnsupportedVersion": 1,
+              "NonExistantPropertiesAreIgnored": "dynamic",
+              "PropertiesWithValuesAreCorrectlyImported": "dynamic",
+              "PropertiesWithoutValuesAreIgnored": "dynamic",
+              "RootNodeHasContents": 1
+            },
+            "RemoteDesktopConnectionManagerDeserializerConcurrencyTests": {
+              "ParallelDeserialization_ShouldNotFail_WhenDifferentSchemaVersions": 1
+            },
+            "RemoteDesktopConnectionManagerDeserializerTests": {
+              "AllSubRootFoldersImported": 1,
+              "CanDeserializeRdcMan282File": 1,
+              "ConnectionAudioRedirectionImported": 1,
+              "ConnectionColorDepthImported": 1,
+              "ConnectionDescriptionImported": 1,
+              "ConnectionDisplayNameImported": 1,
+              "ConnectionDomainImported": 1,
+              "ConnectionDriveRedirectionImported": 1,
+              "ConnectionGatewayDomainImported": 1,
+              "ConnectionGatewayHostnameImported": 1,
+              "ConnectionGatewayUsageMethodImported": 1,
+              "ConnectionGatewayUsernameImported": 1,
+              "ConnectionHostnameImported": 1,
+              "ConnectionKeyRedirectionImported": 1,
+              "ConnectionPortImported": 1,
+              "ConnectionPortRedirectionImported": 1,
+              "ConnectionPrinterRedirectionImported": 1,
+              "ConnectionProtocolSetToRdp": 1,
+              "ConnectionResolutionImported": 1,
+              "ConnectionSmartcardRedirectionImported": 1,
+              "ConnectionTreeModelHasARootNode": 1,
+              "ConnectionUseConsoleSessionImported": 1,
+              "ConnectionUsernameImported": 1,
+              "ConnectionauthenticationLevelImported": 1,
+              "DeserializerRejectsExternalEntityInRdgFile": 1,
+              "DeserializerRejectsXxePayloadInRdgFile": 1,
+              "ExceptionThrownOnBadSchemaVersion": 1,
+              "ExceptionThrownOnNoVersion": 1,
+              "ExceptionThrownOnUnsupportedVersion": 1,
+              "RdcMan282ConnectionPropertiesImported": 1,
+              "RootNodeHasContents": 1,
+              "StartProgramImported": 1
+            },
+            "RemoteDesktopConnectionManagerNewVersionTests": {
+              "CanDeserializeFutureSchemaVersion": 1,
+              "CanDeserializeVersion290": 1,
+              "CanDeserializeVersion292": 1,
+              "CanDeserializeVersion293": 1,
+              "ExceptionThrownOnSchemaVersion2": 1,
+              "ExceptionThrownOnUnsupportedVersionTooLow": 1
+            },
+            "SecureCRTFileDeserializerTests": {
+              "HaveContainerNamedAllConnectionTypes": 1,
+              "TestDescriptionField": 1,
+              "TestRDPConnectionInfo": 1,
+              "TestRawConnectionInfo": 1,
+              "TestRloginConnection": 1,
+              "TestSSH1Connection": 1,
+              "TestSSH2Connection": 1,
+              "TestTelnetConnection": 1,
+              "TestValidateFileStructure": 1
+            }
+          }
+        },
+        "Versioning": {
+          "_classes": {
+            "SqlVersion22To23UpgraderTests": {
+              "CanUpgradeIfVersionIs22": 1
+            },
+            "SqlVersion23To24UpgraderTests": {
+              "CanUpgradeIfVersionIs23": 1
+            },
+            "SqlVersion24To25UpgraderTests": {
+              "CanUpgradeIfVersionIs24": 1
+            },
+            "SqlVersion25To26UpgraderTests": {
+              "CanUpgradeIfVersionIs25": 1
+            },
+            "SqlVersion31To32UpgraderTests": {
+              "CanUpgradeIfVersionIs31": 1,
+              "Upgrade_ConvertsTextColumnsToNvarchar_ForUnicodeRoundTrip": 1
+            }
+          }
+        }
+      },
+      "Settings": {
+        "_classes": {
+          "DockPanelSerializerTests": {
+            "CantProvideNullDockPanel": 1,
+            "SerializerProducesValidDockPanelXml": 1
+          }
+        }
+      }
+    },
+    "Connection": {
+      "_classes": {
+        "AbstractConnectionInfoDataTests": {
+          "AutomaticResizeNotifiesOnValueChange": 1,
+          "CacheBitmapsNotifiesOnValueChange": 1,
+          "ColorsNotifiesOnValueChange": 1,
+          "DescriptionNotifiesOnValueChange": 1,
+          "DisplayThemesNotifiesOnValueChange": 1,
+          "DisplayWallpaperNotifiesOnValueChange": 1,
+          "DomainNotifiesOnValueChange": 1,
+          "EnableDesktopCompositionNotifiesOnValueChange": 1,
+          "EnableFontSmoothingNotifiesOnValueChange": 1,
+          "ExtAppNotifiesOnValueChange": 1,
+          "FavoriteNotifiesOnValueChange": 1,
+          "HostnameNotifiesOnValueChange": 1,
+          "IconNotifiesOnValueChange": 1,
+          "LoadBalanceInfoNotifiesOnValueChange": 1,
+          "MacAddressNotifiesOnValueChange": 1,
+          "NameNotifiesOnValueChange": 1,
+          "OpeningCommandNotifiesOnValueChange": 1,
+          "PanelNotifiesOnValueChange": 1,
+          "PasswordNotifiesOnValueChange": 1,
+          "PortNotifiesOnValueChange": 1,
+          "PostExtAppNotifiesOnValueChange": 1,
+          "PreExtAppNotifiesOnValueChange": 1,
+          "ProtocolNotifiesOnValueChange": 1,
+          "PuttySessionNotifiesOnValueChange": 1,
+          "RdGatewayDomainNotifiesOnValueChange": 1,
+          "RdGatewayHostnameNotifiesOnValueChange": 1,
+          "RdGatewayPasswordNotifiesOnValueChange": 1,
+          "RdGatewayUsageMethodNotifiesOnValueChange": 1,
+          "RdGatewayUseConnectionCredentialsNotifiesOnValueChange": 1,
+          "RdGatewayUsernameNotifiesOnValueChange": 1,
+          "RdpAuthenticationLevelNotifiesOnValueChange": 1,
+          "RedirectDiskDrivesNotifiesOnValueChange": 1,
+          "RedirectKeysNotifiesOnValueChange": 1,
+          "RedirectPortsNotifiesOnValueChange": 1,
+          "RedirectPrintersNotifiesOnValueChange": 1,
+          "RedirectSmartCardsNotifiesOnValueChange": 1,
+          "RedirectSoundNotifiesOnValueChange": 1,
+          "RenderingEngineNotifiesOnValueChange": 1,
+          "ResolutionNotifiesOnValueChange": 1,
+          "UseConsoleSessionNotifiesOnValueChange": 1,
+          "UseCredSspNotifiesOnValueChange": 1,
+          "UseRCGNotifiesOnValueChange": 1,
+          "UseRestrictedAdminNotifiesOnValueChange": 1,
+          "UserFieldNotifiesOnValueChange": 1,
+          "UsernameNotifiesOnValueChange": 1,
+          "VncAuthModeNotifiesOnValueChange": 1,
+          "VncColorsNotifiesOnValueChange": 1,
+          "VncCompressionNotifiesOnValueChange": 1,
+          "VncEncodingNotifiesOnValueChange": 1,
+          "VncProxyIpNotifiesOnValueChange": 1,
+          "VncProxyPasswordNotifiesOnValueChange": 1,
+          "VncProxyPortNotifiesOnValueChange": 1,
+          "VncProxyTypeNotifiesOnValueChange": 1,
+          "VncProxyUsernameNotifiesOnValueChange": 1,
+          "VncSmartSizeModeNotifiesOnValueChange": 1,
+          "VncViewOnlyNotifiesOnValueChange": 1
+        },
+        "ColorPropertyAttributeTests": {
+          "ColorInheritancePropertyHasCategoryAttribute": 1,
+          "ColorPropertyHasCategoryAttribute": 1,
+          "ColorPropertyHasTabColorConverter": 1,
+          "TabColorInheritancePropertyHasCategoryAttribute": 1,
+          "TabColorPropertyHasCategoryAttribute": 1,
+          "TabColorPropertyHasTabColorConverter": 1
+        },
+        "ConnectionInfoCloneTests": {
+          "CloneWithNoCredentials_ShouldHaveEmptyCredentials": 1
+        },
+        "ConnectionInfoComparerTests": {
+          "SortAscendingOnName": 1,
+          "SortDescendingOnName": 1
+        },
+        "ConnectionInfoInheritanceTests": {
+          "AlwaysReturnInheritedValueIfRequested": 1,
+          "ApplyAutomaticInheritanceFromParentComparesStoredParentValues": 1,
+          "ApplyAutomaticInheritanceFromParentSetsOnlyMatchingProperties": 1,
+          "EverythingInheritedAutoOptionTriggersAutomaticComparison": 1,
+          "GetPropertiesExludesPropertiesThatShouldNotBeSet": 1,
+          "GetPropertiesReturnsListOfSettableProperties": 1,
+          "InheritanceIsDisabledWhenAttachedToANodeDirectlyUnderTheRootNode": 1,
+          "InheritanceIsDisabledWhenAttachedToAPuttyNode": 1,
+          "InheritanceIsDisabledWhenAttachedToAPuttyRootNode": 1,
+          "InheritanceIsDisabledWhenAttachedToARootNode": 1,
+          "InheritanceIsEnabledWhenAttachedToNormalConnectionInfo": 1,
+          "InheritanceIsEnabledWhenAttachedToNormalContainerInfo": 1,
+          "TurnOffInheritanceCompletely": 1,
+          "TurnOnInheritanceCompletely": 1
+        },
+        "ConnectionInfoTests": {
+          "CloneAlsoCopiesInheritanceObject": 1,
+          "CloneCorrectlySetsParentOfInheritanceObject": 1,
+          "CloneDoesNotCopyLinkedConnectionId": 1,
+          "CloneDoesNotSetParentOfNewConnectionInfo": 1,
+          "CopyCreatesMemberwiseCopy": 1,
+          "CopyFromCopiesProperties": 1,
+          "CopyingAConnectionInfoAlsoCopiesItsInheritance": 1,
+          "DomainExpandsNameToken": 1,
+          "DomainExpandsNameTokenCaseInsensitive": 1,
+          "DomainWithNoTokensIsUnchanged": 1,
+          "HostnameExpandsNameToken": 1,
+          "HostnameExpandsNameTokenCaseInsensitive": 1,
+          "HostnameExpandsNameTokenMixedWithLiteral": 1,
+          "HostnameWithNoTokensIsUnchanged": 1,
+          "LinkedConnectionResolvesSourcePropertiesAtRuntime": 1,
+          "MovingAConnectionFromUnderRootNodeToUnderADifferentNodeEnablesInheritance": "dynamic",
+          "PropertyChangedEventArgsAreCorrectWhenOpenConnectionsChanges": 1,
+          "PropertyChangedEventRaisedWhenOpenConnectionsChanges": 1,
+          "SerializablePropertiesDoNotIncludeLinkedConnectionId": 1
+        },
+        "ConnectionInitiatorSshTunnelTests": {
+          "OpenConnection_RetriesSshTunnel_OnFailure": 1
+        },
+        "ConnectionInitiatorTests": {
+          "OpenConnection_WithEmptyHostname_AddsErrorMessage": 1,
+          "OpenConnection_WithNullHostname_AddsErrorMessage": 1,
+          "OpenConnection_WithValidHostname_DoesNotAddHostnameError": 1
+        },
+        "ConnectionLinkTests": {
+          "TestCreateLink": 1,
+          "TestLinkSerialization": 1
+        },
+        "ConnectionPresetTests": {
+          "CaptureAndApplyCopiesAllPresetProperties": 1,
+          "CloneCreatesIndependentCopy": 1
+        },
+        "ConnectionPropertyReflectorTests": {
+          "AllInheritablePropertiesAreInBothClasses": 1,
+          "BrowsableFalsePropertiesAreDetected": 1,
+          "ConstantIDIsNotSerializable": 1,
+          "DescriptorToStringIsReadable": 1,
+          "DiscoversSomeProperties": 1,
+          "GetInheritablePropertiesExcludesNonInheritable": 1,
+          "GetSerializablePropertiesExcludesNonSerializable": 1,
+          "HostnameIsInheritable": 1,
+          "InheritablePropertiesHaveMatchingInheritanceBooleans": 1,
+          "NameIsNotInheritable": 1,
+          "NoOrphanedInheritanceBooleans": 1,
+          "PasswordPropertiesAreMarkedEncrypted": 1
+        },
+        "ConnectionsServicePuttySessionsResilienceTests": {
+          "LoadConnectionsContinuesWhenPuttyProviderThrows": 1
+        },
+        "ConnectionsServiceQuickConnectTests": {
+          "CreateQuickConnectKeepsDefaultUsernameWhenNoOverrideProvided": 1,
+          "CreateQuickConnectKeepsLegacyHostAndPortFormat": 1,
+          "CreateQuickConnectRdpFlagDisablesRCG": 1,
+          "CreateQuickConnectRdpFlagDisablesRestrictedAdmin": 1,
+          "CreateQuickConnectRdpFlagEnablesRestrictedAdmin": 1,
+          "CreateQuickConnectRdpFlagsBothDisabled": 1,
+          "CreateQuickConnectRdpFlagsIgnoredForNonRdpProtocol": 1,
+          "CreateQuickConnectRdpFlagsWithUsernameAndPort": 1,
+          "CreateQuickConnectReturnsNullWhenHostnameIsEmpty": 1,
+          "CreateQuickConnectUsesExplicitUsernameAndPortWhenProvided": 1,
+          "CreateQuickConnectUsesExplicitUsernameWhenProvided": 1
+        },
+        "ConnectionsServiceStartupPathTests": {
+          "DefaultStartupConnectionFileNameIsNotNullOrEmpty": 1,
+          "StartupConnectionPathFallsBackToDefaultWhenConfiguredPathIsMissing": 3,
+          "StartupConnectionPathReturnsConfiguredPathWhenSet": 1
+        },
+        "CredentialInheritanceTests": {
+          "InheritFromGrandparent_WhenParentHasEmptyCredsAndInheritanceDisabled": 1,
+          "StandardInheritance_ParentHasCreds": 1
+        },
+        "DefaultConnectionInfoTests": {
+          "CanSaveDefaultConnectionToModelWithAllStringProperties": "dynamic",
+          "LoadingDefaultInfoUpdatesAllProperties": "dynamic",
+          "SavingDefaultConnectionInfoExportsAllProperties": "dynamic"
+        },
+        "DefaultConnectionInheritanceTests": {
+          "LoadingDefaultInheritanceUpdatesAllProperties": "dynamic",
+          "NewInheritanceInstancesCreatedWithAllDefaultInheritanceValues": "dynamic",
+          "NewInheritanceInstancesCreatedWithDefaultInheritanceValues": 1,
+          "SavingDefaultInheritanceExportsAllProperties": "dynamic"
+        },
+        "TextListConnectionImporterTests": {
+          "Import_MissingFile_DoesNothing": 1,
+          "Import_ValidFile_AddsConnections": 1
+        }
+      },
+      "Protocol": {
+        "_classes": {
+          "IntegratedProgramTests": {
+            "ConnectingToExternalAppThatDoesntExistDoesNothing": 1,
+            "InitializeSucceedsForBuiltInShellPresetWhenExternalToolIsNotConfigured": 22,
+            "InitializeSucceedsWhenExternalToolExists": 1
+          },
+          "ProtocolAnyDeskTests": {
+            "IsValidAnydeskId_AlphanumericWithAt_ReturnsTrue": 1,
+            "IsValidAnydeskId_EmptyString_ReturnsFalse": 1,
+            "IsValidAnydeskId_LongValidId_ReturnsTrue": 1,
+            "IsValidAnydeskId_Null_ReturnsFalse": 1,
+            "IsValidAnydeskId_NumericId_ReturnsTrue": 1,
+            "IsValidAnydeskId_Whitespace_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithAmpersand_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithAngleBrackets_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithAsterisk_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithBacktick_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithCarriageReturn_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithDollarSign_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithDot_ReturnsTrue": 1,
+            "IsValidAnydeskId_WithExclamation_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithHyphen_ReturnsTrue": 1,
+            "IsValidAnydeskId_WithNewline_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithParentheses_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithPercent_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithPipe_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithQuestionMark_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithQuotes_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithRedirection_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithSemicolon_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithSingleQuotes_ReturnsFalse": 1,
+            "IsValidAnydeskId_WithUnderscore_ReturnsTrue": 1
+          },
+          "ProtocolListTests": {
+            "AddAddsObjectToList": 1,
+            "AddCollectionChangedEventContainsAddedObject": 1,
+            "AddCollectionChangedEventHasCorrectAction": 1,
+            "AddRaisesCollectionChangedEvent": 1,
+            "AddRangeAddsAllObjects": 1,
+            "AddRangeCollectionChangedEventContainsAddedObjects": 1,
+            "AddRangeCollectionChangedEventHasCorrectAction": 1,
+            "AttemptingToRemoveNonexistantObjectDoesNotRaiseCollectionChangedEvent": 1,
+            "ClearCollectionChangedEventHasCorrectAction": 1,
+            "ClearDoesntRaiseCollectionChangedEventWhenNoObjectsRemoved": 1,
+            "ClearRaisesCollectionChangedEvent": 1,
+            "ClearResetsList": 1,
+            "CountUpdatesToReflectCurrentList": 1,
+            "EmptyWhenInitialized": 1,
+            "IndexerSafelyHandlesUnknownObjects": 1,
+            "IntIndexerReturnsCorrectObject": 1,
+            "ObjectIndexerReturnsCorrectObject": 1,
+            "RemoveCollectionChangedEventContainsRemovedObject": 1,
+            "RemoveCollectionChangedEventHasCorrectAction": 1,
+            "RemoveRemovesObjectFromList": 1,
+            "RemovingNonexistantObjectFromListDoesNothing": 1
+          },
+          "ProtocolMSRATests": {
+            "IsValidHostname_EmptyOrNull_ReturnsFalse": 1,
+            "IsValidHostname_InvalidCharacters_ReturnsFalse": 1,
+            "IsValidHostname_ValidHostname_ReturnsTrue": 1
+          },
+          "PuttyBaseConnectTests": {
+            "Connect_ReturnsTrueImmediately": 1
+          },
+          "PuttyBaseTests": {
+            "OnPowerModeChanged_Resume_TriggersResizeOnUIThread": 1,
+            "SchedulePostOpenLayoutResizePass_WaitsForHandleCreationThenResizes": 1,
+            "StopTerminalTitleTracking_RestoresFallbackAndPreventsFurtherUpdates": 1,
+            "UpdateTabTitleFromTerminalTitle_UsesDynamicTitleWhenWindowTitleChanges": 1,
+            "UpdateTabTitleFromTerminalTitle_UsesFallbackWhenWindowTitleIsInitialOrEmpty": 1
+          },
+          "RdpProtocol8ResizeTests": {
+            "DebounceTimer_MultipleResizeEnds_OnlyLastResizeTakesEffect": 1,
+            "ManualDragResize_Sequence_WorksCorrectly": 1,
+            "MaximizeRestore_Sequence_WorksCorrectly": 1,
+            "MinimizeRestore_Sequence_WorksCorrectly": 1,
+            "ResizeEnd_UpdatesLastWindowState": 1,
+            "ResizeEnd_WhenMinimized_DoesNotCallDoResizeClient": 1,
+            "ResizeEnd_WhenNormalState_CallsDoResizeControlAndSchedulesDebounce": 1,
+            "ResizeEnd_WithDebounce_CallsDoResizeClientAfterDelay": 1,
+            "Resize_WhenMinimized_DoesNotCallDoResizeClient": 1,
+            "Resize_WhenNormalState_CallsDoResizeControl": 1,
+            "Resize_WhenWindowStateChanges_CallsDoResizeClient": 1,
+            "Resize_WhenWindowStateUnchangedInNormalState_DoesNotCallDoResizeClient": 1
+          },
+          "RdpProtocolGatewaySettingsTests": {
+            "ShouldApplyExplicitGatewaySettings_ReturnsExpectedValue": 8
+          }
+        },
+        "RDP": {
+          "_classes": {
+            "AzureLoadBalanceInfoEncoderTests": {
+              "Encode_BasicString_ReturnsEncoded": 1,
+              "Encode_ComplexString_ReturnsEncoded": 1,
+              "Encode_EmptyString_ReturnsEncoded": 1,
+              "Encode_OddLengthString_ReturnsEncodedWithPadding": 1
+            },
+            "RdpProtocolDesktopScaleFactorTests": {
+              "DesktopScaleFactor_Returns100_WhenSetToScale100": 1,
+              "DesktopScaleFactor_Returns125_WhenSetToScale125": 1,
+              "DesktopScaleFactor_Returns150_WhenSetToScale150": 1,
+              "DesktopScaleFactor_Returns200_WhenSetToScale200": 1,
+              "DesktopScaleFactor_ReturnsCalculatedValue_WhenConnectionInfoIsNull": 1,
+              "DesktopScaleFactor_ReturnsCalculatedValue_WhenSetToAuto": 1
+            },
+            "RdpProtocolParseDomainFromUsernameTests": {
+              "ParseDomainFromUsername_WithBackslashPrefix_SplitsCorrectly": 3,
+              "ParseDomainFromUsername_WithEmptyString_ReturnsEmptyAndEmptyDomain": 1,
+              "ParseDomainFromUsername_WithoutBackslash_ReturnsUnchangedAndEmptyDomain": 2
+            },
+            "SmartSizeAspectTests": {
+              "GetResolutionRectangle_ReturnsValues_ForExplicitResolution": 1,
+              "GetResolutionRectangle_ReturnsZero_ForSmartSize": 1,
+              "GetResolutionRectangle_ReturnsZero_ForSmartSizeAspect": 1,
+              "SmartSizeAspect_EnumExists": 1
+            }
+          }
+        },
+        "VNC": {
+          "_classes": {
+            "MockVncClient": {
+              "PreFilterMessage_Ignores_Latin_Chars": 1,
+              "PreFilterMessage_Intercepts_Cyrillic_Capital_A": 1,
+              "PreFilterMessage_Intercepts_Cyrillic_Small_a": 1,
+              "PreFilterMessage_Intercepts_Cyrillic_Yo_Small": 1,
+              "PreFilterMessage_Intercepts_DeadKey_Composed_a_Acute": 1,
+              "PreFilterMessage_Intercepts_DeadKey_Composed_n_Tilde": 1,
+              "PreFilterMessage_Intercepts_LeftWindowsKey": 1,
+              "PreFilterMessage_Intercepts_RightWindowsKey": 1,
+              "ReleaseAllModifiers_SendsKeyUpForAllSixModifiers": 1,
+              "ReleaseAllModifiers_WithNullVncClient_DoesNotThrow": 1
+            },
+            "ProtocolVNCTests": {
+              "StartChat_AddsInformationMessage": 1,
+              "StartFileTransfer_AddsInformationMessage": 1
+            }
+          }
+        }
+      }
+    },
+    "Container": {
+      "_classes": {
+        "ContainerInfoTests": {
+          "AddAddsChildToChildrenList": 1,
+          "AddChildAbovePutsNewChildAtEndOfListIfReferenceChildNotInList": 1,
+          "AddChildAbovePutsNewChildInCorrectLocation": 1,
+          "AddChildAutomaticallySortsWhenAutoSortEnabled": 1,
+          "AddChildBelowPutsNewChildAtEndOfListIfReferenceChildNotInList": 1,
+          "AddChildBelowPutsNewChildInCorrectLocation": 1,
+          "AddRangeAddsAllItems": 1,
+          "AddSetsParentPropertyOnTheChild": 1,
+          "AddingChildTriggersCollectionChangedEvent": 1,
+          "ApplyConnectionPropertiesToChildrenWorksRecursively": 1,
+          "ApplyInheritancePropertiesToChildrenWorksRecursively": 1,
+          "AutoSortCanBeInheritedByChildContainer": 1,
+          "CanApplyConnectionSettingsToChildren": 1,
+          "CanApplyInheritanceSettingsToChildren": 1,
+          "ChangingChildPropertyTriggersPropertyChangedEvent": 1,
+          "ChangingSubChildPropertyTriggersPropertyChangedEvent": 1,
+          "ClonedContainerContainsClonedChildren": 1,
+          "ClonedContainerDoesNotHaveParentSet": 1,
+          "ClonedContainerHasNewConstantId": 1,
+          "DemoteChildDoesNothingWhenAlreadyAtTopOfList": 1,
+          "DemoteChildMovesTargetDownOne": 1,
+          "HasChildrenReturnsFalseForNoChildren": 1,
+          "HasChildrenReturnsTrueWhenChildrenPresent": 1,
+          "PromoteChildDoesNothingWhenAlreadyAtTopOfList": 1,
+          "PromoteChildMovesTargetUpOne": 1,
+          "RemoveChildDoesNothingIfChildNotInList": 1,
+          "RemoveRangeDoesNotRemoveUntargetedMembers": 1,
+          "RemoveRangeRemovesAllIndicatedItems": 1,
+          "RemoveRemovesChildFromChildrenList": 1,
+          "RemoveUnsetsParentPropertyOnChild": 1,
+          "RemovingChildTriggersCollectionChangedEvent": 1,
+          "RenamingChildAutomaticallySortsWhenAutoSortEnabled": 1,
+          "SetChildAbovePutsChildInCorrectPosition": 1,
+          "SetChildBelowPutsChildInCorrectPosition": 1,
+          "SetChildPositionAutomaticallyResortsWhenAutoSortEnabled": 1,
+          "SetChildPositionPutsChildInCorrectPosition": 1,
+          "SettingChildPositionAboveArrayBoundsPutsItAtEndOfList": 1,
+          "SettingChildPositionBelowArrayBoundsDoesNotMoveTheChild": 1,
+          "SortAscendingRecursiveSortsGrandchildrenCorrectlyByName": 1,
+          "SortAscendingSortsCorrectlyByName": 1,
+          "SortDescendingRecursiveSortsGrandchildrenCorrectlyByName": 1,
+          "SortDescendingSortsCorrectlyByName": 1,
+          "SortOnConstantIdAscendingSortsCorrectly": 1,
+          "SortOnConstantIdDescendingSortsCorrectly": 1,
+          "SortOnRecursiveConstantIdAscendingSortsGrandchildrenCorrectly": 1,
+          "SortOnRecursiveConstantIdDescendingSortsGrandchildrenCorrectly": 1,
+          "WhenChildAlreadyPresentAddChildAtDoesNothing": 1
+        },
+        "DynamicFolderManagerTests": {
+          "RefreshFolder_FileSource_PopulatesChildren": 1,
+          "RefreshFolder_ScriptSource_PopulatesChildren": 1
+        },
+        "RootNodeInfoTests": {
+          "InheritanceIsDisabledForNodesDirectlyUnderRootNode": 1
+        }
+      }
+    },
+    "Credential": {
+      "_classes": {
+        "CompositeRepositoryUnlockerTests": {
+          "FirstLockedRepoSelectedIfNoRepoCurrentlySelected": 1,
+          "NothingIsSelectedIfNoReposExist": 1,
+          "SelectingTheNextRepoWhenOnlyOneRepoExistsDoesNothing": 1,
+          "SelectionIsClearedIfThereAreNoMoreLockedRepositories": 1,
+          "SelectionRemainsTheSameIfTheCurrentRepoIsTheOnlyOneLocked": 1,
+          "TheFirstRepoIsInitiallySelected": 1,
+          "WeCanCreateAnUnlockerThatWillHandleSomeRepos": 1,
+          "WeCanSelectTheNextLockedRepository": 1,
+          "WeCanUnlockARepository": 1
+        },
+        "CredentialChangedEventArgsTests": {
+          "CantProvideNullCredentialRecord": 1,
+          "CantProvideNullCredentialRepository": 1,
+          "CredentialRecordPropertySetFromCtor": 1,
+          "RepositoryPropertySetFromCtor": 1
+        },
+        "CredentialDeletionMsgBoxConfirmerTests": {
+          "ClickingNoReturnsFalse": 1,
+          "ClickingYesReturnsTrue": 1
+        },
+        "CredentialDomainUserComparerTests": {
+          "CredentialsWithDifferentDomainsAreNotEqual": 1,
+          "CredentialsWithDifferentUsernamesAreNotEqual": 1,
+          "CredentialsWithTheSameUsernameAndDomainAreEqual": 1
+        },
+        "CredentialRecordTests": {
+          "CopyConstructorCopiesDomain": 1,
+          "CopyConstructorCopiesPassword": 1,
+          "CopyConstructorCopiesUsername": 1,
+          "CopyConstructorGeneratesNewGuid": 1,
+          "CreateWithExistingGuid": 1,
+          "HasDomain": 1,
+          "HasUsername": 1,
+          "IdIsUnique": 1,
+          "PasswordIsSecureString": 1
+        },
+        "CredentialRecordTypeConverterTests": {
+          "CanConvertFrom": 1,
+          "CanConvertTo": 2,
+          "ConvertingToGuidReturnsCorrectValue": 1
+        },
+        "CredentialRepositoryListTests": {
+          "AddingRepoWithDifferentSourceSucceeds": 1,
+          "AddingRepoWithDuplicateSourceThrows": 1,
+          "GetCredentialReturnsNullIfNoRecordFound": 1,
+          "RepositoryIsInListAfterBeingAdded": 1,
+          "RepositoryListIsInitiallyEmpty": 1,
+          "RepositoryNotInListAfterBeingRemoved": 1,
+          "TryingToRemoveRepositoryThatIsntInTheListDoesNothing": 1,
+          "WeCanRetrieveASpecificCredentialRecord": 1,
+          "WillNotAddDuplicateRepositories": 1
+        },
+        "CredentialServiceFacadeTests": {
+          "AddRepoCallsUnderlyingList": 1,
+          "CantProvideNullRepoListToCtor": 1,
+          "CantProvideNullRepoLoaderToCtor": 1,
+          "CantProvideNullRepoSaverToCtor": 1,
+          "GetCredentialRecordCallsUnderlyingList": 1,
+          "GetCredentialRecordsCallsUnderlyingList": 1,
+          "LoadRepoListsAddsRepoFromLoader": 1,
+          "RemoveRepoCallsUnderlyingList": 1,
+          "SaveRepoListsAddsRepoFromLoader": 1
+        }
+      }
+    },
+    "ExternalConnectors": {
+      "_classes": {
+        "OnePasswordCliTests": {
+          "ExtractCredentialsFromJson_EmptyFieldsArrayThrows": 1,
+          "ExtractCredentialsFromJson_ExtractsDomain": 1,
+          "ExtractCredentialsFromJson_ExtractsSshKeyByType": 1,
+          "ExtractCredentialsFromJson_ExtractsUsernameAndPasswordByPurpose": 1,
+          "ExtractCredentialsFromJson_FallsBackToLabelWhenIdDoesNotMatch": 1,
+          "ExtractCredentialsFromJson_FallsBackToLabelWhenPurposeMissing": 1,
+          "ExtractCredentialsFromJson_SkipsFieldsWithEmptyValues": 1,
+          "ExtractCredentialsFromJson_ThrowsForMalformedJson": 1,
+          "ExtractCredentialsFromJson_ThrowsForNullDeserialization": 1,
+          "ExtractCredentialsFromJson_ThrowsWhenFieldsKeyIsMissing": 1,
+          "ExtractCredentialsFromJson_ThrowsWhenNoPasswordOrKey": 1,
+          "ExtractCredentialsFromJson_UsesConcealedFallbackWhenPurposeFieldIsEmpty": 1,
+          "ParseSecretReference_AllowsUnescapedSpacesInVaultAndItem": 1,
+          "ParseSecretReference_AllowsVaultlessFormat": 1,
+          "ParseSecretReference_ParsesEncodedValuesAndAccountQuery": 1,
+          "ParseSecretReference_ThrowsForInvalidInput": 1
+        },
+        "PasswordSafeCliTests": {
+          "ParseSecretReference_DecodesDbPath": 1,
+          "ParseSecretReference_ParsesDbPathGroupAndTitle": 1,
+          "ParseSecretReference_ParsesDbUser": 1,
+          "ParseSecretReference_ThrowsIfGroupAndTitleMissing": 1,
+          "ParseSecretReference_ThrowsIfSchemeMissing": 1
+        }
+      }
+    },
+    "Installer": {
+      "_classes": {
+        "InstalledWindowsUpdateCheckerTests": {
+          "BuildWhereClause_AllInvalidKbs_ReturnsEmpty": 1,
+          "BuildWhereClause_DigitOnlyKb_AddsKbPrefix": 1,
+          "BuildWhereClause_EmptyList_ReturnsEmpty": 1,
+          "BuildWhereClause_InvalidKb_SkipsInvalid": 1,
+          "BuildWhereClause_MixedCaseKbs_NormalizesToUppercase": 1,
+          "BuildWhereClause_MixedPrefixedAndDigitOnly_NormalizesAll": 1,
+          "BuildWhereClause_MultipleValidKbs_ReturnsOrClause": 1,
+          "BuildWhereClause_NullValues_SkipsNulls": 1,
+          "BuildWhereClause_SingleValidKb_ReturnsCorrectClause": 1,
+          "SanitizeKbId_EmptyString_ReturnsEmpty": 1,
+          "SanitizeKbId_NullInput_ReturnsEmpty": 1,
+          "SanitizeKbId_OnlyKbPrefix_ReturnsEmpty": 1,
+          "SanitizeKbId_SqlInjectionAttempt_ReturnsEmpty": 1,
+          "SanitizeKbId_ValidKbLowercase_ReturnsUppercased": 1,
+          "SanitizeKbId_ValidKbMixedCase_ReturnsUppercased": 1,
+          "SanitizeKbId_ValidKbWithPrefix_ReturnsUppercased": 1,
+          "SanitizeKbId_ValidNumberOnly_ReturnsWithKbPrefix": 1,
+          "SanitizeKbId_WhitespaceOnly_ReturnsEmpty": 1,
+          "SanitizeKbId_WithDashes_ReturnsEmpty": 1,
+          "SanitizeKbId_WithSpecialCharacters_ReturnsEmpty": 1,
+          "SanitizeKbId_WithUnderscores_ReturnsEmpty": 1,
+          "SanitizeKbId_WithWhitespace_ReturnsTrimmedAndUppercased": 1,
+          "SanitizeKbId_WqlInjectionWithSemicolon_ReturnsEmpty": 1
+        }
+      }
+    },
+    "IntegrationTests": {
+      "_classes": {
+        "ConnectionInheritanceIntegrationTests": {
+          "CanInheritColorThroughMultipleFolderLevels": 1,
+          "CanInheritThroughMultipleFolderLevels": 1,
+          "ConnectionInheritsColorFromFolder": 1,
+          "ConnectionWillInheritAllFromFolder": 1,
+          "ConnectionsInheritFromCorrectFolder": 1
+        },
+        "EntityFeatureTests": {
+          "CreateEntity_ShouldHaveCorrectTypeAndProperty": 1,
+          "SerializeAndDeserialize_Entity_ShouldPersistIsEntityFlag": 1
+        },
+        "XmlCredentialSerializerLifeCycleTests": {
+          "DomainConsistentAfterSerialization": 1,
+          "IdConsistentAfterSerialization": 1,
+          "PasswordConsistentAfterSerialization": 1,
+          "TitleConsistentAfterSerialization": 1,
+          "UsernameConsistentAfterSerialization": 1,
+          "WeCanSerializeAndDeserializeXmlCredentials": 1
+        },
+        "XmlSerializationLifeCycleTests": {
+          "AllInheritanceCorrectWhenSerializingThenDeserializing": 1,
+          "AllPropertiesCorrectWhenSerializingThenDeserializing": 1,
+          "GuidCreatedIfNonExistedInXml": 1,
+          "LinkedConnectionIdRoundTripsThroughSerialization": 1,
+          "SerializeAndDeserializePropertiesWithInternationalCharacters": 1,
+          "SerializeAndDeserializeWithCustomKdfIterationsValue": 1,
+          "SerializeThenDeserialize": 1,
+          "SerializeThenDeserializeWithFullEncryption": 1
+        }
+      }
+    },
+    "Messages": {
+      "_classes": {
+        "MessageCollectorTests": {
+          "BatchAddAddsAllItems": 1,
+          "EventNotRaisedIfMsgIsntUnique": 1,
+          "InitializesWithNoMessages": 1,
+          "ListCanBeCleared": 1,
+          "MessageAddedToList": 1,
+          "MessagesAreUnique": 1,
+          "NotifiedWhenMessageAdded": 1,
+          "OneNotificationRaisedForBatchAdd": 1
+        }
+      },
+      "MessageWriters": {
+        "_classes": {
+          "MessageTypeFilterDecoratorTests": {
+            "DebugMessageNotWrittenIfNotAllowed": 1,
+            "DebugMessageWrittenIfAllowed": 1,
+            "ErrorMessageNotWrittenIfNotAllowed": 1,
+            "ErrorMessageWrittenIfAllowed": 1,
+            "InfoMessageNotWrittenIfNotAllowed": 1,
+            "InfoMessageWrittenIfAllowed": 1,
+            "WarningMessageNotWrittenIfNotAllowed": 1,
+            "WarningMessageWrittenIfAllowed": 1
+          },
+          "OnlyLogMessageFilterTests": {
+            "WillNotWriteIfTheOnlyLogFlagIsSet": 1,
+            "WillWriteIfTheOnlyLogFlagIsNotSet": 1
+          }
+        }
+      }
+    },
+    "Security": {
+      "_classes": {
+        "AeadCryptographyProviderTests": {
+          "DecryptedTextIsEqualToOriginalPlainText": "dynamic",
+          "DecryptionFailureThrowsException": 1,
+          "EncryptingTheSameValueReturnsNewCipherTextEachTime": 1,
+          "EncryptionOutputsBase64String": 1,
+          "GetBlockSizeReturnsProperValueForAes": 1,
+          "GetCipherEngine": "dynamic",
+          "GetCipherMode": "dynamic",
+          "ProvidingEmptyEncryptionKeyThrowsException": 1
+        },
+        "CryptographyProviderFactoryTests": {
+          "CanCreateAeadProvidersWithCorrectEngine": "dynamic",
+          "CanCreateAeadProvidersWithCorrectMode": "dynamic"
+        },
+        "EncryptedSecureStringTests": {
+          "CanAssignStringValue": 1,
+          "CanCreateEncryptedSecureString": 1,
+          "CreatingMultipleEncryptedSecureStrings": 1,
+          "EncryptedValueIsSameAsOriginalValue": 1
+        },
+        "LdapPathSanitizerTests": {
+          "IsValidDistinguishedNameFormat_ReturnsFalseForEmpty": 1,
+          "IsValidDistinguishedNameFormat_ReturnsFalseForLdapUriWithFragment": 1,
+          "IsValidDistinguishedNameFormat_ReturnsFalseForLdapUriWithQuery": 1,
+          "IsValidDistinguishedNameFormat_ReturnsFalseForNull": 1,
+          "IsValidDistinguishedNameFormat_ReturnsFalseForPlainString": 1,
+          "IsValidDistinguishedNameFormat_ReturnsFalseForWhitespace": 1,
+          "IsValidDistinguishedNameFormat_ReturnsTrueForDnWithEquals": 1,
+          "IsValidDistinguishedNameFormat_ReturnsTrueForLdapUri": 1,
+          "IsValidDistinguishedNameFormat_ReturnsTrueForLdapsUri": 1,
+          "SanitizeDistinguishedName_DoesNotEscapeMiddleHash": 1,
+          "SanitizeDistinguishedName_DoesNotEscapeMiddleSpace": 1,
+          "SanitizeDistinguishedName_EscapesBackslash": 1,
+          "SanitizeDistinguishedName_EscapesComma": 1,
+          "SanitizeDistinguishedName_EscapesLeadingHash": 1,
+          "SanitizeDistinguishedName_EscapesLeadingSpace": 1,
+          "SanitizeDistinguishedName_EscapesLessThan": 1,
+          "SanitizeDistinguishedName_EscapesPlus": 1,
+          "SanitizeDistinguishedName_EscapesQuotes": 1,
+          "SanitizeDistinguishedName_EscapesSemicolon": 1,
+          "SanitizeDistinguishedName_EscapesTrailingSpace": 1,
+          "SanitizeDistinguishedName_PreventsLdapInjectionAttempt": 1,
+          "SanitizeDistinguishedName_ReturnsEmptyForEmpty": 1,
+          "SanitizeDistinguishedName_ReturnsEmptyForNull": 1,
+          "SanitizeFilterValue_EscapesAsterisk": 1,
+          "SanitizeFilterValue_EscapesBackslash": 1,
+          "SanitizeFilterValue_EscapesNullCharacter": 1,
+          "SanitizeFilterValue_EscapesParentheses": 1,
+          "SanitizeFilterValue_PreventsLdapInjectionAttempt": 1,
+          "SanitizeFilterValue_ReturnsEmptyForEmpty": 1,
+          "SanitizeFilterValue_ReturnsNullForNull": 1,
+          "SanitizeLdapPath_ReturnsServerOnlyPath": 1,
+          "SanitizeLdapPath_SanitizesDnPart": 1,
+          "SanitizeLdapPath_ThrowsForUnsafeLdapUri": 1
+        },
+        "LegacyRijndaelCryptographyProviderTests": {
+          "DecryptedTextIsEqualToOriginalPlainText": 1,
+          "DecryptingEmptyStringReturnsEmptyString": 1,
+          "DecryptingFromPreviousApplicationExecutionWorks": 1,
+          "DecryptionFailureThrowsException": 1,
+          "EncryptingEmptyStringReturnsEmptyString": 1,
+          "EncryptingTheSameValueReturnsNewCipherTextEachTime": 1,
+          "EncryptionOutputsBase64String": 1,
+          "GetBlockSizeReturnsProperValueForRijndael": 1,
+          "RoundTripWithSpecialCharacters_ParagraphSign": 1
+        },
+        "RandomGeneratorTests": {
+          "ProducesStringOfCorrectLength": 1,
+          "StringsDiffer": 1
+        },
+        "SecureStringExtensionsTests": {
+          "ConvertToSecureString": 1,
+          "ConvertToSecureStringOnNullStringThrowsException": 1,
+          "ConvertToUnsecureString": 1,
+          "ConvertToUnsecureStringOnNullStringThrowsException": 1
+        },
+        "SecureXmlHelperTests": {
+          "CreateSecureXmlDocument_ReturnsConfiguredDocument": 1,
+          "LoadXmlFromString_HandlesXmlWithComments": 1,
+          "LoadXmlFromString_HandlesXmlWithProcessingInstructions": 1,
+          "LoadXmlFromString_LoadsValidXml": 1,
+          "LoadXmlFromString_RejectsExternalEntity": 1,
+          "LoadXmlFromString_RejectsXxeAttack": 1
+        },
+        "XmlCryptoProviderBuilderTests": {
+          "BuildsCorrectCipherMode": 1,
+          "BuildsCorrectEncryptionEngine": 1,
+          "BuildsCorrectKdfIterations": 1,
+          "CantPassNullIntoConstructor": 1,
+          "ReturnsOldProviderTypeIfXmlIsntValid": 1
+        }
+      },
+      "Authentication": {
+        "_classes": {
+          "PasswordAuthenticatorTests": {
+            "AuthenticatingWithCorrectPasswordReturnsTrue": 1,
+            "AuthenticatingWithWrongPasswordReturnsFalse": 1,
+            "AuthenticationFailsWhenAuthenticationRequestorGivenEmptyPassword": 1,
+            "AuthenticationRequestorIsCalledWhenInitialPasswordIsWrong": 1,
+            "AuthenticationRequestorNotCalledWhenInitialPasswordIsCorrect": 1,
+            "AuthenticatorRespectsMaxAttempts": 1,
+            "AuthenticatorRespectsMaxAttemptsCustomValue": 1,
+            "ProvidingCorrectPasswordToTheAuthenticationRequestorReturnsTrue": 1
+          }
+        }
+      },
+      "KeyDerivation": {
+        "_classes": {
+          "Pkcs5S2KeyGeneratorTests": {
+            "CreatingGeneratorWithLowIterationCountThrowsError": 1,
+            "CreatingGeneratorWithNegativeKeyBitSizeThrowsError": 1,
+            "DefaultConstructorThrowsNoException": 1,
+            "DifferingIterationsProduceDifferingKeys": 1,
+            "DifferingKeysizeProduceDifferingKeys": 1,
+            "DifferingPasswordsProduceDifferingKeys": 1,
+            "DifferingSaltsProduceDifferingKeys": 1,
+            "IdenticalParametersProduceIdenticalKeys": 1,
+            "KeyLengthIsKeyBitSizeDividedBy8": 6,
+            "PasswordWithSpecialCharactersParagraphSignProducesConsistentKey": 1,
+            "PasswordWithSpecialCharactersParagraphSignProducesDifferentKeyThanWithoutIt": 1
+          }
+        }
+      },
+      "PasswordCreation": {
+        "_classes": {
+          "PasswordIncludesLowerCaseConstraintTests": {
+            "CountToRequireMustBeAPositiveValue": 1,
+            "PasswordThatExceedsMinimumLowerCasePassesValidation": 1,
+            "PasswordThatMeetsMinimumLowerCasePassesValidation": 1,
+            "PasswordWithFewerThanMinimumLowerCaseFailsValidation": 1,
+            "PasswordWithoutLowerCaseFailsValidation": 1
+          },
+          "PasswordIncludesNumbersConstraintTests": {
+            "CountOfNumbersToRequireMustBeAPositiveValue": 1,
+            "PasswordWithANumberPassesConstraint": 1,
+            "PasswordWithFewerThanTheMinimumCountOfNumbersFailsConstraint": 1,
+            "PasswordWithoutNumbersFailsConstraint": 1
+          },
+          "PasswordIncludesSpecialCharactersConstraintTests": {
+            "CantProvideNullListOfCharacters": 1,
+            "MinimumCountMustBeAPositiveValue": 1,
+            "PasswordExceedingMinimumSpecialCharsPassesValidation": 1,
+            "PasswordMatchingCustomCharsPassesValidation": 1,
+            "PasswordUnderMinimumSpecialCharsFailsValidation": 1,
+            "PasswordWithMinimumSpecialCharsPassesValidation": 1,
+            "PasswordWithoutCustomCharsFailsValidation": 1,
+            "PasswordWithoutSpecialCharsFailsValidation": 1
+          },
+          "PasswordIncludesUpperCaseConstraintTests": {
+            "CountToRequireMustBeAPositiveValue": 1,
+            "PasswordThatExceedsMinimumLowerCasePassesValidation": 1,
+            "PasswordThatMeetsMinimumLowerCasePassesValidation": 1,
+            "PasswordWithFewerThanMinimumLowerCaseFailsValidation": 1,
+            "PasswordWithoutUpperCaseFailsValidation": 1
+          },
+          "PasswordLengthConstraintTests": {
+            "MaximumLengthMustBeAPositiveValue": 1,
+            "MaximumLengthMustBeGreaterThanMinimumLength": 1,
+            "MinimumLengthMustBeAPositiveValue": 1,
+            "PasswordGreaterThanMaxLengthFailsValidation": 1,
+            "PasswordLessThanMinimumLengthFailsValidation": 1,
+            "PasswordThatEqualsMaxLengthPassesValidation": 1,
+            "PasswordThatEqualsMinimumLengthPassesValidation": 1
+          }
+        }
+      }
+    },
+    "Themes": {
+      "_classes": {
+        "ThemeManagerHighContrastTests": {
+          "ActiveTheme_ReturnsDefaultOrUser_WhenHighContrastInactive": 1,
+          "ActiveTheme_ReturnsHighContrast_WhenHighContrastActive": 1,
+          "HighContrastTheme_IsConfiguredCorrectly": 1
+        }
+      }
+    },
+    "Tools": {
+      "_classes": {
+        "DebugDumperTests": {
+          "CreateDebugBundle_CreatesZipFileWithEntries": 1
+        },
+        "DisposableActionTests": {
+          "DisposalActionRunsWhenDisposeIsCalled": 1,
+          "DisposeActionOnlyExecutedOnceWhenCallingDisposeMultipleTimes": 1,
+          "InitializerActionRunsWhenObjectIsCreated": 1
+        },
+        "ExternalToolIconTests": {
+          "IconPath_IsStoredCorrectly": 1
+        },
+        "ExternalToolTests": {
+          "ArgumentsWithSpaces_AreParsedCorrectly": 1,
+          "InvalidExecutablePath_ThrowsArgumentException": 1,
+          "MultipleArgumentsAreParsedCorrectly": 1,
+          "PasswordWithComma_BatchFile_PassedAsSingleArgument": 1,
+          "PasswordWithComma_ExeFile_PassedCorrectly": 1,
+          "PasswordWithEqualsSignIsPassedCorrectly": 1,
+          "PasswordWithSpecialCharactersIsPassedCorrectly": 1,
+          "RunElevated_UsesShellExecuteTrue": 1,
+          "RunNotElevated_UsesShellExecuteFalse": 1,
+          "System32Path_NormalizesToSysnativeInWow64_WithFallback": 1,
+          "ValidExecutablePath_DoesNotThrow": 1
+        },
+        "ExternalToolsArgumentParserTests": {
+          "NullConnectionInfoResultsInEmptyVariables": 1,
+          "PasswordWithCommaIsNotCaretEscaped": 1,
+          "PasswordWithMultipleSpecialCharsIsEscaped": 1,
+          "PasswordWithSemicolonIsNotCaretEscaped": 1,
+          "ProtocolTokenReturnsCorrectValueForEachProtocol": 11,
+          "UrlEncodePrefixEncodesSpecialCharactersInPassword": 1,
+          "UserField1WithNestedVariableIsExpanded": 1,
+          "UserFieldWithNestedVariableIsExpanded": 1,
+          "UserFieldWithNoVariablesIsUnchanged": 1,
+          "UserFieldWithSelfReferenceDoesNotInfiniteLoop": 1
+        },
+        "FullyObservableCollectionTests": {
+          "CanCreateWithExistingList": 1,
+          "ChildItemEventsTriggerListEvents": 1,
+          "ClearRemovesAllItems": 1,
+          "CollectionBeginsEmpty": 1,
+          "ItemAdded": 1,
+          "ItemInserted": 1,
+          "ItemRemoved": 1,
+          "ItemRemovedAtIndex": 1,
+          "ListUnsubscribesFromRemovedItems": 1
+        },
+        "OptionalTests": {
+          "MaybeExtensionOfNullObjectIsntNull": 1,
+          "MaybeReturnsEmptyListWhenGivenNullValue": 1,
+          "MaybeReturnsValueIfNotNull": 1
+        },
+        "PathValidatorTests": {
+          "EmptyPath_ReturnsFalse": 1,
+          "IsValidExecutablePath_EmptyPath_ReturnsFalse": 1,
+          "IsValidExecutablePath_NullPath_ReturnsFalse": 1,
+          "IsValidExecutablePath_PathWithCaret_ReturnsFalse": 1,
+          "IsValidExecutablePath_PathWithCarriageReturn_ReturnsFalse": 1,
+          "IsValidExecutablePath_PathWithCommandInjectionAmpersand_ReturnsFalse": 1,
+          "IsValidExecutablePath_PathWithCommandInjectionPipe_ReturnsFalse": 1,
+          "IsValidExecutablePath_PathWithCommandInjectionSemicolon_ReturnsFalse": 1,
+          "IsValidExecutablePath_PathWithInputRedirection_ReturnsFalse": 1,
+          "IsValidExecutablePath_PathWithMultipleQuotes_ReturnsFalse": 1,
+          "IsValidExecutablePath_PathWithMultipleSingleQuotes_ReturnsFalse": 1,
+          "IsValidExecutablePath_PathWithNewline_ReturnsFalse": 1,
+          "IsValidExecutablePath_PathWithParentheses_ReturnsFalse": 1,
+          "IsValidExecutablePath_PathWithRedirection_ReturnsFalse": 1,
+          "IsValidExecutablePath_PathWithSpaces_ReturnsTrue": 1,
+          "IsValidExecutablePath_PathWithTraversal_ReturnsFalse": 1,
+          "IsValidExecutablePath_ValidRelativePath_ReturnsTrue": 1,
+          "IsValidExecutablePath_ValidWindowsPath_ReturnsTrue": 1,
+          "IsValidExecutablePath_WhitespacePath_ReturnsFalse": 1,
+          "NullPath_ReturnsFalse": 1,
+          "PathWithBackslashTraversal_ReturnsFalse": 1,
+          "PathWithEncodedTraversal_ReturnsFalse": 1,
+          "PathWithForwardSlashTraversal_ReturnsFalse": 1,
+          "PathWithMixedTraversal_ReturnsFalse": 1,
+          "PathWithUppercaseEncodedTraversal_ReturnsFalse": 1,
+          "ValidPath_ReturnsTrue": 1,
+          "ValidateExecutablePathOrThrow_PathWithCommandInjection_ThrowsArgumentException": 1,
+          "ValidateExecutablePathOrThrow_PathWithTraversal_ThrowsArgumentException": 1,
+          "ValidateExecutablePathOrThrow_ValidPath_DoesNotThrow": 1,
+          "ValidateExecutablePathOrThrow_WithCustomParameterName_IncludesParameterName": 1,
+          "ValidatePathOrThrow_WithCustomParameterName_IncludesParameterName": 1,
+          "ValidatePathOrThrow_WithNullPath_ThrowsArgumentException": 1,
+          "ValidatePathOrThrow_WithTraversalPath_ThrowsArgumentException": 1,
+          "ValidatePathOrThrow_WithValidPath_DoesNotThrow": 1
+        },
+        "PuttyTypeDetectorTests": {
+          "GetPuttyVersion_ReturnsCorrectVersion_ForPuTTYNG": 1,
+          "GetPuttyVersion_ReturnsZero_ForNonExistentFile": 1
+        },
+        "TabColorConverterTests": {
+          "CanConvertFrom": 2,
+          "CanConvertTo": 2,
+          "ColorPropertyUsesTabColorConverter": 1,
+          "ConvertFromColorObjectDoesNotThrowException": 1,
+          "ConvertFromColorToStringCustomColor": 1,
+          "ConvertFromColorToStringCustomColorWithAlpha": 1,
+          "ConvertFromColorToStringNamedColor": 1,
+          "ConvertFromEmptyStringReturnsEmptyString": 1,
+          "ConvertFromHexStringReturnsString": 1,
+          "ConvertFromNullReturnsEmptyString": 1,
+          "ConvertFromStringReturnsString": 1,
+          "ConvertToColorFromEmptyStringReturnsEmpty": 1,
+          "ConvertToColorFromHexString": 1,
+          "ConvertToColorFromNamedString": 1,
+          "ConvertToColorFromNullReturnsEmpty": 1,
+          "ConvertToStringFromString": 1,
+          "GetStandardValuesExclusiveReturnsFalse": 1,
+          "GetStandardValuesReturnsColorList": 1,
+          "GetStandardValuesSupportedReturnsTrue": 1
+        }
+      },
+      "Cmdline": {
+        "_classes": {
+          "StartupArgumentsInterpreterTests": {
+            "ParseArguments_SetsConnectTo_WhenConnectArgumentIsProvided": 1,
+            "ParseArguments_SetsStartupConnectTo_WhenStartupArgumentIsProvided": 1
+          }
+        }
+      },
+      "Registry": {
+        "_classes": {
+          "WindowsRegistryTests": {
+            "ConvertRegistryValueKindToType_ReturnsCorrectType": 1,
+            "ConvertStringToRegistryHive_InvalidHiveNull_ThrowArgumentNullException": 1,
+            "ConvertStringToRegistryHive_InvalidHive_ThrowArgumentException": 1,
+            "ConvertStringToRegistryHive_ReturnsCorrectValue": 1,
+            "ConvertStringToRegistryValueKind_InvalidHiveNull_ThrowArgumentNullException": 1,
+            "ConvertStringToRegistryValueKind_InvalidHive_ThrowArgumentException": 1,
+            "ConvertStringToRegistryValueKind_ReturnsCorrectValue": 1,
+            "ConvertTypeToRegistryValueKind_ReturnsCorrectValue": 1,
+            "ConvertTypeToRegistryValueKind_UnknownType_ReturnsString": 1,
+            "ConvertTypeToRegistryValueKind_WithNullValueType_ThrowsArgumentNullException": 1,
+            "CreateKey_ExistingKey_DoesNotThrow": 1,
+            "CreateKey_InvalidHive_ThrowsArgumentException": 1,
+            "CreateKey_NewKey_CreatesKeySuccessfully": 1,
+            "DeleteRegistryValue_DeletesValue": 1,
+            "DeleteTree_RemovesKeyAndSubkeys": 1,
+            "GetBoolValue_FromDword_ReturnsFalse": 1,
+            "GetBoolValue_FromDword_ReturnsTrue": 1,
+            "GetBoolValue_FromString_ReturnsFalse": 1,
+            "GetBoolValue_FromString_ReturnsTrue": 1,
+            "GetBoolValue_NonExistingValue_ReturnsFalse": 1,
+            "GetIntegerValue_NonExistingValue_ReturnsZero": 1,
+            "GetIntegerValue_NotExistingKey_ReturnsDefault": 1,
+            "GetIntegerValue_RetrieveValue_ReturnsValue": 1,
+            "GetRegistryEntriesRecursive_ReturnsCorrectEntries": 1,
+            "GetRegistryEntries_ReturnsCorrectEntries": 1,
+            "GetRegistryEntry_ReturnsCorrectEntry": 1,
+            "GetStringValue_NonExistingValue_ReturnsDefault": 1,
+            "GetStringValue_NonExistingValue_ReturnsNull": 1,
+            "GetStringValue_RetrieveDefault_ReturnsValue": 1,
+            "GetStringValue_RetrieveValue_ReturnsValue": 1,
+            "GetSubKeyNames_ExistingKey_ReturnsSubKeyNames": 1,
+            "GetSubKeyNames_NonExistingKey_ReturnsEmptyArray": 1,
+            "GetValue_NonExistingValue_ReturnsNull": 1,
+            "GetValue_RetrieveDefault_RetrunsValue": 1,
+            "GetValue_RetrieveValue_ReturnsValue": 1,
+            "SetAndGetDefaultValue_RetrieveValue_ReturnsValue": 1,
+            "SetValue_DefaultValueWithWrongValueKind_SetsValueSuccessfully": 1,
+            "SetValue_NewKey_SetsValueSuccessfully": 1,
+            "SetValue_OverwriteValue_SetsValueSuccessfully": 1,
+            "ThrowIfHiveInvalid_CurrentConfig_ThrowsArgumentException": 1,
+            "ThrowIfHiveInvalid_InvalidHive_ThrowsArgumentException": 1,
+            "ThrowIfHiveInvalid_ValidHive_DoesNotThrow": 1,
+            "ThrowIfNameInvalid_NullName_ThrowsArgumentNullException": 1,
+            "ThrowIfNameInvalid_ValidName_DoesNotThrow": 1,
+            "ThrowIfPathInvalid_EmptyPath_ThrowsArgumentException": 1,
+            "ThrowIfPathInvalid_NullPath_ThrowsArgumentException": 1,
+            "ThrowIfPathInvalid_ValidPath_DoesNotThrow": 1,
+            "ThrowIfPathInvalid_WhitespacePath_ThrowsArgumentException": 1,
+            "ThrowIfValueKindInvalid_InvalidValueKind_ThrowsArgumentException": 1,
+            "ThrowIfValueKindInvalid_ValidValueKind_DoesNotThrow": 1,
+            "ThrowIfValueKindInvalid_ValueKindNone_ThrowsArgumentException": 1,
+            "ThrowIfValueKindInvalid_ValueKindUnknown_ThrowsArgumentException": 1
+          }
+        },
+        "RegistryEntryTest": {
+          "_classes": {
+            "BaseRegistryEntryTest": {
+              "FluentWriteAndRead_DoesNotThrow_ReturnsStrJustATest": 1,
+              "FluentWriteReadAndChange_DoesNotThrow_WriteReadsCorrectly": 1,
+              "IsKeyReadable_AllPropertiesSet_ReturnsTrue": 1,
+              "IsKeyWritable_AllPropertiesSet_ReturnsTrue": 1,
+              "IsSet_ValueHasBeenSet_NotRead_ReturnsFalse": 1,
+              "Name_SetValidValue_GetReturnsSameValue": 1,
+              "Path_SetNullValue_ThrowsArgumentNullException": 1,
+              "Path_SetValidValue_GetReturnsSameValue": 1,
+              "Read_LockAfter_IsLocked": 1,
+              "Read_LockBevore_IsLocked": 1,
+              "Read_Lock_ThrowWhenRead": 1,
+              "Read_WhenRegistryKeyIsNull_ThrowsInvalidOperationException": 1,
+              "ValueKind_SetInvalidValue_ThrowsArgumentException": 1,
+              "Value_SetValidValue_GetReturnsSameValue": 1,
+              "WriteAndRead_Entry_DoesNotThrowAndReadsCorrectly": 1,
+              "WriteDefaultAndReadDefault_Entry_DoesNotThrowAndReadsCorrectly": 1,
+              "Write_WhenKeyIsUnwritable_ThrowsInvalidOperationException": 1
+            },
+            "BoolEntryTest": {
+              "DWordFalse_SuccessfulToBool_ReturnsFalse": 1,
+              "DWordTrue_SuccessfulToBool_ReturnsTrue": 1,
+              "FluentWrite_And_Read_DoesNotThrow_ReturnsBoolFalse": 1,
+              "StringFalse_SuccessfulToBool_ReturnsFalse": 1,
+              "StringTrue_SuccessfulToBool_ReturnsTrue": 1
+            },
+            "IntegerEntryTest": {
+              "FluentWrite_And_Read_DoesNotThrow_ReturnsInt12": 1,
+              "IsValid_AllowedValuesSet_ValueInAllowedValues_ReturnsTrue": 1,
+              "IsValid_AllowedValuesSet_ValueNotInAllowedValues_ReturnsFalse": 1,
+              "IsValid_EnumSet_ValueInEnum_ReturnsTrue": 1,
+              "IsValid_EnumSet_ValueNotInEnum_ReturnsFalse": 1,
+              "IsValid_InvalidValueKind_ThrowArgumentException": 1,
+              "IsValid_NoValidationSet_EntryComplete_ReturnsTrue": 1,
+              "IsValid_RangeSet_DefaultMax_ValueInRange_ReturnsTrue": 1,
+              "IsValid_RangeSet_DefaultMin_ValueInRange_ReturnsTrue": 1,
+              "IsValid_RangeSet_Value0_ValueOutOfRange_ReturnsTrue": 1,
+              "IsValid_RangeSet_ValueInRange_ReturnsTrue": 1,
+              "IsValid_RangeSet_ValueOutOfRange_ReturnsFalse": 1,
+              "Value_SetToNegativeNumber_ThrowArgumentException": 1
+            },
+            "LongIntegerEntryTest": {
+              "FluentWrite_And_Read_DoesNotThrow_ReturnsLong15": 1,
+              "IsValid_AllowedValuesSet_ValueInAllowedValues_ReturnsTrue": 1,
+              "IsValid_AllowedValuesSet_ValueNotInAllowedValues_ReturnsFalse": 1,
+              "IsValid_InvalidValueKind_ThrowArgumentException": 1,
+              "IsValid_NoValidationSet_EntryComplete_ReturnsTrue": 1,
+              "IsValid_RangeSet_ValueInRange_ReturnsTrue": 1,
+              "IsValid_RangeSet_ValueOutOfRange_ReturnsFalse": 1,
+              "Value_SetToNegativeNumber_ThrowArgumentException": 1
+            },
+            "StringEntryTest": {
+              "FluentWrite_And_Read_DoesNotThrow_ReturnsStrJustATest": 1,
+              "IsValid_AllowedValuesSet_CorrectsValueSpellingAndValidatesSuccessfully": 1,
+              "IsValid_AllowedValuesSet_ValueInAllowedValues_ReturnsTrue": 1,
+              "IsValid_AllowedValuesSet_ValueNotInAllowedValues_ReturnsFalse": 1,
+              "IsValid_EnumSet_CorrectsValueSpellingAndValidatesSuccessfully": 1,
+              "IsValid_EnumSet_ValueInEnum_ReturnsTrue": 1,
+              "IsValid_EnumSet_ValueNotInEnum_ReturnsFalse": 1,
+              "IsValid_InvalidValueKind_ThrowArgumentException": 1,
+              "IsValid_NoValidationSet_EntryComplete_ReturnsTrue": 1
+            }
+          }
+        }
+      }
+    },
+    "Tree": {
+      "_classes": {
+        "CommandLineConnectionOpenerTests": {
+          "Execute_DoesNotOpenAnyConnection_WhenTargetIsEmpty": 1,
+          "Execute_OpensMatchingConnection_WhenRootNodeIsProvided": 1,
+          "Execute_OpensMatchingConnection_WhenTargetIsProvided": 1
+        },
+        "ConnectionTreeDragAndDropHandlerTests": {
+          "CanDragConnectionBetweenConnections": 1,
+          "CanDragConnectionOntoContainer": 1,
+          "CanDragContainerBetweenContainers": 1,
+          "CanDragContainerOntoContainer": 1,
+          "CanDragMultipleNodesWhenAllSourcesAreValid": 1,
+          "CantDragConnectionOntoItself": 1,
+          "CantDragConnectionOntoRootPuttySessionNode": 1,
+          "CantDragContainerBetweenItsChildren": 1,
+          "CantDragContainerOntoItsChild": 1,
+          "CantDragContainerOntoItself": 1,
+          "CantDragContainerOntoRootPuttySessionNode": 1,
+          "CantDragMultipleNodesWhenOneSourceIsInvalid": 1,
+          "CantDragNodeAbovePuttySessionNodes": 1,
+          "CantDragNodeAboveRootNodeInfo": 1,
+          "CantDragNodeBelowPuttySessionNodes": 1,
+          "CantDragNodeBelowRootNodeInfo": 1,
+          "CantDragNodeOntoItsCurrentParent": 1,
+          "CantDragPuttySessionInfo": 1,
+          "CantDragRootNodeInfo": 1,
+          "DraggingNodeAboveSiblingRearrangesTheUnderlyingModelCorrectly": 1,
+          "DraggingNodeBelowSiblingRearrangesTheUnderlyingModelCorrectly": 1,
+          "DraggingNodeToNewContainerAddsNodeToTheNewContainer": 1,
+          "DraggingNodeToNewContainerRemovesNodeFromOldContainer": 1
+        },
+        "ConnectionTreeModelTests": {
+          "FindConnectionByIdReturnsChildNode": 1,
+          "GetChildListProvidesAllChildren": 1,
+          "ResolveLinkedConnectionReturnsNullWhenLinksAreCircular": 1,
+          "ResolveLinkedConnectionReturnsSourceNode": 1
+        },
+        "ConnectionTreeTests": {
+          "CanDeleteLastFolderInTheTree": 1
+        },
+        "NodeSearcherPriorityTests": {
+          "SearchByNamePrioritizesExactMatch": 1,
+          "SearchByNamePrioritizesExactMatchByHostname": 1
+        },
+        "NodeSearcherTests": {
+          "NextMatchAdvancesTheIterator": 1,
+          "PreviousMatchRollsBackTheIterator": 1,
+          "SearchByDescription1ReturnsAllExpectedMatches": 1,
+          "SearchByDescriptionReturnsAllExpectedMatches": 1,
+          "SearchByHostname1ReturnsAllExpectedMatches": 1,
+          "SearchByNameReturnsAllExpectedMatches": 1,
+          "SearchingWithEmptyStringReturnsNoMatches": 1
+        },
+        "PreviousSessionOpenerTests": {
+          "ActiveQuickConnectSessionsAreNotReopened": 1,
+          "AllRequestedSessionsAreReopened": 1,
+          "ExceptionThrownWhenConstructorGivenNullArg": 1,
+          "PreviouslyOpenedQuickConnectSessionsAreReopened": 1
+        },
+        "PreviouslyOpenedFolderExpanderTests": {
+          "ExpandsAllFoldersThatAreMarkedForExpansion": 1
+        },
+        "RootNodeInfoTests": {
+          "AutoLockOnMinimizeIsDisabledByDefault": 1,
+          "DefaultPasswordReturnsExpectedValue": 1,
+          "IsPasswordMatchReturnsFalseForNullPassword": 1,
+          "IsPasswordMatchReturnsFalseForWrongPassword": 1,
+          "IsPasswordMatchReturnsTrueForCustomPasswordEvenWhenPasswordFlagIsFalse": 1,
+          "IsPasswordMatchReturnsTrueForDefaultPasswordWhenNoCustomPasswordSet": 1,
+          "PasswordPropertyReflectsWhetherACustomPasswordIsInUse": 4,
+          "PasswordStringReturnsCustomPassword": 2,
+          "PasswordStringReturnsDefaultPasswordWhenNoCustomOneIsSet": 2,
+          "PasswordStringReturnsDefaultWhenPasswordPropertySetWithoutPasswordString": 1,
+          "RootNodeHasCorrectTreeNodeType": 2
+        },
+        "SelectedConnectionDeletionConfirmerTests": {
+          "ClickingNoReturnsFalse": 1,
+          "ClickingYesReturnsTrue": 1
+        }
+      },
+      "ClickHandlers": {
+        "_classes": {
+          "ExpandNodeClickHandlerTests": {
+            "ExceptionThrownOnConstructorNullArg": 1,
+            "NothingHappensWhenConnectionInfoProvided": 1,
+            "TargetedNodeIsExpanded": 1
+          },
+          "OpenConnectionClickHandlerTests": {
+            "ConnectionOpened": 1,
+            "DoesNothingWhenGivenContainerInfo": 1,
+            "ExceptionThrownWhenConstructorGivenNullArg": 1,
+            "ThrowWhenExecuteGivenNullArg": 1
+          },
+          "SwitchToConnectionClickHandlerTests": {
+            "DoesNothingWhenGivenContainerInfo": 1,
+            "ExceptionThrownWhenConstructorGivenNullArg": 1,
+            "SwitchesToConnection": 1,
+            "ThrowWhenExecuteGivenNullArg": 1
+          },
+          "TreeNodeCompositeClickHandlerTests": {
+            "ExecutesAllItsHandlers": 1,
+            "ThrowWhenExecuteGivenNullArg": 1
+          }
+        }
+      },
+      "Smart": {
+        "_classes": {
+          "SmartConnectionInfoTests": {
+            "Constructor_ShouldCopyPropertiesAndShareOpenConnections": 1,
+            "PropertyChanged_OnOriginal_ShouldUpdateSmartConnection": 1
+          }
+        }
+      }
+    },
+    "UI": {
+      "_classes": {
+        "DisplayPropertiesTests": {
+          "AttemptingToCallConstructorWithNullGraphicsProviderWillThrow": 1,
+          "AttemptingToScaleANullIconWillThrowAnException": 1,
+          "AttemptingToScaleANullImageWillThrowAnException": 1,
+          "ResolutionScalingFactorAlwaysReturnsMostUpdatedValue": 1,
+          "ScaleHeightReturnsValueScaledByHeightScalingFactor": 1,
+          "ScaleImageReturnsNewImageWithCorrectlyScaledHeight": 1,
+          "ScaleImageReturnsNewImageWithCorrectlyScaledWidth": 1,
+          "ScaleSizeReturnsNewSizeWithCorrectlyScaledHeight": 1,
+          "ScaleSizeReturnsNewSizeWithCorrectlyScaledWidth": 1,
+          "ScaleWidthReturnsValueScaledByWidthScalingFactor": 1
+        },
+        "WindowListTests": {
+          "CountIsReducedAfterItemRemoved": 1,
+          "CountReturnsCorrectNumberOfElements": 1,
+          "EmptyWhenInitialized": 1,
+          "GetWindowFromStringReturnsCorrectObject": 1,
+          "IndexingByNumberReturnsTheCorrectObject": 1,
+          "IndexingByObjectReturnsTheCorrectObject": 1,
+          "ItemIsNotInListAfterBeingRemoved": 1,
+          "ListIsEmptyAfterLastItemRemoved": 1,
+          "ThrowsExceptionWhenIndexingByObjectFails": 1,
+          "ThrowsExceptionWhenIndexingPastListBounds": 1,
+          "WindowIsInListAfterBeingAdded": 1,
+          "WindowsAreInListAfterCallingAddRange": 1
+        }
+      },
+      "Controls": {
+        "_classes": {
+          "ConnectionContextMenuConnectWithCredentialsTests": {
+            "VerifyConnectWithCredentialsMenuItemExists": 1
+          },
+          "ConnectionContextMenuRecursiveTests": {
+            "DisconnectConnection_ShouldDisconnectRecursively": 1
+          },
+          "ConnectionContextMenuSimpleTests": {
+            "VerifyImportFromTextListMenuItemExists": 1,
+            "VerifyOptionsMenuItemExists": 1
+          },
+          "ConnectionInfoPropertyGridMultiSelectTests": {
+            "IntersectionOfPropertiesIsShown_WhenSelectingDifferentProtocols": 1,
+            "UnionOfPropertiesIsShown_WhenSelectingSameProtocol": 1
+          },
+          "ConnectionTreeCountTests": {
+            "AddingConnectionUpdatesAncestorCounts": 1,
+            "RemovingConnectionUpdatesAncestorCounts": 1
+          },
+          "ConnectionTreeExpansionTests": {
+            "ApplyFilter_ExpandsDeeplyNestedFolders": 1,
+            "ApplyFilter_ExpandsMatchingFolders": 1,
+            "UserExpandAll_ExpandsHiddenFolders_AfterFilterRemoval": 1
+          },
+          "ConnectionTreeReproTests": {
+            "AddingRootNodeToModelUpdatesTree": 1,
+            "RemovingRootNodeFromModelUpdatesTree": 1
+          },
+          "ConnectionTreeSearchTextFilterRegexTests": {
+            "Filter_ByRegex_CaseInsensitiveByDefault": 1,
+            "Filter_ByRegex_InvalidRegex_ReturnsFalseSafely": 1,
+            "Filter_ByRegex_MatchesDescription": 1,
+            "Filter_ByRegex_MatchesHostname": 1,
+            "Filter_ByRegex_MatchesName": 1,
+            "Filter_ByRegex_MatchesTags": 1
+          },
+          "ConnectionTreeSearchTextFilterTests": {
+            "Filter_ByHostname_MatchesSubstring": 1,
+            "Filter_ByName_MatchesSubstring": 1,
+            "Filter_ByProtocolPrefix_MatchesProtocolName": 1,
+            "Filter_ByProtocolPrefix_MatchesSSH2": 1,
+            "Filter_ByTagPrefix_MatchesPartialTag": 1,
+            "Filter_ByTagPrefix_MatchesSingleTag": 1,
+            "Filter_ByTagsInNormalSearch_MatchesTags": 1,
+            "Filter_FolderHostnameMatch_DoesNotRevealChildrenViaAncestorRule_Issue2293": 1,
+            "Filter_FolderNameMatch_ShowsAllChildrenViaAncestorRule_Issue2293": 1,
+            "Filter_FolderNameMatch_ShowsDirectChildConnections": 1,
+            "Filter_FolderNameMatch_ShowsNestedChildConnections": 1,
+            "Filter_FolderNameNoMatch_HidesChildrenThatDontMatch": 1,
+            "Filter_MultipleSpaceTerms_ExtraSpacesIgnored": 1,
+            "Filter_MultipleSpaceTerms_MatchesWhenAllTermsMatch": 1,
+            "Filter_MultipleSpaceTerms_NoMatchWhenOnlyOneTermMatches": 1,
+            "Filter_MultipleSpaceTerms_SingleTermBehaviorUnchanged": 1,
+            "Filter_WithEmptyText_ReturnsTrue": 1,
+            "Filter_WithProtocolFilterSet_ExcludesNonMatchingProtocols": 1,
+            "Filter_WithSpecialInclusionList_AlwaysReturnsTrueForIncludedItems": 1
+          },
+          "ConnectionTreeSqlReadOnlyTests": {
+            "AddConnection_DoesNotAdd_WhenSqlReadOnlyIsTrue": 1,
+            "DeleteSelectedNode_DoesNotDelete_WhenSqlReadOnlyIsTrue": 1,
+            "DuplicateSelectedNode_DoesNotDuplicate_WhenSqlReadOnlyIsTrue": 1,
+            "SortRecursive_DoesNotSort_WhenSqlReadOnlyIsTrue": 1
+          },
+          "ConnectionTreeTests": {
+            "CanCreateLinkedConnectionNode": 1,
+            "CanDeleteMultipleSelectedNodes": 1,
+            "CanDuplicateConnectionNode": 1,
+            "CanDuplicateMultipleSelectedNodes": 1,
+            "CannotAddConnectionToPuttySessionNode": 1,
+            "CannotAddFolderToPuttySessionNode": 1,
+            "CannotDuplicatePuttyConnectionNode": 1,
+            "CannotDuplicateRootConnectionNode": 1,
+            "CannotDuplicateRootPuttyNode": 1,
+            "CopyHostnameCopiesTheHostnameOfTheSelectedConnection": 1,
+            "CopyHostnameCopiesTheNodeNameOfTheSelectedContainer": 1,
+            "CopyHostnameDoesNotCopyAnythingIfHostnameOfSelectedConnectionIsEmpty": 1,
+            "CopyHostnameDoesNotCopyAnythingIfNameOfSelectedContainerIsEmpty": 1,
+            "CopyHostnameDoesNotCopyAnythingIfNoNodeSelected": 1,
+            "DuplicatingWithNoNodeSelectedDoesNothing": 1,
+            "ExpandingAllItemsUpdatesColumnWidthAppropriately": 1,
+            "FilteringIsRetainedAndUpdatedWhenNodeDeleted": 1,
+            "MoveSelectedNodesDownMovesAllSelectedNodes": 1,
+            "MoveSelectedNodesUpMovesAllSelectedNodes": 1,
+            "RenamingNodeWithNothingSelectedDoesNothing": 1,
+            "SortSelectedNodesRecursiveSortsAllSelectedParents": 1
+          },
+          "FilteredPropertyGridTests": {
+            "APropertyOnBothTheBrowsableAndHiddenListWillNotBeShown": 1,
+            "AllPropertiesVisibleByDefault": 1,
+            "CanSelectGridItem": 1,
+            "DoesNotThrowWhenNonExistantPropertyFoundInBrowsablePropertiesList": 1,
+            "FindNextGridItemPropertyReturnsTheCorrectItem": 1,
+            "FindPreviousGridItemPropertyReturnsTheCorrectItem": 1,
+            "GetVisibleGridItemsReturnsAllExpandedItems": 1,
+            "HiddenPropertiesListCanHandleNonExistentProperties": 1,
+            "OnlyPropertiesOnTheBrowsablePropertiesListAreShown": 1,
+            "PropertiesOnTheHiddenPropertiesListAreNotShown": 1
+          },
+          "NameColumnTests": {
+            "AspectGetter_ReturnsNameOnly_ForConnection": 1,
+            "AspectGetter_ReturnsNameWithCount_ForContainer": 1,
+            "AspectGetter_ReturnsNameWithRecursiveCount_ForContainer": 1,
+            "AspectGetter_ReturnsNameWithZeroCount_ForEmptyContainer": 1
+          },
+          "PageSequenceTests": {
+            "CallingNextAdvancesPage": 1,
+            "CallingPreviousGoesBackAPage": 1,
+            "PageListAddedToSequence": 1,
+            "PageParamsAddedToSequence": 1
+          },
+          "SecureTextBoxTests": {
+            "TextboxInputGetsAddedToSecureString": 1
+          },
+          "TextBoxExtensionsTests": {
+            "GetCueBannerReturnsCorrectValue": 1,
+            "SetCueBannerSetsTheBannerText": 1
+          }
+        }
+      },
+      "Forms": {
+        "_classes": {
+          "LockPanelsTests": {
+            "SetPanelLock_LocksPanels_WhenSettingIsTrue": 1,
+            "SetPanelLock_UnlocksPanels_WhenSettingIsFalse": 1
+          },
+          "OptionsFormTests": {
+            "FormBehavior": 1
+          },
+          "PasswordFormTests": {
+            "ClickingCancelClosesPasswordForm": 1,
+            "PasswordFieldHasAutofocus": 1,
+            "PasswordFormText": 1
+          }
+        },
+        "OptionsPages": {
+          "_classes": {
+            "AllOptionsPagesTests": {
+              "AllPagesExistWithIconsAndLoadCorrectSettings": 1
+            }
+          }
+        }
+      },
+      "Menu": {
+        "msMain": {
+          "_classes": {
+            "ConnectionsMenuTests": {
+              "VerifyConnectionsMenuInitialization": 1
+            },
+            "FileMenuTests": {
+              "VerifyNewConnectionMenuItemExists": 1
+            }
+          }
+        }
+      },
+      "Tabs": {
+        "_classes": {
+          "ConnectionTabAppearanceSettingsTests": {
+            "GetTabColorOverride_ReturnsConfiguredColor_WhenEnabled": 1,
+            "GetTabColorOverride_ReturnsConnectionColor_WhenProvided": 1,
+            "GetTabColorOverride_ReturnsNull_WhenDisabled": 1,
+            "GetTabFont_ReturnsConfiguredFont_WhenEnabled": 1,
+            "GetTabFont_ReturnsThemeFont_WhenDisabled": 1
+          },
+          "DockPaneStripNGTests": {
+            "IsWithinUndockSuppressionZone_ReturnsFalse_WhenPointerIsFarOutsideSuppressionZone": 1,
+            "IsWithinUndockSuppressionZone_ReturnsFalse_WhenPointerIsInsideStrip": 1,
+            "IsWithinUndockSuppressionZone_ReturnsTrue_WhenPointerIsJustOutsideStrip": 1,
+            "MiddleClick_ClosesSpecificTab_NotAll": 1
+          }
+        }
+      },
+      "Window": {
+        "_classes": {
+          "ConnectionTreeWindowTests": {
+            "CanCreateWindow": 1,
+            "ClearButtonVisibilityTests": 1,
+            "ConnectionTreeEnablesMultiSelection": 1
+          },
+          "ConnectionWindowReconnectTests": {
+            "Reconnect_ReusesExistingTabAndPreservesTabIndex": 1
+          },
+          "ConnectionWindowTabVisibilityTests": {
+            "TabVisibility_UpdatesBasedOnSettingsAndCount": 1
+          },
+          "ExternalToolsWindowVariablesTests": {
+            "VariablesButton_InsertsVariable_IntoArgumentsTextBox": 1
+          }
+        },
+        "ConfigWindowTests": {
+          "_classes": {
+            "ConfigWindowGeneralTests": {
+              "ConnectionPropertiesCanAlwaysBeShownUnlessNothingIsSelected": "dynamic",
+              "DefaultConnectionPropertiesCanBeShownRegardlessOfWhichNodeIsSelected": "dynamic",
+              "DefaultInheritancePropertiesCanBeShownRegardlessOfWhichNodeIsSelected": "dynamic",
+              "InheritancePropertiesAreVisibleInCertainCases": "dynamic",
+              "IsHostReachable_ReturnsFalse_WhenPortIsClosed": 1,
+              "IsHostReachable_ReturnsTrue_WhenPortIsOpen": 1,
+              "PropertyGridShowCorrectPropertiesForConnectionInfo": "dynamic",
+              "PropertyGridShowCorrectPropertiesForRootConnectionInfo": 1,
+              "PropertyGridShowCorrectPropertiesForRootPuttyInfo": 1,
+              "SwitchFromInheritanceToConnectionPropertiesWhenClickingRootNode": 1,
+              "SwitchFromInheritanceToConnectionPropertiesWhenClickingRootPuttyNode": 1
+            },
+            "ConfigWindowRdpSpecialTests": {
+              "AutomaticResizePropertyShown_WhenResolutionIsDynamic": 2,
+              "PropertyShownWhenActive_RdpMinutesToIdleTimeout": 1,
+              "RdGatewayPropertiesShown_WhenRDGatewayUseConnectionCredentialsIsNotYes": 2,
+              "RdGatewayPropertiesShown_WhenRdGatewayUsageMethodIsNotNever": 2,
+              "ResolutionWidthAndHeightHidden_WhenResolutionIsNotCustom": 5,
+              "ResolutionWidthAndHeightShown_WhenResolutionIsCustom": 1,
+              "SoundQualityPropertyShown_WhenRdpSoundsSetToBringToThisComputer": 1
+            },
+            "ConfigWindowVncSpecialTests": {
+              "ProxyPropertiesShown_WhenProxyModeIsNotNone": 4,
+              "UserDomainPropertiesShown_WhenAuthModeIsWindows": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

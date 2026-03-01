@@ -4,9 +4,9 @@ using System.Xml.Linq;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class ConfConsEnsureConnectionsHaveIds
+    public static class ConfConsEnsureConnectionsHaveIds
     {
-        public void EnsureElementsHaveIds(XDocument xdoc)
+        public static void EnsureElementsHaveIds(XDocument xdoc)
         {
             foreach (XElement element in xdoc.Descendants("Node"))
             {

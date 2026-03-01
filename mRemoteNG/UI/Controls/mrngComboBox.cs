@@ -10,7 +10,7 @@ namespace mRemoteNG.UI.Controls
     //warning: THe DropDown style rendering is glitchy in this control, only use DropDownList or correct the rendering method
     internal class MrngComboBox : ComboBox
     {
-        private ThemeManager _themeManager;
+        private ThemeManager? _themeManager;
 
         public enum MouseState
         {
@@ -30,9 +30,11 @@ namespace mRemoteNG.UI.Controls
         {
             base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ActiveAndExtended) return;
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background");
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground");
+            if (_themeManager is not { ActiveAndExtended: true }) return;
+            var activePalette = _themeManager!.ActiveTheme.ExtendedPalette;
+            if (activePalette is null) return;
+            BackColor = activePalette.getColor("ComboBox_Background");
+            ForeColor = activePalette.getColor("ComboBox_Foreground");
             DrawMode = DrawMode.OwnerDrawFixed;
             SetStyle(ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.UserPaint, true);
@@ -63,76 +65,90 @@ namespace mRemoteNG.UI.Controls
             Invalidate();
         }
 
-        private void NG_DrawItem(object sender, DrawItemEventArgs e)
+        private void NG_DrawItem(object? sender, DrawItemEventArgs e)
         {
+            if (_themeManager?.ActiveTheme?.ExtendedPalette is not { } palette) return;
+
             int index = e.Index >= 0 ? e.Index : 0;
-            Brush itemBrush = new SolidBrush(_themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground"));
+            using SolidBrush itemBrush = new(palette.getColor("ComboBox_Foreground"));
+            Brush activeBrush = itemBrush;
 
-            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            SolidBrush? selectedBrush = null;
+            try
             {
-                itemBrush = new SolidBrush(
-                                           _themeManager
-                                               .ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Foreground"));
-                e.Graphics.FillRectangle(
-                                         new SolidBrush(_themeManager
-                                                        .ActiveTheme.ExtendedPalette
-                                                        .getColor("List_Item_Selected_Background")),
-                                         e.Bounds);
-            }
-            else
-                e.Graphics.FillRectangle(
-                                         new SolidBrush(_themeManager
-                                                        .ActiveTheme.ExtendedPalette.getColor("ComboBox_Background")),
-                                         e.Bounds);
-
-            if (Items.Count > 0)
-            {
-                if (string.IsNullOrEmpty(DisplayMember))
-                    e.Graphics.DrawString(Items[index].ToString(), e.Font, itemBrush, e.Bounds,
-                                          StringFormat.GenericDefault);
+                if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                {
+                    selectedBrush = new SolidBrush(
+                        palette.getColor("List_Item_Selected_Foreground"));
+                    activeBrush = selectedBrush;
+                    using SolidBrush selectedBack = new(
+                        palette.getColor("List_Item_Selected_Background"));
+                    e.Graphics.FillRectangle(selectedBack, e.Bounds);
+                }
                 else
                 {
-                    if (Items[index].GetType().GetProperty(DisplayMember) != null)
+                    using SolidBrush normalBack = new(
+                        palette.getColor("ComboBox_Background"));
+                    e.Graphics.FillRectangle(normalBack, e.Bounds);
+                }
+
+                if (Items.Count > 0)
+                {
+                    Font drawFont = e.Font ?? Font;
+                    var item = Items[index];
+                    if (item is null) return;
+                    if (string.IsNullOrEmpty(DisplayMember))
+                        e.Graphics.DrawString(item.ToString(), drawFont, activeBrush, e.Bounds,
+                                              StringFormat.GenericDefault);
+                    else
                     {
-                        e.Graphics.DrawString(
-                                              Items[index]
-                                                  .GetType().GetProperty(DisplayMember)?.GetValue(Items[index], null)
-                                                  .ToString(),
-                                              e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
+                        var prop = item.GetType().GetProperty(DisplayMember);
+                        if (prop != null)
+                        {
+                            e.Graphics.DrawString(
+                                prop.GetValue(item, null)?.ToString(),
+                                drawFont, activeBrush, e.Bounds, StringFormat.GenericDefault);
+                        }
                     }
                 }
-            }
 
-            e.DrawFocusRectangle();
+                e.DrawFocusRectangle();
+            }
+            finally
+            {
+                selectedBrush?.Dispose();
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!_themeManager.ActiveAndExtended)
+            if (_themeManager is not { ActiveAndExtended: true })
             {
                 base.OnPaint(e);
                 return;
             }
 
             //Colors
-            Color Border = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Border");
-            Color Back = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background");
-            Color Fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground");
-            Color ButtBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Background");
-            Color ButtFore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Foreground");
+            var ep = _themeManager!.ActiveTheme.ExtendedPalette;
+            if (ep is null) return;
+            Color Border = ep.getColor("ComboBox_Border");
+            Color Back = ep.getColor("ComboBox_Background");
+            Color Fore = ep.getColor("ComboBox_Foreground");
+            Color ButtBack = ep.getColor("ComboBox_Button_Background");
+            Color ButtFore = ep.getColor("ComboBox_Button_Foreground");
 
             if (_mice == MouseState.HOVER)
             {
-                Border = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_MouseOver_Border");
-                ButtBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_MouseOver_Background");
-                ButtFore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_MouseOver_Foreground");
+                Border = ep.getColor("ComboBox_MouseOver_Border");
+                ButtBack = ep.getColor("ComboBox_Button_MouseOver_Background");
+                ButtFore = ep.getColor("ComboBox_Button_MouseOver_Foreground");
             }
 
             if (DroppedDown)
             {
-                Border = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_MouseOver_Border");
-                ButtBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Pressed_Background");
-                ButtFore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Pressed_Foreground");
+                Border = ep.getColor("ComboBox_MouseOver_Border");
+                ButtBack = ep.getColor("ComboBox_Button_Pressed_Background");
+                ButtFore = ep.getColor("ComboBox_Button_Pressed_Foreground");
             }
 
 
@@ -152,7 +168,8 @@ namespace mRemoteNG.UI.Controls
             }
 
             //Arrow
-            e.Graphics.DrawString("\u25BC", Font, new SolidBrush(ButtFore), Width - 17, Height / 2 - 5);
+            using (SolidBrush arrowBrush = new(ButtFore))
+                e.Graphics.DrawString("\u25BC", Font, arrowBrush, Width - 17, Height / 2 - 5);
 
             //Text
             Rectangle textRect = new(2, 2, Width - 20, Height - 4);

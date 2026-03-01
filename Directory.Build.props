@@ -1,0 +1,26 @@
+<Project>
+  <PropertyGroup>
+    <!-- Disabled UseSharedCompilation to fix CS2012 WPF temp assembly lock (VBCSCompiler keeps DLL open) -->
+    <UseSharedCompilation>false</UseSharedCompilation>
+
+    <!-- Suppress CA1416 (platform compatibility) — app is 100% Windows-only, net10.0-windows TFM -->
+    <!-- Suppress CS8622 (nullable event handler parameter mismatch) — .NET 10 WinForms delegates use nullable sender -->
+    <!-- Suppress CS8618 (non-nullable field uninitialized) — WinForms designer fields set in InitializeComponent() -->
+    <NoWarn>$(NoWarn);CA1416;CS8622;CS8618</NoWarn>
+
+    <!-- Code quality analyzers -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Roslynator.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Meziantou.Analyzer">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

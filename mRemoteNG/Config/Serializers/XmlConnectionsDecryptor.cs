@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.Versioning;
 using System.Security;
 using mRemoteNG.Security;
@@ -15,8 +15,9 @@ namespace mRemoteNG.Config.Serializers
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly RootNodeInfo _rootNodeInfo;
+        private SecureString? _cachedDecryptionKey;
 
-        public Func<Optional<SecureString>> AuthenticationRequestor { get; set; }
+        public Func<Optional<SecureString>>? AuthenticationRequestor { get; set; }
 
         public int KeyDerivationIterations
         {
@@ -37,11 +38,21 @@ namespace mRemoteNG.Config.Serializers
             _rootNodeInfo = rootNodeInfo;
         }
 
+        private SecureString GetDecryptionKey()
+        {
+            return _cachedDecryptionKey ??= _rootNodeInfo.PasswordString.ConvertToSecureString();
+        }
+
+        private void InvalidateKeyCache()
+        {
+            _cachedDecryptionKey = null;
+        }
+
         public string Decrypt(string plainText)
         {
             return plainText == ""
                 ? ""
-                : _cryptographyProvider.Decrypt(plainText, _rootNodeInfo.PasswordString.ConvertToSecureString());
+                : _cryptographyProvider.Decrypt(plainText, GetDecryptionKey());
         }
 
         public string LegacyFullFileDecrypt(string xml)
@@ -54,7 +65,7 @@ namespace mRemoteNG.Config.Serializers
 
             try
             {
-                decryptedContent = _cryptographyProvider.Decrypt(xml, _rootNodeInfo.PasswordString.ConvertToSecureString());
+                decryptedContent = _cryptographyProvider.Decrypt(xml, GetDecryptionKey());
                 notDecr = decryptedContent == xml;
             }
             catch (Exception)
@@ -64,10 +75,10 @@ namespace mRemoteNG.Config.Serializers
 
             if (notDecr)
             {
-                if (Authenticate(xml, _rootNodeInfo.PasswordString.ConvertToSecureString()))
+                if (Authenticate(xml, GetDecryptionKey()))
                 {
                     decryptedContent =
-                        _cryptographyProvider.Decrypt(xml, _rootNodeInfo.PasswordString.ConvertToSecureString());
+                        _cryptographyProvider.Decrypt(xml, GetDecryptionKey());
                     notDecr = false;
                 }
 
@@ -87,24 +98,29 @@ namespace mRemoteNG.Config.Serializers
             bool connectionsFileIsNotEncrypted = false;
             try
             {
-                connectionsFileIsNotEncrypted = _cryptographyProvider.Decrypt(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()) == "ThisIsNotProtected";
+                connectionsFileIsNotEncrypted = string.Equals(_cryptographyProvider.Decrypt(protectedString, GetDecryptionKey()), "ThisIsNotProtected", StringComparison.Ordinal);
             }
             catch (EncryptionException)
             {
+                _ = 0; // Intentionally empty — file is not encrypted
             }
 
-            return connectionsFileIsNotEncrypted || Authenticate(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString());
+            return connectionsFileIsNotEncrypted || Authenticate(protectedString, GetDecryptionKey());
         }
 
         private bool Authenticate(string cipherText, SecureString password)
         {
+            if (AuthenticationRequestor is null)
+                return false;
+
             PasswordAuthenticator authenticator = new(_cryptographyProvider, cipherText, AuthenticationRequestor);
             bool authenticated = authenticator.Authenticate(password);
 
-            if (!authenticated)
+            if (!authenticated || authenticator.LastAuthenticatedPassword is null)
                 return false;
 
             _rootNodeInfo.PasswordString = authenticator.LastAuthenticatedPassword.ConvertToUnsecureString();
+            InvalidateKeyCache();
             return true;
         }
     }

@@ -6,7 +6,7 @@ namespace mRemoteNG.UI.Controls
 {
     public partial class CredentialRecordComboBox : ComboBox
     {
-        public IEnumerable<ICredentialRecord> CredentialRecords { get; set; }
+        public IEnumerable<ICredentialRecord>? CredentialRecords { get; set; }
 
         public CredentialRecordComboBox()
         {
@@ -14,7 +14,7 @@ namespace mRemoteNG.UI.Controls
             PopulateItems(CredentialRecords);
         }
 
-        private void PopulateItems(IEnumerable<ICredentialRecord> credentialRecords)
+        private void PopulateItems(IEnumerable<ICredentialRecord>? credentialRecords)
         {
             if (credentialRecords == null) return;
             Items.Clear();

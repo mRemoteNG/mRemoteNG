@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.Versioning;
 using mRemoteNG.Connection;
 using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
@@ -8,14 +9,23 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Connection
 {
+    [SupportedOSPlatform("windows")]
 	public class DefaultConnectionInfoTests
 	{
 		private ConnectionInfo _randomizedConnectionInfo;
+        private TestScope? _scope;
 
         [SetUp]
         public void Setup()
         {
+            _scope = TestScope.Begin();
 	        _randomizedConnectionInfo = ConnectionInfoHelpers.GetRandomizedConnectionInfo();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _scope?.Dispose();
         }
 
         [TestCaseSource(nameof(GetConnectionInfoProperties))]

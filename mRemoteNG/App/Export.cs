@@ -6,6 +6,8 @@ using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Csv;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Json;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Rdp;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -33,7 +35,7 @@ namespace mRemoteNG.App
                         exportForm.SelectedFolder = selectedNode as ContainerInfo;
                     else if (selectedNode?.GetTreeNodeType() == TreeNodeType.Connection)
                     {
-                        if (selectedNode.Parent.GetTreeNodeType() == TreeNodeType.Container)
+                        if (selectedNode.Parent?.GetTreeNodeType() == TreeNodeType.Container)
                             exportForm.SelectedFolder = selectedNode.Parent;
                         exportForm.SelectedConnection = selectedNode;
                     }
@@ -41,19 +43,13 @@ namespace mRemoteNG.App
                     if (exportForm.ShowDialog(FrmMain.Default) != DialogResult.OK)
                         return;
 
-                    ConnectionInfo exportTarget;
-                    switch (exportForm.Scope)
+                    ConnectionInfo defaultTarget = connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
+                    ConnectionInfo exportTarget = exportForm.Scope switch
                     {
-                        case FrmExport.ExportScope.SelectedFolder:
-                            exportTarget = exportForm.SelectedFolder;
-                            break;
-                        case FrmExport.ExportScope.SelectedConnection:
-                            exportTarget = exportForm.SelectedConnection;
-                            break;
-                        default:
-                            exportTarget = connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
-                            break;
-                    }
+                        FrmExport.ExportScope.SelectedFolder => exportForm.SelectedFolder ?? defaultTarget,
+                        FrmExport.ExportScope.SelectedConnection => exportForm.SelectedConnection ?? defaultTarget,
+                        _ => defaultTarget
+                    };
 
                     saveFilter.SaveUsername = exportForm.IncludeUsername;
                     saveFilter.SavePassword = exportForm.IncludePassword;
@@ -61,7 +57,7 @@ namespace mRemoteNG.App
                     saveFilter.SaveInheritance = exportForm.IncludeInheritance;
                     saveFilter.SaveCredentialId = exportForm.IncludeAssignedCredential;
 
-                    SaveExportFile(exportForm.FileName, exportForm.SaveFormat, saveFilter, exportTarget);
+                    SaveExportFile(exportForm.FileName, exportForm.SaveFormat, saveFilter, exportTarget, exportForm.IsEncrypted, exportForm.Password);
                 }
             }
             catch (Exception ex)
@@ -73,7 +69,9 @@ namespace mRemoteNG.App
         private static void SaveExportFile(string fileName,
                                            SaveFormat saveFormat,
                                            SaveFilter saveFilter,
-                                           ConnectionInfo exportTarget)
+                                           ConnectionInfo exportTarget,
+                                           bool isEncrypted = false,
+                                           string password = "")
         {
             try
             {
@@ -81,8 +79,32 @@ namespace mRemoteNG.App
                 switch (saveFormat)
                 {
                     case SaveFormat.mRXML:
+                        if (isEncrypted)
+                        {
+                            RootNodeInfo tempRoot = new(RootNodeType.Connection)
+                            {
+                                PasswordString = password
+                            };
+
+                            ConnectionInfo clonedTarget = exportTarget.Clone();
+
+                            if (exportTarget is RootNodeInfo)
+                            {
+                                if (clonedTarget is ContainerInfo container)
+                                {
+                                    tempRoot.AddChildRange(container.Children.ToArray());
+                                }
+                                exportTarget = tempRoot;
+                            }
+                            else
+                            {
+                                tempRoot.AddChild(clonedTarget);
+                                exportTarget = clonedTarget;
+                            }
+                        }
+
                         ICryptographyProvider cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
-                        RootNodeInfo rootNode = exportTarget.GetRootParent() as RootNodeInfo;
+                        RootNodeInfo? rootNode = exportTarget.GetRootParent() as RootNodeInfo;
                         XmlConnectionNodeSerializer28 connectionNodeSerializer = new(
                                                                                          cryptographyProvider,
                                                                                          rootNode?.PasswordString
@@ -92,11 +114,20 @@ namespace mRemoteNG.App
                                                                                              .PasswordString
                                                                                              .ConvertToSecureString(),
                                                                                          saveFilter);
-                        serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer);
+                        serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer)
+                        {
+                            UseFullEncryption = isEncrypted
+                        };
                         break;
                     case SaveFormat.mRCSV:
                         serializer =
                             new CsvConnectionsSerializerMremotengFormat(saveFilter, Runtime.CredentialProviderCatalog);
+                        break;
+                    case SaveFormat.mRJSON:
+                        serializer = new JsonConnectionsSerializer(saveFilter);
+                        break;
+                    case SaveFormat.RDP:
+                        serializer = new RdpConnectionSerializer(saveFilter);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(saveFormat), saveFormat, null);

@@ -13,8 +13,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     public sealed partial class ConnectionsPage
     {
         #region Private Fields
-        private OptRegistryConnectionsPage pageRegSettingsInstance;
-        private readonly FrmMain _frmMain = FrmMain.Default;
+        private OptRegistryConnectionsPage? pageRegSettingsInstance;
+        private FrmMain? _frmMain;
 
         #endregion
 
@@ -60,6 +60,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkUseFilterSearch.Text = Language.FilterSearchMatchesInConnectionTree;
             chkPlaceSearchBarAboveConnectionTree.Text = Language.PlaceSearchBarAboveConnectionTree;
             chkDoNotTrimUsername.Text = Language.DoNotTrimUsername;
+            chkWatchConnectionFile.Text = "Watch connection file for external changes";
 
             lblRdpReconnectionCount.Text = Language.RdpReconnectCount;
             lblRDPConTimeout.Text = Language.RdpOverallConnectionTimeout;
@@ -84,6 +85,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkUseFilterSearch.Checked = Settings.Default.UseFilterSearch;
             chkPlaceSearchBarAboveConnectionTree.Checked = Settings.Default.PlaceSearchBarAboveConnectionTree;
             chkDoNotTrimUsername.Checked = Settings.Default.DoNotTrimUsername;
+            chkWatchConnectionFile.Checked = Properties.OptionsConnectionsPage.Default.WatchConnectionFile;
+            chkDoubleClickOpensNewConnection.Checked = Settings.Default.DoubleClickOpensNewConnection;
+            chkDefaultInheritance.Checked = Settings.Default.InhDefaultEverythingInherited;
+            chkDisableTreeDragAndDrop.Checked = Settings.Default.DisableTreeDragAndDrop;
 
             numRdpReconnectionCount.Value = Convert.ToDecimal(Settings.Default.RdpReconnectionCount);
             numRDPConTimeout.Value = Convert.ToDecimal(Settings.Default.ConRDPOverallConnectionTimeout);
@@ -136,18 +141,26 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
             Properties.Settings.Default.PlaceSearchBarAboveConnectionTree = chkPlaceSearchBarAboveConnectionTree.Checked;
             Properties.Settings.Default.DoNotTrimUsername = chkDoNotTrimUsername.Checked;
+            Properties.OptionsConnectionsPage.Default.WatchConnectionFile = chkWatchConnectionFile.Checked;
+            Properties.Settings.Default.DoubleClickOpensNewConnection = chkDoubleClickOpensNewConnection.Checked;
+            Properties.Settings.Default.InhDefaultEverythingInherited = chkDefaultInheritance.Checked;
+            Properties.Settings.Default.DisableTreeDragAndDrop = chkDisableTreeDragAndDrop.Checked;
 
             Properties.Settings.Default.RdpReconnectionCount = (int)numRdpReconnectionCount.Value;
             Properties.Settings.Default.ConRDPOverallConnectionTimeout = (int)numRDPConTimeout.Value;
             Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes = (int)numAutoSave.Value;
-            if (Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes > 0)
+            if (FrmMain.IsCreated)
             {
-                _frmMain.tmrAutoSave.Interval = Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes * 60000;
-                _frmMain.tmrAutoSave.Enabled = true;
-            }
-            else
-            {
-                _frmMain.tmrAutoSave.Enabled = false;
+                _frmMain ??= FrmMain.Default;
+                if (Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes > 0)
+                {
+                    _frmMain.tmrAutoSave.Interval = Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes * 60000;
+                    _frmMain.tmrAutoSave.Enabled = true;
+                }
+                else
+                {
+                    _frmMain.tmrAutoSave.Enabled = false;
+                }
             }
 
             // Save ConfirmCloseConnection setting
@@ -226,6 +239,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         /// </summary>
         public bool ShowRegistrySettingsUsedInfo()
         {
+            if (pageRegSettingsInstance == null)
+                return false;
+
             return pageRegSettingsInstance.SingleClickOnConnectionOpensIt.IsSet
                 || pageRegSettingsInstance.SingleClickSwitchesToOpenConnection.IsSet
                 || pageRegSettingsInstance.TrackActiveConnectionInConnectionTree.IsSet

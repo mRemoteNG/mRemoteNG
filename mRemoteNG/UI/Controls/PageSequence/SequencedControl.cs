@@ -8,9 +8,9 @@ namespace mRemoteNG.UI.Controls.PageSequence
     [SupportedOSPlatform("windows")]
     public class SequencedControl : UserControl, ISequenceChangingNotifier
     {
-        public event EventHandler Next;
-        public event EventHandler Previous;
-        public event SequencedPageReplcementRequestHandler PageReplacementRequested;
+        public event EventHandler? Next;
+        public event EventHandler? Previous;
+        public event SequencedPageReplcementRequestHandler? PageReplacementRequested;
 
         public SequencedControl()
         {
@@ -26,8 +26,8 @@ namespace mRemoteNG.UI.Controls.PageSequence
         protected virtual void ApplyTheme()
         {
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette?.getColor("Dialog_Background") ?? BackColor;
+            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette?.getColor("Dialog_Foreground") ?? ForeColor;
         }
 
         protected virtual void RaisePreviousPageEvent()

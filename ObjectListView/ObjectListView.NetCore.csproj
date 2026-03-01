@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <Deterministic>false</Deterministic>
@@ -8,6 +8,9 @@
     <UseWindowsForms>true</UseWindowsForms>
     <NoWarn>$(NoWarn);WFO1000</NoWarn>
     <EnableWinFormsAnalyzers>false</EnableWinFormsAnalyzers>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)' == 'x86'">
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)' == 'x64'">
     <PlatformTarget>x64</PlatformTarget>

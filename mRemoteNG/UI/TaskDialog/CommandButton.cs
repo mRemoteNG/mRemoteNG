@@ -164,16 +164,24 @@ namespace mRemoteNG.UI.TaskDialog
         }
 
         //--------------------------------------------------------------------------------
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs pevent)
         {
             if (!_themeManager.ActiveAndExtended)
             {
-                base.OnPaint(e);
+                base.OnPaint(pevent);
                 return;
             }
 
-            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            // ActiveAndExtended guarantees ExtendedPalette is non-null
+            var palette = _themeManager.ActiveTheme.ExtendedPalette;
+            if (palette == null)
+            {
+                base.OnPaint(pevent);
+                return;
+            }
+
+            pevent.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+            pevent.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
             const LinearGradientMode mode = LinearGradientMode.Vertical;
 
@@ -191,39 +199,39 @@ namespace mRemoteNG.UI.TaskDialog
                 switch (m_State)
                 {
                     case eButtonState.MouseOver:
-                        back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Background");
-                        fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Foreground");
-                        border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Border");
+                        back = palette.getColor("Button_Hover_Background");
+                        fore = palette.getColor("Button_Hover_Foreground");
+                        border = palette.getColor("Button_Hover_Border");
                         break;
                     case eButtonState.Down:
-                        back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Pressed_Background");
-                        fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Pressed_Foreground");
-                        border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Pressed_Border");
+                        back = palette.getColor("Button_Pressed_Background");
+                        fore = palette.getColor("Button_Pressed_Foreground");
+                        border = palette.getColor("Button_Pressed_Border");
                         break;
                     default:
-                        back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Background");
-                        fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Foreground");
-                        border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Border");
+                        back = palette.getColor("Button_Background");
+                        fore = palette.getColor("Button_Foreground");
+                        border = palette.getColor("Button_Border");
                         break;
                 }
             }
             else
             {
-                back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Background");
-                fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Foreground");
-                border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Border");
+                back = palette.getColor("Button_Disabled_Background");
+                fore = palette.getColor("Button_Disabled_Foreground");
+                border = palette.getColor("Button_Disabled_Border");
             }
 
             if (Enabled)
             {
-                e.Graphics.FillRectangle(new SolidBrush(back), newRect);
-                e.Graphics.DrawRectangle(new Pen(border, 1), newRect);
+                pevent.Graphics.FillRectangle(new SolidBrush(back), newRect);
+                pevent.Graphics.DrawRectangle(new Pen(border, 1), newRect);
             }
             else
             {
                 LinearGradientBrush brush = new(newRect, back, back, mode);
-                e.Graphics.FillRectangle(brush, newRect);
-                e.Graphics.DrawRectangle(new Pen(border, 1), newRect);
+                pevent.Graphics.FillRectangle(brush, newRect);
+                pevent.Graphics.DrawRectangle(new Pen(border, 1), newRect);
             }
 
             string largetext = GetLargeText();
@@ -231,7 +239,7 @@ namespace mRemoteNG.UI.TaskDialog
 
             SizeF szL = GetLargeTextSizeF();
             //e.Graphics.DrawString(largetext, base.Font, new SolidBrush(text_color), new RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN), szL));
-            TextRenderer.DrawText(e.Graphics, largetext, Font,
+            TextRenderer.DrawText(pevent.Graphics, largetext, Font,
                                   new Rectangle(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN, (int)szL.Width,
                                                 (int)szL.Height), fore,
                                   TextFormatFlags.Default);
@@ -239,13 +247,13 @@ namespace mRemoteNG.UI.TaskDialog
             if (smalltext != "")
             {
                 SizeF szS = GetSmallTextSizeF();
-                e.Graphics.DrawString(smalltext, SmallFont, new SolidBrush(fore),
+                pevent.Graphics.DrawString(smalltext, SmallFont, new SolidBrush(fore),
                                       new
                                           RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 8, TOP_MARGIN + (int)szL.Height),
                                                      szS));
             }
 
-            e.Graphics.DrawImage(img, new Point(LEFT_MARGIN, TOP_MARGIN + (int)(szL.Height / 2) - img.Height / 2));
+            pevent.Graphics.DrawImage(img, new Point(LEFT_MARGIN, TOP_MARGIN + (int)(szL.Height / 2) - img.Height / 2));
         }
 
         //--------------------------------------------------------------------------------
@@ -265,19 +273,19 @@ namespace mRemoteNG.UI.TaskDialog
         }
 
         //--------------------------------------------------------------------------------
-        protected override void OnMouseUp(MouseEventArgs e)
+        protected override void OnMouseUp(MouseEventArgs mevent)
         {
             m_State = eButtonState.MouseOver;
             Invalidate();
-            base.OnMouseUp(e);
+            base.OnMouseUp(mevent);
         }
 
         //--------------------------------------------------------------------------------
-        protected override void OnMouseDown(MouseEventArgs e)
+        protected override void OnMouseDown(MouseEventArgs mevent)
         {
             m_State = eButtonState.Down;
             Invalidate();
-            base.OnMouseDown(e);
+            base.OnMouseDown(mevent);
         }
 
         //--------------------------------------------------------------------------------

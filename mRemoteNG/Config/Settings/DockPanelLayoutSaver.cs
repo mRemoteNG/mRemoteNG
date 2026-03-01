@@ -19,11 +19,8 @@ namespace mRemoteNG.Config.Settings
         public DockPanelLayoutSaver(ISerializer<DockPanel, string> dockPanelSerializer,
                                     IDataProvider<string> dataProvider)
         {
-            if (dockPanelSerializer == null)
-                throw new ArgumentNullException(nameof(dockPanelSerializer));
-            if (dataProvider == null)
-                throw new ArgumentNullException(nameof(dataProvider));
-
+            ArgumentNullException.ThrowIfNull(dockPanelSerializer);
+            ArgumentNullException.ThrowIfNull(dataProvider);
             _dockPanelSerializer = dockPanelSerializer;
             _dataProvider = dataProvider;
         }
@@ -43,6 +40,49 @@ namespace mRemoteNG.Config.Settings
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("SavePanelsToXML failed", ex);
+            }
+        }
+
+        public void SaveLayout(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Layout name cannot be empty", nameof(name));
+
+            try
+            {
+                string layoutsDir = Path.Combine(SettingsFileInfo.SettingsPath, "Layouts");
+                if (!Directory.Exists(layoutsDir))
+                {
+                    Directory.CreateDirectory(layoutsDir);
+                }
+
+                string filePath = Path.Combine(layoutsDir, name + ".xml");
+                string serializedLayout = _dockPanelSerializer.Serialize(FrmMain.Default.pnlDock);
+                File.WriteAllText(filePath, serializedLayout);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace($"Failed to save layout '{name}'", ex);
+            }
+        }
+
+        public static void DeleteLayout(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Layout name cannot be empty", nameof(name));
+
+            try
+            {
+                string layoutsDir = Path.Combine(SettingsFileInfo.SettingsPath, "Layouts");
+                string filePath = Path.Combine(layoutsDir, name + ".xml");
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace($"Failed to delete layout '{name}'", ex);
             }
         }
     }

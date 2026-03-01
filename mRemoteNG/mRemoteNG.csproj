@@ -1,25 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Platforms>x64;arm64</Platforms>
-    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <Platforms>x86;x64;arm64</Platforms>
+    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
     <NoWarn>$(NoWarn);NU1701</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
+    <OutputType Condition="'$(GITHUB_ACTIONS)' == 'true' and '$(GITHUB_WORKFLOW)' == 'PR_Validation'">Exe</OutputType>
     <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <TransformOnBuild>true</TransformOnBuild>
+    <!-- T4 transform settings: only active when VS2026 TextTemplating targets are available -->
+    <TransformOnBuild Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets')">true</TransformOnBuild>
     <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
     <OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
     <ApplicationIcon>Icons\mRemoteNG.ico</ApplicationIcon>
-    <Version>1.78.2-dev</Version>
+    <Version>1.81.0-beta.6</Version>
     <Description>Multi-protocol remote connections manager</Description>
     <Copyright>$([System.DateTime]::Now.Year) mRemoteNG Dev Team, 2010-2013 Riley McArdle, 2007-2009 Felix Deimel</Copyright>
     <PackageLicenseFile>COPYING.TXT</PackageLicenseFile>
     <PackageProjectUrl>https://mremoteng.org/</PackageProjectUrl>
-    <Platforms>x64;arm64</Platforms>
-    <Configurations>Debug;Release;Release Self-Contained;Deploy to github</Configurations>
+    <Platforms>x86;x64;arm64</Platforms>
+    <Configurations>Debug;Release;Debug Portable;Release Portable;Release Installer;Release Self-Contained;Deploy to github</Configurations>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>latest</LangVersion>
     <PackageIcon>Header_dark.png</PackageIcon>
@@ -28,15 +30,27 @@
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <SignAssembly>False</SignAssembly>
     <Title>Multi-Remote Next Generation Connection Manager</Title>
-    <RepositoryUrl>https://github.com/mRemoteNG/mRemoteNG.git</RepositoryUrl>
+    <Product>mRemoteNG Connection Manager</Product>
+    <Company>mRemoteNG Open Source Project</Company>
+    <Authors>mRemoteNG Dev Team</Authors>
+    <RepositoryUrl>https://github.com/robertpopa22/mRemoteNG.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <StartupObject>mRemoteNG.App.ProgramRoot</StartupObject>
     <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
     <UserSecretsId>1307e3e3-38d6-41ee-8301-0a9bae87038b</UserSecretsId>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <DefineConstants>DEBUG;PORTABLE</DefineConstants>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <Optimize>False</Optimize>
+    <WarningLevel>8</WarningLevel>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <DefineConstants>DEBUG</DefineConstants>
+    <DefineConstants>DEBUG;PORTABLE</DefineConstants>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -45,7 +59,7 @@
     <WarningLevel>8</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|arm64'">
-    <DefineConstants>DEBUG</DefineConstants>
+    <DefineConstants>DEBUG;PORTABLE</DefineConstants>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <OutputPath>bin\arm64\Debug\</OutputPath>
@@ -53,8 +67,18 @@
     <Optimize>False</Optimize>
     <WarningLevel>8</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <DefineConstants>PORTABLE</DefineConstants>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <WarningLevel>8</WarningLevel>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <DefineConstants />
+    <DefineConstants>PORTABLE</DefineConstants>
     <Optimize>True</Optimize>
     <OutputPath>bin\x64\Release\</OutputPath>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
@@ -64,7 +88,7 @@
     <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|arm64'">
-    <DefineConstants />
+    <DefineConstants>PORTABLE</DefineConstants>
     <Optimize>True</Optimize>
     <OutputPath>bin\arm64\Release\</OutputPath>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
@@ -73,10 +97,67 @@
     <WarningLevel>8</WarningLevel>
     <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Self-Contained|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Portable|x86'">
+    <DefineConstants>DEBUG;PORTABLE</DefineConstants>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\x86\Debug Portable\</OutputPath>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <WarningLevel>8</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Portable|x64'">
+    <DefineConstants>DEBUG;PORTABLE</DefineConstants>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\x64\Debug Portable\</OutputPath>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <WarningLevel>8</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Portable|arm64'">
+    <DefineConstants>DEBUG;PORTABLE</DefineConstants>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\arm64\Debug Portable\</OutputPath>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <WarningLevel>8</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Portable|x86'">
     <DefineConstants>PORTABLE</DefineConstants>
     <Optimize>True</Optimize>
-    <PublishDir>bin\x64\Publish Self-Contained\</PublishDir>
+    <OutputPath>bin\x86\Release Portable\</OutputPath>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <WarningLevel>8</WarningLevel>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Portable|x64'">
+    <DefineConstants>PORTABLE</DefineConstants>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\x64\Release Portable\</OutputPath>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <WarningLevel>8</WarningLevel>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Portable|arm64'">
+    <DefineConstants>PORTABLE</DefineConstants>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\arm64\Release Portable\</OutputPath>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <WarningLevel>8</WarningLevel>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Self-Contained|x64'">
+    <DefineConstants>PORTABLE;SELF_CONTAINED</DefineConstants>
+    <Optimize>True</Optimize>
+    <PublishDir>bin\x64\Portable\</PublishDir>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
@@ -91,10 +172,10 @@
     <RunArguments></RunArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Self-Contained|arm64'">
-    <DefineConstants>PORTABLE</DefineConstants>
+    <DefineConstants>PORTABLE;SELF_CONTAINED</DefineConstants>
     <Optimize>True</Optimize>
     <OutputPath>bin\arm64\Release Self-Contained\</OutputPath>
-    <PublishDir>bin\arm64\Publish Self-Contained\</PublishDir>
+    <PublishDir>bin\arm64\Portable\</PublishDir>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
@@ -108,6 +189,41 @@
     <RunCommand></RunCommand>
     <RunArguments></RunArguments>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Installer|x86'">
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <Optimize>True</Optimize>
+    <WarningLevel>8</WarningLevel>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Installer|x64'">
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <Optimize>True</Optimize>
+    <WarningLevel>8</WarningLevel>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Installer|arm64'">
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <Optimize>True</Optimize>
+    <WarningLevel>8</WarningLevel>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
+  </PropertyGroup>
+  <!-- Crash report token: injected at build time via -p:CrashReportToken=ghp_xxx -->
+  <!-- Never commit the actual token value to source control -->
+  <PropertyGroup>
+    <CrashReportToken Condition="'$(CrashReportToken)' == ''"></CrashReportToken>
+  </PropertyGroup>
+  <Target Name="WriteCrashReportToken" BeforeTargets="CoreCompile" DependsOnTargets="PrepareForBuild">
+    <ItemGroup>
+      <_CrashTokenAttr Include="System.Reflection.AssemblyMetadataAttribute">
+        <_Parameter1>CrashReportToken</_Parameter1>
+        <_Parameter2>$(CrashReportToken)</_Parameter2>
+      </_CrashTokenAttr>
+    </ItemGroup>
+    <WriteCodeFragment AssemblyAttributes="@(_CrashTokenAttr)" Language="C#" OutputDirectory="$(IntermediateOutputPath)" OutputFile="CrashReportToken.g.cs">
+      <Output TaskParameter="OutputFile" ItemName="Compile" />
+      <Output TaskParameter="OutputFile" ItemName="FileWrites" />
+    </WriteCodeFragment>
+  </Target>
   <ItemGroup>
     <None Remove="buildenv.tmp" />
     <None Remove="UI\Font\HandelGotDBol.ttf" />
@@ -124,12 +240,15 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Ben.Demystifier" />
     <PackageReference Include="BouncyCastle.Cryptography" />
     <PackageReference Include="Castle.Core" />
     <PackageReference Include="ConsoleControl" />
     <PackageReference Include="Cucumber.Messages" />
     <PackageReference Include="DockPanelSuite" />
+    <PackageReference Include="DockPanelSuite.ThemeVS2005" />
     <PackageReference Include="DockPanelSuite.ThemeVS2015" />
+    <PackageReference Include="Google.Apis.Drive.v3" />
     <PackageReference Include="Google.Protobuf" />
     <PackageReference Include="LiteDB" />
     <PackageReference Include="log4net" />
@@ -149,6 +268,7 @@
     <PackageReference Include="ReportGenerator" />
     <PackageReference Include="SSH.NET" />
     <PackageReference Include="System.Management" />
+    <PackageReference Include="System.Runtime.Serialization.Formatters" />
     <PackageReference Include="VncSharpCore" />
     <PackageReference Include="ZstdSharp.Port" />
   </ItemGroup>
@@ -250,6 +370,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\Forms\OptionsPages\BackupPage.cs" />
+    <Compile Update="UI\Forms\OptionsPages\ConfigurationPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\Forms\OptionsPages\ConnectionsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -534,6 +657,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ExternalConnectors\ExternalConnectors.csproj" />
+    <ProjectReference Include="..\mRemoteNG.Plugins\mRemoteNG.Plugins.csproj" />
     <ProjectReference Include="..\ObjectListView\ObjectListView.NetCore.csproj" />
   </ItemGroup>
   <ItemGroup>
@@ -561,6 +685,14 @@
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
+  <PropertyGroup Condition="'$(Platform)'=='x86'">
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Deploy to github|x86'">
+    <WarningLevel>8</WarningLevel>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='x64'">
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Nullable>enable</Nullable>
@@ -573,6 +705,7 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Nullable>enable</Nullable>
     <PlatformTarget>ARM64</PlatformTarget>
+    <GenerateSatelliteAssembliesForCore>true</GenerateSatelliteAssembliesForCore>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Deploy to github|ARM64'">
     <WarningLevel>8</WarningLevel>
@@ -582,19 +715,50 @@
       <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.NuGetPackageId)' != '' " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="Assemblies\" />
     </ItemGroup>
   </Target>
+  <!-- Move satellite assemblies: {OutDir}/{culture}/ → {OutDir}/Languages/{culture}/
+       Keeps release directory clean. Runtime loads via AssemblyResolve in ProgramRoot.cs. -->
+  <Target Name="MoveSatelliteAssembliesToLanguagesFolder" AfterTargets="Build;Publish"
+          Condition="'$(DesignTimeBuild)' != 'true'">
+    <PropertyGroup>
+      <_SatOutDir Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')">$(PublishDir)</_SatOutDir>
+      <_SatOutDir Condition="'$(_SatOutDir)' == ''">$(OutputPath)</_SatOutDir>
+    </PropertyGroup>
+    <ItemGroup>
+      <_SatFiles Include="$(_SatOutDir)**\mRemoteNG.resources.dll"
+                 Exclude="$(_SatOutDir)Languages\**" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_SatFiles)"
+          DestinationFiles="@(_SatFiles->'$(_SatOutDir)Languages\%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true"
+          Condition="'@(_SatFiles)' != ''" />
+    <Delete Files="@(_SatFiles)" Condition="'@(_SatFiles)' != ''" />
+    <RemoveDir Directories="@(_SatFiles->'%(RootDir)%(Directory)')" Condition="'@(_SatFiles)' != ''" />
+  </Target>
   <PropertyGroup>
     <!-- Disable CET compatibility check in .NET 9 AppHost -->
     <CETCompat>false</CETCompat>
+    <!-- .NET 10 removed BinaryFormatter from the runtime. DockPanelSuite 3.1.1
+         and WinForms .resx files still need it for resource deserialization.
+         The compat package (System.Runtime.Serialization.Formatters) re-adds
+         the implementation; this switch activates it. -->
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
   </PropertyGroup>
-  <Target Name="PublishAfterBuild" AfterTargets="Build" Condition="'$(Configuration)' == 'Release Self-Contained'">
-    <Message Text="Publishing self-contained application for $(Platform)..." Importance="high" />
-    <MSBuild Projects="$(MSBuildProjectFile)" Targets="Publish" Properties="Configuration=$(Configuration);Platform=$(Platform);NoBuild=true;NoRestore=true" />
+  <!-- Self-contained build: embeds the .NET runtime so users don't need to install it.
+       Pass /p:SelfContained=true to MSBuild to enable. Default is framework-dependent. -->
+  <PropertyGroup Condition="'$(SelfContained)' == 'true'">
+    <PublishReadyToRun>true</PublishReadyToRun>
+  </PropertyGroup>
+  <Target Name="PublishAfterBuild" AfterTargets="Build" Condition="'$(Configuration)' == 'Release Self-Contained' and '$(SkipAutoPublish)' != 'true'">
+    <Message Text="Publishing self-contained portable application for $(Platform)..." Importance="high" />
+    <MSBuild Projects="$(MSBuildProjectFile)" Targets="Publish" Properties="Configuration=$(Configuration);Platform=$(Platform);RuntimeIdentifier=$(RuntimeIdentifier);NoBuild=true" />
     <PropertyGroup>
       <TempBuildDir>$([System.IO.Path]::GetFullPath('$(OutputPath)'))</TempBuildDir>
     </PropertyGroup>
     <Message Text="Cleaning up temporary build directory: $(TempBuildDir)" Importance="high" />
     <RemoveDir Directories="$(TempBuildDir)" />
-    <RemoveDir Directories="$(ProjectDir)bin\x64\Release Self-Contained" />
+    <Message Text="Portable output: $(PublishDir)" Importance="high" />
   </Target>
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets" />
+  <!-- T4 TextTemplating: import only when the targets file exists (VS2026 BuildTools) -->
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets"
+          Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets')" />
 </Project>

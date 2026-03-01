@@ -4,21 +4,32 @@
 	{
 		//UserControl overrides dispose to clean up the component list.
 		[System.Diagnostics.DebuggerNonUserCode()]
-        protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (disposing && components != null)
-				{
-					components.Dispose();
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-			
+        		protected override void Dispose(bool disposing)
+        		{
+        			try
+        			{
+        				if (disposing)
+        				{
+        					Protocol?.Dispose();
+        					if (components != null)
+        					{
+        						components.Dispose();
+        					}
+        				}
+        			}
+        			finally
+        			{
+        				try
+        				{
+        					base.Dispose(disposing);
+        				}
+        				catch (System.Runtime.InteropServices.InvalidComObjectException)
+        				{
+        					// RDP ActiveX control (MSTSCLib) may already be detached from its RCW
+        					// when the protocol was closed before Dispose runs.
+        				}
+        			}
+        		}			
 		//Required by the Windows Form Designer
 		private System.ComponentModel.Container components = null;
 

@@ -36,9 +36,10 @@ namespace mRemoteNG.UI.Tabs
 
         #region Customizable Properties
 
-        public Font TextFont => DockPanel.Theme.Skin.AutoHideStripSkin.TextFont;
+        public Font TextFont =>
+            ConnectionTabAppearanceSettings.GetTabFont(DockPanel.Theme.Skin.AutoHideStripSkin.TextFont);
 
-        private static StringFormat _stringFormatTabHorizontal;
+        private static StringFormat? _stringFormatTabHorizontal;
 
         private StringFormat StringFormatTabHorizontal
         {
@@ -64,7 +65,7 @@ namespace mRemoteNG.UI.Tabs
             }
         }
 
-        private static StringFormat _stringFormatTabVertical;
+        private static StringFormat? _stringFormatTabVertical;
 
         private StringFormat StringFormatTabVertical
         {
@@ -119,7 +120,7 @@ namespace mRemoteNG.UI.Tabs
 
         private static Matrix MatrixIdentity { get; } = new Matrix();
 
-        private static DockState[] _dockStates;
+        private static DockState[]? _dockStates;
 
         private static DockState[] DockStates
         {
@@ -138,7 +139,7 @@ namespace mRemoteNG.UI.Tabs
             }
         }
 
-        private static GraphicsPath _graphicsPath;
+        private static GraphicsPath? _graphicsPath;
 
         internal static GraphicsPath GraphicsPath
         {
@@ -306,26 +307,30 @@ namespace mRemoteNG.UI.Tabs
                 rectImage.Width = imageWidth;
                 rectImage = GetTransformedRectangle(dockState, rectImage);
 
-                if (dockState == DockState.DockLeftAutoHide || dockState == DockState.DockRightAutoHide)
+                Icon? icon = ((Form)content).Icon;
+                if (icon != null)
                 {
-                    // The DockState is DockLeftAutoHide or DockRightAutoHide, so rotate the image 90 degrees to the right. 
-                    Rectangle rectTransform = RtlTransform(rectImage, dockState);
-                    Point[] rotationPoints =
+                    if (dockState == DockState.DockLeftAutoHide || dockState == DockState.DockRightAutoHide)
                     {
-                        new(rectTransform.X + rectTransform.Width, rectTransform.Y),
-                        new(rectTransform.X + rectTransform.Width, rectTransform.Y + rectTransform.Height),
-                        new(rectTransform.X, rectTransform.Y)
-                    };
+                        // The DockState is DockLeftAutoHide or DockRightAutoHide, so rotate the image 90 degrees to the right.
+                        Rectangle rectTransform = RtlTransform(rectImage, dockState);
+                        Point[] rotationPoints =
+                        {
+                            new(rectTransform.X + rectTransform.Width, rectTransform.Y),
+                            new(rectTransform.X + rectTransform.Width, rectTransform.Y + rectTransform.Height),
+                            new(rectTransform.X, rectTransform.Y)
+                        };
 
-                    using (Icon rotatedIcon = new(((Form)content).Icon, 16, 16))
-                    {
-                        g.DrawImage(rotatedIcon.ToBitmap(), rotationPoints);
+                        using (Icon rotatedIcon = new(icon, 16, 16))
+                        {
+                            g.DrawImage(rotatedIcon.ToBitmap(), rotationPoints);
+                        }
                     }
-                }
-                else
-                {
-                    // Draw the icon normally without any rotation.
-                    g.DrawIcon(((Form)content).Icon, RtlTransform(rectImage, dockState));
+                    else
+                    {
+                        // Draw the icon normally without any rotation.
+                        g.DrawIcon(icon, RtlTransform(rectImage, dockState));
+                    }
                 }
 
                 // Draw the text
@@ -474,7 +479,7 @@ namespace mRemoteNG.UI.Tabs
                 }
             }
 
-            return null;
+            return null!;
         }
 
         protected override Rectangle GetTabBounds(Tab tab)

@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.Common;
 using Microsoft.Data.SqlClient;
 using System.Threading.Tasks;
@@ -46,7 +47,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         private void BuildSqlConnectionString()
         {
-            if (_dbUsername != "")
+            if (!string.IsNullOrEmpty(_dbUsername) || !string.IsNullOrEmpty(_dbPassword))
                 BuildDbConnectionStringWithCustomCredentials();
             else
                 BuildDbConnectionStringWithDefaultCredentials();
@@ -60,7 +61,6 @@ namespace mRemoteNG.Config.DatabaseConnectors
             _dbConnectionString = new SqlConnectionStringBuilder
             {
                 ApplicationName = "mRemoteNG",
-                ApplicationIntent = ApplicationIntent.ReadOnly,
                 DataSource = $"{hostParts[0]},{_dbPort}",
                 InitialCatalog = _dbCatalog,
                 UserID = _dbUsername,
@@ -77,9 +77,14 @@ namespace mRemoteNG.Config.DatabaseConnectors
         {
             _dbConnectionString = new SqlConnectionStringBuilder
             {
+                ApplicationName = "mRemoteNG",
                 DataSource = _dbHost,
                 InitialCatalog = _dbCatalog,
-                IntegratedSecurity = true
+                IntegratedSecurity = true,
+                Encrypt = true,
+                TrustServerCertificate = true,
+                ConnectTimeout = 30,
+                MultipleActiveResultSets = true
             }.ToString();
         }
 
@@ -106,6 +111,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         private void Dispose(bool itIsSafeToFreeManagedObjects)

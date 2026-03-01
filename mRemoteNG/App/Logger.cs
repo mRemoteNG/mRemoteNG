@@ -14,7 +14,7 @@ namespace mRemoteNG.App
     {
         public static readonly Logger Instance = new();
 
-        public ILog Log { get; private set; }
+        public ILog? Log { get; private set; }
 
         public static string DefaultLogPath => BuildLogFilePath();
 
@@ -25,7 +25,7 @@ namespace mRemoteNG.App
 
         private void Initialize()
         {
-            XmlConfigurator.Configure(LogManager.CreateRepository("mRemoteNG"));
+            LogManager.CreateRepository("mRemoteNG");
 
             if (string.IsNullOrEmpty(Properties.OptionsNotificationsPage.Default.LogFilePath))
             {
@@ -58,7 +58,7 @@ namespace mRemoteNG.App
         {
             string logFilePath = Runtime.IsPortableEdition ? GetLogPathPortableEdition() : GetLogPathNormalEdition();
 
-            string logFileName = Path.ChangeExtension(Application.ProductName, ".log");
+            string? logFileName = Path.ChangeExtension(Application.ProductName, ".log");
 
             if (logFileName == null) return "mRemoteNG.log";
 
@@ -69,12 +69,31 @@ namespace mRemoteNG.App
 
         private static string GetLogPathNormalEdition()
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName ?? "mRemoteNG");
         }
 
         private static string GetLogPathPortableEdition()
         {
-            return Application.StartupPath;
+            string startupPath = Application.StartupPath;
+            if (IsDirectoryWritable(startupPath))
+                return startupPath;
+            // Fallback for read-only or WebDAV drives: write log to %LOCALAPPDATA%
+            return GetLogPathNormalEdition();
+        }
+
+        private static bool IsDirectoryWritable(string dirPath)
+        {
+            if (string.IsNullOrEmpty(dirPath)) return false;
+            try
+            {
+                string testFile = Path.Combine(dirPath, Path.GetRandomFileName());
+                using var fs = File.Create(testFile, 1, FileOptions.DeleteOnClose);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }

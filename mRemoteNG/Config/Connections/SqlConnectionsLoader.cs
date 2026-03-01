@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Versioning;
 using System.Security;
 using mRemoteNG.Config.DatabaseConnectors;
+using System.Data;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Sql;
@@ -19,50 +20,83 @@ using mRemoteNG.Tree.Root;
 namespace mRemoteNG.Config.Connections
 {
     [SupportedOSPlatform("windows")]
-    public class SqlConnectionsLoader(
-        IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>> localConnectionPropertiesDeserializer,
-        IDataProvider<string> dataProvider) : IConnectionsLoader
+    public class SqlConnectionsLoader : IConnectionsLoader
     {
-        private readonly IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>> _localConnectionPropertiesDeserializer = localConnectionPropertiesDeserializer.ThrowIfNull(nameof(localConnectionPropertiesDeserializer));
+        private readonly IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>> _localConnectionPropertiesDeserializer;
+        private readonly IDataProvider<string> _localPropertiesDataProvider;
+        private readonly IDatabaseConnector _databaseConnector;
+        private readonly IDataProvider<DataTable> _sqlDataProvider;
+        private readonly ISqlDatabaseMetaDataRetriever _sqlMetaDataRetriever;
+        private readonly ISqlDatabaseVersionVerifier _sqlDatabaseVersionVerifier;
+        private readonly ICryptographyProvider _cryptographyProvider;
 
-        private readonly IDataProvider<string> _dataProvider = dataProvider.ThrowIfNull(nameof(dataProvider));
+        private Func<string, Optional<SecureString>> AuthenticationRequestor { get; }
 
-        private Func<Optional<SecureString>> AuthenticationRequestor { get; set; } = () => MiscTools.PasswordDialog("", false);
+        public SqlConnectionsLoader(
+            IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>> localConnectionPropertiesDeserializer,
+            IDataProvider<string> localPropertiesDataProvider,
+            IDatabaseConnector databaseConnector,
+            IDataProvider<DataTable> sqlDataProvider,
+            ISqlDatabaseMetaDataRetriever sqlMetaDataRetriever,
+            ISqlDatabaseVersionVerifier sqlDatabaseVersionVerifier,
+            ICryptographyProvider cryptographyProvider,
+            Func<string, Optional<SecureString>>? authenticationRequestor = null)
+        {
+            ArgumentNullException.ThrowIfNull(localConnectionPropertiesDeserializer);
+            ArgumentNullException.ThrowIfNull(localPropertiesDataProvider);
+            ArgumentNullException.ThrowIfNull(databaseConnector);
+            ArgumentNullException.ThrowIfNull(sqlDataProvider);
+            ArgumentNullException.ThrowIfNull(sqlMetaDataRetriever);
+            ArgumentNullException.ThrowIfNull(sqlDatabaseVersionVerifier);
+            ArgumentNullException.ThrowIfNull(cryptographyProvider);
+            _localConnectionPropertiesDeserializer = localConnectionPropertiesDeserializer;
+            _localPropertiesDataProvider = localPropertiesDataProvider;
+            _databaseConnector = databaseConnector;
+            _sqlDataProvider = sqlDataProvider;
+            _sqlMetaDataRetriever = sqlMetaDataRetriever;
+            _sqlDatabaseVersionVerifier = sqlDatabaseVersionVerifier;
+            _cryptographyProvider = cryptographyProvider;
+            AuthenticationRequestor = authenticationRequestor ?? ((filename) => MiscTools.PasswordDialog(filename, false));
+        }
 
         public ConnectionTreeModel Load()
         {
-            IDatabaseConnector connector = DatabaseConnectorFactory.DatabaseConnectorFromSettings();
-            SqlDataProvider dataProvider = new(connector);
-            SqlDatabaseMetaDataRetriever metaDataRetriever = new();
-            SqlDatabaseVersionVerifier databaseVersionVerifier = new(connector);
-            LegacyRijndaelCryptographyProvider cryptoProvider = new();
-            SqlConnectionListMetaData metaData = metaDataRetriever.GetDatabaseMetaData(connector) ?? HandleFirstRun(metaDataRetriever, connector);
+            SqlConnectionListMetaData metaData = _sqlMetaDataRetriever.GetDatabaseMetaData(_databaseConnector) ?? HandleFirstRun(_sqlMetaDataRetriever, _databaseConnector);
             Optional<SecureString> decryptionKey = GetDecryptionKey(metaData);
 
             if (!decryptionKey.Any())
-                throw new Exception("Could not load SQL connections");
+                throw new InvalidOperationException("Could not load SQL connections");
 
-            databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion);
-            System.Data.DataTable dataTable = dataProvider.Load();
-            DataTableDeserializer deserializer = new(cryptoProvider, decryptionKey.First());
+            _sqlDatabaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion);
+            System.Data.DataTable dataTable = _sqlDataProvider.Load();
+            DataTableDeserializer deserializer = new(_cryptographyProvider, decryptionKey.First());
             ConnectionTreeModel connectionTree = deserializer.Deserialize(dataTable);
-            ApplyLocalConnectionProperties(connectionTree.RootNodes.First(i => i is RootNodeInfo));
+            ContainerInfo? rootNode = connectionTree.RootNodes.FirstOrDefault(i => i is RootNodeInfo);
+            if (rootNode != null)
+                ApplyLocalConnectionProperties(rootNode);
             return connectionTree;
         }
 
         private Optional<SecureString> GetDecryptionKey(SqlConnectionListMetaData metaData)
         {
-            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
             string cipherText = metaData.Protected;
-            PasswordAuthenticator authenticator = new(cryptographyProvider, cipherText, AuthenticationRequestor);
+
+            // If Protected is empty, the database has no master password set.
+            // Return the default password directly without authentication.
+            if (string.IsNullOrEmpty(cipherText))
+                return new RootNodeInfo(RootNodeType.Connection).DefaultPassword.ConvertToSecureString();
+
+            PasswordAuthenticator authenticator = new(_cryptographyProvider, cipherText, () => AuthenticationRequestor(""));
             bool authenticated = authenticator.Authenticate(new RootNodeInfo(RootNodeType.Connection).DefaultPassword.ConvertToSecureString());
 
-            return authenticated ? authenticator.LastAuthenticatedPassword : Optional<SecureString>.Empty;
+            return authenticated && authenticator.LastAuthenticatedPassword is { } password
+                ? password
+                : Optional<SecureString>.Empty;
         }
 
         private void ApplyLocalConnectionProperties(ContainerInfo rootNode)
         {
-            string localPropertiesXml = _dataProvider.Load();
+            string localPropertiesXml = _localPropertiesDataProvider.Load();
             IEnumerable<LocalConnectionPropertiesModel> localConnectionProperties = _localConnectionPropertiesDeserializer.Deserialize(localPropertiesXml);
 
             rootNode
@@ -70,7 +104,8 @@ namespace mRemoteNG.Config.Connections
                 .Join(localConnectionProperties,
                       con => con.ConstantID,
                       locals => locals.ConnectionId,
-                      (con, locals) => new {Connection = con, LocalProperties = locals})
+                      (con, locals) => new {Connection = con, LocalProperties = locals},
+                      StringComparer.Ordinal)
                 .ForEach(x =>
                 {
                     x.Connection.PleaseConnect = x.LocalProperties.Connected;
@@ -80,10 +115,10 @@ namespace mRemoteNG.Config.Connections
                 });
         }
 
-        private SqlConnectionListMetaData HandleFirstRun(SqlDatabaseMetaDataRetriever metaDataRetriever, IDatabaseConnector connector)
+        private static SqlConnectionListMetaData HandleFirstRun(ISqlDatabaseMetaDataRetriever metaDataRetriever, IDatabaseConnector connector)
         {
 	        metaDataRetriever.WriteDatabaseMetaData(new RootNodeInfo(RootNodeType.Connection), connector);
-	        return metaDataRetriever.GetDatabaseMetaData(connector);
+	        return metaDataRetriever.GetDatabaseMetaData(connector)!;
 		}
     }
 }

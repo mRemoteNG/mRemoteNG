@@ -21,9 +21,10 @@ public class ConnectionsUpdateAvailableEventArgsTests
     }
 
     [Test]
-    public void CantProvideNullDatabaseConnectorToCtor()
+    public void CanProvideNullDatabaseConnectorToCtor()
     {
-        Assert.Throws<ArgumentNullException>(() => new ConnectionsUpdateAvailableEventArgs(null, _dateTime));
+        var eventArgs = new ConnectionsUpdateAvailableEventArgs(null, _dateTime);
+        Assert.That(eventArgs.DatabaseConnector, Is.Null);
     }
 
     [Test]

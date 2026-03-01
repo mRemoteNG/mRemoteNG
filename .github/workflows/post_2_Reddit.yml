@@ -3,6 +3,8 @@ name: Post to Reddit via PowerShell
 on:
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   post:
     runs-on: windows-latest

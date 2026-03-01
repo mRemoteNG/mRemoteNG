@@ -18,12 +18,21 @@ namespace mRemoteNG.App.Info
         public const string UrlForum = "https://github.com/orgs/mRemoteNG/discussions";
         public const string UrlChat = "https://app.element.io/#/room/#mremoteng:matrix.org";
         public const string UrlCommunity = "https://www.reddit.com/r/mRemoteNG";
-        public const string UrlBugs = "https://github.com/mRemoteNG/mRemoteNG/issues/new";
+        public const string UrlBugs = "https://github.com/robertpopa22/mRemoteNG/issues/new";
+        public const string CrashReportOwner = "robertpopa22";
+        public const string CrashReportRepo = "mRemoteNG";
         public const string UrlDocumentation = "https://mremoteng.readthedocs.io/en/latest/";
+
+        // Fork-specific URLs
+        public const string ForkOwner = "robertpopa22";
+        public const string ForkRepo = "mRemoteNG";
+        public const string UrlForkHome = "https://github.com/robertpopa22/mRemoteNG";
+        public const string UrlForkReleases = "https://github.com/robertpopa22/mRemoteNG/releases";
+        public const string UrlForkChangelog = "https://github.com/robertpopa22/mRemoteNG/blob/main/CHANGELOG.md";
         public static readonly string ApplicationVersion = Application.ProductVersion;
-        public static readonly string ProductName = Application.ProductName;
-        public static readonly string Copyright = ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCopyrightAttribute), false))?.Copyright;
-        public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+        public static readonly string ProductName = Application.ProductName ?? string.Empty;
+        public static readonly string Copyright = (Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCopyrightAttribute), false) as AssemblyCopyrightAttribute)?.Copyright ?? string.Empty;
+        public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location) ?? string.Empty;
 
         //public static string ReportingFilePath = "";
         private static readonly string puttyPath = HomePath + "\\PuTTYNG.exe";
@@ -56,11 +65,11 @@ namespace mRemoteNG.App.Info
 
         public static Version GetApplicationVersion()
         {
-            string cleanedVersion = ApplicationVersion.Split(' ')[0].Replace("(", "").Replace(")", "").Replace("Build", "");
-            cleanedVersion = cleanedVersion + "." + ApplicationVersion.Split(' ')[^1].Replace(")", "");
+            string cleanedVersion = ApplicationVersion.Split(' ')[0].Replace("(", "", StringComparison.Ordinal).Replace(")", "", StringComparison.Ordinal).Replace("Build", "", StringComparison.Ordinal);
+            cleanedVersion = cleanedVersion + "." + ApplicationVersion.Split(' ')[^1].Replace(")", "", StringComparison.Ordinal);
 
-            _ = System.Version.TryParse(cleanedVersion, out Version parsedVersion);
-            return parsedVersion;
+            _ = System.Version.TryParse(cleanedVersion, out Version? parsedVersion);
+            return parsedVersion ?? new Version(0, 0);
         }
     }
 }

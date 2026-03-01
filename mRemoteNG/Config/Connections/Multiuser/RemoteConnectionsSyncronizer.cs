@@ -1,4 +1,6 @@
 ﻿using mRemoteNG.App;
+using mRemoteNG.Messages;
+using mRemoteNG.Properties;
 using System;
 using System.Runtime.Versioning;
 using System.Timers;
@@ -18,10 +20,21 @@ namespace mRemoteNG.Config.Connections.Multiuser
             get { return _updateTimer.Interval; }
         }
 
+        /// <summary>
+        /// Gets the UTC time of the last successful external sync, or null if no sync has occurred yet.
+        /// </summary>
+        public DateTime? LastExternalSync { get; private set; }
+
+        /// <summary>
+        /// Raised when connections have been reloaded due to an external change (file or database).
+        /// </summary>
+        public event EventHandler? ConnectionsReloadedExternally;
+
         public RemoteConnectionsSyncronizer(IConnectionsUpdateChecker updateChecker)
         {
             _updateChecker = updateChecker;
-            _updateTimer = new System.Timers.Timer(3000);
+            double intervalMs = OptionsDBsPage.Default.SQLReloadInterval * 1000.0;
+            _updateTimer = new System.Timers.Timer(intervalMs > 0 ? intervalMs : 30000.0);
             SetEventListeners();
         }
 
@@ -29,15 +42,29 @@ namespace mRemoteNG.Config.Connections.Multiuser
         {
             _updateChecker.UpdateCheckStarted += OnUpdateCheckStarted;
             _updateChecker.UpdateCheckFinished += OnUpdateCheckFinished;
-            _updateChecker.ConnectionsUpdateAvailable += (sender, args) => ConnectionsUpdateAvailable?.Invoke(sender, args);
+            _updateChecker.ConnectionsUpdateAvailable += (_, args) => ConnectionsUpdateAvailable?.Invoke(this, args);
             _updateTimer.Elapsed += (sender, args) => _updateChecker.IsUpdateAvailableAsync();
             ConnectionsUpdateAvailable += Load;
         }
 
         private void Load(object sender, ConnectionsUpdateAvailableEventArgs args)
         {
-            Runtime.ConnectionsService.LoadConnections(true, false, "");
+            if (args.DatabaseConnector != null)
+            {
+                Runtime.ConnectionsService.LoadConnections(true, false, "");
+            }
+            else
+            {
+                if (Runtime.ConnectionsService.ConnectionFileName != null)
+                    Runtime.ConnectionsService.LoadConnections(false, false, Runtime.ConnectionsService.ConnectionFileName);
+            }
             args.Handled = true;
+
+            LastExternalSync = DateTime.UtcNow;
+            string source = args.DatabaseConnector != null ? "database" : "file";
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                $"Connections reloaded from external {source} change (team sync)");
+            ConnectionsReloadedExternally?.Invoke(this, EventArgs.Empty);
         }
 
         public void Enable()
@@ -64,18 +91,18 @@ namespace mRemoteNG.Config.Connections.Multiuser
         private void OnUpdateCheckStarted(object sender, EventArgs eventArgs)
         {
             _updateTimer.Stop();
-            UpdateCheckStarted?.Invoke(sender, eventArgs);
+            UpdateCheckStarted?.Invoke(this, eventArgs);
         }
 
         private void OnUpdateCheckFinished(object sender, ConnectionsUpdateCheckFinishedEventArgs eventArgs)
         {
             _updateTimer.Start();
-            UpdateCheckFinished?.Invoke(sender, eventArgs);
+            UpdateCheckFinished?.Invoke(this, eventArgs);
         }
 
-        public event EventHandler UpdateCheckStarted;
-        public event UpdateCheckFinishedEventHandler UpdateCheckFinished;
-        public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
+        public event EventHandler? UpdateCheckStarted;
+        public event UpdateCheckFinishedEventHandler? UpdateCheckFinished;
+        public event ConnectionsUpdateAvailableEventHandler? ConnectionsUpdateAvailable;
 
 
         public void Dispose()

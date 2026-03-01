@@ -18,7 +18,9 @@ namespace mRemoteNG.Tools
                 List<string> sshTunnelList = new() { string.Empty};
 
                 // Add a blank entry to signify that no external tool is selected
-                sshTunnelList.AddRange(GetSshConnectionNames(Runtime.ConnectionsService.ConnectionTreeModel.RootNodes));
+                var treeModel = Runtime.ConnectionsService.ConnectionTreeModel;
+                if (treeModel is not null)
+                    sshTunnelList.AddRange(GetSshConnectionNames(treeModel.RootNodes));
                 return sshTunnelList.ToArray();
             }
         }

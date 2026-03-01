@@ -21,10 +21,10 @@ namespace mRemoteNG.UI.Controls.PageSequence
 
         public PageSequence(Control pageContainer, params SequencedControl[] pages)
         {
-            if (pages == null)
-                throw new ArgumentNullException(nameof(pages));
+            ArgumentNullException.ThrowIfNull(pages);
+            ArgumentNullException.ThrowIfNull(pageContainer);
 
-            _pageContainer = pageContainer ?? throw new ArgumentNullException(nameof(pageContainer));
+            _pageContainer = pageContainer;
             foreach (SequencedControl page in pages)
             {
                 SubscribeToPageEvents(page);
@@ -108,6 +108,7 @@ namespace mRemoteNG.UI.Controls.PageSequence
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)

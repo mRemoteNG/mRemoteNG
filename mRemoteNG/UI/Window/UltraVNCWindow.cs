@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using mRemoteNG.App;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
@@ -12,9 +13,9 @@ namespace mRemoteNG.UI.Window
     {
         #region Form Init
 
-        internal System.Windows.Forms.ToolStrip tsMain;
-        internal System.Windows.Forms.Panel pnlContainer;
-        internal System.Windows.Forms.ToolStripButton btnDisconnect;
+        internal System.Windows.Forms.ToolStrip tsMain = null!;
+        internal System.Windows.Forms.Panel pnlContainer = null!;
+        internal System.Windows.Forms.ToolStripButton btnDisconnect = null!;
 
         private void InitializeComponent()
         {
@@ -42,7 +43,7 @@ namespace mRemoteNG.UI.Window
             // btnDisconnect
             // 
             this.btnDisconnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnDisconnect.Image = ((System.Drawing.Image)(resources.GetObject("btnDisconnect.Image")));
+            this.btnDisconnect.Image = resources.GetObject("btnDisconnect.Image", CultureInfo.InvariantCulture) as System.Drawing.Image;
             this.btnDisconnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDisconnect.Name = "btnDisconnect";
             this.btnDisconnect.Size = new System.Drawing.Size(70, 22);

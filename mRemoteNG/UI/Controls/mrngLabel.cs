@@ -12,7 +12,7 @@ namespace mRemoteNG.UI.Controls
     [ToolboxBitmap(typeof(Label))]
     public class MrngLabel : Label
     {
-        private ThemeManager _themeManager;
+        private ThemeManager? _themeManager;
         private TextFormatFlags _textFormatFlags;
 
         public MrngLabel()
@@ -26,8 +26,8 @@ namespace mRemoteNG.UI.Controls
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ActiveAndExtended) return;
             // Use the Dialog_* colors since Labels generally have the same colors as panels/dialogs/windows/etc...
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette?.getColor("Dialog_Background") ?? BackColor;
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette?.getColor("Dialog_Foreground") ?? ForeColor;
             FontOverrider.FontOverride(this);
             BuildTextFormatFlags();
             Invalidate();
@@ -71,13 +71,13 @@ namespace mRemoteNG.UI.Controls
                     _textFormatFlags |= TextFormatFlags.Bottom | TextFormatFlags.Right;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(TextAlign), TextAlign, null);
             }
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!_themeManager.ActiveAndExtended)
+            if (_themeManager is null || !_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;
@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.Controls
             else
             {
                 Color disabledtextLabel =
-                    _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Foreground");
+                    _themeManager.ActiveTheme.ExtendedPalette?.getColor("TextBox_Disabled_Foreground") ?? ForeColor;
                 TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, disabledtextLabel, _textFormatFlags);
             }
         }

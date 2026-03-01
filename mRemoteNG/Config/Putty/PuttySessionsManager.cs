@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.Versioning;
+using mRemoteNG.App;
+using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 
@@ -18,11 +21,12 @@ namespace mRemoteNG.Config.Putty
 
         public IEnumerable<AbstractPuttySessionsProvider> Providers => _providers;
 
-        public List<RootPuttySessionsNodeInfo> RootPuttySessionsNodes { get; } = [];
+        public IList<RootPuttySessionsNodeInfo> RootPuttySessionsNodes { get; } = [];
 
         private PuttySessionsManager()
         {
             AddProvider(new PuttySessionsRegistryProvider());
+            AddProvider(new PuttySessionsFileProvider());
         }
 
 
@@ -32,16 +36,30 @@ namespace mRemoteNG.Config.Putty
         {
             foreach (AbstractPuttySessionsProvider provider in Providers)
             {
-                AddSessionsFromProvider(provider);
+                if (IsProviderEnabled(provider))
+                {
+                    AddSessionsFromProvider(provider);
+                }
             }
         }
 
         private void AddSessionsFromProvider(AbstractPuttySessionsProvider puttySessionProvider)
         {
-            puttySessionProvider.ThrowIfNull(nameof(puttySessionProvider));
+            ArgumentNullException.ThrowIfNull(puttySessionProvider);
 
             RootPuttySessionsNodeInfo rootTreeNode = puttySessionProvider.RootInfo;
-            puttySessionProvider.GetSessions();
+            try
+            {
+                puttySessionProvider.GetSessions();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage(
+                    $"Failed to load PuTTY sessions from provider {puttySessionProvider.GetType().Name}.",
+                    ex,
+                    MessageClass.WarningMsg);
+                return;
+            }
 
             if (!RootPuttySessionsNodes.Contains(rootTreeNode) && rootTreeNode.HasChildren())
                 RootPuttySessionsNodes.Add(rootTreeNode);
@@ -119,12 +137,16 @@ namespace mRemoteNG.Config.Putty
             return sessionNames.ToArray();
         }
 
-        private bool IsProviderEnabled(AbstractPuttySessionsProvider puttySessionsProvider)
+        private static bool IsProviderEnabled(AbstractPuttySessionsProvider puttySessionsProvider)
         {
-            bool enabled = true;
-            if (!(puttySessionsProvider is PuttySessionsRegistryProvider)) enabled = false;
+            if (puttySessionsProvider is PuttySessionsRegistryProvider) return true;
 
-            return enabled;
+            if (puttySessionsProvider is PuttySessionsFileProvider)
+            {
+                return PuttyTypeDetector.GetPuttyType() == PuttyTypeDetector.PuttyType.Kitty;
+            }
+
+            return false;
         }
 
         #endregion
@@ -153,14 +175,14 @@ namespace mRemoteNG.Config.Putty
 
         #endregion
 
-        public event NotifyCollectionChangedEventHandler PuttySessionsCollectionChanged;
+        public event NotifyCollectionChangedEventHandler? PuttySessionsCollectionChanged;
 
         protected void RaisePuttySessionCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
         {
-            PuttySessionsCollectionChanged?.Invoke(sender, args);
+            PuttySessionsCollectionChanged?.Invoke(this, args);
         }
 
-        public event NotifyCollectionChangedEventHandler SessionProvidersCollectionChanged;
+        public event NotifyCollectionChangedEventHandler? SessionProvidersCollectionChanged;
 
         protected void RaiseSessionProvidersCollectionChangedEvent(NotifyCollectionChangedEventArgs args)
         {

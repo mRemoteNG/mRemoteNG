@@ -33,8 +33,7 @@ namespace mRemoteNG.Config.Import
 
             FileDataProvider dataProvider = new(fileName);
             string content = dataProvider.Load();
-            SecureCRTFileDeserializer deserializer = new();
-            ConnectionTreeModel connectionTreeModel = deserializer.Deserialize(content);
+            ConnectionTreeModel connectionTreeModel = SecureCRTFileDeserializer.Deserialize(content);
 
             ContainerInfo rootImportContainer = new() { Name = Path.GetFileNameWithoutExtension(fileName) };
             rootImportContainer.AddChildRange(connectionTreeModel.RootNodes.First().Children.ToArray());

@@ -16,9 +16,9 @@ namespace mRemoteNG.Themes
         public MremoteNGThemeBase(byte[] themeResource)
             : base(themeResource)
         {
-            Measures.SplitterSize = 3;
-            Measures.AutoHideSplitterSize = 3;
-            Measures.DockPadding = 2;
+            Measures.SplitterSize = Properties.OptionsTabsPanelsPage.Default.SplitterSize;
+            Measures.AutoHideSplitterSize = Properties.OptionsTabsPanelsPage.Default.SplitterSize;
+            Measures.DockPadding = Properties.OptionsTabsPanelsPage.Default.DockPadding;
             ShowAutoHideContentOnHover = false;
         }
     }
@@ -33,7 +33,7 @@ namespace mRemoteNG.Themes
     {
         public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane, Rectangle bounds)
         {
-            Rectangle? activeDocumentBounds = (dockPanel?.ActiveDocument as ConnectionTab)?.Bounds;
+            Rectangle? activeDocumentBounds = (dockPanel.ActiveDocument as ConnectionTab)?.Bounds;
 
             return new FloatWindowNG(dockPanel, pane, activeDocumentBounds ?? bounds);
         }

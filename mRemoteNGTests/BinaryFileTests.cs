@@ -14,7 +14,7 @@ namespace mRemoteNGTests
             Assert.That(IsLargeAware(exePath), Is.True);
         }
 
-        public string GetTargetPath([CallerFilePath] string sourceFilePath = "")
+        public static string GetTargetPath([CallerFilePath] string sourceFilePath = "")
         {
             const string debugOrRelease =
             #if DEBUG || DEBUG_PORTABLE
@@ -34,7 +34,7 @@ namespace mRemoteNGTests
             return filePath;
         }
 
-        private bool IsLargeAware(string file)
+        private static bool IsLargeAware(string file)
         {
             using (var fs = File.OpenRead(file))
             {
@@ -47,7 +47,7 @@ namespace mRemoteNGTests
         /// </summary>
         /// <param name="stream">Stream to check, make sure its at the start of the MZ header</param>
         /// <returns></returns>
-        private bool IsLargeAware(Stream stream)
+        private static bool IsLargeAware(Stream stream)
         {
             const int imageFileLargeAddressAware = 0x20;
 

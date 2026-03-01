@@ -167,7 +167,7 @@ namespace mRemoteNGTests
 
         #region Implementation
 
-        private bool ItemFound(int index)
+        private static bool ItemFound(int index)
         {
             return index != -1;
         }

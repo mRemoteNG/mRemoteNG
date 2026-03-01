@@ -11,7 +11,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     [SupportedOSPlatform("windows")]
     public sealed partial class CredentialsPage : OptionsPage
     {
-        private OptRegistryCredentialsPage pageRegSettingsInstance;
+        private OptRegistryCredentialsPage? pageRegSettingsInstance;
         public CredentialsPage()
         {
             InitializeComponent();
@@ -101,6 +101,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // Show registry settings info if any common setting is used.
             lblRegistrySettingsUsedInfo.Visible =  CommonRegistrySettingsUsed();
 
+            // Enforce AllowSavePasswords/AllowSaveUsernames regardless of UseCredentials
+            if (!CommonRegistrySettings.AllowSavePasswords)
+                DisableControl(txtCredentialsPassword);
+
+            if (!CommonRegistrySettings.AllowSaveUsernames)
+                DisableControl(txtCredentialsUsername);
+
             // UseCredentials reg setting must be set (and valid).
             if (!pageRegSettingsInstance.UseCredentials.IsValid)
                 return;
@@ -132,10 +139,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // The following is only used when set to custom!
             //      Disable controls based on the registry settings.
             //
-            if (pageRegSettingsInstance.DefaultUsername.IsSet)
+            if (pageRegSettingsInstance.DefaultUsername.IsSet || !CommonRegistrySettings.AllowSaveUsernames)
                 DisableControl(txtCredentialsUsername);
 
-            if (pageRegSettingsInstance.DefaultPassword.IsSet)
+            if (pageRegSettingsInstance.DefaultPassword.IsSet || !CommonRegistrySettings.AllowSavePasswords)
                 DisableControl(txtCredentialsPassword);
 
             if (pageRegSettingsInstance.DefaultDomain.IsSet)
@@ -167,14 +174,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         /// <param name="e">Event data containing information about the event.</param>
         private void radCredentialsCustom_CheckedChanged(object sender, EventArgs e)
         {
-            if (!pageRegSettingsInstance.DefaultUsername.IsSet && pageRegSettingsInstance.DefaultUsernameEnabled)
+            if (pageRegSettingsInstance == null)
+                return;
+
+            if (!pageRegSettingsInstance.DefaultUsername.IsSet && pageRegSettingsInstance.DefaultUsernameEnabled
+                && CommonRegistrySettings.AllowSaveUsernames)
             {
                 lblCredentialsUsername.Enabled = radCredentialsCustom.Checked;
                 txtCredentialsUsername.Enabled = radCredentialsCustom.Checked;
             }
 
 
-            if (!pageRegSettingsInstance.DefaultPassword.IsSet && pageRegSettingsInstance.DefaultPasswordEnabled)
+            if (!pageRegSettingsInstance.DefaultPassword.IsSet && pageRegSettingsInstance.DefaultPasswordEnabled
+                && CommonRegistrySettings.AllowSavePasswords)
             {
                 lblCredentialsPassword.Enabled = radCredentialsCustom.Checked;
                 txtCredentialsPassword.Enabled = radCredentialsCustom.Checked;

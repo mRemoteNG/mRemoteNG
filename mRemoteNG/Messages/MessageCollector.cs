@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Versioning;
 
@@ -12,6 +13,7 @@ namespace mRemoteNG.Messages
     [SupportedOSPlatform("windows")]
     public class MessageCollector : INotifyCollectionChanged
     {
+        private const int MaxMessages = 10_000;
         private readonly IList<IMessage> _messageList;
 
         public IEnumerable<IMessage> Messages => _messageList;
@@ -42,6 +44,10 @@ namespace mRemoteNG.Messages
                 newMessages.Add(message);
             }
 
+            // Prevent unbounded growth in long-running sessions
+            while (_messageList.Count > MaxMessages)
+                _messageList.RemoveAt(0);
+
             if (newMessages.Any())
                 RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, newMessages);
         }
@@ -54,7 +60,7 @@ namespace mRemoteNG.Messages
 
         public void AddExceptionStackTrace(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = true)
         {
-            AddMessage(msgClass, message + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace,
+            AddMessage(msgClass, message + Environment.NewLine + ex.Message + Environment.NewLine + ex.Demystify().StackTrace,
                        logOnly);
         }
 

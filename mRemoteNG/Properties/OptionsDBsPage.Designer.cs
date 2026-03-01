@@ -109,6 +109,30 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowDatabasePickerOnStartup {
+            get {
+                return ((bool)(this["ShowDatabasePickerOnStartup"]));
+            }
+            set {
+                this["ShowDatabasePickerOnStartup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Windows Authentication")]
+        public string SQLAuthType {
+            get {
+                return ((string)(this["SQLAuthType"]));
+            }
+            set {
+                this["SQLAuthType"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool cbDBsPageInOptionMenu {
             get {
@@ -116,6 +140,18 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["cbDBsPageInOptionMenu"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int SQLReloadInterval {
+            get {
+                return ((int)(this["SQLReloadInterval"]));
+            }
+            set {
+                this["SQLReloadInterval"] = value;
             }
         }
     }

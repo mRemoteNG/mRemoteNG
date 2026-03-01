@@ -12,13 +12,13 @@ namespace mRemoteNG.Connection
     [SupportedOSPlatform("windows")]
     public sealed partial class InterfaceControl
     {
-        public ProtocolBase Protocol { get; set; }
-        public ConnectionInfo Info { get; set; }
+        public ProtocolBase Protocol { get; set; } = null!;
+        public ConnectionInfo Info { get; set; } = null!;
         // in case the connection is through a SSH tunnel the Info is a copy of original info with hostname and port number overwritten with localhost and local tunnel port
         // and the original Info is saved in the following variable
-        public ConnectionInfo OriginalInfo { get; set; }
+        public ConnectionInfo OriginalInfo { get; set; } = null!;
         // in case the connection is through a SSH tunnel the Info of the SSHTunnelConnection is also saved for reference in log messages etc.
-        public ConnectionInfo SSHTunnelInfo { get; set; }
+        public ConnectionInfo? SSHTunnelInfo { get; set; }
 
 
         public InterfaceControl(Control parent, ProtocolBase protocol, ConnectionInfo info)
@@ -85,7 +85,7 @@ namespace mRemoteNG.Connection
             }
         }
 
-        private Color GetFrameColor(ConnectionFrameColor frameColor)
+        private static Color GetFrameColor(ConnectionFrameColor frameColor)
         {
             return frameColor switch
             {
@@ -98,15 +98,18 @@ namespace mRemoteNG.Connection
             };
         }
 
-        public static InterfaceControl FindInterfaceControl(DockPanel DockPnl)
+        public static InterfaceControl? FindInterfaceControl(DockPanel DockPnl)
         {
             // instead of repeating the code, call the routine using ConnectionTab if called by DockPanel
             if (DockPnl.ActiveDocument is ConnectionTab ct)
                 return FindInterfaceControl(ct);
+            // ActiveDocument is null when the tab is floating (DockState.Float); check ActiveContent too (#1875)
+            if (DockPnl.ActiveContent is ConnectionTab ft)
+                return FindInterfaceControl(ft);
             return null;
         }
 
-        public static InterfaceControl FindInterfaceControl(ConnectionTab tab)
+        public static InterfaceControl? FindInterfaceControl(ConnectionTab tab)
         {
             if (tab.Controls.Count < 1) return null;
             // if the tab has more than one controls and the second is an InterfaceControl than it must be a connection through SSH tunnel

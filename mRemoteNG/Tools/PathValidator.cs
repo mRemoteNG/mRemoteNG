@@ -22,11 +22,11 @@ namespace mRemoteNG.Tools
                 return false;
 
             // Check for path traversal sequences
-            if (path.Contains("../") || path.Contains("..\\"))
+            if (path.Contains("../", StringComparison.Ordinal) || path.Contains("..\\", StringComparison.Ordinal))
                 return false;
 
             // Also check for encoded versions of path traversal
-            if (path.Contains("%2e%2e") || path.Contains("%2E%2E"))
+            if (path.Contains("%2e%2e", StringComparison.Ordinal) || path.Contains("%2E%2E", StringComparison.Ordinal))
                 return false;
 
             return true;
@@ -65,7 +65,7 @@ namespace mRemoteNG.Tools
                 return false;
 
             // Check for multiple consecutive quotes which could be used to break out of quoting
-            if (filePath.Contains("\"\"") || filePath.Contains("''"))
+            if (filePath.Contains("\"\"", StringComparison.Ordinal) || filePath.Contains("''", StringComparison.Ordinal))
                 return false;
 
             try

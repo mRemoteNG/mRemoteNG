@@ -1,13 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
-    <Platforms>x64</Platforms>
+    <Platforms>x86;x64;arm64</Platforms>
     <Configurations>Debug;Release;Release Installer</Configurations>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <SupportedOSPlatformVersion>10.0.26100.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='arm64'">
+    <PlatformTarget>ARM64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Properties\**" />
@@ -16,6 +19,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" />
+    <PackageReference Include="FlaUI.Core" />
+    <PackageReference Include="FlaUI.UIA3" />
     <PackageReference Include="Cucumber.Messages" />
     <PackageReference Include="Gherkin" />
     <PackageReference Include="Google.Protobuf" />
@@ -32,50 +37,8 @@
     <PackageReference Include="NUnit.Extension.TeamCityEventListener" />
     <PackageReference Include="NUnit.Runners" />
     <PackageReference Include="NUnit3TestAdapter" />
-    <PackageReference Include="runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.native.System" />
-    <PackageReference Include="runtime.native.System.IO.Compression" />
-    <PackageReference Include="runtime.native.System.Net.Http" />
-    <PackageReference Include="runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.opensuse.42.1-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="System.Buffers" />
-    <PackageReference Include="System.Collections.Immutable" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" />
-    <PackageReference Include="System.Console" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" />
-    <PackageReference Include="System.Diagnostics.EventLog" />
-    <PackageReference Include="System.Drawing.Common" />
-    <PackageReference Include="System.Dynamic.Runtime" />
-    <PackageReference Include="System.Formats.Asn1" />
-    <PackageReference Include="System.IO.Pipelines" />
-    <PackageReference Include="System.Memory" />
-    <PackageReference Include="System.Net.Http" />
-    <PackageReference Include="System.Net.Primitives" />
-    <PackageReference Include="System.Net.Sockets" />
-    <PackageReference Include="System.Reflection.Emit" />
-    <PackageReference Include="System.Reflection.Emit.ILGeneration" />
-    <PackageReference Include="System.Reflection.Emit.Lightweight" />
-    <PackageReference Include="System.Reflection.Metadata" />
-    <PackageReference Include="System.Reflection.TypeExtensions" />
-    <PackageReference Include="System.Runtime" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" />
-    <PackageReference Include="System.Runtime.Extensions" />
-    <PackageReference Include="System.Security.Cryptography.Algorithms" />
-    <PackageReference Include="System.Security.Cryptography.Cng" />
-    <PackageReference Include="System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="System.Security.Cryptography.X509Certificates" />
-    <PackageReference Include="System.Security.Permissions" />
-    <PackageReference Include="System.Text.Encoding.CodePages" />
-    <PackageReference Include="System.Text.Json" />
-    <PackageReference Include="System.Text.RegularExpressions" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" />
-    <PackageReference Include="System.ValueTuple" />
-    <PackageReference Include="System.Windows.Extensions" />
-    <PackageReference Include="System.Xml.ReaderWriter" />
+    <PackageReference Include="SpecFlow" />
+    <PackageReference Include="SpecFlow.NUnit" />
     <PackageReference Include="ZstdSharp.Port" />
   </ItemGroup>
   <ItemGroup>

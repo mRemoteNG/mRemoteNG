@@ -19,10 +19,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         #region Public Properties
 
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        [Browsable(false)] public virtual string PageName { get; set; }
+        [Browsable(false)] public virtual string PageName { get; set; } = string.Empty;
 
-        public virtual Icon PageIcon { get; protected set; }
-        public virtual Image IconImage => PageIcon?.ToBitmap();
+        public virtual Icon? PageIcon { get; protected set; }
+        public virtual Image? IconImage => PageIcon?.ToBitmap();
 
         /// <summary>
         /// Indicates whether the settings on this page have been modified.
@@ -63,8 +63,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         protected virtual void ApplyTheme()
         {
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette?.getColor("Dialog_Background") ?? BackColor;
+            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette?.getColor("Dialog_Foreground") ?? ForeColor;
             Invalidate();
         }
 

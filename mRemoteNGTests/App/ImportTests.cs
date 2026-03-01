@@ -43,4 +43,22 @@ public class ImportTests
             Assert.That(container.Children, Has.One.Items);
         }
     }
+
+    [Test]
+    public void TextListFileIsImported()
+    {
+        using (FileTestHelpers.DisposableTempFile(out var textFile, ".txt"))
+        {
+            File.AppendAllText(textFile, "server1\r\nserver2 user2 pass2 3390");
+            var conService = new ConnectionsService(PuttySessionsManager.Instance);
+            var container = new ContainerInfo();
+
+            Import.HeadlessFileImport(new[] { textFile }, container, conService);
+
+            Assert.That(container.Children.Count, Is.EqualTo(2));
+            Assert.That(container.Children[0].Hostname, Is.EqualTo("server1"));
+            Assert.That(container.Children[1].Hostname, Is.EqualTo("server2"));
+            Assert.That(container.Children[1].Port, Is.EqualTo(3390));
+        }
+    }
 }

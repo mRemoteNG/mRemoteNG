@@ -8,7 +8,7 @@ namespace mRemoteNG.UI.Controls
 {
     public partial class CredentialRecordListBox : ListBox
     {
-        public new ICredentialRecord SelectedItem => (ICredentialRecord)base.SelectedItem;
+        public new ICredentialRecord? SelectedItem => base.SelectedItem as ICredentialRecord;
         public ICredentialRecord NoneSelection { get; } = new CredentialRecord {Title = $"--{Language.None}--"};
         public ICredentialRecord AddNewSelection { get; } = new CredentialRecord {Title = $"--{Language.Add}--"};
 

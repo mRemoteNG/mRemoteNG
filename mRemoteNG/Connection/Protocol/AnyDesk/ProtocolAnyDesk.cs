@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -18,7 +18,7 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
 
         private IntPtr _handle;
         private readonly ConnectionInfo _connectionInfo;
-        private Process _process;
+        private Process? _process;
         private const string DefaultAnydeskPath = @"C:\Program Files (x86)\AnyDesk\AnyDesk.exe";
         private const string AlternateAnydeskPath = @"C:\Program Files\AnyDesk\AnyDesk.exe";
 
@@ -48,7 +48,7 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
                     "Attempting to start AnyDesk connection.", true);
 
                 // Validate AnyDesk installation
-                string anydeskPath = FindAnydeskExecutable();
+                string? anydeskPath = FindAnydeskExecutable();
                 if (string.IsNullOrEmpty(anydeskPath))
                 {
                     Runtime.MessageCollector?.AddMessage(MessageClass.ErrorMsg,
@@ -170,7 +170,7 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
 
         #region Private Methods
 
-        private string FindAnydeskExecutable()
+        private static string? FindAnydeskExecutable()
         {
             // Check common installation paths
             if (File.Exists(DefaultAnydeskPath))
@@ -184,7 +184,7 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
             }
 
             // Check if it's in PATH
-            string pathVariable = Environment.GetEnvironmentVariable("PATH");
+            string? pathVariable = Environment.GetEnvironmentVariable("PATH");
             if (pathVariable != null)
             {
                 var paths = pathVariable.Split(Path.PathSeparator);
@@ -211,7 +211,7 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
                 // Username field is optional and not used in the CLI (reserved for future use)
                 // Password field is piped via stdin when --with-password flag is used
                 string anydeskId = _connectionInfo.Hostname.Trim();
-                
+
                 // Validate AnyDesk ID to prevent command injection
                 // AnyDesk IDs are numeric or alphanumeric with @ and - characters for aliases
                 if (!IsValidAnydeskId(anydeskId))
@@ -220,7 +220,7 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
                         "Invalid AnyDesk ID format. Only alphanumeric characters, @, -, _, and . are allowed.", true);
                     return false;
                 }
-                
+
                 string arguments = anydeskId;
 
                 // Add --with-password flag if password is provided
@@ -252,12 +252,12 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
                 return false;
             }
         }
-        
-        private bool IsValidAnydeskId(string anydeskId)
+
+        private static bool IsValidAnydeskId(string anydeskId)
         {
             if (string.IsNullOrWhiteSpace(anydeskId))
                 return false;
-            
+
             // AnyDesk IDs can be:
             // - Pure numeric (e.g., 123456789)
             // - Alphanumeric with @ for aliases (e.g., alias@ad)
@@ -270,7 +270,7 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
                     return false;
                 }
             }
-            
+
             return true;
         }
 
@@ -379,7 +379,7 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
             {
                 // Find AnyDesk process by name
                 Process[] anydeskProcesses = Process.GetProcessesByName("AnyDesk");
-                Process processToKeep = null;
+                Process? processToKeep = null;
                 try
                 {
                     foreach (Process anydeskProcess in anydeskProcesses)
@@ -395,7 +395,7 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
 
                                 // Store the actual AnyDesk process for later cleanup
                                 // Dispose the PowerShell process if it's different
-                                if (_process != null && _process.ProcessName != "AnyDesk")
+                                if (_process != null && !string.Equals(_process.ProcessName, "AnyDesk", StringComparison.Ordinal))
                                 {
                                     _process.Exited -= ProcessExited;
                                     _process = anydeskProcess;
@@ -408,7 +408,7 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
                                 if (InterfaceControl != null)
                                 {
                                     NativeMethods.SetParent(_handle, InterfaceControl.Handle);
-                                    Resize(this, new EventArgs());
+                                    Resize(this, EventArgs.Empty);
                                 }
 
                                 return true;

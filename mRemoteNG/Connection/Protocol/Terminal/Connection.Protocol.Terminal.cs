@@ -15,7 +15,7 @@ namespace mRemoteNG.Connection.Protocol.Terminal
 
         private IntPtr _handle;
         private readonly ConnectionInfo _connectionInfo = connectionInfo;
-        private ConsoleControl.ConsoleControl _consoleControl;
+        private ConsoleControl.ConsoleControl? _consoleControl;
 
         #endregion
 
@@ -42,8 +42,8 @@ namespace mRemoteNG.Connection.Protocol.Terminal
 
                 // Setup arguments based on whether hostname is provided
                 string arguments = "";
-                string hostname = _connectionInfo.Hostname.Trim().ToLower();
-                bool useLocalHost = hostname == "" || hostname.Equals("localhost");
+                string hostname = _connectionInfo.Hostname.Trim().ToLowerInvariant();
+                bool useLocalHost = hostname == "" || hostname.Equals("localhost", StringComparison.Ordinal);
                 
                 if (!useLocalHost)
                 {
@@ -92,13 +92,13 @@ namespace mRemoteNG.Connection.Protocol.Terminal
 
                 if (!_consoleControl.IsHandleCreated)
                 {
-                    throw new Exception("Failed to initialize terminal console within 5 seconds. This may indicate system resource constraints or permission issues.");
+                    throw new TimeoutException("Failed to initialize terminal console within 5 seconds. This may indicate system resource constraints or permission issues.");
                 }
 
                 _handle = _consoleControl.Handle;
                 NativeMethods.SetParent(_handle, InterfaceControl.Handle);
 
-                Resize(this, new EventArgs());
+                Resize(this, EventArgs.Empty);
                 base.Connect();
                 return true;
             }

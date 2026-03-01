@@ -17,7 +17,7 @@ namespace mRemoteNGTests.TestHelpers
 
 		public int GetHashCode(ConnectionInfoInheritance inheritance)
 		{
-			var allProperties = inheritance.GetProperties();
+			var allProperties = ConnectionInfoInheritance.GetProperties();
 
 			unchecked // Overflow is fine, just wrap
 			{

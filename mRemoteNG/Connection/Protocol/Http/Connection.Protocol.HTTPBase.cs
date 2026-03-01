@@ -19,13 +19,15 @@ namespace mRemoteNG.Connection.Protocol.Http
     {
         #region Private Properties
 
-        private Control _wBrowser;
-        private string _tabTitle;
-        protected string httpOrS;
+        private Control? _wBrowser;
+        private string _tabTitle = string.Empty;
+        protected string httpOrS = string.Empty;
         protected int defaultPort;
-        private string _userDataFolder;
+        private string _userDataFolder = string.Empty;
         private CoreWebView2Environment? _webView2Environment;
-        private Task _webView2InitializationTask;
+        private Task? _webView2InitializationTask;
+        private ToolStrip? _navigationBar;
+        private ToolStripTextBox? _urlBox;
 
         #endregion
 
@@ -37,18 +39,14 @@ namespace mRemoteNG.Connection.Protocol.Http
             {
                 if (renderingEngine == RenderingEngine.EdgeChromium)
                 {
-                    // Create a unique user data folder for each WebView2 instance
-                    // This prevents session sharing between multiple HTTP/HTTPS connections
-                    _userDataFolder = Path.Combine(
-                        Path.GetTempPath(),
-                        "mRemoteNG_WebView2",
-                        Guid.NewGuid().ToString()
-                    );
-                    
                     Control = new Microsoft.Web.WebView2.WinForms.WebView2()
                     {
                         Dock = DockStyle.Fill,
                     };
+                }
+                else if (renderingEngine == RenderingEngine.ExternalBrowser)
+                {
+                    // No embedded control — URL will be opened in the OS default browser on Connect()
                 }
                 else
                 {
@@ -63,6 +61,9 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         public override bool Initialize()
         {
+            if (InterfaceControl.Info.RenderingEngine == RenderingEngine.ExternalBrowser)
+                return base.Initialize();
+
             base.Initialize();
 
             try
@@ -80,23 +81,46 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.EdgeChromium)
                 {
-                    Microsoft.Web.WebView2.WinForms.WebView2 edge = (Microsoft.Web.WebView2.WinForms.WebView2)_wBrowser;
-                    edge.CoreWebView2InitializationCompleted += Edge_CoreWebView2InitializationCompleted;
-                    
-                    // Initialize WebView2 with unique user data folder asynchronously
-                    _webView2InitializationTask = InitializeWebView2Async(edge);
+                    if (_wBrowser is Microsoft.Web.WebView2.WinForms.WebView2 edge)
+                    {
+                        edge.CoreWebView2InitializationCompleted += Edge_CoreWebView2InitializationCompleted;
+
+                        if (InterfaceControl.Info.UsePersistentBrowser)
+                        {
+                            _userDataFolder = Path.Combine(
+                                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                "mRemoteNG",
+                                "BrowserProfiles",
+                                InterfaceControl.Info.ConstantID
+                            );
+                        }
+                        else
+                        {
+                            _userDataFolder = Path.Combine(
+                                Path.GetTempPath(),
+                                "mRemoteNG_WebView2",
+                                Guid.NewGuid().ToString()
+                            );
+                        }
+
+                        // Initialize WebView2 with unique user data folder asynchronously
+                        _webView2InitializationTask = InitializeWebView2Async(edge);
+                    }
                 }
                 else
                 {
-                    WebBrowser objWebBrowser = (WebBrowser)_wBrowser;
+                    if (_wBrowser is not WebBrowser objWebBrowser) return false;
                     objWebBrowser.ScrollBarsEnabled = true;
 
                     // http://stackoverflow.com/questions/4655662/how-to-ignore-script-errors-in-webbrowser
-                    objWebBrowser.ScriptErrorsSuppressed = true;
+                    objWebBrowser.ScriptErrorsSuppressed = InterfaceControl.Info.ScriptErrorsSuppressed;
 
                     objWebBrowser.Navigated += WBrowser_Navigated;
                     objWebBrowser.DocumentTitleChanged += WBrowser_DocumentTitleChanged;
                 }
+
+                if (InterfaceControl.Info.ShowBrowserNavigationBar)
+                    AddNavigationBar();
 
                 return true;
             }
@@ -105,6 +129,107 @@ namespace mRemoteNG.Connection.Protocol.Http
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpSetPropsFailed, ex);
                 return false;
             }
+        }
+
+        private void AddNavigationBar()
+        {
+            if (_wBrowser == null) return;
+
+            _navigationBar = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden };
+
+            var btnBack = new ToolStripButton("◄") { ToolTipText = "Back", DisplayStyle = ToolStripItemDisplayStyle.Text };
+            var btnForward = new ToolStripButton("►") { ToolTipText = "Forward", DisplayStyle = ToolStripItemDisplayStyle.Text };
+            var btnRefresh = new ToolStripButton("↻") { ToolTipText = "Refresh", DisplayStyle = ToolStripItemDisplayStyle.Text };
+            _urlBox = new ToolStripTextBox { Width = 400, AutoSize = false };
+            var btnGo = new ToolStripButton("Go") { DisplayStyle = ToolStripItemDisplayStyle.Text };
+
+            btnBack.Click += (s, e) => NavigateBack();
+            btnForward.Click += (s, e) => NavigateForward();
+            btnRefresh.Click += (s, e) => NavigateRefresh();
+            btnGo.Click += (s, e) => NavigateTo(_urlBox.Text);
+            _urlBox.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    NavigateTo(_urlBox.Text);
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            };
+
+            _navigationBar.Items.Add(btnBack);
+            _navigationBar.Items.Add(btnForward);
+            _navigationBar.Items.Add(btnRefresh);
+            _navigationBar.Items.Add(new ToolStripSeparator());
+            _navigationBar.Items.Add(_urlBox);
+            _navigationBar.Items.Add(btnGo);
+
+            // Re-arrange: remove browser from InterfaceControl, add navbar (Top), re-add browser (Fill)
+            InterfaceControl.Controls.Remove(_wBrowser);
+            _navigationBar.Dock = DockStyle.Top;
+            InterfaceControl.Controls.Add(_navigationBar);
+            _wBrowser.Dock = DockStyle.Fill;
+            InterfaceControl.Controls.Add(_wBrowser);
+
+            // Wire navigation events for EdgeChromium
+            if (_wBrowser is Microsoft.Web.WebView2.WinForms.WebView2 edge)
+            {
+                // Hook after CoreWebView2 is initialized
+                edge.CoreWebView2InitializationCompleted += (s, e) =>
+                {
+                    if (!e.IsSuccess || edge.CoreWebView2 == null) return;
+                    edge.CoreWebView2.NavigationCompleted += (src, args) =>
+                    {
+                        if (edge.InvokeRequired)
+                            edge.Invoke(new Action(() => _urlBox!.Text = edge.Source?.ToString() ?? string.Empty));
+                        else
+                            _urlBox!.Text = edge.Source?.ToString() ?? string.Empty;
+                    };
+                };
+            }
+            else if (_wBrowser is WebBrowser wb)
+            {
+                wb.Navigated += (s, e) =>
+                {
+                    if (_urlBox != null)
+                        _urlBox.Text = wb.Url?.ToString() ?? string.Empty;
+                };
+            }
+        }
+
+        private void NavigateBack()
+        {
+            if (_wBrowser is Microsoft.Web.WebView2.WinForms.WebView2 edge && edge.CoreWebView2 != null)
+                edge.CoreWebView2.GoBack();
+            else if (_wBrowser is WebBrowser wb && wb.CanGoBack)
+                wb.GoBack();
+        }
+
+        private void NavigateForward()
+        {
+            if (_wBrowser is Microsoft.Web.WebView2.WinForms.WebView2 edge && edge.CoreWebView2 != null)
+                edge.CoreWebView2.GoForward();
+            else if (_wBrowser is WebBrowser wb && wb.CanGoForward)
+                wb.GoForward();
+        }
+
+        private void NavigateRefresh()
+        {
+            if (_wBrowser is Microsoft.Web.WebView2.WinForms.WebView2 edge && edge.CoreWebView2 != null)
+                edge.CoreWebView2.Reload();
+            else if (_wBrowser is WebBrowser wb)
+                wb.Refresh();
+        }
+
+        private void NavigateTo(string url)
+        {
+            if (string.IsNullOrWhiteSpace(url)) return;
+            if (!url.Contains("://", StringComparison.Ordinal))
+                url = "https://" + url;
+            if (_wBrowser is Microsoft.Web.WebView2.WinForms.WebView2 edge && edge.CoreWebView2 != null)
+                edge.CoreWebView2.Navigate(url);
+            else if (_wBrowser is WebBrowser wb)
+                wb.Navigate(url);
         }
 
         private async Task InitializeWebView2Async(Microsoft.Web.WebView2.WinForms.WebView2 webView2)
@@ -119,6 +244,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                 
                 // Prevent popups from opening in new windows
                 webView2.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
+                webView2.CoreWebView2.ServerCertificateErrorDetected += CoreWebView2_ServerCertificateErrorDetected;
             }
             catch (Exception ex)
             {
@@ -130,12 +256,22 @@ namespace mRemoteNG.Connection.Protocol.Http
         {
             try
             {
+                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.ExternalBrowser)
+                {
+                    string url = GetUrl();
+                    if (!string.IsNullOrEmpty(url))
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(url) { UseShellExecute = true });
+                    // Return false so ConnectionInitiator closes the empty tab (same pattern as IntegratedProgram external launch)
+                    return false;
+                }
+
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.EdgeChromium)
                 {
-                    var webView2 = (Microsoft.Web.WebView2.WinForms.WebView2)_wBrowser;
-                    
+                    if (_wBrowser is not Microsoft.Web.WebView2.WinForms.WebView2 webView2)
+                        return false;
+
                     // Wait for WebView2 initialization to complete before connecting
-                    if (_webView2InitializationTask != null && !_webView2InitializationTask.IsCompleted)
+                    if (_webView2InitializationTask is { IsCompleted: false })
                     {
                         // Schedule navigation after initialization completes
                         _webView2InitializationTask.ContinueWith(t =>
@@ -156,10 +292,10 @@ namespace mRemoteNG.Connection.Protocol.Http
                             {
                                 Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpConnectFailed, t.Exception);
                             }
-                        }, 
+                        },
                         // Use UI thread scheduler if available, otherwise use default
-                        System.Threading.SynchronizationContext.Current != null 
-                            ? TaskScheduler.FromCurrentSynchronizationContext() 
+                        System.Threading.SynchronizationContext.Current != null
+                            ? TaskScheduler.FromCurrentSynchronizationContext()
                             : TaskScheduler.Default);
                     }
                     else if (webView2.CoreWebView2 != null)
@@ -170,8 +306,8 @@ namespace mRemoteNG.Connection.Protocol.Http
                 }
                 else
                 {
-                    ((WebBrowser)_wBrowser).Navigate(GetUrl());
-
+                    if (_wBrowser is WebBrowser webBrowser)
+                        webBrowser.Navigate(GetUrl());
                 }
 
                 base.Connect();
@@ -186,8 +322,35 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         private void CoreWebView2_NewWindowRequested(object sender, CoreWebView2NewWindowRequestedEventArgs e)
         {
-            // Suppress the popup (prevent it from opening in a new window)
+            // Navigate to the popup URL in the current WebView2 rather than suppressing it.
+            // This allows pop-up windows (e.g. login dialogs on management interfaces like Intel MEB) to work.
             e.Handled = true;
+            if (sender is CoreWebView2 coreWebView2 && !string.IsNullOrEmpty(e.Uri))
+            {
+                coreWebView2.Navigate(e.Uri);
+            }
+        }
+
+        private void CoreWebView2_ServerCertificateErrorDetected(object sender, CoreWebView2ServerCertificateErrorDetectedEventArgs e)
+        {
+            try
+            {
+                // Only bypass certificate errors for the configured connection host.
+                if (!Uri.TryCreate(GetUrl(), UriKind.Absolute, out Uri? configuredUri) ||
+                    !Uri.TryCreate(e.RequestUri, UriKind.Absolute, out Uri? requestUri))
+                {
+                    return;
+                }
+
+                if (string.Equals(configuredUri.Host, requestUri.Host, StringComparison.OrdinalIgnoreCase))
+                {
+                    e.Action = CoreWebView2ServerCertificateErrorAction.AlwaysAllow;
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpSetPropsFailed, ex);
+            }
         }
 
         #endregion
@@ -198,29 +361,56 @@ namespace mRemoteNG.Connection.Protocol.Http
         {
             try
             {
-                string strHost = InterfaceControl.Info.Hostname;
+                string rawHost = InterfaceControl.Info.Hostname?.Trim() ?? string.Empty;
+                int explicitPort = InterfaceControl.Info.Port;
+                string httpPath = InterfaceControl.Info.HttpPath?.Trim() ?? string.Empty;
 
-                if (InterfaceControl.Info.Port != defaultPort)
+                // Ensure hostname has a scheme so Uri.TryCreate can parse host and embedded port
+                if (!rawHost.Contains("://", StringComparison.Ordinal))
+                    rawHost = httpOrS + "://" + rawHost;
+
+                if (!Uri.TryCreate(rawHost, UriKind.Absolute, out Uri? parsed))
                 {
-                    if (strHost.EndsWith("/"))
-                    {
-                        strHost = strHost[..^1];
-                    }
+                    // Fallback for malformed hostnames
+                    return httpOrS + "://" + (InterfaceControl.Info.Hostname?.Trim() ?? string.Empty);
+                }
 
-                    if (strHost.Contains(httpOrS + "://") == false)
-                    {
-                        strHost = httpOrS + "://" + strHost;
-                    }
+                var builder = new UriBuilder(parsed)
+                {
+                    Scheme = httpOrS  // Always enforce the correct scheme for this protocol
+                };
 
-                    strHost = strHost + ":" + InterfaceControl.Info.Port;
+                // Determine the port to include in the URL:
+                // - Explicit port field (if non-default) always wins, preventing double-port issues
+                // - Otherwise preserve any port embedded in the hostname field
+                // - Otherwise omit port (let the browser use the protocol default)
+                if (explicitPort != defaultPort)
+                {
+                    builder.Port = explicitPort;
+                }
+                else if (parsed.Port != defaultPort)
+                {
+                    builder.Port = parsed.Port;
                 }
                 else
                 {
-                    if (strHost.Contains(httpOrS + "://") == false)
-                        strHost = httpOrS + "://" + strHost;
+                    builder.Port = -1;
                 }
 
-                return strHost;
+                // Combine the path component from the hostname with the HttpPath setting
+                string combinedPath = parsed.AbsolutePath;
+                if (!string.IsNullOrEmpty(httpPath))
+                {
+                    if (!combinedPath.EndsWith('/') && !httpPath.StartsWith('/'))
+                        combinedPath = combinedPath + "/" + httpPath;
+                    else if (combinedPath.EndsWith('/') && httpPath.StartsWith('/'))
+                        combinedPath = combinedPath + httpPath[1..];
+                    else
+                        combinedPath = combinedPath + httpPath;
+                }
+                builder.Path = combinedPath;
+
+                return builder.Uri.ToString();
             }
             catch (Exception ex)
             {
@@ -256,14 +446,15 @@ namespace mRemoteNG.Connection.Protocol.Http
             try
             {
                 if (InterfaceControl.Parent is not ConnectionTab tabP) return;
+                if (_wBrowser is not WebBrowser browser) return;
                 string shortTitle;
-                if (((WebBrowser)_wBrowser).DocumentTitle.Length >= 15)
+                if (browser.DocumentTitle.Length >= 15)
                 {
-                    shortTitle = ((WebBrowser)_wBrowser).DocumentTitle[..10] + "...";
+                    shortTitle = browser.DocumentTitle[..10] + "...";
                 }
                 else
                 {
-                    shortTitle = ((WebBrowser)_wBrowser).DocumentTitle;
+                    shortTitle = browser.DocumentTitle;
                 }
 
                 if (!string.IsNullOrEmpty(_tabTitle))
@@ -340,7 +531,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                         string fullUserDataPath = Path.GetFullPath(_userDataFolder);
                         
                         if (fullUserDataPath.StartsWith(Path.GetFullPath(tempPath), StringComparison.OrdinalIgnoreCase) &&
-                            fullUserDataPath.Contains("mRemoteNG_WebView2"))
+                            fullUserDataPath.Contains("mRemoteNG_WebView2", StringComparison.Ordinal))
                         {
                             Directory.Delete(_userDataFolder, true);
                         }
@@ -368,7 +559,10 @@ namespace mRemoteNG.Connection.Protocol.Http
             IE = 1,
 
             [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpCEF))]
-            EdgeChromium = 2
+            EdgeChromium = 2,
+
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpExternalBrowser))]
+            ExternalBrowser = 3
         }
 
         #endregion

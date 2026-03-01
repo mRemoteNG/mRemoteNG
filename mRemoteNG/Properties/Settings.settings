@@ -38,14 +38,14 @@
     <Setting Name="ConDefaultRedirectKeys" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ConDefaultRedirectDiskDrives" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="ConDefaultRedirectDiskDrives" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Local</Value>
     </Setting>
     <Setting Name="ConDefaultRedirectPrinters" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ConDefaultRedirectClipboard" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ConDefaultRedirectPorts" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -70,6 +70,9 @@
     </Setting>
     <Setting Name="ExtAppsTBParentDock" Type="System.String" Scope="User">
       <Value Profile="(Default)">Bottom</Value>
+    </Setting>
+    <Setting Name="ExtAppsLayout" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="QuickyTBVisible" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -147,6 +150,9 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InhDefaultPanel" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultEverythingInherited" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ConDefaultPreExtApp" Type="System.String" Scope="User">
@@ -234,7 +240,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ConDefaultRDPAuthenticationLevel" Type="System.String" Scope="User">
-      <Value Profile="(Default)">NoAuth</Value>
+      <Value Profile="(Default)">WarnOnFailedAuth</Value>
     </Setting>
     <Setting Name="InhDefaultRDPAuthenticationLevel" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -438,9 +444,12 @@
       <Value Profile="(Default)">General</Value>
     </Setting>
     <Setting Name="UseFilterSearch" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="LockToolbars" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LockWindowSize" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="MultiSshToolbarLocation" Type="System.Drawing.Point" Scope="User">
@@ -451,6 +460,12 @@
     </Setting>
     <Setting Name="MultiSshToolbarVisible" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MainMenuLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="MainMenuParentDock" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Top</Value>
     </Setting>
     <Setting Name="TrackActiveConnectionInConnectionTree" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -465,6 +480,12 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InhDefaultFavorite" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRetryOnFirstConnect" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRetryOnFirstConnect" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="DoNotTrimUsername" Type="System.Boolean" Scope="User">
@@ -495,6 +516,12 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ConDefaultSSHOptions" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultPrivateKeyPath" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultPrivateKeyPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ConDefaultUseEnhancedMode" Type="System.Boolean" Scope="User">
@@ -586,6 +613,36 @@
     </Setting>
     <Setting Name="ConDefaultRDGatewayExternalCredentialProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="InhDefaultColor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultTabColor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultConnectionFrameColor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectDiskDrivesCustom" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayExternalCredentialProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayUserViaAPI" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DoubleClickOpensNewConnection" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DisableTreeDragAndDrop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CustomConfigurationPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CustomExtAppsFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

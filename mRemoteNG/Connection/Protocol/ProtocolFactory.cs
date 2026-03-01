@@ -2,6 +2,7 @@
 using mRemoteNG.Connection.Protocol.RAW;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.Rlogin;
+using mRemoteNG.Connection.Protocol.Serial;
 using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
@@ -11,13 +12,16 @@ using mRemoteNG.Connection.Protocol.PowerShell;
 using mRemoteNG.Connection.Protocol.WSL;
 using mRemoteNG.Connection.Protocol.Terminal;
 using mRemoteNG.Connection.Protocol.AnyDesk;
+using mRemoteNG.Connection.Protocol.MSRA;
+using mRemoteNG.Connection.Protocol.Winbox;
+using mRemoteNG.Connection.Protocol.VMRC;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection.Protocol
 {
     [SupportedOSPlatform("windows")]
-    public class ProtocolFactory
+    public class ProtocolFactory : IProtocolFactory
     {
         private readonly RdpProtocolFactory _rdpProtocolFactory = new();
 
@@ -38,12 +42,16 @@ namespace mRemoteNG.Connection.Protocol
                     return new ProtocolSSH1();
                 case ProtocolType.SSH2:
                     return new ProtocolSSH2();
+                case ProtocolType.OpenSSH:
+                    return new ProtocolOpenSSH(connectionInfo);
                 case ProtocolType.Telnet:
                     return new ProtocolTelnet();
                 case ProtocolType.Rlogin:
                     return new ProtocolRlogin();
                 case ProtocolType.RAW:
                     return new RawProtocol();
+                case ProtocolType.Serial:
+                    return new ProtocolSerial();
                 case ProtocolType.HTTP:
                     return new ProtocolHTTP(connectionInfo.RenderingEngine);
                 case ProtocolType.HTTPS:
@@ -56,15 +64,21 @@ namespace mRemoteNG.Connection.Protocol
                     return new ProtocolTerminal(connectionInfo);
                 case ProtocolType.AnyDesk:
                     return new ProtocolAnyDesk(connectionInfo);
+                case ProtocolType.MSRA:
+                    return new ProtocolMSRA(connectionInfo);
+                case ProtocolType.VMRC:
+                    return new ProtocolVMRC(connectionInfo);
+                case ProtocolType.Winbox:
+                    return new ProtocolWinbox(connectionInfo);
                 case ProtocolType.IntApp:
                     if (connectionInfo.ExtApp == "")
                     {
-                        throw (new Exception(Language.NoExtAppDefined));
+                        throw new InvalidOperationException(Language.NoExtAppDefined);
                     }
                     return new IntegratedProgram();
             }
 
-            return default(ProtocolBase);
+            throw new ArgumentOutOfRangeException(nameof(connectionInfo), connectionInfo.Protocol, Language.NoExtAppDefined);
         }
     }
 }

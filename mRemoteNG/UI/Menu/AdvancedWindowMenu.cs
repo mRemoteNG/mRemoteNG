@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using mRemoteNG.Tools;
 using mRemoteNG.Resources.Language;
@@ -13,11 +14,12 @@ namespace mRemoteNG.UI.Menu
         private readonly WindowMenu _windowMenu = new WindowMenu(boundControl.Handle);
         private readonly int[] _sysMenSubItems = new int[51];
 
-        public Screen GetScreenById(int id)
+        public Screen? GetScreenById(int id)
         {
             for (int i = 0; i <= _sysMenSubItems.Length - 1; i++)
             {
                 if (_sysMenSubItems[i] != id) continue;
+                if (i >= Screen.AllScreens.Length) continue;
                 return Screen.AllScreens[i];
             }
 
@@ -32,30 +34,31 @@ namespace mRemoteNG.UI.Menu
 
         private void ResetScreenList()
         {
+            Array.Clear(_sysMenSubItems, 0, _sysMenSubItems.Length);
             _windowMenu.Reset();
         }
 
         public void BuildAdditionalMenuItems()
         {
             // option to send main form to another screen
-            IntPtr popMen = _windowMenu.CreatePopupMenuItem();
+            IntPtr popMen = WindowMenu.CreatePopupMenuItem();
             for (int i = 0; i <= Screen.AllScreens.Length - 1; i++)
             {
                 _sysMenSubItems[i] = 200 + i;
-                _windowMenu.AppendMenuItem(popMen, WindowMenu.Flags.MF_STRING, new IntPtr(_sysMenSubItems[i]),
-                                           Language.Screen + " " + Convert.ToString(i + 1));
+                WindowMenu.AppendMenuItem(popMen, WindowMenu.Flags.MF_STRING, new IntPtr(_sysMenSubItems[i]),
+                                           Language.Screen + " " + Convert.ToString(i + 1, CultureInfo.InvariantCulture));
             }
-            _windowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 0,
+            WindowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 0,
                 WindowMenu.Flags.MF_POPUP | WindowMenu.Flags.MF_BYPOSITION, popMen,
                 Language.SendTo);
             // option to show/hide menu strips
-            _windowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 1,
-                WindowMenu.Flags.MF_BYPOSITION, new IntPtr(0), 
+            WindowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 1,
+                WindowMenu.Flags.MF_BYPOSITION, new IntPtr(0),
                 Language.ShowHideMenu);
             // separator
-            _windowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 2,
+            WindowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 2,
                                        WindowMenu.Flags.MF_BYPOSITION | WindowMenu.Flags.MF_SEPARATOR, IntPtr.Zero,
-                                       null);
+                                       string.Empty);
         }
 
         private void Dispose(bool disposing)

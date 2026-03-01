@@ -14,7 +14,7 @@ namespace mRemoteNG.UI.Forms
     [SupportedOSPlatform("windows")]
     public partial class FrmExport
     {
-        private ThemeManager _themeManager;
+        private ThemeManager? _themeManager;
 
         #region Public Properties
 
@@ -28,14 +28,14 @@ namespace mRemoteNG.UI.Forms
         {
             get
             {
-                ExportFormat exportFormat = cboFileFormat.SelectedItem as ExportFormat;
+                ExportFormat? exportFormat = cboFileFormat.SelectedItem as ExportFormat;
                 return exportFormat?.Format ?? SaveFormat.mRXML;
             }
             set
             {
                 foreach (object item in cboFileFormat.Items)
                 {
-                    ExportFormat exportFormat = item as ExportFormat;
+                    ExportFormat? exportFormat = item as ExportFormat;
                     if (exportFormat?.Format != value) continue;
                     cboFileFormat.SelectedItem = item;
                     break;
@@ -70,9 +70,9 @@ namespace mRemoteNG.UI.Forms
             }
         }
 
-        private ContainerInfo _selectedFolder;
+        private ContainerInfo? _selectedFolder;
 
-        public ContainerInfo SelectedFolder
+        public ContainerInfo? SelectedFolder
         {
             get => _selectedFolder;
             set
@@ -83,9 +83,9 @@ namespace mRemoteNG.UI.Forms
             }
         }
 
-        private ConnectionInfo _selectedConnection;
+        private ConnectionInfo? _selectedConnection;
 
-        public ConnectionInfo SelectedConnection
+        public ConnectionInfo? SelectedConnection
         {
             get => _selectedConnection;
             set
@@ -126,6 +126,9 @@ namespace mRemoteNG.UI.Forms
             set => chkInheritance.Checked = value;
         }
 
+        public bool IsEncrypted => chkEncrypt.Checked;
+        public string Password => txtPassword.Text;
+
         #endregion
 
         #region Constructors
@@ -138,6 +141,7 @@ namespace mRemoteNG.UI.Forms
             SelectedFolder = null;
             SelectedConnection = null;
             btnOK.Enabled = false;
+            ToggleEncryptionControls();
         }
 
         #endregion
@@ -151,6 +155,8 @@ namespace mRemoteNG.UI.Forms
             cboFileFormat.Items.Clear();
             cboFileFormat.Items.Add(new ExportFormat(SaveFormat.mRXML));
             cboFileFormat.Items.Add(new ExportFormat(SaveFormat.mRCSV));
+            cboFileFormat.Items.Add(new ExportFormat(SaveFormat.mRJSON));
+            cboFileFormat.Items.Add(new ExportFormat(SaveFormat.RDP));
             cboFileFormat.SelectedIndex = 0;
             ApplyTheme();
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
@@ -159,7 +165,7 @@ namespace mRemoteNG.UI.Forms
 
         private void txtFileName_TextChanged(object sender, EventArgs e)
         {
-            btnOK.Enabled = !string.IsNullOrEmpty(txtFileName.Text);
+            ValidateForm();
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -173,6 +179,8 @@ namespace mRemoteNG.UI.Forms
                 List<string> fileTypes = new();
                 fileTypes.AddRange(new[] {Language.FiltermRemoteXML, "*.xml"});
                 fileTypes.AddRange(new[] {Language.FiltermRemoteCSV, "*.csv"});
+                fileTypes.AddRange(new[] {"mRemoteNG JSON|*.json"});
+                fileTypes.AddRange(new[] {"RDP File (*.rdp)|*.rdp"});
                 fileTypes.AddRange(new[] {Language.FilterAll, "*.*"});
 
                 saveFileDialog.Filter = string.Join("|", fileTypes.ToArray());
@@ -187,11 +195,43 @@ namespace mRemoteNG.UI.Forms
 
         private void SelectFileTypeBasedOnSaveFormat(FileDialog saveFileDialog)
         {
-            saveFileDialog.FilterIndex = SaveFormat == SaveFormat.mRCSV ? 2 : 1;
+            saveFileDialog.FilterIndex = SaveFormat switch
+            {
+                SaveFormat.mRCSV => 2,
+                SaveFormat.mRJSON => 3,
+                SaveFormat.RDP => 4,
+                _ => 1
+            };
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            if ((SaveFormat == SaveFormat.mRCSV || SaveFormat == SaveFormat.mRJSON) && IncludePassword)
+            {
+                if (MessageBox.Show("Exporting to this format with passwords enabled will save passwords in clear text. Are you sure you want to continue?",
+                        "Security Warning",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning) != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
+            if (IsEncrypted)
+            {
+                if (string.IsNullOrEmpty(txtPassword.Text))
+                {
+                    MessageBox.Show("Password cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (txtPassword.Text != txtConfirm.Text)
+                {
+                    MessageBox.Show("Passwords do not match.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
             DialogResult = DialogResult.OK;
         }
 
@@ -202,31 +242,49 @@ namespace mRemoteNG.UI.Forms
 
         private void cboFileformat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // should only be active if we are using the credential manager feature
-            //if (SaveFormat == SaveFormat.mRXML)
-            //{
-            //    chkUsername.Enabled = false;
-            //    chkPassword.Enabled = false;
-            //    chkDomain.Enabled = false;
-            //    chkAssignedCredential.Enabled = true;
-            //}
-            //else
-            //{
-            //    chkUsername.Enabled = true;
-            //    chkPassword.Enabled = true;
-            //    chkDomain.Enabled = true;
-            //    chkAssignedCredential.Enabled = false;
-            //}
+            if (SaveFormat != SaveFormat.mRXML)
+            {
+                chkEncrypt.Checked = false;
+                chkEncrypt.Enabled = false;
+            }
+            else
+            {
+                chkEncrypt.Enabled = true;
+            }
+            ToggleEncryptionControls();
+        }
+
+        private void chkEncrypt_CheckedChanged(object sender, EventArgs e)
+        {
+            ToggleEncryptionControls();
+            ValidateForm();
+        }
+
+        private void ToggleEncryptionControls()
+        {
+            bool enabled = chkEncrypt.Checked && chkEncrypt.Enabled;
+            txtPassword.Enabled = enabled;
+            txtConfirm.Enabled = enabled;
+            lblPassword.Enabled = enabled;
+            lblConfirm.Enabled = enabled;
+        }
+
+        private void ValidateForm()
+        {
+            btnOK.Enabled = !string.IsNullOrEmpty(txtFileName.Text);
         }
 
         #endregion
 
         private void ApplyTheme()
         {
-            _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ActiveAndExtended) return;
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            ThemeManager themeManager = ThemeManager.getInstance();
+            _themeManager = themeManager;
+            if (!themeManager.ActiveAndExtended) return;
+            ExtendedColorPalette? palette = themeManager.ActiveTheme.ExtendedPalette;
+            if (palette == null) return;
+            BackColor = palette.getColor("Dialog_Background");
+            ForeColor = palette.getColor("Dialog_Foreground");
         }
 
 
@@ -243,6 +301,11 @@ namespace mRemoteNG.UI.Forms
             rdoExportEverything.Text = Language.ExportEverything;
             rdoExportSelectedFolder.Text = Language.ExportSelectedFolder;
             rdoExportSelectedConnection.Text = Language.ExportSelectedConnection;
+
+            grpEncryption.Text = "Encryption"; // TODO: Localize
+            chkEncrypt.Text = "Encrypt File"; // TODO: Localize
+            lblPassword.Text = Language.Password;
+            lblConfirm.Text = "Confirm:"; // TODO: Localize
 
             grpProperties.Text = Language.ExportProperties;
             chkUsername.Text = Language.Username;
@@ -287,15 +350,14 @@ namespace mRemoteNG.UI.Forms
 
             public override string ToString()
             {
-                switch (Format)
+                return Format switch
                 {
-                    case SaveFormat.mRXML:
-                        return Language.MremoteNgXml;
-                    case SaveFormat.mRCSV:
-                        return Language.MremoteNgCsv;
-                    default:
-                        return Format.ToString();
-                }
+                    SaveFormat.mRXML => Language.MremoteNgXml,
+                    SaveFormat.mRCSV => Language.MremoteNgCsv,
+                    SaveFormat.mRJSON => "mRemoteNG JSON",
+                    SaveFormat.RDP => "RDP File",
+                    _ => Format.ToString()
+                };
             }
 
             #endregion

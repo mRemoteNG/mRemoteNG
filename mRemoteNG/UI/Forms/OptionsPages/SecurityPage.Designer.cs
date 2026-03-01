@@ -174,16 +174,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // numberBoxKdfIterations
             // 
             numberBoxKdfIterations.Dock = System.Windows.Forms.DockStyle.Fill;
-            numberBoxKdfIterations.Increment = new decimal(new int[] { 1000, 0, 0, 0 });
+            numberBoxKdfIterations.Increment = new decimal(new int[] { 10000, 0, 0, 0 });
             numberBoxKdfIterations.Location = new System.Drawing.Point(197, 66);
             numberBoxKdfIterations.Margin = new System.Windows.Forms.Padding(4);
-            numberBoxKdfIterations.Maximum = new decimal(new int[] { 50000, 0, 0, 0 });
+            numberBoxKdfIterations.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             numberBoxKdfIterations.Minimum = new decimal(new int[] { 1000, 0, 0, 0 });
             numberBoxKdfIterations.Name = "numberBoxKdfIterations";
             numberBoxKdfIterations.Size = new System.Drawing.Size(196, 22);
             numberBoxKdfIterations.TabIndex = 3;
             numberBoxKdfIterations.ThousandsSeparator = true;
-            numberBoxKdfIterations.Value = new decimal(new int[] { 1000, 0, 0, 0 });
+            numberBoxKdfIterations.Value = new decimal(new int[] { 600000, 0, 0, 0 });
             // 
             // btnTestSettings
             // 

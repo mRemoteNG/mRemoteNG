@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -45,6 +46,22 @@ namespace mRemoteNG.Config.Settings
         {
             try
             {
+                try
+                {
+                    string configPath = SettingsFileInfo.UserSettingsFilePath;
+                    if (!string.IsNullOrWhiteSpace(configPath))
+                    {
+                        bool exists = System.IO.File.Exists(configPath);
+                        _messageCollector.AddMessage(MessageClass.InformationMsg,
+                            $"Loading settings from: {configPath} (exists: {exists})", true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _messageCollector.AddMessage(MessageClass.WarningMsg,
+                        $"Could not determine user settings file path: {ex.Message}");
+                }
+
                 EnsureSettingsAreSavedInNewestVersion();
 
                 SetSupportedCulture();
@@ -55,11 +72,20 @@ namespace mRemoteNG.Config.Settings
                 SetShowSystemTrayIcon();
                 SetAutoSave();
                 LoadExternalAppsFromXml();
+                LoadQuickConnectHistory();
+                SetAlwaysShowPanelTabs();
 
                 if (Properties.App.Default.ResetToolbars)
                     SetToolbarsDefault();
                 else
                     LoadToolbarsFromSettings();
+            }
+            catch (ConfigurationErrorsException ex)
+            {
+                ProgramRoot.HandleCorruptedUserConfig(ex);
+                _messageCollector.AddExceptionMessage(
+                    "Settings file is corrupted and was reset to defaults. " +
+                    "Please restart mRemoteNG if problems persist.", ex);
             }
             catch (Exception ex)
             {
@@ -67,6 +93,11 @@ namespace mRemoteNG.Config.Settings
             }
         }
 
+        private void SetAlwaysShowPanelTabs()
+        {
+            if (Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelTabs)
+                MainForm.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
+        }
 
         private void SetSupportedCulture()
         {
@@ -153,6 +184,21 @@ namespace mRemoteNG.Config.Settings
             {
                 Properties.Settings.Default.Save();
                 Properties.Settings.Default.Upgrade();
+                Properties.App.Default.Upgrade();
+                Properties.AppUI.Default.Upgrade();
+                Properties.OptionsAdvancedPage.Default.Upgrade();
+                Properties.OptionsAppearancePage.Default.Upgrade();
+                Properties.OptionsBackupPage.Default.Upgrade();
+                Properties.OptionsConnectionsPage.Default.Upgrade();
+                Properties.OptionsCredentialsPage.Default.Upgrade();
+                Properties.OptionsDBsPage.Default.Upgrade();
+                Properties.OptionsNotificationsPage.Default.Upgrade();
+                Properties.OptionsRbac.Default.Upgrade();
+                Properties.OptionsSecurityPage.Default.Upgrade();
+                Properties.OptionsStartupExitPage.Default.Upgrade();
+                Properties.OptionsTabsPanelsPage.Default.Upgrade();
+                Properties.OptionsThemePage.Default.Upgrade();
+                Properties.OptionsUpdatesPage.Default.Upgrade();
             }
             catch (Exception ex)
             {
@@ -201,8 +247,8 @@ namespace mRemoteNG.Config.Settings
         private void AddMainMenuPanel()
         {
             SetToolstripGripStyle(_mainMenu);
-            ToolStripPanel toolStripPanel = ToolStripPanelFromString("top");
-            toolStripPanel.Join(_mainMenu, new Point(3, 0));
+            ToolStripPanel toolStripPanel = ToolStripPanelFromString(Properties.Settings.Default.MainMenuParentDock);
+            toolStripPanel.Join(_mainMenu, Properties.Settings.Default.MainMenuLocation);
         }
 
         private void AddQuickConnectPanel()
@@ -229,14 +275,14 @@ namespace mRemoteNG.Config.Settings
             toolStripPanel.Join(_multiSshToolStrip, Properties.Settings.Default.MultiSshToolbarLocation);
         }
 
-        private void SetToolstripGripStyle(ToolStrip toolbar)
+        private static void SetToolstripGripStyle(ToolStrip toolbar)
         {
             toolbar.GripStyle = Properties.Settings.Default.LockToolbars ? ToolStripGripStyle.Hidden : ToolStripGripStyle.Visible;
         }
 
         private ToolStripPanel ToolStripPanelFromString(string panel)
         {
-            switch (panel.ToLower())
+            switch (panel.ToLowerInvariant())
             {
                 case "top":
                     return MainForm.tsContainer.TopToolStripPanel;
@@ -254,6 +300,12 @@ namespace mRemoteNG.Config.Settings
         private void LoadExternalAppsFromXml()
         {
             _externalAppsLoader.LoadExternalAppsFromXML();
+        }
+
+        private void LoadQuickConnectHistory()
+        {
+            QuickConnectHistoryLoader loader = new(_quickConnectToolStrip.QuickConnectComboBox);
+            loader.Load();
         }
 
         #endregion

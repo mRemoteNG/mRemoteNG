@@ -191,12 +191,30 @@ namespace mRemoteNGTests.Tree
         }
 
         [Test]
+        public void CanDragMultipleNodesWhenAllSourcesAreValid()
+        {
+            ConnectionInfo[] sources = { _connection3, _connection4 };
+            var target = _container1;
+            var dragDropEffects = _dragAndDropHandler.CanModelsDrop(sources, target, DropTargetLocation.Item);
+            Assert.That(dragDropEffects, Is.EqualTo(DragDropEffects.Move));
+        }
+
+        [Test]
+        public void CantDragMultipleNodesWhenOneSourceIsInvalid()
+        {
+            ConnectionInfo[] sources = { _connection3, _rootNode };
+            var target = _container1;
+            var dragDropEffects = _dragAndDropHandler.CanModelsDrop(sources, target, DropTargetLocation.Item);
+            Assert.That(dragDropEffects, Is.EqualTo(DragDropEffects.None));
+        }
+
+        [Test]
         public void DraggingNodeBelowSiblingRearrangesTheUnderlyingModelCorrectly()
         {
             var source = _connection3;
             var target = _connection5;
             var location = DropTargetLocation.BelowItem;
-            _dragAndDropHandler.DropModel(source, target, location);
+            ConnectionTreeDragAndDropHandler.DropModel(source, target, location);
             var actualIndex = _container3.Children.IndexOf(source);
             var expectedIndex = _container3.Children.IndexOf(target) + 1;
             Assert.That(actualIndex, Is.EqualTo(expectedIndex));
@@ -208,7 +226,7 @@ namespace mRemoteNGTests.Tree
             var source = _connection3;
             var target = _connection5;
             var location = DropTargetLocation.AboveItem;
-            _dragAndDropHandler.DropModel(source, target, location);
+            ConnectionTreeDragAndDropHandler.DropModel(source, target, location);
             var actualIndex = _container3.Children.IndexOf(source);
             var expectedIndex = _container3.Children.IndexOf(target) - 1;
             Assert.That(actualIndex, Is.EqualTo(expectedIndex));
@@ -220,7 +238,7 @@ namespace mRemoteNGTests.Tree
             var source = _connection3;
             var target = _container1;
             var location = DropTargetLocation.Item;
-            _dragAndDropHandler.DropModel(source, target, location);
+            ConnectionTreeDragAndDropHandler.DropModel(source, target, location);
             Assert.That(target.Children.Contains(source));
         }
 
@@ -230,7 +248,7 @@ namespace mRemoteNGTests.Tree
             var source = _connection3;
             var target = _container1;
             var location = DropTargetLocation.Item;
-            _dragAndDropHandler.DropModel(source, target, location);
+            ConnectionTreeDragAndDropHandler.DropModel(source, target, location);
             Assert.That(!_container3.Children.Contains(source));
         }
 

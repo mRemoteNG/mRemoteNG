@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Runtime.Versioning;
 using System.Security;
@@ -26,28 +27,26 @@ namespace mRemoteNG.Security.SymmetricEncryption
             BlockSizeInBytes = 16;
         }
 
-        public string Encrypt(string strToEncrypt, SecureString strSecret)
+        public string Encrypt(string plainText, SecureString encryptionKey)
         {
-            if (string.IsNullOrWhiteSpace(strToEncrypt) || strSecret.Length == 0)
-                return strToEncrypt;
+            if (string.IsNullOrWhiteSpace(plainText) || encryptionKey.Length == 0)
+                return plainText;
 
             try
             {
                 using Aes aes = Aes.Create();
                 aes.BlockSize = BlockSizeInBytes * 8;
 
-                using (MD5 md5 = MD5.Create())
-                {
-                    byte[] key = md5.ComputeHash(Encoding.UTF8.GetBytes(strSecret.ConvertToUnsecureString()));
-                    aes.Key = key;
-                    aes.GenerateIV();
-                }
+                byte[] key = MD5.HashData(Encoding.UTF8.GetBytes(encryptionKey.ConvertToUnsecureString()));
+                aes.Key = key;
+                aes.GenerateIV();
+                CryptographicOperations.ZeroMemory(key);
 
                 using MemoryStream ms = new();
                 ms.Write(aes.IV, 0, BlockSizeInBytes);
 
                 using CryptoStream cs = new(ms, aes.CreateEncryptor(), CryptoStreamMode.Write);
-                byte[] data = Encoding.UTF8.GetBytes(strToEncrypt);
+                byte[] data = Encoding.UTF8.GetBytes(plainText);
 
                 cs.Write(data, 0, data.Length);
                 cs.FlushFinalBlock();
@@ -58,34 +57,32 @@ namespace mRemoteNG.Security.SymmetricEncryption
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.ErrorEncryptionFailed, ex.Message));
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(CultureInfo.InvariantCulture, Language.ErrorEncryptionFailed, ex.Message));
             }
 
-            return strToEncrypt;
+            return plainText;
         }
 
-        public string Decrypt(string ciphertextBase64, SecureString password)
+        public string Decrypt(string cipherText, SecureString decryptionKey)
         {
-            if (string.IsNullOrEmpty(ciphertextBase64) || password.Length == 0)
-                return ciphertextBase64;
+            if (string.IsNullOrEmpty(cipherText) || decryptionKey.Length == 0)
+                return cipherText;
 
             try
             {
                 using Aes aes = Aes.Create();
                 aes.BlockSize = BlockSizeInBytes * 8;
 
-                using (MD5 md5 = MD5.Create())
-                {
-                    byte[] key = md5.ComputeHash(Encoding.UTF8.GetBytes(password.ConvertToUnsecureString()));
-                    aes.Key = key;
-                }
+                byte[] key = MD5.HashData(Encoding.UTF8.GetBytes(decryptionKey.ConvertToUnsecureString()));
+                aes.Key = key;
+                CryptographicOperations.ZeroMemory(key);
 
-                byte[] ciphertext = Convert.FromBase64String(ciphertextBase64);
+                byte[] ciphertext = Convert.FromBase64String(cipherText);
 
                 using MemoryStream ms = new(ciphertext);
 
                 byte[] iv = new byte[BlockSizeInBytes];
-                ms.Read(iv, 0, iv.Length);
+                ms.ReadExactly(iv, 0, iv.Length);
                 aes.IV = iv;
 
                 using CryptoStream cryptoStream = new(ms, aes.CreateDecryptor(), CryptoStreamMode.Read);

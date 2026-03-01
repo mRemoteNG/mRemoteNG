@@ -1,4 +1,5 @@
-﻿using System.Runtime.Versioning;
+﻿using System;
+using System.Runtime.Versioning;
 using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -113,7 +114,7 @@ namespace mRemoteNG.Config.Settings.Registry
             ApplyUseCredentials();
 
             // UseCredentials musst be set to custom.
-            if (UseCredentials.Value != "custom")
+            if (!string.Equals(UseCredentials.Value, "custom", StringComparison.Ordinal))
                 return;
 
             ApplyDefaultUsername();

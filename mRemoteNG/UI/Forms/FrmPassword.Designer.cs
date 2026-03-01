@@ -1,12 +1,12 @@
-﻿using mRemoteNG.UI.Controls;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms
 {
-	public 
+	public
 	partial class FrmPassword : System.Windows.Forms.Form
 	{
-			
+
 		//Form overrides dispose to clean up the component list.
 		[System.Diagnostics.DebuggerNonUserCode()]
         protected override void Dispose(bool disposing)
@@ -27,10 +27,10 @@ namespace mRemoteNG.UI.Forms
 				base.Dispose(disposing);
 			}
 		}
-			
+
 		//Required by the Windows Form Designer
 		private System.ComponentModel.Container components = null;
-			
+
 		//NOTE: The following procedure is required by the Windows Form Designer
 		//It can be modified using the Windows Form Designer.
 		//Do not modify it using the code editor.
@@ -46,30 +46,35 @@ namespace mRemoteNG.UI.Forms
             this.txtVerify = new mRemoteNG.UI.Controls.MrngTextBox();
             this.txtPassword = new mRemoteNG.UI.Controls.MrngTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlStrengthBar = new System.Windows.Forms.Panel();
+            this.pnlStrengthFill = new System.Windows.Forms.Panel();
+            this.lblStrength = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblRequirements = new mRemoteNG.UI.Controls.MrngLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbLock)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            this.pnlStrengthBar.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // lblPassword
-            // 
+            //
             this.lblPassword.AutoSize = true;
             this.lblPassword.Location = new System.Drawing.Point(73, 9);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(59, 13);
             this.lblPassword.TabIndex = 1;
             this.lblPassword.Text = "Password:";
-            // 
+            //
             // lblVerify
-            // 
+            //
             this.lblVerify.AutoSize = true;
             this.lblVerify.Location = new System.Drawing.Point(73, 50);
             this.lblVerify.Name = "lblVerify";
             this.lblVerify.Size = new System.Drawing.Size(38, 13);
             this.lblVerify.TabIndex = 3;
             this.lblVerify.Text = "Verify:";
-            // 
+            //
             // btnOK
-            // 
+            //
             this.btnOK._mice = MrngButton.MouseState.HOVER;
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.Location = new System.Drawing.Point(215, 124);
@@ -79,9 +84,9 @@ namespace mRemoteNG.UI.Forms
             this.btnOK.Text = Language._Ok;
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
-            // 
+            //
             // btnCancel
-            // 
+            //
             this.btnCancel._mice = MrngButton.MouseState.HOVER;
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -92,10 +97,10 @@ namespace mRemoteNG.UI.Forms
             this.btnCancel.Text = Language._Cancel;
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
-            // 
+            //
             // lblStatus
-            // 
-            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.lblStatus, 2);
             this.lblStatus.ForeColor = System.Drawing.Color.Red;
@@ -106,21 +111,21 @@ namespace mRemoteNG.UI.Forms
             this.lblStatus.Text = "Status";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.lblStatus.Visible = false;
-            // 
+            //
             // pbLock
-            // 
+            //
             this.pbLock.Image = global::mRemoteNG.Properties.Resources.ASPWebSite_16x;
             this.pbLock.Location = new System.Drawing.Point(3, 12);
             this.pbLock.Name = "pbLock";
-            this.tableLayoutPanel1.SetRowSpan(this.pbLock, 6);
+            this.tableLayoutPanel1.SetRowSpan(this.pbLock, 10);
             this.pbLock.Size = new System.Drawing.Size(64, 64);
             this.pbLock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pbLock.TabIndex = 7;
             this.pbLock.TabStop = false;
-            // 
+            //
             // txtVerify
-            // 
-            this.txtVerify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.txtVerify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.txtVerify, 2);
             this.txtVerify.Location = new System.Drawing.Point(73, 66);
@@ -129,10 +134,10 @@ namespace mRemoteNG.UI.Forms
             this.txtVerify.TabIndex = 4;
             this.txtVerify.UseSystemPasswordChar = true;
             this.txtVerify.TextChanged += new System.EventHandler(this.TxtPassword_TextChanged);
-            // 
+            //
             // txtPassword
-            // 
-            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.txtPassword, 2);
             this.txtPassword.Location = new System.Drawing.Point(73, 25);
@@ -141,26 +146,84 @@ namespace mRemoteNG.UI.Forms
             this.txtPassword.TabIndex = 2;
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.TextChanged += new System.EventHandler(this.TxtPassword_TextChanged);
-            // 
+            //
+            // pnlStrengthBar
+            //
+            this.tableLayoutPanel1.SetColumnSpan(this.pnlStrengthBar, 2);
+            this.pnlStrengthBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlStrengthBar.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            this.pnlStrengthBar.Controls.Add(this.pnlStrengthFill);
+            this.pnlStrengthBar.Location = new System.Drawing.Point(73, 50);
+            this.pnlStrengthBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 0);
+            this.pnlStrengthBar.Name = "pnlStrengthBar";
+            this.pnlStrengthBar.Size = new System.Drawing.Size(298, 4);
+            this.pnlStrengthBar.TabIndex = 8;
+            this.pnlStrengthBar.Visible = false;
+            //
+            // pnlStrengthFill
+            //
+            this.pnlStrengthFill.BackColor = System.Drawing.Color.Red;
+            this.pnlStrengthFill.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlStrengthFill.Location = new System.Drawing.Point(0, 0);
+            this.pnlStrengthFill.Name = "pnlStrengthFill";
+            this.pnlStrengthFill.Size = new System.Drawing.Size(0, 4);
+            this.pnlStrengthFill.TabIndex = 0;
+            //
+            // lblStrength
+            //
+            this.lblStrength.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.lblStrength, 2);
+            this.lblStrength.Font = new System.Drawing.Font("Segoe UI", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStrength.ForeColor = System.Drawing.Color.Gray;
+            this.lblStrength.Location = new System.Drawing.Point(73, 54);
+            this.lblStrength.Margin = new System.Windows.Forms.Padding(3, 0, 3, 2);
+            this.lblStrength.Name = "lblStrength";
+            this.lblStrength.Size = new System.Drawing.Size(50, 12);
+            this.lblStrength.TabIndex = 9;
+            this.lblStrength.Text = "";
+            this.lblStrength.Visible = false;
+            //
+            // lblRequirements
+            //
+            this.lblRequirements.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.lblRequirements, 2);
+            this.lblRequirements.Font = new System.Drawing.Font("Segoe UI", 7.5F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRequirements.ForeColor = System.Drawing.Color.Gray;
+            this.lblRequirements.Location = new System.Drawing.Point(73, 68);
+            this.lblRequirements.Margin = new System.Windows.Forms.Padding(3, 0, 3, 4);
+            this.lblRequirements.Name = "lblRequirements";
+            this.lblRequirements.Size = new System.Drawing.Size(250, 12);
+            this.lblRequirements.TabIndex = 10;
+            this.lblRequirements.Text = "Minimum 8 characters with uppercase, lowercase, and a digit.";
+            this.lblRequirements.Visible = false;
+            //
             // tableLayoutPanel1
-            // 
+            //
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.pbLock, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnOK, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.btnCancel, 2, 6);
-            this.tableLayoutPanel1.Controls.Add(this.lblStatus, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.txtVerify, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblVerify, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.btnOK, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.btnCancel, 2, 10);
+            this.tableLayoutPanel1.Controls.Add(this.lblStatus, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.txtVerify, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.lblVerify, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lblRequirements, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lblStrength, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.pnlStrengthBar, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.txtPassword, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblPassword, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowCount = 11;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -169,9 +232,9 @@ namespace mRemoteNG.UI.Forms
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.33334F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(374, 150);
             this.tableLayoutPanel1.TabIndex = 8;
-            // 
+            //
             // PasswordForm
-            // 
+            //
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -191,6 +254,7 @@ namespace mRemoteNG.UI.Forms
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PasswordForm_FormClosed);
             this.Load += new System.EventHandler(this.FrmPassword_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbLock)).EndInit();
+            this.pnlStrengthBar.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -205,5 +269,9 @@ namespace mRemoteNG.UI.Forms
 		private Controls.MrngLabel lblStatus;
 		private System.Windows.Forms.PictureBox pbLock;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel pnlStrengthBar;
+        private System.Windows.Forms.Panel pnlStrengthFill;
+        private Controls.MrngLabel lblStrength;
+        private Controls.MrngLabel lblRequirements;
     }
 }

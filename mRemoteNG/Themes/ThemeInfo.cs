@@ -16,17 +16,17 @@ namespace mRemoteNG.Themes
     {
         #region Private Variables
 
-        private string _name;
-        private ThemeBase _theme;
-        private string _URI;
-        private VisualStudioToolStripExtender.VsVersion _version;
-        private ExtendedColorPalette _extendedPalette;
+        private string? _name;
+        private ThemeBase? _theme;
+        private string? _URI;
+        private VisualStudioToolStripExtender.VsVersion? _version;
+        private ExtendedColorPalette? _extendedPalette;
 
         #endregion
 
         #region Constructors
 
-        public ThemeInfo(string themeName, ThemeBase inTheme, string inURI, VisualStudioToolStripExtender.VsVersion inVersion, ExtendedColorPalette inExtendedPalette)
+        public ThemeInfo(string? themeName, ThemeBase? inTheme, string? inURI, VisualStudioToolStripExtender.VsVersion inVersion, ExtendedColorPalette? inExtendedPalette, bool applyCustomExtenders = true)
         {
             _name = themeName;
             _theme = inTheme;
@@ -39,10 +39,11 @@ namespace mRemoteNG.Themes
             if (_extendedPalette != null)
                 IsExtended = true;
 
-            setCustomExtenders();
+            if (applyCustomExtenders)
+                setCustomExtenders();
         }
 
-        public ThemeInfo(string themeName, ThemeBase inTheme, string inURI, VisualStudioToolStripExtender.VsVersion inVersion)
+        public ThemeInfo(string? themeName, ThemeBase? inTheme, string? inURI, VisualStudioToolStripExtender.VsVersion inVersion, bool applyCustomExtenders = true)
         {
             _name = themeName;
             _theme = inTheme;
@@ -51,7 +52,8 @@ namespace mRemoteNG.Themes
             IsThemeBase = false;
             IsExtendable = false;
             IsExtended = false;
-            setCustomExtenders();
+            if (applyCustomExtenders)
+                setCustomExtenders();
         }
 
         #endregion
@@ -60,13 +62,18 @@ namespace mRemoteNG.Themes
 
         public object Clone()
         {
-            ExtendedColorPalette extPalette = new()
+            ExtendedColorPalette? extPalette = null;
+            if (_extendedPalette != null)
             {
-                ExtColorPalette =
-                    _extendedPalette.ExtColorPalette.ToDictionary(entry => entry.Key, entry => entry.Value),
-                DefaultColorPalette = _extendedPalette.DefaultColorPalette
-            };
-            ThemeInfo clonedObj = new(_name, _theme, _URI, _version, extPalette)
+                extPalette = new ExtendedColorPalette
+                {
+                    ExtColorPalette =
+                        _extendedPalette.ExtColorPalette.ToDictionary(entry => entry.Key, entry => entry.Value, StringComparer.Ordinal),
+                    DefaultColorPalette = _extendedPalette.DefaultColorPalette
+                };
+            }
+
+            ThemeInfo clonedObj = new(_name, _theme, _URI, _version ?? VisualStudioToolStripExtender.VsVersion.Vs2015, extPalette)
             {
                 IsExtendable = IsExtendable,
                 IsThemeBase = IsThemeBase
@@ -81,12 +88,12 @@ namespace mRemoteNG.Themes
         #region Properties
 
         [Browsable(false)]
-        public string Name
+        public string? Name
         {
             get => _name;
             set
             {
-                if (string.Equals(_name, value, StringComparison.InvariantCulture))
+                if (string.Equals(_name, value, StringComparison.Ordinal))
                 {
                     return;
                 }
@@ -95,7 +102,7 @@ namespace mRemoteNG.Themes
             }
         }
 
-        public ThemeBase Theme
+        public ThemeBase? Theme
         {
             get => _theme;
             set
@@ -110,7 +117,7 @@ namespace mRemoteNG.Themes
             }
         }
 
-        public string URI
+        public string? URI
         {
             get => _URI;
             set
@@ -126,7 +133,7 @@ namespace mRemoteNG.Themes
 
         public VisualStudioToolStripExtender.VsVersion Version
         {
-            get => _version;
+            get => _version ?? VisualStudioToolStripExtender.VsVersion.Vs2015;
             set
             {
                 if (Equals(_version, value))
@@ -138,7 +145,7 @@ namespace mRemoteNG.Themes
             }
         }
 
-        public ExtendedColorPalette ExtendedPalette
+        public ExtendedColorPalette? ExtendedPalette
         {
             get => _extendedPalette;
             set
@@ -163,6 +170,7 @@ namespace mRemoteNG.Themes
         //Custom extenders for mremote customizations in DPS
         private void setCustomExtenders()
         {
+            if (_theme == null) return;
             _theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
             _theme.Extender.FloatWindowFactory = new MremoteFloatWindowFactory();
         }

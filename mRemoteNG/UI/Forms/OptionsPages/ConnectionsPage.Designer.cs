@@ -20,7 +20,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
             finally
             {
-                base.Dispose(disposing);
+                try { base.Dispose(disposing); }
+                catch (System.NullReferenceException) { /* finalizer-safe: Control.ContextMenuStrip may be null on non-STA thread */ }
             }
         }
 
@@ -54,6 +55,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkPlaceSearchBarAboveConnectionTree = new MrngCheckBox();
             chkConnectionTreeTrackActiveConnection = new MrngCheckBox();
             chkDoNotTrimUsername = new MrngCheckBox();
+            chkWatchConnectionFile = new MrngCheckBox();
+            chkDoubleClickOpensNewConnection = new MrngCheckBox();
+            chkDefaultInheritance = new MrngCheckBox();
+            chkDisableTreeDragAndDrop = new MrngCheckBox();
             pnlOptions = new System.Windows.Forms.Panel();
             lblRegistrySettingsUsedInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)numRDPConTimeout).BeginInit();
@@ -99,7 +104,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             numRdpReconnectionCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             numRdpReconnectionCount.Location = new System.Drawing.Point(277, 3);
-            numRdpReconnectionCount.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
+            numRdpReconnectionCount.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
             numRdpReconnectionCount.Name = "numRdpReconnectionCount";
             numRdpReconnectionCount.Size = new System.Drawing.Size(53, 22);
             numRdpReconnectionCount.TabIndex = 1;
@@ -168,7 +173,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlConfirmCloseConnection.Controls.Add(radCloseWarnExit);
             pnlConfirmCloseConnection.Controls.Add(radCloseWarnNever);
             pnlConfirmCloseConnection.Dock = System.Windows.Forms.DockStyle.Top;
-            pnlConfirmCloseConnection.Location = new System.Drawing.Point(0, 292);
+            pnlConfirmCloseConnection.Location = new System.Drawing.Point(0, 343);
             pnlConfirmCloseConnection.Name = "pnlConfirmCloseConnection";
             pnlConfirmCloseConnection.Size = new System.Drawing.Size(610, 133);
             pnlConfirmCloseConnection.TabIndex = 6;
@@ -266,7 +271,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tableLayoutPanel2.Controls.Add(lblRDPConTimeout, 0, 1);
             tableLayoutPanel2.Controls.Add(numRDPConTimeout, 1, 1);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            tableLayoutPanel2.Location = new System.Drawing.Point(0, 213);
+            tableLayoutPanel2.Location = new System.Drawing.Point(0, 264);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 3;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
@@ -311,10 +316,62 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkDoNotTrimUsername.Text = "Do not trim usernames";
             chkDoNotTrimUsername.UseVisualStyleBackColor = true;
             // 
+            // chkWatchConnectionFile
+            // 
+            chkWatchConnectionFile._mice = MrngCheckBox.MouseState.OUT;
+            chkWatchConnectionFile.AutoSize = true;
+            chkWatchConnectionFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkWatchConnectionFile.Location = new System.Drawing.Point(6, 188);
+            chkWatchConnectionFile.Name = "chkWatchConnectionFile";
+            chkWatchConnectionFile.Size = new System.Drawing.Size(243, 17);
+            chkWatchConnectionFile.TabIndex = 12;
+            chkWatchConnectionFile.Text = "Watch connection file for external changes";
+            chkWatchConnectionFile.UseVisualStyleBackColor = true;
+            // 
+            // chkDoubleClickOpensNewConnection
+            // 
+            chkDoubleClickOpensNewConnection._mice = MrngCheckBox.MouseState.OUT;
+            chkDoubleClickOpensNewConnection.AutoSize = true;
+            chkDoubleClickOpensNewConnection.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkDoubleClickOpensNewConnection.Location = new System.Drawing.Point(6, 211);
+            chkDoubleClickOpensNewConnection.Name = "chkDoubleClickOpensNewConnection";
+            chkDoubleClickOpensNewConnection.Size = new System.Drawing.Size(243, 17);
+            chkDoubleClickOpensNewConnection.TabIndex = 13;
+            chkDoubleClickOpensNewConnection.Text = "Double click opens duplicate connection";
+            chkDoubleClickOpensNewConnection.UseVisualStyleBackColor = true;
+            //
+            // chkDefaultInheritance
+            //
+            chkDefaultInheritance._mice = MrngCheckBox.MouseState.OUT;
+            chkDefaultInheritance.AutoSize = true;
+            chkDefaultInheritance.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkDefaultInheritance.Location = new System.Drawing.Point(6, 234);
+            chkDefaultInheritance.Name = "chkDefaultInheritance";
+            chkDefaultInheritance.Size = new System.Drawing.Size(350, 17);
+            chkDefaultInheritance.TabIndex = 14;
+            chkDefaultInheritance.Text = "New connections inherit all properties from parent by default";
+            chkDefaultInheritance.UseVisualStyleBackColor = true;
+            //
+            // chkDisableTreeDragAndDrop
+            //
+            chkDisableTreeDragAndDrop._mice = MrngCheckBox.MouseState.OUT;
+            chkDisableTreeDragAndDrop.AutoSize = true;
+            chkDisableTreeDragAndDrop.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkDisableTreeDragAndDrop.Location = new System.Drawing.Point(6, 257);
+            chkDisableTreeDragAndDrop.Name = "chkDisableTreeDragAndDrop";
+            chkDisableTreeDragAndDrop.Size = new System.Drawing.Size(300, 17);
+            chkDisableTreeDragAndDrop.TabIndex = 15;
+            chkDisableTreeDragAndDrop.Text = "Disable drag and drop in the connection tree";
+            chkDisableTreeDragAndDrop.UseVisualStyleBackColor = true;
+            //
             // pnlOptions
             // 
             pnlOptions.Controls.Add(chkSingleClickOnConnectionOpensIt);
             pnlOptions.Controls.Add(chkDoNotTrimUsername);
+            pnlOptions.Controls.Add(chkWatchConnectionFile);
+            pnlOptions.Controls.Add(chkDoubleClickOpensNewConnection);
+            pnlOptions.Controls.Add(chkDisableTreeDragAndDrop);
+            pnlOptions.Controls.Add(chkDefaultInheritance);
             pnlOptions.Controls.Add(chkSingleClickOnOpenedConnectionSwitchesToIt);
             pnlOptions.Controls.Add(chkConnectionTreeTrackActiveConnection);
             pnlOptions.Controls.Add(chkHostnameLikeDisplayName);
@@ -324,7 +381,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlOptions.Dock = System.Windows.Forms.DockStyle.Top;
             pnlOptions.Location = new System.Drawing.Point(0, 30);
             pnlOptions.Name = "pnlOptions";
-            pnlOptions.Size = new System.Drawing.Size(610, 183);
+            pnlOptions.Size = new System.Drawing.Size(610, 280);
             pnlOptions.TabIndex = 12;
             // 
             // lblRegistrySettingsUsedInfo
@@ -382,6 +439,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private MrngCheckBox chkPlaceSearchBarAboveConnectionTree;
         private MrngCheckBox chkConnectionTreeTrackActiveConnection;
         private MrngCheckBox chkDoNotTrimUsername;
+        private MrngCheckBox chkWatchConnectionFile;
+        private MrngCheckBox chkDoubleClickOpensNewConnection;
+        private MrngCheckBox chkDefaultInheritance;
+        private MrngCheckBox chkDisableTreeDragAndDrop;
         internal System.Windows.Forms.Panel pnlOptions;
         internal System.Windows.Forms.Label lblRegistrySettingsUsedInfo;
     }

@@ -9,7 +9,7 @@ namespace mRemoteNG.UI.Controls
     // Repaint of a ProgressBar on a flat style
     internal class MrngProgressBar : ProgressBar
     {
-        private ThemeManager _themeManager;
+        private ThemeManager? _themeManager;
 
 
         public MrngProgressBar()
@@ -29,14 +29,21 @@ namespace mRemoteNG.UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!_themeManager.ActiveAndExtended)
+            if (_themeManager is null || !_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;
             }
 
-            Color progressFill = _themeManager.ActiveTheme.ExtendedPalette.getColor("ProgressBar_Fill");
-            Color back = _themeManager.ActiveTheme.ExtendedPalette.getColor("ProgressBar_Background");
+            var palette = _themeManager.ActiveTheme.ExtendedPalette;
+            if (palette is null)
+            {
+                base.OnPaint(e);
+                return;
+            }
+
+            Color progressFill = palette.getColor("ProgressBar_Fill");
+            Color back = palette.getColor("ProgressBar_Background");
             int doneProgress = (int)(e.ClipRectangle.Width * ((double)Value / Maximum));
             e.Graphics.FillRectangle(new SolidBrush(progressFill), 0, 0, doneProgress, e.ClipRectangle.Height);
             e.Graphics.FillRectangle(new SolidBrush(back), doneProgress, 0, e.ClipRectangle.Width,

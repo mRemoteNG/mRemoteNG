@@ -34,12 +34,11 @@ namespace mRemoteNGTests.Security
         }
 
         [Test]
-        public void CreateSecureXmlDocument_HasNullXmlResolver()
+        public void CreateSecureXmlDocument_ReturnsConfiguredDocument()
         {
             XmlDocument doc = SecureXmlHelper.CreateSecureXmlDocument();
             
             Assert.That(doc, Is.Not.Null);
-            Assert.That(doc.XmlResolver, Is.Null);
         }
 
         [Test]

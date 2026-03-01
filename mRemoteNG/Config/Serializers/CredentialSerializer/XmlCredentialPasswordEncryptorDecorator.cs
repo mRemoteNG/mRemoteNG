@@ -14,10 +14,8 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
 
         public XmlCredentialPasswordEncryptorDecorator(ICryptographyProvider cryptographyProvider, ISerializer<IEnumerable<ICredentialRecord>, string> baseSerializer)
         {
-            if (baseSerializer == null)
-                throw new ArgumentNullException(nameof(baseSerializer));
-            if (cryptographyProvider == null)
-                throw new ArgumentNullException(nameof(cryptographyProvider));
+            ArgumentNullException.ThrowIfNull(baseSerializer);
+            ArgumentNullException.ThrowIfNull(cryptographyProvider);
 
             _baseSerializer = baseSerializer;
             _cryptographyProvider = cryptographyProvider;
@@ -26,8 +24,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
 
         public string Serialize(IEnumerable<ICredentialRecord> credentialRecords, SecureString key)
         {
-            if (credentialRecords == null)
-                throw new ArgumentNullException(nameof(credentialRecords));
+            ArgumentNullException.ThrowIfNull(credentialRecords);
 
             string baseReturn = _baseSerializer.Serialize(credentialRecords);
             string encryptedReturn = EncryptPasswordAttributes(baseReturn, key);
@@ -40,7 +37,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
             SetEncryptionAttributes(xdoc, encryptionKey);
             foreach (XElement element in xdoc.Descendants())
             {
-                XAttribute passwordAttribute = element.Attribute("Password");
+                XAttribute? passwordAttribute = element.Attribute("Password");
                 if (passwordAttribute == null) continue;
                 string encryptedPassword = _cryptographyProvider.Encrypt(passwordAttribute.Value, encryptionKey);
                 passwordAttribute.Value = encryptedPassword;

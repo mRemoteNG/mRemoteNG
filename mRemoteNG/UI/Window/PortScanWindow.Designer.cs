@@ -12,7 +12,8 @@ namespace mRemoteNG.UI.Window
 		internal Controls.MrngLabel lblStartIP;
 		internal MrngIpTextBox ipEnd;
 		internal Controls.MrngListView olvHosts;
-		internal BrightIdeasSoftware.OLVColumn clmHost;
+		internal BrightIdeasSoftware.OLVColumn clmHostName;
+		internal BrightIdeasSoftware.OLVColumn clmHostIP;
 		internal BrightIdeasSoftware.OLVColumn clmSSH;
 		internal BrightIdeasSoftware.OLVColumn clmTelnet;
 		internal BrightIdeasSoftware.OLVColumn clmHTTP;
@@ -50,7 +51,8 @@ namespace mRemoteNG.UI.Window
             this.btnImport = new MrngButton();
             this.cbProtocol = new MrngComboBox();
             this.lblOnlyImport = new mRemoteNG.UI.Controls.MrngLabel();
-            this.clmHost = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.clmHostName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.clmHostIP = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.clmSSH = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.clmTelnet = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.clmHTTP = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -71,6 +73,8 @@ namespace mRemoteNG.UI.Window
             this.ngCheckLastPort = new MrngCheckBox();
             this.pnlImport = new System.Windows.Forms.TableLayoutPanel();
             this.pnlMain = new System.Windows.Forms.TableLayoutPanel();
+            this.lblCustomPorts = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtCustomPorts = new mRemoteNG.UI.Controls.MrngTextBox();
             this.portScanToolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.olvHosts)).BeginInit();
             this.resultsMenuStrip.SuspendLayout();
@@ -136,6 +140,7 @@ namespace mRemoteNG.UI.Window
             this.olvHosts.Location = new System.Drawing.Point(3, 168);
             this.olvHosts.Name = "olvHosts";
             this.olvHosts.ShowGroups = false;
+            this.olvHosts.ShowSortIndicators = true;
             this.olvHosts.Size = new System.Drawing.Size(878, 230);
             this.olvHosts.TabIndex = 26;
             this.olvHosts.UseCompatibleStateImageBehavior = false;
@@ -228,7 +233,8 @@ namespace mRemoteNG.UI.Window
             "HTTPS",
             "Rlogin",
             "RDP",
-            "VNC"});
+            "VNC",
+            "All detected"});
             this.cbProtocol.Location = new System.Drawing.Point(3, 27);
             this.cbProtocol.Name = "cbProtocol";
             this.cbProtocol.Size = new System.Drawing.Size(144, 21);
@@ -244,13 +250,18 @@ namespace mRemoteNG.UI.Window
             this.lblOnlyImport.TabIndex = 1;
             this.lblOnlyImport.Text = "Protocol to import";
             this.lblOnlyImport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // clmHost
-            // 
-            this.clmHost.AspectName = "HostIPorName";
-            this.clmHost.FillsFreeSpace = true;
-            this.clmHost.Text = "Hostname/IP";
-            this.clmHost.Width = 130;
+            //
+            // clmHostName
+            //
+            this.clmHostName.AspectName = "HostName";
+            this.clmHostName.Text = "Hostname";
+            this.clmHostName.Width = 130;
+            //
+            // clmHostIP
+            //
+            this.clmHostIP.AspectName = "HostIp";
+            this.clmHostIP.Text = "IP Address";
+            this.clmHostIP.Width = 130;
             // 
             // clmSSH
             // 
@@ -319,7 +330,7 @@ namespace mRemoteNG.UI.Window
             // 
             // numericSelectorTimeout
             // 
-            this.numericSelectorTimeout.Location = new System.Drawing.Point(133, 99);
+            this.numericSelectorTimeout.Location = new System.Drawing.Point(133, 123);
             this.numericSelectorTimeout.Maximum = new decimal(new int[] {
             2147482,
             0,
@@ -338,7 +349,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.lblTimeout.AutoSize = true;
             this.lblTimeout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTimeout.Location = new System.Drawing.Point(3, 96);
+            this.lblTimeout.Location = new System.Drawing.Point(3, 120);
             this.lblTimeout.Name = "lblTimeout";
             this.lblTimeout.Size = new System.Drawing.Size(124, 33);
             this.lblTimeout.TabIndex = 16;
@@ -392,20 +403,24 @@ namespace mRemoteNG.UI.Window
             this.pnlIp.Controls.Add(this.lblEndIP, 0, 1);
             this.pnlIp.Controls.Add(this.portStart, 1, 2);
             this.pnlIp.Controls.Add(this.portEnd, 1, 3);
-            this.pnlIp.Controls.Add(this.lblTimeout, 0, 4);
-            this.pnlIp.Controls.Add(this.numericSelectorTimeout, 1, 4);
-            this.pnlIp.Controls.Add(this.btnScan, 2, 4);
+            this.pnlIp.Controls.Add(this.lblCustomPorts, 0, 4);
+            this.pnlIp.Controls.Add(this.txtCustomPorts, 1, 4);
+            this.pnlIp.SetColumnSpan(this.txtCustomPorts, 2);
+            this.pnlIp.Controls.Add(this.lblTimeout, 0, 5);
+            this.pnlIp.Controls.Add(this.numericSelectorTimeout, 1, 5);
+            this.pnlIp.Controls.Add(this.btnScan, 2, 5);
             this.pnlIp.Controls.Add(this.ngCheckFirstPort, 0, 2);
             this.pnlIp.Controls.Add(this.ngCheckLastPort, 0, 3);
             this.pnlIp.Location = new System.Drawing.Point(3, 3);
             this.pnlIp.Name = "pnlIp";
-            this.pnlIp.RowCount = 5;
+            this.pnlIp.RowCount = 6;
             this.pnlIp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.pnlIp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.pnlIp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.pnlIp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.pnlIp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.pnlIp.Size = new System.Drawing.Size(878, 129);
+            this.pnlIp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.pnlIp.Size = new System.Drawing.Size(878, 153);
             this.pnlIp.TabIndex = 103;
             // 
             // btnScan
@@ -414,7 +429,7 @@ namespace mRemoteNG.UI.Window
             this.btnScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnScan.Image = global::mRemoteNG.Properties.Resources.Search_16x;
             this.btnScan.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnScan.Location = new System.Drawing.Point(765, 99);
+            this.btnScan.Location = new System.Drawing.Point(765, 123);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(110, 24);
             this.btnScan.TabIndex = 6;
@@ -448,7 +463,26 @@ namespace mRemoteNG.UI.Window
             this.ngCheckLastPort.Text = "Last Port";
             this.ngCheckLastPort.UseVisualStyleBackColor = true;
             this.ngCheckLastPort.CheckedChanged += new System.EventHandler(this.NgCheckLastPort_CheckedChanged);
-            // 
+            //
+            // lblCustomPorts
+            //
+            this.lblCustomPorts.AutoSize = true;
+            this.lblCustomPorts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCustomPorts.Location = new System.Drawing.Point(3, 96);
+            this.lblCustomPorts.Name = "lblCustomPorts";
+            this.lblCustomPorts.Size = new System.Drawing.Size(124, 24);
+            this.lblCustomPorts.TabIndex = 19;
+            this.lblCustomPorts.Text = "Custom ports:";
+            this.lblCustomPorts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            //
+            // txtCustomPorts
+            //
+            this.txtCustomPorts.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCustomPorts.Location = new System.Drawing.Point(133, 99);
+            this.txtCustomPorts.Name = "txtCustomPorts";
+            this.txtCustomPorts.Size = new System.Drawing.Size(200, 22);
+            this.txtCustomPorts.TabIndex = 20;
+            //
             // pnlImport
             // 
             this.pnlImport.ColumnCount = 2;
@@ -478,7 +512,7 @@ namespace mRemoteNG.UI.Window
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.RowCount = 4;
-            this.pnlMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 135F));
+            this.pnlMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 159F));
             this.pnlMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.pnlMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
@@ -531,5 +565,7 @@ namespace mRemoteNG.UI.Window
         private MrngCheckBox ngCheckFirstPort;
         private MrngCheckBox ngCheckLastPort;
         private System.Windows.Forms.ToolTip portScanToolTip;
+        private Controls.MrngLabel lblCustomPorts;
+        private Controls.MrngTextBox txtCustomPorts;
     }
 }

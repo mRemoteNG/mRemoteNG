@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Security;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
 using MySql.Data.Types;
@@ -50,7 +51,7 @@ namespace mRemoteNG.Tools
 
         public static string LeadingZero(string Number)
         {
-            if (Convert.ToInt32(Number) < 10)
+            if (Convert.ToInt32(Number, CultureInfo.InvariantCulture) < 10)
             {
                 return "0" + Number;
             }
@@ -68,7 +69,7 @@ namespace mRemoteNG.Tools
             }
             if (type == typeof(string))
             {
-                return (string)dataObject == "1";
+                return string.Equals((string)dataObject, "1", StringComparison.Ordinal);
             }
             if (type == typeof(sbyte))
             {
@@ -84,10 +85,10 @@ namespace mRemoteNG.Tools
 			switch (Properties.OptionsDBsPage.Default.SQLServerType)
 			{
 				case "mysql":
-					return Dt.ToString("yyyy/MM/dd HH:mm:ss");
+					return Dt.ToString("yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture);
 				case "mssql":
 				default:
-					return Dt.ToString("yyyyMMdd HH:mm:ss");
+					return Dt.ToString("yyyyMMdd HH:mm:ss", CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -117,7 +118,7 @@ namespace mRemoteNG.Tools
 
         public static string PrepareValueForDB(string Text)
         {
-            return Text.Replace("\'", "\'\'");
+            return Text.Replace("\'", "\'\'", StringComparison.Ordinal);
         }
 
         public static string GetExceptionMessageRecursive(Exception ex)
@@ -159,34 +160,34 @@ namespace mRemoteNG.Tools
         {
             private readonly Type _enumType = type;
 
-            public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destType)
+            public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
             {
-                return destType == typeof(string);
+                return destinationType == typeof(string);
             }
 
-            public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type? destType)
+            public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type? destinationType)
             {
                 if (value == null) return string.Empty;
 
                 string? enumName = Enum.GetName(_enumType, value);
                 if (enumName == null)
                 {
-                    throw new ArgumentException("Invalid enum value provided.");
+                    throw new ArgumentException("Invalid enum value provided.", nameof(value));
                 }
 
                 System.Reflection.FieldInfo? fi = _enumType.GetField(enumName);
                 if (fi == null)
                 {
-                    throw new ArgumentException("FieldInfo could not be retrieved for the provided enum value.");
+                    throw new ArgumentException("FieldInfo could not be retrieved for the provided enum value.", nameof(value));
                 }
 
                 DescriptionAttribute? dna = (DescriptionAttribute?)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
                 return dna?.Description ?? value.ToString() ?? string.Empty;
             }
 
-            public override bool CanConvertFrom(ITypeDescriptorContext? context, Type? srcType)
+            public override bool CanConvertFrom(ITypeDescriptorContext? context, Type? sourceType)
             {
-                return srcType == typeof(string);
+                return sourceType == typeof(string);
             }
 
             public override object ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
@@ -231,24 +232,24 @@ namespace mRemoteNG.Tools
                         : throw new ArgumentNullException(nameof(value), "Value cannot be null.");
                 }
 
-                if (string.Equals(stringValue, Language.Yes, StringComparison.CurrentCultureIgnoreCase))
+                if (string.Equals(stringValue, Language.Yes, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }
 
-                if (string.Equals(stringValue, Language.No, StringComparison.CurrentCultureIgnoreCase))
+                if (string.Equals(stringValue, Language.No, StringComparison.OrdinalIgnoreCase))
                 {
                     return false;
                 }
 
-                throw new Exception("Values must be \"Yes\" or \"No\"");
+                throw new FormatException("Values must be \"Yes\" or \"No\"");
             }
 
             public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
             {
                 if (destinationType == typeof(string))
                 {
-                    return Convert.ToBoolean(value) ? Language.Yes : Language.No;
+                    return Convert.ToBoolean(value, CultureInfo.InvariantCulture) ? Language.Yes : Language.No;
                 }
 
                 return base.ConvertTo(context, culture, value, destinationType) ?? throw new InvalidOperationException("Base conversion returned null.");
@@ -266,6 +267,85 @@ namespace mRemoteNG.Tools
                 StandardValuesCollection svc = new(bools);
 
                 return svc;
+            }
+        }
+
+        public class YesNoAutoTypeConverter : YesNoTypeConverter
+        {
+            private const string AutoText = "Auto";
+
+            public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
+            {
+                if (value is AutoSelection autoSelection)
+                {
+                    if (autoSelection == AutoSelection.Yes)
+                        return true;
+                    if (autoSelection == AutoSelection.No)
+                        return false;
+                    return ConvertFromAutoSelection(context);
+                }
+
+                if (value is string stringValue &&
+                    string.Equals(stringValue, AutoText, StringComparison.OrdinalIgnoreCase))
+                {
+                    return ConvertFromAutoSelection(context);
+                }
+
+                return base.ConvertFrom(context, culture, value);
+            }
+
+            public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+            {
+                if (destinationType == typeof(string) && value is AutoSelection autoSelection)
+                {
+                    if (autoSelection == AutoSelection.Yes)
+                        return Language.Yes;
+                    if (autoSelection == AutoSelection.No)
+                        return Language.No;
+                    return AutoText;
+                }
+
+                return base.ConvertTo(context, culture, value, destinationType);
+            }
+
+            public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
+            {
+                AutoSelection[] values = { AutoSelection.Yes, AutoSelection.No, AutoSelection.Auto };
+                return new StandardValuesCollection(values);
+            }
+
+            private static bool ConvertFromAutoSelection(ITypeDescriptorContext? context)
+            {
+                ConnectionInfoInheritance? inheritance = GetInheritanceFromContext(context);
+                if (inheritance == null)
+                    return false;
+
+                inheritance.RequestAutomaticEverythingInheritanceEvaluation();
+                return !inheritance.EverythingInherited;
+            }
+
+            private static ConnectionInfoInheritance? GetInheritanceFromContext(ITypeDescriptorContext? context)
+            {
+                if (context?.Instance is ConnectionInfoInheritance inheritance)
+                    return inheritance;
+
+                if (context?.Instance is object[] instances)
+                {
+                    foreach (object instance in instances)
+                    {
+                        if (instance is ConnectionInfoInheritance inheritanceInstance)
+                            return inheritanceInstance;
+                    }
+                }
+
+                return null;
+            }
+
+            private enum AutoSelection
+            {
+                Yes,
+                No,
+                Auto
             }
         }
 

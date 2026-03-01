@@ -114,8 +114,8 @@ Creative Commons Attribution 2.5 License
 Copyright © 2016  
 MIT License
 
-**[VncSharp](https://github.com/humphd/VncSharp) (Archived)**  
-Copyright © 2004-2009 David Humphrey  
+**[VncSharpCore](https://github.com/mRemoteNG/VncSharpCore)** (derived from VncSharp by David Humphrey)
+Copyright © 2004-2009 David Humphrey
 GNU General Public License (GPL) Version 2
 
 **[ObjectListView](https://sourceforge.net/projects/objectlistview/)**  

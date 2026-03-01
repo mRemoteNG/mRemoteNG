@@ -32,7 +32,7 @@ namespace mRemoteNGTests.Tree
             Assert.That(_connectionTree.ExpandedObjects, Is.EquivalentTo(connectionTreeModel.GetRecursiveChildList().OfType<ContainerInfo>().Where(info => info.IsExpanded)));
         }
 
-        private ConnectionTreeModel GenerateConnectionTreeModel()
+        private static ConnectionTreeModel GenerateConnectionTreeModel()
         {
             var connectionTreeModel = new ConnectionTreeModel();
             var root = new RootNodeInfo(RootNodeType.Connection) { IsExpanded = true };

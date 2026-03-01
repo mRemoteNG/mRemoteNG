@@ -1,0 +1,3 @@
+[*.cs]
+# CA1707: Test methods use underscore naming convention (Test_Name_Should)
+dotnet_diagnostic.CA1707.severity = none

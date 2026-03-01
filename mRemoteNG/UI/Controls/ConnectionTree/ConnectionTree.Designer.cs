@@ -17,9 +17,11 @@
         {
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // ConnectionTree
-            // 
+            //
+            this.AccessibleName = "Connection Tree";
+            this.AccessibleDescription = "Tree view of saved connections and folders";
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                           revision="1.0"
+                           schemaVersion="1.0"
+                           xmlns="http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitionResources">
+
+  <displayName>mRemoteNG Group Policy</displayName>
+  <description>Administrative template for mRemoteNG remote connection manager.</description>
+
+  <resources>
+    <stringTable>
+
+      <!-- Supported On -->
+      <string id="SUPPORTED_mRemoteNG_1_81">mRemoteNG 1.81.0 or later</string>
+
+      <!-- Categories -->
+      <string id="Cat_mRemoteNG">mRemoteNG</string>
+      <string id="Cat_mRemoteNG_Help">Settings for mRemoteNG remote connection manager. These policies control security, update, and notification behavior for all users on this computer.</string>
+
+      <string id="Cat_Credentials">Credentials</string>
+      <string id="Cat_Credentials_Help">Control how mRemoteNG handles usernames and passwords for saved connections.</string>
+
+      <string id="Cat_Updates">Updates</string>
+      <string id="Cat_Updates_Help">Control whether mRemoteNG can check for software updates.</string>
+
+      <string id="Cat_Notifications">Notifications</string>
+      <string id="Cat_Notifications_Help">Control logging and notification behavior in mRemoteNG.</string>
+
+      <!-- ============================================================ -->
+      <!-- CREDENTIALS POLICIES                                         -->
+      <!-- ============================================================ -->
+
+      <string id="AllowSavePasswords">Allow saving passwords</string>
+      <string id="AllowSavePasswords_Help">Controls whether users can save passwords in connection configurations.
+
+If you enable this policy or leave it not configured, users can save passwords when creating or editing connections. This is the default behavior.
+
+If you disable this policy, the password field is hidden from the connection properties panel and users cannot store passwords locally. Existing saved passwords remain in the configuration file but cannot be viewed or edited.
+
+This setting is commonly required by enterprise security policies (SOC2, ISO 27001, HIPAA) that prohibit storing credentials in applications.
+
+Registry value: HKLM\SOFTWARE\mRemoteNG\Credentials\AllowSavePasswords (DWORD)
+  1 = Allow (default)
+  0 = Block</string>
+
+      <string id="AllowSaveUsernames">Allow saving usernames</string>
+      <string id="AllowSaveUsernames_Help">Controls whether users can save usernames in connection configurations.
+
+If you enable this policy or leave it not configured, users can save usernames when creating or editing connections.
+
+If you disable this policy, the username field is hidden from the connection properties panel.
+
+Registry value: HKLM\SOFTWARE\mRemoteNG\Credentials\AllowSaveUsernames (DWORD)
+  1 = Allow (default)
+  0 = Block</string>
+
+      <string id="AllowExportPasswords">Allow exporting passwords</string>
+      <string id="AllowExportPasswords_Help">Controls whether passwords are included when exporting connection configurations.
+
+If you enable this policy or leave it not configured, exported files will contain passwords (encrypted or in cleartext depending on the export format).
+
+If you disable this policy, passwords are stripped from exported files. This supports Data Loss Prevention (DLP) policies by preventing credential exfiltration through configuration exports.
+
+Registry value: HKLM\SOFTWARE\mRemoteNG\Credentials\AllowExportPasswords (DWORD)
+  1 = Allow (default)
+  0 = Block</string>
+
+      <string id="AllowExportUsernames">Allow exporting usernames</string>
+      <string id="AllowExportUsernames_Help">Controls whether usernames are included when exporting connection configurations.
+
+If you enable this policy or leave it not configured, exported files will contain usernames.
+
+If you disable this policy, usernames are stripped from exported files.
+
+Registry value: HKLM\SOFTWARE\mRemoteNG\Credentials\AllowExportUsernames (DWORD)
+  1 = Allow (default)
+  0 = Block</string>
+
+      <!-- ============================================================ -->
+      <!-- UPDATES POLICIES                                             -->
+      <!-- ============================================================ -->
+
+      <string id="AllowCheckForUpdates">Allow checking for updates</string>
+      <string id="AllowCheckForUpdates_Help">Controls whether mRemoteNG can check for software updates.
+
+If you enable this policy or leave it not configured, mRemoteNG can check for updates (both automatic and manual).
+
+If you disable this policy, all update checking is disabled. This also forces AllowCheckForUpdatesAutomatical and AllowCheckForUpdatesManual to disabled. Use this in environments where software updates are managed centrally (SCCM, Intune, WSUS).
+
+Registry value: HKLM\SOFTWARE\mRemoteNG\Updates\AllowCheckForUpdates (DWORD)
+  1 = Allow (default)
+  0 = Block</string>
+
+      <string id="AllowCheckForUpdatesAutomatical">Allow automatic update checks</string>
+      <string id="AllowCheckForUpdatesAutomatical_Help">Controls whether mRemoteNG automatically checks for updates on startup.
+
+If you enable this policy or leave it not configured, mRemoteNG will periodically check for updates in the background.
+
+If you disable this policy, automatic update checks are disabled. Users can still manually check for updates unless AllowCheckForUpdatesManual is also disabled.
+
+This setting has no effect if AllowCheckForUpdates is disabled.
+
+Registry value: HKLM\SOFTWARE\mRemoteNG\Updates\AllowCheckForUpdatesAutomatical (DWORD)
+  1 = Allow (default)
+  0 = Block</string>
+
+      <string id="AllowCheckForUpdatesManual">Allow manual update checks</string>
+      <string id="AllowCheckForUpdatesManual_Help">Controls whether users can manually trigger an update check from the Help menu.
+
+If you enable this policy or leave it not configured, the "Check for Updates" menu item is available.
+
+If you disable this policy, the manual update check option is hidden or disabled.
+
+This setting has no effect if AllowCheckForUpdates is disabled.
+
+Registry value: HKLM\SOFTWARE\mRemoteNG\Updates\AllowCheckForUpdatesManual (DWORD)
+  1 = Allow (default)
+  0 = Block</string>
+
+      <!-- ============================================================ -->
+      <!-- NOTIFICATIONS POLICIES                                       -->
+      <!-- ============================================================ -->
+
+      <string id="AllowLogging">Allow file logging</string>
+      <string id="AllowLogging_Help">Controls whether mRemoteNG writes log files to disk.
+
+If you enable this policy or leave it not configured, mRemoteNG creates log files in the application data directory.
+
+If you disable this policy, file logging is suppressed. Note that disabling logging may make troubleshooting difficult.
+
+Registry value: HKLM\SOFTWARE\mRemoteNG\Notifications\AllowLogging (DWORD)
+  1 = Allow (default)
+  0 = Block</string>
+
+      <string id="AllowNotifications">Allow notifications</string>
+      <string id="AllowNotifications_Help">Controls whether mRemoteNG displays notifications to the user.
+
+If you enable this policy or leave it not configured, notifications are shown normally.
+
+If you disable this policy, all notifications are suppressed.
+
+Registry value: HKLM\SOFTWARE\mRemoteNG\Notifications\AllowNotifications (DWORD)
+  1 = Allow (default)
+  0 = Block</string>
+
+      <string id="AllowPopups">Allow popup notifications</string>
+      <string id="AllowPopups_Help">Controls whether mRemoteNG can display popup notification windows.
+
+If you enable this policy or leave it not configured, popup notifications are shown.
+
+If you disable this policy, popup notifications are suppressed. Other notification methods (status bar, log) are unaffected.
+
+Registry value: HKLM\SOFTWARE\mRemoteNG\Notifications\AllowPopups (DWORD)
+  1 = Allow (default)
+  0 = Block</string>
+
+    </stringTable>
+  </resources>
+
+</policyDefinitionResources>

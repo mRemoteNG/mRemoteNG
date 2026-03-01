@@ -71,7 +71,7 @@ public class RemoteDesktopConnectionManager27DeserializerTests
         var rootNode = connectionTreeModel.RootNodes.First();
         var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
         var rootNodeContents =
-            importedRdcmanRootNode.Children.Count(node => node.Name == "Group1" || node.Name == "Group2");
+            importedRdcmanRootNode.Children.Count(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal) || string.Equals(node.Name, "Group2", StringComparison.Ordinal));
         Assert.That(rootNodeContents, Is.EqualTo(2));
     }
 
@@ -84,7 +84,7 @@ public class RemoteDesktopConnectionManager27DeserializerTests
         var connection = connectionTreeModel
             .GetRecursiveChildList()
             .OfType<ContainerInfo>()
-            .First(node => node.Name == "Group1")
+            .First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal))
             .Children
             .First();
 
@@ -99,7 +99,7 @@ public class RemoteDesktopConnectionManager27DeserializerTests
         var importedConnection = connectionTreeModel
             .GetRecursiveChildList()
             .OfType<ContainerInfo>()
-            .First(node => node.Name == "Group1")
+            .First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal))
             .Children
             .First();
 
@@ -114,7 +114,7 @@ public class RemoteDesktopConnectionManager27DeserializerTests
         var importedConnection = connectionTreeModel
             .GetRecursiveChildList()
             .OfType<ContainerInfo>()
-            .First(node => node.Name == "Group1")
+            .First(node => string.Equals(node.Name, "Group1", StringComparison.Ordinal))
             .Children
             .First();
 

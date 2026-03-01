@@ -14,7 +14,7 @@ namespace mRemoteNG.UI.Window
 
         //private WindowType _WindowType;
         //private DockContent _DockPnl;
-        private ThemeManager _themeManager;
+        private ThemeManager? _themeManager;
 
         #endregion
 
@@ -22,7 +22,7 @@ namespace mRemoteNG.UI.Window
 
         protected WindowType WindowType { get; set; }
 
-        protected DockContent DockPnl { get; set; }
+        protected DockContent? DockPnl { get; set; }
 
         #endregion
 
@@ -56,6 +56,16 @@ namespace mRemoteNG.UI.Window
                 }
             }
 
+            // Handle Ctrl+F to find in session output (SSH/Telnet)
+            if (keyData == (Keys.Control | Keys.F))
+            {
+                if (this is ConnectionWindow connectionWindow)
+                {
+                    connectionWindow.FindInSession();
+                    return true;
+                }
+            }
+
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
@@ -65,8 +75,8 @@ namespace mRemoteNG.UI.Window
         {
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ActiveAndExtended) return;
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette?.getColor("Dialog_Background") ?? BackColor;
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette?.getColor("Dialog_Foreground") ?? ForeColor;
         }
 
 

@@ -6,12 +6,17 @@
 	/// </summary>
 	internal class SerializableConnectionInfoAllPropertiesOfType<TType>
 	{
+		public TType CredentialId { get; set; }
 		public TType Description { get; set; }
 		public TType Icon { get; set; }
 		public TType Panel { get; set; }
+		public TType Color { get; set; }
+		public TType TabColor { get; set; }
+		public TType ConnectionFrameColor { get; set; }
 		public TType Username { get; set; }
 		public TType Password { get; set; }
 		public TType Domain { get; set; }
+		public TType AlternativeAddress { get; set; }
 		public TType Protocol { get; set; }
 		public TType ExtApp { get; set; }
 		public TType PuttySession { get; set; }
@@ -31,6 +36,7 @@
 		public TType RDGatewayUsername { get; set; }
 		public TType RDGatewayPassword { get; set; }
 		public TType RDGatewayDomain { get; set; }
+		public TType RDGatewayAccessToken { get; set; }
 		public TType RDGatewayExternalCredentialProvider { get; set; }
 		public TType RDGatewayUserViaAPI { get; set; }
 		public TType Resolution { get; set; }
@@ -59,6 +65,16 @@
 		public TType PostExtApp { get; set; }
 		public TType MacAddress { get; set; }
         public TType UserField { get; set; }
+        public TType UserField1 { get; set; }
+        public TType UserField2 { get; set; }
+        public TType UserField3 { get; set; }
+        public TType UserField4 { get; set; }
+        public TType UserField5 { get; set; }
+        public TType UserField6 { get; set; }
+        public TType UserField7 { get; set; }
+        public TType UserField8 { get; set; }
+        public TType UserField9 { get; set; }
+        public TType UserField10 { get; set; }
         public TType EnvironmentTags { get; set; }
         public TType Favorite { get; set; }
         public TType VmId { get; set; }
@@ -77,14 +93,38 @@
         public TType RdpVersion { get; set; }
         public TType UseEnhancedMode { get; set; }
         public TType SSHOptions { get; set; }
+        public TType PrivateKeyPath { get; set; }
         public TType SSHTunnelConnectionName { get; set; }
         public TType RDPStartProgram { get; set; }
         public TType RDPStartProgramWorkDir { get; set; }
 		public TType OpeningCommand { get; set; }
 		public TType ExternalCredentialProvider { get; set; }
 		public TType UserViaAPI { get; set; }
+		public TType VaultOpenbaoMount { get; set; }
+		public TType VaultOpenbaoRole { get; set; }
+		public TType VaultOpenbaoSecretEngine { get; set; }
 		public TType EC2InstanceId { get; set; }
 		public TType ExternalAddressProvider { get; set; }
 		public TType EC2Region { get; set; }
+		public TType UsePersistentBrowser { get; set; }
+		public TType ScriptErrorsSuppressed { get; set; }
+		public TType DesktopScaleFactor { get; set; }
+		public TType IsTemplate { get; set; }
+		public TType IPAddress { get; set; }
+		public TType ConnectionAddressPrimary { get; set; }
+		public TType RDPSignScope { get; set; }
+		public TType RDPSignature { get; set; }
+		public TType RDPSizingMode { get; set; }
+		public TType ResolutionWidth { get; set; }
+		public TType ResolutionHeight { get; set; }
+		public TType RDPUseMultimon { get; set; }
+		public TType Notes { get; set; }
+		public TType RetryOnFirstConnect { get; set; }
+		public TType WaitForIPAvailability { get; set; }
+		public TType WaitForIPTimeout { get; set; }
+		public TType ShowBrowserNavigationBar { get; set; }
+		public TType VNCClipboardRedirect { get; set; }
+		public TType HttpPath { get; set; }
+		public TType AlwaysPromptForCredentials { get; set; }
 	}
 }

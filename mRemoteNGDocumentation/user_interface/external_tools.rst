@@ -113,10 +113,63 @@ Quick Reference - Available Variables:
 - %DESCRIPTION%
 - %MACADDRESS%
 - %USERFIELD%
+- %USERFIELD1%
+- %USERFIELD2%
+- %USERFIELD3%
+- %USERFIELD4%
+- %USERFIELD5%
+- %USERFIELD6%
+- %USERFIELD7%
+- %USERFIELD8%
+- %USERFIELD9%
+- %USERFIELD10%
 
 See the :ref:`variables_reference` page for detailed information about:
 
-- How to use environment variables
-- How to prevent variable expansion
-- Rules for using variables
-- Special character escaping
+If you need to send a variable name to a program without mRemoteNG expanding it, use ^% instead of %.
+mRemoteNG will remove the caret (^) and leave the rest unchanged.
+For example, ^%USERNAME^% will be sent to the program as %USERNAME% and will not be expanded.
+
+Rules for variables
+-------------------
+- Variables always refer to the currently selected connection.
+- Variable names are case-insensitive.
+- Variables can be used in both the Filename and Arguments fields.
+
+
+Special Character Escaping
+==========================
+Expanded variables will be escaped using the rules below. There are two levels of escaping that are done.
+
+1. Is escaping for standard argument splitting (C/C++ argv, CommandLineToArgvW, etc)
+2. Is escaping shell metacharacters for ShellExecute.
+
+Argument splitting escaping
+---------------------------
+
+- Each quotation mark will be escaped by a backslash
+- One or more backslashes (\\) followed by a quotation mark ("):
+   - Each backslash will be escaped by another backslash
+   - The quotation mark will be escaped by a backslash
+      - If the connection's user field contains ``"This"`` is a ``\"test\"``
+      - Then %USERFIELD% is replaced with ``\"This\"`` is a ``\\\"test\\\"``
+- A variable name followed by a quotation mark (for example, %USERFIELD%") with a value ending in one or more backslashes:
+   - Each backslash will be escaped by another backslash
+   - Example:
+      - If the connection's user field contains ``c:\Example\``
+      - Then "%USERFIELD%" is replaced with ``"c:\Example\\"``
+
+To disable argument splitting escaping for a variable, precede its name with a minus (-) sign. For example: %-USERFIELD%
+
+Shell metacharacter escaping
+----------------------------
+
+- The shell metacharacters are ( ) % ! ^ " < > & | , ;
+- Each shell metacharacter will be escaped by a caret (^)
+
+To disable both argument splitting and shell metacharacter escaping for a variable, precede its name with an exclamation point (!).
+For example, %!USERFIELD%. This is not recommended and may cause unexpected results.
+
+Only variables that have been expanded will be escaped. It is up to you to escape the rest of the arguments.
+
+See also the :ref:`variables_reference` page for detailed information about how to use environment variables, prevent variable expansion, rules for using variables, and special character escaping.

@@ -17,14 +17,14 @@ namespace mRemoteNG.App
     [SupportedOSPlatform("windows")]
     public static class Shutdown
     {
-        private static string _updateFilePath;
+        private static string? _updateFilePath;
 
         private static bool UpdatePending
         {
             get { return !string.IsNullOrEmpty(_updateFilePath); }
         }
 
-        public static void Quit(string updateFilePath = null)
+        public static void Quit(string? updateFilePath = null)
         {
             _updateFilePath = updateFilePath;
             FrmMain.Default.Close();
@@ -34,19 +34,38 @@ namespace mRemoteNG.App
         public static void Cleanup(Control quickConnectToolStrip,
                                    ExternalToolsToolStrip externalToolsToolStrip,
                                    MultiSshToolStrip multiSshToolStrip,
+                                   MenuStrip mainMenu,
                                    FrmMain frmMain)
         {
             try
             {
+                StopRestApi();
+                StopAutoStartedExternalTools();
                 StopPuttySessionWatcher();
                 DisposeNotificationAreaIcon();
                 SaveConnections();
-                SaveSettings(quickConnectToolStrip, externalToolsToolStrip, multiSshToolStrip, frmMain);
+                SaveSettings(quickConnectToolStrip, externalToolsToolStrip, multiSshToolStrip, mainMenu, frmMain);
                 UnregisterBrowsers();
+                PluginManager.Instance.ShutdownPlugins();
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.SettingsCouldNotBeSavedOrTrayDispose, ex);
+            }
+        }
+
+        private static void StopRestApi()
+        {
+            Runtime.RestApi?.Dispose();
+            Runtime.RestApi = null;
+        }
+
+        private static void StopAutoStartedExternalTools()
+        {
+            foreach (var tool in Runtime.ExternalToolsService.ExternalTools)
+            {
+                if (tool.StopOnShutdown)
+                    tool.StopTrackedProcess();
             }
         }
 
@@ -95,10 +114,11 @@ namespace mRemoteNG.App
         private static void SaveSettings(Control quickConnectToolStrip,
                                          ExternalToolsToolStrip externalToolsToolStrip,
                                          MultiSshToolStrip multiSshToolStrip,
+                                         MenuStrip mainMenu,
                                          FrmMain frmMain)
         {
             Config.Settings.SettingsSaver.SaveSettings(quickConnectToolStrip, externalToolsToolStrip, multiSshToolStrip,
-                                                       frmMain);
+                                                       mainMenu, frmMain);
         }
 
         private static void UnregisterBrowsers()
@@ -120,11 +140,12 @@ namespace mRemoteNG.App
 
         private static void RunUpdateFile()
         {
-            if (UpdatePending)
+            var updatePath = _updateFilePath;
+            if (!string.IsNullOrEmpty(updatePath))
             {
                 // Validate the update file path to prevent command injection
-                Tools.PathValidator.ValidateExecutablePathOrThrow(_updateFilePath, nameof(_updateFilePath));
-                Process.Start(new ProcessStartInfo(_updateFilePath) { UseShellExecute = true });
+                Tools.PathValidator.ValidateExecutablePathOrThrow(updatePath, nameof(_updateFilePath));
+                Process.Start(new ProcessStartInfo(updatePath) { UseShellExecute = true });
             }
         }
     }

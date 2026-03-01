@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -12,7 +13,8 @@ namespace mRemoteNG.Connection
     [SupportedOSPlatform("windows")]
     public class ConnectionInfoInheritance
     {
-        private ConnectionInfoInheritance _tempInheritanceStorage;
+        private ConnectionInfoInheritance? _tempInheritanceStorage;
+        private bool _autoEverythingInheritedRequested;
 
         #region Public Properties
 
@@ -21,12 +23,28 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.General)),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.All)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionAll)),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+         TypeConverter(typeof(MiscTools.YesNoAutoTypeConverter))]
         public bool EverythingInherited
         {
             get => EverythingIsInherited();
-            set => SetAllValues(value);
+            set
+            {
+                if (_autoEverythingInheritedRequested)
+                {
+                    _autoEverythingInheritedRequested = false;
+                    ApplyAutomaticInheritanceFromParent();
+                    return;
+                }
+
+                SetAllValues(value);
+            }
         }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.General)),
+         DisplayName("Inherit Automatic Sort"),
+         Description("Inherit the Automatic Sort setting from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool AutoSort { get; set; }
 
         #endregion
 
@@ -115,11 +133,35 @@ namespace mRemoteNG.Connection
         public bool Domain { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.HostnameIp)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionHostnameIp)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool Hostname { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
+         DisplayName("Inherit IP Address"),
+         Description("Inherit the IP Address property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool IPAddress { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
+         DisplayName("Inherit Primary Address"),
+         Description("Inherit the Primary Address setting from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool ConnectionAddressPrimary { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
+         DisplayName("Inherit Alternative Hostname/IP"),
+         Description("Inherit the Alternative Hostname/IP property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool AlternativeAddress { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Port)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionPort)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool Port { get; set; }
-        
+
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
          LocalizedAttributes.LocalizedDisplayNameInheritAttribute(nameof(Language.SshTunnel)),
          LocalizedAttributes.LocalizedDescriptionInheritAttribute(nameof(Language.PropertyDescriptionSshTunnel)),
@@ -171,6 +213,12 @@ namespace mRemoteNG.Connection
         public bool SSHOptions { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         DisplayName("Inherit Private Key File"),
+         Description("Inherit the Private Key File path from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool PrivateKeyPath { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.AuthenticationLevel)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionAuthenticationLevel)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
@@ -195,10 +243,28 @@ namespace mRemoteNG.Connection
         public bool LoadBalanceInfo { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         DisplayName("Inherit RDP Sign Scope"),
+         Description("Inherit the RDP Sign Scope setting from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool RDPSignScope { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         DisplayName("Inherit RDP Signature"),
+         Description("Inherit the RDP Signature setting from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool RDPSignature { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.RenderingEngine)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRenderingEngine)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RenderingEngine { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         DisplayName("Inherit Suppress Script Errors"),
+         Description("Inherit the Suppress Script Errors setting from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool ScriptErrorsSuppressed { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.UseConsoleSession)),
@@ -300,10 +366,40 @@ namespace mRemoteNG.Connection
         public bool Resolution { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
+         DisplayName("Inherit Sizing Mode"),
+         Description("Inherit the RDP sizing mode from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool RDPSizingMode { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
+         DisplayName("Inherit Resolution Width"),
+         Description("Inherit the custom resolution width from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool ResolutionWidth { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
+         DisplayName("Inherit Resolution Height"),
+         Description("Inherit the custom resolution height from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool ResolutionHeight { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
+         DisplayName("Inherit Zoom Level (Desktop Scale Factor)"),
+         Description("Inherit the RDP zoom level (Desktop Scale Factor) setting from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool DesktopScaleFactor { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.AutomaticResize)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionAutomaticResize)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool AutomaticResize { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
+         DisplayName("Inherit Use Multiple Monitors"),
+         Description("Inherit the Use Multiple Monitors setting from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool RDPUseMultimon { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Colors)),
@@ -458,6 +554,72 @@ namespace mRemoteNG.Connection
         public bool UserField { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit User Field 1"),
+         Description("Inherit the User Field 1 property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UserField1 { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit User Field 2"),
+         Description("Inherit the User Field 2 property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UserField2 { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit User Field 3"),
+         Description("Inherit the User Field 3 property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UserField3 { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit User Field 4"),
+         Description("Inherit the User Field 4 property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UserField4 { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit User Field 5"),
+         Description("Inherit the User Field 5 property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UserField5 { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit User Field 6"),
+         Description("Inherit the User Field 6 property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UserField6 { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit User Field 7"),
+         Description("Inherit the User Field 7 property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UserField7 { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit User Field 8"),
+         Description("Inherit the User Field 8 property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UserField8 { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit User Field 9"),
+         Description("Inherit the User Field 9 property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UserField9 { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit User Field 10"),
+         Description("Inherit the User Field 10 property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UserField10 { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit Notes"),
+         Description("Inherit the Notes property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool Notes { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.EnvironmentTags)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionEnvironmentTags)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
@@ -468,6 +630,24 @@ namespace mRemoteNG.Connection
         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionFavorite)),
         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool Favorite { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit Retry On First Connect"),
+         Description("Inherit the Retry On First Connect property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool RetryOnFirstConnect { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit Wait For IP Availability"),
+         Description("Inherit the Wait For IP Availability property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool WaitForIPAvailability { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         DisplayName("Inherit Wait For IP Timeout"),
+         Description("Inherit the Wait For IP Timeout property from the parent."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool WaitForIPTimeout { get; set; }
         #endregion
 
         #region VNC
@@ -525,10 +705,15 @@ namespace mRemoteNG.Connection
 		LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.ViewOnly)), 
 		LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionViewOnly)), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCViewOnly {get; set;}
+
+		[LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 9),
+		DisplayName("Inherit VNC Clipboard Redirect"),
+		Description("Inherit the VNC Clipboard Redirect setting from the parent."),
+		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCClipboardRedirect {get; set;}
         #endregion
 
         [Browsable(false)]
-        public ConnectionInfo Parent { get; private set; }
+        public ConnectionInfo? Parent { get; private set; }
 
         /// <summary>
         /// Indicates whether this inheritance object is enabled.
@@ -541,7 +726,7 @@ namespace mRemoteNG.Connection
         #endregion
 
 
-        public ConnectionInfoInheritance(ConnectionInfo parent, bool ignoreDefaultInheritance = false)
+        public ConnectionInfoInheritance(ConnectionInfo? parent, bool ignoreDefaultInheritance = false)
         {
             Parent = parent;
             if (!ignoreDefaultInheritance)
@@ -564,6 +749,7 @@ namespace mRemoteNG.Connection
 
         private void UnstashInheritanceData()
         {
+            if (_tempInheritanceStorage == null) return;
             SetAllValues(_tempInheritanceStorage);
             _tempInheritanceStorage = null;
         }
@@ -576,7 +762,7 @@ namespace mRemoteNG.Connection
 
         private void StashInheritanceData()
         {
-            _tempInheritanceStorage = Clone(Parent);
+            _tempInheritanceStorage = Clone(Parent!);
         }
 
         public void TurnOnInheritanceCompletely()
@@ -589,19 +775,80 @@ namespace mRemoteNG.Connection
             SetAllValues(false);
         }
 
+        internal void RequestAutomaticEverythingInheritanceEvaluation()
+        {
+            _autoEverythingInheritedRequested = true;
+        }
+
+        public void ApplyAutomaticInheritanceFromParent()
+        {
+            ConnectionInfo? childConnection = Parent;
+            ConnectionInfo? parentConnection = childConnection?.Parent;
+            if (childConnection == null || parentConnection == null)
+                return;
+
+            foreach (PropertyInfo inheritanceProperty in s_cachedBoolProperties)
+            {
+                bool shouldInherit = PropertyValuesMatch(childConnection, parentConnection, inheritanceProperty.Name);
+                inheritanceProperty.SetValue(this, shouldInherit);
+            }
+        }
+
         private bool EverythingIsInherited()
         {
             IEnumerable<PropertyInfo> inheritanceProperties = GetProperties();
-            bool everythingInherited = inheritanceProperties.All((p) => (bool)p.GetValue(this, null));
+            bool everythingInherited = inheritanceProperties.All((p) => p.GetValue(this, null) is true);
             return everythingInherited;
         }
 
-        public IEnumerable<PropertyInfo> GetProperties()
+        private static bool PropertyValuesMatch(ConnectionInfo childConnection, ConnectionInfo parentConnection, string propertyName)
         {
-            PropertyInfo[] properties = typeof(ConnectionInfoInheritance).GetProperties();
-            IEnumerable<PropertyInfo> filteredProperties = properties.Where(FilterProperty);
-            return filteredProperties;
+            PropertyInfo? childProperty = childConnection.GetType().GetProperty(propertyName);
+            PropertyInfo? parentProperty = parentConnection.GetType().GetProperty(propertyName);
+            if (childProperty == null || parentProperty == null)
+                return false;
+
+            object? childValue = GetConnectionPropertyValueWithoutInheritance(childConnection, childProperty);
+            object? parentValue = GetConnectionPropertyValueWithoutInheritance(parentConnection, parentProperty);
+            return Equals(childValue, parentValue);
         }
+
+        private static object? GetConnectionPropertyValueWithoutInheritance(ConnectionInfo connection, PropertyInfo connectionProperty)
+        {
+            PropertyInfo? inheritanceProperty = typeof(ConnectionInfoInheritance).GetProperty(connectionProperty.Name);
+            bool inheritanceWasEnabled = inheritanceProperty?.PropertyType == typeof(bool) &&
+                                         inheritanceProperty.GetValue(connection.Inheritance) is true;
+
+            if (inheritanceWasEnabled)
+                inheritanceProperty!.SetValue(connection.Inheritance, false);
+
+            try
+            {
+                return connectionProperty.GetValue(connection);
+            }
+            finally
+            {
+                if (inheritanceWasEnabled)
+                    inheritanceProperty!.SetValue(connection.Inheritance, true);
+            }
+        }
+
+        private static readonly HashSet<string> s_exclusions = new(StringComparer.Ordinal)
+        {
+            nameof(EverythingInherited),
+            nameof(Parent),
+            nameof(InheritanceActive)
+        };
+
+        private static readonly PropertyInfo[] s_cachedProperties =
+            typeof(ConnectionInfoInheritance).GetProperties()
+                .Where(p => !s_exclusions.Contains(p.Name))
+                .ToArray();
+
+        private static readonly PropertyInfo[] s_cachedBoolProperties =
+            s_cachedProperties.Where(p => p.PropertyType == typeof(bool)).ToArray();
+
+        public static IEnumerable<PropertyInfo> GetProperties() => s_cachedProperties;
 
         /// <summary>
         /// Gets the name of all properties where inheritance is turned on
@@ -612,40 +859,30 @@ namespace mRemoteNG.Connection
         {
             return InheritanceActive
                 ? GetProperties()
-                    .Where(property => (bool)property.GetValue(this))
+                    .Where(property => property.GetValue(this) is true)
                     .Select(property => property.Name)
                     .ToList()
                 : Enumerable.Empty<string>();
         }
 
-        private bool FilterProperty(PropertyInfo propertyInfo)
+        private static bool FilterProperty(PropertyInfo propertyInfo)
         {
-            string[] exclusions = new[]
-            {
-                nameof(EverythingInherited),
-                nameof(Parent),
-                nameof(InheritanceActive)
-            };
-            bool valueShouldNotBeFiltered = !exclusions.Contains(propertyInfo.Name);
-            return valueShouldNotBeFiltered;
+            return !s_exclusions.Contains(propertyInfo.Name);
         }
 
         private void SetAllValues(bool value)
         {
-            IEnumerable<PropertyInfo> properties = GetProperties();
-            foreach (PropertyInfo property in properties)
+            foreach (PropertyInfo property in s_cachedBoolProperties)
             {
-                if (property.PropertyType.Name == typeof(bool).Name)
-                    property.SetValue(this, value, null);
+                property.SetValue(this, value, null);
             }
         }
 
         private void SetAllValues(ConnectionInfoInheritance otherInheritanceObject)
         {
-            IEnumerable<PropertyInfo> properties = GetProperties();
-            foreach (PropertyInfo property in properties)
+            foreach (PropertyInfo property in s_cachedProperties)
             {
-                object newPropertyValue = property.GetValue(otherInheritanceObject, null);
+                object? newPropertyValue = property.GetValue(otherInheritanceObject, null);
                 property.SetValue(this, newPropertyValue, null);
             }
         }

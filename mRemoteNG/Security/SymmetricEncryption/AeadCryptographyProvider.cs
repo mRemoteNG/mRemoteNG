@@ -9,6 +9,7 @@
 using System;
 using System.IO;
 using System.Security;
+using System.Security.Cryptography;
 using System.Text;
 using mRemoteNG.Security.KeyDerivation;
 using Org.BouncyCastle.Crypto;
@@ -22,6 +23,13 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Security.SymmetricEncryption
 {
+    /// <summary>
+    /// Provides authenticated encryption with associated data (AEAD) using
+    /// AES-256-GCM via BouncyCastle. Used to encrypt/decrypt connection passwords
+    /// and the confCons.xml connection file. Key derivation uses PBKDF2 with a
+    /// configurable iteration count (default 600,000 as of v1.80.0) stored in
+    /// the file's <c>KdfIterations</c> attribute for forward/backward compatibility.
+    /// </summary>
     public class AeadCryptographyProvider : ICryptographyProvider
     {
         private readonly IAeadBlockCipher _aeadBlockCipher;
@@ -35,7 +43,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
         //Preconfigured Password Key Derivation Parameters
         protected virtual int SaltBitSize { get; set; } = 128;
-        public virtual int KeyDerivationIterations { get; set; } = 1000;
+        public virtual int KeyDerivationIterations { get; set; } = 600_000;
         protected virtual int MinPasswordLength { get; set; } = 1;
 
 
@@ -49,7 +57,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
             get
             {
                 string cipherEngine = _aeadBlockCipher.AlgorithmName.Split('/')[0];
-                return (BlockCipherEngines)Enum.Parse(typeof(BlockCipherEngines), cipherEngine);
+                return Enum.Parse<BlockCipherEngines>(cipherEngine);
             }
         }
 
@@ -58,7 +66,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
             get
             {
                 string cipherMode = _aeadBlockCipher.AlgorithmName.Split('/')[1];
-                return (BlockCipherModes)Enum.Parse(typeof(BlockCipherModes), cipherMode);
+                return Enum.Parse<BlockCipherModes>(cipherMode);
             }
         }
 
@@ -100,7 +108,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
             return encryptedText;
         }
 
-        private string SimpleEncryptWithPassword(string secretMessage, string password, byte[] nonSecretPayload = null)
+        private string SimpleEncryptWithPassword(string secretMessage, string password, byte[]? nonSecretPayload = null)
         {
             if (string.IsNullOrEmpty(secretMessage))
                 return ""; //throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
@@ -110,7 +118,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
             return Convert.ToBase64String(cipherText);
         }
 
-        private byte[] SimpleEncryptWithPassword(byte[] secretMessage, string password, byte[] nonSecretPayload = null)
+        private byte[] SimpleEncryptWithPassword(byte[] secretMessage, string password, byte[]? nonSecretPayload = null)
         {
             nonSecretPayload ??= ""u8.ToArray();
 
@@ -128,16 +136,22 @@ namespace mRemoteNG.Security.SymmetricEncryption
             //Generate Key
             Pkcs5S2KeyGenerator keyDerivationFunction = new(KeyBitSize, KeyDerivationIterations);
             byte[] key = keyDerivationFunction.DeriveKey(password, salt);
+            try
+            {
+                //Create Full Non Secret Payload
+                byte[] payload = new byte[salt.Length + nonSecretPayload.Length];
+                Array.Copy(nonSecretPayload, payload, nonSecretPayload.Length);
+                Array.Copy(salt, 0, payload, nonSecretPayload.Length, salt.Length);
 
-            //Create Full Non Secret Payload
-            byte[] payload = new byte[salt.Length + nonSecretPayload.Length];
-            Array.Copy(nonSecretPayload, payload, nonSecretPayload.Length);
-            Array.Copy(salt, 0, payload, nonSecretPayload.Length, salt.Length);
-
-            return SimpleEncrypt(secretMessage, key, payload);
+                return SimpleEncrypt(secretMessage, key, payload);
+            }
+            finally
+            {
+                CryptographicOperations.ZeroMemory(key);
+            }
         }
 
-        private byte[] SimpleEncrypt(byte[] secretMessage, byte[] key, byte[] nonSecretPayload = null)
+        private byte[] SimpleEncrypt(byte[] secretMessage, byte[] key, byte[]? nonSecretPayload = null)
         {
             //User Error Checks
             if (key == null || key.Length != KeyBitSize / 8)
@@ -190,7 +204,14 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
             byte[] cipherText = Convert.FromBase64String(encryptedMessage);
             byte[] plainText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString(), nonSecretPayloadLength);
-            return plainText == null ? null : _encoding.GetString(plainText);
+            try
+            {
+                return _encoding.GetString(plainText);
+            }
+            finally
+            {
+                CryptographicOperations.ZeroMemory(plainText);
+            }
         }
 
         private byte[] SimpleDecryptWithPassword(byte[] encryptedMessage, string password, int nonSecretPayloadLength = 0)
@@ -209,8 +230,14 @@ namespace mRemoteNG.Security.SymmetricEncryption
             //Generate Key
             Pkcs5S2KeyGenerator keyDerivationFunction = new(KeyBitSize, KeyDerivationIterations);
             byte[] key = keyDerivationFunction.DeriveKey(password, salt);
-
-            return SimpleDecrypt(encryptedMessage, key, salt.Length + nonSecretPayloadLength);
+            try
+            {
+                return SimpleDecrypt(encryptedMessage, key, salt.Length + nonSecretPayloadLength);
+            }
+            finally
+            {
+                CryptographicOperations.ZeroMemory(key);
+            }
         }
 
         private byte[] SimpleDecrypt(byte[] encryptedMessage, byte[] key, int nonSecretPayloadLength = 0)

@@ -106,7 +106,7 @@ namespace mRemoteNGTests.Tools
             Assert.That(wasCalled, Is.False);
         }
 
-        private void RaiseEvent(INotifyPropertyChanged item)
+        private static void RaiseEvent(INotifyPropertyChanged item)
         {
             item.PropertyChanged += Raise.Event<PropertyChangedEventHandler>(item, new PropertyChangedEventArgs("test"));
         }

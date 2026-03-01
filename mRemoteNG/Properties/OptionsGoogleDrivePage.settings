@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="mRemoteNG.Properties" GeneratedClassName="OptionsGoogleDrivePage">
+  <Profiles />
+  <Settings>
+    <Setting Name="UseGoogleDrive" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GoogleDriveFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mRemoteNG_connections.xml</Value>
+    </Setting>
+    <Setting Name="GoogleDriveFileId" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="GoogleDriveCredentialsPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="cbGoogleDrivePageInOptionMenu" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

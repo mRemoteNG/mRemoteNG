@@ -25,6 +25,7 @@ namespace mRemoteNG.Connection
         [ReadOnly(true), Browsable(false)] public override string Description { get; set; } = string.Empty;
 
         [ReadOnly(true), Browsable(false)]
+#pragma warning disable S4275 // Getters intentionally return constant/computed values, not the base backing field
         public override string Icon
         {
             get => "PuTTY";
@@ -37,6 +38,7 @@ namespace mRemoteNG.Connection
             get => Parent?.Panel ?? string.Empty; // Provide a default value to handle null cases
             set { }
         }
+#pragma warning restore S4275
 
         [ReadOnly(true)] public override string Hostname { get; set; } = string.Empty;
 

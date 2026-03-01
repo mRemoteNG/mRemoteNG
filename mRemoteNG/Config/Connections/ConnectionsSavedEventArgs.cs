@@ -15,9 +15,7 @@ namespace mRemoteNG.Config.Connections
                                          bool usingDatabase,
                                          string connectionFileName)
         {
-            if (modelThatWasSaved == null)
-                throw new ArgumentNullException(nameof(modelThatWasSaved));
-
+            ArgumentNullException.ThrowIfNull(modelThatWasSaved);
             ModelThatWasSaved = modelThatWasSaved;
             PreviouslyUsingDatabase = previouslyUsingDatabase;
             UsingDatabase = usingDatabase;

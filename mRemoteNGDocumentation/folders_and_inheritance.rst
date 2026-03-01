@@ -58,6 +58,40 @@ everything else will be inherited from the parent folder.
 Of course you can also only let some of the properties be inherited.
 Just play around with this a bit and you'll get the hang of it.
 
+Default Connection Properties & Inheritance
+===========================================
+
+In addition to inheriting properties from folders, mRemoteNG allows you to define a **Default Connection** template.
+This template determines the initial property values and inheritance settings for every **new** connection or folder you create.
+
+This is particularly useful if you want all your new connections to start with:
+- A specific Protocol (e.g., SSH instead of RDP)
+- Specific Inheritance settings (e.g., always inherit Username and Password from the parent folder)
+
+Accessing Default Properties
+----------------------------
+You can access and modify the Default Connection settings using the buttons in the Connection Panel toolbar:
+
+1.  **Default Connection Properties** (Red icon): Sets the default values for properties (like Protocol, Port, etc.).
+2.  **Default Inheritance** (Green icon): Sets the default inheritance state (Yes/No) for each property.
+
+.. figure:: /images/default_properties.png
+   :alt: Default Connection Properties Buttons
+
+How it works
+------------
+When you create a new connection:
+1.  mRemoteNG copies the values from the **Default Connection Properties** to the new connection.
+2.  mRemoteNG copies the inheritance settings from the **Default Inheritance** to the new connection.
+
+.. note::
+   These settings are only applied at the moment of creation. Changing the Default Connection properties later **will not** update existing connections. To update existing connections, you should use Folder Inheritance or bulk edit them.
+
+Difference from Folder Inheritance
+----------------------------------
+- **Default Connection**: Acts as a "seed" or template for *new* items. Changes do not propagate to existing items.
+- **Folder Inheritance**: Acts as a dynamic hierarchy. If a connection is set to inherit a property, changing that property on the parent folder *will* immediately affect the connection.
+
 Color Property
 ==============
 You can set a color for each connection or folder in the connections list.

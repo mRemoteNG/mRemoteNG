@@ -103,10 +103,10 @@ namespace mRemoteNG.Tools
             if (!otherHasAnything)
                 return 1;
             // neither are empty, compare wrapped objects directly
-            if (_optional[0] is IComparable<T>)
-                return ((IComparable<T>)_optional[0]).CompareTo(other.First());
+            if (_optional[0] is IComparable<T> comparable)
+                return comparable.CompareTo(other.First());
 
-            throw new ArgumentException($"Cannot compare objects. Optional type {typeof(T).FullName} is not comparable to itself");
+            throw new ArgumentException($"Cannot compare objects. Optional type {typeof(T).FullName} is not comparable to itself", nameof(other));
         }
 
         public override bool Equals(object? obj)
@@ -125,8 +125,8 @@ namespace mRemoteNG.Tools
 
         private bool Equals(Optional<T> other)
         {
-            T otherObj = other.FirstOrDefault();
-            T thisObj = _optional.FirstOrDefault();
+            T? otherObj = other.FirstOrDefault();
+            T? thisObj = _optional.FirstOrDefault();
             if (thisObj == null && otherObj == null)
                 return true;
             if (thisObj == null)

@@ -4,16 +4,23 @@ using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 using mRemoteNG.Resources.Language;
 using System;
+using System.Globalization;
 using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
     [SupportedOSPlatform("windows")]
-    public class SqlDatabaseVersionVerifier(IDatabaseConnector databaseConnector)
+    public class SqlDatabaseVersionVerifier : ISqlDatabaseVersionVerifier
     {
-        private readonly Version _currentSupportedVersion = new(3, 0);
+        private readonly Version _currentSupportedVersion = new(3, 2);
 
-        private readonly IDatabaseConnector _databaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
+        private readonly IDatabaseConnector _databaseConnector;
+
+        public SqlDatabaseVersionVerifier(IDatabaseConnector databaseConnector)
+        {
+            ArgumentNullException.ThrowIfNull(databaseConnector);
+            _databaseConnector = databaseConnector;
+        }
 
         public bool VerifyDatabaseVersion(Version dbVersion)
         {
@@ -36,6 +43,8 @@ namespace mRemoteNG.Config.Serializers.Versioning
                     new SqlVersion27To28Upgrader(_databaseConnector),
                     new SqlVersion28To29Upgrader(_databaseConnector),
                     new SqlVersion29To30Upgrader(_databaseConnector),
+                    new SqlVersion30To31Upgrader(_databaseConnector),
+                    new SqlVersion31To32Upgrader(_databaseConnector),
                 };
 
                 foreach (IVersionUpgrader upgrader in dbUpgraders)
@@ -52,11 +61,11 @@ namespace mRemoteNG.Config.Serializers.Versioning
                     return true;
                 }
 
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.ErrorBadDatabaseVersion, databaseVersion, GeneralAppInfo.ProductName));
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(CultureInfo.InvariantCulture, Language.ErrorBadDatabaseVersion, databaseVersion, GeneralAppInfo.ProductName));
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.ErrorVerifyDatabaseVersionFailed, ex.Message));
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(CultureInfo.InvariantCulture, Language.ErrorVerifyDatabaseVersionFailed, ex.Message));
             }
 
             return false;

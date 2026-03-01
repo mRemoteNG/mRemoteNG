@@ -7,6 +7,7 @@ using System.Text;
 
 #pragma warning disable 649
 #pragma warning disable 169
+#pragma warning disable CA1707 // P/Invoke and Windows API constants use SCREAMING_SNAKE_CASE by convention
 
 namespace mRemoteNG.App
 {
@@ -24,8 +25,8 @@ namespace mRemoteNG.App
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr FindWindowEx(IntPtr parentHandle,
                                                    IntPtr childAfter,
-                                                   string lclassName,
-                                                   string windowTitle);
+                                                   string? lclassName,
+                                                   string? windowTitle);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr GetForegroundWindow();
@@ -70,6 +71,9 @@ namespace mRemoteNG.App
                                                   [Out] StringBuilder wParam,
                                                   [In] IntPtr lParam);
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        internal static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, ref COPYDATASTRUCT lParam);
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
 
@@ -78,6 +82,12 @@ namespace mRemoteNG.App
             IntPtr hWndRemove,  // handle to window to remove
             IntPtr hWndNewNext  // handle to next window
         );
+
+        [DllImport("user32.dll")]
+        internal static extern IntPtr GetFocus();
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern IntPtr SetFocus(IntPtr hWnd);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool SetForegroundWindow(IntPtr hWnd);
@@ -98,6 +108,9 @@ namespace mRemoteNG.App
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int ShowWindow(IntPtr hWnd, int nCmdShow);
 
@@ -105,7 +118,13 @@ namespace mRemoteNG.App
         internal static extern IntPtr WindowFromPoint(Point point);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern IntPtr GetParent(IntPtr hWnd);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool GetLastInputInfo(ref LASTINPUTINFO plii);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int GetDlgCtrlID(IntPtr hwndCtl);
@@ -116,11 +135,67 @@ namespace mRemoteNG.App
         [DllImport("user32", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
         internal static extern bool SetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
 
-        [DllImport("user32.dll", SetLastError = true)]
-        internal static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
-
         [DllImport("kernel32", SetLastError = true)]
         internal static extern bool CloseHandle(IntPtr handle);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool IsWindowVisible(IntPtr hWnd);
+
+        internal delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool AddClipboardFormatListener(IntPtr hwnd);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool RemoveClipboardFormatListener(IntPtr hwnd);
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        internal static extern short VkKeyScan(char ch);
+
+        [DllImport("user32.dll")]
+        internal static extern int MapVirtualKey(int uCode, int uMapType);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern IntPtr GetKeyboardLayout(uint idThread);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern IntPtr ActivateKeyboardLayout(IntPtr hkl, uint Flags);
+
+        /// <summary>
+        /// Synthesizes keyboard input using the modern SendInput API.
+        /// Replaces the legacy keybd_event to reduce AV heuristic false positives.
+        /// Used to release stuck modifier keys after RDP sessions (issue #354).
+        /// </summary>
+        [DllImport("user32.dll", SetLastError = true)]
+        [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+        internal static extern uint SendInput(uint nInputs, INPUT[] pInputs, int cbSize);
+
+        /// <summary>
+        /// Determines whether a key is up or down at the time the function is called
+        /// by querying the hardware key state. Unlike GetKeyState, this reflects the
+        /// physical state regardless of which thread has focus.
+        /// If the high-order bit (0x8000) is set, the key is currently pressed.
+        /// </summary>
+        [DllImport("user32.dll")]
+        internal static extern short GetAsyncKeyState(int vKey);
 
         #endregion
 
@@ -136,6 +211,14 @@ namespace mRemoteNG.App
             public int cx;
             public int cy;
             public int flags;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct COPYDATASTRUCT
+        {
+            public IntPtr dwData;
+            public int cbData;
+            public IntPtr lpData;
         }
 
         internal struct WINDOWPLACEMENT
@@ -162,9 +245,54 @@ namespace mRemoteNG.App
             public long bottom;
         }
 
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct LASTINPUTINFO
+        {
+            public uint cbSize;
+            public uint dwTime;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct INPUT
+        {
+            internal uint type;
+            internal INPUTUNION u;
+            internal const uint INPUT_KEYBOARD = 1;
+        }
+
+        [StructLayout(LayoutKind.Explicit)]
+        internal struct INPUTUNION
+        {
+            [FieldOffset(0)] internal KEYBDINPUT ki;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct KEYBDINPUT
+        {
+            internal ushort wVk;
+            internal ushort wScan;
+            internal uint dwFlags;
+            internal uint time;
+            internal UIntPtr dwExtraInfo;
+            internal const uint KEYEVENTF_KEYUP = 0x0002;
+        }
+
         #endregion
 
         #region Helpers
+
+        public static int GetIdleMilliseconds()
+        {
+            LASTINPUTINFO lastInputInfo = new()
+            {
+                cbSize = (uint)Marshal.SizeOf<LASTINPUTINFO>()
+            };
+
+            if (!GetLastInputInfo(ref lastInputInfo))
+                return 0;
+
+            return unchecked((int)(Environment.TickCount - lastInputInfo.dwTime));
+        }
 
         public static int MAKELONG(int wLow, int wHigh)
         {
@@ -205,6 +333,7 @@ namespace mRemoteNG.App
         #region GetWindowLong
 
         public const int GWL_STYLE = (-16);
+        public const int GWL_EXSTYLE = (-20);
 
         #endregion
 
@@ -407,9 +536,14 @@ namespace mRemoteNG.App
         public const int WM_MOUSEACTIVATE = 0x21;
 
         /// <summary>
-        /// Sent to a window when the size or position of the window is about to change. An application can use this message to override the window's default maximized size and position, or its default minimum or maximum tracking size.
+        /// Sent when the size or position of the window is about to change. An application can use this message to override the window's default maximized size and position, or its default minimum or maximum tracking size.
         /// </summary>
         public const int WM_GETMINMAXINFO = 0x24;
+
+        /// <summary>
+        /// An application sends the WM_COPYDATA message to pass data to another application.
+        /// </summary>
+        public const int WM_COPYDATA = 0x4A;
 
         /// <summary>
         /// Sent to a window whose size, position, or place in the Z order is about to change as a result of a call to the SetWindowPos function or another window-management function.
@@ -446,13 +580,24 @@ namespace mRemoteNG.App
         /// </summary>
         public const int WM_SYSCOMMAND = 0x112;
 
+        /// <summary>Restores the window to its normal position and size (WM_SYSCOMMAND wParam, mask with 0xFFF0).</summary>
+        public const int SC_RESTORE = 0xF120;
+
+        /// <summary>Maximizes the window (WM_SYSCOMMAND wParam, mask with 0xFFF0).</summary>
+        public const int SC_MAXIMIZE = 0xF030;
+
         /// <summary>
         /// Posted to a window when the cursor moves. If the mouse is not captured, the message is posted to the window that contains the cursor. Otherwise, the message is posted to the window that has captured the mouse.
         /// </summary>
         public const int WM_MOUSEMOVE = 0x200;
 
         /// <summary>
-        /// Posted when the user presses the left mouse button while the cursor is in the client area of a window. If the mouse is not captured, the message is posted to the window beneath the cursor. Otherwise, the message is posted to the window that has captured the mouse.
+        /// Sent to the focus window when the mouse wheel is rotated. The DefWindowProc function propagates the message to the window's parent. There should be no internal forwarding of the message, since DefWindowProc propagates it up the parent chain until it finds a window that processes it.
+        /// </summary>
+        public const int WM_MOUSEWHEEL = 0x20A;
+
+        /// <summary>
+        /// Sent when the user presses the left mouse button while the cursor is in the client area of a window. If the mouse is not captured, the message is posted to the window beneath the cursor. Otherwise, the message is posted to the window that has captured the mouse.
         /// </summary>
         public const int WM_LBUTTONDOWN = 0x201;
 
@@ -516,6 +661,18 @@ namespace mRemoteNG.App
         /// </summary>
         public const int WM_CHANGECBCHAIN = 0x30D;
 
+        public const int WM_CLIPBOARDUPDATE = 0x031D;
+
+        /// <summary>
+        /// Posted when the user presses a hot key registered by the RegisterHotKey function.
+        /// </summary>
+        public const int WM_HOTKEY = 0x312;
+
+        /// <summary>
+        /// Sent when the effective dots per inch (dpi) for a window has changed. The DPI is the scale factor for a window.
+        /// </summary>
+        public const int WM_DPICHANGED = 0x02E0;
+
         #endregion
 
         #region Window Styles
@@ -528,6 +685,8 @@ namespace mRemoteNG.App
         public const int WS_VISIBLE = 0x10000000;
         public const int WS_CHILD = 0x40000000;
         public const int WS_EX_MDICHILD = 0x40;
+        public const int WS_EX_TOOLWINDOW = 0x80;
+        public const int WS_EX_APPWINDOW = 0x40000;
 
         #endregion
 
@@ -535,6 +694,11 @@ namespace mRemoteNG.App
 
         public const int VK_CONTROL = 0x11;
         public const int VK_C = 0x67;
+        public const uint VK_HOME = 0x24;
+
+        public const uint MOD_ALT = 0x0001;
+        public const uint MOD_CONTROL = 0x0002;
+        public const uint MOD_NOREPEAT = 0x4000;
 
         #endregion
 

@@ -24,14 +24,14 @@ namespace mRemoteNG.App.Update
     public class AppUpdater
     {
         private const int _bufferLength = 8192;
-        private WebProxy _webProxy;
-        private HttpClient _httpClient;
-        private CancellationTokenSource _changeLogCancelToken;
-        private CancellationTokenSource _getUpdateInfoCancelToken;
+        private WebProxy? _webProxy;
+        private HttpClient? _httpClient;
+        private CancellationTokenSource? _changeLogCancelToken;
+        private CancellationTokenSource? _getUpdateInfoCancelToken;
 
         #region Public Properties
 
-        public UpdateInfo CurrentUpdateInfo { get; private set; }
+        public UpdateInfo? CurrentUpdateInfo { get; private set; }
 
         public bool IsGetUpdateInfoRunning
         {
@@ -100,7 +100,7 @@ namespace mRemoteNG.App.Update
         {
             if (IsGetUpdateInfoRunning)
             {
-                _getUpdateInfoCancelToken.Cancel();
+                _getUpdateInfoCancelToken!.Cancel();
                 _getUpdateInfoCancelToken.Dispose();
                 _getUpdateInfoCancelToken = null;
 
@@ -132,6 +132,8 @@ namespace mRemoteNG.App.Update
             try
             {
                 _getUpdateInfoCancelToken = new CancellationTokenSource();
+                if (_httpClient == null)
+                    throw new InvalidOperationException("HttpClient has not been initialized.");
                 using HttpResponseMessage response = await _httpClient.GetAsync(CurrentUpdateInfo.DownloadAddress, HttpCompletionOption.ResponseHeadersRead, _getUpdateInfoCancelToken.Token);
                 byte[] buffer = new byte[_bufferLength];
                 long totalBytes = response.Content.Headers.ContentLength ?? 0;
@@ -165,7 +167,7 @@ namespace mRemoteNG.App.Update
                 Authenticode updateAuthenticode = new(CurrentUpdateInfo.UpdateFilePath)
                     {
                         RequireThumbprintMatch = true,
-                        ThumbprintToMatch = CurrentUpdateInfo.CertificateThumbprint
+                        ThumbprintToMatch = CurrentUpdateInfo.CertificateThumbprint ?? string.Empty
                     };
 
                     if (updateAuthenticode.Verify() != Authenticode.StatusValue.Verified)
@@ -182,9 +184,9 @@ namespace mRemoteNG.App.Update
                 using SHA512 checksum = SHA512.Create();
                 await using FileStream stream = File.OpenRead(CurrentUpdateInfo.UpdateFilePath);
                 byte[] hash = await checksum.ComputeHashAsync(stream);
-                string hashString = BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
-                if (!hashString.Equals(CurrentUpdateInfo.Checksum))
-                    throw new Exception("SHA512 Hashes didn't match!");
+                string hashString = Convert.ToHexString(hash);
+                if (!hashString.Equals(CurrentUpdateInfo.Checksum, StringComparison.Ordinal))
+                    throw new InvalidOperationException("SHA512 Hashes didn't match!");
             } finally{
                 _getUpdateInfoCancelToken?.Dispose();
                 _getUpdateInfoCancelToken = null;
@@ -208,6 +210,11 @@ namespace mRemoteNG.App.Update
                 httpClientHandler.UseProxy = true;
                 httpClientHandler.Proxy = _webProxy;
             }
+            else
+            {
+                // Bypass Windows system proxy when no custom proxy is configured
+                httpClientHandler.UseProxy = false;
+            }
             _httpClient = new HttpClient(httpClientHandler);
             _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(GeneralAppInfo.UserAgent);
         }
@@ -216,7 +223,7 @@ namespace mRemoteNG.App.Update
         {
             if (IsGetUpdateInfoRunning)
             {
-                _getUpdateInfoCancelToken.Cancel();
+                _getUpdateInfoCancelToken!.Cancel();
                 _getUpdateInfoCancelToken.Dispose();
                 _getUpdateInfoCancelToken = null;
             }
@@ -224,8 +231,13 @@ namespace mRemoteNG.App.Update
             try
             {
                 _getUpdateInfoCancelToken = new CancellationTokenSource();
-                string updateInfo = await _httpClient.GetStringAsync(UpdateChannelInfo.GetUpdateChannelInfo(), _getUpdateInfoCancelToken.Token);
-                CurrentUpdateInfo = UpdateInfo.FromString(updateInfo);
+                if (_httpClient == null)
+                    throw new InvalidOperationException("HttpClient has not been initialized.");
+                Uri updateUri = UpdateChannelInfo.GetUpdateChannelInfo();
+                string updateInfo = await _httpClient.GetStringAsync(updateUri, _getUpdateInfoCancelToken.Token);
+                CurrentUpdateInfo = UpdateChannelInfo.IsGitHubUri(updateUri)
+                    ? UpdateInfo.FromGitHubJson(updateInfo)
+                    : UpdateInfo.FromString(updateInfo);
                 Properties.OptionsUpdatesPage.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
 
                 if (!Properties.OptionsUpdatesPage.Default.UpdatePending)
@@ -244,7 +256,7 @@ namespace mRemoteNG.App.Update
         {
             if (IsGetChangeLogRunning)
             {
-                _changeLogCancelToken.Cancel();
+                _changeLogCancelToken!.Cancel();
                 _changeLogCancelToken.Dispose();
                 _changeLogCancelToken = null;
             }
@@ -252,6 +264,10 @@ namespace mRemoteNG.App.Update
             try
             {
                 _changeLogCancelToken = new CancellationTokenSource();
+                if (_httpClient == null)
+                    throw new InvalidOperationException("HttpClient has not been initialized.");
+                if (CurrentUpdateInfo == null)
+                    throw new InvalidOperationException("CurrentUpdateInfo is not available. GetUpdateInfoAsync() must be called first.");
                 return await _httpClient.GetStringAsync(CurrentUpdateInfo.ChangeLogAddress, _changeLogCancelToken.Token);
             }
             finally

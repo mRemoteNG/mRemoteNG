@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data;
+using System.Linq;
 using System.Security;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Sql;
 using mRemoteNG.Connection;
@@ -121,10 +122,22 @@ public class DataTableSerializerTests
         Assert.That(dataTable.Rows.Count, Is.EqualTo(1));
     }
 
-
-    private ConnectionTreeModel CreateConnectionTreeModel()
+    [Test]
+    public void MissingColumnsAreAddedWhenSourceSqlSchemaIsOutdated()
     {
-        var builder = new ConnectionTreeModelBuilder();
-        return builder.Build();
+        var sourceDataTable = new DataTable("tblCons");
+        sourceDataTable.Columns.Add("ConstantID", typeof(string));
+        _dataTableSerializer.SetSourceDataTable(sourceDataTable);
+
+        Assert.DoesNotThrow(() => _dataTableSerializer.Serialize(new ConnectionInfo("existing-id")));
+
+        Assert.That(sourceDataTable.Columns.Contains("DisableCursorBlinking"), Is.True);
+        Assert.That(sourceDataTable.Columns.Contains("InheritDisableCursorBlinking"), Is.True);
+    }
+
+
+    private static ConnectionTreeModel CreateConnectionTreeModel()
+    {
+        return ConnectionTreeModelBuilder.Build();
     }
 }

@@ -17,6 +17,8 @@ using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 
 
+using mRemoteNG.Config.DatabaseConnectors; // Added for DatabaseProfileManager
+
 namespace mRemoteNG.App
 {
     [SupportedOSPlatform("windows")]
@@ -25,9 +27,9 @@ namespace mRemoteNG.App
         private RegistryLoader _RegistryLoader;
         private AppUpdater _appUpdate;
         private readonly ConnectionIconLoader _connectionIconLoader;
-        private readonly FrmMain _frmMain = FrmMain.Default;
-
         public static Startup Instance { get; } = new Startup();
+
+        public string[]? CommandLineArgs { get; set; }
 
         private Startup()
         {
@@ -46,22 +48,56 @@ namespace mRemoteNG.App
             IeBrowserEmulation.Register();
             _connectionIconLoader.GetConnectionIcons();
             DefaultConnectionInfo.Instance.LoadFrom(Settings.Default, a => "ConDefault" + a);
-            DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, a => "InhDefault" + a);
+            DefaultConnectionInheritance.LoadFrom(Settings.Default, a => "InhDefault" + a);
+            PluginManager.Instance.LoadPlugins();
         }
 
-        private static void ParseCommandLineArgs(MessageCollector messageCollector)
+        private void ParseCommandLineArgs(MessageCollector messageCollector)
         {
             StartupArgumentsInterpreter interpreter = new(messageCollector);
-            interpreter.ParseArguments(Environment.GetCommandLineArgs());
+            interpreter.ParseArguments(CommandLineArgs ?? Environment.GetCommandLineArgs());
         }
 
-        public void CreateConnectionsProvider(MessageCollector messageCollector)
+        public static void CreateConnectionsProvider(MessageCollector messageCollector)
         {
-            messageCollector.AddMessage(MessageClass.DebugMsg, "Determining if we need a database syncronizer");
-            if (!Properties.OptionsDBsPage.Default.UseSQLServer) return;
-            messageCollector.AddMessage(MessageClass.DebugMsg, "Creating database syncronizer");
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer.Enable();
+            messageCollector.AddMessage(MessageClass.DebugMsg, "Determining if we need a connections syncronizer");
+
+            if (Properties.OptionsDBsPage.Default.UseSQLServer)
+            {
+                // Check if profile picker should be shown
+                if (Properties.OptionsDBsPage.Default.ShowDatabasePickerOnStartup)
+                {
+                    using (var picker = new FrmDatabasePicker())
+                    {
+                        if (picker.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        {
+                            if (picker.SelectedProfile != null)
+                            {
+                                DatabaseProfileManager.ApplyProfileToSettings(picker.SelectedProfile);
+                            }
+                        }
+                        else
+                        {
+                            // User cancelled, do not enable SQL sync
+                            return;
+                        }
+                    }
+                }
+
+                messageCollector.AddMessage(MessageClass.DebugMsg, "Creating database syncronizer");
+                Runtime.ConnectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+                Runtime.ConnectionsService.RemoteConnectionsSyncronizer.Enable();
+            }
+            else if (Properties.OptionsConnectionsPage.Default.WatchConnectionFile)
+            {
+                messageCollector.AddMessage(MessageClass.DebugMsg, "Creating file syncronizer");
+                string startupFile = ConnectionsService.GetStartupConnectionFileName();
+                if (!string.IsNullOrEmpty(startupFile))
+                {
+                    Runtime.ConnectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new FileConnectionsUpdateChecker(startupFile));
+                    Runtime.ConnectionsService.RemoteConnectionsSyncronizer.Enable();
+                }
+            }
         }
 
         public async Task CheckForUpdate()

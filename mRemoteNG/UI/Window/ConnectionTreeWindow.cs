@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
+using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Properties;
@@ -14,6 +16,8 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.ClickHandlers;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls.ConnectionTree;
+using mRemoteNG.UI.Panels;
+using mRemoteNG.UI.Tabs;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
@@ -26,12 +30,15 @@ namespace mRemoteNG.UI.Window
     [SupportedOSPlatform("windows")]
     public partial class ConnectionTreeWindow
     {
-        private ThemeManager _themeManager;
+        private ThemeManager? _themeManager;
         private bool _sortedAz = true;
+        private bool _suppressSelectionPreview;
+        private ToolStripLabel? _syncStatusLabel;
+        private RemoteConnectionsSyncronizer? _subscribedSyncronizer;
 
         public ConnectionInfo SelectedNode => ConnectionTree.SelectedNode;
 
-        public ConnectionTree ConnectionTree { get; set; }
+        public ConnectionTree ConnectionTree { get; set; } = null!;
 
         public ConnectionTreeWindow() : this(new DockContent())
         {
@@ -43,9 +50,11 @@ namespace mRemoteNG.UI.Window
             DockPnl = panel;
             Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.ASPWebSite_16x);
             InitializeComponent();
+            InitializeSyncStatusLabel();
             SetMenuEventHandlers();
             SetConnectionTreeEventHandlers();
             Settings.Default.PropertyChanged += OnAppSettingsChanged;
+            OptionsConnectionsPage.Default.PropertyChanged += OnConnectionsPageSettingChanged;
             ApplyLanguage();
         }
 
@@ -59,6 +68,78 @@ namespace mRemoteNG.UI.Window
 
             PlaceSearchBar(Settings.Default.PlaceSearchBarAboveConnectionTree);
             SetConnectionTreeClickHandlers();
+        }
+
+        private void OnConnectionsPageSettingChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(OptionsConnectionsPage.Default.WatchConnectionFile))
+                UpdateSyncStatusLabel();
+        }
+
+        private void InitializeSyncStatusLabel()
+        {
+            _syncStatusLabel = new ToolStripLabel
+            {
+                Alignment = ToolStripItemAlignment.Right,
+                Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point),
+                ForeColor = SystemColors.GrayText,
+                Name = "lblSyncStatus",
+                Text = "",
+                Visible = false
+            };
+            msMain.Items.Add(_syncStatusLabel);
+        }
+
+        private void SubscribeToSyncronizer()
+        {
+            RemoteConnectionsSyncronizer? current = Runtime.ConnectionsService.RemoteConnectionsSyncronizer;
+            if (current == _subscribedSyncronizer) return;
+
+            if (_subscribedSyncronizer != null)
+                _subscribedSyncronizer.ConnectionsReloadedExternally -= OnConnectionsReloadedExternally;
+
+            _subscribedSyncronizer = current;
+
+            if (_subscribedSyncronizer != null)
+                _subscribedSyncronizer.ConnectionsReloadedExternally += OnConnectionsReloadedExternally;
+        }
+
+        private void OnConnectionsReloadedExternally(object? sender, EventArgs e)
+        {
+            UpdateSyncStatusLabel();
+        }
+
+        private void UpdateSyncStatusLabel()
+        {
+            if (_syncStatusLabel == null) return;
+
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(UpdateSyncStatusLabel));
+                return;
+            }
+
+            RemoteConnectionsSyncronizer? sync = Runtime.ConnectionsService.RemoteConnectionsSyncronizer;
+            if (sync != null)
+            {
+                if (sync.LastExternalSync.HasValue)
+                {
+                    string time = sync.LastExternalSync.Value.ToLocalTime().ToString("HH:mm:ss", CultureInfo.InvariantCulture);
+                    _syncStatusLabel.Text = $"Synced {time}";
+                    _syncStatusLabel.ToolTipText = $"Connection file sync is active. Last external update: {time}";
+                }
+                else
+                {
+                    _syncStatusLabel.Text = "Sync on";
+                    _syncStatusLabel.ToolTipText = "Connection file sync is active. Watching for external changes.";
+                }
+                _syncStatusLabel.ForeColor = Color.Green;
+                _syncStatusLabel.Visible = true;
+            }
+            else
+            {
+                _syncStatusLabel.Visible = false;
+            }
         }
 
         private void PlaceSearchBar(bool placeSearchBarAboveConnectionTree)
@@ -80,6 +161,9 @@ namespace mRemoteNG.UI.Window
             txtSearch.MinimumSize = new Size(0, 14);
             txtSearch.Size = new Size(txtSearch.Size.Width, 14);
             txtSearch.Multiline = false;
+
+            SubscribeToSyncronizer();
+            UpdateSyncStatusLabel();
         }
 
         private void ApplyLanguage()
@@ -99,7 +183,7 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if (!_themeManager.ThemingActive)
+            if (_themeManager == null || !_themeManager.ThemingActive)
                 return;
 
             ThemeInfo activeTheme = _themeManager.ActiveTheme;
@@ -110,13 +194,18 @@ namespace mRemoteNG.UI.Window
             if (!_themeManager.ActiveAndExtended)
                 return;
 
+            var extendedPalette = activeTheme.ExtendedPalette;
+            if (extendedPalette == null)
+                return;
+
             // connection search area
-            searchBoxLayoutPanel.BackColor = activeTheme.ExtendedPalette.getColor("Dialog_Background");
-            searchBoxLayoutPanel.ForeColor = activeTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            txtSearch.BackColor = activeTheme.ExtendedPalette.getColor("TextBox_Background");
-            txtSearch.ForeColor = activeTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            searchBoxLayoutPanel.BackColor = extendedPalette.getColor("Dialog_Background");
+            searchBoxLayoutPanel.ForeColor = extendedPalette.getColor("Dialog_Foreground");
+            txtSearch.BackColor = extendedPalette.getColor("TextBox_Background");
+            txtSearch.ForeColor = extendedPalette.getColor("TextBox_Foreground");
             //Picturebox needs to be manually themed
-            pbSearch.BackColor = activeTheme.ExtendedPalette.getColor("TreeView_Background");
+            pbSearch.BackColor = extendedPalette.getColor("TreeView_Background");
+            pbClearSearch.BackColor = extendedPalette.getColor("TreeView_Background");
         }
 
         #endregion
@@ -125,11 +214,16 @@ namespace mRemoteNG.UI.Window
 
         private void SetConnectionTreeEventHandlers()
         {
+            ConnectionTree.MultiSelect = true;
             ConnectionTree.NodeDeletionConfirmer =
                 new SelectedConnectionDeletionConfirmer(prompt => CTaskDialog.MessageBox(
-                    Application.ProductName, prompt, "", ETaskDialogButtons.YesNo, ESysIcons.Question));
+                    Application.ProductName ?? "", prompt, "", ETaskDialogButtons.YesNo, ESysIcons.Question));
             ConnectionTree.KeyDown += TvConnections_KeyDown;
             ConnectionTree.KeyPress += TvConnections_KeyPress;
+            // Preview-on-select disabled: it creates phantom tabs on every tree click,
+            // stealing focus from the property grid and confusing navigation.
+            // Connections open via double-click (standard behavior).
+            // ConnectionTree.SelectionChanged += OnTreeSelectionChangedShowPreview;
             SetTreePostSetupActions();
             SetConnectionTreeClickHandlers();
             Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
@@ -145,6 +239,8 @@ namespace mRemoteNG.UI.Window
 
             if (Properties.OptionsStartupExitPage.Default.OpenConsFromLastSession && !Properties.OptionsAdvancedPage.Default.NoReconnect)
                 actions.Add(new PreviousSessionOpener(Runtime.ConnectionInitiator));
+
+            actions.Add(new CommandLineConnectionOpener(Runtime.ConnectionInitiator));
 
             ConnectionTree.PostSetupActions = actions;
         }
@@ -165,8 +261,63 @@ namespace mRemoteNG.UI.Window
             if (Settings.Default.SingleClickSwitchesToOpenConnection)
                 singleClickHandlers.Add(new SwitchToConnectionClickHandler(Runtime.ConnectionInitiator));
 
+            // Middle-click always opens connection (standard UX: middle-click = open in new tab)
+            List<ITreeNodeClickHandler<ConnectionInfo>> middleClickHandlers = new()
+            {
+                new OpenConnectionClickHandler(Runtime.ConnectionInitiator)
+            };
+
             ConnectionTree.SingleClickHandler = new TreeNodeCompositeClickHandler { ClickHandlers = singleClickHandlers };
             ConnectionTree.DoubleClickHandler = new TreeNodeCompositeClickHandler { ClickHandlers = doubleClickHandlers };
+            ConnectionTree.MiddleClickHandler = new TreeNodeCompositeClickHandler { ClickHandlers = middleClickHandlers };
+        }
+
+        private void OnTreeSelectionChangedShowPreview(object sender, EventArgs e)
+        {
+            if (_suppressSelectionPreview)
+            {
+                _suppressSelectionPreview = false;
+                return;
+            }
+
+            try
+            {
+                ConnectionInfo? selected = ConnectionTree.SelectedNode;
+                if (selected == null) return;
+
+                TreeNodeType nodeType = selected.GetTreeNodeType();
+                if (nodeType != TreeNodeType.Connection && nodeType != TreeNodeType.PuttySession)
+                    return;
+
+                // If the connection has open sessions, switch to its tab (#1921)
+                if (selected.OpenConnections.Count > 0)
+                {
+                    Runtime.ConnectionInitiator.SwitchToOpenConnection(selected);
+                    return;
+                }
+
+                // Already showing a tab for this connection somewhere — just focus it
+                if (Runtime.ConnectionInitiator.SwitchToOpenConnection(selected))
+                    return;
+
+                // Determine target panel
+                string panelName = !string.IsNullOrEmpty(selected.Panel) ? selected.Panel : "New Panel";
+
+                ConnectionWindow? connectionForm = Runtime.WindowList.FromString(panelName) as ConnectionWindow;
+                if (connectionForm == null)
+                {
+                    connectionForm = PanelAdder.AddPanel(panelName, showImmediately: true);
+                    if (connectionForm == null) return;
+                }
+
+                ConnectionTab? tab = connectionForm.GetOrAddConnectionTab(selected, switchToConnection: true);
+                tab?.ShowClosedState();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                    "OnTreeSelectionChangedShowPreview (UI.Window.ConnectionTreeWindow) failed", ex);
+            }
         }
 
         private void ConnectionsServiceOnConnectionsLoaded(object o, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
@@ -177,8 +328,28 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
+            var model = connectionsLoadedEventArgs.NewConnectionTreeModel;
+            if (model != null)
+            {
+                var smartRoot = new mRemoteNG.Tree.Smart.SmartGroupRoot();
+
+                var connected = new mRemoteNG.Tree.Smart.ConnectedGroupNode();
+                smartRoot.AddChild(connected);
+
+                var recent = new mRemoteNG.Tree.Smart.RecentGroupNode();
+                smartRoot.AddChild(recent);
+
+                model.AddRootNode(smartRoot);
+
+                connected.Initialize();
+                recent.Initialize();
+            }
+
             ConnectionTree.ConnectionTreeModel = connectionsLoadedEventArgs.NewConnectionTreeModel;
             ConnectionTree.SelectedObject = connectionsLoadedEventArgs.NewConnectionTreeModel.RootNodes.FirstOrDefault();
+
+            SubscribeToSyncronizer();
+            UpdateSyncStatusLabel();
         }
 
         #endregion
@@ -187,7 +358,7 @@ namespace mRemoteNG.UI.Window
 
         private void SetMenuEventHandlers()
         {
-            mMenViewExpandAllFolders.Click += (sender, args) => ConnectionTree.ExpandAll();
+            mMenViewExpandAllFolders.Click += (sender, args) => ConnectionTree.UserExpandAll();
             mMenViewCollapseAllFolders.Click += (sender, args) =>
             {
                 ConnectionTree.CollapseAll();
@@ -211,12 +382,14 @@ namespace mRemoteNG.UI.Window
             mMenFavorites.Click += (sender, args) =>
             {
                 mMenFavorites.DropDownItems.Clear();
-                List<ContainerInfo> rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
+                var connectionTreeModel = Runtime.ConnectionsService.ConnectionTreeModel;
+                if (connectionTreeModel == null) return;
+                List<ContainerInfo> rootNodes = connectionTreeModel.RootNodes;
                 List<ToolStripMenuItem> favoritesList = new();
 
                 foreach (ContainerInfo node in rootNodes)
                 {
-                    foreach (ConnectionInfo containerInfo in Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveFavoriteChildList(node))
+                    foreach (ConnectionInfo containerInfo in ConnectionTreeModel.GetRecursiveFavoriteChildList(node))
                     {
                         ToolStripMenuItem favoriteMenuItem = new()
                         {
@@ -237,7 +410,8 @@ namespace mRemoteNG.UI.Window
         private void FavoriteMenuItem_MouseUp(object sender, MouseEventArgs e)
         {
             if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
-            Runtime.ConnectionInitiator.OpenConnection((ConnectionInfo)((ToolStripMenuItem)sender).Tag);
+            if (((ToolStripMenuItem)sender).Tag is ConnectionInfo connectionInfo)
+                Runtime.ConnectionInitiator.OpenConnection(connectionInfo);
         }
 
         #endregion
@@ -256,6 +430,18 @@ namespace mRemoteNG.UI.Window
 
         #endregion
 
+        /// <summary>
+        /// Applies a live filter to the connection tree from the quick-connect toolbar input.
+        /// Pass an empty string to remove the filter.
+        /// </summary>
+        public void FilterByQuickConnect(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                ConnectionTree.RemoveFilter();
+            else
+                ConnectionTree.ApplyFilter(text);
+        }
+
         #region Search
 
         private void TxtSearch_KeyDown(object sender, KeyEventArgs e)
@@ -266,18 +452,19 @@ namespace mRemoteNG.UI.Window
                 {
                     case Keys.Escape:
                         e.Handled = true;
+                        txtSearch.Text = string.Empty;
                         ConnectionTree.Focus();
                         break;
                     case Keys.Up:
                         {
-                            ConnectionInfo match = ConnectionTree.NodeSearcher.PreviousMatch();
+                            ConnectionInfo? match = ConnectionTree.NodeSearcher?.PreviousMatch();
                             JumpToNode(match);
                             e.Handled = true;
                             break;
                         }
                     case Keys.Down:
                         {
-                            ConnectionInfo match = ConnectionTree.NodeSearcher.NextMatch();
+                            ConnectionInfo? match = ConnectionTree.NodeSearcher?.NextMatch();
                             JumpToNode(match);
                             e.Handled = true;
                             break;
@@ -295,7 +482,15 @@ namespace mRemoteNG.UI.Window
 
         private void TxtSearch_TextChanged(object sender, EventArgs e)
         {
+            pbClearSearch.Visible = txtSearch.Text.Length > 0
+                                    && txtSearch.Text != Language.SearchPrompt;
             ApplyFiltering();
+        }
+
+        private void PbClearSearch_Click(object sender, EventArgs e)
+        {
+            txtSearch.Text = string.Empty;
+            txtSearch.Focus();
         }
 
         private void ApplyFiltering()
@@ -309,6 +504,8 @@ namespace mRemoteNG.UI.Window
                 }
 
                 ConnectionTree.ApplyFilter(txtSearch.Text);
+                ConnectionTree.NodeSearcher?.SearchByName(txtSearch.Text);
+                JumpToNode(ConnectionTree.NodeSearcher?.CurrentMatch);
             }
             else
             {
@@ -318,8 +515,10 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        public void JumpToNode(ConnectionInfo connectionInfo)
+        public void JumpToNode(ConnectionInfo? connectionInfo, bool suppressPreview = false)
         {
+            _suppressSelectionPreview = suppressPreview;
+
             if (connectionInfo == null)
             {
                 ConnectionTree.SelectedObject = null;

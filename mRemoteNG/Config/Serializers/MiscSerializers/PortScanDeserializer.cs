@@ -74,7 +74,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             ConnectionInfo newConnectionInfo = new()
             {
                 Name = host.HostNameWithoutDomain,
-                Hostname = host.HostName,
+                Hostname = string.IsNullOrEmpty(host.HostName) ? host.HostIp : host.HostName,
                 Protocol = finalProtocol
             };
             newConnectionInfo.SetDefaultPort();

@@ -21,6 +21,7 @@
       <xs:attribute name="FullFileEncryption" type="xs:boolean" use="required" />
       <xs:attribute name="Protected" type="xs:string" use="required" />
       <xs:attribute name="ConfVersion" type="xs:float" use="required" />
+      <xs:attribute name="AutoLockOnMinimize" type="xs:boolean" use="optional" />
     </xs:complexType>
   </xs:element>
 
@@ -31,15 +32,22 @@
     </xs:sequence>
     <xs:attribute name="Name" type="xs:string" use="required" />
     <xs:attribute name="Id" type="xs:string" use="required" />
+    <xs:attribute name="LinkedConnectionId" type="xs:string" use="optional" />
     <xs:attribute name="Type" type="xs:string" use="required" />
+    <xs:attribute name="IsTemplate" type="xs:boolean" use="optional" />
     <xs:attribute name="Expanded" type="xs:boolean" use="optional" />
+    <xs:attribute name="AutoSort" type="xs:boolean" use="optional" />
     <xs:attribute name="Descr" type="xs:string" use="required" />
     <xs:attribute name="Icon" type="xs:string" use="required" />
     <xs:attribute name="Panel" type="xs:string" use="required" />
+    <xs:attribute name="Color" type="xs:string" use="optional" />
+    <xs:attribute name="TabColor" type="xs:string" use="optional" />
+    <xs:attribute name="ConnectionFrameColor" type="xs:string" use="optional" />
     <xs:attribute name="Username" type="xs:string" use="required" />
     <xs:attribute name="Domain" type="xs:string" use="required" />
     <xs:attribute name="Password" type="xs:string" use="required" />
     <xs:attribute name="Hostname" type="xs:string" use="required" />
+    <xs:attribute name="AlternativeAddress" type="xs:string" use="optional" />
     <xs:attribute name="Protocol" type="xs:string" use="required" />
     <xs:attribute name="RdpVersion" type="xs:string" use="required" />
     <xs:attribute name="VmId" type="xs:string" use="required" />
@@ -47,6 +55,7 @@
     <xs:attribute name="UseEnhancedMode" type="xs:boolean" use="required" />
     <xs:attribute name="SSHTunnelConnectionName" type="xs:string" use="optional" />
     <xs:attribute name="SSHOptions" type="xs:string" use="optional" />
+    <xs:attribute name="PrivateKeyPath" type="xs:string" use="optional" />
     <xs:attribute name="PuttySession" type="xs:string" use="required" />
     <xs:attribute name="Port" type="xs:int" use="required" />
     <xs:attribute name="ConnectToConsole" type="xs:boolean" use="required" />
@@ -58,6 +67,7 @@
     <xs:attribute name="LoadBalanceInfo" type="xs:string" use="required" />
     <xs:attribute name="Colors" type="xs:string" use="required" />
     <xs:attribute name="Resolution" type="xs:string" use="required" />
+    <xs:attribute name="DesktopScaleFactor" type="xs:string" use="optional" />
     <xs:attribute name="AutomaticResize" type="xs:boolean" use="required" />
     <xs:attribute name="DisplayWallpaper" type="xs:boolean" use="required" />
     <xs:attribute name="DisplayThemes" type="xs:boolean" use="required" />
@@ -83,6 +93,17 @@
     <xs:attribute name="PostExtApp" type="xs:string" use="required" />
     <xs:attribute name="MacAddress" type="xs:string" use="required" />
     <xs:attribute name="UserField" type="xs:string" use="required" />
+    <xs:attribute name="UserField1" type="xs:string" use="optional" />
+    <xs:attribute name="UserField2" type="xs:string" use="optional" />
+    <xs:attribute name="UserField3" type="xs:string" use="optional" />
+    <xs:attribute name="UserField4" type="xs:string" use="optional" />
+    <xs:attribute name="UserField5" type="xs:string" use="optional" />
+    <xs:attribute name="UserField6" type="xs:string" use="optional" />
+    <xs:attribute name="UserField7" type="xs:string" use="optional" />
+    <xs:attribute name="UserField8" type="xs:string" use="optional" />
+    <xs:attribute name="UserField9" type="xs:string" use="optional" />
+    <xs:attribute name="UserField10" type="xs:string" use="optional" />
+    <xs:attribute name="EnvironmentTags" type="xs:string" use="optional" />
     <xs:attribute name="ExtApp" type="xs:string" use="required" />
     <xs:attribute name="Favorite" type="xs:string" use="required" />
     <xs:attribute name="VNCCompression" type="xs:string" use="required" />
@@ -104,6 +125,7 @@
     <xs:attribute name="RDGatewayDomain" type="xs:string" use="required" />
     <xs:attribute name="RDGatewayExternalCredentialProvider" type="xs:string" use="required" />
     <xs:attribute name="RDGatewayUserViaAPI" type="xs:string" use="required" />
+    <xs:attribute name="RDGatewayAccessToken" type="xs:string" use="optional" />
     <xs:attribute name="InheritCredentialRecord" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritCacheBitmaps" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritColors" type="xs:boolean" use="optional" />
@@ -125,6 +147,7 @@
     <xs:attribute name="InheritRdpVersion" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritSSHTunnelConnectionName" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritSSHOptions" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritPrivateKeyPath" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritPuttySession" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRedirectDiskDrives" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRedirectDiskDrivesCustom" type="xs:boolean" use="optional" />
@@ -137,6 +160,7 @@
     <xs:attribute name="InheritSoundQuality" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRedirectAudioCapture" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritResolution" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritDesktopScaleFactor" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritAutomaticResize" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritUseConsoleSession" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRenderingEngine" type="xs:boolean" use="optional" />
@@ -154,8 +178,20 @@
     <xs:attribute name="InheritUseVmId" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritUseEnhancedMode" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritUserField" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUserField1" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUserField2" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUserField3" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUserField4" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUserField5" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUserField6" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUserField7" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUserField8" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUserField9" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUserField10" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritHostname" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritExtApp" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritFavorite" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritAutoSort" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritVNCCompression" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritVNCEncoding" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritVNCAuthMode" type="xs:boolean" use="optional" />
@@ -182,12 +218,63 @@
     <xs:attribute name="InheritExternalCredentialProvider" type="xs:boolean" use="optional" />
     <xs:attribute name="UserViaAPI" type="xs:string" use="optional" />
     <xs:attribute name="ExternalAddressProvider" type="xs:string" use="optional" />
+    <xs:attribute name="UsePersistentBrowser" type="xs:boolean" use="optional" />
+    <xs:attribute name="ScriptErrorsSuppressed" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritScriptErrorsSuppressed" type="xs:boolean" use="optional" />
     <xs:attribute name="EC2InstanceId" type="xs:string" use="optional" />
     <xs:attribute name="EC2Region" type="xs:string" use="optional" />
     <xs:attribute name="UseRCG" type="xs:boolean" use="optional" />
     <xs:attribute name="UseRestrictedAdmin" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritUseRCG" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritUseRestrictedAdmin" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUserViaAPI" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritExternalAddressProvider" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritEC2InstanceId" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritEC2Region" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritColor" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritTabColor" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritConnectionFrameColor" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritEnvironmentTags" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritOpeningCommand" type="xs:boolean" use="optional" />
+    <xs:attribute name="VaultOpenbaoMount" type="xs:string" use="optional" />
+    <xs:attribute name="VaultOpenbaoRole" type="xs:string" use="optional" />
+    <xs:attribute name="VaultOpenbaoSecretEngine" type="xs:string" use="optional" />
+    <xs:attribute name="IPAddress" type="xs:string" use="optional" />
+    <xs:attribute name="ConnectionAddressPrimary" type="xs:string" use="optional" />
+    <xs:attribute name="RDPSignScope" type="xs:string" use="optional" />
+    <xs:attribute name="RDPSignature" type="xs:string" use="optional" />
+    <xs:attribute name="RDPSizingMode" type="xs:string" use="optional" />
+    <xs:attribute name="ResolutionWidth" type="xs:int" use="optional" />
+    <xs:attribute name="ResolutionHeight" type="xs:int" use="optional" />
+    <xs:attribute name="RDPUseMultimon" type="xs:boolean" use="optional" />
+    <xs:attribute name="Notes" type="xs:string" use="optional" />
+    <xs:attribute name="RetryOnFirstConnect" type="xs:boolean" use="optional" />
+    <xs:attribute name="WaitForIPAvailability" type="xs:boolean" use="optional" />
+    <xs:attribute name="WaitForIPTimeout" type="xs:int" use="optional" />
+    <xs:attribute name="ShowBrowserNavigationBar" type="xs:boolean" use="optional" />
+    <xs:attribute name="VNCClipboardRedirect" type="xs:boolean" use="optional" />
+    <xs:attribute name="HttpPath" type="xs:string" use="optional" />
+    <xs:attribute name="AlwaysPromptForCredentials" type="xs:boolean" use="optional" />
+    <xs:attribute name="ContainerPassword" type="xs:string" use="optional" />
+    <xs:attribute name="DynamicSource" type="xs:string" use="optional" />
+    <xs:attribute name="DynamicSourceValue" type="xs:string" use="optional" />
+    <xs:attribute name="DynamicRefreshInterval" type="xs:int" use="optional" />
+    <xs:attribute name="InheritIPAddress" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritConnectionAddressPrimary" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDPSignScope" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDPSignature" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDPSizingMode" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritResolutionWidth" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritResolutionHeight" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDPUseMultimon" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritNotes" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRetryOnFirstConnect" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritWaitForIPAvailability" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritWaitForIPTimeout" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritVNCClipboardRedirect" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritAlternativeAddress" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritShowBrowserNavigationBar" type="xs:boolean" use="optional" />
+    <xs:attribute name="CredentialId" type="xs:string" use="optional" />
 
   </xs:complexType>
 </xs:schema>

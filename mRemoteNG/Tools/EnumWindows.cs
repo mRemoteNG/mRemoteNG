@@ -6,7 +6,7 @@ namespace mRemoteNG.Tools
 {
     public class EnumWindows
     {
-        public List<IntPtr> EnumWindows_Renamed()
+        public IList<IntPtr> GetWindowHandles()
         {
             List<IntPtr> handleList = new();
 
@@ -18,7 +18,7 @@ namespace mRemoteNG.Tools
             return handleList;
         }
 
-        public List<IntPtr> EnumChildWindows(IntPtr hWndParent)
+        public IList<IntPtr> EnumChildWindows(IntPtr hWndParent)
         {
             List<IntPtr> handleList = new();
 
@@ -39,7 +39,7 @@ namespace mRemoteNG.Tools
         }
 
         // ReSharper disable ClassNeverInstantiated.Local
-        private class NativeMethods
+        private static class NativeMethods
         {
             // ReSharper restore ClassNeverInstantiated.Local
 

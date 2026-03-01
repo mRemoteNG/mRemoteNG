@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -15,9 +16,10 @@ namespace mRemoteNG.Tools
     [SupportedOSPlatform("windows")]
     public class NotificationAreaIcon
     {
-        private readonly NotifyIcon _nI;
-        private readonly ContextMenuStrip _cMen;
-        private readonly ToolStripMenuItem _cMenCons;
+        private readonly NotifyIcon? _nI;
+        private readonly ContextMenuStrip? _cMen;
+        private readonly ToolStripMenuItem? _cMenCons;
+        private readonly ToolStripMenuItem? _cMenWol;
         private static readonly FrmMain FrmMain = FrmMain.Default;
 
         public bool Disposed { get; private set; }
@@ -32,6 +34,11 @@ namespace mRemoteNG.Tools
                     Image = Properties.Resources.ASPWebSite_16x
                 };
 
+                _cMenWol = new ToolStripMenuItem
+                {
+                    Text = Language.ResourceManager.GetString("WakeOnLan", Language.Culture) ?? "Wake On LAN"
+                };
+
                 ToolStripSeparator cMenSep1 = new();
 
                 ToolStripMenuItem cMenExit = new() { Text = Language.Exit};
@@ -43,7 +50,7 @@ namespace mRemoteNG.Tools
                                                    System.Drawing.GraphicsUnit.Point, Convert.ToByte(0)),
                     RenderMode = ToolStripRenderMode.Professional
                 };
-                _cMen.Items.AddRange(new ToolStripItem[] {_cMenCons, cMenSep1, cMenExit});
+                _cMen.Items.AddRange(new ToolStripItem[] {_cMenCons, _cMenWol, cMenSep1, cMenExit});
 
                 _nI = new NotifyIcon
                 {
@@ -67,9 +74,13 @@ namespace mRemoteNG.Tools
         {
             try
             {
-                _nI.Visible = false;
-                _nI.Dispose();
-                _cMen.Dispose();
+                if (_nI != null)
+                {
+                    _nI.Visible = false;
+                    _nI.Dispose();
+                }
+
+                _cMen?.Dispose();
                 Disposed = true;
             }
             catch (Exception ex)
@@ -81,17 +92,35 @@ namespace mRemoteNG.Tools
         private void nI_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Right) return;
+            if (_cMenCons == null || _cMenWol == null) return;
+
             _cMenCons.DropDownItems.Clear();
-            ConnectionsTreeToMenuItemsConverter menuItemsConverter = new()
+            _cMenWol.DropDownItems.Clear();
+
+            var connectionTreeModel = Runtime.ConnectionsService.ConnectionTreeModel;
+            if (connectionTreeModel == null) return;
+
+            ConnectionsTreeToMenuItemsConverter connectMenuItemsConverter = new()
             {
                 MouseUpEventHandler = ConMenItem_MouseUp
             };
 
             // ReSharper disable once CoVariantArrayConversion
-            ToolStripItem[] rootMenuItems = menuItemsConverter
-                                            .CreateToolStripDropDownItems(Runtime.ConnectionsService
-                                                                                 .ConnectionTreeModel).ToArray();
-            _cMenCons.DropDownItems.AddRange(rootMenuItems);
+            ToolStripItem[] rootConnectionMenuItems = connectMenuItemsConverter
+                                                      .CreateToolStripDropDownItems(connectionTreeModel).ToArray();
+            _cMenCons.DropDownItems.AddRange(rootConnectionMenuItems);
+
+            ConnectionsTreeToMenuItemsConverter wakeOnLanMenuItemsConverter = new()
+            {
+                MouseUpEventHandler = WakeOnLanMenuItem_MouseUp
+            };
+
+            // ReSharper disable once CoVariantArrayConversion
+            ToolStripItem[] rootWakeOnLanMenuItems = wakeOnLanMenuItemsConverter
+                                                     .CreateToolStripDropDownItems(connectionTreeModel).ToArray();
+            ConfigureWakeOnLanMenuItems(rootWakeOnLanMenuItems);
+            _cMenWol.DropDownItems.AddRange(rootWakeOnLanMenuItems);
+            _cMenWol.Enabled = _cMenWol.DropDownItems.Cast<ToolStripItem>().Any(item => item.Enabled);
         }
 
         private static void nI_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -103,19 +132,23 @@ namespace mRemoteNG.Tools
             }
             else
             {
-                ShowForm();
-                FrmMain.ShowInTaskbar = true;
+                if (ShowForm())
+                    FrmMain.ShowInTaskbar = true;
             }
         }
 
-        private static void ShowForm()
+        private static bool ShowForm()
         {
+            if (!FrmMain.TryUnlockIfNeeded())
+                return false;
+
             FrmMain.Show();
             FrmMain.WindowState = FrmMain.PreviousWindowState;
 
-            if (Properties.OptionsAppearancePage.Default.ShowSystemTrayIcon) return;
-            Runtime.NotificationAreaIcon.Dispose();
+            if (Properties.OptionsAppearancePage.Default.ShowSystemTrayIcon) return true;
+            Runtime.NotificationAreaIcon?.Dispose();
             Runtime.NotificationAreaIcon = null;
+            return true;
         }
 
         private static void HideForm()
@@ -128,9 +161,53 @@ namespace mRemoteNG.Tools
         {
             if (e.Button != MouseButtons.Left) return;
             if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
-            if (FrmMain.Visible == false)
-                ShowForm();
-            Runtime.ConnectionInitiator.OpenConnection((ConnectionInfo)((ToolStripMenuItem)sender).Tag);
+            if (FrmMain.Visible == false && !ShowForm())
+                return;
+            if (((ToolStripMenuItem)sender).Tag is ConnectionInfo connectionInfo)
+                Runtime.ConnectionInitiator.OpenConnection(connectionInfo);
+        }
+
+        private static void ConfigureWakeOnLanMenuItems(IEnumerable<ToolStripItem> menuItems)
+        {
+            foreach (ToolStripItem menuItem in menuItems)
+            {
+                if (menuItem is not ToolStripMenuItem toolStripMenuItem)
+                    continue;
+
+                ConfigureWakeOnLanMenuItem(toolStripMenuItem);
+            }
+        }
+
+        private static bool ConfigureWakeOnLanMenuItem(ToolStripMenuItem menuItem)
+        {
+            if (menuItem.Tag is ConnectionInfo connectionInfo && connectionInfo is not ContainerInfo)
+            {
+                bool canWake = WakeOnLan.IsValidMacAddress(connectionInfo.MacAddress);
+                menuItem.Enabled = canWake;
+                return canWake;
+            }
+
+            bool hasWakeableChild = false;
+            foreach (ToolStripItem childItem in menuItem.DropDownItems)
+            {
+                if (childItem is not ToolStripMenuItem childMenuItem)
+                    continue;
+
+                hasWakeableChild |= ConfigureWakeOnLanMenuItem(childMenuItem);
+            }
+
+            menuItem.Enabled = hasWakeableChild;
+            return hasWakeableChild;
+        }
+
+        private static void WakeOnLanMenuItem_MouseUp(object? sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left) return;
+            if (sender is not ToolStripMenuItem menuItem) return;
+            if (menuItem.Tag is not ConnectionInfo connectionInfo || connectionInfo is ContainerInfo) return;
+            if (!WakeOnLan.IsValidMacAddress(connectionInfo.MacAddress)) return;
+
+            WakeOnLan.TrySendMagicPacket(connectionInfo.MacAddress);
         }
 
         private static void cMenExit_Click(object sender, EventArgs e)

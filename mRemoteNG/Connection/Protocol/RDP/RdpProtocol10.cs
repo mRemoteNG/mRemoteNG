@@ -19,6 +19,19 @@ namespace mRemoteNG.Connection.Protocol.RDP
             if (!base.Initialize())
                 return false;
 
+            return PostInitialize();
+        }
+
+        public override async System.Threading.Tasks.Task<bool> InitializeAsync()
+        {
+            if (!await base.InitializeAsync())
+                return false;
+
+            return PostInitialize();
+        }
+
+        private bool PostInitialize()
+        {
             if (RdpVersion < Versions.RDC100) return false; // minimum dll version checked, loaded MSTSCLIB dll version is not capable
 
             return true;
