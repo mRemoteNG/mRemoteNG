@@ -2571,4 +2571,22 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="VaultOpenbaoSecretEngineSSHOTP" xml:space="preserve">
     <value>SSH engine OTP mode</value>
   </data>
+  <data name="ScpDotNet" xml:space="preserve">
+    <value>SCP/SFTP (SSH.NET)</value>
+  </data>
+  <data name="ScpSettings" xml:space="preserve">
+    <value>SCP Settings</value>
+  </data>
+  <data name="ScpInitialLocalPath" xml:space="preserve">
+    <value>Initial Local Path</value>
+  </data>
+  <data name="PropertyDescriptionScpInitialLocalPath" xml:space="preserve">
+    <value>Starting directory for local file browser (leave empty for program directory)</value>
+  </data>
+  <data name="ScpInitialRemotePath" xml:space="preserve">
+    <value>Initial Remote Path</value>
+  </data>
+  <data name="PropertyDescriptionScpInitialRemotePath" xml:space="preserve">
+    <value>Starting directory for remote file browser (leave empty for user home directory)</value>
+  </data>
 </root>

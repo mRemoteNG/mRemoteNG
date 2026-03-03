@@ -521,10 +521,24 @@ namespace mRemoteNG.Connection
 		LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionSmartSizeMode)), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCSmartSizeMode {get; set;}
 				
-		[LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 9), 
-		LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.ViewOnly)), 
-		LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionViewOnly)), 
+		[LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 9),
+		LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.ViewOnly)),
+		LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionViewOnly)),
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCViewOnly {get; set;}
+        #endregion
+
+        #region SCP Settings
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.ScpSettings), 10),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.ScpInitialLocalPath)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionScpInitialLocalPath)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool ScpInitialLocalPath { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.ScpSettings), 10),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.ScpInitialRemotePath)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionScpInitialRemotePath)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool ScpInitialRemotePath { get; set; }
         #endregion
 
         [Browsable(false)]

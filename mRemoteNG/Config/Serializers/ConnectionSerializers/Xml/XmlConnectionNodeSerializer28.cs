@@ -159,6 +159,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("VaultOpenbaoMount", connectionInfo.VaultOpenbaoMount ?? string.Empty));
             element.Add(new XAttribute("VaultOpenbaoRole", connectionInfo.VaultOpenbaoRole ?? string.Empty));
             element.Add(new XAttribute("VaultOpenbaoSecretEngine", connectionInfo.VaultOpenbaoSecretEngine));
+
+            // SCP Settings
+            element.Add(new XAttribute("ScpInitialLocalPath", connectionInfo.ScpInitialLocalPath ?? string.Empty));
+            element.Add(new XAttribute("ScpInitialRemotePath", connectionInfo.ScpInitialRemotePath ?? string.Empty));
         }
 
         private void SetInheritanceAttributes(XContainer element, IInheritable connectionInfo)
@@ -322,6 +326,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 element.Add(new XAttribute("InheritUseRCG", inheritance.UseRCG.ToString().ToLowerInvariant()));
             if (inheritance.UseRestrictedAdmin)
                 element.Add(new XAttribute("InheritUseRestrictedAdmin", inheritance.UseRestrictedAdmin.ToString().ToLowerInvariant()));
+            if (inheritance.ScpInitialLocalPath)
+                element.Add(new XAttribute("InheritScpInitialLocalPath", inheritance.ScpInitialLocalPath.ToString().ToLowerInvariant()));
+            if (inheritance.ScpInitialRemotePath)
+                element.Add(new XAttribute("InheritScpInitialRemotePath", inheritance.ScpInitialRemotePath.ToString().ToLowerInvariant()));
         }
     }
 }

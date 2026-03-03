@@ -49,8 +49,8 @@ namespace mRemoteNGTests.Connection
             var propertyInfo = typeof(ConnectionInfo).GetProperty("Color");
             Assert.That(propertyInfo, Is.Not.Null);
 
-            var categoryAttr = propertyInfo.GetCustomAttributes(typeof(CategoryAttribute), true)
-                .FirstOrDefault() as CategoryAttribute;
+            var categoryAttr = propertyInfo.GetCustomAttributes(typeof(System.ComponentModel.CategoryAttribute), true)
+                .FirstOrDefault() as System.ComponentModel.CategoryAttribute;
 
             Assert.That(categoryAttr, Is.Not.Null, "Color property should have Category attribute");
         }
@@ -61,8 +61,8 @@ namespace mRemoteNGTests.Connection
             var propertyInfo = typeof(ConnectionInfo).GetProperty("TabColor");
             Assert.That(propertyInfo, Is.Not.Null);
 
-            var categoryAttr = propertyInfo.GetCustomAttributes(typeof(CategoryAttribute), true)
-                .FirstOrDefault() as CategoryAttribute;
+            var categoryAttr = propertyInfo.GetCustomAttributes(typeof(System.ComponentModel.CategoryAttribute), true)
+                .FirstOrDefault() as System.ComponentModel.CategoryAttribute;
 
             Assert.That(categoryAttr, Is.Not.Null, "TabColor property should have Category attribute");
         }
@@ -73,8 +73,8 @@ namespace mRemoteNGTests.Connection
             var propertyInfo = typeof(ConnectionInfoInheritance).GetProperty("Color");
             Assert.That(propertyInfo, Is.Not.Null);
 
-            var categoryAttr = propertyInfo.GetCustomAttributes(typeof(CategoryAttribute), true)
-                .FirstOrDefault() as CategoryAttribute;
+            var categoryAttr = propertyInfo.GetCustomAttributes(typeof(System.ComponentModel.CategoryAttribute), true)
+                .FirstOrDefault() as System.ComponentModel.CategoryAttribute;
 
             Assert.That(categoryAttr, Is.Not.Null, "Color inheritance property should have Category attribute");
         }
@@ -85,8 +85,8 @@ namespace mRemoteNGTests.Connection
             var propertyInfo = typeof(ConnectionInfoInheritance).GetProperty("TabColor");
             Assert.That(propertyInfo, Is.Not.Null);
 
-            var categoryAttr = propertyInfo.GetCustomAttributes(typeof(CategoryAttribute), true)
-                .FirstOrDefault() as CategoryAttribute;
+            var categoryAttr = propertyInfo.GetCustomAttributes(typeof(System.ComponentModel.CategoryAttribute), true)
+                .FirstOrDefault() as System.ComponentModel.CategoryAttribute;
 
             Assert.That(categoryAttr, Is.Not.Null, "TabColor inheritance property should have Category attribute");
         }
