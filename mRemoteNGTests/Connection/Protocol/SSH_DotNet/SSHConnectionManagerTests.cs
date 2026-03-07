@@ -33,7 +33,8 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = null;
             int port = 22;
             string username = "testuser";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
@@ -47,7 +48,8 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "";
             int port = 22;
             string username = "testuser";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
@@ -61,7 +63,8 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "localhost";
             int port = 0;
             string username = "testuser";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
 
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -75,7 +78,8 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "localhost";
             int port = -1;
             string username = "testuser";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
 
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -89,7 +93,8 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "localhost";
             int port = 65536;
             string username = "testuser";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
 
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -103,7 +108,8 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "localhost";
             int port = 22;
             string username = null;
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
@@ -117,7 +123,8 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "localhost";
             int port = 22;
             string username = "";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
@@ -159,10 +166,11 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "localhost";
             int port = 22;
             string username = "testuser";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
 
             // Act
-            var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
             // Assert
             Assert.That(client, Is.Not.Null);
@@ -170,9 +178,6 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             Assert.That(client.ConnectionInfo.Port, Is.EqualTo(port));
             Assert.That(client.ConnectionInfo.Username, Is.EqualTo(username));
             Assert.That(client.IsConnected, Is.False);
-
-            // Cleanup
-            client?.Dispose();
         }
 
         [Test]
@@ -182,18 +187,16 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "localhost";
             int port = 22;
             string username = "testuser";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
             TimeSpan customTimeout = TimeSpan.FromSeconds(60);
 
             // Act
-            var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods, customTimeout);
+            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods, customTimeout);
 
             // Assert
             Assert.That(client, Is.Not.Null);
             Assert.That(client.ConnectionInfo.Timeout, Is.EqualTo(customTimeout));
-
-            // Cleanup
-            client?.Dispose();
         }
 
         [Test]
@@ -203,17 +206,15 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "localhost";
             int port = 22;
             string username = "testuser";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
 
             // Act
-            var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
             // Assert
             Assert.That(client, Is.Not.Null);
             Assert.That(client.ConnectionInfo.Timeout, Is.EqualTo(TimeSpan.FromSeconds(15)));
-
-            // Cleanup
-            client?.Dispose();
         }
 
         [Test]
@@ -223,17 +224,15 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "localhost";
             int port = 22;
             string username = "testuser";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
 
             // Act
-            var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
             // Assert
             Assert.That(client, Is.Not.Null);
             Assert.That(client.ConnectionInfo.Encoding, Is.EqualTo(System.Text.Encoding.UTF8));
-
-            // Cleanup
-            client?.Dispose();
         }
 
         #endregion
@@ -276,20 +275,13 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "localhost";
             int port = 22;
             string username = "testuser";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
-            var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
+            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
-            try
-            {
-                // Act & Assert
-                Assert.Throws<InvalidOperationException>(() =>
-                    SSHConnectionManager.CreateShellStream(client));
-            }
-            finally
-            {
-                // Cleanup
-                client?.Dispose();
-            }
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() =>
+                SSHConnectionManager.CreateShellStream(client));
         }
 
         // Note: Cannot test CreateShellStream success without a connected client
@@ -317,22 +309,15 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "localhost";
             int port = 22;
             string username = "testuser";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
-            var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
+            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
-            try
-            {
-                // Act
-                SSHConnectionManager.ConfigureKeepAlive(client);
+            // Act
+            SSHConnectionManager.ConfigureKeepAlive(client);
 
-                // Assert
-                Assert.That(client.KeepAliveInterval, Is.EqualTo(TimeSpan.FromSeconds(5)));
-            }
-            finally
-            {
-                // Cleanup
-                client?.Dispose();
-            }
+            // Assert
+            Assert.That(client.KeepAliveInterval, Is.EqualTo(TimeSpan.FromSeconds(5)));
         }
 
         [Test]
@@ -342,23 +327,16 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "localhost";
             int port = 22;
             string username = "testuser";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
-            var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
+            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
             TimeSpan customInterval = TimeSpan.FromSeconds(10);
 
-            try
-            {
-                // Act
-                SSHConnectionManager.ConfigureKeepAlive(client, customInterval);
+            // Act
+            SSHConnectionManager.ConfigureKeepAlive(client, customInterval);
 
-                // Assert
-                Assert.That(client.KeepAliveInterval, Is.EqualTo(customInterval));
-            }
-            finally
-            {
-                // Cleanup
-                client?.Dispose();
-            }
+            // Assert
+            Assert.That(client.KeepAliveInterval, Is.EqualTo(customInterval));
         }
 
         #endregion
@@ -385,22 +363,15 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string hostname = "localhost";
             int port = 22;
             string username = "testuser";
-            var authMethods = new[] { new PasswordAuthenticationMethod("testuser", "password") };
-            var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { authMethods0 };
+            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
-            try
-            {
-                // Act
-                string info = SSHConnectionManager.GetConnectionInfo(client);
+            // Act
+            string info = SSHConnectionManager.GetConnectionInfo(client);
 
-                // Assert
-                Assert.That(info, Is.EqualTo("Client is not connected"));
-            }
-            finally
-            {
-                // Cleanup
-                client?.Dispose();
-            }
+            // Assert
+            Assert.That(info, Is.EqualTo("Client is not connected"));
         }
 
         // Note: Cannot test GetConnectionInfo with connected client without real SSH server

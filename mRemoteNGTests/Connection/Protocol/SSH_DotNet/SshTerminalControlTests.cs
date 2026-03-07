@@ -214,8 +214,6 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         {
             // Arrange
             var control = new SshTerminalControl();
-            int originalColumns = control.Columns;
-
             // Act
             control.Columns = 0;  // Invalid - should be clamped or rejected
 
@@ -563,7 +561,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             // Arrange
             var control = new SshTerminalControl();
             control.Initialize();
-            var cts = new CancellationTokenSource();
+            using var cts = new CancellationTokenSource();
             cts.CancelAfter(100);  // Cancel after 100ms
 
             // Act

@@ -15,11 +15,11 @@ public class SSHConnectionManagerTests
         const string hostname = "localhost";
         const int port = 22;
         const string username = "testuser";
-        var authMethod = new PasswordAuthenticationMethod(username, "password");
+        using var authMethod = new PasswordAuthenticationMethod(username, "password");
         var authMethods = new AuthenticationMethod[] { authMethod };
 
         // Act
-        var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+        using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
         // Assert
         Assert.That(client, Is.Not.Null);
@@ -27,9 +27,6 @@ public class SSHConnectionManagerTests
         Assert.That(client.ConnectionInfo.Host, Is.EqualTo(hostname));
         Assert.That(client.ConnectionInfo.Port, Is.EqualTo(port));
         Assert.That(client.ConnectionInfo.Username, Is.EqualTo(username));
-
-        // Cleanup
-        client?.Dispose();
     }
 
     [Test]
@@ -39,18 +36,15 @@ public class SSHConnectionManagerTests
         const string hostname = "localhost";
         const int port = 22;
         const string username = "testuser";
-        var authMethod = new PasswordAuthenticationMethod(username, "password");
+        using var authMethod = new PasswordAuthenticationMethod(username, "password");
         var authMethods = new AuthenticationMethod[] { authMethod };
         var customTimeout = TimeSpan.FromSeconds(60);
 
         // Act
-        var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods, customTimeout);
+        using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods, customTimeout);
 
         // Assert
         Assert.That(client.ConnectionInfo.Timeout, Is.EqualTo(customTimeout));
-
-        // Cleanup
-        client?.Dispose();
     }
 
     [Test]
@@ -60,7 +54,7 @@ public class SSHConnectionManagerTests
         const string hostname = "";
         const int port = 22;
         const string username = "testuser";
-        var authMethod = new PasswordAuthenticationMethod(username, "password");
+        using var authMethod = new PasswordAuthenticationMethod(username, "password");
         var authMethods = new AuthenticationMethod[] { authMethod };
 
         // Act & Assert
@@ -72,22 +66,25 @@ public class SSHConnectionManagerTests
     public void CreateConnection_WithInvalidPort_ThrowsArgumentOutOfRangeException()
     {
         // Arrange & Act & Assert
+        using var authMethod1 = new PasswordAuthenticationMethod("user", "pass");
         Assert.Throws<ArgumentOutOfRangeException>(() =>
             SSHConnectionManager.CreateConnection("localhost", 0, "user",
-                new[] { new PasswordAuthenticationMethod("user", "pass") }));
+                new[] { authMethod1 }));
 
+        using var authMethod2 = new PasswordAuthenticationMethod("user", "pass");
         Assert.Throws<ArgumentOutOfRangeException>(() =>
             SSHConnectionManager.CreateConnection("localhost", 65536, "user",
-                new[] { new PasswordAuthenticationMethod("user", "pass") }));
+                new[] { authMethod2 }));
     }
 
     [Test]
     public void CreateConnection_WithEmptyUsername_ThrowsArgumentException()
     {
         // Act & Assert
+        using var authMethod = new PasswordAuthenticationMethod("", "pass");
         Assert.Throws<ArgumentException>(() =>
             SSHConnectionManager.CreateConnection("localhost", 22, "",
-                new[] { new PasswordAuthenticationMethod("", "pass") }));
+                new[] { authMethod }));
     }
 
     [Test]
@@ -111,18 +108,16 @@ public class SSHConnectionManagerTests
     {
         // Arrange
         const string username = "testuser";
-        var authMethod = new PasswordAuthenticationMethod(username, "password");
+        using var authMethod = new PasswordAuthenticationMethod(username, "password");
         var authMethods = new AuthenticationMethod[] { authMethod };
 
         // Act & Assert - Test minimum valid port
-        var client1 = SSHConnectionManager.CreateConnection("localhost", 1, username, authMethods);
+        using var client1 = SSHConnectionManager.CreateConnection("localhost", 1, username, authMethods);
         Assert.That(client1.ConnectionInfo.Port, Is.EqualTo(1));
-        client1?.Dispose();
 
         // Act & Assert - Test maximum valid port
-        var client2 = SSHConnectionManager.CreateConnection("localhost", 65535, username, authMethods);
+        using var client2 = SSHConnectionManager.CreateConnection("localhost", 65535, username, authMethods);
         Assert.That(client2.ConnectionInfo.Port, Is.EqualTo(65535));
-        client2?.Dispose();
     }
 
     [Test]
@@ -132,17 +127,14 @@ public class SSHConnectionManagerTests
         const string hostname = "localhost";
         const int port = 22;
         const string username = "testuser";
-        var authMethod = new PasswordAuthenticationMethod(username, "password");
+        using var authMethod = new PasswordAuthenticationMethod(username, "password");
         var authMethods = new AuthenticationMethod[] { authMethod };
 
         // Act
-        var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+        using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
         // Assert
         Assert.That(client.ConnectionInfo.Encoding, Is.EqualTo(System.Text.Encoding.UTF8));
-
-        // Cleanup
-        client?.Dispose();
     }
 
     [Test]
@@ -152,9 +144,9 @@ public class SSHConnectionManagerTests
         const string hostname = "localhost";
         const int port = 22;
         const string username = "testuser";
-        var authMethod = new PasswordAuthenticationMethod(username, "password");
+        using var authMethod = new PasswordAuthenticationMethod(username, "password");
         var authMethods = new AuthenticationMethod[] { authMethod };
-        var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+        using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
         var keepAliveInterval = TimeSpan.FromSeconds(60);
 
         // Act
@@ -162,9 +154,6 @@ public class SSHConnectionManagerTests
 
         // Assert
         Assert.That(client.KeepAliveInterval, Is.EqualTo(keepAliveInterval));
-
-        // Cleanup
-        client?.Dispose();
     }
 
     [Test]
@@ -182,9 +171,9 @@ public class SSHConnectionManagerTests
         const string hostname = "localhost";
         const int port = 22;
         const string username = "testuser";
-        var authMethod = new PasswordAuthenticationMethod(username, "password");
+        using var authMethod = new PasswordAuthenticationMethod(username, "password");
         var authMethods = new AuthenticationMethod[] { authMethod };
-        var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+        using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
         // Act
         SSHConnectionManager.ConfigureKeepAlive(client); // Should use default interval
@@ -192,9 +181,6 @@ public class SSHConnectionManagerTests
         // Assert
         Assert.That(client.KeepAliveInterval, Is.Not.EqualTo(TimeSpan.Zero));
         Assert.That(client.KeepAliveInterval.TotalSeconds, Is.GreaterThan(0));
-
-        // Cleanup
-        client?.Dispose();
     }
 
     [Test]
@@ -215,9 +201,9 @@ public class SSHConnectionManagerTests
         const string hostname = "localhost";
         const int port = 22;
         const string username = "testuser";
-        var authMethod = new PasswordAuthenticationMethod(username, "password");
+        using var authMethod = new PasswordAuthenticationMethod(username, "password");
         var authMethods = new AuthenticationMethod[] { authMethod };
-        var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+        using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
         // Act
         var info = SSHConnectionManager.GetConnectionInfo(client);
@@ -225,9 +211,6 @@ public class SSHConnectionManagerTests
         // Assert
         Assert.That(info, Is.Not.Null);
         Assert.That(info, Contains.Substring("not connected"));
-
-        // Cleanup
-        client?.Dispose();
     }
 
     [Test]
@@ -237,19 +220,16 @@ public class SSHConnectionManagerTests
         const string hostname = "localhost";
         const int port = 22;
         const string username = "testuser";
-        var authMethod1 = new PasswordAuthenticationMethod(username, "password");
-        var authMethod2 = new KeyboardInteractiveAuthenticationMethod(username);
+        using var authMethod1 = new PasswordAuthenticationMethod(username, "password");
+        using var authMethod2 = new KeyboardInteractiveAuthenticationMethod(username);
         var authMethods = new AuthenticationMethod[] { authMethod1, authMethod2 };
 
         // Act
-        var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+        using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
         // Assert
         Assert.That(client.ConnectionInfo.AuthenticationMethods, Is.Not.Null);
         Assert.That(client.ConnectionInfo.AuthenticationMethods.Count, Is.EqualTo(2));
-
-        // Cleanup
-        client?.Dispose();
     }
 
     [Test]
@@ -259,18 +239,15 @@ public class SSHConnectionManagerTests
         const string hostname = "localhost";
         const int port = 22;
         const string username = "testuser";
-        var authMethod1 = new PasswordAuthenticationMethod(username, "password");
-        var authMethod2 = new KeyboardInteractiveAuthenticationMethod(username);
+        using var authMethod1 = new PasswordAuthenticationMethod(username, "password");
+        using var authMethod2 = new KeyboardInteractiveAuthenticationMethod(username);
         var authMethods = new AuthenticationMethod[] { authMethod1, authMethod2 };
 
         // Act
-        var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+        using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
         // Assert
         Assert.That(client.ConnectionInfo.AuthenticationMethods[0], Is.TypeOf<PasswordAuthenticationMethod>());
         Assert.That(client.ConnectionInfo.AuthenticationMethods[1], Is.TypeOf<KeyboardInteractiveAuthenticationMethod>());
-
-        // Cleanup
-        client?.Dispose();
     }
 }

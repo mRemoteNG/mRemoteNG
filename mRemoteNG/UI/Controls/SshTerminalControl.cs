@@ -1,3 +1,9 @@
+// Design Note: Generic catch clauses (catch Exception) are used intentionally throughout this file.
+// This is a UI control that renders terminal output and handles user input — an unhandled exception
+// in painting or input processing would crash the application. All exceptions are logged via
+// SSHDotNetDiagnostics. The foreach loops with null/empty checks use inline filtering (continue)
+// rather than .Where() because they accumulate mutable state (e.g., x-position) across iterations,
+// making LINQ-style filtering less readable.
 using System;
 using System.Drawing;
 using System.IO;
@@ -93,7 +99,7 @@ namespace mRemoteNG.UI.Controls
         // Cursor rendering
         private System.Windows.Forms.Timer _cursorBlinkTimer;
         private bool _cursorVisible = true;
-        private Color _cursorColor = Color.Blue;
+        private readonly Color _cursorColor = Color.Blue;
 
         #endregion
 
@@ -719,15 +725,13 @@ namespace mRemoteNG.UI.Controls
             try
             {
                 // Handle Ctrl+C and Ctrl+V specially for copy/paste (optional - can be disabled for full terminal mode)
-                if (e.KeyCode == Keys.C && e.Control && !e.Shift && !e.Alt)
+                if (e.KeyCode == Keys.C && e.Control && !e.Shift && !e.Alt
+                    && _selectionStart != Point.Empty && _selectionEnd != Point.Empty)
                 {
                     // If there's a selection, copy it; otherwise send Ctrl+C to terminal
-                    if (_selectionStart != Point.Empty && _selectionEnd != Point.Empty)
-                    {
-                        CopySelectionToClipboard();
-                        e.Handled = true;
-                        return;
-                    }
+                    CopySelectionToClipboard();
+                    e.Handled = true;
+                    return;
                 }
 
                 if (e.KeyCode == Keys.V && e.Control && !e.Shift && !e.Alt)
@@ -981,7 +985,6 @@ namespace mRemoteNG.UI.Controls
 
         private Point PixelToCharCoordinates(Point pixelPoint)
         {
-            Font font = TerminalFont;
             int row = Math.Max(0, pixelPoint.Y / _charHeight);
 
             // Find column by measuring actual text width character-by-character
@@ -1021,7 +1024,6 @@ namespace mRemoteNG.UI.Controls
 
         private Point CharToPixelCoordinates(Point charPoint)
         {
-            Font font = TerminalFont;
             int x = charPoint.X * _charWidth;
             int y = charPoint.Y * _charHeight;
             return new Point(x, y);
@@ -1490,8 +1492,6 @@ namespace mRemoteNG.UI.Controls
 
                                 // CRITICAL: Measure actual text width, don't use column * _charWidth
                                 // This prevents "exponential" growth of selection box
-                                string[] lines = screenText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-
                                 int startX = 0, endX = 0;
 
                                 // Calculate start position using FIXED character grid
@@ -1501,7 +1501,6 @@ namespace mRemoteNG.UI.Controls
                                 endX = (endCol + 1) * _charWidth;
 
                                 int startY = startRow * _charHeight;
-                                int endY = (endRow + 1) * _charHeight;
 
                                 // Handle single-line vs multi-line selection
                                 if (startRow == endRow)

@@ -1,3 +1,9 @@
+// Design Note: Generic catch clauses (catch Exception) are used intentionally throughout this file.
+// This is protocol/infrastructure code that must remain resilient — an unhandled exception here would
+// crash the user's connection or the entire application. All caught exceptions are logged via
+// SSHDotNetDiagnostics, so no diagnostic information is lost. Splitting into multiple specific
+// exception types would add verbosity without changing behavior, since all branches log and
+// perform the same recovery action (cleanup, error state, return false, etc.).
 using System;
 using System.IO;
 using System.Text;
@@ -44,14 +50,14 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         private long _bytesReceived = 0;
         private long _bytesSent = 0;
         private double _peakReceiveRate = 0;  // bytes/sec
-        private double _peakSendRate = 0;     // bytes/sec
+        private readonly double _peakSendRate = 0;     // bytes/sec
 
         // Error tracking for smart disconnect detection
         private bool _hadRecentError = false;
         private DateTime _lastErrorTime;
         private string _lastErrorMessage = "";
         private Exception _lastException = null;
-        private CancellationTokenSource _errorCancellationSource = new CancellationTokenSource();
+        private readonly CancellationTokenSource _errorCancellationSource = new CancellationTokenSource();
 
         #endregion
 
@@ -270,6 +276,15 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 {
                     // Calculate pixel dimensions from actual control size to ensure accuracy
                     // This is more reliable than using cached CharWidth/CharHeight which might be defaults
+                    if (_terminalControl == null)
+                    {
+                        SSHDotNetDiagnostics.LogError("Protocol: Terminal control is null, cannot create shell stream.");
+                        State = ConnectionState.Error;
+                        Event_ErrorOccured(this, "Terminal control is not available.", null);
+                        CleanupConnection();
+                        return false;
+                    }
+
                     int cols = _terminalControl.Columns;
                     int rows = _terminalControl.Rows;
                     int charW = _terminalControl.CharWidth;

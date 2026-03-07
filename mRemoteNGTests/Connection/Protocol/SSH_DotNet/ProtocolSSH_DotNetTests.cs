@@ -183,7 +183,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             protocol.InterfaceControl.Info = connectionInfo;
 
             // Act
-            bool result = protocol.Connect();
+            protocol.Connect();
 
             // Assert - will fail to connect but should have set state to Connecting first
             // Note: This will transition to Error state because we can't actually connect
@@ -361,7 +361,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             protocol.InterfaceControl.Info = connectionInfo;
 
             // Act
-            bool result = protocol.Connect();
+            protocol.Connect();
 
             // Assert - should not fail due to empty password (will fail to connect for other reasons)
             // We're just verifying it doesn't reject empty password

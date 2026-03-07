@@ -225,7 +225,7 @@ public class ProtocolSSH_DotNetTests
         _sut.Initialize();
 
         // Act
-        var result = _sut.Connect();
+        _sut.Connect();
 
         // Assert - Will fail since no server, but should attempt connection
         Assert.That(
@@ -242,8 +242,8 @@ public class ProtocolSSH_DotNetTests
         _sut.Initialize();
 
         // Act - Call connect multiple times
-        var result1 = _sut.Connect();
-        var result2 = _sut.Connect();
+        _sut.Connect();
+        _sut.Connect();
 
         // Assert - Should handle gracefully without exception
         Assert.That(_sut.State, Is.Not.Null);

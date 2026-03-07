@@ -50,11 +50,6 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void SendWindowChangeRequest_DoesNotThrow_WithValidDimensions()
         {
             // Arrange
-            uint columns = 80;
-            uint rows = 24;
-            uint width = 640;
-            uint height = 480;
-
             // Note: Cannot create a real ShellStream without SSH connection
             // This test verifies that the method signature is correct and accepts valid parameters
 
@@ -78,13 +73,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         [Test]
         public void SendWindowChangeRequest_AcceptsZeroPixelDimensions()
         {
-            // Arrange
-            uint columns = 80;
-            uint rows = 24;
-            uint width = 0;  // Zero width = auto
-            uint height = 0; // Zero height = auto
-
-            // Act & Assert
+            // Arrange & Act & Assert
             // Method should accept zero pixel dimensions (meaning auto)
             Assert.DoesNotThrow(() =>
             {
@@ -100,13 +89,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         [Test]
         public void SendWindowChangeRequest_AcceptsLargeDimensions()
         {
-            // Arrange
-            uint columns = 500;  // Very wide terminal
-            uint rows = 200;     // Very tall terminal
-            uint width = 4000;
-            uint height = 3200;
-
-            // Act & Assert
+            // Arrange & Act & Assert
             // Method should accept large dimensions without throwing
             Assert.DoesNotThrow(() =>
             {
@@ -126,17 +109,6 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             // The method should be an extension method (static)
             Assert.That(method.IsStatic, Is.True, "SendWindowChangeRequest should be a static extension method");
 
-            // The method should have ExtensionAttribute
-            var attrs = method.GetCustomAttributes(false);
-            bool isExtension = false;
-            foreach (var attr in attrs)
-            {
-                if (attr.GetType().Name.Contains("Extension"))
-                {
-                    isExtension = true;
-                    break;
-                }
-            }
             // Note: ExtensionAttribute is compiler-generated for extension methods, so we can verify by checking method.IsStatic
             Assert.That(method.IsStatic, Is.True, "Method should be static (extension methods are static)");
         }

@@ -1,3 +1,7 @@
+// Design Note: Generic catch clauses (catch Exception) are used intentionally in this file.
+// Authentication operations interact with external SSH servers and key files, where any exception
+// type is possible. All exceptions are logged via SSHDotNetDiagnostics and handled gracefully
+// to avoid crashing the application on auth failures.
 using System;
 using System.Collections.Generic;
 using System.IO;

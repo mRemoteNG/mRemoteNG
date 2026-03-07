@@ -98,12 +98,10 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 SSHDotNetDiagnostics.LogInfo($"Connection: Current encryption: {client.ConnectionInfo.CurrentServerEncryption}");
 
                 // Log authentication result
-                foreach (var authMethod in client.ConnectionInfo.AuthenticationMethods)
+                foreach (var authMethod in client.ConnectionInfo.AuthenticationMethods
+                    .Where(am => am.AllowedAuthentications != null && am.AllowedAuthentications.Any()))
                 {
-                    if (authMethod.AllowedAuthentications != null && authMethod.AllowedAuthentications.Any())
-                    {
-                        SSHDotNetDiagnostics.LogDebug($"Connection: Server allows: {string.Join(", ", authMethod.AllowedAuthentications)}");
-                    }
+                    SSHDotNetDiagnostics.LogDebug($"Connection: Server allows: {string.Join(", ", authMethod.AllowedAuthentications)}");
                 }
             }
             catch (SshAuthenticationException authEx)

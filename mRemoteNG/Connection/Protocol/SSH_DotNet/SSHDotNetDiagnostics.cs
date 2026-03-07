@@ -41,7 +41,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
         #region Performance Tracking
 
-        private static Stopwatch _connectionStopwatch = new Stopwatch();
+        private static readonly Stopwatch _connectionStopwatch = new Stopwatch();
 
         #endregion
 

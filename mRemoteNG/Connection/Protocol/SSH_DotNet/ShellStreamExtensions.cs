@@ -1,3 +1,6 @@
+// Design Note: Generic catch clause (catch Exception) is used intentionally in this file.
+// This code uses reflection to access internal SSH.NET APIs, where any reflection-related
+// exception type may occur. The catch logs the error and fails gracefully.
 using System;
 using System.Reflection;
 using Renci.SshNet;
