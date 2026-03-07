@@ -41,6 +41,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         private SshClient _sshClient;
         private ShellStream _shellStream;
         private SshTerminalControl _terminalControl;
+        private SSHTunnelManager _tunnelManager;
         private CancellationTokenSource _cancellationTokenSource;
         private Task _outputReadTask;
         private Task _inputWriteTask;
@@ -92,6 +93,27 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             }
         }
 
+        /// <summary>
+        /// When true, Initialize() skips terminal control creation, and Connect()
+        /// establishes the SSH connection and tunnel manager but skips shell stream
+        /// creation, terminal attachment, and I/O tasks.
+        /// Set this before calling Initialize() when using this protocol as a tunnel provider.
+        /// </summary>
+        public bool TunnelOnlyMode { get; set; }
+
+        /// <summary>
+        /// Provides access to the tunnel manager for setting up port forwarding.
+        /// Available after Connect() succeeds.
+        /// </summary>
+        public SSHTunnelManager TunnelManager => _tunnelManager;
+
+        /// <summary>
+        /// Whether this SSH connection is still alive and usable as a tunnel.
+        /// </summary>
+        public bool IsTunnelHealthy =>
+            _sshClient?.IsConnected == true &&
+            (_tunnelManager?.AreAllPortsHealthy() ?? true);
+
         #endregion
 
         #region Default Port
@@ -120,19 +142,23 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             {
                 SSHDotNetDiagnostics.LogDebug("Protocol: Initializing ProtocolSSH_DotNet");
 
-                // Create and initialize terminal control
-                _terminalControl = new SshTerminalControl();
-                _terminalControl.Initialize();
+                if (!TunnelOnlyMode)
+                {
+                    // Create and initialize terminal control (not needed for tunnel-only)
+                    _terminalControl = new SshTerminalControl();
+                    _terminalControl.Initialize();
 
-                // Subscribe to terminal resize events to notify SSH server
-                _terminalControl.TerminalResized += OnTerminalResized;
+                    // Subscribe to terminal resize events to notify SSH server
+                    _terminalControl.TerminalResized += OnTerminalResized;
 
-                Control = _terminalControl;
+                    Control = _terminalControl;
+                }
 
                 // Call base initialization
+                // Note: base.Initialize() handles Control == null gracefully
                 bool baseResult = base.Initialize();
 
-                SSHDotNetDiagnostics.LogDebug("Protocol: Initialization complete");
+                SSHDotNetDiagnostics.LogDebug($"Protocol: Initialization complete (TunnelOnlyMode={TunnelOnlyMode})");
                 return baseResult;
             }
             catch (Exception ex)
@@ -229,7 +255,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 // Attach error handler
                 _sshClient.ErrorOccurred += OnSshClientError;
 
-                // Connect
+                // Connect SSH client
                 try
                 {
                     SSHConnectionManager.Connect(_sshClient);
@@ -270,6 +296,27 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 // Log connection info
                 string connInfo = SSHConnectionManager.GetConnectionInfo(_sshClient);
                 SSHDotNetDiagnostics.LogInfo($"Protocol: {connInfo}");
+
+                // Create tunnel manager (available for both tunnel-only and full terminal mode)
+                _tunnelManager = new SSHTunnelManager(_sshClient);
+                _tunnelManager.TunnelError += OnTunnelError;
+
+                // Apply any user-configured port forward rules
+                string rules = InterfaceControl?.Info?.SSHDotNetPortForwardRules;
+                if (!string.IsNullOrWhiteSpace(rules))
+                {
+                    PortForwardRuleParser.ApplyRules(_tunnelManager, rules);
+                }
+
+                if (TunnelOnlyMode)
+                {
+                    // In tunnel-only mode, skip shell stream, terminal, and I/O tasks.
+                    // The SSH connection is ready for port forwarding only.
+                    State = ConnectionState.Connected;
+                    SSHDotNetDiagnostics.LogInfo("Protocol: Connected in tunnel-only mode (no shell)");
+                    Event_Connected(this);
+                    return true;
+                }
 
                 // Create shell stream with correct pixel dimensions
                 try
@@ -394,6 +441,12 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             }
         }
 
+        private void OnTunnelError(object sender, string errorMessage)
+        {
+            SSHDotNetDiagnostics.LogError($"Protocol: {errorMessage}");
+            Event_ErrorOccured(this, errorMessage, null);
+        }
+
         private void OnSshClientError(object sender, Renci.SshNet.Common.ExceptionEventArgs e)
         {
             // Track error details for smart disconnect detection
@@ -420,6 +473,16 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         private void CleanupConnection()
         {
             SSHDotNetDiagnostics.LogDebug("Protocol: Cleaning up failed connection");
+
+            try
+            {
+                _tunnelManager?.Dispose();
+                _tunnelManager = null;
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Protocol: Error disposing tunnel manager during cleanup", ex);
+            }
 
             try
             {
@@ -492,6 +555,22 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 catch (Exception ex)
                 {
                     SSHDotNetDiagnostics.LogException("Protocol: Error disposing shell stream", ex);
+                }
+
+                // Dispose tunnel manager BEFORE disconnecting SSH client
+                // SSH.NET's ForwardedPort.Stop() sends channel close messages that require an active connection
+                try
+                {
+                    if (_tunnelManager != null)
+                    {
+                        _tunnelManager.TunnelError -= OnTunnelError;
+                        _tunnelManager.Dispose();
+                        _tunnelManager = null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    SSHDotNetDiagnostics.LogException("Protocol: Error disposing tunnel manager", ex);
                 }
 
                 // Close SSH client

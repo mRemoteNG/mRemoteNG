@@ -133,6 +133,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 ? connectionCsv[headers.IndexOf("SSHOptions")]
                 : "";
 
+            connectionRecord.SSHDotNetPortForwardRules = headers.Contains("SSHDotNetPortForwardRules")
+                ? connectionCsv[headers.IndexOf("SSHDotNetPortForwardRules")]
+                : "";
+
             connectionRecord.SSHTunnelConnectionName = headers.Contains("SSHTunnelConnectionName")
                 ? connectionCsv[headers.IndexOf("SSHTunnelConnectionName")]
                 : "";
@@ -606,6 +610,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSSHOptions")], out bool value))
                     connectionRecord.Inheritance.SSHOptions = value;
+            }
+
+            if (headers.Contains("InheritSSHDotNetPortForwardRules"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSSHDotNetPortForwardRules")], out bool value))
+                    connectionRecord.Inheritance.SSHDotNetPortForwardRules = value;
             }
 
             if (headers.Contains("InheritPuttySession"))

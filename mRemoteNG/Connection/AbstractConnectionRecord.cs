@@ -49,6 +49,7 @@ namespace mRemoteNG.Connection
         private string _extApp;
         private int _port;
         private string _sshOptions = "";
+        private string _sshDotNetPortForwardRules = "";
         private string _puttySession;
         private bool _useConsoleSession;
         private AuthenticationLevel _rdpAuthenticationLevel;
@@ -420,6 +421,16 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("SSHOptions", _sshOptions);
             set => SetField(ref _sshOptions, value, "SSHOptions");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.SshPortForwardRules)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSshPortForwardRules)),
+         AttributeUsedInProtocol(ProtocolType.SSH_DotNet)]
+        public string SSHDotNetPortForwardRules
+        {
+            get => GetPropertyValue("SSHDotNetPortForwardRules", _sshDotNetPortForwardRules);
+            set => SetField(ref _sshDotNetPortForwardRules, value, "SSHDotNetPortForwardRules");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),

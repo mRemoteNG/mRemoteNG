@@ -12,6 +12,7 @@ using mRemoteNG.UI.Tabs;
 using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.Connection.Protocol.SSH_DotNet;
 using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection
@@ -118,104 +119,166 @@ namespace mRemoteNG.Connection
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.SshTunnelConfigProblem, connectionInfoOriginal.Name, connectionInfoOriginal.SSHTunnelConnectionName));
                         return;
                     }
-                    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                        $"SSH Tunnel connection '{connectionInfoOriginal.SSHTunnelConnectionName}' configured for '{connectionInfoOriginal.Name}' found. Finding free local port for use as local tunnel port ...");
-                    // determine a free local port to use as local tunnel port
-                    System.Net.Sockets.TcpListener l = new(System.Net.IPAddress.Loopback, 0);
-                    l.Start();
-                    int localSshTunnelPort = ((System.Net.IPEndPoint)l.LocalEndpoint).Port;
-                    l.Stop();
-                    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                        $"{localSshTunnelPort} will be used as local tunnel port. Establishing SSH connection to '{connectionInfoSshTunnel.Hostname}' with additional tunnel options for target connection ...");
 
-                    // clone SSH tunnel connection as tunnel options will be added to it, and those changes shall not be saved to the configuration
-                    connectionInfoSshTunnel = connectionInfoSshTunnel.Clone();
-                    connectionInfoSshTunnel.SSHOptions += " -L " + localSshTunnelPort + ":" + connectionInfoOriginal.Hostname + ":" + connectionInfoOriginal.Port;
-
-                    // clone target connection info as its hostname will be changed to localhost and port to local tunnel port to establish connection through tunnel, and those changes shall not be saved to the configuration
-                    connectionInfo = connectionInfoOriginal.Clone();
-                    connectionInfo.Name += " via " + connectionInfoSshTunnel.Name;
-                    connectionInfo.Hostname = "localhost";
-                    connectionInfo.Port = localSshTunnelPort;
-
-                    // connect the SSH connection to setup the tunnel
+                    // Create the protocol instance to determine its type
                     ProtocolBase protocolSshTunnel = protocolFactory.CreateProtocol(connectionInfoSshTunnel);
-                    if (!(protocolSshTunnel is PuttyBase puttyBaseSshTunnel))
+                    int localSshTunnelPort;
+
+                    if (protocolSshTunnel is PuttyBase puttyBaseSshTunnel)
                     {
-                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SshTunnelIsNotPutty, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
-                        return;
-                    }
+                        // === PuTTY BRANCH (existing logic, moved inside branch) ===
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                            $"SSH Tunnel connection '{connectionInfoOriginal.SSHTunnelConnectionName}' configured for '{connectionInfoOriginal.Name}' found. Finding free local port for use as local tunnel port ...");
 
-                    SetConnectionFormEventHandlers(protocolSshTunnel, connectionForm);
-                    SetConnectionEventHandlers(protocolSshTunnel);
-                    connectionContainer = SetConnectionContainer(connectionInfo, connectionForm);
-                    BuildConnectionInterfaceController(connectionInfoSshTunnel, protocolSshTunnel, connectionContainer);
-                    protocolSshTunnel.InterfaceControl.OriginalInfo = connectionInfoSshTunnel;
+                        // Find free port via TcpListener (PuTTY needs it upfront for -L flag)
+                        System.Net.Sockets.TcpListener l = new(System.Net.IPAddress.Loopback, 0);
+                        l.Start();
+                        localSshTunnelPort = ((System.Net.IPEndPoint)l.LocalEndpoint).Port;
+                        l.Stop();
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                            $"{localSshTunnelPort} will be used as local tunnel port. Establishing SSH connection to '{connectionInfoSshTunnel.Hostname}' with additional tunnel options for target connection ...");
 
-                    if (protocolSshTunnel.Initialize() == false)
-                    {
-                        protocolSshTunnel.Close();
-                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SshTunnelNotInitialized, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
-                        return;
-                    }
+                        // Clone SSH tunnel connection and add -L option
+                        connectionInfoSshTunnel = connectionInfoSshTunnel.Clone();
+                        connectionInfoSshTunnel.SSHOptions += " -L " + localSshTunnelPort + ":" + connectionInfoOriginal.Hostname + ":" + connectionInfoOriginal.Port;
 
-                    if (protocolSshTunnel.Connect() == false)
-                    {
-                        protocolSshTunnel.Close();
-                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SshTunnelNotConnected, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
-                        return;
-                    }
+                        // Clone target connection with tunnel port
+                        connectionInfo = connectionInfoOriginal.Clone();
+                        connectionInfo.Name += " via " + connectionInfoSshTunnel.Name;
+                        connectionInfo.Hostname = "localhost";
+                        connectionInfo.Port = localSshTunnelPort;
 
-                    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                        "Putty started for SSH connection for tunnel. Waiting for local tunnel port to become available ...");
+                        SetConnectionFormEventHandlers(protocolSshTunnel, connectionForm);
+                        SetConnectionEventHandlers(protocolSshTunnel);
+                        connectionContainer = SetConnectionContainer(connectionInfo, connectionForm);
+                        BuildConnectionInterfaceController(connectionInfoSshTunnel, protocolSshTunnel, connectionContainer);
+                        protocolSshTunnel.InterfaceControl.OriginalInfo = connectionInfoSshTunnel;
 
-                    // wait until SSH tunnel connection is ready, by checking if local port can be connected to, but max 60 sec.
-                    System.Net.Sockets.Socket testsock = new(System.Net.Sockets.SocketType.Stream, System.Net.Sockets.ProtocolType.Tcp);
-                    System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
-                    while (stopwatch.ElapsedMilliseconds < 60000)
-                    {
-                        // confirm that SSH connection is still active
-                        // works only if putty is connfigured to always close window on exit
-                        // else, if connection attempt fails, window remains open and putty process remains running, and we cannot know that connection is already doomed
-                        // in this case the timeout will expire and the log message below will be created
-                        // awkward for user as he has already acknowledged the putty popup some seconds again when the below notification comes....
-                        if (!puttyBaseSshTunnel.isRunning())
+                        if (protocolSshTunnel.Initialize() == false)
                         {
                             protocolSshTunnel.Close();
                             Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                string.Format(Language.SshTunnelFailed, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                                string.Format(Language.SshTunnelNotInitialized, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
                             return;
                         }
 
+                        if (protocolSshTunnel.Connect() == false)
+                        {
+                            protocolSshTunnel.Close();
+                            Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                string.Format(Language.SshTunnelNotConnected, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            return;
+                        }
+
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                            "Putty started for SSH connection for tunnel. Waiting for local tunnel port to become available ...");
+
+                        // Wait until SSH tunnel connection is ready by checking if local port can be connected to, max 60 sec.
+                        System.Net.Sockets.Socket testsock = new(System.Net.Sockets.SocketType.Stream, System.Net.Sockets.ProtocolType.Tcp);
+                        System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
+                        while (stopwatch.ElapsedMilliseconds < 60000)
+                        {
+                            if (!puttyBaseSshTunnel.isRunning())
+                            {
+                                protocolSshTunnel.Close();
+                                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                    string.Format(Language.SshTunnelFailed, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                                return;
+                            }
+
+                            try
+                            {
+                                testsock.Connect(System.Net.IPAddress.Loopback, localSshTunnelPort);
+                                testsock.Close();
+                                break;
+                            }
+                            catch
+                            {
+                                await System.Threading.Tasks.Task.Delay(1000);
+                            }
+                        }
+
+                        if (stopwatch.ElapsedMilliseconds >= 60000)
+                        {
+                            protocolSshTunnel.Close();
+                            Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                string.Format(Language.SshTunnelPortNotReadyInTime, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            return;
+                        }
+
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                            "Local tunnel port is now available. Hiding putty display and setting up target connection via local tunnel port ...");
+
+                        protocolSshTunnel.InterfaceControl.Hide();
+                    }
+                    else if (protocolSshTunnel is ProtocolSSH_DotNet sshDotNetTunnel)
+                    {
+                        // === SSH_DotNet BRANCH (new) ===
+                        // No clone needed — we don't modify SSHOptions
+                        // No TcpListener needed — SSH.NET auto-assigns port with boundPort: 0
+
+                        sshDotNetTunnel.TunnelOnlyMode = true;
+
+                        SetConnectionFormEventHandlers(protocolSshTunnel, connectionForm);
+                        SetConnectionEventHandlers(protocolSshTunnel);
+                        connectionContainer = SetConnectionContainer(connectionInfoOriginal, connectionForm);
+                        BuildConnectionInterfaceController(connectionInfoSshTunnel, protocolSshTunnel, connectionContainer);
+                        protocolSshTunnel.InterfaceControl.OriginalInfo = connectionInfoSshTunnel;
+
+                        if (!protocolSshTunnel.Initialize() || !protocolSshTunnel.Connect())
+                        {
+                            protocolSshTunnel.Close();
+                            Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                string.Format(Language.SshTunnelNotConnected, connectionInfoOriginal.Name,
+                                    connectionInfoSshTunnel.Name));
+                            return;
+                        }
+
+                        // Set up the local port forward via SSH.NET API
+                        // Pass boundPort: 0 to let OS auto-assign — no TOCTOU race
                         try
                         {
-                            testsock.Connect(System.Net.IPAddress.Loopback, localSshTunnelPort);
-                            testsock.Close();
-                            break;
-                        }
-                        catch
-                        {
-                            await System.Threading.Tasks.Task.Delay(1000);
-                        }
-                    }
+                            uint actualPort = sshDotNetTunnel.TunnelManager.AddLocalForward(
+                                "127.0.0.1",
+                                0,  // OS auto-assigns port
+                                connectionInfoOriginal.Hostname,
+                                (uint)connectionInfoOriginal.Port);
 
-                    if (stopwatch.ElapsedMilliseconds >= 60000)
+                            localSshTunnelPort = (int)actualPort;
+
+                            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                                string.Format(Language.SshTunnelDotNetReady,
+                                    connectionInfoOriginal.Name, localSshTunnelPort));
+                        }
+                        catch (Exception tunnelEx)
+                        {
+                            // Must Disconnect() first to clean up SSH client + tunnel manager,
+                            // then Close() to clean up UI. Close() alone only disposes the UI
+                            // and would leak the SSH connection.
+                            protocolSshTunnel.Disconnect();
+                            protocolSshTunnel.Close();
+                            Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                string.Format(Language.SshTunnelDotNetFailed,
+                                    connectionInfoOriginal.Name, tunnelEx.Message));
+                            return;
+                        }
+
+                        // Clone target connection with the actual tunnel port (now known)
+                        connectionInfo = connectionInfoOriginal.Clone();
+                        connectionInfo.Name += " via " + connectionInfoSshTunnel.Name;
+                        connectionInfo.Hostname = "localhost";
+                        connectionInfo.Port = localSshTunnelPort;
+
+                        // Hide the tunnel connection's display (container reused for target)
+                        protocolSshTunnel.InterfaceControl.Hide();
+                    }
+                    else
                     {
-                        protocolSshTunnel.Close();
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SshTunnelPortNotReadyInTime, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            string.Format(Language.SshTunnelUnsupportedProtocol, connectionInfoOriginal.Name,
+                                connectionInfoSshTunnel.Name));
                         return;
                     }
-
-                    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                        "Local tunnel port is now available. Hiding putty display and setting up target connection via local tunnel port ...");
-
-                    // hide the display of the SSH tunnel connection which has been shown until this time, such that password can be entered if required or errors be seen
-                    // it stays invisible in the container however which will be reused for the actual connection and such that if the container is closed the SSH tunnel connection is closed as well
-                    protocolSshTunnel.InterfaceControl.Hide();
                 }
 
                 ProtocolBase newProtocol = protocolFactory.CreateProtocol(connectionInfo);
@@ -266,7 +329,7 @@ namespace mRemoteNG.Connection
                 }
                 else
                 {
-                    if (node.Name == SSHTunnelConnectionName && (node.Protocol == ProtocolType.SSH1 || node.Protocol == ProtocolType.SSH2)) result = node;
+                    if (node.Name == SSHTunnelConnectionName && (node.Protocol == ProtocolType.SSH1 || node.Protocol == ProtocolType.SSH2 || node.Protocol == ProtocolType.SSH_DotNet)) result = node;
                 }
                 if (result != null) break;
             }
