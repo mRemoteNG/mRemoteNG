@@ -19,5 +19,8 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.VaultOpenbao))]
         VaultOpenbao = 4,
+
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.ECPInternalCredentialSet))]
+        InternalCredentialSet = 5,
     }
 }
