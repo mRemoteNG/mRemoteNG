@@ -9,6 +9,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
     <TransformOnBuild>true</TransformOnBuild>
     <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
     <OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
@@ -112,7 +114,8 @@
     <None Remove="buildenv.tmp" />
     <None Remove="UI\Font\HandelGotDBol.ttf" />
   </ItemGroup>
-  <ItemGroup>
+  <!-- COM Reference for Visual Studio builds -->
+  <ItemGroup Condition="'$(BuildingInsideVisualStudio)' == 'true'">
     <COMReference Include="MSTSCLib">
       <WrapperTool>aximp</WrapperTool>
       <VersionMinor>0</VersionMinor>
@@ -122,6 +125,10 @@
       <Isolated>false</Isolated>
       <EmbedInteropTypes>false</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <!-- NuGet package for dotnet CLI builds -->
+  <ItemGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'">
+    <PackageReference Include="AxMSTSCLib" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" />
@@ -136,6 +143,8 @@
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" />
     <PackageReference Include="Microsoft.Data.SqlClient" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
+    <PackageReference Include="Microsoft.NETCore.Platforms" />
+    <PackageReference Include="Microsoft.NETCore.Targets" />
     <PackageReference Include="Microsoft.Web.WebView2" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" />
     <PackageReference Include="MySql.Data" />
@@ -551,10 +560,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="145.0.26" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="144.0.12" />
   </ItemGroup>
   <ItemGroup Condition="'$(Platform)'=='arm64'">
-    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="145.0.26" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="144.0.12" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
@@ -594,5 +603,5 @@
     <RemoveDir Directories="$(TempBuildDir)" />
     <RemoveDir Directories="$(ProjectDir)bin\x64\Release Self-Contained" />
   </Target>
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets')" />
 </Project>

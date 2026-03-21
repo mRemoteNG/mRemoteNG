@@ -232,6 +232,15 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid {
                     && SelectedConnectionInfo.VaultOpenbaoSecretEngine != VaultOpenbaoSecretEngine.SSHOTP)
                     strHide.Add(nameof(AbstractConnectionRecord.Username));
                 strHide.Add(nameof(AbstractConnectionRecord.Password));
+            } else if (SelectedConnectionInfo.ExternalCredentialProvider == ExternalCredentialProvider.InternalCredentialSet) {
+                // When using internal credential sets, hide manual credential fields
+                // and show only the UserViaAPI field (which stores the credential set GUID)
+                strHide.Add(nameof(AbstractConnectionRecord.Username));
+                strHide.Add(nameof(AbstractConnectionRecord.Password));
+                strHide.Add(nameof(AbstractConnectionRecord.Domain));
+                strHide.Add(nameof(AbstractConnectionRecord.VaultOpenbaoSecretEngine));
+                strHide.Add(nameof(AbstractConnectionRecord.VaultOpenbaoMount));
+                strHide.Add(nameof(AbstractConnectionRecord.VaultOpenbaoRole));
             }
             return strHide;
         }
@@ -347,8 +356,12 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid {
                 }
 
                 rootInfo.PasswordString = password.First().ConvertToUnsecureString();
+                if (!Runtime.HasActiveMasterPasswordSession)
+                    Runtime.SetEncryptionKey(rootInfo.PasswordString);
             } else {
                 rootInfo.PasswordString = "";
+                if (!Runtime.HasActiveMasterPasswordSession)
+                    Runtime.ResetEncryptionKey();
             }
         }
 

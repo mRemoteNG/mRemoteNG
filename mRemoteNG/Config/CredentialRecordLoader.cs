@@ -27,8 +27,17 @@ namespace mRemoteNG.Config
 
         public IEnumerable<ICredentialRecord> Load(SecureString key)
         {
-            string serializedCredentials = _dataProvider.Load();
-            return _deserializer.Deserialize(serializedCredentials, key);
+            try
+            {
+                string serializedCredentials = _dataProvider.Load();
+                return _deserializer.Deserialize(serializedCredentials, key);
+            }
+            catch (Exception)
+            {
+                // If loading fails for any reason (file missing, corrupt, etc.),
+                // return empty collection to allow the system to initialize properly.
+                return Array.Empty<ICredentialRecord>();
+            }
         }
     }
 }

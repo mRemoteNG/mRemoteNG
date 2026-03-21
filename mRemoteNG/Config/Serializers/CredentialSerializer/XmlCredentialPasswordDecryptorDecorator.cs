@@ -25,14 +25,39 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
 
         public IEnumerable<ICredentialRecord> Deserialize(string xml, SecureString key)
         {
-            string decryptedXml = DecryptPasswords(xml, key);
-            return _baseDeserializer.Deserialize(decryptedXml);
+            // Handle empty or uninitialized credential files
+            if (string.IsNullOrEmpty(xml))
+                return Array.Empty<ICredentialRecord>();
+
+            try
+            {
+                string decryptedXml = DecryptPasswords(xml, key);
+                return _baseDeserializer.Deserialize(decryptedXml);
+            }
+            catch (Exception)
+            {
+                // If decryption fails (e.g., file has wrong format, no Auth header, etc.),
+                // return empty collection. This allows the system to initialize properly.
+                return Array.Empty<ICredentialRecord>();
+            }
         }
 
         private string DecryptPasswords(string xml, SecureString key)
         {
             if (string.IsNullOrEmpty(xml)) return xml;
+            
             XDocument xdoc = XDocument.Parse(xml);
+            
+            // Check if this is a valid credentials file with Auth header
+            // If not, it may be an uninitialized file - return empty
+            XAttribute authAttribute = xdoc.Root?.Attribute("Auth");
+            if (authAttribute == null)
+            {
+                // No Auth header means this is not a properly initialized credentials file
+                // Return empty XML that will result in empty credentials list
+                return string.Empty;
+            }
+            
             ICryptographyProvider cryptoProvider = new CryptoProviderFactoryFromXml(xdoc.Root).Build();
             DecryptAuthHeader(xdoc.Root, cryptoProvider, key);
             foreach (XElement credentialElement in xdoc.Descendants())
@@ -48,7 +73,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
 
         private void DecryptAuthHeader(XElement rootElement, ICryptographyProvider cryptographyProvider, SecureString key)
         {
-            XAttribute authAttribute = rootElement.Attribute("Auth");
+            XAttribute authAttribute = rootElement?.Attribute("Auth");
             if (authAttribute == null)
                 throw new EncryptionException("Could not find Auth header in the XML repository root element.");
             cryptographyProvider.Decrypt(authAttribute.Value, key);

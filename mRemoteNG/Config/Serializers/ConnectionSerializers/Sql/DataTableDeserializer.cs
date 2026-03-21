@@ -81,10 +81,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             //connectionInfo.EC2InstanceId = (string)dataRow["EC2InstanceId"];
             //connectionInfo.EC2Region = (string)dataRow["EC2Region"];
             //connectionInfo.ExternalAddressProvider = (ExternalAddressProvider)Enum.Parse(typeof(ExternalAddressProvider), (string)dataRow["ExternalAddressProvider"]);
-            //connectionInfo.ExternalCredentialProvider = (ExternalCredentialProvider)Enum.Parse(typeof(ExternalCredentialProvider), (string)dataRow["ExternalCredentialProvider"]);
-            //connectionInfo.RDGatewayExternalCredentialProvider = (ExternalCredentialProvider)Enum.Parse(typeof(ExternalCredentialProvider), (string)dataRow["RDGatewayExternalCredentialProvider"]);
-            //connectionInfo.RDGatewayUserViaAPI = (string)dataRow["RDGatewayUserViaAPI"];
-            //connectionInfo.UserViaAPI = (string)dataRow["UserViaAPI"];
+            connectionInfo.ExternalCredentialProvider = (ExternalCredentialProvider)Enum.Parse(typeof(ExternalCredentialProvider), (string)dataRow["ExternalCredentialProvider"]);
+            connectionInfo.RDGatewayExternalCredentialProvider = (ExternalCredentialProvider)Enum.Parse(typeof(ExternalCredentialProvider), (string)dataRow["RDGatewayExternalCredentialProvider"]);
+            connectionInfo.RDGatewayUserViaAPI = (string)dataRow["RDGatewayUserViaAPI"];
+            connectionInfo.UserViaAPI = (string)dataRow["UserViaAPI"];
             connectionInfo.AutomaticResize = MiscTools.GetBooleanValue(dataRow["AutomaticResize"]);
             connectionInfo.CacheBitmaps = MiscTools.GetBooleanValue(dataRow["CacheBitmaps"]);
             connectionInfo.Colors = (RDPColors)Enum.Parse(typeof(RDPColors), (string)dataRow["Colors"]);
@@ -165,10 +165,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 if (Enum.TryParse((string)dataRow["RdpVersion"], true, out RdpVersion rdpVersion))
                     connectionInfo.RdpVersion = rdpVersion;
 
-            //connectionInfo.Inheritance.ExternalCredentialProvider = MiscTools.GetBooleanValue(dataRow["InheritExternalCredentialProvider"]);
-            //connectionInfo.Inheritance.RDGatewayExternalCredentialProvider = MiscTools.GetBooleanValue(dataRow["InheritRDGatewayExternalCredentialProvider"]);
-            //connectionInfo.Inheritance.RDGatewayUserViaAPI = MiscTools.GetBooleanValue(dataRow["InheritRDGatewayUserViaAPI"]);
-            //connectionInfo.Inheritance.UserViaAPI = MiscTools.GetBooleanValue(dataRow["InheritUserViaAPI"]);
+            connectionInfo.Inheritance.ExternalCredentialProvider = MiscTools.GetBooleanValue(dataRow["InheritExternalCredentialProvider"]);
+            connectionInfo.Inheritance.RDGatewayExternalCredentialProvider = MiscTools.GetBooleanValue(dataRow["InheritRDGatewayExternalCredentialProvider"]);
+            connectionInfo.Inheritance.RDGatewayUserViaAPI = MiscTools.GetBooleanValue(dataRow["InheritRDGatewayUserViaAPI"]);
+            connectionInfo.Inheritance.UserViaAPI = MiscTools.GetBooleanValue(dataRow["InheritUserViaAPI"]);
             connectionInfo.Inheritance.AutomaticResize = MiscTools.GetBooleanValue(dataRow["InheritAutomaticResize"]);
             connectionInfo.Inheritance.CacheBitmaps = MiscTools.GetBooleanValue(dataRow["InheritCacheBitmaps"]);
             connectionInfo.Inheritance.Colors = MiscTools.GetBooleanValue(dataRow["InheritColors"]);

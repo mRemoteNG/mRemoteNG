@@ -3,6 +3,7 @@ using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
+using System.Linq;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
@@ -46,9 +47,203 @@ namespace mRemoteNG.App
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
 
-        public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
+        private static SecureString? _masterPasswordKey;
+        public static SecureString EncryptionKey { get; private set; } = CreateDefaultEncryptionKey();
+        public static bool HasActiveMasterPasswordSession => _masterPasswordKey != null;
 
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
+
+        /// <summary>
+        /// The global credential service facade for accessing credential repositories.
+        /// Must be initialized at startup by calling <see cref="InitializeCredentialService"/>.
+        /// </summary>
+        public static CredentialServiceFacade? CredentialService { get; private set; }
+
+        /// <summary>
+        /// Initializes the credential service and loads the credential repository list.
+        /// Should be called during application startup.
+        /// </summary>
+        public static void InitializeCredentialService()
+        {
+            if (CredentialService == null)
+            {
+                CredentialServiceFactory factory = new();
+                CredentialService = factory.Build();
+                CredentialService.LoadRepositoryList();
+            }
+            
+            // Always ensure a default credential repository exists
+            EnsureDefaultCredentialRepository();
+        }
+
+        /// <summary>
+        /// Creates a default credential repository if none exists, and ensures it's loaded with an encryption key.
+        /// This method can be called multiple times and will only create a repository if needed.
+        /// </summary>
+        public static void EnsureDefaultCredentialRepository()
+        {
+            // Check if any repository exists and is loaded
+            ICredentialRepository? loadedRepo = CredentialProviderCatalog.CredentialProviders.FirstOrDefault(r => r.IsLoaded);
+            
+            if (loadedRepo != null)
+                return; // Already have a loaded repository
+
+            // Try to get an existing unloaded repository
+            ICredentialRepository? existingRepo = CredentialProviderCatalog.CredentialProviders.FirstOrDefault();
+
+            if (existingRepo == null)
+            {
+                // Create a brand new default repository
+                existingRepo = CreateDefaultCredentialRepository();
+                CredentialService?.AddRepository(existingRepo);
+            }
+
+            SecureString repositoryKey = ResolveCredentialRepositoryKey(existingRepo);
+
+            // Load the repository with the encryption key
+            try
+            {
+                existingRepo.LoadCredentials(repositoryKey);
+                MigrateCredentialRepositoryKeyIfNeeded(existingRepo, repositoryKey);
+            }
+            catch (Exception ex)
+            {
+                MessageCollector.AddExceptionMessage("Failed to load credential repository", ex);
+            }
+        }
+
+        public static void SetEncryptionKey(SecureString key)
+        {
+            UpdateEncryptionKey(key.Copy(), syncLoadedRepositories: true);
+        }
+
+        public static void SetEncryptionKey(string key)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                ResetEncryptionKey();
+                return;
+            }
+
+            SetEncryptionKey(key.ConvertToSecureString());
+        }
+
+        public static void ResetEncryptionKey()
+        {
+            UpdateEncryptionKey(_masterPasswordKey?.Copy() ?? CreateCurrentRootOrDefaultEncryptionKey(), syncLoadedRepositories: true);
+        }
+
+        public static void SetMasterPasswordSession(SecureString key)
+        {
+            _masterPasswordKey?.Dispose();
+            _masterPasswordKey = key.Copy();
+            UpdateEncryptionKey(_masterPasswordKey.Copy(), syncLoadedRepositories: true);
+        }
+
+        public static void ClearMasterPasswordSession()
+        {
+            _masterPasswordKey?.Dispose();
+            _masterPasswordKey = null;
+            UpdateEncryptionKey(CreateCurrentRootOrDefaultEncryptionKey(), syncLoadedRepositories: true);
+        }
+
+        /// <summary>
+        /// Creates a new default XML credential repository.
+        /// </summary>
+        private static ICredentialRepository CreateDefaultCredentialRepository()
+        {
+            string credentialsPath = Path.Combine(Info.SettingsFileInfo.SettingsPath, "credentials.xml");
+            
+            CredentialRepositoryConfig config = new()
+            {
+                Title = "Default Credentials",
+                TypeName = "XmlCredentialRepository",
+                Source = credentialsPath
+            };
+            
+            Security.Factories.CryptoProviderFactoryFromSettings cryptoFromSettings = new();
+            Config.Serializers.CredentialSerializer.XmlCredentialPasswordEncryptorDecorator serializer = 
+                new(cryptoFromSettings.Build(), new Config.Serializers.CredentialSerializer.XmlCredentialRecordSerializer());
+            Config.Serializers.CredentialSerializer.XmlCredentialPasswordDecryptorDecorator deserializer = 
+                new(new Config.Serializers.CredentialSerializer.XmlCredentialRecordDeserializer());
+            
+            Credential.Repositories.XmlCredentialRepositoryFactory repoFactory = new(serializer, deserializer);
+            return repoFactory.Build(config);
+        }
+
+        private static SecureString CreateDefaultEncryptionKey()
+        {
+            return new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
+        }
+
+        private static SecureString CreateCurrentRootOrDefaultEncryptionKey()
+        {
+            RootNodeInfo? rootNode = ConnectionsService.ConnectionTreeModel?.RootNodes.OfType<RootNodeInfo>().FirstOrDefault();
+            return rootNode is { Password: true }
+                ? rootNode.PasswordString.ConvertToSecureString()
+                : CreateDefaultEncryptionKey();
+        }
+
+        private static void UpdateEncryptionKey(SecureString newKey, bool syncLoadedRepositories)
+        {
+            bool keyChanged = EncryptionKey.ConvertToUnsecureString() != newKey.ConvertToUnsecureString();
+
+            EncryptionKey?.Dispose();
+            EncryptionKey = newKey;
+
+            if (syncLoadedRepositories && keyChanged)
+                SyncLoadedCredentialRepositoriesToEncryptionKey();
+        }
+
+        private static SecureString ResolveCredentialRepositoryKey(ICredentialRepository repository)
+        {
+            string source = repository.Config.Source;
+            if (string.IsNullOrWhiteSpace(source) || !File.Exists(source))
+                return EncryptionKey.Copy();
+
+            if (XmlKeyValidator.CredentialsFileUsesKey(source, EncryptionKey))
+                return EncryptionKey.Copy();
+
+            SecureString defaultKey = CreateDefaultEncryptionKey();
+            return XmlKeyValidator.CredentialsFileUsesKey(source, defaultKey)
+                ? defaultKey
+                : EncryptionKey.Copy();
+        }
+
+        private static void MigrateCredentialRepositoryKeyIfNeeded(ICredentialRepository repository, SecureString loadedKey)
+        {
+            if (loadedKey.ConvertToUnsecureString() == EncryptionKey.ConvertToUnsecureString())
+            {
+                repository.Config.Key = EncryptionKey.Copy();
+                return;
+            }
+
+            try
+            {
+                repository.SaveCredentials(EncryptionKey);
+                repository.Config.Key = EncryptionKey.Copy();
+            }
+            catch (Exception ex)
+            {
+                MessageCollector.AddExceptionMessage("Failed to migrate credential repository encryption key", ex);
+            }
+        }
+
+        private static void SyncLoadedCredentialRepositoriesToEncryptionKey()
+        {
+            foreach (ICredentialRepository repository in CredentialProviderCatalog.CredentialProviders.Where(r => r.IsLoaded))
+            {
+                try
+                {
+                    repository.SaveCredentials(EncryptionKey);
+                    repository.Config.Key = EncryptionKey.Copy();
+                }
+                catch (Exception ex)
+                {
+                    MessageCollector.AddExceptionMessage("Failed to synchronize credential repository encryption key", ex);
+                }
+            }
+        }
 
         public static ConnectionInitiator ConnectionInitiator { get; set; } = new ConnectionInitiator();
 

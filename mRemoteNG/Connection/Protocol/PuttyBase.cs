@@ -114,7 +114,7 @@ namespace mRemoteNG.Connection.Protocol
                         string privatekey = "";
 
                         // access secret server api if necessary
-                        if (InterfaceControl.Info?.ExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
+                        if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
                         {
                             try
                             {
@@ -135,7 +135,7 @@ namespace mRemoteNG.Connection.Protocol
                                 Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
                             }
                         }
-                        else if (InterfaceControl.Info?.ExternalCredentialProvider == ExternalCredentialProvider.ClickstudiosPasswordState)
+                        else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.ClickstudiosPasswordState)
                         {
                             try
                             {
@@ -156,7 +156,7 @@ namespace mRemoteNG.Connection.Protocol
                                 Event_ErrorOccured(this, "Passwordstate Interface Error: " + ex.Message, 0);
                             }
                         }
-                        else if (InterfaceControl.Info?.ExternalCredentialProvider == ExternalCredentialProvider.OnePassword) {
+                        else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.OnePassword) {
                             try
                             {
                                 ExternalConnectors.OP.OnePasswordCli.ReadPassword($"{UserViaAPI}", out username, out password, out _, out privatekey);
@@ -167,7 +167,7 @@ namespace mRemoteNG.Connection.Protocol
                                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ECPOnePasswordReadFailed + Environment.NewLine + ex.Message);
                             }
                         }
-                        else if (InterfaceControl.Info?.ExternalCredentialProvider == ExternalCredentialProvider.VaultOpenbao) {
+                        else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.VaultOpenbao) {
                             try {
                                 if (InterfaceControl.Info?.VaultOpenbaoSecretEngine == VaultOpenbaoSecretEngine.SSHOTP)
                                     ExternalConnectors.VO.VaultOpenbao.ReadOtpSSH($"{InterfaceControl.Info?.VaultOpenbaoMount}", $"{InterfaceControl.Info?.VaultOpenbaoRole}", $"{InterfaceControl.Info?.Username}", $"{InterfaceControl.Info?.Hostname}", out password);
@@ -175,6 +175,17 @@ namespace mRemoteNG.Connection.Protocol
                                     ExternalConnectors.VO.VaultOpenbao.ReadPasswordSSH((int)InterfaceControl.Info?.VaultOpenbaoSecretEngine, InterfaceControl.Info?.VaultOpenbaoMount ?? "", InterfaceControl.Info?.VaultOpenbaoRole ?? "", InterfaceControl.Info?.Username ?? "root", out password);
                             } catch (ExternalConnectors.VO.VaultOpenbaoException ex) {
                                 Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                            }
+                        }
+                        else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.InternalCredentialSet)
+                        {
+                            try
+                            {
+                                Credential.CredentialSetResolver.Resolve(UserViaAPI, out username, out password, out _);
+                            }
+                            catch (Exception ex)
+                            {
+                                Runtime.MessageCollector.AddExceptionMessage("Failed to resolve credential set", ex);
                             }
                         }
 
@@ -238,7 +249,7 @@ namespace mRemoteNG.Connection.Protocol
                             }
                         }
 
-                        if (InterfaceControl.Info?.ExternalCredentialProvider == ExternalCredentialProvider.VaultOpenbao && InterfaceControl.Info?.VaultOpenbaoSecretEngine == VaultOpenbaoSecretEngine.SSHOTP) {
+                        if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.VaultOpenbao && InterfaceControl.Info?.VaultOpenbaoSecretEngine == VaultOpenbaoSecretEngine.SSHOTP) {
                             if (!_isPuttyNg) {
                                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Cannot connect to VaultOpenbao ssh otp without using puttyng to inject authenticator plugin");
                                 return false;
@@ -272,7 +283,7 @@ namespace mRemoteNG.Connection.Protocol
 
                     }
 
-                    arguments.Add("-P", InterfaceControl.Info?.Port.ToString());
+                    arguments.Add("-P", InterfaceControl.Info.Port.ToString());
                     arguments.Add(InterfaceControl.Info.Hostname);
                 }
 
@@ -291,16 +302,7 @@ namespace mRemoteNG.Connection.Protocol
                 PuttyProcess.EnableRaisingEvents = true;
                 PuttyProcess.Exited += ProcessExited;
 
-                // Start the process minimized for non-PuTTYNG so the window
-                // does not flash at its default position on screen before
-                // being reparented into the mRemoteNG panel.
-                if (!_isPuttyNg)
-                {
-                    PuttyProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-                }
-
                 PuttyProcess.Start();
-                ChildProcessTracker.AddProcess(PuttyProcess);
                 PuttyProcess.WaitForInputIdle(Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
 
                 int startTicks = Environment.TickCount;
@@ -332,9 +334,6 @@ namespace mRemoteNG.Connection.Protocol
                             if (cls.Equals("PuTTY", StringComparison.OrdinalIgnoreCase))
                             {
                                 PuttyHandle = candidateHandle;
-                                // Hide the window immediately so it doesn't flash
-                                // at its default position before being reparented.
-                                NativeMethods.ShowWindow(PuttyHandle, (int)NativeMethods.SW_HIDE);
                             }
                         }
                     }
@@ -348,27 +347,6 @@ namespace mRemoteNG.Connection.Protocol
                 if (!_isPuttyNg)
                 {
                     NativeMethods.SetParent(PuttyHandle, InterfaceControl.Handle);
-
-                    // Strip the title bar and thick frame border so the
-                    // embedded PuTTY window fills the panel cleanly.
-                    int style = NativeMethods.GetWindowLong(PuttyHandle, NativeMethods.GWL_STYLE);
-                    style &= ~(NativeMethods.WS_CAPTION | NativeMethods.WS_THICKFRAME);
-                    int previousStyle = NativeMethods.SetWindowLong(PuttyHandle, NativeMethods.GWL_STYLE, style);
-                    
-                    // Check if SetWindowLong failed (returns 0 on error, but 0 could also be the previous value)
-                    // If it returns 0 and the previous GetWindowLong succeeded, log a warning
-                    if (previousStyle == 0)
-                    {
-                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, 
-                            Language.PuttyStuff + ": SetWindowLong returned 0, window style change may have failed", true);
-                    }
-
-                    // Force Windows to recalculate the non-client area so the
-                    // removed caption and border actually disappear.
-                    NativeMethods.SetWindowPos(PuttyHandle, IntPtr.Zero,
-                        0, 0, 0, 0,
-                        NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE |
-                        NativeMethods.SWP_NOZORDER | NativeMethods.SWP_FRAMECHANGED);
                 }
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.PuttyStuff, true);
@@ -381,11 +359,6 @@ namespace mRemoteNG.Connection.Protocol
                     NativeMethods.SetForegroundWindow(PuttyHandle);
                     string finalCommand = InterfaceControl.Info.OpeningCommand.TrimEnd() + "\n";
                     SendKeys.SendWait(finalCommand);
-                }
-
-                if (!_isPuttyNg)
-                {
-                    NativeMethods.ShowWindow(PuttyHandle, (int)NativeMethods.SW_RESTORE);
                 }
 
                 Resize(this, new EventArgs());
@@ -436,16 +409,25 @@ namespace mRemoteNG.Connection.Protocol
                 }
                 else
                 {
-                    // Window chrome (caption + thick frame) has been stripped
-                    // after reparenting, so just fill the client rectangle.
-                    Rectangle clientRect = InterfaceControl.ClientRectangle;
+                    int scaledFrameBorderHeight = _display.ScaleHeight(SystemInformation.FrameBorderSize.Height);
+                    int scaledFrameBorderWidth = _display.ScaleWidth(SystemInformation.FrameBorderSize.Width);
 
-                    NativeMethods.MoveWindow(PuttyHandle, clientRect.X-8, clientRect.Y-30, clientRect.Width+32, clientRect.Height+38, true);
+                    // Use ClientRectangle to account for padding (for connection frame color)
+                    Rectangle clientRect = InterfaceControl.ClientRectangle;
+                    NativeMethods.MoveWindow(PuttyHandle,
+                                             clientRect.X - scaledFrameBorderWidth,
+                                             clientRect.Y - (SystemInformation.CaptionHeight + scaledFrameBorderHeight),
+                                             clientRect.Width + scaledFrameBorderWidth * 2,
+                                             clientRect.Height + SystemInformation.CaptionHeight +
+                                             scaledFrameBorderHeight * 2,
+                                             true);
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.PuttyResizeFailed + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    Language.PuttyResizeFailed + Environment.NewLine + ex.Message,
+                                                    true);
             }
         }
 

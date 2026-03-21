@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Credential;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.UI.Menu
 {
@@ -14,6 +15,8 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenToolsExternalApps;
         private ToolStripMenuItem _mMenToolsPortScan;
         private ToolStripMenuItem _mMenToolsUvncsc;
+        private ToolStripMenuItem _mMenToolsCredentialSets;
+        private ToolStripMenuItem _mMenToolsMasterPassword;
 
         public Form MainForm { get; set; }
         public ICredentialRepositoryList CredentialProviderCatalog { get; set; }
@@ -29,6 +32,8 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsUvncsc = new ToolStripMenuItem();
             _mMenToolsExternalApps = new ToolStripMenuItem();
             _mMenToolsPortScan = new ToolStripMenuItem();
+            _mMenToolsCredentialSets = new ToolStripMenuItem();
+            _mMenToolsMasterPassword = new ToolStripMenuItem();
             // 
             // mMenTools
             // 
@@ -37,7 +42,10 @@ namespace mRemoteNG.UI.Menu
                 _mMenToolsSshTransfer,
                 _mMenToolsUvncsc,
                 _mMenToolsExternalApps,
-                _mMenToolsPortScan
+                _mMenToolsPortScan,
+                new ToolStripSeparator(),
+                _mMenToolsCredentialSets,
+                _mMenToolsMasterPassword
             });
             Name = "mMenTools";
             Size = new System.Drawing.Size(48, 20);
@@ -74,6 +82,22 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsPortScan.Size = new System.Drawing.Size(184, 22);
             _mMenToolsPortScan.Text = Language.PortScan;
             _mMenToolsPortScan.Click += mMenToolsPortScan_Click;
+            // 
+            // mMenToolsCredentialSets
+            // 
+            _mMenToolsCredentialSets.Image = Properties.Resources.Key_16x;
+            _mMenToolsCredentialSets.Name = "mMenToolsCredentialSets";
+            _mMenToolsCredentialSets.Size = new System.Drawing.Size(184, 22);
+            _mMenToolsCredentialSets.Text = Language.CredentialSetsMenuItem;
+            _mMenToolsCredentialSets.Click += mMenToolsCredentialSets_Click;
+            //
+            // mMenToolsMasterPassword
+            //
+            _mMenToolsMasterPassword.Image = Properties.Resources.Key_16x;
+            _mMenToolsMasterPassword.Name = "mMenToolsMasterPassword";
+            _mMenToolsMasterPassword.Size = new System.Drawing.Size(184, 22);
+            _mMenToolsMasterPassword.Text = "Master Password";
+            _mMenToolsMasterPassword.Click += mMenToolsMasterPassword_Click;
         }
 
         public void ApplyLanguage()
@@ -82,6 +106,8 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsSshTransfer.Text = Language.SshFileTransfer;
             _mMenToolsExternalApps.Text = Language.ExternalTool;
             _mMenToolsPortScan.Text = Language.PortScan;
+            _mMenToolsCredentialSets.Text = Language.CredentialSetsMenuItem;
+            _mMenToolsMasterPassword.Text = "Master Password";
         }
 
         #region Tools
@@ -109,6 +135,18 @@ namespace mRemoteNG.UI.Menu
         private void mMenToolsOptions_Click(object sender, EventArgs e)
         {
             AppWindows.Show(WindowType.Options);
+        }
+
+        private void mMenToolsCredentialSets_Click(object sender, EventArgs e)
+        {
+            using CredentialSetsManager credentialSetsManager = new();
+            credentialSetsManager.ShowDialog(MainForm);
+        }
+
+        private void mMenToolsMasterPassword_Click(object sender, EventArgs e)
+        {
+            using MasterPasswordManager masterPasswordManager = new();
+            masterPasswordManager.ShowDialog(MainForm);
         }
 
         #endregion

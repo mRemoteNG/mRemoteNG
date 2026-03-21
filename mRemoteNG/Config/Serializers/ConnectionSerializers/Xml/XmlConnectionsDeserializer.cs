@@ -49,6 +49,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
                 XmlElement rootXmlElement = _xmlDocument.DocumentElement;
                 InitializeRootNode(rootXmlElement);
+                _rootNodeInfo.PasswordString = Runtime.EncryptionKey.ConvertToUnsecureString();
                 CreateDecryptor(_rootNodeInfo, rootXmlElement);
                 ConnectionTreeModel connectionTreeModel = new();
                 connectionTreeModel.AddRootNode(_rootNodeInfo);
@@ -90,7 +91,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         private void LoadXmlConnectionData(string connections)
         {
-            CreateDecryptor(new RootNodeInfo(RootNodeType.Connection));
+            RootNodeInfo startupRootNode = new(RootNodeType.Connection)
+            {
+                PasswordString = Runtime.EncryptionKey.ConvertToUnsecureString()
+            };
+            CreateDecryptor(startupRootNode);
             connections = _decryptor.LegacyFullFileDecrypt(connections);
             if (connections != "")
             {
@@ -338,7 +343,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.Inheritance.RedirectPrinters = xmlnode.GetAttributeAsBool("InheritRedirectPrinters");
                     connectionInfo.Inheritance.RedirectSmartCards = xmlnode.GetAttributeAsBool("InheritRedirectSmartCards");
                     connectionInfo.Inheritance.RedirectSound = xmlnode.GetAttributeAsBool("InheritRedirectSound");
-                    connectionInfo.Inheritance.RedirectAudioCapture = xmlnode.GetAttributeAsBool("InheritRedirectAudioCapture");
+                    connectionInfo.Inheritance.RedirectAudioCapture = xmlnode.GetAttributeAsBool("RedirectAudioCapture");
                     connectionInfo.Inheritance.Resolution = xmlnode.GetAttributeAsBool("InheritResolution");
                     connectionInfo.Inheritance.UseConsoleSession = xmlnode.GetAttributeAsBool("InheritUseConsoleSession");
 

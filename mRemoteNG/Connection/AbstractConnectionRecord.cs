@@ -5,6 +5,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Credential;
 using mRemoteNG.Properties;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.Attributes;
@@ -233,6 +234,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.UserViaAPI)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUserViaAPI)),
+         TypeConverter(typeof(CredentialSetTypeConverter)),
          AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2)]
         public virtual string UserViaAPI
         {
@@ -640,6 +642,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.UserViaAPI)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUserViaAPI)),
+         TypeConverter(typeof(CredentialSetTypeConverter)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public virtual string RDGatewayUserViaAPI
         {

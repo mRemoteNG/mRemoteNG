@@ -34,6 +34,7 @@ namespace mRemoteNG.UI.Forms
         public FrmPassword(string passwordName = null, bool newPasswordMode = true)
         {
             InitializeComponent();
+            Icon = MiscTools.GetIconFromFile(Application.ExecutablePath) ?? Properties.Resources.mRemoteNG_Icon;
             _passwordName = passwordName;
             NewPasswordMode = newPasswordMode;
         }
@@ -43,9 +44,13 @@ namespace mRemoteNG.UI.Forms
         /// enter their password.
         /// </summary>
         /// <returns></returns>
-        public Optional<SecureString> GetKey()
+        public Optional<SecureString> GetKey() => GetKey(null);
+
+        public Optional<SecureString> GetKey(IWin32Window owner)
         {
-            DialogResult dialog = ShowDialog();
+            DialogResult dialog = owner is null
+                ? ShowDialog()
+                : ShowDialog(owner);
             return dialog == DialogResult.OK
                 ? _password
                 : Optional<SecureString>.Empty;
@@ -60,6 +65,11 @@ namespace mRemoteNG.UI.Forms
             DisplayProperties display = new();
             pbLock.Image = display.ScaleImage(pbLock.Image);
             Height = tableLayoutPanel1.Height;
+
+            TopMost = true;
+            BringToFront();
+            Activate();
+            TopMost = false;
 
             if (NewPasswordMode)
             {
@@ -86,10 +96,11 @@ namespace mRemoteNG.UI.Forms
 
         private void BtnOK_Click(object sender, EventArgs e)
         {
-            if (NewPasswordMode)
-                VerifyNewPassword();
+            if (NewPasswordMode && !VerifyNewPassword())
+                return;
 
             DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void TxtPassword_TextChanged(object sender, EventArgs e)

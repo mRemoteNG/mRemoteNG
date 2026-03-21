@@ -1889,6 +1889,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Credential Set.
+        /// </summary>
+        internal static string ECPInternalCredentialSet {
+            get {
+                return ResourceManager.GetString("ECPInternalCredentialSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1Password.
         /// </summary>
         internal static string ECPOnePassword {
@@ -7357,6 +7366,87 @@ namespace mRemoteNG.Resources.Language {
         internal static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credential Sets Manager.
+        /// </summary>
+        internal static string CredentialSetsManager {
+            get {
+                return ResourceManager.GetString("CredentialSetsManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credential Details.
+        /// </summary>
+        internal static string CredentialDetails {
+            get {
+                return ResourceManager.GetString("CredentialDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        internal static string Confirm {
+            get {
+                return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the credential '{0}'? This credential is referenced by {1} connection(s)..
+        /// </summary>
+        internal static string CredentialDeleteWarningWithReferences {
+            get {
+                return ResourceManager.GetString("CredentialDeleteWarningWithReferences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the credential '{0}'?.
+        /// </summary>
+        internal static string CredentialDeleteConfirmation {
+            get {
+                return ResourceManager.GetString("CredentialDeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title is required..
+        /// </summary>
+        internal static string CredentialTitleRequired {
+            get {
+                return ResourceManager.GetString("CredentialTitleRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credential Sets....
+        /// </summary>
+        internal static string CredentialSetsMenuItem {
+            get {
+                return ResourceManager.GetString("CredentialSetsMenuItem", resourceCulture);
             }
         }
     }
