@@ -86,8 +86,8 @@ namespace mRemoteNG.Credential
                 if (map.TryGetValue(stringValue, out string? guid))
                     return guid;
 
-                // Return empty string if not found
-                return string.Empty;
+                // Return the original value as-is for custom credential providers
+                return stringValue;
             }
 
             return base.ConvertFrom(context, culture, value);

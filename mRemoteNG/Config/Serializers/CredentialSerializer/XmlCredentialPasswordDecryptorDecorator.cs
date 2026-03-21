@@ -29,17 +29,8 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
             if (string.IsNullOrEmpty(xml))
                 return Array.Empty<ICredentialRecord>();
 
-            try
-            {
-                string decryptedXml = DecryptPasswords(xml, key);
-                return _baseDeserializer.Deserialize(decryptedXml);
-            }
-            catch (Exception)
-            {
-                // If decryption fails (e.g., file has wrong format, no Auth header, etc.),
-                // return empty collection. This allows the system to initialize properly.
-                return Array.Empty<ICredentialRecord>();
-            }
+            string decryptedXml = DecryptPasswords(xml, key);
+            return _baseDeserializer.Deserialize(decryptedXml);
         }
 
         private string DecryptPasswords(string xml, SecureString key)

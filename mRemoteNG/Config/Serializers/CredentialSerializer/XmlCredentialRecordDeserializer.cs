@@ -15,17 +15,15 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
         {
             if (string.IsNullOrEmpty(xml)) return Array.Empty<ICredentialRecord>();
             
-            try
-            {
-                XDocument xdoc = XDocument.Parse(xml);
-                XElement rootElement = xdoc.Root;
-                
-                // If schema version doesn't match or is missing, return empty
-                // This handles uninitialized or invalid credential files gracefully
-                if (!IsValidSchemaVersion(rootElement))
-                    return Array.Empty<ICredentialRecord>();
+            XDocument xdoc = XDocument.Parse(xml);
+            XElement rootElement = xdoc.Root;
 
-                IEnumerable<CredentialRecord> credentials = from element in xdoc.Descendants("Credential")
+            // If schema version doesn't match or is missing, return empty
+            // This handles uninitialized or invalid credential files gracefully
+            if (!IsValidSchemaVersion(rootElement))
+                return Array.Empty<ICredentialRecord>();
+
+            IEnumerable<CredentialRecord> credentials = from element in xdoc.Descendants("Credential")
                                   select new CredentialRecord(Guid.Parse(element.Attribute("Id")?.Value ??
                                                                          Guid.NewGuid().ToString()))
                                   {
@@ -34,13 +32,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
                                       Password = element.Attribute("Password")?.Value.ConvertToSecureString(),
                                       Domain = element.Attribute("Domain")?.Value ?? ""
                                   };
-                return credentials.ToArray();
-            }
-            catch (Exception)
-            {
-                // If parsing fails for any reason, return empty collection
-                return Array.Empty<ICredentialRecord>();
-            }
+            return credentials.ToArray();
         }
 
         private bool IsValidSchemaVersion(XElement rootElement)
