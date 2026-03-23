@@ -34,7 +34,7 @@ namespace mRemoteNG.Properties {
                 this["EncryptCompleteConnectionsFile"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("AES")]
@@ -46,7 +46,7 @@ namespace mRemoteNG.Properties {
                 this["EncryptionEngine"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("GCM")]
@@ -58,7 +58,7 @@ namespace mRemoteNG.Properties {
                 this["EncryptionBlockCipherMode"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10000")]

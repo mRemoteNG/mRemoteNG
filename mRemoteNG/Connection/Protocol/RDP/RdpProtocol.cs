@@ -490,6 +490,18 @@ namespace mRemoteNG.Connection.Protocol.RDP
                                 Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
                             }
                         }
+                        else if (InterfaceControl.Info.RDGatewayExternalCredentialProvider == ExternalCredentialProvider.InternalCredentialSet)
+                        {
+                            try
+                            {
+                                string RDGUserViaAPI = InterfaceControl.Info.RDGatewayUserViaAPI;
+                                Credential.CredentialSetResolver.Resolve(RDGUserViaAPI, out gwu, out gwp, out gwd);
+                            }
+                            catch (Exception ex)
+                            {
+                                Runtime.MessageCollector.AddExceptionMessage("Failed to resolve RD Gateway credential set", ex);
+                            }
+                        }
 
 
                             if (connectionInfo.RDGatewayUseConnectionCredentials != RDGatewayUseConnectionCredentials.AccessToken)
@@ -609,6 +621,17 @@ namespace mRemoteNG.Connection.Protocol.RDP
                         ExternalConnectors.VO.VaultOpenbao.ReadPasswordRDP((int)connectionInfo.VaultOpenbaoSecretEngine, connectionInfo?.VaultOpenbaoMount ?? "", connectionInfo?.VaultOpenbaoRole ?? "", ref userName, out password);
                     } catch (ExternalConnectors.VO.VaultOpenbaoException ex) {
                         Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                    }
+                }
+                else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.InternalCredentialSet)
+                {
+                    try
+                    {
+                        Credential.CredentialSetResolver.Resolve(userViaApi, out userName, out password, out domain);
+                    }
+                    catch (Exception ex)
+                    {
+                        Runtime.MessageCollector.AddExceptionMessage("Failed to resolve credential set", ex);
                     }
                 }
 

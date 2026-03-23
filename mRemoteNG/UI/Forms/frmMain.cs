@@ -246,6 +246,15 @@ namespace mRemoteNG.UI.Forms
             else
                 splash.Dispatcher.Invoke(() => splash.Close());
 
+            if (!StartupUnlockService.EnsureStartupUnlocked(this))
+            {
+                Application.Exit();
+                return;
+            }
+
+            // Initialize the credential service before loading connections
+            Runtime.InitializeCredentialService();
+
             CredsAndConsSetup credsAndConsSetup = new();
             credsAndConsSetup.LoadCredsAndCons();
 
@@ -416,15 +425,6 @@ namespace mRemoteNG.UI.Forms
             if (!CommonRegistrySettings.AllowCheckForUpdatesAutomatical) return;
 
             if (Properties.OptionsUpdatesPage.Default.CheckForUpdatesAsked) return;
-
-            // If the user has already explicitly disabled automatic updates via settings, don't ask again
-            if (!Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup)
-            {
-                Properties.OptionsUpdatesPage.Default.CheckForUpdatesAsked = true;
-                Properties.OptionsUpdatesPage.Default.Save();
-                return;
-            }
-
             string[] commandButtons =
             [
                 Language.AskUpdatesCommandRecommended,
@@ -434,25 +434,16 @@ namespace mRemoteNG.UI.Forms
 
             CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProductName, Language.AskUpdatesMainInstruction, string.Format(Language.AskUpdatesContent, GeneralAppInfo.ProductName), "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
 
-            if (CTaskDialog.CommandButtonResult == 0)
+            if (CTaskDialog.CommandButtonResult == 0 | CTaskDialog.CommandButtonResult == 1)
             {
-                // Use Recommended Settings: enable automatic updates with the default frequency
-                Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup = true;
-                if (Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays < 1)
-                    Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays = 14;
                 Properties.OptionsUpdatesPage.Default.CheckForUpdatesAsked = true;
-                Properties.OptionsUpdatesPage.Default.Save();
             }
-            else if (CTaskDialog.CommandButtonResult == 1)
-            {
-                // Customize: let the user configure update settings manually, then open Options
-                Properties.OptionsUpdatesPage.Default.CheckForUpdatesAsked = true;
-                Properties.OptionsUpdatesPage.Default.Save();
-                AppWindows.Show(WindowType.Options);
-                if (AppWindows.OptionsFormWindow != null)
-                    AppWindows.OptionsFormWindow.SetActivatedPage(Language.Updates);
-            }
-            // For "Ask Later" (button 2), CheckForUpdatesAsked remains false so the dialog will show again next startup
+
+            if (CTaskDialog.CommandButtonResult != 1) return;
+
+            AppWindows.Show(WindowType.Options);
+            if (AppWindows.OptionsFormWindow != null)
+                AppWindows.OptionsFormWindow.SetActivatedPage(Language.Updates);
         }
 
         private async Task CheckForUpdates()
