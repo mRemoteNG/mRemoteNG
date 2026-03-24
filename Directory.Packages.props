@@ -21,7 +21,7 @@
     <PackageVersion Include="LiteDB" Version="5.0.21" />
     <PackageVersion Include="log4net" Version="3.3.0" />
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.0.0" />
-    <PackageVersion Include="Microsoft.Data.Sqlite" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Data.Sqlite" Version="9.0.14" />
     <PackageVersion Include="Microsoft.Data.SqlClient.SNI" Version="6.0.2" />
     <PackageVersion Include="Microsoft.Data.SqlClient.SNI.runtime" Version="6.0.2" />
     <PackageVersion Include="Microsoft.Extensions.DependencyModel" Version="10.0.5" />
