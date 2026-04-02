@@ -34,6 +34,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblLanguageRestartRequired.Text =
                 string.Format(Language.LanguageRestartRequired, Application.ProductName);
             chkShowDescriptionTooltipsInTree.Text = Language.ShowDescriptionTooltips;
+            chkShowStatusIndicatorInTree.Text = Language.ShowStatusIndicatorInTree;
             chkShowFullConnectionsFilePathInTitle.Text = Language.ShowFullConsFilePath;
             chkShowSystemTrayIcon.Text = Language.AlwaysShowSysTrayIcon;
             chkMinimizeToSystemTray.Text = Language.MinimizeToSysTray;
@@ -63,6 +64,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             chkShowDescriptionTooltipsInTree.Checked = Properties.OptionsAppearancePage.Default.ShowDescriptionTooltipsInTree;
+            chkShowStatusIndicatorInTree.Checked = Properties.OptionsAppearancePage.Default.ShowStatusIndicatorInTree;
             chkShowFullConnectionsFilePathInTitle.Checked = Properties.OptionsAppearancePage.Default.ShowCompleteConsPathInTitle;
             chkShowSystemTrayIcon.Checked = Properties.OptionsAppearancePage.Default.ShowSystemTrayIcon;
             chkMinimizeToSystemTray.Checked = Properties.OptionsAppearancePage.Default.MinimizeToTray;
@@ -82,6 +84,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             Properties.OptionsAppearancePage.Default.ShowDescriptionTooltipsInTree = chkShowDescriptionTooltipsInTree.Checked;
+            Properties.OptionsAppearancePage.Default.ShowStatusIndicatorInTree = chkShowStatusIndicatorInTree.Checked;
             Properties.OptionsAppearancePage.Default.ShowCompleteConsPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked;
             FrmMain.Default.ShowFullPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked;
 

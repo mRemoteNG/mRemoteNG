@@ -1606,6 +1606,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="ShowFullConsFilePath" xml:space="preserve">
     <value>Show full connections file path in window title</value>
   </data>
+  <data name="ShowStatusIndicatorInTree" xml:space="preserve">
+    <value>Show host status indicator in connection tree</value>
+  </data>
   <data name="ShowLogonInfoOnTabs" xml:space="preserve">
     <value>Show logon information on tab names</value>
   </data>

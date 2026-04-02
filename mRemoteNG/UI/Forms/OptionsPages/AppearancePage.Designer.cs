@@ -39,6 +39,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblLanguage = new MrngLabel();
             chkShowFullConnectionsFilePathInTitle = new MrngCheckBox();
             chkShowDescriptionTooltipsInTree = new MrngCheckBox();
+            chkShowStatusIndicatorInTree = new MrngCheckBox();
             chkShowSystemTrayIcon = new MrngCheckBox();
             chkMinimizeToSystemTray = new MrngCheckBox();
             chkCloseToSystemTray = new MrngCheckBox();
@@ -76,18 +77,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblLanguage.TabIndex = 0;
             lblLanguage.Text = "Language";
             // 
-            // chkShowFullConnectionsFilePathInTitle
-            // 
-            chkShowFullConnectionsFilePathInTitle._mice = MrngCheckBox.MouseState.OUT;
-            chkShowFullConnectionsFilePathInTitle.AutoSize = true;
-            chkShowFullConnectionsFilePathInTitle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkShowFullConnectionsFilePathInTitle.Location = new System.Drawing.Point(3, 130);
-            chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle";
-            chkShowFullConnectionsFilePathInTitle.Size = new System.Drawing.Size(268, 17);
-            chkShowFullConnectionsFilePathInTitle.TabIndex = 4;
-            chkShowFullConnectionsFilePathInTitle.Text = "Show full connections file path in window title";
-            chkShowFullConnectionsFilePathInTitle.UseVisualStyleBackColor = true;
-            // 
             // chkShowDescriptionTooltipsInTree
             // 
             chkShowDescriptionTooltipsInTree._mice = MrngCheckBox.MouseState.OUT;
@@ -100,12 +89,36 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowDescriptionTooltipsInTree.Text = "Show description tooltips in connection tree";
             chkShowDescriptionTooltipsInTree.UseVisualStyleBackColor = true;
             // 
+            // chkShowStatusIndicatorInTree
+            // 
+            chkShowStatusIndicatorInTree._mice = MrngCheckBox.MouseState.OUT;
+            chkShowStatusIndicatorInTree.AutoSize = true;
+            chkShowStatusIndicatorInTree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkShowStatusIndicatorInTree.Location = new System.Drawing.Point(3, 130);
+            chkShowStatusIndicatorInTree.Name = "chkShowStatusIndicatorInTree";
+            chkShowStatusIndicatorInTree.Size = new System.Drawing.Size(290, 17);
+            chkShowStatusIndicatorInTree.TabIndex = 10;
+            chkShowStatusIndicatorInTree.Text = "Show host status indicator in connection tree";
+            chkShowStatusIndicatorInTree.UseVisualStyleBackColor = true;
+            // 
+            // chkShowFullConnectionsFilePathInTitle
+            // 
+            chkShowFullConnectionsFilePathInTitle._mice = MrngCheckBox.MouseState.OUT;
+            chkShowFullConnectionsFilePathInTitle.AutoSize = true;
+            chkShowFullConnectionsFilePathInTitle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkShowFullConnectionsFilePathInTitle.Location = new System.Drawing.Point(3, 153);
+            chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle";
+            chkShowFullConnectionsFilePathInTitle.Size = new System.Drawing.Size(268, 17);
+            chkShowFullConnectionsFilePathInTitle.TabIndex = 4;
+            chkShowFullConnectionsFilePathInTitle.Text = "Show full connections file path in window title";
+            chkShowFullConnectionsFilePathInTitle.UseVisualStyleBackColor = true;
+            // 
             // chkShowSystemTrayIcon
             // 
             chkShowSystemTrayIcon._mice = MrngCheckBox.MouseState.OUT;
             chkShowSystemTrayIcon.AutoSize = true;
             chkShowSystemTrayIcon.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkShowSystemTrayIcon.Location = new System.Drawing.Point(3, 176);
+            chkShowSystemTrayIcon.Location = new System.Drawing.Point(3, 199);
             chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon";
             chkShowSystemTrayIcon.Size = new System.Drawing.Size(178, 17);
             chkShowSystemTrayIcon.TabIndex = 5;
@@ -117,7 +130,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkMinimizeToSystemTray._mice = MrngCheckBox.MouseState.OUT;
             chkMinimizeToSystemTray.AutoSize = true;
             chkMinimizeToSystemTray.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkMinimizeToSystemTray.Location = new System.Drawing.Point(3, 199);
+            chkMinimizeToSystemTray.Location = new System.Drawing.Point(3, 222);
             chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray";
             chkMinimizeToSystemTray.Size = new System.Drawing.Size(147, 17);
             chkMinimizeToSystemTray.TabIndex = 6;
@@ -129,7 +142,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkCloseToSystemTray._mice = MrngCheckBox.MouseState.OUT;
             chkCloseToSystemTray.AutoSize = true;
             chkCloseToSystemTray.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkCloseToSystemTray.Location = new System.Drawing.Point(3, 222);
+            chkCloseToSystemTray.Location = new System.Drawing.Point(3, 245);
             chkCloseToSystemTray.Name = "chkCloseToSystemTray";
             chkCloseToSystemTray.Size = new System.Drawing.Size(129, 17);
             chkCloseToSystemTray.TabIndex = 7;
@@ -143,13 +156,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlOptions.Controls.Add(chkMinimizeToSystemTray);
             pnlOptions.Controls.Add(lblLanguageRestartRequired);
             pnlOptions.Controls.Add(chkShowSystemTrayIcon);
+            pnlOptions.Controls.Add(chkShowStatusIndicatorInTree);
             pnlOptions.Controls.Add(chkShowDescriptionTooltipsInTree);
             pnlOptions.Controls.Add(lblLanguage);
             pnlOptions.Controls.Add(chkShowFullConnectionsFilePathInTitle);
             pnlOptions.Dock = System.Windows.Forms.DockStyle.Top;
             pnlOptions.Location = new System.Drawing.Point(0, 30);
             pnlOptions.Name = "pnlOptions";
-            pnlOptions.Size = new System.Drawing.Size(610, 267);
+            pnlOptions.Size = new System.Drawing.Size(610, 290);
             pnlOptions.TabIndex = 8;
             // 
             // lblRegistrySettingsUsedInfo
@@ -183,6 +197,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal Controls.MrngLabel lblLanguage;
         internal MrngCheckBox chkShowFullConnectionsFilePathInTitle;
         internal MrngCheckBox chkShowDescriptionTooltipsInTree;
+        internal MrngCheckBox chkShowStatusIndicatorInTree;
         internal MrngCheckBox chkShowSystemTrayIcon;
         internal MrngCheckBox chkMinimizeToSystemTray;
         internal MrngCheckBox chkCloseToSystemTray;
