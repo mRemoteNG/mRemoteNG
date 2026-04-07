@@ -19,40 +19,26 @@
 (function() {
   'use strict';
 
-  const term = new Terminal({
+  var Terminal = globalThis.Terminal;
+  var FitAddon = globalThis.FitAddon.FitAddon;
+
+  var term = new Terminal({
     cursorBlink: true,
-    cursorStyle: 'block',
     fontSize: 14,
     fontFamily: "'Cascadia Code', 'Consolas', 'Courier New', monospace",
-    scrollback: 10000,
     theme: {
       background: '#1e1e1e',
       foreground: '#cccccc',
       cursor: '#ffffff',
-      selectionBackground: 'rgba(255, 255, 255, 0.3)',
-      black: '#000000',
-      red: '#cd3131',
-      green: '#0dbc79',
-      yellow: '#e5e510',
-      blue: '#2472c8',
-      magenta: '#bc3fbc',
-      cyan: '#11a8cd',
-      white: '#e5e5e5',
-      brightBlack: '#666666',
-      brightRed: '#f14c4c',
-      brightGreen: '#23d18b',
-      brightYellow: '#f5f543',
-      brightBlue: '#3b8eea',
-      brightMagenta: '#d670d6',
-      brightCyan: '#29b8db',
-      brightWhite: '#ffffff'
-    }
+      selectionBackground: '#264f78'
+    },
+    allowProposedApi: true
   });
 
-  const fitAddon = new FitAddon.FitAddon();
+  var fitAddon = new FitAddon();
   term.loadAddon(fitAddon);
 
-  const container = document.getElementById('terminal');
+  var container = document.getElementById('terminal');
   term.open(container);
 
   // Fit terminal to container
@@ -60,11 +46,13 @@
     try {
       fitAddon.fit();
       postMessage('resize', { cols: term.cols, rows: term.rows });
-    } catch(e) {}
+    } catch(e) {
+      // Fit may fail during initialization when container has zero size
+    }
   }
 
   // Observe container resize
-  const resizeObserver = new ResizeObserver(() => {
+  var resizeObserver = new ResizeObserver(function() {
     requestAnimationFrame(doFit);
   });
   resizeObserver.observe(container);
@@ -83,23 +71,19 @@
   });
 
   // Receive messages from C#
-  window.chrome.webview.addEventListener('message', function(event) {
+  globalThis.chrome.webview.addEventListener('message', function(event) {
     try {
-      const msg = JSON.parse(event.data);
-      switch(msg.type) {
-        case 'output':
-          // Data is Base64-encoded UTF-8 bytes — decode to Uint8Array
-          const binary = atob(msg.data);
-          const bytes = new Uint8Array(binary.length);
-          for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-          term.write(bytes);
-          break;
-        case 'paste':
-          term.paste(msg.data);
-          break;
-        case 'focus':
-          term.focus();
-          break;
+      var msg = JSON.parse(event.data);
+      if (msg.type === 'output') {
+        // Data is Base64-encoded UTF-8 bytes — decode to Uint8Array
+        var binary = atob(msg.data);
+        var bytes = new Uint8Array(binary.length);
+        for (var i = 0; i < binary.length; i++) bytes[i] = binary.codePointAt(i);
+        term.write(bytes);
+      } else if (msg.type === 'paste') {
+        term.paste(msg.data);
+      } else if (msg.type === 'focus') {
+        term.focus();
       }
     } catch(e) {
       // If not JSON, treat as raw output
@@ -109,8 +93,12 @@
 
   // Helper to post messages to C#
   function postMessage(type, payload) {
-    const msg = Object.assign({ type: type }, payload || {});
-    window.chrome.webview.postMessage(JSON.stringify(msg));
+    var msg = { type: type };
+    if (payload) {
+      var keys = Object.keys(payload);
+      for (var k = 0; k < keys.length; k++) msg[keys[k]] = payload[keys[k]];
+    }
+    globalThis.chrome.webview.postMessage(JSON.stringify(msg));
   }
 
   // Signal ready

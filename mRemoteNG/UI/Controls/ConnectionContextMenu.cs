@@ -872,7 +872,7 @@ namespace mRemoteNG.UI.Controls
             SshTransferFile();
         }
 
-        private void OnPropertiesClicked(object sender, EventArgs e)
+        private static void OnPropertiesClicked(object sender, EventArgs e)
         {
             try
             {

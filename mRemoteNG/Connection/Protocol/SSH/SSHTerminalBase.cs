@@ -23,7 +23,6 @@ namespace mRemoteNG.Connection.Protocol.SSH
         #region Fields
 
         private WebView2 _webView2;
-        private CoreWebView2Environment _webView2Environment;
         private Task _initTask;
         private string _userDataFolder;
         private string _resourceFolder;
@@ -78,8 +77,8 @@ namespace mRemoteNG.Connection.Protocol.SSH
         {
             try
             {
-                _webView2Environment = await CoreWebView2Environment.CreateAsync(null, _userDataFolder);
-                await _webView2.EnsureCoreWebView2Async(_webView2Environment);
+                var environment = await CoreWebView2Environment.CreateAsync(null, _userDataFolder);
+                await _webView2.EnsureCoreWebView2Async(environment);
 
                 _webView2.CoreWebView2.SetVirtualHostNameToFolderMapping(
                     "xterm.local",
@@ -101,7 +100,7 @@ namespace mRemoteNG.Connection.Protocol.SSH
             }
         }
 
-        private void OnWebView2InitCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
+        private static void OnWebView2InitCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
         {
             if (!e.IsSuccess)
                 Runtime.MessageCollector.AddExceptionStackTrace("SshTerminal: WebView2 init error", e.InitializationException);
@@ -226,7 +225,7 @@ namespace mRemoteNG.Connection.Protocol.SSH
             catch (InvalidOperationException) { /* Handle invalid during shutdown */ }
         }
 
-        private void OnHostKeyReceived(object sender, Renci.SshNet.Common.HostKeyEventArgs e)
+        private static void OnHostKeyReceived(object sender, Renci.SshNet.Common.HostKeyEventArgs e)
         {
             // For now, accept all host keys with a warning log.
             // A full implementation would check a known_hosts file and prompt the user.
@@ -425,7 +424,7 @@ namespace mRemoteNG.Connection.Protocol.SSH
         {
             try
             {
-                _webView2Environment = null;
+                // WebView2 environment is managed by the control; no explicit cleanup needed
                 TryDeleteTempDirectory(_userDataFolder, "mRemoteNG_WebView2_SSH");
                 TryDeleteTempDirectory(_resourceFolder, "mRemoteNG_xterm");
                 _userDataFolder = null;

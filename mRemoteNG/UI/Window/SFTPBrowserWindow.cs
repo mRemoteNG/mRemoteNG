@@ -20,9 +20,12 @@ using WeifenLuo.WinFormsUI.Docking;
 namespace mRemoteNG.UI.Window
 {
     [SupportedOSPlatform("windows")]
-    public class SFTPBrowserWindow : BaseWindow
+    public class SftpBrowserWindow : BaseWindow
     {
         #region Fields
+
+        private const char RemotePathSeparator = '/';
+        private const string StatusNotConnected = "Not connected";
 
         private SftpFileService _service;
         private ConnectionInfo _currentConnectionInfo;
@@ -66,7 +69,7 @@ namespace mRemoteNG.UI.Window
 
         #region Constructor
 
-        public SFTPBrowserWindow()
+        public SftpBrowserWindow()
         {
             WindowType = WindowType.SFTPBrowser;
             DockPnl = new DockContent();
@@ -83,7 +86,7 @@ namespace mRemoteNG.UI.Window
 
             // Toolbar
             _toolbar = new ToolStrip();
-            _lblConnection = new ToolStripLabel("Not connected");
+            _lblConnection = new ToolStripLabel(StatusNotConnected);
             _btnHome = new ToolStripButton("Home", null, OnHomeClick) { ToolTipText = "Home directory" };
             _btnRefresh = new ToolStripButton("Refresh", null, OnRefreshClick) { ToolTipText = "Refresh" };
             _btnUpload = new ToolStripButton("Upload", null, OnUploadClick) { ToolTipText = "Upload file", Enabled = false };
@@ -196,7 +199,7 @@ namespace mRemoteNG.UI.Window
             _statusPanel = new Panel { Height = 24, Dock = DockStyle.Bottom, Padding = new Padding(2) };
             _lblStatus = new MrngLabel
             {
-                Text = "Not connected",
+                Text = StatusNotConnected,
                 Dock = DockStyle.Fill,
                 TextAlign = ContentAlignment.MiddleLeft,
                 Font = new Font("Segoe UI", 8.25F)
@@ -220,7 +223,7 @@ namespace mRemoteNG.UI.Window
             Controls.Add(_statusPanel);
             Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.DocumentsFolder_16x);
-            Name = "SFTPBrowserWindow";
+            Name = "SftpBrowserWindow";
             TabText = "SFTP Browser";
             Text = "SFTP Browser";
             Load += SFTPBrowser_Load;
@@ -258,7 +261,7 @@ namespace mRemoteNG.UI.Window
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            if (!(_service?.IsConnected == true) && !_isAutoConnecting)
+            if (_service?.IsConnected != true && !_isAutoConnecting)
             {
                 _autoConnectTimer?.Start();
             }
@@ -321,7 +324,7 @@ namespace mRemoteNG.UI.Window
             _ = ConnectToHost(connectionInfo);
         }
 
-        private ConnectionInfo GetActiveSSHConnectionInfo()
+        private static ConnectionInfo GetActiveSSHConnectionInfo()
         {
             try
             {
@@ -400,7 +403,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                UpdateStatus("Not connected");
+                UpdateStatus(StatusNotConnected);
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg,
                     $"SFTPBrowser: Connection to {host} failed: {ex.Message}");
                 _service?.Dispose();
@@ -415,8 +418,8 @@ namespace mRemoteNG.UI.Window
             _currentConnectionInfo = null;
             _fileList.ClearObjects();
             _txtPath.Text = "";
-            UpdateConnectionLabel("Not connected");
-            UpdateStatus("Not connected");
+            UpdateConnectionLabel(StatusNotConnected);
+            UpdateStatus(StatusNotConnected);
             SetButtonsEnabled(false);
         }
 
@@ -483,7 +486,7 @@ namespace mRemoteNG.UI.Window
             foreach (var file in ofd.FileNames)
             {
                 var fileName = Path.GetFileName(file);
-                var remotePath = _service.CurrentPath.TrimEnd('/') + "/" + fileName;
+                var remotePath = _service.CurrentPath.TrimEnd(RemotePathSeparator) + RemotePathSeparator + fileName;
                 try
                 {
                     _pbProgress.Visible = true;
@@ -557,7 +560,7 @@ namespace mRemoteNG.UI.Window
 
             try
             {
-                var path = _service.CurrentPath.TrimEnd('/') + "/" + name;
+                var path = _service.CurrentPath.TrimEnd(RemotePathSeparator) + RemotePathSeparator + name;
                 await _service.CreateDirectoryAsync(path);
                 await NavigateTo(_service.CurrentPath);
             }
@@ -606,8 +609,8 @@ namespace mRemoteNG.UI.Window
 
             try
             {
-                var dir = _service.CurrentPath.TrimEnd('/');
-                await _service.RenameAsync(item.FullPath, dir + "/" + newName);
+                var dir = _service.CurrentPath.TrimEnd(RemotePathSeparator);
+                await _service.RenameAsync(item.FullPath, dir + RemotePathSeparator + newName);
                 await NavigateTo(_service.CurrentPath);
             }
             catch (Exception ex)
@@ -629,9 +632,9 @@ namespace mRemoteNG.UI.Window
             {
                 if (item.Name == "..")
                 {
-                    var parent = _service.CurrentPath.TrimEnd('/');
-                    var lastSlash = parent.LastIndexOf('/');
-                    var parentPath = lastSlash > 0 ? parent.Substring(0, lastSlash) : "/";
+                    var parent = _service.CurrentPath.TrimEnd(RemotePathSeparator);
+                    var lastSlash = parent.LastIndexOf(RemotePathSeparator);
+                    var parentPath = lastSlash > 0 ? parent.Substring(0, lastSlash) : RemotePathSeparator.ToString();
                     _ = NavigateTo(parentPath);
                 }
                 else
@@ -667,7 +670,7 @@ namespace mRemoteNG.UI.Window
             {
                 if (!File.Exists(file)) continue;
                 var fileName = Path.GetFileName(file);
-                var remotePath = _service.CurrentPath.TrimEnd('/') + "/" + fileName;
+                var remotePath = _service.CurrentPath.TrimEnd(RemotePathSeparator) + RemotePathSeparator + fileName;
                 try
                 {
                     UpdateStatus($"Uploading {fileName}...");

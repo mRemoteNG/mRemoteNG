@@ -19,6 +19,9 @@ namespace mRemoteNG.UI.Controls
     {
         #region Fields
 
+        private const char RemotePathSeparator = '/';
+        private const string DefaultFont = "Segoe UI";
+
         private SftpFileService _service;
         private bool _isNavigating;
         private bool _isConnecting;
@@ -111,7 +114,7 @@ namespace mRemoteNG.UI.Controls
             // Toolbar — compact, icon-only with tooltips
             _toolbar = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden, Dock = DockStyle.Top };
 
-            _lblConnection = new ToolStripLabel("SFTP") { Font = new Font("Segoe UI", 7.5F, FontStyle.Bold) };
+            _lblConnection = new ToolStripLabel("SFTP") { Font = new Font(DefaultFont, 7.5F, FontStyle.Bold) };
             _btnBack = new ToolStripButton("", Properties.Resources.GlyphLeft_16x, OnBackClick) { ToolTipText = "Back", Enabled = false };
             _btnForward = new ToolStripButton("", Properties.Resources.GlyphRight_16x, OnForwardClick) { ToolTipText = "Forward", Enabled = false };
             _btnUp = new ToolStripButton("", Properties.Resources.Export_16x, OnUpClick) { ToolTipText = "Up one level", Enabled = false };
@@ -153,9 +156,9 @@ namespace mRemoteNG.UI.Controls
 
             // Path bar
             _pathPanel = new Panel { Height = 22, Dock = DockStyle.Top, Padding = new Padding(1) };
-            _txtPath = new TextBox { Dock = DockStyle.Fill, BorderStyle = BorderStyle.FixedSingle, Font = new Font("Segoe UI", 7.5F) };
+            _txtPath = new TextBox { Dock = DockStyle.Fill, BorderStyle = BorderStyle.FixedSingle, Font = new Font(DefaultFont, 7.5F) };
             _txtPath.KeyDown += TxtPath_KeyDown;
-            _btnGo = new Button { Text = ">", Width = 24, Dock = DockStyle.Right, FlatStyle = FlatStyle.Flat, Font = new Font("Segoe UI", 7F) };
+            _btnGo = new Button { Text = ">", Width = 24, Dock = DockStyle.Right, FlatStyle = FlatStyle.Flat, Font = new Font(DefaultFont, 7F) };
             _btnGo.Click += (s, e) => _ = NavigateTo(_txtPath.Text);
             _pathPanel.Controls.Add(_txtPath);
             _pathPanel.Controls.Add(_btnGo);
@@ -171,7 +174,7 @@ namespace mRemoteNG.UI.Controls
                 ShowGroups = false,
                 CheckBoxes = false,
                 SmallImageList = imageList,
-                Font = new Font("Segoe UI", 7.5F)
+                Font = new Font(DefaultFont, 7.5F)
             };
 
             _colName = new OLVColumn("Name", "") { Width = 200, IsEditable = false };
@@ -239,7 +242,7 @@ namespace mRemoteNG.UI.Controls
             {
                 Dock = DockStyle.Fill,
                 TextAlign = ContentAlignment.MiddleLeft,
-                Font = new Font("Segoe UI", 7F),
+                Font = new Font(DefaultFont, 7F),
                 Text = "Not connected",
                 Padding = new Padding(16, 0, 0, 0)
             };
@@ -460,9 +463,9 @@ namespace mRemoteNG.UI.Controls
         private void OnUpClick(object sender, EventArgs e)
         {
             if (_service?.IsConnected != true) return;
-            var parent = _service.CurrentPath.TrimEnd('/');
-            var lastSlash = parent.LastIndexOf('/');
-            var parentPath = lastSlash > 0 ? parent.Substring(0, lastSlash) : "/";
+            var parent = _service.CurrentPath.TrimEnd(RemotePathSeparator);
+            var lastSlash = parent.LastIndexOf(RemotePathSeparator);
+            var parentPath = lastSlash > 0 ? parent.Substring(0, lastSlash) : RemotePathSeparator.ToString();
             _ = NavigateTo(parentPath);
         }
 
@@ -498,7 +501,7 @@ namespace mRemoteNG.UI.Controls
             foreach (var file in ofd.FileNames)
             {
                 var fileName = Path.GetFileName(file);
-                var remotePath = _service.CurrentPath.TrimEnd('/') + "/" + fileName;
+                var remotePath = _service.CurrentPath.TrimEnd(RemotePathSeparator) + RemotePathSeparator + fileName;
                 try
                 {
                     long fileSize = new FileInfo(file).Length;
@@ -559,7 +562,7 @@ namespace mRemoteNG.UI.Controls
             if (string.IsNullOrWhiteSpace(name)) return;
             try
             {
-                await _service.CreateDirectoryAsync(_service.CurrentPath.TrimEnd('/') + "/" + name);
+                await _service.CreateDirectoryAsync(_service.CurrentPath.TrimEnd(RemotePathSeparator) + RemotePathSeparator + name);
                 _suppressHistory = true;
                 await NavigateTo(_service.CurrentPath);
             }
@@ -573,7 +576,7 @@ namespace mRemoteNG.UI.Controls
             if (string.IsNullOrWhiteSpace(name)) return;
             try
             {
-                var remotePath = _service.CurrentPath.TrimEnd('/') + "/" + name;
+                var remotePath = _service.CurrentPath.TrimEnd(RemotePathSeparator) + RemotePathSeparator + name;
                 var tempFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                 try
                 {
@@ -613,7 +616,7 @@ namespace mRemoteNG.UI.Controls
             if (string.IsNullOrWhiteSpace(newName) || newName == item.Name) return;
             try
             {
-                await _service.RenameAsync(item.FullPath, _service.CurrentPath.TrimEnd('/') + "/" + newName);
+                await _service.RenameAsync(item.FullPath, _service.CurrentPath.TrimEnd(RemotePathSeparator) + RemotePathSeparator + newName);
                 _suppressHistory = true;
                 await NavigateTo(_service.CurrentPath);
             }
@@ -771,7 +774,7 @@ namespace mRemoteNG.UI.Controls
                     long fileSize = new FileInfo(file).Length;
                     _lblStatus.Text = $"Uploading {fileName}...";
                     ShowProgress(0);
-                    await _service.UploadFileAsync(file, _service.CurrentPath.TrimEnd('/') + "/" + fileName, bytes =>
+                    await _service.UploadFileAsync(file, _service.CurrentPath.TrimEnd(RemotePathSeparator) + RemotePathSeparator + fileName, bytes =>
                     {
                         if (fileSize > 0)
                             BeginInvoke(() => ShowProgress((int)(bytes * 100 / (ulong)fileSize)));
