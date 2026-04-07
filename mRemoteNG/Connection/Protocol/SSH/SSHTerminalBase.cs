@@ -196,9 +196,6 @@ namespace mRemoteNG.Connection.Protocol.SSH
             };
             methods.Add(kbInteractive);
 
-            if (methods.Count == 0)
-                methods.Add(new PasswordAuthenticationMethod(username, ""));
-
             return methods.ToArray();
         }
 
@@ -470,9 +467,6 @@ namespace mRemoteNG.Connection.Protocol.SSH
             string[] resourceNames = { "xterm-terminal.html", "xterm.min.js", "xterm.css", "addon-fit.min.js" };
 
             var assembly = Assembly.GetExecutingAssembly();
-            var assemblyWriteTime = File.Exists(assembly.Location)
-                ? File.GetLastWriteTimeUtc(assembly.Location)
-                : DateTime.UtcNow;
 
             foreach (var fileName in resourceNames)
             {

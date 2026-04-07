@@ -684,7 +684,7 @@ namespace mRemoteNG.UI.Controls
             return watcher;
         }
 
-        private async void UploadEditedFile(string tempFile, string remotePath, string displayName)
+        private async System.Threading.Tasks.Task UploadEditedFile(string tempFile, string remotePath, string displayName)
         {
             if (_service?.IsConnected != true) return;
             try
