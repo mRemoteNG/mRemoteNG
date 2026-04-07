@@ -13,65 +13,61 @@ namespace mRemoteNG.Messages.MessageWriters
 
         public void Write(IMessage message)
         {
-            NotificationMessageListViewItem lvItem = new(message);
+            var lvItem = new NotificationMessageListViewItem(message);
             AddToList(lvItem);
         }
 
         private void AddToList(ListViewItem lvItem)
         {
-            if (_messageWindow.lvErrorCollector.IsDisposed)
+            var lv = _messageWindow.lvErrorCollector;
+            if (lv.IsDisposed) return;
+
+            if (!EnsureHandleCreated())
                 return;
 
-            // If handle not yet created, force creation on the UI thread
-            if (!_messageWindow.lvErrorCollector.IsHandleCreated)
-            {
-                if (_messageWindow.InvokeRequired)
-                {
-                    try
-                    {
-                        _messageWindow.Invoke((MethodInvoker)(() => EnsureHandleAndInsert(lvItem)));
-                    }
-                    catch (ObjectDisposedException) { return; }
-                    catch (InvalidOperationException) { return; }
-                    return;
-                }
-
-                // We're on the UI thread — force handle creation
-                try { _ = _messageWindow.lvErrorCollector.Handle; }
-                catch (ObjectDisposedException) { return; }
-            }
-
-            if (_messageWindow.lvErrorCollector.InvokeRequired)
-            {
-                try
-                {
-                    _messageWindow.lvErrorCollector.Invoke((MethodInvoker)(() => InsertItem(lvItem)));
-                }
-                catch (System.ComponentModel.InvalidAsynchronousStateException) { return; }
-                catch (ObjectDisposedException) { return; }
-                catch (InvalidOperationException) { return; }
-            }
-            else
-            {
-                InsertItem(lvItem);
-            }
+            InvokeOnCorrectThread(() => InsertItem(lvItem));
         }
 
-        private void EnsureHandleAndInsert(ListViewItem lvItem)
+        private bool EnsureHandleCreated()
         {
-            if (_messageWindow.lvErrorCollector.IsDisposed) return;
-            if (!_messageWindow.lvErrorCollector.IsHandleCreated)
+            var lv = _messageWindow.lvErrorCollector;
+            if (lv.IsHandleCreated) return true;
+
+            // Handle must be created on the UI thread
+            try
             {
-                try { _ = _messageWindow.lvErrorCollector.Handle; }
-                catch (ObjectDisposedException) { return; }
+                if (_messageWindow.InvokeRequired)
+                    _messageWindow.Invoke((MethodInvoker)(() => { _ = lv.Handle; }));
+                else
+                    _ = lv.Handle;
+                return true;
             }
-            InsertItem(lvItem);
+            catch (ObjectDisposedException) { return false; }
+            catch (InvalidOperationException) { return false; }
+        }
+
+        private void InvokeOnCorrectThread(Action action)
+        {
+            var lv = _messageWindow.lvErrorCollector;
+            if (lv.IsDisposed) return;
+
+            try
+            {
+                if (lv.InvokeRequired)
+                    lv.Invoke((MethodInvoker)(() => action()));
+                else
+                    action();
+            }
+            catch (ObjectDisposedException) { }
+            catch (InvalidOperationException) { }
+            catch (System.ComponentModel.InvalidAsynchronousStateException) { }
         }
 
         private void InsertItem(ListViewItem lvItem)
         {
-            if (_messageWindow.lvErrorCollector.IsDisposed) return;
-            _messageWindow.lvErrorCollector.Items.Insert(0, lvItem);
+            var lv = _messageWindow.lvErrorCollector;
+            if (lv.IsDisposed) return;
+            lv.Items.Insert(0, lvItem);
             _messageWindow.pbError.Visible = true;
         }
     }
