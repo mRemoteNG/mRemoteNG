@@ -222,8 +222,8 @@ namespace mRemoteNG.Connection.Protocol.SSH
         private void InvokeOnUiThread(Action action)
         {
             try { _webView2?.Invoke(action); }
-            catch (ObjectDisposedException) { }
-            catch (InvalidOperationException) { }
+            catch (ObjectDisposedException) { /* WebView2 disposed during shutdown */ }
+            catch (InvalidOperationException) { /* Handle invalid during shutdown */ }
         }
 
         private void OnHostKeyReceived(object sender, Renci.SshNet.Common.HostKeyEventArgs e)
@@ -382,8 +382,8 @@ namespace mRemoteNG.Connection.Protocol.SSH
                     _webView2.CoreWebView2.PostWebMessageAsString(json);
                 }
             }
-            catch (ObjectDisposedException) { }
-            catch (InvalidOperationException) { }
+            catch (ObjectDisposedException) { /* WebView2 disposed during shutdown */ }
+            catch (InvalidOperationException) { /* Handle invalid during shutdown */ }
         }
 
         #endregion

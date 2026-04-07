@@ -352,11 +352,12 @@ namespace mRemoteNG.UI.Controls
                 _connectTimer?.Stop();
                 await NavigateTo(_service.CurrentPath);
             }
-            catch
+            catch (Exception)
             {
                 _lblStatus.Text = "Connecting...";
                 _statusDot.BackColor = Color.Orange;
                 _statusDot.Invalidate();
+                // Dispose the newly created service that failed to connect (not the same instance disposed above)
                 _service?.Dispose();
                 _service = null;
             }
@@ -580,7 +581,7 @@ namespace mRemoteNG.UI.Controls
                 }
                 finally
                 {
-                    try { File.Delete(tempFile); } catch { }
+                    try { File.Delete(tempFile); } catch (IOException) { /* File may be locked */ }
                 }
                 _suppressHistory = true;
                 await NavigateTo(_service.CurrentPath);
@@ -672,11 +673,11 @@ namespace mRemoteNG.UI.Controls
             };
             _activeWatchers.Add(watcher);
 
-            DateTime lastUpload = DateTime.MinValue;
+            var debounceTimer = System.Diagnostics.Stopwatch.StartNew();
             watcher.Changed += async (ws, we) =>
             {
-                if ((DateTime.Now - lastUpload).TotalSeconds < 2) return;
-                lastUpload = DateTime.Now;
+                if (debounceTimer.ElapsedMilliseconds < 2000) return;
+                debounceTimer.Restart();
                 await System.Threading.Tasks.Task.Delay(500);
                 BeginInvoke(() => UploadEditedFile(tempFile, remotePath, displayName));
             };
@@ -747,7 +748,7 @@ namespace mRemoteNG.UI.Controls
         {
             var item = _fileList.SelectedObject as SftpFileItem;
             bool hasSelection = item != null && item.Name != "..";
-            _btnDownload.Enabled = hasSelection && item != null && !item.IsDirectory;
+            _btnDownload.Enabled = hasSelection && !item.IsDirectory;
             _btnDelete.Enabled = hasSelection;
         }
 

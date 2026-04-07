@@ -297,7 +297,7 @@ namespace mRemoteNG.UI.Window
                 FrmMain.Default.pnlDock.ActiveDocumentChanged -= PnlDock_ActiveDocumentChanged;
                 FrmMain.Default.pnlDock.ActiveContentChanged -= PnlDock_ActiveDocumentChanged;
             }
-            catch { }
+            catch (Exception) { /* Event handler may already be detached during shutdown */ }
 
             DisconnectFromHost();
         }
@@ -645,7 +645,7 @@ namespace mRemoteNG.UI.Window
         {
             var item = _fileList.SelectedObject as SftpFileItem;
             var hasSelection = item != null && item.Name != "..";
-            _btnDownload.Enabled = hasSelection && item != null && !item.IsDirectory;
+            _btnDownload.Enabled = hasSelection && !item.IsDirectory;
             _btnDelete.Enabled = hasSelection;
         }
 

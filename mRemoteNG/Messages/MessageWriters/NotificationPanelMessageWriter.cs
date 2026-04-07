@@ -58,9 +58,9 @@ namespace mRemoteNG.Messages.MessageWriters
                 else
                     action();
             }
-            catch (ObjectDisposedException) { }
-            catch (InvalidOperationException) { }
-            catch (System.ComponentModel.InvalidAsynchronousStateException) { }
+            catch (ObjectDisposedException) { /* Control disposed during shutdown — safe to ignore */ }
+            catch (InvalidOperationException) { /* Handle no longer valid during shutdown — safe to ignore */ }
+            catch (System.ComponentModel.InvalidAsynchronousStateException) { /* UI thread gone during shutdown — safe to ignore */ }
         }
 
         private void InsertItem(ListViewItem lvItem)

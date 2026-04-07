@@ -189,8 +189,17 @@ namespace mRemoteNG.Tools
 
         public void Dispose()
         {
-            Disconnect();
-            _semaphore.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Disconnect();
+                _semaphore.Dispose();
+            }
         }
     }
 

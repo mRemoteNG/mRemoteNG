@@ -197,7 +197,8 @@ namespace mRemoteNG.Connection
             _splitView.Panel2Collapsed = !_splitView.Panel2Collapsed;
             if (!_splitView.Panel2Collapsed && _lastSplitterDistance > 0)
             {
-                try { _splitView.SplitterDistance = _lastSplitterDistance; } catch { }
+                try { _splitView.SplitterDistance = _lastSplitterDistance; }
+                catch (InvalidOperationException) { /* Splitter distance out of range during resize */ }
             }
 
             // Show/hide the "Show SFTP" toggle button
