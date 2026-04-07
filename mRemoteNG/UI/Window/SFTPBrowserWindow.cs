@@ -555,7 +555,7 @@ namespace mRemoteNG.UI.Window
         {
             if (_service?.IsConnected != true) return;
 
-            var name = PromptInput("New Folder", "Enter folder name:");
+            var name = InputDialog.Prompt("New Folder", "Enter folder name:");
             if (string.IsNullOrWhiteSpace(name)) return;
 
             try
@@ -604,7 +604,7 @@ namespace mRemoteNG.UI.Window
             var item = _fileList.SelectedObject as SftpFileItem;
             if (item == null || item.Name == ".." || _service?.IsConnected != true) return;
 
-            var newName = PromptInput("Rename", "Enter new name:", item.Name);
+            var newName = InputDialog.Prompt("Rename", "Enter new name:", item.Name);
             if (string.IsNullOrWhiteSpace(newName) || newName == item.Name) return;
 
             try
@@ -752,31 +752,6 @@ namespace mRemoteNG.UI.Window
             _btnHome.Enabled = enabled;
             _btnDownload.Enabled = false;
             _btnDelete.Enabled = false;
-        }
-
-        private static string PromptInput(string title, string prompt, string defaultValue = "")
-        {
-            using var form = new Form
-            {
-                Text = title,
-                Width = 350,
-                Height = 150,
-                FormBorderStyle = FormBorderStyle.FixedDialog,
-                StartPosition = FormStartPosition.CenterParent,
-                MaximizeBox = false,
-                MinimizeBox = false
-            };
-
-            var lbl = new Label { Left = 10, Top = 15, Width = 310, Text = prompt };
-            var txt = new TextBox { Left = 10, Top = 40, Width = 310, Text = defaultValue };
-            var btnOk = new Button { Text = "OK", Left = 160, Top = 75, Width = 75, DialogResult = DialogResult.OK };
-            var btnCancel = new Button { Text = "Cancel", Left = 245, Top = 75, Width = 75, DialogResult = DialogResult.Cancel };
-
-            form.Controls.AddRange(new Control[] { lbl, txt, btnOk, btnCancel });
-            form.AcceptButton = btnOk;
-            form.CancelButton = btnCancel;
-
-            return form.ShowDialog() == DialogResult.OK ? txt.Text : null;
         }
 
         #endregion
