@@ -46,8 +46,8 @@
     try {
       fitAddon.fit();
       postMessage('resize', { cols: term.cols, rows: term.rows });
-    } catch(_) {
-      // Fit may fail during initialization when container has zero size
+    } catch(ex) {
+      console.debug('Terminal fit skipped:', ex.message);
     }
   }
 
@@ -85,8 +85,8 @@
       } else if (msg.type === 'focus') {
         term.focus();
       }
-    } catch(_) {
-      // If not JSON, treat as raw output
+    } catch(ex) {
+      console.debug('Message parse error:', ex.message);
       term.write(event.data);
     }
   });
