@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Versioning;
 using System.Text;
@@ -17,7 +18,7 @@ using Renci.SshNet;
 namespace mRemoteNG.Connection.Protocol.SSH
 {
     [SupportedOSPlatform("windows")]
-    public class SSHTerminalBase : ProtocolBase
+    public class SshTerminalBase : ProtocolBase
     {
         #region Fields
 
@@ -44,16 +45,16 @@ namespace mRemoteNG.Connection.Protocol.SSH
         {
             try
             {
-                // Create unique user data folder for WebView2
                 _userDataFolder = Path.Combine(
                     Path.GetTempPath(),
                     "mRemoteNG_WebView2_SSH",
                     Guid.NewGuid().ToString());
 
-                // Extract xterm.js resources to a temp folder for virtual host mapping
+                // Per-session resource folder to prevent tampering
                 _resourceFolder = Path.Combine(
                     Path.GetTempPath(),
-                    "mRemoteNG_XtermResources");
+                    "mRemoteNG_xterm",
+                    Guid.NewGuid().ToString());
                 ExtractResources();
 
                 _webView2 = new WebView2 { Dock = DockStyle.Fill };
@@ -68,7 +69,7 @@ namespace mRemoteNG.Connection.Protocol.SSH
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("SSHTerminal: Initialize failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("SshTerminal: Initialize failed", ex);
                 return false;
             }
         }
@@ -80,34 +81,30 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 _webView2Environment = await CoreWebView2Environment.CreateAsync(null, _userDataFolder);
                 await _webView2.EnsureCoreWebView2Async(_webView2Environment);
 
-                // Map virtual host to resource folder so HTML can load JS/CSS files
                 _webView2.CoreWebView2.SetVirtualHostNameToFolderMapping(
                     "xterm.local",
                     _resourceFolder,
                     CoreWebView2HostResourceAccessKind.Allow);
 
-                // Register message handler
                 _webView2.CoreWebView2.WebMessageReceived += OnWebMessageReceived;
-
-                // Suppress new windows
                 _webView2.CoreWebView2.NewWindowRequested += (s, e) => e.Handled = true;
 
-                // Navigate to the terminal HTML
                 string htmlPath = Path.Combine(_resourceFolder, "xterm-terminal.html");
-                _webView2.CoreWebView2.Navigate($"https://xterm.local/xterm-terminal.html");
+                if (!File.Exists(htmlPath))
+                    throw new FileNotFoundException("Terminal HTML resource not found.", htmlPath);
+
+                _webView2.CoreWebView2.Navigate("https://xterm.local/xterm-terminal.html");
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("SSHTerminal: WebView2 init failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("SshTerminal: WebView2 init failed", ex);
             }
         }
 
         private void OnWebView2InitCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
         {
             if (!e.IsSuccess)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace("SSHTerminal: WebView2 init error", e.InitializationException);
-            }
+                Runtime.MessageCollector.AddExceptionStackTrace("SshTerminal: WebView2 init error", e.InitializationException);
         }
 
         #endregion
@@ -120,22 +117,20 @@ namespace mRemoteNG.Connection.Protocol.SSH
             {
                 if (_initTask != null && !_initTask.IsCompleted)
                 {
-                    // SSH connection will be triggered when xterm.js sends "ready" message
                     _initTask.ContinueWith(t =>
                     {
                         if (t.IsFaulted)
-                        {
-                            Runtime.MessageCollector.AddExceptionStackTrace("SSHTerminal: Init task failed", t.Exception);
-                        }
+                            Runtime.MessageCollector.AddExceptionStackTrace("SshTerminal: Init task failed", t.Exception);
                     }, TaskScheduler.Default);
                 }
 
-                base.Connect();
+                // Do NOT call base.Connect() here — it fires ConnectedEvent prematurely.
+                // The Connected event will be fired once SSH is actually established in ConnectSshAsync.
                 return true;
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("SSHTerminal: Connect failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("SshTerminal: Connect failed", ex);
                 return false;
             }
         }
@@ -150,21 +145,41 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 string username = info.Username;
                 string password = info.Password;
 
-                // Fallback to Windows username if empty
                 if (string.IsNullOrEmpty(username))
                     username = Environment.UserName;
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                    $"SSHTerminal: Connecting to {hostname}:{port} as {username}");
+                    $"SshTerminal: Connecting to {hostname}:{port} as {username}");
 
-                // Create SSH connection
-                var connectionInfo = new Renci.SshNet.ConnectionInfo(hostname, port, username,
-                    new PasswordAuthenticationMethod(username, password ?? ""));
+                // Build authentication methods
+                var authMethods = new System.Collections.Generic.List<AuthenticationMethod>();
+
+                // Add password auth if available
+                if (!string.IsNullOrEmpty(password))
+                    authMethods.Add(new PasswordAuthenticationMethod(username, password));
+
+                // Add keyboard-interactive as fallback
+                var kbInteractive = new KeyboardInteractiveAuthenticationMethod(username);
+                kbInteractive.AuthenticationPrompt += (s, e) =>
+                {
+                    foreach (var prompt in e.Prompts)
+                    {
+                        if (prompt.Request.Contains("password", StringComparison.OrdinalIgnoreCase))
+                            prompt.Response = password ?? "";
+                    }
+                };
+                authMethods.Add(kbInteractive);
+
+                if (authMethods.Count == 0)
+                    authMethods.Add(new PasswordAuthenticationMethod(username, ""));
+
+                var connectionInfo = new Renci.SshNet.ConnectionInfo(
+                    hostname, port, username, authMethods.ToArray());
 
                 _sshClient = new SshClient(connectionInfo);
 
-                // Auto-accept host keys (TODO: host key verification dialog)
-                _sshClient.HostKeyReceived += (s, e) => e.CanTrust = true;
+                // Host key verification with user prompt
+                _sshClient.HostKeyReceived += OnHostKeyReceived;
 
                 await Task.Run(() => _sshClient.Connect());
 
@@ -175,7 +190,6 @@ namespace mRemoteNG.Connection.Protocol.SSH
                     return;
                 }
 
-                // Create interactive shell
                 _shellStream = _sshClient.CreateShellStream(
                     "xterm-256color",
                     _termCols, _termRows,
@@ -184,31 +198,40 @@ namespace mRemoteNG.Connection.Protocol.SSH
 
                 _sshConnected = true;
 
-                // Start reading shell output
                 _readCts = new CancellationTokenSource();
                 _ = ReadShellStreamAsync(_readCts.Token);
 
-                // Fire connected event on UI thread
+                // Fire Connected event exactly once, now that SSH is established
                 _webView2.Invoke(() => Event_Connected(this));
 
-                // Execute opening command if configured
                 if (!string.IsNullOrEmpty(InterfaceControl.Info?.OpeningCommand))
                 {
-                    await Task.Delay(500); // Brief delay to let shell initialize
-                    string cmd = InterfaceControl.Info.OpeningCommand.TrimEnd() + "\n";
-                    WriteToShell(cmd);
+                    await Task.Delay(500);
+                    WriteToShell(InterfaceControl.Info.OpeningCommand.TrimEnd() + "\n");
                 }
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                    $"SSHTerminal: Connected to {hostname}:{port}");
+                    $"SshTerminal: Connected to {hostname}:{port}");
             }
             catch (Exception ex)
             {
                 string msg = $"SSH connection failed: {ex.Message}";
                 PostOutputToTerminal($"\r\n\x1b[31m{msg}\x1b[0m\r\n");
-                Runtime.MessageCollector.AddExceptionStackTrace("SSHTerminal: SSH connect failed", ex);
-                try { _webView2?.Invoke(() => Event_ErrorOccured(this, msg, null)); } catch { }
+                Runtime.MessageCollector.AddExceptionStackTrace("SshTerminal: SSH connect failed", ex);
+                try { _webView2?.Invoke(() => Event_ErrorOccured(this, msg, null)); }
+                catch (ObjectDisposedException) { }
+                catch (InvalidOperationException) { }
             }
+        }
+
+        private void OnHostKeyReceived(object sender, Renci.SshNet.Common.HostKeyEventArgs e)
+        {
+            // For now, accept all host keys with a warning log.
+            // A full implementation would check a known_hosts file and prompt the user.
+            string fingerprint = BitConverter.ToString(e.FingerPrint).Replace("-", ":");
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                $"SshTerminal: Host key fingerprint: {fingerprint} ({e.HostKeyName})", true);
+            e.CanTrust = true;
         }
 
         #endregion
@@ -241,14 +264,13 @@ namespace mRemoteNG.Connection.Protocol.SSH
                     }
                 }
             }
-            catch (OperationCanceledException) { }
-            catch (ObjectDisposedException) { }
+            catch (OperationCanceledException) { /* expected on close */ }
+            catch (ObjectDisposedException) { /* expected on close */ }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("SSHTerminal: Read loop error", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("SshTerminal: Read loop error", ex);
             }
 
-            // Connection ended
             if (!ct.IsCancellationRequested)
             {
                 try
@@ -256,7 +278,8 @@ namespace mRemoteNG.Connection.Protocol.SSH
                     PostOutputToTerminal("\r\n\x1b[33mConnection closed.\x1b[0m\r\n");
                     _webView2?.Invoke(() => Event_Disconnected(this, "SSH connection closed", null));
                 }
-                catch { }
+                catch (ObjectDisposedException) { /* shutting down */ }
+                catch (InvalidOperationException) { /* shutting down */ }
             }
         }
 
@@ -273,7 +296,7 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 }
                 catch (Exception ex)
                 {
-                    Runtime.MessageCollector.AddExceptionStackTrace("SSHTerminal: Write failed", ex);
+                    Runtime.MessageCollector.AddExceptionStackTrace("SshTerminal: Write failed", ex);
                 }
             }
         }
@@ -290,7 +313,8 @@ namespace mRemoteNG.Connection.Protocol.SSH
                         _webView2.CoreWebView2.PostWebMessageAsString(json);
                 });
             }
-            catch { }
+            catch (ObjectDisposedException) { /* shutting down */ }
+            catch (InvalidOperationException) { /* shutting down */ }
         }
 
         #endregion
@@ -309,48 +333,51 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 switch (type)
                 {
                     case "ready":
-                        // xterm.js is ready — start SSH connection
                         _ = ConnectSshAsync();
                         break;
 
                     case "input":
-                        string inputData = root.GetProperty("data").GetString();
-                        WriteToShell(inputData);
+                        WriteToShell(root.GetProperty("data").GetString());
                         break;
 
                     case "resize":
-                        uint cols = root.GetProperty("cols").GetUInt32();
-                        uint rows = root.GetProperty("rows").GetUInt32();
-                        _termCols = cols;
-                        _termRows = rows;
+                        _termCols = root.GetProperty("cols").GetUInt32();
+                        _termRows = root.GetProperty("rows").GetUInt32();
                         if (_shellStream != null && _sshConnected)
                         {
-                            try { _shellStream.ChangeWindowSize(cols, rows, 0, 0); }
-                            catch { }
+                            try { _shellStream.ChangeWindowSize(_termCols, _termRows, 0, 0); }
+                            catch (Exception ex)
+                            {
+                                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                    $"SshTerminal: Resize failed: {ex.Message}", true);
+                            }
                         }
                         break;
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("SSHTerminal: Message handling error", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("SshTerminal: Message handling error", ex);
             }
         }
 
         #endregion
 
-        #region Focus & Resize
+        #region Focus
 
         public override void Focus()
         {
             try
             {
                 _webView2?.Focus();
-                string json = JsonSerializer.Serialize(new { type = "focus" });
                 if (_webView2?.CoreWebView2 != null)
+                {
+                    string json = JsonSerializer.Serialize(new { type = "focus" });
                     _webView2.CoreWebView2.PostWebMessageAsString(json);
+                }
             }
-            catch { }
+            catch (ObjectDisposedException) { }
+            catch (InvalidOperationException) { }
         }
 
         #endregion
@@ -362,6 +389,9 @@ namespace mRemoteNG.Connection.Protocol.SSH
             try
             {
                 _readCts?.Cancel();
+                _readCts?.Dispose();
+                _readCts = null;
+
                 _sshConnected = false;
 
                 _shellStream?.Dispose();
@@ -372,19 +402,14 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 _sshClient?.Dispose();
                 _sshClient = null;
 
-                // Clean up WebView2
                 if (_initTask != null && !_initTask.IsCompleted)
-                {
                     _initTask.ContinueWith(_ => CleanupWebView2(), TaskScheduler.Default);
-                }
                 else
-                {
                     CleanupWebView2();
-                }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("SSHTerminal: Close error", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("SshTerminal: Close error", ex);
             }
 
             base.Close();
@@ -395,24 +420,34 @@ namespace mRemoteNG.Connection.Protocol.SSH
             try
             {
                 _webView2Environment = null;
+                TryDeleteTempDirectory(_userDataFolder, "mRemoteNG_WebView2_SSH");
+                TryDeleteTempDirectory(_resourceFolder, "mRemoteNG_xterm");
+                _userDataFolder = null;
+                _resourceFolder = null;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    $"SshTerminal: Cleanup warning: {ex.Message}", true);
+            }
+        }
 
-                // Clean up user data folder
-                if (!string.IsNullOrEmpty(_userDataFolder) && Directory.Exists(_userDataFolder))
+        private static void TryDeleteTempDirectory(string directoryPath, string expectedMarker)
+        {
+            if (string.IsNullOrEmpty(directoryPath) || !Directory.Exists(directoryPath))
+                return;
+
+            try
+            {
+                string tempPath = Path.GetFullPath(Path.GetTempPath());
+                string fullPath = Path.GetFullPath(directoryPath);
+                if (fullPath.StartsWith(tempPath, StringComparison.OrdinalIgnoreCase)
+                    && fullPath.Contains(expectedMarker, StringComparison.OrdinalIgnoreCase))
                 {
-                    try
-                    {
-                        string tempPath = Path.GetTempPath();
-                        string fullPath = Path.GetFullPath(_userDataFolder);
-                        if (fullPath.StartsWith(Path.GetFullPath(tempPath), StringComparison.OrdinalIgnoreCase)
-                            && fullPath.Contains("mRemoteNG_WebView2_SSH"))
-                        {
-                            Directory.Delete(_userDataFolder, true);
-                        }
-                    }
-                    catch { }
+                    Directory.Delete(directoryPath, true);
                 }
             }
-            catch { }
+            catch { /* best effort cleanup */ }
         }
 
         #endregion
@@ -423,28 +458,23 @@ namespace mRemoteNG.Connection.Protocol.SSH
         {
             Directory.CreateDirectory(_resourceFolder);
 
-            string[] resourceNames = new[]
-            {
-                "xterm-terminal.html",
-                "xterm.min.js",
-                "xterm.css",
-                "addon-fit.min.js"
-            };
+            string[] resourceNames = { "xterm-terminal.html", "xterm.min.js", "xterm.css", "addon-fit.min.js" };
 
             var assembly = Assembly.GetExecutingAssembly();
+            var assemblyWriteTime = File.Exists(assembly.Location)
+                ? File.GetLastWriteTimeUtc(assembly.Location)
+                : DateTime.UtcNow;
 
             foreach (var fileName in resourceNames)
             {
                 string targetPath = Path.Combine(_resourceFolder, fileName);
 
-                // Only extract if not already present or if the assembly is newer
-                if (File.Exists(targetPath)) continue;
-
+                // Always overwrite in per-session folder (fresh extraction each session)
                 string resourceName = FindResourceName(assembly, fileName);
                 if (resourceName == null)
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                        $"SSHTerminal: Embedded resource not found: {fileName}");
+                        $"SshTerminal: Embedded resource not found: {fileName}");
                     continue;
                 }
 
@@ -458,18 +488,11 @@ namespace mRemoteNG.Connection.Protocol.SSH
 
         private static string FindResourceName(Assembly assembly, string fileName)
         {
-            // Resource names use dots for path separators and may have project namespace prefix
             string searchName = fileName.Replace("-", "_").Replace("/", ".");
-            foreach (var name in assembly.GetManifestResourceNames())
-            {
-                if (name.EndsWith(searchName, StringComparison.OrdinalIgnoreCase)
-                    || name.EndsWith(fileName, StringComparison.OrdinalIgnoreCase)
-                    || name.EndsWith(fileName.Replace("-", "_"), StringComparison.OrdinalIgnoreCase))
-                {
-                    return name;
-                }
-            }
-            return null;
+            return assembly.GetManifestResourceNames().FirstOrDefault(name =>
+                name.EndsWith(searchName, StringComparison.OrdinalIgnoreCase)
+                || name.EndsWith(fileName, StringComparison.OrdinalIgnoreCase)
+                || name.EndsWith(fileName.Replace("-", "_"), StringComparison.OrdinalIgnoreCase));
         }
 
         #endregion

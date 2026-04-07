@@ -29,7 +29,7 @@ namespace mRemoteNG.Tools
             Host = host;
             User = user;
             Port = port;
-            _client = new SftpClient(host, port, user, password);
+            _client = new SftpClient(host, port, user, password ?? string.Empty);
             _client.Connect();
             HomePath = _client.WorkingDirectory ?? "/";
             CurrentPath = HomePath;
@@ -62,6 +62,7 @@ namespace mRemoteNG.Tools
                             Name = entry.Name,
                             FullPath = entry.FullName,
                             IsDirectory = entry.IsDirectory,
+                            IsSymlink = entry.IsSymbolicLink,
                             Size = entry.IsDirectory ? 0 : entry.Length,
                             LastModified = entry.LastWriteTime,
                             Permissions = FormatPermissions(entry),
@@ -198,6 +199,7 @@ namespace mRemoteNG.Tools
         public string Name { get; set; }
         public string FullPath { get; set; }
         public bool IsDirectory { get; set; }
+        public bool IsSymlink { get; set; }
         public long Size { get; set; }
         public DateTime LastModified { get; set; }
         public string Permissions { get; set; }

@@ -876,7 +876,7 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                AppWindows.ConfigForm.Show(FrmMain.Default.pnlDock);
+                AppWindows.ConfigForm.Show();
                 AppWindows.ConfigForm.Activate();
             }
             catch (Exception ex)

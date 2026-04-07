@@ -231,8 +231,9 @@ namespace mRemoteNG.Connection
                 newProtocol.InterfaceControl.SSHTunnelInfo = connectionInfoSshTunnel;
 
                 // Enable embedded SFTP browser for SSH connections (MobaXterm-style split view)
-                if (connectionInfoOriginal.Protocol == ProtocolType.SSH1 || connectionInfoOriginal.Protocol == ProtocolType.SSH2)
-                    newProtocol.InterfaceControl.EnableSftpBrowser(connectionInfoOriginal);
+                // Use effective connectionInfo so SFTP follows SSH tunnel host/port rewrites
+                if (connectionInfo.Protocol == ProtocolType.SSH1 || connectionInfo.Protocol == ProtocolType.SSH2)
+                    newProtocol.InterfaceControl.EnableSftpBrowser(connectionInfo);
 
                 newProtocol.Force = force;
 

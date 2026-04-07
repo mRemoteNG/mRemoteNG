@@ -26,6 +26,7 @@ namespace mRemoteNG.UI.Controls
         private bool _showHiddenFiles = true;
         private readonly List<string> _historyBack = new();
         private readonly List<string> _historyForward = new();
+        private readonly List<FileSystemWatcher> _activeWatchers = new();
         private bool _suppressHistory;
 
         // Connection info for retry
@@ -300,6 +301,8 @@ namespace mRemoteNG.UI.Controls
             _progressBar.Visible = false;
             _historyBack.Clear();
             _historyForward.Clear();
+            foreach (var w in _activeWatchers) { try { w.Dispose(); } catch { /* best effort */ } }
+            _activeWatchers.Clear();
             SetButtonsEnabled(false);
         }
 
@@ -570,7 +573,7 @@ namespace mRemoteNG.UI.Controls
             try
             {
                 var remotePath = _service.CurrentPath.TrimEnd('/') + "/" + name;
-                var tempFile = Path.GetTempFileName();
+                var tempFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                 try
                 {
                     await _service.UploadFileAsync(tempFile, remotePath);
@@ -634,7 +637,9 @@ namespace mRemoteNG.UI.Controls
                 // Download to temp file
                 var tempDir = Path.Combine(Path.GetTempPath(), "mRemoteNG_SFTP");
                 Directory.CreateDirectory(tempDir);
-                var tempFile = Path.Combine(tempDir, $"{_host}_{Path.GetFileName(item.Name)}");
+                // Sanitize hostname for filesystem (IPv6 has colons)
+                string safeHost = string.Join("_", _host.Split(Path.GetInvalidFileNameChars()));
+                var tempFile = Path.Combine(tempDir, $"{safeHost}_{Guid.NewGuid():N}_{Path.GetFileName(item.Name)}");
 
                 _lblStatus.Text = $"Downloading {item.Name} for editing...";
                 await _service.DownloadFileAsync(item.FullPath, tempFile);
@@ -654,6 +659,7 @@ namespace mRemoteNG.UI.Controls
                     NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.Size,
                     EnableRaisingEvents = true
                 };
+                _activeWatchers.Add(watcher);
 
                 // Debounce: editors may fire multiple write events
                 DateTime lastUpload = DateTime.MinValue;
@@ -866,8 +872,7 @@ namespace mRemoteNG.UI.Controls
                 return;
             }
 
-            // Symlinks — check permissions string for 'l' prefix
-            if (perms.StartsWith("l"))
+            if (item.IsSymlink)
             {
                 e.Item.ForeColor = Color.FromArgb(0, 160, 160); // teal for symlinks
             }
@@ -909,13 +914,20 @@ namespace mRemoteNG.UI.Controls
             _progressBar.Value = 0;
         }
 
+        private static readonly HashSet<string> _knownTextFiles = new(StringComparer.OrdinalIgnoreCase)
+            { "Makefile", "Dockerfile", "README", "LICENSE", "CHANGELOG", "AUTHORS", "CONTRIBUTING", "COPYING", "INSTALL", "NOTICE" };
+
         private static bool IsTextFile(string fileName)
         {
             var ext = Path.GetExtension(fileName);
             if (_textExtensions.Contains(ext)) return true;
-            // Files without extension that are commonly text (dotfiles)
             var name = Path.GetFileName(fileName);
-            return name.StartsWith(".") && string.IsNullOrEmpty(ext);
+            if (string.IsNullOrEmpty(ext))
+            {
+                if (name.StartsWith(".")) return true;
+                if (_knownTextFiles.Contains(name)) return true;
+            }
+            return false;
         }
 
         private static string PromptInput(string title, string prompt, string defaultValue = "")

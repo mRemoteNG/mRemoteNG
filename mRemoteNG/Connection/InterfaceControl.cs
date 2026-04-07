@@ -174,6 +174,7 @@ namespace mRemoteNG.Connection
                     pe.Graphics.DrawString("SFTP", _btnShowSftp.Font, brush, 3, 4, sf);
                 };
                 _splitView.Panel1.Controls.Add(_btnShowSftp);
+                _btnShowSftp.BringToFront();
 
                 // Connect SFTP with retry (SSH session may not be ready yet)
                 _sftpPanel.ConnectWithRetry(connectionInfo.Hostname, connectionInfo.Username, connectionInfo.Password, connectionInfo.Port);
