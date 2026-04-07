@@ -273,7 +273,7 @@ public class PasswordstateInterface
         PemReader pr = new PemReader(new StringReader(pem));
         AsymmetricCipherKeyPair KeyPair = (AsymmetricCipherKeyPair)pr.ReadObject();
         RSAParameters rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters)KeyPair.Private);
-        RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+        RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048);
         rsa.ImportParameters(rsaParams);
         return rsa;
     }

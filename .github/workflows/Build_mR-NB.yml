@@ -11,11 +11,10 @@ on:
         required: false
         default: 'true'
 
-permissions:
-  contents: write
-  
 jobs:
   NB-Build-and-Release:
+    permissions:
+      contents: write
     strategy:
       matrix:
         include:

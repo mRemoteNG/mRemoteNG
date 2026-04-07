@@ -239,7 +239,7 @@ public class SecretServerInterface
             PemReader pr = new(new StringReader(pem));
             AsymmetricCipherKeyPair KeyPair = (AsymmetricCipherKeyPair)pr.ReadObject();
             RSAParameters rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters)KeyPair.Private);
-            RSACryptoServiceProvider rsa = new();
+            RSACryptoServiceProvider rsa = new(2048);
             rsa.ImportParameters(rsaParams);
             return rsa;
         }

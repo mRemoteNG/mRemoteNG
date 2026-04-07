@@ -121,7 +121,7 @@ namespace mRemoteNG.Connection.Protocol
 
                                 if (!string.IsNullOrEmpty(privatekey))
                                 {
-                                    optionalTemporaryPrivateKeyPath = Path.GetTempFileName();
+                                    optionalTemporaryPrivateKeyPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                                     File.WriteAllText(optionalTemporaryPrivateKeyPath, privatekey);
                                     FileInfo fileInfo = new(optionalTemporaryPrivateKeyPath)
                                     {
@@ -142,7 +142,7 @@ namespace mRemoteNG.Connection.Protocol
 
                                 if (!string.IsNullOrEmpty(privatekey))
                                 {
-                                    optionalTemporaryPrivateKeyPath = Path.GetTempFileName();
+                                    optionalTemporaryPrivateKeyPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                                     File.WriteAllText(optionalTemporaryPrivateKeyPath, privatekey);
                                     FileInfo fileInfo = new(optionalTemporaryPrivateKeyPath)
                                     {
