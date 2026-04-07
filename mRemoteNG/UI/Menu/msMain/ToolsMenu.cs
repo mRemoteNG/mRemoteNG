@@ -29,9 +29,9 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsUvncsc = new ToolStripMenuItem();
             _mMenToolsExternalApps = new ToolStripMenuItem();
             _mMenToolsPortScan = new ToolStripMenuItem();
-            // 
+            //
             // mMenTools
-            // 
+            //
             DropDownItems.AddRange(new ToolStripItem[]
             {
                 _mMenToolsSshTransfer,
@@ -50,7 +50,7 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsSshTransfer.Size = new System.Drawing.Size(184, 22);
             _mMenToolsSshTransfer.Text = Language.SshFileTransfer;
             _mMenToolsSshTransfer.Click += mMenToolsSSHTransfer_Click;
-            // 
+            //
             // mMenToolsUVNCSC
             // 
             _mMenToolsUvncsc.Name = "mMenToolsUVNCSC";

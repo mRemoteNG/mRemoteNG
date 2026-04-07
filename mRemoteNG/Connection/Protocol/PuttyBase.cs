@@ -277,7 +277,7 @@ namespace mRemoteNG.Connection.Protocol
 
                 if (_isPuttyNg)
                 {
-                    arguments.Add("-hwndparent", InterfaceControl.Handle.ToString());
+                    arguments.Add("-hwndparent", InterfaceControl.ProtocolPanel.Handle.ToString());
                 }
 
                 PuttyProcess.StartInfo.Arguments = arguments.ToString();
@@ -311,7 +311,7 @@ namespace mRemoteNG.Connection.Protocol
 
                     if (_isPuttyNg)
                     {
-                        PuttyHandle = NativeMethods.FindWindowEx(InterfaceControl.Handle, new IntPtr(0), null, null);
+                        PuttyHandle = NativeMethods.FindWindowEx(InterfaceControl.ProtocolPanel.Handle, new IntPtr(0), null, null);
                     }
                     else
                     {
@@ -346,7 +346,7 @@ namespace mRemoteNG.Connection.Protocol
 
                 if (!_isPuttyNg)
                 {
-                    NativeMethods.SetParent(PuttyHandle, InterfaceControl.Handle);
+                    NativeMethods.SetParent(PuttyHandle, InterfaceControl.ProtocolPanel.Handle);
 
                     // Strip the title bar and thick frame border so the
                     // embedded PuTTY window fills the panel cleanly.
@@ -423,22 +423,18 @@ namespace mRemoteNG.Connection.Protocol
         {
             try
             {
-                if (InterfaceControl.Size == Size.Empty)
+                var panel = InterfaceControl.ProtocolPanel;
+                if (panel.Size == Size.Empty)
                     return;
 
                 if (_isPuttyNg)
                 {
-                    // PuTTYNG 0.70.0.1 and later doesn't have any window borders
-                    // Use ClientRectangle to account for padding (for connection frame color)
-                    Rectangle clientRect = InterfaceControl.ClientRectangle;
+                    Rectangle clientRect = panel.ClientRectangle;
                     NativeMethods.MoveWindow(PuttyHandle, clientRect.X, clientRect.Y, clientRect.Width, clientRect.Height, true);
                 }
                 else
                 {
-                    // Window chrome (caption + thick frame) has been stripped
-                    // after reparenting, so just fill the client rectangle.
-                    Rectangle clientRect = InterfaceControl.ClientRectangle;
-
+                    Rectangle clientRect = panel.ClientRectangle;
                     NativeMethods.MoveWindow(PuttyHandle, clientRect.X-8, clientRect.Y-30, clientRect.Width+32, clientRect.Height+38, true);
                 }
             }

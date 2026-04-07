@@ -10,6 +10,7 @@ namespace mRemoteNG.Messages.MessageWriters
     public class NotificationPanelMessageWriter(ErrorAndInfoWindow messageWindow) : IMessageWriter
     {
         private readonly ErrorAndInfoWindow _messageWindow = messageWindow ?? throw new ArgumentNullException(nameof(messageWindow));
+        private bool _handleEnsured;
 
         public void Write(IMessage message)
         {
@@ -20,6 +21,16 @@ namespace mRemoteNG.Messages.MessageWriters
 
         private void AddToList(ListViewItem lvItem)
         {
+            // Ensure the handle is created on first use so early messages aren't dropped
+            if (!_handleEnsured && !_messageWindow.lvErrorCollector.IsDisposed)
+            {
+                if (!_messageWindow.lvErrorCollector.IsHandleCreated)
+                {
+                    try { _ = _messageWindow.lvErrorCollector.Handle; } catch { }
+                }
+                _handleEnsured = true;
+            }
+
             // Check if the control is disposed or handle not created (during shutdown)
             if (_messageWindow.lvErrorCollector.IsDisposed || !_messageWindow.lvErrorCollector.IsHandleCreated)
             {

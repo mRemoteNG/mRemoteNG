@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SSH Terminal</title>
+<link rel="stylesheet" href="https://xterm.local/xterm.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
+  #terminal { width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<div id="terminal"></div>
+<script src="https://xterm.local/xterm.min.js"></script>
+<script src="https://xterm.local/addon-fit.min.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  const term = new Terminal({
+    cursorBlink: true,
+    cursorStyle: 'block',
+    fontSize: 14,
+    fontFamily: "'Cascadia Code', 'Consolas', 'Courier New', monospace",
+    scrollback: 10000,
+    theme: {
+      background: '#1e1e1e',
+      foreground: '#cccccc',
+      cursor: '#ffffff',
+      selectionBackground: 'rgba(255, 255, 255, 0.3)',
+      black: '#000000',
+      red: '#cd3131',
+      green: '#0dbc79',
+      yellow: '#e5e510',
+      blue: '#2472c8',
+      magenta: '#bc3fbc',
+      cyan: '#11a8cd',
+      white: '#e5e5e5',
+      brightBlack: '#666666',
+      brightRed: '#f14c4c',
+      brightGreen: '#23d18b',
+      brightYellow: '#f5f543',
+      brightBlue: '#3b8eea',
+      brightMagenta: '#d670d6',
+      brightCyan: '#29b8db',
+      brightWhite: '#ffffff'
+    }
+  });
+
+  const fitAddon = new FitAddon.FitAddon();
+  term.loadAddon(fitAddon);
+
+  const container = document.getElementById('terminal');
+  term.open(container);
+
+  // Fit terminal to container
+  function doFit() {
+    try {
+      fitAddon.fit();
+      postMessage('resize', { cols: term.cols, rows: term.rows });
+    } catch(e) {}
+  }
+
+  // Observe container resize
+  const resizeObserver = new ResizeObserver(() => {
+    requestAnimationFrame(doFit);
+  });
+  resizeObserver.observe(container);
+
+  // Initial fit
+  requestAnimationFrame(doFit);
+
+  // Send user input to C#
+  term.onData(function(data) {
+    postMessage('input', { data: data });
+  });
+
+  // Send binary data (e.g. from paste)
+  term.onBinary(function(data) {
+    postMessage('input', { data: data });
+  });
+
+  // Receive messages from C#
+  window.chrome.webview.addEventListener('message', function(event) {
+    try {
+      const msg = JSON.parse(event.data);
+      switch(msg.type) {
+        case 'output':
+          // Data is Base64-encoded UTF-8 bytes — decode to Uint8Array
+          const binary = atob(msg.data);
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+          term.write(bytes);
+          break;
+        case 'paste':
+          term.paste(msg.data);
+          break;
+        case 'focus':
+          term.focus();
+          break;
+      }
+    } catch(e) {
+      // If not JSON, treat as raw output
+      term.write(event.data);
+    }
+  });
+
+  // Helper to post messages to C#
+  function postMessage(type, payload) {
+    const msg = Object.assign({ type: type }, payload || {});
+    window.chrome.webview.postMessage(JSON.stringify(msg));
+  }
+
+  // Signal ready
+  postMessage('ready');
+
+  // Focus terminal
+  term.focus();
+})();
+</script>
+</body>
+</html>

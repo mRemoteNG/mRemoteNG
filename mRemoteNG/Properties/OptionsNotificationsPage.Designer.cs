@@ -37,7 +37,7 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool NotificationPanelWriterWriteInfoMsgs {
             get {
                 return ((bool)(this["NotificationPanelWriterWriteInfoMsgs"]));
@@ -49,7 +49,7 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool NotificationPanelWriterWriteWarningMsgs {
             get {
                 return ((bool)(this["NotificationPanelWriterWriteWarningMsgs"]));
