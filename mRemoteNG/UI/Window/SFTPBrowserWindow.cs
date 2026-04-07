@@ -325,41 +325,28 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                // Try the dock panel's active document first (most accurate for tab switches)
+                // Try active document first
                 if (FrmMain.Default.pnlDock.ActiveDocument is ConnectionTab activeTab)
                 {
-                    var ifc = InterfaceControl.FindInterfaceControl(activeTab);
-                    if (ifc != null)
-                    {
-                        var info = ifc.OriginalInfo ?? ifc.Info;
-                        if (info.Protocol == ProtocolType.SSH1 || info.Protocol == ProtocolType.SSH2)
-                            return info;
-                    }
+                    var info = GetSshInfoFromTab(activeTab);
+                    if (info != null) return info;
                 }
 
-                // Try TabHelper (tracks last focused tab, works across connection windows)
+                // Try TabHelper (tracks last focused tab)
                 var tab = TabHelper.Instance.CurrentTab;
                 if (tab != null)
                 {
-                    var ifc2 = InterfaceControl.FindInterfaceControl(tab);
-                    if (ifc2 != null)
-                    {
-                        var info2 = ifc2.OriginalInfo ?? ifc2.Info;
-                        if (info2.Protocol == ProtocolType.SSH1 || info2.Protocol == ProtocolType.SSH2)
-                            return info2;
-                    }
+                    var info = GetSshInfoFromTab(tab);
+                    if (info != null) return info;
                 }
 
-                // Fallback: scan all open documents for any SSH connection
+                // Fallback: scan all open documents
                 foreach (var doc in FrmMain.Default.pnlDock.Documents)
                 {
                     if (doc is ConnectionTab ct)
                     {
-                        var ifc3 = InterfaceControl.FindInterfaceControl(ct);
-                        if (ifc3 == null) continue;
-                        var info3 = ifc3.OriginalInfo ?? ifc3.Info;
-                        if (info3.Protocol == ProtocolType.SSH1 || info3.Protocol == ProtocolType.SSH2)
-                            return info3;
+                        var info = GetSshInfoFromTab(ct);
+                        if (info != null) return info;
                     }
                 }
 
@@ -369,6 +356,15 @@ namespace mRemoteNG.UI.Window
             {
                 return null;
             }
+        }
+
+        private static ConnectionInfo GetSshInfoFromTab(ConnectionTab tab)
+        {
+            var ifc = InterfaceControl.FindInterfaceControl(tab);
+            if (ifc == null) return null;
+            var info = ifc.OriginalInfo ?? ifc.Info;
+            return info.Protocol == ProtocolType.SSH1 || info.Protocol == ProtocolType.SSH2
+                ? info : null;
         }
 
         #endregion

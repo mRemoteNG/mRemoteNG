@@ -634,102 +634,92 @@ namespace mRemoteNG.UI.Controls
 
             try
             {
-                // Download to temp file
-                var tempDir = Path.Combine(Path.GetTempPath(), "mRemoteNG_SFTP");
-                Directory.CreateDirectory(tempDir);
-                // Sanitize hostname for filesystem (IPv6 has colons)
-                string safeHost = string.Join("_", _host.Split(Path.GetInvalidFileNameChars()));
-                var tempFile = Path.Combine(tempDir, $"{safeHost}_{Guid.NewGuid():N}_{Path.GetFileName(item.Name)}");
-
-                _lblStatus.Text = $"Downloading {item.Name} for editing...";
-                await _service.DownloadFileAsync(item.FullPath, tempFile);
-
-                // Track modification time
+                string tempFile = await DownloadToTempFile(item);
                 var lastWrite = File.GetLastWriteTimeUtc(tempFile);
-
-                // Open in default editor
                 var proc = Process.Start(new ProcessStartInfo(tempFile) { UseShellExecute = true });
 
                 _lblStatus.Text = $"Editing {item.Name} — save in editor to upload";
 
-                // Watch for file changes using FileSystemWatcher
-                var remotePath = item.FullPath;
-                var watcher = new FileSystemWatcher(tempDir, Path.GetFileName(tempFile))
-                {
-                    NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.Size,
-                    EnableRaisingEvents = true
-                };
-                _activeWatchers.Add(watcher);
-
-                // Debounce: editors may fire multiple write events
-                DateTime lastUpload = DateTime.MinValue;
-                watcher.Changed += async (ws, we) =>
-                {
-                    // Debounce — skip if we just uploaded within 2 seconds
-                    if ((DateTime.Now - lastUpload).TotalSeconds < 2) return;
-                    lastUpload = DateTime.Now;
-
-                    // Small delay to let the editor finish writing
-                    await System.Threading.Tasks.Task.Delay(500);
-
-                    try
-                    {
-                        BeginInvoke(async () =>
-                        {
-                            try
-                            {
-                                _lblStatus.Text = $"Uploading {item.Name}...";
-                                await _service.UploadFileAsync(tempFile, remotePath);
-                                _lblStatus.Text = $"Saved {item.Name}";
-                                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                    $"SFTP Edit: {item.Name} saved to {_host}:{remotePath}", true);
-                                _suppressHistory = true;
-                                await NavigateTo(_service.CurrentPath);
-                            }
-                            catch (Exception ex)
-                            {
-                                _lblStatus.Text = $"Upload failed: {ex.Message}";
-                            }
-                        });
-                    }
-                    catch { }
-                };
-
-                // If we got a process handle, clean up when editor closes
+                var watcher = CreateEditWatcher(tempFile, item.FullPath, item.Name);
                 if (proc != null)
-                {
-                    _ = System.Threading.Tasks.Task.Run(async () =>
-                    {
-                        await proc.WaitForExitAsync();
-                        watcher.EnableRaisingEvents = false;
-                        watcher.Dispose();
-                        // Final check for changes
-                        if (File.Exists(tempFile) && File.GetLastWriteTimeUtc(tempFile) > lastWrite)
-                        {
-                            BeginInvoke(async () =>
-                            {
-                                try
-                                {
-                                    _lblStatus.Text = $"Uploading {item.Name}...";
-                                    await _service.UploadFileAsync(tempFile, remotePath);
-                                    _lblStatus.Text = $"Saved {item.Name}";
-                                    _suppressHistory = true;
-                                    await NavigateTo(_service.CurrentPath);
-                                }
-                                catch { }
-                            });
-                        }
-                        await System.Threading.Tasks.Task.Delay(1000);
-                        try { if (File.Exists(tempFile)) File.Delete(tempFile); } catch { }
-                    });
-                }
-                // If no process handle (editor already running), watcher stays active
-                // It will auto-upload on each save. Temp file persists until app close.
+                    WaitForEditorClose(proc, watcher, tempFile, item.FullPath, lastWrite);
             }
             catch (Exception ex)
             {
                 _lblStatus.Text = $"Edit failed: {ex.Message}";
             }
+        }
+
+        private async System.Threading.Tasks.Task<string> DownloadToTempFile(SftpFileItem item)
+        {
+            var tempDir = Path.Combine(Path.GetTempPath(), "mRemoteNG_SFTP");
+            Directory.CreateDirectory(tempDir);
+            string safeHost = string.Join("_", _host.Split(Path.GetInvalidFileNameChars()));
+            var tempFile = Path.Combine(tempDir, $"{safeHost}_{Guid.NewGuid():N}_{Path.GetFileName(item.Name)}");
+
+            _lblStatus.Text = $"Downloading {item.Name} for editing...";
+            await _service.DownloadFileAsync(item.FullPath, tempFile);
+            return tempFile;
+        }
+
+        private FileSystemWatcher CreateEditWatcher(string tempFile, string remotePath, string displayName)
+        {
+            string dir = Path.GetDirectoryName(tempFile);
+            var watcher = new FileSystemWatcher(dir, Path.GetFileName(tempFile))
+            {
+                NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.Size,
+                EnableRaisingEvents = true
+            };
+            _activeWatchers.Add(watcher);
+
+            DateTime lastUpload = DateTime.MinValue;
+            watcher.Changed += async (ws, we) =>
+            {
+                if ((DateTime.Now - lastUpload).TotalSeconds < 2) return;
+                lastUpload = DateTime.Now;
+                await System.Threading.Tasks.Task.Delay(500);
+                BeginInvoke(() => UploadEditedFile(tempFile, remotePath, displayName));
+            };
+
+            return watcher;
+        }
+
+        private async void UploadEditedFile(string tempFile, string remotePath, string displayName)
+        {
+            if (_service?.IsConnected != true) return;
+            try
+            {
+                _lblStatus.Text = $"Uploading {displayName}...";
+                await _service.UploadFileAsync(tempFile, remotePath);
+                _lblStatus.Text = $"Saved {displayName}";
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                    $"SFTP Edit: {displayName} saved to {_host}:{remotePath}", true);
+                _suppressHistory = true;
+                await NavigateTo(_service.CurrentPath);
+            }
+            catch (Exception ex)
+            {
+                _lblStatus.Text = $"Upload failed: {ex.Message}";
+            }
+        }
+
+        private void WaitForEditorClose(Process proc, FileSystemWatcher watcher,
+            string tempFile, string remotePath, DateTime lastWrite)
+        {
+            _ = System.Threading.Tasks.Task.Run(async () =>
+            {
+                await proc.WaitForExitAsync();
+                watcher.EnableRaisingEvents = false;
+                watcher.Dispose();
+                _activeWatchers.Remove(watcher);
+
+                if (File.Exists(tempFile) && File.GetLastWriteTimeUtc(tempFile) > lastWrite)
+                    BeginInvoke(() => UploadEditedFile(tempFile, remotePath, Path.GetFileName(tempFile)));
+
+                await System.Threading.Tasks.Task.Delay(1000);
+                try { if (File.Exists(tempFile)) File.Delete(tempFile); }
+                catch { /* best effort cleanup */ }
+            });
         }
 
         private void FileList_DoubleClick(object sender, EventArgs e)

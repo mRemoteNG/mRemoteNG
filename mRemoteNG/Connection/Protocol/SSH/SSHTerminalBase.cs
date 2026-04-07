@@ -142,43 +142,16 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 var info = InterfaceControl.Info;
                 string hostname = info.Hostname;
                 int port = info.Port;
-                string username = info.Username;
-                string password = info.Password;
-
-                if (string.IsNullOrEmpty(username))
-                    username = Environment.UserName;
+                string username = string.IsNullOrEmpty(info.Username) ? Environment.UserName : info.Username;
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
                     $"SshTerminal: Connecting to {hostname}:{port} as {username}");
 
-                // Build authentication methods
-                var authMethods = new System.Collections.Generic.List<AuthenticationMethod>();
-
-                // Add password auth if available
-                if (!string.IsNullOrEmpty(password))
-                    authMethods.Add(new PasswordAuthenticationMethod(username, password));
-
-                // Add keyboard-interactive as fallback
-                var kbInteractive = new KeyboardInteractiveAuthenticationMethod(username);
-                kbInteractive.AuthenticationPrompt += (s, e) =>
-                {
-                    foreach (var prompt in e.Prompts)
-                    {
-                        if (prompt.Request.Contains("password", StringComparison.OrdinalIgnoreCase))
-                            prompt.Response = password ?? "";
-                    }
-                };
-                authMethods.Add(kbInteractive);
-
-                if (authMethods.Count == 0)
-                    authMethods.Add(new PasswordAuthenticationMethod(username, ""));
-
                 var connectionInfo = new Renci.SshNet.ConnectionInfo(
-                    hostname, port, username, authMethods.ToArray());
+                    hostname, port, username,
+                    BuildAuthMethods(username, info.Password));
 
                 _sshClient = new SshClient(connectionInfo);
-
-                // Host key verification with user prompt
                 _sshClient.HostKeyReceived += OnHostKeyReceived;
 
                 await Task.Run(() => _sshClient.Connect());
@@ -190,25 +163,8 @@ namespace mRemoteNG.Connection.Protocol.SSH
                     return;
                 }
 
-                _shellStream = _sshClient.CreateShellStream(
-                    "xterm-256color",
-                    _termCols, _termRows,
-                    0, 0,
-                    8192);
-
-                _sshConnected = true;
-
-                _readCts = new CancellationTokenSource();
-                _ = ReadShellStreamAsync(_readCts.Token);
-
-                // Fire Connected event exactly once, now that SSH is established
-                _webView2.Invoke(() => Event_Connected(this));
-
-                if (!string.IsNullOrEmpty(InterfaceControl.Info?.OpeningCommand))
-                {
-                    await Task.Delay(500);
-                    WriteToShell(InterfaceControl.Info.OpeningCommand.TrimEnd() + "\n");
-                }
+                StartShellSession();
+                await ExecuteOpeningCommand();
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
                     $"SshTerminal: Connected to {hostname}:{port}");
@@ -218,10 +174,59 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 string msg = $"SSH connection failed: {ex.Message}";
                 PostOutputToTerminal($"\r\n\x1b[31m{msg}\x1b[0m\r\n");
                 Runtime.MessageCollector.AddExceptionStackTrace("SshTerminal: SSH connect failed", ex);
-                try { _webView2?.Invoke(() => Event_ErrorOccured(this, msg, null)); }
-                catch (ObjectDisposedException) { }
-                catch (InvalidOperationException) { }
+                InvokeOnUiThread(() => Event_ErrorOccured(this, msg, null));
             }
+        }
+
+        private static AuthenticationMethod[] BuildAuthMethods(string username, string password)
+        {
+            var methods = new System.Collections.Generic.List<AuthenticationMethod>();
+
+            if (!string.IsNullOrEmpty(password))
+                methods.Add(new PasswordAuthenticationMethod(username, password));
+
+            var kbInteractive = new KeyboardInteractiveAuthenticationMethod(username);
+            kbInteractive.AuthenticationPrompt += (s, e) =>
+            {
+                foreach (var prompt in e.Prompts)
+                {
+                    if (prompt.Request.Contains("password", StringComparison.OrdinalIgnoreCase))
+                        prompt.Response = password ?? "";
+                }
+            };
+            methods.Add(kbInteractive);
+
+            if (methods.Count == 0)
+                methods.Add(new PasswordAuthenticationMethod(username, ""));
+
+            return methods.ToArray();
+        }
+
+        private void StartShellSession()
+        {
+            _shellStream = _sshClient.CreateShellStream(
+                "xterm-256color", _termCols, _termRows, 0, 0, 8192);
+
+            _sshConnected = true;
+            _readCts = new CancellationTokenSource();
+            _ = ReadShellStreamAsync(_readCts.Token);
+
+            _webView2.Invoke(() => Event_Connected(this));
+        }
+
+        private async Task ExecuteOpeningCommand()
+        {
+            string cmd = InterfaceControl.Info?.OpeningCommand;
+            if (string.IsNullOrEmpty(cmd)) return;
+            await Task.Delay(500);
+            WriteToShell(cmd.TrimEnd() + "\n");
+        }
+
+        private void InvokeOnUiThread(Action action)
+        {
+            try { _webView2?.Invoke(action); }
+            catch (ObjectDisposedException) { }
+            catch (InvalidOperationException) { }
         }
 
         private void OnHostKeyReceived(object sender, Renci.SshNet.Common.HostKeyEventArgs e)
@@ -246,22 +251,10 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 while (!ct.IsCancellationRequested && _sshClient?.IsConnected == true && _shellStream?.CanRead == true)
                 {
                     int bytesRead = await _shellStream.ReadAsync(buffer, 0, buffer.Length, ct);
-                    if (bytesRead > 0)
-                    {
-                        string base64 = Convert.ToBase64String(buffer, 0, bytesRead);
-                        string json = JsonSerializer.Serialize(new { type = "output", data = base64 });
+                    if (bytesRead <= 0) continue;
 
-                        try
-                        {
-                            _webView2?.Invoke(() =>
-                            {
-                                if (_webView2?.CoreWebView2 != null)
-                                    _webView2.CoreWebView2.PostWebMessageAsString(json);
-                            });
-                        }
-                        catch (ObjectDisposedException) { break; }
-                        catch (InvalidOperationException) { break; }
-                    }
+                    if (!PostDataToWebView(buffer, bytesRead))
+                        break;
                 }
             }
             catch (OperationCanceledException) { /* expected on close */ }
@@ -272,15 +265,31 @@ namespace mRemoteNG.Connection.Protocol.SSH
             }
 
             if (!ct.IsCancellationRequested)
+                OnConnectionClosed();
+        }
+
+        private bool PostDataToWebView(byte[] buffer, int length)
+        {
+            string base64 = Convert.ToBase64String(buffer, 0, length);
+            string json = JsonSerializer.Serialize(new { type = "output", data = base64 });
+
+            try
             {
-                try
+                _webView2?.Invoke(() =>
                 {
-                    PostOutputToTerminal("\r\n\x1b[33mConnection closed.\x1b[0m\r\n");
-                    _webView2?.Invoke(() => Event_Disconnected(this, "SSH connection closed", null));
-                }
-                catch (ObjectDisposedException) { /* shutting down */ }
-                catch (InvalidOperationException) { /* shutting down */ }
+                    if (_webView2?.CoreWebView2 != null)
+                        _webView2.CoreWebView2.PostWebMessageAsString(json);
+                });
+                return true;
             }
+            catch (ObjectDisposedException) { return false; }
+            catch (InvalidOperationException) { return false; }
+        }
+
+        private void OnConnectionClosed()
+        {
+            PostOutputToTerminal("\r\n\x1b[33mConnection closed.\x1b[0m\r\n");
+            InvokeOnUiThread(() => Event_Disconnected(this, "SSH connection closed", null));
         }
 
         private void WriteToShell(string data)
