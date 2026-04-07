@@ -46,7 +46,7 @@
     try {
       fitAddon.fit();
       postMessage('resize', { cols: term.cols, rows: term.rows });
-    } catch(e) {
+    } catch(_) {
       // Fit may fail during initialization when container has zero size
     }
   }
@@ -85,7 +85,7 @@
       } else if (msg.type === 'focus') {
         term.focus();
       }
-    } catch(e) {
+    } catch(_) {
       // If not JSON, treat as raw output
       term.write(event.data);
     }
@@ -95,8 +95,7 @@
   function postMessage(type, payload) {
     var msg = { type: type };
     if (payload) {
-      var keys = Object.keys(payload);
-      for (var k = 0; k < keys.length; k++) msg[keys[k]] = payload[keys[k]];
+      for (var key of Object.keys(payload)) msg[key] = payload[key];
     }
     globalThis.chrome.webview.postMessage(JSON.stringify(msg));
   }

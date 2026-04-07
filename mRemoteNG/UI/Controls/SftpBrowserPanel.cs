@@ -38,8 +38,7 @@ namespace mRemoteNG.UI.Controls
         private string _password;
         private int _port;
 
-        // Controls
-        private ToolStrip _toolbar;
+        // Controls — fields kept for controls referenced in event handlers
         private ToolStripLabel _lblConnection;
         private ToolStripButton _btnBack;
         private ToolStripButton _btnForward;
@@ -52,20 +51,11 @@ namespace mRemoteNG.UI.Controls
         private ToolStripButton _btnNewFolder;
         private ToolStripButton _btnDelete;
         private ToolStripButton _btnToggleHidden;
-        private ToolStripButton _btnClose;
 
-        private Panel _pathPanel;
         private TextBox _txtPath;
-        private Button _btnGo;
 
         private MrngListView _fileList;
-        private OLVColumn _colName;
-        private OLVColumn _colSize;
-        private OLVColumn _colOwner;
-        private OLVColumn _colModified;
-        private OLVColumn _colPermissions;
 
-        private Panel _statusPanel;
         private Label _lblStatus;
         private Panel _statusDot;
         private ProgressBar _progressBar;
@@ -112,7 +102,7 @@ namespace mRemoteNG.UI.Controls
             imageList.Images.Add("file", Properties.Resources.Document_16x);
 
             // Toolbar — compact, icon-only with tooltips
-            _toolbar = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden, Dock = DockStyle.Top };
+            var toolbar = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden, Dock = DockStyle.Top };
 
             _lblConnection = new ToolStripLabel("SFTP") { Font = new Font(DefaultFont, 7.5F, FontStyle.Bold) };
             _btnBack = new ToolStripButton("", Properties.Resources.GlyphLeft_16x, OnBackClick) { ToolTipText = "Back", Enabled = false };
@@ -132,13 +122,13 @@ namespace mRemoteNG.UI.Controls
                 CheckOnClick = true,
                 Enabled = false
             };
-            _btnClose = new ToolStripButton("", Properties.Resources.Close_16x, OnCloseClick)
+            var btnClose = new ToolStripButton("", Properties.Resources.Close_16x, OnCloseClick)
             {
                 ToolTipText = "Hide SFTP browser",
                 Alignment = ToolStripItemAlignment.Right
             };
 
-            _toolbar.Items.AddRange(new ToolStripItem[]
+            toolbar.Items.AddRange(new ToolStripItem[]
             {
                 _lblConnection,
                 new ToolStripSeparator(),
@@ -151,17 +141,17 @@ namespace mRemoteNG.UI.Controls
                 _btnNewFile, _btnNewFolder, _btnDelete,
                 new ToolStripSeparator(),
                 _btnToggleHidden,
-                _btnClose
+                btnClose
             });
 
             // Path bar
-            _pathPanel = new Panel { Height = 22, Dock = DockStyle.Top, Padding = new Padding(1) };
+            var pathPanel = new Panel { Height = 22, Dock = DockStyle.Top, Padding = new Padding(1) };
             _txtPath = new TextBox { Dock = DockStyle.Fill, BorderStyle = BorderStyle.FixedSingle, Font = new Font(DefaultFont, 7.5F) };
             _txtPath.KeyDown += TxtPath_KeyDown;
-            _btnGo = new Button { Text = ">", Width = 24, Dock = DockStyle.Right, FlatStyle = FlatStyle.Flat, Font = new Font(DefaultFont, 7F) };
-            _btnGo.Click += (s, e) => _ = NavigateTo(_txtPath.Text);
-            _pathPanel.Controls.Add(_txtPath);
-            _pathPanel.Controls.Add(_btnGo);
+            var btnGo = new Button { Text = ">", Width = 24, Dock = DockStyle.Right, FlatStyle = FlatStyle.Flat, Font = new Font(DefaultFont, 7F) };
+            btnGo.Click += (s, e) => _ = NavigateTo(_txtPath.Text);
+            pathPanel.Controls.Add(_txtPath);
+            pathPanel.Controls.Add(btnGo);
 
             // File list
             _fileList = new MrngListView
@@ -177,14 +167,14 @@ namespace mRemoteNG.UI.Controls
                 Font = new Font(DefaultFont, 7.5F)
             };
 
-            _colName = new OLVColumn("Name", "") { Width = 200, IsEditable = false };
-            _colName.AspectGetter = obj => ((SftpFileItem)obj).Name;
-            _colName.ImageGetter = obj => ((SftpFileItem)obj).IsDirectory
+            var colName = new OLVColumn("Name", "") { Width = 200, IsEditable = false };
+            colName.AspectGetter = obj => ((SftpFileItem)obj).Name;
+            colName.ImageGetter = obj => ((SftpFileItem)obj).IsDirectory
                 ? Properties.Resources.FolderClosed_16x
                 : Properties.Resources.Document_16x;
 
-            _colSize = new OLVColumn("Size", "") { Width = 55, IsEditable = false, TextAlign = HorizontalAlignment.Right };
-            _colSize.AspectGetter = obj =>
+            var colSize = new OLVColumn("Size", "") { Width = 55, IsEditable = false, TextAlign = HorizontalAlignment.Right };
+            colSize.AspectGetter = obj =>
             {
                 var item = (SftpFileItem)obj;
                 if (item.IsDirectory) return "";
@@ -195,21 +185,21 @@ namespace mRemoteNG.UI.Controls
                 return $"{size / (1024.0 * 1024.0 * 1024.0):F1} GB";
             };
 
-            _colOwner = new OLVColumn("Owner", "") { Width = 45, IsEditable = false };
-            _colOwner.AspectGetter = obj => ((SftpFileItem)obj).Owner;
+            var colOwner = new OLVColumn("Owner", "") { Width = 45, IsEditable = false };
+            colOwner.AspectGetter = obj => ((SftpFileItem)obj).Owner;
 
-            _colModified = new OLVColumn("Modified", "") { Width = 110, IsEditable = false };
-            _colModified.AspectGetter = obj =>
+            var colModified = new OLVColumn("Modified", "") { Width = 110, IsEditable = false };
+            colModified.AspectGetter = obj =>
             {
                 var dt = ((SftpFileItem)obj).LastModified;
                 return dt == DateTime.MinValue ? "" : dt.ToString("yyyy-MM-dd HH:mm");
             };
 
-            _colPermissions = new OLVColumn("Perms", "") { Width = 65, IsEditable = false };
-            _colPermissions.AspectGetter = obj => ((SftpFileItem)obj).Permissions;
+            var colPermissions = new OLVColumn("Perms", "") { Width = 65, IsEditable = false };
+            colPermissions.AspectGetter = obj => ((SftpFileItem)obj).Permissions;
 
-            _fileList.AllColumns.AddRange(new[] { _colName, _colSize, _colOwner, _colModified, _colPermissions });
-            _fileList.Columns.AddRange(new ColumnHeader[] { _colName, _colSize, _colOwner, _colModified, _colPermissions });
+            _fileList.AllColumns.AddRange(new[] { colName, colSize, colOwner, colModified, colPermissions });
+            _fileList.Columns.AddRange(new ColumnHeader[] { colName, colSize, colOwner, colModified, colPermissions });
 
             // Color coding for file types
             _fileList.FormatRow += FileList_FormatRow;
@@ -225,7 +215,7 @@ namespace mRemoteNG.UI.Controls
             _fileList.ContextMenuStrip = _contextMenu;
 
             // Status bar with connection indicator and progress bar
-            _statusPanel = new Panel { Dock = DockStyle.Bottom, Height = 20 };
+            var statusPanel = new Panel { Dock = DockStyle.Bottom, Height = 20 };
             _statusDot = new Panel
             {
                 Size = new Size(10, 10),
@@ -255,15 +245,15 @@ namespace mRemoteNG.UI.Controls
                 Minimum = 0,
                 Maximum = 100
             };
-            _statusPanel.Controls.Add(_lblStatus);
-            _statusPanel.Controls.Add(_statusDot);
+            statusPanel.Controls.Add(_lblStatus);
+            statusPanel.Controls.Add(_statusDot);
 
             // Layout — order matters: Fill control added first
             Controls.Add(_fileList);
             Controls.Add(_progressBar);
-            Controls.Add(_pathPanel);
-            Controls.Add(_toolbar);
-            Controls.Add(_statusPanel);
+            Controls.Add(pathPanel);
+            Controls.Add(toolbar);
+            Controls.Add(statusPanel);
 
             ResumeLayout(false);
         }
@@ -341,13 +331,16 @@ namespace mRemoteNG.UI.Controls
             try
             {
                 _service?.Dispose();
-                _service = new SftpFileService();
+                _service = null;
+
+                var newService = new SftpFileService();
                 _lblStatus.Text = "Connecting...";
                 _statusDot.BackColor = Color.Orange;
                 _statusDot.Invalidate();
 
-                await System.Threading.Tasks.Task.Run(() => _service.Connect(_host, _user, _password, _port));
+                await System.Threading.Tasks.Task.Run(() => newService.Connect(_host, _user, _password, _port));
 
+                _service = newService;
                 _lblConnection.Text = $"{_user}@{_host}";
                 _statusDot.BackColor = Color.LimeGreen;
                 _statusDot.Invalidate();
@@ -360,9 +353,6 @@ namespace mRemoteNG.UI.Controls
                 _lblStatus.Text = "Connecting...";
                 _statusDot.BackColor = Color.Orange;
                 _statusDot.Invalidate();
-                // Dispose the newly created service that failed to connect (not the same instance disposed above)
-                _service?.Dispose();
-                _service = null;
             }
             finally
             {

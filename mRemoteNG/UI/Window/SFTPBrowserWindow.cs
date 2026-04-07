@@ -34,7 +34,7 @@ namespace mRemoteNG.UI.Window
         private System.Windows.Forms.Timer _autoConnectTimer;
 
         // Toolbar
-        private ToolStrip _toolbar;
+
         private ToolStripLabel _lblConnection;
         private ToolStripButton _btnDisconnect;
         private ToolStripButton _btnRefresh;
@@ -45,25 +45,25 @@ namespace mRemoteNG.UI.Window
         private ToolStripButton _btnHome;
 
         // Path bar
-        private Panel _pathPanel;
+
         private MrngTextBox _txtPath;
-        private MrngButton _btnGo;
+
 
         // File list
         private MrngListView _fileList;
-        private OLVColumn _colName;
-        private OLVColumn _colSize;
-        private OLVColumn _colModified;
-        private OLVColumn _colPermissions;
-        private OLVColumn _colOwner;
+
+
+
+
+
 
         // Status bar
-        private Panel _statusPanel;
+
         private MrngLabel _lblStatus;
         private MrngProgressBar _pbProgress;
 
         // Context menu
-        private ContextMenuStrip _contextMenu;
+
 
         #endregion
 
@@ -85,7 +85,7 @@ namespace mRemoteNG.UI.Window
             SuspendLayout();
 
             // Toolbar
-            _toolbar = new ToolStrip();
+            var _toolbar = new ToolStrip();
             _lblConnection = new ToolStripLabel(StatusNotConnected);
             _btnHome = new ToolStripButton("Home", null, OnHomeClick) { ToolTipText = "Home directory" };
             _btnRefresh = new ToolStripButton("Refresh", null, OnRefreshClick) { ToolTipText = "Refresh" };
@@ -113,7 +113,7 @@ namespace mRemoteNG.UI.Window
             _toolbar.GripStyle = ToolStripGripStyle.Hidden;
 
             // Path bar
-            _pathPanel = new Panel { Height = 28, Dock = DockStyle.Top, Padding = new Padding(2) };
+            var _pathPanel = new Panel { Height = 28, Dock = DockStyle.Top, Padding = new Padding(2) };
             _txtPath = new MrngTextBox
             {
                 Dock = DockStyle.Fill,
@@ -121,7 +121,7 @@ namespace mRemoteNG.UI.Window
                 Font = new Font("Segoe UI", 8.25F)
             };
             _txtPath.KeyDown += TxtPath_KeyDown;
-            _btnGo = new MrngButton
+            var _btnGo = new MrngButton
             {
                 Text = "Go",
                 Width = 40,
@@ -150,11 +150,11 @@ namespace mRemoteNG.UI.Window
                 CheckBoxes = false
             };
 
-            _colName = new OLVColumn("Name", "") { Width = 220, IsEditable = false };
+            var _colName = new OLVColumn("Name", "") { Width = 220, IsEditable = false };
             _colName.AspectGetter = obj => ((SftpFileItem)obj).Name;
             _colName.ImageGetter = obj => ((SftpFileItem)obj).IsDirectory ? "folder" : "file";
 
-            _colSize = new OLVColumn("Size", "") { Width = 70, IsEditable = false, TextAlign = HorizontalAlignment.Right };
+            var _colSize = new OLVColumn("Size", "") { Width = 70, IsEditable = false, TextAlign = HorizontalAlignment.Right };
             _colSize.AspectGetter = obj =>
             {
                 var item = (SftpFileItem)obj;
@@ -166,17 +166,17 @@ namespace mRemoteNG.UI.Window
                 return $"{size / (1024.0 * 1024.0 * 1024.0):F1} GB";
             };
 
-            _colOwner = new OLVColumn("Owner", "") { Width = 60, IsEditable = false };
+            var _colOwner = new OLVColumn("Owner", "") { Width = 60, IsEditable = false };
             _colOwner.AspectGetter = obj => ((SftpFileItem)obj).Owner;
 
-            _colModified = new OLVColumn("Modified", "") { Width = 130, IsEditable = false };
+            var _colModified = new OLVColumn("Modified", "") { Width = 130, IsEditable = false };
             _colModified.AspectGetter = obj =>
             {
                 var dt = ((SftpFileItem)obj).LastModified;
                 return dt == DateTime.MinValue ? "" : dt.ToString("yyyy-MM-dd HH:mm");
             };
 
-            _colPermissions = new OLVColumn("Permissions", "") { Width = 80, IsEditable = false };
+            var _colPermissions = new OLVColumn("Permissions", "") { Width = 80, IsEditable = false };
             _colPermissions.AspectGetter = obj => ((SftpFileItem)obj).Permissions;
 
             _fileList.AllColumns.AddRange(new[] { _colName, _colSize, _colOwner, _colModified, _colPermissions });
@@ -188,7 +188,7 @@ namespace mRemoteNG.UI.Window
             _fileList.DragDrop += FileList_DragDrop;
 
             // Context menu
-            _contextMenu = new ContextMenuStrip();
+            var _contextMenu = new ContextMenuStrip();
             _contextMenu.Items.Add("Download", null, OnDownloadClick);
             _contextMenu.Items.Add("Rename", null, OnRenameClick);
             _contextMenu.Items.Add(new ToolStripSeparator());
@@ -196,7 +196,7 @@ namespace mRemoteNG.UI.Window
             _fileList.ContextMenuStrip = _contextMenu;
 
             // Status bar
-            _statusPanel = new Panel { Height = 24, Dock = DockStyle.Bottom, Padding = new Padding(2) };
+            var _statusPanel = new Panel { Height = 24, Dock = DockStyle.Bottom, Padding = new Padding(2) };
             _lblStatus = new MrngLabel
             {
                 Text = StatusNotConnected,
