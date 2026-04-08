@@ -4,7 +4,7 @@ using System.Windows.Forms;
 namespace mRemoteNG.UI
 {
     [SupportedOSPlatform("windows")]
-    internal static class InputDialog
+    public static class InputDialog
     {
         /// <summary>
         /// Shows a simple input dialog and returns the entered text, or null if cancelled.

@@ -185,8 +185,14 @@ namespace mRemoteNG.UI.Controls
                 return $"{size / (1024.0 * 1024.0 * 1024.0):F1} GB";
             };
 
-            var colOwner = new OLVColumn("Owner", "") { Width = 45, IsEditable = false };
-            colOwner.AspectGetter = obj => ((SftpFileItem)obj).Owner;
+            var colOwner = new OLVColumn("Owner", "") { Width = 70, IsEditable = false };
+            colOwner.AspectGetter = obj =>
+            {
+                var item = (SftpFileItem)obj;
+                if (string.IsNullOrEmpty(item.Group) || item.Owner == item.Group)
+                    return item.Owner;
+                return $"{item.Owner}:{item.Group}";
+            };
 
             var colModified = new OLVColumn("Modified", "") { Width = 110, IsEditable = false };
             colModified.AspectGetter = obj =>
@@ -195,7 +201,7 @@ namespace mRemoteNG.UI.Controls
                 return dt == DateTime.MinValue ? "" : dt.ToString("yyyy-MM-dd HH:mm");
             };
 
-            var colPermissions = new OLVColumn("Perms", "") { Width = 65, IsEditable = false };
+            var colPermissions = new OLVColumn("Permissions", "") { Width = 80, IsEditable = false };
             colPermissions.AspectGetter = obj => ((SftpFileItem)obj).Permissions;
 
             _fileList.AllColumns.AddRange(new[] { colName, colSize, colOwner, colModified, colPermissions });
@@ -204,6 +210,7 @@ namespace mRemoteNG.UI.Controls
             // Color coding for file types
             _fileList.FormatRow += FileList_FormatRow;
 
+            _fileList.KeyDown += FileList_KeyDown;
             _fileList.DoubleClick += FileList_DoubleClick;
             _fileList.SelectedIndexChanged += FileList_SelectedIndexChanged;
             _fileList.DragEnter += FileList_DragEnter;
@@ -714,6 +721,33 @@ namespace mRemoteNG.UI.Controls
                 try { if (File.Exists(tempFile)) File.Delete(tempFile); }
                 catch { /* best effort cleanup */ }
             });
+        }
+
+        private void FileList_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F5:
+                    OnRefreshClick(sender, e);
+                    e.Handled = true;
+                    break;
+                case Keys.Delete:
+                    OnDeleteClick(sender, e);
+                    e.Handled = true;
+                    break;
+                case Keys.F2:
+                    OnRenameClick(sender, e);
+                    e.Handled = true;
+                    break;
+                case Keys.Enter:
+                    FileList_DoubleClick(sender, e);
+                    e.Handled = true;
+                    break;
+                case Keys.Back:
+                    OnUpClick(sender, e);
+                    e.Handled = true;
+                    break;
+            }
         }
 
         private void FileList_DoubleClick(object sender, EventArgs e)

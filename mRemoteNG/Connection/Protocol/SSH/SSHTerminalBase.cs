@@ -88,9 +88,14 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 _webView2.CoreWebView2.WebMessageReceived += OnWebMessageReceived;
                 _webView2.CoreWebView2.NewWindowRequested += (s, e) => e.Handled = true;
 
+                // Compute SRI hashes of extracted files and inject into HTML
                 string htmlPath = Path.Combine(_resourceFolder, "xterm-terminal.html");
                 if (!File.Exists(htmlPath))
                     throw new FileNotFoundException("Terminal HTML resource not found.", htmlPath);
+
+                string html = File.ReadAllText(htmlPath);
+                html = InjectSriHashes(html);
+                File.WriteAllText(htmlPath, html);
 
                 _webView2.CoreWebView2.Navigate("https://xterm.local/xterm-terminal.html");
             }
@@ -495,6 +500,44 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 name.EndsWith(searchName, StringComparison.OrdinalIgnoreCase)
                 || name.EndsWith(fileName, StringComparison.OrdinalIgnoreCase)
                 || name.EndsWith(fileName.Replace("-", "_"), StringComparison.OrdinalIgnoreCase));
+        }
+
+        /// <summary>
+        /// Computes SHA-384 SRI hashes of extracted resource files and injects
+        /// integrity attributes into the HTML script/link tags at runtime.
+        /// This ensures tamper detection even after CRLF line ending conversion.
+        /// </summary>
+        private string InjectSriHashes(string html)
+        {
+            var filesToHash = new[] { "xterm.css", "xterm.min.js", "addon-fit.min.js" };
+            foreach (var fileName in filesToHash)
+            {
+                string filePath = Path.Combine(_resourceFolder, fileName);
+                if (!File.Exists(filePath)) continue;
+
+                string hash = ComputeSriHash(filePath);
+                string searchTag = $"https://xterm.local/{fileName}\">";
+                string searchLink = $"https://xterm.local/{fileName}\">";
+
+                // Inject integrity into <script src="..."> tags
+                html = html.Replace(
+                    $"src=\"https://xterm.local/{fileName}\"></script>",
+                    $"src=\"https://xterm.local/{fileName}\" integrity=\"{hash}\" crossorigin=\"anonymous\"></script>");
+
+                // Inject integrity into <link href="..."> tags
+                html = html.Replace(
+                    $"href=\"https://xterm.local/{fileName}\">",
+                    $"href=\"https://xterm.local/{fileName}\" integrity=\"{hash}\" crossorigin=\"anonymous\">");
+            }
+            return html;
+        }
+
+        private static string ComputeSriHash(string filePath)
+        {
+            using var sha = System.Security.Cryptography.SHA384.Create();
+            using var stream = File.OpenRead(filePath);
+            byte[] hashBytes = sha.ComputeHash(stream);
+            return "sha384-" + Convert.ToBase64String(hashBytes);
         }
 
         #endregion
