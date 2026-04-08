@@ -516,8 +516,6 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 if (!File.Exists(filePath)) continue;
 
                 string hash = ComputeSriHash(filePath);
-                string searchTag = $"https://xterm.local/{fileName}\">";
-                string searchLink = $"https://xterm.local/{fileName}\">";
 
                 // Inject integrity into <script src="..."> tags
                 html = html.Replace(

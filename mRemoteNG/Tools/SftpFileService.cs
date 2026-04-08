@@ -170,40 +170,33 @@ namespace mRemoteNG.Tools
                 if (a == null)
                     return "";
 
-                var chars = new char[10];
-
-                // File type prefix (matches ls -l output)
-                if (entry.IsSymbolicLink)
-                    chars[0] = 'l';
-                else if (entry.IsDirectory)
-                    chars[0] = 'd';
-                else if (entry.IsBlockDevice)
-                    chars[0] = 'b';
-                else if (entry.IsCharacterDevice)
-                    chars[0] = 'c';
-                else if (entry.IsNamedPipe)
-                    chars[0] = 'p';
-                else if (entry.IsSocket)
-                    chars[0] = 's';
-                else
-                    chars[0] = '-';
-
-                chars[1] = a.OwnerCanRead ? 'r' : '-';
-                chars[2] = a.OwnerCanWrite ? 'w' : '-';
-                chars[3] = a.OwnerCanExecute ? 'x' : '-';
-                chars[4] = a.GroupCanRead ? 'r' : '-';
-                chars[5] = a.GroupCanWrite ? 'w' : '-';
-                chars[6] = a.GroupCanExecute ? 'x' : '-';
-                chars[7] = a.OthersCanRead ? 'r' : '-';
-                chars[8] = a.OthersCanWrite ? 'w' : '-';
-                chars[9] = a.OthersCanExecute ? 'x' : '-';
-
-                return new string(chars);
+                return string.Concat(
+                    GetFileTypeChar(entry),
+                    a.OwnerCanRead ? 'r' : '-',
+                    a.OwnerCanWrite ? 'w' : '-',
+                    a.OwnerCanExecute ? 'x' : '-',
+                    a.GroupCanRead ? 'r' : '-',
+                    a.GroupCanWrite ? 'w' : '-',
+                    a.GroupCanExecute ? 'x' : '-',
+                    a.OthersCanRead ? 'r' : '-',
+                    a.OthersCanWrite ? 'w' : '-',
+                    a.OthersCanExecute ? 'x' : '-');
             }
             catch
             {
                 return "";
             }
+        }
+
+        private static char GetFileTypeChar(ISftpFile entry)
+        {
+            if (entry.IsSymbolicLink) return 'l';
+            if (entry.IsDirectory) return 'd';
+            if (entry.IsBlockDevice) return 'b';
+            if (entry.IsCharacterDevice) return 'c';
+            if (entry.IsNamedPipe) return 'p';
+            if (entry.IsSocket) return 's';
+            return '-';
         }
 
         public void Dispose()
