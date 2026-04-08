@@ -83,31 +83,27 @@ namespace mRemoteNGTests.Connection.Protocol.SSH
         }
 
         [Test]
-        public void InlineResources_ReplacesScriptTag()
+        public void InlineResources_ReplacesJsMarker()
         {
-            string html = "<script src=\"https://xterm.local/test.js\"></script>";
+            string html = "<!-- INLINE:test.js -->";
             string jsContent = "console.log('hello');";
 
-            string result = html.Replace(
-                "<script src=\"https://xterm.local/test.js\"></script>",
-                $"<script>{jsContent}</script>");
+            string result = html.Replace("<!-- INLINE:test.js -->", $"<script>{jsContent}</script>");
 
             Assert.That(result, Does.Contain("<script>console.log('hello');</script>"));
-            Assert.That(result, Does.Not.Contain("src="));
+            Assert.That(result, Does.Not.Contain("INLINE:"));
         }
 
         [Test]
-        public void InlineResources_ReplacesLinkTag()
+        public void InlineResources_ReplacesCssMarker()
         {
-            string html = "<link rel=\"stylesheet\" href=\"https://xterm.local/test.css\">";
+            string html = "<!-- INLINE:test.css -->";
             string cssContent = "body { background: #000; }";
 
-            string result = html.Replace(
-                "<link rel=\"stylesheet\" href=\"https://xterm.local/test.css\">",
-                $"<style>{cssContent}</style>");
+            string result = html.Replace("<!-- INLINE:test.css -->", $"<style>{cssContent}</style>");
 
             Assert.That(result, Does.Contain("<style>body { background: #000; }</style>"));
-            Assert.That(result, Does.Not.Contain("href="));
+            Assert.That(result, Does.Not.Contain("INLINE:"));
         }
 
         private static string ComputeHash(string filePath)

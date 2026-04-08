@@ -510,34 +510,20 @@ namespace mRemoteNG.Connection.Protocol.SSH
         /// </summary>
         private string InlineResources(string html)
         {
-            var replacements = new[]
-            {
-                ("xterm.css", "link", "stylesheet"),
-                ("xterm.min.js", "script", "js"),
-                ("addon-fit.min.js", "script", "js")
-            };
+            string[] resourceFiles = { "xterm.css", "xterm.min.js", "addon-fit.min.js" };
 
-            foreach (var (fileName, tagType, _) in replacements)
+            foreach (var fileName in resourceFiles)
             {
                 string filePath = Path.Combine(_resourceFolder, fileName);
                 if (!File.Exists(filePath)) continue;
 
                 string content = File.ReadAllText(filePath);
+                string marker = $"<!-- INLINE:{fileName} -->";
+                string tag = fileName.EndsWith(".css")
+                    ? $"<style>{content}</style>"
+                    : $"<script>{content}</script>";
 
-                if (tagType == "link")
-                {
-                    // Replace <link rel="stylesheet" href="..."> with <style>...</style>
-                    html = html.Replace(
-                        $"<link rel=\"stylesheet\" href=\"https://xterm.local/{fileName}\">",
-                        $"<style>{content}</style>");
-                }
-                else
-                {
-                    // Replace <script src="..."></script> with <script>...</script>
-                    html = html.Replace(
-                        $"<script src=\"https://xterm.local/{fileName}\"></script>",
-                        $"<script>{content}</script>");
-                }
+                html = html.Replace(marker, tag);
             }
 
             return html;
