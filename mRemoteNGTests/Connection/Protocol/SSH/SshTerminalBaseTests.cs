@@ -83,32 +83,31 @@ namespace mRemoteNGTests.Connection.Protocol.SSH
         }
 
         [Test]
-        public void InjectSriHash_ReplacesScriptTag()
+        public void InlineResources_ReplacesScriptTag()
         {
-            string html = "<script src=\"https://xterm.local/xterm.min.js\"></script>";
-            string expected = "integrity=\"sha384-";
+            string html = "<script src=\"https://xterm.local/test.js\"></script>";
+            string jsContent = "console.log('hello');";
 
-            // Simulate injection
-            string hash = "sha384-TESTHASH123456789012345678901234567890123456789012345678901234";
             string result = html.Replace(
-                "src=\"https://xterm.local/xterm.min.js\"></script>",
-                $"src=\"https://xterm.local/xterm.min.js\" integrity=\"{hash}\" crossorigin=\"anonymous\"></script>");
+                "<script src=\"https://xterm.local/test.js\"></script>",
+                $"<script>{jsContent}</script>");
 
-            Assert.That(result, Does.Contain(expected));
-            Assert.That(result, Does.Contain("crossorigin=\"anonymous\""));
+            Assert.That(result, Does.Contain("<script>console.log('hello');</script>"));
+            Assert.That(result, Does.Not.Contain("src="));
         }
 
         [Test]
-        public void InjectSriHash_ReplacesLinkTag()
+        public void InlineResources_ReplacesLinkTag()
         {
-            string html = "<link rel=\"stylesheet\" href=\"https://xterm.local/xterm.css\">";
-            string hash = "sha384-TESTHASH123456789012345678901234567890123456789012345678901234";
-            string result = html.Replace(
-                "href=\"https://xterm.local/xterm.css\">",
-                $"href=\"https://xterm.local/xterm.css\" integrity=\"{hash}\" crossorigin=\"anonymous\">");
+            string html = "<link rel=\"stylesheet\" href=\"https://xterm.local/test.css\">";
+            string cssContent = "body { background: #000; }";
 
-            Assert.That(result, Does.Contain("integrity=\"sha384-"));
-            Assert.That(result, Does.Contain("crossorigin=\"anonymous\""));
+            string result = html.Replace(
+                "<link rel=\"stylesheet\" href=\"https://xterm.local/test.css\">",
+                $"<style>{cssContent}</style>");
+
+            Assert.That(result, Does.Contain("<style>body { background: #000; }</style>"));
+            Assert.That(result, Does.Not.Contain("href="));
         }
 
         private static string ComputeHash(string filePath)

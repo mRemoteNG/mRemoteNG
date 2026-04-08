@@ -88,13 +88,13 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 _webView2.CoreWebView2.WebMessageReceived += OnWebMessageReceived;
                 _webView2.CoreWebView2.NewWindowRequested += (s, e) => e.Handled = true;
 
-                // Compute SRI hashes of extracted files and inject into HTML
+                // Build self-contained HTML with inlined JS/CSS to avoid external resource tags
                 string htmlPath = Path.Combine(_resourceFolder, "xterm-terminal.html");
                 if (!File.Exists(htmlPath))
                     throw new FileNotFoundException("Terminal HTML resource not found.", htmlPath);
 
                 string html = File.ReadAllText(htmlPath);
-                html = InjectSriHashes(html);
+                html = InlineResources(html);
                 File.WriteAllText(htmlPath, html);
 
                 _webView2.CoreWebView2.Navigate("https://xterm.local/xterm-terminal.html");
@@ -503,39 +503,44 @@ namespace mRemoteNG.Connection.Protocol.SSH
         }
 
         /// <summary>
-        /// Computes SHA-384 SRI hashes of extracted resource files and injects
-        /// integrity attributes into the HTML script/link tags at runtime.
-        /// This ensures tamper detection even after CRLF line ending conversion.
+        /// Inlines CSS and JS resources directly into the HTML to create a
+        /// self-contained page. This eliminates external script/link tags,
+        /// avoiding SonarCloud S5725 security hotspots while ensuring no
+        /// external resources are loaded.
         /// </summary>
-        private string InjectSriHashes(string html)
+        private string InlineResources(string html)
         {
-            var filesToHash = new[] { "xterm.css", "xterm.min.js", "addon-fit.min.js" };
-            foreach (var fileName in filesToHash)
+            var replacements = new[]
+            {
+                ("xterm.css", "link", "stylesheet"),
+                ("xterm.min.js", "script", "js"),
+                ("addon-fit.min.js", "script", "js")
+            };
+
+            foreach (var (fileName, tagType, _) in replacements)
             {
                 string filePath = Path.Combine(_resourceFolder, fileName);
                 if (!File.Exists(filePath)) continue;
 
-                string hash = ComputeSriHash(filePath);
+                string content = File.ReadAllText(filePath);
 
-                // Inject integrity into <script src="..."> tags
-                html = html.Replace(
-                    $"src=\"https://xterm.local/{fileName}\"></script>",
-                    $"src=\"https://xterm.local/{fileName}\" integrity=\"{hash}\" crossorigin=\"anonymous\"></script>");
-
-                // Inject integrity into <link href="..."> tags
-                html = html.Replace(
-                    $"href=\"https://xterm.local/{fileName}\">",
-                    $"href=\"https://xterm.local/{fileName}\" integrity=\"{hash}\" crossorigin=\"anonymous\">");
+                if (tagType == "link")
+                {
+                    // Replace <link rel="stylesheet" href="..."> with <style>...</style>
+                    html = html.Replace(
+                        $"<link rel=\"stylesheet\" href=\"https://xterm.local/{fileName}\">",
+                        $"<style>{content}</style>");
+                }
+                else
+                {
+                    // Replace <script src="..."></script> with <script>...</script>
+                    html = html.Replace(
+                        $"<script src=\"https://xterm.local/{fileName}\"></script>",
+                        $"<script>{content}</script>");
+                }
             }
-            return html;
-        }
 
-        private static string ComputeSriHash(string filePath)
-        {
-            using var sha = System.Security.Cryptography.SHA384.Create();
-            using var stream = File.OpenRead(filePath);
-            byte[] hashBytes = sha.ComputeHash(stream);
-            return "sha384-" + Convert.ToBase64String(hashBytes);
+            return html;
         }
 
         #endregion
