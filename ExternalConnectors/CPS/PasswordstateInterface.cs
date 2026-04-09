@@ -273,8 +273,13 @@ public class PasswordstateInterface
         PemReader pr = new PemReader(new StringReader(pem));
         AsymmetricCipherKeyPair KeyPair = (AsymmetricCipherKeyPair)pr.ReadObject();
         RSAParameters rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters)KeyPair.Private);
-        RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048);
+        RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
         rsa.ImportParameters(rsaParams);
+
+        if (rsa.KeySize < 2048)
+        {
+            throw new CryptographicException("The imported RSA private key must be at least 2048 bits.");
+        }
         return rsa;
     }
     #endregion
