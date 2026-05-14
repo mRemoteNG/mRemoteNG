@@ -830,6 +830,9 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   <data name="SshFileTransfer" xml:space="preserve">
     <value>Transfer plików SSH</value>
   </data>
+  <data name="SftpFileManager" xml:space="preserve">
+    <value>Menedżer plików SFTP</value>
+  </data>
   <data name="StartChat" xml:space="preserve">
     <value>Rozpocznij Chat (VNC)</value>
   </data>
