@@ -13,5 +13,7 @@
         ExternalApps = 13,
         PortScan = 14,
         UltraVNCSC = 16,
+        SftpFileManager = 17,
+        SftpFileManagerWithConnection = 18,
     }
 }
