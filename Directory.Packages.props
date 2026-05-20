@@ -28,6 +28,7 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.5.1" />
     <PackageVersion Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
     <PackageVersion Include="Microsoft.NETCore.Targets" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.Playwright.NUnit" Version="1.59.0" />
     <PackageVersion Include="Microsoft.VisualStudio.TextTemplating.VSHost" Version="17.14.40265" />
     <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.3967.48" />
     <PackageVersion Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.142" />
@@ -45,6 +46,7 @@
     <PackageVersion Include="NUnit3TestAdapter" Version="6.2.0" />
     <PackageVersion Include="OpenCover" Version="4.7.1221" />
     <PackageVersion Include="Renci.SshNet.Async" Version="1.4.0" />
+    <PackageVersion Include="Reqnroll.NUnit" Version="3.3.4" />
     <PackageVersion Include="ReportGenerator" Version="5.5.10" />
     <PackageVersion Include="runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl" Version="4.3.3" />
     <PackageVersion Include="runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl" Version="4.3.3" />
@@ -100,6 +102,7 @@
     <PackageVersion Include="System.Windows.Extensions" Version="10.0.8" />
     <PackageVersion Include="System.Xml.ReaderWriter" Version="4.3.1" />
     <PackageVersion Include="VaultSharp" Version="1.17.5.1" />
+    <PackageVersion Include="Verify.NUnit" Version="31.16.3" />
     <PackageVersion Include="VncSharpCore" Version="1.2.1" />
     <PackageVersion Include="ZstdSharp.Port" Version="0.8.8" />
   </ItemGroup>

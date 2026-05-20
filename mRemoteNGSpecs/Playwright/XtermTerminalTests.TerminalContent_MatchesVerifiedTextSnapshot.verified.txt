@@ -1,0 +1,4 @@
+﻿mRemoteNG xterm.js terminal E2E
+$ echo visual-regression
+visual-regression
+$

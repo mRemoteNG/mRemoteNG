@@ -2,7 +2,7 @@
 using mRemoteNG.Credential.Repositories;
 using mRemoteNGSpecs.Utilities;
 using NUnit.Framework;
-using TechTalk.SpecFlow;
+using Reqnroll;
 
 namespace mRemoteNGSpecs.StepDefinitions
 {
