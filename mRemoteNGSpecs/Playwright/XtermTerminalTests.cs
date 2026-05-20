@@ -203,7 +203,7 @@ namespace mRemoteNGSpecs.Playwright
             return raw.Select(s => JsonDocument.Parse(s).RootElement).ToList();
         }
 
-        private static string TypeOf(JsonElement message) =>
+        private static string? TypeOf(JsonElement message) =>
             message.TryGetProperty("type", out var t) ? t.GetString() : null;
 
         private static (int R, int G, int B) ParseRgb(string cssColor)

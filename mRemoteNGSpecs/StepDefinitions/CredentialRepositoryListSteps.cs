@@ -9,7 +9,7 @@ namespace mRemoteNGSpecs.StepDefinitions
     [Binding]
     public class CredentialRepositoryListSteps
     {
-        private CredentialRepositoryList _credentialRepositoryList;
+        private CredentialRepositoryList _credentialRepositoryList = null!;
         private readonly XmlCredentialRepoBuilder _credentialRepoUtilities = new();
 
         [Given(@"I have a credential repository list")]

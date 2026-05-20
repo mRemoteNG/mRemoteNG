@@ -21,7 +21,7 @@ namespace mRemoteNGSpecs.Support
                 .FullName;
 
         public List<SftpFileItem> LastListing { get; set; } = new();
-        public string LastDownloadedFile { get; set; }
+        public string LastDownloadedFile { get; set; } = null!;
 
         public void Dispose()
         {

@@ -63,7 +63,7 @@ namespace mRemoteNGSpecs.Playwright
         {
             // Preferred: the resources embedded in the shipping mRemoteNG assembly.
             var assembly = typeof(SshTerminalBase).Assembly;
-            string manifestName = assembly.GetManifestResourceNames().FirstOrDefault(n =>
+            string? manifestName = assembly.GetManifestResourceNames().FirstOrDefault(n =>
                 n.EndsWith(fileName, StringComparison.OrdinalIgnoreCase) ||
                 n.EndsWith(fileName.Replace('-', '_'), StringComparison.OrdinalIgnoreCase));
 

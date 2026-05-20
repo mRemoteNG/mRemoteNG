@@ -63,7 +63,7 @@ namespace mRemoteNGSpecs.Support
         private static void WaitUntilSftpAccepts(TimeSpan timeout)
         {
             var deadline = DateTime.UtcNow + timeout;
-            Exception last = null;
+            Exception? last = null;
 
             while (DateTime.UtcNow < deadline)
             {

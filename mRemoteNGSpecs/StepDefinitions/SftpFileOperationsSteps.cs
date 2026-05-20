@@ -16,7 +16,7 @@ namespace mRemoteNGSpecs.StepDefinitions
     public class SftpFileOperationsSteps
     {
         private readonly SftpWorld _world;
-        private string _stagedLocalFile;
+        private string _stagedLocalFile = null!;
 
         public SftpFileOperationsSteps(SftpWorld world) => _world = world;
 
