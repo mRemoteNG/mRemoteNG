@@ -417,7 +417,7 @@ namespace mRemoteNG.Connection.Protocol
                         writer.Write(privateKey);
                     }
 
-                    new FileInfo(candidatePath) { Attributes = FileAttributes.Temporary };
+                    File.SetAttributes(candidatePath, FileAttributes.Temporary);
                     return candidatePath;
                 }
                 catch (IOException) when (File.Exists(candidatePath))
