@@ -121,12 +121,7 @@ namespace mRemoteNG.Connection.Protocol
 
                                 if (!string.IsNullOrEmpty(privatekey))
                                 {
-                                    optionalTemporaryPrivateKeyPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-                                    File.WriteAllText(optionalTemporaryPrivateKeyPath, privatekey);
-                                    FileInfo fileInfo = new(optionalTemporaryPrivateKeyPath)
-                                    {
-                                        Attributes = FileAttributes.Temporary
-                                    };
+                                    optionalTemporaryPrivateKeyPath = WriteTemporaryPrivateKeyFile(privatekey);
                                 }
                             }
                             catch (Exception ex)
@@ -142,12 +137,7 @@ namespace mRemoteNG.Connection.Protocol
 
                                 if (!string.IsNullOrEmpty(privatekey))
                                 {
-                                    optionalTemporaryPrivateKeyPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-                                    File.WriteAllText(optionalTemporaryPrivateKeyPath, privatekey);
-                                    FileInfo fileInfo = new(optionalTemporaryPrivateKeyPath)
-                                    {
-                                        Attributes = FileAttributes.Temporary
-                                    };
+                                    optionalTemporaryPrivateKeyPath = WriteTemporaryPrivateKeyFile(privatekey);
                                 }
                             }
                             catch (Exception ex)
@@ -398,13 +388,45 @@ namespace mRemoteNG.Connection.Protocol
             }
             finally
             {
-                // make sure to remove the private key file
+                // make sure to remove the private key file we created
                 if (!string.IsNullOrEmpty(optionalTemporaryPrivateKeyPath))
                 {
                     System.Threading.Thread.Sleep(500);
                     System.IO.File.Delete(optionalTemporaryPrivateKeyPath);
                 }
             }
+        }
+
+        /// <summary>
+        /// Atomically writes private-key material to a uniquely named temporary
+        /// file and returns its path. Uses <see cref="FileMode.CreateNew"/> so an
+        /// existing file is never overwritten, retrying on the (extremely
+        /// unlikely) name collision. The caller owns the returned file and is
+        /// responsible for deleting it.
+        /// </summary>
+        private static string WriteTemporaryPrivateKeyFile(string privateKey)
+        {
+            for (int attempt = 0; attempt < 5; attempt++)
+            {
+                string candidatePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".ppk");
+                try
+                {
+                    using (FileStream stream = new(candidatePath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                    using (StreamWriter writer = new(stream))
+                    {
+                        writer.Write(privateKey);
+                    }
+
+                    new FileInfo(candidatePath) { Attributes = FileAttributes.Temporary };
+                    return candidatePath;
+                }
+                catch (IOException) when (File.Exists(candidatePath))
+                {
+                    // Name collided with a pre-existing file - try a different name.
+                }
+            }
+
+            throw new IOException("Unable to create a unique temporary private-key file.");
         }
 
         public override void Focus()

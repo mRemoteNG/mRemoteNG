@@ -196,6 +196,8 @@ jobs:
 
   Create-Combined-Release:
     needs: NB-Build-and-Release
+    permissions:
+      contents: write
     runs-on: windows-latest
     steps:
       - name: Checkout Repository
