@@ -6352,6 +6352,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SFTP File Manager.
+        /// </summary>
+        internal static string SftpFileManager {
+            get {
+                return ResourceManager.GetString("SftpFileManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SSH Options.
         /// </summary>
         internal static string SshOptions {

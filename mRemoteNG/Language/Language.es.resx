@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -732,6 +732,9 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="SshFileTransfer" xml:space="preserve">
     <value>Tranferencia de Archivos por SSH</value>
+  </data>
+  <data name="SftpFileManager" xml:space="preserve">
+    <value>Gestor de archivos SFTP</value>
   </data>
   <data name="StartChat" xml:space="preserve">
     <value>Comenzar Chat (VNC)</value>

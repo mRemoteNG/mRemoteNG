@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -741,6 +741,9 @@
   </data>
   <data name="SshFileTransfer" xml:space="preserve">
     <value>SSH 檔案傳輸</value>
+  </data>
+  <data name="SftpFileManager" xml:space="preserve">
+    <value>SFTP 檔案管理員</value>
   </data>
   <data name="StartChat" xml:space="preserve">
     <value>開始聊天 (VNC)</value>

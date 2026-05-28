@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -832,6 +832,9 @@
   </data>
   <data name="SshFileTransfer" xml:space="preserve">
     <value>பாஓடு கோப்பு பரிமாற்றம்</value>
+  </data>
+  <data name="SftpFileManager" xml:space="preserve">
+    <value>SFTP கோப்பு மேலாளர்</value>
   </data>
   <data name="StartChat" xml:space="preserve">
     <value>அரட்டையைத் தொடங்கு (விஎன்சி)</value>

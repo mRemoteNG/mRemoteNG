@@ -2401,5 +2401,17 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultRedirectDiskDrivesCustom"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SftpFileManagerLastLocalPath {
+            get {
+                return ((string)(this["SftpFileManagerLastLocalPath"]));
+            }
+            set {
+                this["SftpFileManagerLastLocalPath"] = value;
+            }
+        }
     }
 }

@@ -22,8 +22,10 @@
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing"
+  mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework
+  object]</value>
         <comment>This is a comment</comment>
     </data>
                 
@@ -59,7 +61,8 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -112,10 +115,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MenuItem_About" xml:space="preserve">
     <value>O Aplikaci</value>
@@ -819,6 +824,9 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="SshFileTransfer" xml:space="preserve">
     <value>SSH přenos souborů</value>
+  </data>
+  <data name="SftpFileManager" xml:space="preserve">
+    <value>SFTP správce souborů</value>
   </data>
   <data name="StartChat" xml:space="preserve">
     <value>Spustit (VNC) chat</value>
@@ -1878,14 +1886,16 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   <data name="AutoSaveInMinutes" xml:space="preserve">
     <value>Kliknutím na již otevřené připojení v seznamu otevře jeho záložku</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms"
+    name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="VaultOpenbao" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
   <data name="VaultOpenbaoMount" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="VaultOpenbaoMountDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="VaultOpenbaoMountDescription"
+    type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
   <data name="VaultOpenbaoRole" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -1897,28 +1907,34 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   <data name="VaultOpenbaoToken" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="VaultOpenbaoTokenPropertyDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="VaultOpenbaoTokenPropertyDescription"
+    type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
   <data name="VaultOpenbaoSecretEngine" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="PropertyDescriptionVaultOpenbaoSecretEngine" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="PropertyDescriptionVaultOpenbaoSecretEngine"
+    type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="VaultOpenbaoSecretEngineKeyValue" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="VaultOpenbaoSecretEngineKeyValue"
+    type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="VaultOpenbaoSecretEngineLDAPDynamic" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="VaultOpenbaoSecretEngineLDAPDynamic"
+    type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="VaultOpenbaoSecretEngineLDAPStatic" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="VaultOpenbaoSecretEngineLDAPStatic"
+    type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
   <data name="WarnMeOnlyWhenClosingMultipleConnections1" xml:space="preserve">
     <value>Upozornit mě pouze při ukončení několika připojení</value>
   </data>
-  <data name="VaultOpenbaoSecretEngineSSHOTP" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="VaultOpenbaoSecretEngineSSHOTP"
+    type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>

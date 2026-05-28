@@ -827,6 +827,9 @@
   <data name="SshFileTransfer" xml:space="preserve">
     <value>SSH 文件传输</value>
   </data>
+  <data name="SftpFileManager" xml:space="preserve">
+    <value>SFTP 文件管理器</value>
+  </data>
   <data name="StartChat" xml:space="preserve">
     <value>启动 Chat(VNC)</value>
   </data>

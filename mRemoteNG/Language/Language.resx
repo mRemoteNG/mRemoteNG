@@ -854,6 +854,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="SshFileTransfer" xml:space="preserve">
     <value>SSH File Transfer</value>
   </data>
+  <data name="SftpFileManager" xml:space="preserve">
+    <value>SFTP File Manager</value>
+  </data>
   <data name="StartChat" xml:space="preserve">
     <value>Start Chat (VNC)</value>
   </data>

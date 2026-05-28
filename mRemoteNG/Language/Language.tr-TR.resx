@@ -854,6 +854,9 @@ Daha fazla bilgi için http://support.microsoft.com/kb/811833 adresindeki Micros
   <data name="SshFileTransfer" xml:space="preserve">
     <value>SSH Dosya Transferi</value>
   </data>
+  <data name="SftpFileManager" xml:space="preserve">
+    <value>SFTP Dosya Yöneticisi</value>
+  </data>
   <data name="StartChat" xml:space="preserve">
     <value>Sohbet Başlat (VNC)</value>
   </data>

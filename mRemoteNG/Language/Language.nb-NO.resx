@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -815,6 +815,9 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   </data>
   <data name="SshFileTransfer" xml:space="preserve">
     <value>SSH-filoverføring</value>
+  </data>
+  <data name="SftpFileManager" xml:space="preserve">
+    <value>SFTP-filbehandling</value>
   </data>
   <data name="StartChat" xml:space="preserve">
     <value>Start chat (VNC)</value>
