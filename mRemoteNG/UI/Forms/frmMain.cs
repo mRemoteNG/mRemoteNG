@@ -817,7 +817,7 @@ namespace mRemoteNG.UI.Forms
             pnlDock.Visible = false;
 
             AppWindows.TreeForm.Show(pnlDock, DockState.DockLeft);
-            AppWindows.ConfigForm.Show(pnlDock, DockState.DockLeft);
+            AppWindows.ConfigForm.Show(AppWindows.TreeForm.Pane, DockAlignment.Bottom, 0.5);
             AppWindows.ErrorsForm.Show(pnlDock, DockState.DockBottomAutoHide);
             viewMenu._mMenViewErrorsAndInfos.Checked = true;
 

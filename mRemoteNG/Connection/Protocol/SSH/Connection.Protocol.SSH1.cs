@@ -1,16 +1,11 @@
-﻿using System.Runtime.Versioning;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection.Protocol.SSH
 {
     [SupportedOSPlatform("windows")]
-    public class ProtocolSSH1 : PuttyBase
+    public class ProtocolSSH1 : SshTerminalBase
     {
-        public ProtocolSSH1()
-        {
-            PuttyProtocol = Putty_Protocol.ssh;
-            PuttySSHVersion = Putty_SSHVersion.ssh1;
-        }
-
+        // SSH1 is deprecated — SSH.NET connects as SSH2
         public enum Defaults
         {
             Port = 22

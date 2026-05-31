@@ -12,7 +12,7 @@ namespace mRemoteNG.UI
                 throw new ArgumentNullException(nameof(message));
 
             ImageIndex = Convert.ToInt32(message.Class);
-            Text = message.Text.Replace(Environment.NewLine, "  ");
+            Text = $"[{message.Date:HH:mm:ss}] {message.Text.Replace(Environment.NewLine, "  ")}";
             Tag = message;
         }
     }

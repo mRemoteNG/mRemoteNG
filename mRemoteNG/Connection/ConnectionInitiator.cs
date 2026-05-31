@@ -230,6 +230,11 @@ namespace mRemoteNG.Connection
                 // SSH tunnel connection is stored in Interface Control to be used in log messages etc
                 newProtocol.InterfaceControl.SSHTunnelInfo = connectionInfoSshTunnel;
 
+                // Enable embedded SFTP browser for SSH connections (MobaXterm-style split view)
+                // Use effective connectionInfo so SFTP follows SSH tunnel host/port rewrites
+                if (connectionInfo.Protocol == ProtocolType.SSH1 || connectionInfo.Protocol == ProtocolType.SSH2)
+                    newProtocol.InterfaceControl.EnableSftpBrowser(connectionInfo);
+
                 newProtocol.Force = force;
 
                 if (newProtocol.Initialize() == false)

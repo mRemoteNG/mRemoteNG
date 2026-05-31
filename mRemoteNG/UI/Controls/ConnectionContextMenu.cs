@@ -16,6 +16,7 @@ using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using mRemoteNG.Security;
+using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 
 // ReSharper disable UnusedParameter.Local
@@ -38,6 +39,7 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeDisconnect;
         private ToolStripSeparator _cMenTreeSep2;
         private ToolStripMenuItem _cMenTreeToolsTransferFile;
+        private ToolStripMenuItem _cMenTreeProperties;
         private ToolStripMenuItem _cMenTreeToolsSort;
         private ToolStripMenuItem _cMenTreeToolsSortAscending;
         private ToolStripMenuItem _cMenTreeToolsSortDescending;
@@ -99,6 +101,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeSep1 = new ToolStripSeparator();
             _cMenTreeToolsExternalApps = new ToolStripMenuItem();
             _cMenTreeToolsTransferFile = new ToolStripMenuItem();
+            _cMenTreeProperties = new ToolStripMenuItem();
             _cMenTreeSep2 = new ToolStripSeparator();
             _cMenTreeDuplicate = new ToolStripMenuItem();
             _cMenTreeRename = new ToolStripMenuItem();
@@ -144,6 +147,7 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeRename,
                 _cMenTreeDelete,
                 _cMenTreeCopyHostname,
+                _cMenTreeProperties,
                 _cMenInheritanceSubMenu,
                 _cMenTreeSep3,
                 _cMenTreeImport,
@@ -261,6 +265,14 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeToolsTransferFile.Size = new System.Drawing.Size(199, 22);
             _cMenTreeToolsTransferFile.Text = "Transfer File (SSH)";
             _cMenTreeToolsTransferFile.Click += OnTransferFileClicked;
+            //
+            // cMenTreeProperties
+            //
+            _cMenTreeProperties.Image = Properties.Resources.Property_16x;
+            _cMenTreeProperties.Name = "_cMenTreeProperties";
+            _cMenTreeProperties.Size = new System.Drawing.Size(199, 22);
+            _cMenTreeProperties.Text = "Properties";
+            _cMenTreeProperties.Click += OnPropertiesClicked;
             //
             // cMenTreeSep2
             //
@@ -469,6 +481,8 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeToolsExternalApps.Text = Language._Tools;
             _cMenTreeToolsTransferFile.Text = Language.TransferFile;
 
+            _cMenTreeProperties.Text = Language.Properties;
+
             _cMenTreeDuplicate.Text = Language.Duplicate;
             _cMenTreeRename.Text = Language.Rename;
             _cMenTreeDelete.Text = Language.Delete;
@@ -596,7 +610,10 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeDisconnect.Enabled = false;
 
             if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
+            {
                 _cMenTreeToolsTransferFile.Enabled = false;
+
+            }
 
             _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
@@ -619,7 +636,10 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeDisconnect.Enabled = false;
 
             if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
+            {
                 _cMenTreeToolsTransferFile.Enabled = false;
+
+            }
 
             if (!(connectionInfo.Protocol == ProtocolType.RDP))
             {
@@ -851,6 +871,21 @@ namespace mRemoteNG.UI.Controls
         {
             SshTransferFile();
         }
+
+        private static void OnPropertiesClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                AppWindows.ConfigForm.Show();
+                AppWindows.ConfigForm.Activate();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                    "Properties (UI.Controls.ConnectionContextMenu) failed", ex);
+            }
+        }
+
 
         public void SshTransferFile()
         {
