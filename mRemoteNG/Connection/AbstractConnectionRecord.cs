@@ -439,6 +439,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.SshDotNetPrivateKeyFile)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSshDotNetPrivateKeyFile)),
+         Editor(typeof(Tools.SshPrivateKeyFileEditor), typeof(System.Drawing.Design.UITypeEditor)),
          AttributeUsedInProtocol(ProtocolType.SshDotNet)]
         public string SshDotNetPrivateKeyFile
         {
