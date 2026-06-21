@@ -183,254 +183,30 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
 
             try
             {
-                // Validate connection info
-                if (InterfaceControl?.Info == null)
-                {
-                    SshDotNetDiagnostics.LogError("Protocol: InterfaceControl.Info is null");
-                    State = ConnectionState.Error;
-                    Event_ErrorOccured(this, "Connection information is missing", null);
+                if (!TryResolveParameters(out string hostname, out int port, out string username, out string password))
                     return false;
-                }
-
-                var connectionInfo = InterfaceControl.Info;
-                string hostname = connectionInfo.Hostname;
-                int port = connectionInfo.Port != 0 ? connectionInfo.Port : (int)Defaults.Port;
-                string username = connectionInfo.Username;
-                string password = connectionInfo.Password;
-
-                // Validate required fields
-                if (string.IsNullOrEmpty(hostname))
-                {
-                    SshDotNetDiagnostics.LogError("Protocol: Hostname is empty");
-                    State = ConnectionState.Error;
-                    Event_ErrorOccured(this, "Hostname cannot be empty", null);
-                    return false;
-                }
-
-                if (string.IsNullOrEmpty(username))
-                {
-                    SshDotNetDiagnostics.LogError("Protocol: Username is empty");
-                    State = ConnectionState.Error;
-                    Event_ErrorOccured(this, "Username cannot be empty", null);
-                    return false;
-                }
 
                 SshDotNetDiagnostics.LogInfo($"Protocol: Connecting to {username}@{hostname}:{port}");
-
-                // Fire connecting event
                 Event_Connecting(this);
 
-                // Build authentication methods
                 State = ConnectionState.Authenticating;
-                AuthenticationMethod[] authMethods;
-
-                try
-                {
-                    authMethods = SshAuthenticationProvider.GetAuthenticationMethods(
-                        username, password, connectionInfo);
-                }
-                catch (Exception authEx)
-                {
-                    SshDotNetDiagnostics.LogException("Protocol: Failed to create authentication methods", authEx);
-                    State = ConnectionState.Error;
-                    Event_ErrorOccured(this, $"Authentication setup failed: {authEx.Message}", null);
+                if (!TryBuildAuthentication(username, password, InterfaceControl.Info, out AuthenticationMethod[] authMethods))
                     return false;
-                }
 
-                // Create SSH client
-                try
-                {
-                    _sshClient = SshConnectionManager.CreateAdapter(
-                        hostname, port, username, authMethods, TimeSpan.FromSeconds(30));
-                }
-                catch (Exception createEx)
-                {
-                    SshDotNetDiagnostics.LogException("Protocol: Failed to create SSH client", createEx);
-                    State = ConnectionState.Error;
-                    Event_ErrorOccured(this, $"Failed to create SSH client: {createEx.Message}", null);
+                if (!TryEstablishSshConnection(hostname, port, username, authMethods))
                     return false;
-                }
 
-                // Configure keep-alive (uses default 5s interval for fast disconnect detection)
-                _sshClient.ConfigureKeepAlive();
-
-                // Attach error handler
-                _sshClient.ErrorOccurred += OnSshClientError;
-
-                // Connect SSH client
-                try
-                {
-                    _sshClient.Connect();
-                }
-                catch (SshAuthenticationException authEx)
-                {
-                    SshDotNetDiagnostics.LogError($"Protocol: Authentication failed - {authEx.Message}");
-                    State = ConnectionState.Error;
-                    Event_ErrorOccured(this, $"Authentication failed: {authEx.Message}", null);
-                    CleanupConnection();
-                    return false;
-                }
-                catch (SshConnectionException connEx)
-                {
-                    SshDotNetDiagnostics.LogError($"Protocol: Connection failed - {connEx.Message}");
-                    State = ConnectionState.Error;
-                    Event_ErrorOccured(this, $"Connection failed: {connEx.Message}", null);
-                    CleanupConnection();
-                    return false;
-                }
-                catch (System.Net.Sockets.SocketException sockEx)
-                {
-                    SshDotNetDiagnostics.LogError($"Protocol: Network error - {sockEx.Message}");
-                    State = ConnectionState.Error;
-                    Event_ErrorOccured(this, $"Network error: {sockEx.Message}", null);
-                    CleanupConnection();
-                    return false;
-                }
-                catch (Exception connEx)
-                {
-                    SshDotNetDiagnostics.LogException("Protocol: Connection failed", connEx);
-                    State = ConnectionState.Error;
-                    Event_ErrorOccured(this, $"Connection failed: {connEx.Message}", null);
-                    CleanupConnection();
-                    return false;
-                }
-
-                // Log connection info
-                string connInfo = _sshClient.GetConnectionInfo();
-                SshDotNetDiagnostics.LogInfo($"Protocol: {connInfo}");
-
-                // Create tunnel manager (available for both tunnel-only and full terminal mode)
-                _tunnelManager = new SshTunnelManager(_sshClient.UnderlyingClient);
-                _tunnelManager.TunnelError += OnTunnelError;
-
-                // Apply any user-configured port forward rules
-                string rules = InterfaceControl?.Info?.SshDotNetPortForwardRules;
-                if (!string.IsNullOrWhiteSpace(rules))
-                {
-                    PortForwardRuleParser.ApplyRules(_tunnelManager, rules);
-                }
+                ConfigureTunnels(InterfaceControl.Info);
 
                 if (TunnelOnlyMode)
                 {
-                    // In tunnel-only mode, skip shell stream, terminal, and I/O tasks.
-                    // The SSH connection is ready for port forwarding only.
                     State = ConnectionState.Connected;
                     SshDotNetDiagnostics.LogInfo("Protocol: Connected in tunnel-only mode (no shell)");
                     Event_Connected(this);
                     return true;
                 }
 
-                // Create shell stream with correct pixel dimensions
-                try
-                {
-                    // Calculate pixel dimensions from actual control size to ensure accuracy
-                    // This is more reliable than using cached CharWidth/CharHeight which might be defaults
-                    if (_terminalControl == null)
-                    {
-                        SshDotNetDiagnostics.LogError("Protocol: Terminal control is null, cannot create shell stream.");
-                        State = ConnectionState.Error;
-                        Event_ErrorOccured(this, "Terminal control is not available.", null);
-                        CleanupConnection();
-                        return false;
-                    }
-
-                    int cols = _terminalControl.Columns;
-                    int rows = _terminalControl.Rows;
-                    int charW = _terminalControl.CharWidth;
-                    int charH = _terminalControl.CharHeight;
-
-                    SshDotNetDiagnostics.LogDebug($"Protocol: Terminal metrics - Cols={cols}, Rows={rows}, CharW={charW}, CharH={charH}");
-
-                    // Calculate pixel dimensions
-                    uint widthPixels = (uint)(cols * charW);
-                    uint heightPixels = (uint)(rows * charH);
-
-                    // Validate that pixel dimensions are reasonable (not using defaults)
-                    if (charW < 6 || charW > 20 || charH < 10 || charH > 30)
-                    {
-                        SshDotNetDiagnostics.LogWarning($"Protocol: Character dimensions seem wrong ({charW}x{charH}), using control size instead");
-                        // Fallback: use actual control dimensions as pixels (less accurate but better than defaults)
-                        widthPixels = (uint)_terminalControl.Width;
-                        heightPixels = (uint)_terminalControl.Height;
-                    }
-
-                    SshDotNetDiagnostics.LogInfo($"Protocol: Creating shell with dimensions {cols}x{rows} ({widthPixels}x{heightPixels} px)");
-
-                    _shellStream = _sshClient.CreateShellStream(
-                        "xterm-256color",
-                        (uint)cols,
-                        (uint)rows,
-                        widthPixels,
-                        heightPixels,
-                        1024);
-                }
-                catch (Exception shellEx)
-                {
-                    SshDotNetDiagnostics.LogException("Protocol: Failed to create shell stream", shellEx);
-                    State = ConnectionState.Error;
-                    Event_ErrorOccured(this, $"Failed to create shell: {shellEx.Message}", null);
-                    CleanupConnection();
-                    return false;
-                }
-
-                // Attach terminal to shell stream
-                SshDotNetDiagnostics.LogDebug("Protocol: Attaching terminal to shell stream");
-                _terminalControl.AttachSshStream(_shellStream);
-
-                // Start reading output and writing input
-                _cancellationTokenSource = new CancellationTokenSource();
-                _outputReadTask = Task.Run(() => ReadOutputAsync(_cancellationTokenSource.Token));
-                _inputWriteTask = Task.Run(() => WriteInputAsync(_cancellationTokenSource.Token));
-
-                SshDotNetDiagnostics.LogDebug("Protocol: Output reading and input writing tasks started");
-
-                // Execute opening command if configured
-                if (!string.IsNullOrEmpty(connectionInfo.OpeningCommand))
-                {
-                    SshDotNetDiagnostics.LogDebug($"Protocol: Executing opening command: {connectionInfo.OpeningCommand}");
-                    try
-                    {
-                        _shellStream.WriteLine(connectionInfo.OpeningCommand);
-                    }
-                    catch (Exception cmdEx)
-                    {
-                        SshDotNetDiagnostics.LogException("Protocol: Failed to execute opening command", cmdEx);
-                        // Non-fatal, continue
-                    }
-                }
-
-                // Success
-                State = ConnectionState.Connected;
-                SshDotNetDiagnostics.StopConnectionTimer($"Full connection to {hostname}");
-                SshDotNetDiagnostics.LogInfo("Protocol: Connection established successfully");
-
-                Event_Connected(this);
-
-                // Automatically focus the terminal control so user can start typing immediately
-                if (_terminalControl != null && !_terminalControl.IsDisposed)
-                {
-                    _terminalControl.Invoke((Action)(() =>
-                    {
-                        _terminalControl.Focus();
-                        SshDotNetDiagnostics.LogDebug("Protocol: Terminal control focused after connection");
-
-                        // Force resize notification to ensure SSH pty matches actual viewport size
-                        // This is necessary because the control may have been resized after shell stream creation
-                        Task.Delay(100).ContinueWith(_ =>
-                        {
-                            if (!_terminalControl.IsDisposed)
-                            {
-                                _terminalControl.Invoke((Action)(() =>
-                                {
-                                    _terminalControl.ForceResizeNotification();
-                                    SshDotNetDiagnostics.LogDebug("Protocol: Forced terminal resize notification after connection");
-                                }));
-                            }
-                        });
-                    }));
-                }
-
-                return true;
+                return TryStartTerminalSession(InterfaceControl.Info, hostname);
             }
             catch (Exception ex)
             {
@@ -440,6 +216,255 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
                 CleanupConnection();
                 return false;
             }
+        }
+
+        /// <summary>Validates InterfaceControl.Info and resolves the core connection parameters.</summary>
+        private bool TryResolveParameters(out string hostname, out int port, out string username, out string password)
+        {
+            hostname = null; port = 0; username = null; password = null;
+
+            if (InterfaceControl?.Info == null)
+            {
+                SshDotNetDiagnostics.LogError("Protocol: InterfaceControl.Info is null");
+                State = ConnectionState.Error;
+                Event_ErrorOccured(this, "Connection information is missing", null);
+                return false;
+            }
+
+            var connectionInfo = InterfaceControl.Info;
+            hostname = connectionInfo.Hostname;
+            port = connectionInfo.Port != 0 ? connectionInfo.Port : (int)Defaults.Port;
+            username = connectionInfo.Username;
+            password = connectionInfo.Password;
+
+            if (string.IsNullOrEmpty(hostname))
+            {
+                SshDotNetDiagnostics.LogError("Protocol: Hostname is empty");
+                State = ConnectionState.Error;
+                Event_ErrorOccured(this, "Hostname cannot be empty", null);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(username))
+            {
+                SshDotNetDiagnostics.LogError("Protocol: Username is empty");
+                State = ConnectionState.Error;
+                Event_ErrorOccured(this, "Username cannot be empty", null);
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>Builds the SSH authentication methods for the connection.</summary>
+        private bool TryBuildAuthentication(string username, string password, ConnectionInfo connectionInfo,
+            out AuthenticationMethod[] authMethods)
+        {
+            authMethods = null;
+            try
+            {
+                authMethods = SshAuthenticationProvider.GetAuthenticationMethods(username, password, connectionInfo);
+                return true;
+            }
+            catch (Exception authEx)
+            {
+                SshDotNetDiagnostics.LogException("Protocol: Failed to create authentication methods", authEx);
+                State = ConnectionState.Error;
+                Event_ErrorOccured(this, $"Authentication setup failed: {authEx.Message}", null);
+                return false;
+            }
+        }
+
+        /// <summary>Creates the SSH client adapter, configures it, and connects to the server.</summary>
+        private bool TryEstablishSshConnection(string hostname, int port, string username, AuthenticationMethod[] authMethods)
+        {
+            try
+            {
+                _sshClient = SshConnectionManager.CreateAdapter(hostname, port, username, authMethods, TimeSpan.FromSeconds(30));
+            }
+            catch (Exception createEx)
+            {
+                SshDotNetDiagnostics.LogException("Protocol: Failed to create SSH client", createEx);
+                State = ConnectionState.Error;
+                Event_ErrorOccured(this, $"Failed to create SSH client: {createEx.Message}", null);
+                return false;
+            }
+
+            // Configure keep-alive (uses default 5s interval for fast disconnect detection)
+            _sshClient.ConfigureKeepAlive();
+            _sshClient.ErrorOccurred += OnSshClientError;
+
+            try
+            {
+                _sshClient.Connect();
+                return true;
+            }
+            catch (SshAuthenticationException authEx)
+            {
+                SshDotNetDiagnostics.LogError($"Protocol: Authentication failed - {authEx.Message}");
+                State = ConnectionState.Error;
+                Event_ErrorOccured(this, $"Authentication failed: {authEx.Message}", null);
+                CleanupConnection();
+                return false;
+            }
+            catch (SshConnectionException connEx)
+            {
+                SshDotNetDiagnostics.LogError($"Protocol: Connection failed - {connEx.Message}");
+                State = ConnectionState.Error;
+                Event_ErrorOccured(this, $"Connection failed: {connEx.Message}", null);
+                CleanupConnection();
+                return false;
+            }
+            catch (System.Net.Sockets.SocketException sockEx)
+            {
+                SshDotNetDiagnostics.LogError($"Protocol: Network error - {sockEx.Message}");
+                State = ConnectionState.Error;
+                Event_ErrorOccured(this, $"Network error: {sockEx.Message}", null);
+                CleanupConnection();
+                return false;
+            }
+            catch (Exception connEx)
+            {
+                SshDotNetDiagnostics.LogException("Protocol: Connection failed", connEx);
+                State = ConnectionState.Error;
+                Event_ErrorOccured(this, $"Connection failed: {connEx.Message}", null);
+                CleanupConnection();
+                return false;
+            }
+        }
+
+        /// <summary>Creates the tunnel manager and applies any configured port-forward rules.</summary>
+        private void ConfigureTunnels(ConnectionInfo connectionInfo)
+        {
+            string connInfo = _sshClient.GetConnectionInfo();
+            SshDotNetDiagnostics.LogInfo($"Protocol: {connInfo}");
+
+            _tunnelManager = new SshTunnelManager(_sshClient.UnderlyingClient);
+            _tunnelManager.TunnelError += OnTunnelError;
+
+            string rules = connectionInfo?.SshDotNetPortForwardRules;
+            if (!string.IsNullOrWhiteSpace(rules))
+            {
+                PortForwardRuleParser.ApplyRules(_tunnelManager, rules);
+            }
+        }
+
+        /// <summary>Creates the shell stream, attaches the terminal, and starts the I/O tasks.</summary>
+        private bool TryStartTerminalSession(ConnectionInfo connectionInfo, string hostname)
+        {
+            if (!TryCreateShellStream())
+                return false;
+
+            // Attach terminal to shell stream
+            SshDotNetDiagnostics.LogDebug("Protocol: Attaching terminal to shell stream");
+            _terminalControl.AttachSshStream(_shellStream);
+
+            // Start reading output and writing input
+            _cancellationTokenSource = new CancellationTokenSource();
+            _outputReadTask = Task.Run(() => ReadOutputAsync(_cancellationTokenSource.Token));
+            _inputWriteTask = Task.Run(() => WriteInputAsync(_cancellationTokenSource.Token));
+            SshDotNetDiagnostics.LogDebug("Protocol: Output reading and input writing tasks started");
+
+            ExecuteOpeningCommand(connectionInfo);
+
+            State = ConnectionState.Connected;
+            SshDotNetDiagnostics.StopConnectionTimer($"Full connection to {hostname}");
+            SshDotNetDiagnostics.LogInfo("Protocol: Connection established successfully");
+            Event_Connected(this);
+
+            FocusTerminalAfterConnect();
+            return true;
+        }
+
+        /// <summary>Creates the shell stream sized to the current terminal control.</summary>
+        private bool TryCreateShellStream()
+        {
+            try
+            {
+                if (_terminalControl == null)
+                {
+                    SshDotNetDiagnostics.LogError("Protocol: Terminal control is null, cannot create shell stream.");
+                    State = ConnectionState.Error;
+                    Event_ErrorOccured(this, "Terminal control is not available.", null);
+                    CleanupConnection();
+                    return false;
+                }
+
+                int cols = _terminalControl.Columns;
+                int rows = _terminalControl.Rows;
+                int charW = _terminalControl.CharWidth;
+                int charH = _terminalControl.CharHeight;
+
+                SshDotNetDiagnostics.LogDebug($"Protocol: Terminal metrics - Cols={cols}, Rows={rows}, CharW={charW}, CharH={charH}");
+
+                uint widthPixels = (uint)(cols * charW);
+                uint heightPixels = (uint)(rows * charH);
+
+                // Validate that pixel dimensions are reasonable (not using defaults)
+                if (charW < 6 || charW > 20 || charH < 10 || charH > 30)
+                {
+                    SshDotNetDiagnostics.LogWarning($"Protocol: Character dimensions seem wrong ({charW}x{charH}), using control size instead");
+                    widthPixels = (uint)_terminalControl.Width;
+                    heightPixels = (uint)_terminalControl.Height;
+                }
+
+                SshDotNetDiagnostics.LogInfo($"Protocol: Creating shell with dimensions {cols}x{rows} ({widthPixels}x{heightPixels} px)");
+
+                _shellStream = _sshClient.CreateShellStream("xterm-256color", (uint)cols, (uint)rows, widthPixels, heightPixels, 1024);
+                return true;
+            }
+            catch (Exception shellEx)
+            {
+                SshDotNetDiagnostics.LogException("Protocol: Failed to create shell stream", shellEx);
+                State = ConnectionState.Error;
+                Event_ErrorOccured(this, $"Failed to create shell: {shellEx.Message}", null);
+                CleanupConnection();
+                return false;
+            }
+        }
+
+        /// <summary>Writes the configured opening command to the shell, if any. Non-fatal on error.</summary>
+        private void ExecuteOpeningCommand(ConnectionInfo connectionInfo)
+        {
+            if (string.IsNullOrEmpty(connectionInfo.OpeningCommand))
+                return;
+
+            SshDotNetDiagnostics.LogDebug($"Protocol: Executing opening command: {connectionInfo.OpeningCommand}");
+            try
+            {
+                _shellStream.WriteLine(connectionInfo.OpeningCommand);
+            }
+            catch (Exception cmdEx)
+            {
+                SshDotNetDiagnostics.LogException("Protocol: Failed to execute opening command", cmdEx);
+                // Non-fatal, continue
+            }
+        }
+
+        /// <summary>Focuses the terminal control and forces a resize notification after a successful connect.</summary>
+        private void FocusTerminalAfterConnect()
+        {
+            if (_terminalControl == null || _terminalControl.IsDisposed)
+                return;
+
+            _terminalControl.Invoke((Action)(() =>
+            {
+                _terminalControl.Focus();
+                SshDotNetDiagnostics.LogDebug("Protocol: Terminal control focused after connection");
+
+                // Force resize notification to ensure SSH pty matches actual viewport size
+                Task.Delay(100).ContinueWith(_ =>
+                {
+                    if (!_terminalControl.IsDisposed)
+                    {
+                        _terminalControl.Invoke((Action)(() =>
+                        {
+                            _terminalControl.ForceResizeNotification();
+                            SshDotNetDiagnostics.LogDebug("Protocol: Forced terminal resize notification after connection");
+                        }));
+                    }
+                });
+            }));
         }
 
         private void OnTunnelError(object sender, string errorMessage)
