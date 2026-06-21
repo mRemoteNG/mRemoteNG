@@ -1,9 +1,9 @@
-﻿using mRemoteNG.Connection.Protocol.Http;
+using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RAW;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.Rlogin;
 using mRemoteNG.Connection.Protocol.SSH;
-using mRemoteNG.Connection.Protocol.SSH_DotNet;
+using mRemoteNG.Connection.Protocol.SshDotNet;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Connection.Protocol.ARD;
@@ -39,7 +39,7 @@ namespace mRemoteNG.Connection.Protocol
                     return new ProtocolSSH1();
                 case ProtocolType.SSH2:
                     return new ProtocolSSH2();
-                case ProtocolType.SSH_DotNet:
+                case ProtocolType.SshDotNet:
                     return new ProtocolSshDotNet();
                 case ProtocolType.Telnet:
                     return new ProtocolTelnet();

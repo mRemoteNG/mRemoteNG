@@ -1,6 +1,6 @@
 using System;
 
-namespace mRemoteNG.Connection.Protocol.SSH_DotNet
+namespace mRemoteNG.Connection.Protocol.SshDotNet
 {
     /// <summary>
     /// Parses port forwarding rules from the semicolon-separated string format.

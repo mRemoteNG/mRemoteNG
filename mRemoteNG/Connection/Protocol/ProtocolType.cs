@@ -1,4 +1,4 @@
-﻿using mRemoteNG.Tools;
+using mRemoteNG.Tools;
 using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol
@@ -48,7 +48,7 @@ namespace mRemoteNG.Connection.Protocol
         AnyDesk = 14,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.SshDotNet))]
-        SSH_DotNet = 15,
+        SshDotNet = 15,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.ExternalTool))]
         IntApp = 20

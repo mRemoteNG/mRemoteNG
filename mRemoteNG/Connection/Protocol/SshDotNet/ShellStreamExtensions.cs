@@ -2,7 +2,7 @@ using System;
 using Renci.SshNet;
 using Renci.SshNet.Common;
 
-namespace mRemoteNG.Connection.Protocol.SSH_DotNet
+namespace mRemoteNG.Connection.Protocol.SshDotNet
 {
     /// <summary>
     /// Extension methods for Renci.SshNet.ShellStream to support dynamic terminal resizing.

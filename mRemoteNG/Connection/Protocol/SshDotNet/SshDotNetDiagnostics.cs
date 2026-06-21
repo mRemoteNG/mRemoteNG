@@ -3,7 +3,7 @@ using mRemoteNG.Messages;
 using System;
 using System.Diagnostics;
 
-namespace mRemoteNG.Connection.Protocol.SSH_DotNet
+namespace mRemoteNG.Connection.Protocol.SshDotNet
 {
     public static class SshDotNetDiagnostics
     {
@@ -68,7 +68,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
             Runtime.MessageCollector.AddMessage(
                 MessageClass.TraceMsg,
-                $"[SSH_DotNet TRACE] {message}");
+                $"[SshDotNet TRACE] {message}");
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             if (!VerboseLogging) return;
             Runtime.MessageCollector.AddMessage(
                 MessageClass.DebugMsg,
-                $"[SSH_DotNet DEBUG] {message}");
+                $"[SshDotNet DEBUG] {message}");
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         {
             Runtime.MessageCollector.AddMessage(
                 MessageClass.InformationMsg,
-                $"[SSH_DotNet] {message}");
+                $"[SshDotNet] {message}");
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         {
             Runtime.MessageCollector.AddMessage(
                 MessageClass.WarningMsg,
-                $"[SSH_DotNet WARNING] {message}");
+                $"[SshDotNet WARNING] {message}");
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         {
             Runtime.MessageCollector.AddMessage(
                 MessageClass.ErrorMsg,
-                $"[SSH_DotNet ERROR] {message}");
+                $"[SshDotNet ERROR] {message}");
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         public static void LogException(string context, Exception ex)
         {
             Runtime.MessageCollector.AddExceptionStackTrace(
-                $"[SSH_DotNet] {context}",
+                $"[SshDotNet] {context}",
                 ex,
                 MessageClass.ErrorMsg);
         }
@@ -155,7 +155,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
             Runtime.MessageCollector.AddMessage(
                 MessageClass.TraceMsg,
-                $"[SSH_DotNet TRACE] {context}: [{length} bytes] {hex}");
+                $"[SshDotNet TRACE] {context}: [{length} bytes] {hex}");
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
             Runtime.MessageCollector.AddMessage(
                 MessageClass.TraceMsg,
-                $"[SSH_DotNet ESC] {sequence} → {interpretation}");
+                $"[SshDotNet ESC] {sequence} → {interpretation}");
         }
 
         #endregion

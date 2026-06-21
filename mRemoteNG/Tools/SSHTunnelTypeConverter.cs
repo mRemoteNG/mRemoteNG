@@ -1,4 +1,4 @@
-﻿using mRemoteNG.App;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
@@ -36,7 +36,7 @@ namespace mRemoteNG.Tools
                 {
                     if (node is PuttySessionInfo) continue;
                     if (node.Protocol == ProtocolType.SSH1 || node.Protocol == ProtocolType.SSH2
-                        || node.Protocol == ProtocolType.SSH_DotNet)
+                        || node.Protocol == ProtocolType.SshDotNet)
                         result.Add(node.Name);
                 }
 

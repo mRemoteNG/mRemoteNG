@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Renci.SshNet;
 using Renci.SshNet.Common;
 
-namespace mRemoteNG.Connection.Protocol.SSH_DotNet
+namespace mRemoteNG.Connection.Protocol.SshDotNet
 {
     /// <summary>
     /// Manages SSH port forwarding (local, remote, dynamic) on an SshClient.

@@ -1,9 +1,9 @@
 using System.Linq;
-using mRemoteNG.Connection.Protocol.SSH_DotNet;
+using mRemoteNG.Connection.Protocol.SshDotNet;
 using mRemoteNG.Messages;
 using NUnit.Framework;
 
-namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
+namespace mRemoteNGTests.Connection.Protocol.SshDotNet
 {
     [TestFixture]
     [Category("Unit")]

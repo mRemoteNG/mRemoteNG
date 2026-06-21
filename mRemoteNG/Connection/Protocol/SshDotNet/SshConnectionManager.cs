@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Renci.SshNet;
 using Renci.SshNet.Common;
 
-namespace mRemoteNG.Connection.Protocol.SSH_DotNet
+namespace mRemoteNG.Connection.Protocol.SshDotNet
 {
     public static class SshConnectionManager
     {

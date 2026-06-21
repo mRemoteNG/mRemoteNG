@@ -73,11 +73,11 @@ namespace mRemoteNGTests.Messages.MessageWriters
         public void TraceMessageCallsLogDebugWithTracePrefix()
         {
             _message.Class.Returns(MessageClass.TraceMsg);
-            _message.Text.Returns("[SSH_DotNet TRACE] Some trace info");
+            _message.Text.Returns("[SshDotNet TRACE] Some trace info");
 
             _sut.Write(_message);
 
-            _mockLog.Received(1).Debug("TRACE - [SSH_DotNet TRACE] Some trace info");
+            _mockLog.Received(1).Debug("TRACE - [SshDotNet TRACE] Some trace info");
         }
 
         [Test]

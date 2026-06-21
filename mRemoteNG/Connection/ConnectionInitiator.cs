@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -12,7 +12,7 @@ using mRemoteNG.UI.Tabs;
 using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
-using mRemoteNG.Connection.Protocol.SSH_DotNet;
+using mRemoteNG.Connection.Protocol.SshDotNet;
 using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection
@@ -213,7 +213,7 @@ namespace mRemoteNG.Connection
                     }
                     else if (protocolSshTunnel is ProtocolSshDotNet sshDotNetTunnel)
                     {
-                        // === SSH_DotNet BRANCH (new) ===
+                        // === SshDotNet BRANCH (new) ===
                         // No clone needed — we don't modify SSHOptions
                         // No TcpListener needed — SSH.NET auto-assigns port with boundPort: 0
 
@@ -329,7 +329,7 @@ namespace mRemoteNG.Connection
                 }
                 else
                 {
-                    if (node.Name == SSHTunnelConnectionName && (node.Protocol == ProtocolType.SSH1 || node.Protocol == ProtocolType.SSH2 || node.Protocol == ProtocolType.SSH_DotNet)) result = node;
+                    if (node.Name == SSHTunnelConnectionName && (node.Protocol == ProtocolType.SSH1 || node.Protocol == ProtocolType.SSH2 || node.Protocol == ProtocolType.SshDotNet)) result = node;
                 }
                 if (result != null) break;
             }

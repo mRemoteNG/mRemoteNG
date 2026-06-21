@@ -18,7 +18,7 @@ using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Tabs;
 
-namespace mRemoteNG.Connection.Protocol.SSH_DotNet
+namespace mRemoteNG.Connection.Protocol.SshDotNet
 {
     [SupportedOSPlatform("windows")]
     public class ProtocolSshDotNet : ProtocolBase

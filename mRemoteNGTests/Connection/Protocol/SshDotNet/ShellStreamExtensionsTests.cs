@@ -1,10 +1,10 @@
-using mRemoteNG.Connection.Protocol.SSH_DotNet;
+using mRemoteNG.Connection.Protocol.SshDotNet;
 using NUnit.Framework;
 using System;
 using Renci.SshNet;
 using NSubstitute;
 
-namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
+namespace mRemoteNGTests.Connection.Protocol.SshDotNet
 {
     [TestFixture]
     [Category("Unit")]

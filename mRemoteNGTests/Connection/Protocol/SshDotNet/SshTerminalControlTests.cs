@@ -1,12 +1,12 @@
 using mRemoteNG.UI.Controls;
-using mRemoteNG.Connection.Protocol.SSH_DotNet;
+using mRemoteNG.Connection.Protocol.SshDotNet;
 using NUnit.Framework;
 using System;
 using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
+namespace mRemoteNGTests.Connection.Protocol.SshDotNet
 {
     [TestFixture]
     [Apartment(ApartmentState.STA)]  // Required for Windows Forms controls
