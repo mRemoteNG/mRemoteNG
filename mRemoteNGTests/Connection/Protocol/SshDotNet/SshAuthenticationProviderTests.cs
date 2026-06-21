@@ -351,6 +351,21 @@ namespace mRemoteNGTests.Connection.Protocol.SshDotNet
             Assert.That(authMethods.Length, Is.GreaterThan(0), "Should always return at least one authentication method");
         }
 
+        [Test]
+        public void GetAuthenticationMethods_ReadsKeyFile_AndSurfacesMissingFile()
+        {
+            // A connection configured to use a private key file that does not exist.
+            var connectionInfo = new mRemoteNG.Connection.ConnectionInfo
+            {
+                SshDotNetPrivateKeyFile = @"C:\does\not\exist\id_ed25519"
+            };
+
+            // Proves the connection's key property is wired into the auth flow: CreatePrivateKeyAuth
+            // is reached and surfaces the missing file rather than silently ignoring the key.
+            Assert.Throws<FileNotFoundException>(() =>
+                SshAuthenticationProvider.GetAuthenticationMethods("testuser", "password", connectionInfo));
+        }
+
         #endregion
     }
 }

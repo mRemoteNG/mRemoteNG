@@ -29,22 +29,21 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
 
             try
             {
-                // 1. Try password authentication if password is provided
-                if (!string.IsNullOrEmpty(password))
-                {
-                    SshDotNetDiagnostics.LogAuthAttempt(username, "Password");
-                    authMethods.Add(new PasswordAuthenticationMethod(username, password));
-                }
-
-                // 2. Try public key authentication if key path is configured
-                // (Property to be added in Phase 5 if needed)
+                // 1. Public-key authentication if a key file is configured (preferred, like OpenSSH).
                 var keyAuthMethod = TryCreateKeyAuthenticationFromConnectionInfo(username, connectionInfo);
                 if (keyAuthMethod != null)
                 {
                     authMethods.Add(keyAuthMethod);
                 }
 
-                // 3. Try keyboard-interactive (for 2FA/MFA)
+                // 2. Password authentication if a password is provided.
+                if (!string.IsNullOrEmpty(password))
+                {
+                    SshDotNetDiagnostics.LogAuthAttempt(username, "Password");
+                    authMethods.Add(new PasswordAuthenticationMethod(username, password));
+                }
+
+                // 3. Keyboard-interactive (for 2FA/MFA).
                 SshDotNetDiagnostics.LogDebug("Auth: Adding keyboard-interactive method");
                 authMethods.Add(CreateKeyboardInteractiveAuth(username, password));
 
@@ -208,22 +207,16 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
             string username,
             ConnectionInfo connectionInfo)
         {
-            // TODO: In Phase 5, if we add SSH key path property to ConnectionInfo, use it here
-            // For now, check if credential providers have SSH keys
-
-            try
+            string keyPath = connectionInfo?.SshDotNetPrivateKeyFile;
+            if (string.IsNullOrEmpty(keyPath))
             {
-                // Check for SSH key in connection properties or credential providers
-                // This is a placeholder for future implementation
-
                 SshDotNetDiagnostics.LogDebug("Auth: No SSH key path configured in connection");
                 return null;
             }
-            catch (Exception ex)
-            {
-                SshDotNetDiagnostics.LogException("Auth: Error checking for SSH key", ex);
-                return null;
-            }
+
+            // Load failures (missing file, wrong passphrase, corrupt key) are allowed to propagate so
+            // the user gets an actionable error rather than a silent fallback to password auth.
+            return CreatePrivateKeyAuth(username, keyPath, connectionInfo.SshDotNetPrivateKeyPassphrase);
         }
 
         #endregion

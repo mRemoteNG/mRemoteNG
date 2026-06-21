@@ -266,7 +266,7 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
                 authMethods = SshAuthenticationProvider.GetAuthenticationMethods(username, password, connectionInfo);
                 return true;
             }
-            catch (ArgumentException authEx)
+            catch (Exception authEx) when (authEx is ArgumentException or FileNotFoundException or SshException)
             {
                 SshDotNetDiagnostics.LogException("Protocol: Failed to create authentication methods", authEx);
                 State = ConnectionState.Error;
