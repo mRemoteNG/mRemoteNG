@@ -5,6 +5,7 @@
 // exception types would add verbosity without changing behavior, since all branches log and
 // perform the same recovery action (cleanup, error state, return false, etc.).
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -47,7 +48,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         private Task _inputWriteTask;
 
         private ConnectionState _state = ConnectionState.Disconnected;
-        private DateTime _connectionStartTime;
+        private readonly Stopwatch _connectionTimer = new Stopwatch();
         private long _bytesReceived = 0;
         private long _bytesSent = 0;
         private double _peakReceiveRate = 0;  // bytes/sec
@@ -55,7 +56,8 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
         // Error tracking for smart disconnect detection
         private bool _hadRecentError = false;
-        private DateTime _lastErrorTime;
+        private DateTime _lastErrorTime;        // wall-clock, for display only
+        private long _lastErrorTicks;           // monotonic, for elapsed checks
         private string _lastErrorMessage = "";
         private Exception _lastException = null;
         private readonly CancellationTokenSource _errorCancellationSource = new CancellationTokenSource();
@@ -88,7 +90,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             get
             {
                 if (IsConnected)
-                    return DateTime.Now - _connectionStartTime;
+                    return _connectionTimer.Elapsed;
                 return TimeSpan.Zero;
             }
         }
@@ -176,7 +178,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         {
             SSHDotNetDiagnostics.LogDebug("Protocol: Connect() called");
             State = ConnectionState.Connecting;
-            _connectionStartTime = DateTime.Now;
+            _connectionTimer.Restart();
             SSHDotNetDiagnostics.StartConnectionTimer();
 
             try
@@ -451,7 +453,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         {
             // Track error details for smart disconnect detection
             _hadRecentError = true;
-            _lastErrorTime = DateTime.Now;
+            _lastErrorTime = DateTime.Now; _lastErrorTicks = Environment.TickCount64;
             _lastErrorMessage = e.Exception.Message;
             _lastException = e.Exception;
 
@@ -639,10 +641,10 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         {
             try
             {
-                if (_connectionStartTime == default(DateTime))
+                if (_connectionTimer.Elapsed == TimeSpan.Zero)
                     return;  // Never connected
 
-                TimeSpan duration = DateTime.Now - _connectionStartTime;
+                TimeSpan duration = _connectionTimer.Elapsed;
 
                 // Calculate averages
                 double avgReceiveRate = duration.TotalSeconds > 0 ? _bytesReceived / duration.TotalSeconds : 0;
@@ -697,7 +699,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             const int MAX_EMPTY_READS = 100;
 
             long totalBytes = 0;
-            DateTime lastRateLog = DateTime.Now;
+            long lastRateLogTicks = Environment.TickCount64;
             const int RATE_LOG_INTERVAL_SECONDS = 30;
 
             // Create a linked token that responds to both manual cancellation and SSH errors
@@ -747,10 +749,10 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                             }
 
                             // Log data rate periodically and track peak
-                            var elapsed = DateTime.Now - lastRateLog;
-                            if (elapsed.TotalSeconds >= RATE_LOG_INTERVAL_SECONDS)
+                            var elapsedMs = Environment.TickCount64 - lastRateLogTicks;
+                            if (elapsedMs >= RATE_LOG_INTERVAL_SECONDS * 1000L)
                             {
-                                double rate = totalBytes / elapsed.TotalSeconds;
+                                double rate = totalBytes / (elapsedMs / 1000.0);
 
                                 // Track peak receive rate
                                 if (rate > _peakReceiveRate)
@@ -764,7 +766,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                                 }
 
                                 totalBytes = 0;
-                                lastRateLog = DateTime.Now;
+                                lastRateLogTicks = Environment.TickCount64;
                             }
                         }
                         else
@@ -791,7 +793,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     {
                         // Track this as an error for smart disconnect detection
                         _hadRecentError = true;
-                        _lastErrorTime = DateTime.Now;
+                        _lastErrorTime = DateTime.Now; _lastErrorTicks = Environment.TickCount64;
                         _lastErrorMessage = ioEx.Message;
                         _lastException = ioEx;
 
@@ -802,7 +804,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     {
                         // Track this as an error for smart disconnect detection
                         _hadRecentError = true;
-                        _lastErrorTime = DateTime.Now;
+                        _lastErrorTime = DateTime.Now; _lastErrorTicks = Environment.TickCount64;
                         _lastErrorMessage = ex.Message;
                         _lastException = ex;
 
@@ -840,7 +842,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         // Smart disconnect detection: Determine if this was an error disconnect or clean exit
                         // If an error occurred within the last 5 seconds, treat as error disconnect
                         bool isErrorDisconnect = _hadRecentError &&
-                                                (DateTime.Now - _lastErrorTime).TotalSeconds < 5;
+                                                (Environment.TickCount64 - _lastErrorTicks) < 5000;
 
                         if (isErrorDisconnect)
                         {
@@ -905,7 +907,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     {
                         // Track this as an error for smart disconnect detection
                         _hadRecentError = true;
-                        _lastErrorTime = DateTime.Now;
+                        _lastErrorTime = DateTime.Now; _lastErrorTicks = Environment.TickCount64;
                         _lastErrorMessage = ioEx.Message;
                         _lastException = ioEx;
 
@@ -916,7 +918,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     {
                         // Track this as an error for smart disconnect detection
                         _hadRecentError = true;
-                        _lastErrorTime = DateTime.Now;
+                        _lastErrorTime = DateTime.Now; _lastErrorTicks = Environment.TickCount64;
                         _lastErrorMessage = ex.Message;
                         _lastException = ex;
 
@@ -961,7 +963,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
                         // Smart disconnect detection: Check if error was recent (within last 5 seconds)
                         bool isErrorDisconnect = _hadRecentError &&
-                                                (DateTime.Now - _lastErrorTime).TotalSeconds < 5;
+                                                (Environment.TickCount64 - _lastErrorTicks) < 5000;
 
                         if (isErrorDisconnect)
                         {
