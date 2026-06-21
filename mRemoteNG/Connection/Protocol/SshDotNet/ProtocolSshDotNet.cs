@@ -266,7 +266,7 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
                 authMethods = SshAuthenticationProvider.GetAuthenticationMethods(username, password, connectionInfo);
                 return true;
             }
-            catch (Exception authEx)
+            catch (ArgumentException authEx)
             {
                 SshDotNetDiagnostics.LogException("Protocol: Failed to create authentication methods", authEx);
                 State = ConnectionState.Error;
@@ -282,7 +282,7 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
             {
                 _sshClient = SshConnectionManager.CreateAdapter(hostname, port, username, authMethods, TimeSpan.FromSeconds(30));
             }
-            catch (Exception createEx)
+            catch (ArgumentException createEx)
             {
                 SshDotNetDiagnostics.LogException("Protocol: Failed to create SSH client", createEx);
                 State = ConnectionState.Error;
