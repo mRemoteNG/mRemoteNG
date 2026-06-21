@@ -14,7 +14,6 @@ using System.Windows.Forms;
 using System.Runtime.Versioning;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using mRemoteNG.Connection.Protocol.SSH_DotNet;
 using VtNetCore.VirtualTerminal;
 using VtNetCore.XTermParser;
