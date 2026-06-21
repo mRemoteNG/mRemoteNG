@@ -16,7 +16,7 @@ namespace mRemoteNG.Themes
 
 
         //warning, defaultpalette should always contain all the values, because when is loaded there is no default palette (parameter is null
-        public MremoteNGPaletteManipulator(byte[] file, ExtendedColorPalette defaultPalette = null)
+        public MremoteNGPaletteManipulator(byte[] file, ExtendedColorPalette? defaultPalette = null)
         {
             _xml = SecureXmlHelper.LoadXmlFromString(new StreamReader(new MemoryStream(file)).ReadToEnd());
             _defaultPalette = defaultPalette ?? new ExtendedColorPalette();
@@ -28,15 +28,18 @@ namespace mRemoteNG.Themes
         {
             ExtendedColorPalette newPalette = new();
             newPalette.setDefault(_defaultPalette);
-            System.Resources.ResourceSet resourceSet = ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            System.Resources.ResourceSet? resourceSet = ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            if (resourceSet == null) return newPalette;
             //
             foreach (DictionaryEntry entry in resourceSet)
             {
-                string colorName = entry.Key.ToString();
-                string xmlQueryPath = entry.Value.ToString();
-                if (_xml.DocumentElement == null) continue;
-                XmlNodeList colorNodeList = _xml.DocumentElement.FirstChild.SelectNodes(xmlQueryPath);
-                string color = colorNodeList != null && colorNodeList.Count > 0 ? colorNodeList[0].Value : null;
+                string? colorName = entry.Key.ToString();
+                string? xmlQueryPath = entry.Value?.ToString();
+                if (colorName == null || xmlQueryPath == null) continue;
+                XmlNode? firstChild = _xml.DocumentElement?.FirstChild;
+                if (firstChild == null) continue;
+                XmlNodeList? colorNodeList = firstChild.SelectNodes(xmlQueryPath);
+                string? color = colorNodeList != null && colorNodeList.Count > 0 ? colorNodeList[0]?.Value : null;
                 if (color != null)
                 {
                     newPalette.addColor(colorName, ColorTranslator.FromHtml($"#{color}"));
@@ -54,16 +57,22 @@ namespace mRemoteNG.Themes
         /// <returns></returns>
         public byte[] mergePalette(ExtendedColorPalette colorPalette)
         {
-            System.Resources.ResourceSet resourceSet = ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            System.Resources.ResourceSet? resourceSet = ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
 
-            foreach (DictionaryEntry entry in resourceSet)
+            if (resourceSet != null)
             {
-                string colorName = entry.Key.ToString();
-                string xmlQueryPath = entry.Value.ToString();
-                XmlNodeList colorNodeList = _xml.DocumentElement?.FirstChild.SelectNodes(xmlQueryPath);
-                if (colorNodeList == null || colorNodeList.Count <= 0) continue;
-                Color paletteColor = colorPalette.getColor(colorName);
-                colorNodeList[0].Value = $"FF{paletteColor.R:X2}{paletteColor.G:X2}{paletteColor.B:X2}";
+                foreach (DictionaryEntry entry in resourceSet)
+                {
+                    string? colorName = entry.Key.ToString();
+                    string? xmlQueryPath = entry.Value?.ToString();
+                    if (colorName == null || xmlQueryPath == null) continue;
+                    XmlNodeList? colorNodeList = _xml.DocumentElement?.FirstChild?.SelectNodes(xmlQueryPath);
+                    if (colorNodeList == null || colorNodeList.Count <= 0) continue;
+                    XmlNode? colorNode = colorNodeList[0];
+                    if (colorNode == null) continue;
+                    Color paletteColor = colorPalette.getColor(colorName);
+                    colorNode.Value = $"FF{paletteColor.R:X2}{paletteColor.G:X2}{paletteColor.B:X2}";
+                }
             }
 
             MemoryStream ms = new();

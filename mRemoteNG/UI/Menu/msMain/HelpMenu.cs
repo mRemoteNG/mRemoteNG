@@ -188,19 +188,34 @@ namespace mRemoteNG.UI.Menu
             }
         }
 
-        private void mMenInfoHelp_Click(object? sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlDocumentation);
+        private void mMenInfoHelp_Click(object? sender, EventArgs e) => OpenUrl(GeneralAppInfo.UrlDocumentation);
 
-        private void mMenInfoForum_Click(object? sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlForum);
+        private void mMenInfoForum_Click(object? sender, EventArgs e) => OpenUrl(GeneralAppInfo.UrlForum);
 
-        private void mMenInfoChat_Click(object? sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlChat);
+        private void mMenInfoChat_Click(object? sender, EventArgs e) => OpenUrl(GeneralAppInfo.UrlChat);
 
-        private void mMenInfoCommunity_Click(object? sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlCommunity);
+        private void mMenInfoCommunity_Click(object? sender, EventArgs e) => OpenUrl(GeneralAppInfo.UrlCommunity);
 
-        private void mMenInfoBug_Click(object? sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlBugs);
+        private void mMenInfoBug_Click(object? sender, EventArgs e) => OpenUrl(GeneralAppInfo.UrlBugs);
 
-        private void mMenInfoWebsite_Click(object? sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlHome);
+        private void mMenInfoWebsite_Click(object? sender, EventArgs e) => OpenUrl(GeneralAppInfo.UrlHome);
 
-        private void mMenInfoDonate_Click(object? sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlDonate);
+        private void mMenInfoDonate_Click(object? sender, EventArgs e) => OpenUrl(GeneralAppInfo.UrlDonate);
+        
+        private static void OpenUrl(string url)
+        {
+            if (string.IsNullOrWhiteSpace(url) ||
+                (!url.StartsWith("https://", StringComparison.OrdinalIgnoreCase) &&
+                 !url.StartsWith("http://", StringComparison.OrdinalIgnoreCase)))
+                return;
+
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true
+            };
+            Process.Start(startInfo);
+        }
 
         private void mMenInfoAbout_Click(object? sender, EventArgs e)
         {

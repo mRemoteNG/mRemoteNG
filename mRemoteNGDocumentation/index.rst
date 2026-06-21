@@ -39,6 +39,7 @@ Welcome to mRemoteNG's documentation!
    :maxdepth: 2
    :caption: Miscellaneous
    
+   variables_reference.rst
    external_tools_cheat_sheet.rst
    migrate.rst
    Contribute <https://github.com/mRemoteNG/mRemoteNG/wiki>

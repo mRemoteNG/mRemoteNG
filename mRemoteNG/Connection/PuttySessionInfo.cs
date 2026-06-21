@@ -92,7 +92,7 @@ namespace mRemoteNG.Connection
         #region IComponent
 
         [Browsable(false)]
-        public ISite Site
+        public ISite? Site
         {
             get => new PropertyGridCommandSite(this);
             set => throw (new NotImplementedException());
@@ -103,7 +103,7 @@ namespace mRemoteNG.Connection
             Disposed?.Invoke(this, EventArgs.Empty);
         }
 
-        public event EventHandler Disposed;
+        public event EventHandler? Disposed;
 
         #endregion
     }

@@ -99,7 +99,19 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            Process.Start(linkUri.ToString());
+            // Only allow http/https URLs to prevent exploitation via custom URI schemes
+            if (!linkUri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase) &&
+                !linkUri.Scheme.Equals("http", StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = linkUri.ToString(),
+                UseShellExecute = true
+            };
+            Process.Start(startInfo);
         }
 
         #endregion

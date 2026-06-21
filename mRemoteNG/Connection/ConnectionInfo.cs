@@ -327,6 +327,7 @@ namespace mRemoteNG.Connection
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
             UseRestrictedAdmin = Settings.Default.ConDefaultUseRestrictedAdmin;
             UseRCG = Settings.Default.ConDefaultUseRCG;
+            UseRedirectionServerName = Settings.Default.ConDefaultUseRedirectionServerName;
             UseVmId = Settings.Default.ConDefaultUseVmId;
             UseEnhancedMode = Settings.Default.ConDefaultUseEnhancedMode;
         }
@@ -345,13 +346,16 @@ namespace mRemoteNG.Connection
             RDGatewayUsername = Settings.Default.ConDefaultRDGatewayUsername;
             RDGatewayPassword = Settings.Default.ConDefaultRDGatewayPassword;
             RDGatewayDomain = Settings.Default.ConDefaultRDGatewayDomain;
+            RDGatewayAccessToken = Settings.Default.ConDefaultRDGatewayAccessToken;
             RDGatewayExternalCredentialProvider = (ExternalCredentialProvider)Enum.Parse(typeof(ExternalCredentialProvider), Settings.Default.ConDefaultRDGatewayExternalCredentialProvider);
             RDGatewayUserViaAPI = Settings.Default.ConDefaultRDGatewayUserViaAPI;
         }
 
         private void SetAppearanceDefaults()
         {
-            Resolution = (RDPResolutions)Enum.Parse(typeof(RDPResolutions), Settings.Default.ConDefaultResolution);
+            Resolution = Enum.TryParse(Settings.Default.ConDefaultResolution, out RDPResolutions res)
+                ? res
+                : RDPResolutions.SmartSize;
             AutomaticResize = Settings.Default.ConDefaultAutomaticResize;
             Colors = (RDPColors)Enum.Parse(typeof(RDPColors), Settings.Default.ConDefaultColors);
             CacheBitmaps = Settings.Default.ConDefaultCacheBitmaps;
@@ -368,7 +372,9 @@ namespace mRemoteNG.Connection
         private void SetRedirectDefaults()
         {
             RedirectKeys = Settings.Default.ConDefaultRedirectKeys;
-            RedirectDiskDrives = (RDPDiskDrives)Enum.Parse(typeof(RDPDiskDrives), Settings.Default.ConDefaultRedirectDiskDrives);
+            RedirectDiskDrives = Settings.Default.ConDefaultRedirectDiskDrives 
+                ? RDPDiskDrives.All 
+                : RDPDiskDrives.None;
             RedirectDiskDrivesCustom = Settings.Default.ConDefaultRedirectDiskDrivesCustom;
             RedirectPrinters = Settings.Default.ConDefaultRedirectPrinters;
             RedirectClipboard = Settings.Default.ConDefaultRedirectClipboard;

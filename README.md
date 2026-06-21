@@ -95,8 +95,13 @@ You will need to compile it yourself using Visual Studio.
 
 ### Minimum Requirements
 
-* [Microsoft .NET Desktop Runtime 9.0](https://dotnet.microsoft.com/download/dotnet/9.0)
-* [Microsoft Visual C++ 2015-2022 Redistributable x64](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-supported-redistributable-version) - [download latest](https://aka.ms/vs/17/release/vc_redist.x64.exe) (note: use x64 installer also in ARM environments as the installer contains both; ~32-bit version required until #2870 is resolved~)
+Make sure you have the latest version installed:
+
+* [Microsoft .NET Desktop Runtime 10.0](https://dotnet.microsoft.com/download/dotnet/10.0)
+* Microsoft Visual C++ Redistributable 2015–2026 is needed:
+ - [x64](https://aka.ms/vs/18/release/vc_redist.x64.exe)
+ - [ARM64](https://aka.ms/vs/18/release/vc_redist.arm64.exe)
+ - [x86](https://aka.ms/vs/18/release/vc_redist.x86.exe)
 * Microsoft Terminal Service Client 6.0 or later (needed if you use RDP with mstscax.dll and/or msrdp.ocx to be registered)
 
 ### Download

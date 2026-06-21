@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
 using mRemoteNG.Themes;
@@ -8,6 +9,8 @@ using mRemoteNG.Properties;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using mRemoteNG.UI.Window;
+using mRemoteNG.App;
+using mRemoteNG.Messages;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -41,7 +44,7 @@ namespace mRemoteNG.UI.Forms
         [Conditional("PORTABLE")]
         private void AddPortableString() => lblTitle.Text += $@" {Language.PortableEdition}";
 
-        private void ApplyTheme()
+        private new void ApplyTheme()
         {
             if (!ThemeManager.getInstance().ThemingActive) return;
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
@@ -59,47 +62,110 @@ namespace mRemoteNG.UI.Forms
 
         private void llLicense_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Properties.OptionsUpdatesPage.Default.CurrentUpdateChannelType + "/COPYING.txt");
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
+            var updateChannel = Properties.OptionsUpdatesPage.Default.CurrentUpdateChannelType;
+            if (version != null && updateChannel != null)
+            {
+                var versionString = version.ToString();
+                OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + versionString[..^2] + "-" + updateChannel + "/COPYING.txt");
+            }
             Close();
         }
 
         private void llChangelog_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Properties.OptionsUpdatesPage.Default.CurrentUpdateChannelType + "/CHANGELOG.md");
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
+            var updateChannel = Properties.OptionsUpdatesPage.Default.CurrentUpdateChannelType;
+            if (version != null && updateChannel != null)
+            {
+                var versionString = version.ToString();
+                OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + versionString[..^2] + "-" + updateChannel + "/CHANGELOG.md");
+            }
             Close();
         }
 
         private void llCredits_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Properties.OptionsUpdatesPage.Default.CurrentUpdateChannelType + "/CREDITS.md");
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
+            var updateChannel = Properties.OptionsUpdatesPage.Default.CurrentUpdateChannelType;
+            if (version != null && updateChannel != null)
+            {
+                var versionString = version.ToString();
+                OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + versionString[..^2] + "-" + updateChannel + "/CREDITS.md");
+            }
             Close();
         }
 
-        private void OpenUrl(string url)
+        private static void OpenUrl(string url)
         {
+            // Validate URL format to prevent injection
+            if (string.IsNullOrWhiteSpace(url))
+                return;
+            
+            // Basic URL validation - ensure it starts with http:// or https://
+            if (!url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) &&
+                !url.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+            {
+                // Invalid URL format - don't try to open it
+                return;
+            }
+            
             try
             {
-                Process.Start(url);
+                // Use the standard .NET approach for opening URLs securely
+                // UseShellExecute=true delegates to the OS default handler
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                };
+                Process.Start(startInfo);
             }
             catch
             {
-                // hack because of this: https://github.com/dotnet/corefx/issues/10361
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                // Fallback for older .NET Core versions with bug: https://github.com/dotnet/corefx/issues/10361
+                // Use platform-specific URL launchers
+                try
                 {
-                    url = url.Replace("&", "^&");
-                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    {
+                        // Use rundll32 with url.dll as fallback
+                        var startInfo = new ProcessStartInfo
+                        {
+                            FileName = "rundll32.exe",
+                            UseShellExecute = false,
+                            CreateNoWindow = true
+                        };
+                        startInfo.ArgumentList.Add("url.dll,FileProtocolHandler");
+                        startInfo.ArgumentList.Add(url);
+                        Process.Start(startInfo);
+                    }
+                    else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                    {
+                        var startInfo = new ProcessStartInfo
+                        {
+                            FileName = "xdg-open",
+                            UseShellExecute = false
+                        };
+                        startInfo.ArgumentList.Add(url);
+                        Process.Start(startInfo);
+                    }
+                    else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                    {
+                        var startInfo = new ProcessStartInfo
+                        {
+                            FileName = "open",
+                            UseShellExecute = false
+                        };
+                        startInfo.ArgumentList.Add(url);
+                        Process.Start(startInfo);
+                    }
                 }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                catch
                 {
-                    Process.Start("xdg-open", url);
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                {
-                    Process.Start("open", url);
-                }
-                else
-                {
-                    throw;
+                    // Unable to open URL - notify the user
+                    Runtime.MessageCollector?.AddMessage(MessageClass.WarningMsg, 
+                        "Unable to open URL in browser. Please open manually: " + url, true);
                 }
             }
         }

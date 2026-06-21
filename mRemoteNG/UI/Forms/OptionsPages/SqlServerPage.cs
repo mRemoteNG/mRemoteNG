@@ -51,6 +51,40 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblSQLPassword.Text = Language.Password;
             lblSQLReadOnly.Text = Language.ReadOnly;
             btnTestConnection.Text = Language.TestConnection;
+
+            lblSectionName.Text = Language.DatabaseConnectionManager;
+            tabPage1.Text = Language.ServerAndCredentials;
+            lblSQLAuthType.Text = Language.SqlAuthentication;
+            lblSQLType.Text = Language.DatabasePlatform;
+            tabPage2.Text = Language.ConnectionProperties;
+            mrngLabel19.Text = Language.NetworkPacketSize;
+            mrngLabel18.Text = Language.NetworkProtocol;
+            mrngLabel1.Text = Language.ConnectionTimeoutSeconds;
+            mrngLabel9.Text = Language.ExecutionTimeoutSeconds;
+            tabPage3.Text = Language.TabSecurity;
+            mrngLabel7.Text = Language.TrustServerCertificate;
+            mrngLabel3.Text = Language.HostNameInCertificate;
+            mrngLabel11.Text = Language.ProtocolLabel;
+            mrngLabel12.Text = Language.EncryptionLabel;
+            mrngLabel13.Text = Language.EnableAlwaysEncrypted;
+            mrngLabel14.Text = Language.EnableSecureEnclaves;
+            mrngLabel15.Text = Language.EnclaveAttestation;
+            mrngLabel16.Text = Language.UrlLabel;
+            mrngLabel17.Text = Language.EnableMARS;
+            tabPage4.Text = Language.TabSetup;
+            DCMSetupRdBtnC.Text = Language.CreateTableStructure;
+            DCMSetupRdBtnV.Text = Language.VerifyTableStructure;
+            DCMSetuplblschema.Text = Language.ChooseSchema;
+            DCMSetuplbladminuser.Text = Language.DbAdminUser;
+            DCMSetuplbluserpwd.Text = Language.DbUserPassword;
+            DCMSetuplbluser.Text = Language.DbUser;
+            DCMSetuplbldbname.Text = Language.DatabaseName;
+            DCMSetuplbladminpwd.Text = Language.DbAdminPassword;
+            btnExpandOptions.Text = Language.AdvancedExpand;
+            mrngLabel4.Text = Language.ServerNameOrIp;
+            mrngLabel5.Text = Language.DatabaseName;
+            mrngLabel6.Text = Language.UsernameLabel;
+
             lblRegistrySettingsUsedInfo.Text = Language.OptionsCompanyPolicyMessage;
         }
 

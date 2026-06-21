@@ -10,9 +10,10 @@ namespace mRemoteNG.App.Info
     [SupportedOSPlatform("windows")]
     public static class SettingsFileInfo
     {
-        private static readonly string ExePath = Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConnectionInfo))?.Location);
+        private static readonly string? ExePath = Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConnectionInfo))?.Location);
 
-        public static string SettingsPath => Runtime.IsPortableEdition ? ExePath : Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + Application.ProductName;
+        // ExePath resolves the running assembly's own directory and is always available at runtime.
+        public static string SettingsPath => Runtime.IsPortableEdition ? ExePath! : Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + Application.ProductName;
 
         public static string LayoutFileName { get; } = "pnlLayout.xml";
         public static string ExtAppsFilesName { get; } = "extApps.xml";

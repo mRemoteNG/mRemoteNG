@@ -120,6 +120,18 @@
   <data name="MenuItem_About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="_Sessions" xml:space="preserve">
+    <value>&amp;Sessions</value>
+  </data>
+  <data name="NextSession" xml:space="preserve">
+    <value>Next Session</value>
+  </data>
+  <data name="PreviousSession" xml:space="preserve">
+    <value>Previous Session</value>
+  </data>
+  <data name="JumpToSession" xml:space="preserve">
+    <value>Jump to Session {0}</value>
+  </data>
   <data name="ActiveDirectory" xml:space="preserve">
     <value>Active Directory</value>
   </data>
@@ -253,7 +265,7 @@
     <value>Check failed!</value>
   </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Display reconnection dialog when disconnected from server (RDP &amp;&amp; ICA only)</value>
+    <value>Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only)</value>
   </data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Do not show this message again.</value>
@@ -1107,6 +1119,24 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyDescriptionUseRCG" xml:space="preserve">
     <value>Use Remote Credential Guard to tunnel authentication on target back to source through the RDP channel.</value>
   </data>
+  <data name="PropertyDescriptionUseRedirectionServerName" xml:space="preserve">
+    <value>Use the redirection server name instead of the connection hostname for RDP connections.</value>
+  </data>
+  <data name="PropertyDescriptionClearCachedRdpCredentials" xml:space="preserve">
+    <value>If an RDP connection fails with an authentication error, Windows may be substituting a stale cached credential for the credentials configured on this connection. Use this action to delete the TERMSRV/&lt;hostname&gt; entry from the Windows Credential Manager so the credentials on this connection are sent unchanged on the next attempt.</value>
+  </data>
+  <data name="ConfirmDeleteCachedRdpCredential" xml:space="preserve">
+    <value>Delete the cached credential for {0}?</value>
+  </data>
+  <data name="ClearedCachedRdpCredentials" xml:space="preserve">
+    <value>Cleared cached RDP credentials for {0}.</value>
+  </data>
+  <data name="NoCachedRdpCredentialFound" xml:space="preserve">
+    <value>No cached RDP credential was found for {0}. Nothing to delete.</value>
+  </data>
+  <data name="FailedToClearCachedRdpCredential" xml:space="preserve">
+    <value>Failed to clear cached RDP credentials for {0}. See the Messages pane for details.</value>
+  </data>
   <data name="PropertyDescriptionUser1" xml:space="preserve">
     <value>Feel free to enter any information you need here.</value>
   </data>
@@ -1272,6 +1302,12 @@ If you run into such an error, please create a new connection file!</value>
   <data name="UseRCG" xml:space="preserve">
     <value>Use Remote Credential Guard</value>
   </data>
+  <data name="UseRedirectionServerName" xml:space="preserve">
+    <value>Use Redirection Server Name</value>
+  </data>
+  <data name="ClearCachedRdpCredentials" xml:space="preserve">
+    <value>Clear Cached RDP Credentials</value>
+  </data>
   <data name="UserField" xml:space="preserve">
     <value>User Field</value>
   </data>
@@ -1300,8 +1336,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>Protocol Event Disconnected. Host: "{1}"; Protocol: "{2}" Message: "{0}"</value>
   </data>
   <data name="ProtocolEventDisconnectFailed" xml:space="preserve">
-    <value>Protocol Event Disconnected failed.
-{0}</value>
+    <value>Protocol Event Disconnected failed.{0}</value>
   </data>
   <data name="ProtocolToImport" xml:space="preserve">
     <value>Protocol to import</value>
@@ -1379,7 +1414,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>16777216 Colors (24-bit)</value>
   </data>
   <data name="Rdp256Colors" xml:space="preserve">
-    <value>256 Colours (8-bit)</value>
+    <value>256 Colors (8-bit)</value>
   </data>
   <data name="Rdp32768Colors" xml:space="preserve">
     <value>32768 Colors (15-bit)</value>
@@ -2579,5 +2614,167 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="VaultOpenbaoSecretEngineSSHOTP" xml:space="preserve">
     <value>SSH engine OTP mode</value>
+  </data>
+  <data name="MasterKeyProviderPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="MasterKeyProviderDpapi" xml:space="preserve">
+    <value>Windows User Account (DPAPI)</value>
+  </data>
+  <data name="SettingsStoreFirstRunTitle" xml:space="preserve">
+    <value>Set Master Password</value>
+  </data>
+  <data name="SettingsStoreUnlockTitle" xml:space="preserve">
+    <value>Unlock Settings</value>
+  </data>
+  <data name="SlowClickRenameEnabled" xml:space="preserve">
+    <value>Rename items using slow double-click (Explorer style)</value>
+  </data>
+  <data name="DisableRefocus" xml:space="preserve">
+    <value>Disable Refocus</value>
+  </data>
+  <data name="CredentialsUserViaAPI" xml:space="preserve">
+    <value>User via API ID:</value>
+  </data>
+  <data name="SecureKeyGenerator" xml:space="preserve">
+    <value>Secure Key Generator</value>
+  </data>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>Copy to Clipboard</value>
+  </data>
+  <data name="PasswdGenDescription" xml:space="preserve">
+    <value>Generate an encrypted password suitable for registry settings.</value>
+  </data>
+  <data name="MakeABackup" xml:space="preserve">
+    <value>Make a backup</value>
+  </data>
+  <data name="Enable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="Disable" xml:space="preserve">
+    <value>Disable</value>
+  </data>
+  <data name="BackupToDb" xml:space="preserve">
+    <value>to DB</value>
+  </data>
+  <data name="BackupToFile" xml:space="preserve">
+    <value>to File</value>
+  </data>
+  <data name="BackupFolder" xml:space="preserve">
+    <value>Backup folder</value>
+  </data>
+  <data name="OnSave" xml:space="preserve">
+    <value>On save</value>
+  </data>
+  <data name="OnEdit" xml:space="preserve">
+    <value>On edit</value>
+  </data>
+  <data name="OnExit" xml:space="preserve">
+    <value>On exit</value>
+  </data>
+  <data name="Element" xml:space="preserve">
+    <value>Element</value>
+  </data>
+  <data name="ColorName" xml:space="preserve">
+    <value>Color Name</value>
+  </data>
+  <data name="DatabaseConnectionManager" xml:space="preserve">
+    <value>Database Connection Manager</value>
+  </data>
+  <data name="ServerAndCredentials" xml:space="preserve">
+    <value>Server &amp; Credentials</value>
+  </data>
+  <data name="SqlAuthentication" xml:space="preserve">
+    <value>Autentifcation:</value>
+  </data>
+  <data name="DatabasePlatform" xml:space="preserve">
+    <value>Database Platform:</value>
+  </data>
+  <data name="ConnectionProperties" xml:space="preserve">
+    <value>Connection Properties</value>
+  </data>
+  <data name="NetworkPacketSize" xml:space="preserve">
+    <value>Network packet size (bytes):</value>
+  </data>
+  <data name="NetworkProtocol" xml:space="preserve">
+    <value>Network protocol:</value>
+  </data>
+  <data name="ConnectionTimeoutSeconds" xml:space="preserve">
+    <value>Connection time-out (s):</value>
+  </data>
+  <data name="ExecutionTimeoutSeconds" xml:space="preserve">
+    <value>Execution time-out (s):</value>
+  </data>
+  <data name="TrustServerCertificate" xml:space="preserve">
+    <value>Trust server certificate:</value>
+  </data>
+  <data name="HostNameInCertificate" xml:space="preserve">
+    <value>Host name in certificate:</value>
+  </data>
+  <data name="ProtocolLabel" xml:space="preserve">
+    <value>Protocol:</value>
+  </data>
+  <data name="EncryptionLabel" xml:space="preserve">
+    <value>Encryption:</value>
+  </data>
+  <data name="EnableAlwaysEncrypted" xml:space="preserve">
+    <value>Enable Always Encrypted:</value>
+  </data>
+  <data name="EnableSecureEnclaves" xml:space="preserve">
+    <value>Enable secure enclaves:</value>
+  </data>
+  <data name="EnclaveAttestation" xml:space="preserve">
+    <value>Enclave attestation:</value>
+  </data>
+  <data name="UrlLabel" xml:space="preserve">
+    <value>URL:</value>
+  </data>
+  <data name="EnableMARS" xml:space="preserve">
+    <value>Enable MARS:</value>
+  </data>
+  <data name="TabSetup" xml:space="preserve">
+    <value>Setup</value>
+  </data>
+  <data name="CreateTableStructure" xml:space="preserve">
+    <value>Create table structure</value>
+  </data>
+  <data name="VerifyTableStructure" xml:space="preserve">
+    <value>Verify table structure</value>
+  </data>
+  <data name="ChooseSchema" xml:space="preserve">
+    <value>Choose schema:</value>
+  </data>
+  <data name="DbAdminUser" xml:space="preserve">
+    <value>db admin User:</value>
+  </data>
+  <data name="DbUserPassword" xml:space="preserve">
+    <value>db user password:</value>
+  </data>
+  <data name="DbUser" xml:space="preserve">
+    <value>db user:</value>
+  </data>
+  <data name="DatabaseName" xml:space="preserve">
+    <value>Database name:</value>
+  </data>
+  <data name="DbAdminPassword" xml:space="preserve">
+    <value>db admin password:</value>
+  </data>
+  <data name="TestConnectionDetails" xml:space="preserve">
+    <value>Test connection details</value>
+  </data>
+  <data name="AdvancedExpand" xml:space="preserve">
+    <value>Advanced >></value>
+  </data>
+  <data name="ServerNameOrIp" xml:space="preserve">
+    <value>Server name or IP:</value>
+  </data>
+  <data name="UsernameLabel" xml:space="preserve">
+    <value>Username:</value>
+  </data>
+  <data name="BindConnectionsAndConfigPanels" xml:space="preserve">
+    <value>Bind Connections and Config panels together when auto-hidden</value>
+  </data>
+  <data name="DisplayReconnectionDialog" xml:space="preserve">
+    <value>Display reconnection dialog when disconnected from server (RDP &amp;&amp; ICA only)</value>
   </data>
 </root>

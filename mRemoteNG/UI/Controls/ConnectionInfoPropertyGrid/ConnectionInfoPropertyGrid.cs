@@ -274,8 +274,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid {
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUserViaAPI));
             }
 
-            if (!(SelectedConnectionInfo.Resolution == RDPResolutions.FitToWindow ||
-                  SelectedConnectionInfo.Resolution == RDPResolutions.Fullscreen)) {
+            if (SelectedConnectionInfo.Resolution != RDPResolutions.Fullscreen) {
                 strHide.Add(nameof(AbstractConnectionRecord.AutomaticResize));
             }
 

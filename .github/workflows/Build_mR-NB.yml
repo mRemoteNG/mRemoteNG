@@ -1,4 +1,4 @@
-name: Build_and_Release_mR-NB
+name: Build_and_Release_mR-NB_MultiDeploy
 on:
   push:
     branches:
@@ -19,12 +19,28 @@ jobs:
     strategy:
       matrix:
         include:
+          # Framework-Dependent builds (requires .NET runtime on user machine)
           - runner: windows-latest
             platform: x64
             arch: x64
+            deployment: framework-dependent
+            deploy_suffix: FD
           - runner: windows-11-arm
             platform: ARM64
             arch: arm64
+            deployment: framework-dependent
+            deploy_suffix: FD
+          # Self-Contained builds (includes .NET runtime)
+          - runner: windows-latest
+            platform: x64
+            arch: x64
+            deployment: self-contained
+            deploy_suffix: SC
+          - runner: windows-11-arm
+            platform: ARM64
+            arch: arm64
+            deployment: self-contained
+            deploy_suffix: SC
     runs-on: ${{ matrix.runner }}
     # Only run if:
     # - manual dispatch, OR
@@ -35,14 +51,39 @@ jobs:
 
     steps:
       - name: (01) Checkout Repository
-        uses: actions/checkout@v5
-        
-      - name: (02) Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
+        uses: actions/checkout@v7
+
+        # 2. Auto-detect solution file (Supports legacy .sln modern VS2026 .slnx)
+      - name: (02) Find solution file
+        shell: pwsh
+        run: |
+          Write-Host "Locating solution file (.sln or .slnx)..."
+          $sln = Get-ChildItem -Path . -Filter "*.sln*" -File -Recurse | 
+                 Where-Object { $_.Extension -match '^\.slnx?$' } | 
+                 Select-Object -First 1
+
+          if ($sln) {
+            "SOLUTION_FILE=$($sln.Name)" | Out-File -FilePath $env:GITHUB_ENV -Append
+            Write-Host "Located file: $($sln.Name)" -ForegroundColor Green
+          } else {
+            Write-Host "ERROR: Could not locate a .sln or .slnx file!" -ForegroundColor Red
+            exit 1
+          }
+
+      - name: (02) Install .NET 10 SDK
+        uses: actions/setup-dotnet@v5
         with:
-          vs-version: '17.14.12'
+          dotnet-version: '10.0.x'
+
+      # 6. Install Visual Studio 2026 Build Tools
+      - name: (03) Install Visual Studio 2026 Build Tools
+        shell: pwsh
+        run: |
+          Write-Host "Installing VS 2026 Build Tools..."
+          choco install visualstudio2026buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --includeRecommended --quiet" -y --ignore-package-exit-codes=3010
+          Write-Host "VS 2026 Build Tools installation completed"
           
-      - name: (03) Install and run dotnet-t4 to transform T4 templates
+      - name: (04) Install and run dotnet-t4 to transform T4 templates
         shell: pwsh
         run: |
           dotnet tool install --global dotnet-t4
@@ -56,24 +97,32 @@ jobs:
         env:
           PLATFORM: '${{ matrix.platform }}'
   
-      - name: (04) Cache NuGet Packages
-        uses: actions/cache@v4
+      - name: (05) Cache NuGet Packages
+        uses: actions/cache@v5
         with:
           path: ~/.nuget/packages
-          key: ${{ runner.os }}-${{ matrix.arch }}-nuget-${{ hashFiles('**/*.csproj') }}
+          key: ${{ runner.os }}-${{ matrix.arch }}-${{ matrix.deployment }}-nuget-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
+            ${{ runner.os }}-${{ matrix.arch }}-${{ matrix.deployment }}-nuget-
             ${{ runner.os }}-${{ matrix.arch }}-nuget-
             
-      - name: (05) Restore NuGet Packages
+      - name: (06) Restore NuGet Packages
         shell: pwsh
         run: dotnet restore
         
-      - name: (06) Build Release
+      - name: (07) Build Framework-Dependent Release
+        if: matrix.deployment == 'framework-dependent'
         shell: pwsh
         run: |
-          msbuild "$Env:GITHUB_WORKSPACE\mRemoteNG.sln" -p:Configuration="Release" -p:Platform=${{ matrix.platform }} /verbosity:minimal
-        
-      - name: (07) Release Information
+          msbuild "$Env:GITHUB_WORKSPACE\$($sln.Name)" -p:Configuration="Release" -p:Platform=${{ matrix.platform }} /verbosity:minimal
+
+      - name: (08) Build Self-Contained Release
+        if: matrix.deployment == 'self-contained'
+        shell: pwsh
+        run: |
+          msbuild "$Env:GITHUB_WORKSPACE\mRemoteNG.sln" /t:Publish /p:Configuration="Release Self-Contained" -p:Platform=${{ matrix.platform }} /verbosity:minimal /p:SelfContained=true /p:PublishDir="bin\${{ matrix.platform }}\Release"
+                
+      - name: (09) Release Information
         id: version
         shell: pwsh
         run: |
@@ -86,7 +135,7 @@ jobs:
             throw "Could not extract version and build number"
           }
           $date = Get-Date -Format "yyyyMMdd"
-          $zipName = "mRemoteNG-$date-v$version-NB-$build-${{ matrix.arch }}.zip"
+          $zipName = "mRemoteNG-$date-v$version-NB-$build-${{ matrix.arch }}-${{ matrix.deploy_suffix }}.zip"
           $tag = "$date-v$version-NB-($build)"
           $message = git log -1 --pretty=%B
           echo "message=$message" >> $env:GITHUB_OUTPUT
@@ -94,9 +143,9 @@ jobs:
           echo "version=$version" >> $env:GITHUB_OUTPUT
           echo "build=$build" >> $env:GITHUB_OUTPUT
           echo "tag=$tag" >> $env:GITHUB_OUTPUT
-          $version = "${{ steps.version.outputs.version }}"
+          echo "deployment=${{ matrix.deployment }}" >> $env:GITHUB_OUTPUT
 
-      - name: (08) Extract Changelog Section
+      - name: (10) Extract Changelog Section
         id: changelog
         shell: pwsh
         run: |
@@ -127,30 +176,128 @@ jobs:
           echo "log<<EOF" >> $env:GITHUB_OUTPUT
           echo $joined >> $env:GITHUB_OUTPUT
           echo "EOF" >> $env:GITHUB_OUTPUT
-      
-          echo "log=$escaped"
                 
-      - name: (09) Create Zip File
+      - name: (11) Create Zip File
         shell: pwsh
         run: |
           $sourceDir = "$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\Release"
           Compress-Archive -Path "$sourceDir\*" -DestinationPath ${{ steps.version.outputs.zipname }}
           echo "File: ${{ steps.version.outputs.zipname }}"
+          
+          # Show file size
+          $fileSize = (Get-Item ${{ steps.version.outputs.zipname }}).Length / 1MB
+          echo "Size: $([math]::Round($fileSize, 2)) MB"
 
-      - name: (10) Create release
-        id: create_release
-        uses: softprops/action-gh-release@6da8fa9354ddfdc4aeace5fc48d7f679b5214090 # v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      - name: (10) Upload artifacts for combination
+        uses: actions/upload-artifact@v7
         with:
-          tag_name:  ${{ steps.version.outputs.tag }}
-          name: "mRemoteNG ${{ steps.version.outputs.version }} NB ${{ steps.version.outputs.build }}"
-          files: ${{ steps.version.outputs.zipname }}
-          body: |
-            Changes in this Release:
-            ${{ steps.changelog.outputs.log }}
+          name: release-${{ matrix.arch }}-${{ matrix.deploy_suffix }}
+          path: ${{ steps.version.outputs.zipname }}
+          retention-days: 1
 
-            Last Commit Message:
+  Create-Combined-Release:
+    needs: NB-Build-and-Release
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v8
+        with:
+          path: artifacts
+
+      - name: Extract version info
+        id: version
+        shell: pwsh
+        run: |
+          $assemblyInfoPath = "${{ github.workspace }}\mRemoteNG\Properties\AssemblyInfo.cs"
+          $line = Get-Content $assemblyInfoPath | Where-Object { $_ -match 'AssemblyVersion\("(.+?)"\)' }
+          if ($line -match 'AssemblyVersion\("(?<ver>\d+\.\d+\.\d+)\.(?<build>\d+)"\)') {
+            $version = $matches['ver']
+            $build = $matches['build']
+          } else {
+            throw "Could not extract version and build number"
+          }
+          $date = Get-Date -Format "yyyyMMdd"
+          $tag = "$date-v$version-NB-($build)"
+          $message = git log -1 --pretty=%B
+          echo "version=$version" >> $env:GITHUB_OUTPUT
+          echo "build=$build" >> $env:GITHUB_OUTPUT
+          echo "tag=$tag" >> $env:GITHUB_OUTPUT
+          echo "message=$message" >> $env:GITHUB_OUTPUT
+
+      - name: Extract Changelog
+        id: changelog
+        shell: pwsh
+        run: |
+          $changelogPath = "$env:GITHUB_WORKSPACE\CHANGELOG.md"
+          $lines = Get-Content $changelogPath
+      
+          $startIndex = -1
+          for ($i = 0; $i -lt $lines.Count; $i++) {
+            if ($lines[$i] -match '^## \[') {
+              $startIndex = $i
+              break
+            }
+          }
+      
+          if ($startIndex -eq -1) {
+            throw "No version header found in CHANGELOG.md"
+          }
+      
+          $section = @()
+          for ($i = $startIndex + 1; $i -lt $lines.Count; $i++) {
+            if ($lines[$i] -match '^## ') {
+              break
+            }
+            $section += $lines[$i]
+          }
+      
+          $joined = $section -join "`n"
+          echo "log<<EOF" >> $env:GITHUB_OUTPUT
+          echo $joined >> $env:GITHUB_OUTPUT
+          echo "EOF" >> $env:GITHUB_OUTPUT
+
+      - name: Collect all release files
+        shell: pwsh
+        run: |
+          Get-ChildItem -Path artifacts -Recurse -Filter "*.zip" | ForEach-Object {
+            Copy-Item $_.FullName -Destination .
+            echo "Found: $($_.Name)"
+          }
+
+      - name: Create combined release
+        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: "mRemoteNG ${{ steps.version.outputs.version }} NB ${{ steps.version.outputs.build }}"
+          files: '*.zip'
+          body: |
+            ## mRemoteNG ${{ steps.version.outputs.version }} NB Build ${{ steps.version.outputs.build }}
+            
+            ### 📦 Available Downloads
+            
+            **Framework-Dependent (FD)** - Requires .NET 10 Runtime installed:
+            - Smaller download size (~15-25 MB)
+            - Requires .NET 10 Desktop Runtime on user machine
+            - Files: `*-FD.zip`
+            
+            **Self-Contained (SC)** - Portable, no installation required:
+            - Larger download size (~80-150 MB)
+            - Includes .NET 10 runtime - no installation needed
+            - Files: `*-SC.zip`
+            
+            Both versions are available for **x64** and **ARM64** architectures.
+            
+            ---
+            
+            ### 📝 Changes in this Release
+            ${{ steps.changelog.outputs.log }}
+            
+            ### 💬 Last Commit Message
             ${{ steps.version.outputs.message }}
 
           draft: false

@@ -41,9 +41,9 @@ namespace mRemoteNG.App
         /// </summary>
         public static bool UseCredentialManager => false;
 
-        public static WindowList WindowList { get; set; }
+        public static WindowList WindowList { get; set; } = null!; // initialized during FrmMain startup
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
-        public static NotificationAreaIcon NotificationAreaIcon { get; set; }
+        public static NotificationAreaIcon NotificationAreaIcon { get; set; } = null!; // initialized on demand by settings/UI
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
 
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
@@ -121,7 +121,7 @@ namespace mRemoteNG.App
                 {
                     MessageCollector.AddExceptionMessage(Language.LoadFromSqlFailed, ex);
                     string commandButtons = string.Join("|", Language._TryAgain, Language.CommandOpenConnectionFile, string.Format(Language.CommandExitProgram, Application.ProductName));
-                    CTaskDialog.ShowCommandBox(Application.ProductName, Language.LoadFromSqlFailed, Language.LoadFromSqlFailedContent, MiscTools.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, ESysIcons.Error, ESysIcons.Error);
+                    CTaskDialog.ShowCommandBox(Application.ProductName ?? string.Empty, Language.LoadFromSqlFailed, Language.LoadFromSqlFailedContent, MiscTools.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, ESysIcons.Error, ESysIcons.Error);
                     switch (CTaskDialog.CommandButtonResult)
                     {
                         case 0:
@@ -157,7 +157,7 @@ namespace mRemoteNG.App
                     {
                         try
                         {
-                            CTaskDialog.ShowTaskDialogBox(GeneralAppInfo.ProductName, Language.ConnectionFileNotFound, "", "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
+                            CTaskDialog.ShowTaskDialogBox(GeneralAppInfo.ProductName ?? string.Empty, Language.ConnectionFileNotFound, "", "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
 
                             switch (CTaskDialog.CommandButtonResult)
                             {

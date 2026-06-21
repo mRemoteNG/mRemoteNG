@@ -46,17 +46,19 @@ namespace mRemoteNG.Tools
 						return Status;
 					}
 
-                    //X509Certificate2 certificate2 = new(X509Certificate.CreateFromSignedFile(FilePath));
+#pragma warning disable SYSLIB0057
+					using X509Certificate cert = X509Certificate.CreateFromSignedFile(FilePath);
+					byte[] certData = cert.GetRawCertData();
+#pragma warning restore SYSLIB0057
+					X509Certificate2 certificate2 = X509CertificateLoader.LoadCertificate(certData);
+					_thumbprint = certificate2.Thumbprint;
 
-                    X509Certificate2 certificate2 = new(X509Certificate.CreateFromSignedFile(FilePath));
-                    _thumbprint = certificate2.Thumbprint;
-
-                    if (_thumbprint != ThumbprintToMatch)
-                    {
-                        Status = StatusValue.ThumbprintNotMatch;
-                        return Status;
-                    }
-                }
+					if (_thumbprint != ThumbprintToMatch)
+					{
+						Status = StatusValue.ThumbprintNotMatch;
+						return Status;
+					}
+				}
 
                 NativeMethods.WINTRUST_FILE_INFO trustFileInfo = new() { pcwszFilePath = FilePath};
 			    trustFileInfoPointer = Marshal.AllocCoTaskMem(Marshal.SizeOf(trustFileInfo));

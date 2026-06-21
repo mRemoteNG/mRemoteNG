@@ -104,7 +104,8 @@ namespace mRemoteNG.Config.Serializers
             if (!authenticated)
                 return false;
 
-            _rootNodeInfo.PasswordString = authenticator.LastAuthenticatedPassword.ConvertToUnsecureString();
+            // A successful Authenticate() guarantees LastAuthenticatedPassword is set.
+            _rootNodeInfo.PasswordString = authenticator.LastAuthenticatedPassword!.ConvertToUnsecureString();
             return true;
         }
     }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -120,8 +120,23 @@
   <data name="MenuItem_About" xml:space="preserve">
     <value>Hakkında</value>
   </data>
+  <data name="_Sessions" xml:space="preserve">
+    <value>&amp;Oturumlar</value>
+  </data>
+  <data name="NextSession" xml:space="preserve">
+    <value>Sonraki Oturum</value>
+  </data>
+  <data name="PreviousSession" xml:space="preserve">
+    <value>Önceki Oturum</value>
+  </data>
+  <data name="JumpToSession" xml:space="preserve">
+    <value>Oturum {0}'a Git</value>
+  </data>
+  <data name="ActiveDirectory" xml:space="preserve">
+    <value>Active Directory</value>
+  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
-    <value>XML'den node ekleme başarısız!</value>
+    <value>XML'den düğüm ekleme başarısız!</value>
   </data>
   <data name="AllowOnlySingleInstance" xml:space="preserve">
     <value>Uygulamanın yalnızca bir örneğine izin ver (mRemoteNG yeniden başlatılmalı)</value>
@@ -136,10 +151,10 @@
     <value>Bağlantı açılırken panel seçme diyalogunu daima göster</value>
   </data>
   <data name="AlwaysShowPanelTabs" xml:space="preserve">
-    <value>Panel sekmesini daima göster</value>
+    <value>Panel sekmelerini daima göster</value>
   </data>
   <data name="AlwaysShowSysTrayIcon" xml:space="preserve">
-    <value>Bilgilendirme alanı simgelerini daima göster</value>
+    <value>Bildirim alanı simgesini daima göster</value>
   </data>
   <data name="AskUpdatesCommandAskLater" xml:space="preserve">
     <value>Daha sonra tekrar sor</value>
@@ -156,17 +171,23 @@
   <data name="AskUpdatesMainInstruction" xml:space="preserve">
     <value>Otomatik güncelleştirme ayarları</value>
   </data>
+  <data name="AnyDesk" xml:space="preserve">
+    <value>AnyDesk</value>
+  </data>
+  <data name="Ard" xml:space="preserve">
+    <value>ARD (Apple Remote Desktop)</value>
+  </data>
   <data name="Aspect" xml:space="preserve">
     <value>Görünüş</value>
   </data>
   <data name="AutoSaveEvery" xml:space="preserve">
-    <value>Otomatik kaydet her:</value>
+    <value>Otomatik kaydetme süresi, dakika (0 = devre dışı):</value>
   </data>
   <data name="AvailableVersion" xml:space="preserve">
     <value>Son sürüm</value>
   </data>
   <data name="_Browse" xml:space="preserve">
-    <value>&amp;Aç</value>
+    <value>&amp;Gözat...</value>
   </data>
   <data name="_Cancel" xml:space="preserve">
     <value>&amp;İptal</value>
@@ -199,7 +220,7 @@
     <value>&amp;Çalıştır</value>
   </data>
   <data name="ButtonLaunchPutty" xml:space="preserve">
-    <value>Putty'yi çalıştır</value>
+    <value>PuTTY'yi çalıştır</value>
   </data>
   <data name="_Ok" xml:space="preserve">
     <value>&amp;Tamam</value>
@@ -214,7 +235,7 @@
     <value>&amp;Dur</value>
   </data>
   <data name="TestProxy" xml:space="preserve">
-    <value>Test Vekil Sunucu</value>
+    <value>Proxy'yi Test Et</value>
   </data>
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Port taraması başlatılamadı, IP formatı geçersiz!</value>
@@ -227,6 +248,9 @@
   </data>
   <data name="Display" xml:space="preserve">
     <value>Ekran</value>
+  </data>
+  <data name="RDPGateway" xml:space="preserve">
+    <value>RDP Ağ Geçidi</value>
   </data>
   <data name="Miscellaneous" xml:space="preserve">
     <value>Çeşitli</value>
@@ -241,7 +265,7 @@
     <value>Kontrol başarısız!</value>
   </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Sunucu bağlantısı kesildiğinde otomatik olarak yeniden bağlanmayı deneyin (yalnızca RDP  &amp;&amp; ICA)</value>
+    <value>Sunucuyla bağlantı kesildiğinde yeniden bağlanma iletişim kutusunu göster (yalnızca RDP &amp;&amp; ICA)</value>
   </data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Bu mesajı tekrar gösterme</value>
@@ -257,6 +281,9 @@
   </data>
   <data name="CheckboxUpdateUseProxy" xml:space="preserve">
     <value>Bağlanmak için proxy sunucusu kullan</value>
+  </data>
+  <data name="UserViaAPI" xml:space="preserve">
+    <value>API Kullanıcı Kimliği</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Kullanıcı adı</value>
@@ -307,7 +334,7 @@
     <value>&amp;Tekrar deneyin</value>
   </data>
   <data name="CompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
-    <value>{0}, bu sistemde çalışan Lenovo Auto Scroll Utility algıladı. Bu yardımcı programın {0} ile ilgili sorunlara neden olduğu bilinmektedir. Devre dışı bırakmanız veya kaldırmanız önerilir.</value>
+    <value>{0}, bu sistemde çalışan Lenovo Auto Scroll Utility'yi algıladı. Bu yardımcı programın {0} ile ilgili sorunlara neden olduğu bilinmektedir. Devre dışı bırakmanız veya kaldırmanız önerilir.</value>
   </data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
     <value>Uyumluluk sorunu tespit edildi</value>
@@ -322,7 +349,7 @@
     <value>IconMenu_Click başarısız!</value>
   </data>
   <data name="ConfigPropertyGridObjectFailed" xml:space="preserve">
-    <value>Özellik Izgara nesnesi başarısız oldu!</value>
+    <value>Özellik ızgarası nesnesi hatası!</value>
   </data>
   <data name="ConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
     <value>SetHostStatus başarısız!</value>
@@ -334,25 +361,28 @@
     <value>Ayar arayüzü yükleme başarısız!</value>
   </data>
   <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
-    <value>Panelini kapatmak istediğinizden emin misiniz, "{0}"? İçerdiği tüm bağlantılar da kapatılacaktır.</value>
+    <value>"{0}" panelini kapatmak istediğinizden emin misiniz? İçerdiği tüm bağlantılar da kapatılacaktır.</value>
+  </data>
+  <data name="ConfirmDisconnectConnection" xml:space="preserve">
+    <value>"{0}" bağlantısını kesmek istediğinizden emin misiniz?</value>
   </data>
   <data name="ConfirmDeleteExternalTool" xml:space="preserve">
     <value>Harici aracı silmek istediğinizden emin misiniz, "{0}"?</value>
   </data>
   <data name="ConfirmDeleteExternalToolMultiple" xml:space="preserve">
-    <value>Seçilen harici araçları {0} silmek istediğinizden emin misiniz?</value>
+    <value>Seçili {0} harici aracı silmek istediğinizden emin misiniz?</value>
   </data>
   <data name="ConfirmDeleteNodeConnection" xml:space="preserve">
-    <value>Bağlantıyı silmek istediğinize emin misiniz, "{0}"?</value>
+    <value>"{0}" bağlantısını silmek istediğinizden emin misiniz?</value>
   </data>
   <data name="ConfirmDeleteNodeFolder" xml:space="preserve">
-    <value>Boş klasörü silmek istediğinize emin misiniz, "{0}"?</value>
+    <value>Boş "{0}" klasörünü silmek istediğinizden emin misiniz?</value>
   </data>
   <data name="ConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>Bu klasörü silmek istediğinizden emin misiniz, "{0}"? İçerdiği klasörler veya bağlantılar da silinir.</value>
   </data>
   <data name="ConfirmExitMainInstruction" xml:space="preserve">
-    <value>Bütün açık bağlantılar kapatlsın mı?</value>
+    <value>Bütün açık bağlantılar kapatılsın mı?</value>
   </data>
   <data name="ConfirmResetLayout" xml:space="preserve">
     <value>Panelleri varsayılan yerleşimine sıfırlamak istediğinizden emin misiniz?</value>
@@ -367,23 +397,22 @@
     <value>Bağlanıyor...</value>
   </data>
   <data name="ConnectionEventConnected" xml:space="preserve">
-    <value>Protokol Event Bağlandı</value>
+    <value>Protokol Bağlantısı Kuruldu</value>
   </data>
   <data name="ConnectionEventConnectedDetail" xml:space="preserve">
-    <value>"{2}" kullanıcısı tarafından kurulan "{1}" yoluyla "{0}" bağlantısı (Açıklama: "{3}"; Kullanıcı Alanı: "{4}")</value>
+    <value>"{0}" bağlantısı, "{1}" üzerinden "{2}" kullanıcısı tarafından kuruldu (Açıklama: "{3}"; Kullanıcı Alanı: "{4}")</value>
   </data>
   <data name="ConnectionFailed" xml:space="preserve">
     <value>Bağlantı başarısız!</value>
   </data>
   <data name="ConnectionEventErrorOccured" xml:space="preserve">
-    <value>Protokol Event Hata Gerçekleşti</value>
+    <value>Bağlantı protokolü hatası oluştu. Ana bilgisayar: "{1}"; Hata kodu: "{2}"; Hata açıklaması: "{0}"</value>
   </data>
   <data name="ConnectionOpenFailed" xml:space="preserve">
     <value>Bağlantıyı açma başarısız!</value>
   </data>
   <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
-    <value>
-Bağlantı açılamıyor: Hostname belirtilmedi!</value>
+    <value>Bağlantı açılamıyor: ana bilgisayar adı belirtilmedi!</value>
   </data>
   <data name="Connections" xml:space="preserve">
     <value>Bağlantılar</value>
@@ -392,14 +421,14 @@ Bağlantı açılamıyor: Hostname belirtilmedi!</value>
     <value>Varsayılan bağlantı noktası ayarlanamadı!</value>
   </data>
   <data name="ConnectionsFileBackupFailed" xml:space="preserve">
-    <value>Bağlantılar dosyasının yedeğini oluşturulamadı!</value>
+    <value>Bağlantı dosyasının yedeği oluşturulamadı!</value>
   </data>
   <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>"{0}" bağlantı dosyası yüklenemedi!</value>
   </data>
   <data name="ConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
     <value>"{0}" bağlantı dosyası yüklenemedi!
-Yeni bağlantılar dosyası ile başlanıyor.</value>
+Yeni bir bağlantı dosyasıyla başlanıyor.</value>
   </data>
   <data name="ConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>"{0}" bağlantı dosyası kaydedilemiyor!</value>
@@ -411,7 +440,7 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
     <value>Konsol oturumuna bağlan</value>
   </data>
   <data name="ConnectWithOptions" xml:space="preserve">
-    <value>Bağlan (Ayarları kullanarak)</value>
+    <value>Bağlan (seçeneklerle)</value>
   </data>
   <data name="ConnenctionClosedByUser" xml:space="preserve">
     <value>{1} ile bağlanılan {0}, {2} tarafından kapatıldı.</value>
@@ -438,7 +467,7 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
     <value>Kimlik doğrulama başarısız olursa bağlanma</value>
   </data>
   <data name="DoubleClickTabClosesIt" xml:space="preserve">
-    <value>Sekmeyi çift tıklayarak kapatın</value>
+    <value>Bir sekmeye çift tıklamak onu kapatır</value>
   </data>
   <data name="DownloadAndInstall" xml:space="preserve">
     <value>İndir ve Yükle</value>
@@ -450,10 +479,10 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
     <value>Parola olmadan devam etmek istiyor musunuz?</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
-    <value>Boş bırakılan Kullanıcı adı, Parola ve Domain için:</value>
+    <value>Kullanıcı adı, parola veya etki alanı alanları boşsa şunu kullan:</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
-    <value>Bağlantı dosyası şifreleme</value>
+    <value>Bağlantı dosyasını tamamen şifrele</value>
   </data>
   <data name="LastIp" xml:space="preserve">
     <value>Son IP</value>
@@ -465,7 +494,7 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
     <value>Araç çubuğuna harici araç ekleme (frmMain) başarısız. {0}</value>
   </data>
   <data name="ErrorAddFolderFailed" xml:space="preserve">
-    <value>Klasör ekle ((UI.Window.ConnectionTreeWindow) başarısız. {0}</value>
+    <value>Klasör ekleme başarısız oldu (UI.Window.ConnectionTreeWindow). {0}</value>
   </data>
   <data name="ErrorBadDatabaseVersion" xml:space="preserve">
     <value>Veritabanı {0} sürümü, {1} sürümüyle uyumlu değil.</value>
@@ -477,10 +506,17 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
     <value>PuTTY başlatılamadı.</value>
   </data>
   <data name="ErrorDecryptionFailed" xml:space="preserve">
-    <value>Çözümleme başarısız. {0}</value>
+    <value>Şifre çözme başarısız. {0}</value>
   </data>
   <data name="ErrorEncryptionFailed" xml:space="preserve">
     <value>Şifreleme başarısız. {0}</value>
+  </data>
+  <data name="ErrorFipsPolicyIncompatible" xml:space="preserve">
+    <value>Windows güvenlik ayarı "Sistem şifrelemesi: şifreleme, karma oluşturma ve imzalama için FIPS uyumlu algoritmalar kullan" etkin durumda.
+
+Daha fazla bilgi için http://support.microsoft.com/kb/811833 adresindeki Microsoft Destek makalesine bakın.
+
+{0} tam olarak FIPS uyumlu değildir. Kendi sorumluluğunuzda devam etmek için Tamam'a, çıkmak için İptal'e tıklayın.</value>
   </data>
   <data name="Errors" xml:space="preserve">
     <value>Hatalar</value>
@@ -501,7 +537,7 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
     <value>Dışa aktar</value>
   </data>
   <data name="ExportEverything" xml:space="preserve">
-    <value>Herşeyi dışa aktar</value>
+    <value>Her şeyi dışa aktar</value>
   </data>
   <data name="ExportFile" xml:space="preserve">
     <value>Dosyayı dışa aktar</value>
@@ -519,19 +555,19 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
     <value>Seçili olan klasörleri dışa aktar</value>
   </data>
   <data name="_ExportToFile" xml:space="preserve">
-    <value>&amp;Dosyaya dışa atar...</value>
+    <value>&amp;Dosyaya Aktar...</value>
   </data>
   <data name="ExternalToolDefaultName" xml:space="preserve">
     <value>Yeni harici araç</value>
   </data>
   <data name="FileFormat" xml:space="preserve">
-    <value>Dosya &amp;Formatı:</value>
+    <value>Dosya &amp;Biçimi:</value>
   </data>
   <data name="FilterAll" xml:space="preserve">
     <value>Tüm Dosyalar (*.*)</value>
   </data>
   <data name="FilterAllImportable" xml:space="preserve">
-    <value>Tüm alınabilir dosyalar</value>
+    <value>İçe aktarılabilir tüm dosyalar</value>
   </data>
   <data name="FilterApplication" xml:space="preserve">
     <value>Uygulama Dosyaları (*.exe)</value>
@@ -546,16 +582,16 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
     <value>PuTTY Bağlantı Yöneticisi dosyaları</value>
   </data>
   <data name="FilterRdgFiles" xml:space="preserve">
-    <value>Uzak Masaüstü Bğlantı Yöneticisi dosyaları (*.rdg)</value>
+    <value>Uzak Masaüstü Bağlantı Yöneticisi dosyaları (*.rdg)</value>
   </data>
   <data name="FilterRDP" xml:space="preserve">
     <value>RDP Dosyaları (*.rdp)</value>
   </data>
   <data name="FormatInherit" xml:space="preserve">
-    <value>Miras {0}</value>
+    <value>{0} öğesini devral</value>
   </data>
   <data name="FormatInheritDescription" xml:space="preserve">
-    <value>Miras kalan özelliklerin açıklaması: {0}</value>
+    <value>Devralınan özelliğin açıklaması: {0}</value>
   </data>
   <data name="Free" xml:space="preserve">
     <value>Boş</value>
@@ -567,7 +603,7 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
     <value>Genel</value>
   </data>
   <data name="GetConnectionInfoFromXmlFailed" xml:space="preserve">
-    <value>"{1}" den "{0}" için bağlantı bilgileri alınırken bir hata oluştu. {2}</value>
+    <value>"{1}" içinden "{0}" için bağlantı bilgileri alınırken bir hata oluştu. {2}</value>
   </data>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>Otomatik Yeniden Bağlan</value>
@@ -578,6 +614,12 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
   <data name="Files" xml:space="preserve">
     <value>Dosyalar</value>
   </data>
+  <data name="Host" xml:space="preserve">
+    <value>Ana Bilgisayar</value>
+  </data>
+  <data name="Http" xml:space="preserve">
+    <value>HTTP</value>
+  </data>
   <data name="HttpConnectFailed" xml:space="preserve">
     <value>HTTP Bağlantısı Başarısız!</value>
   </data>
@@ -585,19 +627,25 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
     <value>Yeni HTTP Bağlantısı oluşturulamadı!</value>
   </data>
   <data name="HttpDocumentTileChangeFailed" xml:space="preserve">
-    <value>HTTP Doküman Dosyasını Değiştirme Başarısız!</value>
+    <value>HTTP belge başlığı değiştirilemedi!</value>
+  </data>
+  <data name="HttpInternetExplorer" xml:space="preserve">
+    <value>Internet Explorer</value>
+  </data>
+  <data name="Https" xml:space="preserve">
+    <value>HTTPS</value>
   </data>
   <data name="HttpSetPropsFailed" xml:space="preserve">
-    <value>HTTP Prop'larını değiştirme başarısız!</value>
+    <value>HTTP özellikleri ayarlanamadı!</value>
   </data>
   <data name="IdentifyQuickConnectTabs" xml:space="preserve">
     <value>"Hızlı:" önekini ekleyerek hızlı bağlantı sekmelerini belirleyin</value>
   </data>
   <data name="ImportAD" xml:space="preserve">
-    <value>Active Directoy'den içe aktar</value>
+    <value>Active Directory'den içe aktar</value>
   </data>
   <data name="ImportFileFailedContent" xml:space="preserve">
-    <value>Dosya alınırken bir hata oluştu, "{0}".</value>
+    <value>"{0}" dosyası içe aktarılırken bir hata oluştu.</value>
   </data>
   <data name="ImportFromFile" xml:space="preserve">
     <value>&amp;Dosyadan içe aktar...</value>
@@ -615,16 +663,16 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
     <value>Int App odaklaması başarısız!</value>
   </data>
   <data name="IntAppHandle" xml:space="preserve">
-    <value>Int App işleme: {0}</value>
+    <value>Int App tutamacı: {0}</value>
   </data>
   <data name="IntAppKillFailed" xml:space="preserve">
     <value>Int App durdurma başarısız!</value>
   </data>
   <data name="IntAppResizeFailed" xml:space="preserve">
-    <value>Int App yeniden boyutlandırma başarız!</value>
+    <value>Int App yeniden boyutlandırma başarısız!</value>
   </data>
   <data name="IntAppStuff" xml:space="preserve">
-    <value>--- IntApp Ekibi ---</value>
+    <value>--- IntApp Öğeleri ---</value>
   </data>
   <data name="IntAppTitle" xml:space="preserve">
     <value>Int App Başlığı: {0}</value>
@@ -638,6 +686,12 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
   <data name="DisplayName" xml:space="preserve">
     <value>Görünen Ad</value>
   </data>
+  <data name="Domain" xml:space="preserve">
+    <value>Etki Alanı</value>
+  </data>
+  <data name="Hostname" xml:space="preserve">
+    <value>Ana bilgisayar adı:</value>
+  </data>
   <data name="PortableEdition" xml:space="preserve">
     <value>Taşınabilir Sürüm</value>
   </data>
@@ -645,8 +699,7 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
     <value>PuTTY oturumlarını yapılandırmak için bu butona tıklayın:</value>
   </data>
   <data name="PuttyTimeout" xml:space="preserve">
-    <value>
-PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
+    <value>PuTTY ve tümleşik harici araçlar için en fazla bekleme süresi:</value>
   </data>
   <data name="ReleasedUnderGPL" xml:space="preserve">
     <value>GNU Genel Kamu Lisansı (GPL) kapsamında çıkarıldı</value>
@@ -694,16 +747,22 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
     <value>Bağlantı Paneli Ekle</value>
   </data>
   <data name="MenuItem_CheckForUpdates" xml:space="preserve">
-    <value>Güncelleştirmeleri Konrol Et</value>
+    <value>Güncelleştirmeleri Kontrol Et</value>
   </data>
   <data name="Config" xml:space="preserve">
-    <value>Ayar</value>
+    <value>Yapılandırma</value>
   </data>
   <data name="ConnectionPanels" xml:space="preserve">
-    <value>Bağlantı Paneli</value>
+    <value>Bağlantı Panelleri</value>
   </data>
   <data name="Copy" xml:space="preserve">
     <value>Kopyala</value>
+  </data>
+  <data name="CtrlAltDel" xml:space="preserve">
+    <value>Ctrl-Alt-Del</value>
+  </data>
+  <data name="CtrlEsc" xml:space="preserve">
+    <value>Ctrl-Esc</value>
   </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>Harici Aracı Sil...</value>
@@ -769,7 +828,7 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
     <value>Sekmeyi Yeniden Adlandır</value>
   </data>
   <data name="MenuItem_ReportIssue" xml:space="preserve">
-    <value>Hata Raporla</value>
+    <value>Sorun Bildir</value>
   </data>
   <data name="ResetLayout" xml:space="preserve">
     <value>Düzeni sıfırla</value>
@@ -796,7 +855,7 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
     <value>SSH Dosya Transferi</value>
   </data>
   <data name="StartChat" xml:space="preserve">
-    <value>Sohbet'i Başlat (VNC)</value>
+    <value>Sohbet Başlat (VNC)</value>
   </data>
   <data name="MenuItem_SupportForum" xml:space="preserve">
     <value>Destek Forumu</value>
@@ -811,10 +870,10 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
     <value>&amp;Görünüm</value>
   </data>
   <data name="ViewOnly" xml:space="preserve">
-    <value>Yalnızca Gör (VNC)</value>
+    <value>Salt Görüntüle (VNC)</value>
   </data>
   <data name="MenuItem_Website" xml:space="preserve">
-    <value>Web Sitesi</value>
+    <value>Web sitesi</value>
   </data>
   <data name="MinimizeToSysTray" xml:space="preserve">
     <value>Bilgilendirme alanına küçült</value>
@@ -824,6 +883,12 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
     <value>Yukarı çık</value>
+  </data>
+  <data name="MremoteNgCsv" xml:space="preserve">
+    <value>mRemoteNG CSV</value>
+  </data>
+  <data name="MremoteNgXml" xml:space="preserve">
+    <value>mRemoteNG XML</value>
   </data>
   <data name="MyCurrentWindowsCreds" xml:space="preserve">
     <value>Şimdiki kimlik bilgilerim (Windows oturum açma bilgileri)</value>
@@ -854,6 +919,9 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
   </data>
   <data name="None" xml:space="preserve">
     <value>Yok</value>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Normal</value>
   </data>
   <data name="NoSmartSize" xml:space="preserve">
     <value>Akıllı Boyutlandırma yok</value>
@@ -893,7 +961,7 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
     <value>Parolalar eşleşmelidir.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>Parolama en az 3 karakter uzunluğunda olmalıdır.</value>
+    <value>Parola en az 3 karakter uzunluğunda olmalıdır.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>Lütfen tüm alanları doldurun</value>
@@ -902,13 +970,13 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
     <value>Port taraması tamamlandı.</value>
   </data>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
-    <value>PortScan paneli yüklenemedi!</value>
+    <value>Port taraması paneli yüklenemedi!</value>
   </data>
   <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
-    <value>Bağlanmak istediğiniz ana makine adını veya ip'yi girin.</value>
+    <value>Bağlanmak istediğiniz ana bilgisayar adını veya IP'yi girin.</value>
   </data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
-    <value>Tüm kalıtım seçeneklerini açın veya kapatın.</value>
+    <value>Tüm devralma seçeneklerini açar veya kapatır.</value>
   </data>
   <data name="PropertyDescriptionAuthenticationLevel" xml:space="preserve">
     <value>Bu bağlantının hangi kimlik doğrulama düzeyini kullanması gerektiğini seçin.</value>
@@ -917,7 +985,7 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
     <value>VNC sunucusuna nasıl kimlik doğrulama yapmak istediğinizi seçin.</value>
   </data>
   <data name="PropertyDescriptionAutomaticResize" xml:space="preserve">
-    <value>Pencere yeniden boyutlandırıldığında veya tam ekran modu değiştirildiğinde pencereyi yeniden boyutlandırılmasını seçin. RDP 8.0 veya üstü gerektirir.</value>
+    <value>Pencere yeniden boyutlandırıldığında veya tam ekran modu değiştirildiğinde bağlantının otomatik olarak yeniden boyutlandırılıp boyutlandırılmayacağını seçin. RDC 8.0 veya üzeri gerekir.</value>
   </data>
   <data name="PropertyDescriptionCacheBitmaps" xml:space="preserve">
     <value>Bitmap önbellekleme kullanılıp kullanılmayacağını seçin.</value>
@@ -929,13 +997,13 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
     <value>Kullanılacak sıkıştırma değerini seçin.</value>
   </data>
   <data name="PropertyDescriptionDescription" xml:space="preserve">
-    <value>Host için notlarınızı veya açıklamanızı buraya yazın.</value>
+    <value>Ana bilgisayar için notlarınızı veya açıklamanızı buraya yazın.</value>
   </data>
   <data name="PropertyDescriptionDisplayThemes" xml:space="preserve">
-    <value>Uzak host teması görüntülenmesi gerekiyorsa evet'i seçin.</value>
+    <value>Uzak ana bilgisayarın teması görüntülensin istiyorsanız Evet'i seçin.</value>
   </data>
   <data name="PropertyDescriptionDisplayWallpaper" xml:space="preserve">
-    <value>Uzak host duvar kağıdının görüntülenmesi gerekiyorsa evet'i seçin.</value>
+    <value>Uzak ana bilgisayarın duvar kâğıdı görüntülensin istiyorsanız Evet'i seçin.</value>
   </data>
   <data name="PropertyDescriptionDomain" xml:space="preserve">
     <value>Alan adınızı girin.</value>
@@ -953,16 +1021,16 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
     <value>Başlatılacak harici aracı seçin.</value>
   </data>
   <data name="PropertyDescriptionExternalToolAfter" xml:space="preserve">
-    <value>Uzak host bağlantısı kesildikten sonra başlatılacak harici bir aracı seçin.</value>
+    <value>Uzak ana bilgisayarla bağlantı kesildikten sonra başlatılacak harici aracı seçin.</value>
   </data>
   <data name="PropertyDescriptionExternalToolBefore" xml:space="preserve">
-    <value>Uzak host bağlantısı kurulmadan önce başlatılacak harici bir araç seçin.</value>
+    <value>Uzak ana bilgisayarla bağlantı kurulmadan önce başlatılacak harici aracı seçin.</value>
   </data>
   <data name="PropertyDescriptionIcon" xml:space="preserve">
-    <value>Host bağlantısı kurulduğunda görüntülenecek bir simge seçin.</value>
+    <value>Ana bilgisayara bağlandığınızda gösterilecek simgeyi seçin.</value>
   </data>
   <data name="PropertyDescriptionLoadBalanceInfo" xml:space="preserve">
-    <value>Yük dengeleyici, yönlendiriciler tarafından en iyi sunucuyu seçmek için kullanılacak yük dengeleme bilgilerini belirtir.</value>
+    <value>Yük dengeleyicilerin en uygun sunucuyu seçmesi için kullanılacak yük dengeleme bilgisini belirtir.</value>
   </data>
   <data name="PropertyDescriptionMACAddress" xml:space="preserve">
     <value>Harici bir araç içinde kullanmak isterseniz uzaktaki bilgisayarın MAC adresini girin.</value>
@@ -973,6 +1041,12 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
   <data name="PropertyDescriptionPanel" xml:space="preserve">
     <value>Bağlantının açılacağı paneli ayarlar.</value>
   </data>
+  <data name="PropertyDescriptionColor" xml:space="preserve">
+    <value>Bağlantılar ağacındaki bağlantı veya klasörün rengini ayarlar. Bağlantılar bu rengi üst klasörlerinden devralır.</value>
+  </data>
+  <data name="PropertyDescriptionTabColor" xml:space="preserve">
+    <value>Bağlantı sekmesinin rengini ayarlar. Varsayılan tema rengini kullanmak için boş bırakın.</value>
+  </data>
   <data name="PropertyDescriptionPassword" xml:space="preserve">
     <value>Parolanızı girin.</value>
   </data>
@@ -980,7 +1054,7 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
     <value>Seçilen protokolün dinlediği portu girin.</value>
   </data>
   <data name="PropertyDescriptionProtocol" xml:space="preserve">
-    <value>Host bağlantısı için mRemoteNG'nin kullanması gereken protokolü seçin.</value>
+    <value>Ana bilgisayara bağlanmak için mRemoteNG'nin kullanacağı protokolü seçin.</value>
   </data>
   <data name="PropertyDescriptionPuttySession" xml:space="preserve">
     <value>Bağlanırken kullanılacak bir PuTTY oturumu seçin.</value>
@@ -989,34 +1063,40 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
     <value>Bir kullanıcının RD Ağ Geçidi sunucusuna bağlanmak için sağladığı alan adını belirtir.</value>
   </data>
   <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
-    <value>Uzak Masaüstü Ağ Geçidi sunucusunun host adını belirtir.</value>
+    <value>Uzak Masaüstü Ağ Geçidi sunucusunun ana bilgisayar adını belirtir.</value>
   </data>
   <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
     <value>Uzak Masaüstü Ağ Geçidi (RD Ağ Geçidi) sunucusunun ne zaman kullanılacağını belirtir.</value>
   </data>
   <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
-    <value>Bağlantı olarak aynı kullanıcı adı ve parolayı kullanarak ağ geçidinde oturum açıp açmayacağını belirtir.</value>
+    <value>Ağ geçidinde, bağlantıyla aynı kullanıcı adı ve parolanın kullanılıp kullanılmayacağını belirtir.</value>
   </data>
   <data name="PropertyDescriptionRDGatewayUsername" xml:space="preserve">
     <value>Bir kullanıcının RD Ağ Geçidi sunucusuna bağlanmak için sağladığı kullanıcı adını belirtir.</value>
   </data>
   <data name="PropertyDescriptionRedirectDrives" xml:space="preserve">
-    <value>Yerel disk sürücülerinin uzak host içinde gösterilip gösterilmeyeceğini seçin.</value>
+    <value>Yerel disk sürücülerinin uzak ana bilgisayarda gösterilip gösterilmeyeceğini seçin.</value>
   </data>
   <data name="PropertyDescriptionRedirectKeys" xml:space="preserve">
-    <value>Tuş kombinasyonlarının (ör. Alt-Sekme) uzaktaki host'a yönlendirilip yönlendirilmeyeceğini seçin.</value>
+    <value>Tuş birleşimlerinin (örn. Alt-Sekme) uzak ana bilgisayara yönlendirilip yönlendirilmeyeceğini seçin.</value>
   </data>
   <data name="PropertyDescriptionRedirectPorts" xml:space="preserve">
     <value>Uzak ana bilgisayarda yerel bağlantı noktalarının (yani com, paralel) gösterilip gösterilmeyeceğini seçin.</value>
   </data>
   <data name="PropertyDescriptionRedirectPrinters" xml:space="preserve">
-    <value>Uzak host'da yazıcıların gösterilip gösterilmeyeceğini seçin.</value>
+    <value>Yerel yazıcıların uzak ana bilgisayarda gösterilip gösterilmeyeceğini seçin.</value>
+  </data>
+  <data name="PropertyDescriptionRedirectClipboard" xml:space="preserve">
+    <value>Panonun paylaşılıp paylaşılmayacağını seçin.</value>
   </data>
   <data name="PropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Yerel akıllı kartların uzaktaki bilgisayarda bulunup bulunmayacağını seçin.</value>
   </data>
   <data name="PropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Uzak sesin nasıl yönlendirileceğini seçin.</value>
+  </data>
+  <data name="PropertyDescriptionRedirectAudioCapture" xml:space="preserve">
+    <value>Uzak makinedeki varsayılan ses giriş aygıtının bu bilgisayara yönlendirilip yönlendirilmeyeceğini seçin.</value>
   </data>
   <data name="PropertyDescriptionRenderingEngine" xml:space="preserve">
     <value>HTML'yi görüntülemek için kullanılacak kullanılabilir oluşturma motorlarından birini seçin.</value>
@@ -1028,19 +1108,28 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
     <value>Kullanılacak akıllı boyutlandırma modunu seçin.</value>
   </data>
   <data name="PropertyDescriptionUseConsoleSession" xml:space="preserve">
-    <value>Uzak host'un konsol oturumuna bağlanın.</value>
+    <value>Uzak ana bilgisayarın konsol oturumuna bağlanın.</value>
   </data>
   <data name="PropertyDescriptionUseCredSsp" xml:space="preserve">
     <value>Kimlik doğrulama için eğer kullanılabilirse, Kimlik Bilgisi Güvenliği Destek Sağlayıcısı'nı (CredSSP) kullanın.</value>
   </data>
+  <data name="PropertyDescriptionUseRestrictedAdmin" xml:space="preserve">
+    <value>Hedef ana bilgisayarda kısıtlı yönetici modunu kullanın (yerel sistem bağlamı).</value>
+  </data>
+  <data name="PropertyDescriptionUseRCG" xml:space="preserve">
+    <value>Kimlik doğrulamayı RDP kanalı üzerinden hedeften kaynağa tünellemek için Remote Credential Guard kullanın.</value>
+  </data>
   <data name="PropertyDescriptionUser1" xml:space="preserve">
     <value>İhtiyacınız olan bilgileri buraya girmekten çekinmeyin.</value>
+  </data>
+  <data name="PropertyDescriptionUserViaAPI" xml:space="preserve">
+    <value>Harici API'deki kullanıcı verisinin kimliğini girin (örn. Secret Server). Kullanıldığında kullanıcı adı/parola/etki alanı alanlarını boş bırakın.</value>
   </data>
   <data name="PropertyDescriptionUsername" xml:space="preserve">
     <value>Kullanıcı adınızı yazın</value>
   </data>
   <data name="PropertyDescriptionViewOnly" xml:space="preserve">
-    <value>Host'a yalnızca izlemek için bağlantı oluşturmak istiyorsanız evet'i seçin.</value>
+    <value>Ana bilgisayara salt görüntüleme bağlantısı kurmak istiyorsanız Evet'i seçin.</value>
   </data>
   <data name="PropertyDescriptionVNCProxyAddress" xml:space="preserve">
     <value>Kullanılacak proxy adresini girin.</value>
@@ -1057,6 +1146,9 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
   <data name="PropertyDescriptionVNCProxyUsername" xml:space="preserve">
     <value>Proxy ile kimlik doğrulamak için kullanıcı adınızı girin.</value>
   </data>
+  <data name="HostnameIp" xml:space="preserve">
+    <value>Ana bilgisayar adı/IP</value>
+  </data>
   <data name="All" xml:space="preserve">
     <value>Hepsi</value>
   </data>
@@ -1071,6 +1163,9 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
   </data>
   <data name="CacheBitmaps" xml:space="preserve">
     <value>Küçük Resimleri Önbelleğe Al</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Renk</value>
   </data>
   <data name="Colors" xml:space="preserve">
     <value>Renkler</value>
@@ -1114,23 +1209,38 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
   <data name="Name" xml:space="preserve">
     <value>Ad</value>
   </data>
+  <data name="Panel" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="TabColor" xml:space="preserve">
+    <value>Sekme Rengi</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Parola</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Port</value>
   </data>
   <data name="PuttySession" xml:space="preserve">
     <value>PuTTY Oturumu</value>
   </data>
+  <data name="RdpGatewayDomain" xml:space="preserve">
+    <value>RDP Ağ Geçidi Etki Alanı</value>
+  </data>
+  <data name="RdpGatewayHostname" xml:space="preserve">
+    <value>RDP Ağ Geçidi Ana Bilgisayar Adı</value>
+  </data>
   <data name="RdpGatewayPassword" xml:space="preserve">
-    <value>Uzak Masaüstü Gateway Parolası</value>
+    <value>RDP Ağ Geçidi Parolası</value>
   </data>
   <data name="RdpGatewayUsageMethod" xml:space="preserve">
-    <value>Gateway Kullan</value>
+    <value>RDP Ağ Geçidi Kullan</value>
   </data>
   <data name="RdpGatewayUseConnectionCredentials" xml:space="preserve">
-    <value>Gateway Kimlik bilgileri</value>
+    <value>RDP Ağ Geçidi Kimlik Bilgileri</value>
   </data>
   <data name="RdpGatewayUsername" xml:space="preserve">
-    <value>Gateway Kullanıcı Adı</value>
+    <value>RDP Ağ Geçidi Kullanıcı Adı</value>
   </data>
   <data name="DiskDrives" xml:space="preserve">
     <value>Disk Sürücüleri</value>
@@ -1144,8 +1254,14 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
   <data name="Printers" xml:space="preserve">
     <value>Yazıcılar</value>
   </data>
+  <data name="Clipboard" xml:space="preserve">
+    <value>Pano</value>
+  </data>
   <data name="Sounds" xml:space="preserve">
     <value>Sesler</value>
+  </data>
+  <data name="AudioCapture" xml:space="preserve">
+    <value>Ses Yakalama</value>
   </data>
   <data name="RenderingEngine" xml:space="preserve">
     <value>Render Motoru</value>
@@ -1162,8 +1278,20 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
   <data name="UseCredSsp" xml:space="preserve">
     <value>CredSSP Kullan</value>
   </data>
+  <data name="UseRestrictedAdmin" xml:space="preserve">
+    <value>Kısıtlı Yönetici Kullan</value>
+  </data>
+  <data name="UseRCG" xml:space="preserve">
+    <value>Remote Credential Guard Kullan</value>
+  </data>
   <data name="UserField" xml:space="preserve">
-    <value>Kulanıcı Alanı</value>
+    <value>Kullanıcı Alanı</value>
+  </data>
+  <data name="EnvironmentTags" xml:space="preserve">
+    <value>Ortam Etiketleri</value>
+  </data>
+  <data name="PropertyDescriptionEnvironmentTags" xml:space="preserve">
+    <value>Ortamı kategorilere ayırmak için etiketler (örn. #PROD, #UAT, #TEST, #BETA, #FINDEPARTMENT)</value>
   </data>
   <data name="ProxyAddress" xml:space="preserve">
     <value>Proxy Adresi</value>
@@ -1181,12 +1309,13 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
     <value>Proxy Kullanıcı Adı</value>
   </data>
   <data name="ProtocolEventDisconnected" xml:space="preserve">
-    <value>Protokol Bağlantısı Kesildi.
-Mesaj:
-{0}</value>
+    <value>Protokol bağlantısı kesildi.
+Ana bilgisayar: "{1}"
+Protokol: "{2}"
+İleti: "{0}"</value>
   </data>
   <data name="ProtocolEventDisconnectFailed" xml:space="preserve">
-    <value>Protokol Bağlantı kesme İşlemi Başarısız.
+    <value>Protokol bağlantısının kesilmesi başarısız oldu.
 {0}</value>
   </data>
   <data name="ProtocolToImport" xml:space="preserve">
@@ -1199,19 +1328,25 @@ Mesaj:
     <value>Proxy testi başarılı!</value>
   </data>
   <data name="PuttyDisposeFailed" xml:space="preserve">
-    <value>Putty işleminin kapatma başarısız oldu!</value>
+    <value>PuTTY işlemi kapatılamadı!</value>
   </data>
   <data name="PuttyFocusFailed" xml:space="preserve">
     <value>Odaklama ayarlanamadı!</value>
   </data>
+  <data name="PuttyHandle" xml:space="preserve">
+    <value>PuTTY Tutamacı: {0}</value>
+  </data>
   <data name="PuttyKillFailed" xml:space="preserve">
     <value>Putty işlemini sonlandırma başarısız!</value>
+  </data>
+  <data name="PanelHandle" xml:space="preserve">
+    <value>Panel Tutamacı: {0}</value>
   </data>
   <data name="PuttyResizeFailed" xml:space="preserve">
     <value>Putty yeniden boyutlandırma başarısız!</value>
   </data>
   <data name="PuttySavedSessionsRootName" xml:space="preserve">
-    <value>PuTTY kaydedilen oturumlar</value>
+    <value>PuTTY Kaydedilen Oturumlar</value>
   </data>
   <data name="PuttySettings" xml:space="preserve">
     <value>PuTTY Ayarları</value>
@@ -1220,10 +1355,10 @@ Mesaj:
     <value>PuTTY Ayarları gösterilemedi!</value>
   </data>
   <data name="PuttyStuff" xml:space="preserve">
-    <value>--- PuTTY Ekibi ---</value>
+    <value>--- PuTTY Öğeleri ---</value>
   </data>
   <data name="PuttyTitle" xml:space="preserve">
-    <value>Putty Başlığı: {0}</value>
+    <value>PuTTY Başlığı: {0}</value>
   </data>
   <data name="Quick" xml:space="preserve">
     <value>Hızlı: {0}</value>
@@ -1247,7 +1382,28 @@ Mesaj:
     <value>Beni yalnızca birden &amp;fazla bağlantı kapatılırken uyar</value>
   </data>
   <data name="RadioCloseWarnNever" xml:space="preserve">
-    <value>Bağlantılar kapatılırken beni uyarma</value>
+    <value>Bağlantılar kapatılırken beni &amp;uyarma</value>
+  </data>
+  <data name="Raw" xml:space="preserve">
+    <value>RAW</value>
+  </data>
+  <data name="Rdp" xml:space="preserve">
+    <value>RDP</value>
+  </data>
+  <data name="Rdp16777216Colors" xml:space="preserve">
+    <value>16777216 Renk (24 bit)</value>
+  </data>
+  <data name="Rdp256Colors" xml:space="preserve">
+    <value>256 Renk (8 bit)</value>
+  </data>
+  <data name="Rdp32768Colors" xml:space="preserve">
+    <value>32768 Renk (15 bit)</value>
+  </data>
+  <data name="Rdp4294967296Colors" xml:space="preserve">
+    <value>16777216 Renk (32 bit)</value>
+  </data>
+  <data name="Rdp65536Colors" xml:space="preserve">
+    <value>65536 Renk (16 bit)</value>
   </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>RDP kontrolü oluşturulamadı, lütfen mRemoteNG gereksinimlerini kontrol edin.</value>
@@ -1328,7 +1484,7 @@ Mesaj:
     <value>RDP Olay İşleyicisi ayarlama başarısız oldu!</value>
   </data>
   <data name="RdpSetGatewayFailed" xml:space="preserve">
-    <value>RDP RD Gateway ayarlama başarısız oldu!</value>
+    <value>RDP Ağ Geçidi ayarlanamadı!</value>
   </data>
   <data name="RdpSetPerformanceFlagsFailed" xml:space="preserve">
     <value>RDP Performans ayarları başarısız oldu!</value>
@@ -1337,10 +1493,10 @@ Mesaj:
     <value>RDP Port ayarlama başarısız!</value>
   </data>
   <data name="RdpSetPropsFailed" xml:space="preserve">
-    <value>RDP Prob'ları ayarlama başarısız!</value>
+    <value>RDP özellikleri ayarlanamadı!</value>
   </data>
   <data name="RdpSetRedirectionFailed" xml:space="preserve">
-    <value>Rdp Yönlendirme ayarlaması Başarısız!</value>
+    <value>RDP yönlendirme ayarları yapılamadı!</value>
   </data>
   <data name="RdpSetRedirectKeysFailed" xml:space="preserve">
     <value>RDP Yönlendirme Anahtarlarını ayarlama başarısız!</value>
@@ -1352,7 +1508,7 @@ Mesaj:
     <value>Bu bilgisayara getirin</value>
   </data>
   <data name="DoNotPlay" xml:space="preserve">
-    <value>Oynatma</value>
+    <value>Çalma</value>
   </data>
   <data name="RdpSoundLeaveAtRemoteComputer" xml:space="preserve">
     <value>Uzak bilgisayarda bırakın</value>
@@ -1375,6 +1531,9 @@ Mesaj:
   <data name="Rename" xml:space="preserve">
     <value>Yeniden Adlandır</value>
   </data>
+  <data name="Rlogin" xml:space="preserve">
+    <value>Rlogin</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Kaydet</value>
   </data>
@@ -1382,7 +1541,46 @@ Mesaj:
     <value>Hepsini Kaydet</value>
   </data>
   <data name="SaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
-    <value>Başka bir yüklemeden önce geçerli bağlantı dosyasını kaydetmek istiyor musunuz?</value>
+    <value>Başka bir dosya yüklemeden önce geçerli bağlantı dosyasını kaydetmek istiyor musunuz?</value>
+  </data>
+  <data name="SaveOptionsBeforeClosing" xml:space="preserve">
+    <value>Seçeneklerde yapılan değişiklikleri kaydetmek istiyor musunuz?</value>
+  </data>
+  <data name="Discard" xml:space="preserve">
+    <value>Vazgeç</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyDaily" xml:space="preserve">
+    <value>Günlük</value>
+  </data>
+  <data name="strConnectionBackupFrequency" xml:space="preserve">
+    <value>Bağlantı Yedekleme Sıklığı</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyWeekly" xml:space="preserve">
+    <value>Haftalık</value>
+  </data>
+  <data name="strConnectionsBackupMaxCount" xml:space="preserve">
+    <value>Maksimum yedek sayısı</value>
+  </data>
+  <data name="strConnectionsBackupPath" xml:space="preserve">
+    <value>Bağlantı dosyası yedeğinin konumu</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyOnEdit" xml:space="preserve">
+    <value>Düzenleme sırasında</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyOnExit" xml:space="preserve">
+    <value>Çıkışta</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyNever" xml:space="preserve">
+    <value>Bağlantıları asla yedekleme</value>
+  </data>
+  <data name="strBrowse" xml:space="preserve">
+    <value>Gözat...</value>
+  </data>
+  <data name="strBackup" xml:space="preserve">
+    <value>Yedekle</value>
+  </data>
+  <data name="SaveImageFilter" xml:space="preserve">
+    <value>GIF Dosyası (.gif)|*.gif|JPEG Dosyası (.jpeg)|*.jpeg|JPEG Dosyası (.jpg)|*.jpg|PNG Dosyası (.png)|*.png</value>
   </data>
   <data name="Screen" xml:space="preserve">
     <value>Ekran</value>
@@ -1403,7 +1601,7 @@ Mesaj:
     <value>Bağlantılar oluştururken veya yeniden adlandırırken ana bilgisayar adını görüntü adı gibi ayarla</value>
   </data>
   <data name="SettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
-    <value>Ayarlar kaydedilemiyor veya sistem tepsisi simgesi atılamıyor!</value>
+    <value>Ayarlar kaydedilemedi veya sistem tepsisi simgesi kaldırılamadı!</value>
   </data>
   <data name="ShowDescriptionTooltips" xml:space="preserve">
     <value>Bağlantı ağacında açıklama araç ipuçları göster</value>
@@ -1421,7 +1619,10 @@ Mesaj:
     <value>Bağlantı tek tıklama ile açılır</value>
   </data>
   <data name="SingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
-    <value>Bağlantı Ağacı'nda açılan bağlantıyı tek tıklattığınızda Bağlantı Sekmesi açılır</value>
+    <value>Bağlantı ağacında açık bir bağlantıya tek tıklamak, açık bağlantı sekmesine geçer</value>
+  </data>
+  <data name="Socks5" xml:space="preserve">
+    <value>SOCKS 5</value>
   </data>
   <data name="Sort" xml:space="preserve">
     <value>Sırala</value>
@@ -1435,8 +1636,17 @@ Mesaj:
   <data name="SQLInfo" xml:space="preserve">
     <value>Lütfen daha fazla bilgi için Yardım - Başlarken - SQL Yapılandırması bölümüne bakın!</value>
   </data>
+  <data name="SQLServer" xml:space="preserve">
+    <value>SQL Server</value>
+  </data>
+  <data name="SshV1" xml:space="preserve">
+    <value>SSH sürüm 1</value>
+  </data>
+  <data name="SshV2" xml:space="preserve">
+    <value>SSH sürüm 2</value>
+  </data>
   <data name="SshBackgroundTransferFailed" xml:space="preserve">
-    <value>SSH arkaplan trasferi başarısız!</value>
+    <value>SSH arka plan aktarımı başarısız!</value>
   </data>
   <data name="SshTransferFailed" xml:space="preserve">
     <value>SSH transferi başarısız.</value>
@@ -1454,7 +1664,7 @@ Mesaj:
     <value>Durum</value>
   </data>
   <data name="SwitchToErrorsAndInfos" xml:space="preserve">
-    <value>Şunlardan bildirimler paneline geçin:</value>
+    <value>Şu durumlarda Bildirimler paneline geç:</value>
   </data>
   <data name="Advanced" xml:space="preserve">
     <value>Gelişmiş</value>
@@ -1464,6 +1674,9 @@ Mesaj:
   </data>
   <data name="Updates" xml:space="preserve">
     <value>Güncellemeler</value>
+  </data>
+  <data name="Telnet" xml:space="preserve">
+    <value>Telnet</value>
   </data>
   <data name="TheFollowing" xml:space="preserve">
     <value>Aşağıdaki:</value>
@@ -1475,10 +1688,10 @@ Mesaj:
     <value>Bilgi ({0})</value>
   </data>
   <data name="TitlePassword" xml:space="preserve">
-    <value>Parola</value>
+    <value>mRemoteNG parolası</value>
   </data>
   <data name="TitlePasswordWithName" xml:space="preserve">
-    <value>{0} için parola</value>
+    <value>{0} için mRemoteNG parolası</value>
   </data>
   <data name="TitleSelectPanel" xml:space="preserve">
     <value>Panel Seçin</value>
@@ -1486,14 +1699,26 @@ Mesaj:
   <data name="TitleWarning" xml:space="preserve">
     <value>Uyarı ({0})</value>
   </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>Aktarım</value>
+  </data>
   <data name="TryToIntegrate" xml:space="preserve">
     <value>Bütünleştirmeyi deneyin</value>
+  </data>
+  <data name="ShowOnToolbar" xml:space="preserve">
+    <value>Araç Çubuğunda Göster</value>
+  </data>
+  <data name="UltraVncRepeater" xml:space="preserve">
+    <value>UltraVNC Repeater</value>
+  </data>
+  <data name="UltraVNCSCListeningPort" xml:space="preserve">
+    <value>UltraVNC SingleClick portu:</value>
   </data>
   <data name="UncheckProperties" xml:space="preserve">
     <value>Kaydedilmesini istemediğiniz özelliklerin işaretini kaldırın!</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>MRemoteNG bir güncelleme gerektiriyor</value>
+    <value>mRemoteNG için güncelleme mevcut</value>
   </data>
   <data name="UpdateCheck" xml:space="preserve">
     <value>MRemoteNG, düzenli olarak güncellemeleri kontrol etmek için mRemoteNG web sitesine bağlanabilir.</value>
@@ -1503,7 +1728,7 @@ Mesaj:
   </data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
     <value>İndirme tamamlandı!
-MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
+mRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
   </data>
   <data name="UpdateDownloadCompleteFailed" xml:space="preserve">
     <value>Güncelleme indirilemedi.</value>
@@ -1527,28 +1752,31 @@ MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
     <value>Değişiklik günlüğü indirilemedi.</value>
   </data>
   <data name="UseDifferentUsernameAndPassword" xml:space="preserve">
-    <value>Faklı bir kullanıcı adı ve parola kullan</value>
+    <value>Farklı bir kullanıcı adı ve parola kullan</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>Kullanıcı</value>
   </data>
   <data name="UseSameUsernameAndPassword" xml:space="preserve">
-    <value>Aynı kullanıcı adı ve parolasını kullan</value>
+    <value>Aynı kullanıcı adı ve parolayı kullan</value>
   </data>
   <data name="UseSmartCard" xml:space="preserve">
-    <value>Smart Kart kullan</value>
+    <value>Akıllı kart kullan</value>
   </data>
   <data name="UseSQLServer" xml:space="preserve">
-    <value>Baplantıları yüklemek ve kaydetmek için SQL Sunucusu kullanın</value>
+    <value>Bağlantıları yüklemek &amp;&amp; kaydetmek için SQL Server kullan</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Sürüm</value>
+    <value>Geçerli Sürüm</value>
+  </data>
+  <data name="Vnc" xml:space="preserve">
+    <value>VNC</value>
   </data>
   <data name="VncConnectionDisconnectFailed" xml:space="preserve">
-    <value>VNC bağlantı kesme başarısız!</value>
+    <value>VNC bağlantısı kesilemedi!</value>
   </data>
   <data name="VncRefreshFailed" xml:space="preserve">
-    <value>VNC ekrar yenileme başarısız!</value>
+    <value>VNC ekran yenileme başarısız!</value>
   </data>
   <data name="VncSendSpecialKeysFailed" xml:space="preserve">
     <value>VNC Özel tuş gönderme başarısız!</value>
@@ -1563,7 +1791,7 @@ MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
     <value>VNC Akıllı Boyut Değiştirme Başarısız!</value>
   </data>
   <data name="VncToggleViewOnlyFailed" xml:space="preserve">
-    <value>VNC Yalnızca Bak geçişi başarısız!</value>
+    <value>VNC salt görüntüleme geçişi başarısız!</value>
   </data>
   <data name="WarnIfAuthFails" xml:space="preserve">
     <value>Kimlik doğrulama başarısız olduğunda beni uyar</value>
@@ -1587,7 +1815,7 @@ MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
     <value>Üst düğüm alt öğeye sürüklenemez.</value>
   </data>
   <data name="NodeNotDraggable" xml:space="preserve">
-    <value>Bu düğüm sürüklenemez</value>
+    <value>Bu düğüm sürüklenemez.</value>
   </data>
   <data name="EncryptionBlockCipherMode" xml:space="preserve">
     <value>Blok Şifre Modu</value>
@@ -1599,7 +1827,7 @@ MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
     <value>Güvenlik</value>
   </data>
   <data name="EncryptionKeyDerivationIterations" xml:space="preserve">
-    <value>Temel Türev Fonksiyon Yinelemeleri</value>
+    <value>Anahtar Türetme Fonksiyonu Yineleme Sayısı</value>
   </data>
   <data name="Dynamic" xml:space="preserve">
     <value>Dinamik</value>
@@ -1611,7 +1839,7 @@ MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
     <value>Orta</value>
   </data>
   <data name="PropertyDescriptionSoundQuality" xml:space="preserve">
-    <value>Protokol tarafından sağlanan Ses Kalitesini seçin: Dinamik, Orta, Yüksek</value>
+    <value>Protokolün sağladığı ses kalitesini seçin: Dinamik, Orta, Yüksek</value>
   </data>
   <data name="SoundQuality" xml:space="preserve">
     <value>Ses Kalitesi</value>
@@ -1622,47 +1850,740 @@ MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
   <data name="Download" xml:space="preserve">
     <value>İndir</value>
   </data>
+  <data name="PropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
+    <value>Otomatik olarak bağlantı kesilmeden önce RDP oturumunun boşta bekleyeceği dakika sayısı (sınırsız için 0 kullanın).</value>
+  </data>
+  <data name="MinutesToIdleTimeout" xml:space="preserve">
+    <value>Boşta Kalma Dakikası</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ekle</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Başlık</value>
+  </data>
+  <data name="ConfirmDeleteCredentialRecord" xml:space="preserve">
+    <value>Kimlik bilgisi kaydını silmek istediğinizden emin misiniz, {0}?</value>
+  </data>
+  <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
+    <value>RDP oturumu hareketsizlik nedeniyle kesildiğinde uyarı alıp almayacağınızı seçin.</value>
+  </data>
+  <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
+    <value>Parola aşağıdaki karakterlerden en az {0} adet içermelidir: {1}</value>
+  </data>
+  <data name="PasswordContainsLowerCaseConstraintHint" xml:space="preserve">
+    <value>Parola en az {0} küçük harf içermelidir</value>
+  </data>
+  <data name="PasswordContainsNumbersConstraint" xml:space="preserve">
+    <value>Parola en az {0} rakam içermelidir</value>
+  </data>
+  <data name="PasswordContainsUpperCaseConstraintHint" xml:space="preserve">
+    <value>Parola en az {0} büyük harf içermelidir</value>
+  </data>
+  <data name="PasswordLengthConstraintHint" xml:space="preserve">
+    <value>Parola uzunluğu {0} ile {1} arasında olmalıdır</value>
+  </data>
+  <data name="ChooseLogPath" xml:space="preserve">
+    <value>mRemoteNG günlük dosyası için bir yol seçin</value>
+  </data>
+  <data name="Debug" xml:space="preserve">
+    <value>Hata Ayıklama</value>
+  </data>
+  <data name="ShowTheseMessageTypes" xml:space="preserve">
+    <value>Bu ileti türlerini göster</value>
+  </data>
+  <data name="LogFilePath" xml:space="preserve">
+    <value>Günlük dosyası yolu</value>
+  </data>
+  <data name="LogTheseMessageTypes" xml:space="preserve">
+    <value>Bu ileti türlerini günlüğe kaydet</value>
+  </data>
+  <data name="ChoosePath" xml:space="preserve">
+    <value>Yol seç</value>
+  </data>
+  <data name="OpenFile" xml:space="preserve">
+    <value>Dosya aç</value>
+  </data>
+  <data name="UseDefault" xml:space="preserve">
+    <value>Varsayılanı kullan</value>
+  </data>
+  <data name="Logging" xml:space="preserve">
+    <value>Günlükleme</value>
+  </data>
+  <data name="Popups" xml:space="preserve">
+    <value>Açılır Pencereler</value>
+  </data>
+  <data name="LogToAppDir" xml:space="preserve">
+    <value>Uygulama dizinine günlüğe kaydet</value>
+  </data>
+  <data name="AssignedCredential" xml:space="preserve">
+    <value>Atanmış Kimlik Bilgisi</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Kimlik Bilgileri</value>
+  </data>
+  <data name="OpenADifferentFile" xml:space="preserve">
+    <value>Farklı bir dosya aç</value>
+  </data>
+  <data name="CredentialUnavailable" xml:space="preserve">
+    <value>Kimlik bilgisi kullanılamıyor</value>
+  </data>
+  <data name="OptionsThemeDeleteConfirmation" xml:space="preserve">
+    <value>Temayı silmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="OptionsThemeNewThemeCaption" xml:space="preserve">
+    <value>Yeni tema adı</value>
+  </data>
+  <data name="OptionsThemeNewThemeError" xml:space="preserve">
+    <value>Tema oluşturulamıyor; ad zaten mevcut ya da adda özel karakterler var</value>
+  </data>
+  <data name="OptionsThemeNewThemeText" xml:space="preserve">
+    <value>Yeni tema adını yazın</value>
+  </data>
+  <data name="OptionsThemeChangeWarning" xml:space="preserve">
+    <value>Uyarı: Tema yapılandırma değişikliklerinin uygulanması için yeniden başlatma gerekir.</value>
+  </data>
+  <data name="CouldNotFindExternalTool" xml:space="preserve">
+    <value>"{0}" adlı harici araç bulunamadı</value>
+  </data>
+  <data name="ConfigurationCreateNew" xml:space="preserve">
+    <value>Yeni Bir Bağlantı Dosyası Oluştur</value>
+  </data>
+  <data name="ConnectionFileNotFound" xml:space="preserve">
+    <value>Bağlantı dosyası bulunamadı.</value>
+  </data>
+  <data name="ConfigurationImportFile" xml:space="preserve">
+    <value>Mevcut Bir Dosyayı İçe Aktar</value>
+  </data>
+  <data name="ConfigurationCustomPath" xml:space="preserve">
+    <value>Özel Bir Dosya Yolu Kullan</value>
+  </data>
+  <data name="TestingConnection" xml:space="preserve">
+    <value>Bağlantı test ediliyor</value>
+  </data>
+  <data name="ServerNotAccessible" xml:space="preserve">
+    <value>'{0}' sunucusuna erişilemedi.</value>
+  </data>
+  <data name="ConnectionSuccessful" xml:space="preserve">
+    <value>Bağlantı başarılı</value>
+  </data>
+  <data name="LoginFailedForUser" xml:space="preserve">
+    <value>'{0}' kullanıcısı için oturum açma başarısız oldu.</value>
+  </data>
+  <data name="DatabaseNotAvailable" xml:space="preserve">
+    <value>'{0}' veritabanı kullanılamıyor.</value>
+  </data>
+  <data name="ErrorPlatformNotSupported" xml:space="preserve">
+    <value>Desteklenmeyen platform hatası: {0}</value>
+  </data>
+  <data name="ErrorMissingDependency" xml:space="preserve">
+    <value>Eksik bağımlılık: {0}</value>
+  </data>
+  <data name="ErrorArchitectureMismatch" xml:space="preserve">
+    <value>Mimari uyuşmazlığı: {0}</value>
+  </data>
+  <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
+    <value>Her düzenlemeden sonra bağlantıları kaydet</value>
+  </data>
+  <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
+    <value>Arama eşleşmelerini bağlantı ağacında filtrele</value>
+  </data>
+  <data name="TestConnection" xml:space="preserve">
+    <value>Bağlantıyı test et</value>
+  </data>
+  <data name="ReadOnly" xml:space="preserve">
+    <value>Salt okunur:</value>
+  </data>
+  <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>RDP "Yük Dengeleme Bilgisi" özelliği için UTF8 kodlaması kullan</value>
+  </data>
+  <data name="TimeoutInSeconds" xml:space="preserve">
+    <value>Zaman aşımı [saniye]</value>
+  </data>
+  <data name="WorkingDirectory" xml:space="preserve">
+    <value>Çalışma dizini:</value>
+  </data>
+  <data name="RunElevated" xml:space="preserve">
+    <value>Yönetici olarak çalıştır</value>
+  </data>
+  <data name="ShowOnToolbarColumnHeader" xml:space="preserve">
+    <value>Araç çubuğunda göster sütunu</value>
+  </data>
+  <data name="WorkingDirColumnHeader" xml:space="preserve">
+    <value>Çalışma dizini</value>
+  </data>
+  <data name="LockToolbars" xml:space="preserve">
+    <value>Araç çubuğu konumlarını kilitle</value>
+  </data>
+  <data name="MultiSshToolbar" xml:space="preserve">
+    <value>Çoklu SSH araç çubuğu</value>
+  </data>
+  <data name="ImportSubOUs" xml:space="preserve">
+    <value>Alt OU'ları içe aktar</value>
+  </data>
+  <data name="AdvancedSecurityOptions" xml:space="preserve">
+    <value>Gelişmiş güvenlik seçenekleri</value>
+  </data>
+  <data name="OptionsPageTitle" xml:space="preserve">
+    <value>mRemoteNG Seçenekleri</value>
+  </data>
+  <data name="CreateEmptyPanelOnStartUp" xml:space="preserve">
+    <value>mRemoteNG başladığında boş bir panel oluştur</value>
+  </data>
+  <data name="MustBeBetween0And255" xml:space="preserve">
+    <value>0 ile 255 arasında olmalıdır</value>
+  </data>
+  <data name="OutOfRange" xml:space="preserve">
+    <value>Aralık Dışı</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="ReconnectAllConnections" xml:space="preserve">
+    <value>Tüm Bağlantılara Yeniden Bağlan</value>
+  </data>
+  <data name="UltraVNCSingleClick" xml:space="preserve">
+    <value>UltraVNC SingleClick</value>
+  </data>
+  <data name="DisconnectOthersRight" xml:space="preserve">
+    <value>Sağdaki Sekmeleri Kapat</value>
+  </data>
+  <data name="DisconnectOthers" xml:space="preserve">
+    <value>Bunun Dışındaki Tümünü Kapat</value>
+  </data>
+  <data name="ConfirmCloseConnectionOthersInstruction" xml:space="preserve">
+    <value>"{0}" dışında tüm bağlantıları kapatmak istediğinizden emin misiniz?</value>
+  </data>
+  <data name="AutomaticReconnectError" xml:space="preserve">
+    <value>RDP ana bilgisayarı '{0}' için yeniden bağlanmaya çalışılırken bir hata oluştu</value>
+  </data>
+  <data name="ChangeConnectionResolutionError" xml:space="preserve">
+    <value>'{0}' ana bilgisayarındaki bağlantı çözünürlüğü değiştirilirken bir hata oluştu</value>
+  </data>
+  <data name="StackTrace" xml:space="preserve">
+    <value>Yığın İzleme</value>
+  </data>
+  <data name="ExceptionMessage" xml:space="preserve">
+    <value>Özel Durum İletisi</value>
+  </data>
+  <data name="mRemoteNGUnhandledException" xml:space="preserve">
+    <value>mRemoteNG İşlenmeyen Özel Durum</value>
+  </data>
+  <data name="UnhandledExceptionOccured" xml:space="preserve">
+    <value>İşlenmeyen bir özel durum oluştu</value>
+  </data>
+  <data name="ExceptionForcesmRemoteNGToClose" xml:space="preserve">
+    <value>Bu özel durum, mRemoteNG'nin kapanmasına neden olacaktır</value>
+  </data>
+  <data name="CopyHostname" xml:space="preserve">
+    <value>Ana Bilgisayar Adını Kopyala</value>
+  </data>
+  <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
+    <value>Arama çubuğunu bağlantı ağacının üstüne yerleştir</value>
+  </data>
+  <data name="TrackActiveConnectionInConnectionTree" xml:space="preserve">
+    <value>Etkin bağlantıyı bağlantı ağacında izle</value>
+  </data>
+  <data name="AlwaysShowConnectionTabs" xml:space="preserve">
+    <value>Bağlantı sekmelerini her zaman göster</value>
+  </data>
+  <data name="ReleaseChannel" xml:space="preserve">
+    <value>Sürüm Kanalı</value>
+  </data>
+  <data name="ReleaseChannelExplanation" xml:space="preserve">
+    <value>Kararlı kanal yalnızca final sürümlerini içerir.
+Önizleme kanalı Beta ve Sürüm Adaylarını içerir.
+Nightly kanalı Alfa, Beta ve Sürüm Adaylarını içerir.</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Uygula</value>
+  </data>
+  <data name="Proxy" xml:space="preserve">
+    <value>Proxy</value>
+  </data>
+  <data name="MultiSsh" xml:space="preserve">
+    <value>Çoklu SSH:</value>
+  </data>
+  <data name="MultiSshToolTip" xml:space="preserve">
+    <value>Göndermek için ENTER'a basın. Ctrl+C hemen gönderilir.</value>
+  </data>
+  <data name="PropertyDescriptionFavorite" xml:space="preserve">
+    <value>Bu bağlantıyı favoriler menüsünde göster.</value>
+  </data>
+  <data name="Favorite" xml:space="preserve">
+    <value>Favori</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favoriler</value>
+  </data>
+  <data name="ClearSearchString" xml:space="preserve">
+    <value>Arama metnini temizle</value>
+  </data>
+  <data name="ConnectInViewOnlyMode" xml:space="preserve">
+    <value>Salt görüntüleme modunda bağlan</value>
+  </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Kullanıcı adlarındaki boşlukları kırpma</value>
+  </data>
+  <data name="Environment" xml:space="preserve">
+    <value>Ortam</value>
+  </data>
+  <data name="EncryptionTestResultMessage" xml:space="preserve">
+    <value>{1}/{2} ve {3} yineleme kullanılarak {0} girdinin şifrelenmesi {4} saniye sürdü.</value>
+  </data>
+  <data name="EncryptionTest" xml:space="preserve">
+    <value>Şifreleme Testi</value>
+  </data>
+  <data name="TestSettings" xml:space="preserve">
+    <value>Ayarları Test Et</value>
+  </data>
+  <data name="PropertyDescriptionRdpVersion" xml:space="preserve">
+    <value>Bağlantılar açılırken kullanılacak RDP sürümünü ayarlar.</value>
+  </data>
+  <data name="RdpVersion" xml:space="preserve">
+    <value>RDP Sürümü</value>
+  </data>
+  <data name="PropertyDescriptionUseVmId" xml:space="preserve">
+    <value>Hyper-V üzerinde çalışan sanal makineye bağlanmak için VM Kimliği kullanın.</value>
+  </data>
+  <data name="PropertyDescriptionVmId" xml:space="preserve">
+    <value>Bağlanılacak Hyper-V sanal makinesinin kimliği.</value>
+  </data>
+  <data name="UseVmId" xml:space="preserve">
+    <value>VM Kimliği Kullan</value>
+  </data>
+  <data name="VmId" xml:space="preserve">
+    <value>VM Kimliği</value>
+  </data>
+  <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
+    <value>RDP istemcisi oluşturulamadı. RDP protokol sürümü {0} bu makinede desteklenmiyor. Lütfen daha eski bir protokol sürümü seçin.</value>
+  </data>
+  <data name="PropertyDescriptionSshTunnel" xml:space="preserve">
+    <value>SSH tüneli (atlama sunucusu) üzerinden bağlantı için, SSH tünelini kurmakta kullanılacak SSH bağlantısını belirtin.</value>
+  </data>
+  <data name="SshTunnel" xml:space="preserve">
+    <value>SSH Tüneli</value>
+  </data>
+  <data name="PropertyDescriptionSshOptions" xml:space="preserve">
+    <value>SSH bağlantısı için kullanılacak ek seçenekleri burada belirtin. Ayrıntılar için PuTTY belgelerine bakın.</value>
+  </data>
+  <data name="SshOptions" xml:space="preserve">
+    <value>SSH Seçenekleri</value>
+  </data>
+  <data name="SshTunnelConfigProblem" xml:space="preserve">
+    <value>SSH Tüneli bağlantı yapılandırma sorunu. "{0}" bağlantısına "{1}" SSH Tüneli üzerinden bağlanmak mümkün değil. Bağlantı ağacında SSH Tüneli olarak yapılandırılmış ada sahip ve protokolü SSH sürüm 1 veya SSH sürüm 2 olan bir bağlantı bulunamıyor. SSH Tüneli yapılandırmasını temizleyin ya da mevcut bir SSH bağlantısı belirtin.</value>
+  </data>
+  <data name="SshTunnelIsNotPutty" xml:space="preserve">
+    <value>SSH tüneli yapılandırma sorunu. "{0}" bağlantısına "{1}" SSH Tüneli üzerinden bağlanmak mümkün değil. Ağaçta SSH Tüneli olarak yapılandırılmış bir bağlantı bulundu, ancak protokolü PuTTY türevi değil. SSH Tüneli olarak yapılandırılan bağlantının SSH protokolünü kullandığından emin olun.</value>
+  </data>
+  <data name="SshTunnelNotInitialized" xml:space="preserve">
+    <value>SSH tüneli başlatma sorunu. "{0}" bağlantısına "{1}" SSH Tüneli üzerinden bağlanmak mümkün değil. SSH bağlantısı başlatılamadı. SSH Tüneli olarak yapılandırılmış bağlantıda bir sorun olup olmadığını denetleyin.</value>
+  </data>
+  <data name="SshTunnelNotConnected" xml:space="preserve">
+    <value>SSH tüneli bağlantı sorunu. "{0}" bağlantısına "{1}" SSH Tüneli üzerinden bağlanmak mümkün değil. SSH bağlantısı başarısız oldu. SSH Tüneli olarak yapılandırılmış bağlantıda bir sorun olup olmadığını denetleyin.</value>
+  </data>
+  <data name="SshTunnelFailed" xml:space="preserve">
+    <value>SSH tüneli bağlantısı başarısız oldu. "{0}" bağlantısına "{1}" SSH Tüneli üzerinden bağlanmak mümkün değil. PuTTY işlemi sonlandı. SSH Tüneli olarak yapılandırılmış bağlantıda bir sorun olup olmadığını denetleyin.</value>
+  </data>
+  <data name="SshTunnelPortNotReadyInTime" xml:space="preserve">
+    <value>SSH tüneli bağlantısı zaman aşımına uğradı. "{0}" bağlantısına "{1}" SSH Tüneli üzerinden bağlanmak mümkün değil. Yerel tünel portu zamanında kullanılabilir hale gelmedi. SSH Tüneli olarak yapılandırılmış bağlantıda bir sorun olup olmadığını denetleyin.</value>
+  </data>
+  <data name="StartMinimized" xml:space="preserve">
+    <value>Simge durumunda başlat</value>
+  </data>
+  <data name="PropertyDescriptionPasswordProtect" xml:space="preserve">
+    <value>Bağlantı dosyasını şifrelemek için kullanılacak parolayı ayarlayın. mRemoteNG başlamadan önce bu parolayı girmeniz istenir.</value>
+  </data>
+  <data name="PropertyDescriptionUseEnhancedMode" xml:space="preserve">
+    <value>Gelişmiş mod etkin bir Hyper-V ana bilgisayarına bağlanın.</value>
+  </data>
+  <data name="UseEnhancedMode" xml:space="preserve">
+    <value>Gelişmiş Modu Kullan</value>
+  </data>
+  <data name="PropertyDescriptionRdpGatewayPassword" xml:space="preserve">
+    <value>Uzak Masaüstü Ağ Geçidi sunucusunun parolasını belirtir.</value>
+  </data>
+  <data name="CloseToSysTray" xml:space="preserve">
+    <value>Bildirim alanına kapat</value>
+  </data>
+  <data name="Windows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="PowerShell" xml:space="preserve">
+    <value>PowerShell</value>
+  </data>
+  <data name="Terminal" xml:space="preserve">
+    <value>Terminal</value>
+  </data>
+  <data name="Changelog" xml:space="preserve">
+    <value>Değişiklik Günlüğü</value>
+  </data>
+  <data name="Credits" xml:space="preserve">
+    <value>Katkıda Bulunanlar</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>Lisans</value>
+  </data>
+  <data name="PropertyDescriptionDisableCursorBlinking" xml:space="preserve">
+    <value>İmleç yanıp sönmesinin devre dışı bırakılıp bırakılmayacağını belirler.</value>
+  </data>
+  <data name="PropertyDescriptionDisableCursorShadow" xml:space="preserve">
+    <value>Fare gölgesinin görünür olup olmayacağını belirler.</value>
+  </data>
+  <data name="PropertyDescriptionDisableFullWindowDrag" xml:space="preserve">
+    <value>Pencere yeni bir konuma sürüklendiğinde pencere içeriğinin gösterilip gösterilmeyeceğini belirler.</value>
+  </data>
+  <data name="PropertyDescriptionDisableMenuAnimations" xml:space="preserve">
+    <value>Uzak oturumda menü ve pencerelerin animasyon efektleriyle gösterilip gösterilmeyeceğini belirler.</value>
+  </data>
+  <data name="HttpCEF" xml:space="preserve">
+    <value>Edge Chromium</value>
+  </data>
+  <data name="HttpFailedUrlBuild" xml:space="preserve">
+    <value>Yüklenecek URL oluşturulamadı</value>
+  </data>
+  <data name="ShowHideMenu" xml:space="preserve">
+    <value>Menü Çubuğunu Göster/Gizle</value>
+  </data>
+  <data name="PropertyDescriptionRDPStartProgram" xml:space="preserve">
+    <value>Bağlantı kurulduğunda uzak sunucuda başlatılacak program.</value>
+  </data>
+  <data name="PropertyDescriptionRDPStartProgramWorkDir" xml:space="preserve">
+    <value>Alternatif kabuğun çalışma dizinini belirtir.</value>
+  </data>
+  <data name="RDPStartProgram" xml:space="preserve">
+    <value>Alternatif Kabuk</value>
+    <comment>https://docs.microsoft.com/en-us/windows/win32/termserv/imstscsecuredsettings-startprogram</comment>
+  </data>
+  <data name="RDPStartProgramWorkDir" xml:space="preserve">
+    <value>Alternatif kabuk çalışma dizini</value>
+    <comment>https://docs.microsoft.com/en-us/windows/win32/termserv/imstscsecuredsettings-workdir</comment>
+  </data>
+  <data name="OpeningCommand" xml:space="preserve">
+    <value>Açılış Komutu</value>
+    <comment>Command what will be run after connection</comment>
+  </data>
+  <data name="PropertyDescriptionOpeningCommand" xml:space="preserve">
+    <value>Açılış komutunun açıklaması (TODO).</value>
+  </data>
+  <data name="RedirectDrives" xml:space="preserve">
+    <value>Disk Sürücüleri</value>
+  </data>
+  <data name="RedirectSmartCards" xml:space="preserve">
+    <value>Akıllı Kartlar</value>
+  </data>
+  <data name="ApplyInheritanceToChildren" xml:space="preserve">
+    <value>Devralmayı alt öğelere uygula</value>
+  </data>
+  <data name="ApplyDefaultInheritance" xml:space="preserve">
+    <value>Varsayılan devralmayı uygula</value>
+  </data>
+  <data name="SmartCard" xml:space="preserve">
+    <value>Akıllı Kart</value>
+  </data>
+  <data name="RemoteDesktopServices" xml:space="preserve">
+    <value>Uzak Masaüstü Hizmetleri</value>
+  </data>
+  <data name="EC2InstanceId" xml:space="preserve">
+    <value>EC2 Örnek Kimliği</value>
+  </data>
+  <data name="EC2Region" xml:space="preserve">
+    <value>EC2 Bölgesi</value>
+  </data>
+  <data name="PropertyDescriptionEC2InstanceId" xml:space="preserve">
+    <value>AWS EC2 örneğinden genel IP'yi almak için bu örnek kimliğini kullanın</value>
+  </data>
+  <data name="PropertyDescriptionEC2Region" xml:space="preserve">
+    <value>AWS örnek bilgisini bu bölgeden al</value>
+  </data>
+  <data name="ACLPermissionsHidden" xml:space="preserve">
+    <value>Gizli</value>
+    <comment>Permission then option will be hide completly from user</comment>
+  </data>
+  <data name="ACLPermissionsReadOnly" xml:space="preserve">
+    <value>Salt Okunur</value>
+    <comment>Permission then option is visible but user can't modify it</comment>
+  </data>
+  <data name="ACLPermissionsWriteAllow" xml:space="preserve">
+    <value>Yazmaya İzin Ver</value>
+    <comment>Permission then user could modify an option value</comment>
+  </data>
+  <data name="lblConnectionsBackupPath" xml:space="preserve">
+    <value>Bağlantı verisi yedek klasörü için konum seçin</value>
+  </data>
+  <data name="btnBrowsePath" xml:space="preserve">
+    <value>Gözat</value>
+  </data>
+  <data name="lblACL" xml:space="preserve">
+    <value>Kullanıcı için ACL</value>
+  </data>
+  <data name="lblBackupEnable" xml:space="preserve">
+    <value>Bağlantı verileri için yedekler</value>
+  </data>
+  <data name="lblBackupNameFormat" xml:space="preserve">
+    <value>Yedek dosya adı biçimi</value>
+  </data>
+  <data name="lblBackupType" xml:space="preserve">
+    <value>Yedekleme türü</value>
+  </data>
+  <data name="lblConnectionsBackupFrequency" xml:space="preserve">
+    <value>Bağlantı Yedekleme Sıklığı</value>
+  </data>
+  <data name="lblConnectionsBackupMaxCount" xml:space="preserve">
+    <value>Maksimum yedek sayısı</value>
+  </data>
+  <data name="PageСontrolInOptionsMenu" xml:space="preserve">
+    <value>Seçenekler menüsünde sayfa denetimi</value>
+  </data>
+  <data name="ShowForUser" xml:space="preserve">
+    <value>Kullanıcı için göster</value>
+  </data>
+  <data name="FiltermRemoteRemoteDesktopManagerCSV" xml:space="preserve">
+    <value>Remote Desktop Manager Dosyaları (*.csv)</value>
+  </data>
+  <data name="FileMenu" xml:space="preserve">
+    <value>Dosya menüsü</value>
+  </data>
+  <data name="FileMenuWillBeHiddenNow" xml:space="preserve">
+    <value>Dosya menüsü şimdi gizlenecek. Görmek için Alt tuşuna basın</value>
+  </data>
+  <data name="ECPDelineaSecretServer" xml:space="preserve">
+    <value>Delinea Secret Server</value>
+  </data>
+  <data name="ECPClickstudiosPasswordstate" xml:space="preserve">
+    <value>ClickStudios Passwordstate</value>
+  </data>
+  <data name="ECPOnePassword" xml:space="preserve">
+    <value>1Password</value>
+  </data>
+  <data name="ECPOnePasswordReadFailed" xml:space="preserve">
+    <value>1Password okuma başarısız</value>
+  </data>
+  <data name="ECPOnePasswordCommandLine" xml:space="preserve">
+    <value>1Password komut satırı</value>
+  </data>
+  <data name="ECPNone" xml:space="preserve">
+    <value>Yok</value>
+  </data>
+  <data name="EAPAmazonWebServices" xml:space="preserve">
+    <value>Amazon EC2</value>
+  </data>
+  <data name="EAPNone" xml:space="preserve">
+    <value>Yok</value>
+  </data>
+  <data name="ExternalCredentialProvider" xml:space="preserve">
+    <value>Harici Kimlik Bilgisi Sağlayıcısı</value>
+  </data>
+  <data name="PropertyDescriptionExternalCredentialProvider" xml:space="preserve">
+    <value>Kimlik bilgilerini almak için kullanılacak harici kimlik bilgisi sağlayıcısı / kasa</value>
+  </data>
+  <data name="PropertyDescriptionExternalAddressProvider" xml:space="preserve">
+    <value>Ana bilgisayar adresini almak için kullanılacak harici sağlayıcı</value>
+  </data>
+  <data name="ExternalAddressProvider" xml:space="preserve">
+    <value>Harici Adres Sağlayıcısı</value>
+  </data>
+  <data name="UseExternalCredentialProvider" xml:space="preserve">
+    <value>Harici Kimlik Bilgisi Sağlayıcısı Kullan</value>
+  </data>
+  <data name="CheckboxNoReconnect" xml:space="preserve">
+    <value>Sunucuyla bağlantı kesildiğinde otomatik yeniden bağlanmayı dene (yalnızca RDP &amp;&amp; ICA)</value>
+  </data>
+  <data name="PropertyDescriptionRedirectDiskDrivesCustom" xml:space="preserve">
+    <value>Yönlendirilecek özel sürücüleri girin: C,D,X</value>
+  </data>
+  <data name="RdpDrivesAll" xml:space="preserve">
+    <value>Tümü</value>
+  </data>
+  <data name="RdpDrivesCustom" xml:space="preserve">
+    <value>Özel</value>
+  </data>
+  <data name="RdpDrivesLocal" xml:space="preserve">
+    <value>Yerel</value>
+  </data>
+  <data name="RdpDrivesNone" xml:space="preserve">
+    <value>Yok</value>
+  </data>
+  <data name="RedirectDiskDrivesCustom" xml:space="preserve">
+    <value>Özel Sürücüler</value>
+  </data>
+  <data name="PropertyDescriptionRdpGatewayAccessToken" xml:space="preserve">
+    <value>Uzak Masaüstü Ağ Geçidi sunucusu için erişim belirtecini belirtir.</value>
+  </data>
+  <data name="RdpGatewayAccessToken" xml:space="preserve">
+    <value>RDP Ağ Geçidi Erişim Belirteci</value>
+  </data>
+  <data name="UseAccessToken" xml:space="preserve">
+    <value>RD Ağ Geçidi erişim belirteci kullan</value>
+  </data>
+  <data name="PsCanceled" xml:space="preserve">
+    <value>Oturum açma iptal edildi! Gerekirse yeniden başlatın.</value>
+    <comment>C# to Powershell transfer issue with encoding possible</comment>
+  </data>
+  <data name="PsConnectionFailed" xml:space="preserve">
+    <value>Lütfen kullanıcı adı ve parolayı doğrulayıp yeniden deneyin. Sunucuda PSRemoting etkin değilse önce etkinleştirin.</value>
+    <comment>C# to Powershell transfer issue with encoding possible</comment>
+  </data>
+  <data name="PsFailed" xml:space="preserve">
+    <value>Oturum açma başarısız!</value>
+    <comment>C# to Powershell transfer issue with encoding possible</comment>
+  </data>
+  <data name="PsLoginAttempts" xml:space="preserve">
+    <value>Maksimum oturum açma denemesi aşıldı. Lütfen yeniden bağlanın.</value>
+    <comment>C# to Powershell transfer issue with encoding possible</comment>
+  </data>
+  <data name="FilterSecureCRT" xml:space="preserve">
+    <value>SecureCRT (*.xml)</value>
+  </data>
+  <data name="OptionsCompanyPolicyMessage" xml:space="preserve">
+    <value>*Bazı ayarlar şirketiniz tarafından belirlenmiştir. Daha fazla bilgi için lütfen yöneticinizle iletişime geçin</value>
+  </data>
   <data name="Gateway" xml:space="preserve">
-    <value>Ağ geçidi</value>
+    <value>Ağ Geçidi</value>
   </data>
   <data name="SaveConsOnExit" xml:space="preserve">
     <value>Çıkışta bağlantıları kaydet</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="VaultOpenbaoMount" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="SetHostnameLikeDisplayNameNewConnection" xml:space="preserve">
+    <value>Yeni bağlantılarda ana bilgisayar adını görünen ad olarak ayarla</value>
   </data>
-  <data name="VaultOpenbaoMountDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="RdpReconnectionCount" xml:space="preserve">
+    <value>RDP yeniden bağlanma sayısı:</value>
   </data>
-  <data name="VaultOpenbaoRole" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="RdpConnectionTimeout" xml:space="preserve">
+    <value>RDP bağlantı zaman aşımı</value>
   </data>
-  <data name="VaultOpenbaoRoleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="WhenClosingConnections" xml:space="preserve">
+    <value>Bağlantılar kapatılırken</value>
   </data>
-  <data name="VaultOpenbaoToken" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="WarnMeWhenClosingConnections" xml:space="preserve">
+    <value>Bağlantılar kapatılırken beni uyar</value>
   </data>
-  <data name="VaultOpenbaoTokenPropertyDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="WarnMeOnlyWhenExitingProgram" xml:space="preserve">
+    <value>Yalnızca programdan çıkarken beni uyar</value>
   </data>
-  <data name="VaultOpenbaoSecretEngine" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="DoNotWarnMeWhenClosingConnections" xml:space="preserve">
+    <value>Bağlantılar kapatılırken beni uyarma</value>
   </data>
-  <data name="PropertyDescriptionVaultOpenbaoSecretEngine" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="StartFullScreen" xml:space="preserve">
+    <value>Tam ekranda başlat</value>
   </data>
-  <data name="VaultOpenbaoSecretEngineKeyValue" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="ReconnectToPreviouslyOpenedSessionsOnStartup" xml:space="preserve">
+    <value>Başlangıçta daha önce açılan oturumlara yeniden bağlan</value>
   </data>
-  <data name="VaultOpenbaoSecretEngineLDAPDynamic" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="SaveConnectionsOnExit" xml:space="preserve">
+    <value>Çıkışta bağlantıları kaydet</value>
   </data>
-  <data name="VaultOpenbaoSecretEngineLDAPStatic" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="TrackActiveConnectionInTheConnectionTree" xml:space="preserve">
+    <value>Etkin bağlantıyı bağlantı ağacında izle</value>
   </data>
-  <data name="VaultOpenbaoSecretEngineSSHOTP" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="AutoSaveInMinutes" xml:space="preserve">
+    <value>Dakika cinsinden otomatik kaydetme</value>
+  </data>
+  <data name="WebView2InitializationFailed" xml:space="preserve">
+    <value>WebView2 başlatılamadı</value>
+  </data>
+  <data name="WarnMeOnlyWhenClosingMultipleConnections" xml:space="preserve">
+    <value>Yalnızca birden çok bağlantı kapatılırken beni uyar</value>
+  </data>
+  <data name="MsgExit" xml:space="preserve">
+    <value>Uygulama şimdi kapanacak.</value>
+    <comment>Message shown then application will normally close</comment>
+  </data>
+  <data name="MsgDownloadLatestRuntime" xml:space="preserve">
+    <value>Lütfen en son çalışma zamanını indirip kurun:</value>
+    <comment>Appears then missing a runtime</comment>
+  </data>
+  <data name="MsgMissingRuntime" xml:space="preserve">
+    <value>Eksik çalışma zamanı:</value>
+  </data>
+  <data name="MsgRuntimeIsRequired" xml:space="preserve">
+    <value>çalışma zamanı kitaplığı gereklidir</value>
+  </data>
+  <data name="VaultOpenbao" xml:space="preserve">
+    <value>Vault veya OpenBao</value>
+  </data>
+  <data name="VaultOpenbaoMount" xml:space="preserve">
+    <value>Bağlama Noktası</value>
+  </data>
+  <data name="VaultOpenbaoMountDescription" xml:space="preserve">
+    <value>Gizli bilginin saklandığı bağlama noktası</value>
+  </data>
+  <data name="VaultOpenbaoRole" xml:space="preserve">
+    <value>Rol</value>
+  </data>
+  <data name="VaultOpenbaoRoleDescription" xml:space="preserve">
+    <value>Gizli bilginin adı veya yolu</value>
+  </data>
+  <data name="VaultOpenbaoToken" xml:space="preserve">
+    <value>Vault/OpenBao belirteci</value>
+  </data>
+  <data name="VaultOpenbaoTokenPropertyDescription" xml:space="preserve">
+    <value>Vault/OpenBao sunucusuna erişmek için kullanılan belirteç</value>
+  </data>
+  <data name="VaultOpenbaoSecretEngine" xml:space="preserve">
+    <value>Vault/OpenBao Gizli Bilgi Motoru</value>
+  </data>
+  <data name="PropertyDescriptionVaultOpenbaoSecretEngine" xml:space="preserve">
+    <value>Gizli bilginin Vault/OpenBao içinde saklanması için kullanılan gizli bilgi motoru</value>
+  </data>
+  <data name="VaultOpenbaoSecretEngineKeyValue" xml:space="preserve">
+    <value>Anahtar/Değer (Anahtar olarak kullanıcı adı)</value>
+  </data>
+  <data name="VaultOpenbaoSecretEngineLDAPDynamic" xml:space="preserve">
+    <value>LDAP dinamik rol</value>
+  </data>
+  <data name="VaultOpenbaoSecretEngineLDAPStatic" xml:space="preserve">
+    <value>LDAP statik rol</value>
+  </data>
+  <data name="MenuItem_Chat" xml:space="preserve">
+    <value>mR Sohbet</value>
+    <comment>Chat to dev</comment>
+  </data>
+  <data name="MenuItem_Community" xml:space="preserve">
+    <value>Topluluk</value>
+    <comment>Reddit</comment>
+  </data>
+  <data name="ConnectionFrameColor" xml:space="preserve">
+    <value>Bağlantı Çerçeve Rengi</value>
+  </data>
+  <data name="PropertyDescriptionConnectionFrameColor" xml:space="preserve">
+    <value>Farklı ortamları (örn. üretim, test, geliştirme) görsel olarak ayırt etmek için bağlantı panelinin etrafına renkli bir çerçeve çizer.</value>
+  </data>
+  <data name="FrameColorNone" xml:space="preserve">
+    <value>Yok</value>
+  </data>
+  <data name="FrameColorRed" xml:space="preserve">
+    <value>Kırmızı (Üretim)</value>
+  </data>
+  <data name="FrameColorYellow" xml:space="preserve">
+    <value>Sarı (Staging/UAT)</value>
+  </data>
+  <data name="FrameColorGreen" xml:space="preserve">
+    <value>Yeşil (Test)</value>
+  </data>
+  <data name="FrameColorBlue" xml:space="preserve">
+    <value>Mavi (Geliştirme)</value>
+  </data>
+  <data name="FrameColorPurple" xml:space="preserve">
+    <value>Mor (Özel)</value>
+  </data>
+  <data name="Wsl" xml:space="preserve">
+    <value>WSL</value>
+  </data>
+  <data name="VaultOpenbaoSecretEngineSSHOTP" xml:space="preserve">
+    <value>SSH motoru OTP modu</value>
+  </data>
+  <data name="MasterKeyProviderPassword" xml:space="preserve">
+    <value>Parola</value>
+  </data>
+  <data name="MasterKeyProviderDpapi" xml:space="preserve">
+    <value>Windows Kullanıcı Hesabı (DPAPI)</value>
+  </data>
+  <data name="SettingsStoreFirstRunTitle" xml:space="preserve">
+    <value>Ana Parolayı Ayarla</value>
+  </data>
+  <data name="SettingsStoreUnlockTitle" xml:space="preserve">
+    <value>Ayarların Kilidini Aç</value>
   </data>
 </root>

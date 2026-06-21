@@ -24,14 +24,14 @@ namespace mRemoteNG.App.Update
     public class AppUpdater
     {
         private const int _bufferLength = 8192;
-        private WebProxy _webProxy;
-        private HttpClient _httpClient;
-        private CancellationTokenSource _changeLogCancelToken;
-        private CancellationTokenSource _getUpdateInfoCancelToken;
+        private WebProxy? _webProxy;
+        private HttpClient _httpClient = null!; // initialized via UpdateHttpClient() called from the constructor
+        private CancellationTokenSource? _changeLogCancelToken;
+        private CancellationTokenSource? _getUpdateInfoCancelToken;
 
         #region Public Properties
 
-        public UpdateInfo CurrentUpdateInfo { get; private set; }
+        public UpdateInfo? CurrentUpdateInfo { get; private set; }
 
         public bool IsGetUpdateInfoRunning
         {
@@ -93,15 +93,17 @@ namespace mRemoteNG.App.Update
                 return false;
             }
 
-            return CurrentUpdateInfo.Version > GeneralAppInfo.GetApplicationVersion();
+            Version? appVersion = GeneralAppInfo.GetApplicationVersion();
+            // CurrentUpdateInfo.IsValid (checked above) guarantees Version is non-null
+            return appVersion != null && CurrentUpdateInfo.Version! > appVersion;
         }
         
         public async Task DownloadUpdateAsync(IProgress<int> progress)
         {
             if (IsGetUpdateInfoRunning)
             {
-                _getUpdateInfoCancelToken.Cancel();
-                _getUpdateInfoCancelToken.Dispose();
+                _getUpdateInfoCancelToken?.Cancel();
+                _getUpdateInfoCancelToken?.Dispose();
                 _getUpdateInfoCancelToken = null;
 
                 throw new InvalidOperationException("A previous call to DownloadUpdateAsync() is still in progress.");
@@ -216,8 +218,8 @@ namespace mRemoteNG.App.Update
         {
             if (IsGetUpdateInfoRunning)
             {
-                _getUpdateInfoCancelToken.Cancel();
-                _getUpdateInfoCancelToken.Dispose();
+                _getUpdateInfoCancelToken?.Cancel();
+                _getUpdateInfoCancelToken?.Dispose();
                 _getUpdateInfoCancelToken = null;
             }
 
@@ -244,10 +246,13 @@ namespace mRemoteNG.App.Update
         {
             if (IsGetChangeLogRunning)
             {
-                _changeLogCancelToken.Cancel();
-                _changeLogCancelToken.Dispose();
+                _changeLogCancelToken?.Cancel();
+                _changeLogCancelToken?.Dispose();
                 _changeLogCancelToken = null;
             }
+
+            if (CurrentUpdateInfo == null)
+                throw new InvalidOperationException("CurrentUpdateInfo is not available. GetUpdateInfoAsync() must be called before calling GetChangeLogAsync().");
 
             try
             {

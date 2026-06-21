@@ -21,7 +21,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ConDefaultResolution" Type="System.String" Scope="User">
-      <Value Profile="(Default)">FitToWindow</Value>
+      <Value Profile="(Default)">SmartSize</Value>
     </Setting>
     <Setting Name="ConDefaultColors" Type="System.String" Scope="User">
       <Value Profile="(Default)">Colors16Bit</Value>
@@ -359,6 +359,12 @@
     <Setting Name="ConDefaultUseRCG" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="InhDefaultUseRedirectionServerName" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultUseRedirectionServerName" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="ConDefaultUseVmId" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -586,6 +592,15 @@
     </Setting>
     <Setting Name="ConDefaultRDGatewayExternalCredentialProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="SlowClickRenameEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayAccessToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultRedirectDiskDrivesCustom" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

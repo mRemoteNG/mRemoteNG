@@ -233,7 +233,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                 connectionInfo.Resolution = 
 	                Enum.TryParse<RDPResolutions>(remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", ""), true, out RDPResolutions rdpResolution)
 	                ? rdpResolution
-                    : RDPResolutions.FitToWindow;
+                    : RDPResolutions.SmartSize;
 
                 if (remoteDesktopNode.SelectSingleNode("./sameSizeAsClientArea")?.InnerText == "True")
                 {

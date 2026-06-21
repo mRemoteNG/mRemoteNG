@@ -1906,7 +1906,7 @@ namespace BrightIdeasSoftware
         [Category("ObjectListView"),
          Description("The image list from which group header will take their images"),
          DefaultValue(null)]
-        public ImageList GroupImageList
+        public new ImageList GroupImageList
         {
             get { return this.groupImageList; }
             set

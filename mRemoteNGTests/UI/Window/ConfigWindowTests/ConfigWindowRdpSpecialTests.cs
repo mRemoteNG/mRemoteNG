@@ -77,7 +77,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             RunVerification();
         }
 
-        [TestCase(RDPResolutions.FitToWindow)]
         [TestCase(RDPResolutions.Fullscreen)]
         public void AutomaticResizePropertyShown_WhenResolutionIsDynamic(RDPResolutions resolution)
         {

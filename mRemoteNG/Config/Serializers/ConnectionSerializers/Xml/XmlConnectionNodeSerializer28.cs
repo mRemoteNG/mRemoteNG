@@ -143,12 +143,17 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 ? new XAttribute("RDGatewayPassword", _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey))
                 : new XAttribute("RDGatewayPassword", ""));
 
+            element.Add(_saveFilter.SavePassword
+                ? new XAttribute("RDGatewayAccessToken", _cryptographyProvider.Encrypt(connectionInfo.RDGatewayAccessToken, _encryptionKey))
+                : new XAttribute("RDGatewayAccessToken", ""));
+
             element.Add(_saveFilter.SaveDomain
                 ? new XAttribute("RDGatewayDomain", connectionInfo.RDGatewayDomain)
                 : new XAttribute("RDGatewayDomain", ""));
 
             element.Add(new XAttribute("UseRCG", connectionInfo.UseRCG));
             element.Add(new XAttribute("UseRestrictedAdmin", connectionInfo.UseRestrictedAdmin));
+            element.Add(new XAttribute("UseRedirectionServerName", connectionInfo.UseRedirectionServerName));
 
             element.Add(new XAttribute("UserViaAPI", connectionInfo.UserViaAPI));
             element.Add(new XAttribute("EC2InstanceId", connectionInfo.EC2InstanceId));
@@ -304,6 +309,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 element.Add(new XAttribute("InheritRDGatewayUsername", inheritance.RDGatewayUsername.ToString().ToLowerInvariant()));
             if (inheritance.RDGatewayPassword)
                 element.Add(new XAttribute("InheritRDGatewayPassword", inheritance.RDGatewayPassword.ToString().ToLowerInvariant()));
+            if (inheritance.RDGatewayAccessToken)
+                element.Add(new XAttribute("InheritRDGatewayAccessToken", inheritance.RDGatewayAccessToken.ToString().ToLowerInvariant()));
             if (inheritance.RDGatewayDomain)
                 element.Add(new XAttribute("InheritRDGatewayDomain", inheritance.RDGatewayDomain.ToString().ToLowerInvariant()));
             if (inheritance.RDGatewayExternalCredentialProvider)
@@ -325,6 +332,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 element.Add(new XAttribute("InheritUseRCG", inheritance.UseRCG.ToString().ToLowerInvariant()));
             if (inheritance.UseRestrictedAdmin)
                 element.Add(new XAttribute("InheritUseRestrictedAdmin", inheritance.UseRestrictedAdmin.ToString().ToLowerInvariant()));
+            if (inheritance.UseRedirectionServerName)
+                element.Add(new XAttribute("InheritUseRedirectionServerName", inheritance.UseRedirectionServerName.ToString().ToLowerInvariant()));
         }
     }
 }

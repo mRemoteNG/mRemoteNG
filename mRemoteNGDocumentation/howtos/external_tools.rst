@@ -23,6 +23,8 @@ What we are going to use is the following for our entry:
 - Protocol - sftp://
 - Input Parameters (variables) - %HOSTNAME%, %USERNAME%,%PASSWORD% and %PORT%
 
+For a complete list of available variables, see the :ref:`variables_reference` page.
+
 All of the variables are parsed from mRemoteNG connection item to the filezilla command line.
 So lets build this entry up in **External Tools** where we add all these items.
 

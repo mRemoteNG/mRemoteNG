@@ -17,13 +17,15 @@ namespace mRemoteNG.Themes
         /// <param name="baseTheme"></param>
         public static void SaveToXmlFile(ThemeInfo themeToSave, ThemeInfo baseTheme)
         {
-            if (baseTheme.URI == null || baseTheme.URI.Contains("../") || baseTheme.URI.Contains(@"..\"))
+            if (string.IsNullOrWhiteSpace(baseTheme.URI) || baseTheme.URI.Contains("../") || baseTheme.URI.Contains(@"..\"))
                 throw new ArgumentException("Invalid file path");
             if (themeToSave.Name == null || themeToSave.Name.Contains("../") || themeToSave.Name.Contains(@"..\"))
                 throw new ArgumentException("Invalid file path");
             string oldURI = baseTheme.URI;
             string directoryName = Path.GetDirectoryName(oldURI);
-            string toSaveURI = directoryName + Path.DirectorySeparatorChar + themeToSave.Name + ".vstheme";
+            if (string.IsNullOrEmpty(directoryName))
+                throw new ArgumentException("Invalid file path");
+            string toSaveURI = Path.Combine(directoryName, $"{themeToSave.Name}.vstheme");
             File.Copy(baseTheme.URI, toSaveURI);
             themeToSave.URI = toSaveURI;
         }
@@ -55,7 +57,7 @@ namespace mRemoteNG.Themes
         /// <param name="filename"></param>
         /// <param name="defaultTheme"></param>
         /// <returns></returns>
-        public static ThemeInfo LoadFromXmlFile(string filename, ThemeInfo defaultTheme = null)
+        public static ThemeInfo LoadFromXmlFile(string filename, ThemeInfo? defaultTheme = null)
         {
             if (filename == null || filename.Contains("../") || filename.Contains(@"..\"))
                 throw new ArgumentException("Invalid file path");

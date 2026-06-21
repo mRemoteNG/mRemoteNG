@@ -84,7 +84,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                 case "screen mode id":
                     connectionInfo.Resolution = value == "2"
                         ? RDPResolutions.Fullscreen
-                        : RDPResolutions.FitToWindow;
+                        : RDPResolutions.SmartSize;
                     break;
                 case "connect to console":
                     connectionInfo.UseConsoleSession = value == "1";

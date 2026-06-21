@@ -40,7 +40,7 @@ namespace mRemoteNG.UI.TaskDialog
 
         //--------------------------------------------------------------------------------
         // Override this to make sure the control is invalidated (repainted) when 'Text' is changed
-        public override string Text
+        public override string? Text
         {
             get => base.Text;
             set
@@ -109,13 +109,16 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         string GetLargeText()
         {
+            if (string.IsNullOrEmpty(Text))
+                return string.Empty;
+            
             string[] lines = Text.Split('\n');
             return lines[0];
         }
 
         string GetSmallText()
         {
-            if (Text.IndexOf('\n') < 0)
+            if (string.IsNullOrEmpty(Text) || Text.IndexOf('\n') < 0)
                 return "";
 
             string s = Text;
@@ -243,6 +246,13 @@ namespace mRemoteNG.UI.TaskDialog
             }
 
             e.Graphics.DrawImage(img, new Point(LEFT_MARGIN, TOP_MARGIN + (int)(szL.Height / 2) - img.Height / 2));
+
+            // Draw focus rectangle if button has focus
+            if (Focused && Enabled)
+            {
+                Rectangle focusRect = new(newRect.X + 2, newRect.Y + 2, newRect.Width - 4, newRect.Height - 4);
+                ControlPaint.DrawFocusRectangle(e.Graphics, focusRect);
+            }
         }
 
         //--------------------------------------------------------------------------------

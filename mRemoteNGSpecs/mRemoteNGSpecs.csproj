@@ -62,7 +62,6 @@
     <PackageReference Include="System.Reflection.Metadata" />
     <PackageReference Include="System.Reflection.TypeExtensions" />
     <PackageReference Include="System.Runtime" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" />
     <PackageReference Include="System.Runtime.Extensions" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" />
     <PackageReference Include="System.Security.Cryptography.Cng" />

@@ -101,7 +101,7 @@ namespace BrightIdeasSoftware
     /// <para>
     /// Although it isn't documented, .NET virtual lists cannot have checkboxes. This class codes around this limitation,
     /// but you must use the functions provided by ObjectListView: CheckedObjects, CheckObject(), UncheckObject() and their friends. 
-    /// If you use the normal check box properties (CheckedItems or CheckedIndicies), they will throw an exception, since the
+    /// If you use the normal check box properties (CheckedItems or CheckedIndicie), they will throw an exception, since the
     /// list is in virtual mode, and .NET "knows" it can't handle checkboxes in virtual mode.
     /// </para>
     /// <para>Due to the limits of the underlying Windows control, virtual lists do not trigger ItemCheck/ItemChecked events. 
@@ -155,7 +155,7 @@ namespace BrightIdeasSoftware
         /// <para>
         /// This property returns a simple collection. Changes made to the returned
         /// collection do NOT affect the list. This is different to the behaviour of
-        /// CheckedIndicies collection.
+        /// CheckedIndicie collection.
         /// </para>
         /// <para>
         /// When getting CheckedObjects, the performance of this method is O(n) where n is the number of checked objects.
@@ -404,8 +404,6 @@ namespace BrightIdeasSoftware
         }
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_virtualListSize")]
         private static extern ref int GetVirtualListSizeField(ListView listView);
-
-        static private FieldInfo virtualListSizeFieldInfo;
 
         #endregion
 

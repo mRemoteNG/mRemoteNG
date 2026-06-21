@@ -5,6 +5,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Tools.Clipboard;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.ConnectionTree;
 using NSubstitute;
 using NUnit.Framework;
@@ -14,13 +15,13 @@ namespace mRemoteNGTests.UI.Controls
 	public class ConnectionTreeTests
 	{
 		private ConnectionTreeSearchTextFilter _filter;
-		private ConnectionTree _connectionTree;
+		private mRemoteNG.UI.Controls.ConnectionTree.ConnectionTree _connectionTree;
 
 		[SetUp]
 		public void Setup()
 		{
 			_filter = new ConnectionTreeSearchTextFilter();
-			_connectionTree = new ConnectionTree
+			_connectionTree = new mRemoteNG.UI.Controls.ConnectionTree.ConnectionTree
 			{
 				UseFiltering = true
 			};

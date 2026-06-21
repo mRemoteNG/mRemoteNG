@@ -135,7 +135,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             connectionInfo.RedirectSmartCards = MiscTools.GetBooleanValue(dataRow["RedirectSmartCards"]);
             connectionInfo.RedirectSound = (RDPSounds)Enum.Parse(typeof(RDPSounds), (string)dataRow["RedirectSound"]);
             connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine), (string)dataRow["RenderingEngine"]);
-            connectionInfo.Resolution = (RDPResolutions)Enum.Parse(typeof(RDPResolutions), (string)dataRow["Resolution"]);
+            connectionInfo.Resolution = Enum.TryParse<RDPResolutions>((string)dataRow["Resolution"], true, out var resolution)
+                ? resolution
+                : RDPResolutions.SmartSize;
             connectionInfo.SoundQuality = (RDPSoundQuality)Enum.Parse(typeof(RDPSoundQuality), (string)dataRow["SoundQuality"]);
             connectionInfo.SSHOptions = (string)dataRow["SSHOptions"];
             connectionInfo.SSHTunnelConnectionName = (string)dataRow["SSHTunnelConnectionName"];

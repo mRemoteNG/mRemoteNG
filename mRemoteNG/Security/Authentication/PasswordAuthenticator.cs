@@ -14,7 +14,7 @@ namespace mRemoteNG.Security.Authentication
         private readonly Func<Optional<SecureString>> _authenticationRequestor = authenticationRequestor.ThrowIfNull(nameof(authenticationRequestor));
 
         public int MaxAttempts { get; set; } = 3;
-        public SecureString LastAuthenticatedPassword { get; private set; }
+        public SecureString? LastAuthenticatedPassword { get; private set; }
 
         public bool Authenticate(SecureString password)
         {

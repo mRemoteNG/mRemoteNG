@@ -30,6 +30,7 @@
 		public TType RDGatewayUseConnectionCredentials { get; set; }
 		public TType RDGatewayUsername { get; set; }
 		public TType RDGatewayPassword { get; set; }
+		public TType RDGatewayAccessToken { get; set; }
 		public TType RDGatewayDomain { get; set; }
 		public TType RDGatewayExternalCredentialProvider { get; set; }
 		public TType RDGatewayUserViaAPI { get; set; }

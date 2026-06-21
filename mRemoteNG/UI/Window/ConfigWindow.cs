@@ -87,18 +87,14 @@ namespace mRemoteNG.UI.Window
             //
             //pGrid
             //
-            _pGrid.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom)
-                           | AnchorStyles.Left)
-                          | AnchorStyles.Right;
+            _pGrid.Dock = DockStyle.Fill;
             _pGrid.BrowsableProperties = null;
             _pGrid.ContextMenuStrip = PropertyGridContextMenu;
             _pGrid.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
             _pGrid.HiddenAttributes = null;
             _pGrid.HiddenProperties = null;
-            _pGrid.Location = new Point(0, 0);
             _pGrid.Name = "_pGrid";
             _pGrid.PropertySort = PropertySort.Categorized;
-            _pGrid.Size = new Size(226, 530);
             _pGrid.TabIndex = 0;
             _pGrid.UseCompatibleTextRendering = true;
             //

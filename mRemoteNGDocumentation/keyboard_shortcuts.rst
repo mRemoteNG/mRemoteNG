@@ -73,3 +73,35 @@ Connections
      - Move Up
    * - Ctrl+Down
      - Move Down
+
+Sessions
+========
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Keybinding
+     - Action
+   * - Ctrl+Right
+     - Next Session/Tab
+   * - Ctrl+Left
+     - Previous Session/Tab
+   * - Ctrl+1
+     - Jump to Session 1
+   * - Ctrl+2
+     - Jump to Session 2
+   * - Ctrl+3
+     - Jump to Session 3
+   * - Ctrl+4
+     - Jump to Session 4
+   * - Ctrl+5
+     - Jump to Session 5
+   * - Ctrl+6
+     - Jump to Session 6
+   * - Ctrl+7
+     - Jump to Session 7
+   * - Ctrl+8
+     - Jump to Session 8
+   * - Ctrl+9
+     - Jump to Session 9

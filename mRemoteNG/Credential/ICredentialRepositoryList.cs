@@ -16,9 +16,9 @@ namespace mRemoteNG.Credential
 
         IEnumerable<ICredentialRecord> GetCredentialRecords();
 
-        ICredentialRecord GetCredentialRecord(Guid id);
+        ICredentialRecord? GetCredentialRecord(Guid id);
 
-        event EventHandler<CollectionUpdatedEventArgs<ICredentialRepository>> RepositoriesUpdated;
-        event EventHandler<CollectionUpdatedEventArgs<ICredentialRecord>> CredentialsUpdated;
+        event EventHandler<CollectionUpdatedEventArgs<ICredentialRepository>>? RepositoriesUpdated;
+        event EventHandler<CollectionUpdatedEventArgs<ICredentialRecord>>? CredentialsUpdated;
     }
 }

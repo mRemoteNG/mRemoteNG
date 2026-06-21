@@ -14,7 +14,7 @@ namespace mRemoteNG.App
     [Serializable]
     public sealed class SupportedCultures : Dictionary<string, string>
     {
-        private static SupportedCultures _Instance;
+        private static SupportedCultures? _Instance;
 
         private static SupportedCultures SingletonInstance
         {

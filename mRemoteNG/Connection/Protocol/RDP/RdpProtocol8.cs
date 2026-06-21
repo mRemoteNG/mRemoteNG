@@ -7,6 +7,7 @@ using mRemoteNG.Messages;
 using MSTSCLib;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using Microsoft.Win32;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
@@ -32,9 +33,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         public RdpProtocol8()
         {
-            _frmMain.ResizeEnd += ResizeEnd;
-
-            // Initialize debounce timer (300ms delay)
+            // Initialize debounce timer (300ms delay).
+            // Keep this in the constructor because it doesn't root the instance in any
+            // external static object – it's safe for the temporary probing instances
+            // created by RdpProtocolFactory.
             _resizeDebounceTimer = new System.Timers.Timer(300);
             _resizeDebounceTimer.AutoReset = false;
             _resizeDebounceTimer.Elapsed += ResizeDebounceTimer_Elapsed;
@@ -46,6 +48,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 return false;
 
             if (RdpVersion < Versions.RDC81) return false; // minimum dll version checked, loaded MSTSCLIB dll version is not capable
+
+            // Subscribe to static/external events here (not in the constructor) so that
+            // temporary probing instances created by RdpProtocolFactory.RdpVersionSupported()
+            // are not rooted and do not accumulate memory leaks or spurious callbacks.
+            _frmMain.ResizeEnd += ResizeEnd;
+            SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
 
             // https://learn.microsoft.com/en-us/windows/win32/termserv/imsrdpextendedsettings-property
             if (connectionInfo.UseRestrictedAdmin)
@@ -148,13 +156,63 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 return;
             }
 
+            // Guard against the window handle not yet being created or already destroyed
+            if (!InterfaceControl.IsHandleCreated)
+            {
+                _hasPendingResize = false;
+                return;
+            }
+
             _hasPendingResize = false;
 
             Runtime.MessageCollector?.AddMessage(MessageClass.DebugMsg,
                 $"Debounce timer fired - executing delayed resize to {_pendingResizeSize.Width}x{_pendingResizeSize.Height}");
 
-            // Execute the actual RDP session resize
-            DoResizeClient();
+            // Marshal to the UI thread because DoResizeClient() accesses WinForms and COM objects.
+            // Wrap in try/catch: even after the guards above, there is a disposal race between
+            // this timer thread and the UI thread that can cause ObjectDisposedException or
+            // InvalidOperationException from BeginInvoke.
+            try
+            {
+                if (InterfaceControl.InvokeRequired)
+                {
+                    InterfaceControl.BeginInvoke(new Action(DoResizeClient));
+                }
+                else
+                {
+                    DoResizeClient();
+                }
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Runtime.MessageCollector?.AddMessage(MessageClass.DebugMsg,
+                    $"ResizeDebounceTimer_Elapsed: control disposed during BeginInvoke ({ex.GetType().Name})");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Runtime.MessageCollector?.AddMessage(MessageClass.DebugMsg,
+                    $"ResizeDebounceTimer_Elapsed: control handle unavailable during BeginInvoke ({ex.GetType().Name})");
+            }
+        }
+
+        private void OnDisplaySettingsChanged(object sender, EventArgs e)
+        {
+            // When display settings change (e.g., outer RDP session reconnects with a different
+            // resolution/viewport), schedule a debounced resize so the inner RDP session is
+            // updated to match the new panel dimensions once the display has settled.
+            // SystemEvents.DisplaySettingsChanged can fire on a non-UI thread, so marshal
+            // ScheduleDebouncedResize() back to the UI thread before touching UI state.
+            if (!loginComplete) return;
+            if (InterfaceControl == null || InterfaceControl.IsDisposed) return;
+
+            if (InterfaceControl.InvokeRequired)
+            {
+                InterfaceControl.BeginInvoke(new Action(ScheduleDebouncedResize));
+            }
+            else
+            {
+                ScheduleDebouncedResize();
+            }
         }
 
         protected override AxHost CreateActiveXRdpClientControl()
@@ -178,18 +236,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 return;
             }
 
-            if (!(InterfaceControl.Info.Resolution == RDPResolutions.FitToWindow ||
-                  InterfaceControl.Info.Resolution == RDPResolutions.Fullscreen))
+            // FitToWindow: fixed resolution set at connect time, scrollbars handle overflow.
+            // SmartSize: SmartSizing scales the image client-side, no session resize needed.
+            // Only Fullscreen benefits from dynamically changing the remote session resolution.
+            if (InterfaceControl.Info.Resolution != RDPResolutions.Fullscreen)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                    $"Resize skipped for '{connectionInfo.Hostname}': Resolution is {InterfaceControl.Info.Resolution} (needs FitToWindow or Fullscreen)");
-                return;
-            }
-
-            if (SmartSize)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                    $"Resize skipped for '{connectionInfo.Hostname}': SmartSize is enabled (use client-side scaling instead)");
+                    $"Resize skipped for '{connectionInfo.Hostname}': Resolution is {InterfaceControl.Info.Resolution} (only Fullscreen supports dynamic resize)");
                 return;
             }
 
@@ -226,6 +279,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
             // Check if controls are being disposed during shutdown
             if (Control.IsDisposed || InterfaceControl.IsDisposed) return false;
+
+            // FitToWindow: control is undocked at a fixed size with scrollbars; don't touch it.
+            if (InterfaceControl.Info.Resolution == RDPResolutions.FitToWindow)
+                return false;
 
             Runtime.MessageCollector?.AddMessage(MessageClass.DebugMsg,
                 $"DoResizeControl - Before: Control.Size={Control.Size}, InterfaceControl.Size={InterfaceControl.Size}, Control.Dock={Control.Dock}");
@@ -278,6 +335,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         public override void Close()
         {
+            // Unsubscribe from external/static events to prevent memory leaks
+            _frmMain.ResizeEnd -= ResizeEnd;
+            SystemEvents.DisplaySettingsChanged -= OnDisplaySettingsChanged;
+
             // Clean up debounce timer
             if (_resizeDebounceTimer != null)
             {

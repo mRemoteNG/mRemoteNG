@@ -93,6 +93,9 @@ namespace mRemoteNG.App
         internal static extern long SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
@@ -112,6 +115,9 @@ namespace mRemoteNG.App
 
         [DllImport("user32", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
         internal static extern bool SetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
 
         [DllImport("kernel32", SetLastError = true)]
         internal static extern bool CloseHandle(IntPtr handle);
@@ -514,6 +520,10 @@ namespace mRemoteNG.App
 
         #region Window Styles
 
+        public const int WS_BORDER = 0x800000;
+        public const int WS_DLGFRAME = 0x400000;
+        public const int WS_CAPTION = WS_BORDER | WS_DLGFRAME;
+        public const int WS_THICKFRAME = 0x40000;
         public const int WS_MAXIMIZE = 0x1000000;
         public const int WS_VISIBLE = 0x10000000;
         public const int WS_CHILD = 0x40000000;

@@ -2172,41 +2172,394 @@ Nattliga kanalen inkluderar Alfa, Betor &amp; Utgåvokandidater.</value>
   <data name="Gateway" xml:space="preserve">
     <value>Nätverksnod (gateway)</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="VaultOpenbaoMount" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoMount" xml:space="preserve">
+    <value>Montera</value>
   </data>
-  <data name="VaultOpenbaoMountDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoMountDescription" xml:space="preserve">
+    <value>Montera där hemligheten förvaras</value>
   </data>
-  <data name="VaultOpenbaoRole" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoRole" xml:space="preserve">
+    <value>Roll</value>
   </data>
-  <data name="VaultOpenbaoRoleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoRoleDescription" xml:space="preserve">
+    <value>Namn eller sökväg till hemligheten</value>
   </data>
-  <data name="VaultOpenbaoToken" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoToken" xml:space="preserve">
+    <value>Token för Vault/Openbao</value>
   </data>
-  <data name="VaultOpenbaoTokenPropertyDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoTokenPropertyDescription" xml:space="preserve">
+    <value>Token för åtkomst till Vault/Openbao-servern</value>
   </data>
-  <data name="VaultOpenbaoSecretEngine" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoSecretEngine" xml:space="preserve">
+    <value>Vault/Openbao Secret Engine</value>
   </data>
-  <data name="PropertyDescriptionVaultOpenbaoSecretEngine" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="PropertyDescriptionVaultOpenbaoSecretEngine" xml:space="preserve">
+    <value>Secret engine som används i Vault/Openbao för att lagra hemligheten</value>
   </data>
-  <data name="VaultOpenbaoSecretEngineKeyValue" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoSecretEngineKeyValue" xml:space="preserve">
+    <value>Nyckelvärde (användarnamn som nyckel)</value>
   </data>
-  <data name="VaultOpenbaoSecretEngineLDAPDynamic" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoSecretEngineLDAPDynamic" xml:space="preserve">
+    <value>Dynamisk LDAP-roll</value>
   </data>
-  <data name="VaultOpenbaoSecretEngineLDAPStatic" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoSecretEngineLDAPStatic" xml:space="preserve">
+    <value>Statisk LDAP-roll</value>
   </data>
-  <data name="VaultOpenbaoSecretEngineSSHOTP" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoSecretEngineSSHOTP" xml:space="preserve">
+    <value>SSH motor OTP läge</value>
+  </data>
+  <data name="_Sessions" xml:space="preserve">
+    <value>&amp;Sessioner</value>
+  </data>
+  <data name="NextSession" xml:space="preserve">
+    <value>Nästa session</value>
+  </data>
+  <data name="PreviousSession" xml:space="preserve">
+    <value>Förgående session</value>
+  </data>
+  <data name="JumpToSession" xml:space="preserve">
+    <value>Hoppa till session {0}</value>
+  </data>
+  <data name="ActiveDirectory" xml:space="preserve">
+    <value>Active Directory</value>
+  </data>
+  <data name="AnyDesk" xml:space="preserve">
+    <value>AnyDesk</value>
+  </data>
+  <data name="Ard" xml:space="preserve">
+    <value>ARD (Apple Remote Desktop)</value>
+  </data>
+  <data name="RDPGateway" xml:space="preserve">
+    <value>RDP-Gateway</value>
+  </data>
+  <data name="ConfirmDisconnectConnection" xml:space="preserve">
+    <value>Är du säker på att du vill koppla ner "{0}"?</value>
+  </data>
+  <data name="Http" xml:space="preserve">
+    <value>HTTP</value>
+  </data>
+  <data name="HttpInternetExplorer" xml:space="preserve">
+    <value>Internet Explorer</value>
+  </data>
+  <data name="Https" xml:space="preserve">
+    <value>HTTPS</value>
+  </data>
+  <data name="CtrlAltDel" xml:space="preserve">
+    <value>Ctrl-Alt-Del</value>
+  </data>
+  <data name="CtrlEsc" xml:space="preserve">
+    <value>Ctrl-Esc</value>
+  </data>
+  <data name="SmartSize" xml:space="preserve">
+    <value>Smart storleksändring (RDP/VNC) </value>
+  </data>
+  <data name="MremoteNgCsv" xml:space="preserve">
+    <value>mRemoteNG CSV</value>
+  </data>
+  <data name="MremoteNgXml" xml:space="preserve">
+    <value>mRemoteNG XML</value>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="PropertyDescriptionColor" xml:space="preserve">
+    <value>Ställer in färgen för anslutningen eller katalogen i anslutningsträdet. Anslutningar ärver den här färgen från sin överordnade katalog.</value>
+  </data>
+  <data name="PropertyDescriptionTabColor" xml:space="preserve">
+    <value>Ställer in färgen för anslutningsfliken. Lämna tomt för standardfärg.</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Färg</value>
+  </data>
+  <data name="Panel" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="TabColor" xml:space="preserve">
+    <value>Flikfärg</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="EnvironmentTags" xml:space="preserve">
+    <value>Miljötaggar</value>
+  </data>
+  <data name="PropertyDescriptionEnvironmentTags" xml:space="preserve">
+    <value>Taggar för att kategorisera miljön (ex., #PROD, #UAT, #TEST, #BETA, #FINDEPARTMENT)</value>
+  </data>
+  <data name="Raw" xml:space="preserve">
+    <value>RAW</value>
+  </data>
+  <data name="Rdp" xml:space="preserve">
+    <value>RDP</value>
+  </data>
+  <data name="Rlogin" xml:space="preserve">
+    <value>Rlogin</value>
+  </data>
+  <data name="SaveOptionsBeforeClosing" xml:space="preserve">
+    <value>Vill du spara ändringarna gjorda för inställningarna?</value>
+  </data>
+  <data name="Discard" xml:space="preserve">
+    <value>Kasta bort</value>
+  </data>
+  <data name="SaveImageFilter" xml:space="preserve">
+    <value>Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group File (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Network Graphics File (.png)|*.png</value>
+  </data>
+  <data name="Socks5" xml:space="preserve">
+    <value>Socks 5</value>
+  </data>
+  <data name="SQLServer" xml:space="preserve">
+    <value>SQL Server</value>
+  </data>
+  <data name="SshV1" xml:space="preserve">
+    <value>SSH version 1</value>
+  </data>
+  <data name="SshV2" xml:space="preserve">
+    <value>SSH version 2</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Telnet" xml:space="preserve">
+    <value>Telnet</value>
+  </data>
+  <data name="TitleInformation" xml:space="preserve">
+    <value>Information ({0})</value>
+  </data>
+  <data name="UltraVncRepeater" xml:space="preserve">
+    <value>Ultra VNC Repeater</value>
+  </data>
+  <data name="UltraVNCSCListeningPort" xml:space="preserve">
+    <value>Ultra VNC enkelklickport:</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Nuvarande version</value>
+  </data>
+  <data name="Vnc" xml:space="preserve">
+    <value>VNC</value>
+  </data>
+  <data name="ErrorPlatformNotSupported" xml:space="preserve">
+    <value>Plattformsfel: {0}</value>
+  </data>
+  <data name="ErrorMissingDependency" xml:space="preserve">
+    <value>Saknat beroende: {0}</value>
+  </data>
+  <data name="ErrorArchitectureMismatch" xml:space="preserve">
+    <value>Arkitekturkonflikt: {0}</value>
+  </data>
+  <data name="TimeoutInSeconds" xml:space="preserve">
+    <value>Timeout [sekunder]</value>
+  </data>
+  <data name="UltraVNCSingleClick" xml:space="preserve">
+    <value>UltraVNC enkelklick</value>
+  </data>
+  <data name="Proxy" xml:space="preserve">
+    <value>Proxy</value>
+  </data>
+  <data name="MultiSsh" xml:space="preserve">
+    <value>Multi SSH:</value>
+  </data>
+  <data name="RdpVersion" xml:space="preserve">
+    <value>RDP Version</value>
+  </data>
+  <data name="Windows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="PowerShell" xml:space="preserve">
+    <value>PowerShell</value>
+  </data>
+  <data name="Terminal" xml:space="preserve">
+    <value>Terminal</value>
+  </data>
+  <data name="HttpCEF" xml:space="preserve">
+    <value>Edge Chromium</value>
+  </data>
+  <data name="EC2Region" xml:space="preserve">
+    <value>EC2 Region</value>
+  </data>
+  <data name="FileMenu" xml:space="preserve">
+    <value>Filmeny</value>
+  </data>
+  <data name="FileMenuWillBeHiddenNow" xml:space="preserve">
+    <value>Filmeny är dold nu. Tryck Alt-knappen för att se</value>
+  </data>
+  <data name="ECPDelineaSecretServer" xml:space="preserve">
+    <value>Delinea Secret Server</value>
+  </data>
+  <data name="ECPClickstudiosPasswordstate" xml:space="preserve">
+    <value>Clickstudios Passwordstate</value>
+  </data>
+  <data name="ECPOnePassword" xml:space="preserve">
+    <value>1Password</value>
+  </data>
+  <data name="ECPOnePasswordReadFailed" xml:space="preserve">
+    <value>1Password läsning misslyckades</value>
+  </data>
+  <data name="ECPOnePasswordCommandLine" xml:space="preserve">
+    <value>1Password kommandorad</value>
+  </data>
+  <data name="ECPNone" xml:space="preserve">
+    <value>Ingen</value>
+  </data>
+  <data name="EAPAmazonWebServices" xml:space="preserve">
+    <value>AmazonEC2</value>
+  </data>
+  <data name="EAPNone" xml:space="preserve">
+    <value>Ingen</value>
+  </data>
+  <data name="ExternalCredentialProvider" xml:space="preserve">
+    <value>Extern autentiseringsleverantör</value>
+  </data>
+  <data name="PropertyDescriptionExternalCredentialProvider" xml:space="preserve">
+    <value>Extern autentiseringsleverantör / valv att hämta inloggningsuppgifter ifrån</value>
+  </data>
+  <data name="PropertyDescriptionExternalAddressProvider" xml:space="preserve">
+    <value>Extern leverantör att hämta värdadress ifrån</value>
+  </data>
+  <data name="ExternalAddressProvider" xml:space="preserve">
+    <value>Extern adressleverantör</value>
+  </data>
+  <data name="UseExternalCredentialProvider" xml:space="preserve">
+    <value>Använd extern autentiseringsleverantör</value>
+  </data>
+  <data name="CheckboxNoReconnect" xml:space="preserve">
+    <value>Försök automatiskt att återansluta vid frånkoppling från server (enbart RDP &amp;&amp; ICA)</value>
+  </data>
+  <data name="PropertyDescriptionRedirectDiskDrivesCustom" xml:space="preserve">
+    <value>Mata in anpassade enheter att vidarebefordra: C,D,X</value>
+  </data>
+  <data name="RdpDrivesAll" xml:space="preserve">
+    <value>Alla</value>
+  </data>
+  <data name="RdpDrivesCustom" xml:space="preserve">
+    <value>Anpassade</value>
+  </data>
+  <data name="RdpDrivesLocal" xml:space="preserve">
+    <value>Lokala</value>
+  </data>
+  <data name="RdpDrivesNone" xml:space="preserve">
+    <value>Inga</value>
+  </data>
+  <data name="RedirectDiskDrivesCustom" xml:space="preserve">
+    <value>Anpassade enheter</value>
+  </data>
+  <data name="PropertyDescriptionRdpGatewayAccessToken" xml:space="preserve">
+    <value>Anger åtkomsttoken för Remote Desktop Gateway-servern.</value>
+  </data>
+  <data name="RdpGatewayAccessToken" xml:space="preserve">
+    <value>RDP-Gateway åtkomsttoken</value>
+  </data>
+  <data name="UseAccessToken" xml:space="preserve">
+    <value>Använd RD Gateway åtkomsttoken</value>
+  </data>
+  <data name="PsCanceled" xml:space="preserve">
+    <value>Inloggningen avbröts! Starta om vid behov.</value>
+  </data>
+  <data name="PsConnectionFailed" xml:space="preserve">
+    <value>Kontrollera användarnamn och lösenord och försök igen. Om PSRemoting inte är aktiverat på servern måste du först aktivera det.</value>
+  </data>
+  <data name="PsFailed" xml:space="preserve">
+    <value>Inloggningen misslyckades!</value>
+  </data>
+  <data name="PsLoginAttempts" xml:space="preserve">
+    <value>Antalet tillåtna inloggningsförsök har överskridits. Försök igen.</value>
+  </data>
+  <data name="FilterSecureCRT" xml:space="preserve">
+    <value>SecureCRT (*.xml)</value>
+  </data>
+  <data name="OptionsCompanyPolicyMessage" xml:space="preserve">
+    <value>*Vissa inställningar bestäms av ditt företag. För mer information, kontakta din administratör.</value>
+  </data>
+  <data name="SaveConsOnExit" xml:space="preserve">
+    <value>Spara anslutningar vid avslut</value>
+  </data>
+  <data name="SetHostnameLikeDisplayNameNewConnection" xml:space="preserve">
+    <value>Ange värdnamn som visningsnamn för ny anslutning</value>
+  </data>
+  <data name="RdpReconnectionCount" xml:space="preserve">
+    <value>RDP återanslutningsräknare:</value>
+  </data>
+  <data name="RdpConnectionTimeout" xml:space="preserve">
+    <value>RDP anslutningstimeout</value>
+  </data>
+  <data name="WhenClosingConnections" xml:space="preserve">
+    <value>När anslutningar stängs</value>
+  </data>
+  <data name="WarnMeWhenClosingConnections" xml:space="preserve">
+    <value>Varna mig när anslutningar stängs</value>
+  </data>
+  <data name="WarnMeOnlyWhenExitingProgram" xml:space="preserve">
+    <value>Varna mig endast när programmet stängs</value>
+  </data>
+  <data name="DoNotWarnMeWhenClosingConnections" xml:space="preserve">
+    <value>Varna mig inte när anslutningar stängs</value>
+  </data>
+  <data name="StartFullScreen" xml:space="preserve">
+    <value>Starta i helskärmsläge</value>
+  </data>
+  <data name="ReconnectToPreviouslyOpenedSessionsOnStartup" xml:space="preserve">
+    <value>Återanslut till tidigare öppnade sessioner vid uppstart</value>
+  </data>
+  <data name="SaveConnectionsOnExit" xml:space="preserve">
+    <value>Spara anslutningar vid avslut</value>
+  </data>
+  <data name="TrackActiveConnectionInTheConnectionTree" xml:space="preserve">
+    <value>Spåra aktiva anslutningar i anslutningsträdet</value>
+  </data>
+  <data name="AutoSaveInMinutes" xml:space="preserve">
+    <value>Automatisk sparning (minuter)</value>
+  </data>
+  <data name="WebView2InitializationFailed" xml:space="preserve">
+    <value>Initialiseringen av WebView2 misslyckades</value>
+  </data>
+  <data name="WarnMeOnlyWhenClosingMultipleConnections" xml:space="preserve">
+    <value>Varna mig endast när flera anslutningar stängs</value>
+  </data>
+  <data name="MsgExit" xml:space="preserve">
+    <value>Programmet stängs nu.</value>
+  </data>
+  <data name="MsgDownloadLatestRuntime" xml:space="preserve">
+    <value>Ladda ner och installera den senaste .NET-versionen:</value>
+  </data>
+  <data name="MsgMissingRuntime" xml:space="preserve">
+    <value>.NET saknas:</value>
+  </data>
+  <data name="MsgRuntimeIsRequired" xml:space="preserve">
+    <value>.NET krävs</value>
+  </data>
+  <data name="VaultOpenbao" xml:space="preserve">
+    <value>Vault eller Openbao</value>
+  </data>
+  <data name="MenuItem_Chat" xml:space="preserve">
+    <value>mR Chatt</value>
+  </data>
+  <data name="MenuItem_Community" xml:space="preserve">
+    <value>Gemenskap</value>
+  </data>
+  <data name="ConnectionFrameColor" xml:space="preserve">
+    <value>Anslutningspanelens färg</value>
+  </data>
+  <data name="PropertyDescriptionConnectionFrameColor" xml:space="preserve">
+    <value>Sätter en färgad ram runt anslutningspanelen för att visuellt skilja mellan olika miljöer (t.ex. produktion, test, utveckling).</value>
+  </data>
+  <data name="FrameColorNone" xml:space="preserve">
+    <value>Ingen</value>
+  </data>
+  <data name="FrameColorRed" xml:space="preserve">
+    <value>Röd (Produktion)</value>
+  </data>
+  <data name="FrameColorYellow" xml:space="preserve">
+    <value>Gul (Testmiljö/Användartest)</value>
+  </data>
+  <data name="FrameColorGreen" xml:space="preserve">
+    <value>Grön (Test)</value>
+  </data>
+  <data name="FrameColorBlue" xml:space="preserve">
+    <value>Blå (Utveckling)</value>
+  </data>
+  <data name="FrameColorPurple" xml:space="preserve">
+    <value>Lila (Anpassad)</value>
+  </data>
+  <data name="Wsl" xml:space="preserve">
+    <value>WSL</value>
   </data>
 </root>

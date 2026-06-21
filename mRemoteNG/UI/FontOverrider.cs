@@ -13,8 +13,12 @@ namespace mRemoteNG.UI
             foreach (Control tempLoopVarCtlChild in ctlParent.Controls)
             {
                 Control ctlChild = tempLoopVarCtlChild;
-                ctlChild.Font = new Font(SystemFonts.MessageBoxFont.Name, ctlChild.Font.Size, ctlChild.Font.Style,
-                                         ctlChild.Font.Unit, ctlChild.Font.GdiCharSet);
+                // Only create a new Font if the font name is different to avoid unnecessary GDI operations
+                if (ctlChild.Font.Name != SystemFonts.MessageBoxFont.Name)
+                {
+                    ctlChild.Font = new Font(SystemFonts.MessageBoxFont.Name, ctlChild.Font.Size, ctlChild.Font.Style,
+                                             ctlChild.Font.Unit, ctlChild.Font.GdiCharSet);
+                }
                 if (ctlChild.Controls.Count > 0)
                 {
                     FontOverride(ctlChild);

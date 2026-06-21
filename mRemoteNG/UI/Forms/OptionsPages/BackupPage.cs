@@ -143,6 +143,21 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblBacupPageShowInOptionsMenu.Text = Language.PageСontrolInOptionsMenu;
             cbBacupPageInOptionMenu.Text = Language.ShowForUser;
 
+            lblBackupType.Text = Language.lblBackupType;
+            lblBackupEnable.Text = Language.lblBackupEnable;
+            lblMakeBackup.Text = Language.MakeABackup;
+            lblConnectionsBackupMaxCount.Text = Language.lblConnectionsBackupMaxCount;
+            rbBackupEnableEnable.Text = Language.Enable;
+            rbBackupEnableDisable.Text = Language.Disable;
+            radioButton2.Text = Language.BackupToDb;
+            radioButton1.Text = Language.BackupToFile;
+            lblConnectionsBackupPath.Text = Language.BackupFolder;
+            lblBackupNameFormat.Text = Language.lblBackupNameFormat;
+            lblACL.Text = Language.lblACL;
+            cbMakeBackupOnSave.Text = Language.OnSave;
+            cbMakeBackupOnEdit.Text = Language.OnEdit;
+            cbMakeBackupOnExit.Text = Language.OnExit;
+
             cbBackupEnableACL.BindingContext = new BindingContext();
             cbBackupEnableACL.DataSource = _permissionsListing;
             cbBackupEnableACL.DisplayMember = "DisplayString";

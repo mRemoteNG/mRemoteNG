@@ -387,6 +387,34 @@ namespace mRemoteNG.UI.Window
             }
         }
 
+        internal void NavigateToTab(int index)
+        {
+            try
+            {
+                var documents = connDock.DocumentsToArray();
+                if (index < 0 || index >= documents.Length) return;
+
+                documents[index].DockHandler.Activate();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("NavigateToTab (UI.Window.ConnectionWindow) failed", ex);
+            }
+        }
+
+        internal IDockContent[] GetDocuments()
+        {
+            try
+            {
+                return connDock.DocumentsToArray();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("GetDocuments (UI.Window.ConnectionWindow) failed", ex);
+                return Array.Empty<IDockContent>();
+            }
+        }
+
         #endregion
 
         #region Events

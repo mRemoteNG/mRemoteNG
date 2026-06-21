@@ -1,0 +1,63 @@
+name: Remove other GitHub repo links
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+on:
+  issue_comment:
+    types: [created, edited]
+  issues:
+    types: [opened, edited]
+
+jobs:
+  filter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sanitize links
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const githubRepoRegex =
+              /\[[^\]]*\]\((?!https?:\/\/github\.com\/(?:user-attachments\/assets|mRemoteNG)\/)[^\)]*https?:\/\/github\.com\/(?!user-attachments\/assets\/)(?!mRemoteNG\/)[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+[^\s)]*\)|https?:\/\/github\.com\/(?!user-attachments\/assets\/)(?!mRemoteNG\/)[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+[^\s)]*/gi;
+  
+            // CASE 1: Comment
+            if (context.payload.comment) {
+              const comment = context.payload.comment;
+              console.log("Processing comment:", comment.id);
+              const matches = comment.body.match(githubRepoRegex);
+              console.log("Matches:", matches);
+              if (!matches) return;
+              const sanitized = comment.body.replace(
+                githubRepoRegex,
+                "**[CENSORED!] Links to external GitHub repositories are not allowed**"
+              );
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: comment.id,
+                body: sanitized
+              });
+              console.log("Comment updated");
+              return;
+            }
+            // CASE 2: Issue body
+            const issue = context.payload.issue;
+            if (issue) {
+              console.log("Processing issue:", issue.number);
+              const matches = issue.body?.match(githubRepoRegex);
+              console.log("Matches:", matches);
+              if (!matches) return;
+              const sanitized = issue.body.replace(
+                githubRepoRegex,
+                "**[CENSORED!] Links to external GitHub repositories are not allowed**"
+              );
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: sanitized
+              });
+              console.log("Issue body updated");
+            }

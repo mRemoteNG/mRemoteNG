@@ -1,7 +1,9 @@
 ﻿using System.Data;
+using System.Linq;
 using System.Security;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Sql;
 using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
@@ -38,6 +40,17 @@ public class DataTableDeserializerTests
         _deserializer = new DataTableDeserializer(_cryptographyProvider, new SecureString());
         var output = _deserializer.Deserialize(dataTable);
         Assert.That(output.GetRecursiveChildList().Count, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void UnknownLegacyResolutionFallsBackToSmartSize()
+    {
+        var dataTable = CreateDataTable(new ConnectionInfo());
+        dataTable.Rows[0]["Resolution"] = "Res1920x1080";
+        _deserializer = new DataTableDeserializer(_cryptographyProvider, new SecureString());
+        var output = _deserializer.Deserialize(dataTable);
+        var connection = (ConnectionInfo)output.GetRecursiveChildList().First();
+        Assert.That(connection.Resolution, Is.EqualTo(RDPResolutions.SmartSize));
     }
 
 

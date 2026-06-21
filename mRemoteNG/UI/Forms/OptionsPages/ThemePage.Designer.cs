@@ -14,9 +14,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             try
             {
-                if (disposing && components != null)
+                if (disposing)
                 {
-                    components.Dispose();
+                    _themeManager.ThemeChanged -= ApplyTheme;
+                    components?.Dispose();
                 }
             }
             finally
@@ -108,7 +109,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // keyCol
             // 
-            keyCol.AspectName = "Key";
+            keyCol.AspectName = "DisplayKey";
             keyCol.IsEditable = false;
             keyCol.Text = "Element";
             keyCol.Width = 262;

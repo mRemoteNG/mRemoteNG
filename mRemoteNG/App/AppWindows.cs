@@ -12,11 +12,11 @@ namespace mRemoteNG.App
     [SupportedOSPlatform("windows")]
     public static class AppWindows
     {
-        private static ActiveDirectoryImportWindow _adimportForm;
-        private static ExternalToolsWindow _externalappsForm;
-        private static PortScanWindow _portscanForm;
-        private static UltraVNCWindow _ultravncscForm;
-        private static ConnectionTreeWindow _treeForm;
+        private static ActiveDirectoryImportWindow? _adimportForm;
+        private static ExternalToolsWindow? _externalappsForm;
+        private static PortScanWindow? _portscanForm;
+        private static UltraVNCWindow? _ultravncscForm;
+        private static ConnectionTreeWindow? _treeForm;
 
         internal static ConnectionTreeWindow TreeForm
         {
@@ -28,7 +28,7 @@ namespace mRemoteNG.App
         internal static ErrorAndInfoWindow ErrorsForm { get; set; } = new ErrorAndInfoWindow();
         internal static UpdateWindow UpdateForm { get; set; } = new UpdateWindow();
         internal static SSHTransferWindow SshtransferForm { get; private set; } = new SSHTransferWindow();
-        internal static OptionsWindow OptionsFormWindow { get; private set; }
+        internal static OptionsWindow? OptionsFormWindow { get; private set; }
 
 
         public static void Show(WindowType windowType)
@@ -48,6 +48,10 @@ namespace mRemoteNG.App
                         if (OptionsFormWindow == null || OptionsFormWindow.IsDisposed)
                             OptionsFormWindow = new OptionsWindow();
                         OptionsFormWindow.SetActivatedPage(Language.StartupExit);
+                        // Reload controls from stored settings before every show so that any
+                        // edits left over from a previous hide (Tab-X without Apply/OK) are
+                        // discarded.  Safe on first call — no-op until FrmOptions is embedded.
+                        OptionsFormWindow.RefreshSettings();
                         OptionsFormWindow.Show(dockPanel);
                         break;
                     case WindowType.SSHTransfer:

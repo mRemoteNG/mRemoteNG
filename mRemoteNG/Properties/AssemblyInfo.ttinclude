@@ -11,14 +11,30 @@
         if (File.Exists(dllPath)) {
             Assembly.LoadFrom(dllPath);
             var sp = Host as IServiceProvider;
-            var dte = sp?.GetService(typeof(EnvDTE.DTE)) as EnvDTE.DTE;
-            var projectItem = dte?.Solution?.FindProjectItem(Host.TemplateFile);
-            var project = projectItem?.ContainingProject;
-            var cfg = project?.ConfigurationManager?.ActiveConfiguration;
-            platformFromDte = cfg?.PlatformName;
+            if (sp != null) {
+                // Use reflection to avoid compile-time dependency on EnvDTE
+                var envDteAsm = AppDomain.CurrentDomain.GetAssemblies();
+                Type dteType = null;
+                foreach (var asm in envDteAsm) {
+                    dteType = asm.GetType("EnvDTE.DTE");
+                    if (dteType != null) break;
+                }
+                if (dteType != null) {
+                    var dte = sp.GetService(dteType);
+                    if (dte != null) {
+                        var solution = dteType.GetProperty("Solution")?.GetValue(dte);
+                        var findItem = solution?.GetType().GetMethod("FindProjectItem", new[] { typeof(string) });
+                        var projectItem = findItem?.Invoke(solution, new object[] { Host.TemplateFile });
+                        var project = projectItem?.GetType().GetProperty("ContainingProject")?.GetValue(projectItem);
+                        var cfgMgr = project?.GetType().GetProperty("ConfigurationManager")?.GetValue(project);
+                        var activeCfg = cfgMgr?.GetType().GetProperty("ActiveConfiguration")?.GetValue(cfgMgr);
+                        platformFromDte = activeCfg?.GetType().GetProperty("PlatformName")?.GetValue(activeCfg) as string;
+                    }
+                }
+            }
         } 
     } catch {
-        // Log the exception if necessary
+        // Fallback to environment variables below
     }
 
     platformValue = platformFromDte 

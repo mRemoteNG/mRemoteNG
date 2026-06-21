@@ -107,7 +107,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 RenderingEngine = HTTPBase.RenderingEngine.EdgeChromium,
                 RDPAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth,
                 Colors = RDPColors.Colors16Bit,
-                Resolution = RDPResolutions.Res1366x768,
+                Resolution = RDPResolutions.SmartSize,
                 AutomaticResize = true,
                 DisplayWallpaper = true,
                 DisplayThemes = true,

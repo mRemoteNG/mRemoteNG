@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Runtime.Versioning;
@@ -130,6 +131,13 @@ namespace mRemoteNG.UI.Controls
 
             TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, fore,
                                   TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+
+            // Draw focus rectangle if button has focus
+            if (Focused && Enabled)
+            {
+                Rectangle focusRect = new(2, 2, Width - 4, Height - 4);
+                ControlPaint.DrawFocusRectangle(e.Graphics, focusRect);
+            }
         }
 
         private void InitializeComponent()

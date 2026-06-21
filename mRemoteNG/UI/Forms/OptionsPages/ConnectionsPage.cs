@@ -60,6 +60,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkUseFilterSearch.Text = Language.FilterSearchMatchesInConnectionTree;
             chkPlaceSearchBarAboveConnectionTree.Text = Language.PlaceSearchBarAboveConnectionTree;
             chkDoNotTrimUsername.Text = Language.DoNotTrimUsername;
+            chkSlowClickRename.Text = Language.SlowClickRenameEnabled;
 
             lblRdpReconnectionCount.Text = Language.RdpReconnectCount;
             lblRDPConTimeout.Text = Language.RdpOverallConnectionTimeout;
@@ -84,6 +85,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkUseFilterSearch.Checked = Settings.Default.UseFilterSearch;
             chkPlaceSearchBarAboveConnectionTree.Checked = Settings.Default.PlaceSearchBarAboveConnectionTree;
             chkDoNotTrimUsername.Checked = Settings.Default.DoNotTrimUsername;
+            chkSlowClickRename.Checked = Settings.Default.SlowClickRenameEnabled;
 
             numRdpReconnectionCount.Value = Convert.ToDecimal(Settings.Default.RdpReconnectionCount);
             numRDPConTimeout.Value = Convert.ToDecimal(Settings.Default.ConRDPOverallConnectionTimeout);
@@ -136,6 +138,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
             Properties.Settings.Default.PlaceSearchBarAboveConnectionTree = chkPlaceSearchBarAboveConnectionTree.Checked;
             Properties.Settings.Default.DoNotTrimUsername = chkDoNotTrimUsername.Checked;
+            Properties.Settings.Default.SlowClickRenameEnabled = chkSlowClickRename.Checked;
 
             Properties.Settings.Default.RdpReconnectionCount = (int)numRdpReconnectionCount.Value;
             Properties.Settings.Default.ConRDPOverallConnectionTimeout = (int)numRDPConTimeout.Value;
@@ -207,6 +210,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             if (pageRegSettingsInstance.DoNotTrimUsername.IsSet)
                 DisableControl(chkDoNotTrimUsername);
+
+            if (pageRegSettingsInstance.SlowClickRenameEnabled.IsSet)
+                DisableControl(chkSlowClickRename);
 
             if (pageRegSettingsInstance.RdpReconnectionCount.IsSet)
                 DisableControl(numRdpReconnectionCount);

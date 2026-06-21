@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
@@ -9,12 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalConnectors", "Exter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectListView.NetCore", "ObjectListView\ObjectListView.NetCore.csproj", "{5718734C-03AC-4954-89B1-1723CF03AF10}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mRemoteNGTests", "mRemoteNGTests\mRemoteNGTests.csproj", "{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|arm64 = Debug|arm64
 		Debug|x64 = Debug|x64
-		Release Installer and Portable|arm64 = Release Installer and Portable|arm64
-		Release Installer and Portable|x64 = Release Installer and Portable|x64
+		Release Self-Contained|arm64 = Release Self-Contained|arm64
+		Release Self-Contained|x64 = Release Self-Contained|x64
 		Release|arm64 = Release|arm64
 		Release|x64 = Release|x64
 	EndGlobalSection
@@ -23,10 +25,10 @@ Global
 		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Debug|arm64.Build.0 = Debug|arm64
 		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Debug|x64.ActiveCfg = Debug|x64
 		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Debug|x64.Build.0 = Debug|x64
-		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release Installer and Portable|arm64.ActiveCfg = Release Portable|arm64
-		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release Installer and Portable|arm64.Build.0 = Release Portable|arm64
-		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release Installer and Portable|x64.ActiveCfg = Release Portable|x64
-		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release Installer and Portable|x64.Build.0 = Release Portable|x64
+		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release Self-Contained|arm64.ActiveCfg = Release Self-Contained|arm64
+		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release Self-Contained|arm64.Build.0 = Release Self-Contained|arm64
+		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release Self-Contained|x64.ActiveCfg = Release Self-Contained|x64
+		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release Self-Contained|x64.Build.0 = Release Self-Contained|x64
 		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release|arm64.ActiveCfg = Release|arm64
 		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release|arm64.Build.0 = Release|arm64
 		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release|x64.ActiveCfg = Release|x64
@@ -35,10 +37,10 @@ Global
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Debug|arm64.Build.0 = Debug|arm64
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Debug|x64.ActiveCfg = Debug|x64
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Debug|x64.Build.0 = Debug|x64
-		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release Installer and Portable|arm64.ActiveCfg = Release Portable|arm64
-		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release Installer and Portable|arm64.Build.0 = Release Portable|arm64
-		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release Installer and Portable|x64.ActiveCfg = Release Portable|x64
-		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release Installer and Portable|x64.Build.0 = Release Portable|x64
+		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release Self-Contained|arm64.ActiveCfg = Release Self-Contained|arm64
+		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release Self-Contained|arm64.Build.0 = Release Self-Contained|arm64
+		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release Self-Contained|x64.ActiveCfg = Release Self-Contained|x64
+		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release Self-Contained|x64.Build.0 = Release Self-Contained|x64
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release|arm64.ActiveCfg = Release|arm64
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release|arm64.Build.0 = Release|arm64
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release|x64.ActiveCfg = Release|x64
@@ -47,14 +49,26 @@ Global
 		{5718734C-03AC-4954-89B1-1723CF03AF10}.Debug|arm64.Build.0 = Debug|Any CPU
 		{5718734C-03AC-4954-89B1-1723CF03AF10}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{5718734C-03AC-4954-89B1-1723CF03AF10}.Debug|x64.Build.0 = Debug|Any CPU
-		{5718734C-03AC-4954-89B1-1723CF03AF10}.Release Installer and Portable|arm64.ActiveCfg = Release|Any CPU
-		{5718734C-03AC-4954-89B1-1723CF03AF10}.Release Installer and Portable|arm64.Build.0 = Release|Any CPU
-		{5718734C-03AC-4954-89B1-1723CF03AF10}.Release Installer and Portable|x64.ActiveCfg = Release|Any CPU
-		{5718734C-03AC-4954-89B1-1723CF03AF10}.Release Installer and Portable|x64.Build.0 = Release|Any CPU
+		{5718734C-03AC-4954-89B1-1723CF03AF10}.Release Self-Contained|arm64.ActiveCfg = Release|Any CPU
+		{5718734C-03AC-4954-89B1-1723CF03AF10}.Release Self-Contained|arm64.Build.0 = Release|Any CPU
+		{5718734C-03AC-4954-89B1-1723CF03AF10}.Release Self-Contained|x64.ActiveCfg = Release|Any CPU
+		{5718734C-03AC-4954-89B1-1723CF03AF10}.Release Self-Contained|x64.Build.0 = Release|Any CPU
 		{5718734C-03AC-4954-89B1-1723CF03AF10}.Release|arm64.ActiveCfg = Release|Any CPU
 		{5718734C-03AC-4954-89B1-1723CF03AF10}.Release|arm64.Build.0 = Release|Any CPU
 		{5718734C-03AC-4954-89B1-1723CF03AF10}.Release|x64.ActiveCfg = Release|Any CPU
 		{5718734C-03AC-4954-89B1-1723CF03AF10}.Release|x64.Build.0 = Release|Any CPU
+		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Debug|arm64.ActiveCfg = Debug|arm64
+		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Debug|arm64.Build.0 = Debug|arm64
+		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Debug|x64.ActiveCfg = Debug|x64
+		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Debug|x64.Build.0 = Debug|x64
+		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Release Self-Contained|arm64.ActiveCfg = Release|arm64
+		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Release Self-Contained|arm64.Build.0 = Release|arm64
+		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Release Self-Contained|x64.ActiveCfg = Release|x64
+		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Release Self-Contained|x64.Build.0 = Release|x64
+		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Release|arm64.ActiveCfg = Release|arm64
+		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Release|arm64.Build.0 = Release|arm64
+		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Release|x64.ActiveCfg = Release|x64
+		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

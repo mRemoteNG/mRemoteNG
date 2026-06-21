@@ -1,5 +1,6 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.Security.SymmetricEncryption;
+using System;
 using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.DatabaseConnectors
@@ -22,14 +23,13 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         public static IDatabaseConnector DatabaseConnector(string type, string server, string database, string username, string password)
         {
-            switch (type)
+            return type switch
             {
-                case "mysql":
-                    return new MySqlDatabaseConnector(server, database, username, password);
-                case "mssql":
-                default:
-                    return new MSSqlDatabaseConnector(server, database, username, password);
-            }
+                "mysql" => new MySqlDatabaseConnector(server, database, username, password),
+                "odbc" => throw new NotSupportedException("ODBC database connections are not supported for schema initialization. Please use a supported database backend."),
+                "mssql" => new MSSqlDatabaseConnector(server, database, username, password),
+                _ => new MSSqlDatabaseConnector(server, database, username, password)
+            };
         }
     }
 }

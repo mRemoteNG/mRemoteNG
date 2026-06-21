@@ -5,6 +5,10 @@ Common External Tool Configurations
 The list below of various examples is by no means a full list of ways to use
 **External Tools** but gives you a idea of how it can be used in different ways.
 
+.. note::
+   These examples use variables like %HOSTNAME%, %USERNAME%, etc. 
+   For a complete list of available variables, see the :ref:`variables_reference` page.
+
 Ping
 ====
 Ping a server via cmdline.

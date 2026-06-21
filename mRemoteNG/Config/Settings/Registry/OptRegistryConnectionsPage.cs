@@ -44,6 +44,11 @@ namespace mRemoteNG.Config.Settings.Registry
         public WinRegistryEntry<bool> DoNotTrimUsername { get; private set; }
 
         /// <summary>
+        /// Specifies whether Explorer-style slow-click rename is enabled in the connection tree.
+        /// </summary>
+        public WinRegistryEntry<bool> SlowClickRenameEnabled { get; private set; }
+
+        /// <summary>
         /// Specifies the number of RDP reconnections.
         /// </summary>
         public WinRegistryEntry<int> RdpReconnectionCount { get; private set; }
@@ -70,6 +75,7 @@ namespace mRemoteNG.Config.Settings.Registry
             UseFilterSearch = new WinRegistryEntry<bool>(hive, subKey, nameof(UseFilterSearch)).Read();
             PlaceSearchBarAboveConnectionTree = new WinRegistryEntry<bool>(hive, subKey, nameof(PlaceSearchBarAboveConnectionTree)).Read();
             DoNotTrimUsername = new WinRegistryEntry<bool>(hive, subKey, nameof(DoNotTrimUsername)).Read();
+            SlowClickRenameEnabled = new WinRegistryEntry<bool>(hive, subKey, nameof(SlowClickRenameEnabled)).Read();
             RdpReconnectionCount = new WinRegistryEntry<int>(hive, subKey, nameof(RdpReconnectionCount)).Read();
             ConRDPOverallConnectionTimeout = new WinRegistryEntry<int>(hive, subKey, nameof(ConRDPOverallConnectionTimeout)).Read();
             AutoSaveEveryMinutes = new WinRegistryEntry<int>(hive, subKey, nameof(AutoSaveEveryMinutes)).Read();
@@ -110,6 +116,7 @@ namespace mRemoteNG.Config.Settings.Registry
             ApplyUseFilterSearch();
             ApplyPlaceSearchBarAboveConnectionTree();
             ApplyDoNotTrimUsername();
+            ApplySlowClickRenameEnabled();
             ApplyRdpReconnectionCount();
             ApplyConRDPOverallConnectionTimeout();
             ApplyAutoSaveEveryMinutes();
@@ -155,6 +162,12 @@ namespace mRemoteNG.Config.Settings.Registry
         {
             if (DoNotTrimUsername.IsSet)
                 Properties.Settings.Default.DoNotTrimUsername = DoNotTrimUsername.Value;
+        }
+
+        private void ApplySlowClickRenameEnabled()
+        {
+            if (SlowClickRenameEnabled.IsSet)
+                Properties.Settings.Default.SlowClickRenameEnabled = SlowClickRenameEnabled.Value;
         }
 
         private void ApplyRdpReconnectionCount()

@@ -3,11 +3,15 @@
   <PropertyGroup>
     <Platforms>x64;arm64</Platforms>
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <TransformOnBuild>true</TransformOnBuild>
+    <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
+    <OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
     <ApplicationIcon>Icons\mRemoteNG.ico</ApplicationIcon>
     <Version>1.78.2-dev</Version>
     <Description>Multi-protocol remote connections manager</Description>
@@ -15,13 +19,13 @@
     <PackageLicenseFile>COPYING.TXT</PackageLicenseFile>
     <PackageProjectUrl>https://mremoteng.org/</PackageProjectUrl>
     <Platforms>x64;arm64</Platforms>
-    <Configurations>Debug;Release;Debug Portable;Release Portable;Release Installer;Deploy to github</Configurations>
+    <Configurations>Debug;Release;Release Self-Contained;Deploy to github</Configurations>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>latest</LangVersion>
     <PackageIcon>Header_dark.png</PackageIcon>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UseWPF>True</UseWPF>
-    <SupportedOSPlatformVersion>10.0.26100.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <SignAssembly>False</SignAssembly>
     <Title>Multi-Remote Next Generation Connection Manager</Title>
     <RepositoryUrl>https://github.com/mRemoteNG/mRemoteNG.git</RepositoryUrl>
@@ -69,55 +73,40 @@
     <WarningLevel>8</WarningLevel>
     <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Portable|x64'">
-    <DefineConstants>DEBUG;PORTABLE</DefineConstants>
-    <Optimize>False</Optimize>
-    <OutputPath>bin\x64\Debug Portable\</OutputPath>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <WarningsAsErrors />
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-    <WarningLevel>8</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Portable|arm64'">
-    <DefineConstants>DEBUG;PORTABLE</DefineConstants>
-    <Optimize>False</Optimize>
-    <OutputPath>bin\arm64\Debug Portable\</OutputPath>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <WarningsAsErrors />
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-    <WarningLevel>8</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Portable|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Self-Contained|x64'">
     <DefineConstants>PORTABLE</DefineConstants>
     <Optimize>True</Optimize>
-    <OutputPath>bin\x64\Release Portable\</OutputPath>
+    <PublishDir>bin\x64\Publish Self-Contained\</PublishDir>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <WarningLevel>8</WarningLevel>
     <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <CopyBuildOutputToPublishDirectory>true</CopyBuildOutputToPublishDirectory>
+    <CopyOutputSymbolsToPublishDirectory>false</CopyOutputSymbolsToPublishDirectory>
+    <RunCommand></RunCommand>
+    <RunArguments></RunArguments>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Portable|arm64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Self-Contained|arm64'">
     <DefineConstants>PORTABLE</DefineConstants>
     <Optimize>True</Optimize>
-    <OutputPath>bin\arm64\Release Portable\</OutputPath>
+    <OutputPath>bin\arm64\Release Self-Contained\</OutputPath>
+    <PublishDir>bin\arm64\Publish Self-Contained\</PublishDir>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <WarningLevel>8</WarningLevel>
     <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Installer|x64'">
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-    <Optimize>True</Optimize>
-    <WarningLevel>8</WarningLevel>
-    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Installer|arm64'">
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-    <Optimize>True</Optimize>
-    <WarningLevel>8</WarningLevel>
-    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-arm64</RuntimeIdentifier>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <CopyBuildOutputToPublishDirectory>true</CopyBuildOutputToPublishDirectory>
+    <CopyOutputSymbolsToPublishDirectory>false</CopyOutputSymbolsToPublishDirectory>
+    <RunCommand></RunCommand>
+    <RunArguments></RunArguments>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="buildenv.tmp" />
@@ -136,72 +125,21 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" />
-    <PackageReference Include="Castle.Core" />
     <PackageReference Include="ConsoleControl" />
-    <PackageReference Include="Cucumber.Messages" />
     <PackageReference Include="DockPanelSuite" />
     <PackageReference Include="DockPanelSuite.ThemeVS2015" />
-    <PackageReference Include="Google.Protobuf" />
-    <PackageReference Include="LiteDB" />
     <PackageReference Include="log4net" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" />
     <PackageReference Include="Microsoft.Data.SqlClient" />
+    <PackageReference Include="Microsoft.Data.Sqlite" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
-    <PackageReference Include="Microsoft.NETCore.Platforms" />
-    <PackageReference Include="Microsoft.NETCore.Targets" />
-    <PackageReference Include="Microsoft.VisualStudio.TextTemplating.VSHost" />
     <PackageReference Include="Microsoft.Web.WebView2" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" />
     <PackageReference Include="MySql.Data" />
-    <PackageReference Include="NETStandard.Library" />
+    <PackageReference Include="System.Data.Odbc" />
     <PackageReference Include="Newtonsoft.Json" />
-    <PackageReference Include="Newtonsoft.Json.Schema" />
-    <PackageReference Include="OpenCover" />
-    <PackageReference Include="Renci.SshNet.Async" />
-    <PackageReference Include="ReportGenerator" />
-    <PackageReference Include="runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.native.System" />
-    <PackageReference Include="runtime.native.System.IO.Compression" />
-    <PackageReference Include="runtime.native.System.Net.Http" />
-    <PackageReference Include="runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.opensuse.42.1-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl" />
     <PackageReference Include="SSH.NET" />
-    <PackageReference Include="System.Collections.Immutable" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" />
-    <PackageReference Include="System.Console" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" />
-    <PackageReference Include="System.Diagnostics.EventLog" />
-    <PackageReference Include="System.DirectoryServices" />
-    <PackageReference Include="System.Drawing.Common" />
-    <PackageReference Include="System.Formats.Asn1" />
-    <PackageReference Include="System.IO.Pipelines" />
     <PackageReference Include="System.Management" />
-    <PackageReference Include="System.Net.Primitives" />
-    <PackageReference Include="System.Net.Sockets" />
-    <PackageReference Include="System.Reflection.Emit" />
-    <PackageReference Include="System.Reflection.Emit.ILGeneration" />
-    <PackageReference Include="System.Reflection.Emit.Lightweight" />
-    <PackageReference Include="System.Reflection.Metadata" />
-    <PackageReference Include="System.Resources.ResourceManager" />
-    <PackageReference Include="System.Runtime.Extensions" />
-    <PackageReference Include="System.Security.AccessControl" />
-    <PackageReference Include="System.Security.Cryptography.Algorithms" />
-    <PackageReference Include="System.Security.Cryptography.Cng" />
-    <PackageReference Include="System.Security.Cryptography.OpenSsl" />
-    <PackageReference Include="System.Security.Cryptography.ProtectedData" />
-    <PackageReference Include="System.Security.Cryptography.X509Certificates" />
-    <PackageReference Include="System.Security.Permissions" />
-    <PackageReference Include="System.Security.Principal.Windows" />
-    <PackageReference Include="System.Text.Encoding.CodePages" />
-    <PackageReference Include="System.Text.Json" />
-    <PackageReference Include="System.Text.RegularExpressions" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" />
-    <PackageReference Include="System.Windows.Extensions" />
-    <PackageReference Include="System.Xml.ReaderWriter" />
     <PackageReference Include="VncSharpCore" />
     <PackageReference Include="VtNetCore" />
     <PackageReference Include="ZstdSharp.Port" />
@@ -334,6 +272,11 @@
     <Compile Update="UI\Forms\OptionsPages\UpdatesPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <T4ParameterValues Include="platformType">
+      <Value>$(Platform)</Value>
+    </T4ParameterValues>
   </ItemGroup>
   <ItemGroup>
     <None Update="Properties\AssemblyInfo.tt">
@@ -602,10 +545,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="141.0.11" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="148.0.9" />
   </ItemGroup>
   <ItemGroup Condition="'$(Platform)'=='arm64'">
-    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="141.0.11" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="148.0.9" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
@@ -635,4 +578,15 @@
     <!-- Disable CET compatibility check in .NET 9 AppHost -->
     <CETCompat>false</CETCompat>
   </PropertyGroup>
+  <Target Name="PublishAfterBuild" AfterTargets="Build" Condition="'$(Configuration)' == 'Release Self-Contained'">
+    <Message Text="Publishing self-contained application for $(Platform)..." Importance="high" />
+    <MSBuild Projects="$(MSBuildProjectFile)" Targets="Publish" Properties="Configuration=$(Configuration);Platform=$(Platform);NoBuild=true;NoRestore=true" />
+    <PropertyGroup>
+      <TempBuildDir>$([System.IO.Path]::GetFullPath('$(OutputPath)'))</TempBuildDir>
+    </PropertyGroup>
+    <Message Text="Cleaning up temporary build directory: $(TempBuildDir)" Importance="high" />
+    <RemoveDir Directories="$(TempBuildDir)" />
+    <RemoveDir Directories="$(ProjectDir)bin\x64\Release Self-Contained" />
+  </Target>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets" />
 </Project>

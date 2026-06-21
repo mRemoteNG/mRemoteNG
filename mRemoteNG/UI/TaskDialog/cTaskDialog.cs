@@ -49,7 +49,6 @@ namespace mRemoteNG.UI.TaskDialog
 
             using (frmTaskDialog td = new())
             {
-                DisplayProperties display = new();
                 td.Title = title;
                 td.MainInstruction = mainInstruction;
                 td.Content = content;
@@ -61,7 +60,7 @@ namespace mRemoteNG.UI.TaskDialog
                 td.MainIcon = mainIcon;
                 td.FooterIcon = footerIcon;
                 td.VerificationText = verificationText;
-                td.Width = display.ScaleWidth(EmulatedFormWidth);
+                td.Width = EmulatedFormWidth;
                 td.DefaultButtonIndex = defaultIndex;
                 td.BuildForm();
                 result = td.ShowDialog(owner);

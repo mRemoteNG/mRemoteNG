@@ -27,7 +27,7 @@ namespace mRemoteNG.UI.Controls
         private MrngLabel label2;
         private MrngLabel label3;
         private ToolTip toolTip1;
-        private System.ComponentModel.IContainer components;
+        private System.ComponentModel.Container components;
 
         /* Sets and Gets the tooltiptext on toolTip1 */
         public string ToolTipText
@@ -46,7 +46,7 @@ namespace mRemoteNG.UI.Controls
         }
 
         /* Set or Get the string that represents the value in the box */
-        public override string? Text
+        public override string Text
         {
             get => (Octet1.Text ?? string.Empty) + @"." + (Octet2.Text ?? string.Empty) + @"." + (Octet3.Text ?? string.Empty) + @"." + (Octet4.Text ?? string.Empty);
             set
@@ -119,9 +119,7 @@ namespace mRemoteNG.UI.Controls
         {
             if (disposing)
             {
-                // ReSharper disable once UseNullPropagation
-                if (components != null)
-                    components.Dispose();
+                components?.Dispose();
             }
 
             base.Dispose(disposing);

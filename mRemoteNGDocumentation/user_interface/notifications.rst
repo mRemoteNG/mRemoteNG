@@ -37,7 +37,7 @@ Popups settings
 
 .. figure:: /images/notifications_popup.png
 
-When items are selected here you will recieve a popup on the error that occurrs
+When items are selected here you will receive a popup on the error that occurs
 based on level chosen in settings here.
 This can be useful if you do not want to use the notification area
-and only get a popup if error occurs. (**default**: all off)
+and only get a popup if error occurs. (**default**: Errors enabled, Debug/Info/Warning disabled)

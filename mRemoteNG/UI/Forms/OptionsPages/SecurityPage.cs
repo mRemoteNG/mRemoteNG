@@ -51,6 +51,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             labelKdfIterations.Text = Language.EncryptionKeyDerivationIterations;
             groupAdvancedSecurityOptions.Text = Language.AdvancedSecurityOptions;
             btnTestSettings.Text = Language.TestSettings;
+            groupPasswordGenerator.Text = Language.SecureKeyGenerator;
+            btnPasswdGenerator.Text = Language.CopyToClipboard;
+            lblPasswdGenDescription.Text = Language.PasswdGenDescription;
             lblRegistrySettingsUsedInfo.Text = Language.OptionsCompanyPolicyMessage;
         }
 

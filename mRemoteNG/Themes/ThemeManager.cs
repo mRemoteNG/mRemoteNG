@@ -22,10 +22,10 @@ namespace mRemoteNG.Themes
     {
         #region Private Variables
 
-        private ThemeInfo _activeTheme;
-        private Hashtable themes;
+        private ThemeInfo _activeTheme = null!; // set by SetActive() in the constructor
+        private Hashtable themes = null!;       // set by LoadThemes() in the constructor
         private bool _themeActive;
-        private static ThemeManager themeInstance;
+        private static ThemeManager? themeInstance;
         private readonly string themePath = App.Info.SettingsFileInfo.ThemeFolder;
 
         #endregion
@@ -41,8 +41,8 @@ namespace mRemoteNG.Themes
 
         private void SetActive()
         {
-            if (themes[Properties.OptionsThemePage.Default.ThemeName] != null)
-                ActiveTheme = (ThemeInfo)themes[Properties.OptionsThemePage.Default.ThemeName];
+            if (themes[Properties.OptionsThemePage.Default.ThemeName] is ThemeInfo savedTheme)
+                ActiveTheme = savedTheme;
             else
             {
                 ActiveTheme = DefaultTheme;
@@ -66,11 +66,9 @@ namespace mRemoteNG.Themes
         }
 
 
-        public ThemeInfo getTheme(string themeName)
+        public ThemeInfo? getTheme(string themeName)
         {
-            if (themes[themeName] != null)
-                return (ThemeInfo)themes[themeName];
-            return null;
+            return themes[themeName] as ThemeInfo;
         }
 
         private bool ThemeDirExists()
@@ -103,7 +101,7 @@ namespace mRemoteNG.Themes
             return false;
         }
 
-        private ThemeInfo LoadDefaultTheme()
+        private ThemeInfo? LoadDefaultTheme()
         {
             try
             {
@@ -149,7 +147,9 @@ namespace mRemoteNG.Themes
                     string[] themeFiles = Directory.GetFiles(themePath, "*.vstheme");
 
                     //First we load the default base theme, its vs2015lightNG
-                    ThemeInfo defaultTheme = LoadDefaultTheme();
+                    ThemeInfo? defaultTheme = LoadDefaultTheme();
+                    if (defaultTheme == null)
+                        return themes.Values.OfType<ThemeInfo>().ToList();
                     themes.Add(defaultTheme.Name, defaultTheme);
                     //Then the rest
                     foreach (string themeFile in themeFiles)
@@ -170,12 +170,23 @@ namespace mRemoteNG.Themes
                     //Load the embedded themes, extended palettes are taken from the vs2015 themes, trying to match the color theme
 
                     // 2015
-                    ThemeInfo vs2015Light = new("vs2015Light", new VS2015LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)themes["vs2015lightNG"]).ExtendedPalette);
-                    themes.Add(vs2015Light.Name, vs2015Light);
-                    ThemeInfo vs2015Dark = new("vs2015Dark", new VS2015DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)themes["vs2015darkNG"]).ExtendedPalette);
-                    themes.Add(vs2015Dark.Name, vs2015Dark);
-                    ThemeInfo vs2015Blue = new("vs2015Blue", new VS2015BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)themes["vs2015blueNG"]).ExtendedPalette);
-                    themes.Add(vs2015Blue.Name, vs2015Blue);
+                    if (themes["vs2015lightNG"] is ThemeInfo lightBase)
+                    {
+                        ThemeInfo vs2015Light = new("vs2015Light", new VS2015LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, lightBase.ExtendedPalette);
+                        themes.Add(vs2015Light.Name, vs2015Light);
+                    }
+
+                    if (themes["vs2015darkNG"] is ThemeInfo darkBase)
+                    {
+                        ThemeInfo vs2015Dark = new("vs2015Dark", new VS2015DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, darkBase.ExtendedPalette);
+                        themes.Add(vs2015Dark.Name, vs2015Dark);
+                    }
+
+                    if (themes["vs2015blueNG"] is ThemeInfo blueBase)
+                    {
+                        ThemeInfo vs2015Blue = new("vs2015Blue", new VS2015BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, blueBase.ExtendedPalette);
+                        themes.Add(vs2015Blue.Name, vs2015Blue);
+                    }
                 }
             }
             catch (Exception ex)
@@ -192,7 +203,7 @@ namespace mRemoteNG.Themes
         /// <param name="baseTheme"></param>
         /// <param name="newThemeName"></param>
         /// <returns></returns>
-        public ThemeInfo addTheme(ThemeInfo baseTheme, string newThemeName)
+        public ThemeInfo? addTheme(ThemeInfo baseTheme, string newThemeName)
         {
             if (themes.Contains(newThemeName)) return null;
             ThemeInfo modifiedTheme = (ThemeInfo)baseTheme.Clone();
@@ -241,12 +252,12 @@ namespace mRemoteNG.Themes
 
         public delegate void ThemeChangedEventHandler();
 
-        private ThemeChangedEventHandler ThemeChangedEvent;
+        private ThemeChangedEventHandler? ThemeChangedEvent;
 
         public event ThemeChangedEventHandler ThemeChanged
         {
-            add => ThemeChangedEvent = (ThemeChangedEventHandler)Delegate.Combine(ThemeChangedEvent, value);
-            remove => ThemeChangedEvent = (ThemeChangedEventHandler)Delegate.Remove(ThemeChangedEvent, value);
+            add => ThemeChangedEvent = (ThemeChangedEventHandler?)Delegate.Combine(ThemeChangedEvent, value);
+            remove => ThemeChangedEvent = (ThemeChangedEventHandler?)Delegate.Remove(ThemeChangedEvent, value);
         }
 
         // ReSharper disable once UnusedParameter.Local
@@ -277,10 +288,9 @@ namespace mRemoteNG.Themes
         }
 
         public ThemeInfo DefaultTheme =>
-            themes != null && ThemesCount > 0
-                ? (ThemeInfo)themes["vs2015Light"]
-                : new ThemeInfo("vs2015Light", new VS2015LightTheme(), "",
-                                VisualStudioToolStripExtender.VsVersion.Vs2015);
+            (themes != null && ThemesCount > 0 ? themes["vs2015Light"] as ThemeInfo : null)
+            ?? new ThemeInfo("vs2015Light", new VS2015LightTheme(), "",
+                             VisualStudioToolStripExtender.VsVersion.Vs2015);
 
         public ThemeInfo ActiveTheme
         {

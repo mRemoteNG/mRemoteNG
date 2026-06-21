@@ -55,7 +55,6 @@ namespace mRemoteNG.Config.Settings
                 SetShowSystemTrayIcon();
                 SetAutoSave();
                 LoadExternalAppsFromXml();
-                SetAlwaysShowPanelTabs();
 
                 if (Properties.App.Default.ResetToolbars)
                     SetToolbarsDefault();
@@ -66,12 +65,6 @@ namespace mRemoteNG.Config.Settings
             {
                 _messageCollector.AddExceptionMessage("Loading settings failed", ex);
             }
-        }
-
-        private static void SetAlwaysShowPanelTabs()
-        {
-            if (Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelTabs)
-                FrmMain.Default.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
         }
 
 

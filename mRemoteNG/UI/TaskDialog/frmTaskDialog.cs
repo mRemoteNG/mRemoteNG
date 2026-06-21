@@ -24,13 +24,18 @@ namespace mRemoteNG.UI.TaskDialog
             new("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
         private readonly List<MrngRadioButton> _radioButtonCtrls = [];
-        private readonly DisplayProperties _display = new();
+        private readonly List<CommandButton> _commandButtonCtrls = [];
         private Control _focusControl;
 
         private bool _isVista = false;
 
         private int _mainInstructionLeftMargin;
         private int _mainInstructionRightMargin;
+
+        // Design-time size of imgMain at 96 DPI
+        private const int DesignImgMainSize = 32;
+
+        private bool _themeApplied;
 
         #endregion
 
@@ -144,9 +149,33 @@ namespace mRemoteNG.UI.TaskDialog
 
         public void BuildForm()
         {
+            // Force handle creation so DeviceDpi is accurate and any initial
+            // auto-scaling is applied before we compute the layout.
+            _ = Handle;
+
+            // Reset focus control for this rebuild to ensure it's properly reassigned
+            // This prevents stale references to disposed controls after rebuilds
+            _focusControl = null;
+
+            // Clean up previously created dynamic controls (idempotent rebuild)
+            foreach (var rb in _radioButtonCtrls)
+            {
+                pnlRadioButtons.Controls.Remove(rb);
+                rb.Dispose();
+            }
+            _radioButtonCtrls.Clear();
+
+            foreach (var cb in _commandButtonCtrls)
+            {
+                cb.Click -= CommandButton_Click;
+                pnlCommandButtons.Controls.Remove(cb);
+                cb.Dispose();
+            }
+            _commandButtonCtrls.Clear();
+
             int formHeight = 0;
-            imgMain.Width = _display.ScaleWidth(imgMain.Width);
-            imgMain.Height = _display.ScaleHeight(imgMain.Height);
+            imgMain.Width = LogicalToDeviceUnits(DesignImgMainSize);
+            imgMain.Height = LogicalToDeviceUnits(DesignImgMainSize);
 
             // Setup Main Instruction
             switch (MainIcon)
@@ -170,10 +199,10 @@ namespace mRemoteNG.UI.TaskDialog
             lbMainInstruction.Text = _mainInstruction;
             lbMainInstruction.Font = _mainInstructionFont;
             AdjustLabelHeight(lbMainInstruction);
-            pnlMainInstruction.Height = Math.Max(41, lbMainInstruction.Height + _display.ScaleHeight(16));
+            pnlMainInstruction.Height = Math.Max(LogicalToDeviceUnits(41), lbMainInstruction.Height + LogicalToDeviceUnits(16));
 
-            _mainInstructionLeftMargin = imgMain.Left + imgMain.Width + _display.ScaleWidth(imgMain.Padding.Right);
-            _mainInstructionRightMargin = _display.ScaleWidth(8);
+            _mainInstructionLeftMargin = imgMain.Left + imgMain.Width + LogicalToDeviceUnits(imgMain.Padding.Right);
+            _mainInstructionRightMargin = LogicalToDeviceUnits(8);
             formHeight += pnlMainInstruction.Height;
 
             // Setup Content
@@ -181,7 +210,7 @@ namespace mRemoteNG.UI.TaskDialog
             if (Content != "")
             {
                 AdjustLabelHeight(lbContent);
-                pnlContent.Height = lbContent.Height + _display.ScaleHeight(4);
+                pnlContent.Height = lbContent.Height + LogicalToDeviceUnits(4);
                 formHeight += pnlContent.Height;
             }
 
@@ -193,18 +222,18 @@ namespace mRemoteNG.UI.TaskDialog
             {
                 pnlExpandedInfo.Visible = false;
                 lbShowHideDetails.Visible = false;
-                cbVerify.Top = _display.ScaleHeight(12);
-                pnlButtons.Height = _display.ScaleHeight(40);
+                cbVerify.Top = LogicalToDeviceUnits(12);
+                pnlButtons.Height = LogicalToDeviceUnits(40);
             }
             else
             {
                 AdjustLabelHeight(lbExpandedInfo);
-                pnlExpandedInfo.Height = lbExpandedInfo.Height + _display.ScaleHeight(4);
+                pnlExpandedInfo.Height = lbExpandedInfo.Height + LogicalToDeviceUnits(4);
                 pnlExpandedInfo.Visible = Expanded;
                 lbShowHideDetails.Text = Expanded ? "        Hide details" : "        Show details";
                 lbShowHideDetails.ImageIndex = Expanded ? 0 : 3;
                 if (!showVerifyCheckbox)
-                    pnlButtons.Height = _display.ScaleHeight(40);
+                    pnlButtons.Height = LogicalToDeviceUnits(40);
                 if (Expanded)
                     formHeight += pnlExpandedInfo.Height;
             }
@@ -214,15 +243,15 @@ namespace mRemoteNG.UI.TaskDialog
             if (RadioButtons != "")
             {
                 string[] arr = RadioButtons.Split('|');
-                int pnlHeight = _display.ScaleHeight(12);
+                int pnlHeight = LogicalToDeviceUnits(12);
                 for (int i = 0; i < arr.Length; i++)
                 {
                     MrngRadioButton rb = new() { Parent = pnlRadioButtons};
-                    rb.Location = new Point(_display.ScaleWidth(60), _display.ScaleHeight(4) + i * rb.Height);
+                    rb.Location = new Point(LogicalToDeviceUnits(60), LogicalToDeviceUnits(4) + i * rb.Height);
                     rb.Text = arr[i];
                     rb.Tag = i;
                     rb.Checked = DefaultButtonIndex == i;
-                    rb.Width = Width - rb.Left - _display.ScaleWidth(15);
+                    rb.Width = Width - rb.Left - LogicalToDeviceUnits(15);
                     pnlHeight += rb.Height;
                     _radioButtonCtrls.Add(rb);
                 }
@@ -236,22 +265,23 @@ namespace mRemoteNG.UI.TaskDialog
             if (CommandButtons != "")
             {
                 string[] arr = CommandButtons.Split('|');
-                int t = _display.ScaleHeight(8);
-                int pnlHeight = _display.ScaleHeight(16);
+                int t = LogicalToDeviceUnits(8);
+                int pnlHeight = LogicalToDeviceUnits(16);
                 for (int i = 0; i < arr.Length; i++)
                 {
                     CommandButton btn = new()
                     {
-                        Parent = pnlCommandButtons, Location = new Point(_display.ScaleWidth(50), t)
+                        Parent = pnlCommandButtons, Location = new Point(LogicalToDeviceUnits(50), t)
                     };
                     if (_isVista) // <- tweak font if vista
                         btn.Font = new Font(btn.Font, FontStyle.Regular);
                     btn.Text = arr[i];
-                    btn.Size = new Size(Width - btn.Left - _display.ScaleWidth(15), btn.GetBestHeight());
+                    btn.Size = new Size(Width - btn.Left - LogicalToDeviceUnits(15), btn.GetBestHeight());
                     t += btn.Height;
                     pnlHeight += btn.Height;
                     btn.Tag = i;
                     btn.Click += CommandButton_Click;
+                    _commandButtonCtrls.Add(btn);
                     if (i == DefaultButtonIndex)
                         _focusControl = btn;
                 }
@@ -271,6 +301,7 @@ namespace mRemoteNG.UI.TaskDialog
                     bt3.DialogResult = DialogResult.No;
                     AcceptButton = bt2;
                     CancelButton = bt3;
+                    _focusControl = bt2;
                     break;
                 case ETaskDialogButtons.YesNoCancel:
                     bt1.Text = Language.Yes;
@@ -281,6 +312,7 @@ namespace mRemoteNG.UI.TaskDialog
                     bt3.DialogResult = DialogResult.Cancel;
                     AcceptButton = bt1;
                     CancelButton = bt3;
+                    _focusControl = bt1;
                     break;
                 case ETaskDialogButtons.OkCancel:
                     bt1.Visible = false;
@@ -290,6 +322,7 @@ namespace mRemoteNG.UI.TaskDialog
                     bt3.DialogResult = DialogResult.Cancel;
                     AcceptButton = bt2;
                     CancelButton = bt3;
+                    _focusControl = bt2;
                     break;
                 case ETaskDialogButtons.Ok:
                     bt1.Visible = false;
@@ -298,6 +331,7 @@ namespace mRemoteNG.UI.TaskDialog
                     bt3.DialogResult = DialogResult.OK;
                     AcceptButton = bt3;
                     CancelButton = bt3;
+                    _focusControl = bt3;
                     break;
                 case ETaskDialogButtons.Close:
                     bt1.Visible = false;
@@ -305,6 +339,7 @@ namespace mRemoteNG.UI.TaskDialog
                     bt3.Text = Language._Close;
                     bt3.DialogResult = DialogResult.Cancel;
                     CancelButton = bt3;
+                    _focusControl = bt3;
                     break;
                 case ETaskDialogButtons.Cancel:
                     bt1.Visible = false;
@@ -312,6 +347,7 @@ namespace mRemoteNG.UI.TaskDialog
                     bt3.Text = Language._Cancel;
                     bt3.DialogResult = DialogResult.Cancel;
                     CancelButton = bt3;
+                    _focusControl = bt3;
                     break;
                 case ETaskDialogButtons.None:
                     bt1.Visible = false;
@@ -336,7 +372,7 @@ namespace mRemoteNG.UI.TaskDialog
             if (Footer != "")
             {
                 AdjustLabelHeight(lbFooter);
-                pnlFooter.Height = Math.Max(_display.ScaleHeight(28), lbFooter.Height + _display.ScaleHeight(16));
+                pnlFooter.Height = Math.Max(LogicalToDeviceUnits(28), lbFooter.Height + LogicalToDeviceUnits(16));
                 switch (FooterIcon)
                 {
                     case ESysIcons.Information:
@@ -361,7 +397,11 @@ namespace mRemoteNG.UI.TaskDialog
             ClientSize = new Size(ClientSize.Width, formHeight);
 
             _formBuilt = true;
-            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            if (!_themeApplied)
+            {
+                ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+                _themeApplied = true;
+            }
             ApplyTheme();
         }
 
@@ -402,8 +442,8 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         private Image ResizeBitmap(Image srcImg, int newWidth, int newHeight)
         {
-            float percentWidth = _display.ScaleWidth(newWidth) / (float)srcImg.Width;
-            float percentHeight = _display.ScaleHeight(newHeight) / (float)srcImg.Height;
+            float percentWidth = LogicalToDeviceUnits(newWidth) / (float)srcImg.Width;
+            float percentHeight = LogicalToDeviceUnits(newHeight) / (float)srcImg.Height;
 
             float resizePercent = percentHeight < percentWidth ? percentHeight : percentWidth;
 
@@ -448,6 +488,14 @@ namespace mRemoteNG.UI.TaskDialog
             DialogResult = DialogResult.OK;
         }
 
+
+        //--------------------------------------------------------------------------------
+        protected override void OnDpiChanged(DpiChangedEventArgs e)
+        {
+            base.OnDpiChanged(e);
+            if (_formBuilt)
+                BuildForm();
+        }
 
         //--------------------------------------------------------------------------------
         protected override void OnShown(EventArgs e)
@@ -517,7 +565,9 @@ namespace mRemoteNG.UI.TaskDialog
                 }
             }
 
-            _focusControl?.Focus();
+            // Focus the default button, with safety checks for validity
+            if (_focusControl != null && !_focusControl.IsDisposed && _focusControl.CanFocus)
+                _focusControl.Focus();
         }
 
         #endregion

@@ -13,8 +13,18 @@ public class OnePasswordCliException(string message, string arguments) : Excepti
 public class OnePasswordCli
 {
 	private const string OnePasswordCliExecutable = "op.exe";
+
+	// Username / password purpose metadata is used on Login category item fields
 	private const string UserNamePurpose = "USERNAME";
 	private const string PasswordPurpose = "PASSWORD";
+	
+	// Server category items (and perhaps others) do have a built-in username/password field but don't have the `purpose` set
+	// and because it's a built-in field this can't be set afterwards.
+	// We use the label for as fallback because that can be user-modified to fit this convention in all cases.
+	private const string UserNameLabel = "username";
+	private const string PasswordLabel = "password";
+	
+	
 	private const string StringType = "STRING";
 	private const string SshKeyType = "SSHKEY";
 	private const string DomainLabel = "domain";
@@ -41,45 +51,59 @@ public class OnePasswordCli
 	}
 
 	private static void ItemGet(string item, string? vault, string? account, out string username, out string password, out string domain, out string privateKey)
-	{
-		var args = new List<string> { "item", "get", item };
+    {
+        var args = new List<string> { "item", "get", item };
 
-		if (!string.IsNullOrEmpty(account))
+        if (!string.IsNullOrEmpty(account))
+        {
+            args.Add("--account");
+            args.Add(account);
+        }
+
+        if (!string.IsNullOrEmpty(vault))
+        {
+            args.Add("--vault");
+            args.Add(vault);
+        }
+
+        args.Add("--format");
+        args.Add("json");
+
+		string commandLine = OnePasswordCliExecutable + " " + string.Join(' ', args);
+            
+        var exitCode = RunCommand(OnePasswordCliExecutable, args, out var output, out var error);
+        if (exitCode != 0)
+        {
+            username = string.Empty;
+            password = string.Empty;
+            privateKey = string.Empty;
+            domain = string.Empty;
+            throw new OnePasswordCliException($"Error running op item get: {error}",
+                commandLine);
+        }
+
+        var items = JsonSerializer.Deserialize<VaultItem>(output, JsonSerializerOptions) ??
+                    throw new OnePasswordCliException("1Password returned null",
+                        commandLine);
+        username = FindField(items, UserNamePurpose, UserNameLabel);
+        password = FindField(items, PasswordPurpose, PasswordLabel);
+        privateKey = items.Fields?.FirstOrDefault(x => x.Type == SshKeyType)?.Value ?? string.Empty;
+        domain = items.Fields?.FirstOrDefault(x => x.Type == StringType && x.Label == DomainLabel)?.Value ?? string.Empty;
+		if(string.IsNullOrEmpty(password) && string.IsNullOrEmpty(privateKey))
 		{
-			args.Add("--account");
-			args.Add(account);
+			throw new OnePasswordCliException("No secret found in 1Password. At least fields with labels username/password or a SshKey are expected.", commandLine);
 		}
+    }
 
-		if (!string.IsNullOrEmpty(vault))
-		{
-			args.Add("--vault");
-			args.Add(vault);
-		}
+    private static string FindField(VaultItem items, string purpose, string fallbackLabel)
+    {
+        return items.Fields?.FirstOrDefault(x => x.Purpose == purpose)?.Value ??
+			items.Fields?.FirstOrDefault(x => x.Type == StringType && string.Equals(x.Id, fallbackLabel, StringComparison.InvariantCultureIgnoreCase))?.Value ??
+		 	items.Fields?.FirstOrDefault(x => x.Type == StringType && string.Equals(x.Label, fallbackLabel, StringComparison.InvariantCultureIgnoreCase))?.Value ??
+		 	string.Empty;
+    }
 
-		args.Add("--format");
-		args.Add("json");
-
-		var exitCode = RunCommand(OnePasswordCliExecutable, args, out var output, out var error);
-		if (exitCode != 0)
-		{
-			username = string.Empty;
-			password = string.Empty;
-			privateKey = string.Empty;
-			domain = string.Empty;
-			throw new OnePasswordCliException($"Error running op item get: {error}",
-				OnePasswordCliExecutable + " " + string.Join(' ', args));
-		}
-
-		var items = JsonSerializer.Deserialize<VaultItem>(output, JsonSerializerOptions) ??
-		            throw new OnePasswordCliException("1Password returned null",
-			            OnePasswordCliExecutable + " " + string.Join(' ', args));
-		username = items.Fields?.FirstOrDefault(x => x.Purpose == UserNamePurpose)?.Value ?? string.Empty;
-		password = items.Fields?.FirstOrDefault(x => x.Purpose == PasswordPurpose)?.Value ?? string.Empty;
-		privateKey = items.Fields?.FirstOrDefault(x => x.Type == SshKeyType)?.Value ?? string.Empty;
-		domain = items.Fields?.FirstOrDefault(x => x.Type == StringType && x.Label == DomainLabel)?.Value ?? string.Empty;
-	}
-
-	private static int RunCommand(string command, IReadOnlyCollection<string> arguments, out string output,
+    private static int RunCommand(string command, IReadOnlyCollection<string> arguments, out string output,
 		out string error)
 	{
 		var processStartInfo = new ProcessStartInfo

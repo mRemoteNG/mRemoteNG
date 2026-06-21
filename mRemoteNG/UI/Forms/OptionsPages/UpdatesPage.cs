@@ -127,6 +127,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser = txtProxyUsername.Text;
             LegacyRijndaelCryptographyProvider cryptographyProvider = new();
             Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass = cryptographyProvider.Encrypt(txtProxyPassword.Text, Runtime.EncryptionKey);
+
+            // Mark that the user has explicitly configured their update preference so the
+            // first-run preference prompt does not appear again.
+            Properties.OptionsUpdatesPage.Default.CheckForUpdatesAsked = true;
         }
 
         public override void LoadRegistrySettings()

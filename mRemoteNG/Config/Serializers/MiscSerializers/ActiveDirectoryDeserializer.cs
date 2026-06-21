@@ -10,6 +10,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.Security;
 using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Serializers.MiscSerializers
@@ -17,8 +18,47 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
     [SupportedOSPlatform("windows")]
     public class ActiveDirectoryDeserializer(string ldapPath, bool importSubOu)
     {
-        private readonly string _ldapPath = ldapPath.ThrowIfNullOrEmpty(nameof(ldapPath));
+        private readonly string _ldapPath = SanitizeLdapPath(ldapPath.ThrowIfNullOrEmpty(nameof(ldapPath)));
         private readonly bool _importSubOu = importSubOu;
+
+        private static string SanitizeLdapPath(string ldapPath)
+        {
+            // Validate the LDAP path format
+            if (!LdapPathSanitizer.IsValidDistinguishedNameFormat(ldapPath))
+            {
+                throw new ArgumentException("Invalid LDAP path format", nameof(ldapPath));
+            }
+
+            // For LDAP paths (URIs like LDAP://...), we need to sanitize the DN portion
+            // If it starts with LDAP:// or LDAPS://, extract and sanitize the DN part
+            if (ldapPath.StartsWith("LDAP://", StringComparison.OrdinalIgnoreCase) ||
+                ldapPath.StartsWith("LDAPS://", StringComparison.OrdinalIgnoreCase))
+            {
+                int schemeEndIndex = ldapPath.IndexOf("://", StringComparison.OrdinalIgnoreCase) + 3;
+                if (schemeEndIndex < ldapPath.Length)
+                {
+                    // Find the server/domain part (before the first /)
+                    int pathStartIndex = ldapPath.IndexOf('/', schemeEndIndex);
+                    if (pathStartIndex > 0)
+                    {
+                        string scheme = ldapPath.Substring(0, schemeEndIndex);
+                        string serverPart = ldapPath.Substring(schemeEndIndex, pathStartIndex - schemeEndIndex);
+                        string dnPart = ldapPath.Substring(pathStartIndex + 1);
+                        
+                        // Sanitize the DN part
+                        string sanitizedDn = LdapPathSanitizer.SanitizeDistinguishedName(dnPart);
+                        return scheme + serverPart + "/" + sanitizedDn;
+                    }
+                }
+                // If no DN part found, return the path as-is (just the server)
+                return ldapPath;
+            }
+            else
+            {
+                // For plain DN strings, sanitize directly
+                return LdapPathSanitizer.SanitizeDistinguishedName(ldapPath);
+            }
+        }
 
         public ConnectionTreeModel Deserialize()
         {

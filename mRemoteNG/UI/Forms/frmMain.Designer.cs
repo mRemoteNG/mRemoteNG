@@ -38,6 +38,7 @@ namespace mRemoteNG.UI.Forms
             this.pnlDock = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new mRemoteNG.UI.Menu.FileMenu();
+            this.sessionsMenu = new mRemoteNG.UI.Menu.SessionsMenu();
             this.viewMenu = new mRemoteNG.UI.Menu.ViewMenu();
             this.toolsMenu = new mRemoteNG.UI.Menu.ToolsMenu();
             this.helpMenu = new mRemoteNG.UI.Menu.HelpMenu();
@@ -60,7 +61,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.pnlDock.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDock.DockBackColor = System.Drawing.SystemColors.Control;
-            this.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi;
+            this.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
             this.pnlDock.Location = new System.Drawing.Point(0, 0);
             this.pnlDock.Name = "pnlDock";
             this.pnlDock.Size = new System.Drawing.Size(1129, 546);
@@ -75,13 +76,14 @@ namespace mRemoteNG.UI.Forms
             this.msMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
+            this.sessionsMenu,
             this.viewMenu,
             this.toolsMenu,
             this.helpMenu});
             this.msMain.Location = new System.Drawing.Point(3, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
-            this.msMain.Size = new System.Drawing.Size(151, 25);
+            this.msMain.Size = new System.Drawing.Size(212, 25);
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 0;
             this.msMain.Text = "Main Toolbar";
@@ -93,6 +95,13 @@ namespace mRemoteNG.UI.Forms
             this.fileMenu.Size = new System.Drawing.Size(37, 19);
             this.fileMenu.Text = "&File";
             this.fileMenu.TreeWindow = null;
+            // 
+            // sessionsMenu
+            // 
+            this.sessionsMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.sessionsMenu.Name = "mMenSessions";
+            this.sessionsMenu.Size = new System.Drawing.Size(61, 19);
+            this.sessionsMenu.Text = "&Sessions";
             // 
             // viewMenu
             // 
@@ -253,6 +262,7 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripSeparator mMenSep3;
         private System.ComponentModel.IContainer components;
         private Menu.FileMenu fileMenu;
+        private Menu.SessionsMenu sessionsMenu;
         private Menu.ViewMenu viewMenu;
         private Menu.ToolsMenu toolsMenu;
         private Menu.HelpMenu helpMenu;
