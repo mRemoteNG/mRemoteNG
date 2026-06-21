@@ -7,17 +7,17 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 {
     [TestFixture]
     [Category("Unit")]
-    public class SSHDotNetDiagnosticsTests
+    public class SshDotNetDiagnosticsTests
     {
         [SetUp]
         public void Setup()
         {
             // Reset flags to default state
-            SSHDotNetDiagnostics.VerboseLogging = false;
-            SSHDotNetDiagnostics.TraceLogging = false;
-            SSHDotNetDiagnostics.LogRawData = false;
-            SSHDotNetDiagnostics.LogEscapeSequences = false;
-            SSHDotNetDiagnostics.LogPerformanceMetrics = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.LogRawData = false;
+            SshDotNetDiagnostics.LogEscapeSequences = false;
+            SshDotNetDiagnostics.LogPerformanceMetrics = false;
 
             // Reset UI settings to default (false)
             mRemoteNG.Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteTraceMsgs = false;
@@ -29,11 +29,11 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void TearDown()
         {
             // Reset to defaults after tests
-            SSHDotNetDiagnostics.VerboseLogging = false;
-            SSHDotNetDiagnostics.TraceLogging = false;
-            SSHDotNetDiagnostics.LogRawData = false;
-            SSHDotNetDiagnostics.LogEscapeSequences = false;
-            SSHDotNetDiagnostics.LogPerformanceMetrics = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.LogRawData = false;
+            SshDotNetDiagnostics.LogEscapeSequences = false;
+            SshDotNetDiagnostics.LogPerformanceMetrics = false;
 
             mRemoteNG.Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteTraceMsgs = false;
             mRemoteNG.Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteTraceMsgs = false;
@@ -44,11 +44,11 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void LogTrace_GeneratesMessage_WhenTraceLoggingEnabled()
         {
             // Arrange
-            SSHDotNetDiagnostics.TraceLogging = true;
+            SshDotNetDiagnostics.TraceLogging = true;
             int initialMessageCount = mRemoteNG.App.Runtime.MessageCollector.Messages.Count();
 
             // Act
-            SSHDotNetDiagnostics.LogTrace("Test trace message");
+            SshDotNetDiagnostics.LogTrace("Test trace message");
 
             // Assert
             Assert.That(mRemoteNG.App.Runtime.MessageCollector.Messages.Count(), Is.GreaterThan(initialMessageCount),
@@ -59,12 +59,12 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void LogTrace_GeneratesMessage_WhenUiNotificationPanelEnabled()
         {
             // Arrange
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
             mRemoteNG.Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteTraceMsgs = true;
             int initialMessageCount = mRemoteNG.App.Runtime.MessageCollector.Messages.Count();
 
             // Act
-            SSHDotNetDiagnostics.LogTrace("Test trace message");
+            SshDotNetDiagnostics.LogTrace("Test trace message");
 
             // Assert
             Assert.That(mRemoteNG.App.Runtime.MessageCollector.Messages.Count(), Is.GreaterThan(initialMessageCount),
@@ -75,12 +75,12 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void LogTrace_GeneratesMessage_WhenUiTextLogEnabled()
         {
             // Arrange
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
             mRemoteNG.Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteTraceMsgs = true;
             int initialMessageCount = mRemoteNG.App.Runtime.MessageCollector.Messages.Count();
 
             // Act
-            SSHDotNetDiagnostics.LogTrace("Test trace message");
+            SshDotNetDiagnostics.LogTrace("Test trace message");
 
             // Assert
             Assert.That(mRemoteNG.App.Runtime.MessageCollector.Messages.Count(), Is.GreaterThan(initialMessageCount),
@@ -91,12 +91,12 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void LogTrace_GeneratesMessage_WhenUiPopupEnabled()
         {
             // Arrange
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
             mRemoteNG.Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteTraceMsgs = true;
             int initialMessageCount = mRemoteNG.App.Runtime.MessageCollector.Messages.Count();
 
             // Act
-            SSHDotNetDiagnostics.LogTrace("Test trace message");
+            SshDotNetDiagnostics.LogTrace("Test trace message");
 
             // Assert
             Assert.That(mRemoteNG.App.Runtime.MessageCollector.Messages.Count(), Is.GreaterThan(initialMessageCount),
@@ -107,14 +107,14 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void LogTrace_DoesNotGenerateMessage_WhenAllDisabled()
         {
             // Arrange
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
             mRemoteNG.Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteTraceMsgs = false;
             mRemoteNG.Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteTraceMsgs = false;
             mRemoteNG.Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteTraceMsgs = false;
             int initialMessageCount = mRemoteNG.App.Runtime.MessageCollector.Messages.Count();
 
             // Act
-            SSHDotNetDiagnostics.LogTrace("Test trace message");
+            SshDotNetDiagnostics.LogTrace("Test trace message");
 
             // Assert
             Assert.That(mRemoteNG.App.Runtime.MessageCollector.Messages.Count(), Is.EqualTo(initialMessageCount),
@@ -125,11 +125,11 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void LogDebug_RequiresVerboseLogging()
         {
             // Arrange
-            SSHDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
             int initialMessageCount = mRemoteNG.App.Runtime.MessageCollector.Messages.Count();
 
             // Act
-            SSHDotNetDiagnostics.LogDebug("Test debug message");
+            SshDotNetDiagnostics.LogDebug("Test debug message");
 
             // Assert
             Assert.That(mRemoteNG.App.Runtime.MessageCollector.Messages.Count(), Is.EqualTo(initialMessageCount),
@@ -140,12 +140,12 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void LogInfo_AlwaysGenerates()
         {
             // Arrange
-            SSHDotNetDiagnostics.VerboseLogging = false;
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
             int initialMessageCount = mRemoteNG.App.Runtime.MessageCollector.Messages.Count();
 
             // Act
-            SSHDotNetDiagnostics.LogInfo("Test info message");
+            SshDotNetDiagnostics.LogInfo("Test info message");
 
             // Assert
             Assert.That(mRemoteNG.App.Runtime.MessageCollector.Messages.Count(), Is.GreaterThan(initialMessageCount),
@@ -156,13 +156,13 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void LogRawDataBinary_RequiresLogRawDataFlag()
         {
             // Arrange
-            SSHDotNetDiagnostics.LogRawData = false;
-            SSHDotNetDiagnostics.TraceLogging = true;
+            SshDotNetDiagnostics.LogRawData = false;
+            SshDotNetDiagnostics.TraceLogging = true;
             int initialMessageCount = mRemoteNG.App.Runtime.MessageCollector.Messages.Count();
             byte[] data = new byte[] { 0x01, 0x02, 0x03 };
 
             // Act
-            SSHDotNetDiagnostics.LogRawDataBinary(data, data.Length, "Test context");
+            SshDotNetDiagnostics.LogRawDataBinary(data, data.Length, "Test context");
 
             // Assert
             Assert.That(mRemoteNG.App.Runtime.MessageCollector.Messages.Count(), Is.EqualTo(initialMessageCount),
@@ -173,13 +173,13 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void LogRawDataBinary_GeneratesMessage_WhenLogRawDataAndTraceFlagsEnabled()
         {
             // Arrange
-            SSHDotNetDiagnostics.LogRawData = true;
-            SSHDotNetDiagnostics.TraceLogging = true;
+            SshDotNetDiagnostics.LogRawData = true;
+            SshDotNetDiagnostics.TraceLogging = true;
             int initialMessageCount = mRemoteNG.App.Runtime.MessageCollector.Messages.Count();
             byte[] data = new byte[] { 0x01, 0x02, 0x03 };
 
             // Act
-            SSHDotNetDiagnostics.LogRawDataBinary(data, data.Length, "Test context");
+            SshDotNetDiagnostics.LogRawDataBinary(data, data.Length, "Test context");
 
             // Assert
             Assert.That(mRemoteNG.App.Runtime.MessageCollector.Messages.Count(), Is.GreaterThan(initialMessageCount),
@@ -190,11 +190,11 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void LogEscapeSequence_GeneratesMessage_WhenLogEscapeSequencesEnabled()
         {
             // Arrange
-            SSHDotNetDiagnostics.LogEscapeSequences = true;
+            SshDotNetDiagnostics.LogEscapeSequences = true;
             int initialMessageCount = mRemoteNG.App.Runtime.MessageCollector.Messages.Count();
 
             // Act
-            SSHDotNetDiagnostics.LogEscapeSequence("\\x1b[H", "Move cursor to home");
+            SshDotNetDiagnostics.LogEscapeSequence("\\x1b[H", "Move cursor to home");
 
             // Assert
             Assert.That(mRemoteNG.App.Runtime.MessageCollector.Messages.Count(), Is.GreaterThan(initialMessageCount),
@@ -205,12 +205,12 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void LogEscapeSequence_GeneratesMessage_WhenUiSettingsEnabled()
         {
             // Arrange
-            SSHDotNetDiagnostics.LogEscapeSequences = false;
+            SshDotNetDiagnostics.LogEscapeSequences = false;
             mRemoteNG.Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteTraceMsgs = true;
             int initialMessageCount = mRemoteNG.App.Runtime.MessageCollector.Messages.Count();
 
             // Act
-            SSHDotNetDiagnostics.LogEscapeSequence("\\x1b[H", "Move cursor to home");
+            SshDotNetDiagnostics.LogEscapeSequence("\\x1b[H", "Move cursor to home");
 
             // Assert
             Assert.That(mRemoteNG.App.Runtime.MessageCollector.Messages.Count(), Is.GreaterThan(initialMessageCount),

@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 {
-    public static class SSHDotNetDiagnostics
+    public static class SshDotNetDiagnostics
     {
         #region Configuration Flags
 

@@ -1,6 +1,6 @@
 // Design Note: Generic catch clauses (catch Exception) are used intentionally in this file.
 // Authentication operations interact with external SSH servers and key files, where any exception
-// type is possible. All exceptions are logged via SSHDotNetDiagnostics and handled gracefully
+// type is possible. All exceptions are logged via SshDotNetDiagnostics and handled gracefully
 // to avoid crashing the application on auth failures.
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using Renci.SshNet.Common;
 
 namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 {
-    public static class SSHAuthenticationProvider
+    public static class SshAuthenticationProvider
     {
         #region Public Methods
 
@@ -23,7 +23,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             string password,
             ConnectionInfo connectionInfo)
         {
-            SSHDotNetDiagnostics.LogDebug($"Auth: Building authentication methods for user '{username}'");
+            SshDotNetDiagnostics.LogDebug($"Auth: Building authentication methods for user '{username}'");
 
             var authMethods = new List<AuthenticationMethod>();
 
@@ -32,7 +32,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 // 1. Try password authentication if password is provided
                 if (!string.IsNullOrEmpty(password))
                 {
-                    SSHDotNetDiagnostics.LogAuthAttempt(username, "Password");
+                    SshDotNetDiagnostics.LogAuthAttempt(username, "Password");
                     authMethods.Add(new PasswordAuthenticationMethod(username, password));
                 }
 
@@ -45,16 +45,16 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 }
 
                 // 3. Try keyboard-interactive (for 2FA/MFA)
-                SSHDotNetDiagnostics.LogDebug("Auth: Adding keyboard-interactive method");
+                SshDotNetDiagnostics.LogDebug("Auth: Adding keyboard-interactive method");
                 authMethods.Add(CreateKeyboardInteractiveAuth(username, password));
 
-                SSHDotNetDiagnostics.LogDebug($"Auth: Created {authMethods.Count} authentication method(s)");
+                SshDotNetDiagnostics.LogDebug($"Auth: Created {authMethods.Count} authentication method(s)");
 
                 return authMethods.ToArray();
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Auth: Failed to create authentication methods", ex);
+                SshDotNetDiagnostics.LogException("Auth: Failed to create authentication methods", ex);
                 throw;
             }
         }
@@ -67,7 +67,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             if (string.IsNullOrEmpty(username))
                 throw new ArgumentException("Username cannot be empty", nameof(username));
 
-            SSHDotNetDiagnostics.LogAuthAttempt(username, "Password");
+            SshDotNetDiagnostics.LogAuthAttempt(username, "Password");
             return new PasswordAuthenticationMethod(username, password ?? string.Empty);
         }
 
@@ -87,33 +87,33 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
             if (!File.Exists(privateKeyPath))
             {
-                SSHDotNetDiagnostics.LogError($"Auth: Private key file not found: {privateKeyPath}");
+                SshDotNetDiagnostics.LogError($"Auth: Private key file not found: {privateKeyPath}");
                 throw new FileNotFoundException($"Private key file not found: {privateKeyPath}");
             }
 
             try
             {
-                SSHDotNetDiagnostics.LogAuthAttempt(username, $"PublicKey (file: {Path.GetFileName(privateKeyPath)})");
+                SshDotNetDiagnostics.LogAuthAttempt(username, $"PublicKey (file: {Path.GetFileName(privateKeyPath)})");
 
                 PrivateKeyFile keyFile;
                 if (!string.IsNullOrEmpty(passphrase))
                 {
                     keyFile = new PrivateKeyFile(privateKeyPath, passphrase);
-                    SSHDotNetDiagnostics.LogDebug("Auth: Private key loaded with passphrase");
+                    SshDotNetDiagnostics.LogDebug("Auth: Private key loaded with passphrase");
                 }
                 else
                 {
                     keyFile = new PrivateKeyFile(privateKeyPath);
-                    SSHDotNetDiagnostics.LogDebug("Auth: Private key loaded without passphrase");
+                    SshDotNetDiagnostics.LogDebug("Auth: Private key loaded without passphrase");
                 }
 
-                SSHDotNetDiagnostics.LogInfo($"Auth: Loaded private key from {Path.GetFileName(privateKeyPath)}");
+                SshDotNetDiagnostics.LogInfo($"Auth: Loaded private key from {Path.GetFileName(privateKeyPath)}");
 
                 return new PrivateKeyAuthenticationMethod(username, keyFile);
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException($"Auth: Failed to load private key from {privateKeyPath}", ex);
+                SshDotNetDiagnostics.LogException($"Auth: Failed to load private key from {privateKeyPath}", ex);
                 throw;
             }
         }
@@ -134,7 +134,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
             try
             {
-                SSHDotNetDiagnostics.LogAuthAttempt(username, "PublicKey (from credential provider)");
+                SshDotNetDiagnostics.LogAuthAttempt(username, "PublicKey (from credential provider)");
 
                 using (var keyStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(privateKeyContent)))
                 {
@@ -148,14 +148,14 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         keyFile = new PrivateKeyFile(keyStream);
                     }
 
-                    SSHDotNetDiagnostics.LogInfo($"Auth: Loaded private key from content");
+                    SshDotNetDiagnostics.LogInfo($"Auth: Loaded private key from content");
 
                     return new PrivateKeyAuthenticationMethod(username, keyFile);
                 }
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Auth: Failed to load private key from content", ex);
+                SshDotNetDiagnostics.LogException("Auth: Failed to load private key from content", ex);
                 throw;
             }
         }
@@ -167,18 +167,18 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             string username,
             string password = null)
         {
-            SSHDotNetDiagnostics.LogAuthAttempt(username, "KeyboardInteractive");
+            SshDotNetDiagnostics.LogAuthAttempt(username, "KeyboardInteractive");
 
             var keyboardAuth = new KeyboardInteractiveAuthenticationMethod(username);
 
             keyboardAuth.AuthenticationPrompt += (sender, e) =>
             {
-                SSHDotNetDiagnostics.LogInfo($"Auth: Keyboard-interactive prompt received: {e.Prompts.Count()} prompt(s)");
+                SshDotNetDiagnostics.LogInfo($"Auth: Keyboard-interactive prompt received: {e.Prompts.Count()} prompt(s)");
 
                 foreach (var prompt in e.Prompts)
                 {
                     // Log prompt without exposing sensitive data
-                    SSHDotNetDiagnostics.LogDebug($"Auth: Prompt: '{prompt.Request}' (Echo: {prompt.IsEchoed})");
+                    SshDotNetDiagnostics.LogDebug($"Auth: Prompt: '{prompt.Request}' (Echo: {prompt.IsEchoed})");
 
                     // If we have a password and this looks like a password prompt, use it
                     if (!string.IsNullOrEmpty(password) &&
@@ -186,13 +186,13 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                          prompt.Request.Contains(":") && !prompt.IsEchoed))
                     {
                         prompt.Response = password;
-                        SSHDotNetDiagnostics.LogDebug("Auth: Provided stored password to prompt");
+                        SshDotNetDiagnostics.LogDebug("Auth: Provided stored password to prompt");
                     }
                     else if (prompt.IsEchoed)
                     {
                         // For echoed prompts, might be username or other info
                         // Could prompt user here in future
-                        SSHDotNetDiagnostics.LogWarning($"Auth: Cannot auto-respond to echoed prompt: {prompt.Request}");
+                        SshDotNetDiagnostics.LogWarning($"Auth: Cannot auto-respond to echoed prompt: {prompt.Request}");
                     }
                 }
             };
@@ -216,12 +216,12 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 // Check for SSH key in connection properties or credential providers
                 // This is a placeholder for future implementation
 
-                SSHDotNetDiagnostics.LogDebug("Auth: No SSH key path configured in connection");
+                SshDotNetDiagnostics.LogDebug("Auth: No SSH key path configured in connection");
                 return null;
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Auth: Error checking for SSH key", ex);
+                SshDotNetDiagnostics.LogException("Auth: Error checking for SSH key", ex);
                 return null;
             }
         }

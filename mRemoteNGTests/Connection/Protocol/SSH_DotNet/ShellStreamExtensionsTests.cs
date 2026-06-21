@@ -14,16 +14,16 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void Setup()
         {
             // Reset diagnostic flags to default state
-            SSHDotNetDiagnostics.VerboseLogging = false;
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
         }
 
         [TearDown]
         public void TearDown()
         {
             // Reset to defaults after tests
-            SSHDotNetDiagnostics.VerboseLogging = false;
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
         }
 
         #region SendWindowChangeRequest Tests

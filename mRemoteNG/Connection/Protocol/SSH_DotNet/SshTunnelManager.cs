@@ -1,6 +1,6 @@
 // Design Note: Generic catch clauses (catch Exception) are used intentionally in this file.
 // Port forwarding cleanup must be resilient - an exception stopping one port must not
-// prevent cleanup of remaining ports. All exceptions are logged via SSHDotNetDiagnostics.
+// prevent cleanup of remaining ports. All exceptions are logged via SshDotNetDiagnostics.
 using System;
 using System.Collections.Generic;
 using Renci.SshNet;
@@ -13,7 +13,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
     /// Handles setup, monitoring, and cleanup of forwarded ports.
     /// Thread-safe: all public methods use locking on _syncLock.
     /// </summary>
-    public class SSHTunnelManager : IDisposable
+    public class SshTunnelManager : IDisposable
     {
         private readonly SshClient _sshClient;
         private readonly List<ForwardedPort> _forwardedPorts = new();
@@ -26,7 +26,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         /// </summary>
         public event EventHandler<string> TunnelError;
 
-        public SSHTunnelManager(SshClient sshClient)
+        public SshTunnelManager(SshClient sshClient)
         {
             _sshClient = sshClient ?? throw new ArgumentNullException(nameof(sshClient));
         }
@@ -55,7 +55,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
             lock (_syncLock) { _forwardedPorts.Add(forward); }
 
-            SSHDotNetDiagnostics.LogInfo(
+            SshDotNetDiagnostics.LogInfo(
                 $"Tunnel: Local forward started - {localBindHost}:{forward.BoundPort} -> {remoteHost}:{remotePort}");
 
             return forward.BoundPort;
@@ -78,7 +78,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
             lock (_syncLock) { _forwardedPorts.Add(forward); }
 
-            SSHDotNetDiagnostics.LogInfo(
+            SshDotNetDiagnostics.LogInfo(
                 $"Tunnel: Remote forward started - {remoteBindHost}:{remotePort} -> {localHost}:{localPort}");
         }
 
@@ -99,7 +99,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
             lock (_syncLock) { _forwardedPorts.Add(forward); }
 
-            SSHDotNetDiagnostics.LogInfo(
+            SshDotNetDiagnostics.LogInfo(
                 $"Tunnel: Dynamic SOCKS5 proxy started on {localBindHost}:{forward.BoundPort}");
 
             return forward.BoundPort;
@@ -134,7 +134,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 }
                 catch (Exception ex)
                 {
-                    SSHDotNetDiagnostics.LogException("Tunnel: Error stopping forwarded port", ex);
+                    SshDotNetDiagnostics.LogException("Tunnel: Error stopping forwarded port", ex);
                 }
             }
         }
@@ -157,13 +157,13 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
         private void OnForwardException(object sender, ExceptionEventArgs e)
         {
-            SSHDotNetDiagnostics.LogException("Tunnel: Port forwarding error", e.Exception);
+            SshDotNetDiagnostics.LogException("Tunnel: Port forwarding error", e.Exception);
             TunnelError?.Invoke(this, $"Tunnel port forwarding failed: {e.Exception.Message}");
         }
 
         private void OnForwardRequestReceived(object sender, PortForwardEventArgs e)
         {
-            SSHDotNetDiagnostics.LogDebug(
+            SshDotNetDiagnostics.LogDebug(
                 $"Tunnel: Request received - {e.OriginatorHost}:{e.OriginatorPort}");
         }
 

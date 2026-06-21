@@ -32,7 +32,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             try
             {
                 stream.ChangeWindowSize(columns, rows, width, height);
-                SSHDotNetDiagnostics.LogDebug($"ShellStreamExtensions: Sent window change request: {columns}x{rows}");
+                SshDotNetDiagnostics.LogDebug($"ShellStreamExtensions: Sent window change request: {columns}x{rows}");
             }
             catch (ObjectDisposedException)
             {
@@ -40,7 +40,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             }
             catch (SshException ex)
             {
-                SSHDotNetDiagnostics.LogException("ShellStreamExtensions: Error sending window change request", ex);
+                SshDotNetDiagnostics.LogException("ShellStreamExtensions: Error sending window change request", ex);
             }
         }
     }

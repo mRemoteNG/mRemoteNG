@@ -8,7 +8,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
     /// </summary>
     public static class PortForwardRuleParser
     {
-        public static void ApplyRules(SSHTunnelManager tunnelManager, string rulesString)
+        public static void ApplyRules(SshTunnelManager tunnelManager, string rulesString)
         {
             if (string.IsNullOrWhiteSpace(rulesString)) return;
 
@@ -18,7 +18,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 var parts = rule.Split(':');
                 if (parts.Length < 2)
                 {
-                    SSHDotNetDiagnostics.LogWarning($"Tunnel: Invalid port forward rule (too few parts): '{rule}'");
+                    SshDotNetDiagnostics.LogWarning($"Tunnel: Invalid port forward rule (too few parts): '{rule}'");
                     continue;
                 }
 
@@ -42,7 +42,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         break;
 
                     default:
-                        SSHDotNetDiagnostics.LogWarning($"Tunnel: Unrecognized port forward rule: '{rule}'");
+                        SshDotNetDiagnostics.LogWarning($"Tunnel: Unrecognized port forward rule: '{rule}'");
                         break;
                 }
             }

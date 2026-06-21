@@ -40,7 +40,7 @@ namespace mRemoteNG.Connection.Protocol
                 case ProtocolType.SSH2:
                     return new ProtocolSSH2();
                 case ProtocolType.SSH_DotNet:
-                    return new ProtocolSSH_DotNet();
+                    return new ProtocolSshDotNet();
                 case ProtocolType.Telnet:
                     return new ProtocolTelnet();
                 case ProtocolType.Rlogin:

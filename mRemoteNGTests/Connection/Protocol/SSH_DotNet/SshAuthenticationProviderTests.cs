@@ -8,7 +8,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 {
     [TestFixture]
     [Category("Unit")]
-    public class SSHAuthenticationProviderTests
+    public class SshAuthenticationProviderTests
     {
         private string _tempKeyFile;
 
@@ -16,8 +16,8 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void Setup()
         {
             // Reset diagnostic flags to default state
-            SSHDotNetDiagnostics.VerboseLogging = false;
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
 
             // Create a temporary directory for test key files
             _tempKeyFile = null;
@@ -27,8 +27,8 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void TearDown()
         {
             // Reset to defaults after tests
-            SSHDotNetDiagnostics.VerboseLogging = false;
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
 
             // Clean up temporary key file
             if (_tempKeyFile != null && File.Exists(_tempKeyFile))
@@ -55,7 +55,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHAuthenticationProvider.CreatePasswordAuth(username, password));
+                SshAuthenticationProvider.CreatePasswordAuth(username, password));
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHAuthenticationProvider.CreatePasswordAuth(username, password));
+                SshAuthenticationProvider.CreatePasswordAuth(username, password));
         }
 
         [Test]
@@ -78,7 +78,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string password = "password123";
 
             // Act
-            var authMethod = SSHAuthenticationProvider.CreatePasswordAuth(username, password);
+            var authMethod = SshAuthenticationProvider.CreatePasswordAuth(username, password);
 
             // Assert
             Assert.That(authMethod, Is.Not.Null);
@@ -94,7 +94,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string password = null;
 
             // Act
-            var authMethod = SSHAuthenticationProvider.CreatePasswordAuth(username, password);
+            var authMethod = SshAuthenticationProvider.CreatePasswordAuth(username, password);
 
             // Assert
             Assert.That(authMethod, Is.Not.Null);
@@ -110,7 +110,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string password = "";
 
             // Act
-            var authMethod = SSHAuthenticationProvider.CreatePasswordAuth(username, password);
+            var authMethod = SshAuthenticationProvider.CreatePasswordAuth(username, password);
 
             // Assert
             Assert.That(authMethod, Is.Not.Null);
@@ -131,7 +131,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHAuthenticationProvider.CreatePrivateKeyAuth(username, keyPath));
+                SshAuthenticationProvider.CreatePrivateKeyAuth(username, keyPath));
         }
 
         [Test]
@@ -143,7 +143,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHAuthenticationProvider.CreatePrivateKeyAuth(username, keyPath));
+                SshAuthenticationProvider.CreatePrivateKeyAuth(username, keyPath));
         }
 
         [Test]
@@ -155,7 +155,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHAuthenticationProvider.CreatePrivateKeyAuth(username, keyPath));
+                SshAuthenticationProvider.CreatePrivateKeyAuth(username, keyPath));
         }
 
         [Test]
@@ -167,7 +167,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHAuthenticationProvider.CreatePrivateKeyAuth(username, keyPath));
+                SshAuthenticationProvider.CreatePrivateKeyAuth(username, keyPath));
         }
 
         [Test]
@@ -179,7 +179,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<FileNotFoundException>(() =>
-                SSHAuthenticationProvider.CreatePrivateKeyAuth(username, keyPath));
+                SshAuthenticationProvider.CreatePrivateKeyAuth(username, keyPath));
         }
 
         // Note: Cannot test CreatePrivateKeyAuth success without a valid SSH key file
@@ -198,7 +198,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHAuthenticationProvider.CreatePrivateKeyAuthFromString(username, keyContent));
+                SshAuthenticationProvider.CreatePrivateKeyAuthFromString(username, keyContent));
         }
 
         [Test]
@@ -210,7 +210,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHAuthenticationProvider.CreatePrivateKeyAuthFromString(username, keyContent));
+                SshAuthenticationProvider.CreatePrivateKeyAuthFromString(username, keyContent));
         }
 
         [Test]
@@ -222,7 +222,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHAuthenticationProvider.CreatePrivateKeyAuthFromString(username, keyContent));
+                SshAuthenticationProvider.CreatePrivateKeyAuthFromString(username, keyContent));
         }
 
         [Test]
@@ -234,7 +234,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHAuthenticationProvider.CreatePrivateKeyAuthFromString(username, keyContent));
+                SshAuthenticationProvider.CreatePrivateKeyAuthFromString(username, keyContent));
         }
 
         // Note: Cannot test CreatePrivateKeyAuthFromString success without valid key content
@@ -252,7 +252,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string password = "password123";
 
             // Act
-            var authMethod = SSHAuthenticationProvider.CreateKeyboardInteractiveAuth(username, password);
+            var authMethod = SshAuthenticationProvider.CreateKeyboardInteractiveAuth(username, password);
 
             // Assert
             Assert.That(authMethod, Is.Not.Null);
@@ -268,7 +268,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string password = null;
 
             // Act
-            var authMethod = SSHAuthenticationProvider.CreateKeyboardInteractiveAuth(username, password);
+            var authMethod = SshAuthenticationProvider.CreateKeyboardInteractiveAuth(username, password);
 
             // Assert
             Assert.That(authMethod, Is.Not.Null);
@@ -289,7 +289,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             var connectionInfo = new mRemoteNG.Connection.ConnectionInfo();
 
             // Act
-            var authMethods = SSHAuthenticationProvider.GetAuthenticationMethods(username, password, connectionInfo);
+            var authMethods = SshAuthenticationProvider.GetAuthenticationMethods(username, password, connectionInfo);
 
             // Assert
             Assert.That(authMethods, Is.Not.Null);
@@ -308,7 +308,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             var connectionInfo = new mRemoteNG.Connection.ConnectionInfo();
 
             // Act
-            var authMethods = SSHAuthenticationProvider.GetAuthenticationMethods(username, password, connectionInfo);
+            var authMethods = SshAuthenticationProvider.GetAuthenticationMethods(username, password, connectionInfo);
 
             // Assert
             Assert.That(authMethods, Is.Not.Null);
@@ -326,7 +326,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             var connectionInfo = new mRemoteNG.Connection.ConnectionInfo();
 
             // Act
-            var authMethods = SSHAuthenticationProvider.GetAuthenticationMethods(username, password, connectionInfo);
+            var authMethods = SshAuthenticationProvider.GetAuthenticationMethods(username, password, connectionInfo);
 
             // Assert
             Assert.That(authMethods, Is.Not.Null);
@@ -344,7 +344,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             var connectionInfo = new mRemoteNG.Connection.ConnectionInfo();
 
             // Act
-            var authMethods = SSHAuthenticationProvider.GetAuthenticationMethods(username, password, connectionInfo);
+            var authMethods = SshAuthenticationProvider.GetAuthenticationMethods(username, password, connectionInfo);
 
             // Assert
             Assert.That(authMethods, Is.Not.Null);

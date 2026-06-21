@@ -7,22 +7,22 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 {
     [TestFixture]
     [Category("Unit")]
-    public class SSHConnectionManagerTests
+    public class SshConnectionManagerTests
     {
         [SetUp]
         public void Setup()
         {
             // Reset diagnostic flags to default state
-            SSHDotNetDiagnostics.VerboseLogging = false;
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
         }
 
         [TearDown]
         public void TearDown()
         {
             // Reset to defaults after tests
-            SSHDotNetDiagnostics.VerboseLogging = false;
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
         }
 
         #region CreateConnection Tests
@@ -39,7 +39,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHConnectionManager.CreateConnection(hostname, port, username, authMethods));
+                SshConnectionManager.CreateConnection(hostname, port, username, authMethods));
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHConnectionManager.CreateConnection(hostname, port, username, authMethods));
+                SshConnectionManager.CreateConnection(hostname, port, username, authMethods));
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                SSHConnectionManager.CreateConnection(hostname, port, username, authMethods));
+                SshConnectionManager.CreateConnection(hostname, port, username, authMethods));
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                SSHConnectionManager.CreateConnection(hostname, port, username, authMethods));
+                SshConnectionManager.CreateConnection(hostname, port, username, authMethods));
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                SSHConnectionManager.CreateConnection(hostname, port, username, authMethods));
+                SshConnectionManager.CreateConnection(hostname, port, username, authMethods));
         }
 
         [Test]
@@ -114,7 +114,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHConnectionManager.CreateConnection(hostname, port, username, authMethods));
+                SshConnectionManager.CreateConnection(hostname, port, username, authMethods));
         }
 
         [Test]
@@ -129,7 +129,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHConnectionManager.CreateConnection(hostname, port, username, authMethods));
+                SshConnectionManager.CreateConnection(hostname, port, username, authMethods));
         }
 
         [Test]
@@ -143,7 +143,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHConnectionManager.CreateConnection(hostname, port, username, authMethods));
+                SshConnectionManager.CreateConnection(hostname, port, username, authMethods));
         }
 
         [Test]
@@ -157,7 +157,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentException>(() =>
-                SSHConnectionManager.CreateConnection(hostname, port, username, authMethods));
+                SshConnectionManager.CreateConnection(hostname, port, username, authMethods));
         }
 
         [Test]
@@ -171,7 +171,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             var authMethods = new[] { authMethods0 };
 
             // Act
-            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var client = SshConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
             // Assert
             Assert.That(client, Is.Not.Null);
@@ -193,7 +193,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             TimeSpan customTimeout = TimeSpan.FromSeconds(60);
 
             // Act
-            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods, customTimeout);
+            using var client = SshConnectionManager.CreateConnection(hostname, port, username, authMethods, customTimeout);
 
             // Assert
             Assert.That(client, Is.Not.Null);
@@ -211,7 +211,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             var authMethods = new[] { authMethods0 };
 
             // Act
-            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var client = SshConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
             // Assert
             Assert.That(client, Is.Not.Null);
@@ -229,7 +229,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             var authMethods = new[] { authMethods0 };
 
             // Act
-            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var client = SshConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
             // Assert
             Assert.That(client, Is.Not.Null);
@@ -248,7 +248,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() =>
-                SSHConnectionManager.Connect(client));
+                SshConnectionManager.Connect(client));
         }
 
         // Note: Cannot test actual connection without a real SSH server
@@ -266,7 +266,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() =>
-                SSHConnectionManager.CreateShellStream(client));
+                SshConnectionManager.CreateShellStream(client));
         }
 
         [Test]
@@ -278,11 +278,11 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string username = "testuser";
             using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
             var authMethods = new[] { authMethods0 };
-            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var client = SshConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() =>
-                SSHConnectionManager.CreateShellStream(client));
+                SshConnectionManager.CreateShellStream(client));
         }
 
         // Note: Cannot test CreateShellStream success without a connected client
@@ -300,7 +300,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() =>
-                SSHConnectionManager.ConfigureKeepAlive(client));
+                SshConnectionManager.ConfigureKeepAlive(client));
         }
 
         [Test]
@@ -312,10 +312,10 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string username = "testuser";
             using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
             var authMethods = new[] { authMethods0 };
-            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var client = SshConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
             // Act
-            SSHConnectionManager.ConfigureKeepAlive(client);
+            SshConnectionManager.ConfigureKeepAlive(client);
 
             // Assert
             Assert.That(client.KeepAliveInterval, Is.EqualTo(TimeSpan.FromSeconds(5)));
@@ -330,11 +330,11 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string username = "testuser";
             using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
             var authMethods = new[] { authMethods0 };
-            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var client = SshConnectionManager.CreateConnection(hostname, port, username, authMethods);
             TimeSpan customInterval = TimeSpan.FromSeconds(10);
 
             // Act
-            SSHConnectionManager.ConfigureKeepAlive(client, customInterval);
+            SshConnectionManager.ConfigureKeepAlive(client, customInterval);
 
             // Assert
             Assert.That(client.KeepAliveInterval, Is.EqualTo(customInterval));
@@ -351,7 +351,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             SshClient client = null;
 
             // Act
-            string info = SSHConnectionManager.GetConnectionInfo(client);
+            string info = SshConnectionManager.GetConnectionInfo(client);
 
             // Assert
             Assert.That(info, Is.EqualTo("Client is null"));
@@ -366,10 +366,10 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
             string username = "testuser";
             using var authMethods0 = new PasswordAuthenticationMethod("testuser", "password");
             var authMethods = new[] { authMethods0 };
-            using var client = SSHConnectionManager.CreateConnection(hostname, port, username, authMethods);
+            using var client = SshConnectionManager.CreateConnection(hostname, port, username, authMethods);
 
             // Act
-            string info = SSHConnectionManager.GetConnectionInfo(client);
+            string info = SshConnectionManager.GetConnectionInfo(client);
 
             // Assert
             Assert.That(info, Is.EqualTo("Client is not connected"));

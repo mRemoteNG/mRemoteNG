@@ -1,7 +1,7 @@
 // Design Note: Generic catch clauses (catch Exception) are used intentionally throughout this file.
 // This is a UI control that renders terminal output and handles user input — an unhandled exception
 // in painting or input processing would crash the application. All exceptions are logged via
-// SSHDotNetDiagnostics. The foreach loops with null/empty checks use inline filtering (continue)
+// SshDotNetDiagnostics. The foreach loops with null/empty checks use inline filtering (continue)
 // rather than .Where() because they accumulate mutable state (e.g., x-position) across iterations,
 // making LINQ-style filtering less readable.
 using System;
@@ -111,13 +111,13 @@ namespace mRemoteNG.UI.Controls
             {
                 if (value < 1 || value > 500)
                 {
-                    SSHDotNetDiagnostics.LogWarning($"Terminal: Invalid column count {value}, using default {DEFAULT_COLUMNS}");
+                    SshDotNetDiagnostics.LogWarning($"Terminal: Invalid column count {value}, using default {DEFAULT_COLUMNS}");
                     _columns = DEFAULT_COLUMNS;
                 }
                 else
                 {
                     _columns = value;
-                    SSHDotNetDiagnostics.LogDebug($"Terminal: Columns set to {_columns}");
+                    SshDotNetDiagnostics.LogDebug($"Terminal: Columns set to {_columns}");
                 }
             }
         }
@@ -129,13 +129,13 @@ namespace mRemoteNG.UI.Controls
             {
                 if (value < 1 || value > 200)
                 {
-                    SSHDotNetDiagnostics.LogWarning($"Terminal: Invalid row count {value}, using default {DEFAULT_ROWS}");
+                    SshDotNetDiagnostics.LogWarning($"Terminal: Invalid row count {value}, using default {DEFAULT_ROWS}");
                     _rows = DEFAULT_ROWS;
                 }
                 else
                 {
                     _rows = value;
-                    SSHDotNetDiagnostics.LogDebug($"Terminal: Rows set to {_rows}");
+                    SshDotNetDiagnostics.LogDebug($"Terminal: Rows set to {_rows}");
                 }
             }
         }
@@ -146,7 +146,7 @@ namespace mRemoteNG.UI.Controls
             set
             {
                 _scrollbackLines = Math.Max(0, Math.Min(value, 10000));
-                SSHDotNetDiagnostics.LogDebug($"Terminal: Scrollback lines set to {_scrollbackLines}");
+                SshDotNetDiagnostics.LogDebug($"Terminal: Scrollback lines set to {_scrollbackLines}");
             }
         }
 
@@ -166,7 +166,7 @@ namespace mRemoteNG.UI.Controls
             set
             {
                 _terminalFont = value;
-                SSHDotNetDiagnostics.LogDebug($"Terminal: Font set to {_terminalFont.Name} {_terminalFont.Size}pt");
+                SshDotNetDiagnostics.LogDebug($"Terminal: Font set to {_terminalFont.Name} {_terminalFont.Size}pt");
                 RecalculateDimensions();
             }
         }
@@ -178,7 +178,7 @@ namespace mRemoteNG.UI.Controls
             {
                 _backgroundColor = value;
                 this.BackColor = value;
-                SSHDotNetDiagnostics.LogDebug($"Terminal: Background color set to {value}");
+                SshDotNetDiagnostics.LogDebug($"Terminal: Background color set to {value}");
             }
         }
 
@@ -189,7 +189,7 @@ namespace mRemoteNG.UI.Controls
             {
                 _foregroundColor = value;
                 this.ForeColor = value;
-                SSHDotNetDiagnostics.LogDebug($"Terminal: Foreground color set to {value}");
+                SshDotNetDiagnostics.LogDebug($"Terminal: Foreground color set to {value}");
             }
         }
 
@@ -201,7 +201,7 @@ namespace mRemoteNG.UI.Controls
                 if (_diagnosticOverlay != null)
                 {
                     _diagnosticOverlay.Visible = value;
-                    SSHDotNetDiagnostics.LogInfo($"Terminal: Diagnostic mode {(value ? "enabled" : "disabled")}");
+                    SshDotNetDiagnostics.LogInfo($"Terminal: Diagnostic mode {(value ? "enabled" : "disabled")}");
                 }
             }
         }
@@ -222,7 +222,7 @@ namespace mRemoteNG.UI.Controls
 
         public SshTerminalControl()
         {
-            SSHDotNetDiagnostics.LogDebug("Terminal: Creating SshTerminalControl");
+            SshDotNetDiagnostics.LogDebug("Terminal: Creating SshTerminalControl");
 
             InitializeComponent();
 
@@ -232,7 +232,7 @@ namespace mRemoteNG.UI.Controls
             this.TabStop = true;  // Allow the control to receive focus via Tab key
 
             // Note: Do NOT set _isInitialized here - let Initialize() do the full setup
-            SSHDotNetDiagnostics.LogDebug("Terminal: Constructor complete, waiting for Initialize() call");
+            SshDotNetDiagnostics.LogDebug("Terminal: Constructor complete, waiting for Initialize() call");
         }
 
         #endregion
@@ -268,11 +268,11 @@ namespace mRemoteNG.UI.Controls
         {
             if (_isInitialized)
             {
-                SSHDotNetDiagnostics.LogDebug("Terminal: Already initialized, skipping re-initialization");
+                SshDotNetDiagnostics.LogDebug("Terminal: Already initialized, skipping re-initialization");
                 return;
             }
 
-            SSHDotNetDiagnostics.LogDebug("Terminal: Performing initialization");
+            SshDotNetDiagnostics.LogDebug("Terminal: Performing initialization");
 
             try
             {
@@ -282,11 +282,11 @@ namespace mRemoteNG.UI.Controls
 
                 // Configure scrollback buffer size (default is 2001)
                 _vtController.MaximumHistoryLines = DEFAULT_SCROLLBACK;
-                SSHDotNetDiagnostics.LogDebug($"Terminal: VtNetCore scrollback buffer set to {DEFAULT_SCROLLBACK} lines");
+                SshDotNetDiagnostics.LogDebug($"Terminal: VtNetCore scrollback buffer set to {DEFAULT_SCROLLBACK} lines");
 
                 _dataConsumer = new DataConsumer(_vtController);
 
-                SSHDotNetDiagnostics.LogDebug($"Terminal: Created VtNetCore controller and DataConsumer ({_columns}x{_rows})");
+                SshDotNetDiagnostics.LogDebug($"Terminal: Created VtNetCore controller and DataConsumer ({_columns}x{_rows})");
 
                 // Initialize scrollback buffer
                 _scrollbackBuffer = new List<string>();
@@ -319,20 +319,20 @@ namespace mRemoteNG.UI.Controls
                 _cursorBlinkTimer.Interval = 500; // Blink every 500ms
                 _cursorBlinkTimer.Tick += CursorBlinkTimer_Tick;
                 _cursorBlinkTimer.Start();
-                SSHDotNetDiagnostics.LogDebug("Terminal: Cursor blink timer initialized");
+                SshDotNetDiagnostics.LogDebug("Terminal: Cursor blink timer initialized");
 
                 RecalculateDimensions();
 
-                SSHDotNetDiagnostics.LogDebug("Terminal: Initialization complete");
+                SshDotNetDiagnostics.LogDebug("Terminal: Initialization complete");
                 _isInitialized = true;
 
                 // Automatically focus the terminal so user can start typing immediately
                 this.Focus();
-                SSHDotNetDiagnostics.LogDebug("Terminal: Auto-focus set on initialization");
+                SshDotNetDiagnostics.LogDebug("Terminal: Auto-focus set on initialization");
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal initialization failed", ex);
+                SshDotNetDiagnostics.LogException("Terminal initialization failed", ex);
                 throw;
             }
         }
@@ -342,7 +342,7 @@ namespace mRemoteNG.UI.Controls
             // Skip if control has no size yet (not yet laid out)
             if (this.Width <= 0 || this.Height <= 0)
             {
-                SSHDotNetDiagnostics.LogDebug($"Terminal: Skipping dimension calculation - control not yet sized (W={this.Width}, H={this.Height})");
+                SshDotNetDiagnostics.LogDebug($"Terminal: Skipping dimension calculation - control not yet sized (W={this.Width}, H={this.Height})");
                 return;
             }
 
@@ -355,7 +355,7 @@ namespace mRemoteNG.UI.Controls
                 _charWidth = charSize.Width;
                 _charHeight = charSize.Height;
 
-                SSHDotNetDiagnostics.LogDebug($"Terminal: Character size calculated as {_charWidth}x{_charHeight}px (using TextRenderer)");
+                SshDotNetDiagnostics.LogDebug($"Terminal: Character size calculated as {_charWidth}x{_charHeight}px (using TextRenderer)");
 
                 int newCols = Math.Max(1, this.Width / _charWidth);
                 int newRows = Math.Max(1, this.Height / _charHeight);
@@ -369,15 +369,15 @@ namespace mRemoteNG.UI.Controls
                     if (_vtController != null)
                     {
                         _vtController.ResizeView(_columns, _rows);
-                        SSHDotNetDiagnostics.LogDebug($"Terminal: VtNetCore viewport resized to {_columns}x{_rows}");
+                        SshDotNetDiagnostics.LogDebug($"Terminal: VtNetCore viewport resized to {_columns}x{_rows}");
                     }
 
-                    SSHDotNetDiagnostics.LogDebug($"Terminal: Dimensions recalculated to {_columns}x{_rows} (from control size {this.Width}x{this.Height})");
+                    SshDotNetDiagnostics.LogDebug($"Terminal: Dimensions recalculated to {_columns}x{_rows} (from control size {this.Width}x{this.Height})");
 
                     // Calculate pixel dimensions for SSH pty
                     int widthPixels = _columns * _charWidth;
                     int heightPixels = _rows * _charHeight;
-                    SSHDotNetDiagnostics.LogDebug($"Terminal: Pixel dimensions {widthPixels}x{heightPixels} (char {_charWidth}x{_charHeight})");
+                    SshDotNetDiagnostics.LogDebug($"Terminal: Pixel dimensions {widthPixels}x{heightPixels} (char {_charWidth}x{_charHeight})");
 
                     // Notify protocol layer that terminal dimensions changed so SSH pty can be resized
                     TerminalResized?.Invoke(this, new TerminalResizeEventArgs(_columns, _rows, widthPixels, heightPixels));
@@ -393,7 +393,7 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                SSHDotNetDiagnostics.LogDebug($"Terminal: Force resize notification requested (current size: {this.Width}x{this.Height})");
+                SshDotNetDiagnostics.LogDebug($"Terminal: Force resize notification requested (current size: {this.Width}x{this.Height})");
 
                 // Recalculate dimensions
                 RecalculateDimensions();
@@ -406,13 +406,13 @@ namespace mRemoteNG.UI.Controls
                     int widthPixels = _columns * _charWidth;
                     int heightPixels = _rows * _charHeight;
 
-                    SSHDotNetDiagnostics.LogDebug($"Terminal: Forcing TerminalResized event with {_columns}x{_rows} ({widthPixels}x{heightPixels} px)");
+                    SshDotNetDiagnostics.LogDebug($"Terminal: Forcing TerminalResized event with {_columns}x{_rows} ({widthPixels}x{heightPixels} px)");
                     TerminalResized?.Invoke(this, new TerminalResizeEventArgs(_columns, _rows, widthPixels, heightPixels));
                 }
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error in ForceResizeNotification", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error in ForceResizeNotification", ex);
             }
         }
 
@@ -426,11 +426,11 @@ namespace mRemoteNG.UI.Controls
             {
                 _sshStream = sshStream;
                 _streamAttached = true;
-                SSHDotNetDiagnostics.LogInfo("Terminal: SSH stream attached");
+                SshDotNetDiagnostics.LogInfo("Terminal: SSH stream attached");
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Failed to attach SSH stream", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Failed to attach SSH stream", ex);
             }
         }
 
@@ -440,11 +440,11 @@ namespace mRemoteNG.UI.Controls
             {
                 _sshStream = null;
                 _streamAttached = false;
-                SSHDotNetDiagnostics.LogInfo("Terminal: SSH stream detached");
+                SshDotNetDiagnostics.LogInfo("Terminal: SSH stream detached");
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Failed to detach SSH stream", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Failed to detach SSH stream", ex);
             }
         }
 
@@ -463,19 +463,19 @@ namespace mRemoteNG.UI.Controls
                 if (_dataConsumer != null)
                 {
                     _dataConsumer.Push(Encoding.UTF8.GetBytes(data));
-                    SSHDotNetDiagnostics.LogTrace($"Terminal: Pushed {data.Length} bytes to VtNetCore DataConsumer");
+                    SshDotNetDiagnostics.LogTrace($"Terminal: Pushed {data.Length} bytes to VtNetCore DataConsumer");
 
                     // Reset scroll position to bottom when new output arrives
                     // This ensures we automatically show new content
                     if (_scrollbackPosition > 0)
                     {
-                        SSHDotNetDiagnostics.LogTrace($"Terminal: Resetting scroll position from {_scrollbackPosition} to 0 (new output)");
+                        SshDotNetDiagnostics.LogTrace($"Terminal: Resetting scroll position from {_scrollbackPosition} to 0 (new output)");
                         _scrollbackPosition = 0;
                     }
                 }
                 else
                 {
-                    SSHDotNetDiagnostics.LogWarning("Terminal: DataConsumer is null, cannot process output");
+                    SshDotNetDiagnostics.LogWarning("Terminal: DataConsumer is null, cannot process output");
                 }
 
                 // Update scrollback buffer
@@ -497,11 +497,11 @@ namespace mRemoteNG.UI.Controls
                     this.Update();  // Forces immediate paint - PuTTY-style responsiveness!
                 }));
 
-                SSHDotNetDiagnostics.LogTrace($"Terminal: Processed {data?.Length ?? 0} characters of output");
+                SshDotNetDiagnostics.LogTrace($"Terminal: Processed {data?.Length ?? 0} characters of output");
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error writing output", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error writing output", ex);
             }
         }
 
@@ -538,11 +538,11 @@ namespace mRemoteNG.UI.Controls
                     this.Update();  // Forces immediate paint
                 }));
 
-                SSHDotNetDiagnostics.LogInfo("Terminal: Displayed connection closed message");
+                SshDotNetDiagnostics.LogInfo("Terminal: Displayed connection closed message");
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error displaying connection closed message", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error displaying connection closed message", ex);
             }
         }
 
@@ -558,7 +558,7 @@ namespace mRemoteNG.UI.Controls
                 {
                     inputData = Encoding.UTF8.GetBytes(_inputBuffer.ToString());
                     _inputBuffer.Clear();
-                    SSHDotNetDiagnostics.LogTrace($"Terminal: Read {inputData.Length} bytes of input");
+                    SshDotNetDiagnostics.LogTrace($"Terminal: Read {inputData.Length} bytes of input");
                 }
                 else
                 {
@@ -567,7 +567,7 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error reading input", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error reading input", ex);
                 inputData = Array.Empty<byte>();
             }
         }
@@ -583,7 +583,7 @@ namespace mRemoteNG.UI.Controls
                 {
                     byte[] inputData = Encoding.UTF8.GetBytes(_inputBuffer.ToString());
                     _inputBuffer.Clear();
-                    SSHDotNetDiagnostics.LogTrace($"Terminal: Read {inputData.Length} bytes of input (event-driven)");
+                    SshDotNetDiagnostics.LogTrace($"Terminal: Read {inputData.Length} bytes of input (event-driven)");
                     return inputData;
                 }
 
@@ -595,7 +595,7 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error waiting for input", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error waiting for input", ex);
                 return Array.Empty<byte>();
             }
         }
@@ -612,7 +612,7 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error signaling input available", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error signaling input available", ex);
             }
         }
 
@@ -640,11 +640,11 @@ namespace mRemoteNG.UI.Controls
                     }
                 }
 
-                SSHDotNetDiagnostics.LogTrace($"Terminal: Added {lines.Length} lines to scrollback (total: {_scrollbackBuffer.Count})");
+                SshDotNetDiagnostics.LogTrace($"Terminal: Added {lines.Length} lines to scrollback (total: {_scrollbackBuffer.Count})");
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error adding to scrollback", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error adding to scrollback", ex);
             }
         }
 
@@ -663,7 +663,7 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error getting scrollback content", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error getting scrollback content", ex);
                 return string.Empty;
             }
         }
@@ -751,7 +751,7 @@ namespace mRemoteNG.UI.Controls
                         SignalInputAvailable();
                         e.Handled = true;
                         e.SuppressKeyPress = true;  // Prevent beep
-                        SSHDotNetDiagnostics.LogTrace($"Terminal: Ctrl sequence added: {GetPrintableSequence(ctrlSequence)}");
+                        SshDotNetDiagnostics.LogTrace($"Terminal: Ctrl sequence added: {GetPrintableSequence(ctrlSequence)}");
                         return;
                     }
                 }
@@ -765,7 +765,7 @@ namespace mRemoteNG.UI.Controls
                         _inputBuffer.Append(altSequence);
                         SignalInputAvailable();
                         e.Handled = true;
-                        SSHDotNetDiagnostics.LogTrace($"Terminal: Alt sequence added: {GetPrintableSequence(altSequence)}");
+                        SshDotNetDiagnostics.LogTrace($"Terminal: Alt sequence added: {GetPrintableSequence(altSequence)}");
                         return;
                     }
                 }
@@ -778,12 +778,12 @@ namespace mRemoteNG.UI.Controls
                     SignalInputAvailable();  // Signal immediately - no polling delay!
                     e.Handled = true;
                     e.SuppressKeyPress = true;  // Prevent beep
-                    SSHDotNetDiagnostics.LogTrace($"Terminal: Key sequence added: {GetPrintableSequence(keySequence)}");
+                    SshDotNetDiagnostics.LogTrace($"Terminal: Key sequence added: {GetPrintableSequence(keySequence)}");
                 }
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error in KeyDown handler", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error in KeyDown handler", ex);
             }
         }
 
@@ -796,7 +796,7 @@ namespace mRemoteNG.UI.Controls
                 {
                     _inputBuffer.Append(e.KeyChar);
                     SignalInputAvailable();  // Signal immediately - no polling delay!
-                    SSHDotNetDiagnostics.LogTrace($"Terminal: Character '{e.KeyChar}' added to input buffer");
+                    SshDotNetDiagnostics.LogTrace($"Terminal: Character '{e.KeyChar}' added to input buffer");
                     e.Handled = true;
                 }
                 else if (e.KeyChar == (char)Keys.Return)
@@ -810,13 +810,13 @@ namespace mRemoteNG.UI.Controls
                     // Send backspace character to SSH server (it will handle the deletion)
                     _inputBuffer.Append('\b');
                     SignalInputAvailable();  // Signal immediately - no polling delay!
-                    SSHDotNetDiagnostics.LogTrace("Terminal: Backspace character added to input buffer");
+                    SshDotNetDiagnostics.LogTrace("Terminal: Backspace character added to input buffer");
                     e.Handled = true;
                 }
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error in KeyPress handler", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error in KeyPress handler", ex);
             }
         }
 
@@ -977,7 +977,7 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogWarning($"Terminal: Failed to parse color '{colorString}', using default. Error: {ex.Message}");
+                SshDotNetDiagnostics.LogWarning($"Terminal: Failed to parse color '{colorString}', using default. Error: {ex.Message}");
                 return defaultColor;
             }
         }
@@ -1013,7 +1013,7 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error in PixelToCharCoordinates", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error in PixelToCharCoordinates", ex);
                 // Fallback to simple division
                 column = Math.Max(0, pixelPoint.X / _charWidth);
             }
@@ -1043,7 +1043,7 @@ namespace mRemoteNG.UI.Controls
                     _selectionEnd = e.Location;
                     _selectionStartChar = PixelToCharCoordinates(e.Location);
                     _selectionEndChar = _selectionStartChar;
-                    SSHDotNetDiagnostics.LogDebug($"Terminal: Selection started at pixel {e.Location}, char ({_selectionStartChar.X},{_selectionStartChar.Y})");
+                    SshDotNetDiagnostics.LogDebug($"Terminal: Selection started at pixel {e.Location}, char ({_selectionStartChar.X},{_selectionStartChar.Y})");
                 }
                 else if (e.Button == MouseButtons.Right)
                 {
@@ -1053,7 +1053,7 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error in MouseDown handler", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error in MouseDown handler", ex);
             }
         }
 
@@ -1066,12 +1066,12 @@ namespace mRemoteNG.UI.Controls
                     _selectionEnd = e.Location;
                     _selectionEndChar = PixelToCharCoordinates(e.Location);
                     this.Invalidate();
-                    SSHDotNetDiagnostics.LogDebug($"Terminal: Selection extended to pixel {e.Location}, char ({_selectionEndChar.X},{_selectionEndChar.Y})");
+                    SshDotNetDiagnostics.LogDebug($"Terminal: Selection extended to pixel {e.Location}, char ({_selectionEndChar.X},{_selectionEndChar.Y})");
                 }
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error in MouseMove handler", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error in MouseMove handler", ex);
             }
         }
 
@@ -1088,7 +1088,7 @@ namespace mRemoteNG.UI.Controls
                     _selectionEndChar = PixelToCharCoordinates(e.Location);
 
                     // Log selection details for debugging
-                    SSHDotNetDiagnostics.LogDebug($"Terminal: Selection completed - Start: pixel{_selectionStart}, char({_selectionStartChar.X},{_selectionStartChar.Y}) | End: pixel{_selectionEnd}, char({_selectionEndChar.X},{_selectionEndChar.Y})");
+                    SshDotNetDiagnostics.LogDebug($"Terminal: Selection completed - Start: pixel{_selectionStart}, char({_selectionStartChar.X},{_selectionStartChar.Y}) | End: pixel{_selectionEnd}, char({_selectionEndChar.X},{_selectionEndChar.Y})");
 
                     // PuTTY-style: selection = automatic copy
                     CopySelectionToClipboard();
@@ -1109,12 +1109,12 @@ namespace mRemoteNG.UI.Controls
                         }
                     });
 
-                    SSHDotNetDiagnostics.LogDebug("Terminal: Selection completed and copied to clipboard");
+                    SshDotNetDiagnostics.LogDebug("Terminal: Selection completed and copied to clipboard");
                 }
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error in MouseUp handler", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error in MouseUp handler", ex);
             }
         }
 
@@ -1139,13 +1139,13 @@ namespace mRemoteNG.UI.Controls
                 // Only invalidate if position actually changed
                 if (_scrollbackPosition != oldPosition)
                 {
-                    SSHDotNetDiagnostics.LogTrace($"Terminal: Scrolled from {oldPosition} to {_scrollbackPosition} (delta={e.Delta}, lines={scrollLines})");
+                    SshDotNetDiagnostics.LogTrace($"Terminal: Scrolled from {oldPosition} to {_scrollbackPosition} (delta={e.Delta}, lines={scrollLines})");
                     this.Invalidate();
                 }
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error in MouseWheel handler", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error in MouseWheel handler", ex);
             }
         }
 
@@ -1159,11 +1159,11 @@ namespace mRemoteNG.UI.Controls
             {
                 RecalculateDimensions();
                 this.Invalidate();
-                SSHDotNetDiagnostics.LogDebug($"Terminal: Resized to {this.Size}");
+                SshDotNetDiagnostics.LogDebug($"Terminal: Resized to {this.Size}");
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error in Resize handler", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error in Resize handler", ex);
             }
         }
 
@@ -1175,14 +1175,14 @@ namespace mRemoteNG.UI.Controls
                 {
                     // When the control becomes visible, it has been properly sized in its parent
                     // Recalculate dimensions to ensure SSH pty size matches actual viewport
-                    SSHDotNetDiagnostics.LogDebug($"Terminal: Control became visible with size {this.Size}");
+                    SshDotNetDiagnostics.LogDebug($"Terminal: Control became visible with size {this.Size}");
                     RecalculateDimensions();
                     this.Invalidate();
                 }
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error in VisibleChanged handler", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error in VisibleChanged handler", ex);
             }
         }
 
@@ -1196,7 +1196,7 @@ namespace mRemoteNG.UI.Controls
             {
                 if (_vtController == null || _selectionStartChar.X < 0 || _selectionEndChar.X < 0)
                 {
-                    SSHDotNetDiagnostics.LogDebug($"Terminal: CopySelectionToClipboard skipped - no selection (_selectionStartChar={_selectionStartChar}, _selectionEndChar={_selectionEndChar})");
+                    SshDotNetDiagnostics.LogDebug($"Terminal: CopySelectionToClipboard skipped - no selection (_selectionStartChar={_selectionStartChar}, _selectionEndChar={_selectionEndChar})");
                     return;
                 }
 
@@ -1266,17 +1266,17 @@ namespace mRemoteNG.UI.Controls
                         Clipboard.SetText(textToCopy);
                     }
 
-                    SSHDotNetDiagnostics.LogInfo($"Terminal: Copied {textToCopy.Length} characters to clipboard (rows {startRow}-{endRow}, cols {startCol}-{endCol})");
-                    SSHDotNetDiagnostics.LogTrace($"Terminal: Copied text: [{textToCopy}]");
+                    SshDotNetDiagnostics.LogInfo($"Terminal: Copied {textToCopy.Length} characters to clipboard (rows {startRow}-{endRow}, cols {startCol}-{endCol})");
+                    SshDotNetDiagnostics.LogTrace($"Terminal: Copied text: [{textToCopy}]");
                 }
                 else
                 {
-                    SSHDotNetDiagnostics.LogDebug($"Terminal: No text to copy - selection was empty (rows {startRow}-{endRow}, cols {startCol}-{endCol})");
+                    SshDotNetDiagnostics.LogDebug($"Terminal: No text to copy - selection was empty (rows {startRow}-{endRow}, cols {startCol}-{endCol})");
                 }
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error copying to clipboard", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error copying to clipboard", ex);
             }
         }
 
@@ -1289,12 +1289,12 @@ namespace mRemoteNG.UI.Controls
                     string pastedText = Clipboard.GetText();
                     _inputBuffer.Append(pastedText);
                     SignalInputAvailable();  // Signal immediately - no polling delay!
-                    SSHDotNetDiagnostics.LogInfo($"Terminal: Pasted {pastedText.Length} characters from clipboard");
+                    SshDotNetDiagnostics.LogInfo($"Terminal: Pasted {pastedText.Length} characters from clipboard");
                 }
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error pasting from clipboard", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error pasting from clipboard", ex);
             }
         }
 
@@ -1316,7 +1316,7 @@ namespace mRemoteNG.UI.Controls
             _contextMenu.Items.Add(selectAllItem);
 
             this.ContextMenuStrip = _contextMenu;
-            SSHDotNetDiagnostics.LogDebug("Terminal: Context menu initialized");
+            SshDotNetDiagnostics.LogDebug("Terminal: Context menu initialized");
         }
 
         private void SelectAll()
@@ -1328,11 +1328,11 @@ namespace mRemoteNG.UI.Controls
                 _selectionStartChar = new Point(0, 0);
                 _selectionEndChar = new Point(_columns - 1, _rows - 1);
                 this.Invalidate();
-                SSHDotNetDiagnostics.LogDebug("Terminal: Select All executed");
+                SshDotNetDiagnostics.LogDebug("Terminal: Select All executed");
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error in SelectAll", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error in SelectAll", ex);
             }
         }
 
@@ -1346,11 +1346,11 @@ namespace mRemoteNG.UI.Controls
             {
                 TerminalBackColor = backgroundColor;
                 TerminalForeColor = foregroundColor;
-                SSHDotNetDiagnostics.LogInfo($"Terminal: Color scheme changed to BG:{backgroundColor.Name}, FG:{foregroundColor.Name}");
+                SshDotNetDiagnostics.LogInfo($"Terminal: Color scheme changed to BG:{backgroundColor.Name}, FG:{foregroundColor.Name}");
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error setting color scheme", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error setting color scheme", ex);
             }
         }
 
@@ -1367,7 +1367,7 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error in cursor blink timer", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error in cursor blink timer", ex);
             }
         }
 
@@ -1392,7 +1392,7 @@ namespace mRemoteNG.UI.Controls
                     int currentTopRow = _vtController.ViewPort.TopRow;
                     int startLine = Math.Max(0, currentTopRow - _scrollbackPosition);
 
-                    SSHDotNetDiagnostics.LogTrace($"Terminal: Rendering from line {startLine} (ViewPort.TopRow={currentTopRow}, scrollback={_scrollbackPosition})");
+                    SshDotNetDiagnostics.LogTrace($"Terminal: Rendering from line {startLine} (ViewPort.TopRow={currentTopRow}, scrollback={_scrollbackPosition})");
 
                     // Use GetPageSpans for colored rendering with attributes
                     var pageSpans = _vtController.GetPageSpans(startLine, _rows, _columns, null);
@@ -1402,7 +1402,7 @@ namespace mRemoteNG.UI.Controls
                         // Log first time we get screen text for debugging
                         if (!_hasLoggedFirstRender)
                         {
-                            SSHDotNetDiagnostics.LogDebug($"Terminal: First render - {pageSpans.Count} rows with spans");
+                            SshDotNetDiagnostics.LogDebug($"Terminal: First render - {pageSpans.Count} rows with spans");
                             _hasLoggedFirstRender = true;
                         }
 
@@ -1547,7 +1547,7 @@ namespace mRemoteNG.UI.Controls
                             }
                             catch (Exception selEx)
                             {
-                                SSHDotNetDiagnostics.LogException("Terminal: Error rendering selection highlight", selEx);
+                                SshDotNetDiagnostics.LogException("Terminal: Error rendering selection highlight", selEx);
                             }
                         }
 
@@ -1575,7 +1575,7 @@ namespace mRemoteNG.UI.Controls
                             }
                             catch (Exception cursorEx)
                             {
-                                SSHDotNetDiagnostics.LogException("Terminal: Error rendering cursor", cursorEx);
+                                SshDotNetDiagnostics.LogException("Terminal: Error rendering cursor", cursorEx);
                             }
                         }
                     }
@@ -1584,7 +1584,7 @@ namespace mRemoteNG.UI.Controls
                         // Log if no spans returned
                         if (!_hasLoggedEmptyScreen)
                         {
-                            SSHDotNetDiagnostics.LogDebug("Terminal: OnPaint called but GetPageSpans() returned empty");
+                            SshDotNetDiagnostics.LogDebug("Terminal: OnPaint called but GetPageSpans() returned empty");
                             _hasLoggedEmptyScreen = true;
                         }
                     }
@@ -1607,7 +1607,7 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Terminal: Error in OnPaint", ex);
+                SshDotNetDiagnostics.LogException("Terminal: Error in OnPaint", ex);
             }
 
             base.OnPaint(e);
@@ -1630,7 +1630,7 @@ namespace mRemoteNG.UI.Controls
                         _cursorBlinkTimer.Tick -= CursorBlinkTimer_Tick;
                         _cursorBlinkTimer.Dispose();
                         _cursorBlinkTimer = null;
-                        SSHDotNetDiagnostics.LogDebug("Terminal: Cursor blink timer disposed");
+                        SshDotNetDiagnostics.LogDebug("Terminal: Cursor blink timer disposed");
                     }
 
                     // Dispose terminal font if created
@@ -1658,12 +1658,12 @@ namespace mRemoteNG.UI.Controls
                     if (_inputAvailableSemaphore != null)
                     {
                         _inputAvailableSemaphore.Dispose();
-                        SSHDotNetDiagnostics.LogDebug("Terminal: Input semaphore disposed");
+                        SshDotNetDiagnostics.LogDebug("Terminal: Input semaphore disposed");
                     }
                 }
                 catch (Exception ex)
                 {
-                    SSHDotNetDiagnostics.LogException("Terminal: Error during disposal", ex);
+                    SshDotNetDiagnostics.LogException("Terminal: Error during disposal", ex);
                 }
             }
 

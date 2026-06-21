@@ -1,7 +1,7 @@
 // Design Note: Generic catch clauses (catch Exception) are used intentionally throughout this file.
 // This is protocol/infrastructure code that must remain resilient — an unhandled exception here would
 // crash the user's connection or the entire application. All caught exceptions are logged via
-// SSHDotNetDiagnostics, so no diagnostic information is lost. Splitting into multiple specific
+// SshDotNetDiagnostics, so no diagnostic information is lost. Splitting into multiple specific
 // exception types would add verbosity without changing behavior, since all branches log and
 // perform the same recovery action (cleanup, error state, return false, etc.).
 using System;
@@ -21,7 +21,7 @@ using mRemoteNG.UI.Tabs;
 namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 {
     [SupportedOSPlatform("windows")]
-    public class ProtocolSSH_DotNet : ProtocolBase
+    public class ProtocolSshDotNet : ProtocolBase
     {
         #region State Enumeration
 
@@ -42,7 +42,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         private SshClient _sshClient;
         private ShellStream _shellStream;
         private SshTerminalControl _terminalControl;
-        private SSHTunnelManager _tunnelManager;
+        private SshTunnelManager _tunnelManager;
         private CancellationTokenSource _cancellationTokenSource;
         private Task _outputReadTask;
         private Task _inputWriteTask;
@@ -74,7 +74,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 if (_state != value)
                 {
                     _state = value;
-                    SSHDotNetDiagnostics.LogDebug($"Protocol: State changed to {_state}");
+                    SshDotNetDiagnostics.LogDebug($"Protocol: State changed to {_state}");
                 }
             }
         }
@@ -107,7 +107,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         /// Provides access to the tunnel manager for setting up port forwarding.
         /// Available after Connect() succeeds.
         /// </summary>
-        public SSHTunnelManager TunnelManager => _tunnelManager;
+        public SshTunnelManager TunnelManager => _tunnelManager;
 
         /// <summary>
         /// Whether this SSH connection is still alive and usable as a tunnel.
@@ -129,9 +129,9 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
         #region Constructor
 
-        public ProtocolSSH_DotNet()
+        public ProtocolSshDotNet()
         {
-            SSHDotNetDiagnostics.LogDebug("Protocol: ProtocolSSH_DotNet instance created");
+            SshDotNetDiagnostics.LogDebug("Protocol: ProtocolSshDotNet instance created");
         }
 
         #endregion
@@ -142,7 +142,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         {
             try
             {
-                SSHDotNetDiagnostics.LogDebug("Protocol: Initializing ProtocolSSH_DotNet");
+                SshDotNetDiagnostics.LogDebug("Protocol: Initializing ProtocolSshDotNet");
 
                 if (!TunnelOnlyMode)
                 {
@@ -160,12 +160,12 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 // Note: base.Initialize() handles Control == null gracefully
                 bool baseResult = base.Initialize();
 
-                SSHDotNetDiagnostics.LogDebug($"Protocol: Initialization complete (TunnelOnlyMode={TunnelOnlyMode})");
+                SshDotNetDiagnostics.LogDebug($"Protocol: Initialization complete (TunnelOnlyMode={TunnelOnlyMode})");
                 return baseResult;
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Protocol: Initialization failed", ex);
+                SshDotNetDiagnostics.LogException("Protocol: Initialization failed", ex);
                 return false;
             }
         }
@@ -176,17 +176,17 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
         public override bool Connect()
         {
-            SSHDotNetDiagnostics.LogDebug("Protocol: Connect() called");
+            SshDotNetDiagnostics.LogDebug("Protocol: Connect() called");
             State = ConnectionState.Connecting;
             _connectionTimer.Restart();
-            SSHDotNetDiagnostics.StartConnectionTimer();
+            SshDotNetDiagnostics.StartConnectionTimer();
 
             try
             {
                 // Validate connection info
                 if (InterfaceControl?.Info == null)
                 {
-                    SSHDotNetDiagnostics.LogError("Protocol: InterfaceControl.Info is null");
+                    SshDotNetDiagnostics.LogError("Protocol: InterfaceControl.Info is null");
                     State = ConnectionState.Error;
                     Event_ErrorOccured(this, "Connection information is missing", null);
                     return false;
@@ -201,7 +201,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 // Validate required fields
                 if (string.IsNullOrEmpty(hostname))
                 {
-                    SSHDotNetDiagnostics.LogError("Protocol: Hostname is empty");
+                    SshDotNetDiagnostics.LogError("Protocol: Hostname is empty");
                     State = ConnectionState.Error;
                     Event_ErrorOccured(this, "Hostname cannot be empty", null);
                     return false;
@@ -209,13 +209,13 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
                 if (string.IsNullOrEmpty(username))
                 {
-                    SSHDotNetDiagnostics.LogError("Protocol: Username is empty");
+                    SshDotNetDiagnostics.LogError("Protocol: Username is empty");
                     State = ConnectionState.Error;
                     Event_ErrorOccured(this, "Username cannot be empty", null);
                     return false;
                 }
 
-                SSHDotNetDiagnostics.LogInfo($"Protocol: Connecting to {username}@{hostname}:{port}");
+                SshDotNetDiagnostics.LogInfo($"Protocol: Connecting to {username}@{hostname}:{port}");
 
                 // Fire connecting event
                 Event_Connecting(this);
@@ -226,12 +226,12 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
                 try
                 {
-                    authMethods = SSHAuthenticationProvider.GetAuthenticationMethods(
+                    authMethods = SshAuthenticationProvider.GetAuthenticationMethods(
                         username, password, connectionInfo);
                 }
                 catch (Exception authEx)
                 {
-                    SSHDotNetDiagnostics.LogException("Protocol: Failed to create authentication methods", authEx);
+                    SshDotNetDiagnostics.LogException("Protocol: Failed to create authentication methods", authEx);
                     State = ConnectionState.Error;
                     Event_ErrorOccured(this, $"Authentication setup failed: {authEx.Message}", null);
                     return false;
@@ -240,19 +240,19 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 // Create SSH client
                 try
                 {
-                    _sshClient = SSHConnectionManager.CreateConnection(
+                    _sshClient = SshConnectionManager.CreateConnection(
                         hostname, port, username, authMethods, TimeSpan.FromSeconds(30));
                 }
                 catch (Exception createEx)
                 {
-                    SSHDotNetDiagnostics.LogException("Protocol: Failed to create SSH client", createEx);
+                    SshDotNetDiagnostics.LogException("Protocol: Failed to create SSH client", createEx);
                     State = ConnectionState.Error;
                     Event_ErrorOccured(this, $"Failed to create SSH client: {createEx.Message}", null);
                     return false;
                 }
 
                 // Configure keep-alive (uses default 5s interval for fast disconnect detection)
-                SSHConnectionManager.ConfigureKeepAlive(_sshClient);
+                SshConnectionManager.ConfigureKeepAlive(_sshClient);
 
                 // Attach error handler
                 _sshClient.ErrorOccurred += OnSshClientError;
@@ -260,11 +260,11 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 // Connect SSH client
                 try
                 {
-                    SSHConnectionManager.Connect(_sshClient);
+                    SshConnectionManager.Connect(_sshClient);
                 }
                 catch (SshAuthenticationException authEx)
                 {
-                    SSHDotNetDiagnostics.LogError($"Protocol: Authentication failed - {authEx.Message}");
+                    SshDotNetDiagnostics.LogError($"Protocol: Authentication failed - {authEx.Message}");
                     State = ConnectionState.Error;
                     Event_ErrorOccured(this, $"Authentication failed: {authEx.Message}", null);
                     CleanupConnection();
@@ -272,7 +272,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 }
                 catch (SshConnectionException connEx)
                 {
-                    SSHDotNetDiagnostics.LogError($"Protocol: Connection failed - {connEx.Message}");
+                    SshDotNetDiagnostics.LogError($"Protocol: Connection failed - {connEx.Message}");
                     State = ConnectionState.Error;
                     Event_ErrorOccured(this, $"Connection failed: {connEx.Message}", null);
                     CleanupConnection();
@@ -280,7 +280,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 }
                 catch (System.Net.Sockets.SocketException sockEx)
                 {
-                    SSHDotNetDiagnostics.LogError($"Protocol: Network error - {sockEx.Message}");
+                    SshDotNetDiagnostics.LogError($"Protocol: Network error - {sockEx.Message}");
                     State = ConnectionState.Error;
                     Event_ErrorOccured(this, $"Network error: {sockEx.Message}", null);
                     CleanupConnection();
@@ -288,7 +288,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 }
                 catch (Exception connEx)
                 {
-                    SSHDotNetDiagnostics.LogException("Protocol: Connection failed", connEx);
+                    SshDotNetDiagnostics.LogException("Protocol: Connection failed", connEx);
                     State = ConnectionState.Error;
                     Event_ErrorOccured(this, $"Connection failed: {connEx.Message}", null);
                     CleanupConnection();
@@ -296,11 +296,11 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 }
 
                 // Log connection info
-                string connInfo = SSHConnectionManager.GetConnectionInfo(_sshClient);
-                SSHDotNetDiagnostics.LogInfo($"Protocol: {connInfo}");
+                string connInfo = SshConnectionManager.GetConnectionInfo(_sshClient);
+                SshDotNetDiagnostics.LogInfo($"Protocol: {connInfo}");
 
                 // Create tunnel manager (available for both tunnel-only and full terminal mode)
-                _tunnelManager = new SSHTunnelManager(_sshClient);
+                _tunnelManager = new SshTunnelManager(_sshClient);
                 _tunnelManager.TunnelError += OnTunnelError;
 
                 // Apply any user-configured port forward rules
@@ -315,7 +315,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     // In tunnel-only mode, skip shell stream, terminal, and I/O tasks.
                     // The SSH connection is ready for port forwarding only.
                     State = ConnectionState.Connected;
-                    SSHDotNetDiagnostics.LogInfo("Protocol: Connected in tunnel-only mode (no shell)");
+                    SshDotNetDiagnostics.LogInfo("Protocol: Connected in tunnel-only mode (no shell)");
                     Event_Connected(this);
                     return true;
                 }
@@ -327,7 +327,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     // This is more reliable than using cached CharWidth/CharHeight which might be defaults
                     if (_terminalControl == null)
                     {
-                        SSHDotNetDiagnostics.LogError("Protocol: Terminal control is null, cannot create shell stream.");
+                        SshDotNetDiagnostics.LogError("Protocol: Terminal control is null, cannot create shell stream.");
                         State = ConnectionState.Error;
                         Event_ErrorOccured(this, "Terminal control is not available.", null);
                         CleanupConnection();
@@ -339,7 +339,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     int charW = _terminalControl.CharWidth;
                     int charH = _terminalControl.CharHeight;
 
-                    SSHDotNetDiagnostics.LogDebug($"Protocol: Terminal metrics - Cols={cols}, Rows={rows}, CharW={charW}, CharH={charH}");
+                    SshDotNetDiagnostics.LogDebug($"Protocol: Terminal metrics - Cols={cols}, Rows={rows}, CharW={charW}, CharH={charH}");
 
                     // Calculate pixel dimensions
                     uint widthPixels = (uint)(cols * charW);
@@ -348,15 +348,15 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     // Validate that pixel dimensions are reasonable (not using defaults)
                     if (charW < 6 || charW > 20 || charH < 10 || charH > 30)
                     {
-                        SSHDotNetDiagnostics.LogWarning($"Protocol: Character dimensions seem wrong ({charW}x{charH}), using control size instead");
+                        SshDotNetDiagnostics.LogWarning($"Protocol: Character dimensions seem wrong ({charW}x{charH}), using control size instead");
                         // Fallback: use actual control dimensions as pixels (less accurate but better than defaults)
                         widthPixels = (uint)_terminalControl.Width;
                         heightPixels = (uint)_terminalControl.Height;
                     }
 
-                    SSHDotNetDiagnostics.LogInfo($"Protocol: Creating shell with dimensions {cols}x{rows} ({widthPixels}x{heightPixels} px)");
+                    SshDotNetDiagnostics.LogInfo($"Protocol: Creating shell with dimensions {cols}x{rows} ({widthPixels}x{heightPixels} px)");
 
-                    _shellStream = SSHConnectionManager.CreateShellStream(
+                    _shellStream = SshConnectionManager.CreateShellStream(
                         _sshClient,
                         "xterm-256color",
                         (uint)cols,
@@ -367,7 +367,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 }
                 catch (Exception shellEx)
                 {
-                    SSHDotNetDiagnostics.LogException("Protocol: Failed to create shell stream", shellEx);
+                    SshDotNetDiagnostics.LogException("Protocol: Failed to create shell stream", shellEx);
                     State = ConnectionState.Error;
                     Event_ErrorOccured(this, $"Failed to create shell: {shellEx.Message}", null);
                     CleanupConnection();
@@ -375,7 +375,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 }
 
                 // Attach terminal to shell stream
-                SSHDotNetDiagnostics.LogDebug("Protocol: Attaching terminal to shell stream");
+                SshDotNetDiagnostics.LogDebug("Protocol: Attaching terminal to shell stream");
                 _terminalControl.AttachSshStream(_shellStream);
 
                 // Start reading output and writing input
@@ -383,27 +383,27 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 _outputReadTask = Task.Run(() => ReadOutputAsync(_cancellationTokenSource.Token));
                 _inputWriteTask = Task.Run(() => WriteInputAsync(_cancellationTokenSource.Token));
 
-                SSHDotNetDiagnostics.LogDebug("Protocol: Output reading and input writing tasks started");
+                SshDotNetDiagnostics.LogDebug("Protocol: Output reading and input writing tasks started");
 
                 // Execute opening command if configured
                 if (!string.IsNullOrEmpty(connectionInfo.OpeningCommand))
                 {
-                    SSHDotNetDiagnostics.LogDebug($"Protocol: Executing opening command: {connectionInfo.OpeningCommand}");
+                    SshDotNetDiagnostics.LogDebug($"Protocol: Executing opening command: {connectionInfo.OpeningCommand}");
                     try
                     {
                         _shellStream.WriteLine(connectionInfo.OpeningCommand);
                     }
                     catch (Exception cmdEx)
                     {
-                        SSHDotNetDiagnostics.LogException("Protocol: Failed to execute opening command", cmdEx);
+                        SshDotNetDiagnostics.LogException("Protocol: Failed to execute opening command", cmdEx);
                         // Non-fatal, continue
                     }
                 }
 
                 // Success
                 State = ConnectionState.Connected;
-                SSHDotNetDiagnostics.StopConnectionTimer($"Full connection to {hostname}");
-                SSHDotNetDiagnostics.LogInfo("Protocol: Connection established successfully");
+                SshDotNetDiagnostics.StopConnectionTimer($"Full connection to {hostname}");
+                SshDotNetDiagnostics.LogInfo("Protocol: Connection established successfully");
 
                 Event_Connected(this);
 
@@ -413,7 +413,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     _terminalControl.Invoke((Action)(() =>
                     {
                         _terminalControl.Focus();
-                        SSHDotNetDiagnostics.LogDebug("Protocol: Terminal control focused after connection");
+                        SshDotNetDiagnostics.LogDebug("Protocol: Terminal control focused after connection");
 
                         // Force resize notification to ensure SSH pty matches actual viewport size
                         // This is necessary because the control may have been resized after shell stream creation
@@ -424,7 +424,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                                 _terminalControl.Invoke((Action)(() =>
                                 {
                                     _terminalControl.ForceResizeNotification();
-                                    SSHDotNetDiagnostics.LogDebug("Protocol: Forced terminal resize notification after connection");
+                                    SshDotNetDiagnostics.LogDebug("Protocol: Forced terminal resize notification after connection");
                                 }));
                             }
                         });
@@ -435,7 +435,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Protocol: Unexpected error during connection", ex);
+                SshDotNetDiagnostics.LogException("Protocol: Unexpected error during connection", ex);
                 State = ConnectionState.Error;
                 Event_ErrorOccured(this, $"Unexpected error: {ex.Message}", null);
                 CleanupConnection();
@@ -445,7 +445,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
         private void OnTunnelError(object sender, string errorMessage)
         {
-            SSHDotNetDiagnostics.LogError($"Protocol: {errorMessage}");
+            SshDotNetDiagnostics.LogError($"Protocol: {errorMessage}");
             Event_ErrorOccured(this, errorMessage, null);
         }
 
@@ -457,24 +457,24 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             _lastErrorMessage = e.Exception.Message;
             _lastException = e.Exception;
 
-            SSHDotNetDiagnostics.LogException("Protocol: SSH client error event", e.Exception);
+            SshDotNetDiagnostics.LogException("Protocol: SSH client error event", e.Exception);
             Event_ErrorOccured(this, $"SSH Error: {e.Exception.Message}", null);
 
             // Cancel read/write operations immediately to trigger disconnect handling
             try
             {
                 _errorCancellationSource?.Cancel();
-                SSHDotNetDiagnostics.LogDebug("Protocol: Cancelled read/write operations due to SSH error");
+                SshDotNetDiagnostics.LogDebug("Protocol: Cancelled read/write operations due to SSH error");
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Protocol: Error cancelling operations", ex);
+                SshDotNetDiagnostics.LogException("Protocol: Error cancelling operations", ex);
             }
         }
 
         private void CleanupConnection()
         {
-            SSHDotNetDiagnostics.LogDebug("Protocol: Cleaning up failed connection");
+            SshDotNetDiagnostics.LogDebug("Protocol: Cleaning up failed connection");
 
             try
             {
@@ -483,7 +483,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Protocol: Error disposing tunnel manager during cleanup", ex);
+                SshDotNetDiagnostics.LogException("Protocol: Error disposing tunnel manager during cleanup", ex);
             }
 
             try
@@ -498,7 +498,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Protocol: Error during connection cleanup", ex);
+                SshDotNetDiagnostics.LogException("Protocol: Error during connection cleanup", ex);
             }
         }
 
@@ -511,7 +511,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             try
             {
                 State = ConnectionState.Disconnecting;
-                SSHDotNetDiagnostics.LogDebug("Protocol: Disconnect() called");
+                SshDotNetDiagnostics.LogDebug("Protocol: Disconnect() called");
 
                 // Unsubscribe from terminal events
                 if (_terminalControl != null)
@@ -556,7 +556,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 }
                 catch (Exception ex)
                 {
-                    SSHDotNetDiagnostics.LogException("Protocol: Error disposing shell stream", ex);
+                    SshDotNetDiagnostics.LogException("Protocol: Error disposing shell stream", ex);
                 }
 
                 // Dispose tunnel manager BEFORE disconnecting SSH client
@@ -572,7 +572,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 }
                 catch (Exception ex)
                 {
-                    SSHDotNetDiagnostics.LogException("Protocol: Error disposing tunnel manager", ex);
+                    SshDotNetDiagnostics.LogException("Protocol: Error disposing tunnel manager", ex);
                 }
 
                 // Close SSH client
@@ -585,7 +585,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 }
                 catch (Exception ex)
                 {
-                    SSHDotNetDiagnostics.LogException("Protocol: Error disconnecting SSH client", ex);
+                    SshDotNetDiagnostics.LogException("Protocol: Error disconnecting SSH client", ex);
                 }
 
                 // Display connection closed message in terminal
@@ -601,7 +601,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 }
                 catch (Exception ex)
                 {
-                    SSHDotNetDiagnostics.LogException("Protocol: Error displaying connection closed message", ex);
+                    SshDotNetDiagnostics.LogException("Protocol: Error displaying connection closed message", ex);
                 }
 
                 // Detach terminal
@@ -611,20 +611,20 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 }
                 catch (Exception ex)
                 {
-                    SSHDotNetDiagnostics.LogException("Protocol: Error detaching terminal", ex);
+                    SshDotNetDiagnostics.LogException("Protocol: Error detaching terminal", ex);
                 }
 
                 // Log session statistics before completing disconnection
                 LogSessionStatistics();
 
                 State = ConnectionState.Disconnected;
-                SSHDotNetDiagnostics.LogDebug("Protocol: Disconnection complete");
+                SshDotNetDiagnostics.LogDebug("Protocol: Disconnection complete");
 
                 Event_Disconnected(this, "User initiated disconnection", null);
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Protocol: Error during disconnection", ex);
+                SshDotNetDiagnostics.LogException("Protocol: Error during disconnection", ex);
                 State = ConnectionState.Error;
                 Event_ErrorOccured(this, $"Disconnection error: {ex.Message}", null);
             }
@@ -663,11 +663,11 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 stats.AppendLine($"Peak Send Rate: {FormatBytes((long)_peakSendRate)}/s");
                 stats.AppendLine("==============================");
 
-                SSHDotNetDiagnostics.LogInfo(stats.ToString().TrimEnd());
+                SshDotNetDiagnostics.LogInfo(stats.ToString().TrimEnd());
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Protocol: Error logging session statistics", ex);
+                SshDotNetDiagnostics.LogException("Protocol: Error logging session statistics", ex);
             }
         }
 
@@ -692,7 +692,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
         private async Task ReadOutputAsync(CancellationToken cancellationToken)
         {
-            SSHDotNetDiagnostics.LogDebug("Output: Starting output reading loop");
+            SshDotNetDiagnostics.LogDebug("Output: Starting output reading loop");
 
             byte[] buffer = new byte[4096];
             int consecutiveEmptyReads = 0;
@@ -725,9 +725,9 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                             totalBytes += bytesRead;
 
                             // Log raw data if enabled
-                            SSHDotNetDiagnostics.LogRawDataBinary(buffer, bytesRead, "Received");
+                            SshDotNetDiagnostics.LogRawDataBinary(buffer, bytesRead, "Received");
 
-                            SSHDotNetDiagnostics.LogTrace($"Output: Read {bytesRead} bytes (total: {_bytesReceived})");
+                            SshDotNetDiagnostics.LogTrace($"Output: Read {bytesRead} bytes (total: {_bytesReceived})");
 
                             // Convert to string
                             string data = Encoding.UTF8.GetString(buffer, 0, bytesRead);
@@ -743,7 +743,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                                     }
                                     catch (Exception writeEx)
                                     {
-                                        SSHDotNetDiagnostics.LogException("Output: Error writing to terminal", writeEx);
+                                        SshDotNetDiagnostics.LogException("Output: Error writing to terminal", writeEx);
                                     }
                                 }));
                             }
@@ -758,11 +758,11 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                                 if (rate > _peakReceiveRate)
                                     _peakReceiveRate = rate;
 
-                                SSHDotNetDiagnostics.LogInfo($"Output: Data rate: {rate:F0} bytes/sec");
+                                SshDotNetDiagnostics.LogInfo($"Output: Data rate: {rate:F0} bytes/sec");
 
                                 if (rate > 100000) // > 100 KB/s
                                 {
-                                    SSHDotNetDiagnostics.LogWarning($"Output: High data rate detected ({rate:F0} bytes/sec), may impact performance");
+                                    SshDotNetDiagnostics.LogWarning($"Output: High data rate detected ({rate:F0} bytes/sec), may impact performance");
                                 }
 
                                 totalBytes = 0;
@@ -773,11 +773,11 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         {
                             // Read returned 0 bytes, connection might be closed
                             consecutiveEmptyReads++;
-                            SSHDotNetDiagnostics.LogDebug($"Output: Empty read #{consecutiveEmptyReads}");
+                            SshDotNetDiagnostics.LogDebug($"Output: Empty read #{consecutiveEmptyReads}");
 
                             if (consecutiveEmptyReads >= MAX_EMPTY_READS)
                             {
-                                SSHDotNetDiagnostics.LogWarning("Output: Too many empty reads, connection may be closed");
+                                SshDotNetDiagnostics.LogWarning("Output: Too many empty reads, connection may be closed");
                                 break;
                             }
 
@@ -786,7 +786,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     }
                     catch (OperationCanceledException)
                     {
-                        SSHDotNetDiagnostics.LogDebug("Output: Reading cancelled");
+                        SshDotNetDiagnostics.LogDebug("Output: Reading cancelled");
                         break;
                     }
                     catch (IOException ioEx)
@@ -797,7 +797,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         _lastErrorMessage = ioEx.Message;
                         _lastException = ioEx;
 
-                        SSHDotNetDiagnostics.LogException("Output: I/O error reading stream", ioEx);
+                        SshDotNetDiagnostics.LogException("Output: I/O error reading stream", ioEx);
                         break;
                     }
                     catch (Exception ex)
@@ -808,20 +808,20 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         _lastErrorMessage = ex.Message;
                         _lastException = ex;
 
-                        SSHDotNetDiagnostics.LogException("Output: Error in read loop", ex);
+                        SshDotNetDiagnostics.LogException("Output: Error in read loop", ex);
                         // Continue trying to read
                         await Task.Delay(100, linkedToken);
                     }
                     }
 
-                    SSHDotNetDiagnostics.LogDebug("Output: Output reading loop ended");
+                    SshDotNetDiagnostics.LogDebug("Output: Output reading loop ended");
 
                     // Check if we should trigger disconnection event
                     // Use the ORIGINAL cancellation token to check if this was a manual disconnect
                     // If only the error token was cancelled, we should still handle the disconnect
                     if (!cancellationToken.IsCancellationRequested)
                     {
-                        SSHDotNetDiagnostics.LogDebug("Output: Connection appears to be closed by remote");
+                        SshDotNetDiagnostics.LogDebug("Output: Connection appears to be closed by remote");
 
                         // Display connection closed message in terminal
                         try
@@ -836,7 +836,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         }
                         catch (Exception displayEx)
                         {
-                            SSHDotNetDiagnostics.LogException("Output: Error displaying connection closed message", displayEx);
+                            SshDotNetDiagnostics.LogException("Output: Error displaying connection closed message", displayEx);
                         }
 
                         // Smart disconnect detection: Determine if this was an error disconnect or clean exit
@@ -847,21 +847,21 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         if (isErrorDisconnect)
                         {
                             // Error disconnect - keep tab open, show error popup with "OK" and "Go to Tab" buttons
-                            SSHDotNetDiagnostics.LogDebug("Output: Error disconnect detected - keeping tab open");
+                            SshDotNetDiagnostics.LogDebug("Output: Error disconnect detected - keeping tab open");
                             Event_Disconnected(this, "Connection closed due to error", null);
                             ShowErrorDisconnectDialog();
                         }
                         else
                         {
                             // Clean exit (user typed 'exit') - auto-close tab like PuTTY SSH
-                            SSHDotNetDiagnostics.LogDebug("Output: Clean disconnect detected - auto-closing tab");
+                            SshDotNetDiagnostics.LogDebug("Output: Clean disconnect detected - auto-closing tab");
                             Event_Closed(this);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    SSHDotNetDiagnostics.LogException("Output: Fatal error in output reading", ex);
+                    SshDotNetDiagnostics.LogException("Output: Fatal error in output reading", ex);
                     Event_ErrorOccured(this, $"Output reading error: {ex.Message}", null);
                 }
             } // End of using linkedCts
@@ -869,7 +869,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
         private async Task WriteInputAsync(CancellationToken cancellationToken)
         {
-            SSHDotNetDiagnostics.LogDebug("Input: Starting event-driven input writing loop (zero-delay)");
+            SshDotNetDiagnostics.LogDebug("Input: Starting event-driven input writing loop (zero-delay)");
 
             // Create a linked token that responds to both manual cancellation and SSH errors
             using (var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _errorCancellationSource.Token))
@@ -894,13 +894,13 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                             _bytesSent += inputData.Length;
 
                             // Log raw data if enabled
-                            SSHDotNetDiagnostics.LogRawDataBinary(inputData, inputData.Length, "Sent");
-                            SSHDotNetDiagnostics.LogTrace($"Input: Sent {inputData.Length} bytes immediately (total: {_bytesSent})");
+                            SshDotNetDiagnostics.LogRawDataBinary(inputData, inputData.Length, "Sent");
+                            SshDotNetDiagnostics.LogTrace($"Input: Sent {inputData.Length} bytes immediately (total: {_bytesSent})");
                         }
                     }
                     catch (OperationCanceledException)
                     {
-                        SSHDotNetDiagnostics.LogDebug("Input: Writing cancelled");
+                        SshDotNetDiagnostics.LogDebug("Input: Writing cancelled");
                         break;
                     }
                     catch (IOException ioEx)
@@ -911,7 +911,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         _lastErrorMessage = ioEx.Message;
                         _lastException = ioEx;
 
-                        SSHDotNetDiagnostics.LogException("Input: I/O error writing to stream", ioEx);
+                        SshDotNetDiagnostics.LogException("Input: I/O error writing to stream", ioEx);
                         break;
                     }
                     catch (Exception ex)
@@ -922,13 +922,13 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         _lastErrorMessage = ex.Message;
                         _lastException = ex;
 
-                        SSHDotNetDiagnostics.LogException("Input: Error in writing loop", ex);
+                        SshDotNetDiagnostics.LogException("Input: Error in writing loop", ex);
 
                         // If client is disconnected, break out of loop
                         if (ex.Message.Contains("not connected", StringComparison.OrdinalIgnoreCase) ||
                             ex.Message.Contains("disconnected", StringComparison.OrdinalIgnoreCase))
                         {
-                            SSHDotNetDiagnostics.LogWarning("Input: Client disconnected, exiting write loop");
+                            SshDotNetDiagnostics.LogWarning("Input: Client disconnected, exiting write loop");
                             break;
                         }
 
@@ -936,14 +936,14 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     }
                     }
 
-                    SSHDotNetDiagnostics.LogDebug("Input: Input writing loop ended");
+                    SshDotNetDiagnostics.LogDebug("Input: Input writing loop ended");
 
                     // Check if we should trigger disconnection event
                     // Use the ORIGINAL cancellation token to check if this was a manual disconnect
                     // (only if we haven't already been cancelled by the read loop)
                     if (!cancellationToken.IsCancellationRequested && _hadRecentError)
                     {
-                        SSHDotNetDiagnostics.LogDebug("Input: Write loop detected error disconnect");
+                        SshDotNetDiagnostics.LogDebug("Input: Write loop detected error disconnect");
 
                         // Display connection closed message in terminal
                         try
@@ -958,7 +958,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         }
                         catch (Exception displayEx)
                         {
-                            SSHDotNetDiagnostics.LogException("Input: Error displaying connection closed message", displayEx);
+                            SshDotNetDiagnostics.LogException("Input: Error displaying connection closed message", displayEx);
                         }
 
                         // Smart disconnect detection: Check if error was recent (within last 5 seconds)
@@ -968,21 +968,21 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         if (isErrorDisconnect)
                         {
                             // Error disconnect - keep tab open, show error popup
-                            SSHDotNetDiagnostics.LogDebug("Input: Error disconnect detected - keeping tab open");
+                            SshDotNetDiagnostics.LogDebug("Input: Error disconnect detected - keeping tab open");
                             Event_Disconnected(this, "Connection closed due to error", null);
                             ShowErrorDisconnectDialog();
                         }
                         else
                         {
                             // Clean exit - auto-close tab
-                            SSHDotNetDiagnostics.LogDebug("Input: Clean disconnect detected - auto-closing tab");
+                            SshDotNetDiagnostics.LogDebug("Input: Clean disconnect detected - auto-closing tab");
                             Event_Closed(this);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    SSHDotNetDiagnostics.LogException("Input: Fatal error in input writing", ex);
+                    SshDotNetDiagnostics.LogException("Input: Fatal error in input writing", ex);
                 }
             } // End of using linkedCts
         }
@@ -1007,12 +1007,12 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         (uint)e.Rows,
                         (uint)e.WidthPixels,
                         (uint)e.HeightPixels);
-                    SSHDotNetDiagnostics.LogInfo($"Protocol: Sent window change request to SSH server: {e.Columns}x{e.Rows} ({e.WidthPixels}x{e.HeightPixels} px)");
+                    SshDotNetDiagnostics.LogInfo($"Protocol: Sent window change request to SSH server: {e.Columns}x{e.Rows} ({e.WidthPixels}x{e.HeightPixels} px)");
                 }
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Protocol: Error sending window change request", ex);
+                SshDotNetDiagnostics.LogException("Protocol: Error sending window change request", ex);
             }
         }
 
@@ -1058,11 +1058,11 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                         FocusTab();
                     }
 
-                    SSHDotNetDiagnostics.LogDebug($"Protocol: Error dialog dismissed, user chose: {result}");
+                    SshDotNetDiagnostics.LogDebug($"Protocol: Error dialog dismissed, user chose: {result}");
                 }
                 catch (Exception ex)
                 {
-                    SSHDotNetDiagnostics.LogException("Protocol: Error showing disconnect dialog", ex);
+                    SshDotNetDiagnostics.LogException("Protocol: Error showing disconnect dialog", ex);
                 }
             }));
         }
@@ -1099,16 +1099,16 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 {
                     tab.Show(tab.DockPanel);
                     tab.Focus();
-                    SSHDotNetDiagnostics.LogDebug("Protocol: Focused disconnected tab");
+                    SshDotNetDiagnostics.LogDebug("Protocol: Focused disconnected tab");
                 }
                 else
                 {
-                    SSHDotNetDiagnostics.LogWarning("Protocol: Could not focus tab - InterfaceControl.Parent is not a ConnectionTab");
+                    SshDotNetDiagnostics.LogWarning("Protocol: Could not focus tab - InterfaceControl.Parent is not a ConnectionTab");
                 }
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Protocol: Error focusing tab", ex);
+                SshDotNetDiagnostics.LogException("Protocol: Error focusing tab", ex);
             }
         }
 

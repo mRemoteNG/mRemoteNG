@@ -7,7 +7,7 @@ using Renci.SshNet.Common;
 
 namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 {
-    public static class SSHConnectionManager
+    public static class SshConnectionManager
     {
         #region Constants
 
@@ -42,8 +42,8 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             if (authMethods == null || authMethods.Length == 0)
                 throw new ArgumentException("At least one authentication method is required", nameof(authMethods));
 
-            SSHDotNetDiagnostics.LogInfo($"Connection: Creating SSH client for {username}@{hostname}:{port}");
-            SSHDotNetDiagnostics.LogDebug($"Connection: Using {authMethods.Length} authentication method(s)");
+            SshDotNetDiagnostics.LogInfo($"Connection: Creating SSH client for {username}@{hostname}:{port}");
+            SshDotNetDiagnostics.LogDebug($"Connection: Using {authMethods.Length} authentication method(s)");
 
             try
             {
@@ -58,7 +58,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 var actualTimeout = timeout ?? TimeSpan.FromSeconds(DEFAULT_TIMEOUT_SECONDS);
                 connectionInfo.Timeout = actualTimeout;
 
-                SSHDotNetDiagnostics.LogDebug($"Connection: Timeout set to {actualTimeout.TotalSeconds}s");
+                SshDotNetDiagnostics.LogDebug($"Connection: Timeout set to {actualTimeout.TotalSeconds}s");
 
                 // Create client
                 var client = new SshClient(connectionInfo);
@@ -66,13 +66,13 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 // Configure client properties
                 client.ConnectionInfo.Encoding = System.Text.Encoding.UTF8;
 
-                SSHDotNetDiagnostics.LogDebug("Connection: SSH client created, ready to connect");
+                SshDotNetDiagnostics.LogDebug("Connection: SSH client created, ready to connect");
 
                 return client;
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Connection: Failed to create SSH client", ex);
+                SshDotNetDiagnostics.LogException("Connection: Failed to create SSH client", ex);
                 throw;
             }
         }
@@ -85,38 +85,38 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
 
-            SSHDotNetDiagnostics.StartConnectionTimer();
-            SSHDotNetDiagnostics.LogInfo($"Connection: Connecting to {client.ConnectionInfo.Host}:{client.ConnectionInfo.Port}");
+            SshDotNetDiagnostics.StartConnectionTimer();
+            SshDotNetDiagnostics.LogInfo($"Connection: Connecting to {client.ConnectionInfo.Host}:{client.ConnectionInfo.Port}");
 
             try
             {
                 client.Connect();
 
-                SSHDotNetDiagnostics.StopConnectionTimer($"Connection to {client.ConnectionInfo.Host}");
-                SSHDotNetDiagnostics.LogInfo($"Connection: Connected successfully");
-                SSHDotNetDiagnostics.LogInfo($"Connection: Server version: {client.ConnectionInfo.ServerVersion}");
-                SSHDotNetDiagnostics.LogInfo($"Connection: Current encryption: {client.ConnectionInfo.CurrentServerEncryption}");
+                SshDotNetDiagnostics.StopConnectionTimer($"Connection to {client.ConnectionInfo.Host}");
+                SshDotNetDiagnostics.LogInfo($"Connection: Connected successfully");
+                SshDotNetDiagnostics.LogInfo($"Connection: Server version: {client.ConnectionInfo.ServerVersion}");
+                SshDotNetDiagnostics.LogInfo($"Connection: Current encryption: {client.ConnectionInfo.CurrentServerEncryption}");
 
                 // Log authentication result
                 foreach (var authMethod in client.ConnectionInfo.AuthenticationMethods
                     .Where(am => am.AllowedAuthentications != null && am.AllowedAuthentications.Any()))
                 {
-                    SSHDotNetDiagnostics.LogDebug($"Connection: Server allows: {string.Join(", ", authMethod.AllowedAuthentications)}");
+                    SshDotNetDiagnostics.LogDebug($"Connection: Server allows: {string.Join(", ", authMethod.AllowedAuthentications)}");
                 }
             }
             catch (SshAuthenticationException authEx)
             {
-                SSHDotNetDiagnostics.LogError($"Connection: Authentication failed - {authEx.Message}");
+                SshDotNetDiagnostics.LogError($"Connection: Authentication failed - {authEx.Message}");
                 throw;
             }
             catch (SshConnectionException connEx)
             {
-                SSHDotNetDiagnostics.LogError($"Connection: Connection failed - {connEx.Message}");
+                SshDotNetDiagnostics.LogError($"Connection: Connection failed - {connEx.Message}");
                 throw;
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Connection: Unexpected error during connection", ex);
+                SshDotNetDiagnostics.LogException("Connection: Unexpected error during connection", ex);
                 throw;
             }
         }
@@ -145,7 +145,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
             string actualTerminalName = terminalName ?? DEFAULT_TERMINAL_NAME;
 
-            SSHDotNetDiagnostics.LogDebug($"Shell: Creating shell stream with terminal '{actualTerminalName}' ({columns}x{rows})");
+            SshDotNetDiagnostics.LogDebug($"Shell: Creating shell stream with terminal '{actualTerminalName}' ({columns}x{rows})");
 
             try
             {
@@ -157,14 +157,14 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     height,
                     bufferSize);
 
-                SSHDotNetDiagnostics.LogDebug($"Shell: Shell stream created successfully");
-                SSHDotNetDiagnostics.LogDebug($"Shell: Buffer size: {bufferSize} bytes");
+                SshDotNetDiagnostics.LogDebug($"Shell: Shell stream created successfully");
+                SshDotNetDiagnostics.LogDebug($"Shell: Buffer size: {bufferSize} bytes");
 
                 return shellStream;
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("Shell: Failed to create shell stream", ex);
+                SshDotNetDiagnostics.LogException("Shell: Failed to create shell stream", ex);
                 throw;
             }
         }
@@ -183,16 +183,16 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
             var actualInterval = interval ?? TimeSpan.FromSeconds(DEFAULT_KEEPALIVE_SECONDS);
 
-            SSHDotNetDiagnostics.LogDebug($"KeepAlive: Configuring keep-alive interval to {actualInterval.TotalSeconds}s");
+            SshDotNetDiagnostics.LogDebug($"KeepAlive: Configuring keep-alive interval to {actualInterval.TotalSeconds}s");
 
             try
             {
                 client.KeepAliveInterval = actualInterval;
-                SSHDotNetDiagnostics.LogDebug("KeepAlive: Keep-alive configured successfully");
+                SshDotNetDiagnostics.LogDebug("KeepAlive: Keep-alive configured successfully");
             }
             catch (Exception ex)
             {
-                SSHDotNetDiagnostics.LogException("KeepAlive: Failed to configure keep-alive", ex);
+                SshDotNetDiagnostics.LogException("KeepAlive: Failed to configure keep-alive", ex);
                 throw;
             }
         }

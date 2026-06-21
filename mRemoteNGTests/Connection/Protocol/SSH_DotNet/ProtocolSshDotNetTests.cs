@@ -7,27 +7,27 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 {
     [TestFixture]
     [Category("Unit")]
-    public class ProtocolSSH_DotNetTests
+    public class ProtocolSshDotNetTests
     {
-        private ProtocolSSH_DotNet _protocol;
+        private ProtocolSshDotNet _protocol;
 
         [SetUp]
         public void Setup()
         {
             // Reset diagnostic flags to default state
-            SSHDotNetDiagnostics.VerboseLogging = false;
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
 
             // Create protocol instance
-            _protocol = new ProtocolSSH_DotNet();
+            _protocol = new ProtocolSshDotNet();
         }
 
         [TearDown]
         public void TearDown()
         {
             // Reset to defaults after tests
-            SSHDotNetDiagnostics.VerboseLogging = false;
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
 
             // Cleanup protocol
             try
@@ -51,11 +51,11 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void Constructor_CreatesInstance_WithDefaultState()
         {
             // Act
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
 
             // Assert
             Assert.That(protocol, Is.Not.Null);
-            Assert.That(protocol.State, Is.EqualTo(ProtocolSSH_DotNet.ConnectionState.Disconnected));
+            Assert.That(protocol.State, Is.EqualTo(ProtocolSshDotNet.ConnectionState.Disconnected));
             Assert.That(protocol.IsConnected, Is.False);
         }
 
@@ -71,20 +71,20 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void State_DefaultsToDisconnected()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
 
             // Act
             var state = protocol.State;
 
             // Assert
-            Assert.That(state, Is.EqualTo(ProtocolSSH_DotNet.ConnectionState.Disconnected));
+            Assert.That(state, Is.EqualTo(ProtocolSshDotNet.ConnectionState.Disconnected));
         }
 
         [Test]
         public void IsConnected_ReturnsFalse_WhenDisconnected()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
 
             // Act
             bool isConnected = protocol.IsConnected;
@@ -101,7 +101,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void BytesReceived_DefaultsToZero()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
 
             // Act
             long bytesReceived = protocol.BytesReceived;
@@ -114,7 +114,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void BytesSent_DefaultsToZero()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
 
             // Act
             long bytesSent = protocol.BytesSent;
@@ -127,7 +127,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void ConnectionDuration_ReturnsZero_WhenNotConnected()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
 
             // Act
             var duration = protocol.ConnectionDuration;
@@ -144,7 +144,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void DefaultPort_IsStandardSSHPort()
         {
             // Arrange & Act
-            int defaultPort = (int)ProtocolSSH_DotNet.Defaults.Port;
+            int defaultPort = (int)ProtocolSshDotNet.Defaults.Port;
 
             // Assert
             Assert.That(defaultPort, Is.EqualTo(22), "Default SSH port should be 22");
@@ -158,7 +158,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void Connect_ReturnsFalse_WhenInterfaceControlIsNull()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
             // Don't initialize, so InterfaceControl is null
 
             // Act
@@ -166,14 +166,14 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Assert
             Assert.That(result, Is.False);
-            Assert.That(protocol.State, Is.EqualTo(ProtocolSSH_DotNet.ConnectionState.Error));
+            Assert.That(protocol.State, Is.EqualTo(ProtocolSshDotNet.ConnectionState.Error));
         }
 
         [Test]
         public void Connect_SetsStateToConnecting_WhenCalled()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
             protocol.Initialize();
 
             // Create a minimal connection info
@@ -188,7 +188,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Assert - will fail to connect but should have set state to Connecting first
             // Note: This will transition to Error state because we can't actually connect
-            Assert.That(protocol.State, Is.EqualTo(ProtocolSSH_DotNet.ConnectionState.Error).Or.EqualTo(ProtocolSSH_DotNet.ConnectionState.Connecting));
+            Assert.That(protocol.State, Is.EqualTo(ProtocolSshDotNet.ConnectionState.Error).Or.EqualTo(ProtocolSshDotNet.ConnectionState.Connecting));
         }
 
         #endregion
@@ -199,7 +199,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void Disconnect_DoesNotThrow_WhenNeverConnected()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
             protocol.Initialize();
 
             // Act & Assert
@@ -210,14 +210,14 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void Disconnect_SetsStateToDisconnecting_WhenCalled()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
             protocol.Initialize();
 
             // Act
             protocol.Disconnect();
 
             // Assert - should transition to Disconnecting then Disconnected
-            Assert.That(protocol.State, Is.EqualTo(ProtocolSSH_DotNet.ConnectionState.Disconnected).Or.EqualTo(ProtocolSSH_DotNet.ConnectionState.Disconnecting));
+            Assert.That(protocol.State, Is.EqualTo(ProtocolSshDotNet.ConnectionState.Disconnected).Or.EqualTo(ProtocolSshDotNet.ConnectionState.Disconnecting));
         }
 
         #endregion
@@ -228,19 +228,19 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void ConnectionState_HasAllExpectedValues()
         {
             // Act & Assert
-            Assert.That(Enum.IsDefined(typeof(ProtocolSSH_DotNet.ConnectionState), "Disconnected"), Is.True);
-            Assert.That(Enum.IsDefined(typeof(ProtocolSSH_DotNet.ConnectionState), "Connecting"), Is.True);
-            Assert.That(Enum.IsDefined(typeof(ProtocolSSH_DotNet.ConnectionState), "Authenticating"), Is.True);
-            Assert.That(Enum.IsDefined(typeof(ProtocolSSH_DotNet.ConnectionState), "Connected"), Is.True);
-            Assert.That(Enum.IsDefined(typeof(ProtocolSSH_DotNet.ConnectionState), "Disconnecting"), Is.True);
-            Assert.That(Enum.IsDefined(typeof(ProtocolSSH_DotNet.ConnectionState), "Error"), Is.True);
+            Assert.That(Enum.IsDefined(typeof(ProtocolSshDotNet.ConnectionState), "Disconnected"), Is.True);
+            Assert.That(Enum.IsDefined(typeof(ProtocolSshDotNet.ConnectionState), "Connecting"), Is.True);
+            Assert.That(Enum.IsDefined(typeof(ProtocolSshDotNet.ConnectionState), "Authenticating"), Is.True);
+            Assert.That(Enum.IsDefined(typeof(ProtocolSshDotNet.ConnectionState), "Connected"), Is.True);
+            Assert.That(Enum.IsDefined(typeof(ProtocolSshDotNet.ConnectionState), "Disconnecting"), Is.True);
+            Assert.That(Enum.IsDefined(typeof(ProtocolSshDotNet.ConnectionState), "Error"), Is.True);
         }
 
         [Test]
         public void ConnectionState_DisconnectedValue_IsZero()
         {
             // Act
-            var value = (int)ProtocolSSH_DotNet.ConnectionState.Disconnected;
+            var value = (int)ProtocolSshDotNet.ConnectionState.Disconnected;
 
             // Assert
             Assert.That(value, Is.EqualTo(0), "Disconnected should be the default enum value (0)");
@@ -254,7 +254,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void Protocol_InheritsFromProtocolBase()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
 
             // Act & Assert
             Assert.That(protocol, Is.InstanceOf<mRemoteNG.Connection.Protocol.ProtocolBase>());
@@ -268,7 +268,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void Connect_HandlesNullHostname_Gracefully()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
             protocol.Initialize();
 
             var connectionInfo = new mRemoteNG.Connection.ConnectionInfo();
@@ -282,14 +282,14 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Assert
             Assert.That(result, Is.False);
-            Assert.That(protocol.State, Is.EqualTo(ProtocolSSH_DotNet.ConnectionState.Error));
+            Assert.That(protocol.State, Is.EqualTo(ProtocolSshDotNet.ConnectionState.Error));
         }
 
         [Test]
         public void Connect_HandlesEmptyHostname_Gracefully()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
             protocol.Initialize();
 
             var connectionInfo = new mRemoteNG.Connection.ConnectionInfo();
@@ -303,14 +303,14 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Assert
             Assert.That(result, Is.False);
-            Assert.That(protocol.State, Is.EqualTo(ProtocolSSH_DotNet.ConnectionState.Error));
+            Assert.That(protocol.State, Is.EqualTo(ProtocolSshDotNet.ConnectionState.Error));
         }
 
         [Test]
         public void Connect_HandlesNullUsername_Gracefully()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
             protocol.Initialize();
 
             var connectionInfo = new mRemoteNG.Connection.ConnectionInfo();
@@ -324,14 +324,14 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Assert
             Assert.That(result, Is.False);
-            Assert.That(protocol.State, Is.EqualTo(ProtocolSSH_DotNet.ConnectionState.Error));
+            Assert.That(protocol.State, Is.EqualTo(ProtocolSshDotNet.ConnectionState.Error));
         }
 
         [Test]
         public void Connect_HandlesEmptyUsername_Gracefully()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
             protocol.Initialize();
 
             var connectionInfo = new mRemoteNG.Connection.ConnectionInfo();
@@ -345,14 +345,14 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Assert
             Assert.That(result, Is.False);
-            Assert.That(protocol.State, Is.EqualTo(ProtocolSSH_DotNet.ConnectionState.Error));
+            Assert.That(protocol.State, Is.EqualTo(ProtocolSshDotNet.ConnectionState.Error));
         }
 
         [Test]
         public void Connect_AcceptsEmptyPassword()
         {
             // Arrange
-            var protocol = new ProtocolSSH_DotNet();
+            var protocol = new ProtocolSshDotNet();
             protocol.Initialize();
 
             var connectionInfo = new mRemoteNG.Connection.ConnectionInfo();
@@ -366,7 +366,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 
             // Assert - should not fail due to empty password (will fail to connect for other reasons)
             // We're just verifying it doesn't reject empty password
-            Assert.That(protocol.State, Is.Not.EqualTo(ProtocolSSH_DotNet.ConnectionState.Disconnected),
+            Assert.That(protocol.State, Is.Not.EqualTo(ProtocolSshDotNet.ConnectionState.Disconnected),
                 "Protocol should have attempted connection (empty password is allowed)");
         }
 

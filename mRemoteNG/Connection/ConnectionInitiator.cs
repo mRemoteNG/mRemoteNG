@@ -211,7 +211,7 @@ namespace mRemoteNG.Connection
 
                         protocolSshTunnel.InterfaceControl.Hide();
                     }
-                    else if (protocolSshTunnel is ProtocolSSH_DotNet sshDotNetTunnel)
+                    else if (protocolSshTunnel is ProtocolSshDotNet sshDotNetTunnel)
                     {
                         // === SSH_DotNet BRANCH (new) ===
                         // No clone needed — we don't modify SSHOptions

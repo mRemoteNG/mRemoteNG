@@ -19,8 +19,8 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void Setup()
         {
             // Reset diagnostic flags to default state
-            SSHDotNetDiagnostics.VerboseLogging = false;
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
 
             // Create control
             _control = new SshTerminalControl();
@@ -30,8 +30,8 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
         public void TearDown()
         {
             // Reset to defaults after tests
-            SSHDotNetDiagnostics.VerboseLogging = false;
-            SSHDotNetDiagnostics.TraceLogging = false;
+            SshDotNetDiagnostics.VerboseLogging = false;
+            SshDotNetDiagnostics.TraceLogging = false;
 
             // Cleanup control
             if (_control != null && !_control.IsDisposed)
