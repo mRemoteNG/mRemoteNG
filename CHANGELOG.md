@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #2496: fixed use pwfile instead of cleartext password for putty connections 
 
 ### Added
+- #2997: added SSH_DotNet private-key / certificate authentication — configure a private key file (OpenSSH/PEM) with an optional passphrase (tried before password, OpenSSH-style; passphrase stored encrypted like the connection password). Persisted to the XML and CSV connection files; SQL Server/MySQL storage of these properties is a future enhancement.
 - #2931: added vault openbao connector
 - #2900: added "Report a Bug" menu item to Help menu and update bug report URL to GitHub issues 
 - #2865: added configurable connection tab colors to distinguish between different environments
