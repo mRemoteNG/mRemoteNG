@@ -548,6 +548,12 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
                     }
                 }
 
+                // Both I/O tasks have stopped — dispose the per-connection cancellation source (S2930)
+                _cancellationTokenSource?.Dispose();
+                _cancellationTokenSource = null;
+                _outputReadTask = null;
+                _inputWriteTask = null;
+
                 // Close shell stream
                 try
                 {
