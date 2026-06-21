@@ -22,6 +22,21 @@ namespace mRemoteNGTests.Connection.Protocol.SshDotNet
             _protocol = new ProtocolSshDotNet();
         }
 
+        [Test]
+        public void Dispose_DoesNotThrow_WhenNeverConnected()
+        {
+            var protocol = new ProtocolSshDotNet();
+            Assert.DoesNotThrow(() => protocol.Dispose());
+        }
+
+        [Test]
+        public void Dispose_IsIdempotent()
+        {
+            var protocol = new ProtocolSshDotNet();
+            protocol.Dispose();
+            Assert.DoesNotThrow(() => protocol.Dispose());
+        }
+
         [TearDown]
         public void TearDown()
         {

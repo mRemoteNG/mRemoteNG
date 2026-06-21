@@ -25,6 +25,40 @@ namespace mRemoteNGTests.Connection.Protocol.SshDotNet
             SshDotNetDiagnostics.TraceLogging = false;
         }
 
+        #region CreateAdapter Tests
+
+        [Test]
+        public void CreateAdapter_ReturnsUnconnectedAdapter_WithValidParameters()
+        {
+            using var auth = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { auth };
+
+            using var adapter = SshConnectionManager.CreateAdapter("localhost", 22, "testuser", authMethods);
+
+            Assert.That(adapter, Is.Not.Null);
+            Assert.That(adapter.IsConnected, Is.False);
+            Assert.That(adapter.UnderlyingClient, Is.Not.Null);
+        }
+
+        [Test]
+        public void CreateAdapter_ThrowsArgumentException_WhenHostnameIsEmpty()
+        {
+            using var auth = new PasswordAuthenticationMethod("testuser", "password");
+            var authMethods = new[] { auth };
+
+            Assert.Throws<ArgumentException>(() =>
+                SshConnectionManager.CreateAdapter("", 22, "testuser", authMethods));
+        }
+
+        [Test]
+        public void CreateAdapter_ThrowsArgumentException_WhenAuthMethodsIsEmpty()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                SshConnectionManager.CreateAdapter("localhost", 22, "testuser", Array.Empty<AuthenticationMethod>()));
+        }
+
+        #endregion
+
         #region CreateConnection Tests
 
         [Test]
