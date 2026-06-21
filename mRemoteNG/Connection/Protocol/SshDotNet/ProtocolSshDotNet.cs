@@ -722,7 +722,7 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
         /// <summary>
         /// Format bytes into human-readable format (KB, MB, GB)
         /// </summary>
-        private string FormatBytes(long bytes)
+        private static string FormatBytes(long bytes)
         {
             if (bytes < 1024)
                 return $"{bytes} B";
