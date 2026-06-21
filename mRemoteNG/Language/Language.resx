@@ -2202,6 +2202,18 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="PropertyDescriptionSshPortForwardRules" xml:space="preserve">
     <value>SSH port forwarding rules. Format: L:localPort:remoteHost:remotePort for local forwarding, R:remotePort:localHost:localPort for remote forwarding, D:localPort for dynamic SOCKS5 proxy. Separate multiple rules with semicolons.</value>
   </data>
+  <data name="SshDotNetPrivateKeyFile" xml:space="preserve">
+    <value>Private Key File</value>
+  </data>
+  <data name="PropertyDescriptionSshDotNetPrivateKeyFile" xml:space="preserve">
+    <value>Path to an SSH private key file (OpenSSH or PEM) used for public-key authentication. Leave empty to use password / keyboard-interactive authentication.</value>
+  </data>
+  <data name="SshDotNetPrivateKeyPassphrase" xml:space="preserve">
+    <value>Private Key Passphrase</value>
+  </data>
+  <data name="PropertyDescriptionSshDotNetPrivateKeyPassphrase" xml:space="preserve">
+    <value>Passphrase that decrypts the private key file. Leave empty for an unprotected (passphrase-less) key. Stored encrypted, like the password.</value>
+  </data>
   <data name="SshTunnelConfigProblem" xml:space="preserve">
     <value>SSH Tunnel connection configuration problem. Connection to: "{0}" via SSH Tunnel: "{1}" not possible. A connection with the name configured as SSH Tunnel and protocol SSH version 1 or SSH2 version 2 cannot be found in the connection tree. Clear SSH Tunnel configuration or specify existing SSH connection.</value>
   </data>

@@ -137,6 +137,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 ? connectionCsv[headers.IndexOf("SshDotNetPortForwardRules")]
                 : "";
 
+            connectionRecord.SshDotNetPrivateKeyFile = headers.Contains("SshDotNetPrivateKeyFile")
+                ? connectionCsv[headers.IndexOf("SshDotNetPrivateKeyFile")]
+                : "";
+
+            connectionRecord.SshDotNetPrivateKeyPassphrase = headers.Contains("SshDotNetPrivateKeyPassphrase")
+                ? connectionCsv[headers.IndexOf("SshDotNetPrivateKeyPassphrase")]
+                : "";
+
             connectionRecord.SSHTunnelConnectionName = headers.Contains("SSHTunnelConnectionName")
                 ? connectionCsv[headers.IndexOf("SSHTunnelConnectionName")]
                 : "";
@@ -621,6 +629,18 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSshDotNetPortForwardRules")], out bool value))
                     connectionRecord.Inheritance.SshDotNetPortForwardRules = value;
+            }
+
+            if (headers.Contains("InheritSshDotNetPrivateKeyFile"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSshDotNetPrivateKeyFile")], out bool value))
+                    connectionRecord.Inheritance.SshDotNetPrivateKeyFile = value;
+            }
+
+            if (headers.Contains("InheritSshDotNetPrivateKeyPassphrase"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSshDotNetPrivateKeyPassphrase")], out bool value))
+                    connectionRecord.Inheritance.SshDotNetPrivateKeyPassphrase = value;
             }
 
             if (headers.Contains("InheritPuttySession"))

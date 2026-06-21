@@ -177,6 +177,18 @@ namespace mRemoteNG.Connection
         public bool SshDotNetPortForwardRules { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.SshDotNetPrivateKeyFile)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionSshDotNetPrivateKeyFile)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool SshDotNetPrivateKeyFile { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.SshDotNetPrivateKeyPassphrase)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionSshDotNetPrivateKeyPassphrase)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool SshDotNetPrivateKeyPassphrase { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.AuthenticationLevel)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionAuthenticationLevel)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]

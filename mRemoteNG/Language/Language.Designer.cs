@@ -6836,6 +6836,30 @@ namespace mRemoteNG.Resources.Language {
             }
         }
 
+        internal static string SshDotNetPrivateKeyFile {
+            get {
+                return ResourceManager.GetString("SshDotNetPrivateKeyFile", resourceCulture);
+            }
+        }
+
+        internal static string PropertyDescriptionSshDotNetPrivateKeyFile {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionSshDotNetPrivateKeyFile", resourceCulture);
+            }
+        }
+
+        internal static string SshDotNetPrivateKeyPassphrase {
+            get {
+                return ResourceManager.GetString("SshDotNetPrivateKeyPassphrase", resourceCulture);
+            }
+        }
+
+        internal static string PropertyDescriptionSshDotNetPrivateKeyPassphrase {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionSshDotNetPrivateKeyPassphrase", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to SSH transfer failed..
         /// </summary>

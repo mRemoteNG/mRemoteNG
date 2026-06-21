@@ -50,6 +50,8 @@ namespace mRemoteNG.Connection
         private int _port;
         private string _sshOptions = "";
         private string _sshDotNetPortForwardRules = "";
+        private string _sshDotNetPrivateKeyFile = "";
+        private string _sshDotNetPrivateKeyPassphrase = "";
         private string _puttySession;
         private bool _useConsoleSession;
         private AuthenticationLevel _rdpAuthenticationLevel;
@@ -432,6 +434,27 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("SshDotNetPortForwardRules", _sshDotNetPortForwardRules);
             set => SetField(ref _sshDotNetPortForwardRules, value, "SshDotNetPortForwardRules");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.SshDotNetPrivateKeyFile)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSshDotNetPrivateKeyFile)),
+         AttributeUsedInProtocol(ProtocolType.SshDotNet)]
+        public string SshDotNetPrivateKeyFile
+        {
+            get => GetPropertyValue("SshDotNetPrivateKeyFile", _sshDotNetPrivateKeyFile);
+            set => SetField(ref _sshDotNetPrivateKeyFile, value, "SshDotNetPrivateKeyFile");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.SshDotNetPrivateKeyPassphrase)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSshDotNetPrivateKeyPassphrase)),
+         PasswordPropertyText(true),
+         AttributeUsedInProtocol(ProtocolType.SshDotNet)]
+        public string SshDotNetPrivateKeyPassphrase
+        {
+            get => GetPropertyValue("SshDotNetPrivateKeyPassphrase", _sshDotNetPrivateKeyPassphrase);
+            set => SetField(ref _sshDotNetPrivateKeyPassphrase, value, "SshDotNetPrivateKeyPassphrase");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
