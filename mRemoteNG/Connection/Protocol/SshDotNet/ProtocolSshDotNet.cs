@@ -640,6 +640,24 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
             }
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _cancellationTokenSource?.Dispose();
+                _cancellationTokenSource = null;
+                _errorCancellationSource?.Dispose();
+                _shellStream?.Dispose();
+                _shellStream = null;
+                _tunnelManager?.Dispose();
+                _tunnelManager = null;
+                _sshClient?.Dispose();
+                _sshClient = null;
+            }
+
+            base.Dispose(disposing);
+        }
+
         /// <summary>
         /// Log comprehensive session statistics
         /// </summary>

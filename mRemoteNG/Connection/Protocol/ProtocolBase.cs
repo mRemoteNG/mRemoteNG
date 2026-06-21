@@ -343,10 +343,12 @@ namespace mRemoteNG.Connection.Protocol
 
         #endregion
 
-        private void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
-            if (disposing) return;
-            tmrReconnect?.Dispose();
+            if (disposing)
+            {
+                tmrReconnect?.Dispose();
+            }
         }
 
         public void Dispose()
