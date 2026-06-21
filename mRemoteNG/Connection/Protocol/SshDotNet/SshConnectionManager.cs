@@ -78,6 +78,20 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
         }
 
         /// <summary>
+        /// Create an SSH client wrapped in an <see cref="ISshClientAdapter"/> (the seam used by the
+        /// protocol so its connection pipeline is unit-testable with a fake).
+        /// </summary>
+        internal static ISshClientAdapter CreateAdapter(
+            string hostname,
+            int port,
+            string username,
+            AuthenticationMethod[] authMethods,
+            TimeSpan? timeout = null)
+        {
+            return new SshClientAdapter(CreateConnection(hostname, port, username, authMethods, timeout));
+        }
+
+        /// <summary>
         /// Connect the SSH client with logging
         /// </summary>
         public static void Connect(SshClient client)

@@ -39,7 +39,7 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
 
         #region Private Fields
 
-        private SshClient _sshClient;
+        private ISshClientAdapter _sshClient;
         private ShellStream _shellStream;
         private SshTerminalControl _terminalControl;
         private SshTunnelManager _tunnelManager;
@@ -240,7 +240,7 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
                 // Create SSH client
                 try
                 {
-                    _sshClient = SshConnectionManager.CreateConnection(
+                    _sshClient = SshConnectionManager.CreateAdapter(
                         hostname, port, username, authMethods, TimeSpan.FromSeconds(30));
                 }
                 catch (Exception createEx)
@@ -252,7 +252,7 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
                 }
 
                 // Configure keep-alive (uses default 5s interval for fast disconnect detection)
-                SshConnectionManager.ConfigureKeepAlive(_sshClient);
+                _sshClient.ConfigureKeepAlive();
 
                 // Attach error handler
                 _sshClient.ErrorOccurred += OnSshClientError;
@@ -260,7 +260,7 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
                 // Connect SSH client
                 try
                 {
-                    SshConnectionManager.Connect(_sshClient);
+                    _sshClient.Connect();
                 }
                 catch (SshAuthenticationException authEx)
                 {
@@ -296,11 +296,11 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
                 }
 
                 // Log connection info
-                string connInfo = SshConnectionManager.GetConnectionInfo(_sshClient);
+                string connInfo = _sshClient.GetConnectionInfo();
                 SshDotNetDiagnostics.LogInfo($"Protocol: {connInfo}");
 
                 // Create tunnel manager (available for both tunnel-only and full terminal mode)
-                _tunnelManager = new SshTunnelManager(_sshClient);
+                _tunnelManager = new SshTunnelManager(_sshClient.UnderlyingClient);
                 _tunnelManager.TunnelError += OnTunnelError;
 
                 // Apply any user-configured port forward rules
@@ -356,8 +356,7 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
 
                     SshDotNetDiagnostics.LogInfo($"Protocol: Creating shell with dimensions {cols}x{rows} ({widthPixels}x{heightPixels} px)");
 
-                    _shellStream = SshConnectionManager.CreateShellStream(
-                        _sshClient,
+                    _shellStream = _sshClient.CreateShellStream(
                         "xterm-256color",
                         (uint)cols,
                         (uint)rows,
