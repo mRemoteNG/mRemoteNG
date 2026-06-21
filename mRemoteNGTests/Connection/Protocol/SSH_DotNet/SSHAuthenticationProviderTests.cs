@@ -7,6 +7,7 @@ using Renci.SshNet;
 namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 {
     [TestFixture]
+    [Category("Unit")]
     public class SSHAuthenticationProviderTests
     {
         private string _tempKeyFile;

@@ -6,6 +6,7 @@ using mRemoteNG.Connection;
 namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 {
     [TestFixture]
+    [Category("Unit")]
     public class ProtocolSSH_DotNetTests
     {
         private ProtocolSSH_DotNet _protocol;

@@ -10,6 +10,7 @@ namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 {
     [TestFixture]
     [Apartment(ApartmentState.STA)]  // Required for Windows Forms controls
+    [Category("RequiresUI")]
     public class SshTerminalControlTests
     {
         private SshTerminalControl _control;

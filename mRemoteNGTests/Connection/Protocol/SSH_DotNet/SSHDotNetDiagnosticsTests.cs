@@ -6,6 +6,7 @@ using NUnit.Framework;
 namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 {
     [TestFixture]
+    [Category("Unit")]
     public class SSHDotNetDiagnosticsTests
     {
         [SetUp]

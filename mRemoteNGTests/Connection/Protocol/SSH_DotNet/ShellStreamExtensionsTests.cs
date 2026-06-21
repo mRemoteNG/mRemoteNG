@@ -7,6 +7,7 @@ using NSubstitute;
 namespace mRemoteNGTests.Connection.Protocol.SSH_DotNet
 {
     [TestFixture]
+    [Category("Unit")]
     public class ShellStreamExtensionsTests
     {
         [SetUp]
