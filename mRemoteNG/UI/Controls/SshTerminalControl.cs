@@ -83,8 +83,6 @@ namespace mRemoteNG.UI.Controls
 
         // Input handling
         private StringBuilder _inputBuffer;
-        private Stream _sshStream;
-        private bool _streamAttached = false;
         private readonly System.Threading.SemaphoreSlim _inputAvailableSemaphore = new System.Threading.SemaphoreSlim(0);
 
         // Selection/Copy-Paste state
@@ -420,32 +418,14 @@ namespace mRemoteNG.UI.Controls
 
         #region Stream Management
 
-        public void AttachSshStream(System.IO.Stream sshStream)
+        public void AttachSshStream()
         {
-            try
-            {
-                _sshStream = sshStream;
-                _streamAttached = true;
-                SshDotNetDiagnostics.LogInfo("Terminal: SSH stream attached");
-            }
-            catch (Exception ex)
-            {
-                SshDotNetDiagnostics.LogException("Terminal: Failed to attach SSH stream", ex);
-            }
+            SshDotNetDiagnostics.LogInfo("Terminal: SSH stream attached");
         }
 
         public void DetachSshStream()
         {
-            try
-            {
-                _sshStream = null;
-                _streamAttached = false;
-                SshDotNetDiagnostics.LogInfo("Terminal: SSH stream detached");
-            }
-            catch (Exception ex)
-            {
-                SshDotNetDiagnostics.LogException("Terminal: Failed to detach SSH stream", ex);
-            }
+            SshDotNetDiagnostics.LogInfo("Terminal: SSH stream detached");
         }
 
         #endregion
@@ -820,7 +800,7 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        private string GetCtrlSequence(KeyEventArgs e)
+        private static string GetCtrlSequence(KeyEventArgs e)
         {
             // Map Ctrl+letter to ASCII control characters (Ctrl+A = 0x01, Ctrl+Z = 0x1A)
             // Ctrl+@ = 0x00 (NUL), Ctrl+[ = 0x1B (ESC), Ctrl+\ = 0x1C, Ctrl+] = 0x1D, Ctrl+^ = 0x1E, Ctrl+_ = 0x1F
@@ -847,7 +827,7 @@ namespace mRemoteNG.UI.Controls
             };
         }
 
-        private string GetAltSequence(KeyEventArgs e)
+        private static string GetAltSequence(KeyEventArgs e)
         {
             // Alt+key sends ESC followed by the key
             // This is the standard "Meta" key behavior in terminals
@@ -870,7 +850,7 @@ namespace mRemoteNG.UI.Controls
             return null;
         }
 
-        private string GetKeySequence(KeyEventArgs e)
+        private static string GetKeySequence(KeyEventArgs e)
         {
             // Map special keys to terminal sequences with modifier support
             // Modifier encoding: 1=none, 2=Shift, 3=Alt, 4=Alt+Shift, 5=Ctrl, 6=Ctrl+Shift, 7=Ctrl+Alt, 8=Ctrl+Alt+Shift
@@ -935,7 +915,7 @@ namespace mRemoteNG.UI.Controls
             };
         }
 
-        private string GetPrintableSequence(string sequence)
+        private static string GetPrintableSequence(string sequence)
         {
             // Convert control characters to printable form for logging
             if (string.IsNullOrEmpty(sequence)) return "";
@@ -958,7 +938,7 @@ namespace mRemoteNG.UI.Controls
 
         #region Helper Methods
 
-        private Color ParseColor(string colorString, Color defaultColor)
+        private static Color ParseColor(string colorString, Color defaultColor)
         {
             // Parse color from VtNetCore hex format (#RRGGBB) to System.Drawing.Color
             if (string.IsNullOrEmpty(colorString))

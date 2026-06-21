@@ -357,7 +357,7 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
 
             // Attach terminal to shell stream
             SshDotNetDiagnostics.LogDebug("Protocol: Attaching terminal to shell stream");
-            _terminalControl.AttachSshStream(_shellStream);
+            _terminalControl.AttachSshStream();
 
             // Start reading output and writing input
             _cancellationTokenSource = new CancellationTokenSource();

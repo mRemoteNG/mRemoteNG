@@ -461,14 +461,14 @@ namespace mRemoteNGTests.Connection.Protocol.SshDotNet
         #region Stream Attachment Tests
 
         [Test]
-        public void AttachSshStream_DoesNotThrow_WithNullStream()
+        public void AttachSshStream_DoesNotThrow()
         {
             // Arrange
             var control = new SshTerminalControl();
             control.Initialize();
 
             // Act & Assert
-            Assert.DoesNotThrow(() => control.AttachSshStream(null));
+            Assert.DoesNotThrow(() => control.AttachSshStream());
 
             // Cleanup
             control.Dispose();
