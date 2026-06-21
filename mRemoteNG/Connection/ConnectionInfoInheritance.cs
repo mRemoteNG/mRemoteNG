@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -174,7 +174,7 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.SshPortForwardRules)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionSshPortForwardRules)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
-        public bool SSHDotNetPortForwardRules { get; set; }
+        public bool SshDotNetPortForwardRules { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.AuthenticationLevel)),

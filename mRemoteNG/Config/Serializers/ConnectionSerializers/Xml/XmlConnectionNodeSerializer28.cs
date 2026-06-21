@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.Versioning;
 using System.Security;
 using System.Xml.Linq;
@@ -69,7 +69,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("SSHTunnelConnectionName", connectionInfo.SSHTunnelConnectionName));
             element.Add(new XAttribute("OpeningCommand", connectionInfo.OpeningCommand));
             element.Add(new XAttribute("SSHOptions", connectionInfo.SSHOptions));
-            element.Add(new XAttribute("SSHDotNetPortForwardRules", connectionInfo.SSHDotNetPortForwardRules));
+            element.Add(new XAttribute("SshDotNetPortForwardRules", connectionInfo.SshDotNetPortForwardRules));
             element.Add(new XAttribute("PuttySession", connectionInfo.PuttySession));
             element.Add(new XAttribute("Port", connectionInfo.Port));
             element.Add(new XAttribute("ConnectToConsole", connectionInfo.UseConsoleSession.ToString().ToLowerInvariant()));
@@ -219,8 +219,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 element.Add(new XAttribute("InheritOpeningCommand", inheritance.OpeningCommand.ToString().ToLowerInvariant()));
             if (inheritance.SSHOptions)
                 element.Add(new XAttribute("InheritSSHOptions", inheritance.SSHOptions.ToString().ToLowerInvariant()));
-            if (inheritance.SSHDotNetPortForwardRules)
-                element.Add(new XAttribute("InheritSSHDotNetPortForwardRules", inheritance.SSHDotNetPortForwardRules.ToString().ToLowerInvariant()));
+            if (inheritance.SshDotNetPortForwardRules)
+                element.Add(new XAttribute("InheritSshDotNetPortForwardRules", inheritance.SshDotNetPortForwardRules.ToString().ToLowerInvariant()));
             if (inheritance.PuttySession)
                 element.Add(new XAttribute("InheritPuttySession", inheritance.PuttySession.ToString().ToLowerInvariant()));
             if (inheritance.RedirectDiskDrives)

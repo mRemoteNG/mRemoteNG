@@ -304,7 +304,7 @@ namespace mRemoteNG.Connection.Protocol.SshDotNet
                 _tunnelManager.TunnelError += OnTunnelError;
 
                 // Apply any user-configured port forward rules
-                string rules = InterfaceControl?.Info?.SSHDotNetPortForwardRules;
+                string rules = InterfaceControl?.Info?.SshDotNetPortForwardRules;
                 if (!string.IsNullOrWhiteSpace(rules))
                 {
                     PortForwardRuleParser.ApplyRules(_tunnelManager, rules);

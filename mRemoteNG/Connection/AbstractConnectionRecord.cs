@@ -428,10 +428,10 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.SshPortForwardRules)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSshPortForwardRules)),
          AttributeUsedInProtocol(ProtocolType.SshDotNet)]
-        public string SSHDotNetPortForwardRules
+        public string SshDotNetPortForwardRules
         {
-            get => GetPropertyValue("SSHDotNetPortForwardRules", _sshDotNetPortForwardRules);
-            set => SetField(ref _sshDotNetPortForwardRules, value, "SSHDotNetPortForwardRules");
+            get => GetPropertyValue("SshDotNetPortForwardRules", _sshDotNetPortForwardRules);
+            set => SetField(ref _sshDotNetPortForwardRules, value, "SshDotNetPortForwardRules");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),

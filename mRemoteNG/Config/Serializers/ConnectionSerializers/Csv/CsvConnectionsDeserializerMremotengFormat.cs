@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Versioning;
@@ -133,8 +133,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 ? connectionCsv[headers.IndexOf("SSHOptions")]
                 : "";
 
-            connectionRecord.SSHDotNetPortForwardRules = headers.Contains("SSHDotNetPortForwardRules")
-                ? connectionCsv[headers.IndexOf("SSHDotNetPortForwardRules")]
+            connectionRecord.SshDotNetPortForwardRules = headers.Contains("SshDotNetPortForwardRules")
+                ? connectionCsv[headers.IndexOf("SshDotNetPortForwardRules")]
                 : "";
 
             connectionRecord.SSHTunnelConnectionName = headers.Contains("SSHTunnelConnectionName")
@@ -617,10 +617,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.Inheritance.SSHOptions = value;
             }
 
-            if (headers.Contains("InheritSSHDotNetPortForwardRules"))
+            if (headers.Contains("InheritSshDotNetPortForwardRules"))
             {
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSSHDotNetPortForwardRules")], out bool value))
-                    connectionRecord.Inheritance.SSHDotNetPortForwardRules = value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSshDotNetPortForwardRules")], out bool value))
+                    connectionRecord.Inheritance.SshDotNetPortForwardRules = value;
             }
 
             if (headers.Contains("InheritPuttySession"))
