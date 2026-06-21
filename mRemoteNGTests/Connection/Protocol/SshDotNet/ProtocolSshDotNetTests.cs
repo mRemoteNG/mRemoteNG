@@ -196,7 +196,7 @@ namespace mRemoteNGTests.Connection.Protocol.SshDotNet
             connectionInfo.Hostname = "localhost";
             connectionInfo.Username = "testuser";
             connectionInfo.Password = "testpass";
-            protocol.InterfaceControl.Info = connectionInfo;
+            protocol.InterfaceControl = new InterfaceControl(new System.Windows.Forms.Panel(), protocol, connectionInfo);
 
             // Act
             protocol.Connect();
@@ -290,7 +290,7 @@ namespace mRemoteNGTests.Connection.Protocol.SshDotNet
             connectionInfo.Hostname = null;  // Invalid
             connectionInfo.Username = "testuser";
             connectionInfo.Password = "testpass";
-            protocol.InterfaceControl.Info = connectionInfo;
+            protocol.InterfaceControl = new InterfaceControl(new System.Windows.Forms.Panel(), protocol, connectionInfo);
 
             // Act
             bool result = protocol.Connect();
@@ -311,7 +311,7 @@ namespace mRemoteNGTests.Connection.Protocol.SshDotNet
             connectionInfo.Hostname = "";  // Invalid
             connectionInfo.Username = "testuser";
             connectionInfo.Password = "testpass";
-            protocol.InterfaceControl.Info = connectionInfo;
+            protocol.InterfaceControl = new InterfaceControl(new System.Windows.Forms.Panel(), protocol, connectionInfo);
 
             // Act
             bool result = protocol.Connect();
@@ -332,7 +332,7 @@ namespace mRemoteNGTests.Connection.Protocol.SshDotNet
             connectionInfo.Hostname = "localhost";
             connectionInfo.Username = null;  // Invalid
             connectionInfo.Password = "testpass";
-            protocol.InterfaceControl.Info = connectionInfo;
+            protocol.InterfaceControl = new InterfaceControl(new System.Windows.Forms.Panel(), protocol, connectionInfo);
 
             // Act
             bool result = protocol.Connect();
@@ -353,7 +353,7 @@ namespace mRemoteNGTests.Connection.Protocol.SshDotNet
             connectionInfo.Hostname = "localhost";
             connectionInfo.Username = "";  // Invalid
             connectionInfo.Password = "testpass";
-            protocol.InterfaceControl.Info = connectionInfo;
+            protocol.InterfaceControl = new InterfaceControl(new System.Windows.Forms.Panel(), protocol, connectionInfo);
 
             // Act
             bool result = protocol.Connect();
@@ -374,7 +374,7 @@ namespace mRemoteNGTests.Connection.Protocol.SshDotNet
             connectionInfo.Hostname = "localhost";
             connectionInfo.Username = "testuser";
             connectionInfo.Password = "";  // Empty password is valid (might use key auth)
-            protocol.InterfaceControl.Info = connectionInfo;
+            protocol.InterfaceControl = new InterfaceControl(new System.Windows.Forms.Panel(), protocol, connectionInfo);
 
             // Act
             protocol.Connect();
