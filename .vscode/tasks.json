@@ -1,0 +1,86 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/mRemoteNG/mRemoteNG.csproj",
+                "-c",
+                "Debug",
+                "-p:Platform=x64",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "rebuild",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/mRemoteNG/mRemoteNG.csproj",
+                "-c",
+                "Debug",
+                "-p:Platform=x64",
+                "--no-incremental",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build (Release)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/mRemoteNG/mRemoteNG.csproj",
+                "-c",
+                "Release",
+                "-p:Platform=x64",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish (Release Self-Contained)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/mRemoteNG/mRemoteNG.csproj",
+                "-c",
+                "Release Self-Contained",
+                "-p:Platform=x64",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "clean",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean",
+                "${workspaceFolder}/mRemoteNG/mRemoteNG.csproj",
+                "-c",
+                "Debug",
+                "-p:Platform=x64"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

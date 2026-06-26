@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch mRemoteNG (Debug x64)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/mRemoteNG/bin/x64/Debug/mRemoteNG.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/mRemoteNG/bin/x64/Debug",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch mRemoteNG (Release x64)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build (Release)",
+            "program": "${workspaceFolder}/mRemoteNG/bin/x64/Release/mRemoteNG.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/mRemoteNG/bin/x64/Release",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch mRemoteNG (Release Self-Contained x64)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "publish (Release Self-Contained)",
+            "program": "${workspaceFolder}/mRemoteNG/bin/x64/Publish Self-Contained/mRemoteNG.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/mRemoteNG/bin/x64/Publish Self-Contained",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Attach to mRemoteNG",
+            "type": "coreclr",
+            "request": "attach"
+        }
+    ]
+}
