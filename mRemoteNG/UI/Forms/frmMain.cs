@@ -234,6 +234,8 @@ namespace mRemoteNG.UI.Forms
             else
                 SetLayout();
 
+            PositionQuickConnectToolbarRight();
+
             ShowHidePanelTabs();
 
             Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
@@ -331,6 +333,32 @@ namespace mRemoteNG.UI.Forms
             {
                 toolbar.GripStyle = shouldBeLocked ? ToolStripGripStyle.Hidden : ToolStripGripStyle.Visible;
             }
+        }
+
+        /// <summary>
+        /// Keeps the QuickConnect toolbar pinned to the right edge of the top
+        /// toolbar row, on the same line as the main menu toolbar.
+        /// </summary>
+        public void PositionQuickConnectToolbarRight()
+        {
+            if (_quickConnectToolStrip == null || tsContainer == null)
+                return;
+
+            ToolStripPanel topPanel = tsContainer.TopToolStripPanel;
+            if (topPanel == null)
+                return;
+
+            // Always visible and docked on the top toolbar panel.
+            _quickConnectToolStrip.Visible = true;
+            if (_quickConnectToolStrip.Parent != topPanel)
+                topPanel.Join(_quickConnectToolStrip);
+
+            // Right align on row 0 (same line as the main menu).
+            int x = topPanel.Width - _quickConnectToolStrip.Width - topPanel.Padding.Right - 3;
+            if (x < 0)
+                x = 0;
+
+            topPanel.Join(_quickConnectToolStrip, new Point(x, 0));
         }
 
         private void ConnectionsServiceOnConnectionsLoaded(object? sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
@@ -574,6 +602,8 @@ namespace mRemoteNG.UI.Forms
             {
                 PreviousWindowState = WindowState;
             }
+
+            PositionQuickConnectToolbarRight();
         }
 
         private void FrmMain_ResizeEnd(object sender, EventArgs e)
@@ -874,16 +904,10 @@ namespace mRemoteNG.UI.Forms
                 viewMenu._mMenViewMultiSshToolbar.Checked = false;
             }
 
-            if (Properties.Settings.Default.ViewMenuQuickConnect == true)
-            {
-                viewMenu.TsQuickConnect.Visible = true;
-                viewMenu._mMenViewQuickConnectToolbar.Checked = true;
-            }
-            else
-            {
-                viewMenu.TsQuickConnect.Visible = false;
-                viewMenu._mMenViewQuickConnectToolbar.Checked = false;
-            }
+            // The QuickConnect toolbar is always visible.
+            Properties.Settings.Default.ViewMenuQuickConnect = true;
+            viewMenu.TsQuickConnect.Visible = true;
+            viewMenu._mMenViewQuickConnectToolbar.Checked = true;
 
             if (Properties.Settings.Default.LockToolbars == true)
             {

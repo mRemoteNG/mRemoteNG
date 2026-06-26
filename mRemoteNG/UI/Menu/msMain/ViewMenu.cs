@@ -152,6 +152,10 @@ namespace mRemoteNG.UI.Menu
             _mMenViewQuickConnectToolbar.Name = "mMenViewQuickConnectToolbar";
             _mMenViewQuickConnectToolbar.Size = new System.Drawing.Size(228, 22);
             _mMenViewQuickConnectToolbar.Text = Language.QuickConnectToolbar;
+            // The QuickConnect toolbar is always visible, so the toggle is
+            // shown checked and disabled.
+            _mMenViewQuickConnectToolbar.Checked = true;
+            _mMenViewQuickConnectToolbar.Enabled = false;
             _mMenViewQuickConnectToolbar.Click += mMenViewQuickConnectToolbar_Click;
             // 
             // mMenViewExtAppsToolbar

@@ -171,6 +171,7 @@ namespace mRemoteNG.Config.Settings
         {
             ToolStripPanelFromString("top").Join(_quickConnectToolStrip, new Point(300, 0));
             _quickConnectToolStrip.Visible = true;
+            MainForm.PositionQuickConnectToolbarRight();
             ToolStripPanelFromString("bottom").Join(_externalToolsToolStrip, new Point(3, 0));
             _externalToolsToolStrip.Visible = false;
         }
@@ -208,9 +209,12 @@ namespace mRemoteNG.Config.Settings
         private void AddQuickConnectPanel()
         {
             SetToolstripGripStyle(_quickConnectToolStrip);
-            _quickConnectToolStrip.Visible = Properties.Settings.Default.QuickyTBVisible;
-            ToolStripPanel toolStripPanel = ToolStripPanelFromString(Properties.Settings.Default.QuickyTBParentDock);
-            toolStripPanel.Join(_quickConnectToolStrip, Properties.Settings.Default.QuickyTBLocation);
+            // The QuickConnect toolbar is always visible and pinned to the
+            // right of the main menu on the top toolbar row.
+            _quickConnectToolStrip.Visible = true;
+            ToolStripPanel toolStripPanel = ToolStripPanelFromString("top");
+            toolStripPanel.Join(_quickConnectToolStrip, new Point(0, 0));
+            MainForm.PositionQuickConnectToolbarRight();
         }
 
         private void AddExternalAppsPanel()
