@@ -983,6 +983,18 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private void RDPEvent_OnLoginComplete()
         {
             loginComplete = true;
+            OnLoginCompleted();
+        }
+
+        /// <summary>
+        /// Called once the RDP session has finished logging in. At this point the
+        /// hosting panel has been laid out to its final size, so derived protocols
+        /// can re-apply size-dependent settings that may have been configured against
+        /// a stale panel size at connect time (e.g. Quick Connect opening in a
+        /// freshly-created panel).
+        /// </summary>
+        protected virtual void OnLoginCompleted()
+        {
         }
 
         private void RDPEvent_OnLeaveFullscreenMode()

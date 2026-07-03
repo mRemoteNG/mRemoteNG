@@ -220,6 +220,39 @@ namespace mRemoteNG.Connection.Protocol.RDP
             return new AxMsRdpClient8NotSafeForScripting();
         }
 
+        protected override void OnLoginCompleted()
+        {
+            base.OnLoginCompleted();
+
+            // SetResolution() runs at connect-configuration time, before the hosting
+            // panel necessarily has its final size. Quick Connect opens the session in
+            // a freshly-created panel that is laid out AFTER the RDP client is
+            // configured, so the SmartSize/FitToWindow surface can end up sized against
+            // a stale (small/empty) panel rectangle. Now that login is complete the
+            // layout has settled, so re-apply the control size to match the real panel
+            // dimensions. DoResizeControl() is a no-op when the sizes already match, so
+            // this is safe for connections that were already sized correctly.
+            if (InterfaceControl == null || InterfaceControl.IsDisposed) return;
+
+            try
+            {
+                if (InterfaceControl.InvokeRequired)
+                    InterfaceControl.BeginInvoke(new Action(() => DoResizeControl()));
+                else
+                    DoResizeControl();
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Runtime.MessageCollector?.AddMessage(MessageClass.DebugMsg,
+                    $"OnLoginCompleted: control disposed during resize ({ex.GetType().Name})");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Runtime.MessageCollector?.AddMessage(MessageClass.DebugMsg,
+                    $"OnLoginCompleted: control handle unavailable during resize ({ex.GetType().Name})");
+            }
+        }
+
         private void DoResizeClient()
         {
             if (!loginComplete)
