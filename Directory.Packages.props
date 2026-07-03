@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageVersion Include="AWSSDK.Core" Version="4.0.100.1" />
     <PackageVersion Include="AWSSDK.EC2" Version="4.0.102" />
+    <PackageVersion Include="AxMSTSCLib" Version="1.0.1" />
     <PackageVersion Include="BouncyCastle.Cryptography" Version="2.6.2" />
     <PackageVersion Include="Castle.Core" Version="5.2.1" />
     <PackageVersion Include="ConsoleControl" Version="1.3.0" />

@@ -4288,6 +4288,204 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Master Password.
+        /// </summary>
+        internal static string MasterPassword {
+            get {
+                return ResourceManager.GetString("MasterPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master password is enabled..
+        /// </summary>
+        internal static string MasterPasswordEnabled {
+            get {
+                return ResourceManager.GetString("MasterPasswordEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master password is not set..
+        /// </summary>
+        internal static string MasterPasswordNotSet {
+            get {
+                return ResourceManager.GetString("MasterPasswordNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The application will ask for the master password on startup before loading sensitive data..
+        /// </summary>
+        internal static string MasterPasswordEnabledDescription {
+            get {
+                return ResourceManager.GetString("MasterPasswordEnabledDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set a master password to lock the application at startup and protect saved credentials with the same key..
+        /// </summary>
+        internal static string MasterPasswordNotSetDescription {
+            get {
+                return ResourceManager.GetString("MasterPasswordNotSetDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set Master Password.
+        /// </summary>
+        internal static string MasterPasswordSet {
+            get {
+                return ResourceManager.GetString("MasterPasswordSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Master Password.
+        /// </summary>
+        internal static string MasterPasswordChange {
+            get {
+                return ResourceManager.GetString("MasterPasswordChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Master Password.
+        /// </summary>
+        internal static string MasterPasswordCurrent {
+            get {
+                return ResourceManager.GetString("MasterPasswordCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Master Password.
+        /// </summary>
+        internal static string MasterPasswordNew {
+            get {
+                return ResourceManager.GetString("MasterPasswordNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verify Master Password.
+        /// </summary>
+        internal static string MasterPasswordVerify {
+            get {
+                return ResourceManager.GetString("MasterPasswordVerify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password Hint.
+        /// </summary>
+        internal static string MasterPasswordHint {
+            get {
+                return ResourceManager.GetString("MasterPasswordHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter an optional hint to help remember your master password:.
+        /// </summary>
+        internal static string MasterPasswordHintDescription {
+            get {
+                return ResourceManager.GetString("MasterPasswordHintDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master password saved..
+        /// </summary>
+        internal static string MasterPasswordSaved {
+            get {
+                return ResourceManager.GetString("MasterPasswordSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master password removed..
+        /// </summary>
+        internal static string MasterPasswordRemoved {
+            get {
+                return ResourceManager.GetString("MasterPasswordRemoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove the application master password?.
+        /// </summary>
+        internal static string MasterPasswordRemoveConfirm {
+            get {
+                return ResourceManager.GetString("MasterPasswordRemoveConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The master password is invalid..
+        /// </summary>
+        internal static string MasterPasswordInvalid {
+            get {
+                return ResourceManager.GetString("MasterPasswordInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The unlock password is invalid..
+        /// </summary>
+        internal static string StartupUnlockPasswordInvalid {
+            get {
+                return ResourceManager.GetString("StartupUnlockPasswordInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reveal Password.
+        /// </summary>
+        internal static string RevealPassword {
+            get {
+                return ResourceManager.GetString("RevealPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password:.
+        /// </summary>
+        internal static string RevealPasswordDescription {
+            get {
+                return ResourceManager.GetString("RevealPasswordDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A master password must be configured to reveal connection passwords..
+        /// </summary>
+        internal static string RevealPasswordRequiresMasterPassword {
+            get {
+                return ResourceManager.GetString("RevealPasswordRequiresMasterPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master password must be at least 3 characters long..
+        /// </summary>
+        internal static string MasterPasswordTooShort {
+            get {
+                return ResourceManager.GetString("MasterPasswordTooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string _Remove {
+            get {
+                return ResourceManager.GetString("_Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Both passwords must match..
         /// </summary>
         internal static string PasswordStatusMustMatch {

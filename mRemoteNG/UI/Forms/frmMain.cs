@@ -246,6 +246,12 @@ namespace mRemoteNG.UI.Forms
             else
                 splash.Dispatcher.Invoke(() => splash.Close());
 
+            if (!StartupUnlockService.EnsureStartupUnlocked(this))
+            {
+                Application.Exit();
+                return;
+            }
+
             CredsAndConsSetup credsAndConsSetup = new();
             credsAndConsSetup.LoadCredsAndCons();
 

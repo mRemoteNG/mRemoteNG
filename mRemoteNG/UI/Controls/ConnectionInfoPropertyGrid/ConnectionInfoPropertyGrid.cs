@@ -346,8 +346,12 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid {
                 }
 
                 rootInfo.PasswordString = password.First().ConvertToUnsecureString();
+                if (!Runtime.HasActiveMasterPasswordSession)
+                    Runtime.SetEncryptionKey(rootInfo.PasswordString);
             } else {
                 rootInfo.PasswordString = "";
+                if (!Runtime.HasActiveMasterPasswordSession)
+                    Runtime.ResetEncryptionKey();
             }
         }
 

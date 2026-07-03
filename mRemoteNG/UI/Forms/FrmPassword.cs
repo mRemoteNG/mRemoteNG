@@ -43,9 +43,13 @@ namespace mRemoteNG.UI.Forms
         /// enter their password.
         /// </summary>
         /// <returns></returns>
-        public Optional<SecureString> GetKey()
+        public Optional<SecureString> GetKey() => GetKey(null);
+
+        public Optional<SecureString> GetKey(IWin32Window? owner)
         {
-            DialogResult dialog = ShowDialog();
+            DialogResult dialog = owner is null
+                ? ShowDialog()
+                : ShowDialog(owner);
             return dialog == DialogResult.OK
                 ? _password
                 : Optional<SecureString>.Empty;

@@ -957,6 +957,72 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PasswordProtect" xml:space="preserve">
     <value>Password protect</value>
   </data>
+  <data name="MasterPassword" xml:space="preserve">
+    <value>Master Password</value>
+  </data>
+  <data name="MasterPasswordEnabled" xml:space="preserve">
+    <value>Master password is enabled.</value>
+  </data>
+  <data name="MasterPasswordNotSet" xml:space="preserve">
+    <value>Master password is not set.</value>
+  </data>
+  <data name="MasterPasswordEnabledDescription" xml:space="preserve">
+    <value>The application will ask for the master password on startup before loading sensitive data.</value>
+  </data>
+  <data name="MasterPasswordNotSetDescription" xml:space="preserve">
+    <value>Set a master password to lock the application at startup and protect saved credentials with the same key.</value>
+  </data>
+  <data name="MasterPasswordSet" xml:space="preserve">
+    <value>Set Master Password</value>
+  </data>
+  <data name="MasterPasswordChange" xml:space="preserve">
+    <value>Change Master Password</value>
+  </data>
+  <data name="MasterPasswordCurrent" xml:space="preserve">
+    <value>Current Master Password</value>
+  </data>
+  <data name="MasterPasswordNew" xml:space="preserve">
+    <value>New Master Password</value>
+  </data>
+  <data name="MasterPasswordVerify" xml:space="preserve">
+    <value>Verify Master Password</value>
+  </data>
+  <data name="MasterPasswordHint" xml:space="preserve">
+    <value>Password Hint</value>
+  </data>
+  <data name="MasterPasswordHintDescription" xml:space="preserve">
+    <value>Enter an optional hint to help remember your master password:</value>
+  </data>
+  <data name="MasterPasswordSaved" xml:space="preserve">
+    <value>Master password saved.</value>
+  </data>
+  <data name="MasterPasswordRemoved" xml:space="preserve">
+    <value>Master password removed.</value>
+  </data>
+  <data name="MasterPasswordRemoveConfirm" xml:space="preserve">
+    <value>Remove the application master password?</value>
+  </data>
+  <data name="MasterPasswordInvalid" xml:space="preserve">
+    <value>The master password is invalid.</value>
+  </data>
+  <data name="StartupUnlockPasswordInvalid" xml:space="preserve">
+    <value>The unlock password is invalid.</value>
+  </data>
+  <data name="RevealPassword" xml:space="preserve">
+    <value>Reveal Password</value>
+  </data>
+  <data name="RevealPasswordDescription" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="RevealPasswordRequiresMasterPassword" xml:space="preserve">
+    <value>A master password must be configured to reveal connection passwords.</value>
+  </data>
+  <data name="MasterPasswordTooShort" xml:space="preserve">
+    <value>Master password must be at least 3 characters long.</value>
+  </data>
+  <data name="_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
   <data name="PasswordStatusMustMatch" xml:space="preserve">
     <value>Both passwords must match.</value>
   </data>

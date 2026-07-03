@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Versioning;
 using System.Security;
+using mRemoteNG.App;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.Factories;
@@ -84,16 +85,34 @@ namespace mRemoteNG.Config.Serializers
 
         public bool ConnectionsFileIsAuthentic(string protectedString, SecureString password)
         {
-            bool connectionsFileIsNotEncrypted = false;
-            try
+            if (TryDecryptProtectionMarker(protectedString, new RootNodeInfo(RootNodeType.Connection).DefaultPassword.ConvertToSecureString(), out string? defaultMarker) &&
+                defaultMarker == "ThisIsNotProtected")
             {
-                connectionsFileIsNotEncrypted = _cryptographyProvider.Decrypt(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()) == "ThisIsNotProtected";
-            }
-            catch (EncryptionException)
-            {
+                _rootNodeInfo.PasswordString = "";
+                if (!Runtime.HasActiveMasterPasswordSession)
+                    Runtime.ResetEncryptionKey();
+                return true;
             }
 
-            return connectionsFileIsNotEncrypted || Authenticate(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString());
+            if (TryDecryptProtectionMarker(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString(), out string? currentMarker))
+            {
+                if (currentMarker == "ThisIsProtected")
+                {
+                    if (!Runtime.HasActiveMasterPasswordSession)
+                        Runtime.SetEncryptionKey(_rootNodeInfo.PasswordString);
+                    return true;
+                }
+
+                if (currentMarker == "ThisIsNotProtected")
+                {
+                    _rootNodeInfo.PasswordString = "";
+                    if (!Runtime.HasActiveMasterPasswordSession)
+                        Runtime.ResetEncryptionKey();
+                    return true;
+                }
+            }
+
+            return Authenticate(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString());
         }
 
         private bool Authenticate(string cipherText, SecureString password)
@@ -104,9 +123,25 @@ namespace mRemoteNG.Config.Serializers
             if (!authenticated)
                 return false;
 
-            // A successful Authenticate() guarantees LastAuthenticatedPassword is set.
             _rootNodeInfo.PasswordString = authenticator.LastAuthenticatedPassword!.ConvertToUnsecureString();
+            if (!Runtime.HasActiveMasterPasswordSession)
+                Runtime.SetEncryptionKey(authenticator.LastAuthenticatedPassword);
             return true;
+        }
+
+        private bool TryDecryptProtectionMarker(string protectedString, SecureString key, out string marker)
+        {
+            marker = string.Empty;
+
+            try
+            {
+                marker = _cryptographyProvider.Decrypt(protectedString, key);
+                return true;
+            }
+            catch (EncryptionException)
+            {
+                return false;
+            }
         }
     }
 }
