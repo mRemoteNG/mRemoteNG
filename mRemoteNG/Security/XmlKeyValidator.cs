@@ -93,6 +93,18 @@ namespace mRemoteNG.Security
             }
         }
 
+        public static bool IsParsableXml(string filePath)
+        {
+            if (!File.Exists(filePath))
+                return false;
+
+            string xml = File.ReadAllText(filePath);
+            if (string.IsNullOrWhiteSpace(xml))
+                return false;
+
+            return LooksLikeXml(xml) && TryLoadRoot(xml, out _);
+        }
+
         private static bool LooksLikeXml(string xml)
         {
             return xml.TrimStart().StartsWith("<", StringComparison.Ordinal);

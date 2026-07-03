@@ -4432,6 +4432,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The unlock password is invalid..
+        /// </summary>
+        internal static string StartupUnlockPasswordInvalid {
+            get {
+                return ResourceManager.GetString("StartupUnlockPasswordInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Master password must be at least 3 characters long..
         /// </summary>
         internal static string MasterPasswordTooShort {

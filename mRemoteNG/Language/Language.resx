@@ -1005,6 +1005,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="MasterPasswordInvalid" xml:space="preserve">
     <value>The master password is invalid.</value>
   </data>
+  <data name="StartupUnlockPasswordInvalid" xml:space="preserve">
+    <value>The unlock password is invalid.</value>
+  </data>
   <data name="MasterPasswordTooShort" xml:space="preserve">
     <value>Master password must be at least 3 characters long.</value>
   </data>

@@ -37,6 +37,12 @@ namespace mRemoteNG.App
             if (XmlKeyValidator.ConnectionFileUsesKey(startupConnectionFile, Runtime.EncryptionKey))
                 return true;
 
+            if (!XmlKeyValidator.IsParsableXml(startupConnectionFile))
+            {
+                Runtime.ResetEncryptionKey();
+                return true;
+            }
+
             while (true)
             {
                 Optional<SecureString> password = MiscTools.PasswordDialog(owner, Path.GetFileName(startupConnectionFile), verify: false);
@@ -50,7 +56,7 @@ namespace mRemoteNG.App
                     return true;
                 }
 
-                MessageBox.Show(owner, "The unlock password is invalid.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(owner, Language.StartupUnlockPasswordInvalid, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

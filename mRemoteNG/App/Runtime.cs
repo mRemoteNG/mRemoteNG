@@ -48,6 +48,7 @@ namespace mRemoteNG.App
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
 
         private static SecureString? _masterPasswordKey;
+        private static readonly object _encryptionKeyLock = new();
         public static SecureString EncryptionKey { get; private set; } = CreateDefaultEncryptionKey();
         public static bool HasActiveMasterPasswordSession => _masterPasswordKey != null;
 
@@ -66,7 +67,8 @@ namespace mRemoteNG.App
                 return;
             }
 
-            SetEncryptionKey(key.ConvertToSecureString());
+            using SecureString secureKey = key.ConvertToSecureString();
+            SetEncryptionKey(secureKey);
         }
 
         public static void ResetEncryptionKey()
@@ -103,10 +105,17 @@ namespace mRemoteNG.App
 
         private static void UpdateEncryptionKey(SecureString newKey, bool syncLoadedRepositories)
         {
-            bool keyChanged = EncryptionKey.ConvertToUnsecureString() != newKey.ConvertToUnsecureString();
+            SecureString? oldKey = null;
+            bool keyChanged;
 
-            EncryptionKey?.Dispose();
-            EncryptionKey = newKey;
+            lock (_encryptionKeyLock)
+            {
+                keyChanged = EncryptionKey.ConvertToUnsecureString() != newKey.ConvertToUnsecureString();
+                oldKey = EncryptionKey;
+                EncryptionKey = newKey;
+            }
+
+            oldKey?.Dispose();
 
             if (syncLoadedRepositories && keyChanged)
                 SyncLoadedCredentialRepositoriesToEncryptionKey();
