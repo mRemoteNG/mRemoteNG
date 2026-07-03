@@ -112,7 +112,8 @@
     <None Remove="buildenv.tmp" />
     <None Remove="UI\Font\HandelGotDBol.ttf" />
   </ItemGroup>
-  <ItemGroup>
+  <!-- COM Reference for Visual Studio builds -->
+  <ItemGroup Condition="'$(BuildingInsideVisualStudio)' == 'true'">
     <COMReference Include="MSTSCLib">
       <WrapperTool>aximp</WrapperTool>
       <VersionMinor>0</VersionMinor>
@@ -122,6 +123,10 @@
       <Isolated>false</Isolated>
       <EmbedInteropTypes>false</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <!-- NuGet package for dotnet CLI builds -->
+  <ItemGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'">
+    <PackageReference Include="AxMSTSCLib" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" />
@@ -586,5 +591,5 @@
     <RemoveDir Directories="$(TempBuildDir)" />
     <RemoveDir Directories="$(ProjectDir)bin\x64\Release Self-Contained" />
   </Target>
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets')" />
 </Project>

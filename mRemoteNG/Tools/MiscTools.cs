@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Security;
+using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
@@ -38,14 +39,14 @@ namespace mRemoteNG.Tools
 
         public static Optional<SecureString> PasswordDialog(string? passwordName = null, bool verify = true)
         {
-            //var splash = FrmSplashScreenNew.GetInstance();
-            //TODO: something not right there 
-            //if (PresentationSource.FromVisual(splash))
-            //    splash.Close();
+            return PasswordDialog(null, passwordName, verify);
+        }
 
-            passwordName ??= string.Empty; // Ensure passwordName is not null
+        public static Optional<SecureString> PasswordDialog(IWin32Window? owner, string? passwordName = null, bool verify = true)
+        {
+            passwordName ??= string.Empty;
             FrmPassword passwordForm = new(passwordName, verify);
-            return passwordForm.GetKey();
+            return passwordForm.GetKey(owner);
         }
 
         public static string LeadingZero(string Number)
