@@ -20,7 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #2496: fixed use pwfile instead of cleartext password for putty connections 
 
 ### Added
-- #PR: added master password feature for application-level security with startup unlock, encrypted settings migration, and management UI
+- #3371: added master password feature for application-level security with startup unlock, encrypted settings migration, and management UI
 - #2931: added vault openbao connector
 - #2900: added "Report a Bug" menu item to Help menu and update bug report URL to GitHub issues 
 - #2865: added configurable connection tab colors to distinguish between different environments
