@@ -1008,6 +1008,15 @@ If you run into such an error, please create a new connection file!</value>
   <data name="StartupUnlockPasswordInvalid" xml:space="preserve">
     <value>The unlock password is invalid.</value>
   </data>
+  <data name="RevealPassword" xml:space="preserve">
+    <value>Reveal Password</value>
+  </data>
+  <data name="RevealPasswordDescription" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="RevealPasswordRequiresMasterPassword" xml:space="preserve">
+    <value>A master password must be configured to reveal connection passwords.</value>
+  </data>
   <data name="MasterPasswordTooShort" xml:space="preserve">
     <value>Master password must be at least 3 characters long.</value>
   </data>

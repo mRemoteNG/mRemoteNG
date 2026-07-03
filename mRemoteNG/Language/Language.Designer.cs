@@ -4441,6 +4441,33 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reveal Password.
+        /// </summary>
+        internal static string RevealPassword {
+            get {
+                return ResourceManager.GetString("RevealPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password:.
+        /// </summary>
+        internal static string RevealPasswordDescription {
+            get {
+                return ResourceManager.GetString("RevealPasswordDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A master password must be configured to reveal connection passwords..
+        /// </summary>
+        internal static string RevealPasswordRequiresMasterPassword {
+            get {
+                return ResourceManager.GetString("RevealPasswordRequiresMasterPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Master password must be at least 3 characters long..
         /// </summary>
         internal static string MasterPasswordTooShort {

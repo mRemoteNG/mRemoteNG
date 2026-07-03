@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
@@ -10,9 +11,13 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
+using mRemoteNG.Security;
 using mRemoteNG.Themes;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid;
+using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
@@ -36,7 +41,9 @@ namespace mRemoteNG.UI.Window
         internal ContextMenuStrip PropertyGridContextMenu;
         private ToolStripMenuItem _propertyGridContextMenuShowHelpText;
         private ToolStripMenuItem _propertyGridContextMenuReset;
+        private ToolStripMenuItem _propertyGridContextMenuRevealPassword;
         private ToolStripSeparator _toolStripSeparator1;
+        private ToolStripSeparator _toolStripSeparator2;
         private ConnectionInfoPropertyGrid _pGrid;
         private ThemeManager _themeManager;
 
@@ -69,6 +76,9 @@ namespace mRemoteNG.UI.Window
             _propertyGridContextMenuShowHelpText = new ToolStripMenuItem();
             _propertyGridContextMenuShowHelpText.Click += PropertyGridContextMenuShowHelpText_Click;
             _propertyGridContextMenuShowHelpText.CheckedChanged += PropertyGridContextMenuShowHelpText_CheckedChanged;
+            _propertyGridContextMenuRevealPassword = new ToolStripMenuItem();
+            _propertyGridContextMenuRevealPassword.Click += PropertyGridContextMenuRevealPassword_Click;
+            _toolStripSeparator2 = new ToolStripSeparator();
             _btnShowInheritance = new ToolStripButton();
             _btnShowInheritance.Click += BtnShowInheritance_Click;
             _btnShowDefaultInheritance = new ToolStripButton();
@@ -102,7 +112,7 @@ namespace mRemoteNG.UI.Window
             //
             PropertyGridContextMenu.Items.AddRange(new ToolStripItem[]
             {
-                _propertyGridContextMenuReset, _toolStripSeparator1, _propertyGridContextMenuShowHelpText
+                _propertyGridContextMenuReset, _toolStripSeparator1, _propertyGridContextMenuRevealPassword, _toolStripSeparator2, _propertyGridContextMenuShowHelpText
             });
             PropertyGridContextMenu.Name = "PropertyGridContextMenu";
             PropertyGridContextMenu.Size = new Size(157, 76);
@@ -123,6 +133,20 @@ namespace mRemoteNG.UI.Window
             _propertyGridContextMenuShowHelpText.Name = "_propertyGridContextMenuShowHelpText";
             _propertyGridContextMenuShowHelpText.Size = new Size(156, 22);
             _propertyGridContextMenuShowHelpText.Text = @"&Show Help Text";
+            //
+            //propertyGridContextMenuRevealPassword
+            //
+            _propertyGridContextMenuRevealPassword.Image = Properties.Resources.Key_16x;
+            _propertyGridContextMenuRevealPassword.Name = "_propertyGridContextMenuRevealPassword";
+            _propertyGridContextMenuRevealPassword.Size = new Size(156, 22);
+            _propertyGridContextMenuRevealPassword.Text = @"&Reveal Password";
+            _propertyGridContextMenuRevealPassword.Visible = false;
+            //
+            //toolStripSeparator2
+            //
+            _toolStripSeparator2.Name = "_toolStripSeparator2";
+            _toolStripSeparator2.Size = new Size(153, 6);
+            _toolStripSeparator2.Visible = false;
             //
             //btnShowInheritance
             //
@@ -299,6 +323,7 @@ namespace mRemoteNG.UI.Window
             Text = Language.Config;
             TabText = Language.Config;
             _propertyGridContextMenuShowHelpText.Text = Language.ShowHelpText;
+            _propertyGridContextMenuRevealPassword.Text = Language.RevealPassword;
         }
 
         private new void ApplyTheme()
@@ -677,6 +702,11 @@ namespace mRemoteNG.UI.Window
                 _propertyGridContextMenuReset.Enabled = Convert.ToBoolean(_pGrid.SelectedObject != null &&
                                                                           gridItem?.PropertyDescriptor != null &&
                                                                           gridItem.PropertyDescriptor.CanResetValue(_pGrid.SelectedObject));
+
+                bool isPasswordProperty = gridItem?.PropertyDescriptor != null &&
+                                          gridItem.PropertyDescriptor.Attributes.OfType<System.ComponentModel.PasswordPropertyTextAttribute>().Any(a => a.Password);
+                _propertyGridContextMenuRevealPassword.Visible = isPasswordProperty;
+                _toolStripSeparator2.Visible = isPasswordProperty;
             }
             catch (Exception ex)
             {
@@ -710,6 +740,42 @@ namespace mRemoteNG.UI.Window
         {
             Settings.Default.ShowConfigHelpText = _propertyGridContextMenuShowHelpText.Checked;
             _pGrid.HelpVisible = _propertyGridContextMenuShowHelpText.Checked;
+        }
+
+        private void PropertyGridContextMenuRevealPassword_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GridItem gridItem = _pGrid.SelectedGridItem;
+                if (gridItem?.PropertyDescriptor == null)
+                    return;
+
+                if (!MasterPasswordService.IsConfigured)
+                {
+                    MessageBox.Show(this, Language.RevealPasswordRequiresMasterPassword, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                Optional<System.Security.SecureString> password = MiscTools.PasswordDialog(this, Language.MasterPasswordCurrent, verify: false);
+                if (!password.Any())
+                    return;
+
+                if (!MasterPasswordService.TryUnlock(password.First()))
+                {
+                    MessageBox.Show(this, Language.MasterPasswordInvalid, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                object? value = gridItem.PropertyDescriptor.GetValue(_pGrid.SelectedObject);
+                string passwordValue = value?.ToString() ?? string.Empty;
+
+                using FrmInputBox revealBox = new(Language.RevealPassword, Language.RevealPasswordDescription, passwordValue);
+                revealBox.ShowDialog(this);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenuRevealPassword_Click() failed.", ex);
+            }
         }
 
         #endregion
