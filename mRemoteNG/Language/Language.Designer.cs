@@ -1752,7 +1752,16 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("Debug", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Trace.
+        /// </summary>
+        internal static string Trace {
+            get {
+                return ResourceManager.GetString("Trace", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
@@ -5024,7 +5033,7 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("PropertyDescriptionSoundQuality", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Specify here additional options to be used for SSH connection. See putty documentation for further details..
         /// </summary>
@@ -5033,7 +5042,16 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("PropertyDescriptionSshOptions", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to SSH port forwarding rules. Format: L:localPort:remoteHost:remotePort for local forwarding, R:remotePort:localHost:localPort for remote forwarding, D:localPort for dynamic SOCKS5 proxy. Separate multiple rules with semicolons..
+        /// </summary>
+        internal static string PropertyDescriptionSshPortForwardRules {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionSshPortForwardRules", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to For connection through a SSH tunnel (jump host) specify SSH connection to be used to establish SSH tunnel..
         /// </summary>
@@ -6808,7 +6826,40 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("SshOptions", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Port Forward Rules.
+        /// </summary>
+        internal static string SshPortForwardRules {
+            get {
+                return ResourceManager.GetString("SshPortForwardRules", resourceCulture);
+            }
+        }
+
+        internal static string SshDotNetPrivateKeyFile {
+            get {
+                return ResourceManager.GetString("SshDotNetPrivateKeyFile", resourceCulture);
+            }
+        }
+
+        internal static string PropertyDescriptionSshDotNetPrivateKeyFile {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionSshDotNetPrivateKeyFile", resourceCulture);
+            }
+        }
+
+        internal static string SshDotNetPrivateKeyPassphrase {
+            get {
+                return ResourceManager.GetString("SshDotNetPrivateKeyPassphrase", resourceCulture);
+            }
+        }
+
+        internal static string PropertyDescriptionSshDotNetPrivateKeyPassphrase {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionSshDotNetPrivateKeyPassphrase", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to SSH transfer failed..
         /// </summary>
@@ -6880,7 +6931,34 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("SshTunnelPortNotReadyInTime", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to SSH_DotNet tunnel for &apos;{0}&apos; is ready on localhost:{1}.
+        /// </summary>
+        internal static string SshTunnelDotNetReady {
+            get {
+                return ResourceManager.GetString("SshTunnelDotNetReady", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to SSH_DotNet tunnel for &apos;{0}&apos; failed: {1}.
+        /// </summary>
+        internal static string SshTunnelDotNetFailed {
+            get {
+                return ResourceManager.GetString("SshTunnelDotNetFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to SSH tunnel for connection &apos;{0}&apos; references &apos;{1}&apos; which is not an SSH protocol (SSH1, SSH2, or SSH_DotNet)..
+        /// </summary>
+        internal static string SshTunnelUnsupportedProtocol {
+            get {
+                return ResourceManager.GetString("SshTunnelUnsupportedProtocol", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to SSH version 1.
         /// </summary>
@@ -6898,7 +6976,16 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("SshV2", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to SSH (.NET SSH.NET).
+        /// </summary>
+        internal static string SshDotNet {
+            get {
+                return ResourceManager.GetString("SshDotNet", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Stack trace.
         /// </summary>

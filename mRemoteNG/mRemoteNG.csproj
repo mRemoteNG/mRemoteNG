@@ -141,6 +141,8 @@
     <PackageReference Include="SSH.NET" />
     <PackageReference Include="System.Management" />
     <PackageReference Include="VncSharpCore" />
+    <PackageReference Include="VtNetCore" />
+    <PackageReference Include="ZstdSharp.Port" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Language\Language.Designer.cs">

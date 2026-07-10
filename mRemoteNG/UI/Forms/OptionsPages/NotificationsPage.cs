@@ -38,6 +38,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // notifications panel
             groupBoxNotifications.Text = Language.Notifications;
             labelNotificationsShowTypes.Text = Language.ShowTheseMessageTypes;
+            chkShowTraceInMC.Text = Language.Trace;
             chkShowDebugInMC.Text = Language.Debug;
             chkShowInfoInMC.Text = Language.Informations;
             chkShowWarningInMC.Text = Language.Warnings;
@@ -49,6 +50,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             // logging
             groupBoxLogging.Text = Language.Logging;
+            chkLogTraceMsgs.Text = Language.Trace;
             chkLogDebugMsgs.Text = Language.Debug;
             chkLogInfoMsgs.Text = Language.Informations;
             chkLogWarningMsgs.Text = Language.Warnings;
@@ -63,6 +65,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // popups
             groupBoxPopups.Text = Language.Popups;
             labelPopupShowTypes.Text = Language.ShowTheseMessageTypes;
+            chkPopupTrace.Text = Language.Trace;
             chkPopupDebug.Text = Language.Debug;
             chkPopupInfo.Text = Language.Informations;
             chkPopupWarning.Text = Language.Warnings;
@@ -88,6 +91,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void LoadNotificationPanelSettings()
         {
+            chkShowTraceInMC.Checked = Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteTraceMsgs;
             chkShowDebugInMC.Checked = Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteDebugMsgs;
             chkShowInfoInMC.Checked = Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteInfoMsgs;
             chkShowWarningInMC.Checked = Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteWarningMsgs;
@@ -101,6 +105,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             chkLogToCurrentDir.Checked = Properties.OptionsNotificationsPage.Default.LogToApplicationDirectory;
             textBoxLogPath.Text = Properties.OptionsNotificationsPage.Default.LogFilePath;
+            chkLogTraceMsgs.Checked = Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteTraceMsgs;
             chkLogDebugMsgs.Checked = Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteDebugMsgs;
             chkLogInfoMsgs.Checked = Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteInfoMsgs;
             chkLogWarningMsgs.Checked = Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteWarningMsgs;
@@ -109,6 +114,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void LoadPopupSettings()
         {
+            chkPopupTrace.Checked = Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteTraceMsgs;
             chkPopupDebug.Checked = Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteDebugMsgs;
             chkPopupInfo.Checked = Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteInfoMsgs;
             chkPopupWarning.Checked = Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteWarningMsgs;
@@ -117,6 +123,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void SaveNotificationPanelSettings()
         {
+            Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteTraceMsgs = chkShowTraceInMC.Checked;
             Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteDebugMsgs = chkShowDebugInMC.Checked;
             Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteInfoMsgs = chkShowInfoInMC.Checked;
             Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteWarningMsgs = chkShowWarningInMC.Checked;
@@ -131,6 +138,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsNotificationsPage.Default.LogToApplicationDirectory = chkLogToCurrentDir.Checked;
             Properties.OptionsNotificationsPage.Default.LogFilePath = textBoxLogPath.Text;
             Logger.Instance.SetLogPath(Properties.OptionsNotificationsPage.Default.LogFilePath);
+            Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteTraceMsgs = chkLogTraceMsgs.Checked;
             Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteDebugMsgs = chkLogDebugMsgs.Checked;
             Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteInfoMsgs = chkLogInfoMsgs.Checked;
             Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteWarningMsgs = chkLogWarningMsgs.Checked;
@@ -139,6 +147,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void SavePopupSettings()
         {
+            Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteTraceMsgs = chkPopupTrace.Checked;
             Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteDebugMsgs = chkPopupDebug.Checked;
             Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteInfoMsgs = chkPopupInfo.Checked;
             Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteWarningMsgs = chkPopupWarning.Checked;

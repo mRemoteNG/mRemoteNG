@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.Versioning;
 using System.Security;
 using System.Xml.Linq;
@@ -69,6 +69,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("SSHTunnelConnectionName", connectionInfo.SSHTunnelConnectionName));
             element.Add(new XAttribute("OpeningCommand", connectionInfo.OpeningCommand));
             element.Add(new XAttribute("SSHOptions", connectionInfo.SSHOptions));
+            element.Add(new XAttribute("SshDotNetPortForwardRules", connectionInfo.SshDotNetPortForwardRules));
+            element.Add(new XAttribute("SshDotNetPrivateKeyFile", connectionInfo.SshDotNetPrivateKeyFile));
+            if (_saveFilter.SavePassword && !connectionInfo.Inheritance.SshDotNetPrivateKeyPassphrase)
+                element.Add(new XAttribute("SshDotNetPrivateKeyPassphrase", _cryptographyProvider.Encrypt(connectionInfo.SshDotNetPrivateKeyPassphrase, _encryptionKey)));
+            else
+                element.Add(new XAttribute("SshDotNetPrivateKeyPassphrase", ""));
             element.Add(new XAttribute("PuttySession", connectionInfo.PuttySession));
             element.Add(new XAttribute("Port", connectionInfo.Port));
             element.Add(new XAttribute("ConnectToConsole", connectionInfo.UseConsoleSession.ToString().ToLowerInvariant()));
@@ -218,6 +224,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 element.Add(new XAttribute("InheritOpeningCommand", inheritance.OpeningCommand.ToString().ToLowerInvariant()));
             if (inheritance.SSHOptions)
                 element.Add(new XAttribute("InheritSSHOptions", inheritance.SSHOptions.ToString().ToLowerInvariant()));
+            if (inheritance.SshDotNetPortForwardRules)
+                element.Add(new XAttribute("InheritSshDotNetPortForwardRules", inheritance.SshDotNetPortForwardRules.ToString().ToLowerInvariant()));
+            if (inheritance.SshDotNetPrivateKeyFile)
+                element.Add(new XAttribute("InheritSshDotNetPrivateKeyFile", inheritance.SshDotNetPrivateKeyFile.ToString().ToLowerInvariant()));
+            if (inheritance.SshDotNetPrivateKeyPassphrase)
+                element.Add(new XAttribute("InheritSshDotNetPrivateKeyPassphrase", inheritance.SshDotNetPrivateKeyPassphrase.ToString().ToLowerInvariant()));
             if (inheritance.PuttySession)
                 element.Add(new XAttribute("InheritPuttySession", inheritance.PuttySession.ToString().ToLowerInvariant()));
             if (inheritance.RedirectDiskDrives)

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using mRemoteNG.Connection.Protocol;
@@ -49,6 +49,9 @@ namespace mRemoteNG.Connection
         private string _extApp;
         private int _port;
         private string _sshOptions = "";
+        private string _sshDotNetPortForwardRules = "";
+        private string _sshDotNetPrivateKeyFile = "";
+        private string _sshDotNetPrivateKeyPassphrase = "";
         private string _puttySession;
         private bool _useConsoleSession;
         private AuthenticationLevel _rdpAuthenticationLevel;
@@ -71,7 +74,6 @@ namespace mRemoteNG.Connection
         private string _rdGatewayAccessToken;
         private ExternalCredentialProvider _rdGatewayExternalCredentialProvider;
         private string _rdGatewayUserViaAPI = "";
-
 
         private RDPResolutions _resolution;
         private bool _automaticResize;
@@ -244,7 +246,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Username)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUsername)),
-         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2, ProtocolType.HTTP, ProtocolType.HTTPS, ProtocolType.IntApp)]
+         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2, ProtocolType.SshDotNet, ProtocolType.HTTP, ProtocolType.HTTPS, ProtocolType.IntApp)]
         public virtual string Username
         {
             get => GetPropertyValue("Username", _username);
@@ -422,6 +424,38 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("SSHOptions", _sshOptions);
             set => SetField(ref _sshOptions, value, "SSHOptions");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.SshPortForwardRules)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSshPortForwardRules)),
+         AttributeUsedInProtocol(ProtocolType.SshDotNet)]
+        public string SshDotNetPortForwardRules
+        {
+            get => GetPropertyValue("SshDotNetPortForwardRules", _sshDotNetPortForwardRules);
+            set => SetField(ref _sshDotNetPortForwardRules, value, "SshDotNetPortForwardRules");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.SshDotNetPrivateKeyFile)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSshDotNetPrivateKeyFile)),
+         Editor(typeof(Tools.SshPrivateKeyFileEditor), typeof(System.Drawing.Design.UITypeEditor)),
+         AttributeUsedInProtocol(ProtocolType.SshDotNet)]
+        public string SshDotNetPrivateKeyFile
+        {
+            get => GetPropertyValue("SshDotNetPrivateKeyFile", _sshDotNetPrivateKeyFile);
+            set => SetField(ref _sshDotNetPrivateKeyFile, value, "SshDotNetPrivateKeyFile");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.SshDotNetPrivateKeyPassphrase)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSshDotNetPrivateKeyPassphrase)),
+         PasswordPropertyText(true),
+         AttributeUsedInProtocol(ProtocolType.SshDotNet)]
+        public string SshDotNetPrivateKeyPassphrase
+        {
+            get => GetPropertyValue("SshDotNetPrivateKeyPassphrase", _sshDotNetPrivateKeyPassphrase);
+            set => SetField(ref _sshDotNetPrivateKeyPassphrase, value, "SshDotNetPrivateKeyPassphrase");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),

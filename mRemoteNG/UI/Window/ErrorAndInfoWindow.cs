@@ -80,10 +80,11 @@ namespace mRemoteNG.UI.Window
         private void FillImageList()
         {
             imgListMC.ImageSize = _display.ScaleSize(imgListMC.ImageSize);
-            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.Test_16x));
-            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.StatusInformation_16x));
-            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.LogWarning_16x));
-            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.LogError_16x));
+            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.Test_16x));                // Index 0: DebugMsg
+            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.StatusInformation_16x));   // Index 1: InformationMsg
+            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.LogWarning_16x));          // Index 2: WarningMsg
+            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.LogError_16x));            // Index 3: ErrorMsg
+            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.Test_16x));                // Index 4: TraceMsg
         }
 
         private void LayoutVertical()

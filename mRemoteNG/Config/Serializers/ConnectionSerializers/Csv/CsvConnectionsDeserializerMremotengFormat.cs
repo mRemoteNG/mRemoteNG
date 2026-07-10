@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Versioning;
@@ -131,6 +131,18 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
             connectionRecord.SSHOptions =headers.Contains("SSHOptions")
                 ? connectionCsv[headers.IndexOf("SSHOptions")]
+                : "";
+
+            connectionRecord.SshDotNetPortForwardRules = headers.Contains("SshDotNetPortForwardRules")
+                ? connectionCsv[headers.IndexOf("SshDotNetPortForwardRules")]
+                : "";
+
+            connectionRecord.SshDotNetPrivateKeyFile = headers.Contains("SshDotNetPrivateKeyFile")
+                ? connectionCsv[headers.IndexOf("SshDotNetPrivateKeyFile")]
+                : "";
+
+            connectionRecord.SshDotNetPrivateKeyPassphrase = headers.Contains("SshDotNetPrivateKeyPassphrase")
+                ? connectionCsv[headers.IndexOf("SshDotNetPrivateKeyPassphrase")]
                 : "";
 
             connectionRecord.SSHTunnelConnectionName = headers.Contains("SSHTunnelConnectionName")
@@ -611,6 +623,24 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSSHOptions")], out bool value))
                     connectionRecord.Inheritance.SSHOptions = value;
+            }
+
+            if (headers.Contains("InheritSshDotNetPortForwardRules"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSshDotNetPortForwardRules")], out bool value))
+                    connectionRecord.Inheritance.SshDotNetPortForwardRules = value;
+            }
+
+            if (headers.Contains("InheritSshDotNetPrivateKeyFile"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSshDotNetPrivateKeyFile")], out bool value))
+                    connectionRecord.Inheritance.SshDotNetPrivateKeyFile = value;
+            }
+
+            if (headers.Contains("InheritSshDotNetPrivateKeyPassphrase"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSshDotNetPrivateKeyPassphrase")], out bool value))
+                    connectionRecord.Inheritance.SshDotNetPrivateKeyPassphrase = value;
             }
 
             if (headers.Contains("InheritPuttySession"))

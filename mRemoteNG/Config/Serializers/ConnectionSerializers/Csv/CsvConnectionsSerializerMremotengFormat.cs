@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Runtime.Versioning;
 using System.Text;
@@ -58,7 +58,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             if (_saveFilter.SaveDomain)
                 sb.Append("Domain;");
 
-            sb.Append("Hostname;Port;VmId;Protocol;SSHTunnelConnectionName;OpeningCommand;SSHOptions;PuttySession;ConnectToConsole;UseCredSsp;UseRestrictedAdmin;UseRCG;UseRedirectionServerName;UseVmId;UseEnhancedMode;RenderingEngine;RDPAuthenticationLevel;" +
+            sb.Append("Hostname;Port;VmId;Protocol;SSHTunnelConnectionName;OpeningCommand;SSHOptions;SshDotNetPortForwardRules;SshDotNetPrivateKeyFile;SshDotNetPrivateKeyPassphrase;PuttySession;ConnectToConsole;UseCredSsp;UseRestrictedAdmin;UseRCG;UseRedirectionServerName;UseVmId;UseEnhancedMode;RenderingEngine;RDPAuthenticationLevel;" +
                       "LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;DisableFullWindowDrag;DisableMenuAnimations;DisableCursorShadow;DisableCursorBlinking;" +
                       "CacheBitmaps;RedirectDiskDrives;RedirectDiskDrivesCustomRedirectPorts;RedirectPrinters;RedirectClipboard;RedirectSmartCards;RedirectSound;RedirectKeys;" +
                       "PreExtApp;PostExtApp;MacAddress;UserField;EnvironmentTags;ExtApp;Favorite;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;" +
@@ -68,7 +68,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             if (_saveFilter.SaveInheritance)
                 sb.Append("InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;" +
                           "InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDisableFullWindowDrag;InheritDisableMenuAnimations;InheritDisableCursorShadow;InheritDisableCursorBlinking;InheritDomain;InheritIcon;InheritPanel;InheritTabColor;InheritConnectionFrameColor;InheritPassword;InheritPort;" +
-                          "InheritProtocol;InheritSSHTunnelConnectionName;InheritOpeningCommand;InheritSSHOptions;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectDiskDrivesCustom;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;" +
+                          "InheritProtocol;InheritSSHTunnelConnectionName;InheritOpeningCommand;InheritSSHOptions;InheritSshDotNetPortForwardRules;InheritSshDotNetPrivateKeyFile;InheritSshDotNetPrivateKeyPassphrase;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectDiskDrivesCustom;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;" +
                           "InheritRedirectClipboard;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;" +
                           "InheritUseConsoleSession;InheritUseCredSsp;InheritUseRestrictedAdmin;InheritUseRCG;InheritUseRedirectionServerName;InheritUseVmId;InheritUseEnhancedMode;InheritVmId;InheritRenderingEngine;InheritUsername;" +
                           "InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;" +
@@ -127,6 +127,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.SSHTunnelConnectionName))
               .Append(FormatForCsv(con.OpeningCommand))
               .Append(FormatForCsv(con.SSHOptions))
+              .Append(FormatForCsv(con.SshDotNetPortForwardRules))
+              .Append(FormatForCsv(con.SshDotNetPrivateKeyFile))
+              .Append(FormatForCsv(_saveFilter.SavePassword ? con.SshDotNetPrivateKeyPassphrase : ""))
               .Append(FormatForCsv(con.PuttySession))
               .Append(FormatForCsv(con.UseConsoleSession))
               .Append(FormatForCsv(con.UseCredSsp))
@@ -221,6 +224,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.Inheritance.SSHTunnelConnectionName))
               .Append(FormatForCsv(con.Inheritance.OpeningCommand))
               .Append(FormatForCsv(con.Inheritance.SSHOptions))
+              .Append(FormatForCsv(con.Inheritance.SshDotNetPortForwardRules))
+              .Append(FormatForCsv(con.Inheritance.SshDotNetPrivateKeyFile))
+              .Append(FormatForCsv(con.Inheritance.SshDotNetPrivateKeyPassphrase))
               .Append(FormatForCsv(con.Inheritance.PuttySession))
               .Append(FormatForCsv(con.Inheritance.RedirectDiskDrives))
               .Append(FormatForCsv(con.Inheritance.RedirectDiskDrivesCustom))

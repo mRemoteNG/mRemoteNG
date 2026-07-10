@@ -94,5 +94,23 @@ namespace mRemoteNGTests.Messages.MessageWriters
             _sut.Write(_message);
             _mockWriter.DidNotReceive().Write(_message);
         }
+
+        [Test]
+        public void TraceMessageWrittenIfAllowed()
+        {
+            _message.Class.Returns(MessageClass.TraceMsg);
+            _filter.AllowTraceMessages.Returns(true);
+            _sut.Write(_message);
+            _mockWriter.Received().Write(_message);
+        }
+
+        [Test]
+        public void TraceMessageNotWrittenIfNotAllowed()
+        {
+            _message.Class.Returns(MessageClass.TraceMsg);
+            _filter.AllowTraceMessages.Returns(false);
+            _sut.Write(_message);
+            _mockWriter.DidNotReceive().Write(_message);
+        }
     }
 }

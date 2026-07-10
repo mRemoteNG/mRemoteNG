@@ -22,7 +22,19 @@ namespace mRemoteNG.Properties {
                 return defaultInstance;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool NotificationPanelWriterWriteTraceMsgs {
+            get {
+                return ((bool)(this["NotificationPanelWriterWriteTraceMsgs"]));
+            }
+            set {
+                this["NotificationPanelWriterWriteTraceMsgs"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -106,7 +118,19 @@ namespace mRemoteNG.Properties {
                 this["SwitchToMCOnError"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PopupMessageWriterWriteTraceMsgs {
+            get {
+                return ((bool)(this["PopupMessageWriterWriteTraceMsgs"]));
+            }
+            set {
+                this["PopupMessageWriterWriteTraceMsgs"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -178,7 +202,19 @@ namespace mRemoteNG.Properties {
                 this["LogFilePath"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TextLogMessageWriterWriteTraceMsgs {
+            get {
+                return ((bool)(this["TextLogMessageWriterWriteTraceMsgs"]));
+            }
+            set {
+                this["TextLogMessageWriterWriteTraceMsgs"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]

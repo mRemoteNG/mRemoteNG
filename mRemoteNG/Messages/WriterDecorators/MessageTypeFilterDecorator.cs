@@ -43,6 +43,9 @@ namespace mRemoteNG.Messages.WriterDecorators
                 case MessageClass.DebugMsg:
                     if (_filter.AllowDebugMessages) return true;
                     break;
+                case MessageClass.TraceMsg:
+                    if (_filter.AllowTraceMessages) return true;
+                    break;
             }
 
             return false;

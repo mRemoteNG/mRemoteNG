@@ -286,4 +286,11 @@ InstallerProjects/Installer/Resources/License.rtf
 # mRemoteNG
 **/mRemoteNG/Properties/AssemblyInfo.tt
 **/mRemoteNG/Properties/AssemblyInfo.cs
+
+# Claude
+CLAUDE.md
+.claude
+.serena
+*.bat
+
 /.cr/personal/FavoritesList

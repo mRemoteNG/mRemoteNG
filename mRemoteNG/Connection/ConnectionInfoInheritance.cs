@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -171,6 +171,24 @@ namespace mRemoteNG.Connection
         public bool SSHOptions { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.SshPortForwardRules)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionSshPortForwardRules)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool SshDotNetPortForwardRules { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.SshDotNetPrivateKeyFile)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionSshDotNetPrivateKeyFile)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool SshDotNetPrivateKeyFile { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.SshDotNetPrivateKeyPassphrase)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionSshDotNetPrivateKeyPassphrase)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool SshDotNetPrivateKeyPassphrase { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.AuthenticationLevel)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionAuthenticationLevel)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
@@ -299,7 +317,6 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUserViaAPI)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RDGatewayUserViaAPI { get; set; }
-
 
         #endregion
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Security;
 using System.Windows.Forms;
@@ -494,6 +494,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.SSHTunnelConnectionName = xmlnode.GetAttributeAsString("SSHTunnelConnectionName");
                     connectionInfo.OpeningCommand = xmlnode.GetAttributeAsString("OpeningCommand");
                     connectionInfo.SSHOptions = xmlnode.GetAttributeAsString("SSHOptions");
+                    connectionInfo.SshDotNetPortForwardRules = xmlnode.GetAttributeAsString("SshDotNetPortForwardRules");
+                    connectionInfo.SshDotNetPrivateKeyFile = xmlnode.GetAttributeAsString("SshDotNetPrivateKeyFile");
+                    connectionInfo.SshDotNetPrivateKeyPassphrase = _decryptor.Decrypt(xmlnode.GetAttributeAsString("SshDotNetPrivateKeyPassphrase"));
                     connectionInfo.RDPStartProgram = xmlnode.GetAttributeAsString("StartProgram");
                     connectionInfo.RDPStartProgramWorkDir = xmlnode.GetAttributeAsString("StartProgramWorkDir");
                     connectionInfo.DisableFullWindowDrag = xmlnode.GetAttributeAsBool("DisableFullWindowDrag");
@@ -511,6 +514,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.Inheritance.SSHTunnelConnectionName = xmlnode.GetAttributeAsBool("InheritSSHTunnelConnectionName");
                     connectionInfo.Inheritance.OpeningCommand = xmlnode.GetAttributeAsBool("InheritOpeningCommand");
                     connectionInfo.Inheritance.SSHOptions = xmlnode.GetAttributeAsBool("InheritSSHOptions");
+                    connectionInfo.Inheritance.SshDotNetPortForwardRules = xmlnode.GetAttributeAsBool("InheritSshDotNetPortForwardRules");
+                    connectionInfo.Inheritance.SshDotNetPrivateKeyFile = xmlnode.GetAttributeAsBool("InheritSshDotNetPrivateKeyFile");
+                    connectionInfo.Inheritance.SshDotNetPrivateKeyPassphrase = xmlnode.GetAttributeAsBool("InheritSshDotNetPrivateKeyPassphrase");
                     connectionInfo.Inheritance.DisableFullWindowDrag = xmlnode.GetAttributeAsBool("InheritDisableFullWindowDrag");
                     connectionInfo.Inheritance.DisableMenuAnimations = xmlnode.GetAttributeAsBool("InheritDisableMenuAnimations");
                     connectionInfo.Inheritance.DisableCursorShadow = xmlnode.GetAttributeAsBool("InheritDisableCursorShadow");
