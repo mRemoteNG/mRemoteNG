@@ -2,6 +2,7 @@
 using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.Properties;
+using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI;
 using System.Windows.Forms;
@@ -129,6 +130,11 @@ namespace mRemoteNG.UI.Panels
                 // Save this auto-hide state
                 _configFormAutoHideState = AppWindows.ConfigForm.DockState;
             }
+
+            // Keep Connections above Config regardless of the order in which the
+            // panes were converted to auto-hide.
+            Config.Settings.DockPanelLayoutLoader.EnforcePanelOrder(
+                FrmMain.Default, Runtime.MessageCollector);
         }
         
         /// <summary>

@@ -82,8 +82,21 @@ namespace mRemoteNG.Config.Settings
         /// </summary>
         private void EnforcePanelOrder()
         {
+            EnforcePanelOrder(_mainForm, _messageCollector);
+        }
+
+        /// <summary>
+        /// Ensures the Connections panel is always ordered before (above) the Config
+        /// panel. Safe to call at any time (startup, after auto-hide toggles, etc.);
+        /// it never throws.
+        /// </summary>
+        public static void EnforcePanelOrder(FrmMain mainForm, MessageCollector messageCollector)
+        {
             try
             {
+                if (mainForm == null || mainForm.pnlDock == null)
+                    return;
+
                 ConnectionTreeWindow tree = AppWindows.TreeForm;
                 ConfigWindow config = AppWindows.ConfigForm;
 
@@ -105,31 +118,40 @@ namespace mRemoteNG.Config.Settings
                     return;
                 }
 
-                // Case 2: Separate panes. Only reorder when they share the same dock
-                // edge (comparing the persisted pane order used by the auto-hide strip).
+                // Case 2: Separate panes on the same dock edge (e.g. two auto-hide tabs
+                // on the left). The auto-hide strip renders tabs in the order the panes
+                // appear in DockPanel.Panes, so we must make the Connections pane precede
+                // the Config pane there.
                 if (tree.DockState != config.DockState)
                     return;
 
-                DockPaneCollection panes = _mainForm.pnlDock.Panes;
+                DockPaneCollection panes = mainForm.pnlDock.Panes;
                 int treeIndex = panes.IndexOf(treePane);
                 int configIndex = panes.IndexOf(configPane);
 
-                // If Config currently appears before Connections, re-show Config so its
-                // pane is re-appended after Connections, forcing Connections on top.
+                // If Config currently appears before Connections, re-append both panes in
+                // the desired order (Connections first, Config second). Re-showing a panel
+                // moves its pane to the end of the collection for that dock edge, so doing
+                // Tree then Config guarantees Connections ends up on top. Re-showing only
+                // one panel is unreliable because the surviving pane's position depends on
+                // where DockPanelSuite happened to place it.
                 if (treeIndex >= 0 && configIndex >= 0 && configIndex < treeIndex)
                 {
-                    double autoHidePortion = configPane.AutoHidePortion;
-                    DockState state = config.DockState;
+                    double treePortion = tree.AutoHidePortion;
+                    double configPortion = config.AutoHidePortion;
+                    DockState treeState = tree.DockState;
+                    DockState configState = config.DockState;
 
-                    config.Show(_mainForm.pnlDock, state);
+                    tree.Show(mainForm.pnlDock, treeState);
+                    tree.AutoHidePortion = treePortion;
 
-                    if (config.Pane != null)
-                        config.Pane.AutoHidePortion = autoHidePortion;
+                    config.Show(mainForm.pnlDock, configState);
+                    config.AutoHidePortion = configPortion;
                 }
             }
             catch (Exception ex)
             {
-                _messageCollector.AddExceptionMessage("EnforcePanelOrder failed", ex);
+                messageCollector.AddExceptionMessage("EnforcePanelOrder failed", ex);
             }
         }
 

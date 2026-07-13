@@ -85,6 +85,14 @@ namespace mRemoteNG.Connection
                 ConnectionInfo newConnectionInfo = new();
                 newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
+                // Quick Connect connections are never added to the connection tree, so they
+                // have no Parent and cannot inherit properties the way tree connections do.
+                // The default resolution (SmartSize) connects at full-screen resolution and
+                // scales the image down to the panel, which looks blurry and undersized.
+                // Force FitToWindow so Quick Connect sessions render sharp and sized to the
+                // window, matching how connections opened from the panel behave.
+                newConnectionInfo.Resolution = Protocol.RDP.RDPResolutions.FitToWindow;
+
                 newConnectionInfo.Name = Properties.OptionsTabsPanelsPage.Default.IdentifyQuickConnectTabs
                     ? string.Format(Language.Quick, uriBuilder.Host)
                     : uriBuilder.Host;
