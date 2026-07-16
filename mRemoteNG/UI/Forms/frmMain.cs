@@ -240,11 +240,7 @@ namespace mRemoteNG.UI.Forms
             Runtime.ConnectionsService.ConnectionsSaved += ConnectionsServiceOnConnectionsSaved;
             
             // Close splash screen before loading connections to ensure password dialog appears on top
-            FrmSplashScreenNew splash = FrmSplashScreenNew.GetInstance();
-            if (splash.Dispatcher.CheckAccess())
-                splash.Close();
-            else
-                splash.Dispatcher.Invoke(() => splash.Close());
+            ProgramRoot.CloseSplash();
 
             CredsAndConsSetup credsAndConsSetup = new();
             credsAndConsSetup.LoadCredsAndCons();

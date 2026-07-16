@@ -2,6 +2,7 @@
 
 using mRemoteNG.App.Update;
 using mRemoteNG.Config.Settings;
+using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Resources.Language;
@@ -241,18 +242,38 @@ namespace mRemoteNG.App
             _wpfSplashThread.Start();
         }
 
-        private static void CloseSplash()
+        internal static void CloseSplash()
         {
-            if (_wpfSplash != null)
+            // Capture and clear the cached state up front so this is safe to call from
+            // multiple startup paths (e.g. the LoadConnections error handler) without
+            // acting on stale references or re-running against an already-closed splash.
+            FrmSplashScreenNew? splash = _wpfSplash;
+            System.Threading.Thread? splashThread = _wpfSplashThread;
+            _wpfSplash = null;
+            _wpfSplashThread = null;
+
+            if (splash != null)
             {
-                _wpfSplash.Dispatcher.Invoke(() => _wpfSplash.Close());
-                _wpfSplash = null;
+                try
+                {
+                    splash.Dispatcher.Invoke(() =>
+                    {
+                        splash.Close();
+                        // The splash runs its own STA message loop; ask it to exit so the
+                        // thread can actually be joined below instead of running forever.
+                        splash.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
+                    });
+                }
+                catch (Exception ex)
+                {
+                    // Never let splash cleanup mask an in-progress startup error.
+                    Runtime.MessageCollector.AddExceptionMessage("Failed to close splash screen.", ex, MessageClass.WarningMsg);
+                }
             }
-            if (_wpfSplashThread != null)
-            {
-                _wpfSplashThread.Join();
-                _wpfSplashThread = null;
-            }
+
+            // The splash thread is a background thread, so a bounded join keeps startup
+            // from hanging if the dispatcher did not shut down; it dies on process exit anyway.
+            splashThread?.Join(TimeSpan.FromSeconds(2));
         }
 
         // Helper to show a dialog with "Download" and "Cancel" buttons.

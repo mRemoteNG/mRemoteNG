@@ -39,7 +39,7 @@ namespace mRemoteNG.App
             messageCollector.AddMessage(MessageClass.ErrorMsg, errorText, true);
 
             //About to pop up a message, let's not block it...
-            FrmSplashScreenNew.GetInstance().Close();
+            ProgramRoot.CloseSplash();
 
             DialogResult ShouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName ?? string.Empty, Language.CompatibilityProblemDetected, errorText, "", "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.OkCancel, ESysIcons.Warning, ESysIcons.Warning);
             if (CTaskDialog.VerificationChecked && ShouldIStayOrShouldIGo == DialogResult.OK)

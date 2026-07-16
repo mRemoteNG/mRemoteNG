@@ -115,7 +115,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                FrmSplashScreenNew.GetInstance().Close();
+                ProgramRoot.CloseSplash();
 
                 if (Properties.OptionsDBsPage.Default.UseSQLServer)
                 {
