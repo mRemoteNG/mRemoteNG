@@ -20,11 +20,11 @@
     <PackageVersion Include="Google.Protobuf" Version="3.35.1" />
     <PackageVersion Include="log4net" Version="3.3.2" />
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.0.2" />
-    <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.10" />
     <PackageVersion Include="Microsoft.Data.SqlClient.SNI" Version="6.0.2" />
     <PackageVersion Include="Microsoft.Data.SqlClient.SNI.runtime" Version="6.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyModel" Version="10.0.9" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyModel" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.10" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
     <PackageVersion Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
     <PackageVersion Include="Microsoft.NETCore.Targets" Version="5.0.0" />
@@ -58,19 +58,19 @@
     <PackageVersion Include="runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl" Version="4.3.3" />
     <PackageVersion Include="SSH.NET" Version="2025.1.0" />
     <PackageVersion Include="System.Buffers" Version="4.6.1" />
-    <PackageVersion Include="System.Configuration.ConfigurationManager" Version="10.0.9" />
-    <PackageVersion Include="System.Collections.Immutable" Version="10.0.9" />
+    <PackageVersion Include="System.Configuration.ConfigurationManager" Version="10.0.10" />
+    <PackageVersion Include="System.Collections.Immutable" Version="10.0.10" />
     <PackageVersion Include="System.Console" Version="4.3.1" />
     <PackageVersion Include="System.Data.Common" Version="4.3.0" />
-    <PackageVersion Include="System.Data.Odbc" Version="10.0.9" />
-    <PackageVersion Include="System.Diagnostics.DiagnosticSource" Version="10.0.9" />
-    <PackageVersion Include="System.Drawing.Common" Version="10.0.9" />
-    <PackageVersion Include="System.Diagnostics.EventLog" Version="10.0.9" />
-    <PackageVersion Include="System.DirectoryServices" Version="10.0.9" />
+    <PackageVersion Include="System.Data.Odbc" Version="10.0.10" />
+    <PackageVersion Include="System.Diagnostics.DiagnosticSource" Version="10.0.10" />
+    <PackageVersion Include="System.Drawing.Common" Version="10.0.10" />
+    <PackageVersion Include="System.Diagnostics.EventLog" Version="10.0.10" />
+    <PackageVersion Include="System.DirectoryServices" Version="10.0.10" />
     <PackageVersion Include="System.Dynamic.Runtime" Version="4.3.0" />
-    <PackageVersion Include="System.IO.Pipelines" Version="10.0.9" />
-    <PackageVersion Include="System.Formats.Asn1" Version="10.0.9" />
-    <PackageVersion Include="System.Management" Version="10.0.9" />
+    <PackageVersion Include="System.IO.Pipelines" Version="10.0.10" />
+    <PackageVersion Include="System.Formats.Asn1" Version="10.0.10" />
+    <PackageVersion Include="System.Management" Version="10.0.10" />
     <PackageVersion Include="System.Memory" Version="4.6.3" />
     <PackageVersion Include="System.Net.Http" Version="4.3.4" />
     <PackageVersion Include="System.Net.Primitives" Version="4.3.1" />
@@ -78,7 +78,7 @@
     <PackageVersion Include="System.Reflection.Emit" Version="4.7.0" />
     <PackageVersion Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
     <PackageVersion Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
-    <PackageVersion Include="System.Reflection.Metadata" Version="10.0.9" />
+    <PackageVersion Include="System.Reflection.Metadata" Version="10.0.10" />
     <PackageVersion Include="System.Reflection.TypeExtensions" Version="4.7.0" />
     <PackageVersion Include="System.Resources.ResourceManager" Version="4.3.0" />
     <PackageVersion Include="System.Runtime" Version="4.3.1" />
@@ -88,16 +88,16 @@
     <PackageVersion Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
     <PackageVersion Include="System.Security.Cryptography.Cng" Version="5.0.0" />
     <PackageVersion Include="System.Security.Cryptography.OpenSsl" Version="5.0.0" />
-    <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.9" />
+    <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.10" />
     <PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
-    <PackageVersion Include="System.Security.Permissions" Version="10.0.9" />
+    <PackageVersion Include="System.Security.Permissions" Version="10.0.10" />
     <PackageVersion Include="System.Security.Principal.Windows" Version="5.0.0" />
-    <PackageVersion Include="System.Text.Encoding.CodePages" Version="10.0.9" />
-    <PackageVersion Include="System.Text.Json" Version="10.0.9" />
+    <PackageVersion Include="System.Text.Encoding.CodePages" Version="10.0.10" />
+    <PackageVersion Include="System.Text.Json" Version="10.0.10" />
     <PackageVersion Include="System.Text.RegularExpressions" Version="4.3.1" />
     <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
     <PackageVersion Include="System.ValueTuple" Version="4.6.2" />
-    <PackageVersion Include="System.Windows.Extensions" Version="10.0.9" />
+    <PackageVersion Include="System.Windows.Extensions" Version="10.0.10" />
     <PackageVersion Include="System.Xml.ReaderWriter" Version="4.3.1" />
     <PackageVersion Include="VaultSharp" Version="1.17.5.1" />
     <PackageVersion Include="VncSharpCore" Version="1.2.1" />
