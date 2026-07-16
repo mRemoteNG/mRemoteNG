@@ -3,6 +3,7 @@
 using mRemoteNG.App.Update;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Messages;
+using mRemoteNG.Themes;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Resources.Language;
 using System;
@@ -125,6 +126,15 @@ namespace mRemoteNG.App
             CatchAllUnhandledExceptions();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // Match the OS dark mode for common controls (scrollbars, context menus, ...)
+            // to the active theme. Applied once at startup; theme changes require a restart.
+            // Read the persisted flag instead of constructing ThemeManager here, so we avoid
+            // any theme folder/file I/O before the splash is shown. The flag is kept in sync
+            // by ThemeManager whenever the active theme or theming state changes.
+            Application.SetColorMode(Properties.OptionsThemePage.Default.IsActiveThemeDark
+                ? SystemColorMode.Dark
+                : SystemColorMode.Classic);
 
             ShowSplashOnStaThread();
 

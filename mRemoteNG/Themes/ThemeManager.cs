@@ -10,6 +10,8 @@ using mRemoteNG.Messages;
 using mRemoteNG.Properties;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Runtime.Versioning;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace mRemoteNG.Themes
 {
@@ -54,6 +56,18 @@ namespace mRemoteNG.Themes
                 Properties.OptionsThemePage.Default.ThemeName = "";
                 Properties.OptionsThemePage.Default.Save();
             }
+        }
+
+        // Persist the dark/light state of the active theme so startup can read it
+        // without loading any theme from disk (see ProgramRoot.StartApplication).
+        // Uses the raw _activeTheme, not the ThemingActive-gated ActiveTheme: during
+        // construction ThemingActive is still false, which would otherwise persist "light".
+        private void PersistActiveThemeDarkFlag()
+        {
+            bool dark = IsThemeDark(_activeTheme);
+            if (Properties.OptionsThemePage.Default.IsActiveThemeDark == dark) return;
+            Properties.OptionsThemePage.Default.IsActiveThemeDark = dark;
+            Properties.OptionsThemePage.Default.Save();
         }
 
         #endregion
@@ -283,6 +297,7 @@ namespace mRemoteNG.Themes
                 if (themes.Count == 0) return;
                 _themeActive = value;
                 Properties.OptionsThemePage.Default.ThemingActive = value;
+                PersistActiveThemeDarkFlag();
                 NotifyThemeChanged(this, new PropertyChangedEventArgs(""));
             }
         }
@@ -306,6 +321,7 @@ namespace mRemoteNG.Themes
 
                     Properties.OptionsThemePage.Default.ThemeName = DefaultTheme.Name;
                     _activeTheme = DefaultTheme;
+                    PersistActiveThemeDarkFlag();
 
                     if (changed)
                         NotifyThemeChanged(this, new PropertyChangedEventArgs("theme"));
@@ -316,11 +332,41 @@ namespace mRemoteNG.Themes
 
                 _activeTheme = value;
                 Properties.OptionsThemePage.Default.ThemeName = value.Name;
+                PersistActiveThemeDarkFlag();
                 NotifyThemeChanged(this, new PropertyChangedEventArgs("theme"));
             }
         }
 
         public bool ActiveAndExtended => ThemingActive && ActiveTheme.IsExtended;
+
+        // Below this HSL lightness (Color.GetBrightness) the "Dialog_Background" is treated as dark.
+        private const float DarkThemeBrightnessThreshold = 0.5f;
+
+        // True when the given theme has a dark background (HSL lightness of "Dialog_Background").
+        public static bool IsThemeDark(ThemeInfo? theme)
+        {
+            Color background = theme?.ExtendedPalette?.getColor("Dialog_Background") ?? SystemColors.Control;
+            return background.GetBrightness() < DarkThemeBrightnessThreshold;
+        }
+
+        /// <summary>
+        /// True when the active theme has a dark background (derived from the "Dialog_Background"
+        /// brightness (HSL lightness via <see cref="Color.GetBrightness"/>), since there is no
+        /// explicit dark flag).
+        /// </summary>
+        public bool IsActiveThemeDark => IsThemeDark(ActiveTheme);
+
+        /// <summary>
+        /// Applies a dark or light native title bar to the given form based on the active theme's
+        /// background brightness. Safe to call before the handle exists (no-op).
+        /// </summary>
+        public void ApplyThemeToTitleBar(Form form)
+        {
+            if (form == null || !form.IsHandleCreated)
+                return;
+
+            NativeMethods.UseImmersiveDarkMode(form.Handle, IsActiveThemeDark);
+        }
 
         public int ThemesCount => themes.Count;
 
