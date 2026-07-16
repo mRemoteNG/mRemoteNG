@@ -15,6 +15,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
         private IOptionsRepository _optionsRepository;
         private List<OptionInfo> _currentOptions;
+        private TableLayoutPanel tableLayoutPanel;
+        private TableLayoutPanel formLayoutPanel;
+        private FlowLayoutPanel buttonPanel;
         private bool _isLoading;
 
         public OptionsManagementPage()
@@ -89,128 +92,213 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void InitializeComponent()
         {
+            tableLayoutPanel = new TableLayoutPanel();
+            dataGridViewOptions = new DataGridView();
+            groupBoxOptions = new GroupBox();
+            formLayoutPanel = new TableLayoutPanel();
+            labelKey = new Label();
+            textBoxKey = new TextBox();
+            labelValue = new Label();
+            textBoxValue = new TextBox();
+            labelCategory = new Label();
+            textBoxCategory = new TextBox();
+            labelType = new Label();
+            comboBoxType = new ComboBox();
+            labelDescription = new Label();
+            textBoxDescription = new TextBox();
+            buttonPanel = new FlowLayoutPanel();
+            btnAdd = new Button();
+            btnEdit = new Button();
+            btnDelete = new Button();
+            btnRefresh = new Button();
+            tableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewOptions).BeginInit();
+            groupBoxOptions.SuspendLayout();
+            formLayoutPanel.SuspendLayout();
+            buttonPanel.SuspendLayout();
             SuspendLayout();
-
-            // Main layout
-            var tableLayoutPanel = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                ColumnCount = 1,
-                RowCount = 3,
-                Padding = new Padding(10)
-            };
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-
-            // DataGridView for options
-            dataGridViewOptions = new DataGridView
-            {
-                Dock = DockStyle.Fill,
-                AllowUserToAddRows = false,
-                AllowUserToDeleteRows = false,
-                AllowUserToResizeRows = false,
-                AutoGenerateColumns = false,
-                MultiSelect = false,
-                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-                ReadOnly = true,
-                BackgroundColor = System.Drawing.SystemColors.Control
-            };
-
-            SetupDataGridViewColumns();
-            dataGridViewOptions.SelectionChanged += DataGridViewOptions_SelectionChanged;
+            // 
+            // tableLayoutPanel
+            // 
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tableLayoutPanel.Controls.Add(dataGridViewOptions, 0, 0);
-
-            // Form controls panel
-            groupBoxOptions = new GroupBox
-            {
-                Text = "Option Details",
-                Dock = DockStyle.Fill,
-                AutoSize = false,
-                Height = 150
-            };
-
-            var formLayoutPanel = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                ColumnCount = 2,
-                RowCount = 5,
-                Padding = new Padding(5)
-            };
-            formLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100));
-            formLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-
-            // Key
-            labelKey = new Label { Text = "Key:", Dock = DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleLeft };
-            textBoxKey = new TextBox { Dock = DockStyle.Fill, Margin = new Padding(5) };
+            tableLayoutPanel.Controls.Add(groupBoxOptions, 0, 1);
+            tableLayoutPanel.Controls.Add(buttonPanel, 0, 2);
+            tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel.Name = "tableLayoutPanel";
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 60F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle());
+            tableLayoutPanel.RowStyles.Add(new RowStyle());
+            tableLayoutPanel.Size = new System.Drawing.Size(200, 100);
+            tableLayoutPanel.TabIndex = 0;
+            // 
+            // dataGridViewOptions
+            // 
+            dataGridViewOptions.Location = new System.Drawing.Point(3, 3);
+            dataGridViewOptions.Name = "dataGridViewOptions";
+            dataGridViewOptions.Size = new System.Drawing.Size(194, 1);
+            dataGridViewOptions.TabIndex = 0;
+            dataGridViewOptions.SelectionChanged += DataGridViewOptions_SelectionChanged;
+            // 
+            // groupBoxOptions
+            // 
+            groupBoxOptions.Controls.Add(formLayoutPanel);
+            groupBoxOptions.Location = new System.Drawing.Point(3, -109);
+            groupBoxOptions.Name = "groupBoxOptions";
+            groupBoxOptions.Size = new System.Drawing.Size(194, 100);
+            groupBoxOptions.TabIndex = 1;
+            groupBoxOptions.TabStop = false;
+            // 
+            // formLayoutPanel
+            // 
+            formLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            formLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             formLayoutPanel.Controls.Add(labelKey, 0, 0);
             formLayoutPanel.Controls.Add(textBoxKey, 1, 0);
-
-            // Value
-            labelValue = new Label { Text = "Value:", Dock = DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleLeft };
-            textBoxValue = new TextBox { Dock = DockStyle.Fill, Margin = new Padding(5), Multiline = true, Height = 40 };
             formLayoutPanel.Controls.Add(labelValue, 0, 1);
             formLayoutPanel.Controls.Add(textBoxValue, 1, 1);
-
-            // Category
-            labelCategory = new Label { Text = "Category:", Dock = DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleLeft };
-            textBoxCategory = new TextBox { Dock = DockStyle.Fill, Margin = new Padding(5) };
             formLayoutPanel.Controls.Add(labelCategory, 0, 2);
             formLayoutPanel.Controls.Add(textBoxCategory, 1, 2);
-
-            // Type
-            labelType = new Label { Text = "Type:", Dock = DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleLeft };
-            comboBoxType = new ComboBox 
-            { 
-                Dock = DockStyle.Fill, 
-                Margin = new Padding(5),
-                DropDownStyle = ComboBoxStyle.DropDownList
-            };
-            comboBoxType.Items.AddRange(new[] { "string", "int", "bool", "double" });
-            comboBoxType.SelectedIndex = 0;
             formLayoutPanel.Controls.Add(labelType, 0, 3);
             formLayoutPanel.Controls.Add(comboBoxType, 1, 3);
-
-            // Description
-            labelDescription = new Label { Text = "Description:", Dock = DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.TopLeft };
-            textBoxDescription = new TextBox { Dock = DockStyle.Fill, Margin = new Padding(5), Multiline = true, Height = 40 };
             formLayoutPanel.Controls.Add(labelDescription, 0, 4);
             formLayoutPanel.Controls.Add(textBoxDescription, 1, 4);
-
-            groupBoxOptions.Controls.Add(formLayoutPanel);
-            tableLayoutPanel.Controls.Add(groupBoxOptions, 0, 1);
-
-            // Buttons panel
-            var buttonPanel = new FlowLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                FlowDirection = FlowDirection.LeftToRight,
-                AutoSize = true,
-                Margin = new Padding(5)
-            };
-
-            btnAdd = new Button { Text = "Add", Width = 80, Height = 30 };
-            btnEdit = new Button { Text = "Edit", Width = 80, Height = 30 };
-            btnDelete = new Button { Text = "Delete", Width = 80, Height = 30 };
-            btnRefresh = new Button { Text = "Refresh", Width = 80, Height = 30 };
-
-            btnAdd.Click += BtnAdd_Click;
-            btnEdit.Click += BtnEdit_Click;
-            btnDelete.Click += BtnDelete_Click;
-            btnRefresh.Click += BtnRefresh_Click;
-
+            formLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            formLayoutPanel.Name = "formLayoutPanel";
+            formLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            formLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            formLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            formLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            formLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            formLayoutPanel.Size = new System.Drawing.Size(200, 100);
+            formLayoutPanel.TabIndex = 0;
+            // 
+            // labelKey
+            // 
+            labelKey.Location = new System.Drawing.Point(3, 0);
+            labelKey.Name = "labelKey";
+            labelKey.Size = new System.Drawing.Size(94, 20);
+            labelKey.TabIndex = 0;
+            // 
+            // textBoxKey
+            // 
+            textBoxKey.Location = new System.Drawing.Point(103, 3);
+            textBoxKey.Name = "textBoxKey";
+            textBoxKey.Size = new System.Drawing.Size(94, 22);
+            textBoxKey.TabIndex = 1;
+            // 
+            // labelValue
+            // 
+            labelValue.Location = new System.Drawing.Point(3, 20);
+            labelValue.Name = "labelValue";
+            labelValue.Size = new System.Drawing.Size(94, 20);
+            labelValue.TabIndex = 2;
+            // 
+            // textBoxValue
+            // 
+            textBoxValue.Location = new System.Drawing.Point(103, 23);
+            textBoxValue.Name = "textBoxValue";
+            textBoxValue.Size = new System.Drawing.Size(94, 22);
+            textBoxValue.TabIndex = 3;
+            // 
+            // labelCategory
+            // 
+            labelCategory.Location = new System.Drawing.Point(3, 40);
+            labelCategory.Name = "labelCategory";
+            labelCategory.Size = new System.Drawing.Size(94, 20);
+            labelCategory.TabIndex = 4;
+            // 
+            // textBoxCategory
+            // 
+            textBoxCategory.Location = new System.Drawing.Point(103, 43);
+            textBoxCategory.Name = "textBoxCategory";
+            textBoxCategory.Size = new System.Drawing.Size(94, 22);
+            textBoxCategory.TabIndex = 5;
+            // 
+            // labelType
+            // 
+            labelType.Location = new System.Drawing.Point(3, 60);
+            labelType.Name = "labelType";
+            labelType.Size = new System.Drawing.Size(94, 20);
+            labelType.TabIndex = 6;
+            // 
+            // comboBoxType
+            // 
+            comboBoxType.Items.AddRange(new object[] { "string", "int", "bool", "double" });
+            comboBoxType.Location = new System.Drawing.Point(103, 63);
+            comboBoxType.Name = "comboBoxType";
+            comboBoxType.Size = new System.Drawing.Size(94, 21);
+            comboBoxType.TabIndex = 7;
+            // 
+            // labelDescription
+            // 
+            labelDescription.Location = new System.Drawing.Point(3, 80);
+            labelDescription.Name = "labelDescription";
+            labelDescription.Size = new System.Drawing.Size(94, 20);
+            labelDescription.TabIndex = 8;
+            // 
+            // textBoxDescription
+            // 
+            textBoxDescription.Location = new System.Drawing.Point(103, 83);
+            textBoxDescription.Name = "textBoxDescription";
+            textBoxDescription.Size = new System.Drawing.Size(94, 22);
+            textBoxDescription.TabIndex = 9;
+            // 
+            // buttonPanel
+            // 
             buttonPanel.Controls.Add(btnAdd);
             buttonPanel.Controls.Add(btnEdit);
             buttonPanel.Controls.Add(btnDelete);
             buttonPanel.Controls.Add(btnRefresh);
-
-            tableLayoutPanel.Controls.Add(buttonPanel, 0, 2);
-
-            Controls.Add(tableLayoutPanel);
-
+            buttonPanel.Location = new System.Drawing.Point(3, -3);
+            buttonPanel.Name = "buttonPanel";
+            buttonPanel.Size = new System.Drawing.Size(194, 100);
+            buttonPanel.TabIndex = 2;
+            // 
+            // btnAdd
+            // 
+            btnAdd.Location = new System.Drawing.Point(3, 3);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new System.Drawing.Size(75, 23);
+            btnAdd.TabIndex = 0;
+            btnAdd.Click += BtnAdd_Click;
+            // 
+            // btnEdit
+            // 
+            btnEdit.Location = new System.Drawing.Point(84, 3);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new System.Drawing.Size(75, 23);
+            btnEdit.TabIndex = 1;
+            btnEdit.Click += BtnEdit_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new System.Drawing.Point(3, 32);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new System.Drawing.Size(75, 23);
+            btnDelete.TabIndex = 2;
+            btnDelete.Click += BtnDelete_Click;
+            // 
+            // btnRefresh
+            // 
+            btnRefresh.Location = new System.Drawing.Point(84, 32);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new System.Drawing.Size(75, 23);
+            btnRefresh.TabIndex = 3;
+            btnRefresh.Click += BtnRefresh_Click;
+            // 
+            // OptionsManagementPage
+            // 
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
+            Controls.Add(tableLayoutPanel);
             Name = "OptionsManagementPage";
+            tableLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewOptions).EndInit();
+            groupBoxOptions.ResumeLayout(false);
+            formLayoutPanel.ResumeLayout(false);
+            formLayoutPanel.PerformLayout();
+            buttonPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
