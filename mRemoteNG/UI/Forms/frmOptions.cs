@@ -64,6 +64,13 @@ namespace mRemoteNG.UI.Forms
             InitOptionsPagesToListView();
         }
 
+        // Apply the dark/light title bar before the window is shown to avoid a white flash.
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            ThemeManager.getInstance().ApplyThemeToTitleBar(this);
+        }
+
         private void FrmOptions_Load(object sender, EventArgs e)
         {
             Logger.Instance.Log?.Debug($"[FrmOptions_Load] START - IsInitialized: {_isInitialized}, Visible: {this.Visible}, Handle: {this.Handle}");
@@ -84,8 +91,7 @@ namespace mRemoteNG.UI.Forms
             btnOK.Text = Language._Ok;
             btnCancel.Text = Language._Cancel;
             btnApply.Text = Language.Apply;
-            //ApplyTheme();
-            //ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ApplyTheme();
             lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;
             lstOptionPages.SelectedIndex = 0;
             Logger.Instance.Log?.Debug($"[FrmOptions_Load] Selected index set to 0");
@@ -119,6 +125,8 @@ namespace mRemoteNG.UI.Forms
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
             BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlBottom.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlBottom.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
 #if false

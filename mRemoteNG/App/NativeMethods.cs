@@ -122,6 +122,23 @@ namespace mRemoteNG.App
         [DllImport("kernel32", SetLastError = true)]
         internal static extern bool CloseHandle(IntPtr handle);
 
+        [DllImport("dwmapi.dll")]
+        private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
+        // Enables/disables the dark (immersive) title bar. Attribute 20 on Win10 20H1+ (build 19041)
+        // and Win11; 19 on earlier builds. Returns true if the OS accepted the change.
+        internal static bool UseImmersiveDarkMode(IntPtr handle, bool enabled)
+        {
+            if (handle == IntPtr.Zero)
+                return false;
+
+            int useDark = enabled ? 1 : 0;
+            if (DwmSetWindowAttribute(handle, 20, ref useDark, sizeof(int)) == 0)
+                return true;
+
+            return DwmSetWindowAttribute(handle, 19, ref useDark, sizeof(int)) == 0;
+        }
+
         #endregion
 
         #region Structures

@@ -221,9 +221,17 @@ namespace mRemoteNG.UI.Forms
 
         #endregion
 
+        // Apply the dark/light title bar before the window is shown to avoid a white flash.
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            ThemeManager.getInstance().ApplyThemeToTitleBar(this);
+        }
+
         private void ApplyTheme()
         {
             _themeManager = ThemeManager.getInstance();
+            _themeManager.ApplyThemeToTitleBar(this);
             if (!_themeManager.ActiveAndExtended) return;
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
