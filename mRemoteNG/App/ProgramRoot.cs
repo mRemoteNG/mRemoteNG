@@ -40,6 +40,8 @@ namespace mRemoteNG.App
             // PerMonitorV2 awareness; this call keeps the WinForms runtime in sync.
             Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
 
+            InitializeSqliteProvider();
+
             // Ensure the real entry point is definitely STA
             MainAsync(args).GetAwaiter().GetResult();
         }
@@ -97,6 +99,20 @@ namespace mRemoteNG.App
                 StartApplication();
 
             return Task.CompletedTask;
+        }
+
+        private static void InitializeSqliteProvider()
+        {
+            try
+            {
+                Type batteriesType = Type.GetType("SQLitePCL.Batteries_V2, SQLitePCLRaw.batteries_v2", throwOnError: false);
+                MethodInfo initMethod = batteriesType?.GetMethod("Init", BindingFlags.Public | BindingFlags.Static);
+                initMethod?.Invoke(null, null);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"SQLite provider initialization failed: {ex}");
+            }
         }
 
         // Assembly resolve handler

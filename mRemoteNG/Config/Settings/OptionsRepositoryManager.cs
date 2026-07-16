@@ -2,6 +2,7 @@
 using System.IO;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Settings.Store;
+using mRemoteNG.Security.KeyManagement;
 
 namespace mRemoteNG.Config.Settings
 {
@@ -36,10 +37,11 @@ namespace mRemoteNG.Config.Settings
 
             try
             {
-                // Create options database in the same location as other settings
-                string optionsDbPath = Path.Combine(settingsPath, "mremoteng.options.db");
+                // Use the main settings database so options are persisted in the same file.
+                string optionsDbPath = Path.Combine(settingsPath, SettingsStoreInitializer.SettingsDatabaseFileName);
+                string dekHex = TryGetDekHex(settingsPath);
 
-                _store = new OptionsStore(optionsDbPath);
+                _store = new OptionsStore(optionsDbPath, dekHex);
                 _store.Initialize();
 
                 _repository = new OptionsRepository(_store);
@@ -75,6 +77,32 @@ namespace mRemoteNG.Config.Settings
             _store = null;
             _repository = null;
             IsInitialized = false;
+        }
+
+        private static string TryGetDekHex(string settingsPath)
+        {
+            try
+            {
+                string keystorePath = Path.Combine(settingsPath, "mremoteng.keystore.json");
+                if (!File.Exists(keystorePath))
+                    return null;
+
+                string dpapiFilePath = Path.Combine(settingsPath, "mremoteng.dpapi.bin");
+                DpapiMasterKeyProvider dpapiProvider = new(dpapiFilePath);
+                if (!dpapiProvider.IsAvailable)
+                    return null;
+
+                using var masterKey = dpapiProvider.GetKeyAsync().GetAwaiter().GetResult();
+                if (masterKey is null || masterKey.Length == 0)
+                    return null;
+
+                KeystoreManager keystoreManager = new(keystorePath);
+                return keystoreManager.UnwrapDek(masterKey);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private void EnsureNotDisposed()

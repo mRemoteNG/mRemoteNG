@@ -24,7 +24,12 @@ namespace mRemoteNG.Config.Settings.Store
         /// Creates a new OptionsStore instance.
         /// </summary>
         /// <param name="dbPath">Full path to the SQLite database file.</param>
-        public OptionsStore(string dbPath)
+        /// <param name="dekHex">
+        /// Optional hex-encoded 256-bit data encryption key.
+        /// When provided, SQLite encryption is used (requires SQLCipher bundle or compatible provider).
+        /// Pass <c>null</c> for an unencrypted database.
+        /// </param>
+        public OptionsStore(string dbPath, string dekHex = null)
         {
             _dbPath = dbPath ?? throw new ArgumentNullException(nameof(dbPath));
 
@@ -34,6 +39,11 @@ namespace mRemoteNG.Config.Settings.Store
                 Mode = SqliteOpenMode.ReadWriteCreate,
                 Cache = SqliteCacheMode.Shared
             };
+
+            if (!string.IsNullOrEmpty(dekHex))
+            {
+                builder.Password = dekHex;
+            }
 
             _connectionString = builder.ToString();
         }

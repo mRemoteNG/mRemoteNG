@@ -19,6 +19,8 @@ namespace mRemoteNG.Config.Settings.Store
     [SupportedOSPlatform("windows")]
     public class SettingsStoreInitializer
     {
+        public const string SettingsDatabaseFileName = "mremoteng.settings.db";
+
         private readonly string _settingsDbPath;
         private readonly string _keystorePath;
         private readonly string _dpapiFilePath;
@@ -33,7 +35,7 @@ namespace mRemoteNG.Config.Settings.Store
 
             _keyProviders = keyProviders ?? throw new ArgumentNullException(nameof(keyProviders));
 
-            _settingsDbPath = Path.Combine(settingsPath, "mremoteng.settings.db");
+            _settingsDbPath = Path.Combine(settingsPath, SettingsDatabaseFileName);
             _keystorePath = Path.Combine(settingsPath, "mremoteng.keystore.json");
             _dpapiFilePath = Path.Combine(settingsPath, "mremoteng.dpapi.bin");
         }
