@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -18,6 +19,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public AdvancedPage()
         {
             InitializeComponent();
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             ApplyTheme();
             PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Settings_16x);
             DisplayProperties display = new();

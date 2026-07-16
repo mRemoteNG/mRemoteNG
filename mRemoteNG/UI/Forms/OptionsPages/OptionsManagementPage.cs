@@ -22,7 +22,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             InitializeComponent();
             ApplyTheme();
             PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Settings_16x);
-            _currentOptions = new List<OptionInfo>();
+            _currentOptions = [];
         }
 
         #region Public Properties
@@ -64,7 +64,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override async void LoadSettings()
         {
-            if (_optionsRepository == null)
+            if (_optionsRepository is null)
                 return;
 
             _isLoading = true;
@@ -271,7 +271,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private async Task RefreshOptionsAsync()
         {
-            if (_optionsRepository == null)
+            if (_optionsRepository is null)
                 return;
 
             try
@@ -301,7 +301,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             var selectedRow = dataGridViewOptions.SelectedRows[0];
             var option = (OptionInfo)selectedRow.DataBoundItem;
 
-            if (option != null)
+            if (option is not null)
             {
                 textBoxKey.Text = option.Key;
                 textBoxValue.Text = option.Value ?? "";
@@ -351,7 +351,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             var selectedRow = dataGridViewOptions.SelectedRows[0];
             var option = (OptionInfo)selectedRow.DataBoundItem;
 
-            if (option == null)
+            if (option is null)
                 return;
 
             option.Value = textBoxValue.Text;
@@ -389,7 +389,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             var selectedRow = dataGridViewOptions.SelectedRows[0];
             var option = (OptionInfo)selectedRow.DataBoundItem;
 
-            if (option == null)
+            if (option is null)
                 return;
 
             var result = MessageBox.Show(
@@ -437,7 +437,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         protected override void ApplyTheme()
         {
             base.ApplyTheme();
-            if (dataGridViewOptions != null)
+            if (dataGridViewOptions is not null)
             {
                 dataGridViewOptions.BackgroundColor = System.Drawing.SystemColors.Control;
             }

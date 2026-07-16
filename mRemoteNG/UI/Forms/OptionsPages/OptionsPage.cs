@@ -62,6 +62,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         protected virtual void ApplyTheme()
         {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
             BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");

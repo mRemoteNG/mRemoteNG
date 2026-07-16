@@ -2185,7 +2185,7 @@ mRemoteNGを終了してインストールを開始します</value>
   <data name="OutOfRange" xml:space="preserve">
     <value>範囲外です</value>
   </data>
-  <data name="PageСontrolInOptionsMenu" xml:space="preserve">
+  <data name="PageControlInOptionsMenu" xml:space="preserve">
     <value>オプションメニューのページコントロール</value>
   </data>
   <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">

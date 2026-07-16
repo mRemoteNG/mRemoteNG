@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using mRemoteNG.App;
 using mRemoteNG.Config;
 using mRemoteNG.Config.Connections;
@@ -14,13 +15,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
         #region Private Fields
         private OptRegistryConnectionsPage pageRegSettingsInstance;
-        private readonly FrmMain _frmMain = FrmMain.Default;
 
         #endregion
 
         public ConnectionsPage()
         {
             InitializeComponent();
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             ApplyTheme();
             PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.ASPWebSite_16x);
 
@@ -145,12 +146,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes = (int)numAutoSave.Value;
             if (Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes > 0)
             {
-                _frmMain.tmrAutoSave.Interval = Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes * 60000;
-                _frmMain.tmrAutoSave.Enabled = true;
+                FrmMain.Default.tmrAutoSave.Interval = Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes * 60000;
+                FrmMain.Default.tmrAutoSave.Enabled = true;
             }
             else
             {
-                _frmMain.tmrAutoSave.Enabled = false;
+                FrmMain.Default.tmrAutoSave.Enabled = false;
             }
 
             // Save ConfirmCloseConnection setting

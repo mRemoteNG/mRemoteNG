@@ -28,17 +28,50 @@ namespace mRemoteNG.Themes
         private Hashtable themes = null!;       // set by LoadThemes() in the constructor
         private bool _themeActive;
         private static ThemeManager? themeInstance;
-        private readonly string themePath = App.Info.SettingsFileInfo.ThemeFolder;
+        private readonly string? themePath;
 
         #endregion
 
         #region Constructors
 
-        private ThemeManager()
+        private ThemeManager(bool designTime = false)
         {
+            if (designTime)
+            {
+                // Design-time stub: no file I/O, theming stays inactive
+                themePath = null;
+                themes = [];
+                _themeActive = false;
+                _activeTheme = DefaultTheme;
+                return;
+            }
+
+            themePath = ResolveThemePath();
             LoadThemes();
             SetActive();
             _themeActive = true;
+        }
+
+        private static bool IsDesignTimeHost()
+        {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return true;
+
+            string processName = Process.GetCurrentProcess().ProcessName;
+            return processName.Equals("devenv", StringComparison.OrdinalIgnoreCase)
+                   || processName.StartsWith("DesignToolsServer", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static string? ResolveThemePath()
+        {
+            try
+            {
+                return App.Info.SettingsFileInfo.ThemeFolder;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private void SetActive()
@@ -76,7 +109,10 @@ namespace mRemoteNG.Themes
 
         public static ThemeManager getInstance()
         {
-            return themeInstance ?? (themeInstance = new ThemeManager());
+            if (themeInstance != null) return themeInstance;
+            if (IsDesignTimeHost())
+                return themeInstance ??= new ThemeManager(designTime: true);
+            return themeInstance ??= new ThemeManager();
         }
 
 

@@ -29,6 +29,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public SecurityPage()
         {
             InitializeComponent();
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             PopulateEncryptionEngineDropDown();
             PopulateBlockCipherDropDown();
             ApplyTheme();
