@@ -30,7 +30,7 @@ namespace mRemoteNG.UI.Forms
         /// <summary>
         /// Raised when the user clicks OK or Cancel, signalling the host window to hide.
         /// </summary>
-        public event EventHandler CloseRequested;
+        public event EventHandler? CloseRequested;
 
         public FrmOptions() : this(Language.StartupExit)
         {
@@ -45,8 +45,8 @@ namespace mRemoteNG.UI.Forms
             Cursor.Current = Cursors.Default;
             DoubleBuffered = true;
 
-            _optionPageObjectNames =
-            [
+            var optionPages = new List<string>
+            {
                 nameof(StartupExitPage),
                 nameof(AppearancePage),
                 nameof(ConnectionsPage),
@@ -59,7 +59,14 @@ namespace mRemoteNG.UI.Forms
                 nameof(SecurityPage),
                 nameof(AdvancedPage),
                 nameof(BackupPage)
-            ];
+            };
+
+#if DEBUG
+            // Add dev-only options management page in DEBUG builds
+            optionPages.Add(nameof(OptionsManagementPage));
+#endif
+
+            _optionPageObjectNames = optionPages;
 
             InitOptionsPagesToListView();
         }
@@ -261,6 +268,18 @@ namespace mRemoteNG.UI.Forms
                             page = new BackupPage { Dock = DockStyle.Fill };
                         break;
                     }
+#if DEBUG
+                case "OptionsManagementPage":
+                    {
+                        var optionsManagementPage = new OptionsManagementPage { Dock = DockStyle.Fill };
+                        if (Runtime.OptionsRepositoryManager.IsInitialized)
+                        {
+                            optionsManagementPage.SetOptionsRepository(Runtime.OptionsRepositoryManager.Repository);
+                        }
+                        page = optionsManagementPage;
+                        break;
+                    }
+#endif
             }
 
             if (page == null) return;

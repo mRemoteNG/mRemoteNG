@@ -2756,4 +2756,73 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="DisplayReconnectionDialog" xml:space="preserve">
     <value>Display reconnection dialog when disconnected from server (RDP &amp;&amp; ICA only)</value>
   </data>
+  <data name="OptionsManagement" xml:space="preserve">
+    <value>Options Management (Dev)</value>
+  </data>
+  <data name="ManageOptions" xml:space="preserve">
+    <value>Manage Options</value>
+  </data>
+  <data name="OptionKey" xml:space="preserve">
+    <value>Key:</value>
+  </data>
+  <data name="OptionValue" xml:space="preserve">
+    <value>Value:</value>
+  </data>
+  <data name="OptionCategory" xml:space="preserve">
+    <value>Category:</value>
+  </data>
+  <data name="OptionDescription" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="OptionType" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="ButtonAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="ButtonEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="ButtonDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ButtonRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="OptionAddedSuccessfully" xml:space="preserve">
+    <value>Option added successfully.</value>
+  </data>
+  <data name="OptionUpdatedSuccessfully" xml:space="preserve">
+    <value>Option updated successfully.</value>
+  </data>
+  <data name="OptionDeletedSuccessfully" xml:space="preserve">
+    <value>Option deleted successfully.</value>
+  </data>
+  <data name="ConfirmDeleteOption" xml:space="preserve">
+    <value>Are you sure you want to delete the option '{0}'?</value>
+  </data>
+  <data name="ErrorLoadingOptions" xml:space="preserve">
+    <value>Error loading options: {0}</value>
+  </data>
+  <data name="ErrorAddingOption" xml:space="preserve">
+    <value>Error adding option: {0}</value>
+  </data>
+  <data name="ErrorUpdatingOption" xml:space="preserve">
+    <value>Error updating option: {0}</value>
+  </data>
+  <data name="ErrorDeletingOption" xml:space="preserve">
+    <value>Error deleting option: {0}</value>
+  </data>
+  <data name="OptionKeyRequired" xml:space="preserve">
+    <value>Key is required.</value>
+  </data>
+  <data name="SelectOptionToEdit" xml:space="preserve">
+    <value>Please select an option to edit.</value>
+  </data>
+  <data name="SelectOptionToDelete" xml:space="preserve">
+    <value>Please select an option to delete.</value>
+  </data>
+  <data name="OptionNotFound" xml:space="preserve">
+    <value>Option not found.</value>
+  </data>
 </root>
