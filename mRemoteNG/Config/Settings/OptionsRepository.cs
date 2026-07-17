@@ -86,6 +86,16 @@ namespace mRemoteNG.Config.Settings
             return _store.GetOptionCountAsync();
         }
 
+        public Task<string> ExportSchemaAsync()
+        {
+            return _store.ExportSchemaAsync();
+        }
+
+        public Task ImportSchemaAsync(string schemaSql)
+        {
+            return _store.ImportSchemaAsync(schemaSql);
+        }
+
         public Task ClearAllOptionsAsync()
         {
             return _store.ClearAllOptionsAsync();

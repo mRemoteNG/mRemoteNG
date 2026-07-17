@@ -410,6 +410,115 @@ namespace mRemoteNG.Config.Settings.Store
         }
 
         /// <summary>
+        /// Exports the options schema and data as SQL statements.
+        /// Includes CREATE TABLE, CREATE INDEX, and INSERT statements for all options.
+        /// </summary>
+        public async Task<string> ExportSchemaAsync()
+        {
+            EnsureReady();
+
+            return await Task.Run(() =>
+            {
+                List<string> statements = new();
+
+                // Export schema (table and indices)
+                const string schemaSql = """
+                    SELECT sql
+                    FROM sqlite_master
+                    WHERE sql IS NOT NULL
+                      AND ((type = 'table' AND name = 'options')
+                           OR (type = 'index' AND name LIKE 'idx_options_%'))
+                    ORDER BY CASE type WHEN 'table' THEN 0 ELSE 1 END, name;
+                    """;
+
+                using (SqliteCommand cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = schemaSql;
+                    using SqliteDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        string statement = reader.IsDBNull(0) ? null : reader.GetString(0);
+                        if (string.IsNullOrWhiteSpace(statement))
+                            continue;
+
+                        statements.Add(statement.Trim().TrimEnd(';') + ";");
+                    }
+                }
+
+                // Export data as INSERT statements
+                const string dataSql = """
+                    SELECT id, key, value, category, description, option_type, created_at, modified_at
+                    FROM options
+                    ORDER BY id;
+                    """;
+
+                using (SqliteCommand cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = dataSql;
+                    using SqliteDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32(0);
+                        string key = reader.GetString(1);
+                        string value = reader.IsDBNull(2) ? null : reader.GetString(2);
+                        string category = reader.IsDBNull(3) ? null : reader.GetString(3);
+                        string description = reader.IsDBNull(4) ? null : reader.GetString(4);
+                        string optionType = reader.IsDBNull(5) ? "string" : reader.GetString(5);
+                        string createdAt = reader.IsDBNull(6) ? DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture) : reader.GetString(6);
+                        string modifiedAt = reader.IsDBNull(7) ? DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture) : reader.GetString(7);
+
+                        string insertSql = $"""
+                            INSERT INTO options (id, key, value, category, description, option_type, created_at, modified_at)
+                            VALUES ({id}, '{EscapeSqlString(key)}', {(value == null ? "NULL" : $"'{EscapeSqlString(value)}'")}, {(category == null ? "NULL" : $"'{EscapeSqlString(category)}'")}, {(description == null ? "NULL" : $"'{EscapeSqlString(description)}'")}, '{EscapeSqlString(optionType)}', '{createdAt}', '{modifiedAt}');
+                            """;
+
+                        statements.Add(insertSql);
+                    }
+                }
+
+                return string.Join(Environment.NewLine + Environment.NewLine, statements);
+            });
+        }
+
+        private static string EscapeSqlString(string input)
+        {
+            return input?.Replace("'", "''") ?? string.Empty;
+        }
+
+        /// <summary>
+        /// Imports and applies an options schema SQL script.
+        /// Existing options schema objects are recreated.
+        /// </summary>
+        public async Task ImportSchemaAsync(string schemaSql)
+        {
+            if (string.IsNullOrWhiteSpace(schemaSql))
+                throw new ArgumentException("Schema SQL cannot be null or whitespace.", nameof(schemaSql));
+
+            EnsureReady();
+
+            await Task.Run(() =>
+            {
+                using SqliteTransaction transaction = _connection.BeginTransaction();
+
+                using (SqliteCommand dropCommand = _connection.CreateCommand())
+                {
+                    dropCommand.Transaction = transaction;
+                    dropCommand.CommandText = "DROP TABLE IF EXISTS options;";
+                    dropCommand.ExecuteNonQuery();
+                }
+
+                using (SqliteCommand importCommand = _connection.CreateCommand())
+                {
+                    importCommand.Transaction = transaction;
+                    importCommand.CommandText = schemaSql;
+                    importCommand.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
+            });
+        }
+
+        /// <summary>
         /// Flushes pending changes to disk.
         /// </summary>
         public void Flush()

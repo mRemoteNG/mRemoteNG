@@ -85,9 +85,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Text = "Options Management";
             groupBoxOptions.Text = "Manage Options";
             btnAdd.Text = "Add";
-            btnEdit.Text = "Edit";
+            btnEdit.Text = "Update";
             btnDelete.Text = "Delete";
             btnRefresh.Text = "Refresh";
+            btnExportSchema.Text = "Export Schema";
+            btnImportSchema.Text = "Import Schema";
             labelKey.Text = "Key:";
             labelValue.Text = "Value:";
             labelCategory.Text = "Category:";
@@ -145,6 +147,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnEdit = new Button();
             btnDelete = new Button();
             btnRefresh = new Button();
+            btnExportSchema = new Button();
+            btnImportSchema = new Button();
             tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewOptions).BeginInit();
             groupBoxOptions.SuspendLayout();
@@ -270,6 +274,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             buttonPanel.Controls.Add(btnEdit);
             buttonPanel.Controls.Add(btnDelete);
             buttonPanel.Controls.Add(btnRefresh);
+            buttonPanel.Controls.Add(btnExportSchema);
+            buttonPanel.Controls.Add(btnImportSchema);
             buttonPanel.Dock = DockStyle.Fill;
             buttonPanel.FlowDirection = FlowDirection.LeftToRight;
             buttonPanel.Margin = new Padding(5, 10, 5, 0);
@@ -300,6 +306,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnRefresh.Name = "btnRefresh";
             btnRefresh.TabIndex = 3;
             btnRefresh.Click += BtnRefresh_Click;
+
+            btnExportSchema.AutoSize = true;
+            btnExportSchema.MinimumSize = new System.Drawing.Size(110, 30);
+            btnExportSchema.Name = "btnExportSchema";
+            btnExportSchema.TabIndex = 4;
+            btnExportSchema.Click += BtnExportSchema_Click;
+
+            btnImportSchema.AutoSize = true;
+            btnImportSchema.MinimumSize = new System.Drawing.Size(110, 30);
+            btnImportSchema.Name = "btnImportSchema";
+            btnImportSchema.TabIndex = 5;
+            btnImportSchema.Click += BtnImportSchema_Click;
 
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
@@ -537,6 +555,83 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             await RefreshOptionsAsync();
         }
 
+        private async void BtnExportSchema_Click(object sender, EventArgs e)
+        {
+            EnsureOptionsRepositoryInitialized();
+            if (_optionsRepository is null)
+            {
+                MessageBox.Show("Options database is not available.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            using SaveFileDialog saveDialog = new()
+            {
+                Filter = "SQL files (*.sql)|*.sql|All files (*.*)|*.*",
+                FileName = "options_schema.sql",
+                Title = "Export Options Schema"
+            };
+
+            if (saveDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            try
+            {
+                string schemaSql = await _optionsRepository.ExportSchemaAsync();
+                if (string.IsNullOrWhiteSpace(schemaSql))
+                {
+                    MessageBox.Show("No options schema was found to export.", "Export Schema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                await File.WriteAllTextAsync(saveDialog.FileName, schemaSql);
+                MessageBox.Show("Schema exported successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error exporting schema: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void BtnImportSchema_Click(object sender, EventArgs e)
+        {
+            EnsureOptionsRepositoryInitialized();
+            if (_optionsRepository is null)
+            {
+                MessageBox.Show("Options database is not available.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            using OpenFileDialog openDialog = new()
+            {
+                Filter = "SQL files (*.sql)|*.sql|All files (*.*)|*.*",
+                Title = "Import Options Schema"
+            };
+
+            if (openDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            DialogResult confirm = MessageBox.Show(
+                "Importing schema will recreate options schema objects and can remove existing options data. Continue?",
+                "Confirm Import",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            try
+            {
+                string schemaSql = await File.ReadAllTextAsync(openDialog.FileName);
+                await _optionsRepository.ImportSchemaAsync(schemaSql);
+                await RefreshOptionsAsync();
+                MessageBox.Show("Schema imported successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error importing schema: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void ClearFormFields()
         {
             textBoxKey.Clear();
@@ -575,6 +670,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private Button btnEdit;
         private Button btnDelete;
         private Button btnRefresh;
+        private Button btnExportSchema;
+        private Button btnImportSchema;
 
         #endregion
     }

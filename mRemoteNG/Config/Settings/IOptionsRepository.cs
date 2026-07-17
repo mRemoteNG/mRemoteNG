@@ -79,6 +79,17 @@ namespace mRemoteNG.Config.Settings
         Task<int> GetOptionCountAsync();
 
         /// <summary>
+        /// Exports the options schema as SQL.
+        /// </summary>
+        Task<string> ExportSchemaAsync();
+
+        /// <summary>
+        /// Imports and applies the options schema from SQL.
+        /// Existing options schema objects are recreated.
+        /// </summary>
+        Task ImportSchemaAsync(string schemaSql);
+
+        /// <summary>
         /// Clears all options from the store.
         /// </summary>
         Task ClearAllOptionsAsync();
