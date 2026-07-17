@@ -11,9 +11,9 @@ namespace mRemoteNG.Config.Settings
     /// </summary>
     public class OptionsRepository : IOptionsRepository
     {
-        private readonly OptionsStore _store;
+        private readonly ISettingsStore _store;
 
-        public OptionsRepository(OptionsStore store)
+        public OptionsRepository(ISettingsStore store)
         {
             _store = store ?? throw new ArgumentNullException(nameof(store));
         }

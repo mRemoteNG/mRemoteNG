@@ -13,7 +13,7 @@ namespace mRemoteNG.Config.Settings
     [SupportedOSPlatform("windows")]
     public class OptionsRepositoryManager : IDisposable
     {
-        private OptionsStore _store;
+        private ISettingsStore _store;
         private OptionsRepository _repository;
         private bool _disposed;
 
@@ -41,8 +41,9 @@ namespace mRemoteNG.Config.Settings
                 string optionsDbPath = Path.Combine(settingsPath, SettingsStoreInitializer.SettingsDatabaseFileName);
                 string dekHex = TryGetDekHex(settingsPath);
 
-                _store = new OptionsStore(optionsDbPath, dekHex);
-                _store.Initialize();
+                var store = new SqliteSettingsStore(optionsDbPath, dekHex);
+                store.Initialize();
+                _store = store;
 
                 _repository = new OptionsRepository(_store);
 
