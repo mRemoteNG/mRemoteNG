@@ -6556,6 +6556,15 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("ShowDescriptionTooltips", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Enable connection tree expand/collapse animations.
+        /// </summary>
+        internal static string EnableConnectionTreeAnimations {
+            get {
+                return ResourceManager.GetString("EnableConnectionTreeAnimations", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Show for user.

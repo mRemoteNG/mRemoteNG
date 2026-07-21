@@ -42,6 +42,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowSystemTrayIcon = new MrngCheckBox();
             chkMinimizeToSystemTray = new MrngCheckBox();
             chkCloseToSystemTray = new MrngCheckBox();
+            chkEnableConnectionTreeAnimations = new MrngCheckBox();
             pnlOptions = new System.Windows.Forms.Panel();
             lblRegistrySettingsUsedInfo = new System.Windows.Forms.Label();
             pnlOptions.SuspendLayout();
@@ -136,6 +137,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkCloseToSystemTray.Text = "Close to System Tray";
             chkCloseToSystemTray.UseVisualStyleBackColor = true;
             // 
+            // chkEnableConnectionTreeAnimations
+            // 
+            chkEnableConnectionTreeAnimations._mice = MrngCheckBox.MouseState.OUT;
+            chkEnableConnectionTreeAnimations.AutoSize = true;
+            chkEnableConnectionTreeAnimations.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkEnableConnectionTreeAnimations.Location = new System.Drawing.Point(3, 245);
+            chkEnableConnectionTreeAnimations.Name = "chkEnableConnectionTreeAnimations";
+            chkEnableConnectionTreeAnimations.Size = new System.Drawing.Size(268, 17);
+            chkEnableConnectionTreeAnimations.TabIndex = 8;
+            chkEnableConnectionTreeAnimations.Text = "Enable connection tree expand/collapse animations";
+            chkEnableConnectionTreeAnimations.UseVisualStyleBackColor = true;
+            // 
             // pnlOptions
             // 
             pnlOptions.Controls.Add(cboLanguage);
@@ -146,10 +159,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlOptions.Controls.Add(chkShowDescriptionTooltipsInTree);
             pnlOptions.Controls.Add(lblLanguage);
             pnlOptions.Controls.Add(chkShowFullConnectionsFilePathInTitle);
+            pnlOptions.Controls.Add(chkEnableConnectionTreeAnimations);
             pnlOptions.Dock = System.Windows.Forms.DockStyle.Top;
             pnlOptions.Location = new System.Drawing.Point(0, 30);
             pnlOptions.Name = "pnlOptions";
-            pnlOptions.Size = new System.Drawing.Size(610, 267);
+            pnlOptions.Size = new System.Drawing.Size(610, 290);
             pnlOptions.TabIndex = 8;
             // 
             // lblRegistrySettingsUsedInfo
@@ -186,6 +200,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal MrngCheckBox chkShowSystemTrayIcon;
         internal MrngCheckBox chkMinimizeToSystemTray;
         internal MrngCheckBox chkCloseToSystemTray;
+        internal MrngCheckBox chkEnableConnectionTreeAnimations;
         private System.Windows.Forms.Panel pnlOptions;
         internal System.Windows.Forms.Label lblRegistrySettingsUsedInfo;
     }
