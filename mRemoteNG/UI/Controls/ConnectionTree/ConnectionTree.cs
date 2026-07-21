@@ -145,9 +145,56 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             CanExpandGetter = item =>
             {
                 ContainerInfo itemAsContainer = item as ContainerInfo;
-                return itemAsContainer?.Children.Count > 0;
+                return GetVisibleChildren(itemAsContainer).Count > 0;
             };
-            ChildrenGetter = item => ((ContainerInfo)item).Children;
+            ChildrenGetter = item => GetVisibleChildren(item as ContainerInfo);
+        }
+
+        /// <summary>
+        /// Returns the children of the given container that should be displayed nested
+        /// beneath it. Children flagged as <see cref="ContainerInfo.IsRootGroup"/> are
+        /// excluded here because they are displayed flattened as top-level root peers instead.
+        /// </summary>
+        private static List<ConnectionInfo> GetVisibleChildren(ContainerInfo container)
+        {
+            if (container == null)
+                return new List<ConnectionInfo>();
+
+            return container.Children
+                             .Where(child => child is not ContainerInfo { IsRootGroup: true })
+                             .ToList();
+        }
+
+        /// <summary>
+        /// Returns the full set of objects that should be rendered as top-level roots in the
+        /// tree: the model's own root nodes, plus any descendant container flagged as
+        /// <see cref="ContainerInfo.IsRootGroup"/> (displayed flattened as an extra root).
+        /// </summary>
+        private static List<object> GetTreeRoots(ConnectionTreeModel model)
+        {
+            List<object> roots = new(model.RootNodes);
+
+            foreach (ContainerInfo rootNode in model.RootNodes)
+            {
+                roots.AddRange(GetRootGroupsRecursive(rootNode));
+            }
+
+            return roots;
+        }
+
+        private static IEnumerable<ContainerInfo> GetRootGroupsRecursive(ContainerInfo container)
+        {
+            foreach (ConnectionInfo child in container.Children)
+            {
+                if (child is not ContainerInfo childContainer)
+                    continue;
+
+                if (childContainer.IsRootGroup)
+                    yield return childContainer;
+
+                foreach (ContainerInfo nested in GetRootGroupsRecursive(childContainer))
+                    yield return nested;
+            }
         }
 
         private void SetupDropSink()
@@ -211,10 +258,20 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         private void PopulateTreeView(ConnectionTreeModel newModel)
         {
-            SetObjects(newModel.RootNodes);
+            SetObjects(GetTreeRoots(newModel));
             RegisterModelUpdateHandlers(newModel);
             NodeSearcher = new NodeSearcher(newModel);
             ExecutePostSetupActions();
+            AutoResizeColumn(Columns[0]);
+        }
+
+        /// <summary>
+        /// Recomputes the flattened root list (model root nodes + any IsRootGroup-flagged
+        /// descendants) and re-applies it to the tree, preserving expand/selection state.
+        /// </summary>
+        private void RefreshTreeRoots()
+        {
+            SetObjects(GetTreeRoots(ConnectionTreeModel));
             AutoResizeColumn(Columns[0]);
         }
 
@@ -246,6 +303,13 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             // for some reason property changed events are getting triggered twice for each changed property. should be just once. cant find source of duplication
             // Removed "TO DO" from above comment. Per #142 it apperas that this no longer occurs with ObjectListView 2.9.1
             string property = propertyChangedEventArgs.PropertyName;
+
+            if (property == nameof(ContainerInfo.IsRootGroup))
+            {
+                RefreshTreeRoots();
+                return;
+            }
+
             if (property != nameof(ConnectionInfo.Name)
              && property != nameof(ConnectionInfo.OpenConnections)
              && property != nameof(ConnectionInfo.Icon))
@@ -314,6 +378,36 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             try
             {
                 AddNode(new ContainerInfo());
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.ErrorAddFolderFailed, ex);
+            }
+        }
+
+        /// <summary>
+        /// Creates a new top-level root group, displayed as a peer of the main "Connections"
+        /// root node (similar to server groups in SSMS). The group is still stored as a real
+        /// child of the main root node so existing save/load logic is unaffected.
+        /// </summary>
+        public void AddRoot()
+        {
+            try
+            {
+                ContainerInfo newRoot = new() { IsRootGroup = true };
+
+                // the new node will survive filtering if filtering is active
+                _connectionTreeSearchTextFilter.SpecialInclusionList.Add(newRoot);
+
+                DefaultConnectionInfo.Instance.SaveTo(newRoot);
+                DefaultConnectionInheritance.Instance.SaveTo(newRoot.Inheritance);
+
+                newRoot.SetParent(GetRootConnectionNode());
+
+                SelectObject(newRoot, true);
+                EnsureModelVisible(newRoot);
+                _allowEdit = true;
+                SelectedItem.BeginEdit();
             }
             catch (Exception ex)
             {
@@ -446,6 +540,11 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
                 ResetColumnFiltering();
             }
 
+            if (CollectionChangeAffectsRootGroups(args))
+            {
+                RefreshTreeRoots();
+            }
+
             RefreshObject(sender);
             AutoResizeColumn(Columns[0]);
 
@@ -453,6 +552,25 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             if (!filteringEnabled) return;
             ModelFilter = filter;
             UpdateFiltering();
+        }
+
+        private static bool CollectionChangeAffectsRootGroups(NotifyCollectionChangedEventArgs args)
+        {
+            return ContainsRootGroup(args.NewItems) || ContainsRootGroup(args.OldItems);
+        }
+
+        private static bool ContainsRootGroup(System.Collections.IList items)
+        {
+            if (items == null)
+                return false;
+
+            foreach (object item in items)
+            {
+                if (item is ContainerInfo { IsRootGroup: true })
+                    return true;
+            }
+
+            return false;
         }
 
         protected override void UpdateFiltering()
