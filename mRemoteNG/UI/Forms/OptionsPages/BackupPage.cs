@@ -1,6 +1,7 @@
 ﻿using mRemoteNG.Config;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using mRemoteNG.App;
@@ -15,12 +16,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     [SupportedOSPlatform("windows")]
     public sealed partial class BackupPage
     {
-        private readonly FrmMain _frmMain = FrmMain.Default;
         private List<DropdownList> _permissionsListing;
 
         public BackupPage()
         {
             InitializeComponent();
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             Check4ACL();
             ApplyTheme();
             PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.DocumentsFolder_16x);
@@ -140,8 +141,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             btnBrowsePath.Text = Language.strBrowse;
 
-            lblBacupPageShowInOptionsMenu.Text = Language.PageСontrolInOptionsMenu;
+            lblBacupPageShowInOptionsMenu.Text = Language.PageControlInOptionsMenu;
             cbBacupPageInOptionMenu.Text = Language.ShowForUser;
+
+            lblBackupType.Text = Language.lblBackupType;
+            lblBackupEnable.Text = Language.lblBackupEnable;
+            lblMakeBackup.Text = Language.MakeABackup;
+            lblConnectionsBackupMaxCount.Text = Language.lblConnectionsBackupMaxCount;
+            rbBackupEnableEnable.Text = Language.Enable;
+            rbBackupEnableDisable.Text = Language.Disable;
+            radioButton2.Text = Language.BackupToDb;
+            radioButton1.Text = Language.BackupToFile;
+            lblConnectionsBackupPath.Text = Language.BackupFolder;
+            lblBackupNameFormat.Text = Language.lblBackupNameFormat;
+            lblACL.Text = Language.lblACL;
+            cbMakeBackupOnSave.Text = Language.OnSave;
+            cbMakeBackupOnEdit.Text = Language.OnEdit;
+            cbMakeBackupOnExit.Text = Language.OnExit;
 
             cbBackupEnableACL.BindingContext = new BindingContext();
             cbBackupEnableACL.DataSource = _permissionsListing;

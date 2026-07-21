@@ -2,6 +2,8 @@
 
 using mRemoteNG.App.Update;
 using mRemoteNG.Config.Settings;
+using mRemoteNG.Messages;
+using mRemoteNG.Themes;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Resources.Language;
 using System;
@@ -37,6 +39,8 @@ namespace mRemoteNG.App
             // handlers, EnableVisualStyles, …).  The app manifest already declares
             // PerMonitorV2 awareness; this call keeps the WinForms runtime in sync.
             Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
+
+            InitializeSqliteProvider();
 
             // Ensure the real entry point is definitely STA
             MainAsync(args).GetAwaiter().GetResult();
@@ -97,6 +101,20 @@ namespace mRemoteNG.App
             return Task.CompletedTask;
         }
 
+        private static void InitializeSqliteProvider()
+        {
+            try
+            {
+                Type batteriesType = Type.GetType("SQLitePCL.Batteries_V2, SQLitePCLRaw.batteries_v2", throwOnError: false);
+                MethodInfo initMethod = batteriesType?.GetMethod("Init", BindingFlags.Public | BindingFlags.Static);
+                initMethod?.Invoke(null, null);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"SQLite provider initialization failed: {ex}");
+            }
+        }
+
         // Assembly resolve handler
         private static Assembly? OnAssemblyResolve(object? sender, ResolveEventArgs args)
         {
@@ -124,6 +142,15 @@ namespace mRemoteNG.App
             CatchAllUnhandledExceptions();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // Match the OS dark mode for common controls (scrollbars, context menus, ...)
+            // to the active theme. Applied once at startup; theme changes require a restart.
+            // Read the persisted flag instead of constructing ThemeManager here, so we avoid
+            // any theme folder/file I/O before the splash is shown. The flag is kept in sync
+            // by ThemeManager whenever the active theme or theming state changes.
+            Application.SetColorMode(Properties.OptionsThemePage.Default.IsActiveThemeDark
+                ? SystemColorMode.Dark
+                : SystemColorMode.Classic);
 
             ShowSplashOnStaThread();
 
@@ -206,7 +233,9 @@ namespace mRemoteNG.App
 
         private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            FrmUnhandledException window = new(e.ExceptionObject as Exception, e.IsTerminating);
+            Exception exception = e.ExceptionObject as Exception
+                                  ?? new Exception(e.ExceptionObject?.ToString() ?? "Unknown error");
+            FrmUnhandledException window = new(exception, e.IsTerminating);
             window.ShowDialog(FrmMain.Default);
         }
 
@@ -229,18 +258,38 @@ namespace mRemoteNG.App
             _wpfSplashThread.Start();
         }
 
-        private static void CloseSplash()
+        internal static void CloseSplash()
         {
-            if (_wpfSplash != null)
+            // Capture and clear the cached state up front so this is safe to call from
+            // multiple startup paths (e.g. the LoadConnections error handler) without
+            // acting on stale references or re-running against an already-closed splash.
+            FrmSplashScreenNew? splash = _wpfSplash;
+            System.Threading.Thread? splashThread = _wpfSplashThread;
+            _wpfSplash = null;
+            _wpfSplashThread = null;
+
+            if (splash != null)
             {
-                _wpfSplash.Dispatcher.Invoke(() => _wpfSplash.Close());
-                _wpfSplash = null;
+                try
+                {
+                    splash.Dispatcher.Invoke(() =>
+                    {
+                        splash.Close();
+                        // The splash runs its own STA message loop; ask it to exit so the
+                        // thread can actually be joined below instead of running forever.
+                        splash.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
+                    });
+                }
+                catch (Exception ex)
+                {
+                    // Never let splash cleanup mask an in-progress startup error.
+                    Runtime.MessageCollector.AddExceptionMessage("Failed to close splash screen.", ex, MessageClass.WarningMsg);
+                }
             }
-            if (_wpfSplashThread != null)
-            {
-                _wpfSplashThread.Join();
-                _wpfSplashThread = null;
-            }
+
+            // The splash thread is a background thread, so a bounded join keeps startup
+            // from hanging if the dispatcher did not shut down; it dies on process exit anyway.
+            splashThread?.Join(TimeSpan.FromSeconds(2));
         }
 
         // Helper to show a dialog with "Download" and "Cancel" buttons.
@@ -294,7 +343,7 @@ namespace mRemoteNG.App
 
             lbl.LinkClicked += (s, e) =>
             {
-                string? linkUrl = e.Link.LinkData as string;
+                string? linkUrl = e.Link?.LinkData as string;
                 if (string.IsNullOrEmpty(linkUrl))
                     return;
                 if (!hasValidUrl)

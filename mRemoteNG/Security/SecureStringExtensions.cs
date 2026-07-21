@@ -23,7 +23,8 @@ namespace mRemoteNG.Security
             try
             {
                 unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(securePassword);
-                return Marshal.PtrToStringUni(unmanagedString);
+                // A non-null SecureString always marshals to a valid, non-null string.
+                return Marshal.PtrToStringUni(unmanagedString)!;
             }
             finally
             {
@@ -39,8 +40,6 @@ namespace mRemoteNG.Security
             SecureString secureString = new();
             foreach (char character in unsecuredPassword.ToCharArray())
                 secureString.AppendChar(character);
-            // ReSharper disable once RedundantAssignment
-            unsecuredPassword = null;
             return secureString;
         }
 

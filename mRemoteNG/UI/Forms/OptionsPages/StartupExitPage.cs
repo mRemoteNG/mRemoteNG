@@ -36,6 +36,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkReconnectOnStart.Text = Language.ReconnectAtStartup;
             chkSingleInstance.Text = Language.AllowOnlySingleInstance;
             chkStartMinimized.Text = Language.StartMinimized;
+            chkStartFullScreen.Text = Language.StartFullScreen;
+            chkDisableRefocus.Text = Language.DisableRefocus;
             lblRegistrySettingsUsedInfo.Text = Language.OptionsCompanyPolicyMessage;
         }
 

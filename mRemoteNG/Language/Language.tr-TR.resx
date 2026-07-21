@@ -2332,7 +2332,7 @@ Nightly kanalı Alfa, Beta ve Sürüm Adaylarını içerir.</value>
   <data name="lblConnectionsBackupMaxCount" xml:space="preserve">
     <value>Maksimum yedek sayısı</value>
   </data>
-  <data name="PageСontrolInOptionsMenu" xml:space="preserve">
+  <data name="PageControlInOptionsMenu" xml:space="preserve">
     <value>Seçenekler menüsünde sayfa denetimi</value>
   </data>
   <data name="ShowForUser" xml:space="preserve">

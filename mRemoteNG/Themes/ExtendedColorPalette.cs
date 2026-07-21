@@ -6,9 +6,13 @@ namespace mRemoteNG.Themes
     /// <summary>
     /// Class used for the UI to display the color tables,as the Dictionary value keys cannot be directly replaced
     /// </summary>
-    public class PseudoKeyColor(string _key, Color _value)
+    public class PseudoKeyColor(string _key, Color _value, string _displayKey = null)
     {
+        /// <summary>Stable internal key (used for palette replacement).</summary>
         public string Key { get; set; } = _key;
+
+        /// <summary>Localized label shown in the UI; defaults to <see cref="Key"/>.</summary>
+        public string DisplayKey { get; set; } = _displayKey ?? _key;
 
         public Color Value { get; set; } = _value;
     }

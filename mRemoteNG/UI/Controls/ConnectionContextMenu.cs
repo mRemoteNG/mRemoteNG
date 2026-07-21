@@ -7,6 +7,7 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Config;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Properties;
 using mRemoteNG.Tools;
@@ -45,6 +46,7 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeRename;
         private ToolStripMenuItem _cMenTreeDelete;
         private ToolStripMenuItem _cMenTreeCopyHostname;
+        private ToolStripMenuItem _cMenTreeClearCachedRdpCredentials;
         private ToolStripSeparator _cMenTreeSep4;
         private ToolStripMenuItem _cMenTreeMoveUp;
         private ToolStripMenuItem _cMenTreeMoveDown;
@@ -104,6 +106,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeRename = new ToolStripMenuItem();
             _cMenTreeDelete = new ToolStripMenuItem();
             _cMenTreeCopyHostname = new ToolStripMenuItem();
+            _cMenTreeClearCachedRdpCredentials = new ToolStripMenuItem();
             _cMenTreeSep3 = new ToolStripSeparator();
             _cMenTreeImport = new ToolStripMenuItem();
             _cMenTreeImportFile = new ToolStripMenuItem();
@@ -144,6 +147,7 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeRename,
                 _cMenTreeDelete,
                 _cMenTreeCopyHostname,
+                _cMenTreeClearCachedRdpCredentials,
                 _cMenInheritanceSubMenu,
                 _cMenTreeSep3,
                 _cMenTreeImport,
@@ -297,6 +301,18 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeCopyHostname.Size = new System.Drawing.Size(199, 22);
             _cMenTreeCopyHostname.Text = "Copy Hostname";
             _cMenTreeCopyHostname.Click += OnCopyHostnameClicked;
+            //
+            // cMenTreeClearCachedRdpCredentials
+            //
+            _cMenTreeClearCachedRdpCredentials.Name = "_cMenTreeClearCachedRdpCredentials";
+            _cMenTreeClearCachedRdpCredentials.Size = new System.Drawing.Size(199, 22);
+            _cMenTreeClearCachedRdpCredentials.Text = "Clear Cached RDP Credentials";
+            _cMenTreeClearCachedRdpCredentials.ToolTipText =
+                "If RDP connection fails with an authentication error, Windows may be substituting " +
+                "a stale cached credential. Use this to delete the TERMSRV/<hostname> entry from " +
+                "the Windows Credential Manager so the credentials configured on this connection " +
+                "are sent unchanged on the next attempt.";
+            _cMenTreeClearCachedRdpCredentials.Click += OnClearCachedRdpCredentialsClicked;
             //
             // cMenTreeSep3
             //
@@ -473,6 +489,8 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeRename.Text = Language.Rename;
             _cMenTreeDelete.Text = Language.Delete;
             _cMenTreeCopyHostname.Text = Language.CopyHostname;
+            _cMenTreeClearCachedRdpCredentials.Text = Language.ClearCachedRdpCredentials;
+            _cMenTreeClearCachedRdpCredentials.ToolTipText = Language.PropertyDescriptionClearCachedRdpCredentials;
 
             _cMenTreeImport.Text = Language._Import;
             _cMenTreeImportFile.Text = Language.ImportFromFile;
@@ -554,6 +572,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeApplyInheritanceToChildren.Enabled = false;
             _cMenTreeApplyDefaultInheritance.Enabled = false;
             _cMenTreeCopyHostname.Enabled = false;
+            _cMenTreeClearCachedRdpCredentials.Enabled = false;
         }
 
         internal void ShowHideMenuItemsForRootConnectionNode()
@@ -625,6 +644,7 @@ namespace mRemoteNG.UI.Controls
             {
                 _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
                 _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+                _cMenTreeClearCachedRdpCredentials.Enabled = false;
             }
 
             if (connectionInfo.Protocol == ProtocolType.IntApp)
@@ -889,6 +909,61 @@ namespace mRemoteNG.UI.Controls
         private void OnCopyHostnameClicked(object sender, EventArgs e)
         {
             _connectionTree.CopyHostnameSelectedNode(new WindowsClipboard());
+        }
+
+        private void OnClearCachedRdpCredentialsClicked(object sender, EventArgs e)
+        {
+            ConnectionInfo selected = _connectionTree.SelectedNode;
+            if (selected == null || selected.Protocol != ProtocolType.RDP) return;
+            string hostname = selected.Hostname;
+            if (string.IsNullOrWhiteSpace(hostname)) return;
+
+            string target = "TERMSRV/" + hostname;
+
+            // Single-dialog confirmation showing both the explanation and the target.
+            string mainInstruction = string.Format(Language.ConfirmDeleteCachedRdpCredential, target);
+            DialogResult confirm = CTaskDialog.MessageBox(
+                this,
+                Language.ClearCachedRdpCredentials,
+                mainInstruction,
+                Language.PropertyDescriptionClearCachedRdpCredentials,
+                "",
+                "",
+                "",
+                ETaskDialogButtons.YesNo,
+                ESysIcons.Question,
+                ESysIcons.Question);
+
+            if (confirm != DialogResult.Yes) return;
+
+            ClearCachedCredentialsResult outcome = RdpCredentialCacheCleaner.ClearCachedCredentials(hostname);
+            switch (outcome)
+            {
+                case ClearCachedCredentialsResult.Deleted:
+                    CTaskDialog.MessageBox(
+                        this,
+                        Language.ClearCachedRdpCredentials,
+                        string.Format(Language.ClearedCachedRdpCredentials, target),
+                        "", "", "", "",
+                        ETaskDialogButtons.Ok, ESysIcons.Information, ESysIcons.Information);
+                    break;
+                case ClearCachedCredentialsResult.NotFound:
+                    CTaskDialog.MessageBox(
+                        this,
+                        Language.ClearCachedRdpCredentials,
+                        string.Format(Language.NoCachedRdpCredentialFound, target),
+                        "", "", "", "",
+                        ETaskDialogButtons.Ok, ESysIcons.Information, ESysIcons.Information);
+                    break;
+                case ClearCachedCredentialsResult.Failed:
+                    CTaskDialog.MessageBox(
+                        this,
+                        Language.ClearCachedRdpCredentials,
+                        string.Format(Language.FailedToClearCachedRdpCredential, target),
+                        "", "", "", "",
+                        ETaskDialogButtons.Ok, ESysIcons.Warning, ESysIcons.Warning);
+                    break;
+            }
         }
 
         private void OnImportFileClicked(object sender, EventArgs e)

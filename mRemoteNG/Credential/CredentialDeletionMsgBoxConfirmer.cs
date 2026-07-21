@@ -32,7 +32,7 @@ namespace mRemoteNG.Credential
 
         private bool PromptUser(string promptMessage)
         {
-            DialogResult msgBoxResponse = _confirmationFunc.Invoke(promptMessage, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult msgBoxResponse = _confirmationFunc.Invoke(promptMessage, Application.ProductName ?? string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             return msgBoxResponse == DialogResult.Yes;
         }
     }

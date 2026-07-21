@@ -30,7 +30,8 @@ namespace mRemoteNG.App
                 using (FrmExport exportForm = new())
                 {
                     if (selectedNode?.GetTreeNodeType() == TreeNodeType.Container)
-                        exportForm.SelectedFolder = selectedNode as ContainerInfo;
+                        // node type is Container, so the cast is guaranteed to succeed
+                        exportForm.SelectedFolder = (ContainerInfo)selectedNode;
                     else if (selectedNode?.GetTreeNodeType() == TreeNodeType.Connection)
                     {
                         if (selectedNode.Parent.GetTreeNodeType() == TreeNodeType.Container)
@@ -41,7 +42,7 @@ namespace mRemoteNG.App
                     if (exportForm.ShowDialog(FrmMain.Default) != DialogResult.OK)
                         return;
 
-                    ConnectionInfo exportTarget;
+                    ConnectionInfo? exportTarget;
                     switch (exportForm.Scope)
                     {
                         case FrmExport.ExportScope.SelectedFolder:
@@ -54,6 +55,9 @@ namespace mRemoteNG.App
                             exportTarget = connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
                             break;
                     }
+
+                    if (exportTarget == null)
+                        return;
 
                     saveFilter.SaveUsername = exportForm.IncludeUsername;
                     saveFilter.SavePassword = exportForm.IncludePassword;
@@ -82,7 +86,7 @@ namespace mRemoteNG.App
                 {
                     case SaveFormat.mRXML:
                         ICryptographyProvider cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
-                        RootNodeInfo rootNode = exportTarget.GetRootParent() as RootNodeInfo;
+                        RootNodeInfo? rootNode = exportTarget.GetRootParent() as RootNodeInfo;
                         XmlConnectionNodeSerializer28 connectionNodeSerializer = new(
                                                                                          cryptographyProvider,
                                                                                          rootNode?.PasswordString

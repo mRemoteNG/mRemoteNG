@@ -42,7 +42,7 @@ namespace mRemoteNG.App.Initialization
                     .Get())
                 {
                     ManagementObject managementObject = (ManagementObject)o;
-                    osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption"))?.Trim();
+                    osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption"))?.Trim() ?? string.Empty;
                     servicePack = GetOSServicePack(servicePack, managementObject);
                 }
             }

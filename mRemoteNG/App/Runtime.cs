@@ -1,5 +1,6 @@
 ﻿using mRemoteNG.App.Info;
 using mRemoteNG.Config.Putty;
+using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
@@ -41,9 +42,9 @@ namespace mRemoteNG.App
         /// </summary>
         public static bool UseCredentialManager => false;
 
-        public static WindowList WindowList { get; set; }
+        public static WindowList WindowList { get; set; } = null!; // initialized during FrmMain startup
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
-        public static NotificationAreaIcon NotificationAreaIcon { get; set; }
+        public static NotificationAreaIcon NotificationAreaIcon { get; set; } = null!; // initialized on demand by settings/UI
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
 
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
@@ -53,6 +54,11 @@ namespace mRemoteNG.App
         public static ConnectionInitiator ConnectionInitiator { get; set; } = new ConnectionInitiator();
 
         public static ConnectionsService ConnectionsService { get; } = new ConnectionsService(PuttySessionsManager.Instance);
+
+        /// <summary>
+        /// Dev-only options repository manager. Only initialized in DEBUG builds.
+        /// </summary>
+        public static OptionsRepositoryManager OptionsRepositoryManager { get; set; } = new();
 
         #region Connections Loading/Saving
 
@@ -115,13 +121,13 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                FrmSplashScreenNew.GetInstance().Close();
+                ProgramRoot.CloseSplash();
 
                 if (Properties.OptionsDBsPage.Default.UseSQLServer)
                 {
                     MessageCollector.AddExceptionMessage(Language.LoadFromSqlFailed, ex);
                     string commandButtons = string.Join("|", Language._TryAgain, Language.CommandOpenConnectionFile, string.Format(Language.CommandExitProgram, Application.ProductName));
-                    CTaskDialog.ShowCommandBox(Application.ProductName, Language.LoadFromSqlFailed, Language.LoadFromSqlFailedContent, MiscTools.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, ESysIcons.Error, ESysIcons.Error);
+                    CTaskDialog.ShowCommandBox(Application.ProductName ?? string.Empty, Language.LoadFromSqlFailed, Language.LoadFromSqlFailedContent, MiscTools.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, ESysIcons.Error, ESysIcons.Error);
                     switch (CTaskDialog.CommandButtonResult)
                     {
                         case 0:
@@ -157,7 +163,7 @@ namespace mRemoteNG.App
                     {
                         try
                         {
-                            CTaskDialog.ShowTaskDialogBox(GeneralAppInfo.ProductName, Language.ConnectionFileNotFound, "", "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
+                            CTaskDialog.ShowTaskDialogBox(GeneralAppInfo.ProductName ?? string.Empty, Language.ConnectionFileNotFound, "", "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
 
                             switch (CTaskDialog.CommandButtonResult)
                             {

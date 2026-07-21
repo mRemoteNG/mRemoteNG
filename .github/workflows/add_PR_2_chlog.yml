@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Check for Renovate dependency update
         id: check-renovate
@@ -53,9 +53,11 @@ jobs:
         if: steps.check-renovate.outputs.isRenovate == 'true'
         id: extract
         shell: pwsh
+        env:
+          INPUT_DRYRUN: ${{ github.event.inputs.dryRun }}
         run: |
           # 1) Determine dryRun
-          $dryRun = '${{ github.event.inputs.dryRun }}'
+          $dryRun = $env:INPUT_DRYRUN
           if (-not $dryRun) { $dryRun = 'false' }
           Write-Host "🔍 dryRun = $dryRun"
 

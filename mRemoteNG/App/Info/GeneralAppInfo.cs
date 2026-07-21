@@ -21,9 +21,9 @@ namespace mRemoteNG.App.Info
         public const string UrlBugs = "https://github.com/mRemoteNG/mRemoteNG/issues/new";
         public const string UrlDocumentation = "https://mremoteng.readthedocs.io/en/latest/";
         public static readonly string ApplicationVersion = Application.ProductVersion;
-        public static readonly string ProductName = Application.ProductName;
-        public static readonly string Copyright = ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCopyrightAttribute), false))?.Copyright;
-        public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+        public static readonly string? ProductName = Application.ProductName;
+        public static readonly string? Copyright = (Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCopyrightAttribute), false) as AssemblyCopyrightAttribute)?.Copyright;
+        public static readonly string? HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
 
         //public static string ReportingFilePath = "";
         private static readonly string puttyPath = HomePath + "\\PuTTYNG.exe";
@@ -54,12 +54,12 @@ namespace mRemoteNG.App.Info
 
         public static string PuttyPath => puttyPath;
 
-        public static Version GetApplicationVersion()
+        public static Version? GetApplicationVersion()
         {
             string cleanedVersion = ApplicationVersion.Split(' ')[0].Replace("(", "").Replace(")", "").Replace("Build", "");
             cleanedVersion = cleanedVersion + "." + ApplicationVersion.Split(' ')[^1].Replace(")", "");
 
-            _ = System.Version.TryParse(cleanedVersion, out Version parsedVersion);
+            _ = System.Version.TryParse(cleanedVersion, out Version? parsedVersion);
             return parsedVersion;
         }
     }

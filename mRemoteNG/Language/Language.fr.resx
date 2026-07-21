@@ -2157,43 +2157,43 @@ Le canal nightly inclut les versions alpha, beta et release candidates.</value>
     <value>Création WebView2 échouée avec une exception</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="VaultOpenbaoMount" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoMount" xml:space="preserve">
+    <value></value>
   </data>
-  <data name="VaultOpenbaoMountDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoMountDescription" xml:space="preserve">
+    <value></value>
   </data>
-  <data name="VaultOpenbaoRole" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoRole" xml:space="preserve">
+    <value></value>
   </data>
-  <data name="VaultOpenbaoRoleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoRoleDescription" xml:space="preserve">
+    <value></value>
   </data>
-  <data name="VaultOpenbaoToken" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoToken" xml:space="preserve">
+    <value></value>
   </data>
-  <data name="VaultOpenbaoTokenPropertyDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoTokenPropertyDescription" xml:space="preserve">
+    <value></value>
   </data>
-  <data name="VaultOpenbaoSecretEngine" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoSecretEngine" xml:space="preserve">
+    <value></value>
   </data>
-  <data name="PropertyDescriptionVaultOpenbaoSecretEngine" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="PropertyDescriptionVaultOpenbaoSecretEngine" xml:space="preserve">
+    <value></value>
   </data>
-  <data name="VaultOpenbaoSecretEngineKeyValue" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoSecretEngineKeyValue" xml:space="preserve">
+    <value></value>
   </data>
-  <data name="VaultOpenbaoSecretEngineLDAPDynamic" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoSecretEngineLDAPDynamic" xml:space="preserve">
+    <value></value>
   </data>
-  <data name="VaultOpenbaoSecretEngineLDAPStatic" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoSecretEngineLDAPStatic" xml:space="preserve">
+    <value></value>
   </data>
   <data name="Wsl" xml:space="preserve">
     <value>WSL</value>
   </data>
-  <data name="VaultOpenbaoSecretEngineSSHOTP" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="VaultOpenbaoSecretEngineSSHOTP" xml:space="preserve">
+    <value></value>
   </data>
 </root>

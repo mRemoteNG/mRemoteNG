@@ -273,14 +273,14 @@ namespace mRemoteNG.UI.Window
                         break;
                     case Keys.Up:
                         {
-                            ConnectionInfo match = ConnectionTree.NodeSearcher.PreviousMatch();
+                            ConnectionInfo? match = ConnectionTree.NodeSearcher.PreviousMatch();
                             JumpToNode(match);
                             e.Handled = true;
                             break;
                         }
                     case Keys.Down:
                         {
-                            ConnectionInfo match = ConnectionTree.NodeSearcher.NextMatch();
+                            ConnectionInfo? match = ConnectionTree.NodeSearcher.NextMatch();
                             JumpToNode(match);
                             e.Handled = true;
                             break;
@@ -321,7 +321,7 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        public void JumpToNode(ConnectionInfo connectionInfo)
+        public void JumpToNode(ConnectionInfo? connectionInfo)
         {
             if (connectionInfo == null)
             {

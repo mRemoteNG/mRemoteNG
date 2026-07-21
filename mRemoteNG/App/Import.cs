@@ -89,7 +89,7 @@ namespace mRemoteNG.App
 	        IEnumerable<string> filePaths,
 	        ContainerInfo importDestinationContainer,
 	        ConnectionsService connectionsService,
-	        Action<string> exceptionAction = null)
+	        Action<string>? exceptionAction = null)
         {
 	        using (connectionsService.BatchedSavingContext())
 	        {

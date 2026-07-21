@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Tabs
 {
@@ -31,6 +32,13 @@ namespace mRemoteNG.UI.Tabs
 
             // Allow the Windows default behavior of maximizing/restoring the window
             DoubleClickTitleBarToDock = true;
+        }
+
+        // Apply the dark/light title bar before the window is shown to avoid a white flash.
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            ThemeManager.getInstance().ApplyThemeToTitleBar(this);
         }
 
         [DllImport("User32.dll", CharSet = CharSet.Auto)]

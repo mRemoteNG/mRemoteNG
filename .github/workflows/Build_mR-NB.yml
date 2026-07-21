@@ -51,7 +51,7 @@ jobs:
 
     steps:
       - name: (01) Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
         # 2. Auto-detect solution file (Supports legacy .sln modern VS2026 .slnx)
       - name: (02) Find solution file
@@ -71,7 +71,7 @@ jobs:
           }
 
       - name: (02) Install .NET 10 SDK
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '10.0.x'
 
@@ -98,7 +98,7 @@ jobs:
           PLATFORM: '${{ matrix.platform }}'
   
       - name: (05) Cache NuGet Packages
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ~/.nuget/packages
           key: ${{ runner.os }}-${{ matrix.arch }}-${{ matrix.deployment }}-nuget-${{ hashFiles('**/*.csproj') }}
@@ -200,7 +200,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Download all artifacts
         uses: actions/download-artifact@v8
@@ -268,7 +268,7 @@ jobs:
           }
 
       - name: Create combined release
-        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v3
+        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

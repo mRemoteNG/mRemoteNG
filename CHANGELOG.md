@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.78.2]
 ### Fixed
+- #3367: fixed cross-thread crash when closing the splash screen on a startup error
 - #2939: fixed SQL injection vulnerabilities via parameterized queries 
 - #2940: fixed for Possible command injection via Process.Start 
 - #2932: fixed HTTP/HTTPS protocol to support multiple concurrent connections
@@ -29,6 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #2723: added read keyboardhook, gatewayaccesstoken and gatewaycredentialssource from RDP File
 - #2690: added தமிழ் (ta) Translation update
 - #2643: added registry Settings: enhancements and new settings implementation
+- #2642: added dark native title bar and matching dark mode for scrollbars, floating windows and dialogs
 - #2591: add Clickstudios Passwordstate API connector
 - #2212: added 1Password integration
 

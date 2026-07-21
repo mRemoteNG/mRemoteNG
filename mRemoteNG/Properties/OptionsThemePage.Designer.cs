@@ -58,5 +58,17 @@ namespace mRemoteNG.Properties {
                 this["cbThemePageInOptionMenu"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsActiveThemeDark {
+            get {
+                return ((bool)(this["IsActiveThemeDark"]));
+            }
+            set {
+                this["IsActiveThemeDark"] = value;
+            }
+        }
     }
 }

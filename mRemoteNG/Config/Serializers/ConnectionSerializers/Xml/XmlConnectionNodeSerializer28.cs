@@ -152,6 +152,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
             element.Add(new XAttribute("UseRCG", connectionInfo.UseRCG));
             element.Add(new XAttribute("UseRestrictedAdmin", connectionInfo.UseRestrictedAdmin));
+            element.Add(new XAttribute("UseRedirectionServerName", connectionInfo.UseRedirectionServerName));
 
             element.Add(new XAttribute("UserViaAPI", connectionInfo.UserViaAPI));
             element.Add(new XAttribute("EC2InstanceId", connectionInfo.EC2InstanceId));
@@ -328,6 +329,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 element.Add(new XAttribute("InheritUseRCG", inheritance.UseRCG.ToString().ToLowerInvariant()));
             if (inheritance.UseRestrictedAdmin)
                 element.Add(new XAttribute("InheritUseRestrictedAdmin", inheritance.UseRestrictedAdmin.ToString().ToLowerInvariant()));
+            if (inheritance.UseRedirectionServerName)
+                element.Add(new XAttribute("InheritUseRedirectionServerName", inheritance.UseRedirectionServerName.ToString().ToLowerInvariant()));
         }
     }
 }

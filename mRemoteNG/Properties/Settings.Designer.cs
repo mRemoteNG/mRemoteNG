@@ -1450,7 +1450,31 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultUseRCG"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultUseRedirectionServerName {
+            get {
+                return ((bool)(this["InhDefaultUseRedirectionServerName"]));
+            }
+            set {
+                this["InhDefaultUseRedirectionServerName"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultUseRedirectionServerName {
+            get {
+                return ((bool)(this["ConDefaultUseRedirectionServerName"]));
+            }
+            set {
+                this["ConDefaultUseRedirectionServerName"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]

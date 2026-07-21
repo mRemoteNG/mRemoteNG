@@ -240,11 +240,7 @@ namespace mRemoteNG.UI.Forms
             Runtime.ConnectionsService.ConnectionsSaved += ConnectionsServiceOnConnectionsSaved;
             
             // Close splash screen before loading connections to ensure password dialog appears on top
-            FrmSplashScreenNew splash = FrmSplashScreenNew.GetInstance();
-            if (splash.Dispatcher.CheckAccess())
-                splash.Close();
-            else
-                splash.Dispatcher.Invoke(() => splash.Close());
+            ProgramRoot.CloseSplash();
 
             CredsAndConsSetup credsAndConsSetup = new();
             credsAndConsSetup.LoadCredsAndCons();
@@ -360,9 +356,18 @@ namespace mRemoteNG.UI.Forms
             toolsMenu.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
         }
 
+        // Apply the dark/light title bar before the window is shown to avoid a white flash.
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            _themeManager.ApplyThemeToTitleBar(this);
+        }
+
         //Theming support
         private void ApplyTheme()
         {
+            _themeManager.ApplyThemeToTitleBar(this);
+
             if (!_themeManager.ThemingActive)
             {
                 pnlDock.Theme = _themeManager.DefaultTheme.Theme;

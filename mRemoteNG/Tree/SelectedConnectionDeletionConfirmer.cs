@@ -17,7 +17,7 @@ namespace mRemoteNG.Tree
             if (deletionTarget == null)
                 return false;
 
-            ContainerInfo deletionTargetAsContainer = deletionTarget as ContainerInfo;
+            ContainerInfo? deletionTargetAsContainer = deletionTarget as ContainerInfo;
             if (deletionTargetAsContainer != null)
                 return deletionTargetAsContainer.HasChildren()
                     ? UserConfirmsNonEmptyFolderDeletion(deletionTargetAsContainer)

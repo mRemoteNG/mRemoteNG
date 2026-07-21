@@ -30,7 +30,7 @@ namespace mRemoteNG.UI.Forms
         /// <summary>
         /// Raised when the user clicks OK or Cancel, signalling the host window to hide.
         /// </summary>
-        public event EventHandler CloseRequested;
+        public event EventHandler? CloseRequested;
 
         public FrmOptions() : this(Language.StartupExit)
         {
@@ -45,8 +45,8 @@ namespace mRemoteNG.UI.Forms
             Cursor.Current = Cursors.Default;
             DoubleBuffered = true;
 
-            _optionPageObjectNames =
-            [
+            var optionPages = new List<string>
+            {
                 nameof(StartupExitPage),
                 nameof(AppearancePage),
                 nameof(ConnectionsPage),
@@ -59,9 +59,23 @@ namespace mRemoteNG.UI.Forms
                 nameof(SecurityPage),
                 nameof(AdvancedPage),
                 nameof(BackupPage)
-            ];
+            };
+
+#if DEBUG
+            // Add dev-only options management page in DEBUG builds
+            optionPages.Add(nameof(OptionsManagementPage));
+#endif
+
+            _optionPageObjectNames = optionPages;
 
             InitOptionsPagesToListView();
+        }
+
+        // Apply the dark/light title bar before the window is shown to avoid a white flash.
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            ThemeManager.getInstance().ApplyThemeToTitleBar(this);
         }
 
         private void FrmOptions_Load(object sender, EventArgs e)
@@ -84,8 +98,7 @@ namespace mRemoteNG.UI.Forms
             btnOK.Text = Language._Ok;
             btnCancel.Text = Language._Cancel;
             btnApply.Text = Language.Apply;
-            //ApplyTheme();
-            //ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ApplyTheme();
             lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;
             lstOptionPages.SelectedIndex = 0;
             Logger.Instance.Log?.Debug($"[FrmOptions_Load] Selected index set to 0");
@@ -119,6 +132,8 @@ namespace mRemoteNG.UI.Forms
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
             BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlBottom.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            pnlBottom.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
 #if false
@@ -253,6 +268,18 @@ namespace mRemoteNG.UI.Forms
                             page = new BackupPage { Dock = DockStyle.Fill };
                         break;
                     }
+#if DEBUG
+                case "OptionsManagementPage":
+                    {
+                        var optionsManagementPage = new OptionsManagementPage { Dock = DockStyle.Fill };
+                        if (Runtime.OptionsRepositoryManager.IsInitialized)
+                        {
+                            optionsManagementPage.SetOptionsRepository(Runtime.OptionsRepositoryManager.Repository);
+                        }
+                        page = optionsManagementPage;
+                        break;
+                    }
+#endif
             }
 
             if (page == null) return;
