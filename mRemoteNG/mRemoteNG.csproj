@@ -546,7 +546,7 @@
     <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="150.0.11" />
   </ItemGroup>
   <ItemGroup Condition="'$(Platform)'=='arm64'">
-    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="149.0.6" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="150.0.11" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
