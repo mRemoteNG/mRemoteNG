@@ -287,38 +287,60 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
             foreach (KeyValuePair<ContainerInfo, bool> entry in _activeAnimations)
             {
-                ContainerInfo container = entry.Key;
-                bool isExpanding = entry.Value;
-                int totalChildren = container.Children.Count;
-                int currentLimit = _revealLimits.TryGetValue(container, out int limit) ? limit : 0;
-
-                if (isExpanding)
-                {
-                    currentLimit = Math.Min(totalChildren, currentLimit + RowsRevealedPerTick);
-                    _revealLimits[container] = currentLimit;
-                    RefreshObject(container);
-
-                    if (currentLimit >= totalChildren)
-                        finishedExpansions.Add(container);
-                }
-                else
-                {
-                    currentLimit = Math.Max(0, currentLimit - RowsRevealedPerTick);
-                    _revealLimits[container] = currentLimit;
-                    RefreshObject(container);
-
-                    if (currentLimit <= 0)
-                        finishedCollapses.Add(container);
-                }
+                AdvanceContainerAnimation(entry.Key, entry.Value, finishedExpansions, finishedCollapses);
             }
 
+            FinalizeFinishedExpansions(finishedExpansions);
+            FinalizeFinishedCollapses(finishedCollapses);
+
+            AutoResizeColumn(Columns[0]);
+
+            if (_activeAnimations.Count == 0)
+                _expandCollapseAnimationTimer.Stop();
+        }
+
+        /// <summary>
+        /// Advances the reveal limit for a single container by one animation tick and
+        /// records the container as finished if its expansion or collapse has completed.
+        /// </summary>
+        private void AdvanceContainerAnimation(ContainerInfo container, bool isExpanding,
+            List<ContainerInfo> finishedExpansions, List<ContainerInfo> finishedCollapses)
+        {
+            int totalChildren = container.Children.Count;
+            int currentLimit = _revealLimits.TryGetValue(container, out int limit) ? limit : 0;
+
+            if (isExpanding)
+            {
+                currentLimit = Math.Min(totalChildren, currentLimit + RowsRevealedPerTick);
+                _revealLimits[container] = currentLimit;
+                RefreshObject(container);
+
+                if (currentLimit >= totalChildren)
+                    finishedExpansions.Add(container);
+            }
+            else
+            {
+                currentLimit = Math.Max(0, currentLimit - RowsRevealedPerTick);
+                _revealLimits[container] = currentLimit;
+                RefreshObject(container);
+
+                if (currentLimit <= 0)
+                    finishedCollapses.Add(container);
+            }
+        }
+
+        private void FinalizeFinishedExpansions(List<ContainerInfo> finishedExpansions)
+        {
             foreach (ContainerInfo container in finishedExpansions)
             {
                 _activeAnimations.Remove(container);
                 _revealLimits.Remove(container);
                 RefreshObject(container);
             }
+        }
 
+        private void FinalizeFinishedCollapses(List<ContainerInfo> finishedCollapses)
+        {
             foreach (ContainerInfo container in finishedCollapses)
             {
                 _activeAnimations.Remove(container);
@@ -326,11 +348,6 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
                 Collapse(container);
                 _revealLimits.Remove(container);
             }
-
-            AutoResizeColumn(Columns[0]);
-
-            if (_activeAnimations.Count == 0)
-                _expandCollapseAnimationTimer.Stop();
         }
 
         /// <summary>
