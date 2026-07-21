@@ -1626,6 +1626,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="ShowDescriptionTooltips" xml:space="preserve">
     <value>Show description tooltips in connection tree</value>
   </data>
+  <data name="EnableConnectionTreeAnimations" xml:space="preserve">
+    <value>Enable connection tree expand/collapse animations</value>
+  </data>
   <data name="ShowFullConsFilePath" xml:space="preserve">
     <value>Show full connections file path in window title</value>
   </data>

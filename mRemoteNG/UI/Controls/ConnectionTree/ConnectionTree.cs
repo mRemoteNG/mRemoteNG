@@ -38,6 +38,24 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         private ConnectionTreeModel _connectionTreeModel;
         private ISlowClickRenameHandler? _slowClickRenameHandler;
 
+        // Number of direct children currently allowed to be shown for a container
+        // that is mid-animation. Containers not present in this dictionary show
+        // all of their children (the normal, non-animated state).
+        private readonly Dictionary<ContainerInfo, int> _revealLimits = new();
+
+        // Containers currently animating. Value is true while expanding (growing
+        // the reveal limit towards the full child count) and false while
+        // collapsing (shrinking the reveal limit towards zero).
+        private readonly Dictionary<ContainerInfo, bool> _activeAnimations = new();
+
+        // Guards against our own programmatic Collapse() call (issued once the
+        // shrink animation reaches zero) being cancelled a second time by
+        // ConnectionTree_Collapsing.
+        private readonly HashSet<ContainerInfo> _collapseFinalizing = new();
+
+        private const int RowsRevealedPerTick = 1;
+        private readonly Timer _expandCollapseAnimationTimer = new() { Interval = 15 };
+
         public ConnectionInfo SelectedNode => (ConnectionInfo)SelectedObject;
 
         public NodeSearcher NodeSearcher { get; private set; }
@@ -74,6 +92,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             _themeManager = ThemeManager.getInstance();
             _themeManager.ThemeChanged += ThemeManagerOnThemeChanged;
             ApplyTheme();
+            _expandCollapseAnimationTimer.Tick += ExpandCollapseAnimationTimer_Tick;
         }
 
         private void ThemeManagerOnThemeChanged()
@@ -105,6 +124,9 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
                 _slowClickRenameHandler?.Dispose();
 
                 _themeManager.ThemeChanged -= ThemeManagerOnThemeChanged;
+
+                _expandCollapseAnimationTimer.Tick -= ExpandCollapseAnimationTimer_Tick;
+                _expandCollapseAnimationTimer.Dispose();
             }
 
             base.Dispose(disposing);
@@ -147,7 +169,14 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
                 ContainerInfo itemAsContainer = item as ContainerInfo;
                 return itemAsContainer?.Children.Count > 0;
             };
-            ChildrenGetter = item => ((ContainerInfo)item).Children;
+            ChildrenGetter = item =>
+            {
+                ContainerInfo container = (ContainerInfo)item;
+                if (_revealLimits.TryGetValue(container, out int limit))
+                    return container.Children.Take(limit).ToList();
+
+                return container.Children;
+            };
         }
 
         private void SetupDropSink()
@@ -160,6 +189,8 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         private void SetEventHandlers()
         {
+            Expanding += ConnectionTree_Expanding;
+            Collapsing += ConnectionTree_Collapsing;
             Collapsed += (sender, args) =>
             {
                 if (args.Model is not ContainerInfo container) return;
@@ -181,6 +212,142 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             BeforeLabelEdit += OnBeforeLabelEdit;
             AfterLabelEdit += OnAfterLabelEdit;
             FormatCell += ConnectionTree_FormatCell;
+        }
+
+        /// <summary>
+        /// Instead of letting the branch insert all of its children at once,
+        /// start with a single child visible and grow the reveal limit on a
+        /// timer so children slide into view progressively.
+        /// </summary>
+        private void ConnectionTree_Expanding(object sender, TreeBranchExpandingEventArgs e)
+        {
+            if (!ExpandCollapseAnimationsAllowed)
+                return;
+
+            if (e.Model is not ContainerInfo container || container.Children.Count == 0)
+                return;
+
+            _revealLimits[container] = Math.Min(1, container.Children.Count);
+            _activeAnimations[container] = true;
+            StartAnimationTimerIfNeeded();
+        }
+
+        /// <summary>
+        /// Cancels the default (instant) collapse and instead shrinks the
+        /// reveal limit down to zero on a timer, so children disappear
+        /// progressively before the branch is actually collapsed.
+        /// </summary>
+        private void ConnectionTree_Collapsing(object sender, TreeBranchCollapsingEventArgs e)
+        {
+            if (e.Model is not ContainerInfo container)
+                return;
+
+            // This is our own programmatic Collapse() call, issued once the
+            // shrink animation has finished. Let it proceed normally.
+            if (_collapseFinalizing.Remove(container))
+                return;
+
+            if (!ExpandCollapseAnimationsAllowed || container.Children.Count == 0)
+                return;
+
+            e.Canceled = true;
+
+            _revealLimits[container] = container.Children.Count;
+            _activeAnimations[container] = false;
+            StartAnimationTimerIfNeeded();
+        }
+
+        /// <summary>
+        /// Determines whether the connection tree's expand/collapse animation
+        /// should run. Disabled when the user has High Contrast mode enabled
+        /// (a signal that reduced/no motion effects are preferred), or when
+        /// the user has turned off connection tree animations in
+        /// Options > Appearance.
+        /// </summary>
+        private static bool ExpandCollapseAnimationsAllowed =>
+            !SystemInformation.HighContrast &&
+            Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations;
+
+        private void StartAnimationTimerIfNeeded()
+        {
+            if (!_expandCollapseAnimationTimer.Enabled)
+                _expandCollapseAnimationTimer.Start();
+        }
+
+        private void ExpandCollapseAnimationTimer_Tick(object sender, EventArgs e)
+        {
+            if (_activeAnimations.Count == 0)
+            {
+                _expandCollapseAnimationTimer.Stop();
+                return;
+            }
+
+            List<ContainerInfo> finishedExpansions = new();
+            List<ContainerInfo> finishedCollapses = new();
+
+            foreach (KeyValuePair<ContainerInfo, bool> entry in _activeAnimations)
+            {
+                AdvanceContainerAnimation(entry.Key, entry.Value, finishedExpansions, finishedCollapses);
+            }
+
+            FinalizeFinishedExpansions(finishedExpansions);
+            FinalizeFinishedCollapses(finishedCollapses);
+
+            AutoResizeColumn(Columns[0]);
+
+            if (_activeAnimations.Count == 0)
+                _expandCollapseAnimationTimer.Stop();
+        }
+
+        /// <summary>
+        /// Advances the reveal limit for a single container by one animation tick and
+        /// records the container as finished if its expansion or collapse has completed.
+        /// </summary>
+        private void AdvanceContainerAnimation(ContainerInfo container, bool isExpanding,
+            List<ContainerInfo> finishedExpansions, List<ContainerInfo> finishedCollapses)
+        {
+            int totalChildren = container.Children.Count;
+            int currentLimit = _revealLimits.TryGetValue(container, out int limit) ? limit : 0;
+
+            if (isExpanding)
+            {
+                currentLimit = Math.Min(totalChildren, currentLimit + RowsRevealedPerTick);
+                _revealLimits[container] = currentLimit;
+                RefreshObject(container);
+
+                if (currentLimit >= totalChildren)
+                    finishedExpansions.Add(container);
+            }
+            else
+            {
+                currentLimit = Math.Max(0, currentLimit - RowsRevealedPerTick);
+                _revealLimits[container] = currentLimit;
+                RefreshObject(container);
+
+                if (currentLimit <= 0)
+                    finishedCollapses.Add(container);
+            }
+        }
+
+        private void FinalizeFinishedExpansions(List<ContainerInfo> finishedExpansions)
+        {
+            foreach (ContainerInfo container in finishedExpansions)
+            {
+                _activeAnimations.Remove(container);
+                _revealLimits.Remove(container);
+                RefreshObject(container);
+            }
+        }
+
+        private void FinalizeFinishedCollapses(List<ContainerInfo> finishedCollapses)
+        {
+            foreach (ContainerInfo container in finishedCollapses)
+            {
+                _activeAnimations.Remove(container);
+                _collapseFinalizing.Add(container);
+                Collapse(container);
+                _revealLimits.Remove(container);
+            }
         }
 
         /// <summary>
@@ -211,6 +378,11 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         private void PopulateTreeView(ConnectionTreeModel newModel)
         {
+            _expandCollapseAnimationTimer.Stop();
+            _revealLimits.Clear();
+            _activeAnimations.Clear();
+            _collapseFinalizing.Clear();
+
             SetObjects(newModel.RootNodes);
             RegisterModelUpdateHandlers(newModel);
             NodeSearcher = new NodeSearcher(newModel);

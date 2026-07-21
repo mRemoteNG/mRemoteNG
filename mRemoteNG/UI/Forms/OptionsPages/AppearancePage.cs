@@ -38,6 +38,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowSystemTrayIcon.Text = Language.AlwaysShowSysTrayIcon;
             chkMinimizeToSystemTray.Text = Language.MinimizeToSysTray;
             chkCloseToSystemTray.Text = Language.CloseToSysTray;
+            chkEnableConnectionTreeAnimations.Text = Language.EnableConnectionTreeAnimations;
             lblRegistrySettingsUsedInfo.Text = Language.OptionsCompanyPolicyMessage;
         }
 
@@ -67,6 +68,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowSystemTrayIcon.Checked = Properties.OptionsAppearancePage.Default.ShowSystemTrayIcon;
             chkMinimizeToSystemTray.Checked = Properties.OptionsAppearancePage.Default.MinimizeToTray;
             chkCloseToSystemTray.Checked = Properties.OptionsAppearancePage.Default.CloseToTray;
+            chkEnableConnectionTreeAnimations.Checked = Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations;
         }
 
         public override void SaveSettings()
@@ -104,6 +106,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Properties.OptionsAppearancePage.Default.MinimizeToTray = chkMinimizeToSystemTray.Checked;
             Properties.OptionsAppearancePage.Default.CloseToTray = chkCloseToSystemTray.Checked;
+            Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations = chkEnableConnectionTreeAnimations.Checked;
         }
 
         public override void LoadRegistrySettings()
