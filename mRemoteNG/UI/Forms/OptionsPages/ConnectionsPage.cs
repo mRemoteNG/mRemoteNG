@@ -62,6 +62,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkPlaceSearchBarAboveConnectionTree.Text = Language.PlaceSearchBarAboveConnectionTree;
             chkDoNotTrimUsername.Text = Language.DoNotTrimUsername;
             chkSlowClickRename.Text = Language.SlowClickRenameEnabled;
+            chkOpenMultipleConnectionsWithEnter.Text = Language.OpenAllSelectedConnectionsWithEnter;
 
             lblRdpReconnectionCount.Text = Language.RdpReconnectCount;
             lblRDPConTimeout.Text = Language.RdpOverallConnectionTimeout;
@@ -87,6 +88,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkPlaceSearchBarAboveConnectionTree.Checked = Settings.Default.PlaceSearchBarAboveConnectionTree;
             chkDoNotTrimUsername.Checked = Settings.Default.DoNotTrimUsername;
             chkSlowClickRename.Checked = Settings.Default.SlowClickRenameEnabled;
+            chkOpenMultipleConnectionsWithEnter.Checked = Settings.Default.OpenMultipleConnectionsWithEnter;
 
             numRdpReconnectionCount.Value = Convert.ToDecimal(Settings.Default.RdpReconnectionCount);
             numRDPConTimeout.Value = Convert.ToDecimal(Settings.Default.ConRDPOverallConnectionTimeout);
@@ -140,6 +142,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.Settings.Default.PlaceSearchBarAboveConnectionTree = chkPlaceSearchBarAboveConnectionTree.Checked;
             Properties.Settings.Default.DoNotTrimUsername = chkDoNotTrimUsername.Checked;
             Properties.Settings.Default.SlowClickRenameEnabled = chkSlowClickRename.Checked;
+            Properties.Settings.Default.OpenMultipleConnectionsWithEnter = chkOpenMultipleConnectionsWithEnter.Checked;
 
             Properties.Settings.Default.RdpReconnectionCount = (int)numRdpReconnectionCount.Value;
             Properties.Settings.Default.ConRDPOverallConnectionTimeout = (int)numRDPConTimeout.Value;
@@ -215,6 +218,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (pageRegSettingsInstance.SlowClickRenameEnabled.IsSet)
                 DisableControl(chkSlowClickRename);
 
+            if (pageRegSettingsInstance.OpenMultipleConnectionsWithEnter.IsSet)
+                DisableControl(chkOpenMultipleConnectionsWithEnter);
+
             if (pageRegSettingsInstance.RdpReconnectionCount.IsSet)
                 DisableControl(numRdpReconnectionCount);
 
@@ -240,6 +246,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 || pageRegSettingsInstance.UseFilterSearch.IsSet
                 || pageRegSettingsInstance.PlaceSearchBarAboveConnectionTree.IsSet
                 || pageRegSettingsInstance.DoNotTrimUsername.IsSet
+                || pageRegSettingsInstance.SlowClickRenameEnabled.IsSet
+                || pageRegSettingsInstance.OpenMultipleConnectionsWithEnter.IsSet
                 || pageRegSettingsInstance.RdpReconnectionCount.IsSet
                 || pageRegSettingsInstance.ConRDPOverallConnectionTimeout.IsSet
                 || pageRegSettingsInstance.AutoSaveEveryMinutes.IsSet;

@@ -55,6 +55,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkConnectionTreeTrackActiveConnection = new MrngCheckBox();
             chkDoNotTrimUsername = new MrngCheckBox();
             chkSlowClickRename = new MrngCheckBox();
+            chkOpenMultipleConnectionsWithEnter = new MrngCheckBox();
             pnlOptions = new System.Windows.Forms.Panel();
             lblRegistrySettingsUsedInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)numRDPConTimeout).BeginInit();
@@ -324,11 +325,24 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSlowClickRename.Text = "Rename items using slow double-click (Explorer style)";
             chkSlowClickRename.UseVisualStyleBackColor = true;
             // 
+            // chkOpenMultipleConnectionsWithEnter
+            // 
+            chkOpenMultipleConnectionsWithEnter._mice = MrngCheckBox.MouseState.OUT;
+            chkOpenMultipleConnectionsWithEnter.AutoSize = true;
+            chkOpenMultipleConnectionsWithEnter.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkOpenMultipleConnectionsWithEnter.Location = new System.Drawing.Point(6, 211);
+            chkOpenMultipleConnectionsWithEnter.Name = "chkOpenMultipleConnectionsWithEnter";
+            chkOpenMultipleConnectionsWithEnter.Size = new System.Drawing.Size(312, 17);
+            chkOpenMultipleConnectionsWithEnter.TabIndex = 13;
+            chkOpenMultipleConnectionsWithEnter.Text = "Open all selected connections with Enter";
+            chkOpenMultipleConnectionsWithEnter.UseVisualStyleBackColor = true;
+            // 
             // pnlOptions
             // 
             pnlOptions.Controls.Add(chkSingleClickOnConnectionOpensIt);
             pnlOptions.Controls.Add(chkDoNotTrimUsername);
             pnlOptions.Controls.Add(chkSlowClickRename);
+            pnlOptions.Controls.Add(chkOpenMultipleConnectionsWithEnter);
             pnlOptions.Controls.Add(chkSingleClickOnOpenedConnectionSwitchesToIt);
             pnlOptions.Controls.Add(chkConnectionTreeTrackActiveConnection);
             pnlOptions.Controls.Add(chkHostnameLikeDisplayName);
@@ -338,7 +352,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlOptions.Dock = System.Windows.Forms.DockStyle.Top;
             pnlOptions.Location = new System.Drawing.Point(0, 30);
             pnlOptions.Name = "pnlOptions";
-            pnlOptions.Size = new System.Drawing.Size(610, 206);
+            pnlOptions.Size = new System.Drawing.Size(610, 235);
             pnlOptions.TabIndex = 12;
             // 
             // lblRegistrySettingsUsedInfo
@@ -397,6 +411,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private MrngCheckBox chkConnectionTreeTrackActiveConnection;
         private MrngCheckBox chkDoNotTrimUsername;
         private MrngCheckBox chkSlowClickRename;
+        private MrngCheckBox chkOpenMultipleConnectionsWithEnter;
         internal System.Windows.Forms.Panel pnlOptions;
         internal System.Windows.Forms.Label lblRegistrySettingsUsedInfo;
     }

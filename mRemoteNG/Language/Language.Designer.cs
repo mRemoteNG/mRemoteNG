@@ -7916,5 +7916,14 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Open all selected connections with Enter.
+        /// </summary>
+        internal static string OpenAllSelectedConnectionsWithEnter {
+            get {
+                return ResourceManager.GetString("OpenAllSelectedConnectionsWithEnter", resourceCulture);
+            }
+        }
     }
 }

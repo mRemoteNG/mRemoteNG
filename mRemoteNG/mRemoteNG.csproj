@@ -551,6 +551,9 @@
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UI\Helpers\" />
+  </ItemGroup>
   <PropertyGroup Condition="'$(Platform)'=='x64'">
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Nullable>enable</Nullable>

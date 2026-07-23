@@ -476,6 +476,9 @@
     <Setting Name="DoNotTrimUsername" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="OpenMultipleConnectionsWithEnter" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="ConDefaultVmId" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

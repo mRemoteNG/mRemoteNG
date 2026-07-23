@@ -224,6 +224,10 @@ orleans.codegen.cs
 # RIA/Silverlight projects
 Generated_Code/
 
+# Compiled resource files
+# These are generated from .resx files during the build process
+*.resources
+
 # Backup & report files from converting an old project file
 # to a newer Visual Studio version. Backup files are not needed,
 # because we have git ;-)

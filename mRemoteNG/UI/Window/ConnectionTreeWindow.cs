@@ -348,6 +348,13 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
+                // Suppress the beep sound for Enter key
+                if (e.KeyChar == (char)Keys.Return)
+                {
+                    e.Handled = true;
+                    return;
+                }
+
                 if (!char.IsLetterOrDigit(e.KeyChar)) return;
                 txtSearch.Focus();
                 txtSearch.Text = e.KeyChar.ToString();
@@ -366,9 +373,17 @@ namespace mRemoteNG.UI.Window
                 if (e.KeyCode == Keys.Enter)
                 {
                     e.Handled = true;
-                    if (SelectedNode == null)
-                        return;
-                    Runtime.ConnectionInitiator.OpenConnection(SelectedNode);
+
+                    if (Settings.Default.OpenMultipleConnectionsWithEnter)
+                    {
+                        HandleEnterKeyMultiSelect();
+                    }
+                    else
+                    {
+                        if (SelectedNode == null)
+                            return;
+                        Runtime.ConnectionInitiator.OpenConnection(SelectedNode);
+                    }
                 }
                 else if (e.Control && e.KeyCode == Keys.F)
                 {
@@ -381,6 +396,90 @@ namespace mRemoteNG.UI.Window
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_KeyDown (UI.Window.ConnectionTreeWindow) failed", ex);
             }
+        }
+
+        /// <summary>
+        /// Handles opening multiple selected connections when Enter is pressed.
+        /// Opens explicitly selected connections, or if none are selected, opens direct children of selected folders.
+        /// </summary>
+        private void HandleEnterKeyMultiSelect()
+        {
+            var connectionsToOpen = GetExplicitConnectionsToOpen();
+
+            if (connectionsToOpen.Count == 0)
+            {
+                connectionsToOpen.AddRange(GetFolderConnectionsToOpen());
+            }
+
+            foreach (var connection in connectionsToOpen)
+            {
+                Runtime.ConnectionInitiator.OpenConnection(connection);
+            }
+        }
+
+        /// <summary>
+        /// Gets explicitly selected connections that are not already open.
+        /// </summary>
+        private List<ConnectionInfo> GetExplicitConnectionsToOpen()
+        {
+            return ConnectionTree.SelectedObjects
+                .OfType<ConnectionInfo>()
+                .Where(n => n.GetTreeNodeType() == TreeNodeType.Connection
+                         || n.GetTreeNodeType() == TreeNodeType.PuttySession)
+                .Where(n => n.OpenConnections.Count == 0)
+                .ToList();
+        }
+
+        /// <summary>
+        /// Gets direct child connections from selected folders that are not already open.
+        /// </summary>
+        private List<ConnectionInfo> GetFolderConnectionsToOpen()
+        {
+            var connectionsFromFolders = new List<ConnectionInfo>();
+            var selectedFolders = ConnectionTree.SelectedObjects
+                .OfType<ConnectionInfo>()
+                .Where(n => n.GetTreeNodeType() == TreeNodeType.Container)
+                .ToList();
+
+            foreach (var folder in selectedFolders)
+            {
+                var directChildren = GetDirectChildConnections(folder)
+                    .Where(n => n.OpenConnections.Count == 0)
+                    .ToList();
+                connectionsFromFolders.AddRange(directChildren);
+            }
+
+            return connectionsFromFolders;
+        }
+
+        /// <summary>
+        /// Gets direct child connections of a folder, excluding connections in nested subfolders.
+        /// </summary>
+        private static List<ConnectionInfo> GetDirectChildConnections(ConnectionInfo folder)
+        {
+            var directChildren = new List<ConnectionInfo>();
+
+            if (folder is not ContainerInfo container)
+                return directChildren;
+
+            foreach (var child in container.Children)
+            {
+                if (child.GetTreeNodeType() == TreeNodeType.Connection || 
+                    child.GetTreeNodeType() == TreeNodeType.PuttySession)
+                {
+                    directChildren.Add(child);
+                }
+            }
+
+            return directChildren;
+        }
+
+        /// <summary>
+        /// Public wrapper for testing GetDirectChildConnections method.
+        /// </summary>
+        public static List<ConnectionInfo> PublicGetDirectChildConnections(ConnectionInfo folder)
+        {
+            return GetDirectChildConnections(folder);
         }
 
         #endregion

@@ -49,6 +49,11 @@ namespace mRemoteNG.Config.Settings.Registry
         public WinRegistryEntry<bool> SlowClickRenameEnabled { get; private set; }
 
         /// <summary>
+        /// Specifies whether all selected connections should be opened with Enter.
+        /// </summary>
+        public WinRegistryEntry<bool> OpenMultipleConnectionsWithEnter { get; private set; }
+
+        /// <summary>
         /// Specifies the number of RDP reconnections.
         /// </summary>
         public WinRegistryEntry<int> RdpReconnectionCount { get; private set; }
@@ -76,6 +81,7 @@ namespace mRemoteNG.Config.Settings.Registry
             PlaceSearchBarAboveConnectionTree = new WinRegistryEntry<bool>(hive, subKey, nameof(PlaceSearchBarAboveConnectionTree)).Read();
             DoNotTrimUsername = new WinRegistryEntry<bool>(hive, subKey, nameof(DoNotTrimUsername)).Read();
             SlowClickRenameEnabled = new WinRegistryEntry<bool>(hive, subKey, nameof(SlowClickRenameEnabled)).Read();
+            OpenMultipleConnectionsWithEnter = new WinRegistryEntry<bool>(hive, subKey, nameof(OpenMultipleConnectionsWithEnter)).Read();
             RdpReconnectionCount = new WinRegistryEntry<int>(hive, subKey, nameof(RdpReconnectionCount)).Read();
             ConRDPOverallConnectionTimeout = new WinRegistryEntry<int>(hive, subKey, nameof(ConRDPOverallConnectionTimeout)).Read();
             AutoSaveEveryMinutes = new WinRegistryEntry<int>(hive, subKey, nameof(AutoSaveEveryMinutes)).Read();
@@ -117,6 +123,7 @@ namespace mRemoteNG.Config.Settings.Registry
             ApplyPlaceSearchBarAboveConnectionTree();
             ApplyDoNotTrimUsername();
             ApplySlowClickRenameEnabled();
+            ApplyOpenMultipleConnectionsWithEnter();
             ApplyRdpReconnectionCount();
             ApplyConRDPOverallConnectionTimeout();
             ApplyAutoSaveEveryMinutes();
@@ -168,6 +175,12 @@ namespace mRemoteNG.Config.Settings.Registry
         {
             if (SlowClickRenameEnabled.IsSet)
                 Properties.Settings.Default.SlowClickRenameEnabled = SlowClickRenameEnabled.Value;
+        }
+
+        private void ApplyOpenMultipleConnectionsWithEnter()
+        {
+            if (OpenMultipleConnectionsWithEnter.IsSet)
+                Properties.Settings.Default.OpenMultipleConnectionsWithEnter = OpenMultipleConnectionsWithEnter.Value;
         }
 
         private void ApplyRdpReconnectionCount()
