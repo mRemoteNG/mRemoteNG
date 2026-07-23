@@ -38,7 +38,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("UseEnhancedMode", connectionInfo.UseVmId));
             element.Add(new XAttribute("Type", connectionInfo.GetTreeNodeType().ToString()));
             if (nodeAsContainer != null)
+            {
                 element.Add(new XAttribute("Expanded", nodeAsContainer.IsExpanded.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("IsRootGroup", nodeAsContainer.IsRootGroup.ToString().ToLowerInvariant()));
+            }
             element.Add(new XAttribute("Descr", connectionInfo.Description));
             element.Add(new XAttribute("Icon", connectionInfo.Icon));
             element.Add(new XAttribute("Panel", connectionInfo.Panel));
