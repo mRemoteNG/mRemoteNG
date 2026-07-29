@@ -5,8 +5,8 @@
     <NoWarn>$(NoWarn);NU1507;NU1701</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="AWSSDK.Core" Version="4.0.100.6" />
-    <PackageVersion Include="AWSSDK.EC2" Version="4.0.106.2" />
+    <PackageVersion Include="AWSSDK.Core" Version="4.0.100.8" />
+    <PackageVersion Include="AWSSDK.EC2" Version="4.0.106.3" />
     <PackageVersion Include="BouncyCastle.Cryptography" Version="2.6.2" />
     <PackageVersion Include="Castle.Core" Version="5.2.1" />
     <PackageVersion Include="ConsoleControl" Version="1.3.0" />
@@ -16,7 +16,7 @@
     <PackageVersion Include="DockPanelSuite" Version="3.1.1" />
     <PackageVersion Include="DockPanelSuite.ThemeVS2015" Version="3.1.1" />
     <PackageVersion Include="envdte" Version="17.14.40260" />
-    <PackageVersion Include="Gherkin" Version="41.0.0" />
+    <PackageVersion Include="Gherkin" Version="42.0.0" />
     <PackageVersion Include="Google.Protobuf" Version="3.35.1" />
     <PackageVersion Include="log4net" Version="3.3.2" />
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.0.2" />
