@@ -261,7 +261,7 @@
     <value>Nombre de usuario</value>
   </data>
   <data name="WaitForExit" xml:space="preserve">
-    <value>Esperar para quitar</value>
+    <value>Espera para salir</value>
   </data>
   <data name="CheckAgain" xml:space="preserve">
     <value>Comprobar de nuevo</value>
@@ -318,31 +318,31 @@
     <value>¡Fallo en pGrid_PopertyValueChanged!</value>
   </data>
   <data name="ConfigUiLoadFailed" xml:space="preserve">
-    <value>Error al Cargar la interfaz de configuración de usuario</value>
+    <value>Error al cargar la interfaz de configuración de usuario</value>
   </data>
   <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
-    <value>¿Estás seguro de cerrar el panel, "{0}"? Cualquier conexión que contenga el panel también será cerrada.</value>
+    <value>¿Está seguro de cerrar el panel, "{0}"? Cualquier conexión que contenga el panel también será cerrada.</value>
   </data>
   <data name="ConfirmDeleteExternalTool" xml:space="preserve">
-    <value>¿Estás seguro de borrar la herramienta externa, "{0}"?</value>
+    <value>¿Está seguro de borrar la herramienta externa, "{0}"?</value>
   </data>
   <data name="ConfirmDeleteExternalToolMultiple" xml:space="preserve">
-    <value>¿Estás seguro de borrar las {0} herramientas externas seleccionadas?</value>
+    <value>¿Está seguro de borrar las {0} herramientas externas seleccionadas?</value>
   </data>
   <data name="ConfirmDeleteNodeConnection" xml:space="preserve">
-    <value>¿Estás seguro de eliminar la conexión, "{0}"?</value>
+    <value>¿Está seguro de eliminar la conexión, "{0}"?</value>
   </data>
   <data name="ConfirmDeleteNodeFolder" xml:space="preserve">
-    <value>¿Estás seguro de eliminar la carpeta vacía, "{0}"?</value>
+    <value>¿Está seguro de eliminar la carpeta vacía, "{0}"?</value>
   </data>
   <data name="ConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
-    <value>¿Estás seguro de eliminar la carpeta, "{0}"? Cualquier carpeta o conexión que contenga también se eliminará.</value>
+    <value>¿Está seguro de eliminar la carpeta, "{0}"? Cualquier carpeta o conexión que contenga también se eliminará.</value>
   </data>
   <data name="ConfirmExitMainInstruction" xml:space="preserve">
-    <value>¿Quieres cerrar todas las conexiones abiertas?</value>
+    <value>¿Quiere cerrar todas las conexiones abiertas?</value>
   </data>
   <data name="ConfirmResetLayout" xml:space="preserve">
-    <value>¿Estás seguro de resetear los paneles a su configuración inicial?</value>
+    <value>¿Está seguro de resetear los paneles a su configuración inicial?</value>
   </data>
   <data name="Connect" xml:space="preserve">
     <value>Conectar</value>
@@ -424,7 +424,7 @@ Arrancando con un nuevo archivo de conexiones.</value>
     <value>Duplicar</value>
   </data>
   <data name="EmptyPasswordContinue" xml:space="preserve">
-    <value>¿Quieres continuar sin contraseña?</value>
+    <value>¿Quiere continuar sin contraseña?</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Para los campos de nombre de usuario, contraseña y dominio vacíos usar:</value>
@@ -442,7 +442,7 @@ Arrancando con un nuevo archivo de conexiones.</value>
     <value>Fallo al AddExternalToolsToToolBar (frmMain). {0}</value>
   </data>
   <data name="ErrorAddFolderFailed" xml:space="preserve">
-    <value>Añadir Carpeta (UI.Window.Tree) fallida. {0}</value>
+    <value>Fallo al añadir carpeta (UI.Window.Tree). {0}</value>
   </data>
   <data name="ErrorBadDatabaseVersion" xml:space="preserve">
     <value>La versión de base de datos {0} No es compatible con esta versión de {1}.</value>
@@ -583,7 +583,7 @@ Arrancando con un nuevo archivo de conexiones.</value>
     <value>Para configurar las conexiones PuTTY hacer clic en este botón:</value>
   </data>
   <data name="PuttyTimeout" xml:space="preserve">
-    <value>Tiempo de espera Máx. para PuTTY &amp;&amp; Applicaciones Ext. Integradas:</value>
+    <value>Tiempo de espera máx. para PuTTY &amp;&amp; Applicaciones ext. Integradas:</value>
   </data>
   <data name="ReleasedUnderGPL" xml:space="preserve">
     <value>Publicado bajo la GNU General Public License (GPL)</value>
@@ -836,61 +836,61 @@ Arrancando con un nuevo archivo de conexiones.</value>
     <value>¡No se pudo cargar el panel de escaneo de puertos!</value>
   </data>
   <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
-    <value>Introduce el nombre del host o IP con la que quiere conectar.</value>
+    <value>Introduzca el nombre del huésped o IP con la que quiere conectar.</value>
   </data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
     <value>Cambiar todas las opciones heredadas.</value>
   </data>
   <data name="PropertyDescriptionAuthenticationLevel" xml:space="preserve">
-    <value>Elige el nivel de autentificación que esta conexión debe emplear.</value>
+    <value>Elija el nivel de autentificación que esta conexión debe emplear.</value>
   </data>
   <data name="PropertyDescriptionAuthenticationMode" xml:space="preserve">
-    <value>Elige cómo quiere autentificar contra el servidor VNC.</value>
+    <value>Elija cómo quiere autentificar contra el servidor VNC.</value>
   </data>
   <data name="PropertyDescriptionCacheBitmaps" xml:space="preserve">
-    <value>Elige si quiere cachear el mapa de bits o no.</value>
+    <value>Elija si quiere cachear el mapa de bits o no.</value>
   </data>
   <data name="PropertyDescriptionColors" xml:space="preserve">
-    <value>Elige la calidad de color a emplear.</value>
+    <value>Elija la calidad de color a emplear.</value>
   </data>
   <data name="PropertyDescriptionCompression" xml:space="preserve">
-    <value>Elige el nivel de compresión a emplear.</value>
+    <value>Elija el nivel de compresión a emplear.</value>
   </data>
   <data name="PropertyDescriptionDescription" xml:space="preserve">
     <value>Introduce aquí sus notas ó una descripción del huésped.</value>
   </data>
   <data name="PropertyDescriptionDisplayThemes" xml:space="preserve">
-    <value>Elige si el tema del huésped remoto debe ser mostrado.</value>
+    <value>Elija si el tema del huésped remoto debe ser mostrado.</value>
   </data>
   <data name="PropertyDescriptionDisplayWallpaper" xml:space="preserve">
-    <value>Elige si el fondo de escritorio del huésped remoto debe ser mostrado.</value>
+    <value>Elija si el fondo de escritorio del huésped remoto debe ser mostrado.</value>
   </data>
   <data name="PropertyDescriptionDomain" xml:space="preserve">
-    <value>Introduzce tú dominio.</value>
+    <value>Introduzca su dominio.</value>
   </data>
   <data name="PropertyDescriptionEnableDesktopComposition" xml:space="preserve">
-    <value>Elige si emplear composición de escritorio o no.</value>
+    <value>Elija si emplear composición de escritorio o no.</value>
   </data>
   <data name="PropertyDescriptionEnableFontSmoothing" xml:space="preserve">
-    <value>Elige si emplear suavizado de fuentes o no.</value>
+    <value>Elija si emplear suavizado de fuentes o no.</value>
   </data>
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
-    <value>Elige el modo de codificación a emplear.</value>
+    <value>Elija el modo de codificación a emplear.</value>
   </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
-    <value>Elige la herramienta externa a iniciar.</value>
+    <value>Elija la herramienta externa a iniciar.</value>
   </data>
   <data name="PropertyDescriptionExternalToolAfter" xml:space="preserve">
-    <value>Elige la herramienta externa a iniciar tras la desconexión del huésped remoto.</value>
+    <value>Elija la herramienta externa a iniciar tras la desconexión del huésped remoto.</value>
   </data>
   <data name="PropertyDescriptionExternalToolBefore" xml:space="preserve">
-    <value>Elige la herramienta externa a iniciar antes de establecer la conexión con el huésped remoto.</value>
+    <value>Elija la herramienta externa a iniciar antes de establecer la conexión con el huésped remoto.</value>
   </data>
   <data name="PropertyDescriptionIcon" xml:space="preserve">
-    <value>Elige el icono que se mostrará cuando conecte con el huésped.</value>
+    <value>Elija el icono que se mostrará cuando conecte con el huésped.</value>
   </data>
   <data name="PropertyDescriptionMACAddress" xml:space="preserve">
-    <value>Introduzce la dirección MAC del huésped remoto si desea usarlo en una herramienta externa.</value>
+    <value>Introduzca la dirección MAC del huésped remoto si desea usarlo en una herramienta externa.</value>
   </data>
   <data name="PropertyDescriptionName" xml:space="preserve">
     <value>Este es el nombre que se mostrará en el árbol de conexiones.</value>
@@ -899,10 +899,10 @@ Arrancando con un nuevo archivo de conexiones.</value>
     <value>Determina el panel en el que la conexión se abrirá.</value>
   </data>
   <data name="PropertyDescriptionPassword" xml:space="preserve">
-    <value>Introduce la contraseña.</value>
+    <value>Introduzca la contraseña.</value>
   </data>
   <data name="PropertyDescriptionPort" xml:space="preserve">
-    <value>Introduce el puerto por el que escucha el protocolo seleccionado.</value>
+    <value>Introduzca el puerto por el que escucha el protocolo seleccionado.</value>
   </data>
   <data name="PropertyDescriptionProtocol" xml:space="preserve">
     <value>Selecciona el protocolo que mRemoteNG debe emplear para conectar con el huésped.</value>
@@ -923,64 +923,64 @@ Arrancando con un nuevo archivo de conexiones.</value>
     <value>Indica si iniciar o no sesión en la pasarela empleando el mismo usuario y contraseña que en la conexión.</value>
   </data>
   <data name="PropertyDescriptionRDGatewayUsername" xml:space="preserve">
-    <value>Indica el nombre de usuario empleado para conectar con la pasarela de rscritorio remoto.</value>
+    <value>Indica el nombre de usuario empleado para conectar con la pasarela de escritorio remoto.</value>
   </data>
   <data name="PropertyDescriptionRedirectDrives" xml:space="preserve">
     <value>Seleccione si los discos locales deben ser mostrados en el huésped remoto.</value>
   </data>
   <data name="PropertyDescriptionRedirectKeys" xml:space="preserve">
-    <value>Elige si las combinaciones de teclas (ej. Alt-Tab) deben ser redireccionadas al huésped remoto.</value>
+    <value>Elija si las combinaciones de teclas (ej. Alt-Tab) deben ser redireccionadas al huésped remoto.</value>
   </data>
   <data name="PropertyDescriptionRedirectPorts" xml:space="preserve">
-    <value>Elige si los puertos locales (ej. com, paralelo) deben ser mostrados en el huésped remoto.</value>
+    <value>Elija si los puertos locales (ej. com, paralelo) deben ser mostrados en el huésped remoto.</value>
   </data>
   <data name="PropertyDescriptionRedirectPrinters" xml:space="preserve">
-    <value>Elige si las impresoras locales deben ser mostradas en el huésped remoto.</value>
+    <value>Elija si las impresoras locales deben ser mostradas en el huésped remoto.</value>
   </data>
   <data name="PropertyDescriptionRedirectClipboard" xml:space="preserve">
-    <value>Elige si el portapapeles debe compartirse con el huésped remoto.</value>
+    <value>Elija si el portapapeles debe compartirse con el huésped remoto.</value>
   </data>
   <data name="PropertyDescriptionRedirectSmartCards" xml:space="preserve">
-    <value>Elige si las tarjetas inteligentes deben presentarse a la máquina remota.</value>
+    <value>Elija si las tarjetas inteligentes deben presentarse a la máquina remota.</value>
   </data>
   <data name="PropertyDescriptionRedirectSounds" xml:space="preserve">
-    <value>Elige cómo deberá ser redireccionado el sonido remoto.</value>
+    <value>Elija cómo deberá ser redireccionado el sonido remoto.</value>
   </data>
   <data name="PropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>Elige uno de los motores de renderizado disponibles para  mostrar HTML.</value>
+    <value>Elija uno de los motores de renderizado disponibles para  mostrar HTML.</value>
   </data>
   <data name="PropertyDescriptionResolution" xml:space="preserve">
-    <value>Elige la resolución o modo en que esta conexión será abierta.</value>
+    <value>Elija la resolución o modo en que esta conexión será abierta.</value>
   </data>
   <data name="PropertyDescriptionSmartSizeMode" xml:space="preserve">
-    <value>Elige el modo SmartSize a emplear.</value>
+    <value>Elija el modo SmartSize a emplear.</value>
   </data>
   <data name="PropertyDescriptionUseConsoleSession" xml:space="preserve">
     <value>Conectar a la sesión de consola del huésped remoto.</value>
   </data>
   <data name="PropertyDescriptionUser1" xml:space="preserve">
-    <value>Introduce aquí cualquier información que necesites.</value>
+    <value>Introduzca aquí cualquier información que necesite.</value>
   </data>
   <data name="PropertyDescriptionUsername" xml:space="preserve">
-    <value>Introduce tú nombre de usuario.</value>
+    <value>Introduzca su nombre de usuario.</value>
   </data>
   <data name="PropertyDescriptionViewOnly" xml:space="preserve">
-    <value>Elige si deseas establecer una conexión de sólo observación.</value>
+    <value>Elija si deseas establecer una conexión de sólo observación.</value>
   </data>
   <data name="PropertyDescriptionVNCProxyAddress" xml:space="preserve">
-    <value>Introduzce la dirección del proxy a emplear.</value>
+    <value>Introduzca la dirección del proxy a emplear.</value>
   </data>
   <data name="PropertyDescriptionVNCProxyPassword" xml:space="preserve">
-    <value>Introduce tú contraseña de autentificación en el proxy.</value>
+    <value>Introduzca su contraseña de autentificación en el proxy.</value>
   </data>
   <data name="PropertyDescriptionVNCProxyPort" xml:space="preserve">
-    <value>Introduce el puerto de escucha del proxy.</value>
+    <value>Introduzca el puerto de escucha del proxy.</value>
   </data>
   <data name="PropertyDescriptionVNCProxyType" xml:space="preserve">
     <value>Si utilizas un proxy para conexiones VNC, selecciona de qué tipo es.</value>
   </data>
   <data name="PropertyDescriptionVNCProxyUsername" xml:space="preserve">
-    <value>Introduce el nombre de usuario de autentificación en el proxy.</value>
+    <value>Introduzca el nombre de usuario de autentificación en el proxy.</value>
   </data>
   <data name="HostnameIp" xml:space="preserve">
     <value>Nombre del huésped/IP</value>
@@ -1132,7 +1132,7 @@ Mensaje:
     <value>¡Prueba de proxy correcta!</value>
   </data>
   <data name="PuttyFocusFailed" xml:space="preserve">
-    <value>¡No se pudo filtrar el foco!</value>
+    <value>¡No se pudo fijar!</value>
   </data>
   <data name="PuttyHandle" xml:space="preserve">
     <value>Manejar Putty: {0}</value>
@@ -1327,7 +1327,7 @@ Mensaje:
     <value>Guardar todo</value>
   </data>
   <data name="SaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
-    <value>¿Quieres guardar el archivo actual de conexiones antes de cargar otro?</value>
+    <value>¿Quiere guardar el archivo actual de conexiones antes de cargar otro?</value>
   </data>
   <data name="Screen" xml:space="preserve">
     <value>Pantalla</value>
@@ -1351,7 +1351,7 @@ Mensaje:
     <value>¡No se pudieron guardar las preferencias o disponer el icono de la bandeja del sistema!</value>
   </data>
   <data name="ShowDescriptionTooltips" xml:space="preserve">
-    <value>Mostrar la descripción de las herramientas en el arbol de conexiones</value>
+    <value>Mostrar la descripción de los consejos de las herramientas en el árbol de conexiones</value>
   </data>
   <data name="ShowFullConsFilePath" xml:space="preserve">
     <value>Mostrar la ruta completa al archivo de conexión en el título de la ventana</value>
