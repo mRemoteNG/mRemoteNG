@@ -845,6 +845,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="ShowHelpText" xml:space="preserve">
     <value>&amp;Show Help Text</value>
   </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>Show &amp;Password</value>
+  </data>
   <data name="ShowText" xml:space="preserve">
     <value>Show Text</value>
   </data>
