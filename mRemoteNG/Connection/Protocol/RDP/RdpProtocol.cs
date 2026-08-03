@@ -761,6 +761,21 @@ namespace mRemoteNG.Connection.Protocol.RDP
                         _rdpClient.DesktopWidth = Screen.FromControl(_frmMain).Bounds.Width;
                         _rdpClient.DesktopHeight = Screen.FromControl(_frmMain).Bounds.Height;
                         break;
+                    default:
+                        // Fixed pixel resolution (e.g. Res1920x1080): connect the session at
+                        // that exact size, regardless of the panel size. Leave the control
+                        // docked (Fill) - forcing it larger than the panel via WinForms
+                        // AutoScroll/Size (as FitToWindow/SmartSize do) doesn't work here:
+                        // jumping an AxHost-wrapped ActiveX control directly from its small
+                        // docked size to a much larger one fails to propagate to the RDP
+                        // control's internal rendering surface, leaving most of it blank.
+                        // Instead rely on the RDP ActiveX control's own native scrollbars,
+                        // which it shows automatically whenever DesktopWidth/DesktopHeight
+                        // exceed the size of the (docked, panel-sized) control hosting it.
+                        var fixedRect = InterfaceControl.Info.Resolution.GetResolutionRectangle();
+                        _rdpClient.DesktopWidth = fixedRect.Width;
+                        _rdpClient.DesktopHeight = fixedRect.Height;
+                        break;
                 }
             }
             catch (Exception ex)

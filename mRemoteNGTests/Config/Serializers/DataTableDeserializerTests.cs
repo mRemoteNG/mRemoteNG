@@ -46,11 +46,21 @@ public class DataTableDeserializerTests
     public void UnknownLegacyResolutionFallsBackToSmartSize()
     {
         var dataTable = CreateDataTable(new ConnectionInfo());
-        dataTable.Rows[0]["Resolution"] = "Res1920x1080";
+        dataTable.Rows[0]["Resolution"] = "SomeUnknownResolution";
         _deserializer = new DataTableDeserializer(_cryptographyProvider, new SecureString());
         var output = _deserializer.Deserialize(dataTable);
         var connection = (ConnectionInfo)output.GetRecursiveChildList().First();
         Assert.That(connection.Resolution, Is.EqualTo(RDPResolutions.SmartSize));
+    }
+
+    [Test]
+    public void FixedResolutionRoundTrips()
+    {
+        var dataTable = CreateDataTable(new ConnectionInfo { Resolution = RDPResolutions.Res1920x1080 });
+        _deserializer = new DataTableDeserializer(_cryptographyProvider, new SecureString());
+        var output = _deserializer.Deserialize(dataTable);
+        var connection = (ConnectionInfo)output.GetRecursiveChildList().First();
+        Assert.That(connection.Resolution, Is.EqualTo(RDPResolutions.Res1920x1080));
     }
 
 
