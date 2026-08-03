@@ -356,6 +356,7 @@ namespace mRemoteNG.Connection
             Resolution = Enum.TryParse(Settings.Default.ConDefaultResolution, out RDPResolutions res)
                 ? res
                 : RDPResolutions.SmartSize;
+            UseMultiMon = Settings.Default.ConDefaultUseMultiMon;
             AutomaticResize = Settings.Default.ConDefaultAutomaticResize;
             Colors = (RDPColors)Enum.Parse(typeof(RDPColors), Settings.Default.ConDefaultColors);
             CacheBitmaps = Settings.Default.ConDefaultCacheBitmaps;

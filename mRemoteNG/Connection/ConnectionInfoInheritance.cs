@@ -312,6 +312,12 @@ namespace mRemoteNG.Connection
         public bool Resolution { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.UseMultiMon)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUseMultiMon)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UseMultiMon { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.AutomaticResize)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionAutomaticResize)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]

@@ -1107,6 +1107,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyDescriptionResolution" xml:space="preserve">
     <value>Choose the resolution or mode this connection will open in.</value>
   </data>
+  <data name="PropertyDescriptionUseMultiMon" xml:space="preserve">
+    <value>Use all monitors of the local computer for the remote session, when the connection is displayed in full screen.</value>
+  </data>
   <data name="PropertyDescriptionSmartSizeMode" xml:space="preserve">
     <value>Select the SmartSize mode to be used.</value>
   </data>
@@ -1307,6 +1310,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="UseRedirectionServerName" xml:space="preserve">
     <value>Use Redirection Server Name</value>
+  </data>
+  <data name="UseMultiMon" xml:space="preserve">
+    <value>Use all my monitors for the remote session</value>
   </data>
   <data name="ClearCachedRdpCredentials" xml:space="preserve">
     <value>Clear Cached RDP Credentials</value>
