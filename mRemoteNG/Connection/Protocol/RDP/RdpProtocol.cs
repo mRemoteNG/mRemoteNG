@@ -714,13 +714,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 if (Force.HasFlag(ConnectionInfo.Force.Fullscreen))
                 {
-                    _rdpClient.FullScreen = true;
-
+                    // Setting FullScreen=true latches the ActiveX control into fullscreen
+                    // immediately using whatever UseMultimon/DesktopWidth/DesktopHeight are
+                    // set at that instant, so those must be assigned first, not after.
                     if (connectionInfo.UseMultiMon)
                     {
                         EnableMultimonIfSupported();
-                        _rdpClient.DesktopWidth = SystemInformation.VirtualScreen.Width;
-                        _rdpClient.DesktopHeight = SystemInformation.VirtualScreen.Height;
+                        SetMultimonDesktopSize();
                     }
                     else
                     {
@@ -728,35 +728,32 @@ namespace mRemoteNG.Connection.Protocol.RDP
                         _rdpClient.DesktopHeight = Screen.FromControl(_frmMain).Bounds.Height;
                     }
 
+                    _rdpClient.FullScreen = true;
                     return;
                 }
 
-                // "Use all my monitors" overrides whatever resolution mode is selected,
-                // same as mstsc.exe: checking it forces true full screen. The desktop
-                // size still follows the chosen resolution though - a fixed pixel size
-                // (e.g. Res7680x4320) is honored exactly, it's only Fullscreen/SmartSize/
-                // FitToWindow (which have no explicit WxH of their own) that fall back to
-                // the combined size of the local monitors.
+                // "Use all my monitors" spans every physical monitor, same as mstsc.exe
+                // /multimon. Each monitor uses its own native resolution (an RDP protocol
+                // constraint); the resolution dropdown does not apply while multimon is on.
                 if (InterfaceControl.Info.UseMultiMon)
                 {
-                    _rdpClient.FullScreen = true;
+                    // Order matters here too: UseMultimon/DesktopWidth/DesktopHeight must be
+                    // set before FullScreen, see comment above.
                     EnableMultimonIfSupported();
+                    SetMultimonDesktopSize();
+                    _rdpClient.FullScreen = true;
 
-                    switch (InterfaceControl.Info.Resolution)
-                    {
-                        case RDPResolutions.Fullscreen:
-                        case RDPResolutions.SmartSize:
-                        case RDPResolutions.FitToWindow:
-                            _rdpClient.DesktopWidth = SystemInformation.VirtualScreen.Width;
-                            _rdpClient.DesktopHeight = SystemInformation.VirtualScreen.Height;
-                            break;
-                        default:
-                            var multiMonFixedRect = InterfaceControl.Info.Resolution.GetResolutionRectangle();
-                            _rdpClient.DesktopWidth = multiMonFixedRect.Width;
-                            _rdpClient.DesktopHeight = multiMonFixedRect.Height;
-                            break;
-                    }
+                    return;
+                }
 
+                // A custom "WidthxHeight" resolution (single-monitor only) overrides the
+                // Resolution dropdown. Connect the session at that exact pixel size and let
+                // the RDP control show its own native scrollbars, same as a fixed preset.
+                if (RdpExtensions.TryParseCustomResolution(InterfaceControl.Info.CustomResolution,
+                        out int customWidth, out int customHeight))
+                {
+                    _rdpClient.DesktopWidth = customWidth;
+                    _rdpClient.DesktopHeight = customHeight;
                     return;
                 }
 
@@ -830,6 +827,24 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             if (AxHost.GetOcx() is IMsRdpClientNonScriptable5 nonScriptable5)
                 nonScriptable5.UseMultimon = true;
+        }
+
+        // In multimon the DesktopWidth/Height seed the per-monitor desktop size. A fixed
+        // resolution (Res1920x1080, ...) forces every monitor to that size; the non-fixed
+        // modes (SmartSize/FitToWindow/Fullscreen) have no pixel size, so fall back to the
+        // primary monitor's native bounds and let each monitor use its own resolution.
+        // In multimon the DesktopWidth/Height seed MUST be the primary monitor's native
+        // bounds. The RDP client advertises the local monitor topology to the server; if the
+        // seed doesn't match a real monitor (e.g. a fixed 1920x1080 picked on a 2560x1440
+        // screen), RemoteMonitorLayoutMatchesLocal fails and the server rejects multimon,
+        // falling back to a single monitor. Each physical monitor therefore always uses its
+        // own native resolution in multimon - a fixed resolution can't be forced here, that's
+        // an RDP protocol constraint (turn multimon off to use a specific resolution).
+        private void SetMultimonDesktopSize()
+        {
+            var primary = Screen.PrimaryScreen.Bounds;
+            _rdpClient.DesktopWidth = primary.Width;
+            _rdpClient.DesktopHeight = primary.Height;
         }
 
         private void SetPort()
@@ -1041,6 +1056,29 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private void RDPEvent_OnConnected()
         {
             Event_Connected(this);
+            LogMultimonResult();
+        }
+
+        // After connect the server reports how many monitors it actually accepted. If multimon
+        // was requested but this logs 1, the topology was rejected (common causes: primary
+        // monitor not at virtual-desktop origin 0,0, monitors not physically adjacent, mixed
+        // per-monitor DPI, or the server edition doesn't support multimon).
+        private void LogMultimonResult()
+        {
+            if (!connectionInfo.UseMultiMon)
+                return;
+
+            try
+            {
+                if (AxHost.GetOcx() is IMsRdpClientNonScriptable5 nonScriptable5)
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                        $"RDP multimon: server accepted {nonScriptable5.RemoteMonitorCount} monitor(s) for '{connectionInfo.Hostname}'.",
+                        false);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("RdpProtocol: failed to read RemoteMonitorCount", ex, MessageClass.DebugMsg);
+            }
         }
 
         private void RDPEvent_OnLoginComplete()

@@ -83,6 +83,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("LoadBalanceInfo", connectionInfo.LoadBalanceInfo));
             element.Add(new XAttribute("Colors", connectionInfo.Colors));
             element.Add(new XAttribute("Resolution", connectionInfo.Resolution));
+            element.Add(new XAttribute("CustomResolution", connectionInfo.CustomResolution ?? ""));
             element.Add(new XAttribute("UseMultiMon", connectionInfo.UseMultiMon.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("AutomaticResize", connectionInfo.AutomaticResize.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("DisplayWallpaper", connectionInfo.DisplayWallpaper.ToString().ToLowerInvariant()));
@@ -248,6 +249,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 element.Add(new XAttribute("InheritResolution", inheritance.Resolution.ToString().ToLowerInvariant()));
             if (inheritance.UseMultiMon)
                 element.Add(new XAttribute("InheritUseMultiMon", inheritance.UseMultiMon.ToString().ToLowerInvariant()));
+            if (inheritance.CustomResolution)
+                element.Add(new XAttribute("InheritCustomResolution", inheritance.CustomResolution.ToString().ToLowerInvariant()));
             if (inheritance.AutomaticResize)
                 element.Add(new XAttribute("InheritAutomaticResize", inheritance.AutomaticResize.ToString().ToLowerInvariant()));
             if (inheritance.UseConsoleSession)

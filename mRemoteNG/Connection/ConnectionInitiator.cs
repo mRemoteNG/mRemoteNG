@@ -92,6 +92,16 @@ namespace mRemoteNG.Connection
 
                 StartPreConnectionExternalApp(connectionInfo);
 
+                // "Use all my monitors" true multi-monitor can't be done by the embedded RDP
+                // ActiveX control (a docked child window only goes fullscreen on one monitor).
+                // Hand off to the real mstsc.exe (use multimon:i:1), which spans every physical
+                // monitor exactly like the built-in Remote Desktop client's checkbox.
+                if (connectionInfo.Protocol == ProtocolType.RDP && connectionInfo.UseMultiMon)
+                {
+                    Protocol.RDP.RdpExternalMultimonLauncher.Launch(connectionInfo);
+                    return;
+                }
+
                 if (!force.HasFlag(ConnectionInfo.Force.DoNotJump))
                 {
                     if (SwitchToOpenConnection(connectionInfo))

@@ -1113,6 +1113,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyDescriptionUseMultiMon" xml:space="preserve">
     <value>Use all monitors of the local computer for the remote session, when the connection is displayed in full screen.</value>
   </data>
+  <data name="PropertyDescriptionCustomResolution" xml:space="preserve">
+    <value>A custom session resolution as WidthxHeight (e.g. 1920x1080). When set, it overrides the Resolution dropdown for single-monitor sessions. Leave empty to use the Resolution setting.</value>
+  </data>
   <data name="PropertyDescriptionSmartSizeMode" xml:space="preserve">
     <value>Select the SmartSize mode to be used.</value>
   </data>
@@ -1316,6 +1319,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="UseMultiMon" xml:space="preserve">
     <value>Use all my monitors for the remote session</value>
+  </data>
+  <data name="CustomResolution" xml:space="preserve">
+    <value>Custom Resolution</value>
   </data>
   <data name="ClearCachedRdpCredentials" xml:space="preserve">
     <value>Clear Cached RDP Credentials</value>

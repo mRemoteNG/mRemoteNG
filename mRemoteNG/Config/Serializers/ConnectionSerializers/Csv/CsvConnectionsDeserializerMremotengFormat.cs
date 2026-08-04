@@ -307,6 +307,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.UseMultiMon = value;
             }
 
+            if (headers.Contains("CustomResolution"))
+            {
+                connectionRecord.CustomResolution = connectionCsv[headers.IndexOf("CustomResolution")];
+            }
+
             if (headers.Contains("AutomaticResize"))
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("AutomaticResize")], out bool value))
@@ -683,6 +688,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseMultiMon")], out bool value))
                     connectionRecord.Inheritance.UseMultiMon = value;
+            }
+
+            if (headers.Contains("InheritCustomResolution"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritCustomResolution")], out bool value))
+                    connectionRecord.Inheritance.CustomResolution = value;
             }
 
             if (headers.Contains("InheritAutomaticResize"))

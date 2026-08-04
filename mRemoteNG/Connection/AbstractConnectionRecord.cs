@@ -74,6 +74,7 @@ namespace mRemoteNG.Connection
 
 
         private RDPResolutions _resolution;
+        private string _customResolution = "";
         private bool _useMultiMon;
         private bool _automaticResize;
         private RDPColors _colors;
@@ -672,6 +673,16 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("Resolution", _resolution);
             set => SetField(ref _resolution, value, "Resolution");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.CustomResolution)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionCustomResolution)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public string CustomResolution
+        {
+            get => GetPropertyValue("CustomResolution", _customResolution);
+            set => SetField(ref _customResolution, value, "CustomResolution");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),

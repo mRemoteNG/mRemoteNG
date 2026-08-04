@@ -5026,6 +5026,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A custom session resolution as WidthxHeight (e.g. 1920x1080). When set, it overrides the Resolution dropdown for single-monitor sessions. Leave empty to use the Resolution setting..
+        /// </summary>
+        internal static string PropertyDescriptionCustomResolution {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionCustomResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the SmartSize mode to be used..
         /// </summary>
         internal static string PropertyDescriptionSmartSizeMode {
@@ -7518,6 +7527,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string UseMultiMon {
             get {
                 return ResourceManager.GetString("UseMultiMon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Resolution.
+        /// </summary>
+        internal static string CustomResolution {
+            get {
+                return ResourceManager.GetString("CustomResolution", resourceCulture);
             }
         }
         
