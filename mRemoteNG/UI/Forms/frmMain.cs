@@ -74,7 +74,6 @@ namespace mRemoteNG.UI.Forms
         private static ClipboardchangeEventHandler _clipboardChangedEvent;
         private bool _inSizeMove;
         private bool _inMouseActivate;
-        private IntPtr _fpChainedWindowHandle;
         private bool _usingSqlServer;
         private string _connectionsFileName;
         private bool _showFullPathInTitle;
@@ -225,7 +224,7 @@ namespace mRemoteNG.UI.Forms
 
             _themeManager.ThemeChanged += ApplyTheme;
 
-            _fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
+            NativeMethods.AddClipboardFormatListener(Handle);
 
             Runtime.WindowList = [];
 
@@ -538,7 +537,7 @@ namespace mRemoteNG.UI.Forms
                 }
             }
 
-            NativeMethods.ChangeClipboardChain(Handle, _fpChainedWindowHandle);
+            NativeMethods.RemoveClipboardFormatListener(Handle);
             SystemEvents.DisplaySettingsChanged -= _advancedWindowMenu.OnDisplayChanged;
             Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
 
@@ -661,30 +660,8 @@ namespace mRemoteNG.UI.Forms
                             Console.WriteLine(_advancedWindowMenu.GetScreenById(m.WParam.ToInt32()).ToString());
                         }
                         break;
-                    case NativeMethods.WM_DRAWCLIPBOARD:
-                        NativeMethods.SendMessage(_fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);
+                    case NativeMethods.WM_CLIPBOARDUPDATE:
                         _clipboardChangedEvent?.Invoke();
-                        break;
-                    case NativeMethods.WM_CHANGECBCHAIN:
-                        // When a clipboard viewer window receives the WM_CHANGECBCHAIN message, 
-                        // it should call the SendMessage function to pass the message to the 
-                        // next window in the chain, unless the next window is the window 
-                        // being removed. In this case, the clipboard viewer should save 
-                        // the handle specified by the lParam parameter as the next window in the chain. 
-                        //
-                        // wParam is the Handle to the window being removed from 
-                        // the clipboard viewer chain 
-                        // lParam is the Handle to the next window in the chain 
-                        // following the window being removed. 
-                        if (m.WParam == _fpChainedWindowHandle) {
-                            // If wParam is the next clipboard viewer then it
-                            // is being removed so update pointer to the next
-                            // window in the clipboard chain
-                            _fpChainedWindowHandle = m.LParam;
-                        } else {
-                            //Send to the next window
-                            NativeMethods.SendMessage(_fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);
-                        }
                         break;
                 }
             }

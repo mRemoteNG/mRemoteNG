@@ -866,12 +866,24 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             try
             {
-                SetDriveRedirection();
+                _rdpClient.AdvancedSettings6.RedirectClipboard = connectionInfo.RedirectClipboard;
                 _rdpClient.AdvancedSettings2.RedirectPorts = connectionInfo.RedirectPorts;
                 _rdpClient.AdvancedSettings2.RedirectPrinters = connectionInfo.RedirectPrinters;
                 _rdpClient.AdvancedSettings2.RedirectSmartCards = connectionInfo.RedirectSmartCards;
                 _rdpClient.SecuredSettings2.AudioRedirectionMode = (int)connectionInfo.RedirectSound;
-                _rdpClient.AdvancedSettings6.RedirectClipboard = connectionInfo.RedirectClipboard;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.RdpSetRedirectionFailed, ex);
+            }
+
+            // Drive redirection enumerates the client's drive collection via COM, which throws
+            // far more readily than the simple flag assignments above (e.g. the DriveCollection
+            // isn't ready pre-connect). Isolate it in its own try so a drive-redirection failure
+            // can't stop clipboard/printer/etc. redirection from being applied.
+            try
+            {
+                SetDriveRedirection();
             }
             catch (Exception ex)
             {
