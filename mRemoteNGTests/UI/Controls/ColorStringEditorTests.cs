@@ -40,6 +40,15 @@ namespace mRemoteNGTests.UI.Controls
             Assert.That(result, Is.EqualTo(value));
         }
 
+        [TestCase("not-a-color")]
+        [TestCase("#nothex")]
+        public void EditValueKeepsAValueItCannotParse(string value)
+        {
+            // Dismissing the picker must not discard a legacy or hand-edited entry.
+            var result = _editor.EditValue(null, new EmptyServiceProvider(), value);
+            Assert.That(result, Is.EqualTo(value));
+        }
+
         [Test]
         public void EditValueOfNullDoesNotThrow()
         {

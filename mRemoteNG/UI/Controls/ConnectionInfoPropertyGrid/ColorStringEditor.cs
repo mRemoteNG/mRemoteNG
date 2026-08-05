@@ -19,28 +19,59 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 
         public override object? EditValue(ITypeDescriptorContext? context, IServiceProvider provider, object? value)
         {
-            object? editedValue = base.EditValue(context, provider, ToColor(value));
-            return editedValue is Color color ? Converter.ConvertFrom(color) : value;
+            bool valueIsAColor = TryConvertToColor(value, out Color currentColor);
+            object? editedValue = base.EditValue(context, provider, currentColor);
+
+            if (editedValue is not Color pickedColor)
+                return value;
+
+            // A value the converter cannot parse - a legacy or hand-edited entry, say -
+            // also arrives here as an empty color. Dismissing the picker would then wipe
+            // it, so it is kept until a real color is picked.
+            if (pickedColor.IsEmpty && !valueIsAColor)
+                return value;
+
+            return Converter.ConvertFrom(pickedColor);
         }
 
         public override void PaintValue(PaintValueEventArgs e)
         {
-            base.PaintValue(new PaintValueEventArgs(e.Context, ToColor(e.Value), e.Graphics, e.Bounds));
+            TryConvertToColor(e.Value, out Color color);
+            base.PaintValue(new PaintValueEventArgs(e.Context, color, e.Graphics, e.Bounds));
         }
 
-        private static object? ToColor(object? value)
+        /// <summary>
+        /// Converts a stored value to the <see cref="Color"/> the wrapped editor works
+        /// with, reporting whether it actually describes a color.
+        /// </summary>
+        private static bool TryConvertToColor(object? value, out Color color)
         {
-            if (value is Color)
-                return value;
+            color = Color.Empty;
+
+            if (value is Color existingColor)
+            {
+                color = existingColor;
+                return true;
+            }
+
+            // Nothing stored means "no color", which is a valid state rather than a
+            // failed conversion.
+            if (value is null || (value is string text && string.IsNullOrWhiteSpace(text)))
+                return true;
 
             try
             {
-                return Converter.ConvertTo(null, null, value, typeof(Color));
+                if (Converter.ConvertTo(null, null, value, typeof(Color)) is Color convertedColor)
+                    color = convertedColor;
             }
             catch (NotSupportedException)
             {
-                return Color.Empty;
+                return false;
             }
+
+            // TabColorConverter maps text it cannot parse to an empty color instead of
+            // throwing, so an empty result here means the conversion failed.
+            return !color.IsEmpty;
         }
     }
 }
