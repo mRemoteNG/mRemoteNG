@@ -12,28 +12,75 @@ namespace mRemoteNGTests.UI.Tabs
     [TestFixture]
     public class DockPaneStripNGTests
     {
+        private static readonly TimeSpan TestTimeout = TimeSpan.FromSeconds(30);
+        private static readonly TimeSpan ShutdownTimeout = TimeSpan.FromSeconds(5);
+
+        /// <summary>
+        /// Runs <paramref name="testAction"/> on an STA thread with a real message loop, so
+        /// docking layout work that relies on posted messages completes.
+        /// </summary>
         private static void RunWithMessagePump(Action testAction)
         {
             Exception caught = null;
+            Form pump = null;
+            using var pumpReady = new ManualResetEventSlim(false);
+
             var thread = new Thread(() =>
             {
-                try
+                pump = new Form
                 {
-                    testAction();
-                }
-                catch (Exception ex)
+                    ShowInTaskbar = false,
+                    StartPosition = FormStartPosition.Manual,
+                    Location = new System.Drawing.Point(-10000, -10000)
+                };
+
+                _ = pump.Handle; // Force handle creation so the loop below can be posted to.
+                pumpReady.Set();
+
+                pump.BeginInvoke(new Action(() =>
                 {
-                    caught = ex;
-                }
-            });
+                    try
+                    {
+                        testAction();
+                    }
+                    catch (Exception ex)
+                    {
+                        caught = ex;
+                    }
+                    finally
+                    {
+                        Application.ExitThread();
+                    }
+                }));
+
+                Application.Run(new ApplicationContext());
+                pump.Dispose();
+            })
+            {
+                // Last-resort safety net: a wedged UI thread must never hold the test run open.
+                IsBackground = true
+            };
 
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
+            pumpReady.Wait(ShutdownTimeout);
 
-            if (!thread.Join(TimeSpan.FromSeconds(30)))
+            if (!thread.Join(TestTimeout))
             {
-                thread.Interrupt();
-                Assert.Fail("Test timed out after 30 seconds");
+                // Ask the loop to unwind. This only lands if the thread is still pumping;
+                // when it is not, IsBackground keeps the timeout from hanging the run.
+                try
+                {
+                    pump?.BeginInvoke(new Action(Application.ExitThread));
+                }
+                catch (InvalidOperationException)
+                {
+                    // Handle was never created, or the form was disposed as the loop
+                    // unwound (ObjectDisposedException derives from this).
+                }
+
+                thread.Join(ShutdownTimeout);
+                Assert.Fail($"Test timed out after {TestTimeout.TotalSeconds} seconds");
             }
 
             if (caught != null)
