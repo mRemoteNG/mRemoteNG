@@ -14,7 +14,7 @@ namespace mRemoteNGTests.UI.Tabs
     {
         private static void RunWithMessagePump(Action testAction)
         {
-            Exception? caught = null;
+            Exception caught = null;
             var thread = new Thread(() =>
             {
                 try
@@ -132,7 +132,10 @@ namespace mRemoteNGTests.UI.Tabs
             Application.DoEvents();
 
             Control dockPaneStrip = FindDockPaneStripNG(dockPanel);
+            Assert.That(dockPaneStrip, Is.Not.Null, "Could not find DockPaneStripNG control");
+
             MethodInfo closeTabMethod = dockPaneStrip.GetType().GetMethod("CloseTab", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.That(closeTabMethod, Is.Not.Null, "Could not find CloseTab method");
 
             closeTabMethod.Invoke(dockPaneStrip, new object[] { 1 });
             Application.DoEvents();
