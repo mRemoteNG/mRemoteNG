@@ -45,7 +45,7 @@
     <PackageVersion Include="NUnit3TestAdapter" Version="6.2.0" />
     <PackageVersion Include="OpenCover" Version="4.7.1221" />
     <PackageVersion Include="Renci.SshNet.Async" Version="1.4.0" />
-    <PackageVersion Include="ReportGenerator" Version="5.5.10" />
+    <PackageVersion Include="ReportGenerator" Version="5.5.11" />
     <PackageVersion Include="runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl" Version="4.3.3" />
     <PackageVersion Include="runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl" Version="4.3.3" />
     <PackageVersion Include="runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl" Version="4.3.3" />
