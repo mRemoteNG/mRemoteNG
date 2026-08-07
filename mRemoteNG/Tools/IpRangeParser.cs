@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Net;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Tools
 {
@@ -15,10 +16,8 @@ namespace mRemoteNG.Tools
     /// </summary>
     public static class IpRangeParser
     {
-        /// <summary>Example text shown to the user when the field is empty or unparsable.</summary>
-        public const string SyntaxHint =
-            "Enter a single address (192.168.1.1), a range (192.168.1.1 - 192.168.1.254) " +
-            "or a CIDR block (192.168.1.0/24). IPv4 and IPv6 are both supported.";
+        /// <summary>Localized example text shown to the user when the field is empty or unparsable.</summary>
+        public static string SyntaxHint => Language.PortScanAddressRangeHint;
 
         /// <summary>
         /// Attempts to parse <paramref name="text"/>. On success <paramref name="start"/> and
@@ -84,7 +83,7 @@ namespace mRemoteNG.Tools
 
             if (first!.AddressFamily != last!.AddressFamily)
             {
-                error = "The start and end addresses must be the same type (both IPv4 or both IPv6).";
+                error = Language.PortScanMixedAddressFamilies;
                 return false;
             }
 
@@ -115,7 +114,8 @@ namespace mRemoteNG.Tools
             if (!int.TryParse(prefixText, NumberStyles.None, CultureInfo.InvariantCulture, out int prefixLength) ||
                 prefixLength > bitCount)
             {
-                error = $"'{prefixText}' is not a valid prefix length; use a value between 0 and {bitCount}.";
+                error = string.Format(CultureInfo.CurrentCulture, Language.PortScanInvalidPrefixLength,
+                                      prefixText, bitCount);
                 return false;
             }
 
@@ -146,7 +146,7 @@ namespace mRemoteNG.Tools
                 return true;
             }
 
-            error = $"'{text}' is not a valid IPv4 or IPv6 address.";
+            error = string.Format(CultureInfo.CurrentCulture, Language.PortScanInvalidAddress, text);
             return false;
         }
 

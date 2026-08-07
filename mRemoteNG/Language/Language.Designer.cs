@@ -4396,6 +4396,15 @@ namespace mRemoteNG.Resources.Language {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to 192.168.1.1  |  192.168.1.1 - 192.168.1.254  |  192.168.1.0/24.
+        /// </summary>
+        internal static string PortScanAddressRangePlaceholder {
+            get {
+                return ResourceManager.GetString("PortScanAddressRangePlaceholder", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to All ports.
         /// </summary>
         internal static string PortScanAllPorts {
@@ -4428,6 +4437,60 @@ namespace mRemoteNG.Resources.Language {
         internal static string PortScanCustomPortsHint {
             get {
                 return ResourceManager.GetString("PortScanCustomPortsHint", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to 22, 80, 443, 3389, 8000-8100.
+        /// </summary>
+        internal static string PortScanCustomPortsPlaceholder {
+            get {
+                return ResourceManager.GetString("PortScanCustomPortsPlaceholder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid IPv4 or IPv6 address..
+        /// </summary>
+        internal static string PortScanInvalidAddress {
+            get {
+                return ResourceManager.GetString("PortScanInvalidAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid port; ports must be between {1} and {2}..
+        /// </summary>
+        internal static string PortScanInvalidPort {
+            get {
+                return ResourceManager.GetString("PortScanInvalidPort", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid prefix length; use a value between 0 and {1}..
+        /// </summary>
+        internal static string PortScanInvalidPrefixLength {
+            get {
+                return ResourceManager.GetString("PortScanInvalidPrefixLength", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The start and end addresses must be the same type (both IPv4 or both IPv6)..
+        /// </summary>
+        internal static string PortScanMixedAddressFamilies {
+            get {
+                return ResourceManager.GetString("PortScanMixedAddressFamilies", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The address range is too large to scan ({0:N0} addresses); the limit is {1:N0}..
+        /// </summary>
+        internal static string PortScanRangeTooLarge {
+            get {
+                return ResourceManager.GetString("PortScanRangeTooLarge", resourceCulture);
             }
         }
 

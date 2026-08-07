@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Tools
 {
@@ -14,8 +15,8 @@ namespace mRemoteNG.Tools
         public const int MinPort = 1;
         public const int MaxPort = 65535;
 
-        /// <summary>Example text shown to the user when the field is empty or unparsable.</summary>
-        public const string SyntaxHint = "Enter at least one port, e.g. 22, 80, 443, 3389, 8000-8100";
+        /// <summary>Localized example text shown to the user when the field is empty or unparsable.</summary>
+        public static string SyntaxHint => Language.PortScanCustomPortsHint;
 
         /// <summary>
         /// Attempts to parse <paramref name="portListText"/>. On success <paramref name="ports"/> is
@@ -75,7 +76,7 @@ namespace mRemoteNG.Tools
                 return true;
             }
 
-            error = $"'{text}' is not a valid port; ports must be between {MinPort} and {MaxPort}.";
+            error = string.Format(CultureInfo.CurrentCulture, Language.PortScanInvalidPort, text, MinPort, MaxPort);
             return false;
         }
     }

@@ -103,7 +103,7 @@ namespace mRemoteNG.UI.Window
             // One field takes a single address, an explicit range or a CIDR block (IPv4 or IPv6).
             lblStartIP.Text = Language.PortScanAddressRange;
             txtIpRange.ToolTipText = Language.PortScanAddressRangeHint;
-            txtIpRange.PlaceholderText = "192.168.1.1  |  192.168.1.1 - 192.168.1.254  |  192.168.1.0/24";
+            txtIpRange.PlaceholderText = Language.PortScanAddressRangePlaceholder;
             btnScan.Text = Language._Scan;
             btnImport.Text = Language._Import;
             lblOnlyImport.Text = Language.ProtocolToImport;
@@ -114,7 +114,7 @@ namespace mRemoteNG.UI.Window
             rdoCommonPorts.Text = Language.PortScanCommonPorts;
             rdoAllPorts.Text = Language.PortScanAllPorts;
             rdoCustomPorts.Text = Language.PortScanCustomPorts;
-            txtCustomPorts.PlaceholderText = "22, 80, 443, 3389, 8000-8100";
+            txtCustomPorts.PlaceholderText = Language.PortScanCustomPortsPlaceholder;
             portScanToolTip.SetToolTip(rdoCommonPorts, string.Join(", ", CommonPorts));
             portScanToolTip.SetToolTip(rdoCustomPorts, Language.PortScanCustomPortsHint);
             portScanToolTip.SetToolTip(txtCustomPorts, Language.PortScanCustomPortsHint);

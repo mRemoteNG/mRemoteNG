@@ -981,6 +981,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PortScanAddressRangeHint" xml:space="preserve">
     <value>Enter a single address (192.168.1.1), a range (192.168.1.1 - 192.168.1.254) or a CIDR block (192.168.1.0/24). IPv4 and IPv6 are both supported.</value>
   </data>
+  <data name="PortScanAddressRangePlaceholder" xml:space="preserve">
+    <value>192.168.1.1  |  192.168.1.1 - 192.168.1.254  |  192.168.1.0/24</value>
+  </data>
   <data name="PortScanCommonPorts" xml:space="preserve">
     <value>Common ports</value>
   </data>
@@ -992,6 +995,24 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="PortScanCustomPortsHint" xml:space="preserve">
     <value>Enter the ports to probe as a list of ports and ranges, e.g. 22, 80, 443, 3389, 8000-8100</value>
+  </data>
+  <data name="PortScanCustomPortsPlaceholder" xml:space="preserve">
+    <value>22, 80, 443, 3389, 8000-8100</value>
+  </data>
+  <data name="PortScanInvalidAddress" xml:space="preserve">
+    <value>'{0}' is not a valid IPv4 or IPv6 address.</value>
+  </data>
+  <data name="PortScanInvalidPort" xml:space="preserve">
+    <value>'{0}' is not a valid port; ports must be between {1} and {2}.</value>
+  </data>
+  <data name="PortScanInvalidPrefixLength" xml:space="preserve">
+    <value>'{0}' is not a valid prefix length; use a value between 0 and {1}.</value>
+  </data>
+  <data name="PortScanMixedAddressFamilies" xml:space="preserve">
+    <value>The start and end addresses must be the same type (both IPv4 or both IPv6).</value>
+  </data>
+  <data name="PortScanRangeTooLarge" xml:space="preserve">
+    <value>The address range is too large to scan ({0:N0} addresses); the limit is {1:N0}.</value>
   </data>
   <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
     <value>Enter the hostname or ip you want to connect to.</value>
