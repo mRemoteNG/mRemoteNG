@@ -975,6 +975,24 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Couldn't load PortScan panel!</value>
   </data>
+  <data name="PortScanAddressRange" xml:space="preserve">
+    <value>IP / Range / CIDR</value>
+  </data>
+  <data name="PortScanAddressRangeHint" xml:space="preserve">
+    <value>Enter a single address (192.168.1.1), a range (192.168.1.1 - 192.168.1.254) or a CIDR block (192.168.1.0/24). IPv4 and IPv6 are both supported.</value>
+  </data>
+  <data name="PortScanCommonPorts" xml:space="preserve">
+    <value>Common ports</value>
+  </data>
+  <data name="PortScanAllPorts" xml:space="preserve">
+    <value>All ports</value>
+  </data>
+  <data name="PortScanCustomPorts" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="PortScanCustomPortsHint" xml:space="preserve">
+    <value>Enter the ports to probe as a list of ports and ranges, e.g. 22, 80, 443, 3389, 8000-8100</value>
+  </data>
   <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
     <value>Enter the hostname or ip you want to connect to.</value>
   </data>
