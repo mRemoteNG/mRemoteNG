@@ -37,8 +37,8 @@ namespace mRemoteNG.Connection.Protocol.Terminal
                     Padding = new Padding(0, 20, 0, 0)
                 };
 
-                string hostname = _connectionInfo.Hostname.Trim().ToLower();
-                bool useLocalHost = hostname == "" || hostname.Equals("localhost");
+                string hostname = _connectionInfo.Hostname.Trim();
+                bool useLocalHost = hostname.Length == 0 || hostname.Equals("localhost", StringComparison.OrdinalIgnoreCase);
 
                 string processExe;
                 string arguments;
@@ -152,11 +152,14 @@ namespace mRemoteNG.Connection.Protocol.Terminal
             string hostname = (rawHostname ?? string.Empty).Trim();
             string username = (rawUsername ?? string.Empty).Trim();
 
+            // Deliberately do NOT echo the offending value: it is attacker-controlled and, in the
+            // invalid case, may contain control characters/newlines that would be written verbatim into
+            // logs and UI messages (log forging / message spoofing).
             if (!IsSafeSshToken(hostname))
-                throw new ArgumentException($"Refusing to start SSH session: the hostname '{hostname}' contains characters that are not allowed.");
+                throw new ArgumentException("Refusing to start SSH session: the hostname contains characters that are not allowed.");
 
             if (username.Length > 0 && !IsSafeSshToken(username))
-                throw new ArgumentException($"Refusing to start SSH session: the username '{username}' contains characters that are not allowed.");
+                throw new ArgumentException("Refusing to start SSH session: the username contains characters that are not allowed.");
 
             string args = "";
 
@@ -173,8 +176,11 @@ namespace mRemoteNG.Connection.Protocol.Terminal
 
         /// <summary>
         /// Returns true only for values that are safe to place on the ssh.exe command line as a single
-        /// token: non-empty, no whitespace or control characters, and not starting with '-' (which ssh
-        /// would treat as an option switch).
+        /// token: non-empty, no whitespace or control characters, no double quotes, and not starting
+        /// with '-' (which ssh would treat as an option switch). Double quotes are rejected because
+        /// Windows argument parsing (CommandLineToArgvW) strips them, so a value such as
+        /// "-oProxyCommand=..." does not literally start with '-' here yet reaches ssh.exe as an argv
+        /// token that does — re-enabling option injection.
         /// </summary>
         private static bool IsSafeSshToken(string value)
         {
@@ -186,7 +192,7 @@ namespace mRemoteNG.Connection.Protocol.Terminal
 
             foreach (char c in value)
             {
-                if (char.IsWhiteSpace(c) || char.IsControl(c))
+                if (char.IsWhiteSpace(c) || char.IsControl(c) || c == '"')
                     return false;
             }
 
@@ -209,7 +215,17 @@ namespace mRemoteNG.Connection.Protocol.Terminal
             {
                 foreach (string dir in pathVar.Split(Path.PathSeparator))
                 {
-                    string candidate = Path.Combine(dir.Trim(), "ssh.exe");
+                    // PATH segments may be quoted, blank, or contain %VAR% placeholders. Normalize each
+                    // before probing so we don't build a quoted or relative "ssh.exe" candidate.
+                    string segment = dir.Trim().Trim('"');
+                    if (segment.Length == 0)
+                        continue;
+
+                    segment = Environment.ExpandEnvironmentVariables(segment);
+                    if (!Path.IsPathRooted(segment))
+                        continue;
+
+                    string candidate = Path.Combine(segment, "ssh.exe");
                     if (File.Exists(candidate))
                         return candidate;
                 }

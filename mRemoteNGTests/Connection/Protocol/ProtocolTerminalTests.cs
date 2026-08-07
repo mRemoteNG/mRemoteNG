@@ -106,6 +106,41 @@ public class ProtocolTerminalTests
         AssertRejected("", "admin");
     }
 
+    [Test]
+    public void BuildSshArguments_QuotedLeadingDashHostname_Throws()
+    {
+        // A leading '-' hidden behind double quotes: Windows CommandLineToArgvW strips the quotes, so
+        // ssh.exe still receives an argv token starting with '-'. The quote must be rejected.
+        AssertRejected("\"-oProxyCommand=calc.exe\"", "");
+    }
+
+    [Test]
+    public void BuildSshArguments_QuotedLeadingDashUsername_Throws()
+    {
+        AssertRejected("host", "\"-oProxyCommand=calc.exe\"");
+    }
+
+    [TestCase("ho\"st")]
+    [TestCase("\"host")]
+    [TestCase("host\"")]
+    public void BuildSshArguments_HostWithDoubleQuote_Throws(string hostname)
+    {
+        AssertRejected(hostname, "");
+    }
+
+    [Test]
+    public void BuildSshArguments_MessageDoesNotEchoOffendingValue()
+    {
+        // The exception must not embed the attacker-controlled token (control chars/newlines would
+        // otherwise reach logs and UI verbatim — log forging / message spoofing).
+        MethodInfo method = GetBuildMethod();
+        var ex = Assert.Throws<TargetInvocationException>(
+            () => method.Invoke(null, new object[] { "evil\r\nInjected-Log-Line", "", 22 }));
+        Assert.That(ex.InnerException, Is.TypeOf<ArgumentException>());
+        Assert.That(ex.InnerException.Message, Does.Not.Contain("Injected-Log-Line"));
+        Assert.That(ex.InnerException.Message, Does.Not.Contain("\n"));
+    }
+
     #endregion
 
     #region Helpers
