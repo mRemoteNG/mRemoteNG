@@ -33,6 +33,21 @@ if errorlevel 1 (
     exit /b 1
 )
 
+:: If a previous MSI exists and is locked (e.g. registered by Windows Installer), delete it
+:: with elevation before WiX tries to overwrite it — otherwise light.exe fails with LGHT0001.
+set "MSI=%ROOT%mRemoteNGInstaller\Installer\bin\x64\Release\en-US\mRemoteNG-Installer.msi"
+if exist "%MSI%" (
+    del /f /q "%MSI%" >nul 2>&1
+    if exist "%MSI%" (
+        echo [INFO] MSI is locked; re-launching with elevation to delete it...
+        powershell -NoProfile -Command "Start-Process cmd -ArgumentList '/c del /f /q \"%MSI%\"' -Verb RunAs -Wait"
+        if exist "%MSI%" (
+            echo [ERROR] Could not delete locked MSI. Close any program that has it open and retry.
+            exit /b 1
+        )
+    )
+)
+
 echo Building MSI installer...
 :: ponytail: WixTargetsPath is forced because VS's own MSBuildExtensionsPath32 no longer
 :: points at the classic shared "%ProgramFiles(x86)%\MSBuild" folder where WiX v3 installs its targets.
@@ -42,7 +57,6 @@ if errorlevel 1 (
     exit /b 1
 )
 
-set "MSI=%ROOT%mRemoteNGInstaller\Installer\bin\x64\Release\en-US\mRemoteNG-Installer.msi"
 if exist "%MSI%" (
     echo Done. MSI: %MSI%
 ) else (
