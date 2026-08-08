@@ -34,15 +34,22 @@ namespace mRemoteNG.Tools
                            IEnumerable<int> ports,
                            int timeoutInMilliseconds = 5000)
         {
+            ArgumentNullException.ThrowIfNull(ports);
+
             IPAddress ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
             IPAddress ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
 
             if (timeoutInMilliseconds < 0)
                 throw new ArgumentOutOfRangeException(nameof(timeoutInMilliseconds));
 
+            // Materialise once: the sequence may be lazy, and validating it separately from
+            // AddRange would otherwise enumerate it twice.
+            List<int> requestedPorts = [.. ports];
+            ValidatePorts(requestedPorts, nameof(ports));
+
             _timeoutInMilliseconds = timeoutInMilliseconds;
             _ports.Clear();
-            _ports.AddRange(ports);
+            _ports.AddRange(requestedPorts);
 
             _ipAddresses.Clear();
             _ipAddresses.AddRange(IpAddressArrayFromRange(ipAddressStart, ipAddressEnd));
@@ -74,6 +81,7 @@ namespace mRemoteNG.Tools
             _ports.Clear();
 
             if (checkDefaultPortsOnly)
+                // port1/port2 are ignored in this mode, so they are deliberately not validated.
                 _ports.AddRange(new[]
                 {
                     ScanHost.SshPort, ScanHost.TelnetPort, ScanHost.HttpPort, ScanHost.HttpsPort, ScanHost.RloginPort,
@@ -81,6 +89,12 @@ namespace mRemoteNG.Tools
                 });
             else
             {
+                // Validated after the 0-means-unspecified rule above has been applied, so passing
+                // (0, 3389) still scans the single port, and before the loop expands the range, so
+                // an absurd endpoint cannot allocate its way to a million entries first.
+                ValidatePort(portStart, nameof(port1));
+                ValidatePort(portEnd, nameof(port2));
+
                 for (int port = portStart; port <= portEnd; port++)
                 {
                     _ports.Add(port);
@@ -288,6 +302,31 @@ namespace mRemoteNG.Tools
 
             if (_scannedHosts.Count == _ipAddresses.Count)
                 RaiseScanCompleteEvent(_scannedHosts);
+        }
+
+        /// <summary>
+        /// Rejects an unusable port list up front. Without this an empty list scans every host for
+        /// nothing, and an out-of-range value only surfaces much later as a failure inside the
+        /// per-port TcpClient connect, by which time the scan is already running.
+        /// </summary>
+        private static void ValidatePorts(List<int> ports, string paramName)
+        {
+            if (ports.Count == 0)
+                throw new ArgumentException(Language.PortScanCustomPortsHint, paramName);
+
+            foreach (int port in ports)
+            {
+                ValidatePort(port, paramName);
+            }
+        }
+
+        /// <summary>Rejects a single port outside the usable 1..65535 range.</summary>
+        private static void ValidatePort(int port, string paramName)
+        {
+            if (port is < PortListParser.MinPort or > PortListParser.MaxPort)
+                throw new ArgumentOutOfRangeException(paramName,
+                    string.Format(CultureInfo.CurrentCulture, Language.PortScanInvalidPort,
+                                  port, PortListParser.MinPort, PortListParser.MaxPort));
         }
 
         /// <summary>
