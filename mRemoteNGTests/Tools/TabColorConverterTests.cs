@@ -56,6 +56,13 @@ namespace mRemoteNGTests.Tools
         }
 
         [Test]
+        public void ConvertFromEmptyColorReturnsEmptyString()
+        {
+            var result = _converter.ConvertFrom(Color.Empty);
+            Assert.That(result, Is.EqualTo(string.Empty));
+        }
+
+        [Test]
         public void ConvertFromStringReturnsString()
         {
             var colorString = "Blue";

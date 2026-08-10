@@ -295,6 +295,12 @@ namespace mRemoteNG.Tools
 
                 if (value is Color colorValue)
                 {
+                    // An empty color means "no color set" and must stay an empty string.
+                    if (colorValue.IsEmpty)
+                    {
+                        return string.Empty;
+                    }
+
                     // Convert Color to string representation
                     // Use named color if it's a known color, otherwise use hex format
                     if (colorValue.IsNamedColor)
@@ -360,7 +366,9 @@ namespace mRemoteNG.Tools
 
             public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
             {
-                // Provide a list of common colors for the dropdown
+                // Provide a list of common colors for the dropdown. The values must be
+                // strings: the annotated properties are strings, and the grid commits the
+                // picked standard value without running it through this converter.
                 Color[] colors =
                 [
                     Color.Red,
@@ -385,7 +393,7 @@ namespace mRemoteNG.Tools
                     Color.Olive
                 ];
 
-                return new StandardValuesCollection(colors);
+                return new StandardValuesCollection(Array.ConvertAll(colors, color => color.Name));
             }
 
             public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context)
