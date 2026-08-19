@@ -22,7 +22,7 @@
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.0.2" />
     <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.11" />
     <PackageVersion Include="Microsoft.Data.SqlClient.SNI" Version="6.0.3" />
-    <PackageVersion Include="Microsoft.Data.SqlClient.SNI.runtime" Version="6.0.2" />
+    <PackageVersion Include="Microsoft.Data.SqlClient.SNI.runtime" Version="6.0.3" />
     <PackageVersion Include="Microsoft.Extensions.DependencyModel" Version="10.0.11" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.11" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
