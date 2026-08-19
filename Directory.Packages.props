@@ -21,7 +21,7 @@
     <PackageVersion Include="log4net" Version="3.3.2" />
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.0.2" />
     <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.10" />
-    <PackageVersion Include="Microsoft.Data.SqlClient.SNI" Version="6.0.2" />
+    <PackageVersion Include="Microsoft.Data.SqlClient.SNI" Version="6.0.3" />
     <PackageVersion Include="Microsoft.Data.SqlClient.SNI.runtime" Version="6.0.2" />
     <PackageVersion Include="Microsoft.Extensions.DependencyModel" Version="10.0.10" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.10" />
