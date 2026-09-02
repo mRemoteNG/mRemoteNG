@@ -1,4 +1,5 @@
 ﻿using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
@@ -70,6 +71,18 @@ public class XmlConnectionsSerializerTests
         var xdoc = XDocument.Parse(serializedConnections);
         var attributeValue = xdoc.Root?.Element("Node")?.Attribute(attributeName)?.Value;
         Assert.That(attributeValue, Is.EqualTo(expectedValue));
+    }
+
+    [Test]
+    public void FixedResolutionRoundTripsThroughXml()
+    {
+        var password = _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString;
+        var connectionInfo = new ConnectionInfo { Name = "myConnection", Resolution = RDPResolutions.Res1920x1080 };
+        var serializedConnections = _serializer.Serialize(connectionInfo);
+        var deserializer = new XmlConnectionsDeserializer(() => password.ConvertToSecureString());
+        var model = deserializer.Deserialize(serializedConnections);
+        var deserialized = model.RootNodes[0].Children.First();
+        Assert.That(deserialized.Resolution, Is.EqualTo(RDPResolutions.Res1920x1080));
     }
 
     private ConnectionTreeModel SetupConnectionTreeModel()

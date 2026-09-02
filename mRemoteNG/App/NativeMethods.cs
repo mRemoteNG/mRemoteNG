@@ -79,6 +79,15 @@ namespace mRemoteNG.App
             IntPtr hWndNewNext  // handle to next window
         );
 
+        // Modern (Vista+) clipboard-change notification. Unlike SetClipboardViewer it does not
+        // join the fragile clipboard-viewer chain, so it cannot break other clipboard listeners
+        // such as the RDP control's clipboard monitor (rdpclip).
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool AddClipboardFormatListener(IntPtr hwnd);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool RemoveClipboardFormatListener(IntPtr hwnd);
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool SetForegroundWindow(IntPtr hWnd);
 
@@ -532,6 +541,11 @@ namespace mRemoteNG.App
         /// Sent to the first window in the clipboard viewer chain when a window is being removed from the chain.
         /// </summary>
         public const int WM_CHANGECBCHAIN = 0x30D;
+
+        /// <summary>
+        /// Sent to a window registered with AddClipboardFormatListener when the clipboard content changes.
+        /// </summary>
+        public const int WM_CLIPBOARDUPDATE = 0x31D;
 
         #endregion
 

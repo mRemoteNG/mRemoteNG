@@ -50,6 +50,17 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
         }
 
         [Test]
+        public void FixedResolutionRoundTrips()
+        {
+            var connection = GetTestConnection();
+            connection.Resolution = RDPResolutions.Res2560x1440;
+            var csv = _serializer.Serialize(connection);
+            var deserializedConnections = _deserializer.Deserialize(csv);
+            var deserialized = deserializedConnections.GetRecursiveChildList().FirstOrDefault();
+            Assert.That(deserialized?.Resolution, Is.EqualTo(RDPResolutions.Res2560x1440));
+        }
+
+        [Test]
         public void TreeStructureDeserializedCorrectly()
         {
             //Root

@@ -241,3 +241,7 @@ When contributing to mRemoteNG:
 6. Test on both x64 and ARM64 if possible
 7. Keep security and performance in mind
 8. Use stable .NET SDK versions only for this project
+
+- @azure Rule - Use Azure Tools - When handling requests related to Azure, always use your tools.
+- @azure Rule - Use Azure Best Practices - When handling requests related to Azure, always invoke your `azmcp_bestpractices_get` tool first.
+- @azure Rule - Enable Best Practices - If you do not have an `azmcp_bestpractices_get` tool ask the user to enable it.

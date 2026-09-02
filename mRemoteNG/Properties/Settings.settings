@@ -29,6 +29,9 @@
     <Setting Name="ConDefaultCacheBitmaps" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="ConDefaultUseMultiMon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="ConDefaultDisplayWallpaper" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>

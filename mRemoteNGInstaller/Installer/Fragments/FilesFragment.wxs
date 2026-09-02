@@ -25,6 +25,7 @@
             <Directory Id="dirB699B779DD859CB7CAD46DA4BC9017C0" Name="runtimes" />
             <Directory Id="dir54B0732D1EC7055747BB11A9069B5872" Name="Schemas" />
             <Directory Id="dir861F6A02C2F7A7DA6955E64037179011" Name="sv-SE" />
+            <Directory Id="dir4BFD6A5D73BE0F8A766694081D22B841" Name="ta" />
             <Directory Id="dir449D12A97ECE34898DFE89F1087779C9" Name="Themes" />
             <Directory Id="dirF50F8AE1B4079411641D2CA28D569A6E" Name="tr-TR" />
             <Directory Id="dir09CC4E618379FE7D9EB8E064B61C997C" Name="uk" />
@@ -49,18 +50,6 @@
             <Component Id="cmp375F226751B298CD70903C1646985757" Directory="INSTALLDIR" Guid="*">
                 <File Id="filBF38EEDD7B5695007E9582D7EF347826" KeyPath="yes" Source="$(var.HarvestPath)\log4net.config" />
             </Component>
-            <Component Id="cmp73DD793C33CE93882A21562E8A0FFB47" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil579DAFF7079024ADD71395BB16AB9D2F" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Data.SqlClient.SNI.arm64.dll" />
-            </Component>
-            <Component Id="cmp791187EFDDB68CDC204D6B654412E444" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil7F00295DB9A936843822F989B9CBA9D7" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Data.SqlClient.SNI.arm64.pdb" />
-            </Component>
-            <Component Id="cmpE910730FCBBF20B14612C406EFEB5402" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil3B5C5DF4AF7232C40BB382C38F178F78" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Data.SqlClient.SNI.x64.dll" />
-            </Component>
-            <Component Id="cmpBC5D78342783913CB2940FD1FBCB1C0F" Directory="INSTALLDIR" Guid="*">
-                <File Id="filADC5E7D9C4AB391364380BC83CACEAC6" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Data.SqlClient.SNI.x64.pdb" />
-            </Component>
             <Component Id="cmp104087D18B25A9A8D2ECC5B6EA2AE79B" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil5282108DD54B6C7D192C3E9D001FD4E7" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Web.WebView2.Core.dll" />
             </Component>
@@ -73,9 +62,6 @@
                 <File Id="fil157A3D211984A88620C183E777A80E6C" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Web.WebView2.Wpf.dll" />
             </Component>
             
-            <Component Id="cmp7BBC914C2D9AE0E04A00AA2CF03B3079" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil245C1F42A64B9E10948A26E3F1A58891" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.appSettings" />
-            </Component>
             <Component Id="cmp41D33384103998013724F7507BE537A3" Directory="INSTALLDIR" Guid="*">
                 <File Id="filD409F3953DFE64FEE2FDC4460BD98297" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.deps.json" />
             </Component>
@@ -114,17 +100,8 @@
             <Component Id="cmpA0441C32B788060C47970989ED4B5ABF" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="filF17B847CF8A244207E315885859FD897" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\AWSSDK.EC2.dll" />
             </Component>
-            <Component Id="cmpA759EFDC4BD049ACBB9E1044CC03F5A4" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="filE4A4CD2FFCAADE6B26DB853DF998BEEA" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Azure.Core.dll" />
-            </Component>
-            <Component Id="cmpAE9279CF4CCD05DA236D0B0A01404956" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="fil4EB27A4E1D5D9B99E10A0DE38A3CAD93" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Azure.Identity.dll" />
-            </Component>
             <Component Id="cmp9C05BA0000D3C7442C3269AC269A6E0D" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil05368A8F5D5D305EE8BA8527BE51114D" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\BouncyCastle.Cryptography.dll" />
-            </Component>
-            <Component Id="cmp57E640C9AF0343B3206A86DEE4E5D1D3" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="fil0751F7CA5335535177552B9384B9E42A" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Castle.Core.dll" />
             </Component>
             <Component Id="cmpB4829D29933143FC7EC41E4416454794" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil6B74A4B5A77BC2B6A9A4E9458ADAF7BC" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\comerr64.dll" />
@@ -134,9 +111,6 @@
             </Component>
             <Component Id="cmp6E272AFE23CB4F168D530F0D9F506CC1" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil98BE0AB9E106949745E0A8E6F2997799" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\ConsoleControlAPI.dll" />
-            </Component>
-            <Component Id="cmp2710E61893A487A8905367F8C453C97A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="fil64C8BAD21EBE23E8DCC0BB5925D918C9" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Cucumber.Messages.dll" />
             </Component>
             <Component Id="cmp7490A8F9A8DB3A624A5D8CB9577798B6" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil6F297ECD4F58F89504D1FF9A059DCAED" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Google.Protobuf.dll" />
@@ -162,14 +136,8 @@
             <Component Id="cmp63A6483817552D7BD73E83A9F114372D" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="filD91BF289298C520CD2C4CD2F83919C31" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\krbcc64.dll" />
             </Component>
-            <Component Id="cmpD9B5822311AC53B29E53974541779BD7" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="fil244270BF738D34D2DFD126BD36189DBE" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\LiteDB.dll" />
-            </Component>
             <Component Id="cmpB4D15D56199032BB587B2830A03BBFD2" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="filF792872055326743DF87147B6E835CFD" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\log4net.dll" />
-            </Component>
-            <Component Id="cmp9917D4F6F1CFA85CA7D6B773A88AE02B" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="filB7C6959504CEE541DBB2480F74184BE5" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Bcl.AsyncInterfaces.dll" />
             </Component>
             <Component Id="cmpDE93C6C046C09333D8D20B7987D6C7BE" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil0B2A0DBEB96CCDBD8CA51070E23C23E8" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Bcl.Cryptography.dll" />
@@ -177,11 +145,20 @@
             <Component Id="cmpF7C5C60A7BECEDFF1243E72AACAEAB27" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil191CE288914BEE06A0EA1A23F7E5B77D" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Data.SqlClient.dll" />
             </Component>
+            <Component Id="cmpB4D2108D6E8B824E4BB4F1C0C906A979" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
+                <File Id="filF2D292A364F78A221868D945703E822C" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Data.SqlClient.Extensions.Abstractions.dll" />
+            </Component>
+            <Component Id="cmp965FDAE0F1E17AF517597E38A8EDACAB" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
+                <File Id="filD80B28D42A27199C3CAF0D1B85A51EDE" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Data.SqlClient.Internal.Logging.dll" />
+            </Component>
             <Component Id="cmp6EAB18C07FA2633DE7C6E741F22BF7EC" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="filE5067B2FFE87F33030F3A4AC0A17C8F9" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Data.SqlClient.resources.dll" />
             </Component>
             <Component Id="cmp33223CAFD15AEABE0174D8AD111128DB" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil6621C9FE5ACC356D0C07513D6D72A763" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Data.SqlClient.SNI.dll" />
+            </Component>
+            <Component Id="cmpD0FB1338397990B55373C47794CA569A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
+                <File Id="fil9CE8A2115ED647508D7E80C960EFED50" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Data.Sqlite.dll" />
             </Component>
             <Component Id="cmpFB8753E0B4E25B8D2D4CDD1B68F94663" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil82E31B3771ED18205B908DD7CDBE7169" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.Caching.Abstractions.dll" />
@@ -225,12 +202,6 @@
             <Component Id="cmp485B60646E8AD7AD35F595367BA67B29" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil305E974ACE3243277235618C8BF9EB57" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.Primitives.dll" />
             </Component>
-            <Component Id="cmp50D23688AEDD23EC60BDC4CA00BB9238" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="fil9FA7A93D599277E3B180E43BE7AA48E3" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Identity.Client.dll" />
-            </Component>
-            <Component Id="cmp954EF047031A00AB32108DA2D0523B8B" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="fil6DC415A72CA99F2965DB52C619456D92" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Identity.Client.Extensions.Msal.dll" />
-            </Component>
             <Component Id="cmp79B2F0757F8918DF1D4FE564F6F2846A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil11C1829EF31C6F98418267E84B572C9E" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.IdentityModel.Abstractions.dll" />
             </Component>
@@ -252,8 +223,8 @@
             <Component Id="cmp2B1E902B12192B8A03A50280FC4C406C" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil5B8243120A429900E04F175CC9A9D676" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.SqlServer.Server.dll" />
             </Component>
-            <Component Id="cmp6DDF5D90EE104011970A9D3625C1804F" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="fil0D4443CDCAFF6BDC591DBBA69D5773D8" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Win32.SystemEvents.dll" />
+            <Component Id="cmpBF647698C984426683EA67D1C1CDA8F9" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
+                <File Id="fil37BC4D87E253BD9458E89520F01ECA94" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Windows.SDK.NET.dll" />
             </Component>
             <Component Id="cmp71DFBF24555A1B1EB7CEAF528F4CC164" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="filA4A8DBDB19DC67DC5F713D4B7081539B" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.WindowsAPICodePack.dll" />
@@ -270,32 +241,20 @@
             <Component Id="cmpF9AB2384BF489D4C04293854CA6968A1" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil278E1AA2D9F9D520CFBBDD57ACBA4B82" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Newtonsoft.Json.dll" />
             </Component>
-            <Component Id="cmp0B1D954663957EC625C5EE7C1943073E" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="filD0B916E45C4C0C6873C31034761313EC" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Newtonsoft.Json.Schema.dll" />
-            </Component>
-            <Component Id="cmp3241485205830DB376DB66B9155B346A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="fil1EEA40DAC8EF878C897419A71FBDD28F" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Renci.SshNet.Async.dll" />
-            </Component>
             <Component Id="cmp361EEE77E5E353ED53980C78A77F1C68" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="filC15EAFA12C6336D8B6BAAE8FA62A711B" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Renci.SshNet.dll" />
             </Component>
-            <Component Id="cmpEAB2A41DC1BE84F912D8BE4CD73EAE5E" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="filB6EBBBBF7EC22173E39849A570D2D67F" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.ClientModel.dll" />
+            <Component Id="cmp39AC3FCAEC42DD4D47E80DF58B90B014" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
+                <File Id="filAEFFF0DE3E0ECE76EA90C749134F40B6" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\SQLitePCLRaw.batteries_v2.dll" />
             </Component>
-            <Component Id="cmp7FAF50FD8200AF236A928345A61AAEF0" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="filE41EE8C1EF32CFB6D2172C7A7865668F" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.CodeDom.dll" />
+            <Component Id="cmpB233DD2E910013CB396AC4835A0D7321" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
+                <File Id="filE992BB43E660C553FECF168F60ACE921" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\SQLitePCLRaw.core.dll" />
             </Component>
-            <Component Id="cmpAE0E8F321CC9B105BFD21A01BFAFB4A9" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="filB7799F11B9109EE9A930AA4E657B581F" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Configuration.ConfigurationManager.dll" />
+            <Component Id="cmpDC25C9AAF1FE8C27DDA497E75F4E4E52" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
+                <File Id="fil00ADF55DF83A5CDDEBFD676B32950C95" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\SQLitePCLRaw.provider.e_sqlite3.dll" />
             </Component>
-            <Component Id="cmp8B9201781C616B2EF8F835BA72B27F0D" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="filC4F812D5888AB492B912C79A224F3825" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Diagnostics.EventLog.dll" />
-            </Component>
-            <Component Id="cmpAF6590CFC3A5C5503D6C94BD50984569" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="fil8EB9B0E9BC1497463CD9860452265A25" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.DirectoryServices.dll" />
-            </Component>
-            <Component Id="cmp0C28E1D2E89936924959271729D6582A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="fil6B1CE3A32E22D5E559AE970D6CECB76C" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Drawing.Common.dll" />
+            <Component Id="cmpF2692C2E4FF5E34B4229DD9B79AF04C7" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
+                <File Id="fil750CC3712E7CA50C6805E479D62C3C9B" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Data.Odbc.dll" />
             </Component>
             <Component Id="cmp4ECF0365704F485E62712C4561DEA7FC" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="filBE8DADF0BDDEC13E578FD2E7031E1CE0" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.IdentityModel.Tokens.Jwt.dll" />
@@ -303,20 +262,8 @@
             <Component Id="cmp765254F61ED5981D44DB72A18E36D9D1" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="filF3F6DF2D110B96611FAE039862905B4A" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Management.dll" />
             </Component>
-            <Component Id="cmp198317622D63214A867378FCBA129144" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="filB2395BA4B3975CB154E2711802CD59A0" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Memory.Data.dll" />
-            </Component>
-            <Component Id="cmp60A16FDE1EAE14F5A1CEAA1BFC4FB65A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="filC64EA4B6EF173B573B3DDB6845EC5FA1" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Private.Windows.Core.dll" />
-            </Component>
-            <Component Id="cmp8F9D2B732EE7F0A04391DCC6BF71B52D" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="fil8F7A79587C3F410C47D974EBE29C8D97" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Security.Cryptography.ProtectedData.dll" />
-            </Component>
-            <Component Id="cmp60C882C96CD1F5397DFC88C9DC8EF72F" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="fil38022ADBF50CCC2A74B20EB600274DE8" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Security.Permissions.dll" />
-            </Component>
-            <Component Id="cmp181AE9701D7B0929C82B9088EA679DD2" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
-                <File Id="fil40CFB266222E83AA8796D378E810D9FE" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Windows.Extensions.dll" />
+            <Component Id="cmpC53A63DB4383F77454F8206D01C23AFE" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
+                <File Id="fil46E8E4A5A2803922C53A19DF02ACD84B" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\VaultSharp.dll" />
             </Component>
             <Component Id="cmp91AF0DA940C0C1686EBEA00C42E97303" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="filAE1365C3205BCB5594D58106D66B0EBC" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\VncSharpCore.dll" />
@@ -329,6 +276,9 @@
             </Component>
             <Component Id="cmpEFD196E1AC0274FE0E2FBA1F995C5DDB" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil4FD3E8C024852C1F69233E96C40C4012" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll" />
+            </Component>
+            <Component Id="cmp9E2A15803CD046650D4E7B6B4512AE84" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
+                <File Id="fil1C6AC3D6ED099920EA0226AF8A87093F" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\WinRT.Runtime.dll" />
             </Component>
             <Component Id="cmp8185C79E13C1EFA435B800A0FF338B21" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F" Guid="*">
                 <File Id="fil297D1B904F44B56D02D2493BD7046664" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\ZstdSharp.dll" />
@@ -471,6 +421,9 @@
             <Component Id="cmp2DF86AFCC97AE4C0063FE45EBCFCB7FE" Directory="dir5E6DA158F27D9CA2AB915EC6AB53B383" Guid="*">
                 <File Id="fil100CAAAF0BF4C3FB196087F29DA37CDE" KeyPath="yes" Source="$(var.HarvestPath)\Icons\Workstation.ico" />
             </Component>
+            <Component Id="cmp133A0C4FD0FC001E3FA5BAD56B1D1906" Directory="dir5E6DA158F27D9CA2AB915EC6AB53B383" Guid="*">
+                <File Id="filD2E78708D05AECBFCDB3849CB1BB494D" KeyPath="yes" Source="$(var.HarvestPath)\Icons\WSL.ico" />
+            </Component>
             <Component Id="cmpCF1D4DD52581584CB9775277B2969302" Directory="dirB5B71807E9474A6ED7A421DAF6D9317F" Guid="*">
                 <File Id="fil661D46FCD95364176089BD3D28019330" KeyPath="yes" Source="$(var.HarvestPath)\it\mRemoteNG.resources.dll" />
             </Component>
@@ -501,8 +454,77 @@
             <Component Id="cmp14F9A7840D91A07FE79D6C6258D5872E" Directory="dirF7C0BEA86C276F53E8C9E8E6B2629A9B" Guid="*">
                 <File Id="fil84ABB736DDC19CD359E8850BB51959F7" KeyPath="yes" Source="$(var.HarvestPath)\ru\mRemoteNG.resources.dll" />
             </Component>
+            <Component Id="cmp9B9AEB64BE0FCEE4DB7D07A262F1B7B6" Directory="dir227B6AC0426619C568FDAC6453A663A8" Guid="*">
+                <File Id="filC5349A8249185567C42DDD97F745B33F" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\browser-wasm\nativeassets\net9.0\e_sqlite3.a" />
+            </Component>
+            <Component Id="cmpE3CD299DC0A0301C0EE0F12F08612319" Directory="dir527F319E54DE3BA7E208C1B49922E370" Guid="*">
+                <File Id="filB4BE262E2B11EFF178E0AAB0338AC88C" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-arm\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmpC14471046E78F0184A2E397F3FD720BD" Directory="dir38FADD28616AA30248688F1C3391711B" Guid="*">
+                <File Id="fil2A73FC5AB52C81EFA75AD3EB3A24A4E0" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-arm64\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmpED13D1727512ECF315D71BD5D2BEBED4" Directory="dir9DF15FD547D9445F340A38C552E15E12" Guid="*">
+                <File Id="filDF250D83B15EFFA42CCB93B4E3254092" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-armel\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmp7560119DEE4911F0DBDA7950709D416A" Directory="dirC40AC02A99CF2E1DA6AE0C1E7F0CBF0D" Guid="*">
+                <File Id="fil4118589709527533F3AB20DADF6601D9" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-mips64\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmp76DCB017625D24D64798C9C8B5B89C9F" Directory="dir3256CEF875816AF90C4A8A680634659D" Guid="*">
+                <File Id="fil5C6AA64E64BAE8BC85E4AE4AF938D2D4" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-musl-arm\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmp4932F448ED3B8A5336C7E50636A94DDD" Directory="dirF0A9F5E9A5DDA7F9C9935598F7386298" Guid="*">
+                <File Id="filFF83DE40C9B1D06477AAAC7B13D4FDE2" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-musl-arm64\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmp3CFF60CB9BCD4881E08DE7210121D215" Directory="dir6E0E506CDF93ECF0CDF226CC6323DA0C" Guid="*">
+                <File Id="filB8451A6A16CD5FF00B0E98B4007A1485" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-musl-riscv64\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmpBBD22E1F83139193CD3BD58D96CD4DD3" Directory="dir94498C5AB3A58EFB2610AB6A43A389E6" Guid="*">
+                <File Id="filB8B3C16C56546178472E8D1BF0CCD787" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-musl-s390x\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmp6DD3AE287F4DB09EC682C043209D58B9" Directory="dir040A6E9F01947FC2F82CC7A9D06E129D" Guid="*">
+                <File Id="filE6DA3EC59EA7019B61D32D6B6310C547" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-musl-x64\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmp251F62695B5AACC4464A1693CFD6F390" Directory="dirE73884EA84CCDA30BA24E07DB35AEF9A" Guid="*">
+                <File Id="fil619113519E2A58F8619975053449CB54" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-ppc64le\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmpA5E6A7325D2B44D4DC00E231D36BC1EA" Directory="dirE7D87E9EC613E57A1D89A22CEFE337A9" Guid="*">
+                <File Id="filC54919107DB2666EE62A36836607D555" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-riscv64\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmp657142852DDAE24BFF837D7F8A653BD5" Directory="dir124089C2E3E35B20896064A1FA3FCB07" Guid="*">
+                <File Id="fil936C000E2720DB9D2B50D841EDFD5D9C" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-s390x\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmp7A2D34893FB14D69E08B1ADB6DC4656A" Directory="dirA6B4FBEF7E59C2A1E3B19BDCDC5B7C10" Guid="*">
+                <File Id="filBE1FBD8E45893E91BACD6C517218DB8F" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-x64\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmp965291B49D3EE050A6A0EC35B53E9277" Directory="dirA676D4303CB657774FE24A0DB3004C2A" Guid="*">
+                <File Id="filAA90DC54475AB4C8A667324CD77EC188" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\linux-x86\native\libe_sqlite3.so" />
+            </Component>
+            <Component Id="cmp20AB72B8DD0C636900D48C5B9984FFB8" Directory="dir79CE5D6DAF5EF9F9B9DECF02A547638D" Guid="*">
+                <File Id="filB4EAA8FEFE1484477E6178E04C551CA9" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\maccatalyst-arm64\native\libe_sqlite3.dylib" />
+            </Component>
+            <Component Id="cmp409D50B43554B293C38CE397B24AF8F3" Directory="dir2D39F71C195B19D252A44E3D498118BE" Guid="*">
+                <File Id="fil90815E0AD24E2DC7A1A88EE0366AE356" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\maccatalyst-x64\native\libe_sqlite3.dylib" />
+            </Component>
+            <Component Id="cmp5280F6398B5BD470A3B6BBE0FC60BE00" Directory="dir9BE56D918C569DC8AC961A41A18109CA" Guid="*">
+                <File Id="fil7AE740F8E9CF60F09DEDF4BADAE3DADA" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\osx-arm64\native\libe_sqlite3.dylib" />
+            </Component>
+            <Component Id="cmp9898E72CA17275C1386A04ED41D7613B" Directory="dirBAAEF0AE5E1529C739674F4A11EDA905" Guid="*">
+                <File Id="fil226F01686132C0A1875B1D89860476B4" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\osx-x64\native\libe_sqlite3.dylib" />
+            </Component>
+            <Component Id="cmpB5F18B348314F89582CB81F333C83CA8" Directory="dir3FE2CEE9794497F646BBB4CA70D70B40" Guid="*">
+                <File Id="fil6DB62037A19C00AFCF794A2FEDA38CB0" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-arm\native\e_sqlite3.dll" />
+            </Component>
+            <Component Id="cmp42D9D64959F7507D5ECF771FC3497378" Directory="dir8DE1CAE5F6B03F7A6BAE17D4E78639BA" Guid="*">
+                <File Id="fil4207DC84B883711211069FC3437A0B63" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-arm64\native\e_sqlite3.dll" />
+            </Component>
+            <Component Id="cmp899837283D9010E897F5AC07FEF25C5A" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
+                <File Id="fil8EE9084D4CDF9A70F325FD404A332595" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\e_sqlite3.dll" />
+            </Component>
             <Component Id="cmpA94B75651045F785CCA29EE2638258AF" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
                 <File Id="fil4CB4D838CA0B7A043E05392D9F7C1E94" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\WebView2Loader.dll" />
+            </Component>
+            <Component Id="cmp40793708CF89033E4A94B5E0B005607D" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
+                <File Id="fil5103F639AB760C00675F3F948CAA99D1" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\e_sqlite3.dll" />
             </Component>
             <Component Id="cmp33BB9F0091C56A034105A47C3035D1A9" Directory="dir54B0732D1EC7055747BB11A9069B5872" Guid="*">
                 <File Id="fil518DA4E8D2E5F7E1FEF6055DD9BB727E" KeyPath="yes" Source="$(var.HarvestPath)\Schemas\mremoteng_confcons_v2_8.xsd" />
@@ -518,6 +540,9 @@
             </Component>
             <Component Id="cmpCE8CCE2E57CBB8B72D37C8F6606FC1FD" Directory="dir861F6A02C2F7A7DA6955E64037179011" Guid="*">
                 <File Id="fil06AD4DEB76585AD17235CA4874291457" KeyPath="yes" Source="$(var.HarvestPath)\sv-SE\mRemoteNG.resources.dll" />
+            </Component>
+            <Component Id="cmpD12A99FA5EEC8411D5DC8A355316AF66" Directory="dir4BFD6A5D73BE0F8A766694081D22B841" Guid="*">
+                <File Id="fil769C87E85FC2673F81A472ED45E82A27" KeyPath="yes" Source="$(var.HarvestPath)\ta\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp3574060B3152DDCCE44B3528A0C71B63" Directory="dir449D12A97ECE34898DFE89F1087779C9" Guid="*">
                 <File Id="fil146F3F5A21FE54B5545684791AB50136" KeyPath="yes" Source="$(var.HarvestPath)\Themes\darcula.vstheme" />
@@ -546,13 +571,238 @@
         </ComponentGroup>
     </Fragment>
     <Fragment>
+        <DirectoryRef Id="dir4D7B880C4FE703BE89F59A4C15BBDDDB">
+            <Directory Id="dir040A6E9F01947FC2F82CC7A9D06E129D" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir0C2D74C80147EF2CE6655862ED8490C3">
+            <Directory Id="dir064FEFBE3697BA3A303C87D2F4E3893F" Name="nativeassets" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir0C2D74C80147EF2CE6655862ED8490C3" Name="browser-wasm" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6C754F58DC20DB9AB32961E3388DE030">
+            <Directory Id="dir124089C2E3E35B20896064A1FA3FCB07" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirF3038242710747884E86633F9CAF9B21">
+            <Directory Id="dir141099046F4229F01C3B534ABFD3E870" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir064FEFBE3697BA3A303C87D2F4E3893F">
+            <Directory Id="dir227B6AC0426619C568FDAC6453A663A8" Name="net9.0" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir2A0006094BAD327C2D8CD6C7322CF4D7" Name="linux-musl-arm" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB0AFC9D943173FD835475E832870B83D">
+            <Directory Id="dir2D39F71C195B19D252A44E3D498118BE" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir2D4A4213BE3109BFE76ACB5A43470050" Name="maccatalyst-arm64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir2E4FEE11AC666D72BB3783F995E61CEC" Name="linux-ppc64le" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
         <DirectoryRef Id="dir98D160BE690DB35BE57FFB8F3DCF5AC7">
             <Directory Id="dir2ED89DAEE76564AD33DB582F055A5274" Name="native" />
         </DirectoryRef>
     </Fragment>
     <Fragment>
+        <DirectoryRef Id="dir2A0006094BAD327C2D8CD6C7322CF4D7">
+            <Directory Id="dir3256CEF875816AF90C4A8A680634659D" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir648795AAE5F4F913627391A4EA26E0CA">
+            <Directory Id="dir38FADD28616AA30248688F1C3391711B" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir636A5F402A07296FB540C804C5408F70">
+            <Directory Id="dir3FE2CEE9794497F646BBB4CA70D70B40" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir4D7B880C4FE703BE89F59A4C15BBDDDB" Name="linux-musl-x64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6A0DD301CF15D8CF75C184EDAB84EDE3">
+            <Directory Id="dir527F319E54DE3BA7E208C1B49922E370" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir581565EAD245478E5C1264C30F9412AA" Name="linux-x64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir60342AC2F36131A93395A9F7A918352C" Name="osx-x64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir636A5F402A07296FB540C804C5408F70" Name="win-arm" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir648795AAE5F4F913627391A4EA26E0CA" Name="linux-arm64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir6A0DD301CF15D8CF75C184EDAB84EDE3" Name="linux-arm" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir6C754F58DC20DB9AB32961E3388DE030" Name="linux-s390x" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirBFE6FF80778DFFF138C99F291A36AE13">
+            <Directory Id="dir6E0E506CDF93ECF0CDF226CC6323DA0C" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir76EFA2FE2400991447BC99DB7D3D80F9" Name="linux-musl-s390x" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir2D4A4213BE3109BFE76ACB5A43470050">
+            <Directory Id="dir79CE5D6DAF5EF9F9B9DECF02A547638D" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir85A01EEDCA388CEBE492AC128D8D37CC" Name="win-arm64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir8D88A7FFF1E04881E4C3F73651C8B927" Name="linux-armel" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir85A01EEDCA388CEBE492AC128D8D37CC">
+            <Directory Id="dir8DE1CAE5F6B03F7A6BAE17D4E78639BA" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir76EFA2FE2400991447BC99DB7D3D80F9">
+            <Directory Id="dir94498C5AB3A58EFB2610AB6A43A389E6" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir9518806D64646D2D6341262104D7FCD7" Name="osx-arm64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
         <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
             <Directory Id="dir98D160BE690DB35BE57FFB8F3DCF5AC7" Name="win-x64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir9518806D64646D2D6341262104D7FCD7">
+            <Directory Id="dir9BE56D918C569DC8AC961A41A18109CA" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir8D88A7FFF1E04881E4C3F73651C8B927">
+            <Directory Id="dir9DF15FD547D9445F340A38C552E15E12" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirA4D74779469159ACB43726745613600A" Name="linux-musl-arm64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB9868BF26C6C00A134BCFD6A16052F7B">
+            <Directory Id="dirA676D4303CB657774FE24A0DB3004C2A" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir581565EAD245478E5C1264C30F9412AA">
+            <Directory Id="dirA6B4FBEF7E59C2A1E3B19BDCDC5B7C10" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirB0AFC9D943173FD835475E832870B83D" Name="maccatalyst-x64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirB9868BF26C6C00A134BCFD6A16052F7B" Name="linux-x86" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir60342AC2F36131A93395A9F7A918352C">
+            <Directory Id="dirBAAEF0AE5E1529C739674F4A11EDA905" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirBFE6FF80778DFFF138C99F291A36AE13" Name="linux-musl-riscv64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirF53A08E50E93DD1E8210757808D8D929">
+            <Directory Id="dirC40AC02A99CF2E1DA6AE0C1E7F0CBF0D" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirE27AD97EEDD958AAFC6C16261611C251" Name="linux-riscv64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir2E4FEE11AC666D72BB3783F995E61CEC">
+            <Directory Id="dirE73884EA84CCDA30BA24E07DB35AEF9A" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirE27AD97EEDD958AAFC6C16261611C251">
+            <Directory Id="dirE7D87E9EC613E57A1D89A22CEFE337A9" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirA4D74779469159ACB43726745613600A">
+            <Directory Id="dirF0A9F5E9A5DDA7F9C9935598F7386298" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirF3038242710747884E86633F9CAF9B21" Name="win-x86" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirF53A08E50E93DD1E8210757808D8D929" Name="linux-mips64" />
         </DirectoryRef>
     </Fragment>
 </Wix>

@@ -292,6 +292,42 @@ namespace mRemoteNGTests.Connection.Protocol
                 "DoResizeClient should be called when restoring from minimize");
         }
 
+        [TestCase(RDPResolutions.Res800x600, 800, 600)]
+        [TestCase(RDPResolutions.Res1920x1080, 1920, 1080)]
+        [TestCase(RDPResolutions.Res3840x2160, 3840, 2160)]
+        [TestCase(RDPResolutions.Res7680x4320, 7680, 4320)]
+        public void GetResolutionRectangle_ReturnsPixelSize_ForFixedResolution(RDPResolutions resolution, int expectedWidth, int expectedHeight)
+        {
+            var rectangle = resolution.GetResolutionRectangle();
+
+            Assert.That(rectangle.Width, Is.EqualTo(expectedWidth));
+            Assert.That(rectangle.Height, Is.EqualTo(expectedHeight));
+        }
+
+        [TestCase(RDPResolutions.FitToWindow)]
+        [TestCase(RDPResolutions.Fullscreen)]
+        [TestCase(RDPResolutions.SmartSize)]
+        public void GetResolutionRectangle_ReturnsEmpty_ForModeResolutions(RDPResolutions resolution)
+        {
+            var rectangle = resolution.GetResolutionRectangle();
+
+            Assert.That(rectangle, Is.EqualTo(new Rectangle(0, 0, 0, 0)));
+        }
+
+        [TestCase(RDPResolutions.FitToWindow, ExpectedResult = false)]
+        [TestCase(RDPResolutions.Res800x600, ExpectedResult = false)]
+        [TestCase(RDPResolutions.Res1920x1080, ExpectedResult = false)]
+        [TestCase(RDPResolutions.Res7680x4320, ExpectedResult = false)]
+        [TestCase(RDPResolutions.SmartSize, ExpectedResult = true)]
+        [TestCase(RDPResolutions.Fullscreen, ExpectedResult = true)]
+        public bool DoResizeControl_SkipsResize_ForFixedAndFitToWindow(RDPResolutions resolution)
+        {
+            // Fixed resolutions and FitToWindow connect once at a fixed size and are never
+            // resized again (scrollbars handle overflow); only SmartSize/Fullscreen resize.
+            _rdpProtocol.Resolution = resolution;
+            return _rdpProtocol.DoResizeControl();
+        }
+
         /// <summary>
         /// Testable version of RdpProtocol8 that exposes resize methods for testing
         /// </summary>
@@ -304,6 +340,8 @@ namespace mRemoteNGTests.Connection.Protocol
             public int DoResizeControlCallCount { get; private set; }
             public int DoResizeClientCallCount { get; private set; }
             public int DebounceScheduledCount { get; private set; }
+
+            public RDPResolutions Resolution { get; set; } = RDPResolutions.FitToWindow;
 
             public TestableRdpProtocol8(Form mainForm)
             {
@@ -349,9 +387,14 @@ namespace mRemoteNGTests.Connection.Protocol
                 DoResizeClient();
             }
 
-            public void DoResizeControl()
+            public bool DoResizeControl()
             {
                 DoResizeControlCallCount++;
+                // Mirrors RdpProtocol8.DoResizeControl(): only SmartSize and Fullscreen
+                // actually resize the control. FitToWindow is undocked at a fixed size
+                // with scrollbars, and fixed pixel resolutions stay docked relying on the
+                // RDP control's own native scrollbars; both skip the resize.
+                return Resolution == RDPResolutions.SmartSize || Resolution == RDPResolutions.Fullscreen;
             }
 
             public void DoResizeClient()

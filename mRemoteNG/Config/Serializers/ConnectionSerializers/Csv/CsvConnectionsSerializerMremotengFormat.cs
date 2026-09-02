@@ -59,7 +59,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 sb.Append("Domain;");
 
             sb.Append("Hostname;Port;VmId;Protocol;SSHTunnelConnectionName;OpeningCommand;SSHOptions;PuttySession;ConnectToConsole;UseCredSsp;UseRestrictedAdmin;UseRCG;UseRedirectionServerName;UseVmId;UseEnhancedMode;RenderingEngine;RDPAuthenticationLevel;" +
-                      "LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;DisableFullWindowDrag;DisableMenuAnimations;DisableCursorShadow;DisableCursorBlinking;" +
+                      "LoadBalanceInfo;Colors;Resolution;UseMultiMon;CustomResolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;DisableFullWindowDrag;DisableMenuAnimations;DisableCursorShadow;DisableCursorBlinking;" +
                       "CacheBitmaps;RedirectDiskDrives;RedirectDiskDrivesCustomRedirectPorts;RedirectPrinters;RedirectClipboard;RedirectSmartCards;RedirectSound;RedirectKeys;" +
                       "PreExtApp;PostExtApp;MacAddress;UserField;EnvironmentTags;ExtApp;Favorite;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;" +
                       "VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;" +
@@ -69,7 +69,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 sb.Append("InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;" +
                           "InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDisableFullWindowDrag;InheritDisableMenuAnimations;InheritDisableCursorShadow;InheritDisableCursorBlinking;InheritDomain;InheritIcon;InheritPanel;InheritTabColor;InheritConnectionFrameColor;InheritPassword;InheritPort;" +
                           "InheritProtocol;InheritSSHTunnelConnectionName;InheritOpeningCommand;InheritSSHOptions;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectDiskDrivesCustom;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;" +
-                          "InheritRedirectClipboard;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;" +
+                          "InheritRedirectClipboard;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritUseMultiMon;InheritCustomResolution;InheritAutomaticResize;" +
                           "InheritUseConsoleSession;InheritUseCredSsp;InheritUseRestrictedAdmin;InheritUseRCG;InheritUseRedirectionServerName;InheritUseVmId;InheritUseEnhancedMode;InheritVmId;InheritRenderingEngine;InheritUsername;" +
                           "InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;" +
                           "InheritEnvironmentTags;InheritFavorite;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;" +
@@ -140,6 +140,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.LoadBalanceInfo))
               .Append(FormatForCsv(con.Colors))
               .Append(FormatForCsv(con.Resolution))
+              .Append(FormatForCsv(con.UseMultiMon))
+              .Append(FormatForCsv(con.CustomResolution))
               .Append(FormatForCsv(con.AutomaticResize))
               .Append(FormatForCsv(con.DisplayWallpaper))
               .Append(FormatForCsv(con.DisplayThemes))
@@ -231,6 +233,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.Inheritance.RedirectSmartCards))
               .Append(FormatForCsv(con.Inheritance.RedirectSound))
               .Append(FormatForCsv(con.Inheritance.Resolution))
+              .Append(FormatForCsv(con.Inheritance.UseMultiMon))
+              .Append(FormatForCsv(con.Inheritance.CustomResolution))
               .Append(FormatForCsv(con.Inheritance.AutomaticResize))
               .Append(FormatForCsv(con.Inheritance.UseConsoleSession))
               .Append(FormatForCsv(con.Inheritance.UseCredSsp))

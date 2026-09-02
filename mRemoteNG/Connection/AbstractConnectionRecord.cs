@@ -74,6 +74,8 @@ namespace mRemoteNG.Connection
 
 
         private RDPResolutions _resolution;
+        private string _customResolution = "";
+        private bool _useMultiMon;
         private bool _automaticResize;
         private RDPColors _colors;
         private bool _cacheBitmaps;
@@ -671,6 +673,27 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("Resolution", _resolution);
             set => SetField(ref _resolution, value, "Resolution");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.CustomResolution)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionCustomResolution)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public string CustomResolution
+        {
+            get => GetPropertyValue("CustomResolution", _customResolution);
+            set => SetField(ref _customResolution, value, "CustomResolution");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.UseMultiMon)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUseMultiMon)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public bool UseMultiMon
+        {
+            get => GetPropertyValue("UseMultiMon", _useMultiMon);
+            set => SetField(ref _useMultiMon, value, "UseMultiMon");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
