@@ -4376,7 +4376,124 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("PortScan", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to IP / Range / CIDR.
+        /// </summary>
+        internal static string PortScanAddressRange {
+            get {
+                return ResourceManager.GetString("PortScanAddressRange", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a single address (192.168.1.1), a range (192.168.1.1 - 192.168.1.254) or a CIDR block (192.168.1.0/24). IPv4 and IPv6 are both supported..
+        /// </summary>
+        internal static string PortScanAddressRangeHint {
+            get {
+                return ResourceManager.GetString("PortScanAddressRangeHint", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to 192.168.1.1  |  192.168.1.1 - 192.168.1.254  |  192.168.1.0/24.
+        /// </summary>
+        internal static string PortScanAddressRangePlaceholder {
+            get {
+                return ResourceManager.GetString("PortScanAddressRangePlaceholder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to All ports.
+        /// </summary>
+        internal static string PortScanAllPorts {
+            get {
+                return ResourceManager.GetString("PortScanAllPorts", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Common ports.
+        /// </summary>
+        internal static string PortScanCommonPorts {
+            get {
+                return ResourceManager.GetString("PortScanCommonPorts", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Custom.
+        /// </summary>
+        internal static string PortScanCustomPorts {
+            get {
+                return ResourceManager.GetString("PortScanCustomPorts", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the ports to probe as a list of ports and ranges, e.g. 22, 80, 443, 3389, 8000-8100.
+        /// </summary>
+        internal static string PortScanCustomPortsHint {
+            get {
+                return ResourceManager.GetString("PortScanCustomPortsHint", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to 22, 80, 443, 3389, 8000-8100.
+        /// </summary>
+        internal static string PortScanCustomPortsPlaceholder {
+            get {
+                return ResourceManager.GetString("PortScanCustomPortsPlaceholder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid IPv4 or IPv6 address..
+        /// </summary>
+        internal static string PortScanInvalidAddress {
+            get {
+                return ResourceManager.GetString("PortScanInvalidAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid port; ports must be between {1} and {2}..
+        /// </summary>
+        internal static string PortScanInvalidPort {
+            get {
+                return ResourceManager.GetString("PortScanInvalidPort", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid prefix length; use a value between 0 and {1}..
+        /// </summary>
+        internal static string PortScanInvalidPrefixLength {
+            get {
+                return ResourceManager.GetString("PortScanInvalidPrefixLength", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The start and end addresses must be the same type (both IPv4 or both IPv6)..
+        /// </summary>
+        internal static string PortScanMixedAddressFamilies {
+            get {
+                return ResourceManager.GetString("PortScanMixedAddressFamilies", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The address range is too large to scan ({0:N0} addresses); the limit is {1:N0}..
+        /// </summary>
+        internal static string PortScanRangeTooLarge {
+            get {
+                return ResourceManager.GetString("PortScanRangeTooLarge", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Port scan complete..
         /// </summary>
