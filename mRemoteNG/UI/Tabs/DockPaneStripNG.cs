@@ -1183,7 +1183,35 @@ namespace mRemoteNG.UI.Tabs
             Point mousePos = PointToClient(MousePosition);
             Rectangle tabRect = GetTabBounds(Tabs[index]);
             if (tabRect.Contains(ActiveClose) && ActiveCloseHitTest(mousePos))
-                TryCloseTab(index);
+                CloseTab(index);
+        }
+
+        /// <summary>
+        /// Closes the tab at <paramref name="index"/>, keeping the current selection when
+        /// the tab does not actually close.
+        /// </summary>
+        /// <remarks>
+        /// DockPanelSuite's TryCloseTab selects the neighbouring tab afterwards without
+        /// checking whether the close happened, so dismissing the "are you sure" prompt
+        /// still switched the active connection.
+        /// </remarks>
+        private void CloseTab(int index)
+        {
+            IDockContent tabContent = Tabs[index].Content;
+            IDockContent? activeBeforeClose = DockPane.ActiveContent;
+
+            TryCloseTab(index);
+
+            if (activeBeforeClose == null || ReferenceEquals(DockPane.ActiveContent, activeBeforeClose))
+                return;
+
+            // The tab is still on display, so the close was refused and the selection
+            // moved for nothing.
+            if (DockPane.DisplayingContents.Contains(tabContent) &&
+                DockPane.DisplayingContents.Contains(activeBeforeClose))
+            {
+                activeBeforeClose.DockHandler.Activate();
+            }
         }
 
         private Rectangle GetCloseButtonRect(Rectangle rectTab)
