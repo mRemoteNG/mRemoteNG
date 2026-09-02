@@ -220,6 +220,7 @@ namespace BrightIdeasSoftware
                 } else {
                     this.WindowStyle &= ~WS_BORDER;
                 }
+                this.hasBorder = value;
             }
         }
         private bool hasBorder = true;
@@ -302,11 +303,7 @@ namespace BrightIdeasSoftware
         /// <remarks>Setting this to null reverts to the default font.</remarks>
         public Font Font {
             get {
-                IntPtr hfont = NativeMethods.SendMessage(this.Handle, WM_GETFONT, 0, 0);
-                if (hfont == IntPtr.Zero)
-                    return Control.DefaultFont;
-                else
-                    return Font.FromHfont(hfont);
+                return this.font ?? Control.DefaultFont;
             }
             set {
                 Font newFont = value ?? Control.DefaultFont;
