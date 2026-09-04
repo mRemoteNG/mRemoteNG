@@ -30,6 +30,7 @@ namespace mRemoteNG.Connection.Protocol
         private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
         private bool _isPuttyNg;
         private readonly DisplayProperties _display = new();
+        private Panel? _puttyContainerPanel; // Panel to hold PuTTY with margins
 
         #region Public Properties
 
@@ -52,6 +53,121 @@ namespace mRemoteNG.Connection.Protocol
         private void ProcessExited(object sender, EventArgs e)
         {
             Event_Closed(this);
+        }
+
+        /// <summary>
+        /// Removes ALL window decorations from the embedded PuTTY window.
+        /// Called initially when embedding and then on every resize to ensure styles persist.
+        /// Uses DWM to remove the frame completely.
+        /// </summary>
+        private void RemovePuttyWindowDecorations()
+        {
+            if (PuttyHandle == IntPtr.Zero)
+                return;
+
+            try
+            {
+                // Remove ALL standard window styles
+                int style = NativeMethods.GetWindowLong(PuttyHandle, NativeMethods.GWL_STYLE);
+                style &= ~(NativeMethods.WS_CAPTION |         // Title bar
+                           NativeMethods.WS_THICKFRAME |      // Resizable border
+                           NativeMethods.WS_BORDER |          // Static border
+                           NativeMethods.WS_VSCROLL |         // Vertical scrollbar
+                           NativeMethods.WS_HSCROLL |         // Horizontal scrollbar
+                           NativeMethods.WS_MINIMIZEBOX |     // Minimize button
+                           NativeMethods.WS_MAXIMIZEBOX |     // Maximize button
+                           NativeMethods.WS_SYSMENU);         // System menu
+                NativeMethods.SetWindowLong(PuttyHandle, NativeMethods.GWL_STYLE, style);
+
+                // Remove ALL extended window styles
+                int exStyle = NativeMethods.GetWindowLong(PuttyHandle, NativeMethods.GWL_EXSTYLE);
+                exStyle &= ~(NativeMethods.WS_EX_STATICEDGE |      // Static edge border
+                             NativeMethods.WS_EX_CLIENTEDGE |      // Client edge border (3D effect)
+                             NativeMethods.WS_EX_WINDOWEDGE);      // Window edge border  
+                NativeMethods.SetWindowLong(PuttyHandle, NativeMethods.GWL_EXSTYLE, exStyle);
+
+                // Use DWM (Desktop Window Manager) to extend client area into the frame
+                // This removes the frame drawing completely for a seamless look
+                try
+                {
+                    // Extend margins: -1 means extend into entire non-client area
+                    NativeMethods.MARGINS margins = new() { cxLeftWidth = -1, cxRightWidth = -1, cyTopHeight = -1, cyBottomHeight = -1 };
+                    NativeMethods.DwmExtendFrameIntoClientArea(PuttyHandle, ref margins);
+                }
+                catch
+                {
+                    // DWM might not be available on all Windows versions; continue anyway
+                }
+
+                // Force recalculation of the window frame
+                NativeMethods.SetWindowPos(PuttyHandle, IntPtr.Zero,
+                    0, 0, 0, 0,
+                    NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE |
+                    NativeMethods.SWP_NOZORDER | NativeMethods.SWP_FRAMECHANGED);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    $"Error removing PuTTY window decorations: {ex.Message}", true);
+            }
+        }
+
+        /// <summary>
+        /// Handles resize events to reapply border removal styles.
+        /// Decorations can re-appear after resize, so we need to continuously remove them.
+        /// Uses dynamically calculated border values with fallback to defaults if calculation fails.
+        /// </summary>
+        private void InterfaceControl_Resize(object sender, EventArgs e)
+        {
+            if (PuttyHandle == IntPtr.Zero)
+                return;
+
+            RemovePuttyWindowDecorations();
+
+            // Use the same dynamic sizing logic as Resize() method
+            // Use the container panel if it exists, otherwise use InterfaceControl
+            Rectangle clientRect = _puttyContainerPanel?.ClientRectangle ?? InterfaceControl.ClientRectangle;
+
+            // Get the actual border sizes from the window
+            int leftBorder = 8;      // Default fallback
+            int topBorder = 30;      // Default fallback
+            int rightBorder = 8;     // Default fallback
+            int bottomBorder = 8;    // Default fallback
+
+            if (NativeMethods.GetWindowRect(PuttyHandle, out NativeMethods.RECT windowRect) &&
+                NativeMethods.GetClientRect(PuttyHandle, out NativeMethods.RECT internalClientRect))
+            {
+                long windowWidth = windowRect.right - windowRect.left;
+                long windowHeight = windowRect.bottom - windowRect.top;
+                long clientWidth = internalClientRect.right - internalClientRect.left;
+                long clientHeight = internalClientRect.bottom - internalClientRect.top;
+
+                // Only use calculated values if they're reasonable (positive and not huge)
+                int calcLeftBorder = (int)(internalClientRect.left);
+                int calcTopBorder = (int)(internalClientRect.top);
+                int calcRightBorder = (int)(windowWidth - clientWidth - calcLeftBorder);
+                int calcBottomBorder = (int)(windowHeight - clientHeight - calcTopBorder);
+
+                // Validate the calculated values
+                if (calcLeftBorder > 0 && calcLeftBorder < 50 &&
+                    calcTopBorder > 0 && calcTopBorder < 100 &&
+                    calcRightBorder > 0 && calcRightBorder < 50 &&
+                    calcBottomBorder > 0 && calcBottomBorder < 50)
+                {
+                    leftBorder = calcLeftBorder;
+                    topBorder = calcTopBorder;
+                    rightBorder = calcRightBorder;
+                    bottomBorder = calcBottomBorder;
+                }
+            }
+
+            // Apply calculated offsets to hide borders outside panel
+            NativeMethods.MoveWindow(PuttyHandle,
+                clientRect.X - leftBorder,
+                clientRect.Y - topBorder,
+                clientRect.Width + leftBorder + rightBorder,
+                clientRect.Height + topBorder + bottomBorder,
+                true);
         }
 
         #endregion
@@ -346,28 +462,58 @@ namespace mRemoteNG.Connection.Protocol
 
                 if (!_isPuttyNg)
                 {
-                    NativeMethods.SetParent(PuttyHandle, InterfaceControl.Handle);
-
-                    // Strip the title bar and thick frame border so the
-                    // embedded PuTTY window fills the panel cleanly.
-                    int style = NativeMethods.GetWindowLong(PuttyHandle, NativeMethods.GWL_STYLE);
-                    style &= ~(NativeMethods.WS_CAPTION | NativeMethods.WS_THICKFRAME);
-                    int previousStyle = NativeMethods.SetWindowLong(PuttyHandle, NativeMethods.GWL_STYLE, style);
-                    
-                    // Check if SetWindowLong failed (returns 0 on error, but 0 could also be the previous value)
-                    // If it returns 0 and the previous GetWindowLong succeeded, log a warning
-                    if (previousStyle == 0)
+                    // Create a container panel with 10px margins on all sides
+                    _puttyContainerPanel = new Panel
                     {
-                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, 
-                            Language.PuttyStuff + ": SetWindowLong returned 0, window style change may have failed", true);
-                    }
+                        Parent = InterfaceControl,
+                        Dock = DockStyle.Fill,
+                        Margin = new Padding(10, 10, 10, 10),
+                        BackColor = System.Drawing.Color.Black
+                    };
 
-                    // Force Windows to recalculate the non-client area so the
-                    // removed caption and border actually disappear.
+                    // Parent PuTTY to the container panel instead of InterfaceControl
+                    NativeMethods.SetParent(PuttyHandle, _puttyContainerPanel.Handle);
+
+                    // Get container panel dimensions for sizing
+                    Rectangle containerRect = _puttyContainerPanel.ClientRectangle;
+
+                    // Calculate 70% size 
+                    int newWidth = (int)(containerRect.Width * 0.7);
+                    int newHeight = (int)(containerRect.Height * 0.7);
+
+                    // Initial aggressive border and decoration removal
+                    RemovePuttyWindowDecorations();
+
+                    // Step 1: First SetWindowPos call - with explicit position and size
                     NativeMethods.SetWindowPos(PuttyHandle, IntPtr.Zero,
-                        0, 0, 0, 0,
-                        NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE |
+                        0, 0, 
+                        newWidth, newHeight,
                         NativeMethods.SWP_NOZORDER | NativeMethods.SWP_FRAMECHANGED);
+
+                    // Step 2: Small delay to allow Windows to process style changes
+                    Thread.Sleep(100);
+
+                    // Step 3: Second SetWindowPos call - force recalculation again
+                    NativeMethods.SetWindowPos(PuttyHandle, IntPtr.Zero,
+                        0, 0, 
+                        newWidth, newHeight,
+                        NativeMethods.SWP_NOZORDER | NativeMethods.SWP_FRAMECHANGED);
+
+                    // Step 4: Show the window explicitly to force redraw
+                    NativeMethods.ShowWindow(PuttyHandle, (int)NativeMethods.SW_SHOW);
+
+                    // Step 5: Final positioning to ensure seamless integration
+                    NativeMethods.SetWindowPos(PuttyHandle, IntPtr.Zero,
+                        0, 0, 
+                        newWidth, newHeight,
+                        NativeMethods.SWP_NOZORDER | NativeMethods.SWP_FRAMECHANGED | NativeMethods.SWP_SHOWWINDOW);
+
+                    // CRITICAL: Hook into resize event to reapply decoration removal
+                    // This ensures decorations don't reappear when the window is resized
+                    InterfaceControl.Resize += InterfaceControl_Resize;
+
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, 
+                        Language.PuttyStuff + ": Border removal hooked to persist through resizes", true);
                 }
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.PuttyStuff, true);
@@ -435,11 +581,62 @@ namespace mRemoteNG.Connection.Protocol
                 }
                 else
                 {
-                    // Window chrome (caption + thick frame) has been stripped
-                    // after reparenting, so just fill the client rectangle.
-                    Rectangle clientRect = InterfaceControl.ClientRectangle;
+                    // For regular PuTTY, use the container panel if it exists
+                    Rectangle clientRect = _puttyContainerPanel?.ClientRectangle ?? InterfaceControl.ClientRectangle;
 
-                    NativeMethods.MoveWindow(PuttyHandle, clientRect.X-8, clientRect.Y-30, clientRect.Width+32, clientRect.Height+38, true);
+                    // Get the actual border sizes from the window
+                    int leftBorder = 8;      // Default fallback
+                    int topBorder = 30;      // Default fallback
+                    int rightBorder = 8;     // Default fallback
+                    int bottomBorder = 8;    // Default fallback
+                    bool calculatedSuccessfully = false;
+
+                    if (NativeMethods.GetWindowRect(PuttyHandle, out NativeMethods.RECT windowRect) &&
+                        NativeMethods.GetClientRect(PuttyHandle, out NativeMethods.RECT internalClientRect))
+                    {
+                        long windowWidth = windowRect.right - windowRect.left;
+                        long windowHeight = windowRect.bottom - windowRect.top;
+                        long clientWidth = internalClientRect.right - internalClientRect.left;
+                        long clientHeight = internalClientRect.bottom - internalClientRect.top;
+
+                        // Only use calculated values if they're reasonable (positive and not huge)
+                        int calcLeftBorder = (int)(internalClientRect.left);
+                        int calcTopBorder = (int)(internalClientRect.top);
+                        int calcRightBorder = (int)(windowWidth - clientWidth - calcLeftBorder);
+                        int calcBottomBorder = (int)(windowHeight - clientHeight - calcTopBorder);
+
+                        // Validate the calculated values
+                        if (calcLeftBorder > 0 && calcLeftBorder < 50 &&
+                            calcTopBorder > 0 && calcTopBorder < 100 &&
+                            calcRightBorder > 0 && calcRightBorder < 50 &&
+                            calcBottomBorder > 0 && calcBottomBorder < 50)
+                        {
+                            leftBorder = calcLeftBorder;
+                            topBorder = calcTopBorder;
+                            rightBorder = calcRightBorder;
+                            bottomBorder = calcBottomBorder;
+                            calculatedSuccessfully = true;
+
+                            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                                $"PuTTY dynamic borders - Left:{leftBorder}, Top (header):{topBorder}, Right (+ scroll): {rightBorder}, Bottom:{bottomBorder}", true);
+                        }
+                    }
+
+                    if (!calculatedSuccessfully)
+                    {
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                            $"PuTTY using fallback borders - Left:{leftBorder}, Top:{topBorder}, Right:{rightBorder}, Bottom:{bottomBorder}", true);
+                    }
+
+                    // Apply calculated offsets to hide borders outside panel
+                    // Position at negative offset to move borders out of view
+                    // Size is expanded by border amounts to compensate
+                    NativeMethods.MoveWindow(PuttyHandle,
+                        clientRect.X - leftBorder,
+                        clientRect.Y - topBorder,
+                        clientRect.Width + leftBorder + rightBorder,
+                        clientRect.Height + topBorder + bottomBorder,
+                        true);
                 }
             }
             catch (Exception ex)
@@ -450,6 +647,29 @@ namespace mRemoteNG.Connection.Protocol
 
         public override void Close()
         {
+            try
+            {
+                // Remove resize event handler to prevent memory leaks
+                InterfaceControl.Resize -= InterfaceControl_Resize;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, 
+                    Language.PuttyStuff + ": Error removing resize handler: " + ex.Message, true);
+            }
+
+            try
+            {
+                // Dispose the container panel if it was created
+                _puttyContainerPanel?.Dispose();
+                _puttyContainerPanel = null;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    Language.PuttyStuff + ": Error disposing container panel: " + ex.Message, true);
+            }
+
             try
             {
                 if (PuttyProcess?.HasExited == false)
