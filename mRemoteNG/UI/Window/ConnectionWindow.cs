@@ -860,6 +860,26 @@ namespace mRemoteNG.UI.Window
             Invoke(new Action(() => tabPage.Close()));
         }
 
+        public void Prot_Event_TitleChanged(object sender, string newTitle)
+        {
+            if (!Properties.OptionsTabsPanelsPage.Default.UseTerminalTitleForTabs) return;
+            ProtocolBase protocolBase = sender as ProtocolBase;
+            if (!(protocolBase?.InterfaceControl?.Parent is ConnectionTab tabPage)) return;
+            if (tabPage.Disposing || tabPage.IsDisposed) return;
+            if (IsDisposed || Disposing) return;
+
+            string connectionName = protocolBase.InterfaceControl.Info?.Name ?? "";
+            string tabText = string.IsNullOrEmpty(newTitle)
+                ? connectionName
+                : $"{newTitle} ({connectionName})";
+            tabText = tabText.Replace("&", "&&");
+
+            if (tabPage.InvokeRequired)
+                tabPage.Invoke(new Action(() => tabPage.TabText = tabText));
+            else
+                tabPage.TabText = tabText;
+        }
+
         #endregion
     }
 }

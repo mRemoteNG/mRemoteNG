@@ -348,6 +348,7 @@ namespace mRemoteNG.Connection
         private static void SetConnectionFormEventHandlers(ProtocolBase newProtocol, Form connectionForm)
         {
             newProtocol.Closed += ((ConnectionWindow)connectionForm).Prot_Event_Closed;
+            newProtocol.TitleChanged += ((ConnectionWindow)connectionForm).Prot_Event_TitleChanged;
         }
 
         private void SetConnectionEventHandlers(ProtocolBase newProtocol)

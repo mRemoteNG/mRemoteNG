@@ -166,5 +166,17 @@ namespace mRemoteNG.Properties {
                 this["BindConnectionsAndConfigPanels"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseTerminalTitleForTabs {
+            get {
+                return ((bool)(this["UseTerminalTitleForTabs"]));
+            }
+            set {
+                this["UseTerminalTitleForTabs"] = value;
+            }
+        }
     }
 }

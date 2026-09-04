@@ -1638,6 +1638,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="ShowProtocolOnTabs" xml:space="preserve">
     <value>Show protocols on tab names</value>
   </data>
+  <data name="UseTerminalTitleForTabs" xml:space="preserve">
+    <value>Use terminal title for tab names (SSH/Telnet)</value>
+  </data>
   <data name="SingleClickOnConnectionOpensIt" xml:space="preserve">
     <value>Single click on connection opens it</value>
   </data>

@@ -305,6 +305,15 @@ namespace mRemoteNG.Connection.Protocol
             remove => ClosedEvent = (ClosedEventHandler)Delegate.Remove(ClosedEvent, value);
         }
 
+        public delegate void TitleChangedEventHandler(object sender, string newTitle);
+
+        private TitleChangedEventHandler TitleChangedEvent;
+
+        public event TitleChangedEventHandler TitleChanged
+        {
+            add => TitleChangedEvent = (TitleChangedEventHandler)Delegate.Combine(TitleChangedEvent, value);
+            remove => TitleChangedEvent = (TitleChangedEventHandler)Delegate.Remove(TitleChangedEvent, value);
+        }
 
         public void Event_Closing(object sender)
         {
@@ -334,6 +343,11 @@ namespace mRemoteNG.Connection.Protocol
         protected void Event_ErrorOccured(object sender, string errorMsg, int? errorCode)
         {
             ErrorOccuredEvent?.Invoke(sender, errorMsg, errorCode);
+        }
+
+        protected void Event_TitleChanged(object sender, string newTitle)
+        {
+            TitleChangedEvent?.Invoke(sender, newTitle);
         }
 
         protected void Event_ReconnectGroupCloseClicked()

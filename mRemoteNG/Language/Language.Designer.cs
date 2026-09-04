@@ -6639,6 +6639,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use terminal title for tab names (SSH/Telnet).
+        /// </summary>
+        internal static string UseTerminalTitleForTabs {
+            get {
+                return ResourceManager.GetString("UseTerminalTitleForTabs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Text.
         /// </summary>
         internal static string ShowText {
