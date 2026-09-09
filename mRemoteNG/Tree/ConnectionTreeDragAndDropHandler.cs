@@ -53,6 +53,7 @@ namespace mRemoteNG.Tree
         {
             if (!(dropTarget is ContainerInfo dropTargetAsContainer)) return;
             dropSource.SetParent(dropTargetAsContainer);
+            DemoteRootGroupIfNested(dropSource, dropTargetAsContainer);
         }
 
         private void DropModelAboveTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
@@ -61,6 +62,7 @@ namespace mRemoteNG.Tree
                 dropTarget.Parent.AddChildAbove(dropSource, dropTarget);
             else
                 dropTarget.Parent.SetChildAbove(dropSource, dropTarget);
+            DemoteRootGroupIfNested(dropSource, dropTarget.Parent);
         }
 
         private void DropModelBelowTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
@@ -69,6 +71,18 @@ namespace mRemoteNG.Tree
                 dropTarget.Parent.AddChildBelow(dropSource, dropTarget);
             else
                 dropTarget.Parent.SetChildBelow(dropSource, dropTarget);
+            DemoteRootGroupIfNested(dropSource, dropTarget.Parent);
+        }
+
+        /// <summary>
+        /// A container flagged as a top-level root group should only keep that flag while it
+        /// remains a direct child of the master root node. If it has been dropped into any
+        /// other container it becomes a normal nested folder again.
+        /// </summary>
+        private static void DemoteRootGroupIfNested(ConnectionInfo dropSource, ContainerInfo newParent)
+        {
+            if (dropSource is ContainerInfo { IsRootGroup: true } droppedContainer && newParent is not RootNodeInfo)
+                droppedContainer.IsRootGroup = false;
         }
 
         public void HandleEvent_ModelCanDrop(object? sender, ModelDropEventArgs e)

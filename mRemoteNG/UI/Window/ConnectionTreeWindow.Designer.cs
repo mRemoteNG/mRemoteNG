@@ -13,6 +13,7 @@ namespace mRemoteNG.UI.Window
 		internal System.Windows.Forms.ToolStripMenuItem mMenSort;
 		internal System.Windows.Forms.ToolStripMenuItem mMenAddConnection;
 		internal System.Windows.Forms.ToolStripMenuItem mMenAddFolder;
+		internal System.Windows.Forms.ToolStripMenuItem mMenAddRoot;
 		public System.Windows.Forms.TreeView tvConnections;
 		private void InitializeComponent()
 		{
@@ -25,6 +26,7 @@ namespace mRemoteNG.UI.Window
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.mMenAddConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenAddFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMenAddRoot = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewExpandAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewCollapseAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSort = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +81,7 @@ namespace mRemoteNG.UI.Window
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mMenAddConnection,
             this.mMenAddFolder,
+            this.mMenAddRoot,
             this.mMenViewExpandAllFolders,
             this.mMenViewCollapseAllFolders,
             this.mMenSort,
@@ -107,6 +110,14 @@ namespace mRemoteNG.UI.Window
             this.mMenAddFolder.Name = "mMenAddFolder";
             this.mMenAddFolder.Size = new System.Drawing.Size(28, 20);
             this.mMenAddFolder.Click += new System.EventHandler(this.CMenTreeAddFolder_Click);
+            // 
+            // mMenAddRoot
+            // 
+            this.mMenAddRoot.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mMenAddRoot.Image = global::mRemoteNG.Properties.Resources.ASPWebSite_16x;
+            this.mMenAddRoot.Name = "mMenAddRoot";
+            this.mMenAddRoot.Size = new System.Drawing.Size(28, 20);
+            this.mMenAddRoot.Click += new System.EventHandler(this.CMenTreeAddRoot_Click);
             // 
             // mMenViewExpandAllFolders
             // 

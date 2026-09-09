@@ -899,6 +899,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="NewConnection" xml:space="preserve">
     <value>New Connection</value>
   </data>
+  <data name="AddRoot" xml:space="preserve">
+    <value>Add Root</value>
+  </data>
   <data name="NewFolder" xml:space="preserve">
     <value>New Folder</value>
   </data>

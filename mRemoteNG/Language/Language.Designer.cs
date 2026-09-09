@@ -3844,7 +3844,16 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("NewExternalTool", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Add Root.
+        /// </summary>
+        internal static string AddRoot {
+            get {
+                return ResourceManager.GetString("AddRoot", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to New Folder.
         /// </summary>

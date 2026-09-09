@@ -15,6 +15,7 @@ namespace mRemoteNG.Container
     public class ContainerInfo : ConnectionInfo, INotifyCollectionChanged
     {
         private bool _isExpanded;
+        private bool _isRootGroup;
 
         [Browsable(false)] public List<ConnectionInfo> Children { get; } = [];
 
@@ -23,6 +24,19 @@ namespace mRemoteNG.Container
         {
             get => _isExpanded;
             set => SetField(ref _isExpanded, value, "IsExpanded");
+        }
+
+        /// <summary>
+        /// When true, this container is displayed by the connection tree as a top-level
+        /// root group (a peer of the main "Connections" root) instead of being nested
+        /// under its actual parent. It remains a real child of its parent in the
+        /// underlying model for save/load purposes.
+        /// </summary>
+        [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(""), DesignOnly(false)]
+        public bool IsRootGroup
+        {
+            get => _isRootGroup;
+            set => SetField(ref _isRootGroup, value, "IsRootGroup");
         }
 
         [Browsable(false)]

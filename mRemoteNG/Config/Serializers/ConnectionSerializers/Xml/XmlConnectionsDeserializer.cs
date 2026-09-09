@@ -169,6 +169,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                             if (_confVersion >= 0.8)
                             {
                                 containerInfo.IsExpanded = xmlNode.GetAttributeAsBool("Expanded");
+                                containerInfo.IsRootGroup = xmlNode.GetAttributeAsBool("IsRootGroup");
                             }
 
                             parentContainer.AddChild(containerInfo);

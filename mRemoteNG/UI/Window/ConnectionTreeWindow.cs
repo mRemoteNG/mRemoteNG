@@ -92,6 +92,7 @@ namespace mRemoteNG.UI.Window
 
             mMenAddConnection.ToolTipText = Language.NewConnection;
             mMenAddFolder.ToolTipText = Language.NewFolder;
+            mMenAddRoot.ToolTipText = Language.AddRoot;
             mMenViewExpandAllFolders.ToolTipText = Language.ExpandAllFolders;
             mMenViewCollapseAllFolders.ToolTipText = Language.CollapseAllFolders;
             mMenSort.ToolTipText = Language.Sort;
@@ -255,6 +256,11 @@ namespace mRemoteNG.UI.Window
         private void CMenTreeAddFolder_Click(object sender, EventArgs e)
         {
             ConnectionTree.AddFolder();
+        }
+
+        private void CMenTreeAddRoot_Click(object sender, EventArgs e)
+        {
+            ConnectionTree.AddRoot();
         }
 
         #endregion
