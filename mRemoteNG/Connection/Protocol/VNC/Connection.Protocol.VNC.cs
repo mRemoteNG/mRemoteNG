@@ -2,6 +2,8 @@
 using System.Threading;
 using System.ComponentModel;
 using System.Net.Sockets;
+using System.Reflection;
+using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
@@ -63,7 +65,22 @@ namespace mRemoteNG.Connection.Protocol.VNC
             try
             {
                 if (TestConnect(_info.Hostname, _info.Port, 500))
-                    _vnc.Connect(_info.Hostname, _info.VNCViewOnly, _info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
+                {
+                    try
+                    {
+                        _vnc.Connect(_info.Hostname, _info.VNCViewOnly, _info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
+                    }
+                    catch (ArgumentException ex) when (ex.ParamName == "resource")
+                    {
+                        // VncSharpCore 1.2.1 NuGet package is missing the embedded cursor resource
+                        // "Resources.vnccursor.cur". RemoteDesktop.SetState(Connected) sets the
+                        // internal state field to Connected before attempting to create the cursor,
+                        // so the state IS Connected when the exception is thrown. Authentication
+                        // (if required) has already completed successfully. We complete the remaining
+                        // initialization steps (SetupDesktop, ConnectComplete, StartUpdates) here.
+                        CompleteVncInitializationAfterCursorFailure(_vnc);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -74,6 +91,78 @@ namespace mRemoteNG.Connection.Protocol.VNC
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Completes VNC initialization after VncSharpCore's <c>SetState(Connected)</c> throws an
+        /// <see cref="ArgumentException"/> because the cursor resource <c>"Resources.vnccursor.cur"</c>
+        /// is missing from the VncSharpCore 1.2.1 NuGet package.
+        /// <para>
+        /// At the point of the exception, the <c>RemoteDesktop</c> internal state is already
+        /// <c>Connected</c> and the VNC client has been initialized.  The steps that follow
+        /// <c>SetState</c> in <c>RemoteDesktop.Initialize()</c> — <c>SetupDesktop</c>,
+        /// <c>OnConnectComplete</c>, and <c>StartUpdates</c> — are replicated here via reflection.
+        /// </para>
+        /// </summary>
+        private static void CompleteVncInitializationAfterCursorFailure(VncSharpCore.RemoteDesktop vnc)
+        {
+            var rdType = typeof(VncSharpCore.RemoteDesktop);
+
+            // Use the default arrow cursor as a safe substitute for the missing vnccursor.cur.
+            vnc.Cursor = Cursors.Default;
+
+            // Call SetupDesktop() to create the desktop bitmap.
+            // InsureConnection(true) inside passes because state == Connected.
+            var setupDesktop = rdType.GetMethod("SetupDesktop", BindingFlags.NonPublic | BindingFlags.Instance);
+            if (setupDesktop != null)
+                setupDesktop.Invoke(vnc, null);
+            else
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+                    "VNC cursor workaround: SetupDesktop() not found via reflection. Desktop bitmap may not be initialized.", true);
+
+            // Obtain the private VncClient field so we can access the framebuffer and start updates.
+            var vncClient = rdType.GetField("vnc", BindingFlags.NonPublic | BindingFlags.Instance)
+                                  ?.GetValue(vnc) as VncSharpCore.VncClient;
+            if (vncClient == null)
+                return;
+
+            // Fire the ConnectComplete event with the remote framebuffer geometry.
+            var fb = vncClient.Framebuffer;
+            var connectArgs = new VncSharpCore.ConnectEventArgs(fb.Width, fb.Height, fb.DesktopName);
+            var onConnectComplete = rdType.GetMethod("OnConnectComplete", BindingFlags.NonPublic | BindingFlags.Instance);
+            if (onConnectComplete != null)
+                onConnectComplete.Invoke(vnc, new object[] { connectArgs });
+            else
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+                    "VNC cursor workaround: OnConnectComplete() not found via reflection. ConnectComplete event may not fire.", true);
+
+            // Refresh AutoScrollMinSize now that the real framebuffer dimensions are known.
+            var desktopPolicy = rdType.GetField("desktopPolicy", BindingFlags.NonPublic | BindingFlags.Instance)
+                                      ?.GetValue(vnc);
+            if (desktopPolicy != null)
+            {
+                var minSizeValue = desktopPolicy.GetType()
+                                                .GetProperty("AutoScrollMinSize", BindingFlags.Public | BindingFlags.Instance)
+                                                ?.GetValue(desktopPolicy);
+                if (minSizeValue is System.Drawing.Size size)
+                    vnc.AutoScrollMinSize = size;
+            }
+
+            // Wire up the VncUpdate event handler and start the background update thread.
+            var vncUpdateMethod = rdType.GetMethod("VncUpdate", BindingFlags.NonPublic | BindingFlags.Instance);
+            var vncUpdateEvent = typeof(VncSharpCore.VncClient).GetEvent("VncUpdate");
+            if (vncUpdateMethod != null && vncUpdateEvent?.EventHandlerType != null)
+            {
+                var handler = Delegate.CreateDelegate(vncUpdateEvent.EventHandlerType, vnc, vncUpdateMethod);
+                vncUpdateEvent.AddEventHandler(vncClient, handler);
+            }
+            else
+            {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+                    "VNC cursor workaround: VncUpdate event handler could not be wired via reflection. Screen updates may not be displayed.", true);
+            }
+
+            vncClient.StartUpdates();
         }
 
         public override void Disconnect()
