@@ -252,7 +252,9 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
             e.Canceled = true;
 
-            _revealLimits[container] = container.Children.Count;
+            _revealLimits[container] = _revealLimits.TryGetValue(container, out int currentLimit)
+                ? Math.Min(currentLimit, container.Children.Count)
+                : container.Children.Count;
             _activeAnimations[container] = false;
             StartAnimationTimerIfNeeded();
         }
