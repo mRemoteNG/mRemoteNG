@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
@@ -47,13 +48,15 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         // the reveal limit towards the full child count) and false while
         // collapsing (shrinking the reveal limit towards zero).
         private readonly Dictionary<ContainerInfo, bool> _activeAnimations = new();
+        private readonly Dictionary<ContainerInfo, Stopwatch> _animationStopwatches = new();
 
         // Guards against our own programmatic Collapse() call (issued once the
         // shrink animation reaches zero) being cancelled a second time by
         // ConnectionTree_Collapsing.
         private readonly HashSet<ContainerInfo> _collapseFinalizing = new();
 
-        private const int RowsRevealedPerTick = 1;
+        private const int MaxAnimationDurationMs = 180;
+        private const int MinRowsPerTick = 1;
         private readonly Timer _expandCollapseAnimationTimer = new() { Interval = 15 };
 
         public ConnectionInfo SelectedNode => (ConnectionInfo)SelectedObject;
@@ -267,8 +270,14 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             if (e.Model is not ContainerInfo container || container.Children.Count == 0)
                 return;
 
+            // TreeListView raises Expanding before it knows whether Expand() will no-op.
+            // Skip animation state changes for already-expanded branches.
+            if (IsExpanded(container))
+                return;
+
             _revealLimits[container] = Math.Min(1, container.Children.Count);
             _activeAnimations[container] = true;
+            _animationStopwatches[container] = Stopwatch.StartNew();
             StartAnimationTimerIfNeeded();
         }
 
@@ -296,6 +305,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
                 ? Math.Min(currentLimit, container.Children.Count)
                 : container.Children.Count;
             _activeAnimations[container] = false;
+            _animationStopwatches[container] = Stopwatch.StartNew();
             StartAnimationTimerIfNeeded();
         }
 
@@ -308,6 +318,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         /// </summary>
         private static bool ExpandCollapseAnimationsAllowed =>
             !SystemInformation.HighContrast &&
+            SystemInformation.IsMenuAnimationEnabled &&
             Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations;
 
         private void StartAnimationTimerIfNeeded()
@@ -335,10 +346,11 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             FinalizeFinishedExpansions(finishedExpansions);
             FinalizeFinishedCollapses(finishedCollapses);
 
-            AutoResizeColumn(Columns[0]);
-
             if (_activeAnimations.Count == 0)
+            {
+                AutoResizeColumn(Columns[0]);
                 _expandCollapseAnimationTimer.Stop();
+            }
         }
 
         /// <summary>
@@ -351,9 +363,11 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             int totalChildren = container.Children.Count;
             int currentLimit = _revealLimits.TryGetValue(container, out int limit) ? limit : 0;
 
+            int rowsToAdvance = CalculateRowsPerTick(container, totalChildren, currentLimit, isExpanding);
+
             if (isExpanding)
             {
-                currentLimit = Math.Min(totalChildren, currentLimit + RowsRevealedPerTick);
+                currentLimit = Math.Min(totalChildren, currentLimit + rowsToAdvance);
                 _revealLimits[container] = currentLimit;
                 RefreshObject(container);
 
@@ -362,7 +376,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             }
             else
             {
-                currentLimit = Math.Max(0, currentLimit - RowsRevealedPerTick);
+                currentLimit = Math.Max(0, currentLimit - rowsToAdvance);
                 _revealLimits[container] = currentLimit;
                 RefreshObject(container);
 
@@ -377,6 +391,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             {
                 _activeAnimations.Remove(container);
                 _revealLimits.Remove(container);
+                _animationStopwatches.Remove(container);
                 RefreshObject(container);
             }
         }
@@ -389,7 +404,28 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
                 _collapseFinalizing.Add(container);
                 Collapse(container);
                 _revealLimits.Remove(container);
+                _animationStopwatches.Remove(container);
             }
+        }
+
+        private int CalculateRowsPerTick(ContainerInfo container, int totalChildren, int currentLimit, bool isExpanding)
+        {
+            if (!_animationStopwatches.TryGetValue(container, out Stopwatch stopwatch))
+            {
+                stopwatch = Stopwatch.StartNew();
+                _animationStopwatches[container] = stopwatch;
+            }
+
+            int elapsedMs = (int)Math.Min(stopwatch.ElapsedMilliseconds, MaxAnimationDurationMs);
+            int ticksRemaining = Math.Max(1, (MaxAnimationDurationMs - elapsedMs + _expandCollapseAnimationTimer.Interval - 1) / _expandCollapseAnimationTimer.Interval);
+            int remainingRows = isExpanding
+                ? Math.Max(0, totalChildren - currentLimit)
+                : currentLimit;
+
+            if (remainingRows <= 0)
+                return MinRowsPerTick;
+
+            return Math.Max(MinRowsPerTick, (int)Math.Ceiling(remainingRows / (double)ticksRemaining));
         }
 
         /// <summary>
@@ -510,7 +546,19 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         public void InvokeExpand(object model)
         {
-            Invoke(() => Expand(model));
+            Invoke(() => ExpandWithoutAnimation(model));
+        }
+
+        internal void ExpandWithoutAnimation(object model)
+        {
+            if (model is ContainerInfo container)
+            {
+                _activeAnimations.Remove(container);
+                _revealLimits.Remove(container);
+                _animationStopwatches.Remove(container);
+            }
+
+            Expand(model);
         }
 
         public void InvokeRebuildAll(bool preserveState)
@@ -593,7 +641,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             ContainerInfo selectedContainer = parentNode as ContainerInfo;
             ContainerInfo parent = selectedContainer ?? parentNode?.Parent;
             newNode.SetParent(parent);
-            Expand(parent);
+            ExpandWithoutAnimation(parent);
             SelectObject(newNode, true);
             EnsureModelVisible(newNode);
             _allowEdit = true;
