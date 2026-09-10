@@ -6,7 +6,7 @@
            Id="$(var.ProductCode)" 
            UpgradeCode="$(var.UpgradeCode)" 
            Language="1033">
-    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" />
     <MajorUpgrade DowngradeErrorMessage="!(loc.Upgrade_NewerVersionInstalled)" Schedule="afterInstallExecute" />
     <MediaTemplate EmbedCab="yes" />
     <Binary Id="CustomActions.CA.dll" SourceFile="$(var.SolutionDir)mRemoteNGInstaller\CustomActions\bin\x64\$(var.Configuration)\CustomActions.CA.dll" />
@@ -28,6 +28,11 @@
     <PropertyRef Id="NETFRAMEWORK40FULL" />
     <PropertyRef Id="WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
     <Icon Id="AppIcon.ico" SourceFile="Resources\AppIcon.ico" />
+    <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
+    <WixVariable Id="WixUISupportPerUser" Value="1" />
+    <WixVariable Id="WixUISupportPerMachine" Value="1" />
+    <WixVariable Id="WixUISupportPerMachineDefault" Value="1" />
+    <Property Id="ApplicationFolderName" Value="$(var.ProductName)" />
     <CustomActionRef Id='SaveCmdlineINSTALLDIR' />
 
 
@@ -46,10 +51,6 @@
     </InstallExecuteSequence>
     
     
-    <!-- Need to be admin to install -->
-    <Condition Message="!(loc.Install_NeedToBeAdminToInstall)">
-      Privileged
-    </Condition>
     <!-- Windows 7 or higher required -->
     <Condition Message="!(loc.Install_OSVersionRequirement)">
       <![CDATA[Installed OR (IGNOREPREREQUISITES = 1) OR (VersionNT >= 601) OR (VersionNT64 >= 601)]]>
