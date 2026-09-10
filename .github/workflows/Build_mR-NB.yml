@@ -90,19 +90,13 @@ jobs:
           # Refresh PATH to include global tools
           $env:PATH += ";$env:USERPROFILE\.dotnet\tools"
           $ttFile = "$env:GITHUB_WORKSPACE\mRemoteNG\Properties\AssemblyInfo.tt"
-          $vsWhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-          if (!(Test-Path $vsWhere)) {
-            throw "vswhere.exe was not found at $vsWhere"
+          $interopDll = "$env:GITHUB_WORKSPACE\mRemoteNG\libs\Microsoft.VisualStudio.Interop.dll"
+          if (!(Test-Path $interopDll)) {
+            throw "Microsoft.VisualStudio.Interop.dll was not found at $interopDll"
           }
 
-          $vsInstallPath = & $vsWhere -latest -products * -property installationPath
-          if ([string]::IsNullOrWhiteSpace($vsInstallPath)) {
-            throw "Could not determine Visual Studio installation path using vswhere.exe"
-          }
-
-          $vsPath = Join-Path $vsInstallPath "Common7\IDE\PublicAssemblies"
           Write-Host "Transforming T4 template"
-          t4 $ttFile -P platformType=${{ matrix.platform }} -r:"$vsPath\EnvDTE.dll" -r:"$vsPath\Microsoft.VisualStudio.Interop.dll"
+          t4 $ttFile -P platformType=${{ matrix.platform }} -r:"$interopDll"
         env:
           PLATFORM: '${{ matrix.platform }}'
   
