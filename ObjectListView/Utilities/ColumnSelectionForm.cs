@@ -13,11 +13,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Windows.Forms;
 
 namespace BrightIdeasSoftware
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// This form is an example of how an application could allows the user to select which columns 
     /// an ObjectListView will display, as well as select which order the columns are displayed in.

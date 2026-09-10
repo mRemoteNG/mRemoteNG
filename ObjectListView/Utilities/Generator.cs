@@ -47,11 +47,13 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.Versioning;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace BrightIdeasSoftware
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// An object that implements the IGenerator interface provides the ability 
     /// to dynamically create columns
@@ -89,6 +91,7 @@ namespace BrightIdeasSoftware
     /// of that type. The generator can consider all public properties or only those public properties marked with
     /// [OLVColumn] attribute.</para>
     /// </remarks>
+    [SupportedOSPlatform("windows")]
     public class Generator : IGenerator {
         #region Static convenience methods
 

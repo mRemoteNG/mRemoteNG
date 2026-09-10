@@ -39,6 +39,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace BrightIdeasSoftware
@@ -88,6 +89,7 @@ namespace BrightIdeasSoftware
     /// This editor shows and auto completes values from the given listview column.
     /// </summary>
     [ToolboxItem(false)]
+    [SupportedOSPlatform("windows")]
     public class AutoCompleteCellEditor : ComboBox
     {
         /// <summary>
@@ -117,6 +119,7 @@ namespace BrightIdeasSoftware
     /// This combo box is specialised to allow editing of an enum.
     /// </summary>
     [ToolboxItem(false)]
+    [SupportedOSPlatform("windows")]
     public class EnumCellEditor : ComboBox
     {
         /// <summary>
@@ -139,6 +142,7 @@ namespace BrightIdeasSoftware
     /// This editor simply shows and edits integer values.
     /// </summary>
     [ToolboxItem(false)]
+    [SupportedOSPlatform("windows")]
     public class IntUpDown : NumericUpDown
     {
         /// <summary>
@@ -166,6 +170,7 @@ namespace BrightIdeasSoftware
     /// CLS-compliant type. If you want to use, just copy the code to this class
     /// into your project and use it from there.</remarks>
     [ToolboxItem(false)]
+    [SupportedOSPlatform("windows")]
     internal class UintUpDown : NumericUpDown
     {
         public UintUpDown() {
@@ -184,6 +189,7 @@ namespace BrightIdeasSoftware
     /// This editor simply shows and edits boolean values.
     /// </summary>
     [ToolboxItem(false)]
+    [SupportedOSPlatform("windows")]
     public class BooleanCellEditor : ComboBox
     {
         /// <summary>
@@ -205,6 +211,7 @@ namespace BrightIdeasSoftware
     /// This editor simply shows and edits boolean values using a checkbox
     /// </summary>
     [ToolboxItem(false)]
+    [SupportedOSPlatform("windows")]
     public class BooleanCellEditor2 : CheckBox
     {
         /// <summary>
@@ -262,6 +269,7 @@ namespace BrightIdeasSoftware
     /// to change the characteristics of the editor. For example, by increasing
     /// the number of decimal places.</remarks>
     [ToolboxItem(false)]
+    [SupportedOSPlatform("windows")]
     public class FloatCellEditor : NumericUpDown
     {
         /// <summary>

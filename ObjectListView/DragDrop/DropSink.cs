@@ -48,10 +48,12 @@ using System;
 using System.Collections;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace BrightIdeasSoftware
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// Objects that implement this interface can acts as the receiver for drop
     /// operation for an ObjectListView.
@@ -119,6 +121,7 @@ namespace BrightIdeasSoftware
         void QueryContinue(QueryContinueDragEventArgs args);
     }
 
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// This is a do-nothing implementation of IDropSink that is a useful
     /// base class for more sophisticated implementations.
@@ -284,6 +287,7 @@ namespace BrightIdeasSoftware
     /// <remarks>
     /// Actually, it should be called CleverDropSink -- it's far from simple and can do quite a lot in its own right.
     /// </remarks>
+    [SupportedOSPlatform("windows")]
     public class SimpleDropSink : AbstractDropSink
     {
         #region Life and death
@@ -1153,6 +1157,7 @@ namespace BrightIdeasSoftware
     /// if models from another OLV can be moved to OLV under this sink.
     /// </para>
     /// </remarks>
+    [SupportedOSPlatform("windows")]
     public class RearrangingDropSink : SimpleDropSink
     {
         /// <summary>
@@ -1239,6 +1244,7 @@ namespace BrightIdeasSoftware
     /// When a drop sink needs to know if something can be dropped, or
     /// to notify that a drop has occured, it uses an instance of this class.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class OlvDropEventArgs : EventArgs
     {
         /// <summary>
@@ -1384,6 +1390,7 @@ namespace BrightIdeasSoftware
     /// <summary>
     /// These events are triggered when the drag source is an ObjectListView.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class ModelDropEventArgs : OlvDropEventArgs
     {
         /// <summary>

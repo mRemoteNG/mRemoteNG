@@ -29,9 +29,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.Versioning;
 using System.Text;
 
 namespace BrightIdeasSoftware {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// An OLVExporter converts a collection of rows from an ObjectListView
     /// into a variety of textual formats.

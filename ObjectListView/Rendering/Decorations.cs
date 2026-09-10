@@ -38,10 +38,12 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace BrightIdeasSoftware
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// A decoration is an overlay that draws itself in relation to a given row or cell.
     /// Decorations scroll when the listview scrolls.
@@ -59,6 +61,7 @@ namespace BrightIdeasSoftware
         OLVListSubItem SubItem { get; set; }
     }
 
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// An AbstractDecoration is a safe do-nothing implementation of the IDecoration interface
     /// </summary>
@@ -235,6 +238,7 @@ namespace BrightIdeasSoftware
         #endregion
     }
 
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// This decoration draws an optionally filled border around a rectangle.
     /// Subclasses must override CalculateBounds().
