@@ -95,33 +95,9 @@ namespace mRemoteNG.Tools
 
         public string HttpsName => BoolToYesNo(Https);
 
-        public string OpenPortsName
-        {
-            get
-            {
-                string strOpen = "";
-                foreach (int p in OpenPorts)
-                {
-                    strOpen += p + ", ";
-                }
+        public string OpenPortsName => string.Join(", ", OpenPorts.ToArray());
 
-                return strOpen;
-            }
-        }
-
-        public string ClosedPortsName
-        {
-            get
-            {
-                string strClosed = "";
-                foreach (int p in ClosedPorts)
-                {
-                    strClosed += p + ", ";
-                }
-
-                return strClosed;
-            }
-        }
+        public string ClosedPortsName => string.Join(", ", ClosedPorts.ToArray());
 
 
         private static string BoolToYesNo(bool value)
