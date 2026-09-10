@@ -90,8 +90,17 @@ jobs:
           # Refresh PATH to include global tools
           $env:PATH += ";$env:USERPROFILE\.dotnet\tools"
           $ttFile = "$env:GITHUB_WORKSPACE\mRemoteNG\Properties\AssemblyInfo.tt"
-          # VS Enterprise 2022 assemblies
-          $vsPath = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\PublicAssemblies"
+          $vsWhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          if (!(Test-Path $vsWhere)) {
+            throw "vswhere.exe was not found at $vsWhere"
+          }
+
+          $vsInstallPath = & $vsWhere -latest -products * -property installationPath
+          if ([string]::IsNullOrWhiteSpace($vsInstallPath)) {
+            throw "Could not determine Visual Studio installation path using vswhere.exe"
+          }
+
+          $vsPath = Join-Path $vsInstallPath "Common7\IDE\PublicAssemblies"
           Write-Host "Transforming T4 template"
           t4 $ttFile -P platformType=${{ matrix.platform }} -r:"$vsPath\EnvDTE.dll" -r:"$vsPath\Microsoft.VisualStudio.Interop.dll"
         env:
@@ -114,7 +123,7 @@ jobs:
         if: matrix.deployment == 'framework-dependent'
         shell: pwsh
         run: |
-          msbuild "$Env:GITHUB_WORKSPACE\$($sln.Name)" -p:Configuration="Release" -p:Platform=${{ matrix.platform }} /verbosity:minimal
+          msbuild "$Env:GITHUB_WORKSPACE\$env:SOLUTION_FILE" -p:Configuration="Release" -p:Platform=${{ matrix.platform }} /verbosity:minimal
 
       - name: (08) Build Self-Contained Release
         if: matrix.deployment == 'self-contained'
