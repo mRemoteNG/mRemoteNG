@@ -141,7 +141,13 @@ jobs:
             
       - name: (06) Restore NuGet Packages
         shell: pwsh
-        run: dotnet restore
+        run: |
+          $projectPath = "$env:GITHUB_WORKSPACE\mRemoteNG\mRemoteNG.csproj"
+          if ('${{ matrix.deployment }}' -eq 'self-contained') {
+            dotnet restore $projectPath -p:Configuration="Release Self-Contained" -p:Platform=${{ matrix.platform }} -p:SelfContained=true -p:RuntimeIdentifier=win-${{ matrix.arch }} -p:PublishReadyToRun=true
+          } else {
+            dotnet restore $projectPath -p:Configuration=Release -p:Platform=${{ matrix.platform }}
+          }
         
       - name: (07) Build Framework-Dependent Release
         if: matrix.deployment == 'framework-dependent'
