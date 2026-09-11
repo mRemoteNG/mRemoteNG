@@ -135,13 +135,13 @@ jobs:
         if: matrix.deployment == 'framework-dependent'
         shell: pwsh
         run: |
-          dotnet msbuild "$Env:GITHUB_WORKSPACE\$env:SOLUTION_FILE" -p:Configuration="Release" -p:Platform=${{ matrix.platform }} /verbosity:minimal
+          & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\$env:SOLUTION_FILE" /p:Configuration="Release" /p:Platform=${{ matrix.platform }} /verbosity:minimal
 
       - name: (08) Build Self-Contained Release
         if: matrix.deployment == 'self-contained'
         shell: pwsh
         run: |
-          dotnet msbuild "$Env:GITHUB_WORKSPACE\mRemoteNG.sln" /t:Publish /p:Configuration="Release Self-Contained" -p:Platform=${{ matrix.platform }} /verbosity:minimal /p:SelfContained=true /p:PublishDir="bin\${{ matrix.platform }}\Release"
+          & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\mRemoteNG\mRemoteNG.csproj" /t:Publish /p:Configuration="Release Self-Contained" /p:Platform=${{ matrix.platform }} /verbosity:minimal /p:SelfContained=true /p:RuntimeIdentifier=win-${{ matrix.arch }} /p:PublishDir="$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\${{ matrix.arch }}\Release"
                 
       - name: (09) Release Information
         id: version
@@ -201,7 +201,11 @@ jobs:
       - name: (11) Create Zip File
         shell: pwsh
         run: |
-          $sourceDir = "$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\Release"
+          if ('${{ matrix.deployment }}' -eq 'self-contained') {
+            $sourceDir = "$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\${{ matrix.arch }}\Release"
+          } else {
+            $sourceDir = "$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\Release"
+          }
           Compress-Archive -Path "$sourceDir\*" -DestinationPath ${{ steps.version.outputs.zipname }}
           echo "File: ${{ steps.version.outputs.zipname }}"
           
