@@ -82,6 +82,24 @@ jobs:
           Write-Host "Installing VS 2026 Build Tools..."
           choco install visualstudio2026buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --includeRecommended --quiet" -y --ignore-package-exit-codes=3010
           Write-Host "VS 2026 Build Tools installation completed"
+
+      - name: (03b) Locate MSBuild
+        shell: pwsh
+        run: |
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          if (!(Test-Path $vswhere)) {
+            throw "vswhere.exe was not found at $vswhere"
+          }
+
+          $msbuild = & $vswhere -latest -products * -requires Microsoft.Component.MSBuild -find "MSBuild\**\Bin\MSBuild.exe" |
+            Select-Object -First 1
+
+          if ([string]::IsNullOrWhiteSpace($msbuild) -or !(Test-Path $msbuild)) {
+            throw "MSBuild.exe was not found after installing Visual Studio Build Tools"
+          }
+
+          "MSBUILD_EXE=$msbuild" | Out-File -FilePath $env:GITHUB_ENV -Append
+          Write-Host "Resolved MSBuild to $msbuild" -ForegroundColor Green
           
       - name: (04) Install and run dotnet-t4 to transform T4 templates
         shell: pwsh
@@ -117,13 +135,13 @@ jobs:
         if: matrix.deployment == 'framework-dependent'
         shell: pwsh
         run: |
-          msbuild "$Env:GITHUB_WORKSPACE\$env:SOLUTION_FILE" -p:Configuration="Release" -p:Platform=${{ matrix.platform }} /verbosity:minimal
+          & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\$env:SOLUTION_FILE" -p:Configuration="Release" -p:Platform=${{ matrix.platform }} /verbosity:minimal
 
       - name: (08) Build Self-Contained Release
         if: matrix.deployment == 'self-contained'
         shell: pwsh
         run: |
-          msbuild "$Env:GITHUB_WORKSPACE\mRemoteNG.sln" /t:Publish /p:Configuration="Release Self-Contained" -p:Platform=${{ matrix.platform }} /verbosity:minimal /p:SelfContained=true /p:PublishDir="bin\${{ matrix.platform }}\Release"
+          & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\mRemoteNG.sln" /t:Publish /p:Configuration="Release Self-Contained" -p:Platform=${{ matrix.platform }} /verbosity:minimal /p:SelfContained=true /p:PublishDir="bin\${{ matrix.platform }}\Release"
                 
       - name: (09) Release Information
         id: version
