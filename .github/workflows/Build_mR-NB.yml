@@ -159,7 +159,7 @@ jobs:
         if: matrix.deployment == 'self-contained'
         shell: pwsh
         run: |
-          & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\mRemoteNG\mRemoteNG.csproj" /t:Publish /p:Configuration="Release Self-Contained" /p:Platform=${{ matrix.platform }} /p:MSBuildEnableWorkloadResolver=false /verbosity:minimal /p:SelfContained=true /p:RuntimeIdentifier=win-${{ matrix.arch }} /p:PublishDir="$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\${{ matrix.arch }}\Release"
+          & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\mRemoteNG\mRemoteNG.csproj" /p:Configuration="Release Self-Contained" /p:Platform=${{ matrix.platform }} /p:MSBuildEnableWorkloadResolver=false /verbosity:minimal /p:SelfContained=true /p:RuntimeIdentifier=win-${{ matrix.arch }} /p:PublishDir="$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\${{ matrix.arch }}\Release"
                 
       - name: (09) Release Information
         id: version
