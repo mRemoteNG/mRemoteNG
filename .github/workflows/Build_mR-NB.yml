@@ -83,6 +83,35 @@ jobs:
         uses: microsoft/setup-msbuild@v3
         with:
           msbuild-architecture: ${{ matrix.msbuild_arch }}
+
+      - name: (03b) Resolve MSBuild environment
+        shell: pwsh
+        run: |
+          $msbuild = (Get-Command msbuild -ErrorAction Stop).Source
+          if ([string]::IsNullOrWhiteSpace($msbuild) -or !(Test-Path $msbuild)) {
+            throw "msbuild.exe was not found after setup-msbuild"
+          }
+
+          $dotnetPath = (Get-Command dotnet -ErrorAction Stop).Source
+          $dotnetRoot = Split-Path $dotnetPath -Parent
+          $dotnetInfo = & dotnet --info
+          $sdkBasePathLine = $dotnetInfo | Select-String -Pattern '^\s*Base Path:\s*(.+)$' | Select-Object -First 1
+          if ($null -eq $sdkBasePathLine) {
+            throw "Unable to determine active .NET SDK base path from 'dotnet --info'"
+          }
+
+          $sdkBasePath = $sdkBasePathLine.Matches[0].Groups[1].Value.Trim()
+          $msbuildSdksPath = Join-Path $sdkBasePath "Sdks"
+          if (!(Test-Path $msbuildSdksPath)) {
+            throw "MSBuild SDKs path was not found at $msbuildSdksPath"
+          }
+
+          "MSBUILD_EXE=$msbuild" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "MSBuildSDKsPath=$msbuildSdksPath" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "DOTNET_MSBUILD_SDK_RESOLVER_CLI_DIR=$dotnetRoot" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "DOTNET_ROOT=$dotnetRoot" | Out-File -FilePath $env:GITHUB_ENV -Append
+          Write-Host "Resolved MSBuild to $msbuild" -ForegroundColor Green
+          Write-Host "Resolved MSBuild SDKs path to $msbuildSdksPath" -ForegroundColor Green
           
       - name: (04) Install and run dotnet-t4 to transform T4 templates
         shell: pwsh
@@ -118,13 +147,13 @@ jobs:
         if: matrix.deployment == 'framework-dependent'
         shell: pwsh
         run: |
-          msbuild "$Env:GITHUB_WORKSPACE\$env:SOLUTION_FILE" /p:Configuration="Release" /p:Platform=${{ matrix.platform }} /verbosity:minimal
+          & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\mRemoteNG\mRemoteNG.csproj" /p:Configuration="Release" /p:Platform=${{ matrix.platform }} /p:MSBuildEnableWorkloadResolver=false /verbosity:minimal
 
       - name: (08) Build Self-Contained Release
         if: matrix.deployment == 'self-contained'
         shell: pwsh
         run: |
-          msbuild "$Env:GITHUB_WORKSPACE\mRemoteNG\mRemoteNG.csproj" /t:Publish /p:Configuration="Release Self-Contained" /p:Platform=${{ matrix.platform }} /verbosity:minimal /p:SelfContained=true /p:RuntimeIdentifier=win-${{ matrix.arch }} /p:PublishDir="$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\${{ matrix.arch }}\Release"
+          & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\mRemoteNG\mRemoteNG.csproj" /t:Publish /p:Configuration="Release Self-Contained" /p:Platform=${{ matrix.platform }} /p:MSBuildEnableWorkloadResolver=false /verbosity:minimal /p:SelfContained=true /p:RuntimeIdentifier=win-${{ matrix.arch }} /p:PublishDir="$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\${{ matrix.arch }}\Release"
                 
       - name: (09) Release Information
         id: version
