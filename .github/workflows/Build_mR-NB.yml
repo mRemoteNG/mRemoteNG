@@ -20,25 +20,29 @@ jobs:
       matrix:
         include:
           # Framework-Dependent builds (requires .NET runtime on user machine)
-          - runner: windows-latest
+          - runner: windows-2025-vs2026
             platform: x64
             arch: x64
+            msbuild_arch: x64
             deployment: framework-dependent
             deploy_suffix: FD
-          - runner: windows-11-arm
+          - runner: windows-11-vs2026-arm
             platform: ARM64
             arch: arm64
+            msbuild_arch: arm64
             deployment: framework-dependent
             deploy_suffix: FD
           # Self-Contained builds (includes .NET runtime)
-          - runner: windows-latest
+          - runner: windows-2025-vs2026
             platform: x64
             arch: x64
+            msbuild_arch: x64
             deployment: self-contained
             deploy_suffix: SC
-          - runner: windows-11-arm
+          - runner: windows-11-vs2026-arm
             platform: ARM64
             arch: arm64
+            msbuild_arch: arm64
             deployment: self-contained
             deploy_suffix: SC
     runs-on: ${{ matrix.runner }}
@@ -75,48 +79,10 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      # 6. Install Visual Studio 2026 Build Tools
-      - name: (03) Install Visual Studio 2026 Build Tools
-        shell: pwsh
-        run: |
-          Write-Host "Installing VS 2026 Build Tools..."
-          choco install visualstudio2026buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --includeRecommended --quiet" -y --ignore-package-exit-codes=3010
-          Write-Host "VS 2026 Build Tools installation completed"
-
-      - name: (03b) Locate MSBuild
-        shell: pwsh
-        run: |
-          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-          if (!(Test-Path $vswhere)) {
-            throw "vswhere.exe was not found at $vswhere"
-          }
-
-          $msbuild = & $vswhere -latest -products * -requires Microsoft.Component.MSBuild -find "MSBuild\**\Bin\MSBuild.exe" |
-            Select-Object -First 1
-
-          if ([string]::IsNullOrWhiteSpace($msbuild) -or !(Test-Path $msbuild)) {
-            throw "MSBuild.exe was not found after installing Visual Studio Build Tools"
-          }
-
-          $dotnetPath = (Get-Command dotnet -ErrorAction Stop).Source
-          $dotnetRoot = Split-Path $dotnetPath -Parent
-          $dotnetInfo = & dotnet --info
-          $sdkBasePathLine = $dotnetInfo | Select-String -Pattern '^\s*Base Path:\s*(.+)$' | Select-Object -First 1
-          if ($null -eq $sdkBasePathLine) {
-            throw "Unable to determine active .NET SDK base path from 'dotnet --info'"
-          }
-          $sdkBasePath = $sdkBasePathLine.Matches[0].Groups[1].Value.Trim()
-          $msbuildSdksPath = Join-Path $sdkBasePath "Sdks"
-          if (!(Test-Path $msbuildSdksPath)) {
-            throw "MSBuild SDKs path was not found at $msbuildSdksPath"
-          }
-
-          "MSBUILD_EXE=$msbuild" | Out-File -FilePath $env:GITHUB_ENV -Append
-          "MSBuildSDKsPath=$msbuildSdksPath" | Out-File -FilePath $env:GITHUB_ENV -Append
-          "DOTNET_MSBUILD_SDK_RESOLVER_CLI_DIR=$dotnetRoot" | Out-File -FilePath $env:GITHUB_ENV -Append
-          "DOTNET_ROOT=$dotnetRoot" | Out-File -FilePath $env:GITHUB_ENV -Append
-          Write-Host "Resolved MSBuild to $msbuild" -ForegroundColor Green
-          Write-Host "Resolved MSBuild SDKs path to $msbuildSdksPath" -ForegroundColor Green
+      - name: (03) Set up MSBuild
+        uses: microsoft/setup-msbuild@v3
+        with:
+          msbuild-architecture: ${{ matrix.msbuild_arch }}
           
       - name: (04) Install and run dotnet-t4 to transform T4 templates
         shell: pwsh
@@ -152,13 +118,13 @@ jobs:
         if: matrix.deployment == 'framework-dependent'
         shell: pwsh
         run: |
-          & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\$env:SOLUTION_FILE" /p:Configuration="Release" /p:Platform=${{ matrix.platform }} /p:MSBuildEnableWorkloadResolver=false /verbosity:minimal
+          msbuild "$Env:GITHUB_WORKSPACE\$env:SOLUTION_FILE" /p:Configuration="Release" /p:Platform=${{ matrix.platform }} /verbosity:minimal
 
       - name: (08) Build Self-Contained Release
         if: matrix.deployment == 'self-contained'
         shell: pwsh
         run: |
-          & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\mRemoteNG\mRemoteNG.csproj" /t:Publish /p:Configuration="Release Self-Contained" /p:Platform=${{ matrix.platform }} /p:MSBuildEnableWorkloadResolver=false /verbosity:minimal /p:SelfContained=true /p:RuntimeIdentifier=win-${{ matrix.arch }} /p:PublishDir="$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\${{ matrix.arch }}\Release"
+          msbuild "$Env:GITHUB_WORKSPACE\mRemoteNG\mRemoteNG.csproj" /t:Publish /p:Configuration="Release Self-Contained" /p:Platform=${{ matrix.platform }} /verbosity:minimal /p:SelfContained=true /p:RuntimeIdentifier=win-${{ matrix.arch }} /p:PublishDir="$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\${{ matrix.arch }}\Release"
                 
       - name: (09) Release Information
         id: version
@@ -239,7 +205,7 @@ jobs:
 
   Create-Combined-Release:
     needs: NB-Build-and-Release
-    runs-on: windows-latest
+    runs-on: windows-2025-vs2026
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
