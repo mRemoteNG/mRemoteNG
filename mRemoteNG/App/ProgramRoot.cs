@@ -50,47 +50,48 @@ namespace mRemoteNG.App
         {
             AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
 
-#if !SELF_CONTAINED
-            // Runtime checks only needed for framework-dependent deployments
-            // Self-contained builds include the runtime, so no check is needed
-            // Note: .NET runtime check is not needed here — the .NET host (apphost)
-            // natively displays a missing-runtime dialog with a download link.
-
-            var checkFail = false;
-
-            // Checking Visual C++ Redistributable version
-            if (VCppRuntimeCheck.GetInstalledVcRedistVersions() == null || VCppRuntimeCheck.GetInstalledVcRedistVersions().Count == 0)
+            if (!ShouldSkipNativeRuntimeChecks(args))
             {
-                var downloadUrl2 = "https://aka.ms/vs/17/release/vc_redist.x64.exe";
-                try
-                {
-                    var result = ShowDownloadCancelDialog(
-                        $"A Visual C++ (MSVC) " + Language.MsgRuntimeIsRequired + "\n\n" +
-                        Language.MsgDownloadLatestRuntime + "\n" + downloadUrl2 + "\n\n" +
-                        Language.MsgExit + "\n\n",
-                        Language.MsgMissingRuntime + " Visual C++ Redistributable x64");
+                // Runtime checks only needed for framework-dependent deployments
+                // Self-contained builds include the runtime, so no check is needed
+                // Note: .NET runtime check is not needed here — the .NET host (apphost)
+                // natively displays a missing-runtime dialog with a download link.
 
-                    if (result == DialogResult.OK && InternetConnection.IsPosible())
+                var checkFail = false;
+
+                // Checking Visual C++ Redistributable version
+                if (VCppRuntimeCheck.GetInstalledVcRedistVersions() == null || VCppRuntimeCheck.GetInstalledVcRedistVersions().Count == 0)
+                {
+                    var downloadUrl2 = "https://aka.ms/vs/17/release/vc_redist.x64.exe";
+                    try
                     {
-                        try
+                        var result = ShowDownloadCancelDialog(
+                            $"A Visual C++ (MSVC) " + Language.MsgRuntimeIsRequired + "\n\n" +
+                            Language.MsgDownloadLatestRuntime + "\n" + downloadUrl2 + "\n\n" +
+                            Language.MsgExit + "\n\n",
+                            Language.MsgMissingRuntime + " Visual C++ Redistributable x64");
+
+                        if (result == DialogResult.OK && InternetConnection.IsPosible())
                         {
-                            Process.Start(new ProcessStartInfo(fileName: downloadUrl2) { UseShellExecute = true });
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Unable to open download link: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            try
+                            {
+                                Process.Start(new ProcessStartInfo(fileName: downloadUrl2) { UseShellExecute = true });
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Unable to open download link: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
+                    catch { }
+                    checkFail = true;
                 }
-                catch { }
-                checkFail = true;
-            }
 
-            if (checkFail)
-            {
-                Environment.Exit(0);
+                if (checkFail)
+                {
+                    Environment.Exit(0);
+                }
             }
-#endif
 
             Lazy<bool> singleInstanceOption = new(() => Properties.OptionsStartupExitPage.Default.SingleInstance);
             if (singleInstanceOption.Value)
@@ -113,6 +114,34 @@ namespace mRemoteNG.App
             {
                 Debug.WriteLine($"SQLite provider initialization failed: {ex}");
             }
+        }
+
+        internal static bool ShouldSkipNativeRuntimeChecks(string[] args)
+        {
+#if PORTABLE
+            return true;
+#else
+            foreach (string arg in args)
+            {
+                if (string.Equals(arg, "--skip-runtime-checks", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            string? envValue = Environment.GetEnvironmentVariable("MREMOTENG_SKIP_RUNTIME_CHECKS");
+            if (string.IsNullOrWhiteSpace(envValue))
+            {
+                return false;
+            }
+
+            if (string.Equals(envValue, "1", StringComparison.Ordinal))
+            {
+                return true;
+            }
+
+            return bool.TryParse(envValue, out bool skipChecks) && skipChecks;
+#endif
         }
 
         // Assembly resolve handler
