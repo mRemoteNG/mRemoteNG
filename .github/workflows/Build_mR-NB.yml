@@ -98,8 +98,21 @@ jobs:
             throw "MSBuild.exe was not found after installing Visual Studio Build Tools"
           }
 
+          $dotnetPath = (Get-Command dotnet -ErrorAction Stop).Source
+          $dotnetRoot = Split-Path $dotnetPath -Parent
+          $sdkVersion = (& dotnet --version).Trim()
+          $sdkBasePath = Join-Path $dotnetRoot "sdk\$sdkVersion"
+          $msbuildSdksPath = Join-Path $sdkBasePath "Sdks"
+          if (!(Test-Path $msbuildSdksPath)) {
+            throw "MSBuild SDKs path was not found at $msbuildSdksPath"
+          }
+
           "MSBUILD_EXE=$msbuild" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "MSBuildSDKsPath=$msbuildSdksPath" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "DOTNET_MSBUILD_SDK_RESOLVER_CLI_DIR=$dotnetRoot" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "DOTNET_ROOT=$dotnetRoot" | Out-File -FilePath $env:GITHUB_ENV -Append
           Write-Host "Resolved MSBuild to $msbuild" -ForegroundColor Green
+          Write-Host "Resolved MSBuild SDKs path to $msbuildSdksPath" -ForegroundColor Green
           
       - name: (04) Install and run dotnet-t4 to transform T4 templates
         shell: pwsh
