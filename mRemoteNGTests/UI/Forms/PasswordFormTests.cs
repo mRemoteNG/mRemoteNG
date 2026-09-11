@@ -55,5 +55,25 @@ namespace mRemoteNGTests.UI.Forms
             // Verify that the password field has focus when the form is loaded
             Assert.That(passwordTextBox.Focused, Is.True, "Password field should have autofocus when form loads");
         }
+
+        [Test]
+        public void GetKey_UsesProvidedOwnerWindow()
+        {
+            using Form ownerForm = new();
+            ownerForm.Show();
+
+            using FrmPassword passwordForm = new();
+            Form capturedOwner = null;
+            passwordForm.Shown += (_, _) =>
+            {
+                capturedOwner = passwordForm.Owner;
+                passwordForm.DialogResult = DialogResult.Cancel;
+                passwordForm.Close();
+            };
+
+            _ = passwordForm.GetKey(ownerForm);
+
+            Assert.That(capturedOwner, Is.SameAs(ownerForm));
+        }
     }
 }
