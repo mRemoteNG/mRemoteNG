@@ -135,13 +135,13 @@ jobs:
         if: matrix.deployment == 'framework-dependent'
         shell: pwsh
         run: |
-          & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\$env:SOLUTION_FILE" -p:Configuration="Release" -p:Platform=${{ matrix.platform }} /verbosity:minimal
+          dotnet msbuild "$Env:GITHUB_WORKSPACE\$env:SOLUTION_FILE" -p:Configuration="Release" -p:Platform=${{ matrix.platform }} /verbosity:minimal
 
       - name: (08) Build Self-Contained Release
         if: matrix.deployment == 'self-contained'
         shell: pwsh
         run: |
-          & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\mRemoteNG.sln" /t:Publish /p:Configuration="Release Self-Contained" -p:Platform=${{ matrix.platform }} /verbosity:minimal /p:SelfContained=true /p:PublishDir="bin\${{ matrix.platform }}\Release"
+          dotnet msbuild "$Env:GITHUB_WORKSPACE\mRemoteNG.sln" /t:Publish /p:Configuration="Release Self-Contained" -p:Platform=${{ matrix.platform }} /verbosity:minimal /p:SelfContained=true /p:PublishDir="bin\${{ matrix.platform }}\Release"
                 
       - name: (09) Release Information
         id: version
