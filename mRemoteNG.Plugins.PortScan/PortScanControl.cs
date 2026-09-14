@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Net;
 using System.Windows.Forms;
 using mRemoteNG.PluginContracts;
@@ -208,6 +209,12 @@ internal sealed class PortScanControl : UserControl
         }
 
         if (!TryParseAddressRange(out IPAddress? startAddress, out IPAddress? endAddress))
+        {
+            _pluginContext.Messages.Warning(Resource("CannotStartPortScan", "Cannot start port scan."));
+            return;
+        }
+
+        if (startAddress is null || endAddress is null)
         {
             _pluginContext.Messages.Warning(Resource("CannotStartPortScan", "Cannot start port scan."));
             return;
