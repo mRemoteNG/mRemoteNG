@@ -57,6 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="WixToolset.Dtf.CustomAction" Version="5.0.2" />
+    <PackageReference Include="WixToolset.Dtf.CustomAction" />
+    <PackageReference Include="WixToolset.Dtf.WindowsInstaller" />
   </ItemGroup>
 </Project>

@@ -12,9 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WixToolset.Util.wixext" Version="5.0.2" />
-    <PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
-    <PackageReference Include="WixToolset.Netfx.wixext" Version="5.0.2" />
+    <PackageReference Include="WixToolset.Util.wixext" />
+    <PackageReference Include="WixToolset.UI.wixext" />
+    <PackageReference Include="WixToolset.Netfx.wixext" />
   </ItemGroup>
 
   <ItemGroup>

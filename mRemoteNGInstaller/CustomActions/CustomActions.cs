@@ -1,4 +1,4 @@
-﻿using Microsoft.Deployment.WindowsInstaller;
+using WixToolset.Dtf.WindowsInstaller;
 
 namespace CustomActions
 {
