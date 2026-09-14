@@ -116,11 +116,25 @@ namespace mRemoteNG.App
             }
         }
 
+        internal static bool IsPortableBuild
+        {
+            get
+            {
+#if PORTABLE
+                return true;
+#else
+                return false;
+#endif
+            }
+        }
+
         internal static bool ShouldSkipNativeRuntimeChecks(string[] args)
         {
-#if PORTABLE
-            return true;
-#else
+            if (IsPortableBuild)
+            {
+                return true;
+            }
+
             foreach (string arg in args)
             {
                 if (string.Equals(arg, "--skip-runtime-checks", StringComparison.OrdinalIgnoreCase))
@@ -134,14 +148,12 @@ namespace mRemoteNG.App
             {
                 return false;
             }
-
             if (string.Equals(envValue, "1", StringComparison.Ordinal))
             {
                 return true;
             }
 
             return bool.TryParse(envValue, out bool skipChecks) && skipChecks;
-#endif
         }
 
         // Assembly resolve handler

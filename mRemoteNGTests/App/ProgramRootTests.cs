@@ -49,10 +49,6 @@ public class ProgramRootTests
 
         bool shouldSkip = ProgramRoot.ShouldSkipNativeRuntimeChecks(Array.Empty<string>());
 
-#if PORTABLE
-        Assert.That(shouldSkip, Is.True);
-#else
-        Assert.That(shouldSkip, Is.False);
-#endif
+        Assert.That(shouldSkip, Is.EqualTo(ProgramRoot.IsPortableBuild));
     }
 }
