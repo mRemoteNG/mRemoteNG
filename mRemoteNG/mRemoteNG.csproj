@@ -527,8 +527,26 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ExternalConnectors\ExternalConnectors.csproj" />
+    <ProjectReference Include="..\mRemoteNG.PluginContracts\mRemoteNG.PluginContracts.csproj" />
+    <ProjectReference Include="..\mRemoteNG.Plugins.PortScan\mRemoteNG.Plugins.PortScan.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\ObjectListView\ObjectListView.NetCore.csproj" />
   </ItemGroup>
+  <Target Name="CopyPluginAssemblies" AfterTargets="Build">
+    <MSBuild Projects="..\mRemoteNG.Plugins.PortScan\mRemoteNG.Plugins.PortScan.csproj"
+             Targets="GetTargetPath"
+             Properties="Configuration=$(Configuration);Platform=$(Platform)">
+      <Output TaskParameter="TargetOutputs" ItemName="PluginAssemblies" />
+    </MSBuild>
+    <MakeDir Directories="$(OutDir)Plugins" />
+    <Copy SourceFiles="@(PluginAssemblies)"
+          DestinationFolder="$(OutDir)Plugins"
+          SkipUnchangedFiles="true" />
+    <MakeDir Directories="$(PublishDir)Plugins" Condition="'$(PublishDir)' != ''" />
+    <Copy SourceFiles="@(PluginAssemblies)"
+          DestinationFolder="$(PublishDir)Plugins"
+          SkipUnchangedFiles="true"
+          Condition="'$(PublishDir)' != ''" />
+  </Target>
   <ItemGroup>
     <Resource Include="UI\Font\HandelGotDBol.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

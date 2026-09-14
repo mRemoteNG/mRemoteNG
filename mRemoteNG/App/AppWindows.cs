@@ -14,7 +14,6 @@ namespace mRemoteNG.App
     {
         private static ActiveDirectoryImportWindow? _adimportForm;
         private static ExternalToolsWindow? _externalappsForm;
-        private static PortScanWindow? _portscanForm;
         private static UltraVNCWindow? _ultravncscForm;
         private static ConnectionTreeWindow? _treeForm;
 
@@ -68,10 +67,6 @@ namespace mRemoteNG.App
                         if (_externalappsForm == null || _externalappsForm.IsDisposed)
                             _externalappsForm = new ExternalToolsWindow();
                         _externalappsForm.Show(dockPanel);
-                        break;
-                    case WindowType.PortScan:
-                        _portscanForm = new PortScanWindow();
-                        _portscanForm.Show(dockPanel);
                         break;
                     case WindowType.UltraVNCSC:
                         if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
