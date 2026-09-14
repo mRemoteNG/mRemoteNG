@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Fragment>
     <ComponentGroup Id="CG.ProjectInfoFiles" Directory="INSTALLDIR">
       <Component Id="C.Changelog" Guid="762459f4-0460-4058-a448-d0f4e5cd4a65">

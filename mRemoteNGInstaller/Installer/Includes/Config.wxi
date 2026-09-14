@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Include>
+﻿<Include xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <?define ProductName = "mRemoteNG" ?>
   <?define Company = "Profi-Kom Ltd." ?>
   <?define UpgradeCode = "dd678a54-ca75-4791-8dfe-d818095684f8" ?>
@@ -26,5 +25,5 @@
     <?define ProductNameWithPlatform = "$(var.ProductName) (64 bit)" ?>
     <?define Win64 = "yes" ?>
     <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
-  <?endif ?>
+  <?endif?>
 </Include>
