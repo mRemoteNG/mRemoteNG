@@ -104,7 +104,7 @@
     <PackageVersion Include="VaultSharp" Version="1.17.5.1" />
     <PackageVersion Include="VncSharpCore" Version="1.2.1" />
     <PackageVersion Include="WixToolset.Dtf.CustomAction" Version="5.0.2" />
-    <PackageVersion Include="WixToolset.Dtf.WindowsInstaller" Version="5.0.2" />
+    <PackageVersion Include="WixToolset.Dtf.WindowsInstaller" Version="7.0.0" />
     <PackageVersion Include="WixToolset.Netfx.wixext" Version="5.0.2" />
     <PackageVersion Include="WixToolset.UI.wixext" Version="5.0.2" />
     <PackageVersion Include="WixToolset.Util.wixext" Version="5.0.2" />
