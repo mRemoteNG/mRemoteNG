@@ -4,7 +4,7 @@
     
     <MajorUpgrade DowngradeErrorMessage="!(loc.Upgrade_NewerVersionInstalled)" Schedule="afterInstallExecute" />
     <MediaTemplate EmbedCab="yes" />
-    <Binary Id="CustomActions.CA.dll" SourceFile="$(var.SolutionDir)mRemoteNGInstaller\CustomActions\bin\x64\$(var.Configuration)\net481\CustomActions.CA.dll" />
+    <Binary Id="CustomActions.CA.dll" SourceFile="$(var.InstallerSolutionDir)mRemoteNGInstaller\CustomActions\bin\x64\$(var.Configuration)\net481\CustomActions.CA.dll" />
     <Property Id="MsiLogging" Value="v" />
     <Property Id="ARPPRODUCTICON" Value="AppIcon.ico" />
     <Property Id="ARPHELPLINK" Value="http://mremoteng.org" />
