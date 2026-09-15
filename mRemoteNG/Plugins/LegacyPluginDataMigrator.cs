@@ -1,12 +1,12 @@
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 
 namespace mRemoteNG.Plugins;
 
 internal static class LegacyPluginDataMigrator
 {
-    public const string AwsEnabledKey = "mRemoteNG.AWS.Enabled";
-    public const string AwsInstanceIdKey = "mRemoteNG.AWS.EC2InstanceId";
-    public const string AwsRegionKey = "mRemoteNG.AWS.EC2Region";
+    public const string AwsEnabledKey = "mRp.AWS.Enabled";
+    public const string AwsInstanceIdKey = "mRp.AWS.EC2InstanceId";
+    public const string AwsRegionKey = "mRp.AWS.EC2Region";
 
     public static void Migrate(ConnectionInfo connectionInfo)
     {

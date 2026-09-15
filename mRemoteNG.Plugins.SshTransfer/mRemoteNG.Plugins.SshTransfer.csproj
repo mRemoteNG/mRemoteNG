@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -7,11 +7,14 @@
     <Platforms>x64;arm64</Platforms>
     <Configurations>Debug;Release;Release Self-Contained;Deploy to github</Configurations>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
-    <AssemblyName>mRp.AWS</AssemblyName>
-    <RootNamespace>mRp.AWS</RootNamespace>
+    <AssemblyName>mRp.SshTransfer</AssemblyName>
+    <RootNamespace>mRp.SshTransfer</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExternalConnectors\ExternalConnectors.csproj" />
+    <PackageReference Include="Renci.SshNet.Async" />
+    <PackageReference Include="SSH.NET" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\mRemoteNG.PluginContracts\mRemoteNG.PluginContracts.csproj" PrivateAssets="all" />
   </ItemGroup>
 </Project>

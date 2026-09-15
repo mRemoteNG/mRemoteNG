@@ -1,8 +1,10 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Collections.Generic;
 using mRemoteNG.PluginContracts;
 using mRemoteNG.Plugins;
+using mRemoteNG.Connection.Protocol;
 
 namespace mRemoteNG.Connection;
 
@@ -79,12 +81,12 @@ internal sealed class PluginConnectionPropertyDescriptor(ConnectionPropertyDefin
 
     private static Attribute[] BuildAttributes(ConnectionPropertyDefinition definition)
     {
-        List<Attribute> attributes = [new BrowsableAttribute(true)];
+        var attributes = new List<Attribute> { new BrowsableAttribute(true) };
         if (definition.PropertyType == PluginPropertyType.Boolean)
         {
             attributes.Add(new TypeConverterAttribute(typeof(Tools.MiscTools.YesNoTypeConverter)));
         }
 
-        return [.. attributes];
+        return attributes.ToArray();
     }
 }

@@ -1,4 +1,4 @@
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace mRemoteNG.PluginContracts;
 
@@ -15,6 +15,12 @@ public sealed class ToolWindowRegistration
     public Image? Icon { get; init; }
 
     public bool ShowInToolsMenu { get; init; } = true;
+
+    public bool RequiresConnectionSelection { get; init; }
+
+    public bool ShowAsDocument { get; init; } = true;
+
+    public string? PanelName { get; init; }
 
     public int SortOrder { get; init; }
 }

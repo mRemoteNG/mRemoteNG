@@ -7,5 +7,7 @@
     <Platforms>x64;arm64</Platforms>
     <Configurations>Debug;Release;Release Self-Contained;Deploy to github</Configurations>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <AssemblyName>mRp.Contracts</AssemblyName>
+    <RootNamespace>mRemoteNG.PluginContracts</RootNamespace>
   </PropertyGroup>
 </Project>

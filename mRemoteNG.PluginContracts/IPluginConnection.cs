@@ -1,4 +1,4 @@
-namespace mRemoteNG.PluginContracts;
+﻿namespace mRemoteNG.PluginContracts;
 
 public interface IPluginConnection
 {
@@ -9,6 +9,14 @@ public interface IPluginConnection
     string Name { get; set; }
 
     string ProtocolId { get; }
+
+    int Port { get; set; }
+
+    string Username { get; set; }
+
+    string Password { get; set; }
+
+    string Domain { get; set; }
 
     string GetPluginProperty(string key, string defaultValue = "");
 

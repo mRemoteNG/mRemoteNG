@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using mRemoteNG.Connection;
 using mRemoteNG.PluginContracts;
 
@@ -23,6 +23,30 @@ internal sealed class PluginConnectionAdapter(ConnectionInfo connectionInfo) : I
     }
 
     public string ProtocolId => PluginProtocolMapper.ToPluginProtocolId(_connectionInfo.Protocol);
+
+    public int Port
+    {
+        get => _connectionInfo.Port;
+        set => _connectionInfo.Port = value;
+    }
+
+    public string Username
+    {
+        get => _connectionInfo.Username;
+        set => _connectionInfo.Username = value;
+    }
+
+    public string Password
+    {
+        get => _connectionInfo.Password;
+        set => _connectionInfo.Password = value;
+    }
+
+    public string Domain
+    {
+        get => _connectionInfo.Domain;
+        set => _connectionInfo.Domain = value;
+    }
 
     public string GetPluginProperty(string key, string defaultValue = "")
     {

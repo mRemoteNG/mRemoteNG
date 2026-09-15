@@ -8,11 +8,11 @@ namespace mRemoteNG.Plugins.AWS;
 
 public sealed class AwsConnectionPlugin : IConnectionPropertyProviderPlugin, IConnectionAddressResolverPlugin
 {
-    private const string EnabledKey = "mRemoteNG.AWS.Enabled";
-    private const string InstanceIdKey = "mRemoteNG.AWS.EC2InstanceId";
-    private const string RegionKey = "mRemoteNG.AWS.EC2Region";
+    private const string EnabledKey = "mRp.AWS.Enabled";
+    private const string InstanceIdKey = "mRp.AWS.EC2InstanceId";
+    private const string RegionKey = "mRp.AWS.EC2Region";
 
-    public string Id => "mRemoteNG.AWS";
+    public string Id => "mRp.AWS";
 
     public string DisplayName => "AWS";
 

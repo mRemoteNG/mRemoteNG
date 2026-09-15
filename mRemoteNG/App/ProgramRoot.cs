@@ -16,6 +16,7 @@ using System.Runtime.Versioning;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 
 
@@ -29,6 +30,8 @@ namespace mRemoteNG.App
 
         private static System.Threading.Thread? _wpfSplashThread;
         private static FrmSplashScreenNew? _wpfSplash;
+
+        public static event EventHandler? UiCultureChanged;
 
         [STAThread]
         public static void Main(string[] args)
@@ -161,9 +164,13 @@ namespace mRemoteNG.App
         {
             try
             {
-                string assemblyName = new AssemblyName(args.Name).Name ?? string.Empty;
+                var requestedAssemblyName = new AssemblyName(args.Name);
+                string assemblyName = requestedAssemblyName.Name ?? string.Empty;
+
                 if (assemblyName.EndsWith(".resources", StringComparison.OrdinalIgnoreCase))
-                    return null;
+                {
+                    return ResolveSatelliteAssembly(args, requestedAssemblyName);
+                }
 
                 string assemblyFile = assemblyName + ".dll";
                 string assemblyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assemblies", assemblyFile);
@@ -176,6 +183,45 @@ namespace mRemoteNG.App
                 // Suppress resolution exceptions; return null to continue standard probing
             }
             return null;
+        }
+
+        private static Assembly? ResolveSatelliteAssembly(ResolveEventArgs args, AssemblyName requestedAssemblyName)
+        {
+            string? cultureName = requestedAssemblyName.CultureName;
+            if (string.IsNullOrWhiteSpace(cultureName))
+                return null;
+
+            string satelliteAssemblyFileName = (requestedAssemblyName.Name ?? string.Empty) + ".dll";
+            if (string.IsNullOrWhiteSpace(satelliteAssemblyFileName))
+                return null;
+
+            string appBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string cultureSpecificPath = Path.Combine(customResourcePath, cultureName, satelliteAssemblyFileName);
+            if (File.Exists(cultureSpecificPath))
+                return Assembly.LoadFrom(cultureSpecificPath);
+
+            if (args.RequestingAssembly is null)
+                return null;
+
+            string requestingAssemblyName = args.RequestingAssembly.GetName().Name ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(requestingAssemblyName))
+                return null;
+
+            string localizedAssemblyPath = Path.Combine(appBaseDirectory, "Languages", cultureName, requestingAssemblyName + ".resources.dll");
+            return File.Exists(localizedAssemblyPath)
+                ? Assembly.LoadFrom(localizedAssemblyPath)
+                : null;
+        }
+
+        public static void ApplyUiCulture(string? cultureName)
+        {
+            CultureInfo uiCulture = string.IsNullOrWhiteSpace(cultureName)
+                ? CultureInfo.InstalledUICulture
+                : new CultureInfo(cultureName);
+
+            Thread.CurrentThread.CurrentUICulture = uiCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = uiCulture;
+            UiCultureChanged?.Invoke(null, EventArgs.Empty);
         }
 
         private static void StartApplication()

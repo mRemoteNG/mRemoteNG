@@ -1,4 +1,4 @@
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.PluginContracts;
 
@@ -8,7 +8,7 @@ public sealed class PortScanPlugin : IToolWindowPlugin
 {
     private IPluginContext? _context;
 
-    public string Id => "mRemoteNG.PortScan";
+    public string Id => "mRp.PortScan";
 
     public string DisplayName => Resources.GetString("PortScan", "Port Scan");
 
@@ -24,6 +24,8 @@ public sealed class PortScanPlugin : IToolWindowPlugin
         ContextMenuText = Resources.GetString("ImportPortScan", "Import from Port Scan..."),
         Icon = Resources.GetImage("SearchAndApps_16x") as Image,
         MenuText = Resources.GetString("PortScan", "Port Scan"),
+        PanelName = "General",
+        ShowAsDocument = true,
         SortOrder = 100,
         WindowTitle = Resources.GetString("PortScan", "Port Scan"),
     };
@@ -36,5 +38,9 @@ public sealed class PortScanPlugin : IToolWindowPlugin
     public Control CreateControl()
     {
         return new PortScanControl(_context ?? throw new InvalidOperationException("Plugin has not been initialized."));
+    }
+
+    public void OnBeforeShow(IPluginConnection? connection)
+    {
     }
 }

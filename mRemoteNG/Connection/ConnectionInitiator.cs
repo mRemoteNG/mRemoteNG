@@ -298,6 +298,11 @@ namespace mRemoteNG.Connection
             if (connectionInfo.Panel != "" && !force.HasFlag(ConnectionInfo.Force.OverridePanel) && !Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelSelectionDlg)
                 return connectionInfo.Panel;
 
+            if (!Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelSelectionDlg)
+            {
+                return PanelAdder.DefaultPanelName;
+            }
+
             FrmChoosePanel frmPnl = new();
             return frmPnl.ShowDialog() == DialogResult.OK
                 ? frmPnl.Panel
@@ -309,10 +314,13 @@ namespace mRemoteNG.Connection
             ConnectionWindow connectionForm = conForm ?? Runtime.WindowList.FromString(connectionPanel) as ConnectionWindow;
 
             if (connectionForm == null)
-                // Don't show the panel immediately - it will be shown when first tab is added
-                connectionForm = _panelAdder.AddPanel(connectionPanel, showImmediately: false);
+            {
+                connectionForm = _panelAdder.AddPanel(connectionPanel, showImmediately: true);
+            }
             else
+            {
                 connectionForm.Show(FrmMain.Default.pnlDock);
+            }
 
             connectionForm.Focus();
             return connectionForm;

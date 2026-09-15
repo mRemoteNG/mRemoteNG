@@ -7,8 +7,10 @@
     <Platforms>x64;arm64</Platforms>
     <Configurations>Debug;Release;Release Self-Contained;Deploy to github</Configurations>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <AssemblyName>mRp.PortScan</AssemblyName>
+    <RootNamespace>mRp.PortScan</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\mRemoteNG.PluginContracts\mRemoteNG.PluginContracts.csproj" />
+    <ProjectReference Include="..\mRemoteNG.PluginContracts\mRemoteNG.PluginContracts.csproj" PrivateAssets="all" />
   </ItemGroup>
 </Project>
