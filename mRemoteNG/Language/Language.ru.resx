@@ -2068,9 +2068,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="AddFolder" xml:space="preserve">
     <value>Добавить папку</value>
   </data>
-  <data name="UseDefault" xml:space="preserve">
-    <value>Использовать по умолчанию</value>
-  </data>
   <data name="RefreshView" xml:space="preserve">
     <value>Обновить представление</value>
   </data>

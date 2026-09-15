@@ -2229,9 +2229,6 @@ Le canal nightly inclut les versions alpha, beta et release candidates.</value>
   <data name="AddFolder" xml:space="preserve">
     <value>Ajouter un dossier</value>
   </data>
-  <data name="UseDefault" xml:space="preserve">
-    <value>Utiliser la valeur par défaut</value>
-  </data>
   <data name="RefreshView" xml:space="preserve">
     <value>Actualiser l’affichage</value>
   </data>

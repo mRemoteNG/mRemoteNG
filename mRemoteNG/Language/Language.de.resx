@@ -2120,9 +2120,6 @@ Nightly umfasst Alphas, Betas und Release Candidates.</value>
   <data name="AddFolder" xml:space="preserve">
     <value>Ordner hinzufügen</value>
   </data>
-  <data name="UseDefault" xml:space="preserve">
-    <value>Standard verwenden</value>
-  </data>
   <data name="RefreshView" xml:space="preserve">
     <value>Ansicht aktualisieren</value>
   </data>
