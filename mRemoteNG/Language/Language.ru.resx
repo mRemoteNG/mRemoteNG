@@ -2035,4 +2035,49 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="VaultOpenbaoSecretEngineSSHOTP" xml:space="preserve">
     <value></value>
   </data>
+  <data name="Plugins" xml:space="preserve">
+    <value>Плагины</value>
+  </data>
+  <data name="PluginsPageDescription" xml:space="preserve">
+    <value>Управляйте папками плагинов и найденными плагинами. Отключенные плагины остаются в списке, но не загружаются. Отсутствующие папки игнорируются, пока снова не станут доступны.</value>
+  </data>
+  <data name="PluginsPageFolder" xml:space="preserve">
+    <value>Папка плагинов:</value>
+  </data>
+  <data name="PluginsPageFolderNotFound" xml:space="preserve">
+    <value>Выбранные папки плагинов "{0}" не существуют. Вы можете сохранить настройку сейчас и убедиться, что общий или локальный путь будет доступен перед следующим повторным сканированием.</value>
+  </data>
+  <data name="PluginsPageTargetPanel" xml:space="preserve">
+    <value>Панель для выбранного плагина:</value>
+  </data>
+  <data name="PluginsPagePanelColumn" xml:space="preserve">
+    <value>Панель</value>
+  </data>
+  <data name="PluginsPagePanelDefault" xml:space="preserve">
+    <value>По умолчанию (Общее)</value>
+  </data>
+  <data name="PluginsPageFolderMode" xml:space="preserve">
+    <value>Текущий тип папки: {0}</value>
+  </data>
+  <data name="PluginsPageFolderModeDefault" xml:space="preserve">
+    <value>По умолчанию</value>
+  </data>
+  <data name="PluginsPageFolderModeCustom" xml:space="preserve">
+    <value>Пользовательский</value>
+  </data>
+  <data name="AddFolder" xml:space="preserve">
+    <value>Добавить папку</value>
+  </data>
+  <data name="UseDefault" xml:space="preserve">
+    <value>Использовать по умолчанию</value>
+  </data>
+  <data name="RefreshView" xml:space="preserve">
+    <value>Обновить представление</value>
+  </data>
+  <data name="Plugin" xml:space="preserve">
+    <value>Плагин</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Включено</value>
+  </data>
 </root>

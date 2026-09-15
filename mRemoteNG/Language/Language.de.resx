@@ -2087,4 +2087,49 @@ Nightly umfasst Alphas, Betas und Release Candidates.</value>
   <data name="VaultOpenbaoSecretEngineSSHOTP" xml:space="preserve">
     <value></value>
   </data>
+  <data name="Plugins" xml:space="preserve">
+    <value>Plugins</value>
+  </data>
+  <data name="PluginsPageDescription" xml:space="preserve">
+    <value>Verwalten Sie Plugin-Ordner und erkannte Plugins. Deaktivierte Plugins bleiben in der Liste, werden aber nicht geladen. Fehlende Ordner werden ignoriert, bis sie wieder verfügbar sind.</value>
+  </data>
+  <data name="PluginsPageFolder" xml:space="preserve">
+    <value>Plugin-Ordner:</value>
+  </data>
+  <data name="PluginsPageFolderNotFound" xml:space="preserve">
+    <value>Die ausgewählten Plugin-Ordner „{0}“ existieren nicht. Sie können die Einstellung jetzt speichern und sicherstellen, dass der freigegebene oder lokale Pfad vor dem nächsten erneuten Einlesen verfügbar ist.</value>
+  </data>
+  <data name="PluginsPageTargetPanel" xml:space="preserve">
+    <value>Panel für das ausgewählte Plugin:</value>
+  </data>
+  <data name="PluginsPagePanelColumn" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="PluginsPagePanelDefault" xml:space="preserve">
+    <value>Standard (Allgemein)</value>
+  </data>
+  <data name="PluginsPageFolderMode" xml:space="preserve">
+    <value>Aktueller Ordnertyp: {0}</value>
+  </data>
+  <data name="PluginsPageFolderModeDefault" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="PluginsPageFolderModeCustom" xml:space="preserve">
+    <value>Benutzerdefiniert</value>
+  </data>
+  <data name="AddFolder" xml:space="preserve">
+    <value>Ordner hinzufügen</value>
+  </data>
+  <data name="UseDefault" xml:space="preserve">
+    <value>Standard verwenden</value>
+  </data>
+  <data name="RefreshView" xml:space="preserve">
+    <value>Ansicht aktualisieren</value>
+  </data>
+  <data name="Plugin" xml:space="preserve">
+    <value>Plugin</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Aktiviert</value>
+  </data>
 </root>

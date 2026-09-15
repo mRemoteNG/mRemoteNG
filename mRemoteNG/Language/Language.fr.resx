@@ -2196,4 +2196,49 @@ Le canal nightly inclut les versions alpha, beta et release candidates.</value>
   <data name="VaultOpenbaoSecretEngineSSHOTP" xml:space="preserve">
     <value></value>
   </data>
+  <data name="Plugins" xml:space="preserve">
+    <value>Plugins</value>
+  </data>
+  <data name="PluginsPageDescription" xml:space="preserve">
+    <value>Gérez les dossiers de plugins et les plugins détectés. Les plugins désactivés restent dans la liste mais ne sont pas chargés. Les dossiers manquants sont ignorés jusqu’à ce qu’ils soient de nouveau disponibles.</value>
+  </data>
+  <data name="PluginsPageFolder" xml:space="preserve">
+    <value>Dossier des plugins :</value>
+  </data>
+  <data name="PluginsPageFolderNotFound" xml:space="preserve">
+    <value>Le ou les dossiers de plugins sélectionnés « {0} » n’existent pas. Vous pouvez enregistrer maintenant et vous assurer que le chemin partagé ou local sera disponible avant la prochaine actualisation.</value>
+  </data>
+  <data name="PluginsPageTargetPanel" xml:space="preserve">
+    <value>Panneau pour le plugin sélectionné :</value>
+  </data>
+  <data name="PluginsPagePanelColumn" xml:space="preserve">
+    <value>Panneau</value>
+  </data>
+  <data name="PluginsPagePanelDefault" xml:space="preserve">
+    <value>Par défaut (Général)</value>
+  </data>
+  <data name="PluginsPageFolderMode" xml:space="preserve">
+    <value>Type de dossier actuel : {0}</value>
+  </data>
+  <data name="PluginsPageFolderModeDefault" xml:space="preserve">
+    <value>Par défaut</value>
+  </data>
+  <data name="PluginsPageFolderModeCustom" xml:space="preserve">
+    <value>Personnalisé</value>
+  </data>
+  <data name="AddFolder" xml:space="preserve">
+    <value>Ajouter un dossier</value>
+  </data>
+  <data name="UseDefault" xml:space="preserve">
+    <value>Utiliser la valeur par défaut</value>
+  </data>
+  <data name="RefreshView" xml:space="preserve">
+    <value>Actualiser l’affichage</value>
+  </data>
+  <data name="Plugin" xml:space="preserve">
+    <value>Plugin</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Activé</value>
+  </data>
 </root>

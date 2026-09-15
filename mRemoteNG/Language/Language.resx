@@ -243,6 +243,18 @@
   <data name="Appearance" xml:space="preserve">
     <value>Appearance</value>
   </data>
+  <data name="Plugins" xml:space="preserve">
+    <value>Plugins</value>
+  </data>
+  <data name="PluginsPageDescription" xml:space="preserve">
+    <value>Manage plugins discovered in the Plugins folder. Disabled plugins are skipped the next time mRemoteNG loads plugins.</value>
+  </data>
+  <data name="PluginsPageFolder" xml:space="preserve">
+    <value>Plugins folder:</value>
+  </data>
+  <data name="PluginsPageFolderNotFound" xml:space="preserve">
+    <value>The selected plugin folder does not exist. You can save it now and make sure the shared or local path is available before the next rescan.</value>
+  </data>
   <data name="Connection" xml:space="preserve">
     <value>Connection</value>
   </data>
@@ -823,6 +835,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>Refresh Screen (VNC)</value>
+  </data>
+  <data name="RefreshView" xml:space="preserve">
+    <value>Refresh view</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>Rename Tab</value>
