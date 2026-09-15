@@ -130,6 +130,18 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultCacheBitmaps"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultUseMultiMon {
+            get {
+                return ((bool)(this["ConDefaultUseMultiMon"]));
+            }
+            set {
+                this["ConDefaultUseMultiMon"] = value;
+            }
+        }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

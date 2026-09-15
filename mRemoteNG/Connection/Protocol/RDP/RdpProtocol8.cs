@@ -280,8 +280,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
             // Check if controls are being disposed during shutdown
             if (Control.IsDisposed || InterfaceControl.IsDisposed) return false;
 
-            // FitToWindow: control is undocked at a fixed size with scrollbars; don't touch it.
-            if (InterfaceControl.Info.Resolution == RDPResolutions.FitToWindow)
+            // Only SmartSize and Fullscreen adjust the control on resize. FitToWindow is
+            // undocked at a fixed size with scrollbars, and fixed pixel resolutions stay
+            // docked (Fill) relying on the RDP control's own native scrollbars; neither
+            // needs extra handling here.
+            if (InterfaceControl.Info.Resolution != RDPResolutions.SmartSize &&
+                InterfaceControl.Info.Resolution != RDPResolutions.Fullscreen)
                 return false;
 
             Runtime.MessageCollector?.AddMessage(MessageClass.DebugMsg,

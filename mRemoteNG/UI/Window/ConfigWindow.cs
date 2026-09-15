@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Net.NetworkInformation;
@@ -36,6 +37,7 @@ namespace mRemoteNG.UI.Window
         internal ContextMenuStrip PropertyGridContextMenu;
         private ToolStripMenuItem _propertyGridContextMenuShowHelpText;
         private ToolStripMenuItem _propertyGridContextMenuReset;
+        private ToolStripMenuItem _propertyGridContextMenuShowPassword;
         private ToolStripSeparator _toolStripSeparator1;
         private ConnectionInfoPropertyGrid _pGrid;
         private ThemeManager _themeManager;
@@ -65,6 +67,8 @@ namespace mRemoteNG.UI.Window
             PropertyGridContextMenu.Opening += PropertyGridContextMenu_Opening;
             _propertyGridContextMenuReset = new ToolStripMenuItem();
             _propertyGridContextMenuReset.Click += PropertyGridContextMenuReset_Click;
+            _propertyGridContextMenuShowPassword = new ToolStripMenuItem();
+            _propertyGridContextMenuShowPassword.Click += PropertyGridContextMenuShowPassword_Click;
             _toolStripSeparator1 = new ToolStripSeparator();
             _propertyGridContextMenuShowHelpText = new ToolStripMenuItem();
             _propertyGridContextMenuShowHelpText.Click += PropertyGridContextMenuShowHelpText_Click;
@@ -102,7 +106,7 @@ namespace mRemoteNG.UI.Window
             //
             PropertyGridContextMenu.Items.AddRange(new ToolStripItem[]
             {
-                _propertyGridContextMenuReset, _toolStripSeparator1, _propertyGridContextMenuShowHelpText
+                _propertyGridContextMenuReset, _propertyGridContextMenuShowPassword, _toolStripSeparator1, _propertyGridContextMenuShowHelpText
             });
             PropertyGridContextMenu.Name = "PropertyGridContextMenu";
             PropertyGridContextMenu.Size = new Size(157, 76);
@@ -112,6 +116,12 @@ namespace mRemoteNG.UI.Window
             _propertyGridContextMenuReset.Name = "_propertyGridContextMenuReset";
             _propertyGridContextMenuReset.Size = new Size(156, 22);
             _propertyGridContextMenuReset.Text = @"&Reset";
+            //
+            //propertyGridContextMenuShowPassword
+            //
+            _propertyGridContextMenuShowPassword.Name = "_propertyGridContextMenuShowPassword";
+            _propertyGridContextMenuShowPassword.Size = new Size(156, 22);
+            _propertyGridContextMenuShowPassword.Text = @"Show &Password";
             //
             //ToolStripSeparator1
             //
@@ -299,6 +309,7 @@ namespace mRemoteNG.UI.Window
             Text = Language.Config;
             TabText = Language.Config;
             _propertyGridContextMenuShowHelpText.Text = Language.ShowHelpText;
+            _propertyGridContextMenuShowPassword.Text = Language.ShowPassword;
         }
 
         private new void ApplyTheme()
@@ -677,6 +688,10 @@ namespace mRemoteNG.UI.Window
                 _propertyGridContextMenuReset.Enabled = Convert.ToBoolean(_pGrid.SelectedObject != null &&
                                                                           gridItem?.PropertyDescriptor != null &&
                                                                           gridItem.PropertyDescriptor.CanResetValue(_pGrid.SelectedObject));
+                _propertyGridContextMenuShowPassword.Enabled = _pGrid.SelectedObject != null &&
+                                                                gridItem?.PropertyDescriptor?.Attributes[typeof(PasswordPropertyTextAttribute)]
+                                                                    is PasswordPropertyTextAttribute { Password: true } &&
+                                                                !string.IsNullOrEmpty(gridItem.Value as string);
             }
             catch (Exception ex)
             {
@@ -698,6 +713,22 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenuReset_Click() failed.", ex);
+            }
+        }
+
+        private void PropertyGridContextMenuShowPassword_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GridItem gridItem = _pGrid.SelectedGridItem;
+                if (gridItem?.Value is string password && !string.IsNullOrEmpty(password))
+                {
+                    MessageBox.Show(password, gridItem.Label, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenuShowPassword_Click() failed.", ex);
             }
         }
 

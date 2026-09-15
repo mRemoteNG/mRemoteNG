@@ -5017,6 +5017,24 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use all monitors of the local computer for the remote session, when the connection is displayed in full screen..
+        /// </summary>
+        internal static string PropertyDescriptionUseMultiMon {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionUseMultiMon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A custom session resolution as WidthxHeight (e.g. 1920x1080). When set, it overrides the Resolution dropdown for single-monitor sessions. Leave empty to use the Resolution setting..
+        /// </summary>
+        internal static string PropertyDescriptionCustomResolution {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionCustomResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the SmartSize mode to be used..
         /// </summary>
         internal static string PropertyDescriptionSmartSizeMode {
@@ -6603,6 +6621,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show &amp;Password.
+        /// </summary>
+        internal static string ShowPassword {
+            get {
+                return ResourceManager.GetString("ShowPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show/Hide Menu Strip.
         /// </summary>
         internal static string ShowHideMenu {
@@ -7500,6 +7527,24 @@ namespace mRemoteNG.Resources.Language {
         internal static string UseRedirectionServerName {
             get {
                 return ResourceManager.GetString("UseRedirectionServerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use all my monitors for the remote session.
+        /// </summary>
+        internal static string UseMultiMon {
+            get {
+                return ResourceManager.GetString("UseMultiMon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Resolution.
+        /// </summary>
+        internal static string CustomResolution {
+            get {
+                return ResourceManager.GetString("CustomResolution", resourceCulture);
             }
         }
         

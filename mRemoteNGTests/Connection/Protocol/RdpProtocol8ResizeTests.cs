@@ -313,6 +313,8 @@ namespace mRemoteNGTests.Connection.Protocol
             public int DoResizeClientCallCount { get; private set; }
             public int DebounceScheduledCount { get; private set; }
 
+            public RDPResolutions Resolution { get; set; } = RDPResolutions.FitToWindow;
+
             public TestableRdpProtocol8(Form mainForm)
             {
                 _mainForm = mainForm;
@@ -357,9 +359,14 @@ namespace mRemoteNGTests.Connection.Protocol
                 DoResizeClient();
             }
 
-            public void DoResizeControl()
+            public bool DoResizeControl()
             {
                 DoResizeControlCallCount++;
+                // Mirrors RdpProtocol8.DoResizeControl(): only SmartSize and Fullscreen
+                // actually resize the control. FitToWindow is undocked at a fixed size
+                // with scrollbars, and fixed pixel resolutions stay docked relying on the
+                // RDP control's own native scrollbars; both skip the resize.
+                return Resolution == RDPResolutions.SmartSize || Resolution == RDPResolutions.Fullscreen;
             }
 
             public void DoResizeClient()

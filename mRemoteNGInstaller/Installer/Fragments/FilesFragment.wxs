@@ -24,6 +24,7 @@
             <Directory Id="dirB699B779DD859CB7CAD46DA4BC9017C0" Name="runtimes" />
             <Directory Id="dir54B0732D1EC7055747BB11A9069B5872" Name="Schemas" />
             <Directory Id="dir861F6A02C2F7A7DA6955E64037179011" Name="sv-SE" />
+            <Directory Id="dir4BFD6A5D73BE0F8A766694081D22B841" Name="ta" />
             <Directory Id="dir449D12A97ECE34898DFE89F1087779C9" Name="Themes" />
             <Directory Id="dirF50F8AE1B4079411641D2CA28D569A6E" Name="tr-TR" />
             <Directory Id="dir09CC4E618379FE7D9EB8E064B61C997C" Name="uk" />
@@ -331,13 +332,238 @@
         </ComponentGroup>
     </Fragment>
     <Fragment>
+        <DirectoryRef Id="dir4D7B880C4FE703BE89F59A4C15BBDDDB">
+            <Directory Id="dir040A6E9F01947FC2F82CC7A9D06E129D" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir0C2D74C80147EF2CE6655862ED8490C3">
+            <Directory Id="dir064FEFBE3697BA3A303C87D2F4E3893F" Name="nativeassets" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir0C2D74C80147EF2CE6655862ED8490C3" Name="browser-wasm" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6C754F58DC20DB9AB32961E3388DE030">
+            <Directory Id="dir124089C2E3E35B20896064A1FA3FCB07" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirF3038242710747884E86633F9CAF9B21">
+            <Directory Id="dir141099046F4229F01C3B534ABFD3E870" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir064FEFBE3697BA3A303C87D2F4E3893F">
+            <Directory Id="dir227B6AC0426619C568FDAC6453A663A8" Name="net9.0" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir2A0006094BAD327C2D8CD6C7322CF4D7" Name="linux-musl-arm" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB0AFC9D943173FD835475E832870B83D">
+            <Directory Id="dir2D39F71C195B19D252A44E3D498118BE" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir2D4A4213BE3109BFE76ACB5A43470050" Name="maccatalyst-arm64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir2E4FEE11AC666D72BB3783F995E61CEC" Name="linux-ppc64le" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
         <DirectoryRef Id="dir98D160BE690DB35BE57FFB8F3DCF5AC7">
             <Directory Id="dir2ED89DAEE76564AD33DB582F055A5274" Name="native" />
         </DirectoryRef>
     </Fragment>
     <Fragment>
+        <DirectoryRef Id="dir2A0006094BAD327C2D8CD6C7322CF4D7">
+            <Directory Id="dir3256CEF875816AF90C4A8A680634659D" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir648795AAE5F4F913627391A4EA26E0CA">
+            <Directory Id="dir38FADD28616AA30248688F1C3391711B" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir636A5F402A07296FB540C804C5408F70">
+            <Directory Id="dir3FE2CEE9794497F646BBB4CA70D70B40" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir4D7B880C4FE703BE89F59A4C15BBDDDB" Name="linux-musl-x64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6A0DD301CF15D8CF75C184EDAB84EDE3">
+            <Directory Id="dir527F319E54DE3BA7E208C1B49922E370" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir581565EAD245478E5C1264C30F9412AA" Name="linux-x64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir60342AC2F36131A93395A9F7A918352C" Name="osx-x64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir636A5F402A07296FB540C804C5408F70" Name="win-arm" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir648795AAE5F4F913627391A4EA26E0CA" Name="linux-arm64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir6A0DD301CF15D8CF75C184EDAB84EDE3" Name="linux-arm" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir6C754F58DC20DB9AB32961E3388DE030" Name="linux-s390x" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirBFE6FF80778DFFF138C99F291A36AE13">
+            <Directory Id="dir6E0E506CDF93ECF0CDF226CC6323DA0C" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir76EFA2FE2400991447BC99DB7D3D80F9" Name="linux-musl-s390x" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir2D4A4213BE3109BFE76ACB5A43470050">
+            <Directory Id="dir79CE5D6DAF5EF9F9B9DECF02A547638D" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir85A01EEDCA388CEBE492AC128D8D37CC" Name="win-arm64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir8D88A7FFF1E04881E4C3F73651C8B927" Name="linux-armel" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir85A01EEDCA388CEBE492AC128D8D37CC">
+            <Directory Id="dir8DE1CAE5F6B03F7A6BAE17D4E78639BA" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir76EFA2FE2400991447BC99DB7D3D80F9">
+            <Directory Id="dir94498C5AB3A58EFB2610AB6A43A389E6" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir9518806D64646D2D6341262104D7FCD7" Name="osx-arm64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
         <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
             <Directory Id="dir98D160BE690DB35BE57FFB8F3DCF5AC7" Name="win-x64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir9518806D64646D2D6341262104D7FCD7">
+            <Directory Id="dir9BE56D918C569DC8AC961A41A18109CA" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir8D88A7FFF1E04881E4C3F73651C8B927">
+            <Directory Id="dir9DF15FD547D9445F340A38C552E15E12" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirA4D74779469159ACB43726745613600A" Name="linux-musl-arm64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB9868BF26C6C00A134BCFD6A16052F7B">
+            <Directory Id="dirA676D4303CB657774FE24A0DB3004C2A" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir581565EAD245478E5C1264C30F9412AA">
+            <Directory Id="dirA6B4FBEF7E59C2A1E3B19BDCDC5B7C10" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirB0AFC9D943173FD835475E832870B83D" Name="maccatalyst-x64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirB9868BF26C6C00A134BCFD6A16052F7B" Name="linux-x86" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir60342AC2F36131A93395A9F7A918352C">
+            <Directory Id="dirBAAEF0AE5E1529C739674F4A11EDA905" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirBFE6FF80778DFFF138C99F291A36AE13" Name="linux-musl-riscv64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirF53A08E50E93DD1E8210757808D8D929">
+            <Directory Id="dirC40AC02A99CF2E1DA6AE0C1E7F0CBF0D" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirE27AD97EEDD958AAFC6C16261611C251" Name="linux-riscv64" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir2E4FEE11AC666D72BB3783F995E61CEC">
+            <Directory Id="dirE73884EA84CCDA30BA24E07DB35AEF9A" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirE27AD97EEDD958AAFC6C16261611C251">
+            <Directory Id="dirE7D87E9EC613E57A1D89A22CEFE337A9" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirA4D74779469159ACB43726745613600A">
+            <Directory Id="dirF0A9F5E9A5DDA7F9C9935598F7386298" Name="native" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirF3038242710747884E86633F9CAF9B21" Name="win-x86" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirF53A08E50E93DD1E8210757808D8D929" Name="linux-mips64" />
         </DirectoryRef>
     </Fragment>
 </Wix>

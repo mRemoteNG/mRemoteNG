@@ -35,6 +35,8 @@
 		public TType RDGatewayExternalCredentialProvider { get; set; }
 		public TType RDGatewayUserViaAPI { get; set; }
 		public TType Resolution { get; set; }
+		public TType UseMultiMon { get; set; }
+		public TType CustomResolution { get; set; }
 		public TType AutomaticResize { get; set; }
 		public TType Colors { get; set; }
 		public TType CacheBitmaps { get; set; }
