@@ -1,4 +1,5 @@
 ﻿
+using System.Windows.Forms;
 using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -35,11 +36,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             lblUpdatesExplanation = new MrngLabel();
             pnlUpdateCheck = new System.Windows.Forms.Panel();
-            cboUpdateCheckFrequency = new MrngComboBox();
+            cboUpdateCheckFrequency = new ComboBox();
             btnUpdateCheckNow = new MrngButton();
             chkCheckForUpdatesOnStartup = new MrngCheckBox();
             lblReleaseChannelExplanation = new MrngTextBox();
-            cboReleaseChannel = new MrngComboBox();
+            cboReleaseChannel = new ComboBox();
             pnlProxy = new System.Windows.Forms.Panel();
             tblProxyBasic = new System.Windows.Forms.TableLayoutPanel();
             numProxyPort = new MrngNumericUpDown();
@@ -90,12 +91,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // cboUpdateCheckFrequency
             // 
-            cboUpdateCheckFrequency._mice = MrngComboBox.MouseState.HOVER;
-            cboUpdateCheckFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cboUpdateCheckFrequency.DropDownStyle = ComboBoxStyle.DropDownList;
             cboUpdateCheckFrequency.FormattingEnabled = true;
+            cboUpdateCheckFrequency.IntegralHeight = false;
             cboUpdateCheckFrequency.Location = new System.Drawing.Point(27, 44);
             cboUpdateCheckFrequency.Name = "cboUpdateCheckFrequency";
-            cboUpdateCheckFrequency.Size = new System.Drawing.Size(120, 21);
+            cboUpdateCheckFrequency.Size = new System.Drawing.Size(120, 23);
             cboUpdateCheckFrequency.TabIndex = 1;
             cboUpdateCheckFrequency.Enabled = false;
             // 
@@ -138,11 +139,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // cboReleaseChannel
             // 
-            cboReleaseChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cboReleaseChannel.DropDownStyle = ComboBoxStyle.DropDownList;
             cboReleaseChannel.FormattingEnabled = true;
+            cboReleaseChannel.IntegralHeight = false;
             cboReleaseChannel.Location = new System.Drawing.Point(7, 21);
             cboReleaseChannel.Name = "cboReleaseChannel";
-            cboReleaseChannel.Size = new System.Drawing.Size(120, 21);
+            cboReleaseChannel.Size = new System.Drawing.Size(120, 23);
             cboReleaseChannel.TabIndex = 1;
             // 
             // pnlProxy
@@ -392,13 +394,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal Controls.MrngLabel lblProxyPassword;
         internal Controls.MrngTextBox txtProxyPassword;
         internal MrngButton btnTestProxy;
-        private MrngComboBox cboReleaseChannel;
+        private ComboBox cboReleaseChannel;
         private Controls.MrngTextBox lblReleaseChannelExplanation;
         private MrngGroupBox groupBoxReleaseChannel;
         private System.Windows.Forms.TableLayoutPanel tblProxyBasic;
         private System.Windows.Forms.TableLayoutPanel tblProxyAuthentication;
         private System.Windows.Forms.Panel pnlDefaultUpdate;
         internal System.Windows.Forms.Label lblRegistrySettingsUsedInfo;
-        internal MrngComboBox cboUpdateCheckFrequency;
+        internal ComboBox cboUpdateCheckFrequency;
     }
 }

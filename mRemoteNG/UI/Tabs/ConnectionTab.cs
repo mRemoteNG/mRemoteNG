@@ -7,10 +7,13 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Properties;
+using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.Window;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI.Tabs
 {
@@ -81,6 +84,20 @@ namespace mRemoteNG.UI.Tabs
             }
 
             base.OnFormClosing(e);
+
+            if (e.Cancel || FrmMain.Default == null || FrmMain.Default.IsClosing)
+                return;
+
+            ConnectionWindow parentWindow = FindForm() as ConnectionWindow;
+            if (parentWindow == null || parentWindow.IsGeneralPanel)
+                return;
+
+            IDockContent[] remainingDocuments = DockPanel?.DocumentsToArray() ?? [];
+            if (remainingDocuments.Length > 1)
+                return;
+
+            FrmMain.Default?.ShowHidePanelTabs(this);
+            parentWindow.Close();
         }
 
 

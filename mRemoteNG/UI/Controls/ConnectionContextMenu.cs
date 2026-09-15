@@ -41,7 +41,6 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeConnectWithOptionsViewOnly;
         private ToolStripMenuItem _cMenTreeDisconnect;
         private ToolStripSeparator _cMenTreeSep2;
-        private ToolStripMenuItem _cMenTreeToolsTransferFile;
         private ToolStripMenuItem _cMenTreeToolsSort;
         private ToolStripMenuItem _cMenTreeToolsSortAscending;
         private ToolStripMenuItem _cMenTreeToolsSortDescending;
@@ -104,7 +103,6 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDisconnect = new ToolStripMenuItem();
             _cMenTreeSep1 = new ToolStripSeparator();
             _cMenTreeToolsExternalApps = new ToolStripMenuItem();
-            _cMenTreeToolsTransferFile = new ToolStripMenuItem();
             _cMenTreeSep2 = new ToolStripSeparator();
             _cMenTreeDuplicate = new ToolStripMenuItem();
             _cMenTreeRename = new ToolStripMenuItem();
@@ -145,7 +143,6 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeDisconnect,
                 _cMenTreeSep1,
                 _cMenTreeToolsExternalApps,
-                _cMenTreeToolsTransferFile,
                 _cMenTreeSep2,
                 _cMenTreeDuplicate,
                 _cMenTreeRename,
@@ -262,14 +259,6 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeToolsExternalApps.Name = "_cMenTreeToolsExternalApps";
             _cMenTreeToolsExternalApps.Size = new System.Drawing.Size(199, 22);
             _cMenTreeToolsExternalApps.Text = "External Applications";
-            //
-            // cMenTreeToolsTransferFile
-            //
-            _cMenTreeToolsTransferFile.Image = Properties.Resources.SyncArrow_16x;
-            _cMenTreeToolsTransferFile.Name = "_cMenTreeToolsTransferFile";
-            _cMenTreeToolsTransferFile.Size = new System.Drawing.Size(199, 22);
-            _cMenTreeToolsTransferFile.Text = "Transfer File (SSH)";
-            _cMenTreeToolsTransferFile.Click += OnTransferFileClicked;
             //
             // cMenTreeSep2
             //
@@ -488,7 +477,6 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDisconnect.Text = Language.Disconnect;
 
             _cMenTreeToolsExternalApps.Text = Language._Tools;
-            _cMenTreeToolsTransferFile.Text = Language.TransferFile;
 
             _cMenTreeDuplicate.Text = Language.Duplicate;
             _cMenTreeRename.Text = Language.Rename;
@@ -517,6 +505,8 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeApplyDefaultInheritance.Text = Language.ApplyDefaultInheritance;
             RefreshPluginImportItems();
         }
+
+        internal void RefreshUiLanguage() => ApplyLanguage();
 
         private void RefreshPluginImportItems()
         {
@@ -588,7 +578,6 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnect.Enabled = false;
             _cMenTreeConnectWithOptions.Enabled = false;
             _cMenTreeDisconnect.Enabled = false;
-            _cMenTreeToolsTransferFile.Enabled = false;
             _cMenTreeConnectWithOptions.Enabled = false;
             _cMenTreeToolsSort.Enabled = false;
             _cMenTreeToolsExternalApps.Enabled = false;
@@ -614,7 +603,6 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = false;
             _cMenTreeDisconnect.Enabled = false;
-            _cMenTreeToolsTransferFile.Enabled = false;
             _cMenTreeToolsExternalApps.Enabled = false;
             _cMenTreeDuplicate.Enabled = false;
             _cMenTreeDelete.Enabled = false;
@@ -633,7 +621,6 @@ namespace mRemoteNG.UI.Controls
             bool hasOpenConnections = containerInfo.Children.Any(child => child.OpenConnections.Count > 0);
             _cMenTreeDisconnect.Enabled = hasOpenConnections;
 
-            _cMenTreeToolsTransferFile.Enabled = false;
             _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
         }
 
@@ -645,9 +632,6 @@ namespace mRemoteNG.UI.Controls
 
             if (connectionInfo.OpenConnections.Count == 0)
                 _cMenTreeDisconnect.Enabled = false;
-
-            if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
-                _cMenTreeToolsTransferFile.Enabled = false;
 
             _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
@@ -668,9 +652,6 @@ namespace mRemoteNG.UI.Controls
         {
             if (connectionInfo.OpenConnections.Count == 0)
                 _cMenTreeDisconnect.Enabled = false;
-
-            if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
-                _cMenTreeToolsTransferFile.Enabled = false;
 
             if (!(connectionInfo.Protocol == ProtocolType.RDP))
             {
@@ -915,30 +896,6 @@ namespace mRemoteNG.UI.Controls
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(
                                                                 "DisconnectConnection (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
-            }
-        }
-
-        private void OnTransferFileClicked(object sender, EventArgs e)
-        {
-            SshTransferFile();
-        }
-
-        public void SshTransferFile()
-        {
-            try
-            {
-                AppWindows.Show(WindowType.SSHTransfer);
-                AppWindows.SshtransferForm.Hostname = _connectionTree.SelectedNode.Hostname;
-                AppWindows.SshtransferForm.Username = _connectionTree.SelectedNode.Username;
-                //App.Windows.SshtransferForm.Password = _connectionTree.SelectedNode.Password.ConvertToUnsecureString();
-                AppWindows.SshtransferForm.Password = _connectionTree.SelectedNode.Password;
-                AppWindows.SshtransferForm.Port = Convert.ToString(_connectionTree.SelectedNode.Port);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "SSHTransferFile (UI.Window.ConnectionTreeWindow) failed",
                                                                 ex);
             }
         }

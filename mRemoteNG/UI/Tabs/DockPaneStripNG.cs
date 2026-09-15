@@ -87,6 +87,8 @@ namespace mRemoteNG.UI.Tabs
         private ToolTip m_toolTip;
         private Font m_font;
         private Font m_boldFont;
+        private Font m_documentTextFont;
+        private Font m_documentBoldFont;
         private int m_startDisplayingTab;
         private bool m_documentTabsOverflow;
         private static string m_toolTipSelect;
@@ -188,6 +190,31 @@ namespace mRemoteNG.UI.Tabs
 
         public Font TextFont => DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.TextFont;
 
+        private Font DocumentTextFont
+        {
+            get
+            {
+                if (IsDisposed)
+                    return null;
+
+                if (m_documentTextFont == null)
+                {
+                    m_font = TextFont;
+                    m_documentTextFont = new Font(TextFont.FontFamily, TextFont.Size + 2f, TextFont.Style);
+                }
+                else if (!Equals(m_font, TextFont))
+                {
+                    m_documentTextFont.Dispose();
+                    m_documentBoldFont?.Dispose();
+                    m_font = TextFont;
+                    m_documentTextFont = new Font(TextFont.FontFamily, TextFont.Size + 2f, TextFont.Style);
+                    m_documentBoldFont = null;
+                }
+
+                return m_documentTextFont;
+            }
+        }
+
         private Font BoldFont
         {
             get
@@ -195,19 +222,12 @@ namespace mRemoteNG.UI.Tabs
                 if (IsDisposed)
                     return null;
 
-                if (m_boldFont == null)
+                if (m_documentBoldFont == null)
                 {
-                    m_font = TextFont;
-                    m_boldFont = new Font(TextFont, FontStyle.Bold);
-                }
-                else if (!Equals(m_font, TextFont))
-                {
-                    m_boldFont.Dispose();
-                    m_font = TextFont;
-                    m_boldFont = new Font(TextFont, FontStyle.Bold);
+                    m_documentBoldFont = new Font(DocumentTextFont, FontStyle.Bold);
                 }
 
-                return m_boldFont;
+                return m_documentBoldFont;
             }
         }
 
@@ -364,6 +384,18 @@ namespace mRemoteNG.UI.Tabs
                     m_boldFont = null;
                 }
 
+                if (m_documentTextFont != null)
+                {
+                    m_documentTextFont.Dispose();
+                    m_documentTextFont = null;
+                }
+
+                if (m_documentBoldFont != null)
+                {
+                    m_documentBoldFont.Dispose();
+                    m_documentBoldFont = null;
+                }
+
             }
 
             base.Dispose(disposing);
@@ -392,7 +424,7 @@ namespace mRemoteNG.UI.Tabs
         {
             int height =
                 Math.Max(
-                         TextFont.Height + DocumentTabGapTop +
+                         DocumentTextFont.Height + DocumentTabGapTop +
                          (PatchController.EnableHighDpi == true ? DocumentIconGapBottom : 0),
                          ButtonOverflow.Height + DocumentButtonGapTop + DocumentButtonGapBottom)
               + DocumentStripGapBottom + DocumentStripGapTop;
@@ -969,8 +1001,8 @@ namespace mRemoteNG.UI.Tabs
             Rectangle rectText = PatchController.EnableHighDpi == true
                 ? new Rectangle(
                                 rect.X + DocumentIconGapLeft,
-                                rect.Y + rect.Height - DocumentIconGapBottom - TextFont.Height,
-                                DocumentIconWidth, TextFont.Height)
+                                rect.Y + rect.Height - DocumentIconGapBottom - DocumentTextFont.Height,
+                                DocumentIconWidth, DocumentTextFont.Height)
                 : rectIcon;
             if (DockPane.DockPanel.ShowDocumentIcon)
             {
@@ -1051,7 +1083,7 @@ namespace mRemoteNG.UI.Tabs
             }
 
             g.FillRectangle(DockPane.DockPanel.Theme.PaintingService.GetBrush(paint), rect);
-            TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, TextFont, rectText, text, DocumentTextFormat);
+            TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, DocumentTextFont, rectText, text, DocumentTextFormat);
             if (image != null)
                 g.DrawImage(image, rectCloseButton);
 

@@ -301,6 +301,8 @@ namespace mRemoteNG.UI.Window
             _propertyGridContextMenuShowHelpText.Text = Language.ShowHelpText;
         }
 
+        internal void RefreshUiLanguage() => ApplyLanguage();
+
         private new void ApplyTheme()
         {
             if (!ThemeManager.getInstance().ActiveAndExtended) return;

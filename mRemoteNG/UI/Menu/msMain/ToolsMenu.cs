@@ -12,7 +12,6 @@ namespace mRemoteNG.UI.Menu
     [SupportedOSPlatform("windows")]
     public class ToolsMenu : ToolStripMenuItem
     {
-        private ToolStripMenuItem _mMenToolsSshTransfer;
         private ToolStripMenuItem _mMenToolsExternalApps;
         private ToolStripMenuItem _mMenToolsUvncsc;
         private readonly List<ToolStripMenuItem> _pluginMenuItems = [];
@@ -27,7 +26,6 @@ namespace mRemoteNG.UI.Menu
 
         private void Initialize()
         {
-            _mMenToolsSshTransfer = new ToolStripMenuItem();
             _mMenToolsUvncsc = new ToolStripMenuItem();
             _mMenToolsExternalApps = new ToolStripMenuItem();
             // 
@@ -35,21 +33,12 @@ namespace mRemoteNG.UI.Menu
             // 
             DropDownItems.AddRange(new ToolStripItem[]
             {
-                _mMenToolsSshTransfer,
                 _mMenToolsUvncsc,
                 _mMenToolsExternalApps
             });
             Name = "mMenTools";
             Size = new System.Drawing.Size(48, 20);
             Text = Language._Tools;
-            // 
-            // mMenToolsSSHTransfer
-            // 
-            _mMenToolsSshTransfer.Image = Properties.Resources.SyncArrow_16x;
-            _mMenToolsSshTransfer.Name = "mMenToolsSSHTransfer";
-            _mMenToolsSshTransfer.Size = new System.Drawing.Size(184, 22);
-            _mMenToolsSshTransfer.Text = Language.SshFileTransfer;
-            _mMenToolsSshTransfer.Click += mMenToolsSSHTransfer_Click;
             // 
             // mMenToolsUVNCSC
             // 
@@ -72,7 +61,6 @@ namespace mRemoteNG.UI.Menu
         public void ApplyLanguage()
         {
             Text = Language._Tools;
-            _mMenToolsSshTransfer.Text = Language.SshFileTransfer;
             _mMenToolsExternalApps.Text = Language.ExternalTool;
             RefreshPluginItems();
         }
@@ -89,6 +77,11 @@ namespace mRemoteNG.UI.Menu
 
             foreach (var plugin in Runtime.PluginService.GetToolsMenuPlugins().OrderBy(plugin => plugin.ToolWindow.SortOrder))
             {
+                if (DropDownItems.OfType<ToolStripMenuItem>().Any(existingItem => string.Equals(existingItem.Text, plugin.ToolWindow.MenuText, StringComparison.OrdinalIgnoreCase)))
+                {
+                    continue;
+                }
+
                 ToolStripMenuItem item = new()
                 {
                     Name = $"plugin_{plugin.Id}",
@@ -102,11 +95,6 @@ namespace mRemoteNG.UI.Menu
         }
 
         #region Tools
-
-        private void mMenToolsSSHTransfer_Click(object sender, EventArgs e)
-        {
-            AppWindows.Show(WindowType.SSHTransfer);
-        }
 
         private void mMenToolsUVNCSC_Click(object sender, EventArgs e)
         {

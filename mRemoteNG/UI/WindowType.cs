@@ -8,7 +8,6 @@
         ErrorsAndInfos = 4,
         Options = 6,
         Update = 9,
-        SSHTransfer = 10,
         ActiveDirectoryImport = 11,
         ExternalApps = 13,
         UltraVNCSC = 16,

@@ -32,7 +32,7 @@ namespace mRemoteNG.UI.Forms
         /// </summary>
         public event EventHandler? CloseRequested;
 
-        public FrmOptions() : this(Language.StartupExit)
+        public FrmOptions() : this(Language.General)
         {
         }
 
@@ -57,6 +57,7 @@ namespace mRemoteNG.UI.Forms
                 nameof(UpdatesPage),
                 nameof(ThemePage),
                 nameof(SecurityPage),
+                nameof(PluginsPage),
                 nameof(AdvancedPage),
                 nameof(BackupPage)
             };
@@ -136,16 +137,40 @@ namespace mRemoteNG.UI.Forms
             pnlBottom.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
-#if false
-        private void ApplyLanguage()
+        internal void RefreshUiLanguage()
         {
-            Text = Language.OptionsPageTitle;
-            foreach (var optionPage in _pages.Values)
+            var selectedPage = lstOptionPages.SelectedObject as OptionsPage;
+            var wasLoading = _isLoading;
+            _isLoading = true;
+
+            try
             {
-                optionPage.ApplyLanguage();
+                Text = Language.OptionsPageTitle;
+                btnOK.Text = Language._Ok;
+                btnCancel.Text = Language._Cancel;
+                btnApply.Text = Language.Apply;
+
+                foreach (OptionsPage optionPage in _optionPages)
+                {
+                    optionPage.ApplyLanguage();
+                    optionPage.LoadSettings();
+                }
+
+                lstOptionPages.BuildList(true);
+                if (selectedPage != null)
+                {
+                    SetActivatedPage(selectedPage.PageName);
+                }
+                else if (lstOptionPages.Items.Count > 0)
+                {
+                    lstOptionPages.Items[0].Selected = true;
+                }
+            }
+            finally
+            {
+                _isLoading = wasLoading;
             }
         }
-#endif
 
         private void InitOptionsPagesToListView()
         {
@@ -261,6 +286,11 @@ namespace mRemoteNG.UI.Forms
                             page = new AdvancedPage { Dock = DockStyle.Fill };
                         break;
                     }
+                case "PluginsPage":
+                    {
+                        page = new PluginsPage { Dock = DockStyle.Fill };
+                        break;
+                    }
                 case "BackupPage":
                     {
                         if (Properties.OptionsBackupPage.Default.cbBacupPageInOptionMenu ||
@@ -301,7 +331,7 @@ namespace mRemoteNG.UI.Forms
 
         public void SetActivatedPage(string pageName = default)
         {
-            _pageName = pageName ?? Language.StartupExit;
+            _pageName = pageName ?? Language.General;
 
             // Ensure we have items loaded before trying to access them
             if (lstOptionPages.Items.Count == 0)
@@ -350,6 +380,8 @@ namespace mRemoteNG.UI.Forms
 
         private void SaveOptions()
         {
+            string previousOverrideCulture = Settings.Default.OverrideUICulture;
+
             foreach (OptionsPage page in _optionPages)
             {
                 Logger.Instance.Log?.Debug($"[SaveOptions] Saving page: {page.PageName}");
@@ -358,6 +390,12 @@ namespace mRemoteNG.UI.Forms
 
             Logger.Instance.Log?.Debug($"[SaveOptions] Configuration file: {(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)).FilePath}");
             Settings.Default.Save();
+
+            if (!string.Equals(previousOverrideCulture, Settings.Default.OverrideUICulture, StringComparison.Ordinal))
+            {
+                ProgramRoot.ApplyUiCulture(Settings.Default.OverrideUICulture);
+                RefreshUiLanguage();
+            }
         }
 
         private void LstOptionPages_SelectedIndexChanged(object sender, EventArgs e)
