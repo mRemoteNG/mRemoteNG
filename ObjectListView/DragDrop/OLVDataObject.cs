@@ -33,10 +33,12 @@
 
 using System;
 using System.Collections;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace BrightIdeasSoftware {
-    
+
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// A data transfer object that knows how to transform a list of model
     /// objects into a text and HTML representation.

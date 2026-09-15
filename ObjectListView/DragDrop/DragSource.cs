@@ -34,13 +34,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Runtime.Versioning;
+using System.Text;
+using System.Windows.Forms;
 
 namespace BrightIdeasSoftware
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// An IDragSource controls how drag out from the ObjectListView will behave
     /// </summary>
@@ -78,6 +80,7 @@ namespace BrightIdeasSoftware
         void EndDrag(Object dragObject, DragDropEffects effect);
     }
 
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// A do-nothing implementation of IDragSource that can be safely subclassed.
     /// </summary>
@@ -116,6 +119,7 @@ namespace BrightIdeasSoftware
         #endregion
     }
 
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// A reasonable implementation of IDragSource that provides normal
     /// drag source functionality. It creates a data object that supports

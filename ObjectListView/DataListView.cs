@@ -41,11 +41,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing.Design;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace BrightIdeasSoftware
 {
 
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// A DataListView is a ListView that can be bound to a datasource (which would normally be a DataTable or DataView).
     /// </summary>

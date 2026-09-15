@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tools.Clipboard;
@@ -25,6 +28,7 @@ namespace mRemoteNGTests.UI.Controls
 			{
 				UseFiltering = true
 			};
+			mRemoteNG.Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations = true;
 		}
 
 		[Test]
@@ -302,23 +306,126 @@ namespace mRemoteNGTests.UI.Controls
 			clipboard.DidNotReceiveWithAnyArgs().SetText("");
 		}
 
-        [Test]
-        [Apartment(ApartmentState.STA)]
-        public void CopyHostnameDoesNotCopyAnythingIfNameOfSelectedContainerIsEmpty()
-        {
-	        var connectionTreeModel = new ConnectionTreeModel();
-	        var root = new RootNodeInfo(RootNodeType.Connection);
-	        var con1 = new ContainerInfo { Name = string.Empty};
-	        root.AddChild(con1);
-	        connectionTreeModel.AddRootNode(root);
+		[Test]
+		[Apartment(ApartmentState.STA)]
+		public void CopyHostnameDoesNotCopyAnythingIfNameOfSelectedContainerIsEmpty()
+		{
+			var connectionTreeModel = new ConnectionTreeModel();
+			var root = new RootNodeInfo(RootNodeType.Connection);
+			var con1 = new ContainerInfo { Name = string.Empty};
+			root.AddChild(con1);
+			connectionTreeModel.AddRootNode(root);
 
-	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
-	        _connectionTree.ExpandAll();
+			_connectionTree.ConnectionTreeModel = connectionTreeModel;
+			_connectionTree.ExpandAll();
 			_connectionTree.SelectedObject = con1;
 
-	        var clipboard = Substitute.For<IClipboard>();
+			var clipboard = Substitute.For<IClipboard>();
 			_connectionTree.CopyHostnameSelectedNode(clipboard);
 			clipboard.DidNotReceiveWithAnyArgs().SetText("");
+		}
+
+		[Test]
+		[Apartment(ApartmentState.STA)]
+		public void ExpandingLargeContainerCompletesAndShowsAllChildren()
+		{
+			mRemoteNG.Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations = false;
+			var (root, parent, children) = CreateTreeWithChildren(150);
+
+			Assert.That(_connectionTree.IsExpanded(parent), Is.False);
+
+			_connectionTree.InvokeExpand(parent);
+
+			Assert.That(parent.Children, Has.Count.EqualTo(children.Count));
+		}
+
+		[Test]
+		[Apartment(ApartmentState.STA)]
+		public void CollapseRequestDuringExpandCompletesCollapseWithoutStaleState()
+		{
+			mRemoteNG.Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations = false;
+			var (root, parent, children) = CreateTreeWithChildren(120);
+
+			_connectionTree.InvokeExpand(parent);
+
+			_connectionTree.Collapse(parent);
+
+			Assert.That(_connectionTree.IsExpanded(parent), Is.False);
+			Assert.That(parent.Children, Has.Count.EqualTo(children.Count));
+
+			_connectionTree.InvokeExpand(parent);
+			Assert.That(parent.Children, Has.Count.EqualTo(children.Count));
+		}
+
+		[Test]
+		[Apartment(ApartmentState.STA)]
+		public void DisabledAnimationsExpandAndCollapseImmediately()
+		{
+			mRemoteNG.Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations = false;
+			var (root, parent, children) = CreateTreeWithChildren(40);
+
+			_connectionTree.InvokeExpand(parent);
+			Assert.That(parent.Children, Has.Count.EqualTo(children.Count));
+
+			_connectionTree.Collapse(parent);
+
+			Assert.That(_connectionTree.IsExpanded(parent), Is.False);
+			Assert.That(parent.Children, Has.Count.EqualTo(children.Count));
+		}
+
+		[Test]
+		[Apartment(ApartmentState.STA)]
+		public void ProgrammaticExpandWithoutAnimationPreservesNewNodeSelectionAndVisibility()
+		{
+			var connectionTreeModel = new ConnectionTreeModel();
+			var root = new RootNodeInfo(RootNodeType.Connection);
+			var parent = new ContainerInfo { Name = "parent" };
+			root.AddChild(parent);
+			connectionTreeModel.AddRootNode(root);
+
+			_connectionTree.ConnectionTreeModel = connectionTreeModel;
+			_connectionTree.ExpandAll();
+			_connectionTree.SelectedObject = parent;
+
+			_connectionTree.AddConnection();
+
+			Assert.That(parent.Children, Has.Count.EqualTo(1));
+			Assert.That(_connectionTree.SelectedNode, Is.EqualTo(parent.Children[0]));
+			Assert.That(_connectionTree.GetChildren(parent), Has.Count.EqualTo(1));
+		}
+
+		private (RootNodeInfo root, ContainerInfo parent, List<ConnectionInfo> children) CreateTreeWithChildren(int childCount)
+		{
+			var connectionTreeModel = new ConnectionTreeModel();
+			var root = new RootNodeInfo(RootNodeType.Connection);
+			var parent = new ContainerInfo { Name = "parent" };
+			root.AddChild(parent);
+
+			var children = new List<ConnectionInfo>();
+			for (int i = 0; i < childCount; i++)
+			{
+				var child = new ConnectionInfo { Name = $"child-{i}" };
+				parent.AddChild(child);
+				children.Add(child);
+			}
+
+			connectionTreeModel.AddRootNode(root);
+			_connectionTree.ConnectionTreeModel = connectionTreeModel;
+
+			return (root, parent, children);
+		}
+
+		private static void WaitUntil(System.Func<bool> condition, int timeoutMs = 2000)
+		{
+			int elapsed = 0;
+			while (!condition() && elapsed < timeoutMs)
+			{
+				Application.DoEvents();
+				Thread.Sleep(10);
+				elapsed += 10;
+			}
+
+			Assert.That(condition(), Is.True, "Timed out waiting for expected UI state.");
 		}
 	}
 }

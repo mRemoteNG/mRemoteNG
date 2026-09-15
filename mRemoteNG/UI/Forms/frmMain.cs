@@ -211,9 +211,10 @@ namespace mRemoteNG.UI.Forms
 
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters);
-
+ 
             Startup.Instance.InitializeProgram(messageCollector);
-
+            Runtime.PluginService.LoadPlugins();
+ 
             SetMenuDependencies();
 
             DockPanelLayoutLoader uiLoader = new(this, messageCollector);
@@ -256,6 +257,7 @@ namespace mRemoteNG.UI.Forms
             _advancedWindowMenu.BuildAdditionalMenuItems();
             SystemEvents.DisplaySettingsChanged += _advancedWindowMenu.OnDisplayChanged;
             ApplyLanguage();
+            toolsMenu.RefreshPluginItems();
 
             Opacity = 1;
             //Fix MagicRemove , revision on panel strategy for mdi
@@ -600,7 +602,7 @@ namespace mRemoteNG.UI.Forms
                         break;
                     case NativeMethods.WM_ACTIVATEAPP:
                         Control candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
-                                               ?? GetChildAtPoint(MousePosition);
+                                               ?? GetChildAtScreenPoint(this, MousePosition);
                         if (candidateTabToFocus is InterfaceControl) candidateTabToFocus.Parent.Focus();
                         _inMouseActivate = false;
                         break;
@@ -609,7 +611,7 @@ namespace mRemoteNG.UI.Forms
                         if (NativeMethods.LOWORD(m.WParam) == NativeMethods.WA_CLICKACTIVE)
                         {
                             Control controlThatWasClicked = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
-                                                     ?? GetChildAtPoint(MousePosition);
+                                                     ?? GetChildAtScreenPoint(this, MousePosition);
                             if (controlThatWasClicked != null)
                             {
                                 if (controlThatWasClicked is TreeView ||
@@ -682,6 +684,12 @@ namespace mRemoteNG.UI.Forms
                                       (IntPtr)NativeMethods.MAKELPARAM(ref temp_wLow, ref temp_wHigh));
             clientMousePosition.X = temp_wLow;
             clientMousePosition.Y = temp_wHigh;
+        }
+
+        internal static Control GetChildAtScreenPoint(Control parentControl, Point screenPoint)
+        {
+            Point clientPoint = parentControl.PointToClient(screenPoint);
+            return parentControl.GetChildAtPoint(clientPoint);
         }
 
         private void ActivateConnection()

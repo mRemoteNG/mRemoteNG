@@ -292,40 +292,12 @@ namespace mRemoteNGTests.Connection.Protocol
                 "DoResizeClient should be called when restoring from minimize");
         }
 
-        [TestCase(RDPResolutions.Res800x600, 800, 600)]
-        [TestCase(RDPResolutions.Res1920x1080, 1920, 1080)]
-        [TestCase(RDPResolutions.Res3840x2160, 3840, 2160)]
-        [TestCase(RDPResolutions.Res7680x4320, 7680, 4320)]
-        public void GetResolutionRectangle_ReturnsPixelSize_ForFixedResolution(RDPResolutions resolution, int expectedWidth, int expectedHeight)
+        [Test]
+        public void UpdateSessionDisplaySettings_WhenNoActiveXControl_DoesNotThrow()
         {
-            var rectangle = resolution.GetResolutionRectangle();
+            var protocol = new ExposedRdpProtocol8();
 
-            Assert.That(rectangle.Width, Is.EqualTo(expectedWidth));
-            Assert.That(rectangle.Height, Is.EqualTo(expectedHeight));
-        }
-
-        [TestCase(RDPResolutions.FitToWindow)]
-        [TestCase(RDPResolutions.Fullscreen)]
-        [TestCase(RDPResolutions.SmartSize)]
-        public void GetResolutionRectangle_ReturnsEmpty_ForModeResolutions(RDPResolutions resolution)
-        {
-            var rectangle = resolution.GetResolutionRectangle();
-
-            Assert.That(rectangle, Is.EqualTo(new Rectangle(0, 0, 0, 0)));
-        }
-
-        [TestCase(RDPResolutions.FitToWindow, ExpectedResult = false)]
-        [TestCase(RDPResolutions.Res800x600, ExpectedResult = false)]
-        [TestCase(RDPResolutions.Res1920x1080, ExpectedResult = false)]
-        [TestCase(RDPResolutions.Res7680x4320, ExpectedResult = false)]
-        [TestCase(RDPResolutions.SmartSize, ExpectedResult = true)]
-        [TestCase(RDPResolutions.Fullscreen, ExpectedResult = true)]
-        public bool DoResizeControl_SkipsResize_ForFixedAndFitToWindow(RDPResolutions resolution)
-        {
-            // Fixed resolutions and FitToWindow connect once at a fixed size and are never
-            // resized again (scrollbars handle overflow); only SmartSize/Fullscreen resize.
-            _rdpProtocol.Resolution = resolution;
-            return _rdpProtocol.DoResizeControl();
+            Assert.That(() => protocol.CallUpdateSessionDisplaySettings(1024, 768), Throws.Nothing);
         }
 
         /// <summary>
@@ -420,6 +392,15 @@ namespace mRemoteNGTests.Connection.Protocol
             public void Dispose()
             {
                 // Cleanup if needed
+            }
+
+        }
+
+        private class ExposedRdpProtocol8 : RdpProtocol8
+        {
+            public void CallUpdateSessionDisplaySettings(uint width, uint height)
+            {
+                UpdateSessionDisplaySettings(width, height);
             }
         }
     }

@@ -123,19 +123,22 @@
       <EmbedInteropTypes>false</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
+   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" />
     <PackageReference Include="ConsoleControl" />
     <PackageReference Include="DockPanelSuite" />
     <PackageReference Include="DockPanelSuite.ThemeVS2015" />
+    <PackageReference Include="Google.Protobuf" />
     <PackageReference Include="log4net" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" />
     <PackageReference Include="Microsoft.Data.SqlClient" />
+    <PackageReference Include="Microsoft.Data.SqlClient.SNI.runtime" />
     <PackageReference Include="Microsoft.Data.Sqlite" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
     <PackageReference Include="Microsoft.Web.WebView2" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" />
     <PackageReference Include="MySql.Data" />
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" />
     <PackageReference Include="System.Data.Odbc" />
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="SSH.NET" />
@@ -524,8 +527,32 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ExternalConnectors\ExternalConnectors.csproj" />
+    <ProjectReference Include="..\mRemoteNG.PluginContracts\mRemoteNG.PluginContracts.csproj" />
+    <ProjectReference Include="..\mRemoteNG.Plugins.AWS\mRemoteNG.Plugins.AWS.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\mRemoteNG.Plugins.PortScan\mRemoteNG.Plugins.PortScan.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\ObjectListView\ObjectListView.NetCore.csproj" />
   </ItemGroup>
+  <Target Name="CopyPluginAssemblies" AfterTargets="Build">
+    <MSBuild Projects="..\mRemoteNG.Plugins.AWS\mRemoteNG.Plugins.AWS.csproj"
+             Targets="GetTargetPath"
+             Properties="Configuration=$(Configuration);Platform=$(Platform)">
+      <Output TaskParameter="TargetOutputs" ItemName="PluginAssemblies" />
+    </MSBuild>
+    <MSBuild Projects="..\mRemoteNG.Plugins.PortScan\mRemoteNG.Plugins.PortScan.csproj"
+             Targets="GetTargetPath"
+             Properties="Configuration=$(Configuration);Platform=$(Platform)">
+      <Output TaskParameter="TargetOutputs" ItemName="PluginAssemblies" />
+    </MSBuild>
+    <MakeDir Directories="$(OutDir)Plugins" />
+    <Copy SourceFiles="@(PluginAssemblies)"
+          DestinationFolder="$(OutDir)Plugins"
+          SkipUnchangedFiles="true" />
+    <MakeDir Directories="$(PublishDir)Plugins" Condition="'$(PublishDir)' != ''" />
+    <Copy SourceFiles="@(PluginAssemblies)"
+          DestinationFolder="$(PublishDir)Plugins"
+          SkipUnchangedFiles="true"
+          Condition="'$(PublishDir)' != ''" />
+  </Target>
   <ItemGroup>
     <Resource Include="UI\Font\HandelGotDBol.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -543,10 +570,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="150.0.11" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="151.3.24" />
   </ItemGroup>
   <ItemGroup Condition="'$(Platform)'=='arm64'">
-    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="150.0.11" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="151.3.24" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
@@ -586,6 +613,6 @@
     <RemoveDir Directories="$(TempBuildDir)" />
     <RemoveDir Directories="$(ProjectDir)bin\x64\Release Self-Contained" />
   </Target>
-  <!-- ponytail: skip T4 targets when the VS "Text Template Transformation" component isn't installed; AssemblyInfo.cs is already generated/checked in, so it's not required to build -->
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets')" />
-</Project>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets"
+          Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets')" />
+  </Project>

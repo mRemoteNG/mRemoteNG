@@ -16,6 +16,8 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using System.Collections.Generic;
+using mRemoteNG.PluginContracts;
 using mRemoteNG.Security;
 using mRemoteNG.UI.TaskDialog;
 
@@ -62,11 +64,11 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeImportFile;
         private ToolStripMenuItem _cMenTreeImportFromRemoteDesktopManager;
         private ToolStripMenuItem _cMenTreeImportActiveDirectory;
-        private ToolStripMenuItem _cMenTreeImportPortScan;
         private ToolStripMenuItem _cMenTreeImportPutty;
         private ToolStripMenuItem _cMenTreeApplyInheritanceToChildren;
         private ToolStripMenuItem _cMenTreeApplyDefaultInheritance;
         private readonly ConnectionTree.ConnectionTree _connectionTree;
+        private readonly List<ToolStripMenuItem> _pluginImportMenuItems = [];
 
 
         public ConnectionContextMenu(ConnectionTree.ConnectionTree connectionTree)
@@ -78,6 +80,7 @@ namespace mRemoteNG.UI.Controls
             Opening += (sender, args) =>
             {
                 AddExternalApps();
+                RefreshPluginImportItems();
                 if (_connectionTree.SelectedNode == null)
                 {
                     args.Cancel = true;
@@ -113,7 +116,6 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeImportFile = new ToolStripMenuItem();
             _cMenTreeImportFromRemoteDesktopManager = new ToolStripMenuItem();
             _cMenTreeImportActiveDirectory = new ToolStripMenuItem();
-            _cMenTreeImportPortScan = new ToolStripMenuItem();
             _cMenTreeImportPutty = new ToolStripMenuItem();
             _cMenInheritanceSubMenu = new ToolStripMenuItem();
             _cMenTreeApplyInheritanceToChildren = new ToolStripMenuItem();
@@ -329,8 +331,7 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeImportFile,
                 _cMenTreeImportFromRemoteDesktopManager,
                 _cMenTreeImportActiveDirectory,
-                _cMenTreeImportPutty,
-                _cMenTreeImportPortScan
+                _cMenTreeImportPutty
             });
             _cMenTreeImport.Name = "_cMenTreeImport";
             _cMenTreeImport.Size = new System.Drawing.Size(199, 22);
@@ -355,13 +356,6 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeImportActiveDirectory.Size = new System.Drawing.Size(226, 22);
             _cMenTreeImportActiveDirectory.Text = "Import from &Active Directory...";
             _cMenTreeImportActiveDirectory.Click += OnImportActiveDirectoryClicked;
-            //
-            // cMenTreeImportPortScan
-            //
-            _cMenTreeImportPortScan.Name = "_cMenTreeImportPortScan";
-            _cMenTreeImportPortScan.Size = new System.Drawing.Size(226, 22);
-            _cMenTreeImportPortScan.Text = "Import from &Port Scan...";
-            _cMenTreeImportPortScan.Click += OnImportPortScanClicked;
             //
             // cMenTreeImportPutty
             //
@@ -506,7 +500,6 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeImport.Text = Language._Import;
             _cMenTreeImportFile.Text = Language.ImportFromFile;
             _cMenTreeImportActiveDirectory.Text = Language.ImportAD;
-            _cMenTreeImportPortScan.Text = Language.ImportPortScan;
             _cMenTreeExportFile.Text = Language._ExportToFile;
 
             _cMenTreeAddConnection.Text = Language.NewConnection;
@@ -522,6 +515,31 @@ namespace mRemoteNG.UI.Controls
             _cMenInheritanceSubMenu.Text = Language.Inheritance;
             _cMenTreeApplyInheritanceToChildren.Text = Language.ApplyInheritanceToChildren;
             _cMenTreeApplyDefaultInheritance.Text = Language.ApplyDefaultInheritance;
+            RefreshPluginImportItems();
+        }
+
+        private void RefreshPluginImportItems()
+        {
+            foreach (ToolStripMenuItem item in _pluginImportMenuItems)
+            {
+                _cMenTreeImport.DropDownItems.Remove(item);
+                item.Dispose();
+            }
+
+            _pluginImportMenuItems.Clear();
+
+            foreach (var plugin in Runtime.PluginService.GetContextMenuPlugins(PluginContextMenuGroup.Import))
+            {
+                ToolStripMenuItem item = new()
+                {
+                    Name = $"pluginImport_{plugin.Id}",
+                    Text = plugin.ToolWindow.ContextMenuText,
+                    Image = plugin.ToolWindow.Icon,
+                };
+                item.Click += (_, _) => Runtime.PluginService.ShowToolWindow(plugin.Id);
+                _pluginImportMenuItems.Add(item);
+                _cMenTreeImport.DropDownItems.Add(item);
+            }
         }
 
         internal void ShowHideMenuItems()
@@ -725,6 +743,26 @@ namespace mRemoteNG.UI.Controls
 
                     menuItem.Click += OnExternalToolClicked;
                     _cMenTreeToolsExternalApps.DropDownItems.Add(menuItem);
+                }
+
+                if (_connectionTree.SelectedNode != null)
+                {
+                    var pluginActions = Runtime.PluginService.GetTreeContextActionPlugins(_connectionTree.SelectedNode).ToList();
+                    if (_cMenTreeToolsExternalApps.DropDownItems.Count > 0 && pluginActions.Count > 0)
+                        _cMenTreeToolsExternalApps.DropDownItems.Add(new ToolStripSeparator());
+
+                    foreach (var pluginAction in pluginActions)
+                    {
+                        ToolStripMenuItem menuItem = new()
+                        {
+                            Text = pluginAction.TreeContextMenuAction.MenuText,
+                            Tag = pluginAction.Id,
+                            Image = pluginAction.TreeContextMenuAction.Icon
+                        };
+
+                        menuItem.Click += OnPluginTreeActionClicked;
+                        _cMenTreeToolsExternalApps.DropDownItems.Add(menuItem);
+                    }
                 }
             }
             catch (Exception ex)
@@ -1018,11 +1056,6 @@ namespace mRemoteNG.UI.Controls
             AppWindows.Show(WindowType.ActiveDirectoryImport);
         }
 
-        private void OnImportPortScanClicked(object sender, EventArgs e)
-        {
-            AppWindows.Show(WindowType.PortScan);
-        }
-
         private void OnExportFileClicked(object sender, EventArgs e)
         {
             Export.ExportToFile(_connectionTree.SelectedNode, Runtime.ConnectionsService.ConnectionTreeModel);
@@ -1066,6 +1099,14 @@ namespace mRemoteNG.UI.Controls
         private void OnExternalToolClicked(object sender, EventArgs e)
         {
             StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
+        }
+
+        private void OnPluginTreeActionClicked(object sender, EventArgs e)
+        {
+            if (_connectionTree.SelectedNode == null)
+                return;
+
+            Runtime.PluginService.ExecuteTreeContextAction((string)((ToolStripMenuItem)sender).Tag, _connectionTree.SelectedNode);
         }
 
         private void StartExternalApp(ExternalTool externalTool)

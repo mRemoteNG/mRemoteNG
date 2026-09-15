@@ -8,6 +8,7 @@ using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
+using mRemoteNG.Plugins;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -501,6 +502,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("ExternalAddressProvider")], out ExternalAddressProvider value))
                     connectionRecord.ExternalAddressProvider = value;
             }
+            if (headers.Contains("PluginData"))
+            {
+                connectionRecord.ReplacePluginProperties(PluginConnectionDataSerializer.Deserialize(connectionCsv[headers.IndexOf("PluginData")]));
+            }
+            LegacyPluginDataMigrator.Migrate(connectionRecord);
 
             #region Inheritance
 
