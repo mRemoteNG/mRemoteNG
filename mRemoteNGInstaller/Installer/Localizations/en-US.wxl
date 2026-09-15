@@ -1,26 +1,28 @@
 ﻿<WixLocalization Culture="en-US" Language="1033" xmlns="http://wixtoolset.org/schemas/v4/wxl">
-  
+
   <!-- Install Conditions -->
   <String Id="Upgrade_NewerVersionInstalled" Overridable="yes" Value="A newer version of [ProductName] is already installed." />
   <String Id="Install_NeedToBeAdminToInstall" Value="You need to be an administrator to install this product." />
-  <String Id="Install_NeedDotNetFrameworkVersion" Value="mRemoteNG requires Microsoft .NET Framework [REQUIREDDOTNETFRAMEWORKVERSION] or higher." />
   <String Id="Install_OSVersionRequirement" Value="mRemoteNG requires Windows 7 SP1 or higher to run. Please update your operating system and try again." />
-  <String Id="Install_RDP80Requirement" Value="mRemoteNG requires RDP 8.0 or higher to run. Windows 7 users will need to install either KB2592687 (RDP 8.0) or KB2830477 (RDP 8.1)" />
-  <String Id="Install_RDPDtlsRequirement" Value="mRemoteNG requires KB2574819 in order to create RDP connections. Windows 7 users will need to install this KB." />
   <String Id="Install_Win7RequiresSP1" Value="For mRemoteNG to run on Windows 7, it requires Service Pack 1 to be installed. Please install Service Pack 1 and try again." />
-  
-  <!-- Directories and File names -->
-  <String Id="Folders_Desktop" Value="Desktop" />
-  <String Id="File_Credits" Value="Credits" />
-  <String Id="File_License" Value="License" />
-  <String Id="File_VersionHistory" Value="Version History" />
-  
+  <String Id="Install_RDPDtlsRequirement" Value="mRemoteNG requires KB2574819 in order to create RDP connections. Windows 7 users will need to install this KB." />
+  <String Id="Install_RDP80Requirement" Value="mRemoteNG requires RDP 8.0 or higher to run. Windows 7 users will need to install either KB2592687 (RDP 8.0) or KB2830477 (RDP 8.1)" />
+
   <!-- Features and install options -->
-  <String Id="Feature_Complete" Value="Complete" />
   <String Id="Feature_DesktopShortcut" Value="Desktop Shortcut" />
   <String Id="Feature_StartMenuShortcut" Value="Start Menu Shortcut" />
-  
+
   <!-- GUI Page Text -->
   <String Id="FinishPage_LaunchMremoteNow" Overridable="yes" Value="Launch mRemoteNG now" />
-  
+  <String Id="CustomizeDlg_Title" Value="Choose Install Location" />
+  <String Id="CustomizeDlgText" Value="Choose the features and install location for mRemoteNG." />
+  <String Id="CustomizeDlgDescription" Value="Select the features you want to install." />
+  <String Id="CustomizeDlgBrowse" Value="Browse..." />
+  <String Id="CustomizeDlgReset" Value="Reset" />
+  <String Id="CustomizeDlgLocation" Value="Install to:" />
+  <String Id="CustomizeDlgLocationLabel" Value="Folder:" />
+  <String Id="CustomizeDlgItemDescription" Value="Description" />
+  <String Id="CustomizeDlgItemSize" Value="Size" />
+  <String Id="CustomizeDlgTree" Value="Features" />
+
 </WixLocalization>

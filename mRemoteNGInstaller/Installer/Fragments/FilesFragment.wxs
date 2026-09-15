@@ -33,65 +33,18 @@
     </Fragment>
     <Fragment>
         <ComponentGroup Id="MandatoryComponents">
-            <Component Id="cmp35D96EA44AD8354ED2F995D3EBCCE1A7" Directory="INSTALLDIR">
-                <File Id="fil19AFB7CDBA1EEFE8FFFF6028483B5EC8" KeyPath="yes" Source="$(var.HarvestPath)\AxInterop.MSTSCLib.dll" />
-            </Component>
-            <Component Id="cmpD846FD49FC176CEFBA3E8411896C6DEE" Directory="INSTALLDIR">
-                <File Id="fil86AC9D6CDBC2AE2AADFE752F1AD83685" KeyPath="yes" Source="$(var.HarvestPath)\ExternalConnectors.dll" />
-            </Component>
-            <Component Id="cmp0E22CC4281F53936AB57E54775E94F4C" Directory="INSTALLDIR">
-                <File Id="filEA870C5699E25304BC08ED0EFD930BC6" KeyPath="yes" Source="$(var.HarvestPath)\ExternalConnectors.pdb" />
-            </Component>
-            <Component Id="cmp3B87E05C275CE85388D030CC01BF1E20" Directory="INSTALLDIR">
-                <File Id="fil3FCEFF3CAE083B7927D5D4E4B0218A88" KeyPath="yes" Source="$(var.HarvestPath)\Interop.MSTSCLib.dll" />
-            </Component>
-            <Component Id="cmp375F226751B298CD70903C1646985757" Directory="INSTALLDIR">
-                <File Id="filBF38EEDD7B5695007E9582D7EF347826" KeyPath="yes" Source="$(var.HarvestPath)\log4net.config" />
-            </Component>
-            <Component Id="cmp73DD793C33CE93882A21562E8A0FFB47" Directory="INSTALLDIR">
-                <File Id="fil579DAFF7079024ADD71395BB16AB9D2F" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Data.SqlClient.SNI.arm64.dll" />
-            </Component>
-            <Component Id="cmp791187EFDDB68CDC204D6B654412E444" Directory="INSTALLDIR">
-                <File Id="fil7F00295DB9A936843822F989B9CBA9D7" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Data.SqlClient.SNI.arm64.pdb" />
-            </Component>
-            <Component Id="cmpE910730FCBBF20B14612C406EFEB5402" Directory="INSTALLDIR">
-                <File Id="fil3B5C5DF4AF7232C40BB382C38F178F78" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Data.SqlClient.SNI.x64.dll" />
-            </Component>
-            <Component Id="cmpBC5D78342783913CB2940FD1FBCB1C0F" Directory="INSTALLDIR">
-                <File Id="filADC5E7D9C4AB391364380BC83CACEAC6" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Data.SqlClient.SNI.x64.pdb" />
-            </Component>
-            <Component Id="cmp104087D18B25A9A8D2ECC5B6EA2AE79B" Directory="INSTALLDIR">
-                <File Id="fil5282108DD54B6C7D192C3E9D001FD4E7" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Web.WebView2.Core.dll" />
-            </Component>
-            
-            <Component Id="cmp3ED4B6E14797367C1383E408A6961B85" Directory="INSTALLDIR">
-                <File Id="filBEB43BF024BDDFB47075A1E970FB51F2" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Web.WebView2.WinForms.dll" />
-            </Component>
-            
-            <Component Id="cmp6EED7245C933A23BDE5CBE3B4DD32858" Directory="INSTALLDIR">
-                <File Id="fil157A3D211984A88620C183E777A80E6C" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Web.WebView2.Wpf.dll" />
-            </Component>
-            
-            <Component Id="cmp7BBC914C2D9AE0E04A00AA2CF03B3079" Directory="INSTALLDIR">
-                <File Id="fil245C1F42A64B9E10948A26E3F1A58891" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.appSettings" />
-            </Component>
-            <Component Id="cmp41D33384103998013724F7507BE537A3" Directory="INSTALLDIR">
-                <File Id="filD409F3953DFE64FEE2FDC4460BD98297" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.deps.json" />
-            </Component>
             <Component Id="cmpFF3B070182BDDDE8AACCA3CF800537A7" Directory="INSTALLDIR">
                 <File Id="fil071813CC6E65500817D01BDDD73D2B1F" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.dll" />
             </Component>
             <Component Id="cmpC77C2640528674DBBCF20ADD1500C112" Directory="INSTALLDIR">
                 <File Id="filAC4D49028FDDA1626E5B006C9D1ED57E" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.dll.config" />
             </Component>
-            
             <Component Id="cmp67313C6B4CE3487E9A8165EFFE369D16" Directory="INSTALLDIR">
                 <File Id="fil5F0524AF62166FF3C4DAE07F1113C0D9" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.pdb" />
             </Component>
             <Component Id="cmp9FF194CCD09E9797444CF95F7C37C75A" Directory="INSTALLDIR">
                 <File Id="fil09655B2FCDF14CBBA2E03BBD3F6C58EE" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.runtimeconfig.json" />
             </Component>
-            
             <Component Id="cmp2C1BBE07A32C31BCF92912D601AD4864" Directory="INSTALLDIR">
                 <File Id="fil357AF76EEBAC3CE454CB549E0C337C8A" KeyPath="yes" Source="$(var.HarvestPath)\ObjectListView.dll" />
             </Component>
@@ -113,17 +66,8 @@
             <Component Id="cmpA0441C32B788060C47970989ED4B5ABF" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
                 <File Id="filF17B847CF8A244207E315885859FD897" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\AWSSDK.EC2.dll" />
             </Component>
-            <Component Id="cmpA759EFDC4BD049ACBB9E1044CC03F5A4" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filE4A4CD2FFCAADE6B26DB853DF998BEEA" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Azure.Core.dll" />
-            </Component>
-            <Component Id="cmpAE9279CF4CCD05DA236D0B0A01404956" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil4EB27A4E1D5D9B99E10A0DE38A3CAD93" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Azure.Identity.dll" />
-            </Component>
             <Component Id="cmp9C05BA0000D3C7442C3269AC269A6E0D" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
                 <File Id="fil05368A8F5D5D305EE8BA8527BE51114D" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\BouncyCastle.Cryptography.dll" />
-            </Component>
-            <Component Id="cmp57E640C9AF0343B3206A86DEE4E5D1D3" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil0751F7CA5335535177552B9384B9E42A" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Castle.Core.dll" />
             </Component>
             <Component Id="cmpB4829D29933143FC7EC41E4416454794" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
                 <File Id="fil6B74A4B5A77BC2B6A9A4E9458ADAF7BC" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\comerr64.dll" />
@@ -133,9 +77,6 @@
             </Component>
             <Component Id="cmp6E272AFE23CB4F168D530F0D9F506CC1" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
                 <File Id="fil98BE0AB9E106949745E0A8E6F2997799" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\ConsoleControlAPI.dll" />
-            </Component>
-            <Component Id="cmp2710E61893A487A8905367F8C453C97A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil64C8BAD21EBE23E8DCC0BB5925D918C9" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Cucumber.Messages.dll" />
             </Component>
             <Component Id="cmp7490A8F9A8DB3A624A5D8CB9577798B6" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
                 <File Id="fil6F297ECD4F58F89504D1FF9A059DCAED" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Google.Protobuf.dll" />
@@ -161,162 +102,7 @@
             <Component Id="cmp63A6483817552D7BD73E83A9F114372D" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
                 <File Id="filD91BF289298C520CD2C4CD2F83919C31" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\krbcc64.dll" />
             </Component>
-            <Component Id="cmpD9B5822311AC53B29E53974541779BD7" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil244270BF738D34D2DFD126BD36189DBE" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\LiteDB.dll" />
-            </Component>
-            <Component Id="cmpB4D15D56199032BB587B2830A03BBFD2" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filF792872055326743DF87147B6E835CFD" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\log4net.dll" />
-            </Component>
-            <Component Id="cmp9917D4F6F1CFA85CA7D6B773A88AE02B" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filB7C6959504CEE541DBB2480F74184BE5" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Bcl.AsyncInterfaces.dll" />
-            </Component>
-            <Component Id="cmpDE93C6C046C09333D8D20B7987D6C7BE" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil0B2A0DBEB96CCDBD8CA51070E23C23E8" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Bcl.Cryptography.dll" />
-            </Component>
-            <Component Id="cmpF7C5C60A7BECEDFF1243E72AACAEAB27" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil191CE288914BEE06A0EA1A23F7E5B77D" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Data.SqlClient.dll" />
-            </Component>
-            <Component Id="cmp6EAB18C07FA2633DE7C6E741F22BF7EC" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filE5067B2FFE87F33030F3A4AC0A17C8F9" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Data.SqlClient.resources.dll" />
-            </Component>
-            <Component Id="cmp33223CAFD15AEABE0174D8AD111128DB" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil6621C9FE5ACC356D0C07513D6D72A763" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Data.SqlClient.SNI.dll" />
-            </Component>
-            <Component Id="cmpFB8753E0B4E25B8D2D4CDD1B68F94663" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil82E31B3771ED18205B908DD7CDBE7169" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.Caching.Abstractions.dll" />
-            </Component>
-            <Component Id="cmp026BAD348742917C283F0D65B1DD880A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil6B8FB41418DE71F26D8CEF98775125F4" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.Caching.Memory.dll" />
-            </Component>
-            <Component Id="cmp7AF5E15A541EA9AFFFE8D07682F22555" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil443EC1DF7E4E7D04E410E950FC668F43" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.Configuration.Abstractions.dll" />
-            </Component>
-            <Component Id="cmpD87041C19E9D0870B92A04C306C697D1" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil956371BA5FD20017BFC7B3E17E1669CE" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.Configuration.dll" />
-            </Component>
-            <Component Id="cmp646D2DA3407CC52FFA5557594F4ACD8E" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil076D1B3FB5D94B3AB8E492882DE1CD61" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.Configuration.FileExtensions.dll" />
-            </Component>
-            <Component Id="cmp97E28384D6C66AB3A9E8BD2444C9454E" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil1B2672335341208ADC6360CB16726721" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.Configuration.Json.dll" />
-            </Component>
-            <Component Id="cmp53C4A27E91795A046145AB2764E6A233" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filBFD012005A78DC66834C9B7672A8F42C" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.Configuration.UserSecrets.dll" />
-            </Component>
-            <Component Id="cmp8E31AD8F10904C49BA3AA464F412816A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil296C2F066282F243B381F46490F95DA5" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
-            </Component>
-            <Component Id="cmpB590A2EF65E8C6BA0D8E8A9A00EE50B3" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filCBE1F729C91EE76D3EFA60A17451836F" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.FileProviders.Abstractions.dll" />
-            </Component>
-            <Component Id="cmpB16C767899E06180DA057163B9E460D3" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil7E480EBC58594DFE1E465DCCF58F4575" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.FileProviders.Physical.dll" />
-            </Component>
-            <Component Id="cmp672C0FBC4F8F2EB798E13647574B2B11" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil2108085CCC3B5660A67341226AC34186" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.FileSystemGlobbing.dll" />
-            </Component>
-            <Component Id="cmpD30512E8376538C3792617D07BFD8B2F" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil9BB19D60D34D2ABB3E2D2B84D9AE7E6F" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.Logging.Abstractions.dll" />
-            </Component>
-            <Component Id="cmpA9D110B7749E7406E19CB6F5063AFA81" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil68C352326AA07DBC42D4A73F1F52B5FB" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.Options.dll" />
-            </Component>
-            <Component Id="cmp485B60646E8AD7AD35F595367BA67B29" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil305E974ACE3243277235618C8BF9EB57" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Extensions.Primitives.dll" />
-            </Component>
-            <Component Id="cmp50D23688AEDD23EC60BDC4CA00BB9238" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil9FA7A93D599277E3B180E43BE7AA48E3" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Identity.Client.dll" />
-            </Component>
-            <Component Id="cmp954EF047031A00AB32108DA2D0523B8B" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil6DC415A72CA99F2965DB52C619456D92" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Identity.Client.Extensions.Msal.dll" />
-            </Component>
-            <Component Id="cmp79B2F0757F8918DF1D4FE564F6F2846A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil11C1829EF31C6F98418267E84B572C9E" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.IdentityModel.Abstractions.dll" />
-            </Component>
-            <Component Id="cmp94206CF5F878895658F36E8E034ACC0F" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil520FDFF0498D48F8CE4E2CB59F5A8088" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.IdentityModel.JsonWebTokens.dll" />
-            </Component>
-            <Component Id="cmpD06122FDC02208187F55FE5E69D81AA2" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil1E5D6273928DDBDAA3C0414C760D469E" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.IdentityModel.Logging.dll" />
-            </Component>
-            <Component Id="cmp2CC069E406B3B97B637C006AFA03009E" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil7BEEC6300AECC434F327294103B0E047" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.IdentityModel.Protocols.dll" />
-            </Component>
-            <Component Id="cmp8AF197209A73DC8514EFE654FB86C126" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil01A47526250B7DD67B6156E947F29347" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" />
-            </Component>
-            <Component Id="cmpE7EE18952442865DB0D12C55F8804239" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil8BB5BFEE5F20C35BD23DFE2E112ECE15" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.IdentityModel.Tokens.dll" />
-            </Component>
-            <Component Id="cmp2B1E902B12192B8A03A50280FC4C406C" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil5B8243120A429900E04F175CC9A9D676" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.SqlServer.Server.dll" />
-            </Component>
-            <Component Id="cmp6DDF5D90EE104011970A9D3625C1804F" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil0D4443CDCAFF6BDC591DBBA69D5773D8" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Win32.SystemEvents.dll" />
-            </Component>
-            <Component Id="cmp71DFBF24555A1B1EB7CEAF528F4CC164" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filA4A8DBDB19DC67DC5F713D4B7081539B" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.WindowsAPICodePack.dll" />
-            </Component>
-            <Component Id="cmp5E2BFB24AA7B3EDC066B2B2A98692803" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filD4F58C78C296BDDD0AA0DC550B54C488" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.WindowsAPICodePack.Shell.dll" />
-            </Component>
-            <Component Id="cmpD031491E2D2A0B66927CBD9A768EBF38" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil23955F19633C7E79DC0FC3D52653DBF9" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Microsoft.Xaml.Behaviors.dll" />
-            </Component>
-            <Component Id="cmpA37CFA3604156A8B34BE57802B077EFD" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil4F406B659298EAAC4741B966EF68B5EC" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\MySql.Data.dll" />
-            </Component>
-            <Component Id="cmpF9AB2384BF489D4C04293854CA6968A1" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil278E1AA2D9F9D520CFBBDD57ACBA4B82" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Newtonsoft.Json.dll" />
-            </Component>
-            <Component Id="cmp0B1D954663957EC625C5EE7C1943073E" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filD0B916E45C4C0C6873C31034761313EC" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Newtonsoft.Json.Schema.dll" />
-            </Component>
-            <Component Id="cmp3241485205830DB376DB66B9155B346A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil1EEA40DAC8EF878C897419A71FBDD28F" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Renci.SshNet.Async.dll" />
-            </Component>
-            <Component Id="cmp361EEE77E5E353ED53980C78A77F1C68" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filC15EAFA12C6336D8B6BAAE8FA62A711B" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\Renci.SshNet.dll" />
-            </Component>
-            <Component Id="cmpEAB2A41DC1BE84F912D8BE4CD73EAE5E" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filB6EBBBBF7EC22173E39849A570D2D67F" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.ClientModel.dll" />
-            </Component>
-            <Component Id="cmp7FAF50FD8200AF236A928345A61AAEF0" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filE41EE8C1EF32CFB6D2172C7A7865668F" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.CodeDom.dll" />
-            </Component>
-            <Component Id="cmpAE0E8F321CC9B105BFD21A01BFAFB4A9" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filB7799F11B9109EE9A930AA4E657B581F" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Configuration.ConfigurationManager.dll" />
-            </Component>
-            <Component Id="cmp8B9201781C616B2EF8F835BA72B27F0D" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filC4F812D5888AB492B912C79A224F3825" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Diagnostics.EventLog.dll" />
-            </Component>
-            <Component Id="cmpAF6590CFC3A5C5503D6C94BD50984569" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil8EB9B0E9BC1497463CD9860452265A25" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.DirectoryServices.dll" />
-            </Component>
-            <Component Id="cmp0C28E1D2E89936924959271729D6582A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil6B1CE3A32E22D5E559AE970D6CECB76C" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Drawing.Common.dll" />
-            </Component>
-            <Component Id="cmp4ECF0365704F485E62712C4561DEA7FC" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filBE8DADF0BDDEC13E578FD2E7031E1CE0" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.IdentityModel.Tokens.Jwt.dll" />
-            </Component>
-            <Component Id="cmp765254F61ED5981D44DB72A18E36D9D1" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filF3F6DF2D110B96611FAE039862905B4A" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Management.dll" />
-            </Component>
-            <Component Id="cmp198317622D63214A867378FCBA129144" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filB2395BA4B3975CB154E2711802CD59A0" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Memory.Data.dll" />
-            </Component>
-            <Component Id="cmp60A16FDE1EAE14F5A1CEAA1BFC4FB65A" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="filC64EA4B6EF173B573B3DDB6845EC5FA1" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Private.Windows.Core.dll" />
-            </Component>
-            <Component Id="cmp8F9D2B732EE7F0A04391DCC6BF71B52D" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil8F7A79587C3F410C47D974EBE29C8D97" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Security.Cryptography.ProtectedData.dll" />
-            </Component>
-            <Component Id="cmp60C882C96CD1F5397DFC88C9DC8EF72F" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil38022ADBF50CCC2A74B20EB600274DE8" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Security.Permissions.dll" />
-            </Component>
-            <Component Id="cmp181AE9701D7B0929C82B9088EA679DD2" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
-                <File Id="fil40CFB266222E83AA8796D378E810D9FE" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\System.Windows.Extensions.dll" />
-            </Component>
+
             <Component Id="cmp91AF0DA940C0C1686EBEA00C42E97303" Directory="dirEA5DE0DA87CCDD60F4B26843B622260F">
                 <File Id="filAE1365C3205BCB5594D58106D66B0EBC" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\VncSharpCore.dll" />
             </Component>

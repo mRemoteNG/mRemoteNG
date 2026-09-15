@@ -7,9 +7,7 @@
       <Dialog Id="My_CustomizeDlg" Width="370" Height="270" Title="!(loc.CustomizeDlg_Title)" TrackDiskSpace="yes">
         <Control Id="Tree" Type="SelectionTree" X="25" Y="85" Width="175" Height="115" Property="_BrowseProperty" Sunken="yes" TabSkip="no" Text="!(loc.CustomizeDlgTree)" />
         <Control Id="Browse" Type="PushButton" X="294" Y="210" Width="66" Height="17" Text="!(loc.CustomizeDlgBrowse)" HideCondition="Installed" DisableCondition="Installed">
-          <Publish Event="SelectionBrowse" Value="BrowseDlg" />
-          
-          
+          <Publish Event="SpawnDialog" Value="BrowseDlg" Order="1" />
         </Control>
         <Control Id="Reset" Type="PushButton" X="10" Y="243" Width="81" Height="17" Text="!(loc.CustomizeDlgReset)">
           <Publish Event="Reset" Value="0" />

@@ -1,20 +1,23 @@
-<Project Sdk="WixToolset.Sdk/5.0.2">
+<Project Sdk="WixToolset.Sdk/7.0.0">
   <PropertyGroup>
+    <AcceptEula>wix7</AcceptEula>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
     <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
     <Platform Condition="'$(Platform)' == ''">x64</Platform>
+    <Configurations>Debug;Release;Release Self-Contained</Configurations>
     <OutputName>mRemoteNG-Installer</OutputName>
     <OutputType>Package</OutputType>
     <Cultures>en-US</Cultures>
     <SuppressPdbOutput>true</SuppressPdbOutput>
-    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\x64\$(Configuration)</DefineConstants>
+    <DefineConstants>SolutionDir=$(MSBuildProjectDirectory)\..\..\;HarvestPath=$(MSBuildProjectDirectory)\..\..\mRemoteNG\bin\x64\$(Configuration)</DefineConstants>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WixToolset.Util.wixext" />
     <PackageReference Include="WixToolset.UI.wixext" />
     <PackageReference Include="WixToolset.Netfx.wixext" />
+    <PackageReference Include="WixToolset.Util.wixext" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +32,7 @@
     <Content Include="Resources\Installer_Side.png" />
   </ItemGroup>
 
-  <Target Name="RunInstallerPostBuild" AfterTargets="Build">
+  <Target Name="RunInstallerPostBuild" AfterTargets="Build" Condition="'$(APPVEYOR_BUILD_FOLDER)' != ''">
     <Exec Command='powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_installer.ps1" -SolutionDir "$(SolutionDir)\\" -TargetDir "$(TargetDir)" -TargetFileName "mRemoteNG.exe" -ConfigurationName "$(Configuration)" -CertificatePath "$(CertPath)" -CertificatePassword "$(CertPassword)" -ExcludeFromSigning "PuTTYNG.exe"' />
   </Target>
 </Project>

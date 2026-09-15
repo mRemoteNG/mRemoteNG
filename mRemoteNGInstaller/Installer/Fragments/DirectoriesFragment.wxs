@@ -1,10 +1,9 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <?include $(sys.CURRENTDIR)Includes\Config.wxi?>
 	<Fragment>
-      <Directory Id="$(var.PlatformProgramFilesFolder)">
-        <Directory Id="INSTALLDIR" Name="$(var.ProductName)">
-        </Directory>
-      </Directory>
+      <StandardDirectory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLDIR" Name="$(var.ProductName)" />
+      </StandardDirectory>
 
       <StandardDirectory Id="DesktopFolder" />
 

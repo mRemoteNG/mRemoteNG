@@ -6,7 +6,9 @@
     <AssemblyName>CustomActions</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Platforms>x64</Platforms>
+    <Configurations>Debug;Release;Release Self-Contained</Configurations>
     <LangVersion>7.3</LangVersion>
+    <AcceptEula>wix7</AcceptEula>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
@@ -31,24 +33,11 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Portable|x64'">
-    <OutputPath>bin\x64\Release Portable\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Self-Contained|x64'">
+    <OutputPath>bin\x64\Release Self-Contained\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Installer|x64'">
-    <OutputPath>bin\x64\Release Installer\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Deploy to github|x64'">
-    <OutputPath>bin\x64\Deploy to github\</OutputPath>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
