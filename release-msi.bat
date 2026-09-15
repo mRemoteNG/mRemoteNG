@@ -51,7 +51,7 @@ if exist "%MSI%" (
 echo Building MSI installer...
 :: ponytail: WixTargetsPath is forced because VS's own MSBuildExtensionsPath32 no longer
 :: points at the classic shared "%ProgramFiles(x86)%\MSBuild" folder where WiX v3 installs its targets.
-"%MSBUILD%" "%ROOT%mRemoteNGInstaller\Installer\Installer.wixproj" /t:Build /p:Configuration=Release /p:Platform=x64 /p:SolutionDir=%ROOT% "/p:WixTargetsPath=%ProgramFiles(x86)%\MSBuild\Microsoft\WiX\v3.x\Wix.targets" "/p:WixCATargetsPath=%ProgramFiles(x86)%\MSBuild\Microsoft\WiX\v3.x\wix.ca.targets" /nologo /v:minimal
+"%MSBUILD%" "%ROOT%mRemoteNGInstaller\Installer\Installer.wixproj" /t:Build /p:Configuration=Release /p:Platform=x64 "/p:SolutionDir=%ROOT%" "/p:WixTargetsPath=%ProgramFiles(x86)%\MSBuild\Microsoft\WiX\v3.x\Wix.targets" "/p:WixCATargetsPath=%ProgramFiles(x86)%\MSBuild\Microsoft\WiX\v3.x\wix.ca.targets" /nologo /v:minimal
 if errorlevel 1 (
     echo [ERROR] Installer build failed.
     exit /b 1
