@@ -107,7 +107,7 @@
     <PackageVersion Include="WixToolset.Dtf.WindowsInstaller" Version="5.0.2" />
     <PackageVersion Include="WixToolset.Netfx.wixext" Version="5.0.2" />
     <PackageVersion Include="WixToolset.UI.wixext" Version="5.0.2" />
-    <PackageVersion Include="WixToolset.Util.wixext" Version="5.0.2" />
+    <PackageVersion Include="WixToolset.Util.wixext" Version="7.0.0" />
     <PackageVersion Include="ZstdSharp.Port" Version="0.8.8" />
   </ItemGroup>
 </Project>
