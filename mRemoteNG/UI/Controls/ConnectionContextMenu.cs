@@ -744,6 +744,26 @@ namespace mRemoteNG.UI.Controls
                     menuItem.Click += OnExternalToolClicked;
                     _cMenTreeToolsExternalApps.DropDownItems.Add(menuItem);
                 }
+
+                if (_connectionTree.SelectedNode != null)
+                {
+                    var pluginActions = Runtime.PluginService.GetTreeContextActionPlugins(_connectionTree.SelectedNode).ToList();
+                    if (_cMenTreeToolsExternalApps.DropDownItems.Count > 0 && pluginActions.Count > 0)
+                        _cMenTreeToolsExternalApps.DropDownItems.Add(new ToolStripSeparator());
+
+                    foreach (var pluginAction in pluginActions)
+                    {
+                        ToolStripMenuItem menuItem = new()
+                        {
+                            Text = pluginAction.TreeContextMenuAction.MenuText,
+                            Tag = pluginAction.Id,
+                            Image = pluginAction.TreeContextMenuAction.Icon
+                        };
+
+                        menuItem.Click += OnPluginTreeActionClicked;
+                        _cMenTreeToolsExternalApps.DropDownItems.Add(menuItem);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -1079,6 +1099,14 @@ namespace mRemoteNG.UI.Controls
         private void OnExternalToolClicked(object sender, EventArgs e)
         {
             StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
+        }
+
+        private void OnPluginTreeActionClicked(object sender, EventArgs e)
+        {
+            if (_connectionTree.SelectedNode == null)
+                return;
+
+            Runtime.PluginService.ExecuteTreeContextAction((string)((ToolStripMenuItem)sender).Tag, _connectionTree.SelectedNode);
         }
 
         private void StartExternalApp(ExternalTool externalTool)

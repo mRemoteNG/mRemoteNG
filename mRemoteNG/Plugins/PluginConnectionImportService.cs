@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using mRemoteNG.Connection;
-using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.PluginContracts;
 using mRemoteNG.Tree.Root;
@@ -11,19 +8,6 @@ namespace mRemoteNG.Plugins;
 
 internal sealed class PluginConnectionImportService : IConnectionImportService
 {
-    private static readonly IReadOnlyDictionary<string, ProtocolType> ProtocolMap =
-        new Dictionary<string, ProtocolType>(StringComparer.OrdinalIgnoreCase)
-        {
-            [PluginProtocolIds.Ard] = ProtocolType.ARD,
-            [PluginProtocolIds.Http] = ProtocolType.HTTP,
-            [PluginProtocolIds.Https] = ProtocolType.HTTPS,
-            [PluginProtocolIds.Rdp] = ProtocolType.RDP,
-            [PluginProtocolIds.Rlogin] = ProtocolType.Rlogin,
-            [PluginProtocolIds.Ssh2] = ProtocolType.SSH2,
-            [PluginProtocolIds.Telnet] = ProtocolType.Telnet,
-            [PluginProtocolIds.Vnc] = ProtocolType.VNC,
-        };
-
     public void ImportConnections(IEnumerable<PluginConnectionRequest> connections)
     {
         ArgumentNullException.ThrowIfNull(connections);
@@ -43,7 +27,7 @@ internal sealed class PluginConnectionImportService : IConnectionImportService
         {
             foreach (PluginConnectionRequest request in requests)
             {
-                if (!ProtocolMap.TryGetValue(request.ProtocolId, out ProtocolType protocolType))
+                if (!PluginProtocolMapper.TryToCoreProtocolType(request.ProtocolId, out var protocolType))
                 {
                     throw new ArgumentException($"Unsupported plugin protocol '{request.ProtocolId}'.", nameof(connections));
                 }
