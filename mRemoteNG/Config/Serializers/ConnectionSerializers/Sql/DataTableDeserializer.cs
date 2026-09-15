@@ -13,6 +13,7 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using mRemoteNG.Plugins;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -110,6 +111,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             //connectionInfo.Password = DecryptValue(pw ?? "").ConvertToSecureString();
             connectionInfo.Password = DecryptValue(pw ?? "");
             connectionInfo.Port = (int)dataRow["Port"];
+            if (dataRow.Table.Columns.Contains("PluginData"))
+                connectionInfo.ReplacePluginProperties(PluginConnectionDataSerializer.Deserialize(dataRow["PluginData"] as string ?? string.Empty));
             connectionInfo.PostExtApp = (string)dataRow["PostExtApp"];
             connectionInfo.PreExtApp = (string)dataRow["PreExtApp"];
             connectionInfo.Protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), (string)dataRow["Protocol"]);
@@ -243,6 +246,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             connectionInfo.Inheritance.VNCProxyUsername = MiscTools.GetBooleanValue(dataRow["InheritVNCProxyUsername"]);
             connectionInfo.Inheritance.VNCSmartSizeMode = MiscTools.GetBooleanValue(dataRow["InheritVNCSmartSizeMode"]);
             connectionInfo.Inheritance.VNCViewOnly = MiscTools.GetBooleanValue(dataRow["InheritVNCViewOnly"]);
+            LegacyPluginDataMigrator.Migrate(connectionInfo);
         }
 
         private string DecryptValue(string cipherText)

@@ -6,6 +6,7 @@ using System.Runtime.Versioning;
 using System.Security;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Plugins;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -26,7 +27,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
         private readonly SaveFilter _saveFilter = saveFilter.ThrowIfNull(nameof(saveFilter));
         private int _currentNodeIndex;
 
-        public Version Version { get; } = new Version(3, 0);
+        public Version Version { get; } = new Version(3, 1);
 
         public void SetSourceDataTable(DataTable sourceDataTable)
         {
@@ -202,6 +203,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataTable.Columns.Add("Password", typeof(string));
             dataTable.Columns.Add("Port", typeof(int));
             dataTable.Columns.Add("PositionID", typeof(int));
+            dataTable.Columns.Add("PluginData", typeof(string));
             dataTable.Columns.Add("PostExtApp", typeof(string));
             dataTable.Columns.Add("PreExtApp", typeof(string));
             dataTable.Columns.Add("Protocol", typeof(string));
@@ -317,6 +319,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             isFieldNotChange = isFieldNotChange && dataRow["MacAddress"].Equals(connectionInfo.MacAddress);
             isFieldNotChange = isFieldNotChange && dataRow["OpeningCommand"].Equals(connectionInfo.OpeningCommand);
             isFieldNotChange = isFieldNotChange && dataRow["Port"].Equals(connectionInfo.Port);
+            isFieldNotChange = isFieldNotChange &&
+                               (!dataRow.Table.Columns.Contains("PluginData")
+                                   ? string.IsNullOrEmpty(PluginConnectionDataSerializer.Serialize(connectionInfo.PluginProperties))
+                                   : dataRow["PluginData"].Equals(PluginConnectionDataSerializer.Serialize(connectionInfo.PluginProperties)));
             isFieldNotChange = isFieldNotChange && dataRow["PostExtApp"].Equals(connectionInfo.PostExtApp);
             isFieldNotChange = isFieldNotChange && dataRow["PreExtApp"].Equals(connectionInfo.PreExtApp);
             isFieldNotChange = isFieldNotChange && dataRow["Protocol"].Equals(connectionInfo.Protocol.ToString());
@@ -577,6 +583,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataRow["Password"] = _saveFilter.SavePassword ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) : "";
             dataRow["Port"] = connectionInfo.Port;
             dataRow["PositionID"] = _currentNodeIndex;
+            dataRow["PluginData"] = PluginConnectionDataSerializer.Serialize(connectionInfo.PluginProperties);
             dataRow["PostExtApp"] = connectionInfo.PostExtApp;
             dataRow["PreExtApp"] = connectionInfo.PreExtApp;
             dataRow["Protocol"] = connectionInfo.Protocol;

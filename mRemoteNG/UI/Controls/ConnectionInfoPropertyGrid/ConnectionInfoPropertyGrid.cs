@@ -22,7 +22,6 @@ using System.Runtime.Versioning;
 namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid {
     [SupportedOSPlatform("windows")]
     public partial class ConnectionInfoPropertyGrid : FilteredPropertyGrid.FilteredPropertyGrid {
-        private readonly Dictionary<Type, IEnumerable<PropertyInfo>> _propertyCache = [];
         private ConnectionInfo _selectedConnectionInfo;
         private PropertyMode _propertyMode;
 
@@ -176,34 +175,28 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid {
             }
         }
 
-        private IEnumerable<PropertyInfo> GetPropertiesForGridObject(object currentGridObject) {
-            if (_propertyCache.TryGetValue(currentGridObject.GetType(), out IEnumerable<PropertyInfo> properties))
-                return properties;
-
-            Type type = currentGridObject.GetType();
-            PropertyInfo[] props = type.GetProperties();
-            _propertyCache.Add(type, props);
-
-            return props;
+        private IEnumerable<PropertyDescriptor> GetPropertiesForGridObject(object currentGridObject) {
+            return TypeDescriptor.GetProperties(currentGridObject).Cast<PropertyDescriptor>();
         }
 
-        private bool IsValidForProtocol(PropertyInfo property, ProtocolType protocol, bool skipProtocolCheck) {
+        private bool IsValidForProtocol(PropertyDescriptor property, ProtocolType protocol, bool skipProtocolCheck) {
+            if (property is PluginConnectionPropertyDescriptor pluginPropertyDescriptor)
+                return property.IsBrowsable && (skipProtocolCheck || pluginPropertyDescriptor.IsValidForProtocol(protocol));
+
             return
-                property.GetCustomAttribute<BrowsableAttribute>()?.Browsable != false &&
-                (skipProtocolCheck || property.GetCustomAttribute<AttributeUsedInProtocol>()?
+                property.Attributes[typeof(BrowsableAttribute)] is not BrowsableAttribute { Browsable: false } &&
+                (skipProtocolCheck || (property.Attributes[typeof(AttributeUsedInProtocol)] as AttributeUsedInProtocol)?
                     .SupportedProtocolTypes
                     .Contains(protocol) != false);
         }
 
         private List<string> SpecialExternalAddressProviderExclusions() {
-            List<string> strHide = new();
-
-            // aws
-            if (SelectedConnectionInfo.ExternalAddressProvider != ExternalAddressProvider.AmazonWebServices) {
-                strHide.Add(nameof(AbstractConnectionRecord.EC2InstanceId));
-                strHide.Add(nameof(AbstractConnectionRecord.EC2Region));
-            }
-            return strHide;
+            return
+            [
+                nameof(AbstractConnectionRecord.ExternalAddressProvider),
+                nameof(AbstractConnectionRecord.EC2InstanceId),
+                nameof(AbstractConnectionRecord.EC2Region)
+            ];
         }
 
         private List<string> SpecialExternalCredentialProviderExclusions() {
