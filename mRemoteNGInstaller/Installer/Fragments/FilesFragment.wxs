@@ -2,33 +2,35 @@
     <Fragment>
         <DirectoryRef Id="INSTALLDIR">
             <Directory Id="dirEA5DE0DA87CCDD60F4B26843B622260F" Name="Assemblies" />
-            <Directory Id="dir82972532CA27BEF6B972C3A142E19BC1" Name="cs-CZ" />
-            <Directory Id="dirF7A62AAB979B938D6BCEC1392A589DA5" Name="de" />
-            <Directory Id="dir62078C356EA332979A99724C7722A56A" Name="el" />
-            <Directory Id="dir577231E2EF642DDF4B09B65F4BEE3BE2" Name="es" />
-            <Directory Id="dir4D0A9F0DBDF1EE024E030F9E3B94104C" Name="es-AR" />
-            <Directory Id="dirCAD1E83BD4CE375ABDB8F38597B3725B" Name="fi-FI" />
-            <Directory Id="dir0B7D401DE3233449E75F31A823BF5B99" Name="fr" />
-            <Directory Id="dir09632C6D20BFA94E2A24ED0E6D9B2C41" Name="hu" />
+            <Directory Id="dirC04A799E1B7FA0F864A1E0A6D8B2A8F4" Name="Languages">
+                <Directory Id="dir82972532CA27BEF6B972C3A142E19BC1" Name="cs-CZ" />
+                <Directory Id="dirF7A62AAB979B938D6BCEC1392A589DA5" Name="de" />
+                <Directory Id="dir62078C356EA332979A99724C7722A56A" Name="el" />
+                <Directory Id="dir577231E2EF642DDF4B09B65F4BEE3BE2" Name="es" />
+                <Directory Id="dir4D0A9F0DBDF1EE024E030F9E3B94104C" Name="es-AR" />
+                <Directory Id="dirCAD1E83BD4CE375ABDB8F38597B3725B" Name="fi-FI" />
+                <Directory Id="dir0B7D401DE3233449E75F31A823BF5B99" Name="fr" />
+                <Directory Id="dir09632C6D20BFA94E2A24ED0E6D9B2C41" Name="hu" />
+                <Directory Id="dirB5B71807E9474A6ED7A421DAF6D9317F" Name="it" />
+                <Directory Id="dir236726D31B8846E56F94A60B4BDA0D5D" Name="ja-JP" />
+                <Directory Id="dir84F2A679A7F20EDA03A198E92F9399E3" Name="ko-KR" />
+                <Directory Id="dir5D4FF3A14A3EA47FCD6D9414E469A244" Name="lt" />
+                <Directory Id="dir54E7E449F697FA31B946B0D847BC12FC" Name="nb-NO" />
+                <Directory Id="dirAD9F3749BDE51B9EA3E808CC39488A46" Name="nl" />
+                <Directory Id="dir42A5D57151A6A3E9D965C69C82893176" Name="pl" />
+                <Directory Id="dirC5F627279ECABE21145A844571EF9F74" Name="pt" />
+                <Directory Id="dir3CF6B6BC48181D29C167EF5DB7F05816" Name="pt-BR" />
+                <Directory Id="dirF7C0BEA86C276F53E8C9E8E6B2629A9B" Name="ru" />
+                <Directory Id="dir861F6A02C2F7A7DA6955E64037179011" Name="sv-SE" />
+                <Directory Id="dirF50F8AE1B4079411641D2CA28D569A6E" Name="tr-TR" />
+                <Directory Id="dir09CC4E618379FE7D9EB8E064B61C997C" Name="uk" />
+                <Directory Id="dir7615CEE1531630E53F5B99A187D27DF9" Name="zh-CN" />
+                <Directory Id="dir8B12BA0D447ED118A459E1723FCB6A85" Name="zh-TW" />
+            </Directory>
             <Directory Id="dir5E6DA158F27D9CA2AB915EC6AB53B383" Name="Icons" />
-            <Directory Id="dirB5B71807E9474A6ED7A421DAF6D9317F" Name="it" />
-            <Directory Id="dir236726D31B8846E56F94A60B4BDA0D5D" Name="ja-JP" />
-            <Directory Id="dir84F2A679A7F20EDA03A198E92F9399E3" Name="ko-KR" />
-            <Directory Id="dir5D4FF3A14A3EA47FCD6D9414E469A244" Name="lt" />
-            <Directory Id="dir54E7E449F697FA31B946B0D847BC12FC" Name="nb-NO" />
-            <Directory Id="dirAD9F3749BDE51B9EA3E808CC39488A46" Name="nl" />
-            <Directory Id="dir42A5D57151A6A3E9D965C69C82893176" Name="pl" />
-            <Directory Id="dirC5F627279ECABE21145A844571EF9F74" Name="pt" />
-            <Directory Id="dir3CF6B6BC48181D29C167EF5DB7F05816" Name="pt-BR" />
-            <Directory Id="dirF7C0BEA86C276F53E8C9E8E6B2629A9B" Name="ru" />
             <Directory Id="dirB699B779DD859CB7CAD46DA4BC9017C0" Name="runtimes" />
             <Directory Id="dir54B0732D1EC7055747BB11A9069B5872" Name="Schemas" />
-            <Directory Id="dir861F6A02C2F7A7DA6955E64037179011" Name="sv-SE" />
             <Directory Id="dir449D12A97ECE34898DFE89F1087779C9" Name="Themes" />
-            <Directory Id="dirF50F8AE1B4079411641D2CA28D569A6E" Name="tr-TR" />
-            <Directory Id="dir09CC4E618379FE7D9EB8E064B61C997C" Name="uk" />
-            <Directory Id="dir7615CEE1531630E53F5B99A187D27DF9" Name="zh-CN" />
-            <Directory Id="dir8B12BA0D447ED118A459E1723FCB6A85" Name="zh-TW" />
         </DirectoryRef>
     </Fragment>
     <Fragment>
@@ -119,28 +121,28 @@
                 <File Id="fil297D1B904F44B56D02D2493BD7046664" KeyPath="yes" Source="$(var.HarvestPath)\Assemblies\ZstdSharp.dll" />
             </Component>
             <Component Id="cmp46A31C5C8F6C32D00394B76FC10B878C" Directory="dir82972532CA27BEF6B972C3A142E19BC1">
-                <File Id="fil1BBD62B8CC672D965BD8B093F72F7E70" KeyPath="yes" Source="$(var.HarvestPath)\cs-CZ\mRemoteNG.resources.dll" />
+                <File Id="fil1BBD62B8CC672D965BD8B093F72F7E70" KeyPath="yes" Source="$(var.HarvestPath)\Languages\cs-CZ\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp5DFAE724F417BAA098FEE2F39E4ECDCA" Directory="dirF7A62AAB979B938D6BCEC1392A589DA5">
-                <File Id="fil9929483908F07EA65163C388D78E5AA7" KeyPath="yes" Source="$(var.HarvestPath)\de\mRemoteNG.resources.dll" />
+                <File Id="fil9929483908F07EA65163C388D78E5AA7" KeyPath="yes" Source="$(var.HarvestPath)\Languages\de\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp97F1894018FE85E7F10F48530CAD5B16" Directory="dir62078C356EA332979A99724C7722A56A">
-                <File Id="filA71C0402E6C25B37D9854654950D4B83" KeyPath="yes" Source="$(var.HarvestPath)\el\mRemoteNG.resources.dll" />
+                <File Id="filA71C0402E6C25B37D9854654950D4B83" KeyPath="yes" Source="$(var.HarvestPath)\Languages\el\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmpC19C3D7C89A4FBF3FC521FC69C7B3B68" Directory="dir577231E2EF642DDF4B09B65F4BEE3BE2">
-                <File Id="filE15F41E0B29AEFF7322346877159B2A3" KeyPath="yes" Source="$(var.HarvestPath)\es\mRemoteNG.resources.dll" />
+                <File Id="filE15F41E0B29AEFF7322346877159B2A3" KeyPath="yes" Source="$(var.HarvestPath)\Languages\es\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp40698C05218D56587A9782D00CBFDA98" Directory="dir4D0A9F0DBDF1EE024E030F9E3B94104C">
-                <File Id="filDE0D2DDF6B066FC5E61C6AE18CE63B9F" KeyPath="yes" Source="$(var.HarvestPath)\es-AR\mRemoteNG.resources.dll" />
+                <File Id="filDE0D2DDF6B066FC5E61C6AE18CE63B9F" KeyPath="yes" Source="$(var.HarvestPath)\Languages\es-AR\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmpC3F0E66945E0C0A0E019A0D6BF11BA48" Directory="dirCAD1E83BD4CE375ABDB8F38597B3725B">
-                <File Id="fil4E9D222811B808F3EAB32DE9DF620F90" KeyPath="yes" Source="$(var.HarvestPath)\fi-FI\mRemoteNG.resources.dll" />
+                <File Id="fil4E9D222811B808F3EAB32DE9DF620F90" KeyPath="yes" Source="$(var.HarvestPath)\Languages\fi-FI\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp40895E6FE8EC4FFA9CDEB2FB5DD15F20" Directory="dir0B7D401DE3233449E75F31A823BF5B99">
-                <File Id="fil715FF750208BACE83BC7DCCF4BEB3FA2" KeyPath="yes" Source="$(var.HarvestPath)\fr\mRemoteNG.resources.dll" />
+                <File Id="fil715FF750208BACE83BC7DCCF4BEB3FA2" KeyPath="yes" Source="$(var.HarvestPath)\Languages\fr\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp7E6E8D87E380B22ED7E863FC841A2368" Directory="dir09632C6D20BFA94E2A24ED0E6D9B2C41">
-                <File Id="filCD70EE978626DA4828A50601DEAE5556" KeyPath="yes" Source="$(var.HarvestPath)\hu\mRemoteNG.resources.dll" />
+                <File Id="filCD70EE978626DA4828A50601DEAE5556" KeyPath="yes" Source="$(var.HarvestPath)\Languages\hu\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp60BEB4749EF0B6350757C1422ED72958" Directory="dir5E6DA158F27D9CA2AB915EC6AB53B383">
                 <File Id="fil0F9CE0F66286B9AFBF21C2D7C69307CD" KeyPath="yes" Source="$(var.HarvestPath)\Icons\Admin.ico" />
@@ -257,34 +259,34 @@
                 <File Id="fil100CAAAF0BF4C3FB196087F29DA37CDE" KeyPath="yes" Source="$(var.HarvestPath)\Icons\Workstation.ico" />
             </Component>
             <Component Id="cmpCF1D4DD52581584CB9775277B2969302" Directory="dirB5B71807E9474A6ED7A421DAF6D9317F">
-                <File Id="fil661D46FCD95364176089BD3D28019330" KeyPath="yes" Source="$(var.HarvestPath)\it\mRemoteNG.resources.dll" />
+                <File Id="fil661D46FCD95364176089BD3D28019330" KeyPath="yes" Source="$(var.HarvestPath)\Languages\it\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmpCAE7C04B51FCDA44C75468EFEEF4747A" Directory="dir236726D31B8846E56F94A60B4BDA0D5D">
-                <File Id="fil40181C01EA09FC8EA2E69024B65775C3" KeyPath="yes" Source="$(var.HarvestPath)\ja-JP\mRemoteNG.resources.dll" />
+                <File Id="fil40181C01EA09FC8EA2E69024B65775C3" KeyPath="yes" Source="$(var.HarvestPath)\Languages\ja-JP\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp0BAC93C0A0E70E5ACB66DC026BA8110E" Directory="dir84F2A679A7F20EDA03A198E92F9399E3">
-                <File Id="fil0B91C6F2B565FA653A19ED0161ED07EC" KeyPath="yes" Source="$(var.HarvestPath)\ko-KR\mRemoteNG.resources.dll" />
+                <File Id="fil0B91C6F2B565FA653A19ED0161ED07EC" KeyPath="yes" Source="$(var.HarvestPath)\Languages\ko-KR\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp78FEDEE0F378D2F4F0D0F26E5AA4BAA7" Directory="dir5D4FF3A14A3EA47FCD6D9414E469A244">
-                <File Id="filB5234976A684303D93EE2D709DAEF369" KeyPath="yes" Source="$(var.HarvestPath)\lt\mRemoteNG.resources.dll" />
+                <File Id="filB5234976A684303D93EE2D709DAEF369" KeyPath="yes" Source="$(var.HarvestPath)\Languages\lt\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmpF3DD876818F39442E2739EF8AF18F465" Directory="dir54E7E449F697FA31B946B0D847BC12FC">
-                <File Id="fil5D73E84534D2765C09BDC7EA52825053" KeyPath="yes" Source="$(var.HarvestPath)\nb-NO\mRemoteNG.resources.dll" />
+                <File Id="fil5D73E84534D2765C09BDC7EA52825053" KeyPath="yes" Source="$(var.HarvestPath)\Languages\nb-NO\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp6A9C47E1A45A8195474C05BBE19E177A" Directory="dirAD9F3749BDE51B9EA3E808CC39488A46">
-                <File Id="fil8B3155B48D8DBF01C2952E661E6E5C83" KeyPath="yes" Source="$(var.HarvestPath)\nl\mRemoteNG.resources.dll" />
+                <File Id="fil8B3155B48D8DBF01C2952E661E6E5C83" KeyPath="yes" Source="$(var.HarvestPath)\Languages\nl\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp1A4ED188D2470BF1363EB5C9A17FC259" Directory="dir42A5D57151A6A3E9D965C69C82893176">
-                <File Id="fil5DA9B161129D2361D3A60071DDE4214E" KeyPath="yes" Source="$(var.HarvestPath)\pl\mRemoteNG.resources.dll" />
+                <File Id="fil5DA9B161129D2361D3A60071DDE4214E" KeyPath="yes" Source="$(var.HarvestPath)\Languages\pl\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmpDEABACBE2FE4B638AF6271AEA9E2F8C9" Directory="dirC5F627279ECABE21145A844571EF9F74">
-                <File Id="filC52A947A9955B1F51BDDC6B7BD5696AC" KeyPath="yes" Source="$(var.HarvestPath)\pt\mRemoteNG.resources.dll" />
+                <File Id="filC52A947A9955B1F51BDDC6B7BD5696AC" KeyPath="yes" Source="$(var.HarvestPath)\Languages\pt\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp1DCD94595ED6192A198D0FC5405BB080" Directory="dir3CF6B6BC48181D29C167EF5DB7F05816">
-                <File Id="fil5CD3DAE410339965F6CFF69171DA3DB4" KeyPath="yes" Source="$(var.HarvestPath)\pt-BR\mRemoteNG.resources.dll" />
+                <File Id="fil5CD3DAE410339965F6CFF69171DA3DB4" KeyPath="yes" Source="$(var.HarvestPath)\Languages\pt-BR\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp14F9A7840D91A07FE79D6C6258D5872E" Directory="dirF7C0BEA86C276F53E8C9E8E6B2629A9B">
-                <File Id="fil84ABB736DDC19CD359E8850BB51959F7" KeyPath="yes" Source="$(var.HarvestPath)\ru\mRemoteNG.resources.dll" />
+                <File Id="fil84ABB736DDC19CD359E8850BB51959F7" KeyPath="yes" Source="$(var.HarvestPath)\Languages\ru\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmpA94B75651045F785CCA29EE2638258AF" Directory="dir2ED89DAEE76564AD33DB582F055A5274">
                 <File Id="fil4CB4D838CA0B7A043E05392D9F7C1E94" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\WebView2Loader.dll" />
@@ -302,7 +304,7 @@
                 <File Id="fil0E2B1639DA1C4573982DEA27205D6130" KeyPath="yes" Source="$(var.HarvestPath)\Schemas\mremoteng_default_settings_v1_0.json" />
             </Component>
             <Component Id="cmpCE8CCE2E57CBB8B72D37C8F6606FC1FD" Directory="dir861F6A02C2F7A7DA6955E64037179011">
-                <File Id="fil06AD4DEB76585AD17235CA4874291457" KeyPath="yes" Source="$(var.HarvestPath)\sv-SE\mRemoteNG.resources.dll" />
+                <File Id="fil06AD4DEB76585AD17235CA4874291457" KeyPath="yes" Source="$(var.HarvestPath)\Languages\sv-SE\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp3574060B3152DDCCE44B3528A0C71B63" Directory="dir449D12A97ECE34898DFE89F1087779C9">
                 <File Id="fil146F3F5A21FE54B5545684791AB50136" KeyPath="yes" Source="$(var.HarvestPath)\Themes\darcula.vstheme" />
@@ -317,16 +319,16 @@
                 <File Id="fil46DE91950AEE35EDBAF9606ACF6FE1C4" KeyPath="yes" Source="$(var.HarvestPath)\Themes\vs2015light.vstheme" />
             </Component>
             <Component Id="cmp64D2ADC91AE3713E639B495CC0518A7F" Directory="dirF50F8AE1B4079411641D2CA28D569A6E">
-                <File Id="fil74F215747A8E72D357A05798BFC0319D" KeyPath="yes" Source="$(var.HarvestPath)\tr-TR\mRemoteNG.resources.dll" />
+                <File Id="fil74F215747A8E72D357A05798BFC0319D" KeyPath="yes" Source="$(var.HarvestPath)\Languages\tr-TR\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp17BAEE5D2157190600C56FF82FE3784B" Directory="dir09CC4E618379FE7D9EB8E064B61C997C">
-                <File Id="fil659BA500C0BF779A24E8F4669C65E7CA" KeyPath="yes" Source="$(var.HarvestPath)\uk\mRemoteNG.resources.dll" />
+                <File Id="fil659BA500C0BF779A24E8F4669C65E7CA" KeyPath="yes" Source="$(var.HarvestPath)\Languages\uk\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp214DB5E4D7F32338E1E8A139C8BCA66B" Directory="dir7615CEE1531630E53F5B99A187D27DF9">
-                <File Id="fil878C2816E449E0F6C9F4E44E3A06ED4D" KeyPath="yes" Source="$(var.HarvestPath)\zh-CN\mRemoteNG.resources.dll" />
+                <File Id="fil878C2816E449E0F6C9F4E44E3A06ED4D" KeyPath="yes" Source="$(var.HarvestPath)\Languages\zh-CN\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp080BF5CEB7B5881A5C147B8EF586143E" Directory="dir8B12BA0D447ED118A459E1723FCB6A85">
-                <File Id="fil9330E2B75901D743DEB8CF2F5A058247" KeyPath="yes" Source="$(var.HarvestPath)\zh-TW\mRemoteNG.resources.dll" />
+                <File Id="fil9330E2B75901D743DEB8CF2F5A058247" KeyPath="yes" Source="$(var.HarvestPath)\Languages\zh-TW\mRemoteNG.resources.dll" />
             </Component>
         </ComponentGroup>
     </Fragment>

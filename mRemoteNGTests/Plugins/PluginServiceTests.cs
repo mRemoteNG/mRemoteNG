@@ -1,9 +1,14 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 using mRemoteNG.PluginContracts;
 using mRemoteNG.Plugins;
+using mRemoteNG.Properties;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -18,6 +23,9 @@ public class PluginServiceTests
         CompatibleToolWindowPlugin.InitializeCount = 0;
         IncompatibleToolWindowPlugin.InitializeCount = 0;
         CompatibleConnectionPlugin.InitializeCount = 0;
+        Settings.Default.DisabledPlugins = string.Empty;
+        Settings.Default.PluginFolderPath = string.Empty;
+        Settings.Default.PluginPanelAssignments = string.Empty;
     }
 
     [Test]
@@ -68,6 +76,149 @@ public class PluginServiceTests
         Assert.That(CompatibleConnectionPlugin.InitializeCount, Is.EqualTo(1));
     }
 
+    [Test]
+    public void DisabledPlugins_SettingRoundTripsThroughGeneratedSettings()
+    {
+        string disabledPlugins = $" {CompatibleToolWindowPlugin.PluginId} ; {CompatibleConnectionPlugin.PluginId} ";
+
+        Settings.Default.DisabledPlugins = disabledPlugins;
+
+        Assert.That(Settings.Default.DisabledPlugins, Is.EqualTo(disabledPlugins));
+    }
+
+    [Test]
+    public void DisabledPlugins_SettingCanBeParsedIntoIndividualPluginIds()
+    {
+        Settings.Default.DisabledPlugins = $" {CompatibleToolWindowPlugin.PluginId} ; ; {CompatibleConnectionPlugin.PluginId} ";
+
+        string[] disabledPluginIds = Settings.Default.DisabledPlugins
+            .Split([';'], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+        Assert.That(disabledPluginIds, Is.EqualTo(new[]
+        {
+            CompatibleToolWindowPlugin.PluginId,
+            CompatibleConnectionPlugin.PluginId,
+        }));
+    }
+
+    [Test]
+    public void PluginFolderPath_SettingRoundTripsThroughGeneratedSettings()
+    {
+        const string pluginFolderPath = @"\\server\shared\mRemoteNG\Plugins";
+
+        Settings.Default.PluginFolderPath = pluginFolderPath;
+
+        Assert.That(Settings.Default.PluginFolderPath, Is.EqualTo(pluginFolderPath));
+    }
+
+    [Test]
+    public void GetPluginDirectory_ReturnsConfiguredFolderWhenSet()
+    {
+        PluginService service = new();
+        const string pluginFolderPath = @"\\server\shared\mRemoteNG\Plugins";
+        Settings.Default.PluginFolderPath = pluginFolderPath;
+
+        string pluginDirectory = service.GetPluginDirectory();
+
+        Assert.That(pluginDirectory, Is.EqualTo(pluginFolderPath));
+    }
+
+    [Test]
+    public void GetPluginDirectory_FallsBackToApplicationPluginsFolderWhenUnset()
+    {
+        PluginService service = new();
+        Settings.Default.PluginFolderPath = "   ";
+
+        string pluginDirectory = service.GetPluginDirectory();
+
+        Assert.That(pluginDirectory, Is.EqualTo(service.GetDefaultPluginDirectory()));
+        Assert.That(Settings.Default.PluginFolderPath, Is.EqualTo(service.GetDefaultPluginDirectory()));
+    }
+
+    [Test]
+    public void GetPluginDirectories_PopulatesDefaultFolderIntoSettingsWhenUnset()
+    {
+        PluginService service = new();
+        Settings.Default.PluginFolderPath = string.Empty;
+
+        string[] pluginDirectories = service.GetPluginDirectories().ToArray();
+
+        Assert.That(pluginDirectories, Does.Contain(service.GetDefaultPluginDirectory()));
+        Assert.That(Settings.Default.PluginFolderPath, Is.EqualTo(service.GetDefaultPluginDirectory()));
+    }
+
+    [Test]
+    public void GetDefaultPluginDirectory_ReturnsApplicationPluginsFolder()
+    {
+        PluginService service = new();
+
+        string pluginDirectory = service.GetDefaultPluginDirectory();
+
+        Assert.That(pluginDirectory, Is.EqualTo(System.IO.Path.Combine(AppContext.BaseDirectory, "Plugins")));
+    }
+
+    [Test]
+    public void GetPluginDirectories_SupportsMultipleConfiguredFolders()
+    {
+        PluginService service = new();
+        string[] expected = ["C:\\FolderA", "D:\\FolderB"];
+        Settings.Default.PluginFolderPath = string.Join(";", expected);
+
+        string[] actual = service.GetPluginDirectories().ToArray();
+
+        Assert.That(actual, Is.EqualTo(expected.Select(path => System.IO.Path.GetFullPath(path)).ToArray()));
+    }
+
+    [Test]
+    public void GetPluginTargetPanel_UsesConfiguredOverrideWhenPresent()
+    {
+        PluginService service = new();
+        Settings.Default.PluginPanelAssignments = $"{CompatibleToolWindowPlugin.PluginId}=CustomPanel";
+
+        string panelName = service.GetPluginTargetPanel(CompatibleToolWindowPlugin.PluginId, "General");
+
+        Assert.That(panelName, Is.EqualTo("CustomPanel"));
+    }
+
+    [Test]
+    public void GetPluginTargetPanel_FallsBackToGeneralWhenNoOverrideExists()
+    {
+        PluginService service = new();
+
+        string panelName = service.GetPluginTargetPanel(CompatibleToolWindowPlugin.PluginId, "General");
+
+        Assert.That(panelName, Is.EqualTo("General"));
+    }
+
+    [Test]
+    public void ToolWindowRegistration_DefaultPanelNameFallsBackToGeneral()
+    {
+        ToolWindowRegistration registration = new() { MenuText = "Example", WindowTitle = "Example" };
+
+        Assert.That(registration.PanelName, Is.Null);
+        Assert.That(string.IsNullOrWhiteSpace(registration.PanelName), Is.True);
+    }
+
+    [Test]
+    public void ToolWindowRegistration_CanOverrideTargetPanelName()
+    {
+        ToolWindowRegistration registration = new() { MenuText = "Example", WindowTitle = "Example", PanelName = "CustomPanel" };
+
+        Assert.That(registration.PanelName, Is.EqualTo("CustomPanel"));
+    }
+
+    [Test]
+    public void GetPluginDirectory_TreatsConfiguredDefaultFolderAsCustomPathValueButReturnsSameDirectory()
+    {
+        PluginService service = new();
+        string defaultPluginDirectory = service.GetDefaultPluginDirectory();
+        Settings.Default.PluginFolderPath = defaultPluginDirectory;
+
+        string pluginDirectory = service.GetPluginDirectory();
+
+        Assert.That(pluginDirectory, Is.EqualTo(defaultPluginDirectory));
+    }
+
     public sealed class CompatibleToolWindowPlugin : IToolWindowPlugin
     {
         public const string PluginId = "Tests.Compatible";
@@ -87,6 +238,10 @@ public class PluginServiceTests
         public Control CreateControl()
         {
             return new Control();
+        }
+
+        public void OnBeforeShow(IPluginConnection? connection)
+        {
         }
     }
 
@@ -109,6 +264,10 @@ public class PluginServiceTests
         public Control CreateControl()
         {
             return new Control();
+        }
+
+        public void OnBeforeShow(IPluginConnection? connection)
+        {
         }
     }
 
