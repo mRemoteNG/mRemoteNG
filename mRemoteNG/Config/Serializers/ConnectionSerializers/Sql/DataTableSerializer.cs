@@ -319,7 +319,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             isFieldNotChange = isFieldNotChange && dataRow["MacAddress"].Equals(connectionInfo.MacAddress);
             isFieldNotChange = isFieldNotChange && dataRow["OpeningCommand"].Equals(connectionInfo.OpeningCommand);
             isFieldNotChange = isFieldNotChange && dataRow["Port"].Equals(connectionInfo.Port);
-            isFieldNotChange = isFieldNotChange && dataRow["PluginData"].Equals(PluginConnectionDataSerializer.Serialize(connectionInfo.PluginProperties));
+            isFieldNotChange = isFieldNotChange &&
+                               (!dataRow.Table.Columns.Contains("PluginData")
+                                   ? string.IsNullOrEmpty(PluginConnectionDataSerializer.Serialize(connectionInfo.PluginProperties))
+                                   : dataRow["PluginData"].Equals(PluginConnectionDataSerializer.Serialize(connectionInfo.PluginProperties)));
             isFieldNotChange = isFieldNotChange && dataRow["PostExtApp"].Equals(connectionInfo.PostExtApp);
             isFieldNotChange = isFieldNotChange && dataRow["PreExtApp"].Equals(connectionInfo.PreExtApp);
             isFieldNotChange = isFieldNotChange && dataRow["Protocol"].Equals(connectionInfo.Protocol.ToString());

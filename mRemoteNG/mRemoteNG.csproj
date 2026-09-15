@@ -528,10 +528,16 @@
   <ItemGroup>
     <ProjectReference Include="..\ExternalConnectors\ExternalConnectors.csproj" />
     <ProjectReference Include="..\mRemoteNG.PluginContracts\mRemoteNG.PluginContracts.csproj" />
+    <ProjectReference Include="..\mRemoteNG.Plugins.AWS\mRemoteNG.Plugins.AWS.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\mRemoteNG.Plugins.PortScan\mRemoteNG.Plugins.PortScan.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\ObjectListView\ObjectListView.NetCore.csproj" />
   </ItemGroup>
   <Target Name="CopyPluginAssemblies" AfterTargets="Build">
+    <MSBuild Projects="..\mRemoteNG.Plugins.AWS\mRemoteNG.Plugins.AWS.csproj"
+             Targets="GetTargetPath"
+             Properties="Configuration=$(Configuration);Platform=$(Platform)">
+      <Output TaskParameter="TargetOutputs" ItemName="PluginAssemblies" />
+    </MSBuild>
     <MSBuild Projects="..\mRemoteNG.Plugins.PortScan\mRemoteNG.Plugins.PortScan.csproj"
              Targets="GetTargetPath"
              Properties="Configuration=$(Configuration);Platform=$(Platform)">

@@ -11,7 +11,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
     [SupportedOSPlatform("windows")]
     public class SqlDatabaseVersionVerifier(IDatabaseConnector databaseConnector)
     {
-        private readonly Version _currentSupportedVersion = new(3, 0);
+        private readonly Version _currentSupportedVersion = new(3, 1);
 
         private readonly IDatabaseConnector _databaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
 

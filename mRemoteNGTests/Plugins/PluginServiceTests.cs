@@ -17,6 +17,7 @@ public class PluginServiceTests
     {
         CompatibleToolWindowPlugin.InitializeCount = 0;
         IncompatibleToolWindowPlugin.InitializeCount = 0;
+        CompatibleConnectionPlugin.InitializeCount = 0;
     }
 
     [Test]
@@ -51,6 +52,20 @@ public class PluginServiceTests
 
         Assert.That(plugins.Any(plugin => plugin.Id == IncompatibleToolWindowPlugin.PluginId), Is.False);
         Assert.That(IncompatibleToolWindowPlugin.InitializeCount, Is.EqualTo(0));
+    }
+
+    [Test]
+    public void DiscoverPlugins_ReturnsConnectionExtensionPlugins()
+    {
+        PluginService service = new();
+        IPluginContext context = Substitute.For<IPluginContext>();
+
+        var plugins = service.DiscoverPlugins(Assembly.GetExecutingAssembly(), context, new Version(1, 0, 0)).ToArray();
+
+        Assert.That(plugins.OfType<IConnectionPropertyProviderPlugin>().Any(plugin => plugin.Id == CompatibleConnectionPlugin.PluginId), Is.True);
+        Assert.That(plugins.OfType<IConnectionAddressResolverPlugin>().Any(plugin => plugin.Id == CompatibleConnectionPlugin.PluginId), Is.True);
+        Assert.That(plugins.OfType<ITreeContextActionPlugin>().Any(plugin => plugin.Id == CompatibleConnectionPlugin.PluginId), Is.True);
+        Assert.That(CompatibleConnectionPlugin.InitializeCount, Is.EqualTo(1));
     }
 
     public sealed class CompatibleToolWindowPlugin : IToolWindowPlugin
@@ -94,6 +109,54 @@ public class PluginServiceTests
         public Control CreateControl()
         {
             return new Control();
+        }
+    }
+
+    public sealed class CompatibleConnectionPlugin : IConnectionPropertyProviderPlugin, IConnectionAddressResolverPlugin, ITreeContextActionPlugin
+    {
+        public const string PluginId = "Tests.Connection";
+        public static int InitializeCount { get; set; }
+
+        public string Id => PluginId;
+        public string DisplayName => "Connection";
+        public Version Version => new(1, 0, 0);
+        public Version MinimumHostVersion => new(1, 0, 0);
+        public IReadOnlyCollection<ConnectionPropertyDefinition> ConnectionProperties => [new ConnectionPropertyDefinition
+        {
+            Key = "Tests.Connection.Enabled",
+            Category = "Tests",
+            DisplayName = "Enabled",
+            PropertyType = PluginPropertyType.Boolean,
+        }];
+
+        public TreeContextMenuAction TreeContextMenuAction => new()
+        {
+            MenuText = "Run test action",
+            SortOrder = 100,
+        };
+
+        public void Initialize(IPluginContext context)
+        {
+            InitializeCount++;
+        }
+
+        public bool CanResolve(IPluginConnection connection)
+        {
+            return true;
+        }
+
+        public Task ResolveAsync(IPluginConnection connection, CancellationToken cancellationToken)
+        {
+            return Task.CompletedTask;
+        }
+
+        public bool CanExecute(IPluginConnection connection)
+        {
+            return true;
+        }
+
+        public void Execute(IPluginConnection connection)
+        {
         }
     }
 }
