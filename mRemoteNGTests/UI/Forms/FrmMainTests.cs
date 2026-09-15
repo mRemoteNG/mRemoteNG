@@ -46,7 +46,7 @@ namespace mRemoteNGTests.UI.Forms
         {
             Point pointInsideChild = _childPanel.PointToScreen(new Point(10, 10));
 
-            Control result = frmMain.GetChildAtScreenPoint(_parentForm, pointInsideChild);
+            Control result = FrmMain.GetChildAtScreenPoint(_parentForm, pointInsideChild);
 
             Assert.That(result, Is.SameAs(_childPanel));
         }
@@ -56,7 +56,7 @@ namespace mRemoteNGTests.UI.Forms
         {
             Point pointOutsideChild = _parentForm.PointToScreen(new Point(5, 5));
 
-            Control result = frmMain.GetChildAtScreenPoint(_parentForm, pointOutsideChild);
+            Control result = FrmMain.GetChildAtScreenPoint(_parentForm, pointOutsideChild);
 
             Assert.That(result, Is.Null);
         }

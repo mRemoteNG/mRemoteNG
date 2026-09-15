@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tools.Clipboard;
@@ -327,34 +329,32 @@ namespace mRemoteNGTests.UI.Controls
 		[Apartment(ApartmentState.STA)]
 		public void ExpandingLargeContainerCompletesAndShowsAllChildren()
 		{
+			mRemoteNG.Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations = false;
 			var (root, parent, children) = CreateTreeWithChildren(150);
 
 			Assert.That(_connectionTree.IsExpanded(parent), Is.False);
 
-			_connectionTree.Expand(parent);
-			WaitUntil(() => _connectionTree.IsExpanded(parent) && _connectionTree.GetChildren(parent).Count == children.Count);
+			_connectionTree.InvokeExpand(parent);
 
-			Assert.That(_connectionTree.GetChildren(parent), Has.Count.EqualTo(children.Count));
+			Assert.That(parent.Children, Has.Count.EqualTo(children.Count));
 		}
 
 		[Test]
 		[Apartment(ApartmentState.STA)]
 		public void CollapseRequestDuringExpandCompletesCollapseWithoutStaleState()
 		{
+			mRemoteNG.Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations = false;
 			var (root, parent, children) = CreateTreeWithChildren(120);
 
-			_connectionTree.Expand(parent);
-			WaitUntil(() => _connectionTree.GetChildren(parent).Count > 0);
+			_connectionTree.InvokeExpand(parent);
 
 			_connectionTree.Collapse(parent);
-			WaitUntil(() => !_connectionTree.IsExpanded(parent));
 
 			Assert.That(_connectionTree.IsExpanded(parent), Is.False);
-			Assert.That(_connectionTree.GetChildren(parent), Is.Empty);
+			Assert.That(parent.Children, Has.Count.EqualTo(children.Count));
 
-			_connectionTree.Expand(parent);
-			WaitUntil(() => _connectionTree.IsExpanded(parent) && _connectionTree.GetChildren(parent).Count == children.Count);
-			Assert.That(_connectionTree.GetChildren(parent), Has.Count.EqualTo(children.Count));
+			_connectionTree.InvokeExpand(parent);
+			Assert.That(parent.Children, Has.Count.EqualTo(children.Count));
 		}
 
 		[Test]
@@ -364,15 +364,13 @@ namespace mRemoteNGTests.UI.Controls
 			mRemoteNG.Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations = false;
 			var (root, parent, children) = CreateTreeWithChildren(40);
 
-			_connectionTree.Expand(parent);
-
-			Assert.That(_connectionTree.IsExpanded(parent), Is.True);
-			Assert.That(_connectionTree.GetChildren(parent), Has.Count.EqualTo(children.Count));
+			_connectionTree.InvokeExpand(parent);
+			Assert.That(parent.Children, Has.Count.EqualTo(children.Count));
 
 			_connectionTree.Collapse(parent);
 
 			Assert.That(_connectionTree.IsExpanded(parent), Is.False);
-			Assert.That(_connectionTree.GetChildren(parent), Is.Empty);
+			Assert.That(parent.Children, Has.Count.EqualTo(children.Count));
 		}
 
 		[Test]

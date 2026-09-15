@@ -1,4 +1,5 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using mRemoteNG.App;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.App;
