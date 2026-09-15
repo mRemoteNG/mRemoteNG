@@ -11,7 +11,6 @@
         SSHTransfer = 10,
         ActiveDirectoryImport = 11,
         ExternalApps = 13,
-        PortScan = 14,
         UltraVNCSC = 16,
     }
 }

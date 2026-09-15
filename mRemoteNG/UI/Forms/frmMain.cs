@@ -212,9 +212,10 @@ namespace mRemoteNG.UI.Forms
 
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters);
-
+ 
             Startup.Instance.InitializeProgram(messageCollector);
-
+            Runtime.PluginService.LoadPlugins();
+ 
             SetMenuDependencies();
 
             DockPanelLayoutLoader uiLoader = new(this, messageCollector);
@@ -257,6 +258,7 @@ namespace mRemoteNG.UI.Forms
             _advancedWindowMenu.BuildAdditionalMenuItems();
             SystemEvents.DisplaySettingsChanged += _advancedWindowMenu.OnDisplayChanged;
             ApplyLanguage();
+            toolsMenu.RefreshPluginItems();
 
             Opacity = 1;
             //Fix MagicRemove , revision on panel strategy for mdi

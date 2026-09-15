@@ -377,6 +377,7 @@ CREATE TABLE [dbo].[tblCons] (
     [ExternalCredentialProvider] varchar(256) NULL,
     [ExternalAddressProvider] varchar(256) NULL,
     [UserViaAPI] varchar(512) NOT NULL,
+    [PluginData] varchar(max) NULL,
 ) ON [PRIMARY]
 
 CREATE TABLE [dbo].[tblRoot] (
@@ -450,6 +451,7 @@ CREATE TABLE `tblCons` (
     `Panel` varchar(128) NOT NULL,
     `Password` varchar(1024) DEFAULT NULL,
     `Port` int NOT NULL,
+    `PluginData` longtext,
     `PostExtApp` varchar(256) DEFAULT NULL,
     `PreExtApp` varchar(256) DEFAULT NULL,
     `Protocol` varchar(32) NOT NULL,

@@ -7,6 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mRemoteNG", "mRemoteNG\mRem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalConnectors", "ExternalConnectors\ExternalConnectors.csproj", "{A56A2029-79B8-492A-ABE5-D2BFE05801BD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mRemoteNG.PluginContracts", "mRemoteNG.PluginContracts\mRemoteNG.PluginContracts.csproj", "{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mRemoteNG.Plugins.PortScan", "mRemoteNG.Plugins.PortScan\mRemoteNG.Plugins.PortScan.csproj", "{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mRemoteNG.Plugins.AWS", "mRemoteNG.Plugins.AWS\mRemoteNG.Plugins.AWS.csproj", "{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectListView.NetCore", "ObjectListView\ObjectListView.NetCore.csproj", "{5718734C-03AC-4954-89B1-1723CF03AF10}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mRemoteNGTests", "mRemoteNGTests\mRemoteNGTests.csproj", "{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}"
@@ -45,6 +51,42 @@ Global
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release|arm64.Build.0 = Release|arm64
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release|x64.ActiveCfg = Release|x64
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release|x64.Build.0 = Release|x64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Debug|arm64.ActiveCfg = Debug|arm64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Debug|arm64.Build.0 = Debug|arm64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Debug|x64.ActiveCfg = Debug|x64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Debug|x64.Build.0 = Debug|x64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release Self-Contained|arm64.ActiveCfg = Release Self-Contained|arm64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release Self-Contained|arm64.Build.0 = Release Self-Contained|arm64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release Self-Contained|x64.ActiveCfg = Release Self-Contained|x64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release Self-Contained|x64.Build.0 = Release Self-Contained|x64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release|arm64.ActiveCfg = Release|arm64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release|arm64.Build.0 = Release|arm64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release|x64.ActiveCfg = Release|x64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release|x64.Build.0 = Release|x64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Debug|arm64.ActiveCfg = Debug|arm64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Debug|arm64.Build.0 = Debug|arm64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Debug|x64.ActiveCfg = Debug|x64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Debug|x64.Build.0 = Debug|x64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release Self-Contained|arm64.ActiveCfg = Release Self-Contained|arm64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release Self-Contained|arm64.Build.0 = Release Self-Contained|arm64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release Self-Contained|x64.ActiveCfg = Release Self-Contained|x64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release Self-Contained|x64.Build.0 = Release Self-Contained|x64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release|arm64.ActiveCfg = Release|arm64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release|arm64.Build.0 = Release|arm64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release|x64.ActiveCfg = Release|x64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release|x64.Build.0 = Release|x64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Debug|arm64.ActiveCfg = Debug|arm64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Debug|arm64.Build.0 = Debug|arm64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Debug|x64.ActiveCfg = Debug|x64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Debug|x64.Build.0 = Debug|x64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release Self-Contained|arm64.ActiveCfg = Release Self-Contained|arm64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release Self-Contained|arm64.Build.0 = Release Self-Contained|arm64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release Self-Contained|x64.ActiveCfg = Release Self-Contained|x64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release Self-Contained|x64.Build.0 = Release Self-Contained|x64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release|arm64.ActiveCfg = Release|arm64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release|arm64.Build.0 = Release|arm64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release|x64.ActiveCfg = Release|x64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release|x64.Build.0 = Release|x64
 		{5718734C-03AC-4954-89B1-1723CF03AF10}.Debug|arm64.ActiveCfg = Debug|Any CPU
 		{5718734C-03AC-4954-89B1-1723CF03AF10}.Debug|arm64.Build.0 = Debug|Any CPU
 		{5718734C-03AC-4954-89B1-1723CF03AF10}.Debug|x64.ActiveCfg = Debug|Any CPU

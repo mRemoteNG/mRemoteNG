@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Plugins;
 using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
@@ -162,6 +163,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("EC2Region", connectionInfo.EC2Region));
             element.Add(new XAttribute("ExternalCredentialProvider", connectionInfo.ExternalCredentialProvider));
             element.Add(new XAttribute("ExternalAddressProvider", connectionInfo.ExternalAddressProvider));
+
+            string serializedPluginData = PluginConnectionDataSerializer.Serialize(connectionInfo.PluginProperties);
+            if (!string.IsNullOrEmpty(serializedPluginData))
+                element.Add(new XElement("PluginData", serializedPluginData));
 
             // Vault/OpenBao specific
             element.Add(new XAttribute("VaultOpenbaoMount", connectionInfo.VaultOpenbaoMount ?? string.Empty));
