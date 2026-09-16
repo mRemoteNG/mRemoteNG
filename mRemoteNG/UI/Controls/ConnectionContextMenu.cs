@@ -7,6 +7,7 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Config;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Properties;
 using mRemoteNG.Tools;
@@ -15,6 +16,8 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using System.Collections.Generic;
+using mRemoteNG.PluginContracts;
 using mRemoteNG.Security;
 using mRemoteNG.UI.TaskDialog;
 
@@ -28,6 +31,7 @@ namespace mRemoteNG.UI.Controls
     {
         private ToolStripMenuItem _cMenTreeAddConnection;
         private ToolStripMenuItem _cMenTreeAddFolder;
+        private ToolStripMenuItem _cMenTreeAddRoot;
         private ToolStripSeparator _cMenTreeSep1;
         private ToolStripMenuItem _cMenTreeConnect;
         private ToolStripMenuItem _cMenTreeConnectWithOptions;
@@ -37,7 +41,6 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeConnectWithOptionsViewOnly;
         private ToolStripMenuItem _cMenTreeDisconnect;
         private ToolStripSeparator _cMenTreeSep2;
-        private ToolStripMenuItem _cMenTreeToolsTransferFile;
         private ToolStripMenuItem _cMenTreeToolsSort;
         private ToolStripMenuItem _cMenTreeToolsSortAscending;
         private ToolStripMenuItem _cMenTreeToolsSortDescending;
@@ -45,6 +48,7 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeRename;
         private ToolStripMenuItem _cMenTreeDelete;
         private ToolStripMenuItem _cMenTreeCopyHostname;
+        private ToolStripMenuItem _cMenTreeClearCachedRdpCredentials;
         private ToolStripSeparator _cMenTreeSep4;
         private ToolStripMenuItem _cMenTreeMoveUp;
         private ToolStripMenuItem _cMenTreeMoveDown;
@@ -59,11 +63,11 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeImportFile;
         private ToolStripMenuItem _cMenTreeImportFromRemoteDesktopManager;
         private ToolStripMenuItem _cMenTreeImportActiveDirectory;
-        private ToolStripMenuItem _cMenTreeImportPortScan;
         private ToolStripMenuItem _cMenTreeImportPutty;
         private ToolStripMenuItem _cMenTreeApplyInheritanceToChildren;
         private ToolStripMenuItem _cMenTreeApplyDefaultInheritance;
         private readonly ConnectionTree.ConnectionTree _connectionTree;
+        private readonly List<ToolStripMenuItem> _pluginImportMenuItems = [];
 
 
         public ConnectionContextMenu(ConnectionTree.ConnectionTree connectionTree)
@@ -75,6 +79,7 @@ namespace mRemoteNG.UI.Controls
             Opening += (sender, args) =>
             {
                 AddExternalApps();
+                RefreshPluginImportItems();
                 if (_connectionTree.SelectedNode == null)
                 {
                     args.Cancel = true;
@@ -98,18 +103,17 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDisconnect = new ToolStripMenuItem();
             _cMenTreeSep1 = new ToolStripSeparator();
             _cMenTreeToolsExternalApps = new ToolStripMenuItem();
-            _cMenTreeToolsTransferFile = new ToolStripMenuItem();
             _cMenTreeSep2 = new ToolStripSeparator();
             _cMenTreeDuplicate = new ToolStripMenuItem();
             _cMenTreeRename = new ToolStripMenuItem();
             _cMenTreeDelete = new ToolStripMenuItem();
             _cMenTreeCopyHostname = new ToolStripMenuItem();
+            _cMenTreeClearCachedRdpCredentials = new ToolStripMenuItem();
             _cMenTreeSep3 = new ToolStripSeparator();
             _cMenTreeImport = new ToolStripMenuItem();
             _cMenTreeImportFile = new ToolStripMenuItem();
             _cMenTreeImportFromRemoteDesktopManager = new ToolStripMenuItem();
             _cMenTreeImportActiveDirectory = new ToolStripMenuItem();
-            _cMenTreeImportPortScan = new ToolStripMenuItem();
             _cMenTreeImportPutty = new ToolStripMenuItem();
             _cMenInheritanceSubMenu = new ToolStripMenuItem();
             _cMenTreeApplyInheritanceToChildren = new ToolStripMenuItem();
@@ -118,6 +122,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeSep4 = new ToolStripSeparator();
             _cMenTreeAddConnection = new ToolStripMenuItem();
             _cMenTreeAddFolder = new ToolStripMenuItem();
+            _cMenTreeAddRoot = new ToolStripMenuItem();
             _toolStripSeparator1 = new ToolStripSeparator();
             _cMenTreeToolsSort = new ToolStripMenuItem();
             _cMenTreeToolsSortAscending = new ToolStripMenuItem();
@@ -138,12 +143,12 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeDisconnect,
                 _cMenTreeSep1,
                 _cMenTreeToolsExternalApps,
-                _cMenTreeToolsTransferFile,
                 _cMenTreeSep2,
                 _cMenTreeDuplicate,
                 _cMenTreeRename,
                 _cMenTreeDelete,
                 _cMenTreeCopyHostname,
+                _cMenTreeClearCachedRdpCredentials,
                 _cMenInheritanceSubMenu,
                 _cMenTreeSep3,
                 _cMenTreeImport,
@@ -151,6 +156,7 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeSep4,
                 _cMenTreeAddConnection,
                 _cMenTreeAddFolder,
+                _cMenTreeAddRoot,
                 _toolStripSeparator1,
                 _cMenTreeToolsSort,
                 _cMenTreeMoveUp,
@@ -254,14 +260,6 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeToolsExternalApps.Size = new System.Drawing.Size(199, 22);
             _cMenTreeToolsExternalApps.Text = "External Applications";
             //
-            // cMenTreeToolsTransferFile
-            //
-            _cMenTreeToolsTransferFile.Image = Properties.Resources.SyncArrow_16x;
-            _cMenTreeToolsTransferFile.Name = "_cMenTreeToolsTransferFile";
-            _cMenTreeToolsTransferFile.Size = new System.Drawing.Size(199, 22);
-            _cMenTreeToolsTransferFile.Text = "Transfer File (SSH)";
-            _cMenTreeToolsTransferFile.Click += OnTransferFileClicked;
-            //
             // cMenTreeSep2
             //
             _cMenTreeSep2.Name = "_cMenTreeSep2";
@@ -298,6 +296,18 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeCopyHostname.Text = "Copy Hostname";
             _cMenTreeCopyHostname.Click += OnCopyHostnameClicked;
             //
+            // cMenTreeClearCachedRdpCredentials
+            //
+            _cMenTreeClearCachedRdpCredentials.Name = "_cMenTreeClearCachedRdpCredentials";
+            _cMenTreeClearCachedRdpCredentials.Size = new System.Drawing.Size(199, 22);
+            _cMenTreeClearCachedRdpCredentials.Text = "Clear Cached RDP Credentials";
+            _cMenTreeClearCachedRdpCredentials.ToolTipText =
+                "If RDP connection fails with an authentication error, Windows may be substituting " +
+                "a stale cached credential. Use this to delete the TERMSRV/<hostname> entry from " +
+                "the Windows Credential Manager so the credentials configured on this connection " +
+                "are sent unchanged on the next attempt.";
+            _cMenTreeClearCachedRdpCredentials.Click += OnClearCachedRdpCredentialsClicked;
+            //
             // cMenTreeSep3
             //
             _cMenTreeSep3.Name = "_cMenTreeSep3";
@@ -310,8 +320,7 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeImportFile,
                 _cMenTreeImportFromRemoteDesktopManager,
                 _cMenTreeImportActiveDirectory,
-                _cMenTreeImportPutty,
-                _cMenTreeImportPortScan
+                _cMenTreeImportPutty
             });
             _cMenTreeImport.Name = "_cMenTreeImport";
             _cMenTreeImport.Size = new System.Drawing.Size(199, 22);
@@ -336,13 +345,6 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeImportActiveDirectory.Size = new System.Drawing.Size(226, 22);
             _cMenTreeImportActiveDirectory.Text = "Import from &Active Directory...";
             _cMenTreeImportActiveDirectory.Click += OnImportActiveDirectoryClicked;
-            //
-            // cMenTreeImportPortScan
-            //
-            _cMenTreeImportPortScan.Name = "_cMenTreeImportPortScan";
-            _cMenTreeImportPortScan.Size = new System.Drawing.Size(226, 22);
-            _cMenTreeImportPortScan.Text = "Import from &Port Scan...";
-            _cMenTreeImportPortScan.Click += OnImportPortScanClicked;
             //
             // cMenTreeImportPutty
             //
@@ -378,6 +380,14 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeAddFolder.Size = new System.Drawing.Size(199, 22);
             _cMenTreeAddFolder.Text = "New Folder";
             _cMenTreeAddFolder.Click += OnAddFolderClicked;
+            //
+            // cMenTreeAddRoot
+            //
+            _cMenTreeAddRoot.Image = Properties.Resources.ASPWebSite_16x;
+            _cMenTreeAddRoot.Name = "_cMenTreeAddRoot";
+            _cMenTreeAddRoot.Size = new System.Drawing.Size(199, 22);
+            _cMenTreeAddRoot.Text = "Add Root";
+            _cMenTreeAddRoot.Click += OnAddRootClicked;
             //
             // ToolStripSeparator1
             //
@@ -467,21 +477,22 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDisconnect.Text = Language.Disconnect;
 
             _cMenTreeToolsExternalApps.Text = Language._Tools;
-            _cMenTreeToolsTransferFile.Text = Language.TransferFile;
 
             _cMenTreeDuplicate.Text = Language.Duplicate;
             _cMenTreeRename.Text = Language.Rename;
             _cMenTreeDelete.Text = Language.Delete;
             _cMenTreeCopyHostname.Text = Language.CopyHostname;
+            _cMenTreeClearCachedRdpCredentials.Text = Language.ClearCachedRdpCredentials;
+            _cMenTreeClearCachedRdpCredentials.ToolTipText = Language.PropertyDescriptionClearCachedRdpCredentials;
 
             _cMenTreeImport.Text = Language._Import;
             _cMenTreeImportFile.Text = Language.ImportFromFile;
             _cMenTreeImportActiveDirectory.Text = Language.ImportAD;
-            _cMenTreeImportPortScan.Text = Language.ImportPortScan;
             _cMenTreeExportFile.Text = Language._ExportToFile;
 
             _cMenTreeAddConnection.Text = Language.NewConnection;
             _cMenTreeAddFolder.Text = Language.NewFolder;
+            _cMenTreeAddRoot.Text = Language.AddRoot;
 
             _cMenTreeToolsSort.Text = Language.Sort;
             _cMenTreeToolsSortAscending.Text = Language.SortAsc;
@@ -492,6 +503,33 @@ namespace mRemoteNG.UI.Controls
             _cMenInheritanceSubMenu.Text = Language.Inheritance;
             _cMenTreeApplyInheritanceToChildren.Text = Language.ApplyInheritanceToChildren;
             _cMenTreeApplyDefaultInheritance.Text = Language.ApplyDefaultInheritance;
+            RefreshPluginImportItems();
+        }
+
+        internal void RefreshUiLanguage() => ApplyLanguage();
+
+        private void RefreshPluginImportItems()
+        {
+            foreach (ToolStripMenuItem item in _pluginImportMenuItems)
+            {
+                _cMenTreeImport.DropDownItems.Remove(item);
+                item.Dispose();
+            }
+
+            _pluginImportMenuItems.Clear();
+
+            foreach (var plugin in Runtime.PluginService.GetContextMenuPlugins(PluginContextMenuGroup.Import))
+            {
+                ToolStripMenuItem item = new()
+                {
+                    Name = $"pluginImport_{plugin.Id}",
+                    Text = plugin.ToolWindow.ContextMenuText,
+                    Image = plugin.ToolWindow.Icon,
+                };
+                item.Click += (_, _) => Runtime.PluginService.ShowToolWindow(plugin.Id);
+                _pluginImportMenuItems.Add(item);
+                _cMenTreeImport.DropDownItems.Add(item);
+            }
         }
 
         internal void ShowHideMenuItems()
@@ -536,10 +574,10 @@ namespace mRemoteNG.UI.Controls
         {
             _cMenTreeAddConnection.Enabled = false;
             _cMenTreeAddFolder.Enabled = false;
+            _cMenTreeAddRoot.Enabled = false;
             _cMenTreeConnect.Enabled = false;
             _cMenTreeConnectWithOptions.Enabled = false;
             _cMenTreeDisconnect.Enabled = false;
-            _cMenTreeToolsTransferFile.Enabled = false;
             _cMenTreeConnectWithOptions.Enabled = false;
             _cMenTreeToolsSort.Enabled = false;
             _cMenTreeToolsExternalApps.Enabled = false;
@@ -554,6 +592,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeApplyInheritanceToChildren.Enabled = false;
             _cMenTreeApplyDefaultInheritance.Enabled = false;
             _cMenTreeCopyHostname.Enabled = false;
+            _cMenTreeClearCachedRdpCredentials.Enabled = false;
         }
 
         internal void ShowHideMenuItemsForRootConnectionNode()
@@ -564,7 +603,6 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = false;
             _cMenTreeDisconnect.Enabled = false;
-            _cMenTreeToolsTransferFile.Enabled = false;
             _cMenTreeToolsExternalApps.Enabled = false;
             _cMenTreeDuplicate.Enabled = false;
             _cMenTreeDelete.Enabled = false;
@@ -583,7 +621,6 @@ namespace mRemoteNG.UI.Controls
             bool hasOpenConnections = containerInfo.Children.Any(child => child.OpenConnections.Count > 0);
             _cMenTreeDisconnect.Enabled = hasOpenConnections;
 
-            _cMenTreeToolsTransferFile.Enabled = false;
             _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
         }
 
@@ -591,12 +628,10 @@ namespace mRemoteNG.UI.Controls
         {
             _cMenTreeAddConnection.Enabled = false;
             _cMenTreeAddFolder.Enabled = false;
+            _cMenTreeAddRoot.Enabled = false;
 
             if (connectionInfo.OpenConnections.Count == 0)
                 _cMenTreeDisconnect.Enabled = false;
-
-            if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
-                _cMenTreeToolsTransferFile.Enabled = false;
 
             _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
@@ -618,13 +653,11 @@ namespace mRemoteNG.UI.Controls
             if (connectionInfo.OpenConnections.Count == 0)
                 _cMenTreeDisconnect.Enabled = false;
 
-            if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
-                _cMenTreeToolsTransferFile.Enabled = false;
-
             if (!(connectionInfo.Protocol == ProtocolType.RDP))
             {
                 _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
                 _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+                _cMenTreeClearCachedRdpCredentials.Enabled = false;
             }
 
             if (connectionInfo.Protocol == ProtocolType.IntApp)
@@ -691,6 +724,26 @@ namespace mRemoteNG.UI.Controls
 
                     menuItem.Click += OnExternalToolClicked;
                     _cMenTreeToolsExternalApps.DropDownItems.Add(menuItem);
+                }
+
+                if (_connectionTree.SelectedNode != null)
+                {
+                    var pluginActions = Runtime.PluginService.GetTreeContextActionPlugins(_connectionTree.SelectedNode).ToList();
+                    if (_cMenTreeToolsExternalApps.DropDownItems.Count > 0 && pluginActions.Count > 0)
+                        _cMenTreeToolsExternalApps.DropDownItems.Add(new ToolStripSeparator());
+
+                    foreach (var pluginAction in pluginActions)
+                    {
+                        ToolStripMenuItem menuItem = new()
+                        {
+                            Text = pluginAction.TreeContextMenuAction.MenuText,
+                            Tag = pluginAction.Id,
+                            Image = pluginAction.TreeContextMenuAction.Icon
+                        };
+
+                        menuItem.Click += OnPluginTreeActionClicked;
+                        _cMenTreeToolsExternalApps.DropDownItems.Add(menuItem);
+                    }
                 }
             }
             catch (Exception ex)
@@ -847,30 +900,6 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        private void OnTransferFileClicked(object sender, EventArgs e)
-        {
-            SshTransferFile();
-        }
-
-        public void SshTransferFile()
-        {
-            try
-            {
-                AppWindows.Show(WindowType.SSHTransfer);
-                AppWindows.SshtransferForm.Hostname = _connectionTree.SelectedNode.Hostname;
-                AppWindows.SshtransferForm.Username = _connectionTree.SelectedNode.Username;
-                //App.Windows.SshtransferForm.Password = _connectionTree.SelectedNode.Password.ConvertToUnsecureString();
-                AppWindows.SshtransferForm.Password = _connectionTree.SelectedNode.Password;
-                AppWindows.SshtransferForm.Port = Convert.ToString(_connectionTree.SelectedNode.Port);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "SSHTransferFile (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
-            }
-        }
-
         private void OnDuplicateClicked(object sender, EventArgs e)
         {
             _connectionTree.DuplicateSelectedNode();
@@ -889,6 +918,61 @@ namespace mRemoteNG.UI.Controls
         private void OnCopyHostnameClicked(object sender, EventArgs e)
         {
             _connectionTree.CopyHostnameSelectedNode(new WindowsClipboard());
+        }
+
+        private void OnClearCachedRdpCredentialsClicked(object sender, EventArgs e)
+        {
+            ConnectionInfo selected = _connectionTree.SelectedNode;
+            if (selected == null || selected.Protocol != ProtocolType.RDP) return;
+            string hostname = selected.Hostname;
+            if (string.IsNullOrWhiteSpace(hostname)) return;
+
+            string target = "TERMSRV/" + hostname;
+
+            // Single-dialog confirmation showing both the explanation and the target.
+            string mainInstruction = string.Format(Language.ConfirmDeleteCachedRdpCredential, target);
+            DialogResult confirm = CTaskDialog.MessageBox(
+                this,
+                Language.ClearCachedRdpCredentials,
+                mainInstruction,
+                Language.PropertyDescriptionClearCachedRdpCredentials,
+                "",
+                "",
+                "",
+                ETaskDialogButtons.YesNo,
+                ESysIcons.Question,
+                ESysIcons.Question);
+
+            if (confirm != DialogResult.Yes) return;
+
+            ClearCachedCredentialsResult outcome = RdpCredentialCacheCleaner.ClearCachedCredentials(hostname);
+            switch (outcome)
+            {
+                case ClearCachedCredentialsResult.Deleted:
+                    CTaskDialog.MessageBox(
+                        this,
+                        Language.ClearCachedRdpCredentials,
+                        string.Format(Language.ClearedCachedRdpCredentials, target),
+                        "", "", "", "",
+                        ETaskDialogButtons.Ok, ESysIcons.Information, ESysIcons.Information);
+                    break;
+                case ClearCachedCredentialsResult.NotFound:
+                    CTaskDialog.MessageBox(
+                        this,
+                        Language.ClearCachedRdpCredentials,
+                        string.Format(Language.NoCachedRdpCredentialFound, target),
+                        "", "", "", "",
+                        ETaskDialogButtons.Ok, ESysIcons.Information, ESysIcons.Information);
+                    break;
+                case ClearCachedCredentialsResult.Failed:
+                    CTaskDialog.MessageBox(
+                        this,
+                        Language.ClearCachedRdpCredentials,
+                        string.Format(Language.FailedToClearCachedRdpCredential, target),
+                        "", "", "", "",
+                        ETaskDialogButtons.Ok, ESysIcons.Warning, ESysIcons.Warning);
+                    break;
+            }
         }
 
         private void OnImportFileClicked(object sender, EventArgs e)
@@ -929,11 +1013,6 @@ namespace mRemoteNG.UI.Controls
             AppWindows.Show(WindowType.ActiveDirectoryImport);
         }
 
-        private void OnImportPortScanClicked(object sender, EventArgs e)
-        {
-            AppWindows.Show(WindowType.PortScan);
-        }
-
         private void OnExportFileClicked(object sender, EventArgs e)
         {
             Export.ExportToFile(_connectionTree.SelectedNode, Runtime.ConnectionsService.ConnectionTreeModel);
@@ -947,6 +1026,11 @@ namespace mRemoteNG.UI.Controls
         private void OnAddFolderClicked(object sender, EventArgs e)
         {
             _connectionTree.AddFolder();
+        }
+
+        private void OnAddRootClicked(object sender, EventArgs e)
+        {
+            _connectionTree.AddRoot();
         }
 
         private void OnSortAscendingClicked(object sender, EventArgs e)
@@ -972,6 +1056,14 @@ namespace mRemoteNG.UI.Controls
         private void OnExternalToolClicked(object sender, EventArgs e)
         {
             StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
+        }
+
+        private void OnPluginTreeActionClicked(object sender, EventArgs e)
+        {
+            if (_connectionTree.SelectedNode == null)
+                return;
+
+            Runtime.PluginService.ExecuteTreeContextAction((string)((ToolStripMenuItem)sender).Tag, _connectionTree.SelectedNode);
         }
 
         private void StartExternalApp(ExternalTool externalTool)

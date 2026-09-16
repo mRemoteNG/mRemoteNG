@@ -153,6 +153,10 @@ namespace mRemoteNG.UI.TaskDialog
             // auto-scaling is applied before we compute the layout.
             _ = Handle;
 
+            // Reset focus control for this rebuild to ensure it's properly reassigned
+            // This prevents stale references to disposed controls after rebuilds
+            _focusControl = null;
+
             // Clean up previously created dynamic controls (idempotent rebuild)
             foreach (var rb in _radioButtonCtrls)
             {
@@ -297,6 +301,7 @@ namespace mRemoteNG.UI.TaskDialog
                     bt3.DialogResult = DialogResult.No;
                     AcceptButton = bt2;
                     CancelButton = bt3;
+                    _focusControl = bt2;
                     break;
                 case ETaskDialogButtons.YesNoCancel:
                     bt1.Text = Language.Yes;
@@ -307,6 +312,7 @@ namespace mRemoteNG.UI.TaskDialog
                     bt3.DialogResult = DialogResult.Cancel;
                     AcceptButton = bt1;
                     CancelButton = bt3;
+                    _focusControl = bt1;
                     break;
                 case ETaskDialogButtons.OkCancel:
                     bt1.Visible = false;
@@ -316,6 +322,7 @@ namespace mRemoteNG.UI.TaskDialog
                     bt3.DialogResult = DialogResult.Cancel;
                     AcceptButton = bt2;
                     CancelButton = bt3;
+                    _focusControl = bt2;
                     break;
                 case ETaskDialogButtons.Ok:
                     bt1.Visible = false;
@@ -324,6 +331,7 @@ namespace mRemoteNG.UI.TaskDialog
                     bt3.DialogResult = DialogResult.OK;
                     AcceptButton = bt3;
                     CancelButton = bt3;
+                    _focusControl = bt3;
                     break;
                 case ETaskDialogButtons.Close:
                     bt1.Visible = false;
@@ -331,6 +339,7 @@ namespace mRemoteNG.UI.TaskDialog
                     bt3.Text = Language._Close;
                     bt3.DialogResult = DialogResult.Cancel;
                     CancelButton = bt3;
+                    _focusControl = bt3;
                     break;
                 case ETaskDialogButtons.Cancel:
                     bt1.Visible = false;
@@ -338,6 +347,7 @@ namespace mRemoteNG.UI.TaskDialog
                     bt3.Text = Language._Cancel;
                     bt3.DialogResult = DialogResult.Cancel;
                     CancelButton = bt3;
+                    _focusControl = bt3;
                     break;
                 case ETaskDialogButtons.None:
                     bt1.Visible = false;
@@ -393,6 +403,13 @@ namespace mRemoteNG.UI.TaskDialog
                 _themeApplied = true;
             }
             ApplyTheme();
+        }
+
+        // Apply the dark/light title bar before the window is shown to avoid a white flash.
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            ThemeManager.getInstance().ApplyThemeToTitleBar(this);
         }
 
         private void ApplyTheme()
@@ -555,7 +572,9 @@ namespace mRemoteNG.UI.TaskDialog
                 }
             }
 
-            _focusControl?.Focus();
+            // Focus the default button, with safety checks for validity
+            if (_focusControl != null && !_focusControl.IsDisposed && _focusControl.CanFocus)
+                _focusControl.Focus();
         }
 
         #endregion

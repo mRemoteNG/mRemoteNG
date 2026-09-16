@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Security;
+﻿using System;
+using mRemoteNG.Security;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.Security
@@ -18,7 +19,7 @@ namespace mRemoteNGTests.Security
         public void CanAssignStringValue()
         {
             var encryptedSecString = new EncryptedSecureString();
-            TestDelegate testDelegate = () => encryptedSecString.SetValue(_clearTextData);
+            Action testDelegate = () => encryptedSecString.SetValue(_clearTextData);
             Assert.DoesNotThrow(testDelegate);
         }
 

@@ -31,7 +31,7 @@ namespace mRemoteNG.UI.Forms
         /// password box is shown which must match the first password
         /// to continue.
         /// </param>
-        public FrmPassword(string passwordName = null, bool newPasswordMode = true)
+        public FrmPassword(string? passwordName = null, bool newPasswordMode = true)
         {
             InitializeComponent();
             _passwordName = passwordName;
@@ -113,8 +113,16 @@ namespace mRemoteNG.UI.Forms
             btnOK.Text = Language._Ok;
         }
 
+        // Apply the dark/light title bar before the window is shown to avoid a white flash.
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            ThemeManager.getInstance().ApplyThemeToTitleBar(this);
+        }
+
         private void ApplyTheme()
         {
+            ThemeManager.getInstance().ApplyThemeToTitleBar(this);
             if (!ThemeManager.getInstance().ActiveAndExtended)
                 return;
 

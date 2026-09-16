@@ -20,7 +20,9 @@ namespace mRemoteNG.Themes
         private ThemeBase _theme;
         private string _URI;
         private VisualStudioToolStripExtender.VsVersion _version;
-        private ExtendedColorPalette _extendedPalette;
+        // Only populated for extended themes (5-arg constructor); null for plain themes.
+        // Guarded by the IsExtended flag wherever it is dereferenced.
+        private ExtendedColorPalette _extendedPalette = null!;
 
         #endregion
 
@@ -100,7 +102,7 @@ namespace mRemoteNG.Themes
             get => _theme;
             set
             {
-                if (value != null && _theme == value)
+                if (_theme == value)
                 {
                     return;
                 }
@@ -115,7 +117,7 @@ namespace mRemoteNG.Themes
             get => _URI;
             set
             {
-                if (value != null && _URI == value)
+                if (_URI == value)
                 {
                     return;
                 }

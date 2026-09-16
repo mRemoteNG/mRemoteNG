@@ -46,7 +46,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkDoubleClickClosesTab.Text = Language.DoubleClickTabClosesIt;
             chkAlwaysShowPanelSelectionDlg.Text = Language.AlwaysShowPanelSelection;
             chkCreateEmptyPanelOnStart.Text = Language.CreateEmptyPanelOnStartUp;
-            chkBindConnectionsAndConfigPanels.Text = "Bind Connections and Config panels together when auto-hidden";
+            chkBindConnectionsAndConfigPanels.Text = Language.BindConnectionsAndConfigPanels;
             lblPanelName.Text = $@"{Language.PanelName}:";
 
             lblRegistrySettingsUsedInfo.Text = Language.OptionsCompanyPolicyMessage;

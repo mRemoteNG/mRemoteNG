@@ -33,15 +33,14 @@ namespace mRemoteNG.Credential.Repositories
 
         public ICredentialRepository Build(XElement repositoryXElement)
         {
-            string stringId = repositoryXElement.Attribute("Id")?.Value;
-            Guid id;
-            Guid.TryParse(stringId, out id);
+            string? stringId = repositoryXElement.Attribute("Id")?.Value;
+            Guid.TryParse(stringId, out Guid id);
             if (id.Equals(Guid.Empty)) id = Guid.NewGuid();
             CredentialRepositoryConfig config = new(id)
             {
-                TypeName = repositoryXElement.Attribute("TypeName")?.Value,
-                Title = repositoryXElement.Attribute("Title")?.Value,
-                Source = repositoryXElement.Attribute("Source")?.Value
+                TypeName = repositoryXElement.Attribute("TypeName")?.Value ?? string.Empty,
+                Title = repositoryXElement.Attribute("Title")?.Value ?? string.Empty,
+                Source = repositoryXElement.Attribute("Source")?.Value ?? string.Empty
             };
             return BuildXmlRepo(config);
         }

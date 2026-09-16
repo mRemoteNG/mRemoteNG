@@ -327,10 +327,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         protected virtual void UpdateSessionDisplaySettings(uint width, uint height)
         {
-            if (RdpClient8 != null)
-            {
-                RdpClient8.Reconnect(width, height);
-            }
+            string host = connectionInfo?.Hostname ?? "unknown";
+            Runtime.MessageCollector?.AddMessage(MessageClass.DebugMsg,
+                $"Dynamic session resize is not supported for RDP client v8; keeping current resolution for '{host}'.");
         }
 
         public override void Close()

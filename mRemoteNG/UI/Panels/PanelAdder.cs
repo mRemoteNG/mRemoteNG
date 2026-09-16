@@ -15,6 +15,8 @@ namespace mRemoteNG.UI.Panels
     [SupportedOSPlatform("windows")]
     public class PanelAdder
     {
+        public const string DefaultPanelName = "General";
+
         public ConnectionWindow AddPanel(string title = "", bool showImmediately = true)
         {
             try
@@ -26,6 +28,7 @@ namespace mRemoteNG.UI.Panels
                 // When opening connections, we defer showing until first tab is added
                 if (showImmediately)
                     ShowConnectionWindow(connectionForm);
+                FrmMain.Default?.ShowHidePanelTabs();
                 PrepareTabSupport(connectionForm);
                 return connectionForm;
             }
@@ -55,7 +58,7 @@ namespace mRemoteNG.UI.Panels
         private static void SetConnectionWindowTitle(string title, ConnectionWindow connectionForm)
         {
             if (string.IsNullOrEmpty(title))
-                title = Language.NewPanel;
+                title = DefaultPanelName;
             connectionForm.SetFormText(title.Replace("&", "&&"));
         }
 
@@ -66,6 +69,12 @@ namespace mRemoteNG.UI.Panels
             ToolStripMenuItem cMenScreens = CreateScreensMenuItem(pnlcForm);
             ToolStripMenuItem cMenClose = CreateCloseMenuItem(pnlcForm);
             cMen.Items.AddRange(new ToolStripItem[] {cMenRen, cMenScreens, cMenClose});
+
+            if (pnlcForm is ConnectionWindow connectionWindow && connectionWindow.IsGeneralPanel)
+            {
+                cMenClose.Visible = false;
+            }
+
             pnlcForm.TabPageContextMenuStrip = cMen;
         }
 
@@ -127,6 +136,11 @@ namespace mRemoteNG.UI.Panels
             try
             {
                 ConnectionWindow conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
+                if (conW.IsGeneralPanel)
+                {
+                    return;
+                }
+
                 conW.Close();
             }
             catch (Exception ex)

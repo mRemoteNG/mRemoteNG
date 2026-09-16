@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -18,6 +19,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public AdvancedPage()
         {
             InitializeComponent();
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             ApplyTheme();
             PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Settings_16x);
             DisplayProperties display = new();
@@ -39,8 +41,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             lblSeconds.Text = Language.Seconds;
             lblMaximumPuttyWaitTime.Text = Language.PuttyTimeout;
-            chkAutomaticReconnect.Text = Language.CheckboxAutomaticReconnect;
-            //chkNoReconnect.Text = Language.;
+            chkAutomaticReconnect.Text = Language.DisplayReconnectionDialog;
+            chkNoReconnect.Text = Language.CheckboxAutomaticReconnect;
             chkLoadBalanceInfoUseUtf8.Text = Language.LoadBalanceInfoUseUtf8;
             lblConfigurePuttySessions.Text = Language.PuttySessionsConfig;
             btnLaunchPutty.Text = Language.ButtonLaunchPutty;

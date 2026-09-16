@@ -60,6 +60,7 @@ namespace mRemoteNG.Connection
         private bool _useRestrictedAdmin;
         private bool _useRCG;
         private bool _useVmId;
+        private bool _useRedirectionServerName;
 
         private RDGatewayUsageMethod _rdGatewayUsageMethod;
         private string _rdGatewayHostname;
@@ -164,7 +165,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Display)),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Color)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionColor)),
-         Editor(typeof(System.Drawing.Design.ColorEditor), typeof(System.Drawing.Design.UITypeEditor)),
+         Editor(typeof(UI.Controls.ConnectionInfoPropertyGrid.ColorStringEditor), typeof(System.Drawing.Design.UITypeEditor)),
          TypeConverter(typeof(MiscTools.TabColorConverter))]
         public virtual string Color
         {
@@ -175,7 +176,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Display)),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.TabColor)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionTabColor)),
-         Editor(typeof(System.Drawing.Design.ColorEditor), typeof(System.Drawing.Design.UITypeEditor)),
+         Editor(typeof(UI.Controls.ConnectionInfoPropertyGrid.ColorStringEditor), typeof(System.Drawing.Design.UITypeEditor)),
          TypeConverter(typeof(MiscTools.TabColorConverter))]
         public virtual string TabColor
         {
@@ -524,6 +525,17 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("UseRCG", _useRCG);
             set => SetField(ref _useRCG, value, "UseRCG");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.UseRedirectionServerName)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUseRedirectionServerName)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public bool UseRedirectionServerName
+        {
+            get => GetPropertyValue("UseRedirectionServerName", _useRedirectionServerName);
+            set => SetField(ref _useRedirectionServerName, value, "UseRedirectionServerName");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -1120,7 +1132,7 @@ namespace mRemoteNG.Connection
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void RaisePropertyChangedEvent(object sender, PropertyChangedEventArgs args)
+        protected virtual void RaisePropertyChangedEvent(object? sender, PropertyChangedEventArgs args)
         {
             PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(args.PropertyName));
         }

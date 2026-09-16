@@ -11,8 +11,8 @@ namespace mRemoteNG.Tree
     {
         private readonly ConnectionTreeModel _connectionTreeModel = connectionTreeModel;
 
-        private List<ConnectionInfo> Matches { get; set; }
-        public ConnectionInfo CurrentMatch { get; private set; }
+        private List<ConnectionInfo> Matches { get; set; } = [];
+        public ConnectionInfo? CurrentMatch { get; private set; }
 
         public IEnumerable<ConnectionInfo> SearchByName(string searchText)
         {
@@ -33,9 +33,9 @@ namespace mRemoteNG.Tree
             return Matches;
         }
 
-        public ConnectionInfo NextMatch()
+        public ConnectionInfo? NextMatch()
         {
-            int currentMatchIndex = Matches.IndexOf(CurrentMatch);
+            int currentMatchIndex = CurrentMatchIndex();
             if (!CurrentMatchIsTheLastMatchInTheList())
                 CurrentMatch = Matches[currentMatchIndex + 1];
             return CurrentMatch;
@@ -43,13 +43,12 @@ namespace mRemoteNG.Tree
 
         private bool CurrentMatchIsTheLastMatchInTheList()
         {
-            int currentMatchIndex = Matches.IndexOf(CurrentMatch);
-            return currentMatchIndex >= Matches.Count - 1;
+            return CurrentMatchIndex() >= Matches.Count - 1;
         }
 
-        public ConnectionInfo PreviousMatch()
+        public ConnectionInfo? PreviousMatch()
         {
-            int currentMatchIndex = Matches.IndexOf(CurrentMatch);
+            int currentMatchIndex = CurrentMatchIndex();
             if (!CurrentMatchIsTheFirstMatchInTheList())
                 CurrentMatch = Matches[currentMatchIndex - 1];
             return CurrentMatch;
@@ -57,8 +56,13 @@ namespace mRemoteNG.Tree
 
         private bool CurrentMatchIsTheFirstMatchInTheList()
         {
-            int currentMatchIndex = Matches.IndexOf(CurrentMatch);
-            return currentMatchIndex <= 0;
+            return CurrentMatchIndex() <= 0;
+        }
+
+        // IndexOf of a null match is -1; guard so the non-null IndexOf overload is satisfied.
+        private int CurrentMatchIndex()
+        {
+            return CurrentMatch is null ? -1 : Matches.IndexOf(CurrentMatch);
         }
 
         private void ResetMatches()

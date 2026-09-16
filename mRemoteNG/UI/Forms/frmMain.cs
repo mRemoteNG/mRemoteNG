@@ -31,6 +31,7 @@ using System.Windows.Forms;
 using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI.Controls;
+using System.Linq;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Settings.Registry;
@@ -212,9 +213,10 @@ namespace mRemoteNG.UI.Forms
 
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters);
-
+ 
             Startup.Instance.InitializeProgram(messageCollector);
-
+            Runtime.PluginService.LoadPlugins();
+ 
             SetMenuDependencies();
 
             DockPanelLayoutLoader uiLoader = new(this, messageCollector);
@@ -224,6 +226,7 @@ namespace mRemoteNG.UI.Forms
             Properties.Settings.Default.PropertyChanged += OnApplicationSettingChanged;
 
             _themeManager.ThemeChanged += ApplyTheme;
+            ProgramRoot.UiCultureChanged += OnUiCultureChanged;
 
             _fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
 
@@ -240,11 +243,7 @@ namespace mRemoteNG.UI.Forms
             Runtime.ConnectionsService.ConnectionsSaved += ConnectionsServiceOnConnectionsSaved;
             
             // Close splash screen before loading connections to ensure password dialog appears on top
-            FrmSplashScreenNew splash = FrmSplashScreenNew.GetInstance();
-            if (splash.Dispatcher.CheckAccess())
-                splash.Close();
-            else
-                splash.Dispatcher.Invoke(() => splash.Close());
+            ProgramRoot.CloseSplash();
 
             CredsAndConsSetup credsAndConsSetup = new();
             credsAndConsSetup.LoadCredsAndCons();
@@ -261,6 +260,7 @@ namespace mRemoteNG.UI.Forms
             _advancedWindowMenu.BuildAdditionalMenuItems();
             SystemEvents.DisplaySettingsChanged += _advancedWindowMenu.OnDisplayChanged;
             ApplyLanguage();
+            toolsMenu.RefreshPluginItems();
 
             Opacity = 1;
             //Fix MagicRemove , revision on panel strategy for mdi
@@ -280,11 +280,17 @@ namespace mRemoteNG.UI.Forms
 
             OptionsForm = new FrmOptions();
 
+            EnsureGeneralPanel();
+            ShowHidePanelTabs();
+
             if (!Properties.OptionsTabsPanelsPage.Default.CreateEmptyPanelOnStartUp)
             {
                 return;
             }
-            string panelName = !string.IsNullOrEmpty(Properties.OptionsTabsPanelsPage.Default.StartUpPanelName) ? Properties.OptionsTabsPanelsPage.Default.StartUpPanelName : Language.NewPanel;
+
+            string panelName = !string.IsNullOrEmpty(Properties.OptionsTabsPanelsPage.Default.StartUpPanelName)
+                ? Properties.OptionsTabsPanelsPage.Default.StartUpPanelName
+                : PanelAdder.DefaultPanelName;
 
             PanelAdder panelAdder = new();
             if (!panelAdder.DoesPanelExist(panelName))
@@ -298,6 +304,27 @@ namespace mRemoteNG.UI.Forms
             viewMenu.ApplyLanguage();
             toolsMenu.ApplyLanguage();
             helpMenu.ApplyLanguage();
+        }
+
+        internal void RefreshUiLanguage()
+        {
+            if (IsDisposed)
+                return;
+
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(RefreshUiLanguage));
+                return;
+            }
+
+            ApplyLanguage();
+            UpdateWindowTitle();
+            AppWindows.TreeForm?.RefreshUiLanguage();
+            AppWindows.ConfigForm?.RefreshUiLanguage();
+            AppWindows.ErrorsForm?.RefreshUiLanguage();
+            AppWindows.UpdateForm?.RefreshUiLanguage();
+            AppWindows.OptionsFormWindow?.RefreshUiLanguage();
+            Runtime.NotificationAreaIcon?.RefreshUiLanguage();
         }
 
         private void OnApplicationSettingChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -360,9 +387,18 @@ namespace mRemoteNG.UI.Forms
             toolsMenu.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
         }
 
+        // Apply the dark/light title bar before the window is shown to avoid a white flash.
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            _themeManager.ApplyThemeToTitleBar(this);
+        }
+
         //Theming support
         private void ApplyTheme()
         {
+            _themeManager.ApplyThemeToTitleBar(this);
+
             if (!_themeManager.ThemingActive)
             {
                 pnlDock.Theme = _themeManager.DefaultTheme.Theme;
@@ -472,8 +508,14 @@ namespace mRemoteNG.UI.Forms
             await Startup.Instance.CheckForUpdate();
         }
 
+        private void OnUiCultureChanged(object? sender, EventArgs e)
+        {
+            RefreshUiLanguage();
+        }
+
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ProgramRoot.UiCultureChanged -= OnUiCultureChanged;
             if (Runtime.WindowList != null)
             {
                 foreach (BaseWindow window in Runtime.WindowList)
@@ -596,7 +638,7 @@ namespace mRemoteNG.UI.Forms
                         break;
                     case NativeMethods.WM_ACTIVATEAPP:
                         Control candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
-                                               ?? GetChildAtPoint(MousePosition);
+                                               ?? GetChildAtScreenPoint(this, MousePosition);
                         if (candidateTabToFocus is InterfaceControl) candidateTabToFocus.Parent.Focus();
                         _inMouseActivate = false;
                         break;
@@ -605,7 +647,7 @@ namespace mRemoteNG.UI.Forms
                         if (NativeMethods.LOWORD(m.WParam) == NativeMethods.WA_CLICKACTIVE)
                         {
                             Control controlThatWasClicked = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
-                                                     ?? GetChildAtPoint(MousePosition);
+                                                     ?? GetChildAtScreenPoint(this, MousePosition);
                             if (controlThatWasClicked != null)
                             {
                                 if (controlThatWasClicked is TreeView ||
@@ -702,6 +744,12 @@ namespace mRemoteNG.UI.Forms
             clientMousePosition.Y = temp_wHigh;
         }
 
+        internal static Control GetChildAtScreenPoint(Control parentControl, Point screenPoint)
+        {
+            Point clientPoint = parentControl.PointToClient(screenPoint);
+            return parentControl.GetChildAtPoint(clientPoint);
+        }
+
         private void ActivateConnection()
         {
             ConnectionWindow cw = pnlDock.ActiveDocument as ConnectionWindow;
@@ -762,27 +810,28 @@ namespace mRemoteNG.UI.Forms
             Text = titleBuilder.ToString();
         }
 
-        public void ShowHidePanelTabs(DockContent closingDocument = null)
+        public void ShowHidePanelTabs(DockContent? closingDocument = null)
         {
             DocumentStyle newDocumentStyle;
+            bool hasConnectionWindows = pnlDock.Contents.OfType<ConnectionWindow>().Any();
 
-            if (Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelTabs)
+            if (Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelTabs || hasConnectionWindows)
             {
                 newDocumentStyle = DocumentStyle.DockingWindow; // Show the panel tabs
             }
             else
             {
-                int nonConnectionPanelCount = 0;
+                int visibleDocumentCount = 0;
                 foreach (IDockContent dockContent in pnlDock.Documents)
                 {
                     DockContent document = (DockContent)dockContent;
-                    if ((closingDocument == null || document != closingDocument) && document is not ConnectionWindow)
+                    if (closingDocument == null || document != closingDocument)
                     {
-                        nonConnectionPanelCount++;
+                        visibleDocumentCount++;
                     }
                 }
 
-                newDocumentStyle = nonConnectionPanelCount == 0
+                newDocumentStyle = visibleDocumentCount <= 1
                     ? DocumentStyle.DockingSdi
                     : DocumentStyle.DockingWindow;
             }
@@ -818,12 +867,14 @@ namespace mRemoteNG.UI.Forms
 
             AppWindows.TreeForm.Show(pnlDock, DockState.DockLeft);
             AppWindows.ConfigForm.Show(pnlDock, DockState.DockLeft);
+            AppWindows.ConfigForm.Activate();
             AppWindows.ErrorsForm.Show(pnlDock, DockState.DockBottomAutoHide);
             viewMenu._mMenViewErrorsAndInfos.Checked = true;
 
             ShowFileMenu();
 
             pnlDock.Visible = true;
+            EnsureGeneralPanel();
         }
 
         public void ShowFileMenu()
@@ -837,6 +888,29 @@ namespace mRemoteNG.UI.Forms
             msMain.Visible = false;
             viewMenu._mMenViewFileMenu.Checked = false;
             MessageBox.Show(Language.FileMenuWillBeHiddenNow, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void EnsureGeneralPanel()
+        {
+            GetOrCreateGeneralPanel().Activate();
+        }
+
+        internal ConnectionWindow GetOrCreateGeneralPanel()
+        {
+            ConnectionWindow? generalPanel = Runtime.WindowList?
+                .OfType<ConnectionWindow>()
+                .FirstOrDefault(window => string.Equals(window.TabText, PanelAdder.DefaultPanelName, StringComparison.OrdinalIgnoreCase));
+
+            if (generalPanel == null || generalPanel.IsDisposed)
+            {
+                generalPanel = new PanelAdder().AddPanel(PanelAdder.DefaultPanelName);
+            }
+            else if (generalPanel.DockState == DockState.Unknown || generalPanel.DockState == DockState.Hidden || !generalPanel.Visible)
+            {
+                generalPanel.Show(pnlDock, DockState.Document);
+            }
+
+            return generalPanel;
         }
 
         public void SetLayout()

@@ -17,6 +17,7 @@ using System.Runtime.Versioning;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -30,6 +31,8 @@ namespace mRemoteNG.Connection.Protocol
         private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
         private bool _isPuttyNg;
         private readonly DisplayProperties _display = new();
+        private Panel? _puttyContainerPanel; // Panel to hold PuTTY with margins
+        private string? _temporaryPrivateKeyPath;
 
         #region Public Properties
 
@@ -51,7 +54,270 @@ namespace mRemoteNG.Connection.Protocol
 
         private void ProcessExited(object sender, EventArgs e)
         {
+            CleanupTemporaryPrivateKey();
+            CleanupEmbeddedPutty();
             Event_Closed(this);
+        }
+
+        private void CleanupEmbeddedPutty()
+        {
+            if (InterfaceControl != null)
+            {
+                try
+                {
+                    InterfaceControl.Resize -= InterfaceControl_Resize;
+                }
+                catch (Exception ex)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                        Language.PuttyStuff + ": Error removing resize handler: " + ex.Message, true);
+                }
+            }
+
+            try
+            {
+                _puttyContainerPanel?.Dispose();
+                _puttyContainerPanel = null;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    Language.PuttyStuff + ": Error disposing container panel: " + ex.Message, true);
+            }
+
+            if (PuttyHandle != IntPtr.Zero)
+            {
+                try
+                {
+                    NativeMethods.SetParent(PuttyHandle, IntPtr.Zero);
+                }
+                catch (Exception ex)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                        Language.PuttyStuff + ": Error detaching PuTTY from parent: " + ex.Message, true);
+                }
+
+                PuttyHandle = IntPtr.Zero;
+            }
+        }
+
+        private static void AddArgumentString(CommandLineArguments arguments, string rawArguments)
+        {
+            if (string.IsNullOrWhiteSpace(rawArguments))
+                return;
+
+            foreach (Match match in Regex.Matches(rawArguments, @"""(?:[^""\\]|\\.)*""|'(?:[^'\\]|\\.)*'|\S+"))
+            {
+                string token = match.Value.Trim();
+                if (token.Length == 0)
+                    continue;
+
+                if (token.StartsWith('"') && token.EndsWith('"') || token.StartsWith('\'') && token.EndsWith('\''))
+                {
+                    token = token[1..^1];
+                }
+
+                arguments.Add(token);
+            }
+        }
+
+        private static string WriteTemporaryPrivateKeyFile(string privateKey)
+        {
+            for (int attempt = 0; attempt < 5; attempt++)
+            {
+                string candidatePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".ppk");
+                bool created = false;
+
+                try
+                {
+                    using (FileStream stream = new(candidatePath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                    {
+                        created = true;
+                        using StreamWriter writer = new(stream);
+                        writer.Write(privateKey);
+                    }
+
+                    File.SetAttributes(candidatePath, FileAttributes.Temporary);
+                    return candidatePath;
+                }
+                catch (IOException) when (!created && File.Exists(candidatePath))
+                {
+                    // Candidate existed before we could create it; retry.
+                }
+                catch
+                {
+                    if (created)
+                    {
+                        try
+                        {
+                            if (File.Exists(candidatePath))
+                            {
+                                File.Delete(candidatePath);
+                            }
+                        }
+                        catch
+                        {
+                            // Preserve original exception.
+                        }
+                    }
+
+                    throw;
+                }
+            }
+
+            throw new IOException("Unable to create a unique temporary private-key file.");
+        }
+
+        private void CleanupTemporaryPrivateKey()
+        {
+            if (string.IsNullOrEmpty(_temporaryPrivateKeyPath))
+                return;
+
+            try
+            {
+                if (File.Exists(_temporaryPrivateKeyPath))
+                {
+                    File.Delete(_temporaryPrivateKeyPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    $"Error deleting temporary PuTTY private key '{_temporaryPrivateKeyPath}': {ex.Message}", true);
+            }
+            finally
+            {
+                _temporaryPrivateKeyPath = null;
+            }
+        }
+
+        private bool TryGetPuTTYBorderSizes(out int leftBorder, out int topBorder, out int rightBorder, out int bottomBorder)
+        {
+            leftBorder = 8;
+            topBorder = 30;
+            rightBorder = 8;
+            bottomBorder = 8;
+
+            if (PuttyHandle == IntPtr.Zero)
+                return false;
+
+            if (!NativeMethods.GetWindowRect(PuttyHandle, out NativeMethods.RECT windowRect) ||
+                !NativeMethods.GetClientRect(PuttyHandle, out NativeMethods.RECT internalClientRect))
+            {
+                return false;
+            }
+
+            long windowWidth = windowRect.right - windowRect.left;
+            long windowHeight = windowRect.bottom - windowRect.top;
+            long clientWidth = internalClientRect.right - internalClientRect.left;
+            long clientHeight = internalClientRect.bottom - internalClientRect.top;
+
+            int calcLeftBorder = (int)internalClientRect.left;
+            int calcTopBorder = (int)internalClientRect.top;
+            int calcRightBorder = (int)(windowWidth - clientWidth - calcLeftBorder);
+            int calcBottomBorder = (int)(windowHeight - clientHeight - calcTopBorder);
+
+            if (calcLeftBorder > 0 && calcLeftBorder < 50 &&
+                calcTopBorder > 0 && calcTopBorder < 100 &&
+                calcRightBorder > 0 && calcRightBorder < 50 &&
+                calcBottomBorder > 0 && calcBottomBorder < 50)
+            {
+                leftBorder = calcLeftBorder;
+                topBorder = calcTopBorder;
+                rightBorder = calcRightBorder;
+                bottomBorder = calcBottomBorder;
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Removes ALL window decorations from the embedded PuTTY window.
+        /// Called initially when embedding and then on every resize to ensure styles persist.
+        /// Uses DWM to remove the frame completely.
+        /// </summary>
+        private void RemovePuttyWindowDecorations()
+        {
+            if (PuttyHandle == IntPtr.Zero)
+                return;
+
+            try
+            {
+                // Remove ALL standard window styles
+                int style = NativeMethods.GetWindowLong(PuttyHandle, NativeMethods.GWL_STYLE);
+                style &= ~(NativeMethods.WS_CAPTION |         // Title bar
+                           NativeMethods.WS_THICKFRAME |      // Resizable border
+                           NativeMethods.WS_BORDER |          // Static border
+                           NativeMethods.WS_VSCROLL |         // Vertical scrollbar
+                           NativeMethods.WS_HSCROLL |         // Horizontal scrollbar
+                           NativeMethods.WS_MINIMIZEBOX |     // Minimize button
+                           NativeMethods.WS_MAXIMIZEBOX |     // Maximize button
+                           NativeMethods.WS_SYSMENU);         // System menu
+                NativeMethods.SetWindowLong(PuttyHandle, NativeMethods.GWL_STYLE, style);
+
+                // Remove ALL extended window styles
+                int exStyle = NativeMethods.GetWindowLong(PuttyHandle, NativeMethods.GWL_EXSTYLE);
+                exStyle &= ~(NativeMethods.WS_EX_STATICEDGE |      // Static edge border
+                             NativeMethods.WS_EX_CLIENTEDGE |      // Client edge border (3D effect)
+                             NativeMethods.WS_EX_WINDOWEDGE);      // Window edge border  
+                NativeMethods.SetWindowLong(PuttyHandle, NativeMethods.GWL_EXSTYLE, exStyle);
+
+                // Use DWM (Desktop Window Manager) to extend client area into the frame
+                // This removes the frame drawing completely for a seamless look
+                try
+                {
+                    // Extend margins: -1 means extend into entire non-client area
+                    NativeMethods.MARGINS margins = new() { cxLeftWidth = -1, cxRightWidth = -1, cyTopHeight = -1, cyBottomHeight = -1 };
+                    NativeMethods.DwmExtendFrameIntoClientArea(PuttyHandle, ref margins);
+                }
+                catch
+                {
+                    // DWM might not be available on all Windows versions; continue anyway
+                }
+
+                // Force recalculation of the window frame
+                NativeMethods.SetWindowPos(PuttyHandle, IntPtr.Zero,
+                    0, 0, 0, 0,
+                    NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE |
+                    NativeMethods.SWP_NOZORDER | NativeMethods.SWP_FRAMECHANGED);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    $"Error removing PuTTY window decorations: {ex.Message}", true);
+            }
+        }
+
+        /// <summary>
+        /// Handles resize events to reapply border removal styles.
+        /// Decorations can re-appear after resize, so we need to continuously remove them.
+        /// Uses dynamically calculated border values with fallback to defaults if calculation fails.
+        /// </summary>
+        private void InterfaceControl_Resize(object sender, EventArgs e)
+        {
+            if (PuttyHandle == IntPtr.Zero)
+                return;
+
+            RemovePuttyWindowDecorations();
+
+            // Use the same dynamic sizing logic as Resize() method
+            // Use the container panel if it exists, otherwise use InterfaceControl
+            Rectangle clientRect = _puttyContainerPanel?.ClientRectangle ?? InterfaceControl.ClientRectangle;
+
+            int leftBorder;
+            int topBorder;
+            int rightBorder;
+            int bottomBorder;
+            bool calculatedSuccessfully = TryGetPuTTYBorderSizes(out leftBorder, out topBorder, out rightBorder, out bottomBorder);
+
+            // Apply calculated offsets to hide borders outside panel
+            NativeMethods.MoveWindow(PuttyHandle,
+                clientRect.X - leftBorder,
+                clientRect.Y - topBorder,
+                clientRect.Width + leftBorder + rightBorder,
+                clientRect.Height + topBorder + bottomBorder,
+                true);
         }
 
         #endregion
@@ -122,6 +388,7 @@ namespace mRemoteNG.Connection.Protocol
                                 if (!string.IsNullOrEmpty(privatekey))
                                 {
                                     optionalTemporaryPrivateKeyPath = WriteTemporaryPrivateKeyFile(privatekey);
+                                    _temporaryPrivateKeyPath = optionalTemporaryPrivateKeyPath;
                                 }
                             }
                             catch (Exception ex)
@@ -138,6 +405,7 @@ namespace mRemoteNG.Connection.Protocol
                                 if (!string.IsNullOrEmpty(privatekey))
                                 {
                                     optionalTemporaryPrivateKeyPath = WriteTemporaryPrivateKeyFile(privatekey);
+                                    _temporaryPrivateKeyPath = optionalTemporaryPrivateKeyPath;
                                 }
                             }
                             catch (Exception ex)
@@ -235,7 +503,7 @@ namespace mRemoteNG.Connection.Protocol
                             arguments.Add("-auth-plugin");
                             string random = string.Join("", Guid.NewGuid().ToString("n").Take(8));
                             string pipename = $"mRemoteNGSecretPipe{random}";
-                            arguments.Add($"{App.Info.GeneralAppInfo.HomePath}\\vault-ssh-helper-plugin.exe {username} --pipeName={pipename}");
+                            AddArgumentString(arguments, $"\"{App.Info.GeneralAppInfo.HomePath}\\vault-ssh-helper-plugin.exe\" {username} --pipeName={pipename}");
                             System.Threading.Tasks.Task.Run(async () => {
                                 using NamedPipeServerStream server = CreatePipeServer(pipename);
                                 var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token;
@@ -274,7 +542,8 @@ namespace mRemoteNG.Connection.Protocol
                 // add additional SSH options, f.e. tunnel or noshell parameters that may be specified for the the connnection
                 if (!string.IsNullOrEmpty(InterfaceControl.Info.SSHOptions))
                 {
-                    PuttyProcess.StartInfo.Arguments += " " + InterfaceControl.Info.SSHOptions;
+                    AddArgumentString(arguments, InterfaceControl.Info.SSHOptions);
+                    PuttyProcess.StartInfo.Arguments = arguments.ToString();
                 }
 
                 PuttyProcess.EnableRaisingEvents = true;
@@ -293,8 +562,8 @@ namespace mRemoteNG.Connection.Protocol
                 PuttyProcess.WaitForInputIdle(Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
 
                 int startTicks = Environment.TickCount;
-                while (PuttyHandle.ToInt32() == 0 &
-                       Environment.TickCount < startTicks + Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000)
+                while (PuttyHandle == IntPtr.Zero &&
+                        Environment.TickCount < startTicks + Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000)
                 {
                     if (PuttyProcess.HasExited)
                         break;
@@ -328,7 +597,7 @@ namespace mRemoteNG.Connection.Protocol
                         }
                     }
 
-                    if (PuttyHandle.ToInt32() == 0)
+                    if (PuttyHandle == IntPtr.Zero)
                     {
                         Thread.Sleep(100);
                     }
@@ -336,28 +605,58 @@ namespace mRemoteNG.Connection.Protocol
 
                 if (!_isPuttyNg)
                 {
-                    NativeMethods.SetParent(PuttyHandle, InterfaceControl.Handle);
-
-                    // Strip the title bar and thick frame border so the
-                    // embedded PuTTY window fills the panel cleanly.
-                    int style = NativeMethods.GetWindowLong(PuttyHandle, NativeMethods.GWL_STYLE);
-                    style &= ~(NativeMethods.WS_CAPTION | NativeMethods.WS_THICKFRAME);
-                    int previousStyle = NativeMethods.SetWindowLong(PuttyHandle, NativeMethods.GWL_STYLE, style);
-                    
-                    // Check if SetWindowLong failed (returns 0 on error, but 0 could also be the previous value)
-                    // If it returns 0 and the previous GetWindowLong succeeded, log a warning
-                    if (previousStyle == 0)
+                    // Create a container panel with 10px margins on all sides
+                    _puttyContainerPanel = new Panel
                     {
-                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, 
-                            Language.PuttyStuff + ": SetWindowLong returned 0, window style change may have failed", true);
-                    }
+                        Parent = InterfaceControl,
+                        Dock = DockStyle.Fill,
+                        Margin = new Padding(10, 10, 10, 10),
+                        BackColor = System.Drawing.Color.Black
+                    };
 
-                    // Force Windows to recalculate the non-client area so the
-                    // removed caption and border actually disappear.
+                    // Parent PuTTY to the container panel instead of InterfaceControl
+                    NativeMethods.SetParent(PuttyHandle, _puttyContainerPanel.Handle);
+
+                    // Get container panel dimensions for sizing
+                    Rectangle containerRect = _puttyContainerPanel.ClientRectangle;
+
+                    // Calculate 70% size 
+                    int newWidth = (int)(containerRect.Width * 0.7);
+                    int newHeight = (int)(containerRect.Height * 0.7);
+
+                    // Initial aggressive border and decoration removal
+                    RemovePuttyWindowDecorations();
+
+                    // Step 1: First SetWindowPos call - with explicit position and size
                     NativeMethods.SetWindowPos(PuttyHandle, IntPtr.Zero,
-                        0, 0, 0, 0,
-                        NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE |
+                        0, 0, 
+                        newWidth, newHeight,
                         NativeMethods.SWP_NOZORDER | NativeMethods.SWP_FRAMECHANGED);
+
+                    // Step 2: Small delay to allow Windows to process style changes
+                    Thread.Sleep(100);
+
+                    // Step 3: Second SetWindowPos call - force recalculation again
+                    NativeMethods.SetWindowPos(PuttyHandle, IntPtr.Zero,
+                        0, 0, 
+                        newWidth, newHeight,
+                        NativeMethods.SWP_NOZORDER | NativeMethods.SWP_FRAMECHANGED);
+
+                    // Step 4: Show the window explicitly to force redraw
+                    NativeMethods.ShowWindow(PuttyHandle, (int)NativeMethods.SW_SHOW);
+
+                    // Step 5: Final positioning to ensure seamless integration
+                    NativeMethods.SetWindowPos(PuttyHandle, IntPtr.Zero,
+                        0, 0, 
+                        newWidth, newHeight,
+                        NativeMethods.SWP_NOZORDER | NativeMethods.SWP_FRAMECHANGED | NativeMethods.SWP_SHOWWINDOW);
+
+                    // CRITICAL: Hook into resize event to reapply decoration removal
+                    // This ensures decorations don't reappear when the window is resized
+                    InterfaceControl.Resize += InterfaceControl_Resize;
+
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, 
+                        Language.PuttyStuff + ": Border removal hooked to persist through resizes", true);
                 }
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.PuttyStuff, true);
@@ -388,45 +687,8 @@ namespace mRemoteNG.Connection.Protocol
             }
             finally
             {
-                // make sure to remove the private key file we created
-                if (!string.IsNullOrEmpty(optionalTemporaryPrivateKeyPath))
-                {
-                    System.Threading.Thread.Sleep(500);
-                    System.IO.File.Delete(optionalTemporaryPrivateKeyPath);
-                }
+                CleanupTemporaryPrivateKey();
             }
-        }
-
-        /// <summary>
-        /// Atomically writes private-key material to a uniquely named temporary
-        /// file and returns its path. Uses <see cref="FileMode.CreateNew"/> so an
-        /// existing file is never overwritten, retrying on the (extremely
-        /// unlikely) name collision. The caller owns the returned file and is
-        /// responsible for deleting it.
-        /// </summary>
-        private static string WriteTemporaryPrivateKeyFile(string privateKey)
-        {
-            for (int attempt = 0; attempt < 5; attempt++)
-            {
-                string candidatePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".ppk");
-                try
-                {
-                    using (FileStream stream = new(candidatePath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
-                    using (StreamWriter writer = new(stream))
-                    {
-                        writer.Write(privateKey);
-                    }
-
-                    File.SetAttributes(candidatePath, FileAttributes.Temporary);
-                    return candidatePath;
-                }
-                catch (IOException) when (File.Exists(candidatePath))
-                {
-                    // Name collided with a pre-existing file - try a different name.
-                }
-            }
-
-            throw new IOException("Unable to create a unique temporary private-key file.");
         }
 
         public override void Focus()
@@ -457,11 +719,35 @@ namespace mRemoteNG.Connection.Protocol
                 }
                 else
                 {
-                    // Window chrome (caption + thick frame) has been stripped
-                    // after reparenting, so just fill the client rectangle.
-                    Rectangle clientRect = InterfaceControl.ClientRectangle;
+                    // For regular PuTTY, use the container panel if it exists
+                    Rectangle clientRect = _puttyContainerPanel?.ClientRectangle ?? InterfaceControl.ClientRectangle;
 
-                    NativeMethods.MoveWindow(PuttyHandle, clientRect.X-8, clientRect.Y-30, clientRect.Width+32, clientRect.Height+38, true);
+                    int leftBorder;
+                    int topBorder;
+                    int rightBorder;
+                    int bottomBorder;
+                    bool calculatedSuccessfully = TryGetPuTTYBorderSizes(out leftBorder, out topBorder, out rightBorder, out bottomBorder);
+
+                    if (calculatedSuccessfully)
+                    {
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                            $"PuTTY dynamic borders - Left:{leftBorder}, Top (header):{topBorder}, Right (+ scroll): {rightBorder}, Bottom:{bottomBorder}", true);
+                    }
+                    else
+                    {
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                            $"PuTTY using fallback borders - Left:{leftBorder}, Top:{topBorder}, Right:{rightBorder}, Bottom:{bottomBorder}", true);
+                    }
+
+                    // Apply calculated offsets to hide borders outside panel
+                    // Position at negative offset to move borders out of view
+                    // Size is expanded by border amounts to compensate
+                    NativeMethods.MoveWindow(PuttyHandle,
+                        clientRect.X - leftBorder,
+                        clientRect.Y - topBorder,
+                        clientRect.Width + leftBorder + rightBorder,
+                        clientRect.Height + topBorder + bottomBorder,
+                        true);
                 }
             }
             catch (Exception ex)
@@ -472,8 +758,16 @@ namespace mRemoteNG.Connection.Protocol
 
         public override void Close()
         {
+            CleanupTemporaryPrivateKey();
+            CleanupEmbeddedPutty();
+
             try
             {
+                if (PuttyProcess != null)
+                {
+                    PuttyProcess.Exited -= ProcessExited;
+                }
+
                 if (PuttyProcess?.HasExited == false)
                 {
                     PuttyProcess.Kill();
@@ -487,6 +781,7 @@ namespace mRemoteNG.Connection.Protocol
             try
             {
                 PuttyProcess?.Dispose();
+                PuttyProcess = null;
             }
             catch (Exception ex)
             {

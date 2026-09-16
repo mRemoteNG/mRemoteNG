@@ -1,5 +1,6 @@
-﻿using mRemoteNG.UI.Controls;
-using System;
+﻿using System;
+using System.Windows.Forms;
+using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -26,11 +27,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tabPage1 = new System.Windows.Forms.TabPage();
             pnlSQLCon = new System.Windows.Forms.TableLayoutPanel();
             chkSQLReadOnly = new System.Windows.Forms.CheckBox();
-            txtSQLAuthType = new MrngComboBox();
+            txtSQLAuthType = new ComboBox();
             lblSQLAuthType = new MrngLabel();
             lblSQLReadOnly = new MrngLabel();
             lblSQLType = new MrngLabel();
-            txtSQLType = new MrngComboBox();
+            txtSQLType = new ComboBox();
             lblSQLServer = new MrngLabel();
             lblSQLUsername = new MrngLabel();
             lblSQLPassword = new MrngLabel();
@@ -44,7 +45,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             mrngLabel19 = new MrngLabel();
-            mrngComboBox4 = new MrngComboBox();
+            mrngComboBox4 = new ComboBox();
             mrngLabel18 = new MrngLabel();
             mrngLabel1 = new MrngLabel();
             mrngLabel9 = new MrngLabel();
@@ -55,11 +56,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             mrngLabel7 = new MrngLabel();
             mrngTextBox5 = new MrngTextBox();
             mrngLabel3 = new MrngLabel();
-            mrngComboBox2 = new MrngComboBox();
+            mrngComboBox2 = new ComboBox();
             mrngCheckBox2 = new MrngCheckBox();
             mrngCheckBox4 = new MrngCheckBox();
             mrngCheckBox3 = new MrngCheckBox();
-            mrngComboBox3 = new MrngComboBox();
+            mrngComboBox3 = new ComboBox();
             mrngLabel11 = new MrngLabel();
             mrngLabel12 = new MrngLabel();
             mrngLabel13 = new MrngLabel();
@@ -160,9 +161,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlServerBlock.Controls.Add(tableLayoutPanel1);
             pnlServerBlock.Controls.Add(label1);
             pnlServerBlock.Controls.Add(picboxLogo);
-            pnlServerBlock.Location = new System.Drawing.Point(15, 120);
+            pnlServerBlock.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlServerBlock.Location = new System.Drawing.Point(0, 116);
+            pnlServerBlock.Margin = new System.Windows.Forms.Padding(12, 8, 12, 0);
             pnlServerBlock.Name = "pnlServerBlock";
-            pnlServerBlock.Size = new System.Drawing.Size(492, 324);
+            pnlServerBlock.Padding = new System.Windows.Forms.Padding(12, 8, 12, 12);
+            pnlServerBlock.Size = new System.Drawing.Size(656, 344);
             pnlServerBlock.TabIndex = 27;
             pnlServerBlock.Visible = false;
             // 
@@ -172,10 +176,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tabCtrlSQL.Controls.Add(tabPage2);
             tabCtrlSQL.Controls.Add(tabPage3);
             tabCtrlSQL.Controls.Add(tabPage4);
-            tabCtrlSQL.Location = new System.Drawing.Point(8, 3);
+            tabCtrlSQL.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tabCtrlSQL.Location = new System.Drawing.Point(12, 8);
             tabCtrlSQL.Name = "tabCtrlSQL";
             tabCtrlSQL.SelectedIndex = 0;
-            tabCtrlSQL.Size = new System.Drawing.Size(481, 277);
+            tabCtrlSQL.Size = new System.Drawing.Size(632, 277);
             tabCtrlSQL.TabIndex = 33;
             tabCtrlSQL.Visible = false;
             // 
@@ -236,14 +241,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // txtSQLAuthType
             // 
-            txtSQLAuthType._mice = MrngComboBox.MouseState.HOVER;
             txtSQLAuthType.Dock = System.Windows.Forms.DockStyle.Fill;
-            txtSQLAuthType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            txtSQLAuthType.DropDownStyle = ComboBoxStyle.DropDownList;
             txtSQLAuthType.FormattingEnabled = true;
+            txtSQLAuthType.IntegralHeight = false;
             txtSQLAuthType.Items.AddRange(new object[] { "Windows Authentication", "SQL Server Authentication", "Microsoft Entra MFA", "Microsoft Entra Password", "Microsoft Entra Integrated", "Microsoft Entra Service Principal", "Microsoft Entra Managed Identity", "Microsoft Entra Default" });
             txtSQLAuthType.Location = new System.Drawing.Point(163, 81);
             txtSQLAuthType.Name = "txtSQLAuthType";
-            txtSQLAuthType.Size = new System.Drawing.Size(292, 21);
+            txtSQLAuthType.Size = new System.Drawing.Size(292, 23);
             txtSQLAuthType.TabIndex = 24;
             txtSQLAuthType.SelectedIndexChanged += txtSQLAuthType_SelectedIndexChanged;
             // 
@@ -280,14 +285,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // txtSQLType
             // 
-            txtSQLType._mice = MrngComboBox.MouseState.HOVER;
             txtSQLType.Dock = System.Windows.Forms.DockStyle.Fill;
-            txtSQLType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            txtSQLType.DropDownStyle = ComboBoxStyle.DropDownList;
             txtSQLType.FormattingEnabled = true;
+            txtSQLType.IntegralHeight = false;
             txtSQLType.Items.AddRange(new object[] { "MSSQL - developed by Microsoft", "MySQL - developed by Oracle" });
             txtSQLType.Location = new System.Drawing.Point(163, 3);
             txtSQLType.Name = "txtSQLType";
-            txtSQLType.Size = new System.Drawing.Size(292, 21);
+            txtSQLType.Size = new System.Drawing.Size(292, 23);
             txtSQLType.TabIndex = 21;
             // 
             // lblSQLServer
@@ -327,7 +332,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtSQLServer.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             txtSQLServer.Location = new System.Drawing.Point(163, 29);
             txtSQLServer.Name = "txtSQLServer";
-            txtSQLServer.Size = new System.Drawing.Size(292, 22);
+            txtSQLServer.Size = new System.Drawing.Size(466, 22);
             txtSQLServer.TabIndex = 4;
             // 
             // txtSQLPassword
@@ -337,7 +342,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtSQLPassword.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             txtSQLPassword.Location = new System.Drawing.Point(163, 133);
             txtSQLPassword.Name = "txtSQLPassword";
-            txtSQLPassword.Size = new System.Drawing.Size(292, 22);
+            txtSQLPassword.Size = new System.Drawing.Size(466, 22);
             txtSQLPassword.TabIndex = 10;
             txtSQLPassword.UseSystemPasswordChar = true;
             // 
@@ -348,7 +353,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtSQLUsername.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             txtSQLUsername.Location = new System.Drawing.Point(163, 107);
             txtSQLUsername.Name = "txtSQLUsername";
-            txtSQLUsername.Size = new System.Drawing.Size(292, 22);
+            txtSQLUsername.Size = new System.Drawing.Size(466, 22);
             txtSQLUsername.TabIndex = 8;
             // 
             // tabPage2
@@ -357,8 +362,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tabPage2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             tabPage2.Location = new System.Drawing.Point(4, 22);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            tabPage2.Size = new System.Drawing.Size(473, 251);
+            tabPage2.Padding = new System.Windows.Forms.Padding(12);
+            tabPage2.Size = new System.Drawing.Size(624, 251);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Connection Properties";
             tabPage2.UseVisualStyleBackColor = true;
@@ -366,7 +371,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.ColumnCount = 2;
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel2.Controls.Add(txtSQLDatabaseName, 1, 0);
             tableLayoutPanel2.Controls.Add(lblSQLDatabaseName, 0, 0);
@@ -378,19 +383,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tableLayoutPanel2.Controls.Add(mrngLabel1, 0, 3);
             tableLayoutPanel2.Controls.Add(mrngLabel9, 0, 4);
             tableLayoutPanel2.Controls.Add(numericUpDown1, 1, 2);
-            tableLayoutPanel2.Location = new System.Drawing.Point(-3, 9);
+            tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel2.Location = new System.Drawing.Point(12, 12);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 6;
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(458, 191);
+            tableLayoutPanel2.RowCount = 5;
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel2.Size = new System.Drawing.Size(600, 227);
             tableLayoutPanel2.TabIndex = 23;
             // 
             // txtSQLDatabaseName
@@ -400,7 +402,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtSQLDatabaseName.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             txtSQLDatabaseName.Location = new System.Drawing.Point(163, 3);
             txtSQLDatabaseName.Name = "txtSQLDatabaseName";
-            txtSQLDatabaseName.Size = new System.Drawing.Size(292, 22);
+            txtSQLDatabaseName.Size = new System.Drawing.Size(466, 22);
             txtSQLDatabaseName.TabIndex = 32;
             // 
             // lblSQLDatabaseName
@@ -415,18 +417,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // numericUpDown3
             // 
-            numericUpDown3.Location = new System.Drawing.Point(163, 107);
+            numericUpDown3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            numericUpDown3.Location = new System.Drawing.Point(193, 133);
             numericUpDown3.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
             numericUpDown3.Name = "numericUpDown3";
-            numericUpDown3.Size = new System.Drawing.Size(120, 22);
+            numericUpDown3.Size = new System.Drawing.Size(140, 22);
             numericUpDown3.TabIndex = 30;
             // 
             // numericUpDown2
             // 
-            numericUpDown2.Location = new System.Drawing.Point(163, 81);
+            numericUpDown2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            numericUpDown2.Location = new System.Drawing.Point(193, 101);
             numericUpDown2.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
             numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new System.Drawing.Size(120, 22);
+            numericUpDown2.Size = new System.Drawing.Size(140, 22);
             numericUpDown2.TabIndex = 29;
             numericUpDown2.Value = new decimal(new int[] { 30, 0, 0, 0 });
             // 
@@ -442,14 +446,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // mrngComboBox4
             // 
-            mrngComboBox4._mice = MrngComboBox.MouseState.HOVER;
             mrngComboBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            mrngComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            mrngComboBox4.DropDownStyle = ComboBoxStyle.DropDownList;
             mrngComboBox4.FormattingEnabled = true;
+            mrngComboBox4.IntegralHeight = false;
             mrngComboBox4.Items.AddRange(new object[] { "<default>", "Named Pipes", "Shared Memory", "TCP/IP" });
-            mrngComboBox4.Location = new System.Drawing.Point(163, 29);
+            mrngComboBox4.Location = new System.Drawing.Point(193, 35);
             mrngComboBox4.Name = "mrngComboBox4";
-            mrngComboBox4.Size = new System.Drawing.Size(292, 21);
+            mrngComboBox4.Size = new System.Drawing.Size(404, 23);
             mrngComboBox4.TabIndex = 26;
             // 
             // mrngLabel18
@@ -484,10 +488,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // numericUpDown1
             // 
-            numericUpDown1.Location = new System.Drawing.Point(163, 55);
+            numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            numericUpDown1.Location = new System.Drawing.Point(193, 69);
             numericUpDown1.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new System.Drawing.Size(120, 22);
+            numericUpDown1.Size = new System.Drawing.Size(140, 22);
             numericUpDown1.TabIndex = 28;
             numericUpDown1.Value = new decimal(new int[] { 4096, 0, 0, 0 });
             // 
@@ -497,8 +502,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tabPage3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             tabPage3.Location = new System.Drawing.Point(4, 22);
             tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            tabPage3.Size = new System.Drawing.Size(473, 251);
+            tabPage3.Padding = new System.Windows.Forms.Padding(12);
+            tabPage3.Size = new System.Drawing.Size(624, 251);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Security";
             tabPage3.UseVisualStyleBackColor = true;
@@ -506,7 +511,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // tableLayoutPanel3
             // 
             tableLayoutPanel3.ColumnCount = 2;
-            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel3.Controls.Add(mrngCheckBox5, 1, 8);
             tableLayoutPanel3.Controls.Add(mrngLabel7, 0, 8);
@@ -526,20 +531,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tableLayoutPanel3.Controls.Add(mrngLabel16, 0, 4);
             tableLayoutPanel3.Controls.Add(mrngLabel17, 0, 5);
             tableLayoutPanel3.Controls.Add(mrngTextBox11, 1, 4);
-            tableLayoutPanel3.Location = new System.Drawing.Point(-3, 9);
+            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel3.Location = new System.Drawing.Point(12, 12);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 10;
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel3.Size = new System.Drawing.Size(458, 233);
+            tableLayoutPanel3.RowCount = 9;
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel3.Size = new System.Drawing.Size(600, 227);
             tableLayoutPanel3.TabIndex = 23;
             // 
             // mrngCheckBox5
@@ -569,9 +574,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             mrngTextBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             mrngTextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             mrngTextBox5.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            mrngTextBox5.Location = new System.Drawing.Point(163, 185);
+            mrngTextBox5.Location = new System.Drawing.Point(193, 227);
             mrngTextBox5.Name = "mrngTextBox5";
-            mrngTextBox5.Size = new System.Drawing.Size(292, 22);
+            mrngTextBox5.Size = new System.Drawing.Size(404, 22);
             mrngTextBox5.TabIndex = 31;
             // 
             // mrngLabel3
@@ -586,14 +591,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // mrngComboBox2
             // 
-            mrngComboBox2._mice = MrngComboBox.MouseState.HOVER;
             mrngComboBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            mrngComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            mrngComboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
             mrngComboBox2.FormattingEnabled = true;
+            mrngComboBox2.IntegralHeight = false;
             mrngComboBox2.Items.AddRange(new object[] { "Optional", "Mandatory", "Strict (SQL Server 2022 and Azure SQL)" });
-            mrngComboBox2.Location = new System.Drawing.Point(163, 159);
+            mrngComboBox2.Location = new System.Drawing.Point(193, 195);
             mrngComboBox2.Name = "mrngComboBox2";
-            mrngComboBox2.Size = new System.Drawing.Size(292, 21);
+            mrngComboBox2.Size = new System.Drawing.Size(404, 23);
             mrngComboBox2.TabIndex = 29;
             // 
             // mrngCheckBox2
@@ -634,14 +639,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // mrngComboBox3
             // 
-            mrngComboBox3._mice = MrngComboBox.MouseState.HOVER;
             mrngComboBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            mrngComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            mrngComboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
             mrngComboBox3.FormattingEnabled = true;
+            mrngComboBox3.IntegralHeight = false;
             mrngComboBox3.Items.AddRange(new object[] { "None", "Host Guardian Service", "Microsoft Azure Attestation" });
-            mrngComboBox3.Location = new System.Drawing.Point(163, 81);
+            mrngComboBox3.Location = new System.Drawing.Point(193, 99);
             mrngComboBox3.Name = "mrngComboBox3";
-            mrngComboBox3.Size = new System.Drawing.Size(292, 21);
+            mrngComboBox3.Size = new System.Drawing.Size(404, 23);
             mrngComboBox3.TabIndex = 24;
             // 
             // mrngLabel11
@@ -699,9 +704,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             mrngTextBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             mrngTextBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             mrngTextBox8.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            mrngTextBox8.Location = new System.Drawing.Point(163, 55);
+            mrngTextBox8.Location = new System.Drawing.Point(193, 67);
             mrngTextBox8.Name = "mrngTextBox8";
-            mrngTextBox8.Size = new System.Drawing.Size(292, 22);
+            mrngTextBox8.Size = new System.Drawing.Size(404, 22);
             mrngTextBox8.TabIndex = 6;
             // 
             // mrngLabel16
@@ -729,9 +734,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             mrngTextBox11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             mrngTextBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             mrngTextBox11.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            mrngTextBox11.Location = new System.Drawing.Point(163, 107);
+            mrngTextBox11.Location = new System.Drawing.Point(193, 131);
             mrngTextBox11.Name = "mrngTextBox11";
-            mrngTextBox11.Size = new System.Drawing.Size(292, 22);
+            mrngTextBox11.Size = new System.Drawing.Size(404, 22);
             mrngTextBox11.TabIndex = 8;
             // 
             // tabPage4
@@ -740,8 +745,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tabPage4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             tabPage4.Location = new System.Drawing.Point(4, 22);
             tabPage4.Name = "tabPage4";
-            tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            tabPage4.Size = new System.Drawing.Size(473, 251);
+            tabPage4.Padding = new System.Windows.Forms.Padding(12);
+            tabPage4.Size = new System.Drawing.Size(624, 251);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Setup";
             tabPage4.UseVisualStyleBackColor = true;
@@ -749,8 +754,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // tableLayoutPanel4
             // 
             tableLayoutPanel4.ColumnCount = 3;
-            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             tableLayoutPanel4.Controls.Add(DCMSetuptxtmandatory4, 2, 4);
             tableLayoutPanel4.Controls.Add(DCMSetuptxtmandatory3, 2, 3);
@@ -770,18 +775,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tableLayoutPanel4.Controls.Add(DCMSetuplblschema, 0, 1);
             tableLayoutPanel4.Controls.Add(DCMSetupddschema, 1, 1);
             tableLayoutPanel4.Controls.Add(DCMSetuplbladminuser, 0, 2);
-            tableLayoutPanel4.Location = new System.Drawing.Point(8, 6);
+            tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel4.Location = new System.Drawing.Point(12, 12);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 8;
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            tableLayoutPanel4.Size = new System.Drawing.Size(452, 225);
+            tableLayoutPanel4.RowCount = 7;
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            tableLayoutPanel4.Size = new System.Drawing.Size(600, 227);
             tableLayoutPanel4.TabIndex = 0;
             // 
             // DCMSetuptxtmandatory4
@@ -830,12 +835,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // DCMSetuptxtuserpwd
             // 
-            DCMSetuptxtuserpwd.Anchor = System.Windows.Forms.AnchorStyles.Left;
             DCMSetuptxtuserpwd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            DCMSetuptxtuserpwd.Dock = System.Windows.Forms.DockStyle.Fill;
             DCMSetuptxtuserpwd.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            DCMSetuptxtuserpwd.Location = new System.Drawing.Point(219, 184);
+            DCMSetuptxtuserpwd.Location = new System.Drawing.Point(193, 195);
             DCMSetuptxtuserpwd.Name = "DCMSetuptxtuserpwd";
-            DCMSetuptxtuserpwd.Size = new System.Drawing.Size(210, 22);
+            DCMSetuptxtuserpwd.Size = new System.Drawing.Size(384, 22);
             DCMSetuptxtuserpwd.TabIndex = 38;
             frmtoolTip.SetToolTip(DCMSetuptxtuserpwd, "If provided will be saved");
             DCMSetuptxtuserpwd.UseSystemPasswordChar = true;
@@ -843,12 +848,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // DCMSetuptxtuser
             // 
-            DCMSetuptxtuser.Anchor = System.Windows.Forms.AnchorStyles.Left;
             DCMSetuptxtuser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            DCMSetuptxtuser.Dock = System.Windows.Forms.DockStyle.Fill;
             DCMSetuptxtuser.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            DCMSetuptxtuser.Location = new System.Drawing.Point(219, 154);
+            DCMSetuptxtuser.Location = new System.Drawing.Point(193, 163);
             DCMSetuptxtuser.Name = "DCMSetuptxtuser";
-            DCMSetuptxtuser.Size = new System.Drawing.Size(210, 22);
+            DCMSetuptxtuser.Size = new System.Drawing.Size(384, 22);
             DCMSetuptxtuser.TabIndex = 37;
             frmtoolTip.SetToolTip(DCMSetuptxtuser, "If provided will be saved and grant write permissions to db");
             DCMSetuptxtuser.UseSystemPasswordChar = true;
@@ -882,9 +887,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             DCMSetuptxtdbname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             DCMSetuptxtdbname.Dock = System.Windows.Forms.DockStyle.Fill;
             DCMSetuptxtdbname.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            DCMSetuptxtdbname.Location = new System.Drawing.Point(219, 123);
+            DCMSetuptxtdbname.Location = new System.Drawing.Point(193, 131);
             DCMSetuptxtdbname.Name = "DCMSetuptxtdbname";
-            DCMSetuptxtdbname.Size = new System.Drawing.Size(210, 22);
+            DCMSetuptxtdbname.Size = new System.Drawing.Size(384, 22);
             DCMSetuptxtdbname.TabIndex = 33;
             // 
             // DCMSetuplbldbname
@@ -899,12 +904,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // DCMSetuptxtadmpwd
             // 
-            DCMSetuptxtadmpwd.Anchor = System.Windows.Forms.AnchorStyles.Left;
             DCMSetuptxtadmpwd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            DCMSetuptxtadmpwd.Dock = System.Windows.Forms.DockStyle.Fill;
             DCMSetuptxtadmpwd.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            DCMSetuptxtadmpwd.Location = new System.Drawing.Point(219, 94);
+            DCMSetuptxtadmpwd.Location = new System.Drawing.Point(193, 99);
             DCMSetuptxtadmpwd.Name = "DCMSetuptxtadmpwd";
-            DCMSetuptxtadmpwd.Size = new System.Drawing.Size(210, 22);
+            DCMSetuptxtadmpwd.Size = new System.Drawing.Size(384, 22);
             DCMSetuptxtadmpwd.TabIndex = 13;
             frmtoolTip.SetToolTip(DCMSetuptxtadmpwd, "Will be used but not saved");
             DCMSetuptxtadmpwd.UseSystemPasswordChar = true;
@@ -921,12 +926,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // DCMSetuptxtadmuser
             // 
-            DCMSetuptxtadmuser.Anchor = System.Windows.Forms.AnchorStyles.Left;
             DCMSetuptxtadmuser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            DCMSetuptxtadmuser.Dock = System.Windows.Forms.DockStyle.Fill;
             DCMSetuptxtadmuser.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            DCMSetuptxtadmuser.Location = new System.Drawing.Point(219, 64);
+            DCMSetuptxtadmuser.Location = new System.Drawing.Point(193, 67);
             DCMSetuptxtadmuser.Name = "DCMSetuptxtadmuser";
-            DCMSetuptxtadmuser.Size = new System.Drawing.Size(210, 22);
+            DCMSetuptxtadmuser.Size = new System.Drawing.Size(384, 22);
             DCMSetuptxtadmuser.TabIndex = 11;
             frmtoolTip.SetToolTip(DCMSetuptxtadmuser, "Will be used but not saved");
             DCMSetuptxtadmuser.UseSystemPasswordChar = true;
@@ -970,11 +975,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // DCMSetupddschema
             // 
-            DCMSetupddschema.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            DCMSetupddschema.Dock = System.Windows.Forms.DockStyle.Fill;
+            DCMSetupddschema.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             DCMSetupddschema.FormattingEnabled = true;
-            DCMSetupddschema.Location = new System.Drawing.Point(219, 34);
+            DCMSetupddschema.IntegralHeight = false;
+            DCMSetupddschema.Location = new System.Drawing.Point(193, 35);
             DCMSetupddschema.Name = "DCMSetupddschema";
-            DCMSetupddschema.Size = new System.Drawing.Size(210, 21);
+            DCMSetupddschema.Size = new System.Drawing.Size(384, 23);
             DCMSetupddschema.TabIndex = 3;
             // 
             // DCMSetuplbladminuser
@@ -991,7 +998,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // imgConnectionStatus
             // 
             imgConnectionStatus.Image = Properties.Resources.F1Help_16x;
-            imgConnectionStatus.Location = new System.Drawing.Point(243, 286);
+            imgConnectionStatus.Location = new System.Drawing.Point(12, 113);
             imgConnectionStatus.Name = "imgConnectionStatus";
             imgConnectionStatus.Size = new System.Drawing.Size(16, 16);
             imgConnectionStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -1001,7 +1008,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblTestConnectionResults
             // 
             lblTestConnectionResults.AutoSize = true;
-            lblTestConnectionResults.Location = new System.Drawing.Point(17, 289);
+            lblTestConnectionResults.Location = new System.Drawing.Point(34, 113);
             lblTestConnectionResults.Name = "lblTestConnectionResults";
             lblTestConnectionResults.Size = new System.Drawing.Size(124, 13);
             lblTestConnectionResults.TabIndex = 31;
@@ -1010,7 +1017,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // btnTestConnection
             // 
             btnTestConnection._mice = MrngButton.MouseState.OUT;
-            btnTestConnection.Location = new System.Drawing.Point(265, 286);
+            btnTestConnection.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnTestConnection.Location = new System.Drawing.Point(413, 108);
             btnTestConnection.Name = "btnTestConnection";
             btnTestConnection.Size = new System.Drawing.Size(109, 25);
             btnTestConnection.TabIndex = 30;
@@ -1020,7 +1028,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // btnExpandOptions
             // 
             btnExpandOptions._mice = MrngButton.MouseState.OUT;
-            btnExpandOptions.Location = new System.Drawing.Point(380, 286);
+            btnExpandOptions.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnExpandOptions.Location = new System.Drawing.Point(535, 108);
             btnExpandOptions.Name = "btnExpandOptions";
             btnExpandOptions.Size = new System.Drawing.Size(109, 25);
             btnExpandOptions.TabIndex = 29;
@@ -1031,7 +1040,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(mrngTextBox2, 1, 0);
             tableLayoutPanel1.Controls.Add(mrngLabel4, 0, 0);
@@ -1039,15 +1048,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tableLayoutPanel1.Controls.Add(mrngTextBox1, 1, 1);
             tableLayoutPanel1.Controls.Add(mrngLabel6, 0, 2);
             tableLayoutPanel1.Controls.Add(mrngTextBox4, 1, 2);
+            tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tableLayoutPanel1.Enabled = false;
-            tableLayoutPanel1.Location = new System.Drawing.Point(17, 148);
+            tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 4;
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(458, 81);
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(632, 90);
             tableLayoutPanel1.TabIndex = 28;
             // 
             // mrngTextBox2
@@ -1055,9 +1065,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             mrngTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             mrngTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             mrngTextBox2.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            mrngTextBox2.Location = new System.Drawing.Point(163, 3);
+            mrngTextBox2.Location = new System.Drawing.Point(173, 3);
             mrngTextBox2.Name = "mrngTextBox2";
-            mrngTextBox2.Size = new System.Drawing.Size(292, 22);
+            mrngTextBox2.Size = new System.Drawing.Size(456, 22);
             mrngTextBox2.TabIndex = 24;
             // 
             // mrngLabel4
@@ -1085,9 +1095,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             mrngTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             mrngTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             mrngTextBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            mrngTextBox1.Location = new System.Drawing.Point(163, 29);
+            mrngTextBox1.Location = new System.Drawing.Point(173, 33);
             mrngTextBox1.Name = "mrngTextBox1";
-            mrngTextBox1.Size = new System.Drawing.Size(292, 22);
+            mrngTextBox1.Size = new System.Drawing.Size(456, 22);
             mrngTextBox1.TabIndex = 6;
             // 
             // mrngLabel6
@@ -1105,9 +1115,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             mrngTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             mrngTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             mrngTextBox4.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            mrngTextBox4.Location = new System.Drawing.Point(163, 55);
+            mrngTextBox4.Location = new System.Drawing.Point(173, 63);
             mrngTextBox4.Name = "mrngTextBox4";
-            mrngTextBox4.Size = new System.Drawing.Size(292, 22);
+            mrngTextBox4.Size = new System.Drawing.Size(456, 22);
             mrngTextBox4.TabIndex = 8;
             // 
             // label1
@@ -1137,14 +1147,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             picboxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             picboxLogo.TabIndex = 0;
             picboxLogo.TabStop = false;
+            picboxLogo.Visible = false;
+            picboxLogo.Visible = false;
             // 
             // chkUseSQLServer
             // 
             chkUseSQLServer.AutoSize = true;
-            chkUseSQLServer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            chkUseSQLServer.Location = new System.Drawing.Point(15, 89);
+            chkUseSQLServer.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            chkUseSQLServer.Location = new System.Drawing.Point(15, 82);
             chkUseSQLServer.Name = "chkUseSQLServer";
-            chkUseSQLServer.Size = new System.Drawing.Size(240, 25);
+            chkUseSQLServer.Size = new System.Drawing.Size(211, 23);
             chkUseSQLServer.TabIndex = 34;
             chkUseSQLServer.Text = "Enable SQL Server Integration:";
             chkUseSQLServer.UseVisualStyleBackColor = true;
@@ -1204,10 +1216,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private System.Windows.Forms.TabControl tabCtrlSQL;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TableLayoutPanel pnlSQLCon;
-        private MrngComboBox txtSQLAuthType;
+        private ComboBox txtSQLAuthType;
         internal MrngLabel lblSQLAuthType;
         internal MrngLabel lblSQLType;
-        private MrngComboBox txtSQLType;
+        private ComboBox txtSQLType;
         internal MrngLabel lblSQLServer;
         internal MrngLabel lblSQLUsername;
         internal MrngLabel lblSQLPassword;
@@ -1220,7 +1232,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal MrngLabel mrngLabel9;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private MrngComboBox mrngComboBox3;
+        private ComboBox mrngComboBox3;
         internal MrngLabel mrngLabel11;
         internal MrngLabel mrngLabel15;
         internal MrngTextBox mrngTextBox8;
@@ -1234,7 +1246,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal MrngLabel mrngLabel14;
         private MrngCheckBox mrngCheckBox4;
         private MrngCheckBox mrngCheckBox3;
-        private MrngComboBox mrngComboBox2;
+        private ComboBox mrngComboBox2;
         private MrngCheckBox mrngCheckBox2;
         internal MrngLabel mrngLabel12;
         private MrngCheckBox mrngCheckBox5;
@@ -1244,7 +1256,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private System.Windows.Forms.CheckBox chkSQLReadOnly;
         private System.Windows.Forms.CheckBox chkUseSQLServer;
         internal MrngLabel mrngLabel19;
-        private MrngComboBox mrngComboBox4;
+        private ComboBox mrngComboBox4;
         internal MrngLabel mrngLabel18;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.NumericUpDown numericUpDown2;

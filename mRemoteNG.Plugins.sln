@@ -1,0 +1,78 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 14.0.25420.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mRemoteNG.PluginContracts", "mRemoteNG.PluginContracts\mRemoteNG.PluginContracts.csproj", "{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mRemoteNG.Plugins.PortScan", "mRemoteNG.Plugins.PortScan\mRemoteNG.Plugins.PortScan.csproj", "{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mRemoteNG.Plugins.AWS", "mRemoteNG.Plugins.AWS\mRemoteNG.Plugins.AWS.csproj", "{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mRemoteNG.Plugins.SshTransfer", "mRemoteNG.Plugins.SshTransfer\mRemoteNG.Plugins.SshTransfer.csproj", "{9C653643-0E51-4BD4-8D3A-8B8397D6D1F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|arm64 = Debug|arm64
+		Debug|x64 = Debug|x64
+		Release Self-Contained|arm64 = Release Self-Contained|arm64
+		Release Self-Contained|x64 = Release Self-Contained|x64
+		Release|arm64 = Release|arm64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Debug|arm64.ActiveCfg = Debug|arm64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Debug|arm64.Build.0 = Debug|arm64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Debug|x64.ActiveCfg = Debug|x64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Debug|x64.Build.0 = Debug|x64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release Self-Contained|arm64.ActiveCfg = Release Self-Contained|arm64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release Self-Contained|arm64.Build.0 = Release Self-Contained|arm64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release Self-Contained|x64.ActiveCfg = Release Self-Contained|x64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release Self-Contained|x64.Build.0 = Release Self-Contained|x64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release|arm64.ActiveCfg = Release|arm64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release|arm64.Build.0 = Release|arm64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release|x64.ActiveCfg = Release|x64
+		{F1B8B500-3A25-4DCA-95C8-30E46F0687F2}.Release|x64.Build.0 = Release|x64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Debug|arm64.ActiveCfg = Debug|arm64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Debug|arm64.Build.0 = Debug|arm64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Debug|x64.ActiveCfg = Debug|x64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Debug|x64.Build.0 = Debug|x64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release Self-Contained|arm64.ActiveCfg = Release Self-Contained|arm64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release Self-Contained|arm64.Build.0 = Release Self-Contained|arm64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release Self-Contained|x64.ActiveCfg = Release Self-Contained|x64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release Self-Contained|x64.Build.0 = Release Self-Contained|x64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release|arm64.ActiveCfg = Release|arm64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release|arm64.Build.0 = Release|arm64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release|x64.ActiveCfg = Release|x64
+		{D5E56431-7D54-4A3F-9A5C-13A4E2BBA5E1}.Release|x64.Build.0 = Release|x64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Debug|arm64.ActiveCfg = Debug|arm64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Debug|arm64.Build.0 = Debug|arm64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Debug|x64.ActiveCfg = Debug|x64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Debug|x64.Build.0 = Debug|x64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release Self-Contained|arm64.ActiveCfg = Release Self-Contained|arm64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release Self-Contained|arm64.Build.0 = Release Self-Contained|arm64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release Self-Contained|x64.ActiveCfg = Release Self-Contained|x64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release Self-Contained|x64.Build.0 = Release Self-Contained|x64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release|arm64.ActiveCfg = Release|arm64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release|arm64.Build.0 = Release|arm64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release|x64.ActiveCfg = Release|x64
+		{B6FC4667-3E17-4FB0-9615-F4B33C1BB757}.Release|x64.Build.0 = Release|x64
+		{9C653643-0E51-4BD4-8D3A-8B8397D6D1F3}.Debug|arm64.ActiveCfg = Debug|arm64
+		{9C653643-0E51-4BD4-8D3A-8B8397D6D1F3}.Debug|arm64.Build.0 = Debug|arm64
+		{9C653643-0E51-4BD4-8D3A-8B8397D6D1F3}.Debug|x64.ActiveCfg = Debug|x64
+		{9C653643-0E51-4BD4-8D3A-8B8397D6D1F3}.Debug|x64.Build.0 = Debug|x64
+		{9C653643-0E51-4BD4-8D3A-8B8397D6D1F3}.Release Self-Contained|arm64.ActiveCfg = Release Self-Contained|arm64
+		{9C653643-0E51-4BD4-8D3A-8B8397D6D1F3}.Release Self-Contained|arm64.Build.0 = Release Self-Contained|arm64
+		{9C653643-0E51-4BD4-8D3A-8B8397D6D1F3}.Release Self-Contained|x64.ActiveCfg = Release Self-Contained|x64
+		{9C653643-0E51-4BD4-8D3A-8B8397D6D1F3}.Release Self-Contained|x64.Build.0 = Release Self-Contained|x64
+		{9C653643-0E51-4BD4-8D3A-8B8397D6D1F3}.Release|arm64.ActiveCfg = Release|arm64
+		{9C653643-0E51-4BD4-8D3A-8B8397D6D1F3}.Release|arm64.Build.0 = Release|arm64
+		{9C653643-0E51-4BD4-8D3A-8B8397D6D1F3}.Release|x64.ActiveCfg = Release|x64
+		{9C653643-0E51-4BD4-8D3A-8B8397D6D1F3}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A3DB7B0-BEA5-4F47-B416-3D9F890D78A6}
+	EndGlobalSection
+EndGlobal

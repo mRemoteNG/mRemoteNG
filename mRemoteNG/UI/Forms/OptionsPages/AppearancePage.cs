@@ -31,13 +31,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.ApplyLanguage();
 
             lblLanguage.Text = Language.LanguageString;
-            lblLanguageRestartRequired.Text =
-                string.Format(Language.LanguageRestartRequired, Application.ProductName);
+            lblLanguageRestartRequired.Text = string.Empty;
             chkShowDescriptionTooltipsInTree.Text = Language.ShowDescriptionTooltips;
             chkShowFullConnectionsFilePathInTitle.Text = Language.ShowFullConsFilePath;
             chkShowSystemTrayIcon.Text = Language.AlwaysShowSysTrayIcon;
             chkMinimizeToSystemTray.Text = Language.MinimizeToSysTray;
             chkCloseToSystemTray.Text = Language.CloseToSysTray;
+            chkEnableConnectionTreeAnimations.Text = Language.EnableConnectionTreeAnimations;
             lblRegistrySettingsUsedInfo.Text = Language.OptionsCompanyPolicyMessage;
         }
 
@@ -67,6 +67,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowSystemTrayIcon.Checked = Properties.OptionsAppearancePage.Default.ShowSystemTrayIcon;
             chkMinimizeToSystemTray.Checked = Properties.OptionsAppearancePage.Default.MinimizeToTray;
             chkCloseToSystemTray.Checked = Properties.OptionsAppearancePage.Default.CloseToTray;
+            chkEnableConnectionTreeAnimations.Checked = Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations;
         }
 
         public override void SaveSettings()
@@ -104,6 +105,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Properties.OptionsAppearancePage.Default.MinimizeToTray = chkMinimizeToSystemTray.Checked;
             Properties.OptionsAppearancePage.Default.CloseToTray = chkCloseToSystemTray.Checked;
+            Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations = chkEnableConnectionTreeAnimations.Checked;
         }
 
         public override void LoadRegistrySettings()

@@ -79,7 +79,7 @@ namespace mRemoteNGTests.Security
         public void DecryptionFailureThrowsException()
         {
             var cipherText = _cryptographyProvider.Encrypt(_plainText, _encryptionKey);
-            ActualValueDelegate<string> decryptMethod = () => _cryptographyProvider.Decrypt(cipherText, "wrongKey".ConvertToSecureString());
+            Func<string> decryptMethod = () => _cryptographyProvider.Decrypt(cipherText, "wrongKey".ConvertToSecureString());
             Assert.That(decryptMethod, Throws.TypeOf<EncryptionException>());
         }
 

@@ -11,6 +11,7 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using mRemoteNG.Plugins;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -23,7 +24,7 @@ using System.Runtime.Versioning;
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 {
     [SupportedOSPlatform("windows")]
-    public class XmlConnectionsDeserializer(Func<Optional<SecureString>> authenticationRequestor = null) : IDeserializer<string, ConnectionTreeModel>
+    public class XmlConnectionsDeserializer(Func<Optional<SecureString>>? authenticationRequestor = null) : IDeserializer<string, ConnectionTreeModel>
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
@@ -32,7 +33,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         private const double MaxSupportedConfVersion = 2.8;
         private readonly RootNodeInfo _rootNodeInfo = new(RootNodeType.Connection);
 
-        public Func<Optional<SecureString>> AuthenticationRequestor { get; set; } = authenticationRequestor;
+        public Func<Optional<SecureString>>? AuthenticationRequestor { get; set; } = authenticationRequestor;
 
         public ConnectionTreeModel Deserialize(string xml)
         {
@@ -122,7 +123,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             _rootNodeInfo.Name = connectionsRootElement?.Attributes["Name"]?.Value.Trim();
         }
 
-        private void CreateDecryptor(RootNodeInfo rootNodeInfo, XmlElement connectionsRootElement = null)
+        private void CreateDecryptor(RootNodeInfo rootNodeInfo, XmlElement? connectionsRootElement = null)
         {
             if (_confVersion >= 2.6)
             {
@@ -169,6 +170,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                             if (_confVersion >= 0.8)
                             {
                                 containerInfo.IsExpanded = xmlNode.GetAttributeAsBool("Expanded");
+                                containerInfo.IsRootGroup = xmlNode.GetAttributeAsBool("IsRootGroup");
                             }
 
                             parentContainer.AddChild(containerInfo);
@@ -525,10 +527,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.VaultOpenbaoSecretEngine = xmlnode.GetAttributeAsEnum("VaultOpenbaoSecretEngine", VaultOpenbaoSecretEngine.Kv);
                     connectionInfo.EC2InstanceId = xmlnode.GetAttributeAsString("EC2InstanceId");
                     connectionInfo.EC2Region = xmlnode.GetAttributeAsString("EC2Region");
+                    connectionInfo.ReplacePluginProperties(PluginConnectionDataSerializer.Deserialize(xmlnode.SelectSingleNode("PluginData")?.InnerText ?? string.Empty));
+                    LegacyPluginDataMigrator.Migrate(connectionInfo);
                     connectionInfo.UseRestrictedAdmin = xmlnode.GetAttributeAsBool("UseRestrictedAdmin");
                     connectionInfo.Inheritance.UseRestrictedAdmin = xmlnode.GetAttributeAsBool("InheritUseRestrictedAdmin");
                     connectionInfo.UseRCG = xmlnode.GetAttributeAsBool("UseRCG");
                     connectionInfo.Inheritance.UseRCG = xmlnode.GetAttributeAsBool("InheritUseRCG");
+                    connectionInfo.UseRedirectionServerName = xmlnode.GetAttributeAsBool("UseRedirectionServerName");
+                    connectionInfo.Inheritance.UseRedirectionServerName = xmlnode.GetAttributeAsBool("InheritUseRedirectionServerName");
                     connectionInfo.RDGatewayExternalCredentialProvider = xmlnode.GetAttributeAsEnum("RDGatewayExternalCredentialProvider", ExternalCredentialProvider.None);
                     connectionInfo.RDGatewayUserViaAPI = xmlnode.GetAttributeAsString("RDGatewayUserViaAPI");
                     connectionInfo.Inheritance.RDGatewayExternalCredentialProvider = xmlnode.GetAttributeAsBool("InheritRDGatewayExternalCredentialProvider");

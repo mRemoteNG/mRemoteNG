@@ -359,6 +359,12 @@
     <Setting Name="ConDefaultUseRCG" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="InhDefaultUseRedirectionServerName" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultUseRedirectionServerName" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="ConDefaultUseVmId" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -588,7 +594,22 @@
       <Value Profile="(Default)">None</Value>
     </Setting>
     <Setting Name="SlowClickRenameEnabled" Type="System.Boolean" Scope="User">
-        <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayAccessToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultRedirectDiskDrivesCustom" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DisabledPlugins" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PluginFolderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PluginPanelAssignments" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

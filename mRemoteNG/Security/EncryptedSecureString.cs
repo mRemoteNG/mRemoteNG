@@ -9,7 +9,7 @@ namespace mRemoteNG.Security
 {
     public class EncryptedSecureString : IDisposable
     {
-        private static SecureString _machineKey;
+        private static SecureString? _machineKey;
         private SecureString _secureString;
         private readonly ICryptographyProvider _cryptographyProvider;
 

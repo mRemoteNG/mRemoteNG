@@ -1,4 +1,5 @@
-﻿using System.Security;
+﻿using System;
+using System.Security;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using NUnit.Framework;
@@ -68,7 +69,7 @@ namespace mRemoteNGTests.Security
         [Test]
         public void DecryptionFailureThrowsException()
         {
-            ActualValueDelegate<string> decryptMethod = () => _rijndaelCryptographyProvider.Decrypt(CipherText, "wrongKey".ConvertToSecureString());
+            Func<string> decryptMethod = () => _rijndaelCryptographyProvider.Decrypt(CipherText, "wrongKey".ConvertToSecureString());
             Assert.That(decryptMethod, Throws.TypeOf<EncryptionException>());
         }
 

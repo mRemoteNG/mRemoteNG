@@ -35,7 +35,8 @@ namespace mRemoteNG.Themes
         {
             Rectangle? activeDocumentBounds = (dockPanel?.ActiveDocument as ConnectionTab)?.Bounds;
 
-            return new FloatWindowNG(dockPanel, pane, activeDocumentBounds ?? bounds);
+            // dockPanel is non-null per the IFloatWindowFactory.CreateFloatWindow contract
+            return new FloatWindowNG(dockPanel!, pane, activeDocumentBounds ?? bounds);
         }
 
         public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane)

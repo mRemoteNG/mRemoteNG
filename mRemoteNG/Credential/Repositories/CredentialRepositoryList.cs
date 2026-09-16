@@ -47,7 +47,7 @@ namespace mRemoteNG.Credential.Repositories
             return list;
         }
 
-        public ICredentialRecord GetCredentialRecord(Guid id)
+        public ICredentialRecord? GetCredentialRecord(Guid id)
         {
             return CredentialProviders.SelectMany(repo => repo.CredentialRecords)
                                       .FirstOrDefault(record => record.Id.Equals(id));
@@ -63,8 +63,8 @@ namespace mRemoteNG.Credential.Repositories
             return GetEnumerator();
         }
 
-        public event EventHandler<CollectionUpdatedEventArgs<ICredentialRepository>> RepositoriesUpdated;
-        public event EventHandler<CollectionUpdatedEventArgs<ICredentialRecord>> CredentialsUpdated;
+        public event EventHandler<CollectionUpdatedEventArgs<ICredentialRepository>>? RepositoriesUpdated;
+        public event EventHandler<CollectionUpdatedEventArgs<ICredentialRecord>>? CredentialsUpdated;
 
         private void RaiseRepositoriesUpdatedEvent(ActionType action, IEnumerable<ICredentialRepository> changedItems)
         {
@@ -72,14 +72,14 @@ namespace mRemoteNG.Credential.Repositories
                                         new CollectionUpdatedEventArgs<ICredentialRepository>(action, changedItems));
         }
 
-        private void RaiseCredentialsUpdatedEvent(object sender, CollectionUpdatedEventArgs<ICredentialRecord> args)
+        private void RaiseCredentialsUpdatedEvent(object? sender, CollectionUpdatedEventArgs<ICredentialRecord> args)
         {
             CredentialsUpdated?.Invoke(sender, args);
         }
 
-        private void OnRepoConfigChanged(object sender, EventArgs args)
+        private void OnRepoConfigChanged(object? sender, EventArgs args)
         {
-            ICredentialRepository repo = sender as ICredentialRepository;
+            ICredentialRepository? repo = sender as ICredentialRepository;
             if (repo == null) return;
             RaiseRepositoriesUpdatedEvent(ActionType.Updated, new[] {repo});
         }

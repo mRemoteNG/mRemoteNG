@@ -1,5 +1,6 @@
 ﻿
 
+using System.Windows.Forms;
 using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -37,7 +38,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             btnThemeDelete = new MrngButton();
             btnThemeNew = new MrngButton();
-            cboTheme = new MrngComboBox();
+            cboTheme = new ComboBox();
             listPalette = new MrngListView();
             keyCol = new BrightIdeasSoftware.OLVColumn();
             ColorCol = new BrightIdeasSoftware.OLVColumn();
@@ -78,13 +79,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // cboTheme
             // 
-            cboTheme._mice = MrngComboBox.MouseState.HOVER;
             cboTheme.Dock = System.Windows.Forms.DockStyle.Fill;
-            cboTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cboTheme.DropDownStyle = ComboBoxStyle.DropDownList;
             cboTheme.FormattingEnabled = true;
+            cboTheme.IntegralHeight = false;
             cboTheme.Location = new System.Drawing.Point(3, 3);
             cboTheme.Name = "cboTheme";
-            cboTheme.Size = new System.Drawing.Size(398, 21);
+            cboTheme.Size = new System.Drawing.Size(398, 23);
             cboTheme.TabIndex = 0;
             cboTheme.SelectionChangeCommitted += cboTheme_SelectionChangeCommitted;
             // 
@@ -109,7 +110,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // keyCol
             // 
-            keyCol.AspectName = "Key";
+            keyCol.AspectName = "DisplayKey";
             keyCol.IsEditable = false;
             keyCol.Text = "Element";
             keyCol.Width = 262;
@@ -204,7 +205,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         internal MrngButton btnThemeDelete;
         internal MrngButton btnThemeNew;
-        internal MrngComboBox cboTheme;
+        internal ComboBox cboTheme;
         private Controls.MrngListView listPalette;
         private Controls.MrngLabel labelRestart;
         private BrightIdeasSoftware.OLVColumn keyCol;

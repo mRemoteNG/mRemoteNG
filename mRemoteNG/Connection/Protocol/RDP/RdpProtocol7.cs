@@ -1,5 +1,6 @@
 ﻿using AxMSTSCLib;
 using mRemoteNG.App;
+using mRemoteNG.Messages;
 using MSTSCLib;
 using System;
 using System.Windows.Forms;
@@ -27,6 +28,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 RdpClient7.AdvancedSettings8.AudioCaptureRedirectionMode = connectionInfo.RedirectAudioCapture;
                 RdpClient7.AdvancedSettings8.NetworkConnectionType = (int)RdpNetworkConnectionType.Modem;
 
+                SetUseRedirectionServerName();
+
                 if (connectionInfo.UseVmId)
                 {
                     SetExtendedProperty("DisableCredentialsDelegation", true);
@@ -42,7 +45,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 {
                     string authToken = connectionInfo.RDGatewayAccessToken;
                     string encryptedAuthToken = RdGatewayAccessTokenHelper.EncryptAuthCookieString(authToken);
-                    RdpClient7.TransportSettings3.GatewayEncryptedAuthCookie = encryptedAuthToken;  
+                    RdpClient7.TransportSettings3.GatewayEncryptedAuthCookie = encryptedAuthToken;
                     RdpClient7.TransportSettings3.GatewayEncryptedAuthCookieSize = (uint)encryptedAuthToken.Length;
                     RdpClient7.TransportSettings3.GatewayCredsSource = 5;
                 }
@@ -56,10 +59,41 @@ namespace mRemoteNG.Connection.Protocol.RDP
             return true;
         }
 
+        /// <summary>
+        /// When enabled, instructs the RDP client to reconnect using the originally configured
+        /// server name on a server-issued load-balance redirect, instead of following the redirect
+        /// target's host name. Required for servers such as GNOME Remote Desktop in --system mode,
+        /// which redirect to a load-balance token that is only meaningful when reconnecting to the
+        /// original endpoint. Must remain disabled for standard load-balanced deployments such as
+        /// Windows RDS, Azure Virtual Desktop, and Citrix.
+        /// See: IMsRdpPreferredRedirectionInfo.UseRedirectionServerName.
+        /// </summary>
+        private void SetUseRedirectionServerName()
+        {
+            if (!connectionInfo.UseRedirectionServerName) return;
+
+            try
+            {
+                var redirectionInfo = ((AxHost)Control).GetOcx() as IMsRdpPreferredRedirectionInfo;
+                if (redirectionInfo == null)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                        "IMsRdpPreferredRedirectionInfo is not implemented by the current RDP client; UseRedirectionServerName ignored.");
+                    return;
+                }
+                redirectionInfo.UseRedirectionServerName = true;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                    "Unable to set UseRedirectionServerName.", ex);
+            }
+        }
+
         protected override AxHost CreateActiveXRdpClientControl()
         {
             return new AxMsRdpClient11NotSafeForScripting();
         }
-        
+
     }
 }

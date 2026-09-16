@@ -14,7 +14,7 @@ namespace mRemoteNG.App
     {
         public static readonly Logger Instance = new();
 
-        public ILog Log { get; private set; }
+        public ILog Log { get; private set; } = null!; // initialized via SetLogPath() called from the constructor
 
         public static string DefaultLogPath => BuildLogFilePath();
 
@@ -58,7 +58,7 @@ namespace mRemoteNG.App
         {
             string logFilePath = Runtime.IsPortableEdition ? GetLogPathPortableEdition() : GetLogPathNormalEdition();
 
-            string logFileName = Path.ChangeExtension(Application.ProductName, ".log");
+            string? logFileName = Path.ChangeExtension(Application.ProductName, ".log");
 
             if (logFileName == null) return "mRemoteNG.log";
 
@@ -69,7 +69,7 @@ namespace mRemoteNG.App
 
         private static string GetLogPathNormalEdition()
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName ?? "mRemoteNG");
         }
 
         private static string GetLogPathPortableEdition()

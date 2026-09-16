@@ -25,7 +25,7 @@ namespace mRemoteNG.Credential
             return base.ConvertTo(context, culture, value, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
         {
             if (!(value is Guid)) return base.ConvertFrom(context, culture, value);
             ICredentialRecord[] matchedCredentials = Runtime.CredentialProviderCatalog.GetCredentialRecords()

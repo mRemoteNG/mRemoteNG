@@ -47,6 +47,19 @@ namespace mRemoteNG.App
             _connectionIconLoader.GetConnectionIcons();
             DefaultConnectionInfo.Instance.LoadFrom(Settings.Default, a => "ConDefault" + a);
             DefaultConnectionInheritance.Instance.LoadFrom(Settings.Default, a => "InhDefault" + a);
+
+#if DEBUG
+            // Initialize dev-only options repository
+            try
+            {
+                Runtime.OptionsRepositoryManager.Initialize(SettingsFileInfo.SettingsPath);
+                messageCollector.AddMessage(MessageClass.DebugMsg, "Options repository initialized");
+            }
+            catch (Exception ex)
+            {
+                messageCollector.AddMessage(MessageClass.WarningMsg, $"Failed to initialize options repository: {ex.Message}");
+            }
+#endif
         }
 
         private static void ParseCommandLineArgs(MessageCollector messageCollector)

@@ -2160,7 +2160,7 @@ Nattliga kanalen inkluderar Alfa, Betor &amp; Utgåvokandidater.</value>
   <data name="lblConnectionsBackupMaxCount" xml:space="preserve">
     <value>Max antal säkerhetskopior</value>
   </data>
-  <data name="PageСontrolInOptionsMenu" xml:space="preserve">
+  <data name="PageControlInOptionsMenu" xml:space="preserve">
     <value>Sidkontroll i menyn Alternativ</value>
   </data>
   <data name="ShowForUser" xml:space="preserve">

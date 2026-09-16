@@ -3,7 +3,8 @@
   <PropertyGroup>
     <Platforms>x64;arm64</Platforms>
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
-    <NoWarn>$(NoWarn);NU1701</NoWarn>
+    <NoWarn>$(NoWarn);NU1701;CA1416;CS0067;CS0414;CS0618;CS8597;CS8600;CS8601;CS8602;CS8603;CS8604;CS8605;CS8618;CS8622;CS8625;CS8632;CS8764;CS8765;CS8767;CS8777;SYSLIB0060</NoWarn>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -123,11 +124,12 @@
       <EmbedInteropTypes>false</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
+   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" />
     <PackageReference Include="ConsoleControl" />
     <PackageReference Include="DockPanelSuite" />
     <PackageReference Include="DockPanelSuite.ThemeVS2015" />
+    <PackageReference Include="Google.Protobuf" />
     <PackageReference Include="log4net" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" />
     <PackageReference Include="Microsoft.Data.SqlClient" />
@@ -136,6 +138,7 @@
     <PackageReference Include="Microsoft.Web.WebView2" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" />
     <PackageReference Include="MySql.Data" />
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" />
     <PackageReference Include="System.Data.Odbc" />
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="SSH.NET" />
@@ -244,6 +247,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\Forms\OptionsPages\CredentialsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\OptionsPages\PluginsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\Forms\OptionsPages\NotificationsPage.cs">
@@ -524,6 +530,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ExternalConnectors\ExternalConnectors.csproj" />
+    <ProjectReference Include="..\mRemoteNG.PluginContracts\mRemoteNG.PluginContracts.csproj" />
     <ProjectReference Include="..\ObjectListView\ObjectListView.NetCore.csproj" />
   </ItemGroup>
   <ItemGroup>
@@ -543,17 +550,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="146.0.7" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="152.0.6" />
   </ItemGroup>
   <ItemGroup Condition="'$(Platform)'=='arm64'">
-    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="146.0.7" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="152.0.6" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Platform)'=='x64'">
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <Nullable>enable</Nullable>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Deploy to github|x64'">
@@ -561,7 +567,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='arm64'">
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <Nullable>enable</Nullable>
     <PlatformTarget>ARM64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Deploy to github|ARM64'">
@@ -569,13 +574,114 @@
   </PropertyGroup>
   <Target Name="CopyPackageAssembliesToSubFolder" AfterTargets="ResolveReferences">
     <ItemGroup>
-      <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.NuGetPackageId)' != '' " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="Assemblies\" />
+      <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.NuGetPackageId)' != '' and '%(ReferenceCopyLocalPaths.Filename)' != 'e_sqlite3' and '%(ReferenceCopyLocalPaths.Filename)' != 'libe_sqlite3' " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="Assemblies\" />
+      <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.Filename)' == 'mRp.Contracts' " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="Assemblies\" />
     </ItemGroup>
   </Target>
   <PropertyGroup>
     <!-- Disable CET compatibility check in .NET 9 AppHost -->
     <CETCompat>false</CETCompat>
   </PropertyGroup>
+  <ItemGroup>
+    <AppSatelliteResourceAssemblies Include="Language\Language.cs-CZ.resx">
+      <Culture>cs-CZ</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.de.resx">
+      <Culture>de</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.el.resx">
+      <Culture>el</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.es.resx">
+      <Culture>es</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.es-AR.resx">
+      <Culture>es-AR</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.fi-FI.resx">
+      <Culture>fi-FI</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.fr.resx">
+      <Culture>fr</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.hu.resx">
+      <Culture>hu</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.it.resx">
+      <Culture>it</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.ja-JP.resx">
+      <Culture>ja-JP</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.ko-KR.resx">
+      <Culture>ko-KR</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.lt.resx">
+      <Culture>lt</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.nb-NO.resx">
+      <Culture>nb-NO</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.nl.resx">
+      <Culture>nl</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.pl.resx">
+      <Culture>pl</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.pt.resx">
+      <Culture>pt</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.pt-BR.resx">
+      <Culture>pt-BR</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.ru.resx">
+      <Culture>ru</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.sv-SE.resx">
+      <Culture>sv-SE</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.ta.resx">
+      <Culture>ta</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.tr-TR.resx">
+      <Culture>tr-TR</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.uk.resx">
+      <Culture>uk</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.zh-CN.resx">
+      <Culture>zh-CN</Culture>
+    </AppSatelliteResourceAssemblies>
+    <AppSatelliteResourceAssemblies Include="Language\Language.zh-TW.resx">
+      <Culture>zh-TW</Culture>
+    </AppSatelliteResourceAssemblies>
+  </ItemGroup>
+  <Target Name="RelocateSatelliteAssembliesToLanguagesFolder" AfterTargets="Build">
+    <ItemGroup>
+      <BuiltSatelliteResourceAssemblies Include="@(AppSatelliteResourceAssemblies->'$(OutDir)%(Culture)\mRemoteNG.resources.dll')" />
+      <PublishedSatelliteResourceAssemblies Include="@(AppSatelliteResourceAssemblies->'$(PublishDir)%(Culture)\mRemoteNG.resources.dll')"
+                                          Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
+      <BuiltSatelliteCultureDirectories Include="@(AppSatelliteResourceAssemblies->'$(OutDir)%(Culture)')" />
+      <PublishedSatelliteCultureDirectories Include="@(AppSatelliteResourceAssemblies->'$(PublishDir)%(Culture)')"
+                                          Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(BuiltSatelliteResourceAssemblies)"
+          DestinationFiles="@(AppSatelliteResourceAssemblies->'$(OutDir)Languages\%(Culture)\mRemoteNG.resources.dll')"
+          SkipUnchangedFiles="true" />
+
+    <Copy SourceFiles="@(PublishedSatelliteResourceAssemblies)"
+          DestinationFiles="@(AppSatelliteResourceAssemblies->'$(PublishDir)Languages\%(Culture)\mRemoteNG.resources.dll')"
+          SkipUnchangedFiles="true"
+          Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
+
+    <Delete Files="@(BuiltSatelliteResourceAssemblies)" />
+    <Delete Files="@(PublishedSatelliteResourceAssemblies)"
+            Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
+    <RemoveDir Directories="@(BuiltSatelliteCultureDirectories)" />
+    <RemoveDir Directories="@(PublishedSatelliteCultureDirectories)"
+               Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
+  </Target>
   <Target Name="PublishAfterBuild" AfterTargets="Build" Condition="'$(Configuration)' == 'Release Self-Contained'">
     <Message Text="Publishing self-contained application for $(Platform)..." Importance="high" />
     <MSBuild Projects="$(MSBuildProjectFile)" Targets="Publish" Properties="Configuration=$(Configuration);Platform=$(Platform);NoBuild=true;NoRestore=true" />
@@ -586,5 +692,6 @@
     <RemoveDir Directories="$(TempBuildDir)" />
     <RemoveDir Directories="$(ProjectDir)bin\x64\Release Self-Contained" />
   </Target>
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets"
+          Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets')" />
 </Project>

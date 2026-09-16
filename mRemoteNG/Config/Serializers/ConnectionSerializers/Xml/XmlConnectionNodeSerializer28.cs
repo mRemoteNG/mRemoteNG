@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Plugins;
 using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
@@ -38,7 +39,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("UseEnhancedMode", connectionInfo.UseVmId));
             element.Add(new XAttribute("Type", connectionInfo.GetTreeNodeType().ToString()));
             if (nodeAsContainer != null)
+            {
                 element.Add(new XAttribute("Expanded", nodeAsContainer.IsExpanded.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("IsRootGroup", nodeAsContainer.IsRootGroup.ToString().ToLowerInvariant()));
+            }
             element.Add(new XAttribute("Descr", connectionInfo.Description));
             element.Add(new XAttribute("Icon", connectionInfo.Icon));
             element.Add(new XAttribute("Panel", connectionInfo.Panel));
@@ -152,12 +156,17 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
             element.Add(new XAttribute("UseRCG", connectionInfo.UseRCG));
             element.Add(new XAttribute("UseRestrictedAdmin", connectionInfo.UseRestrictedAdmin));
+            element.Add(new XAttribute("UseRedirectionServerName", connectionInfo.UseRedirectionServerName));
 
             element.Add(new XAttribute("UserViaAPI", connectionInfo.UserViaAPI));
             element.Add(new XAttribute("EC2InstanceId", connectionInfo.EC2InstanceId));
             element.Add(new XAttribute("EC2Region", connectionInfo.EC2Region));
             element.Add(new XAttribute("ExternalCredentialProvider", connectionInfo.ExternalCredentialProvider));
             element.Add(new XAttribute("ExternalAddressProvider", connectionInfo.ExternalAddressProvider));
+
+            string serializedPluginData = PluginConnectionDataSerializer.Serialize(connectionInfo.PluginProperties);
+            if (!string.IsNullOrEmpty(serializedPluginData))
+                element.Add(new XElement("PluginData", serializedPluginData));
 
             // Vault/OpenBao specific
             element.Add(new XAttribute("VaultOpenbaoMount", connectionInfo.VaultOpenbaoMount ?? string.Empty));
@@ -328,6 +337,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 element.Add(new XAttribute("InheritUseRCG", inheritance.UseRCG.ToString().ToLowerInvariant()));
             if (inheritance.UseRestrictedAdmin)
                 element.Add(new XAttribute("InheritUseRestrictedAdmin", inheritance.UseRestrictedAdmin.ToString().ToLowerInvariant()));
+            if (inheritance.UseRedirectionServerName)
+                element.Add(new XAttribute("InheritUseRedirectionServerName", inheritance.UseRedirectionServerName.ToString().ToLowerInvariant()));
         }
     }
 }
