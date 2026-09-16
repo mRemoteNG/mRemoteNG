@@ -893,6 +893,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="MinimizeToSysTray" xml:space="preserve">
     <value>Minimize to notification area</value>
   </data>
+  <data name="MinimizeTab" xml:space="preserve">
+    <value>Minimize tab</value>
+  </data>
   <data name="MoveDown" xml:space="preserve">
     <value>Move down</value>
   </data>

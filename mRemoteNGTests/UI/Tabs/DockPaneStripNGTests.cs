@@ -1,8 +1,8 @@
 using System;
-using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
+using mRemoteNG.UI.Tabs;
 using NUnit.Framework;
 using WeifenLuo.WinFormsUI.Docking;
 using WeifenLuo.WinFormsUI.ThemeVS2015;
@@ -130,14 +130,13 @@ namespace mRemoteNGTests.UI.Tabs
             Application.DoEvents();
             Assert.That(doc2.DockHandler.Pane.ActiveContent, Is.SameAs(doc2), "Doc2 should start out active");
 
-            Control dockPaneStrip = FindDockPaneStripNG(dockPanel);
+            DockPaneStripNG dockPaneStrip = FindDockPaneStripNG(dockPanel);
             Assert.That(dockPaneStrip, Is.Not.Null, "Could not find DockPaneStripNG control");
-
-            MethodInfo closeTabMethod = dockPaneStrip.GetType().GetMethod("CloseTab", BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.That(closeTabMethod, Is.Not.Null, "Could not find CloseTab method");
 
             // Act - close Doc2, which is not the first tab, so DockPanelSuite would otherwise
             // select Doc1 once the close attempt returns.
+            var closeTabMethod = typeof(DockPaneStripNG).GetMethod("CloseTab", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            Assert.That(closeTabMethod, Is.Not.Null, "Could not find CloseTab method");
             closeTabMethod.Invoke(dockPaneStrip, new object[] { 1 });
             Application.DoEvents();
 
@@ -178,12 +177,11 @@ namespace mRemoteNGTests.UI.Tabs
 
             Application.DoEvents();
 
-            Control dockPaneStrip = FindDockPaneStripNG(dockPanel);
+            DockPaneStripNG dockPaneStrip = FindDockPaneStripNG(dockPanel);
             Assert.That(dockPaneStrip, Is.Not.Null, "Could not find DockPaneStripNG control");
 
-            MethodInfo closeTabMethod = dockPaneStrip.GetType().GetMethod("CloseTab", BindingFlags.Instance | BindingFlags.NonPublic);
+            var closeTabMethod = typeof(DockPaneStripNG).GetMethod("CloseTab", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
             Assert.That(closeTabMethod, Is.Not.Null, "Could not find CloseTab method");
-
             closeTabMethod.Invoke(dockPaneStrip, new object[] { 1 });
             Application.DoEvents();
 
@@ -191,12 +189,106 @@ namespace mRemoteNGTests.UI.Tabs
             Assert.That(doc1.DockState, Is.EqualTo(DockState.Document), "Doc1 should still be open");
         });
 
-        private static Control FindDockPaneStripNG(Control parent)
+        [Test]
+        public void MinimizingAConnectionTab_MovesItToBottomAutoHide() => RunWithMessagePump(() =>
+        {
+            using var hostForm = new Form
+            {
+                Width = 800,
+                Height = 600,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new System.Drawing.Point(-10000, -10000)
+            };
+
+            var dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill,
+                DocumentStyle = DocumentStyle.DockingWindow,
+                Theme = new VS2015LightTheme()
+            };
+
+            dockPanel.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+
+            hostForm.Controls.Add(dockPanel);
+            hostForm.Show();
+
+            var doc1 = new DockContent { Text = "Doc1", CloseButton = true, CloseButtonVisible = true };
+            var doc2 = new ConnectionTab
+            {
+                Text = "Doc2",
+                TabText = "Doc2",
+                CloseButton = true,
+                CloseButtonVisible = true,
+                DockAreas = DockAreas.Document | DockAreas.Float
+            };
+
+            doc1.Show(dockPanel, DockState.Document);
+            doc2.Show(dockPanel, DockState.Document);
+
+            Application.DoEvents();
+
+            DockPaneStripNG dockPaneStrip = FindDockPaneStripNG(dockPanel);
+            Assert.That(dockPaneStrip, Is.Not.Null, "Could not find DockPaneStripNG control");
+            dockPaneStrip.MinimizeConnectionTab(1);
+            Application.DoEvents();
+
+            Assert.That(doc2.DockState, Is.EqualTo(DockState.DockBottomAutoHide), "Connection tab should move to bottom auto-hide");
+            Assert.That(doc1.DockState, Is.EqualTo(DockState.Document), "Other document tabs should remain unchanged");
+        });
+
+        [Test]
+        public void ConnectionTabMinimizeToBottomAutoHide_ChangesDockState() => RunWithMessagePump(() =>
+        {
+            using var hostForm = new Form
+            {
+                Width = 800,
+                Height = 600,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new System.Drawing.Point(-10000, -10000)
+            };
+
+            var dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill,
+                DocumentStyle = DocumentStyle.DockingWindow,
+                Theme = new VS2015LightTheme()
+            };
+
+            dockPanel.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+
+            hostForm.Controls.Add(dockPanel);
+            hostForm.Show();
+
+            var connectionTab = new ConnectionTab
+            {
+                Text = "Doc1",
+                TabText = "Doc1",
+                DockAreas = DockAreas.Document | DockAreas.Float
+            };
+
+            connectionTab.Show(dockPanel, DockState.Document);
+            Application.DoEvents();
+
+            connectionTab.MinimizeToBottomAutoHide();
+            Application.DoEvents();
+
+            Assert.That(connectionTab.DockState, Is.EqualTo(DockState.DockBottomAutoHide), "ConnectionTab should move to bottom auto-hide");
+            Assert.That((connectionTab.DockAreas & DockAreas.DockBottom), Is.EqualTo(DockAreas.DockBottom), "ConnectionTab should allow bottom docking while minimized");
+
+            connectionTab.Show(dockPanel, DockState.Document);
+            Application.DoEvents();
+
+            Assert.That(connectionTab.DockAreas, Is.EqualTo(DockAreas.Document | DockAreas.Float), "ConnectionTab should restore its original docking areas after leaving auto-hide");
+        });
+
+        private static DockPaneStripNG FindDockPaneStripNG(Control parent)
         {
             foreach (Control c in parent.Controls)
             {
-                if (string.Equals(c.GetType().Name, "DockPaneStripNG", StringComparison.Ordinal))
-                    return c;
+                if (c is DockPaneStripNG dockPaneStrip)
+                    return dockPaneStrip;
 
                 var result = FindDockPaneStripNG(c);
                 if (result != null) return result;

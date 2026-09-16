@@ -19,6 +19,8 @@ namespace mRemoteNG.UI.Tabs
     [SupportedOSPlatform("windows")]
     public partial class ConnectionTab : DockContent
     {
+        private DockAreas? _dockAreasBeforeMinimize;
+
         /// <summary>
         ///Silent close ignores the popup asking for confirmation
         /// </summary>
@@ -33,6 +35,51 @@ namespace mRemoteNG.UI.Tabs
         {
             InitializeComponent();
             GotFocus += ConnectionTab_GotFocus;
+            DockStateChanged += ConnectionTab_DockStateChanged;
+        }
+
+        internal bool CanMinimizeToBottomAutoHide()
+        {
+            return DockPanel != null &&
+                   !IsDisposed &&
+                   !Disposing &&
+                   DockState == DockState.Document;
+        }
+
+        internal void MinimizeToBottomAutoHide()
+        {
+            DockPanel dockPanel = DockPanel;
+            if (!CanMinimizeToBottomAutoHide() || dockPanel == null)
+                return;
+
+            if ((DockAreas & DockAreas.DockBottom) != DockAreas.DockBottom)
+            {
+                _dockAreasBeforeMinimize ??= DockAreas;
+                DockAreas |= DockAreas.DockBottom;
+            }
+
+            Show(dockPanel, DockState.DockBottomAutoHide);
+        }
+
+        private void ConnectionTab_DockStateChanged(object? sender, EventArgs e)
+        {
+            if (_dockAreasBeforeMinimize == null || DockState != DockState.Document)
+            {
+                return;
+            }
+
+            RestoreDockAreasAfterMinimize();
+        }
+
+        private void RestoreDockAreasAfterMinimize()
+        {
+            if (_dockAreasBeforeMinimize == null)
+            {
+                return;
+            }
+
+            DockAreas = _dockAreasBeforeMinimize.Value;
+            _dockAreasBeforeMinimize = null;
         }
 
         private void ConnectionTab_GotFocus(object sender, EventArgs e)
@@ -83,6 +130,11 @@ namespace mRemoteNG.UI.Tabs
             }
 
             base.OnFormClosing(e);
+
+            if (!e.Cancel && DockState == DockState.DockBottomAutoHide)
+            {
+                RestoreDockAreasAfterMinimize();
+            }
 
             if (e.Cancel || FrmMain.Default == null || FrmMain.Default.IsClosing)
                 return;
