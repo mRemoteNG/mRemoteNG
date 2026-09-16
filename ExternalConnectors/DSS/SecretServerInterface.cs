@@ -239,8 +239,14 @@ public class SecretServerInterface
             PemReader pr = new(new StringReader(pem));
             AsymmetricCipherKeyPair KeyPair = (AsymmetricCipherKeyPair)pr.ReadObject();
             RSAParameters rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters)KeyPair.Private);
-            RSACryptoServiceProvider rsa = new(2048);
+            RSACryptoServiceProvider rsa = new();
             rsa.ImportParameters(rsaParams);
+
+            if (rsa.KeySize < 2048)
+            {
+                rsa.Dispose();
+                throw new CryptographicException("RSA private key size must be at least 2048 bits.");
+            }
             return rsa;
         }
         #endregion
