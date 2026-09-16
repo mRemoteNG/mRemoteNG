@@ -114,7 +114,7 @@ namespace mRemoteNG.UI.Window
             this.cmenTabMinimize.Image = global::mRemoteNG.Properties.Resources.GlyphDown_16x;
             this.cmenTabMinimize.Name = "cmenTabMinimize";
             this.cmenTabMinimize.Size = new System.Drawing.Size(230, 22);
-            this.cmenTabMinimize.Text = "Minimize Tab";
+            this.cmenTabMinimize.Text = "Minimize tab";
             // 
             // cmenTabDisconnectOthers
             // 
