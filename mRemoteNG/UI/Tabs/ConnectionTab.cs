@@ -41,7 +41,10 @@ namespace mRemoteNG.UI.Tabs
 
         internal bool CanMinimizeToBottomAutoHide()
         {
-            return DockPanel != null && !IsDisposed && !Disposing;
+            return DockPanel != null &&
+                   !IsDisposed &&
+                   !Disposing &&
+                   DockState == DockState.Document;
         }
 
         internal void MinimizeToBottomAutoHide()
@@ -61,10 +64,7 @@ namespace mRemoteNG.UI.Tabs
 
         private void ConnectionTab_DockStateChanged(object? sender, EventArgs e)
         {
-            if (_dockAreasBeforeMinimize == null ||
-                (DockState != DockState.Document &&
-                 DockState != DockState.Hidden &&
-                 DockState != DockState.Unknown))
+            if (_dockAreasBeforeMinimize == null || DockState != DockState.Document)
             {
                 return;
             }
