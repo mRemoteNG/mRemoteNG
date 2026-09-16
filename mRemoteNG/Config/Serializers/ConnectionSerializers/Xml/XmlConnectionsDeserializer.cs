@@ -24,7 +24,7 @@ using System.Runtime.Versioning;
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 {
     [SupportedOSPlatform("windows")]
-    public class XmlConnectionsDeserializer(Func<Optional<SecureString>> authenticationRequestor = null) : IDeserializer<string, ConnectionTreeModel>
+    public class XmlConnectionsDeserializer(Func<Optional<SecureString>>? authenticationRequestor = null) : IDeserializer<string, ConnectionTreeModel>
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
@@ -33,7 +33,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         private const double MaxSupportedConfVersion = 2.8;
         private readonly RootNodeInfo _rootNodeInfo = new(RootNodeType.Connection);
 
-        public Func<Optional<SecureString>> AuthenticationRequestor { get; set; } = authenticationRequestor;
+        public Func<Optional<SecureString>>? AuthenticationRequestor { get; set; } = authenticationRequestor;
 
         public ConnectionTreeModel Deserialize(string xml)
         {
@@ -123,7 +123,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             _rootNodeInfo.Name = connectionsRootElement?.Attributes["Name"]?.Value.Trim();
         }
 
-        private void CreateDecryptor(RootNodeInfo rootNodeInfo, XmlElement connectionsRootElement = null)
+        private void CreateDecryptor(RootNodeInfo rootNodeInfo, XmlElement? connectionsRootElement = null)
         {
             if (_confVersion >= 2.6)
             {

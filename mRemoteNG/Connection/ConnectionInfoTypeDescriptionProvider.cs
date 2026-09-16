@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace mRemoteNG.Connection;
 
@@ -11,7 +11,7 @@ public sealed class ConnectionInfoTypeDescriptionProvider : TypeDescriptionProvi
     {
     }
 
-    public override ICustomTypeDescriptor GetTypeDescriptor(System.Type objectType, object instance)
+    public override ICustomTypeDescriptor GetTypeDescriptor(System.Type objectType, object? instance)
     {
         ICustomTypeDescriptor baseDescriptor = base.GetTypeDescriptor(objectType, instance);
         return instance is ConnectionInfo connectionInfo

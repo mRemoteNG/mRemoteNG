@@ -810,7 +810,7 @@ namespace mRemoteNG.UI.Forms
             Text = titleBuilder.ToString();
         }
 
-        public void ShowHidePanelTabs(DockContent closingDocument = null)
+        public void ShowHidePanelTabs(DockContent? closingDocument = null)
         {
             DocumentStyle newDocumentStyle;
             bool hasConnectionWindows = pnlDock.Contents.OfType<ConnectionWindow>().Any();

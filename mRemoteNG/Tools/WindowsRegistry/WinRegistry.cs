@@ -54,7 +54,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="Name">The name of the value. Null or Empty to get default.</param>
         /// <returns>The value data as a string, or null if the value is not found.</returns>
         /// <exception cref = "ArgumentException" > Thrown when the specified registry hive, path or name is invalid</exception>
-        public string GetValue(RegistryHive Hive, string Path, string Name)
+        public string? GetValue(RegistryHive Hive, string Path, string? Name)
         {
             ThrowIfHiveInvalid(Hive);
             ThrowIfPathInvalid(Path);
@@ -76,7 +76,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="Hive">The registry hive.</param>
         /// <param name="Path">The registry key path.</param>
         /// <returns>The value data as a string, or null if the value is not found.</returns>
-        public string GetDefaultValue(RegistryHive Hive, string Path)
+        public string? GetDefaultValue(RegistryHive Hive, string Path)
         {
             return GetValue(Hive, Path, null);
         }
@@ -89,9 +89,9 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="Name">The name of the value. Null or Empty to get default.</param>
         /// <param name="DefaultValue">The default value to return if the property is not found.</param>
         /// <returns>The value data as string, or the specified default value if the value is not found.</returns>
-        public string GetStringValue(RegistryHive Hive, string Path, string Name, string DefaultValue = null)
+        public string? GetStringValue(RegistryHive Hive, string Path, string? Name, string? DefaultValue = null)
         {
-            string value = GetValue(Hive, Path, Name);
+            string? value = GetValue(Hive, Path, Name);
             return value ?? DefaultValue;
         }
 

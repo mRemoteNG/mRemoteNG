@@ -13,7 +13,6 @@ using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
-using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI.Tabs
 {

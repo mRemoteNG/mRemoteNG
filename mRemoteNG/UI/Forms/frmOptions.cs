@@ -329,7 +329,7 @@ namespace mRemoteNG.UI.Forms
             return page?.PageIcon == null ? _display.ScaleImage(Properties.Resources.F1Help_16x) : _display.ScaleImage(page.PageIcon);
         }
 
-        public void SetActivatedPage(string pageName = default)
+        public void SetActivatedPage(string? pageName = default)
         {
             _pageName = pageName ?? Language.General;
 

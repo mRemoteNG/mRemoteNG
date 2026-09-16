@@ -17,7 +17,7 @@ namespace mRemoteNG.Config.Settings.Store
     {
         private readonly string _dbPath;
         private readonly string _connectionString;
-        private SqliteConnection _connection;
+        private SqliteConnection? _connection;
         private bool _disposed;
 
         public bool IsInitialized { get; private set; }
@@ -32,7 +32,7 @@ namespace mRemoteNG.Config.Settings.Store
         /// When provided, SQLite encryption is used (requires SQLCipher bundle or compatible provider).
         /// Pass <c>null</c> for an unencrypted database.
         /// </param>
-        public SqliteSettingsStore(string dbPath, string dekHex = null)
+        public SqliteSettingsStore(string dbPath, string? dekHex = null)
         {
             _dbPath = dbPath ?? throw new ArgumentNullException(nameof(dbPath));
 
@@ -73,7 +73,7 @@ namespace mRemoteNG.Config.Settings.Store
             IsInitialized = true;
         }
 
-        public T Get<T>(string category, string key, T defaultValue = default)
+        public T Get<T>(string category, string key, T defaultValue = default!)
         {
             EnsureReady();
 
@@ -127,11 +127,11 @@ namespace mRemoteNG.Config.Settings.Store
             return cmd.ExecuteNonQuery() > 0;
         }
 
-        public IReadOnlyDictionary<string, string> GetAll(string category)
+        public IReadOnlyDictionary<string, string?> GetAll(string category)
         {
             EnsureReady();
 
-            Dictionary<string, string> results = new(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, string?> results = new(StringComparer.OrdinalIgnoreCase);
             const string sql = "SELECT key, value FROM settings WHERE category = @category;";
             using SqliteCommand cmd = _connection.CreateCommand();
             cmd.CommandText = sql;

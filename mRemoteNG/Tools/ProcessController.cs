@@ -14,7 +14,7 @@ namespace mRemoteNG.Tools
     {
         #region Public Methods
 
-        public bool Start(string fileName, CommandLineArguments arguments = null)
+        public bool Start(string fileName, CommandLineArguments? arguments = null)
         {
             // Validate the executable path to prevent command injection
             PathValidator.ValidateExecutablePathOrThrow(fileName, nameof(fileName));

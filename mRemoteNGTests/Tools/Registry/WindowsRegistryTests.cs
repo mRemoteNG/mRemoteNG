@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using Microsoft.Win32;
 using System.Runtime.Versioning;
 using System.Collections.Generic;

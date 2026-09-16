@@ -4,7 +4,7 @@
 namespace mRemoteNG.Security
 {
     [Serializable]
-    public class EncryptionException : Org.BouncyCastle.Security.EncryptionException
+    public class EncryptionException : Org.BouncyCastle.OpenSsl.EncryptionException
     {
         public EncryptionException(string message) : base(message)
         {
