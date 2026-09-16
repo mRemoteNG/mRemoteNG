@@ -95,6 +95,7 @@ namespace mRemoteNG.UI.Window
             cmenTabDuplicateTab.Click += (sender, args) => DuplicateTab();
             cmenTabReconnect.Click += (sender, args) => Reconnect();
             cmenTabDisconnect.Click += (sender, args) => CloseTabMenu();
+            cmenTabMinimize.Click += (sender, args) => MinimizeTabMenu();
             cmenTabDisconnectOthers.Click += (sender, args) => CloseOtherTabs();
             cmenTabDisconnectOthersRight.Click += (sender, args) => CloseOtherTabsToTheRight();
             cmenTabPuttySettings.Click += (sender, args) => ShowPuttySettingsDialog();
@@ -292,6 +293,7 @@ namespace mRemoteNG.UI.Window
             cmenTabDuplicateTab.Text = Language.DuplicateTab;
             cmenTabReconnect.Text = Language.Reconnect;
             cmenTabDisconnect.Text = Language.Disconnect;
+            cmenTabMinimize.Text = Language.MinimizeTab;
             cmenTabDisconnectOthers.Text = Language.DisconnectOthers;
             cmenTabDisconnectOthersRight.Text = Language.DisconnectOthersRight;
             cmenTabPuttySettings.Text = Language.PuttySettings;
@@ -741,6 +743,21 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("CloseTabMenu (UI.Window.ConnectionWindow) failed", ex);
+            }
+        }
+
+        private void MinimizeTabMenu()
+        {
+            ConnectionTab selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+            if (selectedTab == null) return;
+
+            try
+            {
+                selectedTab.MinimizeToBottomAutoHide();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("MinimizeTabMenu (UI.Window.ConnectionWindow) failed", ex);
             }
         }
 

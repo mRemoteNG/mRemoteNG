@@ -1278,7 +1278,7 @@ namespace mRemoteNG.UI.Tabs
             if (Tabs[index].Content is not ConnectionTab connectionTab)
                 return;
 
-            connectionTab.Show(connectionTab.DockPanel, DockState.DockBottomAutoHide);
+            connectionTab.MinimizeToBottomAutoHide();
         }
 
         private Rectangle GetCloseButtonRect(Rectangle rectTab)
