@@ -1295,7 +1295,8 @@ namespace mRemoteNG.UI.Tabs
         {
             const int gap = 3;
             int imageSize = PatchController.EnableHighDpi == true ? rectTab.Height - gap * 2 : 15;
-            return new Rectangle(rectTab.X + rectTab.Width - imageSize - gap - 1, rectTab.Y + gap, imageSize,
+            int rightEdge = Math.Min(rectTab.Right, TabsRectangle.Right);
+            return new Rectangle(rightEdge - imageSize - gap - 1, rectTab.Y + gap, imageSize,
                                  imageSize);
         }
 
