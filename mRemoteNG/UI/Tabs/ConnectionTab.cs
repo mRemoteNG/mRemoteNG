@@ -69,6 +69,16 @@ namespace mRemoteNG.UI.Tabs
                 return;
             }
 
+            RestoreDockAreasAfterMinimize();
+        }
+
+        private void RestoreDockAreasAfterMinimize()
+        {
+            if (_dockAreasBeforeMinimize == null)
+            {
+                return;
+            }
+
             DockAreas = _dockAreasBeforeMinimize.Value;
             _dockAreasBeforeMinimize = null;
         }
@@ -121,6 +131,11 @@ namespace mRemoteNG.UI.Tabs
             }
 
             base.OnFormClosing(e);
+
+            if (!e.Cancel && DockState == DockState.DockBottomAutoHide)
+            {
+                RestoreDockAreasAfterMinimize();
+            }
 
             if (e.Cancel || FrmMain.Default == null || FrmMain.Default.IsClosing)
                 return;
