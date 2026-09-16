@@ -733,7 +733,7 @@ namespace mRemoteNG.UI.Window
 
         private void CloseTabMenu()
         {
-            ConnectionTab selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+            ConnectionTab selectedTab = GetSelectedConnectionTab();
             if (selectedTab == null) return;
 
             try
@@ -748,7 +748,7 @@ namespace mRemoteNG.UI.Window
 
         private void MinimizeTabMenu()
         {
-            ConnectionTab selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+            ConnectionTab selectedTab = GetSelectedConnectionTab();
             if (selectedTab == null) return;
 
             try
@@ -763,7 +763,7 @@ namespace mRemoteNG.UI.Window
 
         private void CloseOtherTabs()
         {
-            ConnectionTab selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+            ConnectionTab selectedTab = GetSelectedConnectionTab();
             if (selectedTab == null) return;
             if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple)
             {
@@ -799,7 +799,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                ConnectionTab selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+                ConnectionTab selectedTab = GetSelectedConnectionTab();
                 if (selectedTab == null) return;
                 DockPane dockPane = selectedTab.Pane;
 
@@ -873,6 +873,11 @@ namespace mRemoteNG.UI.Window
                     if (dr != DialogResult.OK) return;
                     if (!string.IsNullOrEmpty(frmInputBox.returnValue))
                         ((ConnectionTab)interfaceControl.Parent).TabText = frmInputBox.returnValue.Replace("&", "&&");
+                }
+
+                private ConnectionTab GetSelectedConnectionTab()
+                {
+                    return GetInterfaceControl()?.Parent as ConnectionTab;
                 }
             }
             catch (Exception ex)

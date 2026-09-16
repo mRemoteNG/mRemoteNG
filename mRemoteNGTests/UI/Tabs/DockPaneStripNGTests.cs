@@ -244,6 +244,49 @@ namespace mRemoteNGTests.UI.Tabs
             Assert.That(doc1.DockState, Is.EqualTo(DockState.Document), "Other document tabs should remain unchanged");
         });
 
+        [Test]
+        public void ConnectionTabMinimizeToBottomAutoHide_ChangesDockState() => RunWithMessagePump(() =>
+        {
+            using var hostForm = new Form
+            {
+                Width = 800,
+                Height = 600,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new System.Drawing.Point(-10000, -10000)
+            };
+
+            var dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill,
+                DocumentStyle = DocumentStyle.DockingWindow,
+                Theme = new VS2015LightTheme()
+            };
+
+            dockPanel.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+
+            hostForm.Controls.Add(dockPanel);
+            hostForm.Show();
+
+            var connectionTab = new ConnectionTab
+            {
+                Text = "Doc1",
+                TabText = "Doc1",
+                DockAreas = DockAreas.Document | DockAreas.Float | DockAreas.DockBottom
+            };
+
+            connectionTab.Show(dockPanel, DockState.Document);
+            Application.DoEvents();
+
+            MethodInfo minimizeMethod = typeof(ConnectionTab).GetMethod("MinimizeToBottomAutoHide", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.That(minimizeMethod, Is.Not.Null, "Could not find MinimizeToBottomAutoHide method");
+
+            minimizeMethod.Invoke(connectionTab, null);
+            Application.DoEvents();
+
+            Assert.That(connectionTab.DockState, Is.EqualTo(DockState.DockBottomAutoHide), "ConnectionTab should move to bottom auto-hide");
+        });
+
         private static Control FindDockPaneStripNG(Control parent)
         {
             foreach (Control c in parent.Controls)
