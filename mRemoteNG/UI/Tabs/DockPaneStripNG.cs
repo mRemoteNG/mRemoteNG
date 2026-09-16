@@ -993,7 +993,7 @@ namespace mRemoteNG.UI.Tabs
             if (tab.TabWidth == 0)
                 return;
 
-            Rectangle rectCloseButton = GetCloseButtonRect(rect);
+            Rectangle rectCloseButton = GetCloseButtonRect(rect, tab.Content);
             Rectangle rectMinimizeButton = GetMinimizeButtonRect(rect, tab.Content);
             Rectangle rectIcon = new(
                                          rect.X + DocumentIconGapLeft,
@@ -1089,7 +1089,7 @@ namespace mRemoteNG.UI.Tabs
             TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, DocumentTextFont, rectText, text, DocumentTextFormat);
             if (!rectMinimizeButton.IsEmpty)
                 g.DrawImage(Properties.Resources.GlyphDown_16x, rectMinimizeButton);
-            if (image != null)
+            if (image != null && !rectCloseButton.IsEmpty)
                 g.DrawImage(image, rectCloseButton);
 
             if (rectTab.Contains(rectIcon) && DockPane.DockPanel.ShowDocumentIcon)
@@ -1182,7 +1182,7 @@ namespace mRemoteNG.UI.Tabs
                     {
                         Rectangle tabRect = tab.Rectangle.Value;
                         Rectangle minimizeButtonRect = GetMinimizeButtonRect(tabRect, tab.Content);
-                        Rectangle closeButtonRect = GetCloseButtonRect(tabRect);
+                        Rectangle closeButtonRect = GetCloseButtonRect(tabRect, tab.Content);
                         Rectangle mouseRect = new(mousePos, new Size(1, 1));
                         bool minimizeUpdated = SetActiveMinimize(minimizeButtonRect.IntersectsWith(mouseRect)
                                                                      ? minimizeButtonRect
@@ -1238,7 +1238,7 @@ namespace mRemoteNG.UI.Tabs
             Rectangle tabRect = GetTabBounds(Tabs[index]);
             if (tabRect.Contains(ActiveMinimize) && ActiveMinimizeHitTest(mousePos))
             {
-                MinimizeTab(index);
+                MinimizeConnectionTab(index);
                 return true;
             }
 
@@ -1273,7 +1273,7 @@ namespace mRemoteNG.UI.Tabs
             }
         }
 
-        private void MinimizeTab(int index)
+        private void MinimizeConnectionTab(int index)
         {
             if (Tabs[index].Content is not ConnectionTab connectionTab)
                 return;
@@ -1281,13 +1281,18 @@ namespace mRemoteNG.UI.Tabs
             connectionTab.MinimizeToBottomAutoHide();
         }
 
-        private Rectangle GetCloseButtonRect(Rectangle rectTab)
+        private Rectangle GetCloseButtonRect(Rectangle rectTab, IDockContent content)
         {
-            if (Appearance != DockPane.AppearanceStyle.Document)
+            if (Appearance != DockPane.AppearanceStyle.Document || !ShouldShowCloseButton(content))
             {
                 return Rectangle.Empty;
             }
 
+            return GetRightAlignedDocumentButtonRect(rectTab);
+        }
+
+        private Rectangle GetRightAlignedDocumentButtonRect(Rectangle rectTab)
+        {
             const int gap = 3;
             int imageSize = PatchController.EnableHighDpi == true ? rectTab.Height - gap * 2 : 15;
             return new Rectangle(rectTab.X + rectTab.Width - imageSize - gap - 1, rectTab.Y + gap, imageSize,
@@ -1296,20 +1301,25 @@ namespace mRemoteNG.UI.Tabs
 
         private Rectangle GetMinimizeButtonRect(Rectangle rectTab, IDockContent content)
         {
-            if (Appearance != DockPane.AppearanceStyle.Document || content is not ConnectionTab connectionTab)
-            {
-                return Rectangle.Empty;
-            }
-
-            if (!connectionTab.CloseButton || !connectionTab.CloseButtonVisible)
+            if (Appearance != DockPane.AppearanceStyle.Document || content is not ConnectionTab)
             {
                 return Rectangle.Empty;
             }
 
             const int buttonGap = 1;
-            Rectangle closeButtonRect = GetCloseButtonRect(rectTab);
+            Rectangle closeButtonRect = GetCloseButtonRect(rectTab, content);
+            if (closeButtonRect.IsEmpty)
+                return GetRightAlignedDocumentButtonRect(rectTab);
+
             return new Rectangle(closeButtonRect.X - closeButtonRect.Width - buttonGap, closeButtonRect.Y,
                                  closeButtonRect.Width, closeButtonRect.Height);
+        }
+
+        private bool ShouldShowCloseButton(IDockContent content)
+        {
+            return content is DockContent dockContent &&
+                   dockContent.CloseButton &&
+                   dockContent.CloseButtonVisible;
         }
 
 

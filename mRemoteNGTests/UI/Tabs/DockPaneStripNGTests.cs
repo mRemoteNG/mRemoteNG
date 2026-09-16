@@ -234,8 +234,8 @@ namespace mRemoteNGTests.UI.Tabs
             Control dockPaneStrip = FindDockPaneStripNG(dockPanel);
             Assert.That(dockPaneStrip, Is.Not.Null, "Could not find DockPaneStripNG control");
 
-            MethodInfo minimizeTabMethod = dockPaneStrip.GetType().GetMethod("MinimizeTab", BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.That(minimizeTabMethod, Is.Not.Null, "Could not find MinimizeTab method");
+            MethodInfo minimizeTabMethod = dockPaneStrip.GetType().GetMethod("MinimizeConnectionTab", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.That(minimizeTabMethod, Is.Not.Null, "Could not find MinimizeConnectionTab method");
 
             minimizeTabMethod.Invoke(dockPaneStrip, new object[] { 1 });
             Application.DoEvents();
