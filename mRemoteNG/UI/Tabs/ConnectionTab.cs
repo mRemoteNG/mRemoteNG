@@ -20,6 +20,8 @@ namespace mRemoteNG.UI.Tabs
     [SupportedOSPlatform("windows")]
     public partial class ConnectionTab : DockContent
     {
+        private DockAreas? _dockAreasBeforeMinimize;
+
         /// <summary>
         ///Silent close ignores the popup asking for confirmation
         /// </summary>
@@ -34,6 +36,7 @@ namespace mRemoteNG.UI.Tabs
         {
             InitializeComponent();
             GotFocus += ConnectionTab_GotFocus;
+            DockStateChanged += ConnectionTab_DockStateChanged;
         }
 
         internal bool CanMinimizeToBottomAutoHide()
@@ -47,16 +50,24 @@ namespace mRemoteNG.UI.Tabs
             if (!CanMinimizeToBottomAutoHide() || dockPanel == null)
                 return;
 
-            DockAreas originalDockAreas = DockAreas;
-            try
+            if ((DockAreas & DockAreas.DockBottom) != DockAreas.DockBottom)
             {
+                _dockAreasBeforeMinimize ??= DockAreas;
                 DockAreas |= DockAreas.DockBottom;
-                Show(dockPanel, DockState.DockBottomAutoHide);
             }
-            finally
+
+            Show(dockPanel, DockState.DockBottomAutoHide);
+        }
+
+        private void ConnectionTab_DockStateChanged(object? sender, EventArgs e)
+        {
+            if (_dockAreasBeforeMinimize == null || DockState == DockState.DockBottomAutoHide)
             {
-                DockAreas = originalDockAreas;
+                return;
             }
+
+            DockAreas = _dockAreasBeforeMinimize.Value;
+            _dockAreasBeforeMinimize = null;
         }
 
         private void ConnectionTab_GotFocus(object sender, EventArgs e)

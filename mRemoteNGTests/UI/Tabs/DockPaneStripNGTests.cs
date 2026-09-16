@@ -285,7 +285,12 @@ namespace mRemoteNGTests.UI.Tabs
             Application.DoEvents();
 
             Assert.That(connectionTab.DockState, Is.EqualTo(DockState.DockBottomAutoHide), "ConnectionTab should move to bottom auto-hide");
-            Assert.That(connectionTab.DockAreas, Is.EqualTo(DockAreas.Document | DockAreas.Float), "ConnectionTab should restore its original docking areas");
+            Assert.That((connectionTab.DockAreas & DockAreas.DockBottom), Is.EqualTo(DockAreas.DockBottom), "ConnectionTab should allow bottom docking while minimized");
+
+            connectionTab.Show(dockPanel, DockState.Document);
+            Application.DoEvents();
+
+            Assert.That(connectionTab.DockAreas, Is.EqualTo(DockAreas.Document | DockAreas.Float), "ConnectionTab should restore its original docking areas after leaving auto-hide");
         });
 
         private static Control FindDockPaneStripNG(Control parent)
