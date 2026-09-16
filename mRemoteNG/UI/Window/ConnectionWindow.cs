@@ -874,16 +874,16 @@ namespace mRemoteNG.UI.Window
                     if (!string.IsNullOrEmpty(frmInputBox.returnValue))
                         ((ConnectionTab)interfaceControl.Parent).TabText = frmInputBox.returnValue.Replace("&", "&&");
                 }
-
-                private ConnectionTab GetSelectedConnectionTab()
-                {
-                    return GetInterfaceControl()?.Parent as ConnectionTab;
-                }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("RenameTab (UI.Window.ConnectionWindow) failed", ex);
             }
+        }
+
+        private ConnectionTab GetSelectedConnectionTab()
+        {
+            return GetInterfaceControl()?.Parent as ConnectionTab;
         }
 
         #endregion
