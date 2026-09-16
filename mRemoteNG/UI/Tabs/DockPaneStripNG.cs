@@ -1092,7 +1092,7 @@ namespace mRemoteNG.UI.Tabs
             TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, DocumentTextFont, rectText, text, DocumentTextFormat);
             if (!rectMinimizeButton.IsEmpty)
                 g.DrawImage(Properties.Resources.GlyphDown_16x, rectMinimizeButton);
-            if (image != null && !rectCloseButton.IsEmpty)
+            if (image != null && !rectCloseButton.IsEmpty && rectCloseButton != rectMinimizeButton)
                 g.DrawImage(image, rectCloseButton);
 
             if (rectTab.Contains(rectIcon) && DockPane.DockPanel.ShowDocumentIcon)
@@ -1276,7 +1276,7 @@ namespace mRemoteNG.UI.Tabs
             }
         }
 
-        private void MinimizeConnectionTab(int index)
+        internal void MinimizeConnectionTab(int index)
         {
             if (Tabs[index].Content is not ConnectionTab connectionTab)
                 return;
@@ -1325,7 +1325,7 @@ namespace mRemoteNG.UI.Tabs
 
             Rectangle minimizeButtonRect = new(closeButtonRect.X - closeButtonRect.Width - buttonGap, closeButtonRect.Y,
                                                closeButtonRect.Width, closeButtonRect.Height);
-            return minimizeButtonRect.Left >= rectTab.Left ? minimizeButtonRect : Rectangle.Empty;
+            return minimizeButtonRect.Left >= rectTab.Left ? minimizeButtonRect : closeButtonRect;
         }
 
         private bool ShouldShowCloseButton(IDockContent content)

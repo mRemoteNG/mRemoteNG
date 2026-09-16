@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
@@ -131,14 +130,13 @@ namespace mRemoteNGTests.UI.Tabs
             Application.DoEvents();
             Assert.That(doc2.DockHandler.Pane.ActiveContent, Is.SameAs(doc2), "Doc2 should start out active");
 
-            Control dockPaneStrip = FindDockPaneStripNG(dockPanel);
+            DockPaneStripNG dockPaneStrip = FindDockPaneStripNG(dockPanel);
             Assert.That(dockPaneStrip, Is.Not.Null, "Could not find DockPaneStripNG control");
-
-            MethodInfo closeTabMethod = dockPaneStrip.GetType().GetMethod("CloseTab", BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.That(closeTabMethod, Is.Not.Null, "Could not find CloseTab method");
 
             // Act - close Doc2, which is not the first tab, so DockPanelSuite would otherwise
             // select Doc1 once the close attempt returns.
+            var closeTabMethod = typeof(DockPaneStripNG).GetMethod("CloseTab", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            Assert.That(closeTabMethod, Is.Not.Null, "Could not find CloseTab method");
             closeTabMethod.Invoke(dockPaneStrip, new object[] { 1 });
             Application.DoEvents();
 
@@ -179,12 +177,11 @@ namespace mRemoteNGTests.UI.Tabs
 
             Application.DoEvents();
 
-            Control dockPaneStrip = FindDockPaneStripNG(dockPanel);
+            DockPaneStripNG dockPaneStrip = FindDockPaneStripNG(dockPanel);
             Assert.That(dockPaneStrip, Is.Not.Null, "Could not find DockPaneStripNG control");
 
-            MethodInfo closeTabMethod = dockPaneStrip.GetType().GetMethod("CloseTab", BindingFlags.Instance | BindingFlags.NonPublic);
+            var closeTabMethod = typeof(DockPaneStripNG).GetMethod("CloseTab", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
             Assert.That(closeTabMethod, Is.Not.Null, "Could not find CloseTab method");
-
             closeTabMethod.Invoke(dockPaneStrip, new object[] { 1 });
             Application.DoEvents();
 
@@ -231,13 +228,9 @@ namespace mRemoteNGTests.UI.Tabs
 
             Application.DoEvents();
 
-            Control dockPaneStrip = FindDockPaneStripNG(dockPanel);
+            DockPaneStripNG dockPaneStrip = FindDockPaneStripNG(dockPanel);
             Assert.That(dockPaneStrip, Is.Not.Null, "Could not find DockPaneStripNG control");
-
-            MethodInfo minimizeTabMethod = dockPaneStrip.GetType().GetMethod("MinimizeConnectionTab", BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.That(minimizeTabMethod, Is.Not.Null, "Could not find MinimizeConnectionTab method");
-
-            minimizeTabMethod.Invoke(dockPaneStrip, new object[] { 1 });
+            dockPaneStrip.MinimizeConnectionTab(1);
             Application.DoEvents();
 
             Assert.That(doc2.DockState, Is.EqualTo(DockState.DockBottomAutoHide), "Connection tab should move to bottom auto-hide");
@@ -278,10 +271,7 @@ namespace mRemoteNGTests.UI.Tabs
             connectionTab.Show(dockPanel, DockState.Document);
             Application.DoEvents();
 
-            MethodInfo minimizeMethod = typeof(ConnectionTab).GetMethod("MinimizeToBottomAutoHide", BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.That(minimizeMethod, Is.Not.Null, "Could not find MinimizeToBottomAutoHide method");
-
-            minimizeMethod.Invoke(connectionTab, null);
+            connectionTab.MinimizeToBottomAutoHide();
             Application.DoEvents();
 
             Assert.That(connectionTab.DockState, Is.EqualTo(DockState.DockBottomAutoHide), "ConnectionTab should move to bottom auto-hide");
@@ -293,12 +283,12 @@ namespace mRemoteNGTests.UI.Tabs
             Assert.That(connectionTab.DockAreas, Is.EqualTo(DockAreas.Document | DockAreas.Float), "ConnectionTab should restore its original docking areas after leaving auto-hide");
         });
 
-        private static Control FindDockPaneStripNG(Control parent)
+        private static DockPaneStripNG FindDockPaneStripNG(Control parent)
         {
             foreach (Control c in parent.Controls)
             {
-                if (string.Equals(c.GetType().Name, "DockPaneStripNG", StringComparison.Ordinal))
-                    return c;
+                if (c is DockPaneStripNG dockPaneStrip)
+                    return dockPaneStrip;
 
                 var result = FindDockPaneStripNG(c);
                 if (result != null) return result;
