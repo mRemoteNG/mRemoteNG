@@ -36,10 +36,15 @@ namespace mRemoteNG.UI.Tabs
             GotFocus += ConnectionTab_GotFocus;
         }
 
+        internal bool CanMinimizeToBottomAutoHide()
+        {
+            return DockPanel != null && !IsDisposed && !Disposing;
+        }
+
         internal void MinimizeToBottomAutoHide()
         {
             DockPanel dockPanel = DockPanel;
-            if (dockPanel == null)
+            if (!CanMinimizeToBottomAutoHide() || dockPanel == null)
                 return;
 
             DockAreas originalDockAreas = DockAreas;
