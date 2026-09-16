@@ -95,6 +95,7 @@ namespace mRemoteNG.UI.Window
             cmenTabDuplicateTab.Click += (sender, args) => DuplicateTab();
             cmenTabReconnect.Click += (sender, args) => Reconnect();
             cmenTabDisconnect.Click += (sender, args) => CloseTabMenu();
+            cmenTabMinimize.Click += (sender, args) => MinimizeTabMenu();
             cmenTabDisconnectOthers.Click += (sender, args) => CloseOtherTabs();
             cmenTabDisconnectOthersRight.Click += (sender, args) => CloseOtherTabsToTheRight();
             cmenTabPuttySettings.Click += (sender, args) => ShowPuttySettingsDialog();
@@ -292,6 +293,7 @@ namespace mRemoteNG.UI.Window
             cmenTabDuplicateTab.Text = Language.DuplicateTab;
             cmenTabReconnect.Text = Language.Reconnect;
             cmenTabDisconnect.Text = Language.Disconnect;
+            cmenTabMinimize.Text = Language.MinimizeTab;
             cmenTabDisconnectOthers.Text = Language.DisconnectOthers;
             cmenTabDisconnectOthersRight.Text = Language.DisconnectOthersRight;
             cmenTabPuttySettings.Text = Language.PuttySettings;
@@ -731,7 +733,7 @@ namespace mRemoteNG.UI.Window
 
         private void CloseTabMenu()
         {
-            ConnectionTab selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+            ConnectionTab selectedTab = GetSelectedConnectionTab();
             if (selectedTab == null) return;
 
             try
@@ -744,9 +746,24 @@ namespace mRemoteNG.UI.Window
             }
         }
 
+        private void MinimizeTabMenu()
+        {
+            ConnectionTab selectedTab = GetSelectedConnectionTab();
+            if (selectedTab == null) return;
+
+            try
+            {
+                selectedTab.MinimizeToBottomAutoHide();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("MinimizeTabMenu (UI.Window.ConnectionWindow) failed", ex);
+            }
+        }
+
         private void CloseOtherTabs()
         {
-            ConnectionTab selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+            ConnectionTab selectedTab = GetSelectedConnectionTab();
             if (selectedTab == null) return;
             if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple)
             {
@@ -782,7 +799,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                ConnectionTab selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+                ConnectionTab selectedTab = GetSelectedConnectionTab();
                 if (selectedTab == null) return;
                 DockPane dockPane = selectedTab.Pane;
 
@@ -862,6 +879,11 @@ namespace mRemoteNG.UI.Window
             {
                 Runtime.MessageCollector.AddExceptionMessage("RenameTab (UI.Window.ConnectionWindow) failed", ex);
             }
+        }
+
+        private ConnectionTab GetSelectedConnectionTab()
+        {
+            return GetInterfaceControl()?.Parent as ConnectionTab;
         }
 
         #endregion
