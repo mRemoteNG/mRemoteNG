@@ -1028,6 +1028,8 @@ namespace mRemoteNG.UI.Tabs
 
             rectText = DrawHelper.RtlTransform(this, rectText);
             rectIcon = DrawHelper.RtlTransform(this, rectIcon);
+            Rectangle rectCloseButtonVisual = DrawHelper.RtlTransform(this, rectCloseButton);
+            Rectangle rectMinimizeButtonVisual = DrawHelper.RtlTransform(this, rectMinimizeButton);
 
             // Get custom tab color if available
             Color? customTabColor = GetCustomTabColor(tab.Content);
@@ -1054,7 +1056,7 @@ namespace mRemoteNG.UI.Tabs
                     text = activeText;
                     image = IsMouseDown
                         ? imageService.TabPressActive_Close
-                        : rectCloseButton == ActiveClose
+                        : rectCloseButtonVisual == ActiveClose
                             ? imageService.TabHoverActive_Close
                             : imageService.TabActive_Close;
                 }
@@ -1064,7 +1066,7 @@ namespace mRemoteNG.UI.Tabs
                     text = lostFocusText;
                     image = IsMouseDown
                         ? imageService.TabPressLostFocus_Close
-                        : rectCloseButton == ActiveClose
+                        : rectCloseButtonVisual == ActiveClose
                             ? imageService.TabHoverLostFocus_Close
                             : imageService.TabLostFocus_Close;
                 }
@@ -1077,7 +1079,7 @@ namespace mRemoteNG.UI.Tabs
                     text = mouseHoverText;
                     image = IsMouseDown
                         ? imageService.TabPressInactive_Close
-                        : rectCloseButton == ActiveClose
+                        : rectCloseButtonVisual == ActiveClose
                             ? imageService.TabHoverInactive_Close
                             : imageService.TabInactive_Close;
                 }
@@ -1090,10 +1092,10 @@ namespace mRemoteNG.UI.Tabs
 
             g.FillRectangle(DockPane.DockPanel.Theme.PaintingService.GetBrush(paint), rect);
             TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, DocumentTextFont, rectText, text, DocumentTextFormat);
-            if (!rectMinimizeButton.IsEmpty)
-                g.DrawImage(Properties.Resources.GlyphDown_16x, rectMinimizeButton);
-            if (image != null && !rectCloseButton.IsEmpty && rectCloseButton != rectMinimizeButton)
-                g.DrawImage(image, rectCloseButton);
+            if (!rectMinimizeButtonVisual.IsEmpty)
+                g.DrawImage(Properties.Resources.GlyphDown_16x, rectMinimizeButtonVisual);
+            if (image != null && !rectCloseButtonVisual.IsEmpty && rectCloseButtonVisual != rectMinimizeButtonVisual)
+                g.DrawImage(image, rectCloseButtonVisual);
 
             if (rectTab.Contains(rectIcon) && DockPane.DockPanel.ShowDocumentIcon)
                 g.DrawIcon(tab.Content.DockHandler.Icon, rectIcon);
@@ -1184,8 +1186,8 @@ namespace mRemoteNG.UI.Tabs
                     if (tab.Rectangle != null)
                     {
                         Rectangle tabRect = tab.Rectangle.Value;
-                        Rectangle minimizeButtonRect = GetMinimizeButtonRect(tabRect, tab.Content);
-                        Rectangle closeButtonRect = GetCloseButtonRect(tabRect, tab.Content);
+                        Rectangle minimizeButtonRect = DrawHelper.RtlTransform(this, GetMinimizeButtonRect(tabRect, tab.Content));
+                        Rectangle closeButtonRect = DrawHelper.RtlTransform(this, GetCloseButtonRect(tabRect, tab.Content));
                         Rectangle mouseRect = new(mousePos, new Size(1, 1));
                         bool minimizeUpdated = SetActiveMinimize(minimizeButtonRect.IntersectsWith(mouseRect)
                                                                      ? minimizeButtonRect
