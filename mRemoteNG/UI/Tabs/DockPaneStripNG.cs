@@ -1296,7 +1296,12 @@ namespace mRemoteNG.UI.Tabs
 
         private Rectangle GetMinimizeButtonRect(Rectangle rectTab, IDockContent content)
         {
-            if (Appearance != DockPane.AppearanceStyle.Document || content is not ConnectionTab)
+            if (Appearance != DockPane.AppearanceStyle.Document || content is not ConnectionTab connectionTab)
+            {
+                return Rectangle.Empty;
+            }
+
+            if (!connectionTab.CloseButton || !connectionTab.CloseButtonVisible)
             {
                 return Rectangle.Empty;
             }
