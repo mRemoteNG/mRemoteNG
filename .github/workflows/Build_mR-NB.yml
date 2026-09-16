@@ -14,7 +14,7 @@ on:
 jobs:
   NB-Build-and-Release:
     permissions:
-      contents: write
+      contents: read
     strategy:
       matrix:
         include:
