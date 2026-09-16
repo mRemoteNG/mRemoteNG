@@ -1009,14 +1009,17 @@ namespace mRemoteNG.UI.Tabs
             {
                 rectText.X += rectIcon.Width + DocumentIconGapRight;
                 rectText.Y = rect.Y;
-                rectText.Width = rect.Width - rectIcon.Width - DocumentIconGapLeft - DocumentIconGapRight -
-                                 DocumentTextGapRight - rectCloseButton.Width -
-                                 (rectMinimizeButton.IsEmpty ? 0 : rectMinimizeButton.Width + 1);
                 rectText.Height = rect.Height;
             }
             else
-                rectText.Width = rect.Width - DocumentIconGapLeft - DocumentTextGapRight - rectCloseButton.Width -
-                                 (rectMinimizeButton.IsEmpty ? 0 : rectMinimizeButton.Width + 1);
+                rectText.Height = rect.Height;
+
+            int textRight = rect.Right - DocumentTextGapRight;
+            if (!rectCloseButton.IsEmpty)
+                textRight = Math.Min(textRight, rectCloseButton.Left);
+            if (!rectMinimizeButton.IsEmpty)
+                textRight = Math.Min(textRight, rectMinimizeButton.Left);
+            rectText.Width = Math.Max(0, textRight - rectText.X);
 
             Rectangle rectTab = DrawHelper.RtlTransform(this, rect);
             Rectangle rectBack = DrawHelper.RtlTransform(this, rect);
