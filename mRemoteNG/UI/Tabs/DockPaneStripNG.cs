@@ -1016,9 +1016,9 @@ namespace mRemoteNG.UI.Tabs
 
             int textRight = rect.Right - DocumentTextGapRight;
             if (!rectCloseButton.IsEmpty)
-                textRight = Math.Min(textRight, rectCloseButton.Left);
+                textRight = Math.Min(textRight, rectCloseButton.Left - DocumentTextGapRight);
             if (!rectMinimizeButton.IsEmpty)
-                textRight = Math.Min(textRight, rectMinimizeButton.Left);
+                textRight = Math.Min(textRight, rectMinimizeButton.Left - DocumentTextGapRight);
             rectText.Width = Math.Max(0, textRight - rectText.X);
 
             Rectangle rectTab = DrawHelper.RtlTransform(this, rect);
