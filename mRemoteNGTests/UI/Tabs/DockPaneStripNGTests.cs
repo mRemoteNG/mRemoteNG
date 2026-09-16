@@ -1,4 +1,6 @@
 using System;
+using System.Drawing;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
@@ -283,6 +285,78 @@ namespace mRemoteNGTests.UI.Tabs
             Assert.That(connectionTab.DockAreas, Is.EqualTo(DockAreas.Document | DockAreas.Float), "ConnectionTab should restore its original docking areas after leaving auto-hide");
         });
 
+        [Test]
+        public void MouseMoveInRightToLeft_UsesVisualActionButtonRectangles() => RunWithMessagePump(() =>
+        {
+            using var hostForm = new Form
+            {
+                Width = 800,
+                Height = 600,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(-10000, -10000)
+            };
+
+            var dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill,
+                DocumentStyle = DocumentStyle.DockingWindow,
+                Theme = new VS2015LightTheme()
+            };
+
+            dockPanel.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+
+            hostForm.Controls.Add(dockPanel);
+            hostForm.Show();
+
+            var doc1 = new DockContent { Text = "Doc1", CloseButton = true, CloseButtonVisible = true };
+            var doc2 = new ConnectionTab
+            {
+                Text = "Doc2",
+                TabText = "Doc2",
+                CloseButton = true,
+                CloseButtonVisible = true,
+                DockAreas = DockAreas.Document | DockAreas.Float
+            };
+
+            doc1.Show(dockPanel, DockState.Document);
+            doc2.Show(dockPanel, DockState.Document);
+            doc2.DockHandler.Activate();
+            Application.DoEvents();
+
+            DockPaneStripNG dockPaneStrip = FindDockPaneStripNG(dockPanel);
+            Assert.That(dockPaneStrip, Is.Not.Null, "Could not find DockPaneStripNG control");
+
+            dockPaneStrip.RightToLeft = RightToLeft.Yes;
+            Application.DoEvents();
+
+            object tab = GetTabAtIndex(dockPaneStrip, 1);
+            Rectangle? logicalTabRect = (Rectangle?)tab.GetType().GetProperty("Rectangle")?.GetValue(tab);
+            Assert.That(logicalTabRect, Is.Not.Null, "Could not get tab rectangle");
+
+            var getCloseButtonRectMethod = typeof(DockPaneStripNG).GetMethod("GetCloseButtonRect", BindingFlags.Instance | BindingFlags.NonPublic);
+            var getMinimizeButtonRectMethod = typeof(DockPaneStripNG).GetMethod("GetMinimizeButtonRect", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.That(getCloseButtonRectMethod, Is.Not.Null, "Could not find GetCloseButtonRect method");
+            Assert.That(getMinimizeButtonRectMethod, Is.Not.Null, "Could not find GetMinimizeButtonRect method");
+
+            Rectangle logicalCloseButtonRect = (Rectangle)getCloseButtonRectMethod.Invoke(dockPaneStrip, new object[] { logicalTabRect.Value, doc2 });
+            Rectangle logicalMinimizeButtonRect = (Rectangle)getMinimizeButtonRectMethod.Invoke(dockPaneStrip, new object[] { logicalTabRect.Value, doc2 });
+            Rectangle visualCloseButtonRect = DrawHelper.RtlTransform(dockPaneStrip, logicalCloseButtonRect);
+            Rectangle visualMinimizeButtonRect = DrawHelper.RtlTransform(dockPaneStrip, logicalMinimizeButtonRect);
+
+            Point closeButtonCenter = new(visualCloseButtonRect.Left + visualCloseButtonRect.Width / 2, visualCloseButtonRect.Top + visualCloseButtonRect.Height / 2);
+            Cursor.Position = dockPaneStrip.PointToScreen(closeButtonCenter);
+            InvokeOnMouseMove(dockPaneStrip, closeButtonCenter);
+
+            Assert.That(GetRectangleProperty(dockPaneStrip, "ActiveClose"), Is.EqualTo(visualCloseButtonRect), "Close hover rectangle should use visual RTL coordinates");
+
+            Point minimizeButtonCenter = new(visualMinimizeButtonRect.Left + visualMinimizeButtonRect.Width / 2, visualMinimizeButtonRect.Top + visualMinimizeButtonRect.Height / 2);
+            Cursor.Position = dockPaneStrip.PointToScreen(minimizeButtonCenter);
+            InvokeOnMouseMove(dockPaneStrip, minimizeButtonCenter);
+
+            Assert.That(GetRectangleProperty(dockPaneStrip, "ActiveMinimize"), Is.EqualTo(visualMinimizeButtonRect), "Minimize hover rectangle should use visual RTL coordinates");
+        });
+
         private static DockPaneStripNG FindDockPaneStripNG(Control parent)
         {
             foreach (Control c in parent.Controls)
@@ -295,6 +369,40 @@ namespace mRemoteNGTests.UI.Tabs
             }
 
             return null;
+        }
+
+        private static object GetTabAtIndex(DockPaneStripNG dockPaneStrip, int index)
+        {
+            PropertyInfo tabsProperty = typeof(DockPaneStrip).GetProperty("Tabs", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.That(tabsProperty, Is.Not.Null, "Could not find Tabs property");
+
+            object tabs = tabsProperty.GetValue(dockPaneStrip);
+            Assert.That(tabs, Is.Not.Null, "Could not read Tabs property");
+
+            PropertyInfo indexer = tabs.GetType().GetProperty("Item");
+            Assert.That(indexer, Is.Not.Null, "Could not find Tabs indexer");
+
+            return indexer.GetValue(tabs, new object[] { index });
+        }
+
+        private static void InvokeOnMouseMove(Control control, Point point)
+        {
+            MethodInfo onMouseMoveMethod = control.GetType().GetMethod("OnMouseMove", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.That(onMouseMoveMethod, Is.Not.Null, "Could not find OnMouseMove method");
+
+            onMouseMoveMethod.Invoke(control, new object[] { new MouseEventArgs(MouseButtons.None, 0, point.X, point.Y, 0) });
+            Application.DoEvents();
+        }
+
+        private static Rectangle GetRectangleProperty(object target, string propertyName)
+        {
+            PropertyInfo property = target.GetType().GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.That(property, Is.Not.Null, $"Could not find property {propertyName}");
+
+            object value = property.GetValue(target);
+            Assert.That(value, Is.Not.Null, $"Property {propertyName} should not be null");
+
+            return (Rectangle)value;
         }
     }
 }
