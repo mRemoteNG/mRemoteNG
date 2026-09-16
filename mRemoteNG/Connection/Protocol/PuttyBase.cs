@@ -121,6 +121,53 @@ namespace mRemoteNG.Connection.Protocol
             }
         }
 
+        private static string WriteTemporaryPrivateKeyFile(string privateKey)
+        {
+            for (int attempt = 0; attempt < 5; attempt++)
+            {
+                string candidatePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".ppk");
+                bool created = false;
+
+                try
+                {
+                    using (FileStream stream = new(candidatePath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                    {
+                        created = true;
+                        using StreamWriter writer = new(stream);
+                        writer.Write(privateKey);
+                    }
+
+                    File.SetAttributes(candidatePath, FileAttributes.Temporary);
+                    return candidatePath;
+                }
+                catch (IOException) when (!created && File.Exists(candidatePath))
+                {
+                    // Candidate existed before we could create it; retry.
+                }
+                catch
+                {
+                    if (created)
+                    {
+                        try
+                        {
+                            if (File.Exists(candidatePath))
+                            {
+                                File.Delete(candidatePath);
+                            }
+                        }
+                        catch
+                        {
+                            // Preserve original exception.
+                        }
+                    }
+
+                    throw;
+                }
+            }
+
+            throw new IOException("Unable to create a unique temporary private-key file.");
+        }
+
         private void CleanupTemporaryPrivateKey()
         {
             if (string.IsNullOrEmpty(_temporaryPrivateKeyPath))
@@ -340,13 +387,8 @@ namespace mRemoteNG.Connection.Protocol
 
                                 if (!string.IsNullOrEmpty(privatekey))
                                 {
-                                    optionalTemporaryPrivateKeyPath = Path.GetTempFileName();
+                                    optionalTemporaryPrivateKeyPath = WriteTemporaryPrivateKeyFile(privatekey);
                                     _temporaryPrivateKeyPath = optionalTemporaryPrivateKeyPath;
-                                    File.WriteAllText(optionalTemporaryPrivateKeyPath, privatekey);
-                                    FileInfo fileInfo = new(optionalTemporaryPrivateKeyPath)
-                                    {
-                                        Attributes = FileAttributes.Temporary
-                                    };
                                 }
                             }
                             catch (Exception ex)
@@ -362,13 +404,8 @@ namespace mRemoteNG.Connection.Protocol
 
                                 if (!string.IsNullOrEmpty(privatekey))
                                 {
-                                    optionalTemporaryPrivateKeyPath = Path.GetTempFileName();
+                                    optionalTemporaryPrivateKeyPath = WriteTemporaryPrivateKeyFile(privatekey);
                                     _temporaryPrivateKeyPath = optionalTemporaryPrivateKeyPath;
-                                    File.WriteAllText(optionalTemporaryPrivateKeyPath, privatekey);
-                                    FileInfo fileInfo = new(optionalTemporaryPrivateKeyPath)
-                                    {
-                                        Attributes = FileAttributes.Temporary
-                                    };
                                 }
                             }
                             catch (Exception ex)
