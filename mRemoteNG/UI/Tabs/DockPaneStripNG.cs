@@ -1310,10 +1310,14 @@ namespace mRemoteNG.UI.Tabs
             const int buttonGap = 1;
             Rectangle closeButtonRect = GetCloseButtonRect(rectTab, content);
             if (closeButtonRect.IsEmpty)
-                return GetRightAlignedDocumentButtonRect(rectTab);
+            {
+                Rectangle rightAlignedButtonRect = GetRightAlignedDocumentButtonRect(rectTab);
+                return rightAlignedButtonRect.Left >= rectTab.Left ? rightAlignedButtonRect : Rectangle.Empty;
+            }
 
-            return new Rectangle(closeButtonRect.X - closeButtonRect.Width - buttonGap, closeButtonRect.Y,
-                                 closeButtonRect.Width, closeButtonRect.Height);
+            Rectangle minimizeButtonRect = new(closeButtonRect.X - closeButtonRect.Width - buttonGap, closeButtonRect.Y,
+                                               closeButtonRect.Width, closeButtonRect.Height);
+            return minimizeButtonRect.Left >= rectTab.Left ? minimizeButtonRect : Rectangle.Empty;
         }
 
         private bool ShouldShowCloseButton(IDockContent content)
