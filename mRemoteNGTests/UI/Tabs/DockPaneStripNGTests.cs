@@ -223,7 +223,7 @@ namespace mRemoteNGTests.UI.Tabs
                 TabText = "Doc2",
                 CloseButton = true,
                 CloseButtonVisible = true,
-                DockAreas = DockAreas.Document | DockAreas.Float | DockAreas.DockBottom
+                DockAreas = DockAreas.Document | DockAreas.Float
             };
 
             doc1.Show(dockPanel, DockState.Document);
@@ -272,7 +272,7 @@ namespace mRemoteNGTests.UI.Tabs
             {
                 Text = "Doc1",
                 TabText = "Doc1",
-                DockAreas = DockAreas.Document | DockAreas.Float | DockAreas.DockBottom
+                DockAreas = DockAreas.Document | DockAreas.Float
             };
 
             connectionTab.Show(dockPanel, DockState.Document);
@@ -285,6 +285,7 @@ namespace mRemoteNGTests.UI.Tabs
             Application.DoEvents();
 
             Assert.That(connectionTab.DockState, Is.EqualTo(DockState.DockBottomAutoHide), "ConnectionTab should move to bottom auto-hide");
+            Assert.That(connectionTab.DockAreas, Is.EqualTo(DockAreas.Document | DockAreas.Float), "ConnectionTab should restore its original docking areas");
         });
 
         private static Control FindDockPaneStripNG(Control parent)

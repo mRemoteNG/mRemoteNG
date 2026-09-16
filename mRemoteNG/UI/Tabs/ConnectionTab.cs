@@ -39,10 +39,19 @@ namespace mRemoteNG.UI.Tabs
         internal void MinimizeToBottomAutoHide()
         {
             DockPanel dockPanel = DockPanel;
-            if (dockPanel == null || (DockAreas & DockAreas.DockBottom) != DockAreas.DockBottom)
+            if (dockPanel == null)
                 return;
 
-            Show(dockPanel, DockState.DockBottomAutoHide);
+            DockAreas originalDockAreas = DockAreas;
+            try
+            {
+                DockAreas |= DockAreas.DockBottom;
+                Show(dockPanel, DockState.DockBottomAutoHide);
+            }
+            finally
+            {
+                DockAreas = originalDockAreas;
+            }
         }
 
         private void ConnectionTab_GotFocus(object sender, EventArgs e)

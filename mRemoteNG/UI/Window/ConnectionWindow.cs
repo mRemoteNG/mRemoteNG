@@ -141,7 +141,7 @@ namespace mRemoteNG.UI.Window
                 ConnectionTab conTab = new()
                 {
                     Tag = connectionInfo,
-                    DockAreas = DockAreas.Document | DockAreas.Float | DockAreas.DockBottom,
+                    DockAreas = DockAreas.Document | DockAreas.Float,
                     Icon = ConnectionIcon.FromString(connectionInfo.Icon),
                     TabText = titleText,
                     TabPageContextMenuStrip = cmenTab

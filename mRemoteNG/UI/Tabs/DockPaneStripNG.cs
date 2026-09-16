@@ -1302,7 +1302,7 @@ namespace mRemoteNG.UI.Tabs
 
         private Rectangle GetMinimizeButtonRect(Rectangle rectTab, IDockContent content)
         {
-            if (Appearance != DockPane.AppearanceStyle.Document || content is not ConnectionTab connectionTab || !CanMinimizeConnectionTab(connectionTab))
+            if (Appearance != DockPane.AppearanceStyle.Document || content is not ConnectionTab)
             {
                 return Rectangle.Empty;
             }
@@ -1327,10 +1327,6 @@ namespace mRemoteNG.UI.Tabs
                    dockContent.CloseButtonVisible;
         }
 
-        private bool CanMinimizeConnectionTab(ConnectionTab connectionTab)
-        {
-            return (connectionTab.DockAreas & DockAreas.DockBottom) == DockAreas.DockBottom;
-        }
 
 
         private void WindowList_Click(object sender, EventArgs e)
