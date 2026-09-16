@@ -61,7 +61,7 @@ namespace mRemoteNG.UI.Tabs
 
         private void ConnectionTab_DockStateChanged(object? sender, EventArgs e)
         {
-            if (_dockAreasBeforeMinimize == null || DockState == DockState.DockBottomAutoHide)
+            if (_dockAreasBeforeMinimize == null || DockState != DockState.Document)
             {
                 return;
             }
