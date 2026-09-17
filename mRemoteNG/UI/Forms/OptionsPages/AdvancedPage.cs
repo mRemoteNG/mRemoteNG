@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     [SupportedOSPlatform("windows")]
     public sealed partial class AdvancedPage
     {
-        private int _puttyRootInsertIndex = -1;
+        private readonly Dictionary<RootPuttySessionsNodeInfo, int> _puttyRootOriginalIndices = [];
 
         public AdvancedPage()
         {
@@ -189,19 +190,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             if (chkShowPuttySessionsInTree.Checked)
             {
-                int insertOffset = 0;
                 foreach (RootPuttySessionsNodeInfo puttyRoot in PuttySessionsManager.Instance.RootPuttySessionsNodes)
                 {
                     if (connectionTreeModel.RootNodes.Contains(puttyRoot))
                         continue;
 
                     connectionTreeModel.AddRootNode(puttyRoot);
-                    if (_puttyRootInsertIndex >= 0)
-                    {
-                        int targetIndex = Math.Min(_puttyRootInsertIndex + insertOffset, connectionTreeModel.RootNodes.Count - 1);
+                }
+
+                foreach (RootPuttySessionsNodeInfo puttyRoot in PuttySessionsManager.Instance.RootPuttySessionsNodes
+                             .Where(connectionTreeModel.RootNodes.Contains)
+                             .OrderBy(root => _puttyRootOriginalIndices.TryGetValue(root, out int index) ? index : int.MaxValue))
+                {
+                    if (_puttyRootOriginalIndices.TryGetValue(puttyRoot, out int targetIndex))
                         connectionTreeModel.MoveRootNode(puttyRoot, targetIndex);
-                        insertOffset++;
-                    }
                 }
             }
             else
@@ -209,8 +211,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 RootPuttySessionsNodeInfo[] puttyRoots = connectionTreeModel.RootNodes
                     .OfType<RootPuttySessionsNodeInfo>()
                     .ToArray();
-                if (puttyRoots.Length > 0)
-                    _puttyRootInsertIndex = connectionTreeModel.RootNodes.IndexOf(puttyRoots[0]);
+                _puttyRootOriginalIndices.Clear();
+                foreach (RootPuttySessionsNodeInfo puttyRoot in puttyRoots)
+                {
+                    _puttyRootOriginalIndices[puttyRoot] = connectionTreeModel.RootNodes.IndexOf(puttyRoot);
+                }
 
                 foreach (RootPuttySessionsNodeInfo puttyRoot in puttyRoots)
                 {
