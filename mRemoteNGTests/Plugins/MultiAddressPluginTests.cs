@@ -1,0 +1,152 @@
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using mRemoteNG.PluginContracts;
+using mRemoteNG.Plugins.MultiAddress;
+using NSubstitute;
+using NUnit.Framework;
+
+namespace mRemoteNGTests.Plugins;
+
+[TestFixture]
+public class MultiAddressPluginTests
+{
+    private const string EnabledKey = "mRp.MultiAddress.Enabled";
+    private const string HostnameKey = "mRp.MultiAddress.Hostname";
+    private const string IpAddressKey = "mRp.MultiAddress.IpAddress";
+    private const string UseIpAddressAsPrimaryKey = "mRp.MultiAddress.UseIpAddressAsPrimary";
+    private const string VerifyHostnameMatchesIpKey = "mRp.MultiAddress.VerifyHostnameMatchesIp";
+
+    [Test]
+    public async Task ResolveAsync_UsesIpAddressWhenConfiguredAsPrimary()
+    {
+        IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
+        MultiAddressPlugin plugin = CreatePlugin(messageWriter);
+        TestPluginConnection connection = CreateEnabledConnection();
+        connection.SetPluginProperty(HostnameKey, "server01.contoso.local");
+        connection.SetPluginProperty(IpAddressKey, "192.0.2.25");
+        connection.SetPluginProperty(UseIpAddressAsPrimaryKey, bool.TrueString);
+
+        await plugin.ResolveAsync(connection, CancellationToken.None);
+
+        Assert.That(connection.Hostname, Is.EqualTo("192.0.2.25"));
+        messageWriter.DidNotReceive().Warning(Arg.Any<string>(), Arg.Any<bool>());
+    }
+
+    [Test]
+    public async Task ResolveAsync_UsesHostnameWhenHostnameIsPrimary()
+    {
+        IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
+        MultiAddressPlugin plugin = CreatePlugin(messageWriter);
+        TestPluginConnection connection = CreateEnabledConnection();
+        connection.SetPluginProperty(HostnameKey, "server01.contoso.local");
+        connection.SetPluginProperty(IpAddressKey, "192.0.2.25");
+
+        await plugin.ResolveAsync(connection, CancellationToken.None);
+
+        Assert.That(connection.Hostname, Is.EqualTo("server01.contoso.local"));
+        messageWriter.DidNotReceive().Warning(Arg.Any<string>(), Arg.Any<bool>());
+    }
+
+    [Test]
+    public async Task ResolveAsync_FallsBackToIpAddressWhenHostnameCannotBeResolved()
+    {
+        IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
+        MultiAddressPlugin plugin = CreatePlugin(messageWriter);
+        TestPluginConnection connection = CreateEnabledConnection();
+        connection.Name = "Missing host";
+        connection.SetPluginProperty(HostnameKey, "missing-hostname.invalid");
+        connection.SetPluginProperty(IpAddressKey, "192.0.2.50");
+        connection.SetPluginProperty(VerifyHostnameMatchesIpKey, bool.TrueString);
+
+        await plugin.ResolveAsync(connection, CancellationToken.None);
+
+        Assert.That(connection.Hostname, Is.EqualTo("192.0.2.50"));
+        messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("could not be resolved")), Arg.Any<bool>());
+    }
+
+    [Test]
+    public async Task ResolveAsync_UsesIpAddressAndWarnsWhenHostnameResolvesToDifferentIp()
+    {
+        IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
+        MultiAddressPlugin plugin = CreatePlugin(messageWriter);
+        TestPluginConnection connection = CreateEnabledConnection();
+        connection.Name = "Localhost";
+        connection.SetPluginProperty(HostnameKey, "localhost");
+        connection.SetPluginProperty(IpAddressKey, "192.0.2.10");
+        connection.SetPluginProperty(VerifyHostnameMatchesIpKey, bool.TrueString);
+
+        await plugin.ResolveAsync(connection, CancellationToken.None);
+
+        Assert.That(connection.Hostname, Is.EqualTo("192.0.2.10"));
+        messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("resolved to")), Arg.Any<bool>());
+    }
+
+    private static MultiAddressPlugin CreatePlugin(IMessageWriter messageWriter)
+    {
+        IPluginContext context = Substitute.For<IPluginContext>();
+        context.Messages.Returns(messageWriter);
+
+        MultiAddressPlugin plugin = new();
+        plugin.Initialize(context);
+        return plugin;
+    }
+
+    private static TestPluginConnection CreateEnabledConnection()
+    {
+        TestPluginConnection connection = new()
+        {
+            Name = "Test connection",
+        };
+        connection.SetPluginProperty(EnabledKey, bool.TrueString);
+        return connection;
+    }
+
+    private sealed class TestPluginConnection : IPluginConnection
+    {
+        private readonly Dictionary<string, string> _pluginProperties = new(StringComparer.OrdinalIgnoreCase);
+
+        public string Hostname { get; set; } = string.Empty;
+
+        public bool IsContainer => false;
+
+        public string Name { get; set; } = string.Empty;
+
+        public string ProtocolId => "RDP";
+
+        public int Port { get; set; }
+
+        public string Username { get; set; } = string.Empty;
+
+        public string Password { get; set; } = string.Empty;
+
+        public string Domain { get; set; } = string.Empty;
+
+        public string GetPluginProperty(string key, string defaultValue = "")
+        {
+            return _pluginProperties.TryGetValue(key, out string? value) ? value : defaultValue;
+        }
+
+        public IReadOnlyDictionary<string, string> GetPluginProperties()
+        {
+            return _pluginProperties;
+        }
+
+        public void SetPluginProperty(string key, string? value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                _pluginProperties.Remove(key);
+                return;
+            }
+
+            _pluginProperties[key] = value;
+        }
+
+        public bool TryGetPluginProperty(string key, out string value)
+        {
+            return _pluginProperties.TryGetValue(key, out value!);
+        }
+    }
+}
