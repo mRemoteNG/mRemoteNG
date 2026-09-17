@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -195,13 +194,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     }
                 }
             }
-            else
-            {
-                foreach (RootPuttySessionsNodeInfo puttyRoot in connectionTreeModel.RootNodes.OfType<RootPuttySessionsNodeInfo>().ToList())
-                {
-                    connectionTreeModel.RemoveRootNode(puttyRoot);
-                }
-            }
+
+            AppWindows.TreeForm.ConnectionTree.RefreshVisibleRoots();
         }
 
         private void chkNoReconnect_CheckedChanged(object sender, EventArgs e)

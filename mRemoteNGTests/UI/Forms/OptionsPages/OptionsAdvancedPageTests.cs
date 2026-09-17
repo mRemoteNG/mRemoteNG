@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.Properties;
 using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
 
@@ -34,6 +35,28 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
 
             CheckBox showPuttySessionsCheckBox = _optionsForm.FindControl<CheckBox>("chkShowPuttySessionsInTree");
             Assert.That(showPuttySessionsCheckBox.Text, Is.EqualTo("Show PuTTY saved sessions in connection tree"));
+        }
+
+        [Test]
+        public void SavingAdvancedPagePersistsPuttySessionsVisibilitySetting()
+        {
+            bool originalValue = OptionsAdvancedPage.Default.ShowPuttySessionsInTree;
+            try
+            {
+                ListViewTester listViewTester = new("lstOptionPages", _optionsForm);
+                listViewTester.Select("Advanced");
+
+                CheckBox showPuttySessionsCheckBox = _optionsForm.FindControl<CheckBox>("chkShowPuttySessionsInTree");
+                showPuttySessionsCheckBox.Checked = !originalValue;
+
+                _optionsForm.SaveAllOptions();
+
+                Assert.That(OptionsAdvancedPage.Default.ShowPuttySessionsInTree, Is.EqualTo(!originalValue));
+            }
+            finally
+            {
+                OptionsAdvancedPage.Default.ShowPuttySessionsInTree = originalValue;
+            }
         }
     }
 }
