@@ -2889,7 +2889,7 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <value>Multi-address plugin: '{0}' has an invalid saved hostname and no valid IP address fallback is available.</value>
   </data>
   <data name="MultiAddressHostnameNotResolved" xml:space="preserve">
-    <value>Multi-address plugin: the saved hostname for '{0}' could not be resolved. Using the saved IP address instead.</value>
+    <value>Multi-address plugin: the saved hostname for '{0}' could not be resolved.</value>
   </data>
   <data name="MultiAddressHostnameDidNotMatchIp" xml:space="preserve">
     <value>Multi-address plugin: the saved hostname for '{0}' did not match the saved IP address. Using the saved IP address.</value>

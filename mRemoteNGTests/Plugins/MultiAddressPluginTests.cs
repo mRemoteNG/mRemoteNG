@@ -51,7 +51,7 @@ public class MultiAddressPluginTests
     }
 
     [Test]
-    public async Task ResolveAsync_FallsBackToIpAddressWhenHostnameCannotBeResolved()
+    public async Task ResolveAsync_KeepsPreferredTargetWhenHostnameCannotBeResolved()
     {
         IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
         MultiAddressPlugin plugin = CreatePlugin(messageWriter, (_, _) => throw new System.Net.Sockets.SocketException());
@@ -63,7 +63,7 @@ public class MultiAddressPluginTests
 
         await plugin.ResolveAsync(connection, CancellationToken.None);
 
-        Assert.That(connection.Hostname, Is.EqualTo("192.0.2.50"));
+        Assert.That(connection.Hostname, Is.EqualTo("missing-hostname"));
         messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("could not be resolved")), Arg.Any<bool>());
     }
 
@@ -162,6 +162,23 @@ public class MultiAddressPluginTests
         connection.SetPluginProperty(VerifyHostnameMatchesIpKey, bool.TrueString);
 
         Assert.ThrowsAsync<InvalidOperationException>(async () => await plugin.ResolveAsync(connection, CancellationToken.None));
+        messageWriter.DidNotReceive().Warning(Arg.Any<string>(), Arg.Any<bool>());
+    }
+
+    [Test]
+    public void ResolveAsync_PropagatesCancellation()
+    {
+        IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
+        MultiAddressPlugin plugin = CreatePlugin(messageWriter, (_, cancellationToken) => Task.FromCanceled<System.Net.IPAddress[]>(cancellationToken));
+        TestPluginConnection connection = CreateEnabledConnection();
+        connection.SetPluginProperty(HostnameKey, "server01");
+        connection.SetPluginProperty(IpAddressKey, "192.0.2.60");
+        connection.SetPluginProperty(VerifyHostnameMatchesIpKey, bool.TrueString);
+
+        using CancellationTokenSource cancellationTokenSource = new();
+        cancellationTokenSource.Cancel();
+
+        Assert.ThrowsAsync<OperationCanceledException>(async () => await plugin.ResolveAsync(connection, cancellationTokenSource.Token));
         messageWriter.DidNotReceive().Warning(Arg.Any<string>(), Arg.Any<bool>());
     }
 

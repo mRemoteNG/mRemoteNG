@@ -88,6 +88,8 @@ dotnet build mRemoteNG.Plugins.sln -c Release -p:Platform=x64
 
 Then copy the generated plugin DLLs into the app plugin folder, while keeping the shared contracts assembly in the app's `Assemblies` folder:
 
+The example below uses the x64 output path. For ARM64 builds, replace `x64` with `arm64`.
+
 ```powershell
 Copy-Item .\mRemoteNG.PluginContracts\bin\x64\Release\net10.0-windows10.0.26100.0\mRp.Contracts.dll .\mRemoteNG\bin\x64\Release\Assemblies\
 Copy-Item .\mRemoteNG.Plugins.PortScan\bin\x64\Release\net10.0-windows10.0.26100.0\mRp.PortScan.dll .\mRemoteNG\bin\x64\Release\Plugins\

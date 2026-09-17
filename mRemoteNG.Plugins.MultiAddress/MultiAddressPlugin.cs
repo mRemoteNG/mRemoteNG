@@ -155,8 +155,8 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         IPAddress[] resolvedAddresses = await ResolveHostAddressesAsync(hostname, cancellationToken).ConfigureAwait(false);
         if (resolvedAddresses.Length == 0)
         {
-            _context?.Messages.Warning(string.Format(GetString("MultiAddressHostnameNotResolved", "Multi-address plugin: the saved hostname for '{0}' could not be resolved. Using the saved IP address instead."), connection.Name));
-            connection.Hostname = string.IsNullOrWhiteSpace(ipAddress) ? resolvedTarget : ipAddress;
+            _context?.Messages.Warning(string.Format(GetString("MultiAddressHostnameNotResolved", "Multi-address plugin: the saved hostname for '{0}' could not be resolved."), connection.Name));
+            connection.Hostname = resolvedTarget;
             return;
         }
 
