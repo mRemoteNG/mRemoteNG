@@ -208,19 +208,25 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     .Where(root => root is not RootPuttySessionsNodeInfo)
                     .Cast<ContainerInfo>()
                     .ToList();
-                foreach (RootPuttySessionsNodeInfo puttyRoot in PuttySessionsManager.Instance.RootPuttySessionsNodes
-                             .Where(connectionTreeModel.RootNodes.Contains)
-                             .OrderBy(root => _puttyRootOriginalIndices.TryGetValue(root, out int index) ? index : int.MaxValue))
+                RootPuttySessionsNodeInfo[] visiblePuttyRoots = PuttySessionsManager.Instance.RootPuttySessionsNodes
+                    .Where(connectionTreeModel.RootNodes.Contains)
+                    .ToArray();
+                foreach (RootPuttySessionsNodeInfo puttyRoot in visiblePuttyRoots
+                             .Where(root => _puttyRootOriginalIndices.ContainsKey(root))
+                             .OrderBy(root => _puttyRootOriginalIndices[root]))
                 {
-                    if (_puttyRootOriginalIndices.TryGetValue(puttyRoot, out int targetIndex))
-                    {
-                        int clampedTargetIndex = targetIndex < 0
-                            ? 0
-                            : targetIndex > desiredRootOrder.Count
-                                ? desiredRootOrder.Count
-                                : targetIndex;
-                        desiredRootOrder.Insert(clampedTargetIndex, puttyRoot);
-                    }
+                    int targetIndex = _puttyRootOriginalIndices[puttyRoot];
+                    int clampedTargetIndex = targetIndex < 0
+                        ? 0
+                        : targetIndex > desiredRootOrder.Count
+                            ? desiredRootOrder.Count
+                            : targetIndex;
+                    desiredRootOrder.Insert(clampedTargetIndex, puttyRoot);
+                }
+
+                foreach (RootPuttySessionsNodeInfo puttyRoot in visiblePuttyRoots.Where(root => !_puttyRootOriginalIndices.ContainsKey(root)))
+                {
+                    desiredRootOrder.Add(puttyRoot);
                 }
 
                 for (int index = 0; index < desiredRootOrder.Count; index++)

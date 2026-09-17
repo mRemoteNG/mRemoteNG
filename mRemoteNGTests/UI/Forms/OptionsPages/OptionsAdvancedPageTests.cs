@@ -160,6 +160,55 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
             }
         }
 
+        [Test]
+        public void UpdatePuttySessionsVisibility_AppendsNewPuttyRootsFoundWhileHidden()
+        {
+            var manager = PuttySessionsManager.Instance;
+            bool originalSetting = OptionsAdvancedPage.Default.ShowPuttySessionsInTree;
+            RootPuttySessionsNodeInfo[] originalManagerRoots = manager.RootPuttySessionsNodes.ToArray();
+            ConnectionTreeModel originalModel = Runtime.ConnectionsService.ConnectionTreeModel;
+
+            RootNodeInfo regularRoot = new RootNodeInfo(RootNodeType.Connection);
+            RootPuttySessionsNodeInfo existingPuttyRoot = new RootPuttySessionsNodeInfo();
+            RootPuttySessionsNodeInfo newPuttyRoot = new RootPuttySessionsNodeInfo();
+            ConnectionTreeModel testModel = new ConnectionTreeModel();
+
+            try
+            {
+                testModel.AddRootNode(regularRoot);
+                testModel.AddRootNode(existingPuttyRoot);
+                typeof(mRemoteNG.Connection.ConnectionsService)
+                    .GetProperty(nameof(Runtime.ConnectionsService.ConnectionTreeModel), BindingFlags.Instance | BindingFlags.Public)!
+                    .SetValue(Runtime.ConnectionsService, testModel);
+
+                manager.RootPuttySessionsNodes.Clear();
+                manager.RootPuttySessionsNodes.Add(existingPuttyRoot);
+
+                using AdvancedPage page = new AdvancedPage();
+                page.chkShowPuttySessionsInTree.Checked = false;
+                InvokeUpdatePuttySessionsVisibility(page);
+
+                manager.RootPuttySessionsNodes.Add(newPuttyRoot);
+
+                page.chkShowPuttySessionsInTree.Checked = true;
+                InvokeUpdatePuttySessionsVisibility(page);
+
+                Assert.That(testModel.RootNodes, Has.Count.EqualTo(3));
+                Assert.That(testModel.RootNodes[0], Is.SameAs(regularRoot));
+                Assert.That(testModel.RootNodes[1], Is.SameAs(existingPuttyRoot));
+                Assert.That(testModel.RootNodes[2], Is.SameAs(newPuttyRoot));
+            }
+            finally
+            {
+                OptionsAdvancedPage.Default.ShowPuttySessionsInTree = originalSetting;
+                manager.RootPuttySessionsNodes.Clear();
+                manager.RootPuttySessionsNodes.AddRange(originalManagerRoots);
+                typeof(mRemoteNG.Connection.ConnectionsService)
+                    .GetProperty(nameof(Runtime.ConnectionsService.ConnectionTreeModel), BindingFlags.Instance | BindingFlags.Public)!
+                    .SetValue(Runtime.ConnectionsService, originalModel);
+            }
+        }
+
         private static void InvokeUpdatePuttySessionsVisibility(AdvancedPage page)
         {
             typeof(AdvancedPage).GetMethod("UpdatePuttySessionsVisibility", BindingFlags.Instance | BindingFlags.NonPublic)!
