@@ -459,6 +459,8 @@ namespace mRemoteNG.App
             set => _treeForm = value;
         }
 
+        internal static ConnectionTreeWindow? ExistingTreeForm => _treeForm;
+
         internal static ConfigWindow ConfigForm { get; set; } = new ConfigWindow();
         internal static ErrorAndInfoWindow ErrorsForm { get; set; } = new ErrorAndInfoWindow();
         internal static UpdateWindow UpdateForm { get; set; } = new UpdateWindow();
