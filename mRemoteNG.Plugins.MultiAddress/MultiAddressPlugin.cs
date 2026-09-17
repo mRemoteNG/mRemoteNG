@@ -46,7 +46,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
     public string Id => "mRp.MultiAddress";
 
     /// <inheritdoc />
-    public string DisplayName => "Multi-address";
+    public string DisplayName => GetString("MultiAddress", "Multi-address");
 
     /// <inheritdoc />
     public Version Version => new(1, 0, 0);

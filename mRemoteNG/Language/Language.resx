@@ -2849,4 +2849,46 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="OptionNotFound" xml:space="preserve">
     <value>Option not found.</value>
   </data>
+  <data name="IP" xml:space="preserve">
+    <value>IP</value>
+  </data>
+  <data name="MultiAddress" xml:space="preserve">
+    <value>Multi-address</value>
+  </data>
+  <data name="MultiAddressEnableSeparateHostnameIp" xml:space="preserve">
+    <value>Enable separate hostname/IP</value>
+  </data>
+  <data name="MultiAddressDescriptionEnableSeparateHostnameIp" xml:space="preserve">
+    <value>Store hostname and IP address separately and let the plugin choose which address to connect to.</value>
+  </data>
+  <data name="MultiAddressDescriptionHostname" xml:space="preserve">
+    <value>Saved hostname used for DNS verification or as the connection target when IP is not primary.</value>
+  </data>
+  <data name="MultiAddressDescriptionIpAddress" xml:space="preserve">
+    <value>Saved IP address used when it is primary or when hostname verification fails.</value>
+  </data>
+  <data name="MultiAddressUseIpAddressAsPrimary" xml:space="preserve">
+    <value>Use IP address as primary</value>
+  </data>
+  <data name="MultiAddressDescriptionUseIpAddressAsPrimary" xml:space="preserve">
+    <value>Connect with the saved IP address first when both hostname and IP address are configured.</value>
+  </data>
+  <data name="MultiAddressVerifyHostnameMatchesIp" xml:space="preserve">
+    <value>Verify hostname matches IP</value>
+  </data>
+  <data name="MultiAddressDescriptionVerifyHostnameMatchesIp" xml:space="preserve">
+    <value>Resolve the saved hostname before connecting and warn when it does not resolve to the saved IP address.</value>
+  </data>
+  <data name="MultiAddressInvalidSavedIpAddress" xml:space="preserve">
+    <value>Multi-address plugin: '{0}' has an invalid saved IP address.</value>
+  </data>
+  <data name="MultiAddressInvalidSavedHostname" xml:space="preserve">
+    <value>Multi-address plugin: '{0}' has an invalid saved hostname. Using the saved IP address instead.</value>
+  </data>
+  <data name="MultiAddressHostnameNotResolved" xml:space="preserve">
+    <value>Multi-address plugin: the saved hostname for '{0}' could not be resolved. Using the saved IP address instead.</value>
+  </data>
+  <data name="MultiAddressHostnameDidNotMatchIp" xml:space="preserve">
+    <value>Multi-address plugin: the saved hostname for '{0}' did not match the saved IP address. Using the saved IP address.</value>
+  </data>
 </root>
