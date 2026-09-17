@@ -6,6 +6,7 @@ using NUnit.Framework;
 namespace mRemoteNGTests.Config.Putty
 {
     [TestFixture]
+    [NonParallelizable]
     public class PuttySessionsManagerTests
     {
         [Test]
