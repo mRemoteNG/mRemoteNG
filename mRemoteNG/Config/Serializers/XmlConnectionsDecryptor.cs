@@ -47,7 +47,7 @@ namespace mRemoteNG.Config.Serializers
         public string LegacyFullFileDecrypt(string xml)
         {
             if (string.IsNullOrEmpty(xml)) return "";
-            if (xml.Contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>")) return xml;
+            if (xml.Contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>") || xml.Contains("<?xml version='1.0' encoding='utf-8'?>")) return xml;
 
             string decryptedContent = "";
             bool notDecr;
