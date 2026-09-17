@@ -117,6 +117,43 @@ public class MultiAddressPluginTests
         messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("invalid saved hostname")), Arg.Any<bool>());
     }
 
+    [Test]
+    public void CanResolve_ReturnsFalseWhenFeatureIsDisabled()
+    {
+        MultiAddressPlugin plugin = new();
+        TestPluginConnection connection = new();
+        connection.SetPluginProperty(HostnameKey, "server01");
+        connection.SetPluginProperty(IpAddressKey, "192.0.2.1");
+
+        bool canResolve = plugin.CanResolve(connection);
+
+        Assert.That(canResolve, Is.False);
+    }
+
+    [Test]
+    public void CanResolve_ReturnsFalseForContainers()
+    {
+        MultiAddressPlugin plugin = new();
+        TestPluginConnection connection = CreateEnabledConnection();
+        connection.IsContainerValue = true;
+        connection.SetPluginProperty(HostnameKey, "server01");
+
+        bool canResolve = plugin.CanResolve(connection);
+
+        Assert.That(canResolve, Is.False);
+    }
+
+    [Test]
+    public void CanResolve_ReturnsFalseWhenNoSeparateAddressIsConfigured()
+    {
+        MultiAddressPlugin plugin = new();
+        TestPluginConnection connection = CreateEnabledConnection();
+
+        bool canResolve = plugin.CanResolve(connection);
+
+        Assert.That(canResolve, Is.False);
+    }
+
     private static MultiAddressPlugin CreatePlugin(IMessageWriter messageWriter, Func<string, CancellationToken, Task<System.Net.IPAddress[]>>? addressResolver = null)
     {
         IPluginContext context = Substitute.For<IPluginContext>();
@@ -145,7 +182,9 @@ public class MultiAddressPluginTests
 
         public string Hostname { get; set; } = string.Empty;
 
-        public bool IsContainer => false;
+        public bool IsContainer => IsContainerValue;
+
+        public bool IsContainerValue { get; set; }
 
         public string Name { get; set; } = string.Empty;
 

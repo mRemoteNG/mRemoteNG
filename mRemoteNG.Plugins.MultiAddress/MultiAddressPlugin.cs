@@ -138,7 +138,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
             return;
         }
 
-        bool hostnameMatchesIpAddress = resolvedAddresses.Contains(configuredIpAddress);
+        bool hostnameMatchesIpAddress = Array.Exists(resolvedAddresses, address => Equals(address, configuredIpAddress));
         if (!hostnameMatchesIpAddress)
         {
             _context?.Messages.Warning($"Multi-address plugin: the saved hostname for '{connection.Name}' did not match the saved IP address. Using the saved IP address.");
