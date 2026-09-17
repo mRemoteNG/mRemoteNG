@@ -21,15 +21,10 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
     private readonly Func<string, CancellationToken, Task<IPAddress[]>> _addressResolver;
 
     /// <summary>
-    /// Represents a hostname validation failure for the saved hostname field.
-    /// </summary>
-    public sealed class InvalidHostnameException(Exception innerException) : Exception("The saved hostname is invalid.", innerException);
-
-    /// <summary>
     /// Creates the plugin using the default DNS resolver.
     /// </summary>
     public MultiAddressPlugin()
-        : this(ResolveAddressesWithDnsAsync)
+        : this((hostname, cancellationToken) => Dns.GetHostAddressesAsync(hostname, cancellationToken))
     {
     }
 
@@ -133,29 +128,31 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
             return;
         }
 
-        if (!IPAddress.TryParse(ipAddress, out IPAddress? configuredIpAddress))
+        bool isValidHostname = IsValidHostname(hostname);
+        bool isValidIpAddress = IPAddress.TryParse(ipAddress, out IPAddress? configuredIpAddress) && configuredIpAddress is not null;
+
+        if (!isValidHostname)
+        {
+            if (isValidIpAddress)
+            {
+                _context?.Messages.Warning(string.Format(GetString("MultiAddressInvalidSavedHostname", "Multi-address plugin: '{0}' has an invalid saved hostname. Using the saved IP address instead."), connection.Name));
+                connection.Hostname = ipAddress;
+                return;
+            }
+
+            _context?.Messages.Warning(string.Format(GetString("MultiAddressInvalidSavedHostnameNoFallback", "Multi-address plugin: '{0}' has an invalid saved hostname and no valid IP address fallback is available."), connection.Name));
+            connection.Hostname = resolvedTarget;
+            return;
+        }
+
+        if (!isValidIpAddress)
         {
             _context?.Messages.Warning(string.Format(GetString("MultiAddressInvalidSavedIpAddress", "Multi-address plugin: '{0}' has an invalid saved IP address."), connection.Name));
-            connection.Hostname = string.IsNullOrWhiteSpace(hostname) ? resolvedTarget : hostname;
+            connection.Hostname = hostname;
             return;
         }
 
-        IPAddress[] resolvedAddresses;
-        try
-        {
-            resolvedAddresses = await ResolveHostAddressesAsync(hostname, cancellationToken).ConfigureAwait(false);
-        }
-        catch (OperationCanceledException)
-        {
-            throw;
-        }
-        catch (InvalidHostnameException)
-        {
-            _context?.Messages.Warning(string.Format(GetString("MultiAddressInvalidSavedHostname", "Multi-address plugin: '{0}' has an invalid saved hostname. Using the saved IP address instead."), connection.Name));
-            connection.Hostname = string.IsNullOrWhiteSpace(ipAddress) ? resolvedTarget : ipAddress;
-            return;
-        }
-
+        IPAddress[] resolvedAddresses = await ResolveHostAddressesAsync(hostname, cancellationToken).ConfigureAwait(false);
         if (resolvedAddresses.Length == 0)
         {
             _context?.Messages.Warning(string.Format(GetString("MultiAddressHostnameNotResolved", "Multi-address plugin: the saved hostname for '{0}' could not be resolved. Using the saved IP address instead."), connection.Name));
@@ -163,7 +160,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
             return;
         }
 
-        bool hostnameMatchesIpAddress = Array.Exists(resolvedAddresses, address => AddressesMatch(address, configuredIpAddress));
+        bool hostnameMatchesIpAddress = Array.Exists(resolvedAddresses, address => AddressesMatch(address, configuredIpAddress!));
         if (!hostnameMatchesIpAddress)
         {
             _context?.Messages.Warning(string.Format(GetString("MultiAddressHostnameDidNotMatchIp", "Multi-address plugin: the saved hostname for '{0}' did not match the saved IP address. Using the saved IP address."), connection.Name));
@@ -189,6 +186,11 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         return bool.TryParse(connection.GetPluginProperty(key, bool.FalseString), out bool value) && value;
     }
 
+    private static bool IsValidHostname(string hostname)
+    {
+        return Uri.CheckHostName(hostname) != UriHostNameType.Unknown;
+    }
+
     private static string SelectPreferredAddress(string hostname, string ipAddress, bool useIpAddressAsPrimary)
     {
         if (useIpAddressAsPrimary)
@@ -208,18 +210,6 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         catch (SocketException)
         {
             return [];
-        }
-    }
-
-    private static async Task<IPAddress[]> ResolveAddressesWithDnsAsync(string hostname, CancellationToken cancellationToken)
-    {
-        try
-        {
-            return await Dns.GetHostAddressesAsync(hostname, cancellationToken);
-        }
-        catch (ArgumentException ex)
-        {
-            throw new InvalidHostnameException(ex);
         }
     }
 

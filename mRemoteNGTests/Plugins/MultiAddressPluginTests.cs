@@ -138,7 +138,7 @@ public class MultiAddressPluginTests
     public async Task ResolveAsync_WarnsWhenSavedHostnameIsInvalidAndFallsBackToIpAddress()
     {
         IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
-        MultiAddressPlugin plugin = CreatePlugin(messageWriter, (_, _) => throw new MultiAddressPlugin.InvalidHostnameException(new ArgumentException("invalid hostname")));
+        MultiAddressPlugin plugin = CreatePlugin(messageWriter, (_, _) => throw new InvalidOperationException("resolver should not run"));
         TestPluginConnection connection = CreateEnabledConnection();
         connection.Name = "Broken host";
         connection.SetPluginProperty(HostnameKey, "bad host name");
