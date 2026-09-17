@@ -136,14 +136,14 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         if (!IPAddress.TryParse(ipAddress, out IPAddress? configuredIpAddress))
         {
             _context?.Messages.Warning(string.Format(GetString("MultiAddressInvalidSavedIpAddress", "Multi-address plugin: '{0}' has an invalid saved IP address."), connection.Name));
-            connection.Hostname = hostname;
+            connection.Hostname = resolvedTarget;
             return;
         }
 
         IPAddress[] resolvedAddresses;
         try
         {
-            resolvedAddresses = await ResolveHostAddressesAsync(hostname, cancellationToken);
+            resolvedAddresses = await ResolveHostAddressesAsync(hostname, cancellationToken).ConfigureAwait(false);
         }
         catch (OperationCanceledException)
         {
@@ -203,7 +203,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
     {
         try
         {
-            return await _addressResolver(hostname, cancellationToken);
+            return await _addressResolver(hostname, cancellationToken).ConfigureAwait(false);
         }
         catch (SocketException)
         {
