@@ -197,12 +197,9 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         /// </summary>
         private static List<object> GetTreeRoots(ConnectionTreeModel model)
         {
-            List<ContainerInfo> visibleRootNodes = model.RootNodes
-                                                         .Where(rootNode => OptionsAdvancedPage.Default.ShowPuttySessionsInTree || rootNode is not RootPuttySessionsNodeInfo)
-                                                         .ToList();
-            List<object> roots = new(visibleRootNodes);
+            List<object> roots = new(model.RootNodes);
 
-            foreach (ContainerInfo rootNode in visibleRootNodes)
+            foreach (ContainerInfo rootNode in model.RootNodes)
             {
                 roots.AddRange(GetRootGroupsRecursive(rootNode));
             }
