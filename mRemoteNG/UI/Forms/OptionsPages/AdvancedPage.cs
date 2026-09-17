@@ -196,11 +196,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             if (chkShowPuttySessionsInTree.Checked)
             {
-                foreach (RootPuttySessionsNodeInfo puttyRoot in PuttySessionsManager.Instance.RootPuttySessionsNodes)
+                foreach (RootPuttySessionsNodeInfo puttyRoot in PuttySessionsManager.Instance.RootPuttySessionsNodes
+                             .Where(root => !connectionTreeModel.RootNodes.Contains(root)))
                 {
-                    if (connectionTreeModel.RootNodes.Contains(puttyRoot))
-                        continue;
-
                     connectionTreeModel.AddRootNode(puttyRoot);
                 }
 
