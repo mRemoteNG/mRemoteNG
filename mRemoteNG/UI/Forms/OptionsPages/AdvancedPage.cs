@@ -96,13 +96,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             bool puttySessionsVisibilityChanged = Properties.OptionsAdvancedPage.Default.ShowPuttySessionsInTree != chkShowPuttySessionsInTree.Checked;
             Properties.OptionsAdvancedPage.Default.ShowPuttySessionsInTree = chkShowPuttySessionsInTree.Checked;
 
+            if (puttySessionsVisibilityChanged && !chkShowPuttySessionsInTree.Checked)
+            {
+                UpdatePuttySessionsVisibility();
+            }
+
             if (puttyPathChanged || puttySessionsVisibilityChanged)
             {
                 PuttyBase.PuttyPath = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath ? Properties.OptionsAdvancedPage.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
                 PuttySessionsManager.Instance.AddSessions();
             }
 
-            if (puttySessionsVisibilityChanged)
+            if (puttySessionsVisibilityChanged && chkShowPuttySessionsInTree.Checked)
             {
                 UpdatePuttySessionsVisibility();
             }
@@ -200,7 +205,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
                 foreach (RootPuttySessionsNodeInfo puttyRoot in PuttySessionsManager.Instance.RootPuttySessionsNodes
                              .Where(connectionTreeModel.RootNodes.Contains)
-                             .OrderBy(root => _puttyRootOriginalIndices.TryGetValue(root, out int index) ? index : int.MaxValue))
+                             .OrderByDescending(root => _puttyRootOriginalIndices.TryGetValue(root, out int index) ? index : int.MinValue))
                 {
                     if (_puttyRootOriginalIndices.TryGetValue(puttyRoot, out int targetIndex))
                         connectionTreeModel.MoveRootNode(puttyRoot, targetIndex);
