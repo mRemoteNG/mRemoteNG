@@ -15,6 +15,17 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
     private const string VerifyHostnameMatchesIpKey = "mRp.MultiAddress.VerifyHostnameMatchesIp";
 
     private IPluginContext? _context;
+    private readonly Func<string, CancellationToken, Task<IPAddress[]>> _addressResolver;
+
+    public MultiAddressPlugin()
+        : this((hostname, cancellationToken) => Dns.GetHostAddressesAsync(hostname, cancellationToken))
+    {
+    }
+
+    public MultiAddressPlugin(Func<string, CancellationToken, Task<IPAddress[]>> addressResolver)
+    {
+        _addressResolver = addressResolver ?? throw new ArgumentNullException(nameof(addressResolver));
+    }
 
     public string Id => "mRp.MultiAddress";
 
@@ -103,7 +114,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
 
         if (!IPAddress.TryParse(ipAddress, out IPAddress? configuredIpAddress))
         {
-            _context?.Messages.Warning($"Multi-address plugin: '{connection.Name}' has an invalid IP address '{ipAddress}'.");
+            _context?.Messages.Warning($"Multi-address plugin: '{connection.Name}' has an invalid saved IP address.");
             connection.Hostname = resolvedTarget;
             return;
         }
@@ -111,7 +122,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         IPAddress[] resolvedAddresses = await ResolveHostAddressesAsync(hostname, cancellationToken).ConfigureAwait(true);
         if (resolvedAddresses.Length == 0)
         {
-            _context?.Messages.Warning($"Multi-address plugin: hostname '{hostname}' for '{connection.Name}' could not be resolved. Using IP address '{ipAddress}' instead.");
+            _context?.Messages.Warning($"Multi-address plugin: the saved hostname for '{connection.Name}' could not be resolved. Using the saved IP address instead.");
             connection.Hostname = string.IsNullOrWhiteSpace(ipAddress) ? resolvedTarget : ipAddress;
             return;
         }
@@ -119,8 +130,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         bool hostnameMatchesIpAddress = resolvedAddresses.Contains(configuredIpAddress);
         if (!hostnameMatchesIpAddress)
         {
-            string resolvedAddressList = string.Join(", ", resolvedAddresses.Select(address => address.ToString()));
-            _context?.Messages.Warning($"Multi-address plugin: hostname '{hostname}' for '{connection.Name}' resolved to '{resolvedAddressList}' instead of '{ipAddress}'. Using IP address '{ipAddress}'.");
+            _context?.Messages.Warning($"Multi-address plugin: the saved hostname for '{connection.Name}' did not match the saved IP address. Using the saved IP address.");
             connection.Hostname = ipAddress;
             return;
         }
@@ -152,7 +162,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
     {
         try
         {
-            return await Dns.GetHostAddressesAsync(hostname, cancellationToken).ConfigureAwait(true);
+            return await _addressResolver(hostname, cancellationToken).ConfigureAwait(true);
         }
         catch (SocketException)
         {

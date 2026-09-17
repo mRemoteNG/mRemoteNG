@@ -53,10 +53,10 @@ public class MultiAddressPluginTests
     public async Task ResolveAsync_FallsBackToIpAddressWhenHostnameCannotBeResolved()
     {
         IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
-        MultiAddressPlugin plugin = CreatePlugin(messageWriter);
+        MultiAddressPlugin plugin = CreatePlugin(messageWriter, (_, _) => throw new System.Net.Sockets.SocketException());
         TestPluginConnection connection = CreateEnabledConnection();
         connection.Name = "Missing host";
-        connection.SetPluginProperty(HostnameKey, "missing-hostname.invalid");
+        connection.SetPluginProperty(HostnameKey, "missing-hostname");
         connection.SetPluginProperty(IpAddressKey, "192.0.2.50");
         connection.SetPluginProperty(VerifyHostnameMatchesIpKey, bool.TrueString);
 
@@ -70,25 +70,27 @@ public class MultiAddressPluginTests
     public async Task ResolveAsync_UsesIpAddressAndWarnsWhenHostnameResolvesToDifferentIp()
     {
         IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
-        MultiAddressPlugin plugin = CreatePlugin(messageWriter);
+        MultiAddressPlugin plugin = CreatePlugin(messageWriter, (_, _) => Task.FromResult(new[] { System.Net.IPAddress.Parse("127.0.0.1") }));
         TestPluginConnection connection = CreateEnabledConnection();
         connection.Name = "Localhost";
-        connection.SetPluginProperty(HostnameKey, "localhost");
+        connection.SetPluginProperty(HostnameKey, "server01");
         connection.SetPluginProperty(IpAddressKey, "192.0.2.10");
         connection.SetPluginProperty(VerifyHostnameMatchesIpKey, bool.TrueString);
 
         await plugin.ResolveAsync(connection, CancellationToken.None);
 
         Assert.That(connection.Hostname, Is.EqualTo("192.0.2.10"));
-        messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("resolved to")), Arg.Any<bool>());
+        messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("did not match")), Arg.Any<bool>());
     }
 
-    private static MultiAddressPlugin CreatePlugin(IMessageWriter messageWriter)
+    private static MultiAddressPlugin CreatePlugin(IMessageWriter messageWriter, Func<string, CancellationToken, Task<System.Net.IPAddress[]>>? addressResolver = null)
     {
         IPluginContext context = Substitute.For<IPluginContext>();
         context.Messages.Returns(messageWriter);
 
-        MultiAddressPlugin plugin = new();
+        MultiAddressPlugin plugin = addressResolver is null
+            ? new MultiAddressPlugin()
+            : new MultiAddressPlugin(addressResolver);
         plugin.Initialize(context);
         return plugin;
     }
