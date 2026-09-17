@@ -204,41 +204,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     connectionTreeModel.AddRootNode(puttyRoot);
                 }
 
-                List<ContainerInfo> desiredRootOrder = connectionTreeModel.RootNodes
-                    .Where(root => root is not RootPuttySessionsNodeInfo)
-                    .Cast<ContainerInfo>()
-                    .ToList();
-                RootPuttySessionsNodeInfo[] visiblePuttyRoots = PuttySessionsManager.Instance.RootPuttySessionsNodes
-                    .Where(connectionTreeModel.RootNodes.Contains)
-                    .ToArray();
-                Dictionary<RootPuttySessionsNodeInfo, int> visibleRootOrder = visiblePuttyRoots
-                    .Select((root, index) => new { root, index })
-                    .ToDictionary(item => item.root, item => item.index);
-                Dictionary<int, int> insertOffsetsByIndex = [];
-                foreach (RootPuttySessionsNodeInfo puttyRoot in visiblePuttyRoots
-                             .Where(root => _puttyRootOriginalIndices.ContainsKey(root))
-                             .OrderBy(root => _puttyRootOriginalIndices[root])
-                             .ThenBy(root => visibleRootOrder[root]))
-                {
-                    int targetIndex = _puttyRootOriginalIndices[puttyRoot];
-                    int clampedTargetIndex = targetIndex < 0
-                        ? 0
-                        : targetIndex > desiredRootOrder.Count
-                            ? desiredRootOrder.Count
-                            : targetIndex;
-                    int offset = insertOffsetsByIndex.TryGetValue(clampedTargetIndex, out int existingOffset)
-                        ? existingOffset
-                        : 0;
-                    desiredRootOrder.Insert(clampedTargetIndex + offset, puttyRoot);
-                    insertOffsetsByIndex[clampedTargetIndex] = offset + 1;
-                }
-
-                foreach (RootPuttySessionsNodeInfo puttyRoot in visiblePuttyRoots.Where(root => !_puttyRootOriginalIndices.ContainsKey(root)))
-                {
-                    desiredRootOrder.Add(puttyRoot);
-                }
-
-                if (desiredRootOrder.Count == connectionTreeModel.RootNodes.Count)
+                List<ContainerInfo> desiredRootOrder = BuildDesiredRootOrder(connectionTreeModel);
+                if (HasSameRootInstances(connectionTreeModel.RootNodes, desiredRootOrder))
                     connectionTreeModel.SetRootNodeOrder(desiredRootOrder);
             }
             else
@@ -259,6 +226,55 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             RefreshConnectionTreeRoots();
+        }
+
+        private List<ContainerInfo> BuildDesiredRootOrder(mRemoteNG.Tree.ConnectionTreeModel connectionTreeModel)
+        {
+            List<ContainerInfo> desiredRootOrder = connectionTreeModel.RootNodes
+                .Where(root => root is not RootPuttySessionsNodeInfo)
+                .Cast<ContainerInfo>()
+                .ToList();
+            RootPuttySessionsNodeInfo[] visiblePuttyRoots = PuttySessionsManager.Instance.RootPuttySessionsNodes
+                .Where(connectionTreeModel.RootNodes.Contains)
+                .ToArray();
+            Dictionary<RootPuttySessionsNodeInfo, int> visibleRootOrder = visiblePuttyRoots
+                .Select((root, index) => new { root, index })
+                .ToDictionary(item => item.root, item => item.index);
+            Dictionary<int, int> insertOffsetsByIndex = [];
+            foreach (RootPuttySessionsNodeInfo puttyRoot in visiblePuttyRoots
+                         .Where(root => _puttyRootOriginalIndices.ContainsKey(root))
+                         .OrderBy(root => _puttyRootOriginalIndices[root])
+                         .ThenBy(root => visibleRootOrder[root]))
+            {
+                int targetIndex = _puttyRootOriginalIndices[puttyRoot];
+                int clampedTargetIndex = targetIndex < 0
+                    ? 0
+                    : targetIndex > desiredRootOrder.Count
+                        ? desiredRootOrder.Count
+                        : targetIndex;
+                int offset = insertOffsetsByIndex.TryGetValue(clampedTargetIndex, out int existingOffset)
+                    ? existingOffset
+                    : 0;
+                desiredRootOrder.Insert(clampedTargetIndex + offset, puttyRoot);
+                insertOffsetsByIndex[clampedTargetIndex] = offset + 1;
+            }
+
+            foreach (RootPuttySessionsNodeInfo puttyRoot in visiblePuttyRoots.Where(root => !_puttyRootOriginalIndices.ContainsKey(root)))
+            {
+                desiredRootOrder.Add(puttyRoot);
+            }
+
+            return desiredRootOrder;
+        }
+
+        private static bool HasSameRootInstances(IEnumerable<ContainerInfo> currentRoots, IEnumerable<ContainerInfo> desiredRoots)
+        {
+            ContainerInfo[] currentArray = currentRoots.ToArray();
+            ContainerInfo[] desiredArray = desiredRoots.ToArray();
+            if (currentArray.Length != desiredArray.Length)
+                return false;
+
+            return !currentArray.Except(desiredArray).Any() && !desiredArray.Except(currentArray).Any();
         }
 
         private static void RefreshConnectionTreeRoots()
