@@ -18,7 +18,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     [SupportedOSPlatform("windows")]
     public sealed partial class AdvancedPage
     {
-        private static int _puttyRootInsertIndex = -1;
+        private int _puttyRootInsertIndex = -1;
 
         public AdvancedPage()
         {

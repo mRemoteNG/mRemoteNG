@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.Versioning;
-using mRemoteNG.Properties;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 
@@ -31,11 +30,6 @@ namespace mRemoteNG.Config.Putty
 
         public void AddSessions()
         {
-            if (!OptionsAdvancedPage.Default.ShowPuttySessionsInTree)
-            {
-                return;
-            }
-
             foreach (AbstractPuttySessionsProvider provider in Providers)
             {
                 AddSessionsFromProvider(provider);
