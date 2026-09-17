@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using mRemoteNG.PluginContracts;
@@ -158,6 +159,22 @@ public class MultiAddressPluginTests
         bool canResolve = plugin.CanResolve(connection);
 
         Assert.That(canResolve, Is.False);
+    }
+
+    [Test]
+    public void ConnectionProperties_ExposeExpectedKeysAndTypes()
+    {
+        MultiAddressPlugin plugin = new();
+
+        Dictionary<string, PluginPropertyType> properties = plugin.ConnectionProperties
+            .ToDictionary(property => property.Key, property => property.PropertyType, StringComparer.OrdinalIgnoreCase);
+
+        Assert.That(properties, Has.Count.EqualTo(5));
+        Assert.That(properties[EnabledKey], Is.EqualTo(PluginPropertyType.Boolean));
+        Assert.That(properties[HostnameKey], Is.EqualTo(PluginPropertyType.String));
+        Assert.That(properties[IpAddressKey], Is.EqualTo(PluginPropertyType.String));
+        Assert.That(properties[UseIpAddressAsPrimaryKey], Is.EqualTo(PluginPropertyType.Boolean));
+        Assert.That(properties[VerifyHostnameMatchesIpKey], Is.EqualTo(PluginPropertyType.Boolean));
     }
 
     [Test]

@@ -55,46 +55,44 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
     public Version MinimumHostVersion => new(1, 0, 0);
 
     /// <inheritdoc />
-    public IReadOnlyCollection<ConnectionPropertyDefinition> ConnectionProperties => _connectionProperties;
-
-    private static readonly IReadOnlyCollection<ConnectionPropertyDefinition> _connectionProperties =
+    public IReadOnlyCollection<ConnectionPropertyDefinition> ConnectionProperties =>
     [
         new ConnectionPropertyDefinition
         {
             Key = EnabledKey,
-            Category = "Address",
-            DisplayName = "Enable separate hostname/IP",
-            Description = "Store hostname and IP address separately and let the plugin choose which address to connect to.",
+            Category = GetString("Connection", "Connection"),
+            DisplayName = GetString("MultiAddressEnableSeparateHostnameIp", "Enable separate hostname/IP"),
+            Description = GetString("MultiAddressDescriptionEnableSeparateHostnameIp", "Store hostname and IP address separately and let the plugin choose which address to connect to."),
             PropertyType = PluginPropertyType.Boolean,
         },
         new ConnectionPropertyDefinition
         {
             Key = HostnameKey,
-            Category = "Address",
-            DisplayName = "Hostname",
-            Description = "Saved hostname used for DNS verification or as the connection target when IP is not primary.",
+            Category = GetString("Connection", "Connection"),
+            DisplayName = GetString("Hostname", "Hostname"),
+            Description = GetString("MultiAddressDescriptionHostname", "Saved hostname used for DNS verification or as the connection target when IP is not primary."),
         },
         new ConnectionPropertyDefinition
         {
             Key = IpAddressKey,
-            Category = "Address",
-            DisplayName = "IP address",
-            Description = "Saved IP address used when it is primary or when hostname verification fails.",
+            Category = GetString("HostnameIp", "Hostname/IP"),
+            DisplayName = GetString("IP", "IP"),
+            Description = GetString("MultiAddressDescriptionIpAddress", "Saved IP address used when it is primary or when hostname verification fails."),
         },
         new ConnectionPropertyDefinition
         {
             Key = UseIpAddressAsPrimaryKey,
-            Category = "Address",
-            DisplayName = "Use IP address as primary",
-            Description = "Connect with the saved IP address first when both hostname and IP address are configured.",
+            Category = GetString("HostnameIp", "Hostname/IP"),
+            DisplayName = GetString("MultiAddressUseIpAddressAsPrimary", "Use IP address as primary"),
+            Description = GetString("MultiAddressDescriptionUseIpAddressAsPrimary", "Connect with the saved IP address first when both hostname and IP address are configured."),
             PropertyType = PluginPropertyType.Boolean,
         },
         new ConnectionPropertyDefinition
         {
             Key = VerifyHostnameMatchesIpKey,
-            Category = "Address",
-            DisplayName = "Verify hostname matches IP",
-            Description = "Resolve the saved hostname before connecting and warn when it does not resolve to the saved IP address.",
+            Category = GetString("HostnameIp", "Hostname/IP"),
+            DisplayName = GetString("MultiAddressVerifyHostnameMatchesIp", "Verify hostname matches IP"),
+            Description = GetString("MultiAddressDescriptionVerifyHostnameMatchesIp", "Resolve the saved hostname before connecting and warn when it does not resolve to the saved IP address."),
             PropertyType = PluginPropertyType.Boolean,
         },
     ];
@@ -137,8 +135,8 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
 
         if (!IPAddress.TryParse(ipAddress, out IPAddress? configuredIpAddress))
         {
-            _context?.Messages.Warning($"Multi-address plugin: '{connection.Name}' has an invalid saved IP address.");
-            connection.Hostname = resolvedTarget;
+            _context?.Messages.Warning(string.Format(GetString("MultiAddressInvalidSavedIpAddress", "Multi-address plugin: '{0}' has an invalid saved IP address."), connection.Name));
+            connection.Hostname = hostname;
             return;
         }
 
@@ -153,14 +151,14 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         }
         catch (InvalidHostnameException)
         {
-            _context?.Messages.Warning($"Multi-address plugin: '{connection.Name}' has an invalid saved hostname. Using the saved IP address instead.");
+            _context?.Messages.Warning(string.Format(GetString("MultiAddressInvalidSavedHostname", "Multi-address plugin: '{0}' has an invalid saved hostname. Using the saved IP address instead."), connection.Name));
             connection.Hostname = string.IsNullOrWhiteSpace(ipAddress) ? resolvedTarget : ipAddress;
             return;
         }
 
         if (resolvedAddresses.Length == 0)
         {
-            _context?.Messages.Warning($"Multi-address plugin: the saved hostname for '{connection.Name}' could not be resolved. Using the saved IP address instead.");
+            _context?.Messages.Warning(string.Format(GetString("MultiAddressHostnameNotResolved", "Multi-address plugin: the saved hostname for '{0}' could not be resolved. Using the saved IP address instead."), connection.Name));
             connection.Hostname = string.IsNullOrWhiteSpace(ipAddress) ? resolvedTarget : ipAddress;
             return;
         }
@@ -168,7 +166,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         bool hostnameMatchesIpAddress = Array.Exists(resolvedAddresses, address => AddressesMatch(address, configuredIpAddress));
         if (!hostnameMatchesIpAddress)
         {
-            _context?.Messages.Warning($"Multi-address plugin: the saved hostname for '{connection.Name}' did not match the saved IP address. Using the saved IP address.");
+            _context?.Messages.Warning(string.Format(GetString("MultiAddressHostnameDidNotMatchIp", "Multi-address plugin: the saved hostname for '{0}' did not match the saved IP address. Using the saved IP address."), connection.Name));
             connection.Hostname = ipAddress;
             return;
         }
@@ -179,6 +177,11 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
     private static string GetTrimmedProperty(IPluginConnection connection, string key)
     {
         return connection.GetPluginProperty(key)?.Trim() ?? string.Empty;
+    }
+
+    private string GetString(string resourceName, string fallback)
+    {
+        return _context?.Resources.GetString(resourceName, fallback) ?? fallback;
     }
 
     private static bool GetBooleanProperty(IPluginConnection connection, string key)
