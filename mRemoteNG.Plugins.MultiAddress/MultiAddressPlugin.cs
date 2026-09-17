@@ -207,6 +207,10 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         {
             return await _addressResolver(hostname, cancellationToken).ConfigureAwait(false);
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (SocketException)
         {
             return [];
