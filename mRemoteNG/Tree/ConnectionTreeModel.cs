@@ -33,6 +33,26 @@ namespace mRemoteNG.Tree
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, rootNode));
         }
 
+        public void MoveRootNode(ContainerInfo rootNode, int targetIndex)
+        {
+            if (!RootNodes.Contains(rootNode))
+                return;
+
+            int clampedIndex = targetIndex < 0
+                ? 0
+                : targetIndex > RootNodes.Count - 1
+                    ? RootNodes.Count - 1
+                    : targetIndex;
+            int currentIndex = RootNodes.IndexOf(rootNode);
+
+            if (currentIndex == clampedIndex)
+                return;
+
+            RootNodes.RemoveAt(currentIndex);
+            RootNodes.Insert(clampedIndex, rootNode);
+            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
+
         public IReadOnlyList<ConnectionInfo> GetRecursiveChildList()
         {
             List<ConnectionInfo> list = new();

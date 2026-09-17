@@ -198,9 +198,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     connectionTreeModel.AddRootNode(puttyRoot);
                     if (_puttyRootInsertIndex >= 0)
                     {
-                        connectionTreeModel.RootNodes.Remove(puttyRoot);
-                        int targetIndex = Math.Min(_puttyRootInsertIndex + insertOffset, connectionTreeModel.RootNodes.Count);
-                        connectionTreeModel.RootNodes.Insert(targetIndex, puttyRoot);
+                        int targetIndex = Math.Min(_puttyRootInsertIndex + insertOffset, connectionTreeModel.RootNodes.Count - 1);
+                        connectionTreeModel.MoveRootNode(puttyRoot, targetIndex);
                         insertOffset++;
                     }
                 }
