@@ -136,7 +136,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         if (!IPAddress.TryParse(ipAddress, out IPAddress? configuredIpAddress))
         {
             _context?.Messages.Warning(string.Format(GetString("MultiAddressInvalidSavedIpAddress", "Multi-address plugin: '{0}' has an invalid saved IP address."), connection.Name));
-            connection.Hostname = resolvedTarget;
+            connection.Hostname = string.IsNullOrWhiteSpace(hostname) ? resolvedTarget : hostname;
             return;
         }
 

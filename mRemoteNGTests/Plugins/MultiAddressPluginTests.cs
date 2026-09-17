@@ -102,7 +102,7 @@ public class MultiAddressPluginTests
     }
 
     [Test]
-    public async Task ResolveAsync_KeepsIpTargetWhenPreferredIpAddressIsInvalid()
+    public async Task ResolveAsync_FallsBackToHostnameWhenPreferredIpAddressIsInvalid()
     {
         IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
         MultiAddressPlugin plugin = CreatePlugin(messageWriter);
@@ -114,7 +114,7 @@ public class MultiAddressPluginTests
 
         await plugin.ResolveAsync(connection, CancellationToken.None);
 
-        Assert.That(connection.Hostname, Is.EqualTo("not-an-ip"));
+        Assert.That(connection.Hostname, Is.EqualTo("server01.contoso.local"));
         messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("invalid saved IP address")), Arg.Any<bool>());
     }
 
