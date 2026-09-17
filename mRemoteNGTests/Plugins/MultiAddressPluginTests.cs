@@ -101,6 +101,22 @@ public class MultiAddressPluginTests
     }
 
     [Test]
+    public async Task ResolveAsync_AcceptsIpv4MappedIpv6MatchWithoutWarning()
+    {
+        IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
+        MultiAddressPlugin plugin = CreatePlugin(messageWriter, (_, _) => Task.FromResult(new[] { System.Net.IPAddress.Parse("::ffff:192.0.2.10") }));
+        TestPluginConnection connection = CreateEnabledConnection();
+        connection.SetPluginProperty(HostnameKey, "server01");
+        connection.SetPluginProperty(IpAddressKey, "192.0.2.10");
+        connection.SetPluginProperty(VerifyHostnameMatchesIpKey, bool.TrueString);
+
+        await plugin.ResolveAsync(connection, CancellationToken.None);
+
+        Assert.That(connection.Hostname, Is.EqualTo("server01"));
+        messageWriter.DidNotReceive().Warning(Arg.Any<string>(), Arg.Any<bool>());
+    }
+
+    [Test]
     public async Task ResolveAsync_WarnsWhenSavedHostnameIsInvalidAndFallsBackToIpAddress()
     {
         IMessageWriter messageWriter = Substitute.For<IMessageWriter>();

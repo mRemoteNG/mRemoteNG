@@ -138,7 +138,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
             return;
         }
 
-        bool hostnameMatchesIpAddress = Array.Exists(resolvedAddresses, address => Equals(address, configuredIpAddress));
+        bool hostnameMatchesIpAddress = Array.Exists(resolvedAddresses, address => AddressesMatch(address, configuredIpAddress));
         if (!hostnameMatchesIpAddress)
         {
             _context?.Messages.Warning($"Multi-address plugin: the saved hostname for '{connection.Name}' did not match the saved IP address. Using the saved IP address.");
@@ -179,5 +179,17 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         {
             return [];
         }
+    }
+
+    private static bool AddressesMatch(IPAddress left, IPAddress right)
+    {
+        return NormalizeAddress(left).Equals(NormalizeAddress(right));
+    }
+
+    private static IPAddress NormalizeAddress(IPAddress address)
+    {
+        return address.IsIPv4MappedToIPv6
+            ? address.MapToIPv4()
+            : address;
     }
 }
