@@ -119,7 +119,18 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
             return;
         }
 
-        IPAddress[] resolvedAddresses = await ResolveHostAddressesAsync(hostname, cancellationToken).ConfigureAwait(true);
+        IPAddress[] resolvedAddresses;
+        try
+        {
+            resolvedAddresses = await ResolveHostAddressesAsync(hostname, cancellationToken).ConfigureAwait(true);
+        }
+        catch (ArgumentException)
+        {
+            _context?.Messages.Warning($"Multi-address plugin: '{connection.Name}' has an invalid saved hostname. Using the saved IP address instead.");
+            connection.Hostname = string.IsNullOrWhiteSpace(ipAddress) ? resolvedTarget : ipAddress;
+            return;
+        }
+
         if (resolvedAddresses.Length == 0)
         {
             _context?.Messages.Warning($"Multi-address plugin: the saved hostname for '{connection.Name}' could not be resolved. Using the saved IP address instead.");
@@ -165,10 +176,6 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
             return await _addressResolver(hostname, cancellationToken).ConfigureAwait(true);
         }
         catch (SocketException)
-        {
-            return [];
-        }
-        catch (ArgumentException)
         {
             return [];
         }

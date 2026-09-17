@@ -83,6 +83,23 @@ public class MultiAddressPluginTests
         messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("did not match")), Arg.Any<bool>());
     }
 
+    [Test]
+    public async Task ResolveAsync_WarnsWhenSavedIpAddressIsInvalidAndKeepsPreferredTarget()
+    {
+        IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
+        MultiAddressPlugin plugin = CreatePlugin(messageWriter);
+        TestPluginConnection connection = CreateEnabledConnection();
+        connection.Name = "Broken IP";
+        connection.SetPluginProperty(HostnameKey, "server01.contoso.local");
+        connection.SetPluginProperty(IpAddressKey, "not-an-ip");
+        connection.SetPluginProperty(VerifyHostnameMatchesIpKey, bool.TrueString);
+
+        await plugin.ResolveAsync(connection, CancellationToken.None);
+
+        Assert.That(connection.Hostname, Is.EqualTo("server01.contoso.local"));
+        messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("invalid saved IP address")), Arg.Any<bool>());
+    }
+
     private static MultiAddressPlugin CreatePlugin(IMessageWriter messageWriter, Func<string, CancellationToken, Task<System.Net.IPAddress[]>>? addressResolver = null)
     {
         IPluginContext context = Substitute.For<IPluginContext>();
