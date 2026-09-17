@@ -33,7 +33,6 @@ namespace mRemoteNG.Config.Putty
         {
             if (!OptionsAdvancedPage.Default.ShowPuttySessionsInTree)
             {
-                RootPuttySessionsNodes.Clear();
                 return;
             }
 
