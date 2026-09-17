@@ -6,6 +6,9 @@ using mRemoteNG.PluginContracts;
 
 namespace mRemoteNG.Plugins.MultiAddress;
 
+/// <summary>
+/// Adds separate hostname and IP address fields with primary-address selection and optional verification before connecting.
+/// </summary>
 public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, IConnectionAddressResolverPlugin
 {
     private const string EnabledKey = "mRp.MultiAddress.Enabled";
@@ -17,24 +20,36 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
     private IPluginContext? _context;
     private readonly Func<string, CancellationToken, Task<IPAddress[]>> _addressResolver;
 
+    /// <summary>
+    /// Creates the plugin using the default DNS resolver.
+    /// </summary>
     public MultiAddressPlugin()
         : this((hostname, cancellationToken) => Dns.GetHostAddressesAsync(hostname, cancellationToken))
     {
     }
 
+    /// <summary>
+    /// Creates the plugin with a custom hostname resolver.
+    /// </summary>
+    /// <param name="addressResolver">Resolves a hostname to one or more IP addresses.</param>
     public MultiAddressPlugin(Func<string, CancellationToken, Task<IPAddress[]>> addressResolver)
     {
         _addressResolver = addressResolver ?? throw new ArgumentNullException(nameof(addressResolver));
     }
 
+    /// <inheritdoc />
     public string Id => "mRp.MultiAddress";
 
+    /// <inheritdoc />
     public string DisplayName => "Multi-address";
 
+    /// <inheritdoc />
     public Version Version => new(1, 0, 0);
 
+    /// <inheritdoc />
     public Version MinimumHostVersion => new(1, 0, 0);
 
+    /// <inheritdoc />
     public IReadOnlyCollection<ConnectionPropertyDefinition> ConnectionProperties => _connectionProperties;
 
     private static readonly IReadOnlyCollection<ConnectionPropertyDefinition> _connectionProperties =
@@ -79,11 +94,13 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         },
     ];
 
+    /// <inheritdoc />
     public void Initialize(IPluginContext context)
     {
         _context = context;
     }
 
+    /// <inheritdoc />
     public bool CanResolve(IPluginConnection connection)
     {
         return !connection.IsContainer &&
@@ -93,6 +110,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
                 !string.IsNullOrWhiteSpace(GetTrimmedProperty(connection, IpAddressKey)));
     }
 
+    /// <inheritdoc />
     public async Task ResolveAsync(IPluginConnection connection, CancellationToken cancellationToken)
     {
         if (!CanResolve(connection))
@@ -123,6 +141,10 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         try
         {
             resolvedAddresses = await ResolveHostAddressesAsync(hostname, cancellationToken);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (ArgumentException)
         {
