@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -17,6 +18,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     [SupportedOSPlatform("windows")]
     public sealed partial class AdvancedPage
     {
+        private static int _puttyRootInsertIndex = -1;
+
         public AdvancedPage()
         {
             InitializeComponent();
@@ -186,12 +189,33 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             if (chkShowPuttySessionsInTree.Checked)
             {
+                int insertOffset = 0;
                 foreach (RootPuttySessionsNodeInfo puttyRoot in PuttySessionsManager.Instance.RootPuttySessionsNodes)
                 {
-                    if (!connectionTreeModel.RootNodes.Contains(puttyRoot))
+                    if (connectionTreeModel.RootNodes.Contains(puttyRoot))
+                        continue;
+
+                    connectionTreeModel.AddRootNode(puttyRoot);
+                    if (_puttyRootInsertIndex >= 0)
                     {
-                        connectionTreeModel.AddRootNode(puttyRoot);
+                        connectionTreeModel.RootNodes.Remove(puttyRoot);
+                        int targetIndex = Math.Min(_puttyRootInsertIndex + insertOffset, connectionTreeModel.RootNodes.Count);
+                        connectionTreeModel.RootNodes.Insert(targetIndex, puttyRoot);
+                        insertOffset++;
                     }
+                }
+            }
+            else
+            {
+                RootPuttySessionsNodeInfo[] puttyRoots = connectionTreeModel.RootNodes
+                    .OfType<RootPuttySessionsNodeInfo>()
+                    .ToArray();
+                if (puttyRoots.Length > 0)
+                    _puttyRootInsertIndex = connectionTreeModel.RootNodes.IndexOf(puttyRoots[0]);
+
+                foreach (RootPuttySessionsNodeInfo puttyRoot in puttyRoots)
+                {
+                    connectionTreeModel.RemoveRootNode(puttyRoot);
                 }
             }
 
