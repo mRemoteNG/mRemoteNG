@@ -85,6 +85,22 @@ public class MultiAddressPluginTests
     }
 
     [Test]
+    public async Task ResolveAsync_FallsBackToIpAddressWhenHostnameLookupReturnsNoAddresses()
+    {
+        IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
+        MultiAddressPlugin plugin = CreatePlugin(messageWriter, (_, _) => Task.FromResult(Array.Empty<System.Net.IPAddress>()));
+        TestPluginConnection connection = CreateEnabledConnection();
+        connection.SetPluginProperty(HostnameKey, "missing-hostname");
+        connection.SetPluginProperty(IpAddressKey, "192.0.2.50");
+        connection.SetPluginProperty(VerifyHostnameMatchesIpKey, bool.TrueString);
+
+        await plugin.ResolveAsync(connection, CancellationToken.None);
+
+        Assert.That(connection.Hostname, Is.EqualTo("192.0.2.50"));
+        messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("Using the saved IP address instead")), Arg.Any<bool>());
+    }
+
+    [Test]
     public async Task ResolveAsync_UsesIpAddressAndWarnsWhenHostnameResolvesToDifferentIp()
     {
         IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
