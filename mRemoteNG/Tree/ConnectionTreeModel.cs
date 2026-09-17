@@ -53,6 +53,16 @@ namespace mRemoteNG.Tree
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
+        public void SetRootNodeOrder(IReadOnlyList<ContainerInfo> orderedRoots)
+        {
+            if (orderedRoots == null || orderedRoots.Count != RootNodes.Count)
+                return;
+
+            RootNodes.Clear();
+            RootNodes.AddRange(orderedRoots);
+            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
+
         public IReadOnlyList<ConnectionInfo> GetRecursiveChildList()
         {
             List<ConnectionInfo> list = new();

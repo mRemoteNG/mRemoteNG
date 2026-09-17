@@ -238,10 +238,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     desiredRootOrder.Add(puttyRoot);
                 }
 
-                for (int index = 0; index < desiredRootOrder.Count; index++)
-                {
-                    connectionTreeModel.MoveRootNode(desiredRootOrder[index], index);
-                }
+                if (desiredRootOrder.Count == connectionTreeModel.RootNodes.Count)
+                    connectionTreeModel.SetRootNodeOrder(desiredRootOrder);
             }
             else
             {
