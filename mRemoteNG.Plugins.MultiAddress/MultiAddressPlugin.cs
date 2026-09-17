@@ -122,7 +122,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         IPAddress[] resolvedAddresses;
         try
         {
-            resolvedAddresses = await ResolveHostAddressesAsync(hostname, cancellationToken).ConfigureAwait(true);
+            resolvedAddresses = await ResolveHostAddressesAsync(hostname, cancellationToken);
         }
         catch (ArgumentException)
         {
@@ -173,7 +173,7 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
     {
         try
         {
-            return await _addressResolver(hostname, cancellationToken).ConfigureAwait(true);
+            return await _addressResolver(hostname, cancellationToken);
         }
         catch (SocketException)
         {

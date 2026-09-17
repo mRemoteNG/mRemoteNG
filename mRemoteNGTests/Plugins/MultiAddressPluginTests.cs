@@ -100,6 +100,23 @@ public class MultiAddressPluginTests
         messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("invalid saved IP address")), Arg.Any<bool>());
     }
 
+    [Test]
+    public async Task ResolveAsync_WarnsWhenSavedHostnameIsInvalidAndFallsBackToIpAddress()
+    {
+        IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
+        MultiAddressPlugin plugin = CreatePlugin(messageWriter, (_, _) => throw new ArgumentException("invalid hostname"));
+        TestPluginConnection connection = CreateEnabledConnection();
+        connection.Name = "Broken host";
+        connection.SetPluginProperty(HostnameKey, "bad host name");
+        connection.SetPluginProperty(IpAddressKey, "192.0.2.60");
+        connection.SetPluginProperty(VerifyHostnameMatchesIpKey, bool.TrueString);
+
+        await plugin.ResolveAsync(connection, CancellationToken.None);
+
+        Assert.That(connection.Hostname, Is.EqualTo("192.0.2.60"));
+        messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("invalid saved hostname")), Arg.Any<bool>());
+    }
+
     private static MultiAddressPlugin CreatePlugin(IMessageWriter messageWriter, Func<string, CancellationToken, Task<System.Net.IPAddress[]>>? addressResolver = null)
     {
         IPluginContext context = Substitute.For<IPluginContext>();
