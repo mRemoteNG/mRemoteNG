@@ -195,7 +195,22 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
             }
 
-            AppWindows.TreeForm.ConnectionTree.RefreshVisibleRoots();
+            RefreshConnectionTreeRoots();
+        }
+
+        private static void RefreshConnectionTreeRoots()
+        {
+            try
+            {
+                if (AppWindows.TreeForm.IsDisposed || AppWindows.TreeForm.ConnectionTree.IsDisposed)
+                    return;
+
+                AppWindows.TreeForm.ConnectionTree.RefreshVisibleRoots();
+            }
+            catch
+            {
+                // ignored
+            }
         }
 
         private void chkNoReconnect_CheckedChanged(object sender, EventArgs e)

@@ -10,7 +10,7 @@ namespace mRemoteNGTests.Config.Putty
     public class PuttySessionsManagerTests
     {
         [Test]
-        public void AddSessions_DoesNotClearExistingRootNodes_WhenPuttySessionsTreeDisplayIsDisabled()
+        public void AddSessions_LeavesExistingRootNodesUntouched_WhenPuttySessionsTreeDisplayIsDisabled()
         {
             PuttySessionsManager manager = PuttySessionsManager.Instance;
             bool originalValue = OptionsAdvancedPage.Default.ShowPuttySessionsInTree;
@@ -36,7 +36,7 @@ namespace mRemoteNGTests.Config.Putty
         }
 
         [Test]
-        public void AddSessions_DoesNotClearExistingRootNodes_WhenPuttySessionsTreeDisplayIsEnabled()
+        public void AddSessions_KeepsExistingRootEntries_WhenPuttySessionsTreeDisplayIsEnabled()
         {
             PuttySessionsManager manager = PuttySessionsManager.Instance;
             bool originalValue = OptionsAdvancedPage.Default.ShowPuttySessionsInTree;
@@ -62,7 +62,7 @@ namespace mRemoteNGTests.Config.Putty
         }
 
         [Test]
-        public void AddSessions_RetainsCachedRootsThroughDisableEnableToggle()
+        public void AddSessions_KeepsCachedRoots_WhenPuttySessionsTreeDisplayIsToggledOffAndOn()
         {
             PuttySessionsManager manager = PuttySessionsManager.Instance;
             bool originalValue = OptionsAdvancedPage.Default.ShowPuttySessionsInTree;
