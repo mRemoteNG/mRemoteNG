@@ -217,10 +217,6 @@ public sealed class MultiAddressPlugin : IConnectionPropertyProviderPlugin, ICon
         {
             return await Dns.GetHostAddressesAsync(hostname, cancellationToken);
         }
-        catch (SocketException)
-        {
-            return [];
-        }
         catch (ArgumentException ex)
         {
             throw new InvalidHostnameException(ex);

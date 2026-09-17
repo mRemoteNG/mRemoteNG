@@ -181,7 +181,7 @@ public class MultiAddressPluginTests
     [Test]
     public void ConnectionProperties_ExposeExpectedKeysAndTypes()
     {
-        MultiAddressPlugin plugin = new();
+        MultiAddressPlugin plugin = CreatePlugin(Substitute.For<IMessageWriter>());
 
         Dictionary<string, PluginPropertyType> properties = plugin.ConnectionProperties
             .ToDictionary(property => property.Key, property => property.PropertyType, StringComparer.OrdinalIgnoreCase);
@@ -192,6 +192,20 @@ public class MultiAddressPluginTests
         Assert.That(properties[IpAddressKey], Is.EqualTo(PluginPropertyType.String));
         Assert.That(properties[UseIpAddressAsPrimaryKey], Is.EqualTo(PluginPropertyType.Boolean));
         Assert.That(properties[VerifyHostnameMatchesIpKey], Is.EqualTo(PluginPropertyType.Boolean));
+    }
+
+    [Test]
+    public void ConnectionProperties_UseLocalizedResourceValuesWhenAvailable()
+    {
+        MultiAddressPlugin plugin = CreatePlugin(
+            Substitute.For<IMessageWriter>(),
+            localize: (resourceName, fallback) => resourceName == "MultiAddressEnableSeparateHostnameIp"
+                ? "Localized value"
+                : fallback);
+
+        ConnectionPropertyDefinition property = plugin.ConnectionProperties.Single(definition => definition.Key == EnabledKey);
+
+        Assert.That(property.DisplayName, Is.EqualTo("Localized value"));
     }
 
     [Test]
@@ -218,10 +232,22 @@ public class MultiAddressPluginTests
         Assert.That(canResolve, Is.False);
     }
 
-    private static MultiAddressPlugin CreatePlugin(IMessageWriter messageWriter, Func<string, CancellationToken, Task<System.Net.IPAddress[]>>? addressResolver = null)
+    private static MultiAddressPlugin CreatePlugin(
+        IMessageWriter messageWriter,
+        Func<string, CancellationToken, Task<System.Net.IPAddress[]>>? addressResolver = null,
+        Func<string, string, string>? localize = null)
     {
         IPluginContext context = Substitute.For<IPluginContext>();
+        IPluginResources resources = Substitute.For<IPluginResources>();
         context.Messages.Returns(messageWriter);
+        resources.GetString(Arg.Any<string>(), Arg.Any<string>())
+            .Returns(callInfo =>
+            {
+                string resourceName = callInfo.ArgAt<string>(0);
+                string fallback = callInfo.ArgAt<string>(1);
+                return localize?.Invoke(resourceName, fallback) ?? fallback;
+            });
+        context.Resources.Returns(resources);
 
         MultiAddressPlugin plugin = addressResolver is null
             ? new MultiAddressPlugin()
