@@ -51,7 +51,7 @@ public class MultiAddressPluginTests
     }
 
     [Test]
-    public async Task ResolveAsync_KeepsPreferredTargetWhenHostnameCannotBeResolved()
+    public async Task ResolveAsync_FallsBackToIpAddressWhenHostnameCannotBeResolved()
     {
         IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
         MultiAddressPlugin plugin = CreatePlugin(messageWriter, (_, _) => throw new System.Net.Sockets.SocketException());
@@ -63,7 +63,24 @@ public class MultiAddressPluginTests
 
         await plugin.ResolveAsync(connection, CancellationToken.None);
 
-        Assert.That(connection.Hostname, Is.EqualTo("missing-hostname"));
+        Assert.That(connection.Hostname, Is.EqualTo("192.0.2.50"));
+        messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("could not be resolved")), Arg.Any<bool>());
+    }
+
+    [Test]
+    public async Task ResolveAsync_KeepsIpAddressWhenHostnameCannotBeResolvedAndIpIsPrimary()
+    {
+        IMessageWriter messageWriter = Substitute.For<IMessageWriter>();
+        MultiAddressPlugin plugin = CreatePlugin(messageWriter, (_, _) => throw new System.Net.Sockets.SocketException());
+        TestPluginConnection connection = CreateEnabledConnection();
+        connection.SetPluginProperty(HostnameKey, "missing-hostname");
+        connection.SetPluginProperty(IpAddressKey, "192.0.2.50");
+        connection.SetPluginProperty(UseIpAddressAsPrimaryKey, bool.TrueString);
+        connection.SetPluginProperty(VerifyHostnameMatchesIpKey, bool.TrueString);
+
+        await plugin.ResolveAsync(connection, CancellationToken.None);
+
+        Assert.That(connection.Hostname, Is.EqualTo("192.0.2.50"));
         messageWriter.Received().Warning(Arg.Is<string>(message => message.Contains("could not be resolved")), Arg.Any<bool>());
     }
 

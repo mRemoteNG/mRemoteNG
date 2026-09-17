@@ -2891,6 +2891,9 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="MultiAddressHostnameNotResolved" xml:space="preserve">
     <value>Multi-address plugin: the saved hostname for '{0}' could not be resolved.</value>
   </data>
+  <data name="MultiAddressHostnameNotResolvedUsingIp" xml:space="preserve">
+    <value>Multi-address plugin: the saved hostname for '{0}' could not be resolved. Using the saved IP address instead.</value>
+  </data>
   <data name="MultiAddressHostnameDidNotMatchIp" xml:space="preserve">
     <value>Multi-address plugin: the saved hostname for '{0}' did not match the saved IP address. Using the saved IP address.</value>
   </data>
