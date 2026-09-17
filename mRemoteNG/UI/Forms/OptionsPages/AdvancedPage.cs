@@ -8,6 +8,7 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Container;
 using mRemoteNG.Properties;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
@@ -203,12 +204,28 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     connectionTreeModel.AddRootNode(puttyRoot);
                 }
 
+                List<ContainerInfo> desiredRootOrder = connectionTreeModel.RootNodes
+                    .Where(root => root is not RootPuttySessionsNodeInfo)
+                    .Cast<ContainerInfo>()
+                    .ToList();
                 foreach (RootPuttySessionsNodeInfo puttyRoot in PuttySessionsManager.Instance.RootPuttySessionsNodes
                              .Where(connectionTreeModel.RootNodes.Contains)
-                             .OrderByDescending(root => _puttyRootOriginalIndices.TryGetValue(root, out int index) ? index : int.MinValue))
+                             .OrderBy(root => _puttyRootOriginalIndices.TryGetValue(root, out int index) ? index : int.MaxValue))
                 {
                     if (_puttyRootOriginalIndices.TryGetValue(puttyRoot, out int targetIndex))
-                        connectionTreeModel.MoveRootNode(puttyRoot, targetIndex);
+                    {
+                        int clampedTargetIndex = targetIndex < 0
+                            ? 0
+                            : targetIndex > desiredRootOrder.Count
+                                ? desiredRootOrder.Count
+                                : targetIndex;
+                        desiredRootOrder.Insert(clampedTargetIndex, puttyRoot);
+                    }
+                }
+
+                for (int index = 0; index < desiredRootOrder.Count; index++)
+                {
+                    connectionTreeModel.MoveRootNode(desiredRootOrder[index], index);
                 }
             }
             else
