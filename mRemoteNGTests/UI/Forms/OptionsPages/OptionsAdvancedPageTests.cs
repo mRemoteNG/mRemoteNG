@@ -31,6 +31,9 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
             
             CheckBox checkboxTester = _optionsForm.FindControl<CheckBox>("chkAutomaticReconnect");
             Assert.That(checkboxTester.Text, Is.EqualTo("Automatically try to reconnect when disconnected from server (RDP && ICA only)"));
+
+            CheckBox showPuttySessionsCheckBox = _optionsForm.FindControl<CheckBox>("chkShowPuttySessionsInTree");
+            Assert.That(showPuttySessionsCheckBox.Text, Is.EqualTo("Show PuTTY saved sessions in connection tree"));
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -8,6 +9,7 @@ using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Properties;
 using mRemoteNG.Tools;
+using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 
@@ -48,6 +50,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnLaunchPutty.Text = Language.ButtonLaunchPutty;
             btnBrowseCustomPuttyPath.Text = Language._Browse;
             chkUseCustomPuttyPath.Text = Language.CheckboxPuttyPath;
+            chkShowPuttySessionsInTree.Text = Language.ShowPuttySessionsInTree;
             lblUVNCSCPort.Text = Language.UltraVNCSCListeningPort;
         }
 
@@ -62,6 +65,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             chkUseCustomPuttyPath.Checked = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath;
             txtCustomPuttyPath.Text = Properties.OptionsAdvancedPage.Default.CustomPuttyPath;
+            chkShowPuttySessionsInTree.Checked = Properties.OptionsAdvancedPage.Default.ShowPuttySessionsInTree;
             SetPuttyLaunchButtonEnabled();
 
             numUVNCSCPort.Value = Properties.OptionsAdvancedPage.Default.UVNCSCPort;
@@ -86,10 +90,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath = chkUseCustomPuttyPath.Checked;
             }
 
-            if (puttyPathChanged)
+            bool puttySessionsVisibilityChanged = Properties.OptionsAdvancedPage.Default.ShowPuttySessionsInTree != chkShowPuttySessionsInTree.Checked;
+            Properties.OptionsAdvancedPage.Default.ShowPuttySessionsInTree = chkShowPuttySessionsInTree.Checked;
+
+            if (puttyPathChanged || puttySessionsVisibilityChanged)
             {
                 PuttyBase.PuttyPath = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath ? Properties.OptionsAdvancedPage.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
                 PuttySessionsManager.Instance.AddSessions();
+            }
+
+            if (puttySessionsVisibilityChanged)
+            {
+                UpdatePuttySessionsVisibility();
             }
 
             Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime = (int)numPuttyWaitTime.Value;
@@ -166,6 +178,30 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             lblConfigurePuttySessions.Enabled = exists;
             btnLaunchPutty.Enabled = exists;
+        }
+
+        private void UpdatePuttySessionsVisibility()
+        {
+            if (Runtime.ConnectionsService.ConnectionTreeModel is not { } connectionTreeModel)
+                return;
+
+            if (chkShowPuttySessionsInTree.Checked)
+            {
+                foreach (RootPuttySessionsNodeInfo puttyRoot in PuttySessionsManager.Instance.RootPuttySessionsNodes)
+                {
+                    if (!connectionTreeModel.RootNodes.Contains(puttyRoot))
+                    {
+                        connectionTreeModel.AddRootNode(puttyRoot);
+                    }
+                }
+            }
+            else
+            {
+                foreach (RootPuttySessionsNodeInfo puttyRoot in connectionTreeModel.RootNodes.OfType<RootPuttySessionsNodeInfo>().ToList())
+                {
+                    connectionTreeModel.RemoveRootNode(puttyRoot);
+                }
+            }
         }
 
         private void chkNoReconnect_CheckedChanged(object sender, EventArgs e)
