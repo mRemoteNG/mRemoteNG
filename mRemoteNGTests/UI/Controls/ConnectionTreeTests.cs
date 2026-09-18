@@ -175,6 +175,39 @@ namespace mRemoteNGTests.UI.Controls
 	        Assert.That(puttyRoot.Children, Has.One.Items);
 	    }
 
+		[Test]
+		[Apartment(ApartmentState.STA)]
+		public void RefreshVisibleRoots_HidesAndRestoresPuttyRoot_WhenToggledOffAndOn()
+		{
+			var connectionTreeModel = new ConnectionTreeModel();
+			var regularRoot = new RootNodeInfo(RootNodeType.Connection);
+			var puttyRoot = new RootPuttySessionsNodeInfo { Name = "putty-root" };
+			var puttySession = new PuttySessionInfo { Name = "putty-session" };
+			puttyRoot.AddChild(puttySession);
+			connectionTreeModel.AddRootNode(regularRoot);
+			connectionTreeModel.AddRootNode(puttyRoot);
+
+			_connectionTree.ConnectionTreeModel = connectionTreeModel;
+			_connectionTree.ExpandAll();
+
+			_filter.FilterText = "putty-session";
+			_connectionTree.ModelFilter = _filter;
+			Assert.That(_connectionTree.FilteredObjects, Does.Contain(puttySession));
+			Assert.That(_connectionTree.Objects.Cast<object>(), Does.Contain(puttyRoot));
+
+			connectionTreeModel.RemoveRootNode(puttyRoot);
+			_connectionTree.RefreshVisibleRoots();
+			Assert.That(_connectionTree.Objects.Cast<object>(), Does.Not.Contain(puttyRoot));
+			Assert.That(_connectionTree.FilteredObjects, Does.Not.Contain(puttySession));
+			Assert.That(_connectionTree.NodeSearcher.SearchByName("putty-session"), Is.Empty);
+
+			connectionTreeModel.AddRootNode(puttyRoot);
+			_connectionTree.RefreshVisibleRoots();
+			Assert.That(_connectionTree.Objects.Cast<object>(), Does.Contain(puttyRoot));
+			Assert.That(_connectionTree.FilteredObjects, Does.Contain(puttySession));
+			Assert.That(_connectionTree.NodeSearcher.SearchByName("putty-session"), Contains.Item(puttySession));
+		}
+
 	    [Test]
 	    [Apartment(ApartmentState.STA)]
 	    public void DuplicatingWithNoNodeSelectedDoesNothing()
