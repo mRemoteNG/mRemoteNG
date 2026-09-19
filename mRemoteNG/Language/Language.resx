@@ -863,6 +863,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="ShowText" xml:space="preserve">
     <value>Show Text</value>
   </data>
+  <data name="ShowPuttySessionsInTree" xml:space="preserve">
+    <value>Show PuTTY saved sessions in connection tree</value>
+  </data>
   <data name="SmartSize" xml:space="preserve">
     <value>SmartSize (RDP/VNC)</value>
   </data>
