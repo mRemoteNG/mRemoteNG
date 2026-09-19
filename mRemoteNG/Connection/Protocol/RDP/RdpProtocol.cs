@@ -641,12 +641,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
                     _rdpClient.UserName = userName;
                 }
 
-                // Restricted Admin and Remote Credential Guard modes use the current user's Kerberos
-                // credentials and do not forward explicit passwords to the remote host.
-                // Skipping password assignment avoids potential NTLM fallback attempts that would
-                // fail for accounts in the AD Protected Users security group.
-if (RdpProtocolVersion is RDP.RdpVersion.Rdc6 or RDP.RdpVersion.Rdc7 ||
-    (!connectionInfo.UseRestrictedAdmin && !connectionInfo.UseRCG))
+                // Restricted Admin and Remote Credential Guard do not forward explicit passwords
+                // on protocol versions that support those modes. Skipping password assignment
+                // avoids potential NTLM fallback attempts that would fail for AD Protected Users.
+                if (ShouldAssignClearTextPassword(connectionInfo))
                 {
                     if (string.IsNullOrEmpty(password))
                     {
@@ -683,6 +681,12 @@ if (RdpProtocolVersion is RDP.RdpVersion.Rdc6 or RDP.RdpVersion.Rdc7 ||
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.RdpSetCredentialsFailed, ex);
             }
+        }
+
+        protected bool ShouldAssignClearTextPassword(ConnectionInfo connectionInfo)
+        {
+            return RdpProtocolVersion is RDP.RdpVersion.Rdc6 or RDP.RdpVersion.Rdc7
+                || (!connectionInfo.UseRestrictedAdmin && !connectionInfo.UseRCG);
         }
 
         private void SetResolution()
