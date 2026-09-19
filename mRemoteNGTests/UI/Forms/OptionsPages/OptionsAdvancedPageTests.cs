@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Linq;
 using mRemoteNG.App;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Tree;
