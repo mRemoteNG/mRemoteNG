@@ -58,6 +58,10 @@ namespace mRemoteNG.Tree
             if (orderedRoots == null || orderedRoots.Count != RootNodes.Count)
                 return;
 
+            HashSet<ContainerInfo> orderedRootSet = new(orderedRoots);
+            if (orderedRootSet.Count != RootNodes.Count || RootNodes.Exists(root => !orderedRootSet.Contains(root)))
+                return;
+
             RootNodes.Clear();
             RootNodes.AddRange(orderedRoots);
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
