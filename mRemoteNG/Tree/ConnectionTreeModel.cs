@@ -38,11 +38,15 @@ namespace mRemoteNG.Tree
             if (!RootNodes.Contains(rootNode))
                 return;
 
-            int clampedIndex = targetIndex < 0
-                ? 0
-                : targetIndex > RootNodes.Count - 1
-                    ? RootNodes.Count - 1
-                    : targetIndex;
+            int clampedIndex = targetIndex;
+            if (clampedIndex < 0)
+            {
+                clampedIndex = 0;
+            }
+            else if (clampedIndex > RootNodes.Count - 1)
+            {
+                clampedIndex = RootNodes.Count - 1;
+            }
             int currentIndex = RootNodes.IndexOf(rootNode);
 
             if (currentIndex == clampedIndex)

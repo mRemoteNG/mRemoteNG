@@ -230,7 +230,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             List<ContainerInfo> desiredRootOrder = connectionTreeModel.RootNodes
                 .Where(root => root is not RootPuttySessionsNodeInfo)
-                .Cast<ContainerInfo>()
                 .ToList();
             RootPuttySessionsNodeInfo[] visiblePuttyRoots = PuttySessionsManager.Instance.RootPuttySessionsNodes
                 .Where(connectionTreeModel.RootNodes.Contains)
@@ -245,11 +244,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                          .ThenBy(root => visibleRootOrder[root]))
             {
                 int targetIndex = _puttyRootOriginalIndices[puttyRoot];
-                int clampedTargetIndex = targetIndex < 0
-                    ? 0
-                    : targetIndex > desiredRootOrder.Count
-                        ? desiredRootOrder.Count
-                        : targetIndex;
+                int clampedTargetIndex = targetIndex;
+                if (clampedTargetIndex < 0)
+                {
+                    clampedTargetIndex = 0;
+                }
+                else if (clampedTargetIndex > desiredRootOrder.Count)
+                {
+                    clampedTargetIndex = desiredRootOrder.Count;
+                }
                 int offset = insertOffsetsByIndex.TryGetValue(clampedTargetIndex, out int existingOffset)
                     ? existingOffset
                     : 0;
