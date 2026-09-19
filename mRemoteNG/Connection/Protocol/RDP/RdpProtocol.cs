@@ -674,20 +674,26 @@ namespace mRemoteNG.Connection.Protocol.RDP
                     _rdpClient.UserName = userName;
                 }
 
-                if (string.IsNullOrEmpty(password))
+                // Restricted Admin and Remote Credential Guard do not forward explicit passwords
+                // on protocol versions that support those modes. Skipping password assignment
+                // avoids potential NTLM fallback attempts that would fail for AD Protected Users.
+                if (ShouldAssignClearTextPassword(connectionInfo))
                 {
-                    if (Properties.OptionsCredentialsPage.Default.EmptyCredentials == "custom")
+                    if (string.IsNullOrEmpty(password))
                     {
-                        if (Properties.OptionsCredentialsPage.Default.DefaultPassword != "")
+                        if (Properties.OptionsCredentialsPage.Default.EmptyCredentials == "custom")
                         {
-                            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-                            _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
+                            if (Properties.OptionsCredentialsPage.Default.DefaultPassword != "")
+                            {
+                                LegacyRijndaelCryptographyProvider cryptographyProvider = new();
+                                _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
+                            }
                         }
                     }
-                }
-                else
-                {
-                    _rdpClient.AdvancedSettings2.ClearTextPassword = password;
+                    else
+                    {
+                        _rdpClient.AdvancedSettings2.ClearTextPassword = password;
+                    }
                 }
 
                 if (string.IsNullOrEmpty(domain))
@@ -708,6 +714,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.RdpSetCredentialsFailed, ex);
             }
+        }
+
+        protected bool ShouldAssignClearTextPassword(ConnectionInfo connectionInfo)
+        {
+            return RdpProtocolVersion is RDP.RdpVersion.Rdc6 or RDP.RdpVersion.Rdc7
+                || (!connectionInfo.UseRestrictedAdmin && !connectionInfo.UseRCG);
         }
 
         private void SetResolution()
