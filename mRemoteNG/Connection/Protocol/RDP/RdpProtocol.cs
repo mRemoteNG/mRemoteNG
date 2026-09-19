@@ -425,6 +425,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
             }
         }
 
+        internal static bool ShouldDisableCredentialsDelegation(string username)
+        {
+            return string.IsNullOrWhiteSpace(username);
+        }
+
         private void SetRdGateway()
         {
             try
