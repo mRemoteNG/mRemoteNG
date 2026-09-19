@@ -11,11 +11,10 @@ on:
         required: false
         default: 'true'
 
-permissions:
-  contents: write
-  
 jobs:
   NB-Build-and-Release:
+    permissions:
+      contents: read
     strategy:
       matrix:
         include:
@@ -240,6 +239,8 @@ jobs:
 
   Create-Combined-Release:
     needs: NB-Build-and-Release
+    permissions:
+      contents: write
     runs-on: windows-2025-vs2026
     steps:
       - name: Checkout Repository

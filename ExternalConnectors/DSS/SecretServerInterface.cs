@@ -241,6 +241,12 @@ public class SecretServerInterface
             RSAParameters rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters)KeyPair.Private);
             RSACryptoServiceProvider rsa = new();
             rsa.ImportParameters(rsaParams);
+
+            if (rsa.KeySize < 2048)
+            {
+                rsa.Dispose();
+                throw new CryptographicException("RSA private key size must be at least 2048 bits.");
+            }
             return rsa;
         }
         #endregion
