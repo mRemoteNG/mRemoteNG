@@ -147,8 +147,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             try
             {
                 // ANSI SQL way.  Works in PostgreSQL, MSSQL, MySQL.
+                // The database name lives in table_catalog on SQL Server but in table_schema on
+                // MySQL, so match either. Matching table_schema alone never matches on SQL Server
+                // (where it holds the schema, e.g. dbo), which made every load treat the tables as
+                // missing and re-initialize - dropping the user's connections.
                 string database_name = Properties.OptionsDBsPage.Default.SQLDatabaseName;
-                DbCommand cmd = databaseConnector.DbCommand("select case when exists((select * from information_schema.tables where table_name = @TableName and table_schema = @DatabaseName)) then 1 else 0 end");
+                DbCommand cmd = databaseConnector.DbCommand("select case when exists((select * from information_schema.tables where table_name = @TableName and (table_schema = @DatabaseName or table_catalog = @DatabaseName))) then 1 else 0 end");
                 
                 DbParameter tableNameParam = cmd.CreateParameter();
                 tableNameParam.ParameterName = "@TableName";

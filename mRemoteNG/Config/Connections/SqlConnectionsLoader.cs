@@ -37,6 +37,11 @@ namespace mRemoteNG.Config.Connections
             SqlDatabaseVersionVerifier databaseVersionVerifier = new(connector);
             LegacyRijndaelCryptographyProvider cryptoProvider = new();
             SqlConnectionListMetaData metaData = metaDataRetriever.GetDatabaseMetaData(connector) ?? HandleFirstRun(metaDataRetriever, connector);
+
+            // Without this the caller sees a bare NullReferenceException from GetDecryptionKey.
+            if (metaData == null)
+                throw new Exception("Could not read the connection list metadata from the database");
+
             Optional<SecureString> decryptionKey = GetDecryptionKey(metaData);
 
             if (!decryptionKey.Any())
