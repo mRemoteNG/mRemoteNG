@@ -40,7 +40,7 @@ namespace mRemoteNG.Config.Connections
 
             // Without this the caller sees a bare NullReferenceException from GetDecryptionKey.
             if (metaData == null)
-                throw new Exception("Could not read the connection list metadata from the database");
+                throw new InvalidOperationException("Could not read the connection list metadata from the database");
 
             Optional<SecureString> decryptionKey = GetDecryptionKey(metaData);
 
