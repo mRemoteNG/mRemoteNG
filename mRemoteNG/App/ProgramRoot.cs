@@ -1,4 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿﻿using Microsoft.IdentityModel.Tokens;
 
 using mRemoteNG.App.Update;
 using mRemoteNG.Config.Settings;
@@ -198,7 +198,16 @@ namespace mRemoteNG.App
             string appBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string cultureSpecificPath = Path.Combine(customResourcePath, cultureName, satelliteAssemblyFileName);
             if (File.Exists(cultureSpecificPath))
-                return Assembly.LoadFrom(cultureSpecificPath);
+            {
+                var baseFull = Path.GetFullPath(customResourcePath);
+                var fullPath = Path.GetFullPath(cultureSpecificPath);
+                if (!fullPath.StartsWith(baseFull + Path.DirectorySeparatorChar, StringComparison.Ordinal)
+                    && fullPath != baseFull)
+                {
+                    throw new ArgumentException("Invalid file path");
+                }
+                return Assembly.LoadFrom(fullPath);
+            }
 
             if (args.RequestingAssembly is null)
                 return null;
@@ -208,9 +217,18 @@ namespace mRemoteNG.App
                 return null;
 
             string localizedAssemblyPath = Path.Combine(appBaseDirectory, "Languages", cultureName, requestingAssemblyName + ".resources.dll");
-            return File.Exists(localizedAssemblyPath)
-                ? Assembly.LoadFrom(localizedAssemblyPath)
-                : null;
+            if (File.Exists(localizedAssemblyPath))
+            {
+                var baseFull = Path.GetFullPath(Path.Combine(appBaseDirectory, "Languages"));
+                var fullPath = Path.GetFullPath(localizedAssemblyPath);
+                if (!fullPath.StartsWith(baseFull + Path.DirectorySeparatorChar, StringComparison.Ordinal)
+                    && fullPath != baseFull)
+                {
+                    throw new ArgumentException("Invalid file path");
+                }
+                return Assembly.LoadFrom(fullPath);
+            }
+            return null;
         }
 
         public static void ApplyUiCulture(string? cultureName)
