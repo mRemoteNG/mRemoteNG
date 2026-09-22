@@ -10145,10 +10145,11 @@ System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(uri.Abs
     UseShellExecute = true
 });
                 }
-                else
-                {
-                    System.Media.SystemSounds.Beep.Play();
-                }
+else
+{
+    System.Media.SystemSounds.Beep.Play();
+    return;
+}
             }
             catch (Win32Exception)
             {
