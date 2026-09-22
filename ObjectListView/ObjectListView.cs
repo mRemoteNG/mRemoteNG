@@ -10136,7 +10136,16 @@ namespace BrightIdeasSoftware
             try
             {
                 this.Cursor = Cursors.WaitCursor;
-                System.Diagnostics.Process.Start(args.Url);
+                if (Uri.TryCreate(args.Url, UriKind.Absolute, out var uri) &&
+                    (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps))
+                {
+                    // It is recommended to further restrict allowed hosts using a whitelist of known-safe domains.
+                    System.Diagnostics.Process.Start(uri.AbsoluteUri);
+                }
+                else
+                {
+                    System.Media.SystemSounds.Beep.Play();
+                }
             }
             catch (Win32Exception)
             {
