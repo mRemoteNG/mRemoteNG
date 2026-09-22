@@ -11,11 +11,12 @@ on:
         required: false
         default: 'true'
 
-permissions:
-  contents: write
+permissions: {}
   
 jobs:
   NB-Build-and-Release:
+    permissions:
+      contents: read
     strategy:
       matrix:
         include:
@@ -239,6 +240,8 @@ jobs:
           retention-days: 1
 
   Create-Combined-Release:
+    permissions:
+      contents: write
     needs: NB-Build-and-Release
     runs-on: windows-2025-vs2026
     steps:
