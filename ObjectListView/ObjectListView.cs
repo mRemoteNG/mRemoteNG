@@ -10140,7 +10140,10 @@ namespace BrightIdeasSoftware
                     (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps))
                 {
                     // It is recommended to further restrict allowed hosts using a whitelist of known-safe domains.
-                    System.Diagnostics.Process.Start(uri.AbsoluteUri);
+System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(uri.AbsoluteUri)
+{
+    UseShellExecute = true
+});
                 }
                 else
                 {
