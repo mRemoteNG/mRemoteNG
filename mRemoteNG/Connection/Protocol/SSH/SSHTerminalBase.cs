@@ -158,7 +158,8 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 _sshClient = new SshClient(connectionInfo);
                 _sshClient.HostKeyReceived += OnHostKeyReceived;
 
-                await Task.Run(() => _sshClient.Connect());
+                // SSH.NET's Connect() is blocking and offers no cancellation, so opt out explicitly.
+                await Task.Run(() => _sshClient.Connect(), CancellationToken.None);
 
                 if (!_sshClient.IsConnected)
                 {
@@ -219,7 +220,18 @@ namespace mRemoteNG.Connection.Protocol.SSH
         {
             string cmd = InterfaceControl.Info?.OpeningCommand;
             if (string.IsNullOrEmpty(cmd)) return;
-            await Task.Delay(500);
+            // End the wait with the session instead of outliving it.
+            CancellationToken token = _readCts?.Token ?? CancellationToken.None;
+
+            try
+            {
+                await Task.Delay(500, token);
+            }
+            catch (OperationCanceledException)
+            {
+                // Session closed while waiting - nothing to send.
+                return;
+            }
             WriteToShell(cmd.TrimEnd() + "\n");
         }
 
