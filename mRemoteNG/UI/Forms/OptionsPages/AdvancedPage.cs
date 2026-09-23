@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Container;
 using mRemoteNG.Properties;
 using mRemoteNG.Tools;
+using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 
@@ -15,9 +20,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     [SupportedOSPlatform("windows")]
     public sealed partial class AdvancedPage
     {
+        private readonly Dictionary<RootPuttySessionsNodeInfo, int> _puttyRootOriginalIndices = [];
+
         public AdvancedPage()
         {
             InitializeComponent();
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             ApplyTheme();
             PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Settings_16x);
             DisplayProperties display = new();
@@ -39,13 +47,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             lblSeconds.Text = Language.Seconds;
             lblMaximumPuttyWaitTime.Text = Language.PuttyTimeout;
-            chkAutomaticReconnect.Text = Language.CheckboxAutomaticReconnect;
-            //chkNoReconnect.Text = Language.;
+            chkAutomaticReconnect.Text = Language.DisplayReconnectionDialog;
+            chkNoReconnect.Text = Language.CheckboxAutomaticReconnect;
             chkLoadBalanceInfoUseUtf8.Text = Language.LoadBalanceInfoUseUtf8;
             lblConfigurePuttySessions.Text = Language.PuttySessionsConfig;
             btnLaunchPutty.Text = Language.ButtonLaunchPutty;
             btnBrowseCustomPuttyPath.Text = Language._Browse;
             chkUseCustomPuttyPath.Text = Language.CheckboxPuttyPath;
+            chkShowPuttySessionsInTree.Text = Language.ShowPuttySessionsInTree;
             lblUVNCSCPort.Text = Language.UltraVNCSCListeningPort;
         }
 
@@ -60,6 +69,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             chkUseCustomPuttyPath.Checked = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath;
             txtCustomPuttyPath.Text = Properties.OptionsAdvancedPage.Default.CustomPuttyPath;
+            chkShowPuttySessionsInTree.Checked = Properties.OptionsAdvancedPage.Default.ShowPuttySessionsInTree;
             SetPuttyLaunchButtonEnabled();
 
             numUVNCSCPort.Value = Properties.OptionsAdvancedPage.Default.UVNCSCPort;
@@ -84,10 +94,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath = chkUseCustomPuttyPath.Checked;
             }
 
-            if (puttyPathChanged)
+            bool puttySessionsVisibilityChanged = Properties.OptionsAdvancedPage.Default.ShowPuttySessionsInTree != chkShowPuttySessionsInTree.Checked;
+            Properties.OptionsAdvancedPage.Default.ShowPuttySessionsInTree = chkShowPuttySessionsInTree.Checked;
+
+            if (puttySessionsVisibilityChanged && !chkShowPuttySessionsInTree.Checked)
+            {
+                UpdatePuttySessionsVisibility();
+            }
+
+            if (puttyPathChanged || puttySessionsVisibilityChanged)
             {
                 PuttyBase.PuttyPath = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath ? Properties.OptionsAdvancedPage.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
                 PuttySessionsManager.Instance.AddSessions();
+            }
+
+            if (puttySessionsVisibilityChanged && chkShowPuttySessionsInTree.Checked)
+            {
+                UpdatePuttySessionsVisibility();
             }
 
             Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime = (int)numPuttyWaitTime.Value;
@@ -164,6 +187,106 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             lblConfigurePuttySessions.Enabled = exists;
             btnLaunchPutty.Enabled = exists;
+        }
+
+        private void UpdatePuttySessionsVisibility()
+        {
+            if (Runtime.ConnectionsService.ConnectionTreeModel is not { } connectionTreeModel)
+                return;
+
+            if (chkShowPuttySessionsInTree.Checked)
+            {
+                foreach (RootPuttySessionsNodeInfo puttyRoot in PuttySessionsManager.Instance.RootPuttySessionsNodes
+                             .Where(root => !connectionTreeModel.RootNodes.Contains(root)))
+                {
+                    connectionTreeModel.AddRootNode(puttyRoot);
+                }
+
+                List<ContainerInfo> desiredRootOrder = BuildDesiredRootOrder(connectionTreeModel);
+                if (HasSameRootInstances(connectionTreeModel.RootNodes, desiredRootOrder))
+                    connectionTreeModel.SetRootNodeOrder(desiredRootOrder);
+            }
+            else
+            {
+                RootPuttySessionsNodeInfo[] puttyRoots = connectionTreeModel.RootNodes
+                    .OfType<RootPuttySessionsNodeInfo>()
+                    .ToArray();
+                _puttyRootOriginalIndices.Clear();
+                foreach (RootPuttySessionsNodeInfo puttyRoot in puttyRoots)
+                {
+                    _puttyRootOriginalIndices[puttyRoot] = connectionTreeModel.RootNodes.IndexOf(puttyRoot);
+                }
+
+                foreach (RootPuttySessionsNodeInfo puttyRoot in puttyRoots)
+                {
+                    connectionTreeModel.RemoveRootNode(puttyRoot);
+                }
+            }
+
+            RefreshConnectionTreeRoots();
+        }
+
+        private List<ContainerInfo> BuildDesiredRootOrder(mRemoteNG.Tree.ConnectionTreeModel connectionTreeModel)
+        {
+            List<ContainerInfo> desiredRootOrder = connectionTreeModel.RootNodes
+                .Where(root => root is not RootPuttySessionsNodeInfo)
+                .ToList();
+            RootPuttySessionsNodeInfo[] visiblePuttyRoots = PuttySessionsManager.Instance.RootPuttySessionsNodes
+                .Where(connectionTreeModel.RootNodes.Contains)
+                .ToArray();
+            Dictionary<RootPuttySessionsNodeInfo, int> visibleRootOrder = visiblePuttyRoots
+                .Select((root, index) => new { root, index })
+                .ToDictionary(item => item.root, item => item.index);
+            Dictionary<int, int> insertOffsetsByIndex = [];
+            foreach (RootPuttySessionsNodeInfo puttyRoot in visiblePuttyRoots
+                         .Where(root => _puttyRootOriginalIndices.ContainsKey(root))
+                         .OrderBy(root => _puttyRootOriginalIndices[root])
+                         .ThenBy(root => visibleRootOrder[root]))
+            {
+                int targetIndex = _puttyRootOriginalIndices[puttyRoot];
+                int clampedTargetIndex = targetIndex;
+                if (clampedTargetIndex < 0)
+                {
+                    clampedTargetIndex = 0;
+                }
+                else if (clampedTargetIndex > desiredRootOrder.Count)
+                {
+                    clampedTargetIndex = desiredRootOrder.Count;
+                }
+                int offset = insertOffsetsByIndex.TryGetValue(clampedTargetIndex, out int existingOffset)
+                    ? existingOffset
+                    : 0;
+                desiredRootOrder.Insert(clampedTargetIndex + offset, puttyRoot);
+                insertOffsetsByIndex[clampedTargetIndex] = offset + 1;
+            }
+
+            foreach (RootPuttySessionsNodeInfo puttyRoot in visiblePuttyRoots.Where(root => !_puttyRootOriginalIndices.ContainsKey(root)))
+            {
+                desiredRootOrder.Add(puttyRoot);
+            }
+
+            return desiredRootOrder;
+        }
+
+        private static bool HasSameRootInstances(IEnumerable<ContainerInfo> currentRoots, IEnumerable<ContainerInfo> desiredRoots)
+        {
+            ContainerInfo[] currentArray = currentRoots.ToArray();
+            ContainerInfo[] desiredArray = desiredRoots.ToArray();
+            if (currentArray.Length != desiredArray.Length)
+                return false;
+
+            return !currentArray.Except(desiredArray).Any() && !desiredArray.Except(currentArray).Any();
+        }
+
+        private static void RefreshConnectionTreeRoots()
+        {
+            if (AppWindows.ExistingTreeForm is not { IsDisposed: false } treeForm)
+                return;
+
+            if (treeForm.ConnectionTree.IsDisposed)
+                return;
+
+            treeForm.ConnectionTree.RefreshVisibleRoots();
         }
 
         private void chkNoReconnect_CheckedChanged(object sender, EventArgs e)

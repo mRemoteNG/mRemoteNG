@@ -81,6 +81,8 @@ namespace mRemoteNG.UI.Window
             lblLatestVersionLabel.Text = $"{Language.AvailableVersion}:";
         }
 
+        internal void RefreshUiLanguage() => ApplyLanguage();
+
         private async void btnCheckForUpdate_Click(object sender, EventArgs e)
         {
             await CheckForUpdateAsync();

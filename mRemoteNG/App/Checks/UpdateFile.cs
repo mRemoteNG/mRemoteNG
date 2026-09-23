@@ -36,7 +36,7 @@ namespace mRemoteNG.App.Update
 
             using (StringReader sr = new(content))
             {
-                string line;
+                string? line;
                 while ((line = sr.ReadLine()) != null)
                 {
                     string trimmedLine = line.Trim();
@@ -66,13 +66,13 @@ namespace mRemoteNG.App.Update
             return !Items.ContainsKey(key) ? string.Empty : Items[key];
         }
 
-        public Version GetVersion(string key = "Version")
+        public Version? GetVersion(string key = "Version")
         {
             string value = GetString(key);
             return string.IsNullOrEmpty(value) ? null : new Version(value);
         }
 
-        public Uri GetUri(string key)
+        public Uri? GetUri(string key)
         {
             string value = GetString(key);
             return string.IsNullOrEmpty(value) ? null : new Uri(value);

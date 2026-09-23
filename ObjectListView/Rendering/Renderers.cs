@@ -109,6 +109,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Runtime.Versioning;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -170,11 +171,12 @@ namespace BrightIdeasSoftware {
         IModelFilter Filter { get; set; }
     }
 
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// An AbstractRenderer is a do-nothing implementation of the IRenderer interface.
     /// </summary>
     [Browsable(true),
-     ToolboxItem(false)]
+      ToolboxItem(false)]
     public class AbstractRenderer : Component, IRenderer {
         #region IRenderer Members
 
@@ -259,6 +261,7 @@ namespace BrightIdeasSoftware {
     /// </remarks>
     [Browsable(true),
      ToolboxItem(true)]
+    [SupportedOSPlatform("windows")]
     public class BaseRenderer : AbstractRenderer {
         internal const TextFormatFlags NormalTextFormatFlags = TextFormatFlags.NoPrefix |
                                                                TextFormatFlags.EndEllipsis |
@@ -1806,6 +1809,7 @@ namespace BrightIdeasSoftware {
     /// <summary>
     /// This renderer highlights substrings that match a given text filter. 
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class HighlightTextRenderer : BaseRenderer, IFilterAwareRenderer {
         #region Life and death
 
@@ -2299,6 +2303,7 @@ namespace BrightIdeasSoftware {
     /// <summary>
     /// This renderer draws just a checkbox to match the check state of our model object.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class CheckStateRenderer : BaseRenderer {
         /// <summary>
         /// Draw our cell
@@ -2372,6 +2377,7 @@ namespace BrightIdeasSoftware {
     /// an image renderer between two animated gif columns. If you do, only the last column will be
     /// animated.</para>
     /// </remarks>
+    [SupportedOSPlatform("windows")]
     public class ImageRenderer : BaseRenderer {
         /// <summary>
         /// Make an empty image renderer
@@ -2742,6 +2748,7 @@ namespace BrightIdeasSoftware {
     /// <summary>
     /// Render our Aspect as a progress bar
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class BarRenderer : BaseRenderer {
         #region Constructors
 
@@ -3343,6 +3350,7 @@ namespace BrightIdeasSoftware {
         private Dictionary<Int32, Object> imageMap = new Dictionary<Int32, object>();
     }
 
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// This renderer draws an image, a single line title, and then multi-line description
     /// under the title.
@@ -3663,6 +3671,7 @@ namespace BrightIdeasSoftware {
     /// <summary>
     /// This renderer draws a functioning button in its cell
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class ColumnButtonRenderer : BaseRenderer {
 
         #region Properties

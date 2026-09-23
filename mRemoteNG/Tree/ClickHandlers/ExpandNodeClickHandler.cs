@@ -19,7 +19,7 @@ namespace mRemoteNG.Tree.ClickHandlers
 
         public void Execute(ConnectionInfo clickedNode)
         {
-            ContainerInfo clickedNodeAsContainer = clickedNode as ContainerInfo;
+            ContainerInfo? clickedNodeAsContainer = clickedNode as ContainerInfo;
             if (clickedNodeAsContainer == null) return;
             _connectionTree.ToggleExpansion(clickedNodeAsContainer);
         }

@@ -162,6 +162,44 @@ namespace mRemoteNGTests.IntegrationTests
         }
 
 
+        [Test]
+        public void SerializeThenDeserializePreservesIsRootGroupFlag()
+        {
+            var rootGroup = new ContainerInfo { Name = "rootGroup1", IsRootGroup = true };
+            var masterRoot = (RootNodeInfo)_originalModel.RootNodes.First(node => node is RootNodeInfo);
+            masterRoot.AddChild(rootGroup);
+
+            var serializedContent = _serializer.Serialize(_originalModel);
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
+
+            var deserializedRootGroup = deserializedModel
+                .GetRecursiveChildList()
+                .OfType<ContainerInfo>()
+                .First(node => node.Name == "rootGroup1");
+
+            Assert.That(deserializedRootGroup.IsRootGroup, Is.True);
+        }
+
+        [Test]
+        public void DeserializingOldXmlWithoutIsRootGroupAttributeDefaultsToFalse()
+        {
+            // Simulates a connections file saved by an older version of mRemoteNG that predates
+            // the IsRootGroup attribute, to ensure existing users still see a single root and
+            // do not lose any connections/folders on upgrade.
+            var serializedContent = _serializer.Serialize(_originalModel);
+            var xmlWithoutAttribute = serializedContent.Replace(" IsRootGroup=\"false\"", "");
+            Assert.That(xmlWithoutAttribute, Does.Not.Contain("IsRootGroup"));
+
+            var deserializedModel = _deserializer.Deserialize(xmlWithoutAttribute);
+
+            var allContainers = deserializedModel.GetRecursiveChildList().OfType<ContainerInfo>().ToList();
+            Assert.That(allContainers, Is.Not.Empty);
+            Assert.That(allContainers.All(container => !container.IsRootGroup), Is.True);
+
+            // The tree still exposes exactly one true root node, matching pre-upgrade behavior
+            Assert.That(deserializedModel.RootNodes.OfType<RootNodeInfo>().Count(), Is.EqualTo(1));
+        }
+
         private ConnectionTreeModel SetupConnectionTreeModel()
         {
             /*

@@ -13,6 +13,7 @@ using mRemoteNG.Themes;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.ClickHandlers;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.ConnectionTree;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
@@ -92,12 +93,25 @@ namespace mRemoteNG.UI.Window
 
             mMenAddConnection.ToolTipText = Language.NewConnection;
             mMenAddFolder.ToolTipText = Language.NewFolder;
+            mMenAddRoot.ToolTipText = Language.AddRoot;
             mMenViewExpandAllFolders.ToolTipText = Language.ExpandAllFolders;
             mMenViewCollapseAllFolders.ToolTipText = Language.CollapseAllFolders;
             mMenSort.ToolTipText = Language.Sort;
             mMenFavorites.ToolTipText = Language.Favorites;
 
             txtSearch.Text = Language.SearchPrompt;
+        }
+
+        internal void RefreshUiLanguage()
+        {
+            if (IsDisposed)
+                return;
+
+            ApplyLanguage();
+            if (ConnectionTree.ContextMenuStrip is ConnectionContextMenu connectionContextMenu)
+            {
+                connectionContextMenu.RefreshUiLanguage();
+            }
         }
 
         private new void ApplyTheme()
@@ -257,6 +271,11 @@ namespace mRemoteNG.UI.Window
             ConnectionTree.AddFolder();
         }
 
+        private void CMenTreeAddRoot_Click(object sender, EventArgs e)
+        {
+            ConnectionTree.AddRoot();
+        }
+
         #endregion
 
         #region Search
@@ -273,14 +292,14 @@ namespace mRemoteNG.UI.Window
                         break;
                     case Keys.Up:
                         {
-                            ConnectionInfo match = ConnectionTree.NodeSearcher.PreviousMatch();
+                            ConnectionInfo? match = ConnectionTree.NodeSearcher.PreviousMatch();
                             JumpToNode(match);
                             e.Handled = true;
                             break;
                         }
                     case Keys.Down:
                         {
-                            ConnectionInfo match = ConnectionTree.NodeSearcher.NextMatch();
+                            ConnectionInfo? match = ConnectionTree.NodeSearcher.NextMatch();
                             JumpToNode(match);
                             e.Handled = true;
                             break;
@@ -321,7 +340,7 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        public void JumpToNode(ConnectionInfo connectionInfo)
+        public void JumpToNode(ConnectionInfo? connectionInfo)
         {
             if (connectionInfo == null)
             {

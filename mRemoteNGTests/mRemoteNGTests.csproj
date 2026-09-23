@@ -3,6 +3,8 @@
     <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <LangVersion>preview</LangVersion>
     <IsPackable>false</IsPackable>
+    <Nullable>disable</Nullable>
+    <NoWarn>$(NoWarn);CS0618;CS8600;CS8601;CS8602;CS8605;CS8618;CS8622;CS8625;CS8632</NoWarn>
     <Platforms>x64;arm64</Platforms>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Configurations>Debug;Release;Debug Portable;Release Portable;Release Installer;Deploy to github</Configurations>
@@ -22,6 +24,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" />
     <PackageReference Include="Microsoft.Data.Sqlite" />
     <PackageReference Include="System.Diagnostics.EventLog" />
@@ -31,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\mRemoteNG\mRemoteNG.csproj" />
+    <ProjectReference Include="..\mRemoteNG.Plugins.MultiAddress\mRemoteNG.Plugins.MultiAddress.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

@@ -1,7 +1,9 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿﻿using Microsoft.IdentityModel.Tokens;
 
 using mRemoteNG.App.Update;
 using mRemoteNG.Config.Settings;
+using mRemoteNG.Messages;
+using mRemoteNG.Themes;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Resources.Language;
 using System;
@@ -14,6 +16,7 @@ using System.Runtime.Versioning;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 
 
@@ -28,6 +31,8 @@ namespace mRemoteNG.App
         private static System.Threading.Thread? _wpfSplashThread;
         private static FrmSplashScreenNew? _wpfSplash;
 
+        public static event EventHandler? UiCultureChanged;
+
         [STAThread]
         public static void Main(string[] args)
         {
@@ -38,6 +43,8 @@ namespace mRemoteNG.App
             // PerMonitorV2 awareness; this call keeps the WinForms runtime in sync.
             Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
 
+            InitializeSqliteProvider();
+
             // Ensure the real entry point is definitely STA
             MainAsync(args).GetAwaiter().GetResult();
         }
@@ -46,47 +53,48 @@ namespace mRemoteNG.App
         {
             AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
 
-#if !SELF_CONTAINED
-            // Runtime checks only needed for framework-dependent deployments
-            // Self-contained builds include the runtime, so no check is needed
-            // Note: .NET runtime check is not needed here — the .NET host (apphost)
-            // natively displays a missing-runtime dialog with a download link.
-
-            var checkFail = false;
-
-            // Checking Visual C++ Redistributable version
-            if (VCppRuntimeCheck.GetInstalledVcRedistVersions() == null || VCppRuntimeCheck.GetInstalledVcRedistVersions().Count == 0)
+            if (!ShouldSkipNativeRuntimeChecks(args))
             {
-                var downloadUrl2 = "https://aka.ms/vs/17/release/vc_redist.x64.exe";
-                try
-                {
-                    var result = ShowDownloadCancelDialog(
-                        $"A Visual C++ (MSVC) " + Language.MsgRuntimeIsRequired + "\n\n" +
-                        Language.MsgDownloadLatestRuntime + "\n" + downloadUrl2 + "\n\n" +
-                        Language.MsgExit + "\n\n",
-                        Language.MsgMissingRuntime + " Visual C++ Redistributable x64");
+                // Runtime checks only needed for framework-dependent deployments
+                // Self-contained builds include the runtime, so no check is needed
+                // Note: .NET runtime check is not needed here — the .NET host (apphost)
+                // natively displays a missing-runtime dialog with a download link.
 
-                    if (result == DialogResult.OK && InternetConnection.IsPosible())
+                var checkFail = false;
+
+                // Checking Visual C++ Redistributable version
+                if (VCppRuntimeCheck.GetInstalledVcRedistVersions() == null || VCppRuntimeCheck.GetInstalledVcRedistVersions().Count == 0)
+                {
+                    var downloadUrl2 = "https://aka.ms/vs/17/release/vc_redist.x64.exe";
+                    try
                     {
-                        try
+                        var result = ShowDownloadCancelDialog(
+                            $"A Visual C++ (MSVC) " + Language.MsgRuntimeIsRequired + "\n\n" +
+                            Language.MsgDownloadLatestRuntime + "\n" + downloadUrl2 + "\n\n" +
+                            Language.MsgExit + "\n\n",
+                            Language.MsgMissingRuntime + " Visual C++ Redistributable x64");
+
+                        if (result == DialogResult.OK && InternetConnection.IsPosible())
                         {
-                            Process.Start(new ProcessStartInfo(fileName: downloadUrl2) { UseShellExecute = true });
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Unable to open download link: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            try
+                            {
+                                Process.Start(new ProcessStartInfo(fileName: downloadUrl2) { UseShellExecute = true });
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Unable to open download link: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
+                    catch { }
+                    checkFail = true;
                 }
-                catch { }
-                checkFail = true;
-            }
 
-            if (checkFail)
-            {
-                Environment.Exit(0);
+                if (checkFail)
+                {
+                    Environment.Exit(0);
+                }
             }
-#endif
 
             Lazy<bool> singleInstanceOption = new(() => Properties.OptionsStartupExitPage.Default.SingleInstance);
             if (singleInstanceOption.Value)
@@ -97,14 +105,72 @@ namespace mRemoteNG.App
             return Task.CompletedTask;
         }
 
+        private static void InitializeSqliteProvider()
+        {
+            try
+            {
+                Type batteriesType = Type.GetType("SQLitePCL.Batteries_V2, SQLitePCLRaw.batteries_v2", throwOnError: false);
+                MethodInfo initMethod = batteriesType?.GetMethod("Init", BindingFlags.Public | BindingFlags.Static);
+                initMethod?.Invoke(null, null);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"SQLite provider initialization failed: {ex}");
+            }
+        }
+
+        internal static bool IsPortableBuild
+        {
+            get
+            {
+#if PORTABLE
+                return true;
+#else
+                return false;
+#endif
+            }
+        }
+
+        internal static bool ShouldSkipNativeRuntimeChecks(string[] args)
+        {
+            if (IsPortableBuild)
+            {
+                return true;
+            }
+
+            foreach (string arg in args)
+            {
+                if (string.Equals(arg, "--skip-runtime-checks", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            string? envValue = Environment.GetEnvironmentVariable("MREMOTENG_SKIP_RUNTIME_CHECKS");
+            if (string.IsNullOrWhiteSpace(envValue))
+            {
+                return false;
+            }
+            if (string.Equals(envValue, "1", StringComparison.Ordinal))
+            {
+                return true;
+            }
+
+            return bool.TryParse(envValue, out bool skipChecks) && skipChecks;
+        }
+
         // Assembly resolve handler
         private static Assembly? OnAssemblyResolve(object? sender, ResolveEventArgs args)
         {
             try
             {
-                string assemblyName = new AssemblyName(args.Name).Name ?? string.Empty;
+                var requestedAssemblyName = new AssemblyName(args.Name);
+                string assemblyName = requestedAssemblyName.Name ?? string.Empty;
+
                 if (assemblyName.EndsWith(".resources", StringComparison.OrdinalIgnoreCase))
-                    return null;
+                {
+                    return ResolveSatelliteAssembly(args, requestedAssemblyName);
+                }
 
                 string assemblyFile = assemblyName + ".dll";
                 string assemblyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assemblies", assemblyFile);
@@ -119,11 +185,77 @@ namespace mRemoteNG.App
             return null;
         }
 
+        private static Assembly? ResolveSatelliteAssembly(ResolveEventArgs args, AssemblyName requestedAssemblyName)
+        {
+            string? cultureName = requestedAssemblyName.CultureName;
+            if (string.IsNullOrWhiteSpace(cultureName))
+                return null;
+
+            string satelliteAssemblyFileName = (requestedAssemblyName.Name ?? string.Empty) + ".dll";
+            if (string.IsNullOrWhiteSpace(satelliteAssemblyFileName))
+                return null;
+
+            string appBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string cultureSpecificPath = Path.Combine(customResourcePath, cultureName, satelliteAssemblyFileName);
+            if (File.Exists(cultureSpecificPath))
+            {
+                var baseFull = Path.GetFullPath(customResourcePath);
+                var fullPath = Path.GetFullPath(cultureSpecificPath);
+                if (!fullPath.StartsWith(baseFull + Path.DirectorySeparatorChar, StringComparison.Ordinal)
+                    && fullPath != baseFull)
+                {
+                    throw new ArgumentException("Invalid file path");
+                }
+                return Assembly.LoadFrom(fullPath);
+            }
+
+            if (args.RequestingAssembly is null)
+                return null;
+
+            string requestingAssemblyName = args.RequestingAssembly.GetName().Name ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(requestingAssemblyName))
+                return null;
+
+            string localizedAssemblyPath = Path.Combine(appBaseDirectory, "Languages", cultureName, requestingAssemblyName + ".resources.dll");
+            if (File.Exists(localizedAssemblyPath))
+            {
+                var baseFull = Path.GetFullPath(Path.Combine(appBaseDirectory, "Languages"));
+                var fullPath = Path.GetFullPath(localizedAssemblyPath);
+                if (!fullPath.StartsWith(baseFull + Path.DirectorySeparatorChar, StringComparison.Ordinal)
+                    && fullPath != baseFull)
+                {
+                    throw new ArgumentException("Invalid file path");
+                }
+                return Assembly.LoadFrom(fullPath);
+            }
+            return null;
+        }
+
+        public static void ApplyUiCulture(string? cultureName)
+        {
+            CultureInfo uiCulture = string.IsNullOrWhiteSpace(cultureName)
+                ? CultureInfo.InstalledUICulture
+                : new CultureInfo(cultureName);
+
+            Thread.CurrentThread.CurrentUICulture = uiCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = uiCulture;
+            UiCultureChanged?.Invoke(null, EventArgs.Empty);
+        }
+
         private static void StartApplication()
         {
             CatchAllUnhandledExceptions();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // Match the OS dark mode for common controls (scrollbars, context menus, ...)
+            // to the active theme. Applied once at startup; theme changes require a restart.
+            // Read the persisted flag instead of constructing ThemeManager here, so we avoid
+            // any theme folder/file I/O before the splash is shown. The flag is kept in sync
+            // by ThemeManager whenever the active theme or theming state changes.
+            Application.SetColorMode(Properties.OptionsThemePage.Default.IsActiveThemeDark
+                ? SystemColorMode.Dark
+                : SystemColorMode.Classic);
 
             ShowSplashOnStaThread();
 
@@ -206,7 +338,9 @@ namespace mRemoteNG.App
 
         private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            FrmUnhandledException window = new(e.ExceptionObject as Exception, e.IsTerminating);
+            Exception exception = e.ExceptionObject as Exception
+                                  ?? new Exception(e.ExceptionObject?.ToString() ?? "Unknown error");
+            FrmUnhandledException window = new(exception, e.IsTerminating);
             window.ShowDialog(FrmMain.Default);
         }
 
@@ -229,18 +363,38 @@ namespace mRemoteNG.App
             _wpfSplashThread.Start();
         }
 
-        private static void CloseSplash()
+        internal static void CloseSplash()
         {
-            if (_wpfSplash != null)
+            // Capture and clear the cached state up front so this is safe to call from
+            // multiple startup paths (e.g. the LoadConnections error handler) without
+            // acting on stale references or re-running against an already-closed splash.
+            FrmSplashScreenNew? splash = _wpfSplash;
+            System.Threading.Thread? splashThread = _wpfSplashThread;
+            _wpfSplash = null;
+            _wpfSplashThread = null;
+
+            if (splash != null)
             {
-                _wpfSplash.Dispatcher.Invoke(() => _wpfSplash.Close());
-                _wpfSplash = null;
+                try
+                {
+                    splash.Dispatcher.Invoke(() =>
+                    {
+                        splash.Close();
+                        // The splash runs its own STA message loop; ask it to exit so the
+                        // thread can actually be joined below instead of running forever.
+                        splash.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
+                    });
+                }
+                catch (Exception ex)
+                {
+                    // Never let splash cleanup mask an in-progress startup error.
+                    Runtime.MessageCollector.AddExceptionMessage("Failed to close splash screen.", ex, MessageClass.WarningMsg);
+                }
             }
-            if (_wpfSplashThread != null)
-            {
-                _wpfSplashThread.Join();
-                _wpfSplashThread = null;
-            }
+
+            // The splash thread is a background thread, so a bounded join keeps startup
+            // from hanging if the dispatcher did not shut down; it dies on process exit anyway.
+            splashThread?.Join(TimeSpan.FromSeconds(2));
         }
 
         // Helper to show a dialog with "Download" and "Cancel" buttons.
@@ -294,7 +448,7 @@ namespace mRemoteNG.App
 
             lbl.LinkClicked += (s, e) =>
             {
-                string? linkUrl = e.Link.LinkData as string;
+                string? linkUrl = e.Link?.LinkData as string;
                 if (string.IsNullOrEmpty(linkUrl))
                     return;
                 if (!hasValidUrl)

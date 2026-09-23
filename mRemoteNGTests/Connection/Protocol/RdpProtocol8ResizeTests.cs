@@ -292,6 +292,14 @@ namespace mRemoteNGTests.Connection.Protocol
                 "DoResizeClient should be called when restoring from minimize");
         }
 
+        [Test]
+        public void UpdateSessionDisplaySettings_WhenNoActiveXControl_DoesNotThrow()
+        {
+            var protocol = new ExposedRdpProtocol8();
+
+            Assert.That(() => protocol.CallUpdateSessionDisplaySettings(1024, 768), Throws.Nothing);
+        }
+
         /// <summary>
         /// Testable version of RdpProtocol8 that exposes resize methods for testing
         /// </summary>
@@ -377,6 +385,15 @@ namespace mRemoteNGTests.Connection.Protocol
             public void Dispose()
             {
                 // Cleanup if needed
+            }
+
+        }
+
+        private class ExposedRdpProtocol8 : RdpProtocol8
+        {
+            public void CallUpdateSessionDisplaySettings(uint width, uint height)
+            {
+                UpdateSessionDisplaySettings(width, height);
             }
         }
     }

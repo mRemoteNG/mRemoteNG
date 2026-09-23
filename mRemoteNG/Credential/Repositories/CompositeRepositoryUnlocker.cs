@@ -10,7 +10,7 @@ namespace mRemoteNG.Credential.Repositories
         private readonly List<ICredentialRepository> _repositories = [];
 
         public IEnumerable<ICredentialRepository> Repositories => _repositories;
-        public ICredentialRepository SelectedRepository { get; set; }
+        public ICredentialRepository? SelectedRepository { get; set; }
 
         public CompositeRepositoryUnlocker(IEnumerable<ICredentialRepository> repositories)
         {
@@ -23,7 +23,7 @@ namespace mRemoteNG.Credential.Repositories
 
         public void Unlock(SecureString key)
         {
-            SelectedRepository.LoadCredentials(key);
+            SelectedRepository?.LoadCredentials(key);
         }
 
         public void SelectNextLockedRepository()
@@ -31,7 +31,7 @@ namespace mRemoteNG.Credential.Repositories
             SelectedRepository = GetNextLockedRepo();
         }
 
-        private ICredentialRepository GetNextLockedRepo()
+        private ICredentialRepository? GetNextLockedRepo()
         {
             IList<ICredentialRepository> newOrder = OrderListForNextLockedRepo();
             return newOrder.Any() ? newOrder.First() : null;
@@ -67,7 +67,8 @@ namespace mRemoteNG.Credential.Repositories
 
         private int GetNewListStartIndex()
         {
-            int currentItemIndex = _repositories.IndexOf(SelectedRepository);
+            // IndexOf of a null selection is -1; guard so the non-null IndexOf overload is satisfied.
+            int currentItemIndex = SelectedRepository is null ? -1 : _repositories.IndexOf(SelectedRepository);
             return currentItemIndex + 1;
         }
     }

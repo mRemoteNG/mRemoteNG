@@ -15,7 +15,7 @@ namespace mRemoteNG.Credential
         void LoadCredentials(SecureString key);
         void SaveCredentials(SecureString key);
         void UnloadCredentials();
-        event EventHandler RepositoryConfigUpdated;
-        event EventHandler<CollectionUpdatedEventArgs<ICredentialRecord>> CredentialsUpdated;
+        event EventHandler? RepositoryConfigUpdated;
+        event EventHandler<CollectionUpdatedEventArgs<ICredentialRecord>>? CredentialsUpdated;
     }
 }

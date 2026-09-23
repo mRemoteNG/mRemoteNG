@@ -1,18 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <?include $(sys.CURRENTDIR)Includes\Config.wxi?>
 	<Fragment>
-    <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="$(var.PlatformProgramFilesFolder)">
-        <Directory Id="INSTALLDIR" Name="$(var.ProductName)">
-        </Directory>
-      </Directory>
+      <StandardDirectory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLDIR" Name="$(var.ProductName)" />
+      </StandardDirectory>
 
-      <Directory Id="DesktopFolder" Name="!(loc.Folders_Desktop)" />
+      <StandardDirectory Id="DesktopFolder" />
 
-      <Directory Id="ProgramMenuFolder">
-        <Directory Id="ApplicationProgramsFolder" Name="$(var.ProductName)"/>
-      </Directory>
-    </Directory>
-	</Fragment>
+      <StandardDirectory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="$(var.ProductName)" />
+      </StandardDirectory>
+    </Fragment>
 </Wix>

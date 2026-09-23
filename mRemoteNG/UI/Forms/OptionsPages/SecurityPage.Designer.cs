@@ -1,4 +1,5 @@
-﻿using mRemoteNG.UI.Controls;
+﻿using System.Windows.Forms;
+using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -31,10 +32,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void InitializeComponent()
         {
             chkEncryptCompleteFile = new MrngCheckBox();
-            comboBoxEncryptionEngine = new MrngComboBox();
+            comboBoxEncryptionEngine = new ComboBox();
             labelEncryptionEngine = new MrngLabel();
             labelBlockCipher = new MrngLabel();
-            comboBoxBlockCipher = new MrngComboBox();
+            comboBoxBlockCipher = new ComboBox();
             groupAdvancedSecurityOptions = new MrngGroupBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             labelKdfIterations = new MrngLabel();
@@ -72,14 +73,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // comboBoxEncryptionEngine
             // 
-            comboBoxEncryptionEngine._mice = MrngComboBox.MouseState.HOVER;
             comboBoxEncryptionEngine.Dock = System.Windows.Forms.DockStyle.Fill;
-            comboBoxEncryptionEngine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboBoxEncryptionEngine.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxEncryptionEngine.FormattingEnabled = true;
+            comboBoxEncryptionEngine.IntegralHeight = false;
             comboBoxEncryptionEngine.Location = new System.Drawing.Point(197, 8);
             comboBoxEncryptionEngine.Margin = new System.Windows.Forms.Padding(4);
             comboBoxEncryptionEngine.Name = "comboBoxEncryptionEngine";
-            comboBoxEncryptionEngine.Size = new System.Drawing.Size(196, 21);
+            comboBoxEncryptionEngine.Size = new System.Drawing.Size(196, 23);
             comboBoxEncryptionEngine.Sorted = true;
             comboBoxEncryptionEngine.TabIndex = 1;
             // 
@@ -109,14 +110,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // comboBoxBlockCipher
             // 
-            comboBoxBlockCipher._mice = MrngComboBox.MouseState.HOVER;
             comboBoxBlockCipher.Dock = System.Windows.Forms.DockStyle.Fill;
-            comboBoxBlockCipher.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboBoxBlockCipher.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxBlockCipher.FormattingEnabled = true;
+            comboBoxBlockCipher.IntegralHeight = false;
             comboBoxBlockCipher.Location = new System.Drawing.Point(197, 37);
             comboBoxBlockCipher.Margin = new System.Windows.Forms.Padding(4);
             comboBoxBlockCipher.Name = "comboBoxBlockCipher";
-            comboBoxBlockCipher.Size = new System.Drawing.Size(196, 21);
+            comboBoxBlockCipher.Size = new System.Drawing.Size(196, 23);
             comboBoxBlockCipher.TabIndex = 2;
             // 
             // groupAdvancedSecurityOptions
@@ -309,10 +310,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         #endregion
 
         internal MrngCheckBox chkEncryptCompleteFile;
-        private MrngComboBox comboBoxEncryptionEngine;
+        private ComboBox comboBoxEncryptionEngine;
         private Controls.MrngLabel labelEncryptionEngine;
         private Controls.MrngLabel labelBlockCipher;
-        private MrngComboBox comboBoxBlockCipher;
+        private ComboBox comboBoxBlockCipher;
         private MrngGroupBox groupAdvancedSecurityOptions;
         internal Controls.MrngNumericUpDown numberBoxKdfIterations;
         private Controls.MrngLabel labelKdfIterations;

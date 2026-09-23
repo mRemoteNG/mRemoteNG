@@ -71,7 +71,7 @@ namespace mRemoteNG.Config.Settings
         private void SetSupportedCulture()
         {
             if (Properties.Settings.Default.OverrideUICulture == "" || !SupportedCultures.IsNameSupported(Properties.Settings.Default.OverrideUICulture)) return;
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.OverrideUICulture);
+            ProgramRoot.ApplyUiCulture(Properties.Settings.Default.OverrideUICulture);
             _messageCollector.AddMessage(MessageClass.InformationMsg, $"Override Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}", true);
         }
 

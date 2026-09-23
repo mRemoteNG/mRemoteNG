@@ -15,12 +15,12 @@ namespace mRemoteNG.Tree
     {
         private readonly Color DropAllowedFeedbackColor = Color.Green;
         private readonly Color DropDeniedFeedbackColor = Color.Red;
-        private string _infoMessage;
+        private string? _infoMessage;
         private Color _currentFeedbackColor;
         private bool _enableFeedback;
 
 
-        public void HandleEvent_ModelDropped(object sender, ModelDropEventArgs e)
+        public void HandleEvent_ModelDropped(object? sender, ModelDropEventArgs e)
         {
             if (!(e.TargetModel is ConnectionInfo dropTarget)) return;
             foreach(ConnectionInfo dropSource in e.SourceModels.Cast<ConnectionInfo>())
@@ -53,6 +53,7 @@ namespace mRemoteNG.Tree
         {
             if (!(dropTarget is ContainerInfo dropTargetAsContainer)) return;
             dropSource.SetParent(dropTargetAsContainer);
+            DemoteRootGroupIfNested(dropSource, dropTargetAsContainer);
         }
 
         private void DropModelAboveTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
@@ -61,6 +62,7 @@ namespace mRemoteNG.Tree
                 dropTarget.Parent.AddChildAbove(dropSource, dropTarget);
             else
                 dropTarget.Parent.SetChildAbove(dropSource, dropTarget);
+            DemoteRootGroupIfNested(dropSource, dropTarget.Parent);
         }
 
         private void DropModelBelowTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
@@ -69,16 +71,28 @@ namespace mRemoteNG.Tree
                 dropTarget.Parent.AddChildBelow(dropSource, dropTarget);
             else
                 dropTarget.Parent.SetChildBelow(dropSource, dropTarget);
+            DemoteRootGroupIfNested(dropSource, dropTarget.Parent);
         }
 
-        public void HandleEvent_ModelCanDrop(object sender, ModelDropEventArgs e)
+        /// <summary>
+        /// A container flagged as a top-level root group should only keep that flag while it
+        /// remains a direct child of the master root node. If it has been dropped into any
+        /// other container it becomes a normal nested folder again.
+        /// </summary>
+        private static void DemoteRootGroupIfNested(ConnectionInfo dropSource, ContainerInfo newParent)
+        {
+            if (dropSource is ContainerInfo { IsRootGroup: true } droppedContainer && newParent is not RootNodeInfo)
+                droppedContainer.IsRootGroup = false;
+        }
+
+        public void HandleEvent_ModelCanDrop(object? sender, ModelDropEventArgs e)
         {
             _enableFeedback = true;
             _currentFeedbackColor = DropDeniedFeedbackColor;
             _infoMessage = null;
             foreach (ConnectionInfo dropSource in e.SourceModels.Cast<ConnectionInfo>())
             {
-                ConnectionInfo dropTarget = e.TargetModel as ConnectionInfo;
+                ConnectionInfo? dropTarget = e.TargetModel as ConnectionInfo;
 
                 e.Effect = CanModelDrop(dropSource, dropTarget, e.DropTargetLocation);
                 e.InfoMessage = _infoMessage;
@@ -89,7 +103,7 @@ namespace mRemoteNG.Tree
         }
 
         public DragDropEffects CanModelDrop(ConnectionInfo dropSource,
-                                            ConnectionInfo dropTarget,
+                                            ConnectionInfo? dropTarget,
                                             DropTargetLocation dropTargetLocation)
         {
             DragDropEffects dragDropEffect = DragDropEffects.None;
@@ -113,7 +127,7 @@ namespace mRemoteNG.Tree
             return dragDropEffect;
         }
 
-        private DragDropEffects HandleCanDropOnItem(ConnectionInfo dropSource, ConnectionInfo dropTarget)
+        private DragDropEffects HandleCanDropOnItem(ConnectionInfo dropSource, ConnectionInfo? dropTarget)
         {
             DragDropEffects dragDropEffect = DragDropEffects.None;
             if (dropTarget is ContainerInfo && !(dropTarget is RootPuttySessionsNodeInfo))
@@ -130,7 +144,7 @@ namespace mRemoteNG.Tree
             return dragDropEffect;
         }
 
-        private DragDropEffects HandleCanDropBetweenItems(ConnectionInfo dropSource, ConnectionInfo dropTarget)
+        private DragDropEffects HandleCanDropBetweenItems(ConnectionInfo dropSource, ConnectionInfo? dropTarget)
         {
             DragDropEffects dragDropEffect = DragDropEffects.None;
             if (AncestorDraggingOntoChild(dropSource, dropTarget))
@@ -165,18 +179,18 @@ namespace mRemoteNG.Tree
             return node != null && !(node is RootNodeInfo) && !(node is PuttySessionInfo);
         }
 
-        private bool NodeDraggingOntoSelf(ConnectionInfo source, ConnectionInfo target)
+        private bool NodeDraggingOntoSelf(ConnectionInfo source, ConnectionInfo? target)
         {
             return source.Equals(target);
         }
 
-        private bool AncestorDraggingOntoChild(ConnectionInfo source, ConnectionInfo target)
+        private bool AncestorDraggingOntoChild(ConnectionInfo source, ConnectionInfo? target)
         {
-            return source is ContainerInfo sourceAsContainer &&
+            return target is not null && source is ContainerInfo sourceAsContainer &&
                    sourceAsContainer.GetRecursiveChildList().Contains(target);
         }
 
-        private bool DraggingOntoCurrentParent(ConnectionInfo source, ConnectionInfo target)
+        private bool DraggingOntoCurrentParent(ConnectionInfo source, ConnectionInfo? target)
         {
             return target is ContainerInfo targetAsContainer && targetAsContainer.Children.Contains(source);
         }

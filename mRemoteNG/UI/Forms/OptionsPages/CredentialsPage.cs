@@ -35,6 +35,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblCredentialsUsername.Text = Language.Username;
             lblCredentialsPassword.Text = Language.Password;
             lblCredentialsDomain.Text = Language.Domain;
+            lblCredentialsUserViaAPI.Text = Language.CredentialsUserViaAPI;
             lblRegistrySettingsUsedInfo.Text = Language.OptionsCompanyPolicyMessage;
         }
 

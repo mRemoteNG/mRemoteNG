@@ -11,12 +11,12 @@ namespace mRemoteNG.Connection
         void OpenConnection(
             ContainerInfo containerInfo,
             ConnectionInfo.Force force = ConnectionInfo.Force.None,
-            ConnectionWindow conForm = null);
+            ConnectionWindow? conForm = null);
 
         void OpenConnection(
             ConnectionInfo connectionInfo,
             ConnectionInfo.Force force = ConnectionInfo.Force.None,
-            ConnectionWindow conForm = null);
+            ConnectionWindow? conForm = null);
 
         bool SwitchToOpenConnection(ConnectionInfo connectionInfo);
     }
