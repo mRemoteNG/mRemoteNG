@@ -39,7 +39,8 @@ namespace mRemoteNG.Tools.Cmdline
 
         public IEnumerable<string> ToArgumentList()
         {
-            return Arguments.Select(argument => argument.Text);
+            return Arguments.Select(argument =>
+                argument.IsFileName ? PrefixFileName(argument.Text) : argument.Text);
         }
 
         public static string PrefixFileName(string argument)
