@@ -22,7 +22,12 @@ namespace mRemoteNG.Tools
             Process.StartInfo.UseShellExecute = false;
             Process.StartInfo.FileName = fileName;
             if (arguments != null)
-                Process.StartInfo.Arguments = arguments.ToString();
+            {
+                foreach (string argument in arguments.ToArgumentList())
+                {
+                    Process.StartInfo.ArgumentList.Add(argument);
+                }
+            }
 
             if (!Process.Start())
                 return false;
