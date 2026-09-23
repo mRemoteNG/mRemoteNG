@@ -93,9 +93,9 @@ namespace mRemoteNG.Connection.Protocol.SSH
                 if (!File.Exists(htmlPath))
                     throw new FileNotFoundException("Terminal HTML resource not found.", htmlPath);
 
-                string html = File.ReadAllText(htmlPath);
+                string html = await File.ReadAllTextAsync(htmlPath);
                 html = InlineResources(html);
-                File.WriteAllText(htmlPath, html);
+                await File.WriteAllTextAsync(htmlPath, html);
 
                 _webView2.CoreWebView2.Navigate("https://xterm.local/xterm-terminal.html");
             }

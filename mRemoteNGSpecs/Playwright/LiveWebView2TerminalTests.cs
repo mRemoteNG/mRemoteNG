@@ -109,6 +109,10 @@ namespace mRemoteNGSpecs.Playwright
                 "text => document.querySelector('#terminal').innerText.includes(text)",
                 marker,
                 new PageWaitForFunctionOptions { Timeout = 10_000 });
+
+            string terminalText = await _page.InnerTextAsync("#terminal");
+            Assert.That(terminalText, Does.Contain(marker),
+                        "Output posted by the host should be rendered by the terminal.");
         }
 
         [Test]
