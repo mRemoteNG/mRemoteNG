@@ -37,6 +37,11 @@ namespace mRemoteNG.Tools.Cmdline
             return string.Join(" ", argList.ToArray());
         }
 
+        public IEnumerable<string> ToArgumentList()
+        {
+            return Arguments.Select(argument => argument.Text);
+        }
+
         public static string PrefixFileName(string argument)
         {
             if (string.IsNullOrEmpty(argument))
