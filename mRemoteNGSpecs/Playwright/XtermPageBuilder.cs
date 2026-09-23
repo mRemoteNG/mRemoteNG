@@ -40,6 +40,27 @@ namespace mRemoteNGSpecs.Playwright
 })();
 </script>";
 
+        /// <summary>
+        /// The same page without the bridge stub, for hosting in a real WebView2
+        /// where <c>chrome.webview</c> is provided by the runtime itself.
+        /// </summary>
+        public static string BuildHostedHtml()
+        {
+            string html = ReadResource(HtmlResource);
+
+            foreach (var fileName in InlineResources)
+            {
+                string content = ReadResource(fileName);
+                string marker = $"<!-- INLINE:{fileName} -->";
+                string tag = fileName.EndsWith(".css", StringComparison.OrdinalIgnoreCase)
+                    ? $"<style>{content}</style>"
+                    : $"<script>{content}</script>";
+                html = html.Replace(marker, tag);
+            }
+
+            return html;
+        }
+
         public static string BuildSelfContainedHtml()
         {
             string html = ReadResource(HtmlResource);
