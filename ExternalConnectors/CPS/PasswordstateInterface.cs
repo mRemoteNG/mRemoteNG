@@ -275,6 +275,12 @@ public class PasswordstateInterface
         RSAParameters rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters)KeyPair.Private);
         RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
         rsa.ImportParameters(rsaParams);
+
+        if (rsa.KeySize < 2048)
+        {
+            rsa.Dispose();
+            throw new CryptographicException("The imported RSA private key must be at least 2048 bits.");
+        }
         return rsa;
     }
     #endregion
