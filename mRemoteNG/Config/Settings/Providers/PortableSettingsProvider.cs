@@ -1,4 +1,4 @@
-﻿// The MIT License (MIT)
+﻿﻿// The MIT License (MIT)
 //
 // Copyright(c) crdx
 // 
@@ -30,7 +30,9 @@ using System.Configuration;
 using System.Windows.Forms;
 using System.Collections.Specialized;
 using System.Xml;
+using System.Xml.Linq;
 using System.IO;
+using System.Linq;
 using mRemoteNG.Security;
 
 //using mRemoteNG.App;
@@ -132,7 +134,19 @@ namespace mRemoteNG.Config.Settings.Providers
         {
             XmlNode targetNode = IsGlobal(propertyValue.Property) ? _globalSettingsNode : _localSettingsNode;
 
-            XmlNode settingNode = targetNode.SelectSingleNode($"setting[@name='{propertyValue.Name}']");
+            var xdoc = XDocument.Load(new XmlNodeReader(targetNode));
+            var settingElement = xdoc.DescendantsAndSelf()
+                .FirstOrDefault(e => e.Name.LocalName == "setting" && e.Attribute("name")?.Value == propertyValue.Name);
+
+            XmlNode settingNode = null;
+            if (settingElement != null)
+            {
+                using (var reader = settingElement.CreateReader())
+                {
+                    reader.MoveToContent();
+                    settingNode = _rootDocument.ReadNode(reader) as XmlElement;
+                }
+            }
 
             if (settingNode != null)
                 settingNode.InnerText = propertyValue.SerializedValue.ToString();
@@ -153,7 +167,19 @@ namespace mRemoteNG.Config.Settings.Providers
         private string GetValue(SettingsProperty property)
         {
             XmlNode targetNode = IsGlobal(property) ? _globalSettingsNode : _localSettingsNode;
-            XmlNode settingNode = targetNode.SelectSingleNode($"setting[@name='{property.Name}']");
+            var xdoc = XDocument.Load(new XmlNodeReader(targetNode));
+            var settingElement = xdoc.DescendantsAndSelf()
+                .FirstOrDefault(e => e.Name.LocalName == "setting" && e.Attribute("name")?.Value == property.Name);
+
+            XmlNode settingNode = null;
+            if (settingElement != null)
+            {
+                using (var reader = settingElement.CreateReader())
+                {
+                    reader.MoveToContent();
+                    settingNode = _rootDocument.ReadNode(reader) as XmlElement;
+                }
+            }
 
             if (settingNode == null)
                 return property.DefaultValue != null ? property.DefaultValue.ToString() : string.Empty;
