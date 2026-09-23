@@ -11,6 +11,8 @@ on:
         required: false
         default: 'true'
 
+permissions: {}
+  
 jobs:
   NB-Build-and-Release:
     permissions:
@@ -238,9 +240,9 @@ jobs:
           retention-days: 1
 
   Create-Combined-Release:
-    needs: NB-Build-and-Release
     permissions:
       contents: write
+    needs: NB-Build-and-Release
     runs-on: windows-2025-vs2026
     steps:
       - name: Checkout Repository

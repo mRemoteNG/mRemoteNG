@@ -6664,6 +6664,15 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("ShowText", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Show PuTTY saved sessions in connection tree.
+        /// </summary>
+        internal static string ShowPuttySessionsInTree {
+            get {
+                return ResourceManager.GetString("ShowPuttySessionsInTree", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Show these message types.

@@ -140,6 +140,25 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             return true;
         }
 
+        /// <summary>
+        /// Builds the information_schema lookup used to decide whether one of our tables exists.
+        /// </summary>
+        /// <remarks>
+        /// information_schema names the database differently per provider: SQL Server puts it in
+        /// table_catalog (table_schema holds the schema, e.g. dbo), while MySQL puts it in
+        /// table_schema and reports table_catalog as the constant 'def'. Matching table_schema
+        /// against the database name therefore never matched on SQL Server, so every load treated
+        /// the tables as missing and re-initialized, dropping the user's connections. SQL Server
+        /// also has to pin the schema to the one <see cref="InitializeDatabaseSchema"/> creates,
+        /// otherwise a same-named table in another schema would be mistaken for ours.
+        /// </remarks>
+        internal static string BuildTableExistsQuery(IDatabaseConnector databaseConnector)
+        {
+            return databaseConnector is MSSqlDatabaseConnector
+                ? "select case when exists((select * from information_schema.tables where table_name = @TableName and table_catalog = @DatabaseName and table_schema = 'dbo')) then 1 else 0 end"
+                : "select case when exists((select * from information_schema.tables where table_name = @TableName and table_schema = @DatabaseName)) then 1 else 0 end";
+        }
+
         private bool DoesDbTableExist(IDatabaseConnector databaseConnector, string tableName)
         {
             bool exists;
@@ -148,7 +167,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             {
                 // ANSI SQL way.  Works in PostgreSQL, MSSQL, MySQL.
                 string database_name = Properties.OptionsDBsPage.Default.SQLDatabaseName;
-                DbCommand cmd = databaseConnector.DbCommand("select case when exists((select * from information_schema.tables where table_name = @TableName and table_schema = @DatabaseName)) then 1 else 0 end");
+                DbCommand cmd = databaseConnector.DbCommand(BuildTableExistsQuery(databaseConnector));
                 
                 DbParameter tableNameParam = cmd.CreateParameter();
                 tableNameParam.ParameterName = "@TableName";
