@@ -134,19 +134,8 @@ namespace mRemoteNG.Config.Settings.Providers
         {
             XmlNode targetNode = IsGlobal(propertyValue.Property) ? _globalSettingsNode : _localSettingsNode;
 
-            var xdoc = XDocument.Load(new XmlNodeReader(targetNode));
-            var settingElement = xdoc.DescendantsAndSelf()
-                .FirstOrDefault(e => e.Name.LocalName == "setting" && e.Attribute("name")?.Value == propertyValue.Name);
-
-            XmlNode settingNode = null;
-            if (settingElement != null)
-            {
-                using (var reader = settingElement.CreateReader())
-                {
-                    reader.MoveToContent();
-                    settingNode = _rootDocument.ReadNode(reader) as XmlElement;
-                }
-            }
+            XmlNode settingNode = targetNode.ChildNodes.Cast<XmlNode>()
+                .FirstOrDefault(node => node.Name == "setting" && node.Attributes?["name"]?.Value == propertyValue.Name);
 
             if (settingNode != null)
                 settingNode.InnerText = propertyValue.SerializedValue.ToString();
