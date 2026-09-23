@@ -1,4 +1,4 @@
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 //
 // Copyright(c) crdx
 // 
@@ -30,7 +30,6 @@ using System.Configuration;
 using System.Windows.Forms;
 using System.Collections.Specialized;
 using System.Xml;
-using System.Xml.Linq;
 using System.IO;
 using System.Linq;
 using mRemoteNG.Security;
@@ -133,9 +132,7 @@ namespace mRemoteNG.Config.Settings.Providers
         private void SetValue(SettingsPropertyValue propertyValue)
         {
             XmlNode targetNode = IsGlobal(propertyValue.Property) ? _globalSettingsNode : _localSettingsNode;
-
-            XmlNode settingNode = targetNode.ChildNodes.Cast<XmlNode>()
-                .FirstOrDefault(node => node.Name == "setting" && node.Attributes?["name"]?.Value == propertyValue.Name);
+            XmlNode settingNode = GetSettingNode(targetNode, propertyValue.Name);
 
             if (settingNode != null)
                 settingNode.InnerText = propertyValue.SerializedValue.ToString();
@@ -156,24 +153,18 @@ namespace mRemoteNG.Config.Settings.Providers
         private string GetValue(SettingsProperty property)
         {
             XmlNode targetNode = IsGlobal(property) ? _globalSettingsNode : _localSettingsNode;
-            var xdoc = XDocument.Load(new XmlNodeReader(targetNode));
-            var settingElement = xdoc.DescendantsAndSelf()
-                .FirstOrDefault(e => e.Name.LocalName == "setting" && e.Attribute("name")?.Value == property.Name);
-
-            XmlNode settingNode = null;
-            if (settingElement != null)
-            {
-                using (var reader = settingElement.CreateReader())
-                {
-                    reader.MoveToContent();
-                    settingNode = _rootDocument.ReadNode(reader) as XmlElement;
-                }
-            }
+            XmlNode settingNode = GetSettingNode(targetNode, property.Name);
 
             if (settingNode == null)
                 return property.DefaultValue != null ? property.DefaultValue.ToString() : string.Empty;
 
             return settingNode.InnerText;
+        }
+
+        private static XmlNode GetSettingNode(XmlNode targetNode, string propertyName)
+        {
+            return targetNode.ChildNodes.Cast<XmlNode>()
+                .FirstOrDefault(node => node.Name == "setting" && node.Attributes?["name"]?.Value == propertyName);
         }
 
         private static bool IsGlobal(SettingsProperty property)
