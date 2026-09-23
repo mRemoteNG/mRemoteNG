@@ -11,5 +11,6 @@
         ActiveDirectoryImport = 11,
         ExternalApps = 13,
         UltraVNCSC = 16,
+        SFTPBrowser = 17,
     }
 }

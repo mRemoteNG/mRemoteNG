@@ -11,6 +11,7 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Properties;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms;
 using mRemoteNG.Tools.Clipboard;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -49,6 +50,7 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeDelete;
         private ToolStripMenuItem _cMenTreeCopyHostname;
         private ToolStripMenuItem _cMenTreeClearCachedRdpCredentials;
+        private ToolStripMenuItem _cMenTreeProperties;
         private ToolStripSeparator _cMenTreeSep4;
         private ToolStripMenuItem _cMenTreeMoveUp;
         private ToolStripMenuItem _cMenTreeMoveDown;
@@ -109,6 +111,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDelete = new ToolStripMenuItem();
             _cMenTreeCopyHostname = new ToolStripMenuItem();
             _cMenTreeClearCachedRdpCredentials = new ToolStripMenuItem();
+            _cMenTreeProperties = new ToolStripMenuItem();
             _cMenTreeSep3 = new ToolStripSeparator();
             _cMenTreeImport = new ToolStripMenuItem();
             _cMenTreeImportFile = new ToolStripMenuItem();
@@ -148,6 +151,7 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeRename,
                 _cMenTreeDelete,
                 _cMenTreeCopyHostname,
+                _cMenTreeProperties,
                 _cMenTreeClearCachedRdpCredentials,
                 _cMenInheritanceSubMenu,
                 _cMenTreeSep3,
@@ -287,6 +291,14 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDelete.Name = "_cMenTreeDelete";
             _cMenTreeDelete.Size = new System.Drawing.Size(199, 22);
             _cMenTreeDelete.Text = "Delete";
+            //
+            // cMenTreeProperties
+            //
+            _cMenTreeProperties.Image = Properties.Resources.Property_16x;
+            _cMenTreeProperties.Name = "_cMenTreeProperties";
+            _cMenTreeProperties.Size = new System.Drawing.Size(199, 22);
+            _cMenTreeProperties.Text = "Properties";
+            _cMenTreeProperties.Click += OnPropertiesClicked;
             _cMenTreeDelete.Click += OnDeleteClicked;
             //
             // cMenTreeCopyHostname
@@ -481,6 +493,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDuplicate.Text = Language.Duplicate;
             _cMenTreeRename.Text = Language.Rename;
             _cMenTreeDelete.Text = Language.Delete;
+            _cMenTreeProperties.Text = Language.Properties;
             _cMenTreeCopyHostname.Text = Language.CopyHostname;
             _cMenTreeClearCachedRdpCredentials.Text = Language.ClearCachedRdpCredentials;
             _cMenTreeClearCachedRdpCredentials.ToolTipText = Language.PropertyDescriptionClearCachedRdpCredentials;
@@ -918,6 +931,20 @@ namespace mRemoteNG.UI.Controls
         private void OnCopyHostnameClicked(object sender, EventArgs e)
         {
             _connectionTree.CopyHostnameSelectedNode(new WindowsClipboard());
+        }
+
+        private static void OnPropertiesClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                AppWindows.ConfigForm.Show();
+                AppWindows.ConfigForm.Activate();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                    "Properties (UI.Controls.ConnectionContextMenu) failed", ex);
+            }
         }
 
         private void OnClearCachedRdpCredentialsClicked(object sender, EventArgs e)

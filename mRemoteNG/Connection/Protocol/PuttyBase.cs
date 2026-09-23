@@ -303,7 +303,7 @@ namespace mRemoteNG.Connection.Protocol
 
             // Use the same dynamic sizing logic as Resize() method
             // Use the container panel if it exists, otherwise use InterfaceControl
-            Rectangle clientRect = _puttyContainerPanel?.ClientRectangle ?? InterfaceControl.ClientRectangle;
+            Rectangle clientRect = _puttyContainerPanel?.ClientRectangle ?? InterfaceControl.ProtocolPanel.ClientRectangle;
 
             int leftBorder;
             int topBorder;
@@ -535,7 +535,7 @@ namespace mRemoteNG.Connection.Protocol
 
                 if (_isPuttyNg)
                 {
-                    arguments.Add("-hwndparent", InterfaceControl.Handle.ToString());
+                    arguments.Add("-hwndparent", InterfaceControl.ProtocolPanel.Handle.ToString());
                 }
 
                 PuttyProcess.StartInfo.Arguments = arguments.ToString();
@@ -570,7 +570,7 @@ namespace mRemoteNG.Connection.Protocol
 
                     if (_isPuttyNg)
                     {
-                        PuttyHandle = NativeMethods.FindWindowEx(InterfaceControl.Handle, new IntPtr(0), null, null);
+                        PuttyHandle = NativeMethods.FindWindowEx(InterfaceControl.ProtocolPanel.Handle, new IntPtr(0), null, null);
                     }
                     else
                     {
@@ -608,7 +608,7 @@ namespace mRemoteNG.Connection.Protocol
                     // Create a container panel with 10px margins on all sides
                     _puttyContainerPanel = new Panel
                     {
-                        Parent = InterfaceControl,
+                        Parent = InterfaceControl.ProtocolPanel,
                         Dock = DockStyle.Fill,
                         Margin = new Padding(10, 10, 10, 10),
                         BackColor = System.Drawing.Color.Black
@@ -707,20 +707,20 @@ namespace mRemoteNG.Connection.Protocol
         {
             try
             {
-                if (InterfaceControl.Size == Size.Empty)
+                if (InterfaceControl.ProtocolPanel.Size == Size.Empty)
                     return;
 
                 if (_isPuttyNg)
                 {
                     // PuTTYNG 0.70.0.1 and later doesn't have any window borders
                     // Use ClientRectangle to account for padding (for connection frame color)
-                    Rectangle clientRect = InterfaceControl.ClientRectangle;
+                    Rectangle clientRect = InterfaceControl.ProtocolPanel.ClientRectangle;
                     NativeMethods.MoveWindow(PuttyHandle, clientRect.X, clientRect.Y, clientRect.Width, clientRect.Height, true);
                 }
                 else
                 {
                     // For regular PuTTY, use the container panel if it exists
-                    Rectangle clientRect = _puttyContainerPanel?.ClientRectangle ?? InterfaceControl.ClientRectangle;
+                    Rectangle clientRect = _puttyContainerPanel?.ClientRectangle ?? InterfaceControl.ProtocolPanel.ClientRectangle;
 
                     int leftBorder;
                     int topBorder;

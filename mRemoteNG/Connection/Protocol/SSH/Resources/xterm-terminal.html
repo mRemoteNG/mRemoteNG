@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SSH Terminal</title>
+<!-- INLINE:xterm.css -->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
+  #terminal { width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<div id="terminal"></div>
+<!-- INLINE:xterm.min.js -->
+<!-- INLINE:addon-fit.min.js -->
+<script>
+(function() {
+  'use strict';
+
+  var Terminal = globalThis.Terminal;
+  var FitAddon = globalThis.FitAddon.FitAddon;
+
+  var term = new Terminal({
+    cursorBlink: true,
+    fontSize: 14,
+    fontFamily: "'Cascadia Code', 'Consolas', 'Courier New', monospace",
+    theme: {
+      background: '#1e1e1e',
+      foreground: '#cccccc',
+      cursor: '#ffffff',
+      selectionBackground: '#264f78'
+    },
+    allowProposedApi: true
+  });
+
+  var fitAddon = new FitAddon();
+  term.loadAddon(fitAddon);
+
+  var container = document.getElementById('terminal');
+  term.open(container);
+
+  // Fit terminal to container
+  function doFit() {
+    try {
+      fitAddon.fit();
+      postMessage('resize', { cols: term.cols, rows: term.rows });
+    } catch(ex) {
+      console.debug('Terminal fit skipped:', ex.message);
+    }
+  }
+
+  // Observe container resize
+  var resizeObserver = new ResizeObserver(function() {
+    requestAnimationFrame(doFit);
+  });
+  resizeObserver.observe(container);
+
+  // Initial fit
+  requestAnimationFrame(doFit);
+
+  // Send user input to C#
+  term.onData(function(data) {
+    postMessage('input', { data: data });
+  });
+
+  // Send binary data (e.g. from paste)
+  term.onBinary(function(data) {
+    postMessage('input', { data: data });
+  });
+
+  // Receive messages from C#
+  globalThis.chrome.webview.addEventListener('message', function(event) {
+    try {
+      var msg = JSON.parse(event.data);
+      if (msg.type === 'output') {
+        // Data is Base64-encoded UTF-8 bytes — decode to Uint8Array
+        var binary = atob(msg.data);
+        var bytes = new Uint8Array(binary.length);
+        for (var i = 0; i < binary.length; i++) bytes[i] = binary.codePointAt(i);
+        term.write(bytes);
+      } else if (msg.type === 'paste') {
+        term.paste(msg.data);
+      } else if (msg.type === 'focus') {
+        term.focus();
+      }
+    } catch(ex) {
+      console.debug('Message parse error:', ex.message);
+      term.write(event.data);
+    }
+  });
+
+  // Helper to post messages to C#
+  function postMessage(type, payload) {
+    var msg = { type: type };
+    if (payload) {
+      for (var key of Object.keys(payload)) msg[key] = payload[key];
+    }
+    globalThis.chrome.webview.postMessage(JSON.stringify(msg));
+  }
+
+  // Signal ready
+  postMessage('ready');
+
+  // Focus terminal
+  term.focus();
+})();
+</script>
+</body>
+</html>
