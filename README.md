@@ -149,9 +149,9 @@ The MSI package of mRemoteNG can be installed using the command line:
 | /qn | `Silent Installation` | Will run the installer silently in the background. |
 | /lv* | `Silent Installation` | Will write a logfile to the specified location. (For paths that contain spaces, enclose the path in double quotes) |
 | INSTALLDIR | `folder path` | Allows you to set the installation directory from the command line. (For paths that contain spaces, enclose the path in double quotes) |
-| IGNOREPREREQUISITES | `0` or `1` | When set to `1`, the installer will not be halted if any prerequisite check is not met. You must still run the installer as administrator. |
-| ALLUSERS | `2` | A special dual-mode flag. Check the user's privileges. If they have admin rights, install per-machine. If they don't, check if MSIINSTALLPERUSER is set. |
-| MSIINSTALLPERUSER | `1` | Explicitly forces the installation to be scoped to the current user. |
+| IGNOREPREREQUISITES | `0` or `1` | When set to `1`, the installer will not be halted if any prerequisite check is not met. Administrator privileges are still required for a per-machine installation. |
+| ALLUSERS | `2` | Enables single-package authoring so `MSIINSTALLPERUSER` can select the installation scope. |
+| MSIINSTALLPERUSER | `1` | With `ALLUSERS=2`, installs for the current user; omit this property for a per-machine installation. |
 
 ## Manual Uninstall
 
