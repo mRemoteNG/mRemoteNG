@@ -52,7 +52,7 @@ Patch dialog sequence:
       <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="InstallScopeDlg">LicenseAccepted = "1"</Publish>
 
       <Publish Dialog="InstallScopeDlg" Control="Back" Event="NewDialog" Value="LicenseAgreementDlg">1</Publish>
-      <Publish Dialog="InstallScopeDlg" Control="Next" Property="WixAppFolder" Value="WixPerUserFolder" Order="1">!(wix.WixUISupportPerUser) AND NOT !(wix.WixUISupportPerMachine)</Publish>
+      <Publish Dialog="InstallScopeDlg" Control="Next" Property="WixAppFolder" Value="WixPerUserFolder" Order="1">!(wix.WixUISupportPerUser) AND NOT Privileged</Publish>
       <Publish Dialog="InstallScopeDlg" Control="Next" Property="WixAppFolder" Value="WixPerMachineFolder" Order="2">!(wix.WixUISupportPerMachine) AND NOT !(wix.WixUISupportPerUser)</Publish>
       <Publish Dialog="InstallScopeDlg" Control="Next" Property="ALLUSERS" Value="2" Order="3">WixAppFolder = "WixPerUserFolder"</Publish>
       <Publish Dialog="InstallScopeDlg" Control="Next" Property="MSIINSTALLPERUSER" Value="1" Order="4">WixAppFolder = "WixPerUserFolder"</Publish>
