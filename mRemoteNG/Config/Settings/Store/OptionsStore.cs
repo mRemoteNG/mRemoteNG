@@ -15,7 +15,7 @@ namespace mRemoteNG.Config.Settings.Store
     {
         private readonly string _dbPath;
         private readonly string _connectionString;
-        private SqliteConnection _connection;
+        private SqliteConnection? _connection;
         private bool _disposed;
 
         public bool IsInitialized { get; private set; }
@@ -29,7 +29,7 @@ namespace mRemoteNG.Config.Settings.Store
         /// When provided, SQLite encryption is used (requires SQLCipher bundle or compatible provider).
         /// Pass <c>null</c> for an unencrypted database.
         /// </param>
-        public OptionsStore(string dbPath, string dekHex = null)
+        public OptionsStore(string dbPath, string? dekHex = null)
         {
             _dbPath = dbPath ?? throw new ArgumentNullException(nameof(dbPath));
 
@@ -123,7 +123,7 @@ namespace mRemoteNG.Config.Settings.Store
         /// <summary>
         /// Retrieves a specific option by its key.
         /// </summary>
-        public async Task<OptionInfo> GetOptionByKeyAsync(string key)
+        public async Task<OptionInfo?> GetOptionByKeyAsync(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentException("Key cannot be null or whitespace.", nameof(key));
@@ -155,7 +155,7 @@ namespace mRemoteNG.Config.Settings.Store
         /// <summary>
         /// Retrieves a specific option by its ID.
         /// </summary>
-        public async Task<OptionInfo> GetOptionByIdAsync(int id)
+        public async Task<OptionInfo?> GetOptionByIdAsync(int id)
         {
             if (id <= 0)
                 throw new ArgumentException("ID must be greater than 0.", nameof(id));

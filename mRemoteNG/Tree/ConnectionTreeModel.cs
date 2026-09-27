@@ -33,6 +33,44 @@ namespace mRemoteNG.Tree
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, rootNode));
         }
 
+        public void MoveRootNode(ContainerInfo rootNode, int targetIndex)
+        {
+            if (!RootNodes.Contains(rootNode))
+                return;
+
+            int clampedIndex = targetIndex;
+            if (clampedIndex < 0)
+            {
+                clampedIndex = 0;
+            }
+            else if (clampedIndex > RootNodes.Count - 1)
+            {
+                clampedIndex = RootNodes.Count - 1;
+            }
+            int currentIndex = RootNodes.IndexOf(rootNode);
+
+            if (currentIndex == clampedIndex)
+                return;
+
+            RootNodes.RemoveAt(currentIndex);
+            RootNodes.Insert(clampedIndex, rootNode);
+            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
+
+        public void SetRootNodeOrder(IReadOnlyList<ContainerInfo> orderedRoots)
+        {
+            if (orderedRoots == null || orderedRoots.Count != RootNodes.Count)
+                return;
+
+            HashSet<ContainerInfo> orderedRootSet = new(orderedRoots);
+            if (orderedRootSet.Count != RootNodes.Count || RootNodes.Exists(root => !orderedRootSet.Contains(root)))
+                return;
+
+            RootNodes.Clear();
+            RootNodes.AddRange(orderedRoots);
+            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
+
         public IReadOnlyList<ConnectionInfo> GetRecursiveChildList()
         {
             List<ConnectionInfo> list = new();

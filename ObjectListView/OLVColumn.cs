@@ -37,6 +37,7 @@ using System.Drawing;
 using System.Collections;
 using System.Diagnostics;
 using System.Drawing.Design;
+using System.Runtime.Versioning;
 
 namespace BrightIdeasSoftware {
 
@@ -85,6 +86,7 @@ namespace BrightIdeasSoftware {
     /// return strings and other times integers.</para>
     /// </remarks>
     [Browsable(false)]
+    [SupportedOSPlatform("windows")]
     public partial class OLVColumn : ColumnHeader {
 
         /// <summary>

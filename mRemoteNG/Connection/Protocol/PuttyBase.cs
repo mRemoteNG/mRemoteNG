@@ -17,6 +17,7 @@ using System.Runtime.Versioning;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -31,6 +32,7 @@ namespace mRemoteNG.Connection.Protocol
         private bool _isPuttyNg;
         private readonly DisplayProperties _display = new();
         private Panel? _puttyContainerPanel; // Panel to hold PuTTY with margins
+        private string? _temporaryPrivateKeyPath;
 
         #region Public Properties
 
@@ -52,7 +54,182 @@ namespace mRemoteNG.Connection.Protocol
 
         private void ProcessExited(object sender, EventArgs e)
         {
+            CleanupTemporaryPrivateKey();
+            CleanupEmbeddedPutty();
             Event_Closed(this);
+        }
+
+        private void CleanupEmbeddedPutty()
+        {
+            if (InterfaceControl != null)
+            {
+                try
+                {
+                    InterfaceControl.Resize -= InterfaceControl_Resize;
+                }
+                catch (Exception ex)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                        Language.PuttyStuff + ": Error removing resize handler: " + ex.Message, true);
+                }
+            }
+
+            try
+            {
+                _puttyContainerPanel?.Dispose();
+                _puttyContainerPanel = null;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    Language.PuttyStuff + ": Error disposing container panel: " + ex.Message, true);
+            }
+
+            if (PuttyHandle != IntPtr.Zero)
+            {
+                try
+                {
+                    NativeMethods.SetParent(PuttyHandle, IntPtr.Zero);
+                }
+                catch (Exception ex)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                        Language.PuttyStuff + ": Error detaching PuTTY from parent: " + ex.Message, true);
+                }
+
+                PuttyHandle = IntPtr.Zero;
+            }
+        }
+
+        private static void AddArgumentString(CommandLineArguments arguments, string rawArguments)
+        {
+            if (string.IsNullOrWhiteSpace(rawArguments))
+                return;
+
+            foreach (Match match in Regex.Matches(rawArguments, @"""(?:[^""\\]|\\.)*""|'(?:[^'\\]|\\.)*'|\S+"))
+            {
+                string token = match.Value.Trim();
+                if (token.Length == 0)
+                    continue;
+
+                if (token.StartsWith('"') && token.EndsWith('"') || token.StartsWith('\'') && token.EndsWith('\''))
+                {
+                    token = token[1..^1];
+                }
+
+                arguments.Add(token);
+            }
+        }
+
+        private static string WriteTemporaryPrivateKeyFile(string privateKey)
+        {
+            for (int attempt = 0; attempt < 5; attempt++)
+            {
+                string candidatePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".ppk");
+                bool created = false;
+
+                try
+                {
+                    using (FileStream stream = new(candidatePath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                    {
+                        created = true;
+                        using StreamWriter writer = new(stream);
+                        writer.Write(privateKey);
+                    }
+
+                    File.SetAttributes(candidatePath, FileAttributes.Temporary);
+                    return candidatePath;
+                }
+                catch (IOException) when (!created && File.Exists(candidatePath))
+                {
+                    // Candidate existed before we could create it; retry.
+                }
+                catch
+                {
+                    if (created)
+                    {
+                        try
+                        {
+                            if (File.Exists(candidatePath))
+                            {
+                                File.Delete(candidatePath);
+                            }
+                        }
+                        catch
+                        {
+                            // Preserve original exception.
+                        }
+                    }
+
+                    throw;
+                }
+            }
+
+            throw new IOException("Unable to create a unique temporary private-key file.");
+        }
+
+        private void CleanupTemporaryPrivateKey()
+        {
+            if (string.IsNullOrEmpty(_temporaryPrivateKeyPath))
+                return;
+
+            try
+            {
+                if (File.Exists(_temporaryPrivateKeyPath))
+                {
+                    File.Delete(_temporaryPrivateKeyPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    $"Error deleting temporary PuTTY private key '{_temporaryPrivateKeyPath}': {ex.Message}", true);
+            }
+            finally
+            {
+                _temporaryPrivateKeyPath = null;
+            }
+        }
+
+        private bool TryGetPuTTYBorderSizes(out int leftBorder, out int topBorder, out int rightBorder, out int bottomBorder)
+        {
+            leftBorder = 8;
+            topBorder = 30;
+            rightBorder = 8;
+            bottomBorder = 8;
+
+            if (PuttyHandle == IntPtr.Zero)
+                return false;
+
+            if (!NativeMethods.GetWindowRect(PuttyHandle, out NativeMethods.RECT windowRect) ||
+                !NativeMethods.GetClientRect(PuttyHandle, out NativeMethods.RECT internalClientRect))
+            {
+                return false;
+            }
+
+            long windowWidth = windowRect.right - windowRect.left;
+            long windowHeight = windowRect.bottom - windowRect.top;
+            long clientWidth = internalClientRect.right - internalClientRect.left;
+            long clientHeight = internalClientRect.bottom - internalClientRect.top;
+
+            int calcLeftBorder = (int)internalClientRect.left;
+            int calcTopBorder = (int)internalClientRect.top;
+            int calcRightBorder = (int)(windowWidth - clientWidth - calcLeftBorder);
+            int calcBottomBorder = (int)(windowHeight - clientHeight - calcTopBorder);
+
+            if (calcLeftBorder > 0 && calcLeftBorder < 50 &&
+                calcTopBorder > 0 && calcTopBorder < 100 &&
+                calcRightBorder > 0 && calcRightBorder < 50 &&
+                calcBottomBorder > 0 && calcBottomBorder < 50)
+            {
+                leftBorder = calcLeftBorder;
+                topBorder = calcTopBorder;
+                rightBorder = calcRightBorder;
+                bottomBorder = calcBottomBorder;
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -128,38 +305,11 @@ namespace mRemoteNG.Connection.Protocol
             // Use the container panel if it exists, otherwise use InterfaceControl
             Rectangle clientRect = _puttyContainerPanel?.ClientRectangle ?? InterfaceControl.ClientRectangle;
 
-            // Get the actual border sizes from the window
-            int leftBorder = 8;      // Default fallback
-            int topBorder = 30;      // Default fallback
-            int rightBorder = 8;     // Default fallback
-            int bottomBorder = 8;    // Default fallback
-
-            if (NativeMethods.GetWindowRect(PuttyHandle, out NativeMethods.RECT windowRect) &&
-                NativeMethods.GetClientRect(PuttyHandle, out NativeMethods.RECT internalClientRect))
-            {
-                long windowWidth = windowRect.right - windowRect.left;
-                long windowHeight = windowRect.bottom - windowRect.top;
-                long clientWidth = internalClientRect.right - internalClientRect.left;
-                long clientHeight = internalClientRect.bottom - internalClientRect.top;
-
-                // Only use calculated values if they're reasonable (positive and not huge)
-                int calcLeftBorder = (int)(internalClientRect.left);
-                int calcTopBorder = (int)(internalClientRect.top);
-                int calcRightBorder = (int)(windowWidth - clientWidth - calcLeftBorder);
-                int calcBottomBorder = (int)(windowHeight - clientHeight - calcTopBorder);
-
-                // Validate the calculated values
-                if (calcLeftBorder > 0 && calcLeftBorder < 50 &&
-                    calcTopBorder > 0 && calcTopBorder < 100 &&
-                    calcRightBorder > 0 && calcRightBorder < 50 &&
-                    calcBottomBorder > 0 && calcBottomBorder < 50)
-                {
-                    leftBorder = calcLeftBorder;
-                    topBorder = calcTopBorder;
-                    rightBorder = calcRightBorder;
-                    bottomBorder = calcBottomBorder;
-                }
-            }
+            int leftBorder;
+            int topBorder;
+            int rightBorder;
+            int bottomBorder;
+            bool calculatedSuccessfully = TryGetPuTTYBorderSizes(out leftBorder, out topBorder, out rightBorder, out bottomBorder);
 
             // Apply calculated offsets to hide borders outside panel
             NativeMethods.MoveWindow(PuttyHandle,
@@ -237,12 +387,8 @@ namespace mRemoteNG.Connection.Protocol
 
                                 if (!string.IsNullOrEmpty(privatekey))
                                 {
-                                    optionalTemporaryPrivateKeyPath = Path.GetTempFileName();
-                                    File.WriteAllText(optionalTemporaryPrivateKeyPath, privatekey);
-                                    FileInfo fileInfo = new(optionalTemporaryPrivateKeyPath)
-                                    {
-                                        Attributes = FileAttributes.Temporary
-                                    };
+                                    optionalTemporaryPrivateKeyPath = WriteTemporaryPrivateKeyFile(privatekey);
+                                    _temporaryPrivateKeyPath = optionalTemporaryPrivateKeyPath;
                                 }
                             }
                             catch (Exception ex)
@@ -258,12 +404,8 @@ namespace mRemoteNG.Connection.Protocol
 
                                 if (!string.IsNullOrEmpty(privatekey))
                                 {
-                                    optionalTemporaryPrivateKeyPath = Path.GetTempFileName();
-                                    File.WriteAllText(optionalTemporaryPrivateKeyPath, privatekey);
-                                    FileInfo fileInfo = new(optionalTemporaryPrivateKeyPath)
-                                    {
-                                        Attributes = FileAttributes.Temporary
-                                    };
+                                    optionalTemporaryPrivateKeyPath = WriteTemporaryPrivateKeyFile(privatekey);
+                                    _temporaryPrivateKeyPath = optionalTemporaryPrivateKeyPath;
                                 }
                             }
                             catch (Exception ex)
@@ -361,7 +503,7 @@ namespace mRemoteNG.Connection.Protocol
                             arguments.Add("-auth-plugin");
                             string random = string.Join("", Guid.NewGuid().ToString("n").Take(8));
                             string pipename = $"mRemoteNGSecretPipe{random}";
-                            arguments.Add($"{App.Info.GeneralAppInfo.HomePath}\\vault-ssh-helper-plugin.exe {username} --pipeName={pipename}");
+                            AddArgumentString(arguments, $"\"{App.Info.GeneralAppInfo.HomePath}\\vault-ssh-helper-plugin.exe\" {username} --pipeName={pipename}");
                             System.Threading.Tasks.Task.Run(async () => {
                                 using NamedPipeServerStream server = CreatePipeServer(pipename);
                                 var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token;
@@ -400,7 +542,8 @@ namespace mRemoteNG.Connection.Protocol
                 // add additional SSH options, f.e. tunnel or noshell parameters that may be specified for the the connnection
                 if (!string.IsNullOrEmpty(InterfaceControl.Info.SSHOptions))
                 {
-                    PuttyProcess.StartInfo.Arguments += " " + InterfaceControl.Info.SSHOptions;
+                    AddArgumentString(arguments, InterfaceControl.Info.SSHOptions);
+                    PuttyProcess.StartInfo.Arguments = arguments.ToString();
                 }
 
                 PuttyProcess.EnableRaisingEvents = true;
@@ -419,8 +562,8 @@ namespace mRemoteNG.Connection.Protocol
                 PuttyProcess.WaitForInputIdle(Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
 
                 int startTicks = Environment.TickCount;
-                while (PuttyHandle.ToInt32() == 0 &
-                       Environment.TickCount < startTicks + Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000)
+                while (PuttyHandle == IntPtr.Zero &&
+                        Environment.TickCount < startTicks + Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000)
                 {
                     if (PuttyProcess.HasExited)
                         break;
@@ -454,7 +597,7 @@ namespace mRemoteNG.Connection.Protocol
                         }
                     }
 
-                    if (PuttyHandle.ToInt32() == 0)
+                    if (PuttyHandle == IntPtr.Zero)
                     {
                         Thread.Sleep(100);
                     }
@@ -544,12 +687,7 @@ namespace mRemoteNG.Connection.Protocol
             }
             finally
             {
-                // make sure to remove the private key file
-                if (!string.IsNullOrEmpty(optionalTemporaryPrivateKeyPath))
-                {
-                    System.Threading.Thread.Sleep(500);
-                    System.IO.File.Delete(optionalTemporaryPrivateKeyPath);
-                }
+                CleanupTemporaryPrivateKey();
             }
         }
 
@@ -584,45 +722,18 @@ namespace mRemoteNG.Connection.Protocol
                     // For regular PuTTY, use the container panel if it exists
                     Rectangle clientRect = _puttyContainerPanel?.ClientRectangle ?? InterfaceControl.ClientRectangle;
 
-                    // Get the actual border sizes from the window
-                    int leftBorder = 8;      // Default fallback
-                    int topBorder = 30;      // Default fallback
-                    int rightBorder = 8;     // Default fallback
-                    int bottomBorder = 8;    // Default fallback
-                    bool calculatedSuccessfully = false;
+                    int leftBorder;
+                    int topBorder;
+                    int rightBorder;
+                    int bottomBorder;
+                    bool calculatedSuccessfully = TryGetPuTTYBorderSizes(out leftBorder, out topBorder, out rightBorder, out bottomBorder);
 
-                    if (NativeMethods.GetWindowRect(PuttyHandle, out NativeMethods.RECT windowRect) &&
-                        NativeMethods.GetClientRect(PuttyHandle, out NativeMethods.RECT internalClientRect))
+                    if (calculatedSuccessfully)
                     {
-                        long windowWidth = windowRect.right - windowRect.left;
-                        long windowHeight = windowRect.bottom - windowRect.top;
-                        long clientWidth = internalClientRect.right - internalClientRect.left;
-                        long clientHeight = internalClientRect.bottom - internalClientRect.top;
-
-                        // Only use calculated values if they're reasonable (positive and not huge)
-                        int calcLeftBorder = (int)(internalClientRect.left);
-                        int calcTopBorder = (int)(internalClientRect.top);
-                        int calcRightBorder = (int)(windowWidth - clientWidth - calcLeftBorder);
-                        int calcBottomBorder = (int)(windowHeight - clientHeight - calcTopBorder);
-
-                        // Validate the calculated values
-                        if (calcLeftBorder > 0 && calcLeftBorder < 50 &&
-                            calcTopBorder > 0 && calcTopBorder < 100 &&
-                            calcRightBorder > 0 && calcRightBorder < 50 &&
-                            calcBottomBorder > 0 && calcBottomBorder < 50)
-                        {
-                            leftBorder = calcLeftBorder;
-                            topBorder = calcTopBorder;
-                            rightBorder = calcRightBorder;
-                            bottomBorder = calcBottomBorder;
-                            calculatedSuccessfully = true;
-
-                            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                                $"PuTTY dynamic borders - Left:{leftBorder}, Top (header):{topBorder}, Right (+ scroll): {rightBorder}, Bottom:{bottomBorder}", true);
-                        }
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                            $"PuTTY dynamic borders - Left:{leftBorder}, Top (header):{topBorder}, Right (+ scroll): {rightBorder}, Bottom:{bottomBorder}", true);
                     }
-
-                    if (!calculatedSuccessfully)
+                    else
                     {
                         Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
                             $"PuTTY using fallback borders - Left:{leftBorder}, Top:{topBorder}, Right:{rightBorder}, Bottom:{bottomBorder}", true);
@@ -647,31 +758,16 @@ namespace mRemoteNG.Connection.Protocol
 
         public override void Close()
         {
-            try
-            {
-                // Remove resize event handler to prevent memory leaks
-                InterfaceControl.Resize -= InterfaceControl_Resize;
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, 
-                    Language.PuttyStuff + ": Error removing resize handler: " + ex.Message, true);
-            }
+            CleanupTemporaryPrivateKey();
+            CleanupEmbeddedPutty();
 
             try
             {
-                // Dispose the container panel if it was created
-                _puttyContainerPanel?.Dispose();
-                _puttyContainerPanel = null;
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                    Language.PuttyStuff + ": Error disposing container panel: " + ex.Message, true);
-            }
+                if (PuttyProcess != null)
+                {
+                    PuttyProcess.Exited -= ProcessExited;
+                }
 
-            try
-            {
                 if (PuttyProcess?.HasExited == false)
                 {
                     PuttyProcess.Kill();
@@ -685,6 +781,7 @@ namespace mRemoteNG.Connection.Protocol
             try
             {
                 PuttyProcess?.Dispose();
+                PuttyProcess = null;
             }
             catch (Exception ex)
             {

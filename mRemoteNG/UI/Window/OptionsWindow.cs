@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -77,6 +77,12 @@ namespace mRemoteNG.UI.Window
         {
             Text = Language.Options;
             TabText = Language.Options;
+        }
+
+        internal void RefreshUiLanguage()
+        {
+            ApplyLanguage();
+            _optionsForm?.RefreshUiLanguage();
         }
 
         private void LoadOptionsForm()

@@ -56,6 +56,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace BrightIdeasSoftware
@@ -886,6 +887,7 @@ namespace BrightIdeasSoftware
     /// <param name="cellBounds"></param>
     /// <param name="item"></param>
     /// <param name="subItemIndex"></param>
+    [SupportedOSPlatform("windows")]
     public class CellEditEventArgs(OLVColumn column, Control control, Rectangle cellBounds, OLVListItem item, int subItemIndex) : EventArgs
     {
 
@@ -984,6 +986,7 @@ namespace BrightIdeasSoftware
     /// <summary>
     /// Event blocks for events that can be cancelled
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class CancellableEventArgs : EventArgs
     {
         /// <summary>
@@ -1356,6 +1359,7 @@ namespace BrightIdeasSoftware
     /// <summary>
     /// The parameter block when telling the world about a cell based event
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class CellEventArgs : EventArgs
     {
         /// <summary>

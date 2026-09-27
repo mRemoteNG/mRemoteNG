@@ -12,7 +12,7 @@ namespace mRemoteNG.Config.Settings.Store
         /// <summary>
         /// Gets a setting value, returning the default if not found.
         /// </summary>
-        T Get<T>(string category, string key, T defaultValue = default);
+        T Get<T>(string category, string key, T defaultValue = default!);
 
         /// <summary>
         /// Sets a setting value.
@@ -27,7 +27,7 @@ namespace mRemoteNG.Config.Settings.Store
         /// <summary>
         /// Returns all key-value pairs in a category.
         /// </summary>
-        IReadOnlyDictionary<string, string> GetAll(string category);
+        IReadOnlyDictionary<string, string?> GetAll(string category);
 
         /// <summary>
         /// Returns all categories present in the store.

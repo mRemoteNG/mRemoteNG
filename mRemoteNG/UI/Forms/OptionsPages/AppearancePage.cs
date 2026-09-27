@@ -31,8 +31,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.ApplyLanguage();
 
             lblLanguage.Text = Language.LanguageString;
-            lblLanguageRestartRequired.Text =
-                string.Format(Language.LanguageRestartRequired, Application.ProductName);
+            lblLanguageRestartRequired.Text = string.Empty;
             chkShowDescriptionTooltipsInTree.Text = Language.ShowDescriptionTooltips;
             chkShowFullConnectionsFilePathInTitle.Text = Language.ShowFullConsFilePath;
             chkShowSystemTrayIcon.Text = Language.AlwaysShowSysTrayIcon;

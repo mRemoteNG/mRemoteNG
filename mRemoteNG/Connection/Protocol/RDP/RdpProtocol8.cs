@@ -62,7 +62,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
             }
             else if (connectionInfo.UseRCG)
             {
-                SetExtendedProperty("DisableCredentialsDelegation", true);
+                if (ShouldDisableCredentialsDelegation(connectionInfo.Username))
+                {
+                    SetExtendedProperty("DisableCredentialsDelegation", true);
+                }
                 SetExtendedProperty("RedirectedAuthentication", true);
             }
             

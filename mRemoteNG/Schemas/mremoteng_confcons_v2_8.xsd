@@ -11,7 +11,10 @@
   <xs:element name="Connections">
     <xs:complexType>
       <xs:sequence minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Node" type="mrng:connectioninfo" />
+        <xs:choice>
+          <xs:element name="Node" type="mrng:connectioninfo" />
+          <xs:element name="PluginData" type="xs:string" />
+        </xs:choice>
       </xs:sequence>
       <xs:attribute name="Name" type="xs:string" use="required" />
       <xs:attribute name="Export" type="xs:boolean" use="required" />

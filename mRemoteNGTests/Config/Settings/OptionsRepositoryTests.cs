@@ -13,14 +13,14 @@ namespace mRemoteNGTests.Config.Settings
     public class OptionsRepositoryTests
     {
         private string _testDbPath;
-        private OptionsStore _store;
+        private SqliteSettingsStore _store;
         private OptionsRepository _repository;
 
         [SetUp]
         public void Setup()
         {
             _testDbPath = Path.Combine(Path.GetTempPath(), $"test_options_{Guid.NewGuid()}.db");
-            _store = new OptionsStore(_testDbPath);
+            _store = new SqliteSettingsStore(_testDbPath);
             _store.Initialize();
             _repository = new OptionsRepository(_store);
         }

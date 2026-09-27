@@ -50,6 +50,8 @@ namespace mRemoteNG.UI.Window
         {
         }
 
+        internal void RefreshUiLanguage() => ApplyLanguage();
+
         private void ApplyLanguage()
         {
             clmMessage.Text = Language.Message;

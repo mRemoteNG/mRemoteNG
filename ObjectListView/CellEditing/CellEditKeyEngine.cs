@@ -34,6 +34,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
@@ -46,6 +47,7 @@ namespace BrightIdeasSoftware {
     /// the left most column, since the normal action of the key cannot be taken
     /// (since there are no more columns to the left).
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public enum CellEditAtEdgeBehaviour {
         /// <summary>
         /// The key press will be ignored
@@ -82,6 +84,7 @@ namespace BrightIdeasSoftware {
     /// Indicates the normal behaviour of a key when used during a cell edit
     /// operation.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public enum CellEditCharacterBehaviour {
         /// <summary>
         /// The key press will be ignored
@@ -176,6 +179,7 @@ namespace BrightIdeasSoftware {
     /// <summary>
     /// Instances of this class handle key presses during a cell edit operation.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class CellEditKeyEngine {
 
         #region Public interface

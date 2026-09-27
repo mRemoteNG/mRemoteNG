@@ -19,6 +19,7 @@ using mRemoteNG.UI;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Sql;
+using mRemoteNG.Properties;
 
 namespace mRemoteNG.Connection
 {
@@ -152,7 +153,8 @@ namespace mRemoteNG.Connection
             if (!import)
             {
                 _puttySessionsManager.AddSessions();
-                newConnectionTreeModel.RootNodes.AddRange(_puttySessionsManager.RootPuttySessionsNodes);
+                if (OptionsAdvancedPage.Default.ShowPuttySessionsInTree)
+                    newConnectionTreeModel.RootNodes.AddRange(_puttySessionsManager.RootPuttySessionsNodes);
             }
 
             ConnectionTreeModel = newConnectionTreeModel;

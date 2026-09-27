@@ -223,10 +223,79 @@ Preview channel includes Betas &amp; Release Candidates.
 Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="Apply" xml:space="preserve">
-    <value>Apply</value>
+    <value>Taikyti</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Išvaizda</value>
+  </data>
+  <data name="Config" xml:space="preserve">
+    <value>Konfigūracija</value>
+  </data>
+  <data name="Connections" xml:space="preserve">
+    <value>Ryšiai</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Įjungta</value>
+  </data>
+  <data name="ExternalTool" xml:space="preserve">
+    <value>Išorinis įrankis</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Bendra</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Pranešimai</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Parinktys</value>
+  </data>
+  <data name="Plugin" xml:space="preserve">
+    <value>Įskiepis</value>
+  </data>
+  <data name="Plugins" xml:space="preserve">
+    <value>Įskiepiai</value>
+  </data>
+  <data name="PluginsPageDescription" xml:space="preserve">
+    <value>Tvarkykite įskiepių aplankus ir aptiktus įskiepius. Išjungti įskiepiai lieka sąraše, bet nėra įkeliami. Trūkstami aplankai ignoruojami, kol vėl tampa pasiekiami.</value>
+  </data>
+  <data name="PluginsPageFolder" xml:space="preserve">
+    <value>Įskiepių aplankas:</value>
+  </data>
+  <data name="PluginsPageFolderNotFound" xml:space="preserve">
+    <value>Pasirinktas įskiepių aplankas (-ai) „{0}“ neegzistuoja. Galite išsaugoti dabar ir pasirūpinti, kad bendrinamas arba vietinis kelias būtų pasiekiamas prieš kitą nuskaitymą.</value>
+  </data>
+  <data name="PluginsPageFolderMode" xml:space="preserve">
+    <value>Dabartinis aplanko tipas: {0}</value>
+  </data>
+  <data name="PluginsPageFolderModeCustom" xml:space="preserve">
+    <value>Tinkintas</value>
+  </data>
+  <data name="PluginsPageFolderModeDefault" xml:space="preserve">
+    <value>Numatytasis</value>
+  </data>
+  <data name="PluginsPagePanelColumn" xml:space="preserve">
+    <value>Skydelis</value>
+  </data>
+  <data name="PluginsPagePanelDefault" xml:space="preserve">
+    <value>Numatytasis (Bendra)</value>
+  </data>
+  <data name="PluginsPageTargetPanel" xml:space="preserve">
+    <value>Skydelis pasirinktam įskiepiui:</value>
   </data>
   <data name="Proxy" xml:space="preserve">
     <value>Proxy</value>
+  </data>
+  <data name="QuickConnect" xml:space="preserve">
+    <value>Greitas prisijungimas</value>
+  </data>
+  <data name="RefreshView" xml:space="preserve">
+    <value>Atnaujinti vaizdą</value>
+  </data>
+  <data name="SearchPrompt" xml:space="preserve">
+    <value>Ieškoti</value>
+  </data>
+  <data name="UseDefault" xml:space="preserve">
+    <value>Naudoti numatytąjį</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="VaultOpenbaoMount" xml:space="preserve">

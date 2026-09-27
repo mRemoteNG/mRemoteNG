@@ -78,6 +78,15 @@ namespace mRemoteNG.Tools
             }
         }
 
+        public void RefreshUiLanguage()
+        {
+            _cMenCons.Text = Language.Connections;
+            if (_cMen.Items.Count >= 3 && _cMen.Items[2] is ToolStripMenuItem exitMenuItem)
+            {
+                exitMenuItem.Text = Language.Exit;
+            }
+        }
+
         private void nI_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Right) return;

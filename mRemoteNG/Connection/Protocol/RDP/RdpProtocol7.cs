@@ -32,7 +32,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 if (connectionInfo.UseVmId)
                 {
-                    SetExtendedProperty("DisableCredentialsDelegation", true);
+                    if (ShouldDisableCredentialsDelegation(connectionInfo.Username))
+                    {
+                        SetExtendedProperty("DisableCredentialsDelegation", true);
+                    }
                     RdpClient7.AdvancedSettings7.AuthenticationServiceClass = "Microsoft Virtual Console Service";
                     RdpClient7.AdvancedSettings8.EnableCredSspSupport = true;
                     RdpClient7.AdvancedSettings8.NegotiateSecurityLayer = false;

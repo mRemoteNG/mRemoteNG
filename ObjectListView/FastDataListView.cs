@@ -32,11 +32,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.ComponentModel;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using System.Drawing.Design;
 
 namespace BrightIdeasSoftware
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// A FastDataListView virtualizes the display of data from a DataSource. It operates on
     /// DataSets and DataTables in the same way as a DataListView, but does so much more efficiently.

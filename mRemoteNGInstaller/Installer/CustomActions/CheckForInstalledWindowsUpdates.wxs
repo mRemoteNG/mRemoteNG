@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <?include $(sys.CURRENTDIR)Includes\Config.wxi?>
 	<Fragment>
-    <CustomAction Id="CheckIfMinimumRdpInstalled" Return="check" Execute="immediate" BinaryKey="CustomActions.CA.dll" DllEntry="IsMinimumRdpVersionInstalled" />
+    <CustomAction Id="CheckIfMinimumRdpInstalled" Return="check" Execute="immediate" DllEntry="IsMinimumRdpVersionInstalled" BinaryRef="CustomActions.CA.dll" />
   </Fragment>
   <Fragment>
-    <CustomAction Id="CheckIfRdpDtlsUpdateInstalled" Return="check" Execute="immediate" BinaryKey="CustomActions.CA.dll" DllEntry="IsRdpDtlsUpdateInstalled" />
+    <CustomAction Id="CheckIfRdpDtlsUpdateInstalled" Return="check" Execute="immediate" DllEntry="IsRdpDtlsUpdateInstalled" BinaryRef="CustomActions.CA.dll" />
   </Fragment>
 </Wix>

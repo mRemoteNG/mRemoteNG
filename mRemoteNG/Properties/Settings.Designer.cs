@@ -2425,5 +2425,41 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultRedirectDiskDrivesCustom"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DisabledPlugins {
+            get {
+                return ((string)(this["DisabledPlugins"]));
+            }
+            set {
+                this["DisabledPlugins"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PluginFolderPath {
+            get {
+                return ((string)(this["PluginFolderPath"]));
+            }
+            set {
+                this["PluginFolderPath"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PluginPanelAssignments {
+            get {
+                return ((string)(this["PluginPanelAssignments"]));
+            }
+            set {
+                this["PluginPanelAssignments"] = value;
+            }
+        }
     }
 }

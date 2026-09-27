@@ -15,6 +15,7 @@ namespace mRemoteNG.UI.Window
         private ToolStripSeparator cmenTabSep2;
         private ToolStripMenuItem cmenTabRenameTab;
         private ToolStripMenuItem cmenTabDuplicateTab;
+        private ToolStripMenuItem cmenTabMinimize;
         private ToolStripMenuItem cmenTabDisconnect;
         private ToolStripMenuItem cmenTabDisconnectOthers;
         private ToolStripMenuItem cmenTabDisconnectOthersRight;
@@ -37,6 +38,7 @@ namespace mRemoteNG.UI.Window
             this.cmenTab = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmenTabReconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabDisconnect = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmenTabMinimize = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabDisconnectOthers = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabDisconnectOthersRight = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabRenameTab = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,6 +75,7 @@ namespace mRemoteNG.UI.Window
             this.cmenTab.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmenTabReconnect,
             this.cmenTabDisconnect,
+            this.cmenTabMinimize,
             this.cmenTabDisconnectOthers,
             this.cmenTabDisconnectOthersRight,
             this.cmenTabRenameTab,
@@ -105,6 +108,13 @@ namespace mRemoteNG.UI.Window
             this.cmenTabDisconnect.Name = "cmenTabDisconnect";
             this.cmenTabDisconnect.Size = new System.Drawing.Size(230, 22);
             this.cmenTabDisconnect.Text = "Disconnect";
+            // 
+            // cmenTabMinimize
+            // 
+            this.cmenTabMinimize.Image = global::mRemoteNG.Properties.Resources.GlyphDown_16x;
+            this.cmenTabMinimize.Name = "cmenTabMinimize";
+            this.cmenTabMinimize.Size = new System.Drawing.Size(230, 22);
+            this.cmenTabMinimize.Text = "Minimize tab";
             // 
             // cmenTabDisconnectOthers
             // 

@@ -3628,6 +3628,15 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("MinimizeToSysTray", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Minimize tab.
+        /// </summary>
+        internal static string MinimizeTab {
+            get {
+                return ResourceManager.GetString("MinimizeTab", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Minutes to Idle.
@@ -6653,6 +6662,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string ShowText {
             get {
                 return ResourceManager.GetString("ShowText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Show PuTTY saved sessions in connection tree.
+        /// </summary>
+        internal static string ShowPuttySessionsInTree {
+            get {
+                return ResourceManager.GetString("ShowPuttySessionsInTree", resourceCulture);
             }
         }
         

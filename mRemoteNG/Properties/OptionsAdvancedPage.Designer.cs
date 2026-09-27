@@ -118,5 +118,17 @@ namespace mRemoteNG.Properties {
                 this["NoReconnect"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowPuttySessionsInTree {
+            get {
+                return ((bool)(this["ShowPuttySessionsInTree"]));
+            }
+            set {
+                this["ShowPuttySessionsInTree"] = value;
+            }
+        }
     }
 }

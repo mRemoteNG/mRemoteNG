@@ -31,7 +31,7 @@ namespace mRemoteNG.UI.Forms
         /// password box is shown which must match the first password
         /// to continue.
         /// </param>
-        public FrmPassword(string passwordName = null, bool newPasswordMode = true)
+        public FrmPassword(string? passwordName = null, bool newPasswordMode = true)
         {
             InitializeComponent();
             _passwordName = passwordName;

@@ -37,10 +37,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace BrightIdeasSoftware
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// This attribute is used to mark a property of a model
     /// class that should be noticed by Generator class.

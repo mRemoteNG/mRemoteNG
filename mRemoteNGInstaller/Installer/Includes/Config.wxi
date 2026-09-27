@@ -1,30 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Include>
+﻿<Include xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <?define ProductName = "mRemoteNG" ?>
   <?define Company = "Profi-Kom Ltd." ?>
   <?define UpgradeCode = "dd678a54-ca75-4791-8dfe-d818095684f8" ?>
   <?define ProductCode = "*" ?>
-  <?define ProductVersion = "!(bind.FileVersion.MainExeFile)" ?>
-  <?define MajorVersion = "!(bind.property.ProductVersion.Major)" ?>
-  <?define MinorVersion = "!(bind.property.ProductVersion.Minor)" ?>
-  <?define BuildVersion = "!(bind.property.ProductVersion.Build)" ?>
-  <?define RevisionVersion = "!(bind.property.ProductVersion.Revision)" ?>
+  <?define ProductVersion = "1.78.2.0" ?>
+  <?define ProductVersionDisplay = "1.78.2-dev" ?>
   <?define ProductLanguage = 1033 ?>
   <?define ExeProcessName = "$(var.ProductName).exe" ?>
-  
+
   <?define RequiredDotNetFrameworkMajorVersion = "4" ?>
   <?define RequiredDotNetFrameworkMinorVersion = "0" ?>
   <?define RequiredDotNetFrameworkServicePackLevel = "" ?>
   <?define RequiredDotNetFrameworkVersion = "$(var.RequiredDotNetFrameworkMajorVersion).$(var.RequiredDotNetFrameworkMinorVersion)" ?>
   <?define Rdp80Kb = "KB2592687" ?>
   <?define Rdp81Kb = "KB2830477" ?>
-  <?define MinimumRdpKb = $(var.Rdp80Kb) ?>
   <?define RdpDtlsKb = "KB2574819" ?>
   <?define IGNOREPREREQUISITES = 0 ?>
-  
+
   <?if $(var.Platform) = x64 ?>
     <?define ProductNameWithPlatform = "$(var.ProductName) (64 bit)" ?>
     <?define Win64 = "yes" ?>
-    <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
-  <?endif ?>
+  <?endif?>
 </Include>

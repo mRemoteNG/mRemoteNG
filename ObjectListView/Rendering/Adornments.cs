@@ -39,9 +39,11 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Runtime.Versioning;
 
 namespace BrightIdeasSoftware
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// An adorment is the common base for overlays and decorations.
     /// </summary>

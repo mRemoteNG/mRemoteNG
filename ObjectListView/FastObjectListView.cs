@@ -41,10 +41,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace BrightIdeasSoftware
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// A FastObjectListView trades function for speed.
     /// </summary>
@@ -154,6 +156,7 @@ namespace BrightIdeasSoftware
     /// <summary>
     /// Provide a data source for a FastObjectListView
     /// </summary>
+    [SupportedOSPlatform("windows")]
     /// <remarks>
     /// This class isn't intended to be used directly, but it is left as a public
     /// class just in case someone wants to subclass it.

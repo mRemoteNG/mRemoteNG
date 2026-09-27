@@ -55,6 +55,20 @@ namespace mRemoteNG.Config.Connections
                 SqlDatabaseMetaDataRetriever metaDataRetriever = new();
                 SqlConnectionListMetaData metaData = metaDataRetriever.GetDatabaseMetaData(dbConnector);
 
+                // A database that has no root row yet (a brand new one) reports no metadata.
+                // Write it before the version check instead of dereferencing null.
+                if (metaData == null)
+                {
+                    metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector);
+                    metaData = metaDataRetriever.GetDatabaseMetaData(dbConnector);
+                }
+
+                if (metaData == null)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ErrorConnectionListSaveFailed);
+                    return;
+                }
+
                 if (!databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion))
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ErrorConnectionListSaveFailed);

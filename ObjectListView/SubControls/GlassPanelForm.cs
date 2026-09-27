@@ -45,10 +45,12 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace BrightIdeasSoftware
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// A GlassPanelForm sits transparently over an ObjectListView to show overlays.
     /// </summary>

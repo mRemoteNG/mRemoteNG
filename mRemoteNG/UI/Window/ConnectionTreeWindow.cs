@@ -13,6 +13,7 @@ using mRemoteNG.Themes;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.ClickHandlers;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.ConnectionTree;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
@@ -99,6 +100,18 @@ namespace mRemoteNG.UI.Window
             mMenFavorites.ToolTipText = Language.Favorites;
 
             txtSearch.Text = Language.SearchPrompt;
+        }
+
+        internal void RefreshUiLanguage()
+        {
+            if (IsDisposed)
+                return;
+
+            ApplyLanguage();
+            if (ConnectionTree.ContextMenuStrip is ConnectionContextMenu connectionContextMenu)
+            {
+                connectionContextMenu.RefreshUiLanguage();
+            }
         }
 
         private new void ApplyTheme()

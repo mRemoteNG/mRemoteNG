@@ -1,4 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿﻿using Microsoft.IdentityModel.Tokens;
 
 using mRemoteNG.App.Update;
 using mRemoteNG.Config.Settings;
@@ -16,6 +16,7 @@ using System.Runtime.Versioning;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 
 
@@ -29,6 +30,8 @@ namespace mRemoteNG.App
 
         private static System.Threading.Thread? _wpfSplashThread;
         private static FrmSplashScreenNew? _wpfSplash;
+
+        public static event EventHandler? UiCultureChanged;
 
         [STAThread]
         public static void Main(string[] args)
@@ -50,47 +53,48 @@ namespace mRemoteNG.App
         {
             AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
 
-#if !SELF_CONTAINED
-            // Runtime checks only needed for framework-dependent deployments
-            // Self-contained builds include the runtime, so no check is needed
-            // Note: .NET runtime check is not needed here — the .NET host (apphost)
-            // natively displays a missing-runtime dialog with a download link.
-
-            var checkFail = false;
-
-            // Checking Visual C++ Redistributable version
-            if (VCppRuntimeCheck.GetInstalledVcRedistVersions() == null || VCppRuntimeCheck.GetInstalledVcRedistVersions().Count == 0)
+            if (!ShouldSkipNativeRuntimeChecks(args))
             {
-                var downloadUrl2 = "https://aka.ms/vs/17/release/vc_redist.x64.exe";
-                try
-                {
-                    var result = ShowDownloadCancelDialog(
-                        $"A Visual C++ (MSVC) " + Language.MsgRuntimeIsRequired + "\n\n" +
-                        Language.MsgDownloadLatestRuntime + "\n" + downloadUrl2 + "\n\n" +
-                        Language.MsgExit + "\n\n",
-                        Language.MsgMissingRuntime + " Visual C++ Redistributable x64");
+                // Runtime checks only needed for framework-dependent deployments
+                // Self-contained builds include the runtime, so no check is needed
+                // Note: .NET runtime check is not needed here — the .NET host (apphost)
+                // natively displays a missing-runtime dialog with a download link.
 
-                    if (result == DialogResult.OK && InternetConnection.IsPosible())
+                var checkFail = false;
+
+                // Checking Visual C++ Redistributable version
+                if (VCppRuntimeCheck.GetInstalledVcRedistVersions() == null || VCppRuntimeCheck.GetInstalledVcRedistVersions().Count == 0)
+                {
+                    var downloadUrl2 = "https://aka.ms/vs/17/release/vc_redist.x64.exe";
+                    try
                     {
-                        try
+                        var result = ShowDownloadCancelDialog(
+                            $"A Visual C++ (MSVC) " + Language.MsgRuntimeIsRequired + "\n\n" +
+                            Language.MsgDownloadLatestRuntime + "\n" + downloadUrl2 + "\n\n" +
+                            Language.MsgExit + "\n\n",
+                            Language.MsgMissingRuntime + " Visual C++ Redistributable x64");
+
+                        if (result == DialogResult.OK && InternetConnection.IsPosible())
                         {
-                            Process.Start(new ProcessStartInfo(fileName: downloadUrl2) { UseShellExecute = true });
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Unable to open download link: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            try
+                            {
+                                Process.Start(new ProcessStartInfo(fileName: downloadUrl2) { UseShellExecute = true });
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Unable to open download link: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
+                    catch { }
+                    checkFail = true;
                 }
-                catch { }
-                checkFail = true;
-            }
 
-            if (checkFail)
-            {
-                Environment.Exit(0);
+                if (checkFail)
+                {
+                    Environment.Exit(0);
+                }
             }
-#endif
 
             Lazy<bool> singleInstanceOption = new(() => Properties.OptionsStartupExitPage.Default.SingleInstance);
             if (singleInstanceOption.Value)
@@ -115,14 +119,58 @@ namespace mRemoteNG.App
             }
         }
 
+        internal static bool IsPortableBuild
+        {
+            get
+            {
+#if PORTABLE
+                return true;
+#else
+                return false;
+#endif
+            }
+        }
+
+        internal static bool ShouldSkipNativeRuntimeChecks(string[] args)
+        {
+            if (IsPortableBuild)
+            {
+                return true;
+            }
+
+            foreach (string arg in args)
+            {
+                if (string.Equals(arg, "--skip-runtime-checks", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            string? envValue = Environment.GetEnvironmentVariable("MREMOTENG_SKIP_RUNTIME_CHECKS");
+            if (string.IsNullOrWhiteSpace(envValue))
+            {
+                return false;
+            }
+            if (string.Equals(envValue, "1", StringComparison.Ordinal))
+            {
+                return true;
+            }
+
+            return bool.TryParse(envValue, out bool skipChecks) && skipChecks;
+        }
+
         // Assembly resolve handler
         private static Assembly? OnAssemblyResolve(object? sender, ResolveEventArgs args)
         {
             try
             {
-                string assemblyName = new AssemblyName(args.Name).Name ?? string.Empty;
+                var requestedAssemblyName = new AssemblyName(args.Name);
+                string assemblyName = requestedAssemblyName.Name ?? string.Empty;
+
                 if (assemblyName.EndsWith(".resources", StringComparison.OrdinalIgnoreCase))
-                    return null;
+                {
+                    return ResolveSatelliteAssembly(args, requestedAssemblyName);
+                }
 
                 string assemblyFile = assemblyName + ".dll";
                 string assemblyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assemblies", assemblyFile);
@@ -135,6 +183,63 @@ namespace mRemoteNG.App
                 // Suppress resolution exceptions; return null to continue standard probing
             }
             return null;
+        }
+
+        private static Assembly? ResolveSatelliteAssembly(ResolveEventArgs args, AssemblyName requestedAssemblyName)
+        {
+            string? cultureName = requestedAssemblyName.CultureName;
+            if (string.IsNullOrWhiteSpace(cultureName))
+                return null;
+
+            string satelliteAssemblyFileName = (requestedAssemblyName.Name ?? string.Empty) + ".dll";
+            if (string.IsNullOrWhiteSpace(satelliteAssemblyFileName))
+                return null;
+
+            string appBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string cultureSpecificPath = Path.Combine(customResourcePath, cultureName, satelliteAssemblyFileName);
+            if (File.Exists(cultureSpecificPath))
+            {
+                var baseFull = Path.GetFullPath(customResourcePath);
+                var fullPath = Path.GetFullPath(cultureSpecificPath);
+                if (!fullPath.StartsWith(baseFull + Path.DirectorySeparatorChar, StringComparison.Ordinal)
+                    && fullPath != baseFull)
+                {
+                    throw new ArgumentException("Invalid file path");
+                }
+                return Assembly.LoadFrom(fullPath);
+            }
+
+            if (args.RequestingAssembly is null)
+                return null;
+
+            string requestingAssemblyName = args.RequestingAssembly.GetName().Name ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(requestingAssemblyName))
+                return null;
+
+            string localizedAssemblyPath = Path.Combine(appBaseDirectory, "Languages", cultureName, requestingAssemblyName + ".resources.dll");
+            if (File.Exists(localizedAssemblyPath))
+            {
+                var baseFull = Path.GetFullPath(Path.Combine(appBaseDirectory, "Languages"));
+                var fullPath = Path.GetFullPath(localizedAssemblyPath);
+                if (!fullPath.StartsWith(baseFull + Path.DirectorySeparatorChar, StringComparison.Ordinal)
+                    && fullPath != baseFull)
+                {
+                    throw new ArgumentException("Invalid file path");
+                }
+                return Assembly.LoadFrom(fullPath);
+            }
+            return null;
+        }
+
+        public static void ApplyUiCulture(string? cultureName)
+        {
+            CultureInfo uiCulture = string.IsNullOrWhiteSpace(cultureName)
+                ? CultureInfo.InstalledUICulture
+                : new CultureInfo(cultureName);
+
+            Thread.CurrentThread.CurrentUICulture = uiCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = uiCulture;
+            UiCultureChanged?.Invoke(null, EventArgs.Empty);
         }
 
         private static void StartApplication()

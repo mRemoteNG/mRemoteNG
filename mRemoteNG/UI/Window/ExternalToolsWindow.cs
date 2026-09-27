@@ -84,6 +84,8 @@ namespace mRemoteNG.UI.Window
             LaunchToolMenuItem.Text = Language.LaunchExternalTool;
         }
 
+        internal void RefreshUiLanguage() => ApplyLanguage();
+
         private new void ApplyTheme()
         {
             if (!_themeManager.ThemingActive) return;

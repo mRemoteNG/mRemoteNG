@@ -16,27 +16,27 @@ namespace mRemoteNG.Config.Settings
         /// <summary>
         /// The key/name of the option (must be unique).
         /// </summary>
-        public string Key { get; set; }
+        public string? Key { get; set; }
 
         /// <summary>
         /// The value of the option.
         /// </summary>
-        public string Value { get; set; }
+        public string? Value { get; set; }
 
         /// <summary>
         /// Optional category to group related options.
         /// </summary>
-        public string Category { get; set; }
+        public string? Category { get; set; }
 
         /// <summary>
         /// Optional description of what this option does.
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The type of the option (e.g., "string", "int", "bool").
         /// </summary>
-        public string OptionType { get; set; }
+        public string? OptionType { get; set; }
 
         /// <summary>
         /// Timestamp when the option was created.
@@ -60,7 +60,7 @@ namespace mRemoteNG.Config.Settings
             return $"{Key} = {Value}";
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is not OptionInfo other)
                 return false;

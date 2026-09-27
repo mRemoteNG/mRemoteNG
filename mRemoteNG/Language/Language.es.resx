@@ -1580,4 +1580,49 @@ mRemoteNG ahora se cerrará y comenzará la instalación.</value>
   <data name="VaultOpenbaoSecretEngineSSHOTP" xml:space="preserve">
     <value></value>
   </data>
+  <data name="Plugins" xml:space="preserve">
+    <value>Complementos</value>
+  </data>
+  <data name="PluginsPageDescription" xml:space="preserve">
+    <value>Administre las carpetas de complementos y los complementos detectados. Los complementos deshabilitados permanecen en la lista, pero no se cargan. Las carpetas que faltan se ignoran hasta que vuelvan a estar disponibles.</value>
+  </data>
+  <data name="PluginsPageFolder" xml:space="preserve">
+    <value>Carpeta de complementos:</value>
+  </data>
+  <data name="PluginsPageFolderNotFound" xml:space="preserve">
+    <value>La carpeta o las carpetas de complementos seleccionadas "{0}" no existen. Puede guardar ahora y asegurarse de que la ruta compartida o local esté disponible antes del próximo análisis.</value>
+  </data>
+  <data name="PluginsPageTargetPanel" xml:space="preserve">
+    <value>Panel para el complemento seleccionado:</value>
+  </data>
+  <data name="PluginsPagePanelColumn" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="PluginsPagePanelDefault" xml:space="preserve">
+    <value>Predeterminado (General)</value>
+  </data>
+  <data name="PluginsPageFolderMode" xml:space="preserve">
+    <value>Tipo de carpeta actual: {0}</value>
+  </data>
+  <data name="PluginsPageFolderModeDefault" xml:space="preserve">
+    <value>Predeterminado</value>
+  </data>
+  <data name="PluginsPageFolderModeCustom" xml:space="preserve">
+    <value>Personalizado</value>
+  </data>
+  <data name="AddFolder" xml:space="preserve">
+    <value>Agregar carpeta</value>
+  </data>
+  <data name="UseDefault" xml:space="preserve">
+    <value>Usar predeterminado</value>
+  </data>
+  <data name="RefreshView" xml:space="preserve">
+    <value>Actualizar vista</value>
+  </data>
+  <data name="Plugin" xml:space="preserve">
+    <value>Complemento</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Habilitado</value>
+  </data>
 </root>

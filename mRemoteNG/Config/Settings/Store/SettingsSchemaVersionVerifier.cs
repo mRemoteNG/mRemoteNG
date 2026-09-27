@@ -14,7 +14,7 @@ namespace mRemoteNG.Config.Settings.Store
 
         /// <param name="currentSupportedVersion">The latest schema version the application supports.</param>
         /// <param name="upgraders">Ordered list of schema upgraders.</param>
-        public SettingsSchemaVersionVerifier(int currentSupportedVersion, ISettingsSchemaUpgrader[] upgraders = null)
+        public SettingsSchemaVersionVerifier(int currentSupportedVersion, ISettingsSchemaUpgrader[]? upgraders = null)
         {
             _currentSupportedVersion = currentSupportedVersion;
             _upgraders = upgraders ?? [];

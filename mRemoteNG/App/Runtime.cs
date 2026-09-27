@@ -5,6 +5,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
 using mRemoteNG.Messages;
+using mRemoteNG.Plugins;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
@@ -46,6 +47,7 @@ namespace mRemoteNG.App
         public static MessageCollector MessageCollector { get; } = new MessageCollector();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; } = null!; // initialized on demand by settings/UI
         public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
+        public static PluginService PluginService { get; } = new PluginService();
 
         public static SecureString EncryptionKey { get; set; } = new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
 

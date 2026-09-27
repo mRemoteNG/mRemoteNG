@@ -473,6 +473,11 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             AutoResizeColumn(Columns[0]);
         }
 
+        internal void RefreshVisibleRoots()
+        {
+            RefreshTreeRoots();
+        }
+
         private void RegisterModelUpdateHandlers(ConnectionTreeModel newModel)
         {
             _puttySessionsManager.PuttySessionsCollectionChanged += OnPuttySessionsCollectionChanged;

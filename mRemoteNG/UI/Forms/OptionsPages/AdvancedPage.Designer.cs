@@ -45,6 +45,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnBrowseCustomPuttyPath = new MrngButton();
             chkLoadBalanceInfoUseUtf8 = new MrngCheckBox();
             chkNoReconnect = new MrngCheckBox();
+            chkShowPuttySessionsInTree = new MrngCheckBox();
             ((System.ComponentModel.ISupportInitialize)numPuttyWaitTime).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numUVNCSCPort).BeginInit();
             SuspendLayout();
@@ -197,10 +198,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkNoReconnect.UseVisualStyleBackColor = true;
             chkNoReconnect.CheckedChanged += chkNoReconnect_CheckedChanged;
             // 
+            // chkShowPuttySessionsInTree
+            // 
+            chkShowPuttySessionsInTree._mice = MrngCheckBox.MouseState.OUT;
+            chkShowPuttySessionsInTree.AutoSize = true;
+            chkShowPuttySessionsInTree.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            chkShowPuttySessionsInTree.Location = new System.Drawing.Point(27, 234);
+            chkShowPuttySessionsInTree.Name = "chkShowPuttySessionsInTree";
+            chkShowPuttySessionsInTree.Size = new System.Drawing.Size(194, 17);
+            chkShowPuttySessionsInTree.TabIndex = 12;
+            chkShowPuttySessionsInTree.Text = "Show PuTTY saved sessions in tree";
+            chkShowPuttySessionsInTree.UseVisualStyleBackColor = true;
+            // 
             // AdvancedPage
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            Controls.Add(chkShowPuttySessionsInTree);
             Controls.Add(chkNoReconnect);
             Controls.Add(chkLoadBalanceInfoUseUtf8);
             Controls.Add(lblMaximumPuttyWaitTime);
@@ -236,5 +250,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal MrngButton btnBrowseCustomPuttyPath;
         private MrngCheckBox chkLoadBalanceInfoUseUtf8;
         internal MrngCheckBox chkNoReconnect;
+        internal MrngCheckBox chkShowPuttySessionsInTree;
     }
 }
