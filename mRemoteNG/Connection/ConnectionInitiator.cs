@@ -38,7 +38,9 @@ namespace mRemoteNG.Connection
         public void OpenConnection(
             ContainerInfo containerInfo,
             ConnectionInfo.Force force = ConnectionInfo.Force.None,
-            ConnectionWindow conForm = null)
+            ConnectionWindow conForm = null,
+            DockPane targetPane = null,
+            int? targetContentIndex = null)
         {
             if (containerInfo == null || containerInfo.Children.Count == 0)
                 return;
@@ -46,9 +48,9 @@ namespace mRemoteNG.Connection
             foreach (ConnectionInfo child in containerInfo.Children)
             {
                 if (child is ContainerInfo childAsContainer)
-                    OpenConnection(childAsContainer, force, conForm);
+                    OpenConnection(childAsContainer, force, conForm, targetPane, targetContentIndex);
                 else
-                    OpenConnection(child, force, conForm);
+                    OpenConnection(child, force, conForm, targetPane, targetContentIndex);
             }
         }
 
@@ -56,7 +58,9 @@ namespace mRemoteNG.Connection
         public async void OpenConnection(
             ConnectionInfo connectionInfo,
             ConnectionInfo.Force force = ConnectionInfo.Force.None,
-            ConnectionWindow conForm = null)
+            ConnectionWindow conForm = null,
+            DockPane targetPane = null,
+            int? targetContentIndex = null)
         {
             if (connectionInfo == null)
                 return;
@@ -138,7 +142,7 @@ namespace mRemoteNG.Connection
 
                     SetConnectionFormEventHandlers(protocolSshTunnel, connectionForm);
                     SetConnectionEventHandlers(protocolSshTunnel);
-                    connectionContainer = SetConnectionContainer(connectionInfo, connectionForm);
+                    connectionContainer = SetConnectionContainer(connectionInfo, connectionForm, targetPane, targetContentIndex);
                     BuildConnectionInterfaceController(connectionInfoSshTunnel, protocolSshTunnel, connectionContainer);
                     protocolSshTunnel.InterfaceControl.OriginalInfo = connectionInfoSshTunnel;
 
@@ -211,7 +215,7 @@ namespace mRemoteNG.Connection
                 SetConnectionFormEventHandlers(newProtocol, connectionForm);
                 SetConnectionEventHandlers(newProtocol);
                 // in case of connection through SSH tunnel the container is already defined and must be use, else it needs to be created here
-                if (connectionContainer == null) connectionContainer = SetConnectionContainer(connectionInfo, connectionForm);
+                if (connectionContainer == null) connectionContainer = SetConnectionContainer(connectionInfo, connectionForm, targetPane, targetContentIndex);
                 BuildConnectionInterfaceController(connectionInfo, newProtocol, connectionContainer);
                 // in case of connection through SSH tunnel the connectionInfo was modified but connectionInfoOriginal in all cases retains the original info
                 // and is stored in interface control for further use
@@ -326,9 +330,9 @@ namespace mRemoteNG.Connection
             return connectionForm;
         }
 
-        private static Control SetConnectionContainer(ConnectionInfo connectionInfo, ConnectionWindow connectionForm)
+        private static Control SetConnectionContainer(ConnectionInfo connectionInfo, ConnectionWindow connectionForm, DockPane targetPane = null, int? targetContentIndex = null)
         {
-            Control connectionContainer = connectionForm.AddConnectionTab(connectionInfo);
+            Control connectionContainer = connectionForm.AddConnectionTab(connectionInfo, targetPane, targetContentIndex);
 
             if (connectionInfo.Protocol != ProtocolType.IntApp) return connectionContainer;
 

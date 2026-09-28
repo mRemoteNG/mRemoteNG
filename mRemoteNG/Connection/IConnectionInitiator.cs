@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using mRemoteNG.Container;
 using mRemoteNG.UI.Window;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Connection
 {
@@ -11,12 +12,16 @@ namespace mRemoteNG.Connection
         void OpenConnection(
             ContainerInfo containerInfo,
             ConnectionInfo.Force force = ConnectionInfo.Force.None,
-            ConnectionWindow? conForm = null);
+            ConnectionWindow? conForm = null,
+            DockPane? targetPane = null,
+            int? targetContentIndex = null);
 
         void OpenConnection(
             ConnectionInfo connectionInfo,
             ConnectionInfo.Force force = ConnectionInfo.Force.None,
-            ConnectionWindow? conForm = null);
+            ConnectionWindow? conForm = null,
+            DockPane? targetPane = null,
+            int? targetContentIndex = null);
 
         bool SwitchToOpenConnection(ConnectionInfo connectionInfo);
     }
