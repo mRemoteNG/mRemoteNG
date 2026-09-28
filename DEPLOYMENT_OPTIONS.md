@@ -77,6 +77,17 @@ All four zip files are uploaded to a single GitHub Release with clear descriptio
 - Framework-Dependent versions are marked as requiring .NET 10 Runtime
 - Self-Contained versions are marked as portable/no installation needed
 
+### Authenticode Signing for Nightly Releases
+
+Windows 11 Smart App Control can block unsigned DLLs from the official ZIP, including `ExternalConnectors.dll`, which prevents RDP sessions from starting. To keep nightly releases compatible with Smart App Control, configure these GitHub Actions secrets for the release workflow:
+
+- `NB_SIGNING_CERT_BASE64` - Base64-encoded contents of the Authenticode `.pfx`
+- `NB_SIGNING_CERT_PASSWORD` - Password for the `.pfx`
+
+When both secrets are present, `Build_mR-NB.yml` imports the certificate into the runner's temp directory, signs the release output (excluding `PuTTYNG.exe`), and verifies the resulting signatures before zipping the artifacts.
+
+If the secrets are missing, the workflow emits a warning that the published binaries remain unsigned. For an official release, supply a trusted code-signing certificate so `ExternalConnectors.dll` and the rest of the shipped first-party binaries are signed before publication.
+
 ## Code Changes
 
 ### ProgramRoot.cs
@@ -163,5 +174,4 @@ The original workflow `Build_and_Release_mR-NB.yml` is preserved. To migrate:
 1. Rename or remove old workflow: `Build_and_Release_mR-NB.yml`
 2. Rename new workflow: `Build_and_Release_mR-NB-MultiDeploy.yml` → `Build_and_Release_mR-NB.yml`
 3. Commit and push with "NB release" in message
-
 

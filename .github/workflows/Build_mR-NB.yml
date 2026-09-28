@@ -17,6 +17,9 @@ jobs:
   NB-Build-and-Release:
     permissions:
       contents: read
+    env:
+      NB_SIGNING_CERT_BASE64: ${{ secrets.NB_SIGNING_CERT_BASE64 }}
+      NB_SIGNING_CERT_PASSWORD: ${{ secrets.NB_SIGNING_CERT_PASSWORD }}
     strategy:
       matrix:
         include:
@@ -161,7 +164,52 @@ jobs:
         shell: pwsh
         run: |
           & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\mRemoteNG\mRemoteNG.csproj" /p:Configuration="Release Self-Contained" /p:Platform=${{ matrix.platform }} /p:MSBuildEnableWorkloadResolver=false /verbosity:minimal /p:SelfContained=true /p:RuntimeIdentifier=win-${{ matrix.arch }} /p:PublishDir="$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\${{ matrix.arch }}\Release"
-                
+
+      - name: (08b) Prepare code signing certificate
+        if: env.NB_SIGNING_CERT_BASE64 != '' || env.NB_SIGNING_CERT_PASSWORD != ''
+        shell: pwsh
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:NB_SIGNING_CERT_BASE64) -or [string]::IsNullOrWhiteSpace($env:NB_SIGNING_CERT_PASSWORD)) {
+            throw "Both NB_SIGNING_CERT_BASE64 and NB_SIGNING_CERT_PASSWORD must be configured to sign nightly build artifacts."
+          }
+
+          $certPath = Join-Path $env:RUNNER_TEMP "mremoteng-nightly-signing.pfx"
+          [System.IO.File]::WriteAllBytes($certPath, [Convert]::FromBase64String($env:NB_SIGNING_CERT_BASE64))
+          "NB_SIGNING_CERT_PATH=$certPath" | Out-File -FilePath $env:GITHUB_ENV -Append
+          Write-Host "Signing certificate prepared in runner temp." -ForegroundColor Green
+
+      - name: (08c) Sign release binaries
+        if: env.NB_SIGNING_CERT_BASE64 != '' && env.NB_SIGNING_CERT_PASSWORD != ''
+        shell: pwsh
+        run: |
+          if ('${{ matrix.deployment }}' -eq 'self-contained') {
+            $targetDir = "$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\${{ matrix.arch }}\Release"
+            $configurationName = "Release Self-Contained"
+          } else {
+            $targetDir = "$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\Release"
+            $configurationName = "Release"
+          }
+
+          & "$Env:GITHUB_WORKSPACE\Tools\sign_binaries.ps1" `
+            -TargetDir $targetDir `
+            -ConfigurationName $configurationName `
+            -CertificatePath $env:NB_SIGNING_CERT_PATH `
+            -CertificatePassword $env:NB_SIGNING_CERT_PASSWORD `
+            -Exclude "PuTTYNG.exe" `
+            -SolutionDir "$Env:GITHUB_WORKSPACE\"
+
+          & "$Env:GITHUB_WORKSPACE\Tools\verify_binary_signatures.ps1" `
+            -TargetDir $targetDir `
+            -ConfigurationName $configurationName `
+            -CertificatePath $env:NB_SIGNING_CERT_PATH `
+            -SolutionDir "$Env:GITHUB_WORKSPACE\"
+
+      - name: (08d) Warn when signing is not configured
+        if: env.NB_SIGNING_CERT_BASE64 == '' && env.NB_SIGNING_CERT_PASSWORD == ''
+        shell: pwsh
+        run: |
+          Write-Warning "NB_SIGNING_CERT_BASE64/NB_SIGNING_CERT_PASSWORD are not configured. Nightly artifacts, including ExternalConnectors.dll, will be published unsigned."
+
       - name: (09) Release Information
         id: version
         shell: pwsh
