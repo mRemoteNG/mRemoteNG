@@ -342,6 +342,66 @@ namespace mRemoteNGTests.UI.Tabs
         });
 
         [Test]
+        public void ReplacingTheOnlyTabInAFloatingPane_CanKeepItsOriginalPane() => RunWithMessagePump(() =>
+        {
+            using var hostForm = new Form
+            {
+                Width = 800,
+                Height = 600,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(-10000, -10000)
+            };
+
+            var dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill,
+                DocumentStyle = DocumentStyle.DockingWindow,
+                Theme = new VS2015LightTheme()
+            };
+
+            dockPanel.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+
+            hostForm.Controls.Add(dockPanel);
+            hostForm.Show();
+
+            using var panelHost = new DockContent();
+            using var connectionWindow = new ConnectionWindow(panelHost);
+            connectionWindow.Show(dockPanel, DockState.Document);
+
+            ConnectionTab doc1 = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "Doc1" });
+            ConnectionTab doc2 = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "Doc2" });
+
+            doc2.Show(connectionWindow.connDock, DockState.Float);
+            Application.DoEvents();
+
+            DockPane targetPane = doc2.Pane;
+            Assert.That(doc2.DockState, Is.EqualTo(DockState.Float), "Doc2 should be in a floating pane");
+            Assert.That(targetPane.DisplayingContents.Count, Is.EqualTo(1), "Doc2 should be the only tab in its pane");
+
+            var reconnectPlacement = connectionWindow.PrepareReconnectPlacement(doc2);
+            Application.DoEvents();
+
+            Assert.That(reconnectPlacement.targetPanePlaceholder, Is.Not.Null, "Reconnect placement should keep the floating pane alive");
+            DockContent placeholder = reconnectPlacement.targetPanePlaceholder!;
+            Assert.That(placeholder.Pane, Is.SameAs(targetPane), "Placeholder should be added to the original pane");
+
+            doc2.protocolClose = true;
+            doc2.Close();
+            Application.DoEvents();
+
+            Assert.That(targetPane.DockPanel, Is.SameAs(connectionWindow.connDock), "Floating pane should remain attached while the replacement is opened");
+
+            ConnectionTab replacement = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "Doc2" }, reconnectPlacement.targetPane, reconnectPlacement.targetContentIndex);
+            placeholder.Close();
+            Application.DoEvents();
+
+            Assert.That(replacement.Pane, Is.SameAs(targetPane), "Replacement tab should remain in the original floating pane");
+            Assert.That(replacement.DockState, Is.EqualTo(DockState.Float), "Replacement tab should stay floated");
+            Assert.That(doc1.DockState, Is.EqualTo(DockState.Document), "Other tabs should remain unchanged");
+        });
+
+        [Test]
         public void MouseMoveInRightToLeft_UsesVisualActionButtonRectangles() => RunWithMessagePump(() =>
         {
             using var hostForm = new Form

@@ -60,7 +60,8 @@ namespace mRemoteNG.Connection
             ConnectionInfo.Force force = ConnectionInfo.Force.None,
             ConnectionWindow conForm = null,
             DockPane targetPane = null,
-            int? targetContentIndex = null)
+            int? targetContentIndex = null,
+            DockContent? targetPanePlaceholder = null)
         {
             if (connectionInfo == null)
                 return;
@@ -244,6 +245,11 @@ namespace mRemoteNG.Connection
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.ConnectionOpenFailed, ex);
+            }
+            finally
+            {
+                if (targetPanePlaceholder is { IsDisposed: false })
+                    targetPanePlaceholder.Close();
             }
         }
 

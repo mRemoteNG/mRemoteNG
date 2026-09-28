@@ -179,6 +179,32 @@ namespace mRemoteNG.UI.Window
             return null;
         }
 
+        internal (DockPane? targetPane, int? targetContentIndex, DockContent? targetPanePlaceholder) PrepareReconnectPlacement(ConnectionTab? selectedTab)
+        {
+            DockPane? targetPane = selectedTab?.Pane;
+            int existingIndex = targetPane?.DisplayingContents.IndexOf(selectedTab) ?? -1;
+            int? targetContentIndex = existingIndex >= 0 ? existingIndex : null;
+            DockContent? targetPanePlaceholder = null;
+
+            if (targetPane?.DockPanel == connDock && existingIndex >= 0 && targetPane.DisplayingContents.Count == 1)
+            {
+                targetPanePlaceholder = new DockContent
+                {
+                    CloseButton = false,
+                    CloseButtonVisible = false,
+                    DockAreas = DockAreas.Document | DockAreas.Float,
+                    HideOnClose = true,
+                    TabText = string.Empty,
+                    Text = string.Empty
+                };
+
+                targetPanePlaceholder.Show(connDock, DockState.Document);
+                targetPanePlaceholder.DockTo(targetPane, DockStyle.Fill, existingIndex + 1);
+            }
+
+            return (targetPane, targetContentIndex, targetPanePlaceholder);
+        }
+
         #endregion
 
         public void ReconnectAll(IConnectionInitiator initiator)
@@ -858,12 +884,10 @@ namespace mRemoteNG.UI.Window
                 }
 
                 ConnectionTab selectedTab = interfaceControl.Parent as ConnectionTab;
-                DockPane targetPane = selectedTab?.Pane;
-                int existingIndex = targetPane?.DisplayingContents.IndexOf(selectedTab) ?? -1;
-                int? targetContentIndex = existingIndex >= 0 ? existingIndex : null;
+                var reconnectPlacement = PrepareReconnectPlacement(selectedTab);
 
                 Invoke(new Action(() => Prot_Event_Closed(interfaceControl.Protocol)));
-                Runtime.ConnectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump, this, targetPane, targetContentIndex);
+                Runtime.ConnectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump, this, reconnectPlacement.targetPane, reconnectPlacement.targetContentIndex, reconnectPlacement.targetPanePlaceholder);
             }
             catch (Exception ex)
             {
