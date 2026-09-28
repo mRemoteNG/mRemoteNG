@@ -84,7 +84,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkIdentifyQuickConnectTabs.Location = new System.Drawing.Point(3, 95);
             chkIdentifyQuickConnectTabs.Name = "chkIdentifyQuickConnectTabs";
             chkIdentifyQuickConnectTabs.Size = new System.Drawing.Size(315, 17);
-            chkIdentifyQuickConnectTabs.TabIndex = 4;
+            chkIdentifyQuickConnectTabs.TabIndex = 5;
             chkIdentifyQuickConnectTabs.Text = Language.IdentifyQuickConnectTabs;
             chkIdentifyQuickConnectTabs.UseVisualStyleBackColor = true;
             // 
@@ -108,7 +108,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkAlwaysShowPanelSelectionDlg.Location = new System.Drawing.Point(3, 141);
             chkAlwaysShowPanelSelectionDlg.Name = "chkAlwaysShowPanelSelectionDlg";
             chkAlwaysShowPanelSelectionDlg.Size = new System.Drawing.Size(347, 17);
-            chkAlwaysShowPanelSelectionDlg.TabIndex = 6;
+            chkAlwaysShowPanelSelectionDlg.TabIndex = 7;
             chkAlwaysShowPanelSelectionDlg.Text = "Always show panel selection dialog when opening connectins";
             chkAlwaysShowPanelSelectionDlg.UseVisualStyleBackColor = true;
             // 
@@ -132,7 +132,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkDoubleClickClosesTab.Location = new System.Drawing.Point(3, 118);
             chkDoubleClickClosesTab.Name = "chkDoubleClickClosesTab";
             chkDoubleClickClosesTab.Size = new System.Drawing.Size(170, 17);
-            chkDoubleClickClosesTab.TabIndex = 5;
+            chkDoubleClickClosesTab.TabIndex = 6;
             chkDoubleClickClosesTab.Text = "Double click on tab closes it";
             chkDoubleClickClosesTab.UseVisualStyleBackColor = true;
             // 
@@ -156,7 +156,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkUseTerminalTitleForTabs.Location = new System.Drawing.Point(3, 72);
             chkUseTerminalTitleForTabs.Name = "chkUseTerminalTitleForTabs";
             chkUseTerminalTitleForTabs.Size = new System.Drawing.Size(270, 17);
-            chkUseTerminalTitleForTabs.TabIndex = 10;
+            chkUseTerminalTitleForTabs.TabIndex = 4;
             chkUseTerminalTitleForTabs.Text = "Use terminal title for tab names (SSH/Telnet)";
             chkUseTerminalTitleForTabs.UseVisualStyleBackColor = true;
             // 
@@ -168,7 +168,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkCreateEmptyPanelOnStart.Location = new System.Drawing.Point(3, 164);
             chkCreateEmptyPanelOnStart.Name = "chkCreateEmptyPanelOnStart";
             chkCreateEmptyPanelOnStart.Size = new System.Drawing.Size(271, 17);
-            chkCreateEmptyPanelOnStart.TabIndex = 7;
+            chkCreateEmptyPanelOnStart.TabIndex = 8;
             chkCreateEmptyPanelOnStart.Text = "Create an empty panel when mRemoteNG starts";
             chkCreateEmptyPanelOnStart.UseVisualStyleBackColor = true;
             chkCreateEmptyPanelOnStart.CheckedChanged += chkCreateEmptyPanelOnStart_CheckedChanged;
@@ -181,7 +181,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkBindConnectionsAndConfigPanels.Location = new System.Drawing.Point(3, 233);
             chkBindConnectionsAndConfigPanels.Name = "chkBindConnectionsAndConfigPanels";
             chkBindConnectionsAndConfigPanels.Size = new System.Drawing.Size(350, 17);
-            chkBindConnectionsAndConfigPanels.TabIndex = 9;
+            chkBindConnectionsAndConfigPanels.TabIndex = 10;
             chkBindConnectionsAndConfigPanels.Text = "Bind Connections and Config panels together when auto-hidden";
             chkBindConnectionsAndConfigPanels.UseVisualStyleBackColor = true;
             // 
@@ -191,7 +191,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtBoxPanelName.Location = new System.Drawing.Point(35, 200);
             txtBoxPanelName.Name = "txtBoxPanelName";
             txtBoxPanelName.Size = new System.Drawing.Size(213, 22);
-            txtBoxPanelName.TabIndex = 8;
+            txtBoxPanelName.TabIndex = 9;
             // 
             // lblPanelName
             // 

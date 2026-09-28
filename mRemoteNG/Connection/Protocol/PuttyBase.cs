@@ -339,6 +339,7 @@ namespace mRemoteNG.Connection.Protocol
 
                 // Start monitoring PuTTY window title for dynamic tab naming
                 _lastWindowTitle = PuttyProcess.MainWindowTitle;
+                Event_TitleChanged(this, _lastWindowTitle);
                 _titleMonitorTimer = new System.Threading.Timer(MonitorPuttyTitle, null, TitleMonitorIntervalMs, TitleMonitorIntervalMs);
 
                 return true;

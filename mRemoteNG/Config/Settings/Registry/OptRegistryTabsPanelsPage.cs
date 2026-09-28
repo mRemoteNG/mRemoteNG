@@ -29,6 +29,11 @@ namespace mRemoteNG.Config.Settings.Registry
         public WinRegistryEntry<bool> IdentifyQuickConnectTabs { get; private set; }
 
         /// <summary>
+        /// Specifies whether terminal titles are used for PuTTY-based tabs.
+        /// </summary>
+        public WinRegistryEntry<bool> UseTerminalTitleForTabs { get; private set; }
+
+        /// <summary>
         /// Specifies whether double-clicking on a tab closes it.
         /// </summary>
         public WinRegistryEntry<bool> DoubleClickOnTabClosesIt { get; private set; }
@@ -62,6 +67,7 @@ namespace mRemoteNG.Config.Settings.Registry
             ShowLogonInfoOnTabs = new WinRegistryEntry<bool>(hive, subKey, nameof(ShowLogonInfoOnTabs)).Read();
             ShowProtocolOnTabs = new WinRegistryEntry<bool>(hive, subKey, nameof(ShowProtocolOnTabs)).Read();
             IdentifyQuickConnectTabs = new WinRegistryEntry<bool>(hive, subKey, nameof(IdentifyQuickConnectTabs)).Read();
+            UseTerminalTitleForTabs = new WinRegistryEntry<bool>(hive, subKey, nameof(UseTerminalTitleForTabs)).Read();
             DoubleClickOnTabClosesIt = new WinRegistryEntry<bool>(hive, subKey, nameof(DoubleClickOnTabClosesIt)).Read();
             AlwaysShowPanelSelectionDlg = new WinRegistryEntry<bool>(hive, subKey, nameof(AlwaysShowPanelSelectionDlg)).Read();
             CreateEmptyPanelOnStartUp = new WinRegistryEntry<bool>(hive, subKey, nameof(CreateEmptyPanelOnStartUp)).Read();
@@ -89,6 +95,7 @@ namespace mRemoteNG.Config.Settings.Registry
             ApplyShowLogonInfoOnTabs();
             ApplyShowProtocolOnTabs();
             ApplyIdentifyQuickConnectTabs();
+            ApplyUseTerminalTitleForTabs();
             ApplyDoubleClickOnTabClosesIt();
             ApplyAlwaysShowPanelSelectionDlg();
             ApplyCreateEmptyPanelOnStartUp();
@@ -118,6 +125,12 @@ namespace mRemoteNG.Config.Settings.Registry
         {
             if (IdentifyQuickConnectTabs.IsSet)
                 Properties.OptionsTabsPanelsPage.Default.IdentifyQuickConnectTabs = IdentifyQuickConnectTabs.Value;
+        }
+
+        private void ApplyUseTerminalTitleForTabs()
+        {
+            if (UseTerminalTitleForTabs.IsSet)
+                Properties.OptionsTabsPanelsPage.Default.UseTerminalTitleForTabs = UseTerminalTitleForTabs.Value;
         }
 
         private void ApplyDoubleClickOnTabClosesIt()

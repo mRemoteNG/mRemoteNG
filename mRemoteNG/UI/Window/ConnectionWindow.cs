@@ -837,6 +837,7 @@ namespace mRemoteNG.UI.Window
             if (!Properties.OptionsTabsPanelsPage.Default.UseTerminalTitleForTabs) return;
             ProtocolBase protocolBase = sender as ProtocolBase;
             if (!(protocolBase?.InterfaceControl?.Parent is ConnectionTab tabPage)) return;
+            if (InterfaceControl.FindInterfaceControl(tabPage) != protocolBase.InterfaceControl) return;
             if (tabPage.Disposing || tabPage.IsDisposed) return;
             if (IsDisposed || Disposing) return;
 

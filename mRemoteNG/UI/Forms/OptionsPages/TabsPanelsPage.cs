@@ -146,6 +146,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (pageRegSettingsInstance.IdentifyQuickConnectTabs.IsSet)
                 DisableControl(chkIdentifyQuickConnectTabs);
 
+            if (pageRegSettingsInstance.UseTerminalTitleForTabs.IsSet)
+                DisableControl(chkUseTerminalTitleForTabs);
+
             if (pageRegSettingsInstance.DoubleClickOnTabClosesIt.IsSet)
                 DisableControl(chkDoubleClickClosesTab);
 
@@ -174,6 +177,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 || pageRegSettingsInstance.ShowLogonInfoOnTabs.IsSet
                 || pageRegSettingsInstance.ShowProtocolOnTabs.IsSet
                 || pageRegSettingsInstance.IdentifyQuickConnectTabs.IsSet
+                || pageRegSettingsInstance.UseTerminalTitleForTabs.IsSet
                 || pageRegSettingsInstance.DoubleClickOnTabClosesIt.IsSet
                 || pageRegSettingsInstance.AlwaysShowPanelSelectionDlg.IsSet
                 || pageRegSettingsInstance.CreateEmptyPanelOnStartUp.IsSet
