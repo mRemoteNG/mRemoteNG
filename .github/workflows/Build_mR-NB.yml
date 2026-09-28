@@ -161,8 +161,29 @@ jobs:
         shell: pwsh
         run: |
           & "$env:MSBUILD_EXE" "$Env:GITHUB_WORKSPACE\mRemoteNG\mRemoteNG.csproj" /p:Configuration="Release Self-Contained" /p:Platform=${{ matrix.platform }} /p:MSBuildEnableWorkloadResolver=false /verbosity:minimal /p:SelfContained=true /p:RuntimeIdentifier=win-${{ matrix.arch }} /p:PublishDir="$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\${{ matrix.arch }}\Release"
-                
-      - name: (09) Release Information
+
+      - name: (09) Validate SQL Client native asset layout
+        if: matrix.deployment == 'framework-dependent'
+        shell: pwsh
+        run: |
+          $outputDir = "$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\Release"
+          $managedSqlClientPath = Join-Path $outputDir "Assemblies\Microsoft.Data.SqlClient.dll"
+          $nativeSqlClientPath = Join-Path $outputDir "runtimes\win-${{ matrix.arch }}\native\Microsoft.Data.SqlClient.SNI.dll"
+          $flattenedNativeSqlClientPath = Join-Path $outputDir "Assemblies\Microsoft.Data.SqlClient.SNI.dll"
+
+          if (-not (Test-Path $managedSqlClientPath)) {
+            throw "Expected managed SQL client assembly at '$managedSqlClientPath'."
+          }
+
+          if (-not (Test-Path $nativeSqlClientPath)) {
+            throw "Expected RID-specific SQL client native assembly at '$nativeSqlClientPath'."
+          }
+
+          if (Test-Path $flattenedNativeSqlClientPath) {
+            throw "SQL client native assembly should not be flattened into '$flattenedNativeSqlClientPath'."
+          }
+                 
+      - name: (10) Release Information
         id: version
         shell: pwsh
         run: |
@@ -185,7 +206,7 @@ jobs:
           echo "tag=$tag" >> $env:GITHUB_OUTPUT
           echo "deployment=${{ matrix.deployment }}" >> $env:GITHUB_OUTPUT
 
-      - name: (10) Extract Changelog Section
+      - name: (11) Extract Changelog Section
         id: changelog
         shell: pwsh
         run: |
@@ -217,7 +238,7 @@ jobs:
           echo $joined >> $env:GITHUB_OUTPUT
           echo "EOF" >> $env:GITHUB_OUTPUT
                 
-      - name: (11) Create Zip File
+      - name: (12) Create Zip File
         shell: pwsh
         run: |
           if ('${{ matrix.deployment }}' -eq 'self-contained') {
@@ -232,7 +253,7 @@ jobs:
           $fileSize = (Get-Item ${{ steps.version.outputs.zipname }}).Length / 1MB
           echo "Size: $([math]::Round($fileSize, 2)) MB"
 
-      - name: (10) Upload artifacts for combination
+      - name: (13) Upload artifacts for combination
         uses: actions/upload-artifact@v7
         with:
           name: release-${{ matrix.arch }}-${{ matrix.deploy_suffix }}
