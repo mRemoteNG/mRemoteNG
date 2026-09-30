@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Runtime.Versioning;
+using System.Security;
 using mRemoteNG.Config.UserProfiles;
 using mRemoteNG.Tools;
 using NUnit.Framework;
@@ -18,7 +19,7 @@ namespace mRemoteNGTests.Config.UserProfiles
         public void SetUp()
         {
             _settingsPath = Path.Combine(Path.GetTempPath(), $"mremoteng_profiles_{Guid.NewGuid()}");
-            _store = new SqliteUserProfileStore(_settingsPath);
+            _store = new SqliteUserProfileStore(_settingsPath, "admin password".ConvertToSecureString());
         }
 
         [TearDown]
@@ -50,8 +51,12 @@ namespace mRemoteNGTests.Config.UserProfiles
         [Test]
         public void PasswordProvider_StoresAndVerifiesPassword()
         {
-            UserProfile user = _store.AddUser("person");
-            _store.SetPassword(user.Id, "correct horse battery staple".ConvertToSecureString());
+            UserProfile user = AddUser("person");
+            _store.SetPassword(
+                UserProfile.BuiltInAdministratorId,
+                user.Id,
+                null,
+                "correct horse battery staple".ConvertToSecureString());
 
             Assert.That(_store.VerifyPassword(user.Id, "correct horse battery staple".ConvertToSecureString()), Is.True);
             Assert.That(_store.VerifyPassword(user.Id, "wrong".ConvertToSecureString()), Is.False);
@@ -61,8 +66,8 @@ namespace mRemoteNGTests.Config.UserProfiles
         [Test]
         public void SharedProfile_IsReadOnlyForOtherUsers()
         {
-            UserProfile owner = _store.AddUser("owner");
-            UserProfile reader = _store.AddUser("reader");
+            UserProfile owner = AddUser("owner");
+            UserProfile reader = AddUser("reader");
             _store.AddProfile(owner.Id, "Shared", Path.Combine(_settingsPath, "shared.db"), true);
 
             ConnectionProfile profile = _store.GetProfiles(reader.Id).Single();
@@ -74,8 +79,8 @@ namespace mRemoteNGTests.Config.UserProfiles
         [Test]
         public void Administrator_CanGrantWriteAccess()
         {
-            UserProfile owner = _store.AddUser("owner");
-            UserProfile writer = _store.AddUser("writer");
+            UserProfile owner = AddUser("owner");
+            UserProfile writer = AddUser("writer");
             ConnectionProfile profile = _store.AddProfile(owner.Id, "Private", Path.Combine(_settingsPath, "private.db"));
 
             _store.SetAccess(UserProfile.BuiltInAdministratorId, profile.Id, writer.Id, ProfileAccessLevel.Write);
@@ -87,7 +92,7 @@ namespace mRemoteNGTests.Config.UserProfiles
         [Test]
         public void OnlyAdministrator_CanDeleteProfile()
         {
-            UserProfile owner = _store.AddUser("owner");
+            UserProfile owner = AddUser("owner");
             ConnectionProfile profile = _store.AddProfile(owner.Id, "Private", Path.Combine(_settingsPath, "private.db"));
 
             Assert.Throws<UnauthorizedAccessException>(() => _store.DeleteProfile(owner.Id, profile.Id));
@@ -99,8 +104,8 @@ namespace mRemoteNGTests.Config.UserProfiles
         [Test]
         public void LoadOnStartup_IsStoredPerUser()
         {
-            UserProfile owner = _store.AddUser("owner");
-            UserProfile reader = _store.AddUser("reader");
+            UserProfile owner = AddUser("owner");
+            UserProfile reader = AddUser("reader");
             ConnectionProfile profile = _store.AddProfile(owner.Id, "Shared", Path.Combine(_settingsPath, "shared.db"), true);
 
             _store.SetLoadOnStartup(reader.Id, profile.Id, true);
@@ -112,13 +117,46 @@ namespace mRemoteNGTests.Config.UserProfiles
         [Test]
         public void ProfileCatalog_PersistsAcrossInstances()
         {
-            UserProfile owner = _store.AddUser("owner");
+            UserProfile owner = AddUser("owner");
             _store.AddProfile(owner.Id, "Persistent", Path.Combine(_settingsPath, "persistent.db"));
             _store.Dispose();
 
             _store = new SqliteUserProfileStore(_settingsPath);
 
             Assert.That(_store.GetProfiles(owner.Id).Single().Name, Is.EqualTo("Persistent"));
+        }
+
+        [Test]
+        public void Administrator_RequiresPasswordOnFirstRun()
+        {
+            string path = Path.Combine(Path.GetTempPath(), $"mremoteng_profiles_{Guid.NewGuid()}");
+            try
+            {
+                Assert.Throws<InvalidOperationException>(() => new SqliteUserProfileStore(path));
+            }
+            finally
+            {
+                if (Directory.Exists(path))
+                    Directory.Delete(path, true);
+            }
+        }
+
+        [Test]
+        public void User_CannotResetAnotherUsersPassword()
+        {
+            UserProfile first = AddUser("first");
+            UserProfile second = AddUser("second");
+
+            Assert.Throws<UnauthorizedAccessException>(() => _store.SetPassword(
+                first.Id,
+                second.Id,
+                null,
+                "attacker password".ConvertToSecureString()));
+        }
+
+        private UserProfile AddUser(string userName)
+        {
+            return _store.AddUser(UserProfile.BuiltInAdministratorId, userName);
         }
     }
 }

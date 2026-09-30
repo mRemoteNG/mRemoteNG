@@ -9,6 +9,7 @@ namespace mRemoteNG.Config.UserProfiles
         ConnectionProfile AddProfile(Guid userId, string name, string databasePath, bool isShared = false);
         void RenameProfile(Guid userId, Guid profileId, string name);
         void DeleteProfile(Guid userId, Guid profileId);
+        void SetShared(Guid userId, Guid profileId, bool isShared);
         void SetAccess(Guid administratorId, Guid profileId, Guid userId, ProfileAccessLevel accessLevel);
         void SetLoadOnStartup(Guid userId, Guid profileId, bool loadOnStartup);
     }

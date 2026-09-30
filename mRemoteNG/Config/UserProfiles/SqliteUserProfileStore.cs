@@ -19,20 +19,34 @@ namespace mRemoteNG.Config.UserProfiles
 
         private readonly SqliteConnection _connection;
 
-        public SqliteUserProfileStore(string settingsPath)
+        public SqliteUserProfileStore(string settingsPath, SecureString initialAdministratorPassword = null)
         {
             if (string.IsNullOrWhiteSpace(settingsPath))
                 throw new ArgumentException("A settings path is required.", nameof(settingsPath));
 
             Directory.CreateDirectory(settingsPath);
+            bool databaseExists = File.Exists(Path.Combine(settingsPath, DatabaseFileName));
             SqliteConnectionStringBuilder builder = new()
             {
                 DataSource = Path.Combine(settingsPath, DatabaseFileName),
-                Mode = SqliteOpenMode.ReadWriteCreate
+                Mode = SqliteOpenMode.ReadWriteCreate,
+                Pooling = false
             };
             _connection = new SqliteConnection(builder.ToString());
             _connection.Open();
             Initialize();
+            UserProfile administrator = GetUser(UserProfile.BuiltInAdministratorId);
+            if (!administrator.HasPassword)
+            {
+                if (initialAdministratorPassword is null || initialAdministratorPassword.Length == 0)
+                {
+                    _connection.Dispose();
+                    throw new InvalidOperationException(databaseExists
+                        ? "The built-in administrator must be assigned a password."
+                        : "An initial administrator password is required.");
+                }
+                SetPasswordInternal(UserProfile.BuiltInAdministratorId, initialAdministratorPassword);
+            }
         }
 
         public UserProfile EnsureFirstRunUsers(string windowsUserName)
@@ -41,7 +55,11 @@ namespace mRemoteNG.Config.UserProfiles
                 throw new ArgumentException("A Windows user name is required.", nameof(windowsUserName));
 
             EnsureBuiltInAdministrator();
-            return GetUser(windowsUserName) ?? AddUser(windowsUserName);
+            UserProfile user = GetUser(windowsUserName);
+            if (user is not null)
+                return user;
+
+            return AddUserInternal(windowsUserName);
         }
 
         public IReadOnlyList<UserProfile> GetUsers()
@@ -76,7 +94,40 @@ namespace mRemoteNG.Config.UserProfiles
             return reader.Read() ? ReadUser(reader) : null;
         }
 
-        public UserProfile AddUser(string userName)
+        public UserProfile AddUser(Guid administratorId, string userName)
+        {
+            DemandAdministrator(administratorId);
+            return AddUserInternal(userName);
+        }
+
+        public void RemoveUser(Guid administratorId, Guid userId)
+        {
+            DemandAdministrator(administratorId);
+            if (userId == UserProfile.BuiltInAdministratorId)
+                throw new InvalidOperationException("The built-in administrator cannot be removed.");
+
+            using SqliteCommand command = CreateCommand("DELETE FROM users WHERE id = @id;");
+            command.Parameters.AddWithValue("@id", userId.ToString());
+            command.ExecuteNonQuery();
+        }
+
+        public void SetPassword(
+            Guid actingUserId,
+            Guid userId,
+            SecureString currentPassword,
+            SecureString newPassword)
+        {
+            EnsureUserExists(actingUserId);
+            EnsureUserExists(userId);
+            if (actingUserId != userId && !IsAdministrator(actingUserId))
+                throw new UnauthorizedAccessException("Only an administrator can reset another user's password.");
+            if (actingUserId == userId && !VerifyPassword(userId, currentPassword))
+                throw new UnauthorizedAccessException("The current password is incorrect.");
+
+            SetPasswordInternal(userId, newPassword);
+        }
+
+        private UserProfile AddUserInternal(string userName)
         {
             if (string.IsNullOrWhiteSpace(userName))
                 throw new ArgumentException("A user name is required.", nameof(userName));
@@ -90,17 +141,7 @@ namespace mRemoteNG.Config.UserProfiles
             return GetUser(id);
         }
 
-        public void RemoveUser(Guid userId)
-        {
-            if (userId == UserProfile.BuiltInAdministratorId)
-                throw new InvalidOperationException("The built-in administrator cannot be removed.");
-
-            using SqliteCommand command = CreateCommand("DELETE FROM users WHERE id = @id;");
-            command.Parameters.AddWithValue("@id", userId.ToString());
-            command.ExecuteNonQuery();
-        }
-
-        public void SetPassword(Guid userId, SecureString password)
+        private void SetPasswordInternal(Guid userId, SecureString password)
         {
             if (password is null || password.Length == 0)
                 throw new ArgumentException("A password is required.", nameof(password));
@@ -137,7 +178,7 @@ namespace mRemoteNG.Config.UserProfiles
                 return false;
 
             if (reader.IsDBNull(0) || reader.IsDBNull(1))
-                return password.Length == 0;
+                return false;
 
             byte[] salt = (byte[])reader[0];
             byte[] expectedHash = (byte[])reader[1];
@@ -166,7 +207,9 @@ namespace mRemoteNG.Config.UserProfiles
                        COALESCE(a.load_on_startup, 0)
                 FROM connection_profiles p
                 LEFT JOIN profile_access a ON a.profile_id = p.id AND a.user_id = @userId
-                WHERE @admin = 1 OR p.is_shared = 1 OR a.access_level > 0
+                WHERE @admin = 1
+                   OR (a.access_level IS NULL AND p.is_shared = 1)
+                   OR a.access_level > 0
                 ORDER BY p.name;
                 """;
             using SqliteCommand command = CreateCommand(sql);
@@ -242,6 +285,16 @@ namespace mRemoteNG.Config.UserProfiles
             command.ExecuteNonQuery();
         }
 
+        public void SetShared(Guid userId, Guid profileId, bool isShared)
+        {
+            DemandAccess(userId, profileId, ProfileAccessLevel.Owner);
+            using SqliteCommand command = CreateCommand(
+                "UPDATE connection_profiles SET is_shared = @shared WHERE id = @id;");
+            command.Parameters.AddWithValue("@shared", isShared ? 1 : 0);
+            command.Parameters.AddWithValue("@id", profileId.ToString());
+            command.ExecuteNonQuery();
+        }
+
         public void SetAccess(Guid administratorId, Guid profileId, Guid userId, ProfileAccessLevel accessLevel)
         {
             DemandAdministrator(administratorId);
@@ -279,13 +332,14 @@ namespace mRemoteNG.Config.UserProfiles
         public void Dispose()
         {
             _connection.Dispose();
-            SqliteConnection.ClearAllPools();
         }
 
         private void Initialize()
         {
             using SqliteCommand command = CreateCommand("""
                 PRAGMA foreign_keys = ON;
+                PRAGMA busy_timeout = 5000;
+                PRAGMA journal_mode = WAL;
                 CREATE TABLE IF NOT EXISTS users (
                     id TEXT PRIMARY KEY,
                     user_name TEXT NOT NULL COLLATE NOCASE UNIQUE,
@@ -296,7 +350,7 @@ namespace mRemoteNG.Config.UserProfiles
                 );
                 CREATE TABLE IF NOT EXISTS connection_profiles (
                     id TEXT PRIMARY KEY,
-                    name TEXT NOT NULL COLLATE NOCASE UNIQUE,
+                    name TEXT NOT NULL COLLATE NOCASE,
                     database_path TEXT NOT NULL UNIQUE,
                     is_shared INTEGER NOT NULL DEFAULT 0
                 );
