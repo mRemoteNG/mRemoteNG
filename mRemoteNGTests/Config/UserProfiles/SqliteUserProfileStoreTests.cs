@@ -51,9 +51,9 @@ namespace mRemoteNGTests.Config.UserProfiles
         [Test]
         public void PasswordProvider_StoresAndVerifiesPassword()
         {
-            UserProfile user = AddUser("person");
+            UserProfile user = _store.AddUser(Administrator, "person");
             _store.SetPassword(
-                UserProfile.BuiltInAdministratorId,
+                Administrator,
                 user.Id,
                 null,
                 "correct horse battery staple".ConvertToSecureString());
@@ -66,64 +66,68 @@ namespace mRemoteNGTests.Config.UserProfiles
         [Test]
         public void SharedProfile_IsReadOnlyForOtherUsers()
         {
-            UserProfile owner = AddUser("owner");
-            UserProfile reader = AddUser("reader");
-            _store.AddProfile(owner.Id, "Shared", Path.Combine(_settingsPath, "shared.db"), true);
+            UserProfileSession owner = AddUser("owner");
+            UserProfileSession reader = AddUser("reader");
+            _store.AddProfile(owner, "Shared", Path.Combine(_settingsPath, "shared.db"), true);
 
-            ConnectionProfile profile = _store.GetProfiles(reader.Id).Single();
+            ConnectionProfile profile = _store.GetProfiles(reader).Single();
 
             Assert.That(profile.AccessLevel, Is.EqualTo(ProfileAccessLevel.ReadOnly));
-            Assert.Throws<UnauthorizedAccessException>(() => _store.RenameProfile(reader.Id, profile.Id, "Renamed"));
+            Assert.Throws<UnauthorizedAccessException>(() => _store.RenameProfile(reader, profile.Id, "Renamed"));
         }
 
         [Test]
         public void Administrator_CanGrantWriteAccess()
         {
-            UserProfile owner = AddUser("owner");
-            UserProfile writer = AddUser("writer");
-            ConnectionProfile profile = _store.AddProfile(owner.Id, "Private", Path.Combine(_settingsPath, "private.db"));
+            UserProfileSession owner = AddUser("owner");
+            UserProfileSession writer = AddUser("writer");
+            ConnectionProfile profile = _store.AddProfile(owner, "Private", Path.Combine(_settingsPath, "private.db"));
 
-            _store.SetAccess(UserProfile.BuiltInAdministratorId, profile.Id, writer.Id, ProfileAccessLevel.Write);
-            _store.RenameProfile(writer.Id, profile.Id, "Writable");
+            _store.SetAccess(Administrator, profile.Id, writer.User.Id, ProfileAccessLevel.Write);
+            _store.RenameProfile(writer, profile.Id, "Writable");
 
-            Assert.That(_store.GetProfiles(writer.Id).Single().Name, Is.EqualTo("Writable"));
+            Assert.That(_store.GetProfiles(writer).Single().Name, Is.EqualTo("Writable"));
         }
 
         [Test]
         public void OnlyAdministrator_CanDeleteProfile()
         {
-            UserProfile owner = AddUser("owner");
-            ConnectionProfile profile = _store.AddProfile(owner.Id, "Private", Path.Combine(_settingsPath, "private.db"));
+            UserProfileSession owner = AddUser("owner");
+            ConnectionProfile profile = _store.AddProfile(owner, "Private", Path.Combine(_settingsPath, "private.db"));
 
-            Assert.Throws<UnauthorizedAccessException>(() => _store.DeleteProfile(owner.Id, profile.Id));
+            Assert.Throws<UnauthorizedAccessException>(() => _store.DeleteProfile(owner, profile.Id));
 
-            _store.DeleteProfile(UserProfile.BuiltInAdministratorId, profile.Id);
-            Assert.That(_store.GetProfiles(owner.Id), Is.Empty);
+            _store.DeleteProfile(Administrator, profile.Id);
+            Assert.That(_store.GetProfiles(owner), Is.Empty);
         }
 
         [Test]
         public void LoadOnStartup_IsStoredPerUser()
         {
-            UserProfile owner = AddUser("owner");
-            UserProfile reader = AddUser("reader");
-            ConnectionProfile profile = _store.AddProfile(owner.Id, "Shared", Path.Combine(_settingsPath, "shared.db"), true);
+            UserProfileSession owner = AddUser("owner");
+            UserProfileSession reader = AddUser("reader");
+            ConnectionProfile profile = _store.AddProfile(owner, "Shared", Path.Combine(_settingsPath, "shared.db"), true);
 
-            _store.SetLoadOnStartup(reader.Id, profile.Id, true);
+            _store.SetLoadOnStartup(reader, profile.Id, true);
 
-            Assert.That(_store.GetProfiles(reader.Id).Single().LoadOnStartup, Is.True);
-            Assert.That(_store.GetProfiles(owner.Id).Single().LoadOnStartup, Is.False);
+            Assert.That(_store.GetProfiles(reader).Single().LoadOnStartup, Is.True);
+            Assert.That(_store.GetProfiles(owner).Single().LoadOnStartup, Is.False);
+
+            _store.SetShared(owner, profile.Id, false);
+            Assert.That(_store.GetProfiles(reader), Is.Empty);
         }
 
         [Test]
         public void ProfileCatalog_PersistsAcrossInstances()
         {
-            UserProfile owner = AddUser("owner");
-            _store.AddProfile(owner.Id, "Persistent", Path.Combine(_settingsPath, "persistent.db"));
+            UserProfileSession owner = AddUser("owner");
+            _store.AddProfile(owner, "Persistent", Path.Combine(_settingsPath, "persistent.db"));
             _store.Dispose();
 
             _store = new SqliteUserProfileStore(_settingsPath);
+            owner = _store.Authenticate("owner", "owner password".ConvertToSecureString());
 
-            Assert.That(_store.GetProfiles(owner.Id).Single().Name, Is.EqualTo("Persistent"));
+            Assert.That(_store.GetProfiles(owner).Single().Name, Is.EqualTo("Persistent"));
         }
 
         [Test]
@@ -144,19 +148,28 @@ namespace mRemoteNGTests.Config.UserProfiles
         [Test]
         public void User_CannotResetAnotherUsersPassword()
         {
-            UserProfile first = AddUser("first");
-            UserProfile second = AddUser("second");
+            UserProfileSession first = AddUser("first");
+            UserProfileSession second = AddUser("second");
 
             Assert.Throws<UnauthorizedAccessException>(() => _store.SetPassword(
-                first.Id,
-                second.Id,
-                null,
+                first,
+                second.User.Id,
+                "first password".ConvertToSecureString(),
                 "attacker password".ConvertToSecureString()));
         }
 
-        private UserProfile AddUser(string userName)
+        private UserProfileSession Administrator =>
+            _store.Authenticate("Admin", "admin password".ConvertToSecureString());
+
+        private UserProfileSession AddUser(string userName)
         {
-            return _store.AddUser(UserProfile.BuiltInAdministratorId, userName);
+            UserProfile user = _store.AddUser(Administrator, userName);
+            _store.SetPassword(
+                Administrator,
+                user.Id,
+                null,
+                $"{userName} password".ConvertToSecureString());
+            return _store.Authenticate(userName, $"{userName} password".ConvertToSecureString());
         }
     }
 }

@@ -17,6 +17,7 @@ namespace mRemoteNG.Config.UserProfiles
         private const int PasswordIterations = 210_000;
         private const int PasswordHashLength = 32;
 
+        private readonly Guid _storeId = Guid.NewGuid();
         private readonly SqliteConnection _connection;
 
         public SqliteUserProfileStore(string settingsPath, SecureString initialAdministratorPassword = null)
@@ -94,15 +95,23 @@ namespace mRemoteNG.Config.UserProfiles
             return reader.Read() ? ReadUser(reader) : null;
         }
 
-        public UserProfile AddUser(Guid administratorId, string userName)
+        public UserProfileSession Authenticate(string userName, SecureString password)
         {
-            DemandAdministrator(administratorId);
+            UserProfile user = GetUser(userName);
+            return user is not null && VerifyPassword(user.Id, password)
+                ? new UserProfileSession(_storeId, user)
+                : null;
+        }
+
+        public UserProfile AddUser(UserProfileSession administrator, string userName)
+        {
+            DemandAdministrator(administrator);
             return AddUserInternal(userName);
         }
 
-        public void RemoveUser(Guid administratorId, Guid userId)
+        public void RemoveUser(UserProfileSession administrator, Guid userId)
         {
-            DemandAdministrator(administratorId);
+            DemandAdministrator(administrator);
             if (userId == UserProfile.BuiltInAdministratorId)
                 throw new InvalidOperationException("The built-in administrator cannot be removed.");
 
@@ -112,12 +121,12 @@ namespace mRemoteNG.Config.UserProfiles
         }
 
         public void SetPassword(
-            Guid actingUserId,
+            UserProfileSession actingUser,
             Guid userId,
             SecureString currentPassword,
             SecureString newPassword)
         {
-            EnsureUserExists(actingUserId);
+            Guid actingUserId = DemandAuthenticated(actingUser);
             EnsureUserExists(userId);
             if (actingUserId != userId && !IsAdministrator(actingUserId))
                 throw new UnauthorizedAccessException("Only an administrator can reset another user's password.");
@@ -194,9 +203,9 @@ namespace mRemoteNG.Config.UserProfiles
             }
         }
 
-        public IReadOnlyList<ConnectionProfile> GetProfiles(Guid userId)
+        public IReadOnlyList<ConnectionProfile> GetProfiles(UserProfileSession user)
         {
-            EnsureUserExists(userId);
+            Guid userId = DemandAuthenticated(user);
             bool isAdministrator = IsAdministrator(userId);
             const string sql = """
                 SELECT p.id, p.name, p.database_path, p.is_shared,
@@ -204,9 +213,10 @@ namespace mRemoteNG.Config.UserProfiles
                             WHEN a.access_level IS NOT NULL THEN a.access_level
                             WHEN p.is_shared = 1 THEN @readOnly
                             ELSE @none END,
-                       COALESCE(a.load_on_startup, 0)
+                       COALESCE(pref.load_on_startup, 0)
                 FROM connection_profiles p
                 LEFT JOIN profile_access a ON a.profile_id = p.id AND a.user_id = @userId
+                LEFT JOIN profile_preferences pref ON pref.profile_id = p.id AND pref.user_id = @userId
                 WHERE @admin = 1
                    OR (a.access_level IS NULL AND p.is_shared = 1)
                    OR a.access_level > 0
@@ -235,12 +245,13 @@ namespace mRemoteNG.Config.UserProfiles
             return profiles;
         }
 
-        public ConnectionProfile AddProfile(Guid userId, string name, string databasePath, bool isShared = false)
+        public ConnectionProfile AddProfile(UserProfileSession user, string name, string databasePath, bool isShared = false)
         {
-            EnsureUserExists(userId);
+            Guid userId = DemandAuthenticated(user);
             ValidateProfileName(name);
             if (string.IsNullOrWhiteSpace(databasePath))
                 throw new ArgumentException("A profile database path is required.", nameof(databasePath));
+            string normalizedDatabasePath = Path.GetFullPath(databasePath);
 
             Guid profileId = Guid.NewGuid();
             using SqliteTransaction transaction = _connection.BeginTransaction();
@@ -250,7 +261,7 @@ namespace mRemoteNG.Config.UserProfiles
             {
                 command.Parameters.AddWithValue("@id", profileId.ToString());
                 command.Parameters.AddWithValue("@name", name.Trim());
-                command.Parameters.AddWithValue("@path", databasePath);
+                command.Parameters.AddWithValue("@path", normalizedDatabasePath);
                 command.Parameters.AddWithValue("@shared", isShared ? 1 : 0);
                 command.ExecuteNonQuery();
             }
@@ -264,30 +275,30 @@ namespace mRemoteNG.Config.UserProfiles
                 command.ExecuteNonQuery();
             }
             transaction.Commit();
-            return FindProfile(userId, profileId);
+            return FindProfile(user, profileId);
         }
 
-        public void RenameProfile(Guid userId, Guid profileId, string name)
+        public void RenameProfile(UserProfileSession user, Guid profileId, string name)
         {
             ValidateProfileName(name);
-            DemandAccess(userId, profileId, ProfileAccessLevel.Write);
+            DemandAccess(user, profileId, ProfileAccessLevel.Write);
             using SqliteCommand command = CreateCommand("UPDATE connection_profiles SET name = @name WHERE id = @id;");
             command.Parameters.AddWithValue("@name", name.Trim());
             command.Parameters.AddWithValue("@id", profileId.ToString());
             command.ExecuteNonQuery();
         }
 
-        public void DeleteProfile(Guid userId, Guid profileId)
+        public void DeleteProfile(UserProfileSession user, Guid profileId)
         {
-            DemandAdministrator(userId);
+            DemandAdministrator(user);
             using SqliteCommand command = CreateCommand("DELETE FROM connection_profiles WHERE id = @id;");
             command.Parameters.AddWithValue("@id", profileId.ToString());
             command.ExecuteNonQuery();
         }
 
-        public void SetShared(Guid userId, Guid profileId, bool isShared)
+        public void SetShared(UserProfileSession user, Guid profileId, bool isShared)
         {
-            DemandAccess(userId, profileId, ProfileAccessLevel.Owner);
+            DemandAccess(user, profileId, ProfileAccessLevel.Owner);
             using SqliteCommand command = CreateCommand(
                 "UPDATE connection_profiles SET is_shared = @shared WHERE id = @id;");
             command.Parameters.AddWithValue("@shared", isShared ? 1 : 0);
@@ -295,9 +306,9 @@ namespace mRemoteNG.Config.UserProfiles
             command.ExecuteNonQuery();
         }
 
-        public void SetAccess(Guid administratorId, Guid profileId, Guid userId, ProfileAccessLevel accessLevel)
+        public void SetAccess(UserProfileSession administrator, Guid profileId, Guid userId, ProfileAccessLevel accessLevel)
         {
-            DemandAdministrator(administratorId);
+            DemandAdministrator(administrator);
             EnsureUserExists(userId);
             if (!Enum.IsDefined(accessLevel))
                 throw new ArgumentOutOfRangeException(nameof(accessLevel));
@@ -314,17 +325,17 @@ namespace mRemoteNG.Config.UserProfiles
                 throw new InvalidOperationException("The connection profile does not exist.");
         }
 
-        public void SetLoadOnStartup(Guid userId, Guid profileId, bool loadOnStartup)
+        public void SetLoadOnStartup(UserProfileSession user, Guid profileId, bool loadOnStartup)
         {
-            DemandAccess(userId, profileId, ProfileAccessLevel.ReadOnly);
+            Guid userId = DemandAuthenticated(user);
+            DemandAccess(user, profileId, ProfileAccessLevel.ReadOnly);
             using SqliteCommand command = CreateCommand("""
-                INSERT INTO profile_access (profile_id, user_id, access_level, load_on_startup)
-                VALUES (@profileId, @userId, @access, @load)
+                INSERT INTO profile_preferences (profile_id, user_id, load_on_startup)
+                VALUES (@profileId, @userId, @load)
                 ON CONFLICT(profile_id, user_id) DO UPDATE SET load_on_startup = excluded.load_on_startup;
                 """);
             command.Parameters.AddWithValue("@profileId", profileId.ToString());
             command.Parameters.AddWithValue("@userId", userId.ToString());
-            command.Parameters.AddWithValue("@access", (int)GetAccess(userId, profileId));
             command.Parameters.AddWithValue("@load", loadOnStartup ? 1 : 0);
             command.ExecuteNonQuery();
         }
@@ -351,13 +362,19 @@ namespace mRemoteNG.Config.UserProfiles
                 CREATE TABLE IF NOT EXISTS connection_profiles (
                     id TEXT PRIMARY KEY,
                     name TEXT NOT NULL COLLATE NOCASE,
-                    database_path TEXT NOT NULL UNIQUE,
+                    database_path TEXT NOT NULL COLLATE NOCASE UNIQUE,
                     is_shared INTEGER NOT NULL DEFAULT 0
                 );
                 CREATE TABLE IF NOT EXISTS profile_access (
                     profile_id TEXT NOT NULL REFERENCES connection_profiles(id) ON DELETE CASCADE,
                     user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
                     access_level INTEGER NOT NULL,
+                    load_on_startup INTEGER NOT NULL DEFAULT 0,
+                    PRIMARY KEY (profile_id, user_id)
+                );
+                CREATE TABLE IF NOT EXISTS profile_preferences (
+                    profile_id TEXT NOT NULL REFERENCES connection_profiles(id) ON DELETE CASCADE,
+                    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
                     load_on_startup INTEGER NOT NULL DEFAULT 0,
                     PRIMARY KEY (profile_id, user_id)
                 );
@@ -376,9 +393,9 @@ namespace mRemoteNG.Config.UserProfiles
             command.ExecuteNonQuery();
         }
 
-        private ConnectionProfile FindProfile(Guid userId, Guid profileId)
+        private ConnectionProfile FindProfile(UserProfileSession user, Guid profileId)
         {
-            foreach (ConnectionProfile profile in GetProfiles(userId))
+            foreach (ConnectionProfile profile in GetProfiles(user))
             {
                 if (profile.Id == profileId)
                     return profile;
@@ -407,18 +424,26 @@ namespace mRemoteNG.Config.UserProfiles
             return (ProfileAccessLevel)Convert.ToInt32(value, CultureInfo.InvariantCulture);
         }
 
-        private void DemandAccess(Guid userId, Guid profileId, ProfileAccessLevel requiredAccess)
+        private void DemandAccess(UserProfileSession user, Guid profileId, ProfileAccessLevel requiredAccess)
         {
-            EnsureUserExists(userId);
+            Guid userId = DemandAuthenticated(user);
             if (GetAccess(userId, profileId) < requiredAccess)
                 throw new UnauthorizedAccessException("The user does not have permission to perform this action.");
         }
 
-        private void DemandAdministrator(Guid userId)
+        private void DemandAdministrator(UserProfileSession user)
         {
-            EnsureUserExists(userId);
+            Guid userId = DemandAuthenticated(user);
             if (!IsAdministrator(userId))
                 throw new UnauthorizedAccessException("Only an administrator can perform this action.");
+        }
+
+        private Guid DemandAuthenticated(UserProfileSession user)
+        {
+            if (user is null || user.StoreId != _storeId)
+                throw new UnauthorizedAccessException("An authenticated user session is required.");
+            EnsureUserExists(user.User.Id);
+            return user.User.Id;
         }
 
         private bool IsAdministrator(Guid userId)

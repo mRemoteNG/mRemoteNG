@@ -5,12 +5,12 @@ namespace mRemoteNG.Config.UserProfiles
 {
     public interface IConnectionProfileProvider
     {
-        IReadOnlyList<ConnectionProfile> GetProfiles(Guid userId);
-        ConnectionProfile AddProfile(Guid userId, string name, string databasePath, bool isShared = false);
-        void RenameProfile(Guid userId, Guid profileId, string name);
-        void DeleteProfile(Guid userId, Guid profileId);
-        void SetShared(Guid userId, Guid profileId, bool isShared);
-        void SetAccess(Guid administratorId, Guid profileId, Guid userId, ProfileAccessLevel accessLevel);
-        void SetLoadOnStartup(Guid userId, Guid profileId, bool loadOnStartup);
+        IReadOnlyList<ConnectionProfile> GetProfiles(UserProfileSession user);
+        ConnectionProfile AddProfile(UserProfileSession user, string name, string databasePath, bool isShared = false);
+        void RenameProfile(UserProfileSession user, Guid profileId, string name);
+        void DeleteProfile(UserProfileSession user, Guid profileId);
+        void SetShared(UserProfileSession user, Guid profileId, bool isShared);
+        void SetAccess(UserProfileSession administrator, Guid profileId, Guid userId, ProfileAccessLevel accessLevel);
+        void SetLoadOnStartup(UserProfileSession user, Guid profileId, bool loadOnStartup);
     }
 }

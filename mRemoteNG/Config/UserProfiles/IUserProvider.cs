@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security;
 
 namespace mRemoteNG.Config.UserProfiles
 {
@@ -8,7 +9,8 @@ namespace mRemoteNG.Config.UserProfiles
         IReadOnlyList<UserProfile> GetUsers();
         UserProfile GetUser(Guid userId);
         UserProfile GetUser(string userName);
-        UserProfile AddUser(Guid administratorId, string userName);
-        void RemoveUser(Guid administratorId, Guid userId);
+        UserProfileSession Authenticate(string userName, SecureString password);
+        UserProfile AddUser(UserProfileSession administrator, string userName);
+        void RemoveUser(UserProfileSession administrator, Guid userId);
     }
 }
