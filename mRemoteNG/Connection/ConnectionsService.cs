@@ -20,6 +20,9 @@ using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Sql;
 using mRemoteNG.Properties;
+using mRemoteNG.Config.UserProfiles;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
+using mRemoteNG.Security.Factories;
 
 namespace mRemoteNG.Connection
 {
@@ -37,6 +40,7 @@ namespace mRemoteNG.Connection
         public bool IsConnectionsFileLoaded { get; set; }
         public bool UsingDatabase { get; private set; }
         public string ConnectionFileName { get; private set; }
+        public IConnectionProfileDataProvider ProfileDataProvider { get; set; }
         public RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public DateTime LastSqlUpdate { get; set; }
 		public DateTime LastFileUpdate { get; set; }
@@ -129,7 +133,9 @@ namespace mRemoteNG.Connection
             ConnectionTreeModel oldConnectionTreeModel = ConnectionTreeModel;
             bool oldIsUsingDatabaseValue = UsingDatabase;
 
-            IConnectionsLoader connectionLoader = useDatabase
+            IConnectionsLoader connectionLoader = ProfileDataProvider is not null
+                ? new ProfileConnectionsLoader(ProfileDataProvider)
+                : useDatabase
                 ? (IConnectionsLoader)new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
                 : new XmlConnectionsLoader(connectionFileName);
 
@@ -245,7 +251,9 @@ namespace mRemoteNG.Connection
 
                 bool previouslyUsingDatabase = UsingDatabase;
 
-                ISaver<ConnectionTreeModel> saver = useDatabase
+                ISaver<ConnectionTreeModel> saver = ProfileDataProvider is not null
+                    ? new ProfileConnectionsSaver(ProfileDataProvider, saveFilter)
+                    : useDatabase
                     ? (ISaver<ConnectionTreeModel>)new SqlConnectionsSaver(saveFilter, _localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
                     : new XmlConnectionsSaver(connectionFileName, saveFilter);
 

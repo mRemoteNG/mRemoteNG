@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Security;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.UserProfiles
 {
@@ -12,5 +14,10 @@ namespace mRemoteNG.Config.UserProfiles
         void SetShared(UserProfileSession user, Guid profileId, bool isShared);
         void SetAccess(UserProfileSession administrator, Guid profileId, Guid userId, ProfileAccessLevel accessLevel);
         void SetLoadOnStartup(UserProfileSession user, Guid profileId, bool loadOnStartup);
+        IConnectionProfileDataProvider OpenProfile(
+            UserProfileSession user,
+            Guid profileId,
+            ICryptographyProvider cryptographyProvider,
+            SecureString encryptionKey);
     }
 }

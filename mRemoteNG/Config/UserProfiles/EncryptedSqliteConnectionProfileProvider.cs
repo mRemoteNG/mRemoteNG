@@ -16,7 +16,7 @@ namespace mRemoteNG.Config.UserProfiles
         private readonly ProfileAccessLevel _accessLevel;
         private readonly SqliteConnection _connection;
 
-        public EncryptedSqliteConnectionProfileProvider(
+        internal EncryptedSqliteConnectionProfileProvider(
             string databasePath,
             ICryptographyProvider cryptographyProvider,
             SecureString encryptionKey,

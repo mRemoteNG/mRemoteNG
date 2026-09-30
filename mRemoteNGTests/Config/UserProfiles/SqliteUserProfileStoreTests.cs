@@ -169,6 +169,19 @@ namespace mRemoteNGTests.Config.UserProfiles
             Assert.That(File.ReadAllText(existingPath), Is.EqualTo("existing data"));
         }
 
+        [Test]
+        public void DeleteProfile_RemovesCatalogAndProfileFiles()
+        {
+            UserProfileSession owner = AddUser("owner");
+            string databasePath = Path.Combine(_settingsPath, "owned.db");
+            ConnectionProfile profile = _store.AddProfile(owner, "Owned", databasePath);
+
+            _store.DeleteProfile(Administrator, profile.Id);
+
+            Assert.That(File.Exists(databasePath), Is.False);
+            Assert.That(_store.GetProfiles(owner), Is.Empty);
+        }
+
         private UserProfileSession Administrator =>
             _store.Authenticate("Admin", "admin password".ConvertToSecureString());
 

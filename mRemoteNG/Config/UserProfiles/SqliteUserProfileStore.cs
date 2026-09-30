@@ -7,6 +7,7 @@ using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Cryptography;
 using Microsoft.Data.Sqlite;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.UserProfiles
 {
@@ -61,6 +62,12 @@ namespace mRemoteNG.Config.UserProfiles
                 return user;
 
             return AddUserInternal(windowsUserName);
+        }
+
+        public void SetInitialUserPassword(UserProfileSession administrator, Guid userId, SecureString password)
+        {
+            DemandAdministrator(administrator);
+            SetPasswordInternal(userId, password);
         }
 
         public IReadOnlyList<UserProfile> GetUsers()
@@ -305,9 +312,50 @@ namespace mRemoteNG.Config.UserProfiles
         public void DeleteProfile(UserProfileSession user, Guid profileId)
         {
             DemandAdministrator(user);
-            using SqliteCommand command = CreateCommand("DELETE FROM connection_profiles WHERE id = @id;");
+            string databasePath;
+            using (SqliteCommand lookup = CreateCommand("SELECT database_path FROM connection_profiles WHERE id = @id;"))
+            {
+                lookup.Parameters.AddWithValue("@id", profileId.ToString());
+                databasePath = lookup.ExecuteScalar() as string
+                    ?? throw new InvalidOperationException("The connection profile does not exist.");
+            }
+
+            string backupPath = databasePath + $".deleting-{Guid.NewGuid():N}";
+            MoveProfileFiles(databasePath, backupPath);
+            try
+            {
+                using SqliteTransaction transaction = _connection.BeginTransaction();
+                using SqliteCommand command = CreateCommand("DELETE FROM connection_profiles WHERE id = @id;", transaction);
+                command.Parameters.AddWithValue("@id", profileId.ToString());
+                if (command.ExecuteNonQuery() == 0)
+                    throw new InvalidOperationException("The connection profile does not exist.");
+                transaction.Commit();
+            }
+            catch
+            {
+                RestoreProfileFiles(backupPath, databasePath);
+                throw;
+            }
+
+            DeleteProfileFiles(backupPath);
+        }
+
+        public IConnectionProfileDataProvider OpenProfile(
+            UserProfileSession user,
+            Guid profileId,
+            ICryptographyProvider cryptographyProvider,
+            SecureString encryptionKey)
+        {
+            Guid userId = DemandAuthenticated(user);
+            ProfileAccessLevel accessLevel = GetAccess(userId, profileId);
+            if (accessLevel < ProfileAccessLevel.ReadOnly)
+                throw new UnauthorizedAccessException("The user does not have permission to open this profile.");
+
+            using SqliteCommand command = CreateCommand("SELECT database_path FROM connection_profiles WHERE id = @id;");
             command.Parameters.AddWithValue("@id", profileId.ToString());
-            command.ExecuteNonQuery();
+            string databasePath = command.ExecuteScalar() as string
+                ?? throw new InvalidOperationException("The connection profile does not exist.");
+            return new EncryptedSqliteConnectionProfileProvider(databasePath, cryptographyProvider, encryptionKey, accessLevel);
         }
 
         public void SetShared(UserProfileSession user, Guid profileId, bool isShared)
@@ -478,6 +526,32 @@ namespace mRemoteNG.Config.UserProfiles
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("A profile name is required.", nameof(name));
+        }
+
+        private static void MoveProfileFiles(string databasePath, string backupPath)
+        {
+            string[] paths = { databasePath, databasePath + "-wal", databasePath + "-shm" };
+            foreach (string path in paths)
+            {
+                if (File.Exists(path))
+                    File.Move(path, path == databasePath ? backupPath : backupPath + path[databasePath.Length..]);
+            }
+        }
+
+        private static void RestoreProfileFiles(string backupPath, string databasePath)
+        {
+            string[] paths = { backupPath, backupPath + "-wal", backupPath + "-shm" };
+            foreach (string path in paths)
+            {
+                if (File.Exists(path))
+                    File.Move(path, path == backupPath ? databasePath : databasePath + path[backupPath.Length..]);
+            }
+        }
+
+        private static void DeleteProfileFiles(string backupPath)
+        {
+            foreach (string path in new[] { backupPath, backupPath + "-wal", backupPath + "-shm" })
+                File.Delete(path);
         }
 
         private static byte[] DerivePassword(SecureString password, byte[] salt, int iterations = PasswordIterations)
