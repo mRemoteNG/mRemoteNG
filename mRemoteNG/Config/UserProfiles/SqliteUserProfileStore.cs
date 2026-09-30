@@ -252,29 +252,43 @@ namespace mRemoteNG.Config.UserProfiles
             if (string.IsNullOrWhiteSpace(databasePath))
                 throw new ArgumentException("A profile database path is required.", nameof(databasePath));
             string normalizedDatabasePath = Path.GetFullPath(databasePath);
+            string profileDirectory = Path.GetDirectoryName(normalizedDatabasePath);
+            if (!string.IsNullOrEmpty(profileDirectory))
+                Directory.CreateDirectory(profileDirectory);
+            using (new FileStream(normalizedDatabasePath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+            {
+            }
 
             Guid profileId = Guid.NewGuid();
-            using SqliteTransaction transaction = _connection.BeginTransaction();
-            using (SqliteCommand command = CreateCommand(
-                       "INSERT INTO connection_profiles (id, name, database_path, is_shared) VALUES (@id, @name, @path, @shared);",
-                       transaction))
+            try
             {
-                command.Parameters.AddWithValue("@id", profileId.ToString());
-                command.Parameters.AddWithValue("@name", name.Trim());
-                command.Parameters.AddWithValue("@path", normalizedDatabasePath);
-                command.Parameters.AddWithValue("@shared", isShared ? 1 : 0);
-                command.ExecuteNonQuery();
+                using SqliteTransaction transaction = _connection.BeginTransaction();
+                using (SqliteCommand command = CreateCommand(
+                           "INSERT INTO connection_profiles (id, name, database_path, is_shared) VALUES (@id, @name, @path, @shared);",
+                           transaction))
+                {
+                    command.Parameters.AddWithValue("@id", profileId.ToString());
+                    command.Parameters.AddWithValue("@name", name.Trim());
+                    command.Parameters.AddWithValue("@path", normalizedDatabasePath);
+                    command.Parameters.AddWithValue("@shared", isShared ? 1 : 0);
+                    command.ExecuteNonQuery();
+                }
+                using (SqliteCommand command = CreateCommand(
+                           "INSERT INTO profile_access (profile_id, user_id, access_level) VALUES (@profileId, @userId, @access);",
+                           transaction))
+                {
+                    command.Parameters.AddWithValue("@profileId", profileId.ToString());
+                    command.Parameters.AddWithValue("@userId", userId.ToString());
+                    command.Parameters.AddWithValue("@access", (int)ProfileAccessLevel.Owner);
+                    command.ExecuteNonQuery();
+                }
+                transaction.Commit();
             }
-            using (SqliteCommand command = CreateCommand(
-                       "INSERT INTO profile_access (profile_id, user_id, access_level) VALUES (@profileId, @userId, @access);",
-                       transaction))
+            catch
             {
-                command.Parameters.AddWithValue("@profileId", profileId.ToString());
-                command.Parameters.AddWithValue("@userId", userId.ToString());
-                command.Parameters.AddWithValue("@access", (int)ProfileAccessLevel.Owner);
-                command.ExecuteNonQuery();
+                File.Delete(normalizedDatabasePath);
+                throw;
             }
-            transaction.Commit();
             return FindProfile(user, profileId);
         }
 

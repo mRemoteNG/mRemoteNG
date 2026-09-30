@@ -158,6 +158,17 @@ namespace mRemoteNGTests.Config.UserProfiles
                 "attacker password".ConvertToSecureString()));
         }
 
+        [Test]
+        public void AddProfile_RejectsExistingDatabaseFile()
+        {
+            UserProfileSession owner = AddUser("owner");
+            string existingPath = Path.Combine(_settingsPath, "existing.db");
+            File.WriteAllText(existingPath, "existing data");
+
+            Assert.Throws<IOException>(() => _store.AddProfile(owner, "Alias", existingPath));
+            Assert.That(File.ReadAllText(existingPath), Is.EqualTo("existing data"));
+        }
+
         private UserProfileSession Administrator =>
             _store.Authenticate("Admin", "admin password".ConvertToSecureString());
 

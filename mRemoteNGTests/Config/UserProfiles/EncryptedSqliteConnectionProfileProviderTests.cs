@@ -51,6 +51,23 @@ namespace mRemoteNGTests.Config.UserProfiles
         }
 
         [Test]
+        public void Load_UsesPersistedKeyDerivationIterations()
+        {
+            using (EncryptedSqliteConnectionProfileProvider provider = CreateProvider(ProfileAccessLevel.Write))
+                provider.Save("<Connections />");
+
+            AeadCryptographyProvider cryptographyProvider = new() { KeyDerivationIterations = 20_000 };
+            using EncryptedSqliteConnectionProfileProvider reopenedProvider = new(
+                _databasePath,
+                cryptographyProvider,
+                "profile password".ConvertToSecureString(),
+                ProfileAccessLevel.ReadOnly);
+
+            Assert.That(reopenedProvider.Load(), Is.EqualTo("<Connections />"));
+            Assert.That(cryptographyProvider.KeyDerivationIterations, Is.EqualTo(10_000));
+        }
+
+        [Test]
         public void Load_WithWrongPassword_FailsAuthentication()
         {
             using (EncryptedSqliteConnectionProfileProvider provider = CreateProvider(ProfileAccessLevel.Write))
