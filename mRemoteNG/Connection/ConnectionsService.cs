@@ -133,11 +133,13 @@ namespace mRemoteNG.Connection
             ConnectionTreeModel oldConnectionTreeModel = ConnectionTreeModel;
             bool oldIsUsingDatabaseValue = UsingDatabase;
 
-            IConnectionsLoader connectionLoader = ProfileDataProvider is not null
-                ? new ProfileConnectionsLoader(ProfileDataProvider)
-                : useDatabase
-                ? (IConnectionsLoader)new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
-                : new XmlConnectionsLoader(connectionFileName);
+            IConnectionsLoader connectionLoader;
+            if (ProfileDataProvider is not null)
+                connectionLoader = new ProfileConnectionsLoader(ProfileDataProvider);
+            else if (useDatabase)
+                connectionLoader = new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider);
+            else
+                connectionLoader = new XmlConnectionsLoader(connectionFileName);
 
             ConnectionTreeModel newConnectionTreeModel = connectionLoader.Load();
 
@@ -251,11 +253,13 @@ namespace mRemoteNG.Connection
 
                 bool previouslyUsingDatabase = UsingDatabase;
 
-                ISaver<ConnectionTreeModel> saver = ProfileDataProvider is not null
-                    ? new ProfileConnectionsSaver(ProfileDataProvider, saveFilter)
-                    : useDatabase
-                    ? (ISaver<ConnectionTreeModel>)new SqlConnectionsSaver(saveFilter, _localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
-                    : new XmlConnectionsSaver(connectionFileName, saveFilter);
+                ISaver<ConnectionTreeModel> saver;
+                if (ProfileDataProvider is not null)
+                    saver = new ProfileConnectionsSaver(ProfileDataProvider, saveFilter);
+                else if (useDatabase)
+                    saver = new SqlConnectionsSaver(saveFilter, _localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider);
+                else
+                    saver = new XmlConnectionsSaver(connectionFileName, saveFilter);
 
                 saver.Save(connectionTreeModel, propertyNameTrigger);
 

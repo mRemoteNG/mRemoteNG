@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Config.UserProfiles;
@@ -20,7 +19,7 @@ namespace mRemoteNG.Config.Connections
                 connectionTreeModel,
                 saveFilter,
                 Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile)
-                .Serialize(connectionTreeModel.RootNodes.First());
+                .Serialize(connectionTreeModel.RootNodes[0]);
             dataProvider.Save(xml);
         }
     }

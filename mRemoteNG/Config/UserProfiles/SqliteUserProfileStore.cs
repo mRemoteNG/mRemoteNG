@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security;
@@ -17,6 +18,10 @@ namespace mRemoteNG.Config.UserProfiles
         public const string DatabaseFileName = "mremoteng.profiles.db";
         private const int PasswordIterations = 210_000;
         private const int PasswordHashLength = 32;
+        private const string UserNameParameter = "@name";
+        private const string UserIdParameter = "@userId";
+        private const string ProfileIdParameter = "@profileId";
+        private const string ProfileNotFoundMessage = "The connection profile does not exist.";
 
         private readonly Guid _storeId = Guid.NewGuid();
         private readonly SqliteConnection _connection;
@@ -97,7 +102,7 @@ namespace mRemoteNG.Config.UserProfiles
 
             using SqliteCommand command = CreateCommand(
                 "SELECT id, user_name, is_administrator, password_hash IS NOT NULL FROM users WHERE user_name = @name COLLATE NOCASE;");
-            command.Parameters.AddWithValue("@name", userName.Trim());
+            command.Parameters.AddWithValue(UserNameParameter, userName.Trim());
             using SqliteDataReader reader = command.ExecuteReader();
             return reader.Read() ? ReadUser(reader) : null;
         }
@@ -152,7 +157,7 @@ namespace mRemoteNG.Config.UserProfiles
             using SqliteCommand command = CreateCommand(
                 "INSERT INTO users (id, user_name, is_administrator) VALUES (@id, @name, 0);");
             command.Parameters.AddWithValue("@id", id.ToString());
-            command.Parameters.AddWithValue("@name", userName.Trim());
+            command.Parameters.AddWithValue(UserNameParameter, userName.Trim());
             command.ExecuteNonQuery();
             return GetUser(id);
         }
@@ -234,7 +239,7 @@ namespace mRemoteNG.Config.UserProfiles
             command.Parameters.AddWithValue("@owner", (int)ProfileAccessLevel.Owner);
             command.Parameters.AddWithValue("@readOnly", (int)ProfileAccessLevel.ReadOnly);
             command.Parameters.AddWithValue("@none", (int)ProfileAccessLevel.None);
-            command.Parameters.AddWithValue("@userId", userId.ToString());
+            command.Parameters.AddWithValue(UserIdParameter, userId.ToString());
             using SqliteDataReader reader = command.ExecuteReader();
             List<ConnectionProfile> profiles = [];
             while (reader.Read())
@@ -262,9 +267,7 @@ namespace mRemoteNG.Config.UserProfiles
             string profileDirectory = Path.GetDirectoryName(normalizedDatabasePath);
             if (!string.IsNullOrEmpty(profileDirectory))
                 Directory.CreateDirectory(profileDirectory);
-            using (new FileStream(normalizedDatabasePath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
-            {
-            }
+            using FileStream _ = new(normalizedDatabasePath, FileMode.CreateNew, FileAccess.Write, FileShare.None);
 
             Guid profileId = Guid.NewGuid();
             try
@@ -275,7 +278,7 @@ namespace mRemoteNG.Config.UserProfiles
                            transaction))
                 {
                     command.Parameters.AddWithValue("@id", profileId.ToString());
-                    command.Parameters.AddWithValue("@name", name.Trim());
+                    command.Parameters.AddWithValue(UserNameParameter, name.Trim());
                     command.Parameters.AddWithValue("@path", normalizedDatabasePath);
                     command.Parameters.AddWithValue("@shared", isShared ? 1 : 0);
                     command.ExecuteNonQuery();
@@ -284,8 +287,8 @@ namespace mRemoteNG.Config.UserProfiles
                            "INSERT INTO profile_access (profile_id, user_id, access_level) VALUES (@profileId, @userId, @access);",
                            transaction))
                 {
-                    command.Parameters.AddWithValue("@profileId", profileId.ToString());
-                    command.Parameters.AddWithValue("@userId", userId.ToString());
+                    command.Parameters.AddWithValue(ProfileIdParameter, profileId.ToString());
+                    command.Parameters.AddWithValue(UserIdParameter, userId.ToString());
                     command.Parameters.AddWithValue("@access", (int)ProfileAccessLevel.Owner);
                     command.ExecuteNonQuery();
                 }
@@ -304,7 +307,7 @@ namespace mRemoteNG.Config.UserProfiles
             ValidateProfileName(name);
             DemandAccess(user, profileId, ProfileAccessLevel.Write);
             using SqliteCommand command = CreateCommand("UPDATE connection_profiles SET name = @name WHERE id = @id;");
-            command.Parameters.AddWithValue("@name", name.Trim());
+            command.Parameters.AddWithValue(UserNameParameter, name.Trim());
             command.Parameters.AddWithValue("@id", profileId.ToString());
             command.ExecuteNonQuery();
         }
@@ -317,7 +320,7 @@ namespace mRemoteNG.Config.UserProfiles
             {
                 lookup.Parameters.AddWithValue("@id", profileId.ToString());
                 databasePath = lookup.ExecuteScalar() as string
-                    ?? throw new InvalidOperationException("The connection profile does not exist.");
+                    ?? throw new InvalidOperationException(ProfileNotFoundMessage);
             }
 
             string backupPath = databasePath + $".deleting-{Guid.NewGuid():N}";
@@ -328,7 +331,7 @@ namespace mRemoteNG.Config.UserProfiles
                 using SqliteCommand command = CreateCommand("DELETE FROM connection_profiles WHERE id = @id;", transaction);
                 command.Parameters.AddWithValue("@id", profileId.ToString());
                 if (command.ExecuteNonQuery() == 0)
-                    throw new InvalidOperationException("The connection profile does not exist.");
+                    throw new InvalidOperationException(ProfileNotFoundMessage);
                 transaction.Commit();
             }
             catch
@@ -354,7 +357,7 @@ namespace mRemoteNG.Config.UserProfiles
             using SqliteCommand command = CreateCommand("SELECT database_path FROM connection_profiles WHERE id = @id;");
             command.Parameters.AddWithValue("@id", profileId.ToString());
             string databasePath = command.ExecuteScalar() as string
-                ?? throw new InvalidOperationException("The connection profile does not exist.");
+                ?? throw new InvalidOperationException(ProfileNotFoundMessage);
             return new EncryptedSqliteConnectionProfileProvider(databasePath, cryptographyProvider, encryptionKey, accessLevel);
         }
 
@@ -380,11 +383,11 @@ namespace mRemoteNG.Config.UserProfiles
                 VALUES (@profileId, @userId, @access)
                 ON CONFLICT(profile_id, user_id) DO UPDATE SET access_level = excluded.access_level;
                 """);
-            command.Parameters.AddWithValue("@profileId", profileId.ToString());
-            command.Parameters.AddWithValue("@userId", userId.ToString());
+            command.Parameters.AddWithValue(ProfileIdParameter, profileId.ToString());
+            command.Parameters.AddWithValue(UserIdParameter, userId.ToString());
             command.Parameters.AddWithValue("@access", (int)accessLevel);
             if (command.ExecuteNonQuery() == 0)
-                throw new InvalidOperationException("The connection profile does not exist.");
+                throw new InvalidOperationException(ProfileNotFoundMessage);
         }
 
         public void SetLoadOnStartup(UserProfileSession user, Guid profileId, bool loadOnStartup)
@@ -396,8 +399,8 @@ namespace mRemoteNG.Config.UserProfiles
                 VALUES (@profileId, @userId, @load)
                 ON CONFLICT(profile_id, user_id) DO UPDATE SET load_on_startup = excluded.load_on_startup;
                 """);
-            command.Parameters.AddWithValue("@profileId", profileId.ToString());
-            command.Parameters.AddWithValue("@userId", userId.ToString());
+            command.Parameters.AddWithValue(ProfileIdParameter, profileId.ToString());
+            command.Parameters.AddWithValue(UserIdParameter, userId.ToString());
             command.Parameters.AddWithValue("@load", loadOnStartup ? 1 : 0);
             command.ExecuteNonQuery();
         }
@@ -478,11 +481,11 @@ namespace mRemoteNG.Config.UserProfiles
                 """);
             command.Parameters.AddWithValue("@readOnly", (int)ProfileAccessLevel.ReadOnly);
             command.Parameters.AddWithValue("@none", (int)ProfileAccessLevel.None);
-            command.Parameters.AddWithValue("@userId", userId.ToString());
-            command.Parameters.AddWithValue("@profileId", profileId.ToString());
+            command.Parameters.AddWithValue(UserIdParameter, userId.ToString());
+            command.Parameters.AddWithValue(ProfileIdParameter, profileId.ToString());
             object value = command.ExecuteScalar();
             if (value is null)
-                throw new InvalidOperationException("The connection profile does not exist.");
+                throw new InvalidOperationException(ProfileNotFoundMessage);
             return (ProfileAccessLevel)Convert.ToInt32(value, CultureInfo.InvariantCulture);
         }
 
@@ -531,21 +534,15 @@ namespace mRemoteNG.Config.UserProfiles
         private static void MoveProfileFiles(string databasePath, string backupPath)
         {
             string[] paths = { databasePath, databasePath + "-wal", databasePath + "-shm" };
-            foreach (string path in paths)
-            {
-                if (File.Exists(path))
-                    File.Move(path, path == databasePath ? backupPath : backupPath + path[databasePath.Length..]);
-            }
+            foreach (string path in paths.Where(File.Exists))
+                File.Move(path, path == databasePath ? backupPath : backupPath + path[databasePath.Length..]);
         }
 
         private static void RestoreProfileFiles(string backupPath, string databasePath)
         {
             string[] paths = { backupPath, backupPath + "-wal", backupPath + "-shm" };
-            foreach (string path in paths)
-            {
-                if (File.Exists(path))
-                    File.Move(path, path == backupPath ? databasePath : databasePath + path[backupPath.Length..]);
-            }
+            foreach (string path in paths.Where(File.Exists))
+                File.Move(path, path == backupPath ? databasePath : databasePath + path[backupPath.Length..]);
         }
 
         private static void DeleteProfileFiles(string backupPath)
