@@ -9,14 +9,17 @@ namespace mRemoteNG.UI.Window
         #region  Windows Form Designer generated code
 		internal BrightIdeasSoftware.OLVColumn FilenameColumnHeader;
         internal BrightIdeasSoftware.OLVColumn DisplayNameColumnHeader;
+        internal BrightIdeasSoftware.OLVColumn CategoryColumnHeader;
         internal BrightIdeasSoftware.OLVColumn ArgumentsColumnHeader;
         internal BrightIdeasSoftware.OLVColumn WaitForExitColumnHeader;
         internal BrightIdeasSoftware.OLVColumn TryToIntegrateColumnHeader;
 	    internal BrightIdeasSoftware.OLVColumn WorkingDirColumnHeader;
 	    internal BrightIdeasSoftware.OLVColumn RunElevateHeader;
 		internal Controls.MrngTextBox DisplayNameTextBox;
+        internal Controls.MrngTextBox CategoryTextBox;
         internal BrightIdeasSoftware.OLVColumn ShowOnToolbarColumnHeader;
 		internal Controls.MrngLabel DisplayNameLabel;
+        internal Controls.MrngLabel CategoryLabel;
 		internal Controls.MrngTextBox ArgumentsCheckBox;
 		internal Controls.MrngTextBox FilenameTextBox;
 		internal Controls.MrngLabel ArgumentsLabel;
@@ -43,6 +46,7 @@ namespace mRemoteNG.UI.Window
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExternalToolsWindow));
             this.ToolsListObjView = new mRemoteNG.UI.Controls.MrngListView();
             this.DisplayNameColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.CategoryColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.FilenameColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ArgumentsColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.WorkingDirColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -58,9 +62,11 @@ namespace mRemoteNG.UI.Window
             this.PropertiesGroupBox = new MrngGroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.DisplayNameLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.CategoryLabel = new mRemoteNG.UI.Controls.MrngLabel();
             this.ShowOnToolbarCheckBox = new MrngCheckBox();
             this.WorkingDirTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
             this.DisplayNameTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.CategoryTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
             this.FilenameTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
             this.ArgumentsCheckBox = new mRemoteNG.UI.Controls.MrngTextBox();
             this.FilenameLabel = new mRemoteNG.UI.Controls.MrngLabel();
@@ -92,6 +98,7 @@ namespace mRemoteNG.UI.Window
             // ToolsListObjView
             // 
             this.ToolsListObjView.AllColumns.Add(this.DisplayNameColumnHeader);
+            this.ToolsListObjView.AllColumns.Add(this.CategoryColumnHeader);
             this.ToolsListObjView.AllColumns.Add(this.FilenameColumnHeader);
             this.ToolsListObjView.AllColumns.Add(this.ArgumentsColumnHeader);
             this.ToolsListObjView.AllColumns.Add(this.WorkingDirColumnHeader);
@@ -107,6 +114,7 @@ namespace mRemoteNG.UI.Window
             this.ToolsListObjView.CellEditUseWholeCell = false;
             this.ToolsListObjView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.DisplayNameColumnHeader,
+            this.CategoryColumnHeader,
             this.FilenameColumnHeader,
             this.ArgumentsColumnHeader,
             this.WorkingDirColumnHeader,
@@ -125,7 +133,7 @@ namespace mRemoteNG.UI.Window
             this.ToolsListObjView.RenderNonEditableCheckboxesAsDisabled = true;
             this.ToolsListObjView.ShowCommandMenuOnRightClick = true;
             this.ToolsListObjView.ShowGroups = false;
-            this.ToolsListObjView.Size = new System.Drawing.Size(827, 186);
+            this.ToolsListObjView.Size = new System.Drawing.Size(827, 160);
             this.ToolsListObjView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.ToolsListObjView.TabIndex = 0;
             this.ToolsListObjView.UseCompatibleStateImageBehavior = false;
@@ -143,6 +151,14 @@ namespace mRemoteNG.UI.Window
             this.DisplayNameColumnHeader.Text = "Display Name";
             this.DisplayNameColumnHeader.UseInitialLetterForGroup = true;
             this.DisplayNameColumnHeader.Width = 100;
+            //
+            // CategoryColumnHeader
+            //
+            this.CategoryColumnHeader.AspectName = "Category";
+            this.CategoryColumnHeader.AutoCompleteEditor = false;
+            this.CategoryColumnHeader.AutoCompleteEditorMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.CategoryColumnHeader.Text = "Category";
+            this.CategoryColumnHeader.Width = 100;
             // 
             // FilenameColumnHeader
             // 
@@ -252,9 +268,9 @@ namespace mRemoteNG.UI.Window
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PropertiesGroupBox.Controls.Add(this.tableLayoutPanel1);
             this.PropertiesGroupBox.Enabled = false;
-            this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 192);
+            this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 166);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(827, 184);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(827, 210);
             this.PropertiesGroupBox.TabIndex = 1;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "External Tool Properties";
@@ -268,6 +284,8 @@ namespace mRemoteNG.UI.Window
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.DisplayNameLabel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.CategoryLabel, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.CategoryTextBox, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.ShowOnToolbarCheckBox, 2, 5);
             this.tableLayoutPanel1.Controls.Add(this.WorkingDirTextBox, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.DisplayNameTextBox, 1, 0);
@@ -285,7 +303,8 @@ namespace mRemoteNG.UI.Window
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 18);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowCount = 8;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
@@ -293,7 +312,7 @@ namespace mRemoteNG.UI.Window
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(821, 163);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(821, 189);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
             // DisplayNameLabel
@@ -306,6 +325,29 @@ namespace mRemoteNG.UI.Window
             this.DisplayNameLabel.TabIndex = 0;
             this.DisplayNameLabel.Text = "Display Name:";
             this.DisplayNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            //
+            // CategoryLabel
+            //
+            this.CategoryLabel.AutoSize = true;
+            this.CategoryLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CategoryLabel.Location = new System.Drawing.Point(3, 156);
+            this.CategoryLabel.Name = "CategoryLabel";
+            this.CategoryLabel.Size = new System.Drawing.Size(104, 26);
+            this.CategoryLabel.TabIndex = 12;
+            this.CategoryLabel.Text = "Category:";
+            this.CategoryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            //
+            // CategoryTextBox
+            //
+            this.CategoryTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel1.SetColumnSpan(this.CategoryTextBox, 3);
+            this.CategoryTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CategoryTextBox.Location = new System.Drawing.Point(110, 158);
+            this.CategoryTextBox.Margin = new System.Windows.Forms.Padding(0, 2, 3, 2);
+            this.CategoryTextBox.Name = "CategoryTextBox";
+            this.CategoryTextBox.Size = new System.Drawing.Size(607, 22);
+            this.CategoryTextBox.TabIndex = 12;
+            this.CategoryTextBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
             // ShowOnToolbarCheckBox
             // 

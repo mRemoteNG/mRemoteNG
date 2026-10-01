@@ -77,6 +77,9 @@ namespace mRemoteNG.Config.Settings
                     Arguments = xEl.Attributes["Arguments"].Value
                 };
 
+                if (xEl.HasAttribute("Category"))
+                    extA.Category = xEl.Attributes["Category"].Value;
+
                 // check before, since old save files won't have this set
                 if (xEl.HasAttribute("WorkingDir"))
                     extA.WorkingDir = xEl.Attributes["WorkingDir"].Value;

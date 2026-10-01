@@ -572,6 +572,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="ExternalToolDefaultName" xml:space="preserve">
     <value>New External Tool</value>
   </data>
+  <data name="ExternalToolCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
   <data name="FileFormat" xml:space="preserve">
     <value>File &amp;Format:</value>
   </data>

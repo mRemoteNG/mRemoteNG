@@ -713,18 +713,9 @@ namespace mRemoteNG.UI.Controls
             {
                 ResetExternalAppMenu();
 
-                foreach (ExternalTool extA in Runtime.ExternalToolsService.ExternalTools)
-                {
-                    ToolStripMenuItem menuItem = new()
-                    {
-                        Text = extA.DisplayName,
-                        Tag = extA,
-                        Image = extA.Image
-                    };
-
-                    menuItem.Click += OnExternalToolClicked;
-                    _cMenTreeToolsExternalApps.DropDownItems.Add(menuItem);
-                }
+                _cMenTreeToolsExternalApps.DropDownItems.AddRange(
+                    ExternalToolsMenuBuilder.CreateMenuItems(Runtime.ExternalToolsService.ExternalTools,
+                                                             OnExternalToolClicked));
 
                 if (_connectionTree.SelectedNode != null)
                 {

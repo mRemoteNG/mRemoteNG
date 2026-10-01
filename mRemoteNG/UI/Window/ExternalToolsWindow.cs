@@ -34,6 +34,8 @@ namespace mRemoteNG.UI.Window
             _currentlySelectedExternalTools.CollectionUpdated += CurrentlySelectedExternalToolsOnCollectionUpdated;
             BrowseButton.Height = FilenameTextBox.Height;
             BrowseWorkingDir.Height = WorkingDirTextBox.Height;
+            ToolsListObjView.ShowGroups = true;
+            ToolsListObjView.AlwaysGroupByColumn = CategoryColumnHeader;
         }
 
 
@@ -56,6 +58,7 @@ namespace mRemoteNG.UI.Window
             LaunchToolToolstripButton.Text = Language._Launch;
 
             DisplayNameColumnHeader.Text = Language.DisplayName;
+            CategoryColumnHeader.Text = Language.ExternalToolCategory;
             FilenameColumnHeader.Text = Language.Filename;
             ArgumentsColumnHeader.Text = Language.Arguments;
             WorkingDirColumnHeader.Text = Language.WorkingDirColumnHeader;
@@ -71,6 +74,7 @@ namespace mRemoteNG.UI.Window
             PropertiesGroupBox.Text = Language.ExternalToolProperties;
 
             DisplayNameLabel.Text = Language.DisplayName;
+            CategoryLabel.Text = Language.ExternalToolCategory;
             FilenameLabel.Text = Language.Filename;
             ArgumentsLabel.Text = Language.Arguments;
             WorkingDirLabel.Text = Language.WorkingDirectory;
@@ -138,6 +142,7 @@ namespace mRemoteNG.UI.Window
             ExternalTool selectedTool = _currentlySelectedExternalTools.FirstOrDefault();
 
             DisplayNameTextBox.Text = selectedTool?.DisplayName;
+            CategoryTextBox.Text = selectedTool?.Category;
             FilenameTextBox.Text = selectedTool?.FileName;
             ArgumentsCheckBox.Text = selectedTool?.Arguments;
             WorkingDirTextBox.Text = selectedTool?.WorkingDir;
@@ -272,6 +277,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 selectedTool.DisplayName = DisplayNameTextBox.Text;
+                selectedTool.Category = CategoryTextBox.Text;
                 selectedTool.FileName = FilenameTextBox.Text;
                 selectedTool.Arguments = ArgumentsCheckBox.Text;
                 selectedTool.WorkingDir = WorkingDirTextBox.Text;

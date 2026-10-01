@@ -37,6 +37,7 @@ namespace mRemoteNG.Config.Settings
                 {
                     xmlTextWriter.WriteStartElement("App");
                     xmlTextWriter.WriteAttributeString("DisplayName", "", extA.DisplayName);
+                    xmlTextWriter.WriteAttributeString("Category", "", extA.Category);
                     xmlTextWriter.WriteAttributeString("FileName", "", extA.FileName);
                     xmlTextWriter.WriteAttributeString("Arguments", "", extA.Arguments);
                     xmlTextWriter.WriteAttributeString("WorkingDir", "", extA.WorkingDir);
