@@ -167,7 +167,7 @@ namespace mRemoteNG.App
                 {
                     ConnectionsService.LastSqlUpdate = DateTime.Now.ToUniversalTime();
                 } 
-				else if (ProfileDataProvider is null)
+				else if (ConnectionsService.ProfileDataProvider is null)
                 {
                     ConnectionsService.LastFileUpdate =  System.IO.File.GetLastWriteTime(connectionFileName);
                 }

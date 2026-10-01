@@ -1,6 +1,7 @@
-using System.Runtime.Versioning;
+﻿using System.Runtime.Versioning;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Config.UserProfiles;
+using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
 
