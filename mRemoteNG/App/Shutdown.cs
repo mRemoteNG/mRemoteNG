@@ -41,6 +41,8 @@ namespace mRemoteNG.App
                 StopPuttySessionWatcher();
                 DisposeNotificationAreaIcon();
                 SaveConnections();
+                (Runtime.ConnectionsService.ProfileDataProvider as IDisposable)?.Dispose();
+                Runtime.UserProfileStore?.Dispose();
                 SaveSettings(quickConnectToolStrip, externalToolsToolStrip, multiSshToolStrip, frmMain);
                 UnregisterBrowsers();
             }
