@@ -101,14 +101,20 @@ namespace mRemoteNG.UI.Controls
             ExternalTool extA = (ExternalTool)((ToolStripButton)sender).Tag;
 
             Connection.ConnectionInfo selectedTreeNode = AppWindows.TreeForm.SelectedNode;
-            if (selectedTreeNode != null && selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection ||
-                selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession)
+            if (CanPassConnectionToExternalTool(selectedTreeNode))
                 extA.Start(selectedTreeNode);
             else
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "No connection was selected, external tool may return errors.", true);
                 extA.Start();
             }
+        }
+
+        internal static bool CanPassConnectionToExternalTool(Connection.ConnectionInfo selectedTreeNode)
+        {
+            return selectedTreeNode != null &&
+                   (selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection ||
+                    selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession);
         }
 
         public void SwitchToolBarText(bool show)
