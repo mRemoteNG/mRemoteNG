@@ -36,10 +36,26 @@ namespace mRemoteNG.UI.Window
             BrowseWorkingDir.Height = WorkingDirTextBox.Height;
             ToolsListObjView.ShowGroups = true;
             ToolsListObjView.AlwaysGroupByColumn = CategoryColumnHeader;
+            CategoryColumnHeader.GroupKeyGetter = row =>
+                new ExternalToolCategoryGroupKey(((ExternalTool)row).Category);
+            CategoryColumnHeader.GroupKeyToTitleConverter = key =>
+                ((ExternalToolCategoryGroupKey)key).DisplayName;
         }
 
 
         #region Private Methods
+
+        private sealed class ExternalToolCategoryGroupKey(string category) : IEquatable<ExternalToolCategoryGroupKey>
+        {
+            public string DisplayName { get; } = category?.Trim() ?? string.Empty;
+
+            public bool Equals(ExternalToolCategoryGroupKey other) =>
+                other != null && StringComparer.OrdinalIgnoreCase.Equals(DisplayName, other.DisplayName);
+
+            public override bool Equals(object obj) => Equals(obj as ExternalToolCategoryGroupKey);
+
+            public override int GetHashCode() => StringComparer.OrdinalIgnoreCase.GetHashCode(DisplayName);
+        }
 
         private void ExternalTools_Load(object sender, EventArgs e)
         {
