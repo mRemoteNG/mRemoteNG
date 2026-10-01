@@ -67,7 +67,7 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeApplyInheritanceToChildren;
         private ToolStripMenuItem _cMenTreeApplyDefaultInheritance;
         private readonly ConnectionTree.ConnectionTree _connectionTree;
-        private readonly List<ToolStripMenuItem> _pluginImportMenuItems = [];
+        private readonly List<ToolStripMenuItem> _pluginImportMenuItems = new List<ToolStripMenuItem>();
 
 
         public ConnectionContextMenu(ConnectionTree.ConnectionTree connectionTree)

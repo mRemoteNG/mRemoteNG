@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Versioning;
@@ -13,7 +13,7 @@ namespace mRemoteNG.UI.Controls
         internal static ToolStripItem[] CreateMenuItems(IEnumerable<ExternalTool> externalTools, EventHandler clickHandler)
         {
             List<ExternalTool> tools = externalTools.ToList();
-            List<ToolStripItem> menuItems = [];
+            List<ToolStripItem> menuItems = new List<ToolStripItem>();
 
             foreach (ExternalTool tool in tools.Where(tool => string.IsNullOrWhiteSpace(tool.Category)))
                 menuItems.Add(CreateToolMenuItem(tool, clickHandler));
