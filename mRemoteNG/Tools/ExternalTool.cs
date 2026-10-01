@@ -20,6 +20,7 @@ namespace mRemoteNG.Tools
     public class ExternalTool : INotifyPropertyChanged
     {
         private string _displayName = string.Empty; // Initialize to avoid CS8618
+        private string _category = string.Empty;
         private string _fileName = string.Empty; // Initialize to avoid CS8618
         private bool _waitForExit;
         private string _arguments = string.Empty; // Initialize to avoid CS8618
@@ -34,6 +35,12 @@ namespace mRemoteNG.Tools
         {
             get => _displayName;
             set => SetField(ref _displayName, value, nameof(DisplayName));
+        }
+
+        public string Category
+        {
+            get => _category;
+            set => SetField(ref _category, value, nameof(Category));
         }
 
         public string FileName

@@ -243,5 +243,17 @@ namespace mRemoteNGTests.Tools
             // Assert
             Assert.That(process.StartInfo.UseShellExecute, Is.False);
         }
+
+        [Test]
+        public void ChangingCategory_RaisesPropertyChanged()
+        {
+            var externalTool = new ExternalTool();
+            string changedProperty = null;
+            externalTool.PropertyChanged += (_, args) => changedProperty = args.PropertyName;
+
+            externalTool.Category = "PowerShell";
+
+            Assert.That(changedProperty, Is.EqualTo(nameof(ExternalTool.Category)));
+        }
     }
 }

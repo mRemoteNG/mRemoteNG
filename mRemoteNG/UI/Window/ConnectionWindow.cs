@@ -694,22 +694,10 @@ namespace mRemoteNG.UI.Window
                     cmenTabExternalApps.DropDownItems.Clear();
                 }
 
-                //add ext apps
-                foreach (ExternalTool externalTool in Runtime.ExternalToolsService.ExternalTools)
-                {
-                    ToolStripMenuItem nItem = new()
-                    {
-                        Text = externalTool.DisplayName,
-                        Tag = externalTool,
-                        /* rare failure here. While ExternalTool.Image already tries to default this
-                         * try again so it's not null/doesn't crash.
-                         */
-                        Image = externalTool.Image ?? Properties.Resources.mRemoteNG_Icon.ToBitmap()
-                    };
-
-                    nItem.Click += (sender, args) => StartExternalApp(((ToolStripMenuItem)sender)?.Tag as ExternalTool);
-                    cmenTabExternalApps.DropDownItems.Add(nItem);
-                }
+                cmenTabExternalApps.DropDownItems.AddRange(
+                    ExternalToolsMenuBuilder.CreateMenuItems(
+                        Runtime.ExternalToolsService.ExternalTools,
+                        (sender, args) => StartExternalApp(((ToolStripMenuItem)sender)?.Tag as ExternalTool)));
             }
             catch (Exception ex)
             {

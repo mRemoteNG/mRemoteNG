@@ -2584,6 +2584,15 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("ExternalTool", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        internal static string ExternalToolCategory {
+            get {
+                return ResourceManager.GetString("ExternalToolCategory", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to External Tool After.
