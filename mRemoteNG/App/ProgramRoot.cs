@@ -177,6 +177,12 @@ namespace mRemoteNG.App
 
                 if (File.Exists(assemblyPath))
                     return Assembly.LoadFrom(assemblyPath);
+
+                // Fall back to the Plugins\ folder for plugin-shared assemblies (e.g. mRp.Contracts)
+                // that are deployed alongside the plugin DLLs instead of under Assemblies\.
+                string pluginsAssemblyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins", assemblyFile);
+                if (File.Exists(pluginsAssemblyPath))
+                    return Assembly.LoadFrom(pluginsAssemblyPath);
             }
             catch
             {

@@ -221,6 +221,21 @@ jobs:
           if (-not (Test-Path $sampleSatellitePath)) {
             throw "Expected satellite assembly at '$sampleSatellitePath' in self-contained publish."
           }
+
+          # Plugin-shared assemblies (mRp.*) must live under Plugins\, not Assemblies\ or the root.
+          $pluginContractsPath = Join-Path $publishDir "Plugins\mRp.Contracts.dll"
+          if (-not (Test-Path $pluginContractsPath)) {
+            throw "Expected plugin contracts assembly at '$pluginContractsPath' in self-contained publish."
+          }
+          $misplacedPluginContracts = @(
+            (Join-Path $publishDir "mRp.Contracts.dll"),
+            (Join-Path $publishDir "Assemblies\mRp.Contracts.dll")
+          )
+          foreach ($misplaced in $misplacedPluginContracts) {
+            if (Test-Path $misplaced) {
+              throw "Plugin contracts assembly should not be present at '$misplaced'; it must live under Plugins\."
+            }
+          }
                  
       - name: (10) Release Information
         id: version
