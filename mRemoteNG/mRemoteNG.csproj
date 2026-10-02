@@ -575,7 +575,7 @@
   <Target Name="CopyPackageAssembliesToSubFolder" AfterTargets="ResolveReferences">
     <ItemGroup>
       <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.NuGetPackageId)' != '' and '%(ReferenceCopyLocalPaths.Filename)' != 'e_sqlite3' and '%(ReferenceCopyLocalPaths.Filename)' != 'libe_sqlite3' and !$([System.String]::Copy('%(ReferenceCopyLocalPaths.FullPath)').Contains('\runtimes\')) " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="Assemblies\" />
-      <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.Filename)' == 'mRp.Contracts' " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="Plugins\" />
+      <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.Filename)' == 'mRp.Contracts' " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="Assemblies\" />
     </ItemGroup>
   </Target>
   <!--
@@ -583,8 +583,8 @@
     for the build output. During publish (self-contained in particular) files flow through
     ResolvedFileToPublish, whose RelativePath metadata is what decides the layout under
     $(PublishDir). Mirror the same rules on ResolvedFileToPublish so NuGet DLLs end up in
-    Assemblies\ and plugin assemblies (mRp.*) end up in Plugins\ in the self-contained
-    publish, matching the framework-dependent build.
+    Assemblies\ and plugin assemblies (mRp.* other than mRp.Contracts) end up in Plugins\
+    in the self-contained publish, matching the framework-dependent build.
   -->
   <Target Name="RelocatePublishedPackageAssembliesToSubFolder" AfterTargets="ComputeResolvedFilesToPublishList" BeforeTargets="CopyFilesToPublishDirectory">
     <ItemGroup>
@@ -596,7 +596,8 @@
            apphost in a self-contained publish so coreclr.dll / hostfxr.dll resolve, so they
            are excluded from the move. -->
       <ResolvedFileToPublish Condition=" '%(ResolvedFileToPublish.NuGetPackageId)' != '' and '%(ResolvedFileToPublish.Extension)' == '.dll' and '%(ResolvedFileToPublish.Filename)' != 'e_sqlite3' and '%(ResolvedFileToPublish.Filename)' != 'libe_sqlite3' and !$([System.String]::Copy('%(ResolvedFileToPublish.NuGetPackageId)').StartsWith('Microsoft.NETCore.App')) and !$([System.String]::Copy('%(ResolvedFileToPublish.NuGetPackageId)').StartsWith('Microsoft.WindowsDesktop.App')) and !$([System.String]::Copy('%(ResolvedFileToPublish.NuGetPackageId)').StartsWith('Microsoft.AspNetCore.App')) and !$([System.String]::Copy('%(ResolvedFileToPublish.RelativePath)').Contains('\')) and !$([System.String]::Copy('%(ResolvedFileToPublish.RelativePath)').Contains('/')) " Update="%(ResolvedFileToPublish.Identity)" RelativePath="Assemblies\%(ResolvedFileToPublish.RelativePath)" />
-      <ResolvedFileToPublish Condition=" $([System.String]::Copy('%(ResolvedFileToPublish.Filename)').StartsWith('mRp.')) and '%(ResolvedFileToPublish.Extension)' == '.dll' " Update="%(ResolvedFileToPublish.Identity)" RelativePath="Plugins\%(ResolvedFileToPublish.Filename)%(ResolvedFileToPublish.Extension)" />
+      <ResolvedFileToPublish Condition=" '%(ResolvedFileToPublish.Filename)' == 'mRp.Contracts' and '%(ResolvedFileToPublish.Extension)' == '.dll' " Update="%(ResolvedFileToPublish.Identity)" RelativePath="Assemblies\%(ResolvedFileToPublish.Filename)%(ResolvedFileToPublish.Extension)" />
+      <ResolvedFileToPublish Condition=" $([System.String]::Copy('%(ResolvedFileToPublish.Filename)').StartsWith('mRp.')) and '%(ResolvedFileToPublish.Filename)' != 'mRp.Contracts' and '%(ResolvedFileToPublish.Extension)' == '.dll' " Update="%(ResolvedFileToPublish.Identity)" RelativePath="Plugins\%(ResolvedFileToPublish.Filename)%(ResolvedFileToPublish.Extension)" />
     </ItemGroup>
   </Target>
   <PropertyGroup>
