@@ -182,6 +182,45 @@ jobs:
           if (Test-Path $flattenedNativeSqlClientPath) {
             throw "SQL client native assembly should not be flattened into '$flattenedNativeSqlClientPath'."
           }
+
+      - name: (09b) Validate Self-Contained publish layout
+        if: matrix.deployment == 'self-contained'
+        shell: pwsh
+        run: |
+          $publishDir = "$Env:GITHUB_WORKSPACE\mRemoteNG\bin\${{ matrix.platform }}\${{ matrix.arch }}\Release"
+
+          # Third-party NuGet DLLs must be routed into Assemblies\, matching framework-dependent layout.
+          $managedSqlClientPath = Join-Path $publishDir "Assemblies\Microsoft.Data.SqlClient.dll"
+          if (-not (Test-Path $managedSqlClientPath)) {
+            throw "Expected managed SQL client assembly at '$managedSqlClientPath' in self-contained publish."
+          }
+
+          # Flattened third-party DLLs in the publish root indicate the relocation target did not run.
+          $flattenedSqlClientPath = Join-Path $publishDir "Microsoft.Data.SqlClient.dll"
+          if (Test-Path $flattenedSqlClientPath) {
+            throw "Third-party assembly '$flattenedSqlClientPath' should live under Assemblies\ in self-contained publish."
+          }
+
+          # The .NET shared framework / apphost files MUST remain at the publish root so the
+          # self-contained host can resolve coreclr.dll / hostfxr.dll.
+          foreach ($runtimeFile in @('coreclr.dll', 'hostfxr.dll', 'hostpolicy.dll', 'System.Private.CoreLib.dll')) {
+            $runtimePath = Join-Path $publishDir $runtimeFile
+            if (-not (Test-Path $runtimePath)) {
+              throw "Expected .NET runtime file at '$runtimePath' in self-contained publish."
+            }
+          }
+
+          # SQL Client SNI must still live under runtimes\win-<arch>\native, not Assemblies\.
+          $nativeSqlClientPath = Join-Path $publishDir "runtimes\win-${{ matrix.arch }}\native\Microsoft.Data.SqlClient.SNI.dll"
+          if (-not (Test-Path $nativeSqlClientPath)) {
+            throw "Expected RID-specific SQL client native assembly at '$nativeSqlClientPath'."
+          }
+
+          # Satellite assemblies must be relocated under Languages\<culture>\.
+          $sampleSatellitePath = Join-Path $publishDir "Languages\de\mRemoteNG.resources.dll"
+          if (-not (Test-Path $sampleSatellitePath)) {
+            throw "Expected satellite assembly at '$sampleSatellitePath' in self-contained publish."
+          }
                  
       - name: (10) Release Information
         id: version

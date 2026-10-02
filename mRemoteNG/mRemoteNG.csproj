@@ -578,6 +578,26 @@
       <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.Filename)' == 'mRp.Contracts' " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="Assemblies\" />
     </ItemGroup>
   </Target>
+  <!--
+    The AfterTargets="ResolveReferences" rewrite above only reroutes ReferenceCopyLocalPaths
+    for the build output. During publish (self-contained in particular) files flow through
+    ResolvedFileToPublish, whose RelativePath metadata is what decides the layout under
+    $(PublishDir). Mirror the same rules on ResolvedFileToPublish so NuGet DLLs end up in
+    Assemblies\ in the self-contained publish, matching the framework-dependent build.
+  -->
+  <Target Name="RelocatePublishedPackageAssembliesToSubFolder" AfterTargets="ComputeResolvedFilesToPublishList" BeforeTargets="CopyFilesToPublishDirectory">
+    <ItemGroup>
+      <!-- Reroute top-level third-party NuGet DLLs into Assemblies\. Items whose RelativePath
+           already contains a path separator (e.g. runtimes\..., culture satellite folders)
+           are left untouched so the SQL Client SNI layout and satellite assemblies remain
+           intact. The .NET shared-framework / runtime packs (Microsoft.NETCore.App.*,
+           Microsoft.WindowsDesktop.App.*, Microsoft.AspNetCore.App.*) must stay next to the
+           apphost in a self-contained publish so coreclr.dll / hostfxr.dll resolve, so they
+           are excluded from the move. -->
+      <ResolvedFileToPublish Condition=" '%(ResolvedFileToPublish.NuGetPackageId)' != '' and '%(ResolvedFileToPublish.Extension)' == '.dll' and '%(ResolvedFileToPublish.Filename)' != 'e_sqlite3' and '%(ResolvedFileToPublish.Filename)' != 'libe_sqlite3' and !$([System.String]::Copy('%(ResolvedFileToPublish.NuGetPackageId)').StartsWith('Microsoft.NETCore.App')) and !$([System.String]::Copy('%(ResolvedFileToPublish.NuGetPackageId)').StartsWith('Microsoft.WindowsDesktop.App')) and !$([System.String]::Copy('%(ResolvedFileToPublish.NuGetPackageId)').StartsWith('Microsoft.AspNetCore.App')) and !$([System.String]::Copy('%(ResolvedFileToPublish.RelativePath)').Contains('\')) and !$([System.String]::Copy('%(ResolvedFileToPublish.RelativePath)').Contains('/')) " Update="%(ResolvedFileToPublish.Identity)" RelativePath="Assemblies\%(ResolvedFileToPublish.RelativePath)" />
+      <ResolvedFileToPublish Condition=" '%(ResolvedFileToPublish.Filename)' == 'mRp.Contracts' and '%(ResolvedFileToPublish.Extension)' == '.dll' " Update="%(ResolvedFileToPublish.Identity)" RelativePath="Assemblies\%(ResolvedFileToPublish.Filename)%(ResolvedFileToPublish.Extension)" />
+    </ItemGroup>
+  </Target>
   <PropertyGroup>
     <!-- Disable CET compatibility check in .NET 9 AppHost -->
     <CETCompat>false</CETCompat>
