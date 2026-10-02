@@ -210,10 +210,14 @@ jobs:
             }
           }
 
-          # SQL Client SNI must still live under runtimes\win-<arch>\native, not Assemblies\.
-          $nativeSqlClientPath = Join-Path $publishDir "runtimes\win-${{ matrix.arch }}\native\Microsoft.Data.SqlClient.SNI.dll"
+          # Self-contained publish places native runtime assets at the publish root.
+          $nativeSqlClientPath = Join-Path $publishDir "Microsoft.Data.SqlClient.SNI.dll"
           if (-not (Test-Path $nativeSqlClientPath)) {
-            throw "Expected RID-specific SQL client native assembly at '$nativeSqlClientPath'."
+            throw "Expected SQL client native assembly at '$nativeSqlClientPath' in self-contained publish."
+          }
+          $misplacedSqlClientPath = Join-Path $publishDir "Assemblies\Microsoft.Data.SqlClient.SNI.dll"
+          if (Test-Path $misplacedSqlClientPath) {
+            throw "SQL client native assembly should not be relocated to '$misplacedSqlClientPath'."
           }
 
           # Satellite assemblies must be relocated under Languages\<culture>\.
