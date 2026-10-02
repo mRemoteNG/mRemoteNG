@@ -92,24 +92,24 @@ namespace mRemoteNG.Tools.Cmdline
 
             if (string.IsNullOrEmpty(consParam)) return;
             _messageCollector.AddMessage(MessageClass.DebugMsg, "Cmdline arg: loading connections from a custom path");
-            if (File.Exists(args[consParam]) == false)
+            string connectionFilePath = args[consParam];
+            if (File.Exists(connectionFilePath) == false)
             {
-                if (File.Exists(Path.Combine(GeneralAppInfo.HomePath, args[consParam])))
+                connectionFilePath = Path.Combine(GeneralAppInfo.HomePath, args[consParam]);
+                if (File.Exists(connectionFilePath))
                 {
                     Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
-                    Properties.OptionsBackupPage.Default.BackupLocation = Path.Combine(GeneralAppInfo.HomePath, args[consParam]);
-                    return;
                 }
+                else
+                {
+                    connectionFilePath = Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]);
+                    if (!File.Exists(connectionFilePath)) return;
+                }
+            }
 
-                if (!File.Exists(Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]))) return;
-                Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
-                Properties.OptionsBackupPage.Default.BackupLocation = Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]);
-            }
-            else
-            {
-                Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
-                Properties.OptionsBackupPage.Default.BackupLocation = args[consParam];
-            }
+            Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
+            Properties.OptionsBackupPage.Default.BackupLocation = connectionFilePath;
+            Properties.OptionsConnectionsPage.Default.ConnectionFilePath = connectionFilePath;
         }
     }
 }
