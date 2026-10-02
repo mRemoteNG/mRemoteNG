@@ -588,14 +588,15 @@
   -->
   <Target Name="RelocatePublishedPackageAssembliesToSubFolder" AfterTargets="ComputeResolvedFilesToPublishList" BeforeTargets="CopyFilesToPublishDirectory">
     <ItemGroup>
-      <!-- Reroute top-level third-party NuGet DLLs into Assemblies\. Items whose RelativePath
+      <!-- Reroute top-level third-party managed NuGet DLLs into Assemblies\. Native runtime
+           assets stay at the publish root, as required by self-contained publishing. Items whose RelativePath
            already contains a path separator (e.g. runtimes\..., culture satellite folders)
            are left untouched so the SQL Client SNI layout and satellite assemblies remain
            intact. The .NET shared-framework / runtime packs (Microsoft.NETCore.App.*,
            Microsoft.WindowsDesktop.App.*, Microsoft.AspNetCore.App.*) must stay next to the
            apphost in a self-contained publish so coreclr.dll / hostfxr.dll resolve, so they
            are excluded from the move. -->
-      <ResolvedFileToPublish Condition=" '%(ResolvedFileToPublish.NuGetPackageId)' != '' and '%(ResolvedFileToPublish.Extension)' == '.dll' and '%(ResolvedFileToPublish.Filename)' != 'e_sqlite3' and '%(ResolvedFileToPublish.Filename)' != 'libe_sqlite3' and !$([System.String]::Copy('%(ResolvedFileToPublish.NuGetPackageId)').StartsWith('Microsoft.NETCore.App')) and !$([System.String]::Copy('%(ResolvedFileToPublish.NuGetPackageId)').StartsWith('Microsoft.WindowsDesktop.App')) and !$([System.String]::Copy('%(ResolvedFileToPublish.NuGetPackageId)').StartsWith('Microsoft.AspNetCore.App')) and !$([System.String]::Copy('%(ResolvedFileToPublish.RelativePath)').Contains('\')) and !$([System.String]::Copy('%(ResolvedFileToPublish.RelativePath)').Contains('/')) " Update="%(ResolvedFileToPublish.Identity)" RelativePath="Assemblies\%(ResolvedFileToPublish.RelativePath)" />
+      <ResolvedFileToPublish Condition=" '%(ResolvedFileToPublish.NuGetPackageId)' != '' and '%(ResolvedFileToPublish.Extension)' == '.dll' and '%(ResolvedFileToPublish.AssetType)' != 'native' and '%(ResolvedFileToPublish.Filename)' != 'e_sqlite3' and '%(ResolvedFileToPublish.Filename)' != 'libe_sqlite3' and !$([System.String]::Copy('%(ResolvedFileToPublish.NuGetPackageId)').StartsWith('Microsoft.NETCore.App')) and !$([System.String]::Copy('%(ResolvedFileToPublish.NuGetPackageId)').StartsWith('Microsoft.WindowsDesktop.App')) and !$([System.String]::Copy('%(ResolvedFileToPublish.NuGetPackageId)').StartsWith('Microsoft.AspNetCore.App')) and !$([System.String]::Copy('%(ResolvedFileToPublish.RelativePath)').Contains('\')) and !$([System.String]::Copy('%(ResolvedFileToPublish.RelativePath)').Contains('/')) " Update="%(ResolvedFileToPublish.Identity)" RelativePath="Assemblies\%(ResolvedFileToPublish.RelativePath)" />
       <ResolvedFileToPublish Condition=" '%(ResolvedFileToPublish.Filename)' == 'mRp.Contracts' and '%(ResolvedFileToPublish.Extension)' == '.dll' " Update="%(ResolvedFileToPublish.Identity)" RelativePath="Assemblies\%(ResolvedFileToPublish.Filename)%(ResolvedFileToPublish.Extension)" />
       <ResolvedFileToPublish Condition=" $([System.String]::Copy('%(ResolvedFileToPublish.Filename)').StartsWith('mRp.')) and '%(ResolvedFileToPublish.Filename)' != 'mRp.Contracts' and '%(ResolvedFileToPublish.Extension)' == '.dll' " Update="%(ResolvedFileToPublish.Identity)" RelativePath="Plugins\%(ResolvedFileToPublish.Filename)%(ResolvedFileToPublish.Extension)" />
     </ItemGroup>
