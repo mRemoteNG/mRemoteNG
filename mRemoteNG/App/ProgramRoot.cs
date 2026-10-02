@@ -43,6 +43,7 @@ namespace mRemoteNG.App
             // PerMonitorV2 awareness; this call keeps the WinForms runtime in sync.
             Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
 
+            AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
             InitializeSqliteProvider();
 
             // Ensure the real entry point is definitely STA
@@ -51,8 +52,6 @@ namespace mRemoteNG.App
 
         private static Task MainAsync(string[] args)
         {
-            AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
-
             if (!ShouldSkipNativeRuntimeChecks(args))
             {
                 // Runtime checks only needed for framework-dependent deployments
@@ -177,6 +176,12 @@ namespace mRemoteNG.App
 
                 if (File.Exists(assemblyPath))
                     return Assembly.LoadFrom(assemblyPath);
+
+                // Fall back to the Plugins\ folder for plugin-shared assemblies (e.g. mRp.Contracts)
+                // that are deployed alongside the plugin DLLs instead of under Assemblies\.
+                string pluginsAssemblyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins", assemblyFile);
+                if (File.Exists(pluginsAssemblyPath))
+                    return Assembly.LoadFrom(pluginsAssemblyPath);
             }
             catch
             {
