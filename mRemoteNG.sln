@@ -13,6 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectListView.NetCore", "O
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mRemoteNGTests", "mRemoteNGTests\mRemoteNGTests.csproj", "{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mRemoteNGSpecs", "mRemoteNGSpecs\mRemoteNGSpecs.csproj", "{7E9C2A14-3B5D-4F86-9C1E-2D8A6F0B4E73}"
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomActions", "mRemoteNGInstaller\CustomActions\CustomActions.csproj", "{D6B6F9DF-364D-447D-8782-920238A7D9A7}"
 EndProject
 Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "Installer", "mRemoteNGInstaller\Installer\Installer.wixproj", "{2AB84485-7F86-4F0A-905A-5B0D32FEA17F}"
@@ -87,6 +88,15 @@ Global
 		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Release|arm64.Build.0 = Release|arm64
 		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Release|x64.ActiveCfg = Release|x64
 		{B5CD6448-41AE-4D2E-8F20-1E2A81B8B8E4}.Release|x64.Build.0 = Release|x64
+		{7E9C2A14-3B5D-4F86-9C1E-2D8A6F0B4E73}.Debug|arm64.ActiveCfg = Debug|x64
+		{7E9C2A14-3B5D-4F86-9C1E-2D8A6F0B4E73}.Debug|x64.ActiveCfg = Debug|x64
+		{7E9C2A14-3B5D-4F86-9C1E-2D8A6F0B4E73}.Debug|x64.Build.0 = Debug|x64
+		{7E9C2A14-3B5D-4F86-9C1E-2D8A6F0B4E73}.Release Self-Contained|arm64.ActiveCfg = Release|x64
+		{7E9C2A14-3B5D-4F86-9C1E-2D8A6F0B4E73}.Release Self-Contained|x64.ActiveCfg = Release|x64
+		{7E9C2A14-3B5D-4F86-9C1E-2D8A6F0B4E73}.Release Self-Contained|x64.Build.0 = Release|x64
+		{7E9C2A14-3B5D-4F86-9C1E-2D8A6F0B4E73}.Release|arm64.ActiveCfg = Release|x64
+		{7E9C2A14-3B5D-4F86-9C1E-2D8A6F0B4E73}.Release|x64.ActiveCfg = Release|x64
+		{7E9C2A14-3B5D-4F86-9C1E-2D8A6F0B4E73}.Release|x64.Build.0 = Release|x64
 		{D6B6F9DF-364D-447D-8782-920238A7D9A7}.Debug|arm64.ActiveCfg = Debug|x64
 		{D6B6F9DF-364D-447D-8782-920238A7D9A7}.Debug|x64.ActiveCfg = Debug|x64
 		{D6B6F9DF-364D-447D-8782-920238A7D9A7}.Debug|x64.Build.0 = Debug|x64
