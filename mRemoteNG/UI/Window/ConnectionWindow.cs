@@ -108,7 +108,7 @@ namespace mRemoteNG.UI.Window
             TabHelper.Instance.CurrentPanel = this;
         }
 
-        public ConnectionTab AddConnectionTab(ConnectionInfo connectionInfo)
+        public ConnectionTab AddConnectionTab(ConnectionInfo connectionInfo, DockPane targetPane = null, int? targetContentIndex = null)
         {
             try
             {
@@ -162,6 +162,12 @@ namespace mRemoteNG.UI.Window
 
                 //Show the tab
                 conTab.Show(connDock, DockState.Document);
+                if (targetPane?.DockPanel == connDock && targetContentIndex.HasValue)
+                {
+                    int contentIndex = Math.Max(0, Math.Min(targetContentIndex.Value, targetPane.DisplayingContents.Count));
+                    conTab.DockTo(targetPane, DockStyle.Fill, contentIndex);
+                }
+
                 FrmMain.Default?.ShowHidePanelTabs();
                 conTab.Focus();
                 return conTab;
@@ -172,6 +178,32 @@ namespace mRemoteNG.UI.Window
             }
 
             return null;
+        }
+
+        internal (DockPane? targetPane, int? targetContentIndex, DockContent? targetPanePlaceholder) PrepareReconnectPlacement(ConnectionTab? selectedTab)
+        {
+            DockPane? targetPane = selectedTab?.Pane;
+            int existingIndex = targetPane?.DisplayingContents.IndexOf(selectedTab) ?? -1;
+            int? targetContentIndex = existingIndex >= 0 ? existingIndex : null;
+            DockContent? targetPanePlaceholder = null;
+
+            if (targetPane?.DockPanel == connDock && existingIndex >= 0 && targetPane.DisplayingContents.Count == 1)
+            {
+                targetPanePlaceholder = new DockContent
+                {
+                    CloseButton = false,
+                    CloseButtonVisible = false,
+                    DockAreas = DockAreas.Document | DockAreas.Float,
+                    HideOnClose = true,
+                    TabText = string.Empty,
+                    Text = string.Empty
+                };
+
+                targetPanePlaceholder.Show(connDock, DockState.Document);
+                targetPanePlaceholder.DockTo(targetPane, DockStyle.Fill, existingIndex + 1);
+            }
+
+            return (targetPane, targetContentIndex, targetPanePlaceholder);
         }
 
         #endregion
@@ -840,8 +872,11 @@ namespace mRemoteNG.UI.Window
                     return;
                 }
 
+                ConnectionTab selectedTab = interfaceControl.Parent as ConnectionTab;
+                var reconnectPlacement = PrepareReconnectPlacement(selectedTab);
+
                 Invoke(new Action(() => Prot_Event_Closed(interfaceControl.Protocol)));
-                Runtime.ConnectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
+                Runtime.ConnectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump, this, reconnectPlacement.targetPane, reconnectPlacement.targetContentIndex, reconnectPlacement.targetPanePlaceholder);
             }
             catch (Exception ex)
             {

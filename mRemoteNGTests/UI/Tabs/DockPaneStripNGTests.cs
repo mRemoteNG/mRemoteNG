@@ -3,8 +3,11 @@ using System.Drawing;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using System.Linq;
+using mRemoteNG.Connection;
 using mRemoteNG.Themes;
 using mRemoteNG.UI.Tabs;
+using mRemoteNG.UI.Window;
 using NUnit.Framework;
 using WeifenLuo.WinFormsUI.Docking;
 using WeifenLuo.WinFormsUI.ThemeVS2015;
@@ -283,6 +286,119 @@ namespace mRemoteNGTests.UI.Tabs
             Application.DoEvents();
 
             Assert.That(connectionTab.DockAreas, Is.EqualTo(DockAreas.Document | DockAreas.Float), "ConnectionTab should restore its original docking areas after leaving auto-hide");
+        });
+
+        [Test]
+        public void ReplacingAConnectionTab_CanKeepItsOriginalDocumentIndex() => RunWithMessagePump(() =>
+        {
+            using var hostForm = new Form
+            {
+                Width = 800,
+                Height = 600,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(-10000, -10000)
+            };
+
+            var dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill,
+                DocumentStyle = DocumentStyle.DockingWindow,
+                Theme = new VS2015LightTheme()
+            };
+
+            dockPanel.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+
+            hostForm.Controls.Add(dockPanel);
+            hostForm.Show();
+
+            using var panelHost = new DockContent();
+            using var connectionWindow = new ConnectionWindow(panelHost);
+            connectionWindow.Show(dockPanel, DockState.Document);
+
+            ConnectionTab doc1 = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "Doc1" });
+            ConnectionTab doc2 = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "Doc2" });
+            ConnectionTab doc3 = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "Doc3" });
+
+            Application.DoEvents();
+
+            DockPane targetPane = doc2.Pane;
+            int targetIndex = targetPane.DisplayingContents.IndexOf(doc2);
+
+            doc2.protocolClose = true;
+            doc2.Close();
+            Application.DoEvents();
+
+            ConnectionTab replacement = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "Doc2" }, targetPane, targetIndex);
+            Application.DoEvents();
+
+            string[] tabOrder = connectionWindow.connDock.DocumentsToArray()
+                .Cast<ConnectionTab>()
+                .Select(tab => tab.TabText)
+                .ToArray();
+
+            Assert.That(replacement.Pane, Is.SameAs(targetPane), "Replacement tab should remain in the original pane");
+            Assert.That(tabOrder, Is.EqualTo(new[] { "Doc1", "Doc2", "Doc3" }), "Replacement tab should return to the original tab order");
+        });
+
+        [Test]
+        public void ReplacingTheOnlyTabInAFloatingPane_CanKeepItsOriginalPane() => RunWithMessagePump(() =>
+        {
+            using var hostForm = new Form
+            {
+                Width = 800,
+                Height = 600,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(-10000, -10000)
+            };
+
+            var dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill,
+                DocumentStyle = DocumentStyle.DockingWindow,
+                Theme = new VS2015LightTheme()
+            };
+
+            dockPanel.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+
+            hostForm.Controls.Add(dockPanel);
+            hostForm.Show();
+
+            using var panelHost = new DockContent();
+            using var connectionWindow = new ConnectionWindow(panelHost);
+            connectionWindow.Show(dockPanel, DockState.Document);
+
+            ConnectionTab doc1 = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "Doc1" });
+            ConnectionTab doc2 = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "Doc2" });
+
+            doc2.Show(connectionWindow.connDock, DockState.Float);
+            Application.DoEvents();
+
+            DockPane targetPane = doc2.Pane;
+            Assert.That(doc2.DockState, Is.EqualTo(DockState.Float), "Doc2 should be in a floating pane");
+            Assert.That(targetPane.DisplayingContents.Count, Is.EqualTo(1), "Doc2 should be the only tab in its pane");
+
+            var reconnectPlacement = connectionWindow.PrepareReconnectPlacement(doc2);
+            Application.DoEvents();
+
+            Assert.That(reconnectPlacement.targetPanePlaceholder, Is.Not.Null, "Reconnect placement should keep the floating pane alive");
+            DockContent placeholder = reconnectPlacement.targetPanePlaceholder!;
+            Assert.That(placeholder.Pane, Is.SameAs(targetPane), "Placeholder should be added to the original pane");
+
+            doc2.protocolClose = true;
+            doc2.Close();
+            Application.DoEvents();
+
+            Assert.That(targetPane.DockPanel, Is.SameAs(connectionWindow.connDock), "Floating pane should remain attached while the replacement is opened");
+
+            ConnectionTab replacement = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "Doc2" }, reconnectPlacement.targetPane, reconnectPlacement.targetContentIndex);
+            placeholder.Close();
+            Application.DoEvents();
+
+            Assert.That(replacement.Pane, Is.SameAs(targetPane), "Replacement tab should remain in the original floating pane");
+            Assert.That(replacement.DockState, Is.EqualTo(DockState.Float), "Replacement tab should stay floated");
+            Assert.That(doc1.DockState, Is.EqualTo(DockState.Document), "Other tabs should remain unchanged");
         });
 
         [Test]
