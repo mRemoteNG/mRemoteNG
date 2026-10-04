@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #2496: fixed use pwfile instead of cleartext password for putty connections 
 
 ### Added
+- #876: added Wake-on-LAN option to the connection tree context menu to wake sleeping or powered-off machines using the connection's MAC Address
 - #3449: added Single Package Authoring (SPA) to MSI installer to allow per-user installations without admin privileges
 - #2931: added vault openbao connector
 - #2900: added "Report a Bug" menu item to Help menu and update bug report URL to GitHub issues 

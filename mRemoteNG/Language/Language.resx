@@ -1335,6 +1335,21 @@ If you run into such an error, please create a new connection file!</value>
   <data name="ClearCachedRdpCredentials" xml:space="preserve">
     <value>Clear Cached RDP Credentials</value>
   </data>
+  <data name="WakeOnLan" xml:space="preserve">
+    <value>Wake up (Wake-on-LAN)</value>
+  </data>
+  <data name="PropertyDescriptionWakeOnLan" xml:space="preserve">
+    <value>Sends a Wake-on-LAN magic packet to the MAC address configured on this connection so that a sleeping or powered-off machine can be woken before connecting. The target machine must have Wake-on-LAN enabled.</value>
+  </data>
+  <data name="WakeOnLanNoMacAddress" xml:space="preserve">
+    <value>No MAC address is configured for this connection. Set the MAC Address property to use Wake-on-LAN.</value>
+  </data>
+  <data name="WakeOnLanSent" xml:space="preserve">
+    <value>A Wake-on-LAN magic packet was sent to {0}.</value>
+  </data>
+  <data name="WakeOnLanFailed" xml:space="preserve">
+    <value>Failed to send a Wake-on-LAN magic packet to {0}.</value>
+  </data>
   <data name="UserField" xml:space="preserve">
     <value>User Field</value>
   </data>
