@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
 using log4net;
@@ -17,6 +18,8 @@ namespace mRemoteNG.App
         public static readonly Logger Instance = new();
 
         internal const string SyslogAppenderName = "SyslogAppender";
+
+        private IAppender? _fileAppender;
 
         public ILog Log { get; private set; } = null!; // initialized via SetLogPath() called from the constructor
 
@@ -51,8 +54,13 @@ namespace mRemoteNG.App
             {
                 if (appender is not RollingFileAppender fileAppender) continue;
                 if (fileAppender is not { Name: "LogFileAppender" }) continue;
-                fileAppender.File = path;
-                fileAppender.ActivateOptions();
+                _fileAppender = fileAppender;
+            }
+
+            if (_fileAppender is RollingFileAppender storedFileAppender)
+            {
+                storedFileAppender.File = path;
+                storedFileAppender.ActivateOptions();
             }
 
             ConfigureSyslog();
@@ -84,13 +92,33 @@ namespace mRemoteNG.App
             string host = Properties.OptionsNotificationsPage.Default.SyslogServerHost;
             int port = Properties.OptionsNotificationsPage.Default.SyslogServerPort;
 
-            if (!enabled || string.IsNullOrWhiteSpace(host))
+            if (!enabled)
+            {
+                RestoreFileAppender(root);
                 return;
+            }
 
-            RemoteSyslogAppender appender = BuildSyslogAppender(host, port);
-            root.AddAppender(appender);
+            try
+            {
+                RemoteSyslogAppender appender = BuildSyslogAppender(host, port);
+                root.AddAppender(appender);
+                if (root.GetAppender("LogFileAppender") is IAppender fileAppender)
+                    root.RemoveAppender(fileAppender);
+            }
+            catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or System.Net.Sockets.SocketException)
+            {
+                Properties.OptionsNotificationsPage.Default.LogToSyslog = false;
+                LogManager.GetLogger("mRemoteNG", "Logger").Warn("Syslog has been disabled because its server endpoint is invalid.", ex);
+                RestoreFileAppender(root);
+            }
 
             hierarchy.Configured = true;
+        }
+
+        private void RestoreFileAppender(log4net.Repository.Hierarchy.Logger root)
+        {
+            if (_fileAppender != null && root.GetAppender("LogFileAppender") == null)
+                root.AddAppender(_fileAppender);
         }
 
         /// <summary>
@@ -98,13 +126,20 @@ namespace mRemoteNG.App
         /// </summary>
         internal static RemoteSyslogAppender BuildSyslogAppender(string host, int port)
         {
+            if (port is < 1 or > 65535)
+                throw new ArgumentOutOfRangeException(nameof(port), "Syslog port must be between 1 and 65535.");
+
+            IPAddress[] addresses = Dns.GetHostAddresses(host);
+            if (addresses.Length == 0)
+                throw new InvalidOperationException("The syslog server host did not resolve to an IP address.");
+
             var layout = new PatternLayout("%-6level- %message");
             layout.ActivateOptions();
 
             var appender = new RemoteSyslogAppender
             {
                 Name = SyslogAppenderName,
-                RemoteAddress = System.Net.Dns.GetHostAddresses(host)[0],
+                RemoteAddress = addresses[0],
                 RemotePort = port,
                 Facility = RemoteSyslogAppender.SyslogFacility.User,
                 Identity = new PatternLayout(Application.ProductName ?? "mRemoteNG"),
