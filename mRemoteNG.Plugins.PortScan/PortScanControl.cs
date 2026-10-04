@@ -11,6 +11,8 @@ internal sealed class PortScanControl : UserControl
     private readonly BindingSource _bindingSource = new();
     private readonly ComboBox _protocolComboBox = new();
     private readonly CheckBox _scanDefaultPortsCheckBox = new();
+    private readonly CheckBox _useIpAddressCheckBox = new();
+    private readonly CheckBox _importAllOpenPortsCheckBox = new();
     private readonly DataGridView _resultsGrid = new();
     private readonly Button _importButton = new();
     private readonly TextBox _startIpTextBox = new();
@@ -100,13 +102,15 @@ internal sealed class PortScanControl : UserControl
         TableLayoutPanel importLayout = new()
         {
             AutoSize = true,
-            ColumnCount = 3,
+            ColumnCount = 5,
             Dock = DockStyle.Fill,
             Padding = new Padding(8),
         };
         importLayout.Controls.Add(BuildLabel("ProtocolLabel"), 0, 0);
         importLayout.Controls.Add(_protocolComboBox, 1, 0);
-        importLayout.Controls.Add(_importButton, 2, 0);
+        importLayout.Controls.Add(_useIpAddressCheckBox, 2, 0);
+        importLayout.Controls.Add(_importAllOpenPortsCheckBox, 3, 0);
+        importLayout.Controls.Add(_importButton, 4, 0);
 
         _protocolComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         _protocolComboBox.DisplayMember = nameof(ProtocolOption.DisplayName);
@@ -114,6 +118,8 @@ internal sealed class PortScanControl : UserControl
         _protocolComboBox.DataSource = BuildProtocolOptions();
         _importButton.AutoSize = true;
         _importButton.Click += ImportButtonOnClick;
+        _useIpAddressCheckBox.AutoSize = true;
+        _importAllOpenPortsCheckBox.AutoSize = true;
 
         rootLayout.Controls.Add(inputLayout, 0, 0);
         rootLayout.Controls.Add(_resultsGrid, 0, 1);
@@ -126,14 +132,21 @@ internal sealed class PortScanControl : UserControl
         _scanButton.Text = Resource("_Scan", "Scan");
         _importButton.Text = Resource("_Import", "Import");
         _scanDefaultPortsCheckBox.Text = Resource("DefaultProtocolPortsOnly", "Default protocol ports only");
+        _useIpAddressCheckBox.Text = Resource("UseIpAddressForImport", "Use IP address for imported connections");
+        _importAllOpenPortsCheckBox.Text = Resource("ImportAllOpenPorts", "Import all open ports");
     }
 
     private void ConfigureGridColumns()
     {
         _resultsGrid.Columns.Add(new DataGridViewTextBoxColumn
         {
-            DataPropertyName = nameof(PortScanHostResult.HostDisplayName),
-            HeaderText = Resource("HostnameIp", "Hostname / IP"),
+            DataPropertyName = nameof(PortScanHostResult.HostNameDisplay),
+            HeaderText = Resource("Hostname", "Hostname"),
+        });
+        _resultsGrid.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            DataPropertyName = nameof(PortScanHostResult.HostIp),
+            HeaderText = Resource("IpAddress", "IP Address"),
         });
         _resultsGrid.Columns.Add(CreateBooleanColumn(nameof(PortScanHostResult.SshDisplay), "SSH"));
         _resultsGrid.Columns.Add(CreateBooleanColumn(nameof(PortScanHostResult.TelnetDisplay), "Telnet"));
@@ -292,15 +305,11 @@ internal sealed class PortScanControl : UserControl
             return;
         }
 
-        List<PluginConnectionRequest> requests = selectedHosts
-            .Where(host => SupportsProtocol(host, selectedProtocol.ProtocolId))
-            .Select(host => new PluginConnectionRequest
-            {
-                Hostname = host.HostDisplayName,
-                Name = host.HostNameWithoutDomain,
-                ProtocolId = selectedProtocol.ProtocolId,
-            })
-            .ToList();
+        List<PluginConnectionRequest> requests = PortScanConnectionRequestBuilder.Build(
+            selectedHosts,
+            selectedProtocol.ProtocolId,
+            _useIpAddressCheckBox.Checked,
+            _importAllOpenPortsCheckBox.Checked);
 
         if (requests.Count == 0)
         {
@@ -309,22 +318,6 @@ internal sealed class PortScanControl : UserControl
         }
 
         _pluginContext.Connections.ImportConnections(requests);
-    }
-
-    private bool SupportsProtocol(PortScanHostResult host, string protocolId)
-    {
-        return protocolId switch
-        {
-            PluginProtocolIds.Ard => host.Vnc,
-            PluginProtocolIds.Http => host.Http,
-            PluginProtocolIds.Https => host.Https,
-            PluginProtocolIds.Rdp => host.Rdp,
-            PluginProtocolIds.Rlogin => host.Rlogin,
-            PluginProtocolIds.Ssh2 => host.Ssh,
-            PluginProtocolIds.Telnet => host.Telnet,
-            PluginProtocolIds.Vnc => host.Vnc,
-            _ => false,
-        };
     }
 
     private bool TryParseAddressRange(out IPAddress? startAddress, out IPAddress? endAddress)

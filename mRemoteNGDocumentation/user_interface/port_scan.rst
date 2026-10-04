@@ -17,4 +17,6 @@ It will scan a range of IP addresses and to determine if specific mRemoteNG supp
 - Click Scan
 - Wait. Possibly a long time.
 - The table will populate, and eventually you'll get a notification that the scan has completed. Alternatively, you can press Stop to end the scan at any time.
-- Change the dropdown to the protocol you'd like to import and click Import.
+- The results show the resolved hostname and IP address in separate columns. Select ``Use IP address for imported connections`` to import connections using the IP instead of the hostname.
+- Change the dropdown to the protocol you'd like to import and click Import. By default, only hosts with that protocol's standard port open are imported.
+- Select ``Import all open ports as selected protocol`` to create one connection for each open port found in the scan range, using the selected protocol and the scanned port number.

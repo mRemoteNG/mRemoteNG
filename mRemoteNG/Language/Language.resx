@@ -1194,6 +1194,15 @@ If you run into such an error, please create a new connection file!</value>
   <data name="HostnameIp" xml:space="preserve">
     <value>Hostname/IP</value>
   </data>
+  <data name="IpAddress" xml:space="preserve">
+    <value>IP Address</value>
+  </data>
+  <data name="UseIpAddressForImport" xml:space="preserve">
+    <value>Use IP address for imported connections</value>
+  </data>
+  <data name="ImportAllOpenPorts" xml:space="preserve">
+    <value>Import all open ports as selected protocol</value>
+  </data>
   <data name="All" xml:space="preserve">
     <value>All</value>
   </data>
