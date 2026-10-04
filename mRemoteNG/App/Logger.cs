@@ -5,7 +5,9 @@ using System.Windows.Forms;
 using log4net;
 using log4net.Appender;
 using log4net.Config;
+using log4net.Layout;
 using log4net.Repository;
+using log4net.Repository.Hierarchy;
 
 namespace mRemoteNG.App
 {
@@ -13,6 +15,8 @@ namespace mRemoteNG.App
     public class Logger
     {
         public static readonly Logger Instance = new();
+
+        internal const string SyslogAppenderName = "SyslogAppender";
 
         public ILog Log { get; private set; } = null!; // initialized via SetLogPath() called from the constructor
 
@@ -45,14 +49,71 @@ namespace mRemoteNG.App
 
             foreach (IAppender appender in appenders)
             {
-                RollingFileAppender fileAppender = (RollingFileAppender)appender;
+                if (appender is not RollingFileAppender fileAppender) continue;
                 if (fileAppender is not { Name: "LogFileAppender" }) continue;
                 fileAppender.File = path;
                 fileAppender.ActivateOptions();
             }
 
+            ConfigureSyslog();
+
             Log = LogManager.GetLogger("mRemoteNG", "Logger");
         }
+
+        /// <summary>
+        /// Adds or removes the syslog appender on the "mRemoteNG" repository based on the
+        /// current notification options. When enabled, log messages are forwarded to the
+        /// configured remote syslog server via UDP (RFC 3164).
+        /// </summary>
+        public void ConfigureSyslog()
+        {
+            if (LogManager.GetRepository("mRemoteNG") is not Hierarchy hierarchy)
+                return;
+
+            log4net.Repository.Hierarchy.Logger root = hierarchy.Root;
+
+            // Remove any previously attached syslog appender so settings changes take effect.
+            if (root.GetAppender(SyslogAppenderName) is IAppender existing)
+            {
+                root.RemoveAppender(existing);
+                if (existing is IDisposable disposable)
+                    disposable.Dispose();
+            }
+
+            bool enabled = Properties.OptionsNotificationsPage.Default.LogToSyslog;
+            string host = Properties.OptionsNotificationsPage.Default.SyslogServerHost;
+            int port = Properties.OptionsNotificationsPage.Default.SyslogServerPort;
+
+            if (!enabled || string.IsNullOrWhiteSpace(host))
+                return;
+
+            RemoteSyslogAppender appender = BuildSyslogAppender(host, port);
+            root.AddAppender(appender);
+
+            hierarchy.Configured = true;
+        }
+
+        /// <summary>
+        /// Builds and activates a <see cref="RemoteSyslogAppender"/> targeting the given host and port.
+        /// </summary>
+        internal static RemoteSyslogAppender BuildSyslogAppender(string host, int port)
+        {
+            var layout = new PatternLayout("%-6level- %message");
+            layout.ActivateOptions();
+
+            var appender = new RemoteSyslogAppender
+            {
+                Name = SyslogAppenderName,
+                RemoteAddress = System.Net.Dns.GetHostAddresses(host)[0],
+                RemotePort = port,
+                Facility = RemoteSyslogAppender.SyslogFacility.User,
+                Identity = new PatternLayout(Application.ProductName ?? "mRemoteNG"),
+                Layout = layout
+            };
+            appender.ActivateOptions();
+            return appender;
+        }
+
 
         private static string BuildLogFilePath()
         {

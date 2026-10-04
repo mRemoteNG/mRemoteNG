@@ -56,5 +56,14 @@
     <Setting Name="cbNotificationsPageInOptionMenu" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="LogToSyslog" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SyslogServerHost" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SyslogServerPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">514</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
