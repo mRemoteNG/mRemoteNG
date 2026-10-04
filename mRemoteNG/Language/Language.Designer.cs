@@ -1491,7 +1491,25 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("ConnectWithOptions", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Connect With Credentials.
+        /// </summary>
+        internal static string ConnectWithCredentials {
+            get {
+                return ResourceManager.GetString("ConnectWithCredentials", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Select a credential from the list below. Click OK to connect..
+        /// </summary>
+        internal static string SelectCredential {
+            get {
+                return ResourceManager.GetString("SelectCredential", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Connection to {0} via {1} closed by user {2}..
         /// </summary>
