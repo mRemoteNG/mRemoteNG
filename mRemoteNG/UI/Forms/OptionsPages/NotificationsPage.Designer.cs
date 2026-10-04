@@ -58,6 +58,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             labelLogFilePath = new MrngLabel();
             textBoxLogPath = new MrngTextBox();
             saveFileDialogLogging = new System.Windows.Forms.SaveFileDialog();
+            groupBoxSyslog = new MrngGroupBox();
+            chkLogToSyslog = new MrngCheckBox();
+            labelSyslogServer = new MrngLabel();
+            textBoxSyslogServer = new MrngTextBox();
+            labelSyslogPort = new MrngLabel();
+            numericSyslogPort = new System.Windows.Forms.NumericUpDown();
             groupBoxPopups = new MrngGroupBox();
             tblPopups = new System.Windows.Forms.TableLayoutPanel();
             chkPopupDebug = new MrngCheckBox();
@@ -69,6 +75,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             groupBoxNotifications.SuspendLayout();
             groupBoxLogging.SuspendLayout();
             tblLogging.SuspendLayout();
+            groupBoxSyslog.SuspendLayout();
             groupBoxPopups.SuspendLayout();
             tblPopups.SuspendLayout();
             SuspendLayout();
@@ -352,13 +359,78 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             textBoxLogPath.ReadOnly = true;
             textBoxLogPath.Size = new System.Drawing.Size(585, 22);
             textBoxLogPath.TabIndex = 2;
+            //
+            // groupBoxSyslog
+            //
+            groupBoxSyslog.Controls.Add(chkLogToSyslog);
+            groupBoxSyslog.Controls.Add(labelSyslogServer);
+            groupBoxSyslog.Controls.Add(textBoxSyslogServer);
+            groupBoxSyslog.Controls.Add(labelSyslogPort);
+            groupBoxSyslog.Controls.Add(numericSyslogPort);
+            groupBoxSyslog.Dock = System.Windows.Forms.DockStyle.Top;
+            groupBoxSyslog.Location = new System.Drawing.Point(0, 305);
+            groupBoxSyslog.Name = "groupBoxSyslog";
+            groupBoxSyslog.Size = new System.Drawing.Size(610, 75);
+            groupBoxSyslog.TabIndex = 2;
+            groupBoxSyslog.TabStop = false;
+            groupBoxSyslog.Text = "Syslog";
+            //
+            // chkLogToSyslog
+            //
+            chkLogToSyslog._mice = MrngCheckBox.MouseState.OUT;
+            chkLogToSyslog.AutoSize = true;
+            chkLogToSyslog.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkLogToSyslog.Location = new System.Drawing.Point(9, 18);
+            chkLogToSyslog.Name = "chkLogToSyslog";
+            chkLogToSyslog.Size = new System.Drawing.Size(57, 17);
+            chkLogToSyslog.TabIndex = 0;
+            chkLogToSyslog.Text = "Enable";
+            chkLogToSyslog.UseVisualStyleBackColor = true;
+            chkLogToSyslog.CheckedChanged += chkLogToSyslog_CheckedChanged;
+            //
+            // labelSyslogServer
+            //
+            labelSyslogServer.AutoSize = true;
+            labelSyslogServer.Location = new System.Drawing.Point(9, 48);
+            labelSyslogServer.Name = "labelSyslogServer";
+            labelSyslogServer.Size = new System.Drawing.Size(32, 13);
+            labelSyslogServer.TabIndex = 1;
+            labelSyslogServer.Text = "Host";
+            //
+            // textBoxSyslogServer
+            //
+            textBoxSyslogServer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            textBoxSyslogServer.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            textBoxSyslogServer.Location = new System.Drawing.Point(51, 44);
+            textBoxSyslogServer.Name = "textBoxSyslogServer";
+            textBoxSyslogServer.Size = new System.Drawing.Size(390, 22);
+            textBoxSyslogServer.TabIndex = 2;
+            //
+            // labelSyslogPort
+            //
+            labelSyslogPort.AutoSize = true;
+            labelSyslogPort.Location = new System.Drawing.Point(455, 48);
+            labelSyslogPort.Name = "labelSyslogPort";
+            labelSyslogPort.Size = new System.Drawing.Size(26, 13);
+            labelSyslogPort.TabIndex = 3;
+            labelSyslogPort.Text = "Port";
+            //
+            // numericSyslogPort
+            //
+            numericSyslogPort.Location = new System.Drawing.Point(490, 44);
+            numericSyslogPort.Maximum = 65535;
+            numericSyslogPort.Minimum = 1;
+            numericSyslogPort.Name = "numericSyslogPort";
+            numericSyslogPort.Size = new System.Drawing.Size(100, 22);
+            numericSyslogPort.TabIndex = 4;
+            numericSyslogPort.Value = 514;
             // 
             // groupBoxPopups
             // 
             groupBoxPopups.Controls.Add(tblPopups);
             groupBoxPopups.Controls.Add(labelPopupShowTypes);
             groupBoxPopups.Dock = System.Windows.Forms.DockStyle.Top;
-            groupBoxPopups.Location = new System.Drawing.Point(0, 305);
+            groupBoxPopups.Location = new System.Drawing.Point(0, 380);
             groupBoxPopups.Name = "groupBoxPopups";
             groupBoxPopups.Size = new System.Drawing.Size(610, 74);
             groupBoxPopups.TabIndex = 2;
@@ -446,7 +518,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblRegistrySettingsUsedInfo.BackColor = System.Drawing.SystemColors.ControlLight;
             lblRegistrySettingsUsedInfo.Dock = System.Windows.Forms.DockStyle.Top;
             lblRegistrySettingsUsedInfo.ForeColor = System.Drawing.SystemColors.ControlText;
-            lblRegistrySettingsUsedInfo.Location = new System.Drawing.Point(0, 379);
+            lblRegistrySettingsUsedInfo.Location = new System.Drawing.Point(0, 454);
             lblRegistrySettingsUsedInfo.Name = "lblRegistrySettingsUsedInfo";
             lblRegistrySettingsUsedInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
             lblRegistrySettingsUsedInfo.Size = new System.Drawing.Size(610, 30);
@@ -459,6 +531,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             Controls.Add(groupBoxPopups);
+            Controls.Add(groupBoxSyslog);
             Controls.Add(groupBoxLogging);
             Controls.Add(groupBoxNotifications);
             Controls.Add(lblRegistrySettingsUsedInfo);
@@ -471,6 +544,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             groupBoxLogging.PerformLayout();
             tblLogging.ResumeLayout(false);
             tblLogging.PerformLayout();
+            groupBoxSyslog.ResumeLayout(false);
+            groupBoxSyslog.PerformLayout();
             groupBoxPopups.ResumeLayout(false);
             groupBoxPopups.PerformLayout();
             tblPopups.ResumeLayout(false);
@@ -506,6 +581,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private MrngCheckBox chkLogToCurrentDir;
         private System.Windows.Forms.TableLayoutPanel tblLogging;
         private System.Windows.Forms.TableLayoutPanel tblPopups;
+        private MrngGroupBox groupBoxSyslog;
+        private MrngCheckBox chkLogToSyslog;
+        private Controls.MrngLabel labelSyslogServer;
+        private MrngTextBox textBoxSyslogServer;
+        private Controls.MrngLabel labelSyslogPort;
+        private System.Windows.Forms.NumericUpDown numericSyslogPort;
         private MrngGroupBox groupBoxNotifications;
         private MrngGroupBox groupBoxLogging;
         private MrngGroupBox groupBoxPopups;

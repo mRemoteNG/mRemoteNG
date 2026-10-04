@@ -238,5 +238,41 @@ namespace mRemoteNG.Properties {
                 this["cbNotificationsPageInOptionMenu"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LogToSyslog {
+            get {
+                return ((bool)(this["LogToSyslog"]));
+            }
+            set {
+                this["LogToSyslog"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SyslogServerHost {
+            get {
+                return ((string)(this["SyslogServerHost"]));
+            }
+            set {
+                this["SyslogServerHost"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("514")]
+        public int SyslogServerPort {
+            get {
+                return ((int)(this["SyslogServerPort"]));
+            }
+            set {
+                this["SyslogServerPort"] = value;
+            }
+        }
     }
 }
