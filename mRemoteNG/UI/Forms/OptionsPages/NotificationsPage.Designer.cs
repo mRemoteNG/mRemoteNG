@@ -58,6 +58,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             labelLogFilePath = new MrngLabel();
             textBoxLogPath = new MrngTextBox();
             saveFileDialogLogging = new System.Windows.Forms.SaveFileDialog();
+            groupBoxSyslog = new MrngGroupBox();
+            chkLogToSyslog = new MrngCheckBox();
+            labelSyslogServer = new MrngLabel();
+            textBoxSyslogServer = new MrngTextBox();
+            labelSyslogPort = new MrngLabel();
+            numericSyslogPort = new System.Windows.Forms.NumericUpDown();
             groupBoxPopups = new MrngGroupBox();
             tblPopups = new System.Windows.Forms.TableLayoutPanel();
             chkPopupDebug = new MrngCheckBox();
