@@ -421,6 +421,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 {
                     connectionInfo.UserField = xmlnode.GetAttributeAsString("UserField");
                     connectionInfo.Inheritance.UserField = xmlnode.GetAttributeAsBool("InheritUserField");
+                    connectionInfo.UserFields = xmlnode.GetAttributeAsString("UserFields");
+                    connectionInfo.Inheritance.UserFields = xmlnode.GetAttributeAsBool("InheritUserFields");
                 }
 
                 if (_confVersion >= 2.1)

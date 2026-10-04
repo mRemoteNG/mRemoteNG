@@ -470,6 +470,12 @@ namespace mRemoteNG.Connection
         public bool UserField { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.UserFields)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUserFields)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UserFields { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 8),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.EnvironmentTags)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionEnvironmentTags)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
