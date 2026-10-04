@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.UI;
@@ -13,50 +13,62 @@ namespace mRemoteNG.Messages.MessageWriters
 
         public void Write(IMessage message)
         {
-            NotificationMessageListViewItem lvItem = new(message);
-
+            var lvItem = new NotificationMessageListViewItem(message);
             AddToList(lvItem);
         }
 
         private void AddToList(ListViewItem lvItem)
         {
-            // Check if the control is disposed or handle not created (during shutdown)
-            if (_messageWindow.lvErrorCollector.IsDisposed || !_messageWindow.lvErrorCollector.IsHandleCreated)
-            {
+            var lv = _messageWindow.lvErrorCollector;
+            if (lv.IsDisposed) return;
+
+            if (!EnsureHandleCreated())
                 return;
-            }
 
-            if (_messageWindow.lvErrorCollector.InvokeRequired)
-            {
-                try
-                {
-                    _messageWindow.lvErrorCollector.Invoke((MethodInvoker)(() => AddToList(lvItem)));
-                }
-                catch (System.ComponentModel.InvalidAsynchronousStateException)
-                {
-                    // Destination thread no longer exists (application shutting down)
-                    return;
-                }
-                catch (ObjectDisposedException)
-                {
-                    // Control has been disposed (application shutting down)
-                    return;
-                }
-                catch (InvalidOperationException)
-                {
-                    // Control handle no longer exists or other invalid operation (application shutting down)
-                    return;
-                }
-            }
-            else
-            {
-                _messageWindow.lvErrorCollector.Items.Insert(0, lvItem);
+            InvokeOnCorrectThread(() => InsertItem(lvItem));
+        }
 
-                if (_messageWindow.lvErrorCollector.Items.Count > 0)
-                {
-                    _messageWindow.pbError.Visible = true;
-                }
+        private bool EnsureHandleCreated()
+        {
+            var lv = _messageWindow.lvErrorCollector;
+            if (lv.IsHandleCreated) return true;
+
+            // Handle must be created on the UI thread
+            try
+            {
+                if (_messageWindow.InvokeRequired)
+                    _messageWindow.Invoke((MethodInvoker)(() => { _ = lv.Handle; }));
+                else
+                    _ = lv.Handle;
+                return true;
             }
+            catch (ObjectDisposedException) { return false; }
+            catch (InvalidOperationException) { return false; }
+        }
+
+        private void InvokeOnCorrectThread(Action action)
+        {
+            var lv = _messageWindow.lvErrorCollector;
+            if (lv.IsDisposed) return;
+
+            try
+            {
+                if (lv.InvokeRequired)
+                    lv.Invoke((MethodInvoker)(() => action()));
+                else
+                    action();
+            }
+            catch (ObjectDisposedException) { /* Control disposed during shutdown — safe to ignore */ }
+            catch (InvalidOperationException) { /* Handle no longer valid during shutdown — safe to ignore */ }
+            catch (System.ComponentModel.InvalidAsynchronousStateException) { /* UI thread gone during shutdown — safe to ignore */ }
+        }
+
+        private void InsertItem(ListViewItem lvItem)
+        {
+            var lv = _messageWindow.lvErrorCollector;
+            if (lv.IsDisposed) return;
+            lv.Items.Insert(0, lvItem);
+            _messageWindow.pbError.Visible = true;
         }
     }
 }

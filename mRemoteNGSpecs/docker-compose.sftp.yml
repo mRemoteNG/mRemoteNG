@@ -1,0 +1,10 @@
+# Live SFTP server used by the @sftp end-to-end scenarios.
+# Started/stopped automatically by SftpServerFixture (Reqnroll BeforeFeature/AfterFeature hooks).
+services:
+  sftp:
+    image: atmoz/sftp:alpine
+    container_name: mremoteng-e2e-sftp
+    ports:
+      - "2222:22"
+    # format: user:pass:uid:gid:writable-dir
+    command: testuser:testpass:1001:1001:upload
