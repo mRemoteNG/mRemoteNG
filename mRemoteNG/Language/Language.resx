@@ -454,6 +454,12 @@ Starting with new connections file.</value>
   <data name="ConnectWithOptions" xml:space="preserve">
     <value>Connect (with options)</value>
   </data>
+  <data name="ConnectWithCredentials" xml:space="preserve">
+    <value>Connect With Credentials</value>
+  </data>
+  <data name="SelectCredential" xml:space="preserve">
+    <value>Select a credential from the list below. Click OK to connect.</value>
+  </data>
   <data name="ConnenctionClosedByUser" xml:space="preserve">
     <value>Connection to {0} via {1} closed by user {2}.</value>
   </data>
