@@ -1,35 +1,42 @@
+using System.Globalization;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Numerics;
 
 namespace mRemoteNG.Plugins.PortScan;
 
 internal sealed class PortScanService
 {
-    private static readonly int[] DefaultPorts =
+    /// <summary>
+    /// Caps the number of addresses a single scan may enumerate. Every address in the range is
+    /// pinged, so this is a practical scan limit as much as a guard against an IPv6 range - which
+    /// can span an astronomically large number of addresses - exhausting memory.
+    /// </summary>
+    private const long MaxScanRange = 65536;
+
+    /// <summary>
+    /// Commonly scanned service ports: FTP/SSH/Telnet/SMTP/DNS/HTTP(S), Windows RPC/NetBIOS/SMB,
+    /// LDAP(S), IMAP/POP3 (incl. TLS), rlogin, the usual databases, RDP, VNC, WinRM and common app
+    /// ports. Every port backing a protocol column in the results list is included, so the
+    /// SSH/Telnet/HTTP/HTTPS/Rlogin/RDP/VNC columns are still populated in this mode.
+    /// </summary>
+    public static readonly int[] CommonPorts =
     [
-        22,
-        23,
-        80,
-        443,
-        513,
-        3389,
-        5900,
+        21, 22, 23, 25, 53, 80, 110, 111, 135, 139, 143, 389, 443, 445, 465, 513, 587, 636, 993, 995,
+        1433, 1521, 2049, 3306, 3389, 5432, 5900, 5985, 5986, 6379, 8080, 8443, 9200, 27017
     ];
 
     public async Task<IReadOnlyList<PortScanHostResult>> ScanAsync(
         IPAddress startAddress,
         IPAddress endAddress,
-        int firstPort,
-        int lastPort,
+        IReadOnlyList<int> ports,
         int timeoutInMilliseconds,
-        bool scanDefaultPortsOnly,
         Action<string>? onBeginHostScan,
         Action<PortScanHostResult, int, int>? onHostScanned,
         CancellationToken cancellationToken)
     {
-        List<IPAddress> addresses = ExpandAddresses(startAddress, endAddress).ToList();
-        List<int> ports = BuildPortList(firstPort, lastPort, scanDefaultPortsOnly);
+        List<IPAddress> addresses = ExpandAddresses(startAddress, endAddress);
         List<PortScanHostResult> results = [];
 
         for (int index = 0; index < addresses.Count; index++)
@@ -47,49 +54,43 @@ internal sealed class PortScanService
         return results;
     }
 
-    private static List<int> BuildPortList(int firstPort, int lastPort, bool scanDefaultPortsOnly)
+    /// <summary>
+    /// Enumerates every address between <paramref name="first"/> and <paramref name="last"/>
+    /// inclusive. Addresses are treated as UNSIGNED big-endian integers so ordering and counting are
+    /// correct across the whole space (e.g. an IPv4 range straddling 128.0.0.0); BigInteger covers
+    /// both the 32-bit IPv4 and 128-bit IPv6 spaces. Throws when the endpoints mix address families
+    /// or the range exceeds <see cref="MaxScanRange"/>.
+    /// </summary>
+    private static List<IPAddress> ExpandAddresses(IPAddress first, IPAddress last)
     {
-        if (scanDefaultPortsOnly)
+        if (first.AddressFamily != last.AddressFamily)
         {
-            return [.. DefaultPorts];
+            throw new ArgumentException("A range cannot mix IPv4 and IPv6 addresses.");
         }
 
-        int start = Math.Min(firstPort, lastPort);
-        int end = Math.Max(firstPort, lastPort);
-        if (start == 0)
+        AddressFamily family = first.AddressFamily;
+
+        BigInteger start = ToBigInteger(first);
+        BigInteger end = ToBigInteger(last);
+        BigInteger min = BigInteger.Min(start, end);
+        BigInteger max = BigInteger.Max(start, end);
+
+        BigInteger addressCount = max - min + 1;
+        if (addressCount > MaxScanRange)
         {
-            start = end;
+            throw new ArgumentOutOfRangeException(nameof(last),
+                string.Format(CultureInfo.CurrentCulture,
+                              "The range covers {0} addresses, which exceeds the {1} address scan limit.",
+                              addressCount, MaxScanRange));
         }
 
-        List<int> ports = [];
-        for (int port = start; port <= end; port++)
+        List<IPAddress> addresses = new((int)addressCount);
+        for (BigInteger current = min; current <= max; current++)
         {
-            ports.Add(port);
+            addresses.Add(FromBigInteger(current, family));
         }
 
-        return ports;
-    }
-
-    private static IEnumerable<IPAddress> ExpandAddresses(IPAddress first, IPAddress last)
-    {
-        if (first.AddressFamily != AddressFamily.InterNetwork || last.AddressFamily != AddressFamily.InterNetwork)
-        {
-            throw new NotSupportedException("Only IPv4 ranges are supported.");
-        }
-
-        uint start = ToUInt32(first);
-        uint end = ToUInt32(last);
-        uint min = Math.Min(start, end);
-        uint max = Math.Max(start, end);
-
-        for (uint current = min; current <= max; current++)
-        {
-            yield return FromUInt32(current);
-            if (current == uint.MaxValue)
-            {
-                yield break;
-            }
-        }
+        return addresses;
     }
 
     private static async Task<PortScanHostResult> ScanHostAsync(
@@ -208,25 +209,23 @@ internal sealed class PortScanService
         }
     }
 
-    private static uint ToUInt32(IPAddress address)
+    private static BigInteger ToBigInteger(IPAddress address)
     {
-        byte[] bytes = address.GetAddressBytes();
-        if (BitConverter.IsLittleEndian)
-        {
-            Array.Reverse(bytes);
-        }
-
-        return BitConverter.ToUInt32(bytes, 0);
+        // GetAddressBytes() is big-endian (network order). Interpret it as an unsigned value.
+        return new BigInteger(address.GetAddressBytes(), isUnsigned: true, isBigEndian: true);
     }
 
-    private static IPAddress FromUInt32(uint value)
+    private static IPAddress FromBigInteger(BigInteger value, AddressFamily family)
     {
-        byte[] bytes = BitConverter.GetBytes(value);
-        if (BitConverter.IsLittleEndian)
-        {
-            Array.Reverse(bytes);
-        }
+        int length = family == AddressFamily.InterNetworkV6 ? 16 : 4;
+        byte[] addressBytes = new byte[length];
 
-        return new IPAddress(bytes);
+        // ToByteArray gives the minimal big-endian representation; right-align it into a
+        // fixed-width, zero-padded buffer so IPAddress gets a valid 4- or 16-byte address.
+        byte[] raw = value.ToByteArray(isUnsigned: true, isBigEndian: true);
+        int copyLength = Math.Min(raw.Length, length);
+        Array.Copy(raw, raw.Length - copyLength, addressBytes, length - copyLength, copyLength);
+
+        return new IPAddress(addressBytes);
     }
 }
