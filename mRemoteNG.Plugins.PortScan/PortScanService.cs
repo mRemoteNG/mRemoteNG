@@ -8,6 +8,8 @@ namespace mRemoteNG.Plugins.PortScan;
 
 internal sealed class PortScanService
 {
+    private const int MaxConcurrentPortScans = 256;
+
     /// <summary>
     /// Caps the number of addresses a single scan may enumerate. Every address in the range is
     /// pinged, so this is a practical scan limit as much as a guard against an IPv6 range - which
@@ -61,7 +63,7 @@ internal sealed class PortScanService
     /// both the 32-bit IPv4 and 128-bit IPv6 spaces. Throws when the endpoints mix address families
     /// or the range exceeds <see cref="MaxScanRange"/>.
     /// </summary>
-    private static List<IPAddress> ExpandAddresses(IPAddress first, IPAddress last)
+    internal static List<IPAddress> ExpandAddresses(IPAddress first, IPAddress last)
     {
         if (first.AddressFamily != last.AddressFamily)
         {
@@ -69,6 +71,10 @@ internal sealed class PortScanService
         }
 
         AddressFamily family = first.AddressFamily;
+        if (family == AddressFamily.InterNetworkV6 && first.ScopeId != last.ScopeId)
+        {
+            throw new ArgumentException("IPv6 range endpoints must use the same scope ID.");
+        }
 
         BigInteger start = ToBigInteger(first);
         BigInteger end = ToBigInteger(last);
@@ -87,7 +93,7 @@ internal sealed class PortScanService
         List<IPAddress> addresses = new((int)addressCount);
         for (BigInteger current = min; current <= max; current++)
         {
-            addresses.Add(FromBigInteger(current, family));
+            addresses.Add(FromBigInteger(current, family, family == AddressFamily.InterNetworkV6 ? first.ScopeId : 0));
         }
 
         return addresses;
@@ -95,7 +101,7 @@ internal sealed class PortScanService
 
     private static async Task<PortScanHostResult> ScanHostAsync(
         IPAddress address,
-        IEnumerable<int> ports,
+        IReadOnlyList<int> ports,
         int timeoutInMilliseconds,
         CancellationToken cancellationToken)
     {
@@ -113,9 +119,23 @@ internal sealed class PortScanService
                 result.HostName = result.HostIp;
             }
 
-            foreach (int port in ports)
+            bool[] openPorts = new bool[ports.Count];
+            await Parallel.ForEachAsync(
+                Enumerable.Range(0, openPorts.Length),
+                new ParallelOptions
+                {
+                    CancellationToken = cancellationToken,
+                    MaxDegreeOfParallelism = MaxConcurrentPortScans,
+                },
+                async (index, token) =>
+                {
+                    openPorts[index] = await IsPortOpenAsync(address, ports[index], timeoutInMilliseconds, token);
+                });
+
+            for (int index = 0; index < openPorts.Length; index++)
             {
-                bool isOpen = await IsPortOpenAsync(address, port, timeoutInMilliseconds, cancellationToken);
+                int port = ports[index];
+                bool isOpen = openPorts[index];
                 if (isOpen)
                 {
                     result.OpenPorts.Add(port);
@@ -192,16 +212,14 @@ internal sealed class PortScanService
         try
         {
             using TcpClient client = new();
-            Task connectTask = client.ConnectAsync(address, port);
-            Task timeoutTask = Task.Delay(timeoutInMilliseconds, cancellationToken);
-            Task completedTask = await Task.WhenAny(connectTask, timeoutTask);
-            if (completedTask != connectTask)
-            {
-                return false;
-            }
-
-            await connectTask;
+            using CancellationTokenSource timeoutCancellation = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            timeoutCancellation.CancelAfter(timeoutInMilliseconds);
+            await client.ConnectAsync(address, port, timeoutCancellation.Token);
             return client.Connected;
+        }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            throw;
         }
         catch
         {
@@ -215,7 +233,7 @@ internal sealed class PortScanService
         return new BigInteger(address.GetAddressBytes(), isUnsigned: true, isBigEndian: true);
     }
 
-    private static IPAddress FromBigInteger(BigInteger value, AddressFamily family)
+    private static IPAddress FromBigInteger(BigInteger value, AddressFamily family, long scopeId)
     {
         int length = family == AddressFamily.InterNetworkV6 ? 16 : 4;
         byte[] addressBytes = new byte[length];
@@ -226,6 +244,8 @@ internal sealed class PortScanService
         int copyLength = Math.Min(raw.Length, length);
         Array.Copy(raw, raw.Length - copyLength, addressBytes, length - copyLength, copyLength);
 
-        return new IPAddress(addressBytes);
+        return family == AddressFamily.InterNetworkV6
+            ? new IPAddress(addressBytes, scopeId)
+            : new IPAddress(addressBytes);
     }
 }

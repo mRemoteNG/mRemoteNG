@@ -69,6 +69,33 @@ public class IpRangeParserTests
         });
     }
 
+    [Test]
+    public void ScopedIpv6CidrPreservesItsScopeId()
+    {
+        bool parsed = IpRangeParser.TryParse("fe80::1234%12/120", out IPAddress? start, out IPAddress? end, out string error);
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(parsed, Is.True, error);
+            Assert.That(start?.ScopeId, Is.EqualTo(12L));
+            Assert.That(end?.ScopeId, Is.EqualTo(12L));
+        });
+    }
+
+    [Test]
+    public void ScopedIpv6RangeRequiresMatchingScopeIds()
+    {
+        bool parsed = IpRangeParser.TryParse("fe80::1%12-fe80::2%13", out IPAddress? start, out IPAddress? end, out string error);
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(parsed, Is.False);
+            Assert.That(start, Is.Null);
+            Assert.That(end, Is.Null);
+            Assert.That(error, Does.Contain("scope ID"));
+        });
+    }
+
     [TestCase("")]
     [TestCase("   ")]
     [TestCase("not an address")]

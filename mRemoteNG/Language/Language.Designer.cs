@@ -4466,6 +4466,78 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("PortScan", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Scan target.
+        /// </summary>
+        internal static string PortScanAddressRange {
+            get {
+                return ResourceManager.GetString("PortScanAddressRange", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a single address, a range (192.168.1.1 - 192.168.1.254) or a CIDR block (192.168.1.0/24). IPv4 and IPv6 are supported..
+        /// </summary>
+        internal static string PortScanAddressRangeHint {
+            get {
+                return ResourceManager.GetString("PortScanAddressRangeHint", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to 192.168.1.0/24.
+        /// </summary>
+        internal static string PortScanAddressRangePlaceholder {
+            get {
+                return ResourceManager.GetString("PortScanAddressRangePlaceholder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to All ports.
+        /// </summary>
+        internal static string PortScanAllPorts {
+            get {
+                return ResourceManager.GetString("PortScanAllPorts", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Common ports.
+        /// </summary>
+        internal static string PortScanCommonPorts {
+            get {
+                return ResourceManager.GetString("PortScanCommonPorts", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Custom.
+        /// </summary>
+        internal static string PortScanCustomPorts {
+            get {
+                return ResourceManager.GetString("PortScanCustomPorts", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a list of ports and/or ranges, e.g. 22, 80, 443, 3389, 8000-8100..
+        /// </summary>
+        internal static string PortScanCustomPortsHint {
+            get {
+                return ResourceManager.GetString("PortScanCustomPortsHint", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to 22, 80, 443, 3389, 8000-8100.
+        /// </summary>
+        internal static string PortScanCustomPortsPlaceholder {
+            get {
+                return ResourceManager.GetString("PortScanCustomPortsPlaceholder", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Port scan complete..

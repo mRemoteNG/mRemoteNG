@@ -75,6 +75,12 @@ internal static class IpRangeParser
             return false;
         }
 
+        if (first.AddressFamily == AddressFamily.InterNetworkV6 && first.ScopeId != last.ScopeId)
+        {
+            error = "IPv6 range endpoints must use the same scope ID.";
+            return false;
+        }
+
         // Accept the endpoints in either order so "192.168.1.254 - 192.168.1.1" still works.
         if (Compare(first, last) > 0)
             (first, last) = (last, first);
@@ -120,8 +126,12 @@ internal static class IpRangeParser
             lastBytes[i] = (byte)(addressBytes[i] | (byte)~mask);
         }
 
-        start = new IPAddress(firstBytes);
-        end = new IPAddress(lastBytes);
+        start = address.AddressFamily == AddressFamily.InterNetworkV6
+            ? new IPAddress(firstBytes, address.ScopeId)
+            : new IPAddress(firstBytes);
+        end = address.AddressFamily == AddressFamily.InterNetworkV6
+            ? new IPAddress(lastBytes, address.ScopeId)
+            : new IPAddress(lastBytes);
         error = string.Empty;
         return true;
     }

@@ -25,7 +25,7 @@ public class PortListParserTests
     {
         PortListParser.TryParse(input, out List<int> ports, out string error);
 
-        Assert.That(ports, Is.SupersetOf(new[] { 22, 80 }), error);
+        Assert.That(ports, Is.EqualTo(new[] { 22, 80, 443 }), error);
     }
 
     [Test]
