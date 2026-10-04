@@ -5114,7 +5114,16 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("PropertyDescriptionUser1", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Custom user fields as name=value pairs separated by semicolons (e.g. Env=prod;Role=admin). Each name can be passed into external applications using %name%..
+        /// </summary>
+        internal static string PropertyDescriptionUserFields {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionUserFields", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Use Remote Credential Guard to tunnel authentication on target back to source through the RDP channel..
         /// </summary>
@@ -7547,7 +7556,16 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("UserField", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to User Fields.
+        /// </summary>
+        internal static string UserFields {
+            get {
+                return ResourceManager.GetString("UserFields", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>

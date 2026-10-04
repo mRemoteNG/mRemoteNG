@@ -1167,6 +1167,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyDescriptionUser1" xml:space="preserve">
     <value>Feel free to enter any information you need here.</value>
   </data>
+  <data name="PropertyDescriptionUserFields" xml:space="preserve">
+    <value>Custom user fields as name=value pairs separated by semicolons (e.g. Env=prod;Role=admin). Each name can be passed into external applications using %name%.</value>
+  </data>
   <data name="PropertyDescriptionUserViaAPI" xml:space="preserve">
     <value>Enter the ID of user data in external API (e.g. secret server). when used, leave username/password/domain fields empty</value>
   </data>
@@ -1337,6 +1340,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="UserField" xml:space="preserve">
     <value>User Field</value>
+  </data>
+  <data name="UserFields" xml:space="preserve">
+    <value>User Fields</value>
   </data>
   <data name="EnvironmentTags" xml:space="preserve">
     <value>Environment Tags</value>

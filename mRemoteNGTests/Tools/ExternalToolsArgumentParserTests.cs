@@ -34,7 +34,8 @@ namespace mRemoteNGTests.Tools
                 Domain = TestString,
                 Description = TestString,
                 MacAddress = TestString,
-                UserField = TestString
+                UserField = TestString,
+                UserFields = "Env=prod;Role=admin;Spaced = spacedvalue"
             };
             _argumentParser = new ExternalToolArgumentParser(connectionInfo);
         }
@@ -94,6 +95,10 @@ namespace mRemoteNGTests.Tools
                     yield return new TestCaseData("%USERFIELD%").Returns(StringAfterAllEscaping);
                     yield return new TestCaseData("%-USERFIELD%").Returns(StringAfterMetacharacterEscaping);
                     yield return new TestCaseData("%!USERFIELD%").Returns(StringAfterNoEscaping);
+                    yield return new TestCaseData("%Env%") { TestName = "CustomUserFieldParsed" }.Returns("prod");
+                    yield return new TestCaseData("%ROLE%") { TestName = "CustomUserFieldParsedCaseInsensitive" }.Returns("admin");
+                    yield return new TestCaseData("%Spaced%") { TestName = "CustomUserFieldNameTrimmed" }.Returns(" spacedvalue");
+                    yield return new TestCaseData("%!Env%") { TestName = "CustomUserFieldHonorsNoEscape" }.Returns("prod");
                     yield return new TestCaseData("%%") {TestName = "EmptyVariableTagsNotParsed" }.Returns("%%");
                     yield return new TestCaseData("/k echo %!USERNAME%") { TestName = "ParsingWorksWhenVariableIsNotInFirstPosition" }.Returns(SampleCommandString);
                     yield return new TestCaseData("%COMSPEC%") { TestName = "EnvironmentVariablesParsed" }.Returns(Environment.GetEnvironmentVariable("comspec"));

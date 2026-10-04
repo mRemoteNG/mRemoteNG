@@ -205,10 +205,36 @@ namespace mRemoteNG.Tools
                     replacement = _connectionInfo.UserField;
                     break;
                 default:
+                    if (TryGetCustomUserField(variable, out string customValue))
+                        return customValue;
                     return original;
             }
 
             return replacement;
+        }
+
+        private bool TryGetCustomUserField(string variable, out string value)
+        {
+            value = "";
+            string userFields = _connectionInfo.UserFields;
+            if (string.IsNullOrEmpty(userFields))
+                return false;
+
+            foreach (string pair in userFields.Split(';'))
+            {
+                int separator = pair.IndexOf('=');
+                if (separator <= 0)
+                    continue;
+
+                string name = pair.Substring(0, separator).Trim();
+                if (name.Equals(variable, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    value = pair.Substring(separator + 1);
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private string PerformReplacements(string input, List<Replacement> replacements)

@@ -86,6 +86,7 @@
     <xs:attribute name="PostExtApp" type="xs:string" use="required" />
     <xs:attribute name="MacAddress" type="xs:string" use="required" />
     <xs:attribute name="UserField" type="xs:string" use="required" />
+    <xs:attribute name="UserFields" type="xs:string" use="optional" />
     <xs:attribute name="ExtApp" type="xs:string" use="required" />
     <xs:attribute name="Favorite" type="xs:string" use="required" />
     <xs:attribute name="VNCCompression" type="xs:string" use="required" />
@@ -157,6 +158,7 @@
     <xs:attribute name="InheritUseVmId" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritUseEnhancedMode" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritUserField" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUserFields" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritExtApp" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritFavorite" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritVNCCompression" type="xs:boolean" use="optional" />
