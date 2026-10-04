@@ -68,7 +68,7 @@ RDP 6
 	* - Desktop Composition
 	  - Enables visual effects on the remote desktop and features like glass window frames, 3D window transition animations, and Windows Flip. Uses more network bandwidth.
 	* - Redirect Key Combinations
-	  - Select whether key combinations (e.g. Alt-Tab) should be redirected to the remote host.
+	  - Select where Windows key combinations (e.g. Alt-Tab) are handled. ``Yes`` sends them to the remote host in both windowed and fullscreen sessions; ``No`` keeps them on the local computer in both modes. This is not a switch to block all Ctrl/Shift application shortcuts.
 	* - Redirect Disk Drives
 	  - Select whether local disk drives should be shown on the remote host.
 	* - Redirect Printers
@@ -81,7 +81,7 @@ RDP 6
 	  - Select whether local smart cards should be available on the remote host.
 	* - Redirect Sounds
 	  - Determine how remote sound should be redirected. Possible values are ``Bring to this computer``, ``Leave at remote computer``, ``Do not play``
-	
+
 
 RDP 7
 -----
@@ -134,3 +134,19 @@ RDP 10
 ------
 
 We support this protocol version, but are not yet using any of its features.
+
+
+Keyboard Combination Troubleshooting
+====================================
+
+If a required shortcut is not reaching a windowed RDP session, set the
+``Key Combinations`` connection property to ``Yes`` and reconnect. Check whether
+the property is inherited from a parent folder.
+
+With ``No``, Windows shortcuts are deliberately handled locally. Ordinary
+application shortcuts and left/right modifier behavior are also affected by the
+Windows RDP client, keyboard layout, and local shortcut handlers. If right
+Shift/Ctrl combinations still behave differently on the latest build, compare
+the same shortcut in Microsoft's Remote Desktop client with the same keyboard
+redirection setting, and report the exact shortcut, local/remote Windows
+versions, keyboard layouts, and mRemoteNG version.

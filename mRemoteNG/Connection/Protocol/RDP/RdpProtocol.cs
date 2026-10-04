@@ -39,7 +39,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private readonly DisplayProperties _displayProperties;
         protected readonly FrmMain _frmMain = FrmMain.Default;
         protected bool loginComplete;
-        private bool _redirectKeys;
         private bool _alertOnIdleDisconnect;
         protected uint DesktopScaleFactor => (uint)(_displayProperties.ResolutionScalingFactor.Width * 100);
         protected readonly uint DeviceScaleFactor = 100;
@@ -89,23 +88,22 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             set
             {
-                _redirectKeys = value;
                 try
                 {
-                    if (!_redirectKeys)
-                    {
-                        return;
-                    }
-
                     Debug.Assert(Convert.ToBoolean(_rdpClient.SecuredSettingsEnabled));
                     IMsRdpClientSecuredSettings msRdpClientSecuredSettings = _rdpClient.SecuredSettings2;
-                    msRdpClientSecuredSettings.KeyboardHookMode = 1; // Apply key combinations at the remote server.
+                    ConfigureKeyboardRedirection(msRdpClientSecuredSettings, value);
                 }
                 catch (Exception ex)
                 {
                     Runtime.MessageCollector.AddExceptionStackTrace(Language.RdpSetRedirectKeysFailed, ex);
                 }
             }
+        }
+
+        internal static void ConfigureKeyboardRedirection(IMsRdpClientSecuredSettings securedSettings, bool redirectKeys)
+        {
+            securedSettings.KeyboardHookMode = redirectKeys ? 1 : 0; // Remote server or local computer, regardless of fullscreen.
         }
 
         public bool LoadBalanceInfoUseUtf8 { get; set; }
