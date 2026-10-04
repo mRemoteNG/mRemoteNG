@@ -163,7 +163,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.PostExtApp))
               .Append(FormatForCsv(con.MacAddress))
               .Append(FormatForCsv(con.UserField))
-              .Append(FormatForCsv(con.UserFields))
+              .Append(FormatUserFieldsForCsv(con.UserFields))
               .Append(FormatForCsv(con.EnvironmentTags))
               .Append(FormatForCsv(con.ExtApp))
               .Append(FormatForCsv(con.Favorite))
@@ -287,6 +287,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
         {
             string cleanedString = value.ToString().Replace(";", "");
             return cleanedString + ";";
+        }
+
+        private string FormatUserFieldsForCsv(string value)
+        {
+            return "\"" + value.Replace("\"", "\"\"") + "\";";
         }
     }
 }

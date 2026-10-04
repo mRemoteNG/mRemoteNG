@@ -2281,6 +2281,18 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultUserViaAPI"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultUserFields {
+            get {
+                return ((string)(this["ConDefaultUserFields"]));
+            }
+            set {
+                this["ConDefaultUserFields"] = value;
+            }
+        }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2303,6 +2315,18 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["InhDefaultUserViaAPI"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultUserFields {
+            get {
+                return ((bool)(this["InhDefaultUserFields"]));
+            }
+            set {
+                this["InhDefaultUserFields"] = value;
             }
         }
         
