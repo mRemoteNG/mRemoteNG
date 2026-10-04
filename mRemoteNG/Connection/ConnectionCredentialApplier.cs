@@ -28,6 +28,13 @@ namespace mRemoteNG.Connection
 
             ConnectionInfo clone = connectionInfo.Clone();
             clone.Parent = connectionInfo.Parent;
+            clone.Inheritance.Username = false;
+            clone.Inheritance.Password = false;
+            clone.Inheritance.Domain = false;
+            clone.Inheritance.ExternalCredentialProvider = false;
+            clone.Inheritance.UserViaAPI = false;
+            clone.ExternalCredentialProvider = ExternalCredentialProvider.None;
+            clone.UserViaAPI = "";
             clone.Username = credentialRecord.Username ?? "";
             clone.Domain = credentialRecord.Domain ?? "";
             clone.Password = credentialRecord.Password?.ConvertToUnsecureString() ?? "";

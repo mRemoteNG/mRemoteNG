@@ -88,6 +88,41 @@ namespace mRemoteNGTests.Connection
         }
 
         [Test]
+        public void ApplyCredentialOverridesInheritedCredentialsAndExternalProvider()
+        {
+            var parent = new ContainerInfo
+            {
+                Username = "parentUser",
+                Domain = "parentDomain",
+                Password = "parentPassword",
+                ExternalCredentialProvider = ExternalCredentialProvider.DelineaSecretServer,
+                UserViaAPI = "parent-secret"
+            };
+            _connectionInfo.SetParent(parent);
+            _connectionInfo.Inheritance.Username = true;
+            _connectionInfo.Inheritance.Domain = true;
+            _connectionInfo.Inheritance.Password = true;
+            _connectionInfo.Inheritance.ExternalCredentialProvider = true;
+            _connectionInfo.Inheritance.UserViaAPI = true;
+
+            var result = ConnectionCredentialApplier.ApplyCredential(_connectionInfo, _credentialRecord);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.Username, Is.EqualTo("adminUser"));
+                Assert.That(result.Domain, Is.EqualTo("adminDomain"));
+                Assert.That(result.Password, Is.EqualTo("adminPassword"));
+                Assert.That(result.ExternalCredentialProvider, Is.EqualTo(ExternalCredentialProvider.None));
+                Assert.That(result.UserViaAPI, Is.Empty);
+                Assert.That(result.Inheritance.Username, Is.False);
+                Assert.That(result.Inheritance.Domain, Is.False);
+                Assert.That(result.Inheritance.Password, Is.False);
+                Assert.That(result.Inheritance.ExternalCredentialProvider, Is.False);
+                Assert.That(result.Inheritance.UserViaAPI, Is.False);
+            });
+        }
+
+        [Test]
         public void ApplyCredentialThrowsWhenConnectionIsNull()
         {
             Assert.Throws<ArgumentNullException>(

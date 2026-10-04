@@ -24,6 +24,15 @@ namespace mRemoteNG.Connection
             int? targetContentIndex = null,
             DockContent? targetPanePlaceholder = null);
 
+        void OpenConnection(
+            ConnectionInfo originalConnectionInfo,
+            ConnectionInfo connectionInfo,
+            ConnectionInfo.Force force = ConnectionInfo.Force.None,
+            ConnectionWindow? conForm = null,
+            DockPane? targetPane = null,
+            int? targetContentIndex = null,
+            DockContent? targetPanePlaceholder = null);
+
         bool SwitchToOpenConnection(ConnectionInfo connectionInfo);
     }
 }

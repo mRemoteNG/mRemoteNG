@@ -799,7 +799,7 @@ namespace mRemoteNG.UI.Controls
 
             ConnectionInfo connectionWithCredential =
                 ConnectionCredentialApplier.ApplyCredential(selectedNode, selectedCredential);
-            Runtime.ConnectionInitiator.OpenConnection(connectionWithCredential, ConnectionInfo.Force.DoNotJump);
+            Runtime.ConnectionInitiator.OpenConnection(selectedNode, connectionWithCredential, ConnectionInfo.Force.DoNotJump);
         }
 
         private void OnConnectToConsoleSessionClicked(object sender, EventArgs e)
@@ -807,6 +807,10 @@ namespace mRemoteNG.UI.Controls
             ContainerInfo selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
             if (selectedNodeAsContainer != null)
                 Runtime.ConnectionInitiator.OpenConnection(selectedNodeAsContainer,
+                                                           ConnectionInfo.Force.UseConsoleSession |
+                                                           ConnectionInfo.Force.DoNotJump);
+            else
+                Runtime.ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode,
                                                            ConnectionInfo.Force.UseConsoleSession |
                                                            ConnectionInfo.Force.DoNotJump);
 

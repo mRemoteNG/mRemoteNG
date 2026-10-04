@@ -54,8 +54,7 @@ namespace mRemoteNG.Connection
             }
         }
 
-        // async is necessary so UI can update while OpenConnection waits for tunnel connection to get ready in case of connection through SSH tunnel
-        public async void OpenConnection(
+        public void OpenConnection(
             ConnectionInfo connectionInfo,
             ConnectionInfo.Force force = ConnectionInfo.Force.None,
             ConnectionWindow conForm = null,
@@ -63,7 +62,20 @@ namespace mRemoteNG.Connection
             int? targetContentIndex = null,
             DockContent? targetPanePlaceholder = null)
         {
-            if (connectionInfo == null)
+            OpenConnection(connectionInfo, connectionInfo, force, conForm, targetPane, targetContentIndex, targetPanePlaceholder);
+        }
+
+        // async is necessary so UI can update while OpenConnection waits for tunnel connection to get ready in case of connection through SSH tunnel
+        public async void OpenConnection(
+            ConnectionInfo originalConnectionInfo,
+            ConnectionInfo connectionInfo,
+            ConnectionInfo.Force force = ConnectionInfo.Force.None,
+            ConnectionWindow conForm = null,
+            DockPane targetPane = null,
+            int? targetContentIndex = null,
+            DockContent? targetPanePlaceholder = null)
+        {
+            if (originalConnectionInfo == null || connectionInfo == null)
                 return;
 
             try
@@ -101,7 +113,7 @@ namespace mRemoteNG.Connection
                 // Handle connection through SSH tunnel:
                 // in case of connection through SSH tunnel, connectionInfo gets cloned, so that modification of its name, hostname and port do not modify the original connection info
                 // connectionInfoOriginal points to the original connection info in either case, for where its needed later on.
-                ConnectionInfo connectionInfoOriginal = connectionInfo;
+                ConnectionInfo connectionInfoOriginal = originalConnectionInfo;
                 ConnectionInfo connectionInfoSshTunnel = null; // SSH tunnel connection info will be set if SSH tunnel connection is configured, can be found and connected.
                 if (!string.IsNullOrEmpty(connectionInfoOriginal.SSHTunnelConnectionName))
                 {
@@ -127,7 +139,7 @@ namespace mRemoteNG.Connection
                     connectionInfoSshTunnel.SSHOptions += " -L " + localSshTunnelPort + ":" + connectionInfoOriginal.Hostname + ":" + connectionInfoOriginal.Port;
 
                     // clone target connection info as its hostname will be changed to localhost and port to local tunnel port to establish connection through tunnel, and those changes shall not be saved to the configuration
-                    connectionInfo = connectionInfoOriginal.Clone();
+                    connectionInfo = connectionInfo.Clone();
                     connectionInfo.Name += " via " + connectionInfoSshTunnel.Name;
                     connectionInfo.Hostname = "localhost";
                     connectionInfo.Port = localSshTunnelPort;
