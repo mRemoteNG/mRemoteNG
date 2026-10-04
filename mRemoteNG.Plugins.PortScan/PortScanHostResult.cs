@@ -26,7 +26,10 @@ internal sealed class PortScanHostResult
 
     public string ClosedPortsDisplay => string.Join(", ", ClosedPorts);
 
-    public string HostNameDisplay => string.Equals(HostName, HostIp, StringComparison.OrdinalIgnoreCase) ? string.Empty : HostName;
+    public string HostNameDisplay => string.IsNullOrWhiteSpace(HostName) ||
+                                     string.Equals(HostName, HostIp, StringComparison.OrdinalIgnoreCase)
+        ? string.Empty
+        : HostName;
 
     public string HostNameWithoutDomain
     {

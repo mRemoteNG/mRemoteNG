@@ -3016,6 +3016,33 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("HostnameIp", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to IP Address.
+        /// </summary>
+        internal static string IpAddress {
+            get {
+                return ResourceManager.GetString("IpAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Use IP address for imported connections.
+        /// </summary>
+        internal static string UseIpAddressForImport {
+            get {
+                return ResourceManager.GetString("UseIpAddressForImport", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Import all open ports as selected protocol.
+        /// </summary>
+        internal static string ImportAllOpenPorts {
+            get {
+                return ResourceManager.GetString("ImportAllOpenPorts", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to HTTP.

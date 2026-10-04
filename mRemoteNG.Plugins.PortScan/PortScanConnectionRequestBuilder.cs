@@ -34,7 +34,7 @@ internal static class PortScanConnectionRequestBuilder
     {
         return new PluginConnectionRequest
         {
-            Hostname = useIpAddress ? host.HostIp : host.HostName,
+            Hostname = useIpAddress || string.IsNullOrWhiteSpace(host.HostNameDisplay) ? host.HostIp : host.HostName,
             Name = host.HostNameWithoutDomain,
             Port = port,
             ProtocolId = protocolId,
