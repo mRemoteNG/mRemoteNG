@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Tools
 {
@@ -104,7 +105,7 @@ namespace mRemoteNG.Tools
             {
                 Send(macAddress, port);
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                    $"Sent Wake-on-LAN magic packet to {macAddress}.");
+                    string.Format(Language.WakeOnLanSent, macAddress));
                 return true;
             }
             catch (Exception ex)
