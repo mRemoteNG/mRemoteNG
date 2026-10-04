@@ -108,8 +108,8 @@ namespace mRemoteNG.App
             catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or System.Net.Sockets.SocketException)
             {
                 Properties.OptionsNotificationsPage.Default.LogToSyslog = false;
-                LogManager.GetLogger("mRemoteNG", "Logger").Warn("Syslog has been disabled because its server endpoint is invalid.", ex);
                 RestoreFileAppender(root);
+                LogManager.GetLogger("mRemoteNG", "Logger").Warn("Syslog has been disabled because its server endpoint is invalid.", ex);
             }
 
             hierarchy.Configured = true;
