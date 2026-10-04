@@ -860,7 +860,52 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("ClearCachedRdpCredentials", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Wake up (Wake-on-LAN).
+        /// </summary>
+        internal static string WakeOnLan {
+            get {
+                return ResourceManager.GetString("WakeOnLan", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Sends a Wake-on-LAN magic packet....
+        /// </summary>
+        internal static string PropertyDescriptionWakeOnLan {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionWakeOnLan", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to No MAC address is configured for this connection....
+        /// </summary>
+        internal static string WakeOnLanNoMacAddress {
+            get {
+                return ResourceManager.GetString("WakeOnLanNoMacAddress", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to A Wake-on-LAN magic packet was sent to {0}..
+        /// </summary>
+        internal static string WakeOnLanSent {
+            get {
+                return ResourceManager.GetString("WakeOnLanSent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to send a Wake-on-LAN magic packet to {0}..
+        /// </summary>
+        internal static string WakeOnLanFailed {
+            get {
+                return ResourceManager.GetString("WakeOnLanFailed", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Cleared cached RDP credentials for {0}..
         /// </summary>

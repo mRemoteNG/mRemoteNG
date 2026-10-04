@@ -48,6 +48,7 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeRename;
         private ToolStripMenuItem _cMenTreeDelete;
         private ToolStripMenuItem _cMenTreeCopyHostname;
+        private ToolStripMenuItem _cMenTreeWakeOnLan;
         private ToolStripMenuItem _cMenTreeClearCachedRdpCredentials;
         private ToolStripSeparator _cMenTreeSep4;
         private ToolStripMenuItem _cMenTreeMoveUp;
@@ -108,6 +109,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeRename = new ToolStripMenuItem();
             _cMenTreeDelete = new ToolStripMenuItem();
             _cMenTreeCopyHostname = new ToolStripMenuItem();
+            _cMenTreeWakeOnLan = new ToolStripMenuItem();
             _cMenTreeClearCachedRdpCredentials = new ToolStripMenuItem();
             _cMenTreeSep3 = new ToolStripSeparator();
             _cMenTreeImport = new ToolStripMenuItem();
@@ -148,6 +150,7 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeRename,
                 _cMenTreeDelete,
                 _cMenTreeCopyHostname,
+                _cMenTreeWakeOnLan,
                 _cMenTreeClearCachedRdpCredentials,
                 _cMenInheritanceSubMenu,
                 _cMenTreeSep3,
@@ -295,6 +298,13 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeCopyHostname.Size = new System.Drawing.Size(199, 22);
             _cMenTreeCopyHostname.Text = "Copy Hostname";
             _cMenTreeCopyHostname.Click += OnCopyHostnameClicked;
+            //
+            // cMenTreeWakeOnLan
+            //
+            _cMenTreeWakeOnLan.Name = "_cMenTreeWakeOnLan";
+            _cMenTreeWakeOnLan.Size = new System.Drawing.Size(199, 22);
+            _cMenTreeWakeOnLan.Text = "Wake up (Wake-on-LAN)";
+            _cMenTreeWakeOnLan.Click += OnWakeOnLanClicked;
             //
             // cMenTreeClearCachedRdpCredentials
             //
@@ -482,6 +492,8 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeRename.Text = Language.Rename;
             _cMenTreeDelete.Text = Language.Delete;
             _cMenTreeCopyHostname.Text = Language.CopyHostname;
+            _cMenTreeWakeOnLan.Text = Language.WakeOnLan;
+            _cMenTreeWakeOnLan.ToolTipText = Language.PropertyDescriptionWakeOnLan;
             _cMenTreeClearCachedRdpCredentials.Text = Language.ClearCachedRdpCredentials;
             _cMenTreeClearCachedRdpCredentials.ToolTipText = Language.PropertyDescriptionClearCachedRdpCredentials;
 
@@ -592,6 +604,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeApplyInheritanceToChildren.Enabled = false;
             _cMenTreeApplyDefaultInheritance.Enabled = false;
             _cMenTreeCopyHostname.Enabled = false;
+            _cMenTreeWakeOnLan.Enabled = false;
             _cMenTreeClearCachedRdpCredentials.Enabled = false;
         }
 
@@ -609,6 +622,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveUp.Enabled = false;
             _cMenTreeMoveDown.Enabled = false;
             _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
+            _cMenTreeWakeOnLan.Enabled = false;
             _cMenTreeApplyInheritanceToChildren.Enabled = false;
             _cMenTreeApplyDefaultInheritance.Enabled = false;
         }
@@ -621,6 +635,7 @@ namespace mRemoteNG.UI.Controls
             bool hasOpenConnections = containerInfo.Children.Any(child => child.OpenConnections.Count > 0);
             _cMenTreeDisconnect.Enabled = hasOpenConnections;
 
+            _cMenTreeWakeOnLan.Enabled = false;
             _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
         }
 
@@ -644,6 +659,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeImport.Enabled = false;
             _cMenTreeExportFile.Enabled = false;
             _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
+            _cMenTreeWakeOnLan.Enabled = false;
             _cMenTreeApplyInheritanceToChildren.Enabled = false;
             _cMenTreeApplyDefaultInheritance.Enabled = false;
         }
@@ -659,6 +675,8 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
                 _cMenTreeClearCachedRdpCredentials.Enabled = false;
             }
+
+            _cMenTreeWakeOnLan.Enabled = !string.IsNullOrWhiteSpace(connectionInfo.MacAddress);
 
             if (connectionInfo.Protocol == ProtocolType.IntApp)
                 _cMenTreeConnectWithOptionsNoCredentials.Enabled = false;
@@ -909,6 +927,37 @@ namespace mRemoteNG.UI.Controls
         private void OnCopyHostnameClicked(object sender, EventArgs e)
         {
             _connectionTree.CopyHostnameSelectedNode(new WindowsClipboard());
+        }
+
+        private void OnWakeOnLanClicked(object sender, EventArgs e)
+        {
+            ConnectionInfo selected = _connectionTree.SelectedNode;
+            if (selected == null || selected.IsContainer)
+                return;
+
+            string macAddress = selected.MacAddress;
+            if (string.IsNullOrWhiteSpace(macAddress))
+            {
+                CTaskDialog.MessageBox(
+                    this,
+                    Language.WakeOnLan,
+                    Language.WakeOnLanNoMacAddress,
+                    "", "", "", "",
+                    ETaskDialogButtons.Ok, ESysIcons.Warning, ESysIcons.Warning);
+                return;
+            }
+
+            bool sent = WakeOnLan.TrySend(macAddress);
+            CTaskDialog.MessageBox(
+                this,
+                Language.WakeOnLan,
+                sent
+                    ? string.Format(Language.WakeOnLanSent, macAddress)
+                    : string.Format(Language.WakeOnLanFailed, macAddress),
+                "", "", "", "",
+                ETaskDialogButtons.Ok,
+                sent ? ESysIcons.Information : ESysIcons.Warning,
+                sent ? ESysIcons.Information : ESysIcons.Warning);
         }
 
         private void OnClearCachedRdpCredentialsClicked(object sender, EventArgs e)
