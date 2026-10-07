@@ -289,6 +289,54 @@ namespace mRemoteNGTests.UI.Tabs
         });
 
         [Test]
+        public void ClosingAConnectionTabWhileMinimized_DoesNotThrow() => RunWithMessagePump(() =>
+        {
+            using var hostForm = new Form
+            {
+                Width = 800,
+                Height = 600,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(-10000, -10000)
+            };
+
+            var dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill,
+                DocumentStyle = DocumentStyle.DockingWindow,
+                Theme = new VS2015LightTheme()
+            };
+
+            dockPanel.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+
+            hostForm.Controls.Add(dockPanel);
+            hostForm.Show();
+
+            var connectionTab = new ConnectionTab
+            {
+                Text = "Doc1",
+                TabText = "Doc1",
+                DockAreas = DockAreas.Document | DockAreas.Float,
+                silentClose = true,
+                protocolClose = true
+            };
+
+            connectionTab.Show(dockPanel, DockState.Document);
+            Application.DoEvents();
+
+            connectionTab.MinimizeToBottomAutoHide();
+            Application.DoEvents();
+
+            Assert.That(connectionTab.DockState, Is.EqualTo(DockState.DockBottomAutoHide), "ConnectionTab should be auto-hidden at the bottom before closing");
+
+            Assert.DoesNotThrow(() =>
+            {
+                connectionTab.Close();
+                Application.DoEvents();
+            }, "Closing a connection tab while minimized to bottom auto-hide must not throw");
+        });
+
+        [Test]
         public void ReplacingAConnectionTab_CanKeepItsOriginalDocumentIndex() => RunWithMessagePump(() =>
         {
             using var hostForm = new Form
