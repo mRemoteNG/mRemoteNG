@@ -200,14 +200,14 @@ namespace mRemoteNG.UI.Tabs
                 if (m_documentTextFont == null)
                 {
                     m_font = TextFont;
-                    m_documentTextFont = new Font(TextFont.FontFamily, TextFont.Size + 2f, TextFont.Style);
+                    m_documentTextFont = new Font(TextFont, TextFont.Style);
                 }
                 else if (!Equals(m_font, TextFont))
                 {
                     m_documentTextFont.Dispose();
                     m_documentBoldFont?.Dispose();
                     m_font = TextFont;
-                    m_documentTextFont = new Font(TextFont.FontFamily, TextFont.Size + 2f, TextFont.Style);
+                    m_documentTextFont = new Font(TextFont, TextFont.Style);
                     m_documentBoldFont = null;
                 }
 
