@@ -78,8 +78,30 @@ namespace mRemoteNG.UI.Tabs
                 return;
             }
 
+            // Assigning DockAreas throws if the new value does not allow the current
+            // DockState (e.g. restoring areas without DockBottom while still auto-hidden
+            // at the bottom). Defer the restore until the state is compatible again.
+            if (!DockAreasAllowState(_dockAreasBeforeMinimize.Value, DockState))
+            {
+                return;
+            }
+
             DockAreas = _dockAreasBeforeMinimize.Value;
             _dockAreasBeforeMinimize = null;
+        }
+
+        private static bool DockAreasAllowState(DockAreas dockAreas, DockState dockState)
+        {
+            return dockState switch
+            {
+                DockState.Float => (dockAreas & DockAreas.Float) == DockAreas.Float,
+                DockState.DockLeft or DockState.DockLeftAutoHide => (dockAreas & DockAreas.DockLeft) == DockAreas.DockLeft,
+                DockState.DockRight or DockState.DockRightAutoHide => (dockAreas & DockAreas.DockRight) == DockAreas.DockRight,
+                DockState.DockTop or DockState.DockTopAutoHide => (dockAreas & DockAreas.DockTop) == DockAreas.DockTop,
+                DockState.DockBottom or DockState.DockBottomAutoHide => (dockAreas & DockAreas.DockBottom) == DockAreas.DockBottom,
+                DockState.Document => (dockAreas & DockAreas.Document) == DockAreas.Document,
+                _ => true,
+            };
         }
 
         private void ConnectionTab_GotFocus(object sender, EventArgs e)
