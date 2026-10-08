@@ -337,6 +337,63 @@ namespace mRemoteNGTests.UI.Tabs
         });
 
         [Test]
+        public void RestoringDockAreasWhileStillMinimized_DoesNotThrow() => RunWithMessagePump(() =>
+        {
+            using var hostForm = new Form
+            {
+                Width = 800,
+                Height = 600,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(-10000, -10000)
+            };
+
+            var dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill,
+                DocumentStyle = DocumentStyle.DockingWindow,
+                Theme = new VS2015LightTheme()
+            };
+
+            dockPanel.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+
+            hostForm.Controls.Add(dockPanel);
+            hostForm.Show();
+
+            var connectionTab = new ConnectionTab
+            {
+                Text = "Doc1",
+                TabText = "Doc1",
+                DockAreas = DockAreas.Document | DockAreas.Float
+            };
+
+            connectionTab.Show(dockPanel, DockState.Document);
+            Application.DoEvents();
+
+            connectionTab.MinimizeToBottomAutoHide();
+            Application.DoEvents();
+
+            Assert.That(connectionTab.DockState, Is.EqualTo(DockState.DockBottomAutoHide), "ConnectionTab should be auto-hidden at the bottom");
+
+            // Reproduces the crash scenario from the stack trace: forcing a restore of the
+            // original DockAreas (which lack DockBottom) while still auto-hidden at the bottom
+            // must not surface the "DockAreas conflicts with current DockState" exception.
+            MethodInfo restoreMethod = typeof(ConnectionTab).GetMethod(
+                "RestoreDockAreasAfterMinimize",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.That(restoreMethod, Is.Not.Null, "Could not find RestoreDockAreasAfterMinimize method");
+
+            Assert.DoesNotThrow(() =>
+            {
+                restoreMethod.Invoke(connectionTab, null);
+                Application.DoEvents();
+            }, "Restoring DockAreas while still minimized must not throw");
+
+            connectionTab.Close();
+            Application.DoEvents();
+        });
+
+        [Test]
         public void ReplacingAConnectionTab_CanKeepItsOriginalDocumentIndex() => RunWithMessagePump(() =>
         {
             using var hostForm = new Form
