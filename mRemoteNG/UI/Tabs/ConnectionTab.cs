@@ -153,11 +153,6 @@ namespace mRemoteNG.UI.Tabs
 
             base.OnFormClosing(e);
 
-            if (!e.Cancel && DockState == DockState.DockBottomAutoHide)
-            {
-                RestoreDockAreasAfterMinimize();
-            }
-
             if (e.Cancel || FrmMain.Default == null || FrmMain.Default.IsClosing)
                 return;
 

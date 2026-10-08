@@ -288,8 +288,11 @@ namespace mRemoteNGTests.UI.Tabs
             Assert.That(connectionTab.DockAreas, Is.EqualTo(DockAreas.Document | DockAreas.Float), "ConnectionTab should restore its original docking areas after leaving auto-hide");
         });
 
-        [Test]
-        public void ClosingAConnectionTabWhileMinimized_DoesNotThrow() => RunWithMessagePump(() =>
+        [TestCase(false, false)]
+        [TestCase(false, true)]
+        [TestCase(true, false)]
+        [TestCase(true, true)]
+        public void ClosingAConnectionTabWhileMinimized_DoesNotThrow(bool cancelClose, bool allowsBottomDocking) => RunWithMessagePump(() =>
         {
             using var hostForm = new Form
             {
@@ -312,14 +315,19 @@ namespace mRemoteNGTests.UI.Tabs
             hostForm.Controls.Add(dockPanel);
             hostForm.Show();
 
-            var connectionTab = new ConnectionTab
+            DockAreas originalDockAreas = DockAreas.Document | DockAreas.Float;
+            if (allowsBottomDocking)
+                originalDockAreas |= DockAreas.DockBottom;
+
+            using var connectionTab = new ConnectionTab
             {
                 Text = "Doc1",
                 TabText = "Doc1",
-                DockAreas = DockAreas.Document | DockAreas.Float,
+                DockAreas = originalDockAreas,
                 silentClose = true,
                 protocolClose = true
             };
+            connectionTab.FormClosing += (_, e) => e.Cancel = cancelClose;
 
             connectionTab.Show(dockPanel, DockState.Document);
             Application.DoEvents();
@@ -334,6 +342,18 @@ namespace mRemoteNGTests.UI.Tabs
                 connectionTab.Close();
                 Application.DoEvents();
             }, "Closing a connection tab while minimized to bottom auto-hide must not throw");
+
+            Assert.That(connectionTab.IsDisposed, Is.EqualTo(!cancelClose));
+            if (cancelClose)
+            {
+                Assert.That(connectionTab.DockState, Is.EqualTo(DockState.DockBottomAutoHide));
+                Assert.That(connectionTab.DockAreas, Is.EqualTo(originalDockAreas | DockAreas.DockBottom));
+
+                connectionTab.Show(dockPanel, DockState.Document);
+                Application.DoEvents();
+
+                Assert.That(connectionTab.DockAreas, Is.EqualTo(originalDockAreas), "Returning to document mode after a cancelled close should restore the original docking areas");
+            }
         });
 
         [Test]
