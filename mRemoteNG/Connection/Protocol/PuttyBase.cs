@@ -651,8 +651,21 @@ namespace mRemoteNG.Connection.Protocol
                     // This ensures decorations don't reappear when the window is resized
                     InterfaceControl.Resize += InterfaceControl_Resize;
 
-                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, 
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
                         Language.PuttyStuff + ": Border removal hooked to persist through resizes", true);
+                }
+                else
+                {
+                    // PuTTYNG attaches itself to the parent panel, but it initially
+                    // paints at its saved-session size (smaller than the panel) and is
+                    // only stretched later by the Resize() call below. Stretch it to
+                    // fill the panel immediately so the user never sees it appear small
+                    // and then expand.
+                    if (PuttyHandle != IntPtr.Zero && InterfaceControl.Size != Size.Empty)
+                    {
+                        Rectangle clientRect = InterfaceControl.ClientRectangle;
+                        NativeMethods.MoveWindow(PuttyHandle, clientRect.X, clientRect.Y, clientRect.Width, clientRect.Height, true);
+                    }
                 }
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.PuttyStuff, true);
