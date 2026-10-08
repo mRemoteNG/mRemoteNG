@@ -642,6 +642,10 @@ namespace mRemoteNG.Connection.Protocol
 
                     // Now that the window already fills the panel, make it visible.
                     NativeMethods.ShowWindow(PuttyHandle, (int)NativeMethods.SW_SHOW);
+                    if (NativeMethods.IsIconic(PuttyHandle) != 0)
+                    {
+                        NativeMethods.ShowWindow(PuttyHandle, (int)NativeMethods.SW_RESTORE);
+                    }
 
                     // CRITICAL: Hook into resize event to reapply decoration removal
                     // This ensures decorations don't reappear when the window is resized
