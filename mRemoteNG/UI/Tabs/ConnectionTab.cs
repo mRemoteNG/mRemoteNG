@@ -86,8 +86,24 @@ namespace mRemoteNG.UI.Tabs
                 return;
             }
 
-            DockAreas = _dockAreasBeforeMinimize.Value;
-            _dockAreasBeforeMinimize = null;
+            try
+            {
+                DockAreas = _dockAreasBeforeMinimize.Value;
+            }
+            catch (InvalidOperationException ex)
+            {
+                // The docking library re-validates the value against the live DockState and
+                // can still reject it if the state changed between the check above and the
+                // assignment. Swallowing keeps tab close/restore from surfacing an unhandled
+                // exception; the original DockAreas simply remain in effect.
+                Runtime.MessageCollector?.AddExceptionMessage(
+                    "RestoreDockAreasAfterMinimize (UI.Tabs.ConnectionTab) failed to restore DockAreas",
+                    ex);
+            }
+            finally
+            {
+                _dockAreasBeforeMinimize = null;
+            }
         }
 
         private static bool DockAreasAllowState(DockAreas dockAreas, DockState dockState)
