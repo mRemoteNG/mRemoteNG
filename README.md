@@ -76,6 +76,18 @@ The following protocols are supported:
 
 For a detailed feature list and general usage support, refer to the [Documentation](https://mremoteng.readthedocs.io/en/latest/).
 
+## Build environment
+
+This project must be built on Windows using Visual Studio 2026 tooling. Use the MSBuild.exe from the Visual Studio 2026 installation instead of the .NET Core `dotnet build` fallback; the Windows desktop project requires the Visual Studio build environment and COM/desktop targets.
+
+For local builds, prefer:
+
+```powershell
+& "$env:ProgramFiles(x86)\Microsoft Visual Studio\2026\Enterprise\MSBuild\Current\Bin\MSBuild.exe" mRemoteNG.sln /p:Configuration=Debug /p:Platform=x64
+```
+
+If your installation path differs, locate the VS2026 MSBuild from `vswhere.exe` first and then call that `MSBuild.exe` explicitly.
+
 ## Plugin development workflow
 
 Plugin projects are built from a separate plugin-only solution and loaded from the app's plugin folder at runtime.

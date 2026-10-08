@@ -34,8 +34,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\mRemoteNG\mRemoteNG.csproj" />
-    <ProjectReference Include="..\mRemoteNG.Plugins.MultiAddress\mRemoteNG.Plugins.MultiAddress.csproj" />
-    <ProjectReference Include="..\mRemoteNG.Plugins.PortScan\mRemoteNG.Plugins.PortScan.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

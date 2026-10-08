@@ -4,11 +4,13 @@ This repository now separates the app solution from the plugin solution.
 
 ## Build the plugins
 
-From the repository root:
+From the repository root on Windows using the Visual Studio 2026 toolchain:
 
 ```powershell
-dotnet build mRemoteNG.Plugins.sln -c Release -p:Platform=x64
+& "$env:ProgramFiles(x86)\Microsoft Visual Studio\2026\Enterprise\MSBuild\Current\Bin\MSBuild.exe" mRemoteNG.Plugins.sln /p:Configuration=Release /p:Platform=x64
 ```
+
+If you do not use the Enterprise edition folder name, replace it with your installed VS2026 edition (Community, Professional, or Enterprise).
 
 This builds the shared contract assembly and the plugin assemblies:
 

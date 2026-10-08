@@ -515,19 +515,6 @@ namespace mRemoteNG.UI.Forms
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ProgramRoot.UiCultureChanged -= OnUiCultureChanged;
-            if (Runtime.WindowList != null)
-            {
-                foreach (BaseWindow window in Runtime.WindowList)
-                {
-                    window.Close();
-                }
-            }
-
-            IsClosing = true;
-
-            Hide();
-
             if (Properties.OptionsAppearancePage.Default.CloseToTray)
             {
                 Runtime.NotificationAreaIcon ??= new NotificationAreaIcon();
@@ -574,6 +561,20 @@ namespace mRemoteNG.UI.Forms
                     }
                 }
             }
+
+            ProgramRoot.UiCultureChanged -= OnUiCultureChanged;
+
+            IsClosing = true;
+
+            if (Runtime.WindowList != null)
+            {
+                foreach (BaseWindow window in Runtime.WindowList)
+                {
+                    window.Close();
+                }
+            }
+
+            Hide();
 
             NativeMethods.ChangeClipboardChain(Handle, _fpChainedWindowHandle);
             SystemEvents.DisplaySettingsChanged -= _advancedWindowMenu.OnDisplayChanged;
