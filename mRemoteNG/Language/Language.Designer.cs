@@ -203,7 +203,25 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("_Tools", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        internal static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Minimise.
+        /// </summary>
+        internal static string Minimise {
+            get {
+                return ResourceManager.GetString("Minimise", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to &amp;Try again.
         /// </summary>

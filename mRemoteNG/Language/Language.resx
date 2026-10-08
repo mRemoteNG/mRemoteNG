@@ -884,6 +884,12 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="_Tools" xml:space="preserve">
     <value>&amp;Tools</value>
   </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Minimise" xml:space="preserve">
+    <value>Minimise</value>
+  </data>
   <data name="TransferFile" xml:space="preserve">
     <value>Transfer File (SSH)</value>
   </data>
