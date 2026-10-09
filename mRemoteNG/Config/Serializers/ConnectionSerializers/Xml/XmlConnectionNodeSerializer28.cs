@@ -78,6 +78,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("ConnectToConsole", connectionInfo.UseConsoleSession.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("UseCredSsp", connectionInfo.UseCredSsp.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RenderingEngine", connectionInfo.RenderingEngine));
+            element.Add(new XAttribute("TerminalBackend", connectionInfo.TerminalBackend));
             element.Add(new XAttribute("RDPAuthenticationLevel", connectionInfo.RDPAuthenticationLevel));
             element.Add(new XAttribute("RDPMinutesToIdleTimeout", connectionInfo.RDPMinutesToIdleTimeout));
             element.Add(new XAttribute("RDPAlertIdleTimeout", connectionInfo.RDPAlertIdleTimeout.ToString().ToLowerInvariant()));
@@ -258,6 +259,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 element.Add(new XAttribute("InheritUseCredSsp", inheritance.UseCredSsp.ToString().ToLowerInvariant()));
             if (inheritance.RenderingEngine)
                 element.Add(new XAttribute("InheritRenderingEngine", inheritance.RenderingEngine.ToString().ToLowerInvariant()));
+            if (inheritance.TerminalBackend)
+                element.Add(new XAttribute("InheritTerminalBackend", inheritance.TerminalBackend.ToString().ToLowerInvariant()));
             if (inheritance.Username)
                 element.Add(new XAttribute("InheritUsername", inheritance.Username.ToString().ToLowerInvariant()));
             if (inheritance.RDPAuthenticationLevel)

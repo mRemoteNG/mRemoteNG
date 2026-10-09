@@ -5186,6 +5186,42 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("PropertyDescriptionRenderingEngine", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Selects the terminal backend used to open this SSH connection inside the mRemoteNG panel. PuTTYNG keeps the embedded PuTTYNG terminal, while Windows Terminal embeds the Windows console running the system OpenSSH client..
+        /// </summary>
+        internal static string PropertyDescriptionTerminalBackend {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionTerminalBackend", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Terminal backend.
+        /// </summary>
+        internal static string TerminalBackend {
+            get {
+                return ResourceManager.GetString("TerminalBackend", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to PuTTYNG.
+        /// </summary>
+        internal static string TerminalBackendPuttyNg {
+            get {
+                return ResourceManager.GetString("TerminalBackendPuttyNg", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Windows Terminal.
+        /// </summary>
+        internal static string TerminalBackendWindowsTerminal {
+            get {
+                return ResourceManager.GetString("TerminalBackendWindowsTerminal", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Choose the resolution or mode this connection will open in..

@@ -386,6 +386,7 @@ namespace mRemoteNG.Connection
             RDPAlertIdleTimeout = Settings.Default.ConDefaultRDPAlertIdleTimeout;
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
             RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine), Settings.Default.ConDefaultRenderingEngine);
+            TerminalBackend = (TerminalBackend)Enum.Parse(typeof(TerminalBackend), Settings.Default.ConDefaultTerminalBackend);
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
             UseRestrictedAdmin = Settings.Default.ConDefaultUseRestrictedAdmin;
             UseRCG = Settings.Default.ConDefaultUseRCG;
