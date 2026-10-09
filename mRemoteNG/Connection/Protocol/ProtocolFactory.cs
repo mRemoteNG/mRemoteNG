@@ -35,8 +35,12 @@ namespace mRemoteNG.Connection.Protocol
                 case ProtocolType.ARD:
                     return new ProtocolARD();
                 case ProtocolType.SSH1:
+                    if (connectionInfo.TerminalBackend == TerminalBackend.WindowsTerminal)
+                        return new ProtocolTerminal(connectionInfo);
                     return new ProtocolSSH1();
                 case ProtocolType.SSH2:
+                    if (connectionInfo.TerminalBackend == TerminalBackend.WindowsTerminal)
+                        return new ProtocolTerminal(connectionInfo);
                     return new ProtocolSSH2();
                 case ProtocolType.Telnet:
                     return new ProtocolTelnet();

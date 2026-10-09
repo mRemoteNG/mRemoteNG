@@ -6,6 +6,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.Terminal;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Plugins;
@@ -282,6 +283,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             {
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RenderingEngine")], out HTTPBase.RenderingEngine value))
                     connectionRecord.RenderingEngine = value;
+            }
+
+            if (headers.Contains("TerminalBackend"))
+            {
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("TerminalBackend")], out TerminalBackend value))
+                    connectionRecord.TerminalBackend = value;
             }
 
             if (headers.Contains("RDPAuthenticationLevel"))
@@ -731,6 +738,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRenderingEngine")], out bool value))
                     connectionRecord.Inheritance.RenderingEngine = value;
+            }
+
+            if (headers.Contains("InheritTerminalBackend"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritTerminalBackend")], out bool value))
+                    connectionRecord.Inheritance.TerminalBackend = value;
             }
 
             if (headers.Contains("InheritExternalCredentialProvider"))

@@ -994,6 +994,18 @@ namespace mRemoteNG.Properties {
                 this["InhDefaultRenderingEngine"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultTerminalBackend {
+            get {
+                return ((bool)(this["InhDefaultTerminalBackend"]));
+            }
+            set {
+                this["InhDefaultTerminalBackend"] = value;
+            }
+        }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2219,6 +2231,18 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["ConDefaultRenderingEngine"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("PuttyNg")]
+        public string ConDefaultTerminalBackend {
+            get {
+                return ((string)(this["ConDefaultTerminalBackend"]));
+            }
+            set {
+                this["ConDefaultTerminalBackend"] = value;
             }
         }
         

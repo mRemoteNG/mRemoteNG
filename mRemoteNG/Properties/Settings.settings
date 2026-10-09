@@ -245,6 +245,9 @@
     <Setting Name="InhDefaultRenderingEngine" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="InhDefaultTerminalBackend" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="ConDefaultMacAddress" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -550,6 +553,9 @@
     </Setting>
     <Setting Name="ConDefaultRenderingEngine" Type="System.String" Scope="User">
       <Value Profile="(Default)">EdgeChromium</Value>
+    </Setting>
+    <Setting Name="ConDefaultTerminalBackend" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PuttyNg</Value>
     </Setting>
     <Setting Name="OpeningCommand" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

@@ -201,6 +201,12 @@ namespace mRemoteNG.Connection
         public bool RenderingEngine { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.TerminalBackend)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionTerminalBackend)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool TerminalBackend { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.UseConsoleSession)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUseConsoleSession)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
