@@ -20,7 +20,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         private readonly SecureString _encryptionKey = encryptionKey ?? throw new ArgumentNullException(nameof(encryptionKey));
         private readonly SaveFilter _saveFilter = saveFilter ?? throw new ArgumentNullException(nameof(saveFilter));
 
-        public Version Version { get; } = new Version(2, 8);
+        public virtual Version Version { get; } = new Version(2, 8);
+
+        protected bool SaveInheritance => _saveFilter.SaveInheritance;
 
         public XElement Serialize(ConnectionInfo connectionInfo)
         {
@@ -30,7 +32,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             return element;
         }
 
-        private void SetElementAttributes(XContainer element, ConnectionInfo connectionInfo)
+        protected virtual void SetElementAttributes(XContainer element, ConnectionInfo connectionInfo)
         {
             ContainerInfo nodeAsContainer = connectionInfo as ContainerInfo;
             element.Add(new XAttribute("Name", connectionInfo.Name));
@@ -174,7 +176,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("VaultOpenbaoSecretEngine", connectionInfo.VaultOpenbaoSecretEngine));
         }
 
-        private void SetInheritanceAttributes(XContainer element, IInheritable connectionInfo)
+        protected virtual void SetInheritanceAttributes(XContainer element, IInheritable connectionInfo)
         {
             if (!_saveFilter.SaveInheritance) return;
 
