@@ -741,9 +741,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             }
 
             if (headers.Contains("InheritTerminalBackend") &&
-                bool.TryParse(connectionCsv[headers.IndexOf("InheritTerminalBackend")], out bool value))
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritTerminalBackend")], out bool inheritTerminalBackend))
             {
-                connectionRecord.Inheritance.TerminalBackend = value;
+                connectionRecord.Inheritance.TerminalBackend = inheritTerminalBackend;
             }
 
             if (headers.Contains("InheritExternalCredentialProvider"))
