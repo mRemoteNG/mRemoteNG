@@ -10,12 +10,13 @@ using mRemoteNG.Resources.Language;
 namespace mRemoteNG.Connection.Protocol.Terminal
 {
     [SupportedOSPlatform("windows")]
-    public class ProtocolTerminal(ConnectionInfo connectionInfo) : ProtocolBase
+    public class ProtocolTerminal(ConnectionInfo connectionInfo, bool forceSsh = false) : ProtocolBase
     {
         #region Private Fields
 
         private IntPtr _handle;
         private readonly ConnectionInfo _connectionInfo = connectionInfo;
+        private readonly bool _forceSsh = forceSsh;
         private ConsoleControl.ConsoleControl _consoleControl;
 
         #endregion
@@ -38,7 +39,7 @@ namespace mRemoteNG.Connection.Protocol.Terminal
                 };
 
                 string hostname = _connectionInfo.Hostname.Trim();
-                bool useLocalHost = hostname.Length == 0 || hostname.Equals("localhost", StringComparison.OrdinalIgnoreCase);
+                bool useLocalHost = !_forceSsh && (hostname.Length == 0 || hostname.Equals("localhost", StringComparison.OrdinalIgnoreCase));
 
                 string processExe;
                 string arguments;

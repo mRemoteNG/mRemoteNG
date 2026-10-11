@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Sql;
 using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol.Terminal;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
@@ -51,6 +52,19 @@ public class DataTableDeserializerTests
         var output = _deserializer.Deserialize(dataTable);
         var connection = (ConnectionInfo)output.GetRecursiveChildList().First();
         Assert.That(connection.Resolution, Is.EqualTo(RDPResolutions.SmartSize));
+    }
+
+    [Test]
+    public void NullTerminalBackendUsesDefault()
+    {
+        var dataTable = CreateDataTable(new ConnectionInfo());
+        dataTable.Rows[0]["TerminalBackend"] = DBNull.Value;
+        _deserializer = new DataTableDeserializer(_cryptographyProvider, new SecureString());
+
+        var output = _deserializer.Deserialize(dataTable);
+        var connection = (ConnectionInfo)output.GetRecursiveChildList().First();
+
+        Assert.That(connection.TerminalBackend, Is.EqualTo(TerminalBackend.PuttyNg));
     }
 
 

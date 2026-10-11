@@ -1,3 +1,4 @@
+using System.Reflection;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Terminal;
@@ -41,12 +42,14 @@ public class ProtocolFactoryTests
         var connectionInfo = new ConnectionInfo
         {
             Protocol = protocol,
+            Hostname = "localhost",
             TerminalBackend = TerminalBackend.WindowsTerminal
         };
 
         var result = _factory.CreateProtocol(connectionInfo);
 
         Assert.That(result, Is.InstanceOf<ProtocolTerminal>());
+        Assert.That(typeof(ProtocolTerminal).GetField("_forceSsh", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(result), Is.True);
     }
 
     [Test]
