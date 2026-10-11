@@ -35,7 +35,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
             }
             else
             {
-                throw new Exception("Unknown database back-end");
+                throw new NotSupportedException("Unknown database back-end");
             }
 
             DbParameter pConfVersion = dbCommand.CreateParameter();

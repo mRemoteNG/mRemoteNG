@@ -285,10 +285,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.RenderingEngine = value;
             }
 
-            if (headers.Contains("TerminalBackend"))
+            if (headers.Contains("TerminalBackend") &&
+                Enum.TryParse(connectionCsv[headers.IndexOf("TerminalBackend")], out TerminalBackend value))
             {
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("TerminalBackend")], out TerminalBackend value))
-                    connectionRecord.TerminalBackend = value;
+                connectionRecord.TerminalBackend = value;
             }
 
             if (headers.Contains("RDPAuthenticationLevel"))
@@ -740,10 +740,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.Inheritance.RenderingEngine = value;
             }
 
-            if (headers.Contains("InheritTerminalBackend"))
+            if (headers.Contains("InheritTerminalBackend") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritTerminalBackend")], out bool value))
             {
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritTerminalBackend")], out bool value))
-                    connectionRecord.Inheritance.TerminalBackend = value;
+                connectionRecord.Inheritance.TerminalBackend = value;
             }
 
             if (headers.Contains("InheritExternalCredentialProvider"))
