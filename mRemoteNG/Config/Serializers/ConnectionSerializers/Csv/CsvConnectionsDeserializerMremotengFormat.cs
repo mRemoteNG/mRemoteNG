@@ -285,10 +285,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.RenderingEngine = value;
             }
 
-            if (headers.Contains("TerminalBackend") &&
-                Enum.TryParse(connectionCsv[headers.IndexOf("TerminalBackend")], out TerminalBackend value))
+            if (headers.Contains("TerminalBackend"))
             {
-                connectionRecord.TerminalBackend = value;
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("TerminalBackend")], out TerminalBackend value))
+                    connectionRecord.TerminalBackend = value;
             }
 
             if (headers.Contains("RDPAuthenticationLevel"))
