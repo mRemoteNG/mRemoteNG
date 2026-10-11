@@ -21,7 +21,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 .First().PasswordString
                 .ConvertToSecureString();
 
-            XmlConnectionNodeSerializer28 connectionNodeSerializer = new(
+            XmlConnectionNodeSerializer29 connectionNodeSerializer = new(
                 cryptographyProvider,
                 encryptionKey,
                 saveFilter ?? new SaveFilter());
