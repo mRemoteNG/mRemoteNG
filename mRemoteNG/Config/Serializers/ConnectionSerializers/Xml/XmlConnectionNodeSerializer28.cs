@@ -20,7 +20,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         private readonly SecureString _encryptionKey = encryptionKey ?? throw new ArgumentNullException(nameof(encryptionKey));
         private readonly SaveFilter _saveFilter = saveFilter ?? throw new ArgumentNullException(nameof(saveFilter));
 
-        public Version Version { get; } = new Version(2, 8);
+        public virtual Version Version { get; } = new Version(2, 8);
+
+        protected bool SaveInheritance => _saveFilter.SaveInheritance;
 
         public XElement Serialize(ConnectionInfo connectionInfo)
         {
@@ -30,7 +32,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             return element;
         }
 
-        private void SetElementAttributes(XContainer element, ConnectionInfo connectionInfo)
+        protected virtual void SetElementAttributes(XContainer element, ConnectionInfo connectionInfo)
         {
             ContainerInfo nodeAsContainer = connectionInfo as ContainerInfo;
             element.Add(new XAttribute("Name", connectionInfo.Name));
@@ -50,22 +52,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("ConnectionFrameColor", connectionInfo.ConnectionFrameColor));
             element.Add(new XAttribute("Id", connectionInfo.ConstantID));
 
-            if (!Runtime.UseCredentialManager)
-            {
-                element.Add(_saveFilter.SaveUsername
-                    ? new XAttribute("Username", connectionInfo.Username)
-                    : new XAttribute("Username", ""));
-
-                element.Add(_saveFilter.SaveDomain
-                    ? new XAttribute("Domain", connectionInfo.Domain)
-                    : new XAttribute("Domain", ""));
-
-                if (_saveFilter.SavePassword && !connectionInfo.Inheritance.Password)
-                    //element.Add(new XAttribute("Password", _cryptographyProvider.Encrypt(connectionInfo.Password?.ConvertToUnsecureString(), _encryptionKey)));
-                    element.Add(new XAttribute("Password", _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey)));
-                else
-                    element.Add(new XAttribute("Password", ""));
-            }
+            AddCredentialAttributes(element, connectionInfo);
 
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));
@@ -174,171 +161,116 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("VaultOpenbaoSecretEngine", connectionInfo.VaultOpenbaoSecretEngine));
         }
 
-        private void SetInheritanceAttributes(XContainer element, IInheritable connectionInfo)
+        private void AddCredentialAttributes(XContainer element, ConnectionInfo connectionInfo)
+        {
+            if (Runtime.UseCredentialManager)
+                return;
+
+            element.Add(_saveFilter.SaveUsername
+                ? new XAttribute("Username", connectionInfo.Username)
+                : new XAttribute("Username", ""));
+
+            element.Add(_saveFilter.SaveDomain
+                ? new XAttribute("Domain", connectionInfo.Domain)
+                : new XAttribute("Domain", ""));
+
+            element.Add(_saveFilter.SavePassword && !connectionInfo.Inheritance.Password
+                ? new XAttribute("Password", _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey))
+                : new XAttribute("Password", ""));
+        }
+
+        protected virtual void SetInheritanceAttributes(XContainer element, IInheritable connectionInfo)
         {
             if (!_saveFilter.SaveInheritance) return;
 
             ConnectionInfoInheritance inheritance = connectionInfo.Inheritance;
 
-            if (inheritance.CacheBitmaps)
-                element.Add(new XAttribute("InheritCacheBitmaps", inheritance.CacheBitmaps.ToString().ToLowerInvariant()));
-            if (inheritance.Colors)
-                element.Add(new XAttribute("InheritColors", inheritance.Colors.ToString().ToLowerInvariant()));
-            if (inheritance.Description)
-                element.Add(new XAttribute("InheritDescription", inheritance.Description.ToString().ToLowerInvariant()));
-            if (inheritance.DisplayThemes)
-                element.Add(new XAttribute("InheritDisplayThemes", inheritance.DisplayThemes.ToString().ToLowerInvariant()));
-            if (inheritance.DisplayWallpaper)
-                element.Add(new XAttribute("InheritDisplayWallpaper", inheritance.DisplayWallpaper.ToString().ToLowerInvariant()));
-            if (inheritance.EnableFontSmoothing)
-                element.Add(new XAttribute("InheritEnableFontSmoothing", inheritance.EnableFontSmoothing.ToString().ToLowerInvariant()));
-            if (inheritance.EnableDesktopComposition)
-                element.Add(new XAttribute("InheritEnableDesktopComposition", inheritance.EnableDesktopComposition.ToString().ToLowerInvariant()));
-            if (inheritance.DisableFullWindowDrag)
-                element.Add(new XAttribute("InheritDisableFullWindowDrag", inheritance.DisableFullWindowDrag.ToString().ToLowerInvariant()));
-            if (inheritance.DisableMenuAnimations)
-                element.Add(new XAttribute("InheritDisableMenuAnimations", inheritance.DisableMenuAnimations.ToString().ToLowerInvariant()));
-            if (inheritance.DisableCursorShadow)
-                element.Add(new XAttribute("InheritDisableCursorShadow", inheritance.DisableCursorShadow.ToString().ToLowerInvariant()));
-            if (inheritance.DisableCursorBlinking)
-                element.Add(new XAttribute("InheritDisableCursorBlinking", inheritance.DisableCursorBlinking.ToString().ToLowerInvariant()));
-            if (inheritance.Domain)
-                element.Add(new XAttribute("InheritDomain", inheritance.Domain.ToString().ToLowerInvariant()));
-            if (inheritance.Icon)
-                element.Add(new XAttribute("InheritIcon", inheritance.Icon.ToString().ToLowerInvariant()));
-            if (inheritance.Panel)
-                element.Add(new XAttribute("InheritPanel", inheritance.Panel.ToString().ToLowerInvariant()));
-            if (inheritance.TabColor)
-                element.Add(new XAttribute("InheritTabColor", inheritance.TabColor.ToString().ToLowerInvariant()));
-            if (inheritance.ConnectionFrameColor)
-                element.Add(new XAttribute("InheritConnectionFrameColor", inheritance.ConnectionFrameColor.ToString().ToLowerInvariant()));
-            if (inheritance.Password)
-                element.Add(new XAttribute("InheritPassword", inheritance.Password.ToString().ToLowerInvariant()));
-            if (inheritance.Port)
-                element.Add(new XAttribute("InheritPort", inheritance.Port.ToString().ToLowerInvariant()));
-            if (inheritance.Protocol)
-                element.Add(new XAttribute("InheritProtocol", inheritance.Protocol.ToString().ToLowerInvariant()));
-            if (inheritance.RdpVersion)
-                element.Add(new XAttribute("InheritRdpVersion", inheritance.RdpVersion.ToString().ToLowerInvariant()));
-            if (inheritance.SSHTunnelConnectionName)
-                element.Add(new XAttribute("InheritSSHTunnelConnectionName", inheritance.SSHTunnelConnectionName.ToString().ToLowerInvariant()));
-            if (inheritance.OpeningCommand)
-                element.Add(new XAttribute("InheritOpeningCommand", inheritance.OpeningCommand.ToString().ToLowerInvariant()));
-            if (inheritance.SSHOptions)
-                element.Add(new XAttribute("InheritSSHOptions", inheritance.SSHOptions.ToString().ToLowerInvariant()));
-            if (inheritance.PuttySession)
-                element.Add(new XAttribute("InheritPuttySession", inheritance.PuttySession.ToString().ToLowerInvariant()));
-            if (inheritance.RedirectDiskDrives)
-                element.Add(new XAttribute("InheritRedirectDiskDrives", inheritance.RedirectDiskDrives.ToString().ToLowerInvariant()));
-            if (inheritance.RedirectDiskDrivesCustom)
-                element.Add(new XAttribute("InheritRedirectDiskDrivesCustom", inheritance.RedirectDiskDrivesCustom.ToString().ToLowerInvariant()));
-            if (inheritance.RedirectKeys)
-                element.Add(new XAttribute("InheritRedirectKeys", inheritance.RedirectKeys.ToString().ToLowerInvariant()));
-            if (inheritance.RedirectPorts)
-                element.Add(new XAttribute("InheritRedirectPorts", inheritance.RedirectPorts.ToString().ToLowerInvariant()));
-            if (inheritance.RedirectPrinters)
-                element.Add(new XAttribute("InheritRedirectPrinters", inheritance.RedirectPrinters.ToString().ToLowerInvariant()));
-            if (inheritance.RedirectClipboard)
-                element.Add(new XAttribute("InheritRedirectClipboard", inheritance.RedirectClipboard.ToString().ToLowerInvariant()));
-            if (inheritance.RedirectSmartCards)
-                element.Add(new XAttribute("InheritRedirectSmartCards", inheritance.RedirectSmartCards.ToString().ToLowerInvariant()));
-            if (inheritance.RedirectSound)
-                element.Add(new XAttribute("InheritRedirectSound", inheritance.RedirectSound.ToString().ToLowerInvariant()));
-            if (inheritance.SoundQuality)
-                element.Add(new XAttribute("InheritSoundQuality", inheritance.SoundQuality.ToString().ToLowerInvariant()));
-            if (inheritance.RedirectAudioCapture)
-                element.Add(new XAttribute("InheritRedirectAudioCapture", inheritance.RedirectAudioCapture.ToString().ToLowerInvariant()));
-            if (inheritance.Resolution)
-                element.Add(new XAttribute("InheritResolution", inheritance.Resolution.ToString().ToLowerInvariant()));
-            if (inheritance.AutomaticResize)
-                element.Add(new XAttribute("InheritAutomaticResize", inheritance.AutomaticResize.ToString().ToLowerInvariant()));
-            if (inheritance.UseConsoleSession)
-                element.Add(new XAttribute("InheritUseConsoleSession", inheritance.UseConsoleSession.ToString().ToLowerInvariant()));
-            if (inheritance.UseCredSsp)
-                element.Add(new XAttribute("InheritUseCredSsp", inheritance.UseCredSsp.ToString().ToLowerInvariant()));
-            if (inheritance.RenderingEngine)
-                element.Add(new XAttribute("InheritRenderingEngine", inheritance.RenderingEngine.ToString().ToLowerInvariant()));
-            if (inheritance.Username)
-                element.Add(new XAttribute("InheritUsername", inheritance.Username.ToString().ToLowerInvariant()));
-            if (inheritance.RDPAuthenticationLevel)
-                element.Add(new XAttribute("InheritRDPAuthenticationLevel", inheritance.RDPAuthenticationLevel.ToString().ToLowerInvariant()));
-            if (inheritance.RDPMinutesToIdleTimeout)
-                element.Add(new XAttribute("InheritRDPMinutesToIdleTimeout", inheritance.RDPMinutesToIdleTimeout.ToString().ToLowerInvariant()));
-            if (inheritance.RDPAlertIdleTimeout)
-                element.Add(new XAttribute("InheritRDPAlertIdleTimeout", inheritance.RDPAlertIdleTimeout.ToString().ToLowerInvariant()));
-            if (inheritance.LoadBalanceInfo)
-                element.Add(new XAttribute("InheritLoadBalanceInfo", inheritance.LoadBalanceInfo.ToString().ToLowerInvariant()));
-            if (inheritance.PreExtApp)
-                element.Add(new XAttribute("InheritPreExtApp", inheritance.PreExtApp.ToString().ToLowerInvariant()));
-            if (inheritance.PostExtApp)
-                element.Add(new XAttribute("InheritPostExtApp", inheritance.PostExtApp.ToString().ToLowerInvariant()));
-            if (inheritance.MacAddress)
-                element.Add(new XAttribute("InheritMacAddress", inheritance.MacAddress.ToString().ToLowerInvariant()));
-            if (inheritance.UserField)
-                element.Add(new XAttribute("InheritUserField", inheritance.UserField.ToString().ToLowerInvariant()));
-            if (inheritance.EnvironmentTags)
-                element.Add(new XAttribute("InheritEnvironmentTags", inheritance.EnvironmentTags.ToString().ToLowerInvariant()));
-            if (inheritance.Favorite)
-                element.Add(new XAttribute("InheritFavorite", inheritance.Favorite.ToString().ToLowerInvariant()));
-            if (inheritance.ExtApp)
-                element.Add(new XAttribute("InheritExtApp", inheritance.ExtApp.ToString().ToLowerInvariant()));
-            if (inheritance.VNCCompression)
-                element.Add(new XAttribute("InheritVNCCompression", inheritance.VNCCompression.ToString().ToLowerInvariant()));
-            if (inheritance.VNCEncoding)
-                element.Add(new XAttribute("InheritVNCEncoding", inheritance.VNCEncoding.ToString().ToLowerInvariant()));
-            if (inheritance.VNCAuthMode)
-                element.Add(new XAttribute("InheritVNCAuthMode", inheritance.VNCAuthMode.ToString().ToLowerInvariant()));
-            if (inheritance.VNCProxyType)
-                element.Add(new XAttribute("InheritVNCProxyType", inheritance.VNCProxyType.ToString().ToLowerInvariant()));
-            if (inheritance.VNCProxyIP)
-                element.Add(new XAttribute("InheritVNCProxyIP", inheritance.VNCProxyIP.ToString().ToLowerInvariant()));
-            if (inheritance.VNCProxyPort)
-                element.Add(new XAttribute("InheritVNCProxyPort", inheritance.VNCProxyPort.ToString().ToLowerInvariant()));
-            if (inheritance.VNCProxyUsername)
-                element.Add(new XAttribute("InheritVNCProxyUsername", inheritance.VNCProxyUsername.ToString().ToLowerInvariant()));
-            if (inheritance.VNCProxyPassword)
-                element.Add(new XAttribute("InheritVNCProxyPassword", inheritance.VNCProxyPassword.ToString().ToLowerInvariant()));
-            if (inheritance.VNCColors)
-                element.Add(new XAttribute("InheritVNCColors", inheritance.VNCColors.ToString().ToLowerInvariant()));
-            if (inheritance.VNCSmartSizeMode)
-                element.Add(new XAttribute("InheritVNCSmartSizeMode", inheritance.VNCSmartSizeMode.ToString().ToLowerInvariant()));
-            if (inheritance.VNCViewOnly)
-                element.Add(new XAttribute("InheritVNCViewOnly", inheritance.VNCViewOnly.ToString().ToLowerInvariant()));
-            if (inheritance.RDGatewayUsageMethod)
-                element.Add(new XAttribute("InheritRDGatewayUsageMethod", inheritance.RDGatewayUsageMethod.ToString().ToLowerInvariant()));
-            if (inheritance.RDGatewayHostname)
-                element.Add(new XAttribute("InheritRDGatewayHostname", inheritance.RDGatewayHostname.ToString().ToLowerInvariant()));
-            if (inheritance.RDGatewayUseConnectionCredentials)
-                element.Add(new XAttribute("InheritRDGatewayUseConnectionCredentials", inheritance.RDGatewayUseConnectionCredentials.ToString().ToLowerInvariant()));
-            if (inheritance.RDGatewayUsername)
-                element.Add(new XAttribute("InheritRDGatewayUsername", inheritance.RDGatewayUsername.ToString().ToLowerInvariant()));
-            if (inheritance.RDGatewayPassword)
-                element.Add(new XAttribute("InheritRDGatewayPassword", inheritance.RDGatewayPassword.ToString().ToLowerInvariant()));
-            if (inheritance.RDGatewayAccessToken)
-                element.Add(new XAttribute("InheritRDGatewayAccessToken", inheritance.RDGatewayAccessToken.ToString().ToLowerInvariant()));
-            if (inheritance.RDGatewayDomain)
-                element.Add(new XAttribute("InheritRDGatewayDomain", inheritance.RDGatewayDomain.ToString().ToLowerInvariant()));
-            if (inheritance.RDGatewayExternalCredentialProvider)
-                element.Add(new XAttribute("InheritRDGatewayExternalCredentialProvider", inheritance.RDGatewayExternalCredentialProvider.ToString().ToLowerInvariant()));
-            if (inheritance.RDGatewayUserViaAPI)
-                element.Add(new XAttribute("InheritRDGatewayUserViaAPI", inheritance.RDGatewayUserViaAPI.ToString().ToLowerInvariant()));
+            AddInheritanceAttribute(element, inheritance.CacheBitmaps, "InheritCacheBitmaps");
+            AddInheritanceAttribute(element, inheritance.Colors, "InheritColors");
+            AddInheritanceAttribute(element, inheritance.Description, "InheritDescription");
+            AddInheritanceAttribute(element, inheritance.DisplayThemes, "InheritDisplayThemes");
+            AddInheritanceAttribute(element, inheritance.DisplayWallpaper, "InheritDisplayWallpaper");
+            AddInheritanceAttribute(element, inheritance.EnableFontSmoothing, "InheritEnableFontSmoothing");
+            AddInheritanceAttribute(element, inheritance.EnableDesktopComposition, "InheritEnableDesktopComposition");
+            AddInheritanceAttribute(element, inheritance.DisableFullWindowDrag, "InheritDisableFullWindowDrag");
+            AddInheritanceAttribute(element, inheritance.DisableMenuAnimations, "InheritDisableMenuAnimations");
+            AddInheritanceAttribute(element, inheritance.DisableCursorShadow, "InheritDisableCursorShadow");
+            AddInheritanceAttribute(element, inheritance.DisableCursorBlinking, "InheritDisableCursorBlinking");
+            AddInheritanceAttribute(element, inheritance.Domain, "InheritDomain");
+            AddInheritanceAttribute(element, inheritance.Icon, "InheritIcon");
+            AddInheritanceAttribute(element, inheritance.Panel, "InheritPanel");
+            AddInheritanceAttribute(element, inheritance.TabColor, "InheritTabColor");
+            AddInheritanceAttribute(element, inheritance.ConnectionFrameColor, "InheritConnectionFrameColor");
+            AddInheritanceAttribute(element, inheritance.Password, "InheritPassword");
+            AddInheritanceAttribute(element, inheritance.Port, "InheritPort");
+            AddInheritanceAttribute(element, inheritance.Protocol, "InheritProtocol");
+            AddInheritanceAttribute(element, inheritance.RdpVersion, "InheritRdpVersion");
+            AddInheritanceAttribute(element, inheritance.SSHTunnelConnectionName, "InheritSSHTunnelConnectionName");
+            AddInheritanceAttribute(element, inheritance.OpeningCommand, "InheritOpeningCommand");
+            AddInheritanceAttribute(element, inheritance.SSHOptions, "InheritSSHOptions");
+            AddInheritanceAttribute(element, inheritance.PuttySession, "InheritPuttySession");
+            AddInheritanceAttribute(element, inheritance.RedirectDiskDrives, "InheritRedirectDiskDrives");
+            AddInheritanceAttribute(element, inheritance.RedirectDiskDrivesCustom, "InheritRedirectDiskDrivesCustom");
+            AddInheritanceAttribute(element, inheritance.RedirectKeys, "InheritRedirectKeys");
+            AddInheritanceAttribute(element, inheritance.RedirectPorts, "InheritRedirectPorts");
+            AddInheritanceAttribute(element, inheritance.RedirectPrinters, "InheritRedirectPrinters");
+            AddInheritanceAttribute(element, inheritance.RedirectClipboard, "InheritRedirectClipboard");
+            AddInheritanceAttribute(element, inheritance.RedirectSmartCards, "InheritRedirectSmartCards");
+            AddInheritanceAttribute(element, inheritance.RedirectSound, "InheritRedirectSound");
+            AddInheritanceAttribute(element, inheritance.SoundQuality, "InheritSoundQuality");
+            AddInheritanceAttribute(element, inheritance.RedirectAudioCapture, "InheritRedirectAudioCapture");
+            AddInheritanceAttribute(element, inheritance.Resolution, "InheritResolution");
+            AddInheritanceAttribute(element, inheritance.AutomaticResize, "InheritAutomaticResize");
+            AddInheritanceAttribute(element, inheritance.UseConsoleSession, "InheritUseConsoleSession");
+            AddInheritanceAttribute(element, inheritance.UseCredSsp, "InheritUseCredSsp");
+            AddInheritanceAttribute(element, inheritance.RenderingEngine, "InheritRenderingEngine");
+            AddInheritanceAttribute(element, inheritance.Username, "InheritUsername");
+            AddInheritanceAttribute(element, inheritance.RDPAuthenticationLevel, "InheritRDPAuthenticationLevel");
+            AddInheritanceAttribute(element, inheritance.RDPMinutesToIdleTimeout, "InheritRDPMinutesToIdleTimeout");
+            AddInheritanceAttribute(element, inheritance.RDPAlertIdleTimeout, "InheritRDPAlertIdleTimeout");
+            AddInheritanceAttribute(element, inheritance.LoadBalanceInfo, "InheritLoadBalanceInfo");
+            AddInheritanceAttribute(element, inheritance.PreExtApp, "InheritPreExtApp");
+            AddInheritanceAttribute(element, inheritance.PostExtApp, "InheritPostExtApp");
+            AddInheritanceAttribute(element, inheritance.MacAddress, "InheritMacAddress");
+            AddInheritanceAttribute(element, inheritance.UserField, "InheritUserField");
+            AddInheritanceAttribute(element, inheritance.EnvironmentTags, "InheritEnvironmentTags");
+            AddInheritanceAttribute(element, inheritance.Favorite, "InheritFavorite");
+            AddInheritanceAttribute(element, inheritance.ExtApp, "InheritExtApp");
+            AddInheritanceAttribute(element, inheritance.VNCCompression, "InheritVNCCompression");
+            AddInheritanceAttribute(element, inheritance.VNCEncoding, "InheritVNCEncoding");
+            AddInheritanceAttribute(element, inheritance.VNCAuthMode, "InheritVNCAuthMode");
+            AddInheritanceAttribute(element, inheritance.VNCProxyType, "InheritVNCProxyType");
+            AddInheritanceAttribute(element, inheritance.VNCProxyIP, "InheritVNCProxyIP");
+            AddInheritanceAttribute(element, inheritance.VNCProxyPort, "InheritVNCProxyPort");
+            AddInheritanceAttribute(element, inheritance.VNCProxyUsername, "InheritVNCProxyUsername");
+            AddInheritanceAttribute(element, inheritance.VNCProxyPassword, "InheritVNCProxyPassword");
+            AddInheritanceAttribute(element, inheritance.VNCColors, "InheritVNCColors");
+            AddInheritanceAttribute(element, inheritance.VNCSmartSizeMode, "InheritVNCSmartSizeMode");
+            AddInheritanceAttribute(element, inheritance.VNCViewOnly, "InheritVNCViewOnly");
+            AddInheritanceAttribute(element, inheritance.RDGatewayUsageMethod, "InheritRDGatewayUsageMethod");
+            AddInheritanceAttribute(element, inheritance.RDGatewayHostname, "InheritRDGatewayHostname");
+            AddInheritanceAttribute(element, inheritance.RDGatewayUseConnectionCredentials, "InheritRDGatewayUseConnectionCredentials");
+            AddInheritanceAttribute(element, inheritance.RDGatewayUsername, "InheritRDGatewayUsername");
+            AddInheritanceAttribute(element, inheritance.RDGatewayPassword, "InheritRDGatewayPassword");
+            AddInheritanceAttribute(element, inheritance.RDGatewayAccessToken, "InheritRDGatewayAccessToken");
+            AddInheritanceAttribute(element, inheritance.RDGatewayDomain, "InheritRDGatewayDomain");
+            AddInheritanceAttribute(element, inheritance.RDGatewayExternalCredentialProvider, "InheritRDGatewayExternalCredentialProvider");
+            AddInheritanceAttribute(element, inheritance.RDGatewayUserViaAPI, "InheritRDGatewayUserViaAPI");
 
-            if (inheritance.VmId)
-                element.Add(new XAttribute("InheritVmId", inheritance.VmId.ToString().ToLowerInvariant()));
-            if (inheritance.UseVmId)
-                element.Add(new XAttribute("InheritUseVmId", inheritance.UseVmId.ToString().ToLowerInvariant()));
-            if (inheritance.UseEnhancedMode)
-                element.Add(new XAttribute("InheritUseEnhancedMode", inheritance.UseEnhancedMode.ToString().ToLowerInvariant()));
-            if (inheritance.ExternalCredentialProvider)
-                element.Add(new XAttribute("InheritExternalCredentialProvider", inheritance.ExternalCredentialProvider.ToString().ToLowerInvariant()));
-            if (inheritance.UserViaAPI)
-                element.Add(new XAttribute("InheritUserViaAPI", inheritance.UserViaAPI.ToString().ToLowerInvariant()));
-            if (inheritance.UseRCG)
-                element.Add(new XAttribute("InheritUseRCG", inheritance.UseRCG.ToString().ToLowerInvariant()));
-            if (inheritance.UseRestrictedAdmin)
-                element.Add(new XAttribute("InheritUseRestrictedAdmin", inheritance.UseRestrictedAdmin.ToString().ToLowerInvariant()));
-            if (inheritance.UseRedirectionServerName)
-                element.Add(new XAttribute("InheritUseRedirectionServerName", inheritance.UseRedirectionServerName.ToString().ToLowerInvariant()));
+            AddInheritanceAttribute(element, inheritance.VmId, "InheritVmId");
+            AddInheritanceAttribute(element, inheritance.UseVmId, "InheritUseVmId");
+            AddInheritanceAttribute(element, inheritance.UseEnhancedMode, "InheritUseEnhancedMode");
+            AddInheritanceAttribute(element, inheritance.ExternalCredentialProvider, "InheritExternalCredentialProvider");
+            AddInheritanceAttribute(element, inheritance.UserViaAPI, "InheritUserViaAPI");
+            AddInheritanceAttribute(element, inheritance.UseRCG, "InheritUseRCG");
+            AddInheritanceAttribute(element, inheritance.UseRestrictedAdmin, "InheritUseRestrictedAdmin");
+            AddInheritanceAttribute(element, inheritance.UseRedirectionServerName, "InheritUseRedirectionServerName");
+        }
+
+        private static void AddInheritanceAttribute(XContainer element, bool inherit, string attributeName)
+        {
+            if (inherit)
+                element.Add(new XAttribute(attributeName, inherit.ToString().ToLowerInvariant()));
         }
     }
 }

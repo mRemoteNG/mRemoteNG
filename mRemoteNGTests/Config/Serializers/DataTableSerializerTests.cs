@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using mRemoteNG.Connection.Protocol.Terminal;
 using System.Security;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Sql;
 using mRemoteNG.Connection;
@@ -119,6 +120,38 @@ public class DataTableSerializerTests
     {
         var dataTable = _dataTableSerializer.Serialize(new ConnectionInfo());
         Assert.That(dataTable.Rows.Count, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void TerminalBackendChangeIsSerialized()
+    {
+        var model = CreateConnectionTreeModel();
+        var connection = model.GetRecursiveChildList().OfType<ConnectionInfo>().First();
+        var sourceTable = _dataTableSerializer.Serialize(model);
+        connection.TerminalBackend = TerminalBackend.WindowsTerminal;
+
+        var serializer = new DataTableSerializer(_saveFilter, new LegacyRijndaelCryptographyProvider(), new SecureString());
+        serializer.SetSourceDataTable(sourceTable.Copy());
+        var updatedTable = serializer.Serialize(model);
+
+        Assert.That(updatedTable.Rows.Find(connection.ConstantID)["TerminalBackend"], Is.EqualTo(TerminalBackend.WindowsTerminal.ToString()));
+    }
+
+    [Test]
+    public void InheritedTerminalBackendChangeIsSerialized()
+    {
+        var model = CreateConnectionTreeModel();
+        var connection = model.GetRecursiveChildList().OfType<ConnectionInfo>().First();
+        _saveFilter.SaveInheritance = true;
+        connection.Inheritance.TerminalBackend = false;
+        var sourceTable = _dataTableSerializer.Serialize(model);
+        connection.Inheritance.TerminalBackend = true;
+
+        var serializer = new DataTableSerializer(_saveFilter, new LegacyRijndaelCryptographyProvider(), new SecureString());
+        serializer.SetSourceDataTable(sourceTable.Copy());
+        var updatedTable = serializer.Serialize(model);
+
+        Assert.That(updatedTable.Rows.Find(connection.ConstantID)["InheritTerminalBackend"], Is.True);
     }
 
 

@@ -4,6 +4,7 @@ using System.Drawing;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.Terminal;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Properties;
 using mRemoteNG.Tools;
@@ -56,6 +57,7 @@ namespace mRemoteNG.Connection
         private bool _rdpAlertIdleTimeout;
         private string _loadBalanceInfo;
         private HTTPBase.RenderingEngine _renderingEngine;
+        private TerminalBackend _terminalBackend;
         private bool _useCredSsp;
         private bool _useRestrictedAdmin;
         private bool _useRCG;
@@ -492,6 +494,17 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("RenderingEngine", _renderingEngine);
             set => SetField(ref _renderingEngine, value, "RenderingEngine");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.TerminalBackend)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionTerminalBackend)),
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.SSH1, ProtocolType.SSH2)]
+        public TerminalBackend TerminalBackend
+        {
+            get => GetPropertyValue("TerminalBackend", _terminalBackend);
+            set => SetField(ref _terminalBackend, value, "TerminalBackend");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),

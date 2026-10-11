@@ -8,6 +8,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.Terminal;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
@@ -412,8 +413,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 if (_confVersion >= 1.9)
                 {
                     connectionInfo.RenderingEngine = xmlnode.GetAttributeAsEnum<HTTPBase.RenderingEngine>("RenderingEngine");
+                    connectionInfo.TerminalBackend = xmlnode.GetAttributeAsEnum<TerminalBackend>("TerminalBackend");
                     connectionInfo.MacAddress = xmlnode.GetAttributeAsString("MacAddress");
                     connectionInfo.Inheritance.RenderingEngine = xmlnode.GetAttributeAsBool("InheritRenderingEngine");
+                    connectionInfo.Inheritance.TerminalBackend = xmlnode.GetAttributeAsBool("InheritTerminalBackend");
                     connectionInfo.Inheritance.MacAddress = xmlnode.GetAttributeAsBool("InheritMacAddress");
                 }
 

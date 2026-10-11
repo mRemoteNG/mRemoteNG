@@ -26,11 +26,11 @@ public class ValidateXmlSchemas
     {
         _connectionTreeModel = new ConnectionTreeModel();
         var root = new RootNodeInfo(RootNodeType.Connection);
-        root.AddChild(new ConnectionInfo());
+        root.AddChild(new ConnectionInfo { Inheritance = { TerminalBackend = true } });
         _connectionTreeModel.AddRootNode(root);
 
         _cryptographyProvider = new AeadCryptographyProvider();
-        var connectionNodeSerializer = new XmlConnectionNodeSerializer28(
+        var connectionNodeSerializer = new XmlConnectionNodeSerializer29(
             _cryptographyProvider,
             _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
             new SaveFilter());

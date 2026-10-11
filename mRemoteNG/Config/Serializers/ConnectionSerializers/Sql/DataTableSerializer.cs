@@ -24,10 +24,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
         private DataTable _sourceDataTable;
         private readonly Dictionary<string, int> _sourcePrimaryKeyDict = [];
         private const string TABLE_NAME = "tblCons";
+        private const string INHERIT_TERMINAL_BACKEND = "InheritTerminalBackend";
         private readonly SaveFilter _saveFilter = saveFilter.ThrowIfNull(nameof(saveFilter));
         private int _currentNodeIndex;
 
-        public Version Version { get; } = new Version(3, 1);
+        public Version Version { get; } = new Version(3, 2);
 
         public void SetSourceDataTable(DataTable sourceDataTable)
         {
@@ -167,6 +168,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataTable.Columns.Add("InheritRedirectSmartCards", typeof(bool));
             dataTable.Columns.Add("InheritRedirectSound", typeof(bool));
             dataTable.Columns.Add("InheritRenderingEngine", typeof(bool));
+            dataTable.Columns.Add(INHERIT_TERMINAL_BACKEND, typeof(bool));
             dataTable.Columns.Add("InheritResolution", typeof(bool));
             dataTable.Columns.Add("InheritSSHOptions", typeof(bool));
             dataTable.Columns.Add("InheritSSHTunnelConnectionName", typeof(bool));
@@ -230,6 +232,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataTable.Columns.Add("RedirectSmartCards", typeof(bool));
             dataTable.Columns.Add("RedirectSound", typeof(string));
             dataTable.Columns.Add("RenderingEngine", typeof(string));
+            dataTable.Columns.Add("TerminalBackend", typeof(string));
             dataTable.Columns.Add("Resolution", typeof(string));
             dataTable.Columns.Add("SSHOptions", typeof(string));
             dataTable.Columns.Add("SSHTunnelConnectionName", typeof(string));
@@ -348,6 +351,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             isFieldNotChange = isFieldNotChange && dataRow["RedirectSmartCards"].Equals(connectionInfo.RedirectSmartCards);
             isFieldNotChange = isFieldNotChange && dataRow["RedirectSound"].Equals(connectionInfo.RedirectSound.ToString());
             isFieldNotChange = isFieldNotChange && dataRow["RenderingEngine"].Equals(connectionInfo.RenderingEngine.ToString());
+            isFieldNotChange = isFieldNotChange && dataRow["TerminalBackend"].Equals(connectionInfo.TerminalBackend.ToString());
             isFieldNotChange = isFieldNotChange && dataRow["Resolution"].Equals(connectionInfo.Resolution.ToString());
             isFieldNotChange = isFieldNotChange && dataRow["SoundQuality"].Equals(connectionInfo.SoundQuality.ToString());
             isFieldNotChange = isFieldNotChange && dataRow["StartProgram"].Equals(connectionInfo.RDPStartProgram);
@@ -423,6 +427,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                     dataRow["InheritRedirectSmartCards"].Equals(connectionInfo.Inheritance.RedirectSmartCards) &&
                     dataRow["InheritRedirectSound"].Equals(connectionInfo.Inheritance.RedirectSound) &&
                     dataRow["InheritRenderingEngine"].Equals(connectionInfo.Inheritance.RenderingEngine) &&
+                    dataRow[INHERIT_TERMINAL_BACKEND].Equals(connectionInfo.Inheritance.TerminalBackend) &&
                     dataRow["InheritResolution"].Equals(connectionInfo.Inheritance.Resolution) &&
                     dataRow["InheritSoundQuality"].Equals(connectionInfo.Inheritance.SoundQuality) &&
                     dataRow["InheritUseConsoleSession"].Equals(connectionInfo.Inheritance.UseConsoleSession) &&
@@ -498,6 +503,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                     dataRow["InheritRedirectSmartCards"].Equals(false) &&
                     dataRow["InheritRedirectSound"].Equals(false) &&
                     dataRow["InheritRenderingEngine"].Equals(false) &&
+                    dataRow[INHERIT_TERMINAL_BACKEND].Equals(false) &&
                     dataRow["InheritResolution"].Equals(false) &&
                     dataRow["InheritSoundQuality"].Equals(false) &&
                     dataRow["InheritUseConsoleSession"].Equals(false) &&
@@ -608,6 +614,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataRow["RedirectSmartCards"] = connectionInfo.RedirectSmartCards;
             dataRow["RedirectSound"] = connectionInfo.RedirectSound;
             dataRow["RenderingEngine"] = connectionInfo.RenderingEngine;
+            dataRow["TerminalBackend"] = connectionInfo.TerminalBackend;
             dataRow["Resolution"] = connectionInfo.Resolution;
             dataRow["SSHOptions"] = connectionInfo.SSHOptions;
             dataRow["SSHTunnelConnectionName"] = connectionInfo.SSHTunnelConnectionName;
@@ -689,6 +696,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 dataRow["InheritRedirectSmartCards"] = connectionInfo.Inheritance.RedirectSmartCards;
                 dataRow["InheritRedirectSound"] = connectionInfo.Inheritance.RedirectSound;
                 dataRow["InheritRenderingEngine"] = connectionInfo.Inheritance.RenderingEngine;
+                dataRow[INHERIT_TERMINAL_BACKEND] = connectionInfo.Inheritance.TerminalBackend;
                 dataRow["InheritResolution"] = connectionInfo.Inheritance.Resolution;
                 dataRow["InheritSSHOptions"] = connectionInfo.Inheritance.SSHOptions;
                 dataRow["InheritSSHTunnelConnectionName"] = connectionInfo.Inheritance.SSHTunnelConnectionName;
@@ -769,6 +777,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 dataRow["InheritRedirectSmartCards"] = false;
                 dataRow["InheritRedirectSound"] = false;
                 dataRow["InheritRenderingEngine"] = false;
+                dataRow[INHERIT_TERMINAL_BACKEND] = false;
                 dataRow["InheritResolution"] = false;
                 dataRow["InheritSSHOptions"] = false;
                 dataRow["InheritSSHTunnelConnectionName"] = false;

@@ -1158,6 +1158,18 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyDescriptionRenderingEngine" xml:space="preserve">
     <value>Select one of the available rendering engines that will be used to display HTML.</value>
   </data>
+  <data name="PropertyDescriptionTerminalBackend" xml:space="preserve">
+    <value>Selects the terminal backend used to open this SSH connection inside the mRemoteNG panel. PuTTYNG keeps the embedded PuTTYNG terminal, while Windows Terminal embeds the Windows console running the system OpenSSH client.</value>
+  </data>
+  <data name="TerminalBackend" xml:space="preserve">
+    <value>Terminal backend</value>
+  </data>
+  <data name="TerminalBackendPuttyNg" xml:space="preserve">
+    <value>PuTTYNG</value>
+  </data>
+  <data name="TerminalBackendWindowsTerminal" xml:space="preserve">
+    <value>Windows Terminal</value>
+  </data>
   <data name="PropertyDescriptionResolution" xml:space="preserve">
     <value>Choose the resolution or mode this connection will open in.</value>
   </data>
