@@ -4,12 +4,14 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.App;
 using mRemoteNG.Config.Settings;
+using mRemoteNG.Connection;
 using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools.CustomCollections;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.UI.Controls;
 using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Window
@@ -20,6 +22,9 @@ namespace mRemoteNG.UI.Window
         private readonly ExternalAppsSaver _externalAppsSaver;
         private readonly ThemeManager _themeManager;
         private readonly FullyObservableCollection<ExternalTool> _currentlySelectedExternalTools;
+        private readonly VariableAutoCompleteMenu _filenameVariableMenu;
+        private readonly VariableAutoCompleteMenu _argumentsVariableMenu;
+        private readonly VariableAutoCompleteMenu _workingDirVariableMenu;
 
         public ExternalToolsWindow()
         {
@@ -40,6 +45,10 @@ namespace mRemoteNG.UI.Window
                 new ExternalToolCategoryGroupKey(((ExternalTool)row).Category);
             CategoryColumnHeader.GroupKeyToTitleConverter = key =>
                 ((ExternalToolCategoryGroupKey)key).DisplayName;
+
+            _filenameVariableMenu = new VariableAutoCompleteMenu(FilenameTextBox);
+            _argumentsVariableMenu = new VariableAutoCompleteMenu(ArgumentsCheckBox);
+            _workingDirVariableMenu = new VariableAutoCompleteMenu(WorkingDirTextBox);
         }
 
 
@@ -167,6 +176,11 @@ namespace mRemoteNG.UI.Window
             ShowOnToolbarCheckBox.Checked = selectedTool?.ShowOnToolbar ?? false;
             RunElevatedCheckBox.Checked = selectedTool?.RunElevated ?? false;
             WaitForExitCheckBox.Enabled = !TryToIntegrateCheckBox.Checked;
+
+            ConnectionInfo previewConnection = selectedTool?.ConnectionInfo;
+            _filenameVariableMenu.ConnectionInfo = previewConnection;
+            _argumentsVariableMenu.ConnectionInfo = previewConnection;
+            _workingDirVariableMenu.ConnectionInfo = previewConnection;
         }
 
         private void UpdateToolstipControls()
@@ -198,6 +212,9 @@ namespace mRemoteNG.UI.Window
             _externalAppsSaver.Save(Runtime.ExternalToolsService.ExternalTools);
             _themeManager.ThemeChanged -= ApplyTheme;
             _currentlySelectedExternalTools.CollectionUpdated -= CurrentlySelectedExternalToolsOnCollectionUpdated;
+            _filenameVariableMenu.Dispose();
+            _argumentsVariableMenu.Dispose();
+            _workingDirVariableMenu.Dispose();
         }
 
         private void NewTool_Click(object sender, EventArgs e)
