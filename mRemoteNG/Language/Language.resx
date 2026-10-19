@@ -1972,6 +1972,9 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="MinutesToIdleTimeout" xml:space="preserve">
     <value>Minutes to Idle</value>
   </data>
+  <data name="AlertIdleTimeout" xml:space="preserve">
+    <value>Alert on Idle Disconnect</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
