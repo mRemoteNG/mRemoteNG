@@ -36,6 +36,11 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         // Folders the search filter expanded to reveal matches; collapsed again when the filter is cleared.
         private readonly HashSet<ContainerInfo> _containersExpandedByFilter = new();
 
+        // ContainerInfo.IsExpanded is saved to the connections file, and changing it counts as an
+        // edit (save + rolling backup when saving on edit). Expansion done only to show search
+        // results must not touch it, or every keystroke in the search box rewrites the file.
+        private bool _filterIsChangingExpansion;
+
         private bool _nodeInEditMode;
         private bool _allowEdit;
         private ConnectionContextMenu _contextMenu;
@@ -240,13 +245,15 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             Collapsed += (sender, args) =>
             {
                 if (args.Model is not ContainerInfo container) return;
-                container.IsExpanded = false;
+                if (!_filterIsChangingExpansion)
+                    container.IsExpanded = false;
                 AutoResizeColumn(Columns[0]);
             };
             Expanded += (sender, args) =>
             {
                 if (args.Model is not ContainerInfo container) return;
-                container.IsExpanded = true;
+                if (!_filterIsChangingExpansion)
+                    container.IsExpanded = true;
                 AutoResizeColumn(Columns[0]);
             };
             SelectionChanged += TvConnections_AfterSelect;
@@ -776,11 +783,19 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
             if (containersToExpand.Count == 0) return;
 
-            // expand outermost folders first so each child branch exists when it is expanded
-            foreach (ContainerInfo container in containersToExpand.OrderBy(GetDepth))
+            _filterIsChangingExpansion = true;
+            try
             {
-                ExpandWithoutAnimation(container);
-                _containersExpandedByFilter.Add(container);
+                // expand outermost folders first so each child branch exists when it is expanded
+                foreach (ContainerInfo container in containersToExpand.OrderBy(GetDepth))
+                {
+                    ExpandWithoutAnimation(container);
+                    _containersExpandedByFilter.Add(container);
+                }
+            }
+            finally
+            {
+                _filterIsChangingExpansion = false;
             }
 
             AutoResizeColumn(Columns[0]);
@@ -795,14 +810,22 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             if (_containersExpandedByFilter.Count == 0) return;
 
-            // collapse innermost folders first so each branch is still visible when collapsed
-            foreach (ContainerInfo container in _containersExpandedByFilter.OrderByDescending(GetDepth).ToList())
+            _filterIsChangingExpansion = true;
+            try
             {
-                if (!IsExpanded(container)) continue;
+                // collapse innermost folders first so each branch is still visible when collapsed
+                foreach (ContainerInfo container in _containersExpandedByFilter.OrderByDescending(GetDepth).ToList())
+                {
+                    if (!IsExpanded(container)) continue;
 
-                // skip the collapse animation; it would run for every folder at once
-                _collapseFinalizing.Add(container);
-                Collapse(container);
+                    // skip the collapse animation; it would run for every folder at once
+                    _collapseFinalizing.Add(container);
+                    Collapse(container);
+                }
+            }
+            finally
+            {
+                _filterIsChangingExpansion = false;
             }
 
             _containersExpandedByFilter.Clear();
