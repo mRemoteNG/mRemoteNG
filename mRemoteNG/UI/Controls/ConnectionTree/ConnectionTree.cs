@@ -33,6 +33,9 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new();
 
+        // Folders the search filter expanded to reveal matches; collapsed again when the filter is cleared.
+        private readonly HashSet<ContainerInfo> _containersExpandedByFilter = new();
+
         private bool _nodeInEditMode;
         private bool _allowEdit;
         private ConnectionContextMenu _contextMenu;
@@ -730,8 +733,12 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         /// <param name="filterText">The text to filter by</param>
         public void ApplyFilter(string filterText)
         {
-            UseFiltering = true;
             _connectionTreeSearchTextFilter.FilterText = filterText;
+            // TreeListView ignores Expand() on rows it is not showing, so expand
+            // the paths to matches before the filter hides their folders
+            ModelFilter = null;
+            ExpandAncestorsOfFilterMatches();
+            UseFiltering = true;
             ModelFilter = _connectionTreeSearchTextFilter;
         }
 
@@ -742,6 +749,72 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             UseFiltering = false;
             ResetColumnFiltering();
+            CollapseContainersExpandedByFilter();
+        }
+
+        /// <summary>
+        /// TreeListView only evaluates the filter against children of expanded
+        /// branches, so matches inside collapsed folders would stay hidden.
+        /// Expand every folder on the path to a match so the user can see it
+        /// and where it lives.
+        /// </summary>
+        private void ExpandAncestorsOfFilterMatches()
+        {
+            if (ConnectionTreeModel == null) return;
+
+            HashSet<ContainerInfo> containersToExpand = [];
+            foreach (ConnectionInfo node in ConnectionTreeModel.GetRecursiveChildList())
+            {
+                if (!_connectionTreeSearchTextFilter.Filter(node)) continue;
+
+                for (ContainerInfo parent = node.Parent; parent != null; parent = parent.Parent)
+                {
+                    if (!IsExpanded(parent))
+                        containersToExpand.Add(parent);
+                }
+            }
+
+            if (containersToExpand.Count == 0) return;
+
+            // expand outermost folders first so each child branch exists when it is expanded
+            foreach (ContainerInfo container in containersToExpand.OrderBy(GetDepth))
+            {
+                ExpandWithoutAnimation(container);
+                _containersExpandedByFilter.Add(container);
+            }
+
+            AutoResizeColumn(Columns[0]);
+        }
+
+        /// <summary>
+        /// Returns folders that were opened only to reveal filter matches to
+        /// their previous collapsed state, so searching does not permanently
+        /// change (and save) the user's tree layout.
+        /// </summary>
+        private void CollapseContainersExpandedByFilter()
+        {
+            if (_containersExpandedByFilter.Count == 0) return;
+
+            // collapse innermost folders first so each branch is still visible when collapsed
+            foreach (ContainerInfo container in _containersExpandedByFilter.OrderByDescending(GetDepth).ToList())
+            {
+                if (!IsExpanded(container)) continue;
+
+                // skip the collapse animation; it would run for every folder at once
+                _collapseFinalizing.Add(container);
+                Collapse(container);
+            }
+
+            _containersExpandedByFilter.Clear();
+            AutoResizeColumn(Columns[0]);
+        }
+
+        private static int GetDepth(ConnectionInfo node)
+        {
+            int depth = 0;
+            for (ContainerInfo parent = node.Parent; parent != null; parent = parent.Parent)
+                depth++;
+            return depth;
         }
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)

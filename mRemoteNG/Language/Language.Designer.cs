@@ -3081,6 +3081,15 @@ namespace mRemoteNG.Resources.Language {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to &quot;{0}&quot; is already used by these connections:{1}.
+        /// </summary>
+        internal static string HostnameAlreadyExists {
+            get {
+                return ResourceManager.GetString("HostnameAlreadyExists", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to IP Address.
         /// </summary>
         internal static string IpAddress {

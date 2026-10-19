@@ -69,6 +69,61 @@ namespace mRemoteNGTests.UI.Controls
 			Assert.That(_connectionTree.FilteredObjects, Does.Contain(con2));
 		}
 
+		[Test]
+		[Apartment(ApartmentState.STA)]
+		public void ApplyFilterRevealsMatchesInsideCollapsedFolders()
+		{
+			// root
+			// |- folder1
+			//		|- subfolder
+			//			|- sql01
+			mRemoteNG.Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations = false;
+			var connectionTreeModel = new ConnectionTreeModel();
+			var root = new RootNodeInfo(RootNodeType.Connection);
+			var folder1 = new ContainerInfo {Name = "folder1"};
+			var subfolder = new ContainerInfo {Name = "subfolder"};
+			var sql01 = new ConnectionInfo {Name = "sql01"};
+			root.AddChild(folder1);
+			folder1.AddChild(subfolder);
+			subfolder.AddChild(sql01);
+			connectionTreeModel.AddRootNode(root);
+			_connectionTree.ConnectionTreeModel = connectionTreeModel;
+			_connectionTree.CollapseAll();
+
+			_connectionTree.ApplyFilter("sql");
+
+			Assert.That(_connectionTree.FilteredObjects, Does.Contain(sql01));
+			Assert.That(_connectionTree.IsExpanded(folder1), Is.True);
+			Assert.That(_connectionTree.IsExpanded(subfolder), Is.True);
+		}
+
+		[Test]
+		[Apartment(ApartmentState.STA)]
+		public void RemoveFilterCollapsesFoldersThatTheFilterExpanded()
+		{
+			mRemoteNG.Properties.OptionsAppearancePage.Default.EnableConnectionTreeAnimations = false;
+			var connectionTreeModel = new ConnectionTreeModel();
+			var root = new RootNodeInfo(RootNodeType.Connection);
+			var openFolder = new ContainerInfo {Name = "openFolder"};
+			var closedFolder = new ContainerInfo {Name = "closedFolder"};
+			var con1 = new ConnectionInfo {Name = "match1"};
+			var con2 = new ConnectionInfo {Name = "match2"};
+			root.AddChildRange(new []{openFolder, closedFolder});
+			openFolder.AddChild(con1);
+			closedFolder.AddChild(con2);
+			connectionTreeModel.AddRootNode(root);
+			_connectionTree.ConnectionTreeModel = connectionTreeModel;
+			_connectionTree.CollapseAll();
+			_connectionTree.Expand(root);
+			_connectionTree.Expand(openFolder);
+
+			_connectionTree.ApplyFilter("match");
+			_connectionTree.RemoveFilter();
+
+			Assert.That(_connectionTree.IsExpanded(openFolder), Is.True);
+			Assert.That(_connectionTree.IsExpanded(closedFolder), Is.False);
+		}
+
 	    [Test]
 	    [Apartment(ApartmentState.STA)]
 	    public void CannotAddConnectionToPuttySessionNode()
