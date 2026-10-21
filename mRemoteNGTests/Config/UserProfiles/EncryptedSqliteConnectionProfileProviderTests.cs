@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using mRemoteNG.Config.UserProfiles;
+using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using NUnit.Framework;
