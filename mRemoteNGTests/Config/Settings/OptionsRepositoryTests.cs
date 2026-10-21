@@ -66,21 +66,21 @@ namespace mRemoteNGTests.Config.Settings
         }
 
         [Test]
-        public void AddOptionAsync_NullOption_ThrowsException()
+        public async Task AddOptionAsync_NullOption_ThrowsException()
         {
             // Act & Assert
-            var ex = Assert.ThrowsAsync<ArgumentNullException>(async () => await _repository.AddOptionAsync(null));
+            var ex = await Assert.ThrowsAsync<ArgumentNullException>(async () => await _repository.AddOptionAsync(null));
             Assert.That(ex.ParamName, Is.EqualTo("option"));
         }
 
         [Test]
-        public void AddOptionAsync_EmptyKey_ThrowsException()
+        public async Task AddOptionAsync_EmptyKey_ThrowsException()
         {
             // Arrange
             var option = new OptionInfo { Key = "" };
 
             // Act & Assert
-            Assert.ThrowsAsync<ArgumentException>(async () => await _repository.AddOptionAsync(option));
+            await Assert.ThrowsAsync<ArgumentException>(async () => await _repository.AddOptionAsync(option));
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace mRemoteNGTests.Config.Settings
             await _repository.AddOptionAsync(option1);
 
             // Act & Assert
-            var ex = Assert.ThrowsAsync<InvalidOperationException>(async () => await _repository.AddOptionAsync(option2));
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () => await _repository.AddOptionAsync(option2));
             Assert.That(ex.Message, Does.Contain("already exists"));
         }
 
@@ -128,10 +128,10 @@ namespace mRemoteNGTests.Config.Settings
         }
 
         [Test]
-        public void GetOptionByKeyAsync_EmptyKey_ThrowsException()
+        public async Task GetOptionByKeyAsync_EmptyKey_ThrowsException()
         {
             // Act & Assert
-            Assert.ThrowsAsync<ArgumentException>(async () => await _repository.GetOptionByKeyAsync(""));
+            await Assert.ThrowsAsync<ArgumentException>(async () => await _repository.GetOptionByKeyAsync(""));
         }
 
         #endregion
