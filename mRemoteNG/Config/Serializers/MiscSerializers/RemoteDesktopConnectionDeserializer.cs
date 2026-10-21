@@ -18,6 +18,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             RootNodeInfo root = new(RootNodeType.Connection);
             connectionTreeModel.AddRootNode(root);
             ConnectionInfo connectionInfo = new();
+            bool promptCredentialOnce = false;
             foreach (string line in rdcFileContent.Split(Environment.NewLine.ToCharArray()))
             {
                 string[] parts = line.Split(new[] { ':' }, 3);
@@ -29,8 +30,17 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                 string key = parts[0].Trim();
                 string value = parts[2].Trim();
 
+                if (key.Equals("promptcredentialonce", StringComparison.OrdinalIgnoreCase))
+                    promptCredentialOnce = value == "1";
+
                 SetConnectionInfoParameter(connectionInfo, key, value);
             }
+
+            // "Prompt once" means the gateway takes the same logon as the computer behind it.
+            // RD Web Access writes it next to gatewaycredentialssource:i:4, which on its own reads
+            // as "enter the gateway credentials manually".
+            if (promptCredentialOnce && connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.No)
+                connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes;
 
             root.AddChild(connectionInfo);
 
@@ -43,6 +53,13 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             switch (key.ToLower())
             {
                 case "full address":
+                    // A bare IPv6 address has colons of its own and cannot carry a port; Uri reads
+                    // its last group as an invalid port and throws, failing the whole import.
+                    if (value.IndexOf(':') != value.LastIndexOf(':') && !value.StartsWith("[", StringComparison.Ordinal))
+                    {
+                        connectionInfo.Hostname = value;
+                        break;
+                    }
                     Uri uri = new("dummyscheme" + Uri.SchemeDelimiter + value);
                     if (!string.IsNullOrEmpty(uri.Host))
                         connectionInfo.Hostname = uri.Host;
@@ -87,7 +104,25 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                         : RDPResolutions.SmartSize;
                     break;
                 case "connect to console":
+                case "administrative session":
                     connectionInfo.UseConsoleSession = value == "1";
+                    break;
+                case "authentication level":
+                    switch (value)
+                    {
+                        case "0":
+                            connectionInfo.RDPAuthenticationLevel = AuthenticationLevel.NoAuth;
+                            break;
+                        case "1":
+                            connectionInfo.RDPAuthenticationLevel = AuthenticationLevel.AuthRequired;
+                            break;
+                        case "2":
+                            connectionInfo.RDPAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth;
+                            break;
+                    }
+                    break;
+                case "enablecredsspsupport":
+                    connectionInfo.UseCredSsp = value == "1";
                     break;
                 case "disable wallpaper":
                     connectionInfo.DisplayWallpaper = value == "1";
@@ -154,6 +189,10 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                         case "2":
                             connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Detect;
                             break;
+                        case "4":
+                            // Don't use a gateway, and bypass it for local addresses
+                            connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Never;
+                            break;
                     }
                     break;
                 case "gatewayhostname":
@@ -183,6 +222,12 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                             connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.AccessToken;
                             break;
                     }
+                    break;
+                case "gatewayusername":
+                    connectionInfo.RDGatewayUsername = value;
+                    break;
+                case "gatewaydomain":
+                    connectionInfo.RDGatewayDomain = value;
                     break;
                 case "gatewayaccesstoken":
                     connectionInfo.RDGatewayAccessToken = value;
