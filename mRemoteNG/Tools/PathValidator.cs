@@ -60,7 +60,9 @@ namespace mRemoteNG.Tools
 
             // Check for shell metacharacters that could be used for command injection
             // These characters are dangerous when UseShellExecute is true
-            char[] dangerousChars = ['&', '|', ';', '<', '>', '(', ')', '^', '\n', '\r'];
+            // Parentheses are allowed: they only have meaning inside cmd.exe blocks, the path is
+            // never run through cmd.exe, and standard locations such as "C:\Program Files (x86)" need them (#3560)
+            char[] dangerousChars = ['&', '|', ';', '<', '>', '^', '\n', '\r'];
             if (filePath.Any(c => dangerousChars.Contains(c)))
                 return false;
 

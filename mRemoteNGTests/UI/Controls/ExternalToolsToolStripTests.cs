@@ -1,4 +1,5 @@
 using mRemoteNG.Connection;
+using mRemoteNG.Container;
 using mRemoteNG.UI.Controls;
 using NUnit.Framework;
 

@@ -200,6 +200,39 @@ namespace mRemoteNGTests.IntegrationTests
             Assert.That(deserializedModel.RootNodes.OfType<RootNodeInfo>().Count(), Is.EqualTo(1));
         }
 
+        // UseEnhancedMode used to be written from UseVmId. The randomized all-properties test
+        // only catches that when the two random values differ, so these pin both combinations.
+        [TestCase(true, false)]
+        [TestCase(false, true)]
+        public void UseEnhancedModeIsSerializedIndependentlyOfUseVmId(bool useVmId, bool useEnhancedMode)
+        {
+            AssertUseEnhancedModeRoundTrip(_serializer, useVmId, useEnhancedMode);
+        }
+
+        [TestCase(true, false)]
+        [TestCase(false, true)]
+        public void UseEnhancedModeIsSerializedIndependentlyOfUseVmIdInSchema27(bool useVmId, bool useEnhancedMode)
+        {
+            var cryptoProvider = _cryptoFactory.Build();
+            var nodeSerializer = new XmlConnectionNodeSerializer27(
+                cryptoProvider,
+                _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
+                new SaveFilter());
+            var serializer = new XmlConnectionsSerializer(cryptoProvider, nodeSerializer);
+            AssertUseEnhancedModeRoundTrip(serializer, useVmId, useEnhancedMode);
+        }
+
+        private void AssertUseEnhancedModeRoundTrip(XmlConnectionsSerializer serializer, bool useVmId, bool useEnhancedMode)
+        {
+            var originalConnectionInfo = new ConnectionInfo { Name = "con1", UseVmId = useVmId, UseEnhancedMode = useEnhancedMode };
+            originalConnectionInfo.Inheritance.TurnOffInheritanceCompletely();
+            var serializedContent = serializer.Serialize(originalConnectionInfo);
+            var deserializedModel = _deserializer.Deserialize(serializedContent);
+            var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => node.Name == originalConnectionInfo.Name);
+            Assert.That(deserializedConnectionInfo.UseVmId, Is.EqualTo(useVmId));
+            Assert.That(deserializedConnectionInfo.UseEnhancedMode, Is.EqualTo(useEnhancedMode));
+        }
+
         private ConnectionTreeModel SetupConnectionTreeModel()
         {
             /*

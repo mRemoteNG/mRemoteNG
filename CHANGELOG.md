@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 - fixed connection tree search bar ignoring the "place search bar above connection tree" setting at startup
 - fixed connection tree filter hiding matches inside collapsed folders; folders opened by the filter are collapsed again when the search is cleared
+- #3560: fixed "Invalid executable path" for PuTTY and external tools installed under "Program Files (x86)"
+- : fixed connection files saved by this version (format 2.9) being rejected on load as "Incompatible connection file format"
 - #3367: fixed cross-thread crash when closing the splash screen on a startup error
 - #2939: fixed SQL injection vulnerabilities via parameterized queries 
 - #2940: fixed for Possible command injection via Process.Start 
