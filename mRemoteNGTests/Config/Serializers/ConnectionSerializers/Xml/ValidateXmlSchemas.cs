@@ -1,4 +1,5 @@
 ﻿using mRemoteNG.Connection;
+using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
@@ -47,8 +48,29 @@ public class ValidateXmlSchemas
     [Test]
     public void ValidateSchema()
     {
+        AssertSerializedXmlMatchesSchema(_serializer.Serialize(_connectionTreeModel));
+    }
+
+    [Test]
+    public void ValidateSchemaWithFolderAndAllInheritanceEnabled()
+    {
+        // Folders and inheritance flags are only written conditionally, so the
+        // default test data never exercises them against the schema
+        var root = new RootNodeInfo(RootNodeType.Connection);
+        var folder = new ContainerInfo { Name = "folder", IsRootGroup = true };
+        var connection = new ConnectionInfo { Name = "con" };
+        connection.Inheritance.TurnOnInheritanceCompletely();
+        root.AddChild(folder);
+        folder.AddChild(connection);
+        var model = new ConnectionTreeModel();
+        model.AddRootNode(root);
+
+        AssertSerializedXmlMatchesSchema(_serializer.Serialize(model));
+    }
+
+    private void AssertSerializedXmlMatchesSchema(string xml)
+    {
         var sb = new StringBuilder();
-        var xml = _serializer.Serialize(_connectionTreeModel);
         var schemaFileName = $"mremoteng_confcons_v{_serializer.Version.Major}_{_serializer.Version.Minor}.xsd";
         var schemaFile = GetTargetPath(schemaFileName);
         _xmlReaderSettings.Schemas.Add("http://mremoteng.org", schemaFile);

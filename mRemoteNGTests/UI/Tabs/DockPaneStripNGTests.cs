@@ -594,7 +594,7 @@ namespace mRemoteNGTests.UI.Tabs
 
         private static object GetTabAtIndex(DockPaneStripNG dockPaneStrip, int index)
         {
-            PropertyInfo tabsProperty = typeof(DockPaneStrip).GetProperty("Tabs", BindingFlags.Instance | BindingFlags.NonPublic);
+            PropertyInfo tabsProperty = typeof(DockPaneStripBase).GetProperty("Tabs", BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.That(tabsProperty, Is.Not.Null, "Could not find Tabs property");
 
             object tabs = tabsProperty.GetValue(dockPaneStrip);

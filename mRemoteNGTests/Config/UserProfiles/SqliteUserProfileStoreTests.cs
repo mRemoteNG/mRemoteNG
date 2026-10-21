@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Versioning;
 using System.Security;
 using mRemoteNG.Config.UserProfiles;
+using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using NUnit.Framework;
 
