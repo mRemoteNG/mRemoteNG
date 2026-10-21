@@ -3754,6 +3754,15 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("MinutesToIdleTimeout", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Alert on Idle Disconnect.
+        /// </summary>
+        internal static string AlertIdleTimeout {
+            get {
+                return ResourceManager.GetString("AlertIdleTimeout", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Miscellaneous.

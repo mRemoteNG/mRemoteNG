@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.78.2]
 ### Fixed
+- #2154: fixed "Alert on Idle Disconnect" and "Disable Cursor Blinking" showing the labels of other RDP properties in the Config panel
 - fixed connection tree search bar ignoring the "place search bar above connection tree" setting at startup
 - fixed connection tree filter hiding matches inside collapsed folders; folders opened by the filter are collapsed again when the search is cleared
 - #3560: fixed "Invalid executable path" for PuTTY and external tools installed under "Program Files (x86)"

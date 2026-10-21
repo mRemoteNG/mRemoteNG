@@ -466,7 +466,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.MinutesToIdleTimeout)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.AlertIdleTimeout)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDPAlertIdleTimeout)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool RDPAlertIdleTimeout
@@ -797,8 +797,8 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.DisableCursorShadow)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionDisableCursorShadow)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.DisableCursorBlinking)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionDisableCursorBlinking)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool DisableCursorBlinking
