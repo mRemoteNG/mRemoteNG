@@ -148,10 +148,10 @@ public class PathValidatorTests
     }
 
     [Test]
-    public void IsValidExecutablePath_PathWithParentheses_ReturnsFalse()
+    public void IsValidExecutablePath_ProgramFilesX86Path_ReturnsTrue()
     {
-        string maliciousPath = @"notepad.exe (calc.exe)";
-        Assert.That(PathValidator.IsValidExecutablePath(maliciousPath), Is.False);
+        string validPath = @"C:\Program Files (x86)\PuTTY\putty.exe";
+        Assert.That(PathValidator.IsValidExecutablePath(validPath), Is.True);
     }
 
     [Test]

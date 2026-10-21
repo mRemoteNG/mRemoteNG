@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.78.2]
 ### Fixed
-- fixed connection files saved by this version (format 2.9) being rejected on load as "Incompatible connection file format"
+- #3560: fixed "Invalid executable path" for PuTTY and external tools installed under "Program Files (x86)"
+- : fixed connection files saved by this version (format 2.9) being rejected on load as "Incompatible connection file format"
 - #3367: fixed cross-thread crash when closing the splash screen on a startup error
 - #2939: fixed SQL injection vulnerabilities via parameterized queries 
 - #2940: fixed for Possible command injection via Process.Start 
