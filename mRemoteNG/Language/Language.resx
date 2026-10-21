@@ -1236,6 +1236,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="HostnameIp" xml:space="preserve">
     <value>Hostname/IP</value>
   </data>
+  <data name="HostnameAlreadyExists" xml:space="preserve">
+    <value>"{0}" is already used by these connections:{1}</value>
+  </data>
   <data name="IpAddress" xml:space="preserve">
     <value>IP Address</value>
   </data>

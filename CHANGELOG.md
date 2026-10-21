@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.78.2]
 ### Fixed
+- fixed connection tree search bar ignoring the "place search bar above connection tree" setting at startup
+- fixed connection tree filter hiding matches inside collapsed folders; folders opened by the filter are collapsed again when the search is cleared
 - #3560: fixed "Invalid executable path" for PuTTY and external tools installed under "Program Files (x86)"
 - : fixed connection files saved by this version (format 2.9) being rejected on load as "Incompatible connection file format"
 - #3367: fixed cross-thread crash when closing the splash screen on a startup error
@@ -23,6 +25,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #2496: fixed use pwfile instead of cleartext password for putty connections 
 
 ### Added
+- added a warning when a connection's hostname is already used by another connection, listing where the existing ones are in the tree
+- changed connection tree search to filter the tree by default instead of jumping to the first match
 - #876: added Wake-on-LAN option to the connection tree context menu to wake sleeping or powered-off machines using the connection's MAC Address
 - #3449: added Single Package Authoring (SPA) to MSI installer to allow per-user installations without admin privileges
 - #2931: added vault openbao connector
