@@ -155,6 +155,27 @@ public class DataTableSerializerTests
     }
 
 
+    // A real tblCons never has these columns: no CREATE TABLE or version upgrader creates
+    // them, for either provider. The serializer only saw them before because an empty table
+    // makes it build its own schema; as soon as the database has a row, the real schema comes
+    // back and every save threw, so SQL users lost every edit after the first.
+    [TestCase("EnvironmentTags")]
+    [TestCase("InheritEnvironmentTags")]
+    [TestCase("RDGatewayExternalCredentialProvider")]
+    [TestCase("RDGatewayUserViaAPI")]
+    public void SerializingSucceedsWhenTheDatabaseLacksAColumn(string missingColumn)
+    {
+        var model = CreateConnectionTreeModel();
+        _saveFilter.SaveInheritance = true;
+        var sourceTable = _dataTableSerializer.Serialize(model).Copy();
+        sourceTable.Columns.Remove(missingColumn);
+
+        var serializer = new DataTableSerializer(_saveFilter, new LegacyRijndaelCryptographyProvider(), new SecureString());
+        serializer.SetSourceDataTable(sourceTable);
+
+        Assert.That(() => serializer.Serialize(model), Throws.Nothing);
+    }
+
     private ConnectionTreeModel CreateConnectionTreeModel()
     {
         var builder = new ConnectionTreeModelBuilder();
