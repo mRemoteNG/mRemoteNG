@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -28,7 +29,16 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
         public void PropertyGridShowCorrectPropertiesForConnectionInfo(ConnectionInfo connectionInfo, IEnumerable<string> expectedVisibleProperties)
         {
             _configWindow.SelectedTreeNode = connectionInfo;
-            Assert.That(_configWindow.VisibleObjectProperties, Is.EquivalentTo(expectedVisibleProperties));
+            Assert.That(_configWindow.VisibleObjectProperties,
+                Is.EquivalentTo(expectedVisibleProperties.Concat(PluginPropertiesFor(connectionInfo))));
+        }
+
+        // FrmMain loads plugins from the application folder, which in a test run is the test
+        // output folder, so the plugins in this test assembly add their properties to the grid
+        // once any test has created it.
+        internal static IEnumerable<string> PluginPropertiesFor(ConnectionInfo connectionInfo)
+        {
+            return Runtime.PluginService.GetConnectionPropertyDefinitions(connectionInfo).Select(definition => definition.Key);
         }
 
         [Test]
