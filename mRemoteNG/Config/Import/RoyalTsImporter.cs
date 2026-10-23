@@ -35,7 +35,7 @@ namespace mRemoteNG.Config.Import
             {
                 Name = deserializer.DocumentName.Length > 0 ? deserializer.DocumentName : Path.GetFileNameWithoutExtension(fileName)
             };
-            importContainer.AddChildRange(connectionTreeModel.RootNodes.First().Children.ToArray());
+            importContainer.AddChildRange(connectionTreeModel.RootNodes[0].Children.ToArray());
             destinationContainer.AddChild(importContainer);
         }
 

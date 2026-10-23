@@ -49,16 +49,24 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             _sharedUsernamesById.Clear();
             _sharedUsernamesByName.Clear();
 
-            ConnectionTreeModel connectionTreeModel = new();
-            RootNodeInfo root = new(RootNodeType.Connection);
-            connectionTreeModel.AddRootNode(root);
-
             XmlDocument xmlDocument = SecureXmlHelper.LoadXmlFromString(content);
             XmlElement documentElement = xmlDocument.DocumentElement;
             if (documentElement?.Name != "RTSZDocument")
                 throw new FormatException("This is not a Royal TS document: the root element is not RTSZDocument.");
 
             List<XmlElement> objects = documentElement.ChildNodes.OfType<XmlElement>().ToList();
+            ReadSharedCredentials(objects);
+            List<ImportedNode> importedNodes = objects.Select(ReadObject).Where(node => node != null).ToList();
+
+            ConnectionTreeModel connectionTreeModel = new();
+            RootNodeInfo root = new(RootNodeType.Connection);
+            connectionTreeModel.AddRootNode(root);
+            AssembleTree(root, importedNodes, objects);
+            return connectionTreeModel;
+        }
+
+        private void ReadSharedCredentials(IEnumerable<XmlElement> objects)
+        {
             foreach (XmlElement credential in objects.Where(element => element.Name == CredentialElement))
             {
                 string username = Text(credential, "UserName");
@@ -67,61 +75,64 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                 if (Text(credential, "Password").Length > 0)
                     PasswordsNotImported++;
             }
+        }
 
-            Dictionary<string, ConnectionInfo> nodes = new(StringComparer.Ordinal);
-            Dictionary<string, string> parentIds = new(StringComparer.Ordinal);
-            List<(string Id, int Position)> order = new();
-
-            foreach (XmlElement element in objects)
+        // One object of the document as a node, or null when it does not become one.
+        private ImportedNode ReadObject(XmlElement element)
+        {
+            switch (element.Name)
             {
-                switch (element.Name)
-                {
-                    case "RoyalDocument":
-                        DocumentName = Text(element, "Name");
-                        continue;
-                    // Deleted objects stay in the document under RoyalTrash; shared credentials were read above.
-                    case "RoyalTrash":
-                    case CredentialElement:
-                        continue;
-                }
-
-                string id = Text(element, "ID");
-                if (id.Length == 0)
-                    continue;
-
-                ConnectionInfo node = CreateNode(element);
-                if (node == null)
-                {
-                    _skippedObjectTypes[element.Name] = _skippedObjectTypes.GetValueOrDefault(element.Name) + 1;
-                    continue;
-                }
-
-                if (Text(element, "CredentialPassword").Length > 0)
-                    PasswordsNotImported++;
-
-                nodes[id] = node;
-                parentIds[id] = Text(element, "ParentID");
-                order.Add((id, int.TryParse(Text(element, "PositionNr"), out int position) ? position : 0));
+                case "RoyalDocument":
+                    DocumentName = Text(element, "Name");
+                    return null;
+                // Deleted objects stay in the document under RoyalTrash; shared credentials are read separately.
+                case "RoyalTrash":
+                case CredentialElement:
+                    return null;
             }
 
-            // A node whose parent is not one of the imported nodes belongs at the top, unless
-            // that parent is the trash. Anything inside a deleted folder hangs off a node that
-            // is never attached, so it is left out as well.
+            string id = Text(element, "ID");
+            if (id.Length == 0)
+                return null;
+
+            ConnectionInfo node = CreateNode(element);
+            if (node == null)
+            {
+                _skippedObjectTypes[element.Name] = _skippedObjectTypes.GetValueOrDefault(element.Name) + 1;
+                return null;
+            }
+
+            if (Text(element, "CredentialPassword").Length > 0)
+                PasswordsNotImported++;
+
+            int position = int.TryParse(Text(element, "PositionNr"), out int positionNr) ? positionNr : 0;
+            return new ImportedNode(id, Text(element, "ParentID"), position, node);
+        }
+
+        // A node whose parent is not one of the imported nodes belongs at the top, unless
+        // that parent is the trash. Anything inside a deleted folder hangs off a node that
+        // is never attached, so it is left out as well.
+        private static void AssembleTree(RootNodeInfo root, List<ImportedNode> importedNodes, IEnumerable<XmlElement> objects)
+        {
+            Dictionary<string, ConnectionInfo> nodesById = new(StringComparer.Ordinal);
+            foreach (ImportedNode imported in importedNodes)
+                nodesById[imported.Id] = imported.Node;
+
             HashSet<string> trashIds = new(objects.Where(element => element.Name == "RoyalTrash")
                                                   .Select(element => Text(element, "ID")),
                                            StringComparer.Ordinal);
-            foreach ((string id, _) in order.OrderBy(entry => entry.Position)
-                                                .ThenBy(entry => entry.Id, StringComparer.Ordinal))
-            {
-                string parentId = parentIds[id];
-                if (nodes.TryGetValue(parentId, out ConnectionInfo parent) && parent is ContainerInfo folder)
-                    folder.AddChild(nodes[id]);
-                else if (!trashIds.Contains(parentId))
-                    root.AddChild(nodes[id]);
-            }
 
-            return connectionTreeModel;
+            foreach (ImportedNode imported in importedNodes.OrderBy(node => node.Position)
+                                                           .ThenBy(node => node.Id, StringComparer.Ordinal))
+            {
+                if (nodesById.TryGetValue(imported.ParentId, out ConnectionInfo parent) && parent is ContainerInfo folder)
+                    folder.AddChild(imported.Node);
+                else if (!trashIds.Contains(imported.ParentId))
+                    root.AddChild(imported.Node);
+            }
         }
+
+        private sealed record ImportedNode(string Id, string ParentId, int Position, ConnectionInfo Node);
 
         private ConnectionInfo CreateNode(XmlElement element)
         {
