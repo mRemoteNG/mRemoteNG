@@ -2485,5 +2485,161 @@ namespace mRemoteNG.Properties {
                 this["PluginPanelAssignments"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultColor {
+            get {
+                return ((string)(this["ConDefaultColor"]));
+            }
+            set {
+                this["ConDefaultColor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultTabColor {
+            get {
+                return ((string)(this["ConDefaultTabColor"]));
+            }
+            set {
+                this["ConDefaultTabColor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string ConDefaultConnectionFrameColor {
+            get {
+                return ((string)(this["ConDefaultConnectionFrameColor"]));
+            }
+            set {
+                this["ConDefaultConnectionFrameColor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultVaultOpenbaoMount {
+            get {
+                return ((string)(this["ConDefaultVaultOpenbaoMount"]));
+            }
+            set {
+                this["ConDefaultVaultOpenbaoMount"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultVaultOpenbaoRole {
+            get {
+                return ((string)(this["ConDefaultVaultOpenbaoRole"]));
+            }
+            set {
+                this["ConDefaultVaultOpenbaoRole"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Kv")]
+        public string ConDefaultVaultOpenbaoSecretEngine {
+            get {
+                return ((string)(this["ConDefaultVaultOpenbaoSecretEngine"]));
+            }
+            set {
+                this["ConDefaultVaultOpenbaoSecretEngine"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultColor {
+            get {
+                return ((bool)(this["InhDefaultColor"]));
+            }
+            set {
+                this["InhDefaultColor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultTabColor {
+            get {
+                return ((bool)(this["InhDefaultTabColor"]));
+            }
+            set {
+                this["InhDefaultTabColor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultConnectionFrameColor {
+            get {
+                return ((bool)(this["InhDefaultConnectionFrameColor"]));
+            }
+            set {
+                this["InhDefaultConnectionFrameColor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRDGatewayAccessToken {
+            get {
+                return ((bool)(this["InhDefaultRDGatewayAccessToken"]));
+            }
+            set {
+                this["InhDefaultRDGatewayAccessToken"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRDGatewayExternalCredentialProvider {
+            get {
+                return ((bool)(this["InhDefaultRDGatewayExternalCredentialProvider"]));
+            }
+            set {
+                this["InhDefaultRDGatewayExternalCredentialProvider"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRDGatewayUserViaAPI {
+            get {
+                return ((bool)(this["InhDefaultRDGatewayUserViaAPI"]));
+            }
+            set {
+                this["InhDefaultRDGatewayUserViaAPI"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRedirectDiskDrivesCustom {
+            get {
+                return ((bool)(this["InhDefaultRedirectDiskDrivesCustom"]));
+            }
+            set {
+                this["InhDefaultRedirectDiskDrivesCustom"] = value;
+            }
+        }
     }
 }
