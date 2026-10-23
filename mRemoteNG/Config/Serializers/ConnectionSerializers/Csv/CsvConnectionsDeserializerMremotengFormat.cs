@@ -21,14 +21,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
     {
         public ConnectionTreeModel Deserialize(string serializedData)
         {
-            string[] lines = serializedData.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.RemoveEmptyEntries);
+            List<string[]> lines = SemicolonSeparatedValues.Parse(serializedData);
             List<string> csvHeaders = new();
             // used to map a connectioninfo to it's parent's GUID
             Dictionary<ConnectionInfo, string> parentMapping = new();
 
-            for (int lineNumber = 0; lineNumber < lines.Length; lineNumber++)
+            for (int lineNumber = 0; lineNumber < lines.Count; lineNumber++)
             {
-                string[] line = lines[lineNumber].Split(';');
+                string[] line = lines[lineNumber];
                 if (lineNumber == 0)
                     csvHeaders = ReadHeaders(line);
                 else
