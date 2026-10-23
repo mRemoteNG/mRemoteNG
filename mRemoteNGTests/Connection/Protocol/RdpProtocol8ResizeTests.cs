@@ -1,3 +1,4 @@
+using System.Threading;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -11,6 +12,7 @@ using NUnit.Framework;
 namespace mRemoteNGTests.Connection.Protocol
 {
     [TestFixture]
+    [Apartment(ApartmentState.STA)]
     public class RdpProtocol8ResizeTests
     {
         private TestableRdpProtocol8 _rdpProtocol;
