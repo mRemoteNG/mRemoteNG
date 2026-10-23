@@ -264,6 +264,8 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
             BeforeLabelEdit += OnBeforeLabelEdit;
             AfterLabelEdit += OnAfterLabelEdit;
+            // ObjectListView raises FormatCell only when this is on, and Color is applied there.
+            UseCellFormatEvents = true;
             FormatCell += ConnectionTree_FormatCell;
         }
 

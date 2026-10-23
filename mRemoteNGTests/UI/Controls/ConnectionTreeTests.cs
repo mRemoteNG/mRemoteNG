@@ -71,6 +71,28 @@ namespace mRemoteNGTests.UI.Controls
 
 		[Test]
 		[Apartment(ApartmentState.STA)]
+		public void ConnectionColorIsUsedForItsNameInTheTree()
+		{
+			var connectionTreeModel = new ConnectionTreeModel();
+			var root = new RootNodeInfo(RootNodeType.Connection);
+			var folder = new ContainerInfo {Name = "folder"};
+			var coloured = new ConnectionInfo {Name = "coloured", Color = "Red"};
+			// Other tests change the default inheritance; this one must show its own colour.
+			coloured.Inheritance.TurnOffInheritanceCompletely();
+			root.AddChild(folder);
+			folder.AddChild(coloured);
+			connectionTreeModel.AddRootNode(root);
+			_connectionTree.ConnectionTreeModel = connectionTreeModel;
+			_connectionTree.ExpandAll();
+
+			var item = _connectionTree.ModelToItem(coloured);
+
+			Assert.That(item, Is.Not.Null);
+			Assert.That(item.GetSubItem(0).ForeColor.ToArgb(), Is.EqualTo(System.Drawing.Color.Red.ToArgb()));
+		}
+
+		[Test]
+		[Apartment(ApartmentState.STA)]
 		public void ApplyFilterRevealsMatchesInsideCollapsedFolders()
 		{
 			// root
