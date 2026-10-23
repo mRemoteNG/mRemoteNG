@@ -1,3 +1,6 @@
+using System.Data.Common;
+using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Sql;
 using NUnit.Framework;
@@ -45,6 +48,45 @@ public class SqlDatabaseMetaDataRetrieverTests
 
         Assert.That(query, Does.Contain("table_schema = @DatabaseName"));
         Assert.That(query, Does.Not.Contain("table_catalog"));
+    }
+
+    // With the Database field left blank the server falls back to the login's default
+    // database, so the setting names a database the connection is not in. Comparing against
+    // it never matches, the table check reports our tables as missing, and the initializer
+    // drops and recreates them - destroying the connections stored there.
+    [Test]
+    public void DatabaseNameComesFromTheOpenConnection()
+    {
+        var connector = new StubDatabaseConnector("TheDatabaseWeActuallyLandedIn");
+
+        string resolved = SqlDatabaseMetaDataRetriever.ResolveDatabaseName(connector);
+
+        Assert.That(resolved, Is.EqualTo("TheDatabaseWeActuallyLandedIn"));
+    }
+
+    [Test]
+    public void DatabaseNameFallsBackToTheSettingWhenTheConnectionReportsNone()
+    {
+        mRemoteNG.Properties.OptionsDBsPage.Default.SQLDatabaseName = "FromSettings";
+        var connector = new StubDatabaseConnector(string.Empty);
+
+        string resolved = SqlDatabaseMetaDataRetriever.ResolveDatabaseName(connector);
+
+        Assert.That(resolved, Is.EqualTo("FromSettings"));
+    }
+
+    private sealed class StubDatabaseConnector(string database) : IDatabaseConnector
+    {
+        private readonly SqlConnection _connection = new($"Server=unused;Database={database};");
+
+        public DbConnection DbConnection() => _connection;
+        public DbCommand DbCommand(string dbCommand) => _connection.CreateCommand();
+        public bool IsConnected => false;
+        public void Connect() { }
+        public Task ConnectAsync() => Task.CompletedTask;
+        public void Disconnect() { }
+        public void AssociateItemToThisConnector(DbCommand dbCommand) { }
+        public void Dispose() => _connection.Dispose();
     }
 
     [Test]
