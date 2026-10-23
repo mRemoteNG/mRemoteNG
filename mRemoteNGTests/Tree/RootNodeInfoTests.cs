@@ -1,5 +1,6 @@
 ﻿using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.Resources.Language;
 using NUnit.Framework;
 
 
@@ -62,6 +63,15 @@ namespace mRemoteNGTests.Tree
         {
             var rootNode = new RootNodeInfo(rootNodeType);
             Assert.That(rootNode.GetTreeNodeType(), Is.EqualTo(expectedTreeNodeType));
+        }
+
+        [TestCase(RootNodeType.Connection)]
+        [TestCase(RootNodeType.PuttySessions)]
+        public void NewRootNodeIsNamedConnections(RootNodeType rootNodeType)
+        {
+            var rootNode = new RootNodeInfo(rootNodeType, "a0000000-0000-4000-8000-000000000001");
+            Assert.That(rootNode.Name, Is.EqualTo(Language.Connections));
+            Assert.That(rootNode.Type, Is.EqualTo(rootNodeType));
         }
     }
 }
