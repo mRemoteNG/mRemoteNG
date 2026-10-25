@@ -44,6 +44,8 @@ namespace mRemoteNG.UI.Window
             DockPnl = panel;
             Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.ASPWebSite_16x);
             InitializeComponent();
+            // the designer docks the search bar at the bottom; apply the saved preference at startup
+            PlaceSearchBar(Settings.Default.PlaceSearchBarAboveConnectionTree);
             SetMenuEventHandlers();
             SetConnectionTreeEventHandlers();
             Settings.Default.PropertyChanged += OnAppSettingsChanged;

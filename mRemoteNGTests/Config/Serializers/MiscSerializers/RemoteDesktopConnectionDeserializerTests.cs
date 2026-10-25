@@ -3,6 +3,7 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
+using System;
 using System.Linq;
 using mRemoteNG.Config.Serializers.MiscSerializers;
 
@@ -187,4 +188,79 @@ public class RemoteDesktopConnectionDeserializerTests
     //    var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
     //    Assert.That(connectionInfo.RDGatewayHostname, Is.EqualTo(_expectedGatewayHostname));
     //}
+
+    private static ConnectionInfo Import(params string[] lines)
+    {
+        var model = new RemoteDesktopConnectionDeserializer().Deserialize(string.Join(Environment.NewLine, lines));
+        return model.RootNodes.First().Children.OfType<ConnectionInfo>().First();
+    }
+
+    [Test]
+    public void AdministrativeSessionImportedAsConsoleSession()
+    {
+        var connectionInfo = Import("full address:s:host", "administrative session:i:1");
+        Assert.That(connectionInfo.UseConsoleSession, Is.True);
+    }
+
+    [TestCase("0", AuthenticationLevel.NoAuth)]
+    [TestCase("1", AuthenticationLevel.AuthRequired)]
+    [TestCase("2", AuthenticationLevel.WarnOnFailedAuth)]
+    public void AuthenticationLevelImported(string value, AuthenticationLevel expected)
+    {
+        var connectionInfo = Import("full address:s:host", $"authentication level:i:{value}");
+        Assert.That(connectionInfo.RDPAuthenticationLevel, Is.EqualTo(expected));
+    }
+
+    [TestCase("0", false)]
+    [TestCase("1", true)]
+    public void CredSspSupportImported(string value, bool expected)
+    {
+        var connectionInfo = Import("full address:s:host", $"enablecredsspsupport:i:{value}");
+        Assert.That(connectionInfo.UseCredSsp, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void GatewayUsernameAndDomainImported()
+    {
+        var connectionInfo = Import("full address:s:host", "gatewayusername:s:gwuser", "gatewaydomain:s:GWDOMAIN");
+        Assert.That(connectionInfo.RDGatewayUsername, Is.EqualTo("gwuser"));
+        Assert.That(connectionInfo.RDGatewayDomain, Is.EqualTo("GWDOMAIN"));
+    }
+
+    [Test]
+    public void GatewayBypassForLocalAddressesImportedAsNever()
+    {
+        var connectionInfo = Import("full address:s:host", "gatewayusagemethod:i:1", "gatewayusagemethod:i:4");
+        Assert.That(connectionInfo.RDGatewayUsageMethod, Is.EqualTo(RDGatewayUsageMethod.Never));
+    }
+
+    [TestCase("gatewaycredentialssource:i:4", "promptcredentialonce:i:1")]
+    [TestCase("promptcredentialonce:i:1", "gatewaycredentialssource:i:4")]
+    public void PromptCredentialOnceMakesGatewayUseConnectionCredentials(string first, string second)
+    {
+        var connectionInfo = Import("full address:s:host", "gatewayhostname:s:gw", first, second);
+        Assert.That(connectionInfo.RDGatewayUseConnectionCredentials, Is.EqualTo(RDGatewayUseConnectionCredentials.Yes));
+    }
+
+    [Test]
+    public void GatewayCredentialsStayManualWithoutPromptCredentialOnce()
+    {
+        var connectionInfo = Import("full address:s:host", "gatewayhostname:s:gw", "gatewaycredentialssource:i:4", "promptcredentialonce:i:0");
+        Assert.That(connectionInfo.RDGatewayUseConnectionCredentials, Is.EqualTo(RDGatewayUseConnectionCredentials.No));
+    }
+
+    [TestCase("fe80::1")]
+    [TestCase("2001:db8::10")]
+    public void BareIpv6AddressImportedAsHostname(string address)
+    {
+        var connectionInfo = Import($"full address:s:{address}");
+        Assert.That(connectionInfo.Hostname, Is.EqualTo(address));
+    }
+
+    [Test]
+    public void BracketedIpv6AddressKeepsItsPort()
+    {
+        var connectionInfo = Import("full address:s:[fe80::1]:3391");
+        Assert.That(connectionInfo.Port, Is.EqualTo(3391));
+    }
 }
