@@ -106,7 +106,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
             string nodeId = headers.Contains("Id")
                 ? connectionCsv[headers.IndexOf("Id")]
-                : Guid.NewGuid().ToString();
+                : string.Empty;
+            // A hand-written file may leave the Id empty, which the XML loader allows as well.
+            if (string.IsNullOrWhiteSpace(nodeId))
+                nodeId = Guid.NewGuid().ToString();
 
             ConnectionInfo connectionRecord = nodeType == TreeNodeType.Connection
                 ? new ConnectionInfo(nodeId)
