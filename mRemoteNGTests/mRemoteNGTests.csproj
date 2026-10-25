@@ -35,6 +35,15 @@
   <ItemGroup>
     <ProjectReference Include="..\mRemoteNG\mRemoteNG.csproj" />
   </ItemGroup>
+  <!-- COM references don't flow through ProjectReference, so pick up the RDP interop assemblies
+       mRemoteNG generates. Globbing inside a target runs after mRemoteNG has built. -->
+  <Target Name="AddRdpInteropReferences" AfterTargets="ResolveProjectReferences">
+    <ItemGroup>
+      <Reference Include="$(MSBuildThisFileDirectory)..\mRemoteNG\obj\**\$(Configuration)\**\Interop.MSTSCLib.dll;$(MSBuildThisFileDirectory)..\mRemoteNG\obj\**\$(Configuration)\**\AxInterop.MSTSCLib.dll">
+        <Private>true</Private>
+      </Reference>
+    </ItemGroup>
+  </Target>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
