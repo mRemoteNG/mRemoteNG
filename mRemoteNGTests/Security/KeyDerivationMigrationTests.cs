@@ -34,13 +34,12 @@ namespace mRemoteNGTests.Security
         }
 
         [Test]
-        public void Sha256DistinguishesNonAsciiPasswordsThatLegacyConfuses()
+        public void Sha256AcceptsNonAsciiPasswordsThatLegacyRejects()
         {
-            // U+0161 and U+0061 share a low byte, so the legacy conversion treats them as the same password
+            // The legacy conversion cannot represent characters above U+00FF at all
             byte[] salt = new byte[16];
-            string a = "š", b = "a";
-            Assert.That(new Pkcs5S2KeyGenerator(256, 1000).DeriveKey(a, salt),
-                        Is.EqualTo(new Pkcs5S2KeyGenerator(256, 1000).DeriveKey(b, salt)));
+            string a = "pašš", b = "pass";
+            Assert.Throws<System.OverflowException>(() => new Pkcs5S2KeyGenerator(256, 1000).DeriveKey(a, salt));
             Assert.That(new Pkcs5S2KeyGenerator(256, 1000, KeyDerivationAlgorithms.Pbkdf2Sha256).DeriveKey(a, salt),
                         Is.Not.EqualTo(new Pkcs5S2KeyGenerator(256, 1000, KeyDerivationAlgorithms.Pbkdf2Sha256).DeriveKey(b, salt)));
         }

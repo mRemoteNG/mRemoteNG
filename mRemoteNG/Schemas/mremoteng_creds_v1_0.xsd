@@ -16,6 +16,7 @@
             <xs:attribute name="EncryptionEngine" type="xs:string" use="required" />
             <xs:attribute name="BlockCipherMode" type="xs:string" use="required" />
             <xs:attribute name="KdfIterations" type="xs:int" use="optional" />
+            <xs:attribute name="KdfAlgorithm" type="xs:string" use="optional" />
             <xs:attribute name="FullFileEncryption" type="xs:boolean" use="required" />
             <xs:attribute name="Auth" type="xs:string" use="required" />
             <xs:attribute name="SchemaVersion" type="xs:float" use="required" />
