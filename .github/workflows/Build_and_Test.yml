@@ -1,0 +1,67 @@
+name: Build_and_Test
+# Builds the app and runs the unit tests without producing a release.
+on:
+  push:
+    branches:
+      - 'fix/**'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  build-and-test:
+    permissions:
+      contents: read
+    runs-on: windows-2025-vs2026
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+
+      - name: Install .NET 10 SDK
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v3
+        with:
+          msbuild-architecture: x64
+
+      # Same environment resolution as Build_mR-NB.yml; MSBuild is needed for the MSTSCLib COM reference
+      - name: Resolve MSBuild environment
+        shell: pwsh
+        run: |
+          $msbuild = (Get-Command msbuild -ErrorAction Stop).Source
+          $dotnetRoot = Split-Path (Get-Command dotnet -ErrorAction Stop).Source -Parent
+          $sdkBasePathLine = & dotnet --info | Select-String -Pattern '^\s*Base Path:\s*(.+)$' | Select-Object -First 1
+          if ($null -eq $sdkBasePathLine) { throw "Unable to determine active .NET SDK base path" }
+          $msbuildSdksPath = Join-Path $sdkBasePathLine.Matches[0].Groups[1].Value.Trim() "Sdks"
+          "MSBUILD_EXE=$msbuild" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "MSBuildSDKsPath=$msbuildSdksPath" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "DOTNET_MSBUILD_SDK_RESOLVER_CLI_DIR=$dotnetRoot" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "DOTNET_ROOT=$dotnetRoot" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Transform T4 templates
+        shell: pwsh
+        run: |
+          dotnet tool install --global dotnet-t4
+          $env:PATH += ";$env:USERPROFILE\.dotnet\tools"
+          t4 "$env:GITHUB_WORKSPACE\mRemoteNG\Properties\AssemblyInfo.tt" -P platformType=x64 -r:"$env:GITHUB_WORKSPACE\mRemoteNG\libs\Microsoft.VisualStudio.Interop.dll"
+
+      - name: Build tests
+        shell: pwsh
+        run: |
+          & "$env:MSBUILD_EXE" "$env:GITHUB_WORKSPACE\mRemoteNGTests\mRemoteNGTests.csproj" /restore /p:Configuration=Release /p:Platform=x64 /p:MSBuildEnableWorkloadResolver=false /verbosity:minimal
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Run tests
+        shell: pwsh
+        run: |
+          dotnet test "$env:GITHUB_WORKSPACE\mRemoteNGTests\mRemoteNGTests.csproj" --no-build -c Release -p:Platform=x64 --logger "trx;LogFileName=results.trx" --results-directory TestResults
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: test-results
+          path: TestResults
