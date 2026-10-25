@@ -54,6 +54,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
             xdoc.Root?.SetAttributeValue("EncryptionEngine", _cryptographyProvider.CipherEngine);
             xdoc.Root?.SetAttributeValue("BlockCipherMode", _cryptographyProvider.CipherMode);
             xdoc.Root?.SetAttributeValue("KdfIterations", _cryptographyProvider.KeyDerivationIterations);
+            xdoc.Root?.SetAttributeValue("KdfAlgorithm", _cryptographyProvider.KeyDerivationAlgorithm);
             xdoc.Root?.SetAttributeValue("Auth", _cryptographyProvider.Encrypt(RandomGenerator.RandomString(20), encryptionKey));
         }
     }

@@ -7,6 +7,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security;
 using System.Text;
@@ -36,7 +37,15 @@ namespace mRemoteNG.Security.SymmetricEncryption
         //Preconfigured Password Key Derivation Parameters
         protected virtual int SaltBitSize { get; set; } = 128;
         public virtual int KeyDerivationIterations { get; set; } = 1000;
+        // Defaults to the legacy algorithm so data that does not say how it was derived still decrypts
+        public virtual KeyDerivationAlgorithms KeyDerivationAlgorithm { get; set; } = KeyDerivationAlgorithms.Pbkdf2Sha1Legacy;
         protected virtual int MinPasswordLength { get; set; } = 1;
+
+        // A connection file encrypts every password attribute separately. Deriving a fresh key for each one
+        // made high iteration counts unusably slow, so one salt is used for everything this instance encrypts
+        // and derived keys are cached. Each message still gets its own random nonce.
+        private readonly Dictionary<string, byte[]> _derivedKeyCache = new();
+        private readonly Dictionary<string, byte[]> _encryptionSaltCache = new();
 
 
         public int BlockSizeInBytes
@@ -123,11 +132,10 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
             //Use Random Salt to minimize pre-generated weak password attacks.
-            byte[] salt = GenerateSalt();
+            byte[] salt = GetEncryptionSalt(password);
 
             //Generate Key
-            Pkcs5S2KeyGenerator keyDerivationFunction = new(KeyBitSize, KeyDerivationIterations);
-            byte[] key = keyDerivationFunction.DeriveKey(password, salt);
+            byte[] key = DeriveKeyCached(password, salt);
 
             //Create Full Non Secret Payload
             byte[] payload = new byte[salt.Length + nonSecretPayload.Length];
@@ -207,8 +215,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
             Array.Copy(encryptedMessage, nonSecretPayloadLength, salt, 0, salt.Length);
 
             //Generate Key
-            Pkcs5S2KeyGenerator keyDerivationFunction = new(KeyBitSize, KeyDerivationIterations);
-            byte[] key = keyDerivationFunction.DeriveKey(password, salt);
+            byte[] key = DeriveKeyCached(password, salt);
 
             return SimpleDecrypt(encryptedMessage, key, salt.Length + nonSecretPayloadLength);
         }
@@ -249,6 +256,44 @@ namespace mRemoteNG.Security.SymmetricEncryption
             }
 
             return plainText;
+        }
+
+        private string KdfSettingsId(string password)
+        {
+            byte[] passwordHash = System.Security.Cryptography.SHA256.HashData(Encoding.UTF8.GetBytes(password));
+            return $"{KeyDerivationAlgorithm}|{KeyDerivationIterations}|{Convert.ToBase64String(passwordHash)}";
+        }
+
+        private byte[] GetEncryptionSalt(string password)
+        {
+            string settingsId = KdfSettingsId(password);
+            lock (_derivedKeyCache)
+            {
+                if (!_encryptionSaltCache.TryGetValue(settingsId, out byte[]? salt))
+                {
+                    salt = GenerateSalt();
+                    _encryptionSaltCache[settingsId] = salt;
+                }
+                return salt;
+            }
+        }
+
+        private byte[] DeriveKeyCached(string password, byte[] salt)
+        {
+            string cacheId = $"{KdfSettingsId(password)}|{Convert.ToBase64String(salt)}";
+            lock (_derivedKeyCache)
+            {
+                if (_derivedKeyCache.TryGetValue(cacheId, out byte[]? cachedKey))
+                    return cachedKey;
+            }
+
+            Pkcs5S2KeyGenerator keyDerivationFunction = new(KeyBitSize, KeyDerivationIterations, KeyDerivationAlgorithm);
+            byte[] key = keyDerivationFunction.DeriveKey(password, salt);
+            lock (_derivedKeyCache)
+            {
+                _derivedKeyCache[cacheId] = key;
+            }
+            return key;
         }
 
         private byte[] GenerateSalt()

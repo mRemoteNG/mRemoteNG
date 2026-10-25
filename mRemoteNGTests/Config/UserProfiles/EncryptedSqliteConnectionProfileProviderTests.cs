@@ -2,7 +2,9 @@ using System;
 using System.IO;
 using System.Runtime.Versioning;
 using System.Security.Cryptography;
+using Microsoft.Data.Sqlite;
 using mRemoteNG.Config.UserProfiles;
+using mRemoteNG.Security.KeyDerivation;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using NUnit.Framework;
@@ -65,6 +67,62 @@ namespace mRemoteNGTests.Config.UserProfiles
 
             Assert.That(reopenedProvider.Load(), Is.EqualTo("<Connections />"));
             Assert.That(cryptographyProvider.KeyDerivationIterations, Is.EqualTo(10_000));
+        }
+
+        [Test]
+        public void ProfileWithoutKdfAlgorithmColumn_LoadsAsLegacyAndUpgradesOnSave()
+        {
+            const string connections = "<Connections><Node Name=\"Old\" /></Connections>";
+            string legacyCipherText = new AeadCryptographyProvider { KeyDerivationIterations = 10_000 }
+                .Encrypt(connections, "profile password".ConvertToSecureString());
+            using (SqliteConnection connection = new($"Data Source={_databasePath};Pooling=False"))
+            {
+                connection.Open();
+                using SqliteCommand command = connection.CreateCommand();
+                // Schema as it was before kdf_algorithm existed
+                command.CommandText = """
+                    CREATE TABLE connection_data (
+                        id INTEGER PRIMARY KEY CHECK (id = 1),
+                        encrypted_data TEXT NOT NULL,
+                        cipher_engine TEXT NOT NULL,
+                        cipher_mode TEXT NOT NULL,
+                        kdf_iterations INTEGER NOT NULL,
+                        updated_at TEXT NOT NULL
+                    );
+                    INSERT INTO connection_data VALUES (1, @data, 'AES', 'GCM', 10000, '2020-01-01');
+                    """;
+                command.Parameters.AddWithValue("@data", legacyCipherText);
+                command.ExecuteNonQuery();
+            }
+
+            AeadCryptographyProvider upgraded = new()
+            {
+                KeyDerivationIterations = 600_000,
+                KeyDerivationAlgorithm = KeyDerivationAlgorithms.Pbkdf2Sha256
+            };
+            using (EncryptedSqliteConnectionProfileProvider provider = new(
+                       _databasePath, upgraded, "profile password".ConvertToSecureString(), ProfileAccessLevel.Write))
+            {
+                Assert.That(provider.Load(), Is.EqualTo(connections));
+                provider.Save(connections);
+            }
+
+            using (SqliteConnection connection = new($"Data Source={_databasePath};Pooling=False"))
+            {
+                connection.Open();
+                using SqliteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT kdf_algorithm, kdf_iterations FROM connection_data WHERE id = 1;";
+                using SqliteDataReader reader = command.ExecuteReader();
+                Assert.That(reader.Read(), Is.True);
+                Assert.That(reader.GetString(0), Is.EqualTo("Pbkdf2Sha256"));
+                Assert.That(reader.GetInt32(1), Is.EqualTo(600_000));
+            }
+
+            AeadCryptographyProvider reopenedCrypto = new();
+            using EncryptedSqliteConnectionProfileProvider reopened = new(
+                _databasePath, reopenedCrypto, "profile password".ConvertToSecureString(), ProfileAccessLevel.ReadOnly);
+            Assert.That(reopened.Load(), Is.EqualTo(connections));
+            Assert.That(reopenedCrypto.KeyDerivationAlgorithm, Is.EqualTo(KeyDerivationAlgorithms.Pbkdf2Sha256));
         }
 
         [Test]

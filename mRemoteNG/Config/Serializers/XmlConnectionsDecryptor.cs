@@ -4,6 +4,7 @@ using System.Security;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
 using mRemoteNG.Security.Factories;
+using mRemoteNG.Security.KeyDerivation;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
@@ -22,6 +23,12 @@ namespace mRemoteNG.Config.Serializers
         {
             get { return _cryptographyProvider.KeyDerivationIterations; }
             set { _cryptographyProvider.KeyDerivationIterations = value; }
+        }
+
+        public KeyDerivationAlgorithms KeyDerivationAlgorithm
+        {
+            get { return _cryptographyProvider.KeyDerivationAlgorithm; }
+            set { _cryptographyProvider.KeyDerivationAlgorithm = value; }
         }
 
 

@@ -8,6 +8,7 @@ using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Properties;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
+using mRemoteNG.Security.KeyDerivation;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Settings.Registry;
@@ -64,7 +65,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             comboBoxEncryptionEngine.Text = Enum.GetName(typeof(BlockCipherEngines), Properties.OptionsSecurityPage.Default.EncryptionEngine);
             comboBoxBlockCipher.Text =
                 Enum.GetName(typeof(BlockCipherModes), Properties.OptionsSecurityPage.Default.EncryptionBlockCipherMode);
-            numberBoxKdfIterations.Value = Properties.OptionsSecurityPage.Default.EncryptionKeyDerivationIterations;
+            // Settings saved by older versions can be below the new minimum; setting Value out of range throws
+            numberBoxKdfIterations.Value = Math.Clamp(Properties.OptionsSecurityPage.Default.EncryptionKeyDerivationIterations,
+                                                      numberBoxKdfIterations.Minimum, numberBoxKdfIterations.Maximum);
         }
 
         public override void SaveSettings()
@@ -141,6 +144,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             BlockCipherModes mode = (BlockCipherModes)comboBoxBlockCipher.SelectedItem;
             ICryptographyProvider cryptographyProvider = new CryptoProviderFactory(engine, mode).Build();
             cryptographyProvider.KeyDerivationIterations = (int)numberBoxKdfIterations.Value;
+            cryptographyProvider.KeyDerivationAlgorithm = KeyDerivationDefaults.Algorithm;
 
             XmlConnectionSerializerFactory serializerFactory = new();
             Config.Serializers.ISerializer<Connection.ConnectionInfo, string> serializer = serializerFactory.Build(cryptographyProvider, connectionTree, useFullEncryption: chkEncryptCompleteFile.Checked);

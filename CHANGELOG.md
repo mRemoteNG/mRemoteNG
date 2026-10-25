@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.78.2]
 ### Fixed
+- fixed app hanging on exit when PuTTY never read the password pipe; the pipe now times out and its name is no longer guessable
+- fixed RDP sessions always being treated as a 56 Kbps modem link; the client now auto-detects bandwidth
+- fixed random string generator never picking the last character of its pool
+- fixed connection and credential files with unreadable encryption settings silently falling back to legacy encryption
+- hardened connection, credential and profile encryption: PBKDF2-HMAC-SHA256 over UTF-8 with at least 600,000 iterations; older files still open and are upgraded on their next save
 - #3367: fixed cross-thread crash when closing the splash screen on a startup error
 - #2939: fixed SQL injection vulnerabilities via parameterized queries 
 - #2940: fixed for Possible command injection via Process.Start 

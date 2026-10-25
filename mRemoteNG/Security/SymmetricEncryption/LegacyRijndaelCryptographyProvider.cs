@@ -7,6 +7,7 @@ using System.Text;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.Security.KeyDerivation;
 
 
 namespace mRemoteNG.Security.SymmetricEncryption
@@ -20,6 +21,9 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
         public BlockCipherModes CipherMode { get; }
         public int KeyDerivationIterations { get; set; }
+
+        // MD5 key, no KDF; kept only so very old files still open
+        public KeyDerivationAlgorithms KeyDerivationAlgorithm { get; set; } = KeyDerivationAlgorithms.Pbkdf2Sha1Legacy;
 
         public LegacyRijndaelCryptographyProvider()
         {
