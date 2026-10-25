@@ -15,6 +15,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Plugins;
 using mRemoteNG.Security;
+using mRemoteNG.Security.KeyDerivation;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -137,11 +138,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 BlockCipherEngines engine = connectionsRootElement.GetAttributeAsEnum<BlockCipherEngines>("EncryptionEngine");
                 BlockCipherModes mode = connectionsRootElement.GetAttributeAsEnum<BlockCipherModes>("BlockCipherMode");
                 int keyDerivationIterations = connectionsRootElement.GetAttributeAsInt("KdfIterations");
+                // Files saved before this attribute existed used the legacy derivation
+                KeyDerivationAlgorithms keyDerivationAlgorithm = connectionsRootElement.GetAttributeAsEnum("KdfAlgorithm", KeyDerivationAlgorithms.Pbkdf2Sha1Legacy);
 
                 _decryptor = new XmlConnectionsDecryptor(engine, mode, rootNodeInfo)
                 {
                     AuthenticationRequestor = AuthenticationRequestor,
-                    KeyDerivationIterations = keyDerivationIterations
+                    KeyDerivationIterations = keyDerivationIterations,
+                    KeyDerivationAlgorithm = keyDerivationAlgorithm
                 };
             }
             else

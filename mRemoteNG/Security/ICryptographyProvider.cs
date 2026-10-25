@@ -1,4 +1,5 @@
 ﻿using System.Security;
+using mRemoteNG.Security.KeyDerivation;
 
 namespace mRemoteNG.Security
 {
@@ -11,6 +12,8 @@ namespace mRemoteNG.Security
         BlockCipherModes CipherMode { get; }
 
         int KeyDerivationIterations { get; set; }
+
+        KeyDerivationAlgorithms KeyDerivationAlgorithm { get; set; }
 
         string Encrypt(string plainText, SecureString encryptionKey);
 

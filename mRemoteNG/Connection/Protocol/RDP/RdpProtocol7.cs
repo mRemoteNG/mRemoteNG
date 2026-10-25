@@ -26,7 +26,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 RdpClient7.AdvancedSettings8.AudioQualityMode = (uint)connectionInfo.SoundQuality;
                 RdpClient7.AdvancedSettings8.AudioCaptureRedirectionMode = connectionInfo.RedirectAudioCapture;
-                RdpClient7.AdvancedSettings8.NetworkConnectionType = (int)RdpNetworkConnectionType.Modem;
+                // Let the client measure the link instead of assuming dial-up, which turned visual quality down on fast links
+                RdpClient7.AdvancedSettings8.NetworkConnectionType = (int)RdpNetworkConnectionType.AutoDetect;
 
                 SetUseRedirectionServerName();
 
