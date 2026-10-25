@@ -1,14 +1,16 @@
 ﻿using System;
-using System.Threading;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.Sockets;
+using System.Reflection;
+using System.Runtime.ExceptionServices;
+using System.Runtime.Versioning;
+using System.Threading;
 using mRemoteNG.App;
+using mRemoteNG.Resources.Language;
+using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
-using mRemoteNG.Resources.Language;
-using System.Runtime.Versioning;
-using mRemoteNG.Security;
-using System.Runtime.ExceptionServices;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -33,6 +35,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
         public ProtocolVNC()
         {
+            PatchVncKeyTranslationTable();
             Control = new VncSharpCore.RemoteDesktop();
         }
 
@@ -212,6 +215,39 @@ namespace mRemoteNG.Connection.Protocol.VNC
             {
                 tcpclient?.Close();
                 TimeoutObject.Set();
+            }
+        }
+
+        private static bool _keyTablePatched = false;
+        private static readonly object _patchLock = new();
+
+        /// <summary>
+        /// Patches the VncSharpCore KeyTranslationTable to add a missing entry for the Caps Lock key.
+        /// Without this, pressing Caps Lock sends a 't' keypress to the remote because ToAscii()
+        /// incorrectly maps VK_CAPITAL (0x14) when it is absent from the translation table.
+        /// </summary>
+        private static void PatchVncKeyTranslationTable()
+        {
+            lock (_patchLock)
+            {
+                if (_keyTablePatched) return;
+                try
+                {
+                    var tableField = typeof(VncSharpCore.RemoteDesktop)
+                        .GetField("KeyTranslationTable", BindingFlags.NonPublic | BindingFlags.Static);
+                    if (tableField?.GetValue(null) is Dictionary<int, int> table)
+                    {
+                        const int VK_CAPITAL = 0x14;     // Windows virtual key code for Caps Lock
+                        const int XK_Caps_Lock = 0xFF20; // X11 keysym for Caps Lock
+                        table.TryAdd(VK_CAPITAL, XK_Caps_Lock);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+                        $"Failed to patch VncSharpCore KeyTranslationTable for Caps Lock fix: {ex.Message}", true);
+                }
+                _keyTablePatched = true;
             }
         }
 
