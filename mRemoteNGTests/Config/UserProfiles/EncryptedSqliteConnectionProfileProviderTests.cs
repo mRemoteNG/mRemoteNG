@@ -4,6 +4,7 @@ using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using Microsoft.Data.Sqlite;
 using mRemoteNG.Config.UserProfiles;
+using mRemoteNG.Security;
 using mRemoteNG.Security.KeyDerivation;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;

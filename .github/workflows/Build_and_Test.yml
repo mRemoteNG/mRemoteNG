@@ -51,13 +51,31 @@ jobs:
       - name: Build tests
         shell: pwsh
         run: |
-          & "$env:MSBUILD_EXE" "$env:GITHUB_WORKSPACE\mRemoteNGTests\mRemoteNGTests.csproj" /restore /p:Configuration=Release /p:Platform=x64 /p:MSBuildEnableWorkloadResolver=false /verbosity:minimal
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $log = & "$env:MSBUILD_EXE" "$env:GITHUB_WORKSPACE\mRemoteNGTests\mRemoteNGTests.csproj" /restore /p:Configuration=Release /p:Platform=x64 /p:MSBuildEnableWorkloadResolver=false /verbosity:minimal /nologo 2>&1
+          $code = $LASTEXITCODE
+          $log | Write-Host
+          if ($code -ne 0) {
+            # GitHub keeps only 10 annotations per step, so report every distinct error in one
+            $errors = $log | Select-String ' error ' | ForEach-Object { ($_.Line -replace '\s*\[[^\]]*\.csproj\]$', '').Replace($env:GITHUB_WORKSPACE + '\', '') } | Sort-Object -Unique
+            Write-Host "::error title=Build errors ($($errors.Count))::$($errors -join '%0A')"
+            exit $code
+          }
 
       - name: Run tests
         shell: pwsh
         run: |
           dotnet test "$env:GITHUB_WORKSPACE\mRemoteNGTests\mRemoteNGTests.csproj" --no-build -c Release -p:Platform=x64 --logger "trx;LogFileName=results.trx" --results-directory TestResults
+          $code = $LASTEXITCODE
+          $trx = Get-ChildItem TestResults -Filter *.trx -Recurse | Select-Object -First 1
+          if ($trx) {
+            [xml]$x = Get-Content $trx.FullName
+            $c = $x.TestRun.ResultSummary.Counters
+            Write-Host "::notice title=Test totals::total=$($c.total) passed=$($c.passed) failed=$($c.failed) notExecuted=$($c.notExecuted)"
+            $failed = $x.TestRun.Results.UnitTestResult | Where-Object { $_.outcome -eq 'Failed' } |
+                      ForEach-Object { "$($_.testName): $((($_.Output.ErrorInfo.Message) -split "`n")[0])" }
+            if ($failed) { Write-Host "::error title=Failed tests ($(@($failed).Count))::$(@($failed) -join '%0A')" }
+          }
+          exit $code
 
       - name: Upload test results
         if: always()
