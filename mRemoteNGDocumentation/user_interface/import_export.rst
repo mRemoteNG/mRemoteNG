@@ -72,5 +72,7 @@ Here is a detailed explanation of the export dialog.
    - **Export the currently selected connection** *[nameofconnection]* - Same as before with folder but uses the currently
      selected connection for export.
 - **Export Properties** - Properties of the specific connections to export
+   - **Username** and **Password** are disabled when the ``AllowExportUsernames`` or ``AllowExportPasswords``
+     registry setting does not allow them. See :doc:`/registry/credential_settings`.
 
 .. note:: Options do change based on what is selected in the connection tree. You can try this out by right clicking on a folder and selecting **Export to file** on a connection to understand more
