@@ -140,10 +140,31 @@ public class CsvConnectionsSerializerMremotengFormatTests
             Name = ConnectionName,
             Username = Username,
             Domain = Domain,
-            //Password = Password?.ConvertToSecureString(),
             Password = Password,
             Inheritance = { Colors = true }
         };
+    }
+
+    [Test]
+    public void RestrictedFilterRedactsMainAndAuxiliaryCredentials()
+    {
+        var filter = new SaveFilter(allowPasswords: false, allowUsernames: false)
+        {
+            SavePassword = true,
+            SaveUsername = true
+        };
+        var serializer = new CsvConnectionsSerializerMremotengFormat(filter, _credentialRepositoryList);
+        var connection = BuildConnectionInfo();
+        connection.VNCProxyUsername = "synthetic-proxy-user";
+        connection.VNCProxyPassword = "synthetic-proxy-secret";
+        connection.RDGatewayUsername = "synthetic-gateway-user";
+        connection.RDGatewayPassword = "synthetic-gateway-secret";
+
+        var csv = serializer.Serialize(connection);
+
+        foreach (var secret in new[] { Username, Password, connection.VNCProxyUsername,
+                     connection.VNCProxyPassword, connection.RDGatewayUsername, connection.RDGatewayPassword })
+            Assert.That(csv, Does.Not.Contain(secret));
     }
 
     private ContainerInfo BuildContainer()
