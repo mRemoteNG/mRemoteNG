@@ -1,40 +1,41 @@
-using mRemoteNG.Security;
+﻿using mRemoteNG.Security;
 using NUnit.Framework;
 
-namespace mRemoteNGTests.Security;
-
-[TestFixture]
-public class SaveFilterTests
+namespace mRemoteNGTests.Security
 {
-    [Test]
-    public void SelectionsCannotRelaxPasswordOrUsernameLimits()
+    [TestFixture]
+    public class SaveFilterTests
     {
-        var filter = new SaveFilter(allowPasswords: false, allowUsernames: false);
-        filter.SavePassword = true;
-        filter.SaveUsername = true;
-
-        Assert.That(filter.SavePassword, Is.False);
-        Assert.That(filter.SaveUsername, Is.False);
-    }
-
-    [Test]
-    public void ExportCopyPreservesLimitsAndSelections()
-    {
-        var filter = new SaveFilter(allowPasswords: false, allowUsernames: false)
+        [Test]
+        public void SelectionsCannotRelaxPasswordOrUsernameLimits()
         {
-            SavePassword = true,
-            SaveUsername = true,
-            SaveDomain = false,
-            SaveInheritance = false
-        };
+            var filter = new SaveFilter(allowPasswords: false, allowUsernames: false);
+            filter.SavePassword = true;
+            filter.SaveUsername = true;
 
-        var export = filter.RestrictForExport();
-        export.SavePassword = true;
-        export.SaveUsername = true;
+            Assert.That(filter.SavePassword, Is.False);
+            Assert.That(filter.SaveUsername, Is.False);
+        }
 
-        Assert.That(export.SavePassword, Is.False);
-        Assert.That(export.SaveUsername, Is.False);
-        Assert.That(export.SaveDomain, Is.False);
-        Assert.That(export.SaveInheritance, Is.False);
+        [Test]
+        public void ExportCopyPreservesLimitsAndSelections()
+        {
+            var filter = new SaveFilter(allowPasswords: false, allowUsernames: false)
+            {
+                SavePassword = true,
+                SaveUsername = true,
+                SaveDomain = false,
+                SaveInheritance = false
+            };
+
+            var export = filter.RestrictForExport();
+            export.SavePassword = true;
+            export.SaveUsername = true;
+
+            Assert.That(export.SavePassword, Is.False);
+            Assert.That(export.SaveUsername, Is.False);
+            Assert.That(export.SaveDomain, Is.False);
+            Assert.That(export.SaveInheritance, Is.False);
+        }
     }
 }

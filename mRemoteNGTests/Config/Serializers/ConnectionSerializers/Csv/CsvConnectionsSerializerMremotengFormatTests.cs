@@ -140,6 +140,7 @@ public class CsvConnectionsSerializerMremotengFormatTests
             Name = ConnectionName,
             Username = Username,
             Domain = Domain,
+            //Password = Password?.ConvertToSecureString(),
             Password = Password,
             Inheritance = { Colors = true }
         };
