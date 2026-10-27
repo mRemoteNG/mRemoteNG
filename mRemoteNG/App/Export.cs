@@ -25,7 +25,7 @@ namespace mRemoteNG.App
         {
             try
             {
-                SaveFilter saveFilter = new();
+                SaveFilter saveFilter = new SaveFilter().RestrictForExport();
 
                 using (FrmExport exportForm = new())
                 {
