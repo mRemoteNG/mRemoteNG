@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.IO;
 using mRemoteNG.Config.DataProviders;
 using NUnit.Framework;
 
-namespace mRemoteNGTests.Config;
+namespace mRemoteNGTests.Config.DataProviders;
 
 [TestFixture]
 public class AtomicFileTests

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using mRemoteNG.Config;
 using mRemoteNG.Config.Connections;
@@ -7,7 +7,7 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
 
-namespace mRemoteNGTests.Security;
+namespace mRemoteNGTests.Config.Connections;
 
 public class XmlConnectionsSaveFailureTests
 {
