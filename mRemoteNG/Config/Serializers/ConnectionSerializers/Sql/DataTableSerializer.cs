@@ -331,11 +331,15 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             isFieldNotChange = isFieldNotChange && dataRow["Protocol"].Equals(connectionInfo.Protocol.ToString());
             isFieldNotChange = isFieldNotChange && dataRow["PuttySession"].Equals(connectionInfo.PuttySession);
             isFieldNotChange = isFieldNotChange && dataRow["RDGatewayDomain"].Equals(connectionInfo.RDGatewayDomain);
-            isFieldNotChange = isFieldNotChange && dataRow["RDGatewayExternalCredentialProvider"].Equals(connectionInfo.RDGatewayExternalCredentialProvider);
+            isFieldNotChange = isFieldNotChange &&
+                               (!dataRow.Table.Columns.Contains("RDGatewayExternalCredentialProvider")
+                                   || dataRow["RDGatewayExternalCredentialProvider"].Equals(connectionInfo.RDGatewayExternalCredentialProvider));
             isFieldNotChange = isFieldNotChange && dataRow["RDGatewayHostname"].Equals(connectionInfo.RDGatewayHostname);
             isFieldNotChange = isFieldNotChange && dataRow["RDGatewayUsageMethod"].Equals(connectionInfo.RDGatewayUsageMethod.ToString());
             isFieldNotChange = isFieldNotChange && dataRow["RDGatewayUseConnectionCredentials"].Equals(connectionInfo.RDGatewayUseConnectionCredentials.ToString());
-            isFieldNotChange = isFieldNotChange && dataRow["RDGatewayUserViaAPI"].Equals(connectionInfo.RDGatewayUserViaAPI);
+            isFieldNotChange = isFieldNotChange &&
+                               (!dataRow.Table.Columns.Contains("RDGatewayUserViaAPI")
+                                   || dataRow["RDGatewayUserViaAPI"].Equals(connectionInfo.RDGatewayUserViaAPI));
             isFieldNotChange = isFieldNotChange && dataRow["RDGatewayUsername"].Equals(connectionInfo.RDGatewayUsername);
             isFieldNotChange = isFieldNotChange && dataRow["RDPAlertIdleTimeout"].Equals(connectionInfo.RDPAlertIdleTimeout);
             isFieldNotChange = isFieldNotChange && dataRow["RDPAuthenticationLevel"].Equals(connectionInfo.RDPAuthenticationLevel.ToString());
@@ -628,7 +632,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataRow["UseRestrictedAdmin"] = connectionInfo.UseRestrictedAdmin;
             dataRow["UseVmId"] = connectionInfo.UseVmId;
             dataRow["UserField"] = connectionInfo.UserField;
-            dataRow["EnvironmentTags"] = connectionInfo.EnvironmentTags;
+            if (dataRow.Table.Columns.Contains("EnvironmentTags"))
+                dataRow["EnvironmentTags"] = connectionInfo.EnvironmentTags;
             dataRow["Username"] = _saveFilter.SaveUsername ? connectionInfo.Username : "";
             dataRow["VNCAuthMode"] = connectionInfo.VNCAuthMode;
             dataRow["VNCColors"] = connectionInfo.VNCColors;
@@ -708,7 +713,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 dataRow["InheritUseRestrictedAdmin"] = connectionInfo.Inheritance.UseRestrictedAdmin;
                 dataRow["InheritUseVmId"] = connectionInfo.Inheritance.UseVmId;
                 dataRow["InheritUserField"] = connectionInfo.Inheritance.UserField;
-                dataRow["InheritEnvironmentTags"] = connectionInfo.Inheritance.EnvironmentTags;
+                if (dataRow.Table.Columns.Contains("InheritEnvironmentTags"))
+                    dataRow["InheritEnvironmentTags"] = connectionInfo.Inheritance.EnvironmentTags;
                 dataRow["InheritUserViaAPI"] = connectionInfo.Inheritance.UserViaAPI;
                 dataRow["InheritUsername"] = connectionInfo.Inheritance.Username;
                 dataRow["InheritVNCAuthMode"] = connectionInfo.Inheritance.VNCAuthMode;
@@ -787,7 +793,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 dataRow["InheritUseRCG"] = false;
                 dataRow["InheritUseRestrictedAdmin"] = false;
                 dataRow["InheritUserField"] = false;
-                dataRow["InheritEnvironmentTags"] = false;
+                if (dataRow.Table.Columns.Contains("InheritEnvironmentTags"))
+                    dataRow["InheritEnvironmentTags"] = false;
                 dataRow["InheritUserViaAPI"] = false;
                 dataRow["InheritUsername"] = false;
                 dataRow["InheritVNCAuthMode"] = false;
