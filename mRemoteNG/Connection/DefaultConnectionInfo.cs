@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Configuration;
 using System.Runtime.Versioning;
 using mRemoteNG.App;
@@ -24,7 +25,7 @@ namespace mRemoteNG.Connection
             if (propertyNameMutator == null)
                 propertyNameMutator = a => a;
 
-            System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> connectionProperties = GetSerializableProperties();
+            System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> connectionProperties = GetPropertiesWithADefault();
             foreach (System.Reflection.PropertyInfo property in connectionProperties)
             {
                 try
@@ -51,12 +52,18 @@ namespace mRemoteNG.Connection
             }
         }
 
+        // A property that cannot be set, such as PluginProperties, has no default to load or save.
+        private System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> GetPropertiesWithADefault()
+        {
+            return GetSerializableProperties().Where(property => property.CanWrite);
+        }
+
         public void SaveTo<TDestination>(TDestination destinationInstance, Func<string, string> propertyNameMutator = null)
         {
             if (propertyNameMutator == null)
                 propertyNameMutator = (a) => a;
 
-            System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> connectionProperties = GetSerializableProperties();
+            System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> connectionProperties = GetPropertiesWithADefault();
 
             foreach (System.Reflection.PropertyInfo property in connectionProperties)
             {

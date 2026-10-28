@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Linq;
 using mRemoteNG.Connection;
+using mRemoteNG.Properties;
 using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
 
@@ -63,9 +65,16 @@ namespace mRemoteNGTests.Connection
             Assert.That(valueInDestination, Is.EqualTo(valueInSource));
         }
 
+		[TestCaseSource(nameof(GetConnectionInfoProperties))]
+		public void EveryPropertyHasASettingForItsDefault(PropertyInfo property)
+		{
+			Assert.That(typeof(Settings).GetProperty("ConDefault" + property.Name), Is.Not.Null);
+		}
+
+		// A property that cannot be set, such as PluginProperties, has no default.
 		private static IEnumerable<PropertyInfo> GetConnectionInfoProperties()
 	    {
-			return new ConnectionInfo().GetSerializableProperties();
+			return new ConnectionInfo().GetSerializableProperties().Where(property => property.CanWrite);
 	    }
     }
 }
