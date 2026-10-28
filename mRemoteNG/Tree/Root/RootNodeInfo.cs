@@ -14,6 +14,7 @@ namespace mRemoteNG.Tree.Root
     {
         private string _name;
         private string _customPassword = "";
+        private bool _password;
 
         public RootNodeInfo(RootNodeType rootType, string uniqueId)
             : base(uniqueId)
@@ -39,7 +40,7 @@ namespace mRemoteNG.Tree.Root
         public override string Name
         {
             get => _name;
-            set => _name = value;
+            set => SetField(ref _name, value, nameof(Name));
         }
         
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous)),
@@ -47,7 +48,11 @@ namespace mRemoteNG.Tree.Root
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.PasswordProtect)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPasswordProtect)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
-        public new bool Password { get; set; }
+        public new bool Password
+        {
+            get => _password;
+            set => SetField(ref _password, value, nameof(Password));
+        }
 
         [Browsable(false)]
         public string PasswordString
@@ -55,7 +60,7 @@ namespace mRemoteNG.Tree.Root
             get => (Password && !string.IsNullOrEmpty(_customPassword)) ? _customPassword : DefaultPassword;
             set
             {
-                _customPassword = value;
+                SetField(ref _customPassword, value, nameof(PasswordString));
                 Password = !string.IsNullOrEmpty(value) && _customPassword != DefaultPassword;
             }
         }

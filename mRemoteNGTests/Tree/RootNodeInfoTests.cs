@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Tree;
+﻿using System.Collections.Generic;
+using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
 using NUnit.Framework;
@@ -14,6 +15,67 @@ namespace mRemoteNGTests.Tree
         public void Setup()
         {
             _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
+        }
+
+        // The connection file is saved when the tree raises PropertyChanged (see
+        // SaveConnectionsOnEdit). Without these notifications a master password change
+        // never reaches disk, leaving the file encrypted with the built-in default key
+        // while the UI reports the change as applied. See issue #3418.
+        [Test]
+        public void SettingPasswordRaisesPropertyChanged()
+        {
+            var changed = new List<string>();
+            _rootNodeInfo.PropertyChanged += (_, args) => changed.Add(args.PropertyName);
+
+            _rootNodeInfo.Password = true;
+
+            Assert.That(changed, Does.Contain(nameof(RootNodeInfo.Password)));
+        }
+
+        [Test]
+        public void SettingPasswordStringRaisesPropertyChanged()
+        {
+            var changed = new List<string>();
+            _rootNodeInfo.PropertyChanged += (_, args) => changed.Add(args.PropertyName);
+
+            _rootNodeInfo.PasswordString = "a-new-master-password";
+
+            Assert.That(changed, Does.Contain(nameof(RootNodeInfo.PasswordString)));
+        }
+
+        [Test]
+        public void ClearingPasswordStringRaisesPropertyChanged()
+        {
+            _rootNodeInfo.PasswordString = "a-new-master-password";
+            var changed = new List<string>();
+            _rootNodeInfo.PropertyChanged += (_, args) => changed.Add(args.PropertyName);
+
+            _rootNodeInfo.PasswordString = "";
+
+            Assert.That(changed, Does.Contain(nameof(RootNodeInfo.PasswordString)));
+        }
+
+        [Test]
+        public void RenamingRaisesPropertyChanged()
+        {
+            var changed = new List<string>();
+            _rootNodeInfo.PropertyChanged += (_, args) => changed.Add(args.PropertyName);
+
+            _rootNodeInfo.Name = "Renamed root";
+
+            Assert.That(changed, Does.Contain(nameof(RootNodeInfo.Name)));
+        }
+
+        [Test]
+        public void SettingAnUnchangedValueRaisesNothing()
+        {
+            _rootNodeInfo.PasswordString = "same";
+            var changed = new List<string>();
+            _rootNodeInfo.PropertyChanged += (_, args) => changed.Add(args.PropertyName);
+
+            _rootNodeInfo.PasswordString = "same";
+
+            Assert.That(changed, Is.Empty);
         }
 
         [Test]
