@@ -121,7 +121,32 @@ namespace mRemoteNG.Config.Settings
                 }
             }
 
+            // 1.76 opened a connections file kept elsewhere through LoadConsFromCustomLocation and
+            // CustomConsPath; later versions open the one in ConnectionFilePath.
+            string? customConnectionsFile = CustomConnectionsFile(section);
+            if (customConnectionsFile != null)
+            {
+                foreach (ApplicationSettingsBase target in classes)
+                {
+                    if (target.Properties["ConnectionFilePath"] == null) continue;
+                    target["ConnectionFilePath"] = customConnectionsFile;
+                    count++;
+                }
+            }
+
             return count;
+        }
+
+        private static string? CustomConnectionsFile(XElement section)
+        {
+            string? Value(string name) => section.Elements("setting")
+                .FirstOrDefault(s => (string?)s.Attribute("name") == name)?.Element("value")?.Value;
+
+            string? path = Value("CustomConsPath");
+            return string.Equals(Value("LoadConsFromCustomLocation"), "True", StringComparison.OrdinalIgnoreCase)
+                   && !string.IsNullOrWhiteSpace(path)
+                ? path
+                : null;
         }
     }
 }

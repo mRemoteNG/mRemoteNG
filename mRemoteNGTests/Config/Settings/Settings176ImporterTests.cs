@@ -145,6 +145,28 @@ namespace mRemoteNGTests.Config.Settings
         }
 
         [Test]
+        public void AConnectionsFileKeptElsewhereIsOpenedFromThere()
+        {
+            string file = WriteUserConfig(Setting("LoadConsFromCustomLocation", "True"), Setting("CustomConsPath", @"\\server\team\confCons.xml"));
+            ConnectionsLikeSettings connections = new();
+
+            Settings176Importer.Import(file, [connections], _root);
+
+            Assert.That(connections.ConnectionFilePath, Is.EqualTo(@"\\server\team\confCons.xml"));
+        }
+
+        [Test]
+        public void ACustomPathThatWasNotInUseIsNotOpened()
+        {
+            string file = WriteUserConfig(Setting("LoadConsFromCustomLocation", "False"), Setting("CustomConsPath", @"D:\old\confCons.xml"));
+            ConnectionsLikeSettings connections = new();
+
+            Settings176Importer.Import(file, [connections], _root);
+
+            Assert.That(connections.ConnectionFilePath, Is.Empty);
+        }
+
+        [Test]
         public void AFileWithoutThe176SectionImportsNothing()
         {
             string file = Path.Combine(_root, "user.config");
@@ -211,6 +233,16 @@ namespace mRemoteNGTests.Config.Settings
             {
                 get => (int)this[nameof(AutoSaveEveryMinutes)];
                 set => this[nameof(AutoSaveEveryMinutes)] = value;
+            }
+        }
+
+        private sealed class ConnectionsLikeSettings : ApplicationSettingsBase
+        {
+            [UserScopedSetting, DefaultSettingValue("")]
+            public string ConnectionFilePath
+            {
+                get => (string)this[nameof(ConnectionFilePath)];
+                set => this[nameof(ConnectionFilePath)] = value;
             }
         }
 
