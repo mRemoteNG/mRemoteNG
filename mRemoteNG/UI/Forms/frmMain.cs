@@ -49,7 +49,23 @@ namespace mRemoteNG.UI.Forms
         private static readonly Lazy<FrmMain> s_default =
             new(InitializeOnSta, LazyThreadSafetyMode.ExecutionAndPublication);
 
-        public static FrmMain Default => s_default.Value;
+        public static FrmMain Default => GetDefault();
+
+        // The thread is checked before the Lazy runs. In ExecutionAndPublication mode a Lazy keeps
+        // the exception its factory throws, so one call from the wrong thread would otherwise
+        // leave FrmMain.Default failing for the rest of the process, whatever thread asks next.
+        private static FrmMain GetDefault()
+        {
+            if (!s_default.IsValueCreated && !CanBeCreatedOnThisThread())
+                throw new ThreadStateException("FrmMain must be created on an STA thread.");
+            return s_default.Value;
+        }
+
+        private static bool CanBeCreatedOnThisThread()
+        {
+            return Thread.CurrentThread.GetApartmentState() == ApartmentState.STA ||
+                   SynchronizationContext.Current is WindowsFormsSynchronizationContext;
+        }
 
         public static bool IsCreated => s_default.IsValueCreated;
 
