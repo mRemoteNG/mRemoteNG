@@ -170,10 +170,21 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                             parentContainer.AddChild(connectionInfo);
                             break;
                         case TreeNodeType.Container:
-                            ContainerInfo containerInfo = new();
+                            ContainerInfo containerInfo;
 
                             if (_confVersion >= 0.9)
-                                containerInfo.CopyFrom(GetConnectionInfoFromXml(xmlNode));
+                            {
+                                // Built with the Id from the file: CopyFrom cannot carry the read-only
+                                // ConstantID, so a folder created first and filled in afterwards got a
+                                // new Id on every load.
+                                ConnectionInfo folderInfo = GetConnectionInfoFromXml(xmlNode);
+                                containerInfo = new ContainerInfo(folderInfo.ConstantID);
+                                containerInfo.CopyFrom(folderInfo);
+                            }
+                            else
+                            {
+                                containerInfo = new ContainerInfo();
+                            }
                             if (_confVersion >= 0.8)
                             {
                                 containerInfo.IsExpanded = xmlNode.GetAttributeAsBool("Expanded");
