@@ -51,6 +51,22 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
         }
 
         [Test]
+        public void FileFromAnExportWithTheMergedRedirectHeaderIsReadInPlace()
+        {
+            var original = GetTestConnection();
+            var csv = _serializer.Serialize(original);
+            var olderExport = csv.Replace("RedirectDiskDrivesCustom;RedirectPorts;", "RedirectDiskDrivesCustomRedirectPorts;");
+            Assume.That(olderExport, Is.Not.EqualTo(csv));
+
+            var connection = _deserializer.Deserialize(olderExport).GetRecursiveChildList().First();
+
+            Assert.That(connection.RedirectPorts, Is.EqualTo(original.RedirectPorts));
+            Assert.That(connection.RedirectSound, Is.EqualTo(original.RedirectSound));
+            Assert.That(connection.VNCProxyPort, Is.EqualTo(original.VNCProxyPort));
+            Assert.That(connection.EC2Region, Is.EqualTo(original.EC2Region));
+        }
+
+        [Test]
         public void TreeStructureDeserializedCorrectly()
         {
             //Root

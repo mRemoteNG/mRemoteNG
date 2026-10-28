@@ -30,7 +30,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             {
                 string[] line = lines[lineNumber].Split(';');
                 if (lineNumber == 0)
-                    csvHeaders = line.ToList();
+                    csvHeaders = ReadHeaders(line);
                 else
                 {
                     ConnectionInfo connectionInfo = ParseConnectionInfo(csvHeaders, line);
@@ -42,6 +42,28 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             ConnectionTreeModel connectionTreeModel = new();
             connectionTreeModel.AddRootNode(root);
             return connectionTreeModel;
+        }
+
+        // Exports from 2023 to 2026 wrote this for two columns, a separator missing between them,
+        // while every row still had a value for each. Read as two, the columns after it line up again.
+        private const string MergedRedirectHeader = "RedirectDiskDrivesCustomRedirectPorts";
+
+        private static List<string> ReadHeaders(string[] headerLine)
+        {
+            List<string> headers = new();
+            foreach (string header in headerLine)
+            {
+                if (header == MergedRedirectHeader)
+                {
+                    headers.Add("RedirectDiskDrivesCustom");
+                    headers.Add("RedirectPorts");
+                }
+                else
+                {
+                    headers.Add(header);
+                }
+            }
+            return headers;
         }
 
         private RootNodeInfo CreateTreeStructure(Dictionary<ConnectionInfo, string> parentMapping)
