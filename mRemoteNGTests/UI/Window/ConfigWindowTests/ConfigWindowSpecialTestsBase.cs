@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.UI.Window;
@@ -28,7 +29,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             ConfigWindow.SelectedTreeNode = ConnectionInfo;
             Assert.That(
                 ConfigWindow.VisibleObjectProperties,
-                Is.EquivalentTo(ExpectedPropertyList));
+                Is.EquivalentTo(ExpectedPropertyList.Concat(ConfigWindowGeneralTests.PluginPropertiesFor(ConnectionInfo))));
         }
     }
 }
