@@ -25,7 +25,7 @@ RDP 6
 	* - Use Console Session
 	  - Connect to the console session of the remote host
 	* - Server Authentication
-	  - When connecting, RDP clients attempt to authenticate the remote server to ensure that it is who you expect. This option allows you to select how to handle authentication failures. The possible values are ``Always connect, even if authentication fails``, ``Don't connect if authentication fails``, ``Warn me if authentication fails``.
+	  - When connecting, RDP clients attempt to authenticate the remote server to ensure that it is who you expect. This option allows you to select how to handle authentication failures. The possible values are ``Always connect, even if authentication fails``, ``Don't connect if authentication fails``, ``Warn me if authentication fails``. A new installation starts with ``Warn me if authentication fails``, as the Windows Remote Desktop client does.
 	* - Minute to Idle
 	  - Allows you to specify the number of minutes an RDP connection can sit idle before automatically being disconnected. A value of ``0`` means the connection will never disconnect due to inactivity.
 	* - Load Balance Info
