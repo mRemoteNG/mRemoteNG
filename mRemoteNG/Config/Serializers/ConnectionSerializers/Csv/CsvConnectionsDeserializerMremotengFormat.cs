@@ -134,11 +134,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             if (headers.Contains("TabColor"))
                 connectionRecord.TabColor = connectionCsv[headers.IndexOf("TabColor")];
 
-            if (headers.Contains("ConnectionFrameColor"))
-            {
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("ConnectionFrameColor")], out ConnectionFrameColor value))
-                    connectionRecord.ConnectionFrameColor = value;
-            }
+            if (headers.Contains("ConnectionFrameColor") &&
+                Enum.TryParse(connectionCsv[headers.IndexOf("ConnectionFrameColor")], out ConnectionFrameColor frameColor))
+                connectionRecord.ConnectionFrameColor = frameColor;
 
             if (headers.Contains("Color"))
                 connectionRecord.Color = connectionCsv[headers.IndexOf("Color")];
@@ -627,23 +625,17 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.Inheritance.Panel = value;
             }
 
-            if (headers.Contains("InheritTabColor"))
-            {
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritTabColor")], out bool value))
-                    connectionRecord.Inheritance.TabColor = value;
-            }
+            if (headers.Contains("InheritTabColor") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritTabColor")], out bool inheritTabColor))
+                connectionRecord.Inheritance.TabColor = inheritTabColor;
 
-            if (headers.Contains("InheritConnectionFrameColor"))
-            {
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritConnectionFrameColor")], out bool value))
-                    connectionRecord.Inheritance.ConnectionFrameColor = value;
-            }
+            if (headers.Contains("InheritConnectionFrameColor") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritConnectionFrameColor")], out bool inheritConnectionFrameColor))
+                connectionRecord.Inheritance.ConnectionFrameColor = inheritConnectionFrameColor;
 
-            if (headers.Contains("InheritColor"))
-            {
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritColor")], out bool value))
-                    connectionRecord.Inheritance.Color = value;
-            }
+            if (headers.Contains("InheritColor") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritColor")], out bool inheritColor))
+                connectionRecord.Inheritance.Color = inheritColor;
 
             if (headers.Contains("InheritPassword"))
             {
@@ -987,11 +979,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.Inheritance.RDGatewayDomain = value;
             }
 
-            if (headers.Contains("InheritRDGatewayAccessToken"))
-            {
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayAccessToken")], out bool value))
-                    connectionRecord.Inheritance.RDGatewayAccessToken = value;
-            }
+            if (headers.Contains("InheritRDGatewayAccessToken") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayAccessToken")], out bool inheritRDGatewayAccessToken))
+                connectionRecord.Inheritance.RDGatewayAccessToken = inheritRDGatewayAccessToken;
 
             if (headers.Contains("InheritRDGatewayExternalCredentialProvider"))
             {
