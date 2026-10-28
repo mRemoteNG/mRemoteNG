@@ -55,7 +55,7 @@ namespace mRemoteNG.App.Initialization
                 string target = Path.Combine(newFolder, Path.GetRelativePath(oldFolder, file));
                 if (File.Exists(target)) continue;
 
-                Directory.CreateDirectory(Path.GetDirectoryName(target)!);
+                Directory.CreateDirectory(Path.GetDirectoryName(target));
                 File.Copy(file, target);
                 copied++;
             }
