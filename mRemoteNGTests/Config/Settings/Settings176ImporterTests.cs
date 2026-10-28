@@ -35,13 +35,13 @@ namespace mRemoteNGTests.Config.Settings
         [Test]
         public void EachValueLandsInTheClassThatHoldsItNow()
         {
-            string file = WriteUserConfig(Setting("ThemeName", "vs2015dark"), Setting("SingleInstance", "True"));
+            string file = WriteUserConfig(Setting("ThemeName", "My own theme"), Setting("SingleInstance", "True"));
             ThemeLikeSettings theme = new();
             StartupLikeSettings startup = new();
 
             int imported = Settings176Importer.Import(file, [theme, startup], _root);
 
-            Assert.That(theme.ThemeName, Is.EqualTo("vs2015dark"));
+            Assert.That(theme.ThemeName, Is.EqualTo("My own theme"));
             Assert.That(startup.SingleInstance, Is.True);
             Assert.That(imported, Is.EqualTo(2));
         }
@@ -128,6 +128,20 @@ namespace mRemoteNGTests.Config.Settings
             Settings176Importer.Import(file, [startup], _root);
 
             Assert.That(startup.LogFilePath, Is.EqualTo(@"D:\logs\mremoteng.log"));
+        }
+
+        [TestCase("vs2015dark", "vs2015darkNG")]
+        [TestCase("darcula", "darculaNG")]
+        [TestCase("vs2015light", "vs2015lightNG")]
+        [TestCase("My own theme", "My own theme")]
+        public void TheThemesOf176AreFoundUnderTheirNewNames(string oldName, string newName)
+        {
+            string file = WriteUserConfig(Setting("ThemeName", oldName));
+            ThemeLikeSettings theme = new();
+
+            Settings176Importer.Import(file, [theme], _root);
+
+            Assert.That(theme.ThemeName, Is.EqualTo(newName));
         }
 
         [Test]

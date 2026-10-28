@@ -28,6 +28,19 @@ namespace mRemoteNG.Config.Settings
             "UpdatePending",
         };
 
+        /// <summary>
+        /// The themes 1.76 loaded from its .vstheme files under their own names. Later versions
+        /// add "NG" to them, to tell them from the DockPanelSuite themes of the same name, and
+        /// treat the old name as an invalid theme.
+        /// </summary>
+        private static readonly Dictionary<string, string> RenamedThemes = new(StringComparer.Ordinal)
+        {
+            ["vs2015light"] = "vs2015lightNG",
+            ["vs2015dark"] = "vs2015darkNG",
+            ["vs2015blue"] = "vs2015blueNG",
+            ["darcula"] = "darculaNG",
+        };
+
         /// <summary>The user.config of the newest 1.76 found, or null.</summary>
         public static string? FindNewestUserConfig(string localAppData)
         {
@@ -83,6 +96,8 @@ namespace mRemoteNG.Config.Settings
                 // 1.76 wrote its default log path into the file; this version logs elsewhere.
                 if (name == "LogFilePath" && serialized.StartsWith(oldDataFolder, StringComparison.OrdinalIgnoreCase))
                     continue;
+                if (name == "ThemeName" && RenamedThemes.TryGetValue(serialized, out string? themeName))
+                    serialized = themeName;
 
                 foreach (ApplicationSettingsBase target in classes)
                 {
