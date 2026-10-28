@@ -37,12 +37,9 @@ namespace mRemoteNGTests.Tools
             setProcessPropertiesMethod?.Invoke(externalTool, new object[] { process, connectionInfo });
 
             // Assert
-            // The arguments should contain the password with the equals sign
-            // It may be escaped (e.g., Z-3^=Wv99/Aq), but should not be split
-            Assert.That(process.StartInfo.Arguments, Does.Contain("Z-3"));
-            Assert.That(process.StartInfo.Arguments, Does.Contain("Wv99/Aq"));
-            // The equals sign should be present (possibly escaped as ^=)
-            Assert.That(process.StartInfo.Arguments, Does.Match("Z-3.=Wv99/Aq"));
+            // Not elevated, the arguments go one by one into ArgumentList. The equals sign is not
+            // a shell metacharacter, so the password arrives whole and unescaped, in one argument.
+            Assert.That(process.StartInfo.ArgumentList, Does.Contain("Z-3=Wv99/Aq"));
         }
 
         [Test]
@@ -73,8 +70,9 @@ namespace mRemoteNGTests.Tools
 
             // Assert
             // The password should be present in the arguments (possibly escaped)
-            Assert.That(process.StartInfo.Arguments, Does.Contain("P@ss"));
-            Assert.That(process.StartInfo.Arguments, Does.Contain("W0rd"));
+            var arguments = string.Join(" ", process.StartInfo.ArgumentList);
+            Assert.That(arguments, Does.Contain("P@ss"));
+            Assert.That(arguments, Does.Contain("W0rd"));
         }
 
         [Test]
@@ -105,7 +103,7 @@ namespace mRemoteNGTests.Tools
             setProcessPropertiesMethod?.Invoke(externalTool, new object[] { process, connectionInfo });
 
             // Assert
-            var arguments = process.StartInfo.Arguments;
+            var arguments = string.Join(" ", process.StartInfo.ArgumentList);
             Assert.That(arguments, Does.Contain("myhost.com"));
             Assert.That(arguments, Does.Contain("8080"));
             Assert.That(arguments, Does.Contain("admin"));
