@@ -66,6 +66,37 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             Assert.That(connection.EC2Region, Is.EqualTo(original.EC2Region));
         }
 
+        [TestCase("pass;word")]
+        [TestCase("say \"hi\"")]
+        [TestCase("two\r\nlines")]
+        [TestCase("\"starts with a quote")]
+        public void ValuesWithSeparatorsQuotesAndLineBreaksSurviveExportAndImport(string value)
+        {
+            var original = GetTestConnection();
+            original.Description = value;
+            original.Password = value;
+            var csv = _serializer.Serialize(original);
+
+            var connection = _deserializer.Deserialize(csv).GetRecursiveChildList().First();
+
+            Assert.That(connection.Description, Is.EqualTo(value));
+            Assert.That(connection.Password, Is.EqualTo(value));
+            Assert.That(connection.Hostname, Is.EqualTo(original.Hostname));
+            Assert.That(connection.EC2Region, Is.EqualTo(original.EC2Region));
+        }
+
+        [Test]
+        public void HandWrittenFileWithAQuotedPasswordIsImported()
+        {
+            var csv = "Name;Id;Parent;NodeType;Password;Hostname\r\n" +
+                      "SampleVM;;;Connection;\"pa;ss\"\"word\";10.100.10.111\r\n";
+
+            var connection = _deserializer.Deserialize(csv).GetRecursiveChildList().First();
+
+            Assert.That(connection.Password, Is.EqualTo("pa;ss\"word"));
+            Assert.That(connection.Hostname, Is.EqualTo("10.100.10.111"));
+        }
+
         [Test]
         public void TreeStructureDeserializedCorrectly()
         {

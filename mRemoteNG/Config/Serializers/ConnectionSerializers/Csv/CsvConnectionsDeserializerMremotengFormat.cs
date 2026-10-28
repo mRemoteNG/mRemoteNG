@@ -21,14 +21,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
     {
         public ConnectionTreeModel Deserialize(string serializedData)
         {
-            string[] lines = serializedData.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.RemoveEmptyEntries);
+            List<string[]> lines = SemicolonSeparatedValues.Parse(serializedData);
             List<string> csvHeaders = new();
             // used to map a connectioninfo to it's parent's GUID
             Dictionary<ConnectionInfo, string> parentMapping = new();
 
-            for (int lineNumber = 0; lineNumber < lines.Length; lineNumber++)
+            for (int lineNumber = 0; lineNumber < lines.Count; lineNumber++)
             {
-                string[] line = lines[lineNumber].Split(';');
+                string[] line = lines[lineNumber];
                 if (lineNumber == 0)
                     csvHeaders = ReadHeaders(line);
                 else
@@ -106,7 +106,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
             string nodeId = headers.Contains("Id")
                 ? connectionCsv[headers.IndexOf("Id")]
-                : Guid.NewGuid().ToString();
+                : string.Empty;
+            // A hand-written file may leave the Id empty, which the XML loader allows as well.
+            if (string.IsNullOrWhiteSpace(nodeId))
+                nodeId = Guid.NewGuid().ToString();
 
             ConnectionInfo connectionRecord = nodeType == TreeNodeType.Connection
                 ? new ConnectionInfo(nodeId)
