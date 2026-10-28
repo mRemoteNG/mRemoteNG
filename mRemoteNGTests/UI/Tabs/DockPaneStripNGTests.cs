@@ -440,8 +440,8 @@ namespace mRemoteNGTests.UI.Tabs
             Application.DoEvents();
 
             // The order of the tabs in the pane; DocumentsToArray lists documents in the order they were added.
-            string[] tabOrder = targetPane.DisplayingContents
-                .Cast<ConnectionTab>()
+            string[] tabOrder = targetPane.Contents
+                .OfType<ConnectionTab>()
                 .Select(tab => tab.TabText)
                 .ToArray();
 
