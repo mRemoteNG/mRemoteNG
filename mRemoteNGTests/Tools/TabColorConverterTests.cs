@@ -44,7 +44,7 @@ namespace mRemoteNGTests.Tools
         {
             var color = Color.FromArgb(255, 128, 64, 32);
             var result = _converter.ConvertFrom(color);
-            Assert.That(result, Is.EqualTo("#80401F"));
+            Assert.That(result, Is.EqualTo("#804020"));
         }
 
         [Test]
@@ -112,9 +112,11 @@ namespace mRemoteNGTests.Tools
         public void ConvertToColorFromHexString()
         {
             var colorString = "#FF0000";
-            var result = _converter.ConvertTo(colorString, typeof(Color));
+            var result = (Color)_converter.ConvertTo(colorString, typeof(Color));
             var expectedColor = Color.FromArgb(255, 255, 0, 0);
-            Assert.That(result, Is.EqualTo(expectedColor));
+            // ColorConverter returns the known color Red for #FF0000, and Color.Equals tells a
+            // named color from an ARGB one with the same value.
+            Assert.That(result.ToArgb(), Is.EqualTo(expectedColor.ToArgb()));
         }
 
         [Test]
