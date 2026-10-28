@@ -32,11 +32,23 @@ namespace mRemoteNG.Security
         internal static string Protect(string plainText, bool portable)
         {
             if (string.IsNullOrEmpty(plainText)) return "";
-            if (portable) return new LegacyRijndaelCryptographyProvider().Encrypt(plainText, Runtime.EncryptionKey);
+            if (portable) return OldForm(plainText);
 
-            byte[] protectedBytes = ProtectedData.Protect(Encoding.UTF8.GetBytes(plainText), Entropy, DataProtectionScope.CurrentUser);
-            return DpapiPrefix + Convert.ToBase64String(protectedBytes);
+            try
+            {
+                byte[] protectedBytes = ProtectedData.Protect(Encoding.UTF8.GetBytes(plainText), Entropy, DataProtectionScope.CurrentUser);
+                return DpapiPrefix + Convert.ToBase64String(protectedBytes);
+            }
+            catch (CryptographicException)
+            {
+                // DPAPI is not available in every logon session (a key-based SSH session, for one).
+                // Saving the options must not fail on that: the old form, as before.
+                return OldForm(plainText);
+            }
         }
+
+        private static string OldForm(string plainText) =>
+            new LegacyRijndaelCryptographyProvider().Encrypt(plainText, Runtime.EncryptionKey);
 
         /// <summary>
         /// The password in clear. A value protected for another user or on another machine reads
@@ -93,7 +105,9 @@ namespace mRemoteNG.Security
 
             try
             {
-                return Protect(Unprotect(stored), portable: false);
+                // Where DPAPI is not available the value stays as it is, rather than saved anew in the old form.
+                string moved = Protect(Unprotect(stored), portable: false);
+                return IsProtected(moved) ? moved : stored;
             }
             catch (EncryptionException)
             {
