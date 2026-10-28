@@ -49,19 +49,18 @@ namespace mRemoteNG.Config.Settings
 
             FileInfo? newest = null;
             Version? newestVersion = null;
-            foreach (DirectoryInfo appFolder in root.EnumerateDirectories("mRemoteNG.exe_*"))
+            // One folder per install location, one per version inside it.
+            foreach (DirectoryInfo versionFolder in root.EnumerateDirectories("mRemoteNG.exe_*")
+                                                       .SelectMany(appFolder => appFolder.EnumerateDirectories()))
             {
-                foreach (DirectoryInfo versionFolder in appFolder.EnumerateDirectories())
+                if (!Version.TryParse(versionFolder.Name, out Version? version)) continue;
+                FileInfo file = new(Path.Combine(versionFolder.FullName, "user.config"));
+                if (!file.Exists) continue;
+                if (newest == null || version > newestVersion
+                    || (version == newestVersion && file.LastWriteTimeUtc > newest.LastWriteTimeUtc))
                 {
-                    if (!Version.TryParse(versionFolder.Name, out Version? version)) continue;
-                    FileInfo file = new(Path.Combine(versionFolder.FullName, "user.config"));
-                    if (!file.Exists) continue;
-                    if (newest == null || version > newestVersion
-                        || (version == newestVersion && file.LastWriteTimeUtc > newest.LastWriteTimeUtc))
-                    {
-                        newest = file;
-                        newestVersion = version;
-                    }
+                    newest = file;
+                    newestVersion = version;
                 }
             }
 
@@ -85,56 +84,73 @@ namespace mRemoteNG.Config.Settings
 
             foreach (XElement setting in section.Elements("setting"))
             {
-                string? name = (string?)setting.Attribute("name");
-                XElement? value = setting.Element("value");
-                if (name == null || value == null || NotImported.Contains(name)) continue;
-
-                string serialized = (string?)setting.Attribute("serializeAs") == "Xml"
-                    ? string.Concat(value.Nodes())
-                    : value.Value;
-
-                // 1.76 wrote its default log path into the file; this version logs elsewhere.
-                if (name == "LogFilePath" && serialized.StartsWith(oldDataFolder, StringComparison.OrdinalIgnoreCase))
-                    continue;
-                if (name == "ThemeName" && RenamedThemes.TryGetValue(serialized, out string? themeName))
-                    serialized = themeName;
-
-                foreach (ApplicationSettingsBase target in classes)
-                {
-                    SettingsProperty? property = target.Properties[name];
-                    if (property == null) continue;
-
-                    try
-                    {
-                        // Converted the way the settings provider converts what it reads from a file.
-                        // A value it cannot read comes back as the default, flagged as such.
-                        SettingsPropertyValue converted = new(property) { SerializedValue = serialized };
-                        object? propertyValue = converted.PropertyValue;
-                        if (converted.UsingDefaultValue) continue;
-                        target[name] = propertyValue;
-                        count++;
-                    }
-                    catch (Exception)
-                    {
-                        // Or it throws; either way the option keeps its default.
-                    }
-                }
+                if (TryRead(setting, oldDataFolder, out string name, out string serialized))
+                    count += SetOnEveryClass(classes, name, serialized);
             }
 
             // 1.76 opened a connections file kept elsewhere through LoadConsFromCustomLocation and
             // CustomConsPath; later versions open the one in ConnectionFilePath.
             string? customConnectionsFile = CustomConnectionsFile(section);
             if (customConnectionsFile != null)
+                count += SetOnEveryClass(classes, "ConnectionFilePath", customConnectionsFile);
+
+            return count;
+        }
+
+        /// <summary>
+        /// The option's name and its value as the settings provider would read it from a file;
+        /// false for an option that is not imported.
+        /// </summary>
+        private static bool TryRead(XElement setting, string oldDataFolder, out string name, out string serialized)
+        {
+            name = (string?)setting.Attribute("name") ?? "";
+            serialized = "";
+            XElement? value = setting.Element("value");
+            if (name.Length == 0 || value == null || NotImported.Contains(name)) return false;
+
+            serialized = (string?)setting.Attribute("serializeAs") == "Xml"
+                ? string.Concat(value.Nodes())
+                : value.Value;
+
+            // 1.76 wrote its default log path into the file; this version logs elsewhere.
+            if (name == "LogFilePath" && serialized.StartsWith(oldDataFolder, StringComparison.OrdinalIgnoreCase))
+                return false;
+            if (name == "ThemeName" && RenamedThemes.TryGetValue(serialized, out string? themeName))
+                serialized = themeName;
+            return true;
+        }
+
+        /// <returns>The number of classes the option was set on.</returns>
+        private static int SetOnEveryClass(List<ApplicationSettingsBase> classes, string name, string serialized)
+        {
+            int count = 0;
+            foreach (ApplicationSettingsBase target in classes)
             {
-                foreach (ApplicationSettingsBase target in classes)
-                {
-                    if (target.Properties["ConnectionFilePath"] == null) continue;
-                    target["ConnectionFilePath"] = customConnectionsFile;
-                    count++;
-                }
+                SettingsProperty? property = target.Properties[name];
+                if (property == null || !TryConvert(property, serialized, out object? value)) continue;
+                target[name] = value;
+                count++;
             }
 
             return count;
+        }
+
+        /// <summary>Converts the value the way the settings provider converts what it reads from a file.</summary>
+        private static bool TryConvert(SettingsProperty property, string serialized, out object? value)
+        {
+            value = null;
+            try
+            {
+                SettingsPropertyValue converted = new(property) { SerializedValue = serialized };
+                value = converted.PropertyValue;
+                // A value it cannot read comes back as the default, flagged as such.
+                return !converted.UsingDefaultValue;
+            }
+            catch (Exception)
+            {
+                // Or it throws; either way the option keeps its default.
+                return false;
+            }
         }
 
         private static string? CustomConnectionsFile(XElement section)
