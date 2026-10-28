@@ -4,6 +4,7 @@ using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Text;
 using mRemoteNG.App;
+using mRemoteNG.Messages;
 using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.Security
@@ -62,20 +63,27 @@ namespace mRemoteNG.Security
         /// <summary>
         /// Moves the passwords an earlier version saved in the old form over to DPAPI, and saves
         /// them. A value the registry sets is moved too, and set again from the registry at the
-        /// next start.
+        /// next start. Never throws: a failure is reported, and the passwords stay readable.
         /// </summary>
-        public static void ProtectStoredPasswords()
+        public static void ProtectStoredPasswords(MessageCollector messageCollector)
         {
             if (Runtime.IsPortableEdition) return;
 
-            string sql = Reprotect(Properties.OptionsDBsPage.Default.SQLPass);
-            SaveIfChanged(Properties.OptionsDBsPage.Default, nameof(Properties.OptionsDBsPage.SQLPass), sql);
+            try
+            {
+                string sql = Reprotect(Properties.OptionsDBsPage.Default.SQLPass);
+                SaveIfChanged(Properties.OptionsDBsPage.Default, nameof(Properties.OptionsDBsPage.SQLPass), sql);
 
-            string proxy = Reprotect(Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass);
-            SaveIfChanged(Properties.OptionsUpdatesPage.Default, nameof(Properties.OptionsUpdatesPage.UpdateProxyAuthPass), proxy);
+                string proxy = Reprotect(Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass);
+                SaveIfChanged(Properties.OptionsUpdatesPage.Default, nameof(Properties.OptionsUpdatesPage.UpdateProxyAuthPass), proxy);
 
-            string credentials = Reprotect(Properties.OptionsCredentialsPage.Default.DefaultPassword);
-            SaveIfChanged(Properties.OptionsCredentialsPage.Default, nameof(Properties.OptionsCredentialsPage.DefaultPassword), credentials);
+                string credentials = Reprotect(Properties.OptionsCredentialsPage.Default.DefaultPassword);
+                SaveIfChanged(Properties.OptionsCredentialsPage.Default, nameof(Properties.OptionsCredentialsPage.DefaultPassword), credentials);
+            }
+            catch (Exception ex)
+            {
+                messageCollector.AddExceptionMessage("Protecting the passwords kept in the options failed", ex);
+            }
         }
 
         /// <summary>The DPAPI form of a value in the old form; anything else as it is.</summary>

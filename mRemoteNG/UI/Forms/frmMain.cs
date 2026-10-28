@@ -35,6 +35,7 @@ using System.Linq;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Settings.Registry;
+using mRemoteNG.Security;
 using System.Threading; // ADDED
 #endregion
 
@@ -226,6 +227,8 @@ namespace mRemoteNG.UI.Forms
 
             SettingsLoader settingsLoader = new(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, msMain);
             settingsLoader.LoadSettings();
+            // A step of its own: LoadSettings stops at its first failure, and this must not depend on the rest.
+            OptionPasswords.ProtectStoredPasswords(messageCollector);
 
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters);
