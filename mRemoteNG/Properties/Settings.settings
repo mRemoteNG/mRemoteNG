@@ -234,7 +234,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ConDefaultRDPAuthenticationLevel" Type="System.String" Scope="User">
-      <Value Profile="(Default)">NoAuth</Value>
+      <Value Profile="(Default)">WarnOnFailedAuth</Value>
     </Setting>
     <Setting Name="InhDefaultRDPAuthenticationLevel" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
