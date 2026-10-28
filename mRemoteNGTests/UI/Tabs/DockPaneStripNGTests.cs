@@ -389,6 +389,8 @@ namespace mRemoteNGTests.UI.Tabs
                 Application.DoEvents();
             }, "Restoring DockAreas while still minimized must not throw");
 
+            // Closing without it asks for confirmation, and a dialog nobody answers holds the test.
+            connectionTab.protocolClose = true;
             connectionTab.Close();
             Application.DoEvents();
         });
@@ -437,8 +439,9 @@ namespace mRemoteNGTests.UI.Tabs
             ConnectionTab replacement = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "Doc2" }, targetPane, targetIndex);
             Application.DoEvents();
 
-            string[] tabOrder = connectionWindow.connDock.DocumentsToArray()
-                .Cast<ConnectionTab>()
+            // The order of the tabs in the pane; DocumentsToArray lists documents in the order they were added.
+            string[] tabOrder = targetPane.Contents
+                .OfType<ConnectionTab>()
                 .Select(tab => tab.TabText)
                 .ToArray();
 

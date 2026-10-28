@@ -28,8 +28,9 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
         {
             ListViewTester listViewTester = new("lstOptionPages", _optionsForm);
             listViewTester.Select("Startup/Exit");
-            CheckBox checkboxTester = _optionsForm.FindControl<CheckBox>("chkSaveConsOnExit");
-            Assert.That(checkboxTester.Text, Does.Match("Save connections"));
+            // Saving the connections on exit is no longer on this page.
+            CheckBox checkboxTester = _optionsForm.FindControl<CheckBox>("chkSingleInstance");
+            Assert.That(checkboxTester.Text, Does.Match("single instance"));
         }
     }
 }
