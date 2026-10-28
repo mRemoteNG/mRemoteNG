@@ -1,5 +1,4 @@
-﻿using mRemoteNG.App;
-using mRemoteNG.Security.SymmetricEncryption;
+﻿using mRemoteNG.Security;
 using System;
 using System.Runtime.Versioning;
 
@@ -15,8 +14,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
             string sqlHost = Properties.OptionsDBsPage.Default.SQLHost;
             string sqlCatalog = Properties.OptionsDBsPage.Default.SQLDatabaseName;
             string sqlUsername = Properties.OptionsDBsPage.Default.SQLUser;
-            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-            string sqlPassword = cryptographyProvider.Decrypt(Properties.OptionsDBsPage.Default.SQLPass, Runtime.EncryptionKey);
+            string sqlPassword = OptionPasswords.Unprotect(Properties.OptionsDBsPage.Default.SQLPass);
 
             return DatabaseConnector(sqlType, sqlHost, sqlCatalog, sqlUsername, sqlPassword);
         }

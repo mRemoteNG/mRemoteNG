@@ -2,7 +2,6 @@
 using mRemoteNG.Messages;
 using mRemoteNG.Resources.Language;
 using mRemoteNG.Security;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.Cmdline;
 using mRemoteNG.Tree.Root;
@@ -479,8 +478,7 @@ namespace mRemoteNG.Connection.Protocol
                         {
                             if (Properties.OptionsCredentialsPage.Default.EmptyCredentials == "custom")
                             {
-                                LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-                                password = cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
+                                password = OptionPasswords.Unprotect(Properties.OptionsCredentialsPage.Default.DefaultPassword);
                             }
                         }
 
