@@ -46,6 +46,44 @@ namespace mRemoteNGTests.UI.Forms
             Assert.That(eventFired, Is.True);
         }
 
+        [TestCase("", "")]
+        [TestCase("ab", "ab")]
+        [TestCase("new password", "different password")]
+        public void InvalidNewPasswordDoesNotAcceptDialog(string password, string confirmation)
+        {
+            _passwordForm.FindControl<TextBox>("txtPassword").Text = password;
+            _passwordForm.FindControl<TextBox>("txtVerify").Text = confirmation;
+
+            _passwordForm.FindControl<Button>("btnOK").PerformClick();
+
+            Assert.That(_passwordForm.DialogResult, Is.EqualTo(DialogResult.None));
+            Assert.That(_passwordForm.Visible, Is.True);
+            Assert.That(_passwordForm.FindControl<Label>("lblStatus").Visible, Is.True);
+        }
+
+        [Test]
+        public void MatchingNewPasswordAcceptsDialog()
+        {
+            _passwordForm.FindControl<TextBox>("txtPassword").Text = "new password";
+            _passwordForm.FindControl<TextBox>("txtVerify").Text = "new password";
+
+            _passwordForm.FindControl<Button>("btnOK").PerformClick();
+
+            Assert.That(_passwordForm.DialogResult, Is.EqualTo(DialogResult.OK));
+        }
+
+        [Test]
+        public void ExistingPasswordDoesNotRequireConfirmationOrNewPasswordLength()
+        {
+            using FrmPassword existingPasswordForm = new(newPasswordMode: false);
+            existingPasswordForm.Show();
+            existingPasswordForm.FindControl<TextBox>("txtPassword").Text = "a";
+
+            existingPasswordForm.FindControl<Button>("btnOK").PerformClick();
+
+            Assert.That(existingPasswordForm.DialogResult, Is.EqualTo(DialogResult.OK));
+        }
+
         [Test]
         public void PasswordFieldHasAutofocus()
         {
