@@ -565,6 +565,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.Inheritance.RDGatewayUserViaAPI = xmlnode.GetAttributeAsBool("InheritRDGatewayUserViaAPI");
                 }
 
+                if (_confVersion >= 2.9)
+                {
+                    connectionInfo.Color = xmlnode.GetAttributeAsString("Color");
+                    connectionInfo.Inheritance.Color = xmlnode.GetAttributeAsBool("InheritColor");
+                }
+
                 switch (_confVersion)
                 {
                     case >= 2.8:
