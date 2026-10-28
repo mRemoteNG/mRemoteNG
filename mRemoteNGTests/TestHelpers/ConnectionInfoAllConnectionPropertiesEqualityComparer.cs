@@ -21,9 +21,10 @@ namespace mRemoteNGTests.TestHelpers
 
 			unchecked // Overflow is fine, just wrap
 			{
+				// Password and the Vault properties are null until they are set.
 				return allProperties
 					.Aggregate(17, 
-						(current, prop) => current * 23 + prop.GetValue(connectionInfo).GetHashCode());
+						(current, prop) => current * 23 + (prop.GetValue(connectionInfo)?.GetHashCode() ?? 0));
 			}
 		}
 	}
