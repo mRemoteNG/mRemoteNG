@@ -51,6 +51,21 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
         }
 
         [Test]
+        public void ColoursSurviveAnExportAndAnImport()
+        {
+            var original = GetTestConnection();
+            original.Color = "#336699";
+            original.TabColor = "#AA5500";
+            original.ConnectionFrameColor = ConnectionFrameColor.Purple;
+
+            var connection = _deserializer.Deserialize(_serializer.Serialize(original)).GetRecursiveChildList().First();
+
+            Assert.That(connection.Color, Is.EqualTo("#336699"));
+            Assert.That(connection.TabColor, Is.EqualTo("#AA5500"));
+            Assert.That(connection.ConnectionFrameColor, Is.EqualTo(ConnectionFrameColor.Purple));
+        }
+
+        [Test]
         public void FileFromAnExportWithTheMergedRedirectHeaderIsReadInPlace()
         {
             var original = GetTestConnection();
