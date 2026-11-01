@@ -949,7 +949,7 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("NoAuth")]
+        [global::System.Configuration.DefaultSettingValueAttribute("WarnOnFailedAuth")]
         public string ConDefaultRDPAuthenticationLevel {
             get {
                 return ((string)(this["ConDefaultRDPAuthenticationLevel"]));
