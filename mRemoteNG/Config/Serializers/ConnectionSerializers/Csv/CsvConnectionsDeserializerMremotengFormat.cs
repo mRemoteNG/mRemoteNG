@@ -131,6 +131,16 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 ? connectionCsv[headers.IndexOf("Panel")]
                 : "";
 
+            if (headers.Contains("TabColor"))
+                connectionRecord.TabColor = connectionCsv[headers.IndexOf("TabColor")];
+
+            if (headers.Contains("ConnectionFrameColor") &&
+                Enum.TryParse(connectionCsv[headers.IndexOf("ConnectionFrameColor")], out ConnectionFrameColor frameColor))
+                connectionRecord.ConnectionFrameColor = frameColor;
+
+            if (headers.Contains("Color"))
+                connectionRecord.Color = connectionCsv[headers.IndexOf("Color")];
+
             connectionRecord.Username = headers.Contains("UserViaAPI")
                 ? connectionCsv[headers.IndexOf("UserViaAPI")]
                 : "";
@@ -615,6 +625,18 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.Inheritance.Panel = value;
             }
 
+            if (headers.Contains("InheritTabColor") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritTabColor")], out bool inheritTabColor))
+                connectionRecord.Inheritance.TabColor = inheritTabColor;
+
+            if (headers.Contains("InheritConnectionFrameColor") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritConnectionFrameColor")], out bool inheritConnectionFrameColor))
+                connectionRecord.Inheritance.ConnectionFrameColor = inheritConnectionFrameColor;
+
+            if (headers.Contains("InheritColor") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritColor")], out bool inheritColor))
+                connectionRecord.Inheritance.Color = inheritColor;
+
             if (headers.Contains("InheritPassword"))
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPassword")], out bool value))
@@ -956,6 +978,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayDomain")], out bool value))
                     connectionRecord.Inheritance.RDGatewayDomain = value;
             }
+
+            if (headers.Contains("InheritRDGatewayAccessToken") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayAccessToken")], out bool inheritRDGatewayAccessToken))
+                connectionRecord.Inheritance.RDGatewayAccessToken = inheritRDGatewayAccessToken;
 
             if (headers.Contains("InheritRDGatewayExternalCredentialProvider"))
             {
