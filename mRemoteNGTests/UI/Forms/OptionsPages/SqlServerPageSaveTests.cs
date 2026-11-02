@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -154,6 +156,31 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
             Assert.That(serverBlock.Visible, Is.True);
             Assert.That(checkBox.Bounds.IntersectsWith(serverBlock.Bounds), Is.False,
                 () => $"checkbox {checkBox.Bounds} overlaps server block {serverBlock.Bounds}");
+        }
+
+        [Test]
+        public void SimpleViewCanBeShownAgainAfterTheAdvancedView()
+        {
+            StoreSettings(true, "", "", "", "");
+            SqlServerPage page = LoadPage();
+            page.Size = new System.Drawing.Size(656, 500);
+            page.CreateControl();
+
+            Control expandButton = page.Controls.Find("btnExpandOptions", true).Single();
+            Control testButton = page.Controls.Find("btnTestConnection", true).Single();
+            Control tabs = page.Controls.Find("tabCtrlSQL", true).Single();
+            Control simpleView = page.Controls.Find("tableLayoutPanel1", true).Single();
+            MethodInfo click = typeof(SqlServerPage).GetMethod("btnExpandOptions_Click", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            click.Invoke(page, [expandButton, EventArgs.Empty]);
+            Assert.That(tabs.Visible, Is.True);
+            Assert.That(expandButton.Bounds.IntersectsWith(tabs.Bounds), Is.False, "the button back to the simple view is covered by the tabs");
+            Assert.That(testButton.Bounds.IntersectsWith(tabs.Bounds), Is.False, "Test connection is covered by the tabs");
+
+            click.Invoke(page, [expandButton, EventArgs.Empty]);
+            Assert.That(tabs.Visible, Is.False);
+            Assert.That(simpleView.Visible, Is.True);
+            Assert.That(expandButton.Bounds.IntersectsWith(simpleView.Bounds), Is.False);
         }
 
         [Test]

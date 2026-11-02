@@ -273,7 +273,21 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             _advancedOptionsVisible = !_advancedOptionsVisible;
             tabCtrlSQL.Visible = _advancedOptionsVisible;
+            tableLayoutPanel1.Visible = !_advancedOptionsVisible;
             btnExpandOptions.Text = _advancedOptionsVisible ? "<< Simple" : Language.AdvancedExpand;
+
+            // The tabs cover the simple view; keep the buttons and the test result below
+            // whichever view is shown, so that the simple view can be brought back
+            PlaceBelow(_advancedOptionsVisible ? tabCtrlSQL : tableLayoutPanel1);
+        }
+
+        private void PlaceBelow(Control view)
+        {
+            int top = view.Bottom + 6;
+            btnTestConnection.Top = top;
+            btnExpandOptions.Top = top;
+            imgConnectionStatus.Top = top + 5;
+            lblTestConnectionResults.Top = top + 5;
         }
 
         private async void btnTestConnection_Click(object sender, EventArgs e)
