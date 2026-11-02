@@ -577,6 +577,13 @@ namespace mRemoteNG.UI.Forms
                 }
             }
 
+            // Changed options would otherwise be lost without a question (#3249)
+            if (AppWindows.OptionsFormWindow?.ConfirmUnsavedChanges() == false)
+            {
+                e.Cancel = true;
+                return;
+            }
+
             ProgramRoot.UiCultureChanged -= OnUiCultureChanged;
 
             IsClosing = true;

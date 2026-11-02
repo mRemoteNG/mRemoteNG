@@ -147,29 +147,42 @@ namespace mRemoteNG.UI.Window
         /// </summary>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (_optionsForm != null && !_optionsForm.IsDisposed && _optionsForm.HasUnsavedChanges())
+            if (!ConfirmUnsavedChanges())
             {
-                DialogResult result = MessageBox.Show(
-                    Language.SaveOptionsBeforeClosing,
-                    Language.Options,
-                    MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Question);
-
-                switch (result)
-                {
-                    case DialogResult.Yes:
-                        _optionsForm.SaveAllOptions();
-                        break;
-                    case DialogResult.No:
-                        _optionsForm.DiscardChanges();
-                        break;
-                    case DialogResult.Cancel:
-                        e.Cancel = true;
-                        return;
-                }
+                e.Cancel = true;
+                return;
             }
 
             base.OnFormClosing(e);
+        }
+
+        /// <summary>
+        /// Asks whether to save the options that were changed but not saved yet, and saves or
+        /// discards them. Also called when mRemoteNG exits, which does not close this window.
+        /// </summary>
+        /// <returns>false if the user chose Cancel.</returns>
+        internal bool ConfirmUnsavedChanges()
+        {
+            if (_optionsForm == null || _optionsForm.IsDisposed || !_optionsForm.HasUnsavedChanges())
+                return true;
+
+            DialogResult result = MessageBox.Show(
+                Language.SaveOptionsBeforeClosing,
+                Language.Options,
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
+
+            switch (result)
+            {
+                case DialogResult.Yes:
+                    _optionsForm.SaveAllOptions();
+                    return true;
+                case DialogResult.No:
+                    _optionsForm.DiscardChanges();
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         public void SetActivatedPage(string pageName)

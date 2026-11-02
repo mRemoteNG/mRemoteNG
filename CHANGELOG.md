@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.78.2]
 ### Fixed
+- #3249: fixed SQL Server options saving an empty server, a replaced user name or the wrong database type, re-applying unchanged settings on OK, and losing changed options without a question when mRemoteNG exits
 - fixed the new password dialog accepting an empty, too short or mismatched password when clicking OK
 - #2154: fixed "Alert on Idle Disconnect" and "Disable Cursor Blinking" showing the labels of other RDP properties in the Config panel
 - fixed connection tree search bar ignoring the "place search bar above connection tree" setting at startup

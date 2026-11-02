@@ -1886,7 +1886,7 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Use a smart card</value>
   </data>
   <data name="UseSQLServer" xml:space="preserve">
-    <value>Use SQL Server to load &amp;&amp; save connections</value>
+    <value>Use a database to load &amp;&amp; save connections</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Current Version</value>
