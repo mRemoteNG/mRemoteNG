@@ -29,7 +29,7 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
             ListViewTester listViewTester = new("lstOptionPages", _optionsForm);
             listViewTester.Select("SQL Server");
             CheckBox checkboxTester = _optionsForm.FindControl<CheckBox>("chkUseSQLServer");
-            Assert.That(checkboxTester.Text, Does.Match("Use SQL"));
+            Assert.That(checkboxTester.Text, Does.Match("Use a database"));
         }
     }
 }
