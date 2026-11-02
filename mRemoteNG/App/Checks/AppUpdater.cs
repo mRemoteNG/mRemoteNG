@@ -4,13 +4,13 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using mRemoteNG.App.Info;
-using mRemoteNG.Security.SymmetricEncryption;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using mRemoteNG.Properties;
 using System.Runtime.Versioning;
 #if !PORTABLE
 using mRemoteNG.Tools;
+using mRemoteNG.Security;
 
 #else
 using System.Windows.Forms;
@@ -65,8 +65,7 @@ namespace mRemoteNG.App.Update
             int port = Properties.OptionsUpdatesPage.Default.UpdateProxyPort;
             bool useAuthentication = Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication;
             string username = Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser;
-            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-            string password = cryptographyProvider.Decrypt(Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass, Runtime.EncryptionKey);
+            string password = OptionPasswords.Unprotect(Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass);
 
             SetProxySettings(shouldWeUseProxy, proxyAddress, port, useAuthentication, username, password);
         }

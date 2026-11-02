@@ -3,10 +3,10 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Properties;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Settings.Registry;
+using mRemoteNG.Security;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -95,8 +95,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtSQLServer.Text = Properties.OptionsDBsPage.Default.SQLHost;
             txtSQLDatabaseName.Text = Properties.OptionsDBsPage.Default.SQLDatabaseName;
             txtSQLUsername.Text = Properties.OptionsDBsPage.Default.SQLUser;
-            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-            txtSQLPassword.Text = cryptographyProvider.Decrypt(Properties.OptionsDBsPage.Default.SQLPass, Runtime.EncryptionKey);
+            txtSQLPassword.Text = OptionPasswords.Unprotect(Properties.OptionsDBsPage.Default.SQLPass);
             chkSQLReadOnly.Checked = Properties.OptionsDBsPage.Default.SQLReadOnly;
 
             mrngTextBox2.Text = txtSQLServer.Text;
@@ -123,8 +122,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsDBsPage.Default.SQLHost = txtSQLServer.Text;
             Properties.OptionsDBsPage.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
             Properties.OptionsDBsPage.Default.SQLUser = txtSQLUsername.Text;
-            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-            Properties.OptionsDBsPage.Default.SQLPass = cryptographyProvider.Encrypt(txtSQLPassword.Text, Runtime.EncryptionKey);
+            Properties.OptionsDBsPage.Default.SQLPass = OptionPasswords.Protect(txtSQLPassword.Text);
             Properties.OptionsDBsPage.Default.SQLReadOnly = chkSQLReadOnly.Checked;
 
             if (Properties.OptionsDBsPage.Default.UseSQLServer)
