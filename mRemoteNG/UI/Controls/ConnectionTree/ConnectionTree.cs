@@ -262,8 +262,8 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             CellToolTipShowing += TvConnections_CellToolTipShowing;
             ModelCanDrop += _dragAndDropHandler.HandleEvent_ModelCanDrop;
             ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
-            BeforeLabelEdit += OnBeforeLabelEdit;
-            AfterLabelEdit += OnAfterLabelEdit;
+            CellEditStarting += OnCellEditStarting;
+            CellEditFinishing += OnCellEditFinishing;
             // ObjectListView raises FormatCell only when this is on, and Color is applied there.
             UseCellFormatEvents = true;
             FormatCell += ConnectionTree_FormatCell;
@@ -633,8 +633,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
                 SelectObject(newRoot, true);
                 EnsureModelVisible(newRoot);
-                _allowEdit = true;
-                SelectedItem.BeginEdit();
+                BeginRename();
             }
             catch (Exception ex)
             {
@@ -661,8 +660,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             ExpandWithoutAnimation(parent);
             SelectObject(newNode, true);
             EnsureModelVisible(newNode);
-            _allowEdit = true;
-            SelectedItem.BeginEdit();
+            BeginRename();
         }
 
         public void DuplicateSelectedNode()
@@ -683,8 +681,18 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             if (SelectedItem == null) return;
             _slowClickRenameHandler?.Cancel();
+            BeginRename();
+        }
+
+        // The native ListViewItem.BeginEdit() places its edit box at the native text position,
+        // while ObjectListView draws the text after the indent, expander and icon, so the box
+        // was shifted and the old name showed behind it (#3247). ObjectListView's own cell
+        // editor is placed by the tree renderer, over the text as drawn.
+        private void BeginRename()
+        {
+            if (SelectedItem == null) return;
             _allowEdit = true;
-            SelectedItem.BeginEdit();
+            StartCellEdit(SelectedItem, 0);
         }
 
         public void DeleteSelectedNode()
@@ -945,19 +953,20 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             }
         }
 
-        private void OnBeforeLabelEdit(object sender, LabelEditEventArgs e)
+        private void OnCellEditStarting(object sender, CellEditEventArgs e)
         {
-            if (_nodeInEditMode || sender is not ConnectionTree)
+            if (_nodeInEditMode)
                 return;
 
-            if (!_allowEdit || SelectedNode is PuttySessionInfo || SelectedNode is RootPuttySessionsNodeInfo)
+            if (!_allowEdit || e.RowObject is PuttySessionInfo || e.RowObject is RootPuttySessionsNodeInfo)
             {
-                e.CancelEdit = true;
+                e.Cancel = true;
+                _allowEdit = false;
                 return;
             }
 
             _nodeInEditMode = true;
-            _contextMenu.DisableShortcutKeys();
+            _contextMenu?.DisableShortcutKeys();
         }
 
         private void ConnectionTree_FormatCell(object sender, FormatCellEventArgs e)
@@ -981,15 +990,24 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             }
         }
 
-        private void OnAfterLabelEdit(object sender, LabelEditEventArgs e)
+        private void OnCellEditFinishing(object sender, CellEditEventArgs e)
         {
             if (!_nodeInEditMode)
                 return;
 
+            // e.Cancel is set when the user pressed Escape. Otherwise the name is applied here,
+            // through RenameNode, instead of ObjectListView writing it into the model directly.
+            string newName = e.Cancel ? null : e.NewValue as string;
+            e.Cancel = true;
+
             try
             {
-                _contextMenu.EnableShortcutKeys();
-                ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
+                _contextMenu?.EnableShortcutKeys();
+                if (e.RowObject is ConnectionInfo connectionInfo)
+                {
+                    ConnectionTreeModel.RenameNode(connectionInfo, newName);
+                    RefreshObject(connectionInfo);
+                }
                 _nodeInEditMode = false;
                 _allowEdit = false;
                 _slowClickRenameHandler?.Cancel();
@@ -1000,7 +1018,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("ConnectionTree.OnCellEditFinishing failed", ex);
             }
         }
 

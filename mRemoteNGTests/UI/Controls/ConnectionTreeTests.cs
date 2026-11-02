@@ -368,6 +368,91 @@ namespace mRemoteNGTests.UI.Controls
 	        Assert.DoesNotThrow(() => _connectionTree.RenameSelectedNode());
         }
 
+        // Rename uses ObjectListView's cell editor, which is placed over the text as the tree
+        // draws it; the native label edit box was shifted and left the old name visible (#3247)
+        private (Form host, ConnectionInfo connection) ShowTreeWithNestedConnection()
+        {
+            var connectionTreeModel = new ConnectionTreeModel();
+            var root = new RootNodeInfo(RootNodeType.Connection);
+            var folder = new ContainerInfo { Name = "folder" };
+            var connection = new ConnectionInfo { Name = "old name" };
+            root.AddChild(folder);
+            folder.AddChild(connection);
+            connectionTreeModel.AddRootNode(root);
+
+            var host = new Form { Width = 400, Height = 300, ShowInTaskbar = false };
+            _connectionTree.Dock = DockStyle.Fill;
+            host.Controls.Add(_connectionTree);
+            host.Show();
+            _connectionTree.ConnectionTreeModel = connectionTreeModel;
+            _connectionTree.ExpandAll();
+            _connectionTree.SelectObject(connection, true);
+            Application.DoEvents();
+            return (host, connection);
+        }
+
+        private TextBox CellEditor() => _connectionTree.Controls.OfType<TextBox>().SingleOrDefault();
+
+        [Test]
+        [Apartment(ApartmentState.STA)]
+        public void RenameOpensTheTreesOwnEditorWithTheCurrentName()
+        {
+            var (host, _) = ShowTreeWithNestedConnection();
+            using (host)
+            {
+                _connectionTree.RenameSelectedNode();
+
+                Assert.That(_connectionTree.IsCellEditing, Is.True);
+                Assert.That(CellEditor()?.Text, Is.EqualTo("old name"));
+                _connectionTree.CancelCellEdit();
+            }
+        }
+
+        [Test]
+        [Apartment(ApartmentState.STA)]
+        public void FinishingTheRenameSetsTheNewName()
+        {
+            var (host, connection) = ShowTreeWithNestedConnection();
+            using (host)
+            {
+                _connectionTree.RenameSelectedNode();
+                CellEditor().Text = "new name";
+                _connectionTree.FinishCellEdit();
+
+                Assert.That(connection.Name, Is.EqualTo("new name"));
+                Assert.That(_connectionTree.IsCellEditing, Is.False);
+            }
+        }
+
+        [Test]
+        [Apartment(ApartmentState.STA)]
+        public void CancellingTheRenameKeepsTheOldName()
+        {
+            var (host, connection) = ShowTreeWithNestedConnection();
+            using (host)
+            {
+                _connectionTree.RenameSelectedNode();
+                CellEditor().Text = "new name";
+                _connectionTree.CancelCellEdit();
+
+                Assert.That(connection.Name, Is.EqualTo("old name"));
+            }
+        }
+
+        [Test]
+        [Apartment(ApartmentState.STA)]
+        public void CellEditCanOnlyStartThroughRename()
+        {
+            var (host, _) = ShowTreeWithNestedConnection();
+            using (host)
+            {
+                // without a rename request, starting an edit is refused, as BeforeLabelEdit did
+                _connectionTree.StartCellEdit(_connectionTree.SelectedItem, 0);
+
+                Assert.That(_connectionTree.IsCellEditing, Is.False);
+            }
+        }
+
         [Test]
         [Apartment(ApartmentState.STA)]
         public void CopyHostnameCopiesTheHostnameOfTheSelectedConnection()
