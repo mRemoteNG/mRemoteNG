@@ -140,6 +140,23 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
         }
 
         [Test]
+        public void UseSqlServerCheckboxDoesNotCoverTheServerFields()
+        {
+            StoreSettings(true, "", "", "", "");
+            SqlServerPage page = LoadPage();
+            page.Size = new System.Drawing.Size(656, 500);
+            page.CreateControl();
+            page.PerformLayout();
+
+            Control checkBox = page.Controls.Find("chkUseSQLServer", true).Single();
+            Control serverBlock = page.Controls.Find("pnlServerBlock", true).Single();
+
+            Assert.That(serverBlock.Visible, Is.True);
+            Assert.That(checkBox.Bounds.IntersectsWith(serverBlock.Bounds), Is.False,
+                () => $"checkbox {checkBox.Bounds} overlaps server block {serverBlock.Bounds}");
+        }
+
+        [Test]
         public void UnchangedSettingsAreNotAppliedAgain()
         {
             StoreSettings(true, "sql01.example.local", "mRemoteNG", "mrng_login", "secret");
