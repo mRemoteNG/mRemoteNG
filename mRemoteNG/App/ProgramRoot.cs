@@ -95,6 +95,9 @@ namespace mRemoteNG.App
                 }
             }
 
+            // On a new version's first start, carry the options over before anything reads one.
+            SettingsUpgrader.UpgradeIfNeeded(Runtime.MessageCollector);
+
             Lazy<bool> singleInstanceOption = new(() => Properties.OptionsStartupExitPage.Default.SingleInstance);
             if (singleInstanceOption.Value)
                 StartApplicationAsSingleInstance();
