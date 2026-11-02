@@ -439,6 +439,56 @@ namespace mRemoteNGTests.UI.Controls
             }
         }
 
+        [TestCase(0, TestName = "RenameEditorCoversTheTextOnEveryLevel")]
+        [TestCase(24, TestName = "RenameEditorCoversTheTextOnEveryLevelWithScaledIcons")]
+        [Apartment(ApartmentState.STA)]
+        public void RenameEditorCoversTheTextOnEveryLevel(int scaledIconSize)
+        {
+            var connectionTreeModel = new ConnectionTreeModel();
+            var root = new RootNodeInfo(RootNodeType.Connection);
+            var outer = new ContainerInfo { Name = "outer" };
+            var inner = new ContainerInfo { Name = "inner" };
+            var server = new ConnectionInfo { Name = "a.rather.long.server.name.example.local" };
+            var deepServer = new ConnectionInfo { Name = "deep server" };
+            root.AddChild(outer);
+            outer.AddChildRange(new ConnectionInfo[] { inner, server });
+            inner.AddChild(deepServer);
+            connectionTreeModel.AddRootNode(root);
+
+            using var host = new Form { Width = 500, Height = 400, ShowInTaskbar = false };
+            _connectionTree.Dock = DockStyle.Fill;
+            host.Controls.Add(_connectionTree);
+            host.Show();
+            _connectionTree.ConnectionTreeModel = connectionTreeModel;
+            if (scaledIconSize > 0)
+            {
+                // display scaling makes the icons wider than the 17 pixels the tree indents per level
+                var scaled = new ImageList { ImageSize = new System.Drawing.Size(scaledIconSize, scaledIconSize) };
+                foreach (string key in _connectionTree.SmallImageList.Images.Keys)
+                    scaled.Images.Add(key, new System.Drawing.Bitmap(scaledIconSize, scaledIconSize));
+                _connectionTree.SmallImageList = scaled;
+            }
+            _connectionTree.ExpandAll();
+            Application.DoEvents();
+
+            var textOffsets = new List<int>();
+            foreach (ConnectionInfo node in new ConnectionInfo[] { outer, inner, server, deepServer })
+            {
+                _connectionTree.SelectObject(node, true);
+                int indentCount = _connectionTree.SelectedItem.IndentCount;
+                _connectionTree.RenameSelectedNode();
+                TextBox editor = CellEditor();
+
+                // the text is drawn PIXELS_PER_LEVEL per level in, then image and spacing
+                textOffsets.Add(editor.Left - indentCount * BrightIdeasSoftware.TreeListView.TreeRenderer.PIXELS_PER_LEVEL);
+                Assert.That(editor.Right, Is.EqualTo(_connectionTree.ClientSize.Width), $"{node.Name}: the editor should fill the row");
+                _connectionTree.CancelCellEdit();
+                Application.DoEvents();
+            }
+
+            Assert.That(textOffsets.Distinct().Count(), Is.EqualTo(1), $"the editor moves relative to the text between levels: {string.Join(", ", textOffsets)}");
+        }
+
         [Test]
         [Apartment(ApartmentState.STA)]
         public void CellEditCanOnlyStartThroughRename()

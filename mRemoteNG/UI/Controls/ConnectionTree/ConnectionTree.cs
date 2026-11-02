@@ -967,7 +967,23 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
             _nodeInEditMode = true;
             _contextMenu?.DisableShortcutKeys();
+            e.Control.Bounds = CalculateRenameEditorBounds(e.Control.Bounds, e.ListViewItem.IndentCount);
         }
+
+        /// <summary>
+        /// ObjectListView indents the editor by the small image width per tree level, but the tree
+        /// renderer indents the text by TreeRenderer.PIXELS_PER_LEVEL; with display scaling the
+        /// images are wider and the editor moves right of the text, more on each level. The editor
+        /// is also only as wide as the current name. Move it over the text and let it fill the row.
+        /// </summary>
+        internal System.Drawing.Rectangle CalculateRenameEditorBounds(System.Drawing.Rectangle editorBounds, int indentCount)
+        {
+            editorBounds.X += indentCount * (TreeRenderer.PIXELS_PER_LEVEL - SmallImageSize.Width);
+            editorBounds.Width = Math.Max(MinimumRenameEditorWidth, ClientSize.Width - editorBounds.X);
+            return editorBounds;
+        }
+
+        private const int MinimumRenameEditorWidth = 50;
 
         private void ConnectionTree_FormatCell(object sender, FormatCellEventArgs e)
         {
