@@ -59,11 +59,12 @@ namespace mRemoteNG.Config.DataProviders
             try
             {
                 CreateMissingDirectories();
-                File.WriteAllText(FilePath, content);
+                AtomicFile.WriteAllText(FilePath, content);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace($"Failed to save file {FilePath}", ex);
+                throw;
             }
         }
 

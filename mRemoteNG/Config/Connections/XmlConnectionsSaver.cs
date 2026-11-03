@@ -44,6 +44,7 @@ namespace mRemoteNG.Config.Connections
             catch (Exception ex)
             {
                 Runtime.MessageCollector?.AddExceptionStackTrace("SaveToXml failed", ex);
+                throw;
             }
         }
     }
