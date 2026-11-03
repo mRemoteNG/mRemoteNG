@@ -1716,6 +1716,18 @@ If you run into such an error, please create a new connection file!</value>
   <data name="SendTo" xml:space="preserve">
     <value>Send To...</value>
   </data>
+  <data name="SendToRightClickFullscreenHint" xml:space="preserve">
+    <value>Right-click to also switch RDP to fullscreen</value>
+  </data>
+  <data name="SendToRightClickWindowedHint" xml:space="preserve">
+    <value>Right-click to send without switching RDP to fullscreen</value>
+  </data>
+  <data name="SendToScreenUsesRdpFullscreen" xml:space="preserve">
+    <value>"Send To" a screen switches RDP connections to fullscreen</value>
+  </data>
+  <data name="PrimaryScreen" xml:space="preserve">
+    <value>Primary</value>
+  </data>
   <data name="SetHostnameLikeDisplayName" xml:space="preserve">
     <value>Set hostname like display name when creating or renaming connections</value>
   </data>
