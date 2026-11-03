@@ -13,6 +13,16 @@ Import from File
 Opens a normal file load dialog to open a exported xml or csv file for mRemoteNG.
 See Export to file further down this page for information on exporting your connections.
 
+The same dialog also reads files from other tools:
+
+- **RDP files** (``*.rdp``)
+- **Remote Desktop Connection Manager** files (``*.rdg``)
+- **PuTTY Connection Manager** files (``*.dat``)
+- **SecureCRT** session exports (``*.crt``)
+- **Royal TS / Royal TSX** documents (``*.rtsz``): folders and RDP, SSH, Telnet, VNC and web
+  connections, with their hosts, ports, usernames and descriptions. Passwords are not imported,
+  because Royal TS stores them encrypted with the document's key.
+
 Import from Active Directory
 ----------------------------
 .. TODO: Needs even more information and testing (new image with a actual import of server from AD)

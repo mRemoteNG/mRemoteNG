@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -28,7 +29,16 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
         public void PropertyGridShowCorrectPropertiesForConnectionInfo(ConnectionInfo connectionInfo, IEnumerable<string> expectedVisibleProperties)
         {
             _configWindow.SelectedTreeNode = connectionInfo;
-            Assert.That(_configWindow.VisibleObjectProperties, Is.EquivalentTo(expectedVisibleProperties));
+            Assert.That(_configWindow.VisibleObjectProperties,
+                Is.EquivalentTo(expectedVisibleProperties.Concat(PluginPropertiesFor(connectionInfo))));
+        }
+
+        // FrmMain loads plugins from the application folder, which in a test run is the test
+        // output folder, so the plugins in this test assembly add their properties to the grid
+        // once any test has created it.
+        internal static IEnumerable<string> PluginPropertiesFor(ConnectionInfo connectionInfo)
+        {
+            return Runtime.PluginService.GetConnectionPropertyDefinitions(connectionInfo).Select(definition => definition.Key);
         }
 
         [Test]
@@ -206,6 +216,10 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 nameof(ConnectionInfo.Description),
                 nameof(ConnectionInfo.Icon),
                 nameof(ConnectionInfo.Panel),
+                nameof(ConnectionInfo.Color),
+                nameof(ConnectionInfo.TabColor),
+                nameof(ConnectionInfo.ConnectionFrameColor),
+                nameof(ConnectionInfo.EnvironmentTags),
                 nameof(ConnectionInfo.Protocol),
                 nameof(ConnectionInfo.PreExtApp),
                 nameof(ConnectionInfo.PostExtApp),
@@ -240,6 +254,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.UseCredSsp),
                         nameof(ConnectionInfo.UseRestrictedAdmin),
                         nameof(ConnectionInfo.UseRCG),
+                        nameof(ConnectionInfo.UseRedirectionServerName),
                         nameof(ConnectionInfo.RDGatewayUsageMethod),
                         nameof(ConnectionInfo.Resolution),
                         nameof(ConnectionInfo.Colors),
@@ -254,7 +269,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.DisableCursorBlinking),
                         nameof(ConnectionInfo.RedirectKeys),
                         nameof(ConnectionInfo.RedirectDiskDrives),
-                        nameof(ConnectionInfo.RedirectDiskDrivesCustom),
                         nameof(ConnectionInfo.RedirectPrinters),
                         nameof(ConnectionInfo.RedirectClipboard),
                         nameof(ConnectionInfo.RedirectPorts),
@@ -267,11 +281,10 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RDGatewayExternalCredentialProvider),
                         nameof(ConnectionInfo.RDGatewayUserViaAPI),
                         nameof(ConnectionInfo.ExternalCredentialProvider),
-                        nameof(ConnectionInfo.ExternalAddressProvider),
-                        nameof(ConnectionInfo.UserViaAPI),
                     });
                     break;
                 case ProtocolType.VNC:
+                case ProtocolType.ARD:
                     expectedProperties.AddRange(new []
                     {
                         nameof(ConnectionInfo.Password),
@@ -303,7 +316,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.TerminalBackend),
                         nameof(ConnectionInfo.PuttySession),
                         nameof(ConnectionInfo.OpeningCommand),
-                        nameof(ConnectionInfo.ExternalAddressProvider),
                         nameof(ConnectionInfo.ExternalCredentialProvider),
                     });
                     break;
@@ -342,9 +354,18 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Port),
                     });
                     break;
+                case ProtocolType.Terminal:
+                case ProtocolType.AnyDesk:
+                    expectedProperties.AddRange(new[]
+                    {
+                        nameof(ConnectionInfo.Password),
+                        nameof(ConnectionInfo.Port),
+                    });
+                    break;
                 case ProtocolType.IntApp:
                     expectedProperties.AddRange(new[]
                     {
+                        nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),

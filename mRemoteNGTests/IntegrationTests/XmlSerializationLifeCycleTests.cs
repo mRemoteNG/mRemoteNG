@@ -1,5 +1,6 @@
 ﻿using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Plugins;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
@@ -7,6 +8,7 @@ using mRemoteNG.Tree.Root;
 using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
@@ -25,7 +27,7 @@ namespace mRemoteNGTests.IntegrationTests
         {
             _originalModel = SetupConnectionTreeModel();
             var cryptoProvider = _cryptoFactory.Build();
-            var nodeSerializer = new XmlConnectionNodeSerializer28(
+            var nodeSerializer = new XmlConnectionNodeSerializer29(
                 cryptoProvider, 
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
@@ -75,7 +77,7 @@ namespace mRemoteNGTests.IntegrationTests
         {
             var cryptoProvider = _cryptoFactory.Build();
             cryptoProvider.KeyDerivationIterations = 5000;
-            var nodeSerializer = new XmlConnectionNodeSerializer28(
+            var nodeSerializer = new XmlConnectionNodeSerializer29(
                 cryptoProvider, 
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
@@ -106,6 +108,8 @@ namespace mRemoteNGTests.IntegrationTests
         {
             var originalConnectionInfo = new ConnectionInfo().RandomizeValues();
             originalConnectionInfo.Inheritance.TurnOffInheritanceCompletely();
+            // The random EC2 values are legacy AWS data, which loading moves into PluginProperties.
+            LegacyPluginDataMigrator.Migrate(originalConnectionInfo);
             var serializedContent = _serializer.Serialize(originalConnectionInfo);
             var deserializedModel = _deserializer.Deserialize(serializedContent);
             var deserializedConnectionInfo = deserializedModel
@@ -120,7 +124,7 @@ namespace mRemoteNGTests.IntegrationTests
 
                 var originalValue = property.GetValue(originalConnectionInfo);
                 var deserializedValue = property.GetValue(deserializedConnectionInfo);
-                if (originalValue.Equals(deserializedValue))
+                if (originalValue.Equals(deserializedValue) || HaveSameEntries(originalValue, deserializedValue))
                     continue;
 
                 sb.AppendLine($"Property: {property.Name}");
@@ -231,6 +235,15 @@ namespace mRemoteNGTests.IntegrationTests
             var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => node.Name == originalConnectionInfo.Name);
             Assert.That(deserializedConnectionInfo.UseVmId, Is.EqualTo(useVmId));
             Assert.That(deserializedConnectionInfo.UseEnhancedMode, Is.EqualTo(useEnhancedMode));
+        }
+
+        // PluginProperties is a dictionary, and Equals compares dictionaries by reference.
+        private static bool HaveSameEntries(object originalValue, object deserializedValue)
+        {
+            return originalValue is IReadOnlyDictionary<string, string> original &&
+                   deserializedValue is IReadOnlyDictionary<string, string> deserialized &&
+                   original.Count == deserialized.Count &&
+                   original.All(entry => deserialized.TryGetValue(entry.Key, out string value) && value == entry.Value);
         }
 
         private ConnectionTreeModel SetupConnectionTreeModel()

@@ -90,8 +90,8 @@ namespace mRemoteNG.UI.Forms
 
         private void BtnOK_Click(object sender, EventArgs e)
         {
-            if (NewPasswordMode)
-                VerifyNewPassword();
+            if (NewPasswordMode && !VerifyNewPassword())
+                return;
 
             DialogResult = DialogResult.OK;
         }
@@ -136,7 +136,6 @@ namespace mRemoteNG.UI.Forms
             ForeColor = activeTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
-        // ReSharper disable once UnusedMethodReturnValue.Local
         private bool VerifyNewPassword()
         {
             if (txtPassword.Text.Length >= 3)

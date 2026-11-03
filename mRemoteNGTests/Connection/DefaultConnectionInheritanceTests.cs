@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using mRemoteNG.Connection;
+using mRemoteNG.Properties;
 using NUnit.Framework;
 
 
@@ -53,6 +54,12 @@ namespace mRemoteNGTests.Connection
 			var valueInDestination = property.GetValue(inheritanceInstance);
 	        var valueInSource = property.GetValue(DefaultConnectionInheritance.Instance);
 	        Assert.That(valueInDestination, Is.EqualTo(valueInSource));
+		}
+
+		[TestCaseSource(nameof(GetInheritanceProperties))]
+		public void EveryInheritanceFlagHasASettingForItsDefault(PropertyInfo property)
+		{
+			Assert.That(typeof(Settings).GetProperty("InhDefault" + property.Name), Is.Not.Null);
 		}
 
 	    private static IEnumerable<PropertyInfo> GetInheritanceProperties()

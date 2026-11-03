@@ -602,6 +602,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="FilterRDP" xml:space="preserve">
     <value>RDP Files (*.rdp)</value>
   </data>
+  <data name="FilterRoyalTs" xml:space="preserve">
+    <value>Royal TS documents (*.rtsz)</value>
+  </data>
   <data name="FormatInherit" xml:space="preserve">
     <value>Inherit {0}</value>
   </data>

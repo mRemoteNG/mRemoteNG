@@ -21,16 +21,16 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
     {
         public ConnectionTreeModel Deserialize(string serializedData)
         {
-            string[] lines = serializedData.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.RemoveEmptyEntries);
+            List<string[]> lines = SemicolonSeparatedValues.Parse(serializedData);
             List<string> csvHeaders = new();
             // used to map a connectioninfo to it's parent's GUID
             Dictionary<ConnectionInfo, string> parentMapping = new();
 
-            for (int lineNumber = 0; lineNumber < lines.Length; lineNumber++)
+            for (int lineNumber = 0; lineNumber < lines.Count; lineNumber++)
             {
-                string[] line = lines[lineNumber].Split(';');
+                string[] line = lines[lineNumber];
                 if (lineNumber == 0)
-                    csvHeaders = line.ToList();
+                    csvHeaders = ReadHeaders(line);
                 else
                 {
                     ConnectionInfo connectionInfo = ParseConnectionInfo(csvHeaders, line);
@@ -42,6 +42,28 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             ConnectionTreeModel connectionTreeModel = new();
             connectionTreeModel.AddRootNode(root);
             return connectionTreeModel;
+        }
+
+        // Exports from 2023 to 2026 wrote this for two columns, a separator missing between them,
+        // while every row still had a value for each. Read as two, the columns after it line up again.
+        private const string MergedRedirectHeader = "RedirectDiskDrivesCustomRedirectPorts";
+
+        private static List<string> ReadHeaders(string[] headerLine)
+        {
+            List<string> headers = new();
+            foreach (string header in headerLine)
+            {
+                if (header == MergedRedirectHeader)
+                {
+                    headers.Add("RedirectDiskDrivesCustom");
+                    headers.Add("RedirectPorts");
+                }
+                else
+                {
+                    headers.Add(header);
+                }
+            }
+            return headers;
         }
 
         private RootNodeInfo CreateTreeStructure(Dictionary<ConnectionInfo, string> parentMapping)
@@ -84,7 +106,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
             string nodeId = headers.Contains("Id")
                 ? connectionCsv[headers.IndexOf("Id")]
-                : Guid.NewGuid().ToString();
+                : string.Empty;
+            // A hand-written file may leave the Id empty, which the XML loader allows as well.
+            if (string.IsNullOrWhiteSpace(nodeId))
+                nodeId = Guid.NewGuid().ToString();
 
             ConnectionInfo connectionRecord = nodeType == TreeNodeType.Connection
                 ? new ConnectionInfo(nodeId)
@@ -105,6 +130,16 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             connectionRecord.Panel = headers.Contains("Panel")
                 ? connectionCsv[headers.IndexOf("Panel")]
                 : "";
+
+            if (headers.Contains("TabColor"))
+                connectionRecord.TabColor = connectionCsv[headers.IndexOf("TabColor")];
+
+            if (headers.Contains("ConnectionFrameColor") &&
+                Enum.TryParse(connectionCsv[headers.IndexOf("ConnectionFrameColor")], out ConnectionFrameColor frameColor))
+                connectionRecord.ConnectionFrameColor = frameColor;
+
+            if (headers.Contains("Color"))
+                connectionRecord.Color = connectionCsv[headers.IndexOf("Color")];
 
             connectionRecord.Username = headers.Contains("UserViaAPI")
                 ? connectionCsv[headers.IndexOf("UserViaAPI")]
@@ -590,6 +625,18 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.Inheritance.Panel = value;
             }
 
+            if (headers.Contains("InheritTabColor") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritTabColor")], out bool inheritTabColor))
+                connectionRecord.Inheritance.TabColor = inheritTabColor;
+
+            if (headers.Contains("InheritConnectionFrameColor") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritConnectionFrameColor")], out bool inheritConnectionFrameColor))
+                connectionRecord.Inheritance.ConnectionFrameColor = inheritConnectionFrameColor;
+
+            if (headers.Contains("InheritColor") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritColor")], out bool inheritColor))
+                connectionRecord.Inheritance.Color = inheritColor;
+
             if (headers.Contains("InheritPassword"))
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritPassword")], out bool value))
@@ -931,6 +978,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayDomain")], out bool value))
                     connectionRecord.Inheritance.RDGatewayDomain = value;
             }
+
+            if (headers.Contains("InheritRDGatewayAccessToken") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayAccessToken")], out bool inheritRDGatewayAccessToken))
+                connectionRecord.Inheritance.RDGatewayAccessToken = inheritRDGatewayAccessToken;
 
             if (headers.Contains("InheritRDGatewayExternalCredentialProvider"))
             {
