@@ -29,16 +29,19 @@ public class XmlConnectionsRoundTripTests
     {
         _model = new ConnectionTreeModel();
         _root = new RootNodeInfo(RootNodeType.Connection);
-        var folder = new ContainerInfo { Name = "folder" };
+        var folder = new ContainerInfo { Name = "folder", Color = "Blue" };
         _connection = new ConnectionInfo
         {
             Name = "con1",
             Hostname = "server01",
             Username = "user1",
-            TerminalBackend = TerminalBackend.WindowsTerminal
+            TerminalBackend = TerminalBackend.WindowsTerminal,
+            Color = "Red"
         };
+        var inheritingConnection = new ConnectionInfo { Name = "con2", Inheritance = { Color = true } };
         _root.AddChild(folder);
         folder.AddChild(_connection);
+        folder.AddChild(inheritingConnection);
         _model.AddRootNode(_root);
     }
 
@@ -70,5 +73,23 @@ public class XmlConnectionsRoundTripTests
         Assert.That(loadedConnection.Hostname, Is.EqualTo("server01"));
         Assert.That(loadedConnection.Username, Is.EqualTo("user1"));
         Assert.That(loadedConnection.TerminalBackend, Is.EqualTo(TerminalBackend.WindowsTerminal));
+    }
+
+    [Test]
+    [Apartment(ApartmentState.STA)]
+    public void SavedColorAndColorInheritanceAreLoadedBack()
+    {
+        string savedXml = SaveLikeTheApp();
+
+        var deserializer = new XmlConnectionsDeserializer(() => _root.PasswordString.ConvertToSecureString());
+        ConnectionTreeModel loaded = deserializer.Deserialize(savedXml);
+
+        ConnectionInfo loadedFolder = loaded.GetRecursiveChildList().Single(c => c.Name == "folder");
+        ConnectionInfo loadedConnection = loaded.GetRecursiveChildList().Single(c => c.Name == "con1");
+        ConnectionInfo loadedInheriting = loaded.GetRecursiveChildList().Single(c => c.Name == "con2");
+        Assert.That(loadedFolder.Color, Is.EqualTo("Blue"));
+        Assert.That(loadedConnection.Color, Is.EqualTo("Red"));
+        Assert.That(loadedInheriting.Inheritance.Color, Is.True);
+        Assert.That(loadedInheriting.Color, Is.EqualTo("Blue"));
     }
 }

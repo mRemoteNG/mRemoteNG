@@ -257,6 +257,8 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid {
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayExternalCredentialProvider));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUserViaAPI));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayAccessToken));
+            } else if (SelectedConnectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.No) {
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayAccessToken));
             } else if (SelectedConnectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.ExternalCredentialProvider) {
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayDomain));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayPassword));

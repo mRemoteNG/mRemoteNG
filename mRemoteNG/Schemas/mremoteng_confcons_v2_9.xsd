@@ -59,6 +59,7 @@
     <xs:attribute name="UseCredSsp" type="xs:boolean" use="required" />
     <xs:attribute name="RenderingEngine" type="xs:string" use="required" />
     <xs:attribute name="TerminalBackend" type="xs:string" use="required" />
+    <xs:attribute name="Color" type="xs:string" use="optional" />
     <xs:attribute name="RDPAuthenticationLevel" type="xs:string" use="required" />
     <xs:attribute name="RDPMinutesToIdleTimeout" type="xs:int" use="required" />
     <xs:attribute name="RDPAlertIdleTimeout" type="xs:boolean" use="required" />
@@ -153,6 +154,7 @@
     <xs:attribute name="InheritUseConsoleSession" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRenderingEngine" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritTerminalBackend" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritColor" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritUsername" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritICAEncryptionStrength" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRDPAuthenticationLevel" type="xs:boolean" use="optional" />

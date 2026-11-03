@@ -1,3 +1,4 @@
+using System.Threading;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol.RDP;
 using NUnit.Framework;
@@ -5,6 +6,7 @@ using NUnit.Framework;
 namespace mRemoteNGTests.Connection.Protocol
 {
     [TestFixture]
+    [Apartment(ApartmentState.STA)]
     public class RdpProtocolPasswordTests
     {
         [TestCase(RdpVersion.Rdc6, true, false, true)]

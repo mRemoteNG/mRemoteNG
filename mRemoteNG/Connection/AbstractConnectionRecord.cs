@@ -206,7 +206,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInAllProtocolsExcept()]
         public virtual string Hostname
         {
-            get => _hostname.Trim();
+            // A connection given no hostname, or a null one, reads as empty rather than throwing.
+            get => _hostname?.Trim() ?? "";
             set => SetField(ref _hostname, value?.Trim(), "Hostname");
         }
 

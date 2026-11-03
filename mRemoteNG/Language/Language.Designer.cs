@@ -2856,6 +2856,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Royal TS documents (*.rtsz).
+        /// </summary>
+        internal static string FilterRoyalTs {
+            get {
+                return ResourceManager.GetString("FilterRoyalTs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter search matches in connection tree.
         /// </summary>
         internal static string FilterSearchMatchesInConnectionTree {

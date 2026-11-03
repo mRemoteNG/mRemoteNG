@@ -152,6 +152,21 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
         /// also has to pin the schema to the one <see cref="InitializeDatabaseSchema"/> creates,
         /// otherwise a same-named table in another schema would be mistaken for ours.
         /// </remarks>
+        /// <summary>
+        /// The database the connection actually landed in, which is not always the one in
+        /// settings: with the Database field left blank the server falls back to the login's
+        /// default database. Comparing against a name that never matches makes the table check
+        /// report our tables as missing, and the initializer then drops and recreates them,
+        /// destroying whatever was stored there.
+        /// </summary>
+        internal static string ResolveDatabaseName(IDatabaseConnector databaseConnector)
+        {
+            string catalog = databaseConnector.DbConnection()?.Database;
+            return string.IsNullOrEmpty(catalog)
+                ? Properties.OptionsDBsPage.Default.SQLDatabaseName
+                : catalog;
+        }
+
         internal static string BuildTableExistsQuery(IDatabaseConnector databaseConnector)
         {
             return databaseConnector is MSSqlDatabaseConnector
@@ -166,7 +181,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             try
             {
                 // ANSI SQL way.  Works in PostgreSQL, MSSQL, MySQL.
-                string database_name = Properties.OptionsDBsPage.Default.SQLDatabaseName;
+                string database_name = ResolveDatabaseName(databaseConnector);
                 DbCommand cmd = databaseConnector.DbCommand(BuildTableExistsQuery(databaseConnector));
                 
                 DbParameter tableNameParam = cmd.CreateParameter();

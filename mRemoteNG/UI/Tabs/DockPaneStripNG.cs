@@ -1162,7 +1162,8 @@ namespace mRemoteNG.UI.Tabs
             if (!m_suspendDrag)
                 base.OnMouseMove(e);
 
-            int index = HitTest(PointToClient(MousePosition));
+            // The position the event was raised for, not where the cursor is by the time it is handled.
+            int index = HitTest(e.Location);
             string toolTip = string.Empty;
 
             bool tabUpdate = false;
@@ -1182,7 +1183,7 @@ namespace mRemoteNG.UI.Tabs
                     else if (tab.MaxWidth > tab.TabWidth)
                         toolTip = tab.Content.DockHandler.TabText;
 
-                    Point mousePos = PointToClient(MousePosition);
+                    Point mousePos = e.Location;
                     if (tab.Rectangle != null)
                     {
                         Rectangle tabRect = tab.Rectangle.Value;
