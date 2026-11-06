@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using AxMSTSCLib;
 using mRemoteNG.App;
@@ -68,8 +69,44 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 }
                 SetExtendedProperty("RedirectedAuthentication", true);
             }
-            
+
+            if (connectionInfo.RedirectWebAuthn)
+            {
+                LoadWebAuthnRedirectionPlugin();
+            }
+
             return true;
+        }
+
+        /// <summary>
+        /// WebAuthn (passkey / FIDO2 / Windows Hello) redirection is implemented by the in-box
+        /// %SystemRoot%\System32\WebAuthn.dll dynamic virtual channel plugin (see the IWTSPlugin
+        /// remarks on learn.microsoft.com). mstsc.exe enables it by handing that path to
+        /// IMsTscAdvancedSettings::PluginDlls; mstscax recognises the plugin by its path and
+        /// wires it up internally. IMsRdpExtendedSettings exposes no property for it.
+        /// Requires Windows 11 22H2 / Windows Server 2025 or later on the remote side.
+        /// </summary>
+        private void LoadWebAuthnRedirectionPlugin()
+        {
+            try
+            {
+                string pluginPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "WebAuthn.dll");
+                if (!File.Exists(pluginPath))
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                        $"WebAuthn redirection: plugin not found at '{pluginPath}', skipping", true);
+                    return;
+                }
+
+                IMsTscAdvancedSettings advancedSettings = RdpClient8.AdvancedSettings;
+                advancedSettings.PluginDlls = pluginPath;
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                    $"WebAuthn redirection: PluginDlls set to '{pluginPath}'", true);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("WebAuthn redirection: failed to set PluginDlls", ex, MessageClass.WarningMsg, false);
+            }
         }
 
         public override bool Fullscreen

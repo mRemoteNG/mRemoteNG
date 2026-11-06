@@ -79,6 +79,8 @@ RDP 6
 	  - Select whether local ports (ie. com, parallel) should be shown on the remote host.
 	* - Redirect Smart Cards
 	  - Select whether local smart cards should be available on the remote host.
+	* - WebAuthn (Windows Hello / security keys)
+	  - Select whether WebAuthn requests (passkeys, Windows Hello, FIDO2 security keys) made in the remote session are redirected to the local computer. Requires Windows 11 22H2 / Windows Server 2025 or later on the remote host and an up-to-date RDP client on the local computer.
 	* - Redirect Sounds
 	  - Determine how remote sound should be redirected. Possible values are ``Bring to this computer``, ``Leave at remote computer``, ``Do not play``
 

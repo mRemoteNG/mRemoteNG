@@ -5197,6 +5197,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select whether WebAuthn requests (passkeys, Windows Hello, FIDO2 security keys) made in the remote session should be redirected to this computer.
+        /// </summary>
+        internal static string PropertyDescriptionRedirectWebAuthn {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionRedirectWebAuthn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select how remote sound should be redirected..
         /// </summary>
         internal static string PropertyDescriptionRedirectSounds {
@@ -6417,6 +6426,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string RedirectSmartCards {
             get {
                 return ResourceManager.GetString("RedirectSmartCards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WebAuthn (Windows Hello / security keys).
+        /// </summary>
+        internal static string RedirectWebAuthn {
+            get {
+                return ResourceManager.GetString("RedirectWebAuthn", resourceCulture);
             }
         }
         
