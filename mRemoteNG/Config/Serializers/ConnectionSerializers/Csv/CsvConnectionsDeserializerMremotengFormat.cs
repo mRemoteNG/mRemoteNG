@@ -434,10 +434,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.RedirectSmartCards = value;
             }
 
-            if (headers.Contains("RedirectWebAuthn"))
+            if (headers.Contains("RedirectWebAuthn") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("RedirectWebAuthn")], out bool redirectWebAuthn))
             {
-                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectWebAuthn")], out bool value))
-                    connectionRecord.RedirectWebAuthn = value;
+                connectionRecord.RedirectWebAuthn = redirectWebAuthn;
             }
 
             if (headers.Contains("RedirectSound"))
@@ -727,10 +727,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.Inheritance.RedirectSmartCards = value;
             }
 
-            if (headers.Contains("InheritRedirectWebAuthn"))
+            if (headers.Contains("InheritRedirectWebAuthn") &&
+                bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectWebAuthn")], out bool inheritRedirectWebAuthn))
             {
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectWebAuthn")], out bool value))
-                    connectionRecord.Inheritance.RedirectWebAuthn = value;
+                connectionRecord.Inheritance.RedirectWebAuthn = inheritRedirectWebAuthn;
             }
 
             if (headers.Contains("InheritRedirectSound"))

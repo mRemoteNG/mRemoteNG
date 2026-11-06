@@ -25,6 +25,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
         private readonly Dictionary<string, int> _sourcePrimaryKeyDict = [];
         private const string TABLE_NAME = "tblCons";
         private const string INHERIT_TERMINAL_BACKEND = "InheritTerminalBackend";
+        private const string INHERIT_REDIRECT_WEBAUTHN = "InheritRedirectWebAuthn";
         private readonly SaveFilter _saveFilter = saveFilter.ThrowIfNull(nameof(saveFilter));
         private int _currentNodeIndex;
 
@@ -165,7 +166,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataTable.Columns.Add("InheritRedirectPorts", typeof(bool));
             dataTable.Columns.Add("InheritRedirectPrinters", typeof(bool));
             dataTable.Columns.Add("InheritRedirectSmartCards", typeof(bool));
-            dataTable.Columns.Add("InheritRedirectWebAuthn", typeof(bool));
+            dataTable.Columns.Add(INHERIT_REDIRECT_WEBAUTHN, typeof(bool));
             dataTable.Columns.Add("InheritRedirectSound", typeof(bool));
             dataTable.Columns.Add("InheritRenderingEngine", typeof(bool));
             dataTable.Columns.Add(INHERIT_TERMINAL_BACKEND, typeof(bool));
@@ -431,7 +432,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                     dataRow["InheritRedirectPorts"].Equals(connectionInfo.Inheritance.RedirectPorts) &&
                     dataRow["InheritRedirectPrinters"].Equals(connectionInfo.Inheritance.RedirectPrinters) &&
                     dataRow["InheritRedirectSmartCards"].Equals(connectionInfo.Inheritance.RedirectSmartCards) &&
-                    dataRow["InheritRedirectWebAuthn"].Equals(connectionInfo.Inheritance.RedirectWebAuthn) &&
+                    dataRow[INHERIT_REDIRECT_WEBAUTHN].Equals(connectionInfo.Inheritance.RedirectWebAuthn) &&
                     dataRow["InheritRedirectSound"].Equals(connectionInfo.Inheritance.RedirectSound) &&
                     dataRow["InheritRenderingEngine"].Equals(connectionInfo.Inheritance.RenderingEngine) &&
                     dataRow[INHERIT_TERMINAL_BACKEND].Equals(connectionInfo.Inheritance.TerminalBackend) &&
@@ -508,7 +509,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                     dataRow["InheritRedirectPorts"].Equals(false) &&
                     dataRow["InheritRedirectPrinters"].Equals(false) &&
                     dataRow["InheritRedirectSmartCards"].Equals(false) &&
-                    dataRow["InheritRedirectWebAuthn"].Equals(false) &&
+                    dataRow[INHERIT_REDIRECT_WEBAUTHN].Equals(false) &&
                     dataRow["InheritRedirectSound"].Equals(false) &&
                     dataRow["InheritRenderingEngine"].Equals(false) &&
                     dataRow[INHERIT_TERMINAL_BACKEND].Equals(false) &&
@@ -704,7 +705,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 dataRow["InheritRedirectPorts"] = connectionInfo.Inheritance.RedirectPorts;
                 dataRow["InheritRedirectPrinters"] = connectionInfo.Inheritance.RedirectPrinters;
                 dataRow["InheritRedirectSmartCards"] = connectionInfo.Inheritance.RedirectSmartCards;
-                dataRow["InheritRedirectWebAuthn"] = connectionInfo.Inheritance.RedirectWebAuthn;
+                dataRow[INHERIT_REDIRECT_WEBAUTHN] = connectionInfo.Inheritance.RedirectWebAuthn;
                 dataRow["InheritRedirectSound"] = connectionInfo.Inheritance.RedirectSound;
                 dataRow["InheritRenderingEngine"] = connectionInfo.Inheritance.RenderingEngine;
                 dataRow[INHERIT_TERMINAL_BACKEND] = connectionInfo.Inheritance.TerminalBackend;
@@ -787,7 +788,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 dataRow["InheritRedirectPorts"] = false;
                 dataRow["InheritRedirectPrinters"] = false;
                 dataRow["InheritRedirectSmartCards"] = false;
-                dataRow["InheritRedirectWebAuthn"] = false;
+                dataRow[INHERIT_REDIRECT_WEBAUTHN] = false;
                 dataRow["InheritRedirectSound"] = false;
                 dataRow["InheritRenderingEngine"] = false;
                 dataRow[INHERIT_TERMINAL_BACKEND] = false;
