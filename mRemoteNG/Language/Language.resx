@@ -1152,6 +1152,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Select whether local smart cards should be available on the remote host.</value>
   </data>
+  <data name="PropertyDescriptionRedirectWebAuthn" xml:space="preserve">
+    <value>Select whether WebAuthn requests (passkeys, Windows Hello, FIDO2 security keys) made in the remote session should be redirected to this computer. Requires Windows 11 22H2 / Windows Server 2025 or later on the remote host.</value>
+  </data>
   <data name="PropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Select how remote sound should be redirected.</value>
   </data>
@@ -2396,6 +2399,9 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="RedirectSmartCards" xml:space="preserve">
     <value>Smart Cards</value>
+  </data>
+  <data name="RedirectWebAuthn" xml:space="preserve">
+    <value>WebAuthn (Windows Hello / security keys)</value>
   </data>
   <data name="ApplyInheritanceToChildren" xml:space="preserve">
     <value>Apply inheritance to children</value>

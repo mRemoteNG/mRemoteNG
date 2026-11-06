@@ -569,6 +569,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 {
                     connectionInfo.Color = xmlnode.GetAttributeAsString("Color");
                     connectionInfo.Inheritance.Color = xmlnode.GetAttributeAsBool("InheritColor");
+                    connectionInfo.RedirectWebAuthn = xmlnode.GetAttributeAsBool("RedirectWebAuthn");
+                    connectionInfo.Inheritance.RedirectWebAuthn = xmlnode.GetAttributeAsBool("InheritRedirectWebAuthn");
                 }
 
                 switch (_confVersion)

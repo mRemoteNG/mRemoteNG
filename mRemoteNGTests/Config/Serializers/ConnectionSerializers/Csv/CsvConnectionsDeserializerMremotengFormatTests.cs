@@ -187,6 +187,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 RedirectPorts = true,
                 RedirectPrinters = true,
                 RedirectSmartCards = true,
+                RedirectWebAuthn = true,
                 RedirectSound = RDPSounds.LeaveAtRemoteComputer,
                 RedirectAudioCapture = true,
                 RedirectKeys = true,

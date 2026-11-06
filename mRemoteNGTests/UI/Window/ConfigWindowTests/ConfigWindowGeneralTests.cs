@@ -273,6 +273,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectClipboard),
                         nameof(ConnectionInfo.RedirectPorts),
                         nameof(ConnectionInfo.RedirectSmartCards),
+                        nameof(ConnectionInfo.RedirectWebAuthn),
                         nameof(ConnectionInfo.RedirectSound),
                         nameof(ConnectionInfo.RedirectAudioCapture),
 			            nameof(ConnectionInfo.RdpVersion),
