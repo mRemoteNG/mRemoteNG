@@ -36,6 +36,13 @@ namespace mRemoteNG.UI.Window
 
         public bool IsGeneralPanel => string.Equals(TabText, PanelAdder.DefaultPanelName, StringComparison.OrdinalIgnoreCase);
 
+        /// <summary>
+        /// Number of connection tabs hosted in this panel, whatever their dock state.
+        /// The panel's dock can also hold other contents, such as the Options window,
+        /// which only hides on close and stays registered; those are not connections.
+        /// </summary>
+        internal int OpenConnectionCount => connDock.Contents.OfType<ConnectionTab>().Count(tab => !tab.IsHidden);
+
         #region Public Methods
 
         public ConnectionWindow(DockContent panel, string formText = "")
