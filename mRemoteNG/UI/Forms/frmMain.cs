@@ -828,29 +828,10 @@ namespace mRemoteNG.UI.Forms
 
         public void ShowHidePanelTabs(DockContent? closingDocument = null)
         {
-            DocumentStyle newDocumentStyle;
-            bool hasConnectionWindows = pnlDock.Contents.OfType<ConnectionWindow>().Any();
-
-            if (Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelTabs || hasConnectionWindows)
-            {
-                newDocumentStyle = DocumentStyle.DockingWindow; // Show the panel tabs
-            }
-            else
-            {
-                int visibleDocumentCount = 0;
-                foreach (IDockContent dockContent in pnlDock.Documents)
-                {
-                    DockContent document = (DockContent)dockContent;
-                    if (closingDocument == null || document != closingDocument)
-                    {
-                        visibleDocumentCount++;
-                    }
-                }
-
-                newDocumentStyle = visibleDocumentCount <= 1
-                    ? DocumentStyle.DockingSdi
-                    : DocumentStyle.DockingWindow;
-            }
+            DocumentStyle newDocumentStyle = ResolvePanelDocumentStyle(
+                Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelTabs,
+                pnlDock.Documents,
+                closingDocument);
 
             // TODO: See if we can get this to work with DPS
 #if false
@@ -875,6 +856,28 @@ namespace mRemoteNG.UI.Forms
             if (pnlDock.DocumentStyle == newDocumentStyle) return;
             pnlDock.DocumentStyle = newDocumentStyle;
             pnlDock.Size = new Size(1, 1);
+        }
+
+        /// <summary>
+        /// Connection panels never force the panel tab strip on their own: while every open
+        /// document is a connection panel, the dock renders as a single document area and only
+        /// the connection tabs inside the panel are visible. The strip appears when the user asks
+        /// for it or when a non-connection document (Update, External Tools, ...) is docked.
+        /// </summary>
+        internal static DocumentStyle ResolvePanelDocumentStyle(bool alwaysShowPanelTabs,
+                                                                IEnumerable<IDockContent> documents,
+                                                                DockContent? closingDocument)
+        {
+            if (alwaysShowPanelTabs)
+                return DocumentStyle.DockingWindow;
+
+            bool hasNonConnectionDocument = documents
+                .OfType<DockContent>()
+                .Any(document => document != closingDocument && document is not ConnectionWindow);
+
+            return hasNonConnectionDocument
+                ? DocumentStyle.DockingWindow
+                : DocumentStyle.DockingSdi;
         }
 
         public void SetDefaultLayout()
