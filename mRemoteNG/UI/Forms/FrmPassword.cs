@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security;
 using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.Security;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
@@ -12,8 +13,17 @@ namespace mRemoteNG.UI.Forms
     [SupportedOSPlatform("windows")]
     public partial class FrmPassword : IKeyProvider
     {
+        private const string RevealGlyph = ""; // eye in Segoe MDL2 Assets
         private readonly string _passwordName;
         private SecureString _password = new();
+        private readonly Button _btnShowPassword = new();
+        private ToolTip _toolTip;
+
+        /// <summary>
+        /// True while the password is shown in plain text. The verify box
+        /// is not needed then, because the user can read what they typed.
+        /// </summary>
+        internal bool PasswordShown => !txtPassword.UseSystemPasswordChar;
 
         /// <summary>
         /// Puts the dialog into the New Password mode. An extra
@@ -36,6 +46,7 @@ namespace mRemoteNG.UI.Forms
             InitializeComponent();
             _passwordName = passwordName;
             NewPasswordMode = newPasswordMode;
+            AddShowPasswordButton();
         }
 
         /// <summary>
@@ -140,7 +151,7 @@ namespace mRemoteNG.UI.Forms
         {
             if (txtPassword.Text.Length >= 3)
             {
-                if (txtPassword.Text == txtVerify.Text)
+                if (PasswordShown || txtPassword.Text == txtVerify.Text)
                     return true;
                 ShowStatus(Language.PasswordStatusMustMatch);
                 return false;
@@ -148,6 +159,54 @@ namespace mRemoteNG.UI.Forms
 
             ShowStatus(Language.PasswordStatusTooShort);
             return false;
+        }
+
+        private void AddShowPasswordButton()
+        {
+            components ??= new System.ComponentModel.Container();
+            _toolTip = new ToolTip(components);
+
+            _btnShowPassword.Name = "btnShowPassword";
+            _btnShowPassword.Text = RevealGlyph;
+            _btnShowPassword.Font = new System.Drawing.Font("Segoe MDL2 Assets", 8.25F);
+            _btnShowPassword.Dock = DockStyle.Right;
+            _btnShowPassword.Width = txtPassword.ClientSize.Height + 4;
+            _btnShowPassword.FlatStyle = FlatStyle.Flat;
+            _btnShowPassword.FlatAppearance.BorderSize = 0;
+            _btnShowPassword.Cursor = Cursors.Default;
+            _btnShowPassword.TabStop = false;
+            _btnShowPassword.Click += (_, _) => SetPasswordShown(!PasswordShown);
+            txtPassword.Controls.Add(_btnShowPassword);
+
+            // keep typed text out from under the button, also after the handle is recreated
+            txtPassword.HandleCreated += (_, _) => SetRightMargin(txtPassword, _btnShowPassword.Width);
+            txtPassword.BackColorChanged += (_, _) => _btnShowPassword.BackColor = txtPassword.BackColor;
+            txtPassword.ForeColorChanged += (_, _) => _btnShowPassword.ForeColor = txtPassword.ForeColor;
+            UpdateShowPasswordText();
+        }
+
+        internal void SetPasswordShown(bool shown)
+        {
+            txtPassword.UseSystemPasswordChar = !shown;
+            lblVerify.Enabled = !shown;
+            txtVerify.Enabled = !shown;
+            UpdateShowPasswordText();
+            HideStatus();
+            txtPassword.Focus();
+            txtPassword.SelectionStart = txtPassword.TextLength;
+        }
+
+        private void UpdateShowPasswordText()
+        {
+            string text = PasswordShown ? Language.HidePassword : Language.ShowPassword;
+            _btnShowPassword.AccessibleName = text;
+            _toolTip.SetToolTip(_btnShowPassword, text);
+        }
+
+        private static void SetRightMargin(TextBox textBox, int margin)
+        {
+            NativeMethods.SendMessage(textBox.Handle, (int)NativeMethods.EM_SETMARGINS,
+                (IntPtr)NativeMethods.EC_RIGHTMARGIN, (IntPtr)(margin << 16));
         }
 
         private void ShowStatus(string status)
