@@ -74,6 +74,8 @@ namespace mRemoteNG.App
         {
             string profilesPath = SettingsFileInfo.SettingsPath;
             string databasePath = Path.Combine(profilesPath, SqliteUserProfileStore.DatabaseFileName);
+            if (!ShouldUseUserProfiles(Properties.OptionsDBsPage.Default.UseUserProfiles, File.Exists(databasePath)))
+                return false;
             Optional<SecureString> passwordResult = MiscTools.PasswordDialog("Profile password", true);
             if (!passwordResult.Any())
                 return false;
@@ -116,6 +118,15 @@ namespace mRemoteNG.App
                 UserProfileStore = null;
                 return false;
             }
+        }
+
+        /// <summary>
+        /// User profiles are opt-in. An existing profile store keeps the prompt,
+        /// so connections already saved in a profile are not left behind.
+        /// </summary>
+        internal static bool ShouldUseUserProfiles(bool useUserProfiles, bool profileStoreExists)
+        {
+            return useUserProfiles || profileStoreExists;
         }
 
         public static void LoadConnectionsAsync()

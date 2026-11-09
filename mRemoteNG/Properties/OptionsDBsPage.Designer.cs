@@ -118,5 +118,17 @@ namespace mRemoteNG.Properties {
                 this["cbDBsPageInOptionMenu"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseUserProfiles {
+            get {
+                return ((bool)(this["UseUserProfiles"]));
+            }
+            set {
+                this["UseUserProfiles"] = value;
+            }
+        }
     }
 }
