@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [1.78.2]
 ### Fixed
 - #3301: fixed an unhandled exception that closed mRemoteNG when the Config panel was closed while the host status check was still running
+- #3580: fixed a "Profile password" prompt on every startup; user profiles are now opt-in (UseUserProfiles, off by default) and an existing profile store still prompts
+- fixed clipboard sharing being turned off for every RDP connection loaded from a connection file saved by 1.76 or earlier (format 2.6 and older)
 - fixed the new password dialog accepting an empty, too short or mismatched password when clicking OK
 - #2154: fixed "Alert on Idle Disconnect" and "Disable Cursor Blinking" showing the labels of other RDP properties in the Config panel
 - fixed connection tree search bar ignoring the "place search bar above connection tree" setting at startup
@@ -28,6 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #2496: fixed use pwfile instead of cleartext password for putty connections 
 
 ### Added
+- added a "show password" eye to the password dialog; while the new password is shown, it does not need to be typed again in Verify
 - added a warning when a connection's hostname is already used by another connection, listing where the existing ones are in the tree
 - changed connection tree search to filter the tree by default instead of jumping to the first match
 - #876: added Wake-on-LAN option to the connection tree context menu to wake sleeping or powered-off machines using the connection's MAC Address

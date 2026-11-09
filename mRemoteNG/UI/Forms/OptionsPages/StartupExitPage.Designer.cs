@@ -39,6 +39,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkStartMinimized = new MrngCheckBox();
             chkStartFullScreen = new MrngCheckBox();
             chkDisableRefocus = new MrngCheckBox();
+            chkAskProfilePassword = new MrngCheckBox();
             pnlOptions = new System.Windows.Forms.Panel();
             lblRegistrySettingsUsedInfo = new System.Windows.Forms.Label();
             pnlOptions.SuspendLayout();
@@ -105,9 +106,22 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkDisableRefocus.TabIndex = 6;
             chkDisableRefocus.Text = "Disable Refocus";
             chkDisableRefocus.UseVisualStyleBackColor = true;
-            // 
+            //
+            // chkAskProfilePassword
+            //
+            chkAskProfilePassword._mice = MrngCheckBox.MouseState.OUT;
+            chkAskProfilePassword.AutoSize = true;
+            chkAskProfilePassword.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkAskProfilePassword.Location = new System.Drawing.Point(6, 119);
+            chkAskProfilePassword.Name = "chkAskProfilePassword";
+            chkAskProfilePassword.Size = new System.Drawing.Size(220, 17);
+            chkAskProfilePassword.TabIndex = 7;
+            chkAskProfilePassword.Text = "Ask for a profile password at startup";
+            chkAskProfilePassword.UseVisualStyleBackColor = true;
+            //
             // pnlOptions
-            // 
+            //
+            pnlOptions.Controls.Add(chkAskProfilePassword);
             pnlOptions.Controls.Add(chkDisableRefocus);
             pnlOptions.Controls.Add(chkStartFullScreen);
             pnlOptions.Controls.Add(chkReconnectOnStart);
@@ -116,7 +130,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlOptions.Dock = System.Windows.Forms.DockStyle.Top;
             pnlOptions.Location = new System.Drawing.Point(0, 30);
             pnlOptions.Name = "pnlOptions";
-            pnlOptions.Size = new System.Drawing.Size(610, 135);
+            pnlOptions.Size = new System.Drawing.Size(610, 158);
             pnlOptions.TabIndex = 0;
             // 
             // lblRegistrySettingsUsedInfo
@@ -150,6 +164,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal MrngCheckBox chkStartMinimized;
         internal MrngCheckBox chkStartFullScreen;
         internal MrngCheckBox chkDisableRefocus;
+        internal MrngCheckBox chkAskProfilePassword;
         internal System.Windows.Forms.Label lblRegistrySettingsUsedInfo;
         internal System.Windows.Forms.Panel pnlOptions;
     }

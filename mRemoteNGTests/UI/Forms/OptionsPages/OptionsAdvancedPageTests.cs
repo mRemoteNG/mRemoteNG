@@ -22,15 +22,16 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
         [Test]
         public void AdvancedPageLinkExistsInListView()
         {
+            // Plugins comes right before Advanced.
             ListViewTester listViewTester = new("lstOptionPages", _optionsForm);
-            Assert.That(listViewTester.Items[10].Text, Does.Match("Advanced"));
+            Assert.That(listViewTester.Items[11].Text, Does.Match("Advanced"));
         }
 
         [Test]
         public void AdvancedIconShownInListView()
         {
             ListViewTester listViewTester = new("lstOptionPages", _optionsForm);
-            Assert.That(listViewTester.Items[10].ImageList, Is.Not.Null);
+            Assert.That(listViewTester.Items[11].ImageList, Is.Not.Null);
         }
 
         [Test]
@@ -40,10 +41,45 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
             listViewTester.Select("Advanced");
             
             CheckBox checkboxTester = _optionsForm.FindControl<CheckBox>("chkAutomaticReconnect");
-            Assert.That(checkboxTester.Text, Is.EqualTo("Automatically try to reconnect when disconnected from server (RDP && ICA only)"));
+            // ReconnectOnDisconnect shows the reconnection dialog; the automatic reconnect is the option under it.
+            Assert.That(checkboxTester.Text, Is.EqualTo("Display reconnection dialog when disconnected from server (RDP && ICA only)"));
 
             CheckBox showPuttySessionsCheckBox = _optionsForm.FindControl<CheckBox>("chkShowPuttySessionsInTree");
             Assert.That(showPuttySessionsCheckBox.Text, Is.EqualTo("Show PuTTY saved sessions in connection tree"));
+
+            CheckBox useUserProfilesCheckBox = _optionsForm.FindControl<CheckBox>("chkUseUserProfiles");
+            Assert.That(useUserProfilesCheckBox.Text, Is.EqualTo("Use user profiles to store connections (experimental, takes effect after restart)"));
+        }
+
+        [Test]
+        public void UseUserProfilesSetting_DefaultsToDisabled()
+        {
+            // The profile store prompts for a password at startup and replaces the connection file,
+            // so a fresh installation must never opt into it implicitly.
+            OptionsAdvancedPage defaults = new();
+            Assert.That(defaults.UseUserProfiles, Is.False);
+        }
+
+        [Test]
+        public void SavingAdvancedPagePersistsUseUserProfilesSetting()
+        {
+            bool originalValue = OptionsAdvancedPage.Default.UseUserProfiles;
+            try
+            {
+                ListViewTester listViewTester = new("lstOptionPages", _optionsForm);
+                listViewTester.Select("Advanced");
+
+                CheckBox useUserProfilesCheckBox = _optionsForm.FindControl<CheckBox>("chkUseUserProfiles");
+                useUserProfilesCheckBox.Checked = !originalValue;
+
+                _optionsForm.SaveAllOptions();
+
+                Assert.That(OptionsAdvancedPage.Default.UseUserProfiles, Is.EqualTo(!originalValue));
+            }
+            finally
+            {
+                OptionsAdvancedPage.Default.UseUserProfiles = originalValue;
+            }
         }
 
         [Test]

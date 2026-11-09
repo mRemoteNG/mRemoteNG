@@ -290,8 +290,61 @@ namespace mRemoteNGTests.Connection.Protocol
             // Assert
             Assert.That(resizeCallsWhileMinimized, Is.EqualTo(0),
                 "DoResizeClient should not be called when minimizing");
+            // Resize() skips a minimized window without recording it, so a window restored to the
+            // state it had keeps the size it had, and the session is not resized again.
+            Assert.That(_rdpProtocol.DoResizeClientCallCount, Is.EqualTo(0),
+                "DoResizeClient should not be called when restoring to the state the window had before minimizing");
+        }
+
+        [Test]
+        public void RestoringFromMinimizeIntoAnotherState_ResizesTheSession()
+        {
+            // Arrange - Start in Normal state
+            _testForm.WindowState = FormWindowState.Normal;
+            _rdpProtocol.SimulateResize(null, EventArgs.Empty);
+            _testForm.WindowState = FormWindowState.Minimized;
+            _rdpProtocol.SimulateResize(null, EventArgs.Empty);
+            _rdpProtocol.ResetResizeCounts();
+
+            // Act - Restore maximized
+            _testForm.WindowState = FormWindowState.Maximized;
+            _rdpProtocol.SimulateResize(null, EventArgs.Empty);
+
+            // Assert
             Assert.That(_rdpProtocol.DoResizeClientCallCount, Is.EqualTo(1),
-                "DoResizeClient should be called when restoring from minimize");
+                "DoResizeClient should be called when the window comes back in another state");
+        }
+
+        [TestCase(RDPResolutions.FitToWindow, true, ExpectedResult = true)]
+        [TestCase(RDPResolutions.FitToWindow, false, ExpectedResult = false)]
+        [TestCase(RDPResolutions.Fullscreen, true, ExpectedResult = true)]
+        [TestCase(RDPResolutions.Fullscreen, false, ExpectedResult = false)]
+        [TestCase(RDPResolutions.SmartSize, true, ExpectedResult = false)]
+        [TestCase(RDPResolutions.SmartSize, false, ExpectedResult = false)]
+        public bool SessionFollowsPanelSize_DependsOnResolutionAndAutomaticResize(RDPResolutions resolution, bool automaticResize)
+        {
+            var connectionInfo = new ConnectionInfo
+            {
+                Resolution = resolution,
+                AutomaticResize = automaticResize
+            };
+
+            return RdpProtocol.SessionFollowsPanelSize(connectionInfo);
+        }
+
+        [TestCase(RDPResolutions.FitToWindow, false, ExpectedResult = true)]
+        [TestCase(RDPResolutions.FitToWindow, true, ExpectedResult = false)]
+        [TestCase(RDPResolutions.Fullscreen, false, ExpectedResult = false)]
+        [TestCase(RDPResolutions.SmartSize, false, ExpectedResult = false)]
+        public bool IsLockedAtConnectSize_OnlyForFitToPanelWithoutAutomaticResize(RDPResolutions resolution, bool automaticResize)
+        {
+            var connectionInfo = new ConnectionInfo
+            {
+                Resolution = resolution,
+                AutomaticResize = automaticResize
+            };
+
+            return RdpProtocol.IsLockedAtConnectSize(connectionInfo);
         }
 
         [Test]

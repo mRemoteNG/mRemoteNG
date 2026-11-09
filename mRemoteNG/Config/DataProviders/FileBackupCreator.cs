@@ -15,10 +15,11 @@ namespace mRemoteNG.Config.DataProviders
         {
             try
             {
+                // First, so a path with traversal sequences is refused whether or not a backup is due.
+                PathValidator.ValidatePathOrThrow(fileName, nameof(fileName));
+
                 if (WeDontNeedToBackup(fileName))
                     return;
-
-                PathValidator.ValidatePathOrThrow(fileName, nameof(fileName));
 
                 string backupFileName =
                     string.Format(Properties.OptionsBackupPage.Default.BackupFileNameFormat, fileName, DateTime.Now);

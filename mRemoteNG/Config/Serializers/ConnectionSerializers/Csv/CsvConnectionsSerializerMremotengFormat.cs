@@ -51,7 +51,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
         private void WriteCsvHeader(StringBuilder sb)
         {
-            sb.Append("Name;Id;Parent;NodeType;Description;Icon;Panel;TabColor;ConnectionFrameColor;");
+            sb.Append("Name;Id;Parent;NodeType;Description;Icon;Panel;TabColor;ConnectionFrameColor;Color;");
             if (_saveFilter.SaveUsername)
                 sb.Append("Username;");
             if (_saveFilter.SavePassword)
@@ -68,7 +68,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
             if (_saveFilter.SaveInheritance)
                 sb.Append("InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;" +
-                          "InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDisableFullWindowDrag;InheritDisableMenuAnimations;InheritDisableCursorShadow;InheritDisableCursorBlinking;InheritDomain;InheritIcon;InheritPanel;InheritTabColor;InheritConnectionFrameColor;InheritPassword;InheritPort;" +
+                          "InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDisableFullWindowDrag;InheritDisableMenuAnimations;InheritDisableCursorShadow;InheritDisableCursorBlinking;InheritDomain;InheritIcon;InheritPanel;InheritTabColor;InheritConnectionFrameColor;InheritColor;InheritPassword;InheritPort;" +
                           "InheritProtocol;InheritSSHTunnelConnectionName;InheritOpeningCommand;InheritSSHOptions;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectDiskDrivesCustom;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;" +
                           "InheritRedirectClipboard;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;" +
                           "InheritUseConsoleSession;InheritUseCredSsp;InheritUseRestrictedAdmin;InheritUseRCG;InheritUseRedirectionServerName;InheritUseVmId;InheritUseEnhancedMode;InheritVmId;InheritRenderingEngine;InheritTerminalBackend;InheritUsername;" +
@@ -76,7 +76,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                           "InheritEnvironmentTags;InheritFavorite;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;" +
                           "InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;" +
                           "InheritRDGatewayUsageMethod;InheritRDGatewayHostname;InheritRDGatewayUseConnectionCredentials;InheritRDGatewayUsername;" +
-                          "InheritRDGatewayPassword;InheritRDGatewayDomain;InheritRDGatewayExternalCredentialProvider;InheritRDGatewayUserViaAPI;InheritRDPAlertIdleTimeout;InheritRDPMinutesToIdleTimeout;InheritSoundQuality;InheritUserViaAPI;" +
+                          "InheritRDGatewayPassword;InheritRDGatewayDomain;InheritRDGatewayAccessToken;InheritRDGatewayExternalCredentialProvider;InheritRDGatewayUserViaAPI;InheritRDPAlertIdleTimeout;InheritRDPMinutesToIdleTimeout;InheritSoundQuality;InheritUserViaAPI;" +
                           "InheritRedirectAudioCapture;InheritRdpVersion;InheritExternalCredentialProvider");
         }
 
@@ -109,7 +109,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.Icon))
               .Append(FormatForCsv(con.Panel))
               .Append(FormatForCsv(con.TabColor))
-              .Append(FormatForCsv(con.ConnectionFrameColor));
+              .Append(FormatForCsv(con.ConnectionFrameColor))
+              .Append(FormatForCsv(con.Color));
 
             if (_saveFilter.SaveUsername)
                 sb.Append(FormatForCsv(con.Username));
@@ -217,6 +218,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.Inheritance.Panel))
               .Append(FormatForCsv(con.Inheritance.TabColor))
               .Append(FormatForCsv(con.Inheritance.ConnectionFrameColor))
+              .Append(FormatForCsv(con.Inheritance.Color))
               .Append(FormatForCsv(con.Inheritance.Password))
               .Append(FormatForCsv(con.Inheritance.Port))
               .Append(FormatForCsv(con.Inheritance.Protocol))
@@ -271,6 +273,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.Inheritance.RDGatewayUsername))
               .Append(FormatForCsv(con.Inheritance.RDGatewayPassword))
               .Append(FormatForCsv(con.Inheritance.RDGatewayDomain))
+              .Append(FormatForCsv(con.Inheritance.RDGatewayAccessToken))
               .Append(FormatForCsv(con.Inheritance.RDGatewayExternalCredentialProvider))
               .Append(FormatForCsv(con.Inheritance.RDGatewayUserViaAPI))
               .Append(FormatForCsv(con.Inheritance.RDPAlertIdleTimeout))
