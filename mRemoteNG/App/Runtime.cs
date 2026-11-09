@@ -74,9 +74,20 @@ namespace mRemoteNG.App
         {
             string profilesPath = SettingsFileInfo.SettingsPath;
             string databasePath = Path.Combine(profilesPath, SqliteUserProfileStore.DatabaseFileName);
+            Properties.OptionsDBsPage settings = Properties.OptionsDBsPage.Default;
+            bool profileStoreExists = File.Exists(databasePath);
+            if (!ShouldUseUserProfiles(settings.UseUserProfiles, profileStoreExists, settings.UserProfilePromptDeclined))
+                return false;
             Optional<SecureString> passwordResult = MiscTools.PasswordDialog("Profile password", true);
             if (!passwordResult.Any())
+            {
+                if (AskToStopProfilePrompt())
+                {
+                    SetProfilePromptEnabled(settings, false);
+                    settings.Save();
+                }
                 return false;
+            }
             SecureString password = passwordResult.First();
 
             try
@@ -117,6 +128,42 @@ namespace mRemoteNG.App
                 return false;
             }
         }
+
+        /// <summary>
+        /// User profiles are opt-in. An existing profile store keeps the prompt,
+        /// so connections already saved in a profile are not left behind,
+        /// until the user chooses to stop being asked.
+        /// </summary>
+        internal static bool ShouldUseUserProfiles(bool useUserProfiles, bool profileStoreExists, bool promptDeclined)
+        {
+            return useUserProfiles || (profileStoreExists && !promptDeclined);
+        }
+
+        /// <summary>
+        /// Whether the profile password prompt will appear at the next startup.
+        /// </summary>
+        internal static bool IsProfilePromptEnabled(Properties.OptionsDBsPage settings)
+        {
+            string databasePath = Path.Combine(SettingsFileInfo.SettingsPath, SqliteUserProfileStore.DatabaseFileName);
+            return ShouldUseUserProfiles(settings.UseUserProfiles, File.Exists(databasePath), settings.UserProfilePromptDeclined);
+        }
+
+        /// <summary>
+        /// Turns the profile password prompt on or off. Off keeps the profile store.
+        /// </summary>
+        internal static void SetProfilePromptEnabled(Properties.OptionsDBsPage settings, bool enabled)
+        {
+            settings.UseUserProfiles = enabled;
+            settings.UserProfilePromptDeclined = !enabled;
+        }
+
+        /// <summary>
+        /// Asked whenever the profile prompt is cancelled; Yes is the same as
+        /// unticking "Ask for a profile password at startup".
+        /// </summary>
+        private static bool AskToStopProfilePrompt() =>
+            MessageBox.Show(Language.ProfilePromptStopAsking, Application.ProductName,
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes;
 
         public static void LoadConnectionsAsync()
         {
