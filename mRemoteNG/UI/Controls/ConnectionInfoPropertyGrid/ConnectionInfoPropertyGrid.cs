@@ -272,7 +272,8 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid {
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUserViaAPI));
             }
 
-            if (SelectedConnectionInfo.Resolution != RDPResolutions.Fullscreen) {
+            // SmartSize scales client-side; Fit To Panel and Fullscreen can renegotiate the session resolution.
+            if (SelectedConnectionInfo.Resolution == RDPResolutions.SmartSize) {
                 strHide.Add(nameof(AbstractConnectionRecord.AutomaticResize));
             }
 

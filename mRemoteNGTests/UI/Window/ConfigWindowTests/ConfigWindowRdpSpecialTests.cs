@@ -77,11 +77,21 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             RunVerification();
         }
 
+        [TestCase(RDPResolutions.FitToWindow)]
         [TestCase(RDPResolutions.Fullscreen)]
         public void AutomaticResizePropertyShown_WhenResolutionIsDynamic(RDPResolutions resolution)
         {
             ConnectionInfo.Resolution = resolution;
             ExpectedPropertyList.Add(nameof(mRemoteNG.Connection.ConnectionInfo.AutomaticResize));
+
+            RunVerification();
+        }
+
+        [Test]
+        public void AutomaticResizePropertyHidden_WhenResolutionIsSmartSize()
+        {
+            ConnectionInfo.Resolution = RDPResolutions.SmartSize;
+            ExpectedPropertyList.Remove(nameof(mRemoteNG.Connection.ConnectionInfo.AutomaticResize));
 
             RunVerification();
         }

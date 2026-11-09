@@ -46,6 +46,40 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
 
             CheckBox showPuttySessionsCheckBox = _optionsForm.FindControl<CheckBox>("chkShowPuttySessionsInTree");
             Assert.That(showPuttySessionsCheckBox.Text, Is.EqualTo("Show PuTTY saved sessions in connection tree"));
+
+            CheckBox useUserProfilesCheckBox = _optionsForm.FindControl<CheckBox>("chkUseUserProfiles");
+            Assert.That(useUserProfilesCheckBox.Text, Is.EqualTo("Use user profiles to store connections (experimental, takes effect after restart)"));
+        }
+
+        [Test]
+        public void UseUserProfilesSetting_DefaultsToDisabled()
+        {
+            // The profile store prompts for a password at startup and replaces the connection file,
+            // so a fresh installation must never opt into it implicitly.
+            OptionsAdvancedPage defaults = new();
+            Assert.That(defaults.UseUserProfiles, Is.False);
+        }
+
+        [Test]
+        public void SavingAdvancedPagePersistsUseUserProfilesSetting()
+        {
+            bool originalValue = OptionsAdvancedPage.Default.UseUserProfiles;
+            try
+            {
+                ListViewTester listViewTester = new("lstOptionPages", _optionsForm);
+                listViewTester.Select("Advanced");
+
+                CheckBox useUserProfilesCheckBox = _optionsForm.FindControl<CheckBox>("chkUseUserProfiles");
+                useUserProfilesCheckBox.Checked = !originalValue;
+
+                _optionsForm.SaveAllOptions();
+
+                Assert.That(OptionsAdvancedPage.Default.UseUserProfiles, Is.EqualTo(!originalValue));
+            }
+            finally
+            {
+                OptionsAdvancedPage.Default.UseUserProfiles = originalValue;
+            }
         }
 
         [Test]

@@ -744,6 +744,11 @@ Connections saved in the profile are kept. You can turn the prompt back on in Op
   </data>
   <data name="AskProfilePasswordAtStartup" xml:space="preserve">
     <value>Ask for a profile password at startup</value>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>Show password</value>
+  </data>
+  <data name="HidePassword" xml:space="preserve">
+    <value>Hide password</value>
   </data>
   <data name="LanguageString" xml:space="preserve">
     <value>Language</value>
@@ -1396,6 +1401,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="UseRedirectionServerName" xml:space="preserve">
     <value>Use Redirection Server Name</value>
+  </data>
+  <data name="UseUserProfiles" xml:space="preserve">
+    <value>Use user profiles to store connections (experimental, takes effect after restart)</value>
   </data>
   <data name="ClearCachedRdpCredentials" xml:space="preserve">
     <value>Clear Cached RDP Credentials</value>
