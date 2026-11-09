@@ -55,6 +55,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnBrowseCustomPuttyPath.Text = Language._Browse;
             chkUseCustomPuttyPath.Text = Language.CheckboxPuttyPath;
             chkShowPuttySessionsInTree.Text = Language.ShowPuttySessionsInTree;
+            chkUseUserProfiles.Text = Language.UseUserProfiles;
             lblUVNCSCPort.Text = Language.UltraVNCSCListeningPort;
         }
 
@@ -73,6 +74,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             SetPuttyLaunchButtonEnabled();
 
             numUVNCSCPort.Value = Properties.OptionsAdvancedPage.Default.UVNCSCPort;
+            chkUseUserProfiles.Checked = Properties.OptionsAdvancedPage.Default.UseUserProfiles;
         }
 
         public override void SaveSettings()
@@ -115,6 +117,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime = (int)numPuttyWaitTime.Value;
             Properties.OptionsAdvancedPage.Default.UVNCSCPort = (int)numUVNCSCPort.Value;
+            Properties.OptionsAdvancedPage.Default.UseUserProfiles = chkUseUserProfiles.Checked;
         }
 
         #endregion
