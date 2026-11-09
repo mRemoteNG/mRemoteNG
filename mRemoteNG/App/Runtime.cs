@@ -74,11 +74,20 @@ namespace mRemoteNG.App
         {
             string profilesPath = SettingsFileInfo.SettingsPath;
             string databasePath = Path.Combine(profilesPath, SqliteUserProfileStore.DatabaseFileName);
-            if (!ShouldUseUserProfiles(Properties.OptionsDBsPage.Default.UseUserProfiles, File.Exists(databasePath)))
+            Properties.OptionsDBsPage settings = Properties.OptionsDBsPage.Default;
+            bool profileStoreExists = File.Exists(databasePath);
+            if (!ShouldUseUserProfiles(settings.UseUserProfiles, profileStoreExists, settings.UserProfilePromptDeclined))
                 return false;
             Optional<SecureString> passwordResult = MiscTools.PasswordDialog("Profile password", true);
             if (!passwordResult.Any())
+            {
+                if (ShouldStopProfilePrompt(settings.UseUserProfiles, AskToStopProfilePrompt))
+                {
+                    settings.UserProfilePromptDeclined = true;
+                    settings.Save();
+                }
                 return false;
+            }
             SecureString password = passwordResult.First();
 
             try
@@ -122,12 +131,26 @@ namespace mRemoteNG.App
 
         /// <summary>
         /// User profiles are opt-in. An existing profile store keeps the prompt,
-        /// so connections already saved in a profile are not left behind.
+        /// so connections already saved in a profile are not left behind,
+        /// until the user chooses to stop being asked.
         /// </summary>
-        internal static bool ShouldUseUserProfiles(bool useUserProfiles, bool profileStoreExists)
+        internal static bool ShouldUseUserProfiles(bool useUserProfiles, bool profileStoreExists, bool promptDeclined)
         {
-            return useUserProfiles || profileStoreExists;
+            return useUserProfiles || (profileStoreExists && !promptDeclined);
         }
+
+        /// <summary>
+        /// After the profile prompt is cancelled, the user is asked whether to stop
+        /// being prompted. Not asked when profiles were turned on deliberately.
+        /// </summary>
+        internal static bool ShouldStopProfilePrompt(bool useUserProfiles, Func<bool> askToStop)
+        {
+            return !useUserProfiles && askToStop();
+        }
+
+        private static bool AskToStopProfilePrompt() =>
+            MessageBox.Show(Language.ProfilePromptStopAsking, Application.ProductName,
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes;
 
         public static void LoadConnectionsAsync()
         {

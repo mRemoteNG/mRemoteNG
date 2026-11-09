@@ -737,6 +737,11 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="Verify" xml:space="preserve">
     <value>Verify:</value>
   </data>
+  <data name="ProfilePromptStopAsking" xml:space="preserve">
+    <value>Stop asking for a profile password at startup?
+
+Connections saved in the profile are kept. Profiles can be turned back on with the UseUserProfiles setting.</value>
+  </data>
   <data name="LanguageString" xml:space="preserve">
     <value>Language</value>
   </data>

@@ -130,5 +130,17 @@ namespace mRemoteNG.Properties {
                 this["UseUserProfiles"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UserProfilePromptDeclined {
+            get {
+                return ((bool)(this["UserProfilePromptDeclined"]));
+            }
+            set {
+                this["UserProfilePromptDeclined"] = value;
+            }
+        }
     }
 }
