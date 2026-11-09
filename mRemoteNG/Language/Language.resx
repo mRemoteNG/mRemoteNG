@@ -740,7 +740,10 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="ProfilePromptStopAsking" xml:space="preserve">
     <value>Stop asking for a profile password at startup?
 
-Connections saved in the profile are kept. Profiles can be turned back on with the UseUserProfiles setting.</value>
+Connections saved in the profile are kept. You can turn the prompt back on in Options &gt; Startup/Exit.</value>
+  </data>
+  <data name="AskProfilePasswordAtStartup" xml:space="preserve">
+    <value>Ask for a profile password at startup</value>
   </data>
   <data name="LanguageString" xml:space="preserve">
     <value>Language</value>

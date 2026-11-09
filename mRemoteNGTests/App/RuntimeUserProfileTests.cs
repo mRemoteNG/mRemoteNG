@@ -56,6 +56,28 @@ public class RuntimeUserProfileTests
     }
 
     [Test]
+    public void TurningThePromptOnClearsAnEarlierStop()
+    {
+        mRemoteNG.Properties.OptionsDBsPage settings = new() { UserProfilePromptDeclined = true };
+
+        Runtime.SetProfilePromptEnabled(settings, true);
+
+        Assert.That(settings.UseUserProfiles, Is.True);
+        Assert.That(settings.UserProfilePromptDeclined, Is.False);
+        Assert.That(Runtime.ShouldUseUserProfiles(settings.UseUserProfiles, profileStoreExists: true, settings.UserProfilePromptDeclined), Is.True);
+    }
+
+    [Test]
+    public void TurningThePromptOffStopsItForAnExistingProfileStore()
+    {
+        mRemoteNG.Properties.OptionsDBsPage settings = new() { UseUserProfiles = true };
+
+        Runtime.SetProfilePromptEnabled(settings, false);
+
+        Assert.That(Runtime.ShouldUseUserProfiles(settings.UseUserProfiles, profileStoreExists: true, settings.UserProfilePromptDeclined), Is.False);
+    }
+
+    [Test]
     public void CancellingDoesNotAskWhenProfilesWereTurnedOn()
     {
         bool asked = false;

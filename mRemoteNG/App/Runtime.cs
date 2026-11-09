@@ -143,6 +143,24 @@ namespace mRemoteNG.App
         /// After the profile prompt is cancelled, the user is asked whether to stop
         /// being prompted. Not asked when profiles were turned on deliberately.
         /// </summary>
+        /// <summary>
+        /// Whether the profile password prompt will appear at the next startup.
+        /// </summary>
+        internal static bool IsProfilePromptEnabled(Properties.OptionsDBsPage settings)
+        {
+            string databasePath = Path.Combine(SettingsFileInfo.SettingsPath, SqliteUserProfileStore.DatabaseFileName);
+            return ShouldUseUserProfiles(settings.UseUserProfiles, File.Exists(databasePath), settings.UserProfilePromptDeclined);
+        }
+
+        /// <summary>
+        /// Turns the profile password prompt on or off. Off keeps the profile store.
+        /// </summary>
+        internal static void SetProfilePromptEnabled(Properties.OptionsDBsPage settings, bool enabled)
+        {
+            settings.UseUserProfiles = enabled;
+            settings.UserProfilePromptDeclined = !enabled;
+        }
+
         internal static bool ShouldStopProfilePrompt(bool useUserProfiles, Func<bool> askToStop)
         {
             return !useUserProfiles && askToStop();

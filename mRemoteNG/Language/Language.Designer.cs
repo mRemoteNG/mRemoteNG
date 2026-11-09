@@ -7961,6 +7961,15 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("ProfilePromptStopAsking", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Ask for a profile password at startup.
+        /// </summary>
+        internal static string AskProfilePasswordAtStartup {
+            get {
+                return ResourceManager.GetString("AskProfilePasswordAtStartup", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Verify table structure.
