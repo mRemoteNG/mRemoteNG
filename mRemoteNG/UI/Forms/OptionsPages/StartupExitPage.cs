@@ -13,6 +13,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         #region Private Fields
 
         private OptRegistryStartupExitPage pageRegSettingsInstance;
+        private bool _profilePromptEnabledAtLoad;
 
         #endregion
 
@@ -38,6 +39,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkStartMinimized.Text = Language.StartMinimized;
             chkStartFullScreen.Text = Language.StartFullScreen;
             chkDisableRefocus.Text = Language.DisableRefocus;
+            chkAskProfilePassword.Text = Language.AskProfilePasswordAtStartup;
             lblRegistrySettingsUsedInfo.Text = Language.OptionsCompanyPolicyMessage;
         }
 
@@ -48,6 +50,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkStartMinimized.Checked = Properties.OptionsStartupExitPage.Default.StartMinimized;
             chkStartFullScreen.Checked = Properties.OptionsStartupExitPage.Default.StartFullScreen;
             chkDisableRefocus.Checked = Properties.OptionsStartupExitPage.Default.DisableRefocus;
+            _profilePromptEnabledAtLoad = Runtime.IsProfilePromptEnabled(Properties.OptionsDBsPage.Default);
+            chkAskProfilePassword.Checked = _profilePromptEnabledAtLoad;
         }
 
         public override void SaveSettings()
@@ -59,6 +63,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsStartupExitPage.Default.StartMinimized = chkStartMinimized.Checked;
             Properties.OptionsStartupExitPage.Default.StartFullScreen = chkStartFullScreen.Checked;
             Properties.OptionsStartupExitPage.Default.DisableRefocus = chkDisableRefocus.Checked;
+
+            // only write when changed, so an untouched box keeps the defaults
+            if (chkAskProfilePassword.Checked != _profilePromptEnabledAtLoad)
+            {
+                Runtime.SetProfilePromptEnabled(Properties.OptionsDBsPage.Default, chkAskProfilePassword.Checked);
+                Properties.OptionsDBsPage.Default.Save();
+                _profilePromptEnabledAtLoad = chkAskProfilePassword.Checked;
+            }
         }
 
         public override void LoadRegistrySettings()
