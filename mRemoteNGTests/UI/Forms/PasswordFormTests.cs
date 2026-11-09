@@ -146,6 +146,30 @@ namespace mRemoteNGTests.UI.Forms
             Assert.That(passwordTextBox.Text, Is.EqualTo("typed before"));
         }
 
+        [TestCase(true)]
+        [TestCase(false)]
+        public void ButtonsAreFullyVisibleBeforeAndAfterAStatusMessage(bool newPasswordMode)
+        {
+            using FrmPassword form = new(newPasswordMode: newPasswordMode);
+            form.Show();
+            AssertButtonsVisible(form);
+
+            form.FindControl<TextBox>("txtPassword").Text = newPasswordMode ? "abc" : "";
+            if (newPasswordMode)
+                form.FindControl<Button>("btnOK").PerformClick();
+            AssertButtonsVisible(form);
+        }
+
+        private static void AssertButtonsVisible(Form form)
+        {
+            foreach (string name in new[] { "btnOK", "btnCancel" })
+            {
+                Button button = form.FindControl<Button>(name);
+                System.Drawing.Rectangle bounds = form.RectangleToClient(button.RectangleToScreen(button.ClientRectangle));
+                Assert.That(form.ClientRectangle.Contains(bounds), Is.True, $"{name} is cut off: {bounds} in {form.ClientRectangle}");
+            }
+        }
+
         [Test]
         public void FourCharacterNewPasswordIsAccepted()
         {

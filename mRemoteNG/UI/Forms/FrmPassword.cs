@@ -82,15 +82,13 @@ namespace mRemoteNG.UI.Forms
             ApplyTheme();
             DisplayProperties display = new();
             pbLock.Image = display.ScaleImage(pbLock.Image);
-            Height = tableLayoutPanel1.Height;
 
-            if (NewPasswordMode)
+            if (!NewPasswordMode)
             {
-                txtPassword.Focus();
-                return;
+                lblVerify.Visible = false;
+                txtVerify.Visible = false;
             }
-            lblVerify.Visible = false;
-            txtVerify.Visible = false;
+            FitToContents();
             txtPassword.Focus();
         }
 
@@ -259,13 +257,27 @@ namespace mRemoteNG.UI.Forms
 
         private void ShowStatus(string status)
         {
-            lblStatus.Visible = true;
             lblStatus.Text = status;
+            lblStatus.Visible = true;
+            FitToContents();
         }
 
         private void HideStatus()
         {
+            if (!lblStatus.Visible)
+                return;
             lblStatus.Visible = false;
+            FitToContents();
+        }
+
+        /// <summary>
+        /// Sizes the window to its contents, so a status message that wraps
+        /// never squeezes the OK and Cancel buttons.
+        /// </summary>
+        private void FitToContents()
+        {
+            int height = tableLayoutPanel1.GetPreferredSize(new System.Drawing.Size(ClientSize.Width, 0)).Height;
+            ClientSize = new System.Drawing.Size(ClientSize.Width, height);
         }
 
         #endregion
