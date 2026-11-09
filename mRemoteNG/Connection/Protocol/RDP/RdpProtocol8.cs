@@ -239,13 +239,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 return;
             }
 
-            // FitToWindow: fixed resolution set at connect time, scrollbars handle overflow.
             // SmartSize: SmartSizing scales the image client-side, no session resize needed.
-            // Only Fullscreen benefits from dynamically changing the remote session resolution.
-            if (InterfaceControl.Info.Resolution != RDPResolutions.Fullscreen)
+            // FitToWindow and Fullscreen renegotiate the remote session resolution when
+            // AutomaticResize is enabled.
+            if (!SessionFollowsPanelSize(InterfaceControl.Info))
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                    $"Resize skipped for '{connectionInfo.Hostname}': Resolution is {InterfaceControl.Info.Resolution} (only Fullscreen supports dynamic resize)");
+                    $"Resize skipped for '{connectionInfo.Hostname}': Resolution is {InterfaceControl.Info.Resolution} (SmartSize scales client-side)");
                 return;
             }
 
@@ -283,8 +283,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
             // Check if controls are being disposed during shutdown
             if (Control.IsDisposed || InterfaceControl.IsDisposed) return false;
 
-            // FitToWindow: control is undocked at a fixed size with scrollbars; don't touch it.
-            if (InterfaceControl.Info.Resolution == RDPResolutions.FitToWindow)
+            // FitToWindow without automatic resize: control is undocked at a fixed size with scrollbars; don't touch it.
+            if (IsLockedAtConnectSize(InterfaceControl.Info))
                 return false;
 
             Runtime.MessageCollector?.AddMessage(MessageClass.DebugMsg,
