@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.78.2]
 ### Fixed
+- fixed clipboard sharing being turned off for every RDP connection loaded from a connection file saved by 1.76 or earlier (format 2.6 and older)
 - fixed the new password dialog accepting an empty, too short or mismatched password when clicking OK
 - #2154: fixed "Alert on Idle Disconnect" and "Disable Cursor Blinking" showing the labels of other RDP properties in the Config panel
 - fixed connection tree search bar ignoring the "place search bar above connection tree" setting at startup
