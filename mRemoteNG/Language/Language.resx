@@ -1395,6 +1395,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="UseRedirectionServerName" xml:space="preserve">
     <value>Use Redirection Server Name</value>
   </data>
+  <data name="UseUserProfiles" xml:space="preserve">
+    <value>Use user profiles to store connections (experimental, takes effect after restart)</value>
+  </data>
   <data name="ClearCachedRdpCredentials" xml:space="preserve">
     <value>Clear Cached RDP Credentials</value>
   </data>
