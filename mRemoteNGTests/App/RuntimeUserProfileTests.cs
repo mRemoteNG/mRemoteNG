@@ -44,17 +44,6 @@ public class RuntimeUserProfileTests
         Assert.That(Runtime.ShouldUseUserProfiles(useUserProfiles: true, profileStoreExists: true, promptDeclined: true), Is.True);
     }
 
-    [TestCase(true, true)]
-    [TestCase(false, false)]
-    public void CancellingAsksWhetherToStopPrompting(bool answer, bool expected)
-    {
-        bool asked = false;
-        bool result = Runtime.ShouldStopProfilePrompt(useUserProfiles: false, () => { asked = true; return answer; });
-
-        Assert.That(asked, Is.True);
-        Assert.That(result, Is.EqualTo(expected));
-    }
-
     [Test]
     public void TurningThePromptOnClearsAnEarlierStop()
     {
@@ -78,12 +67,13 @@ public class RuntimeUserProfileTests
     }
 
     [Test]
-    public void CancellingDoesNotAskWhenProfilesWereTurnedOn()
+    public void StoppingThePromptAfterProfilesWereTurnedOnStopsIt()
     {
-        bool asked = false;
-        bool result = Runtime.ShouldStopProfilePrompt(useUserProfiles: true, () => { asked = true; return true; });
+        mRemoteNG.Properties.OptionsDBsPage settings = new();
+        Runtime.SetProfilePromptEnabled(settings, true);
 
-        Assert.That(asked, Is.False);
-        Assert.That(result, Is.False);
+        Runtime.SetProfilePromptEnabled(settings, false);
+
+        Assert.That(Runtime.ShouldUseUserProfiles(settings.UseUserProfiles, profileStoreExists: true, settings.UserProfilePromptDeclined), Is.False);
     }
 }

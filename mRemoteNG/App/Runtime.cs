@@ -81,9 +81,9 @@ namespace mRemoteNG.App
             Optional<SecureString> passwordResult = MiscTools.PasswordDialog("Profile password", true);
             if (!passwordResult.Any())
             {
-                if (ShouldStopProfilePrompt(settings.UseUserProfiles, AskToStopProfilePrompt))
+                if (AskToStopProfilePrompt())
                 {
-                    settings.UserProfilePromptDeclined = true;
+                    SetProfilePromptEnabled(settings, false);
                     settings.Save();
                 }
                 return false;
@@ -140,10 +140,6 @@ namespace mRemoteNG.App
         }
 
         /// <summary>
-        /// After the profile prompt is cancelled, the user is asked whether to stop
-        /// being prompted. Not asked when profiles were turned on deliberately.
-        /// </summary>
-        /// <summary>
         /// Whether the profile password prompt will appear at the next startup.
         /// </summary>
         internal static bool IsProfilePromptEnabled(Properties.OptionsDBsPage settings)
@@ -161,11 +157,10 @@ namespace mRemoteNG.App
             settings.UserProfilePromptDeclined = !enabled;
         }
 
-        internal static bool ShouldStopProfilePrompt(bool useUserProfiles, Func<bool> askToStop)
-        {
-            return !useUserProfiles && askToStop();
-        }
-
+        /// <summary>
+        /// Asked whenever the profile prompt is cancelled; Yes is the same as
+        /// unticking "Ask for a profile password at startup".
+        /// </summary>
         private static bool AskToStopProfilePrompt() =>
             MessageBox.Show(Language.ProfilePromptStopAsking, Application.ProductName,
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes;
