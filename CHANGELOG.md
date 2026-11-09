@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.78.2]
 ### Fixed
+- #3301: fixed an unhandled exception that closed mRemoteNG when the Config panel was closed while the host status check was still running
 - #3580: fixed a "Profile password" prompt on every startup; user profiles are now opt-in (UseUserProfiles, off by default) and an existing profile store still prompts
 - fixed clipboard sharing being turned off for every RDP connection loaded from a connection file saved by 1.76 or earlier (format 2.6 and older)
 - fixed the new password dialog accepting an empty, too short or mismatched password when clicking OK
