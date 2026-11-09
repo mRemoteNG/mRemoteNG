@@ -4441,7 +4441,7 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The password must be at least 3 characters long..
+        ///   Looks up a localized string similar to The password must be at least 4 characters long..
         /// </summary>
         internal static string PasswordStatusTooShort {
             get {
@@ -7968,6 +7968,51 @@ namespace mRemoteNG.Resources.Language {
         internal static string HidePassword {
             get {
                 return ResourceManager.GetString("HidePassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Strength: {0}.
+        /// </summary>
+        internal static string PasswordStrength {
+            get {
+                return ResourceManager.GetString("PasswordStrength", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Weak.
+        /// </summary>
+        internal static string PasswordStrengthWeak {
+            get {
+                return ResourceManager.GetString("PasswordStrengthWeak", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Fair.
+        /// </summary>
+        internal static string PasswordStrengthFair {
+            get {
+                return ResourceManager.GetString("PasswordStrengthFair", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Good.
+        /// </summary>
+        internal static string PasswordStrengthGood {
+            get {
+                return ResourceManager.GetString("PasswordStrengthGood", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Strong.
+        /// </summary>
+        internal static string PasswordStrengthStrong {
+            get {
+                return ResourceManager.GetString("PasswordStrengthStrong", resourceCulture);
             }
         }
         

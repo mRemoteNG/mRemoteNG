@@ -934,7 +934,7 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexions !</value>
     <value>Les deux mots de passe doivent correspondre.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>Le mot de passe doit faire au minimum 3 caractères.</value>
+    <value>Le mot de passe doit faire au minimum 4 caractères.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>Merci de remplir tous les champs</value>

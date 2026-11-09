@@ -144,6 +144,7 @@
     <PackageReference Include="SSH.NET" />
     <PackageReference Include="System.Management" />
     <PackageReference Include="VncSharpCore" />
+    <PackageReference Include="zxcvbn-core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Language\Language.Designer.cs">

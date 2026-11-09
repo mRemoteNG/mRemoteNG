@@ -48,6 +48,7 @@ namespace mRemoteNGTests.UI.Forms
 
         [TestCase("", "")]
         [TestCase("ab", "ab")]
+        [TestCase("abc", "abc")]
         [TestCase("new password", "different password")]
         public void InvalidNewPasswordDoesNotAcceptDialog(string password, string confirmation)
         {
@@ -143,6 +144,41 @@ namespace mRemoteNGTests.UI.Forms
             _passwordForm.FindControl<Button>("btnShowPassword").PerformClick();
 
             Assert.That(passwordTextBox.Text, Is.EqualTo("typed before"));
+        }
+
+        [Test]
+        public void FourCharacterNewPasswordIsAccepted()
+        {
+            _passwordForm.FindControl<TextBox>("txtPassword").Text = "abcd";
+            _passwordForm.FindControl<TextBox>("txtVerify").Text = "abcd";
+
+            _passwordForm.FindControl<Button>("btnOK").PerformClick();
+
+            Assert.That(_passwordForm.DialogResult, Is.EqualTo(DialogResult.OK));
+        }
+
+        [Test]
+        [SetUICulture("en-US")]
+        public void TypingANewPasswordShowsItsStrength()
+        {
+            Label strengthLabel = _passwordForm.FindControl<Label>("lblStrength");
+            Assert.That(strengthLabel.Visible, Is.False);
+
+            _passwordForm.FindControl<TextBox>("txtPassword").Text = "password";
+
+            Assert.That(strengthLabel.Visible, Is.True);
+            Assert.That(strengthLabel.Text, Is.EqualTo("Strength: Weak"));
+        }
+
+        [Test]
+        public void ExistingPasswordDoesNotShowStrength()
+        {
+            using FrmPassword existingPasswordForm = new(newPasswordMode: false);
+            existingPasswordForm.Show();
+
+            existingPasswordForm.FindControl<TextBox>("txtPassword").Text = "password";
+
+            Assert.That(existingPasswordForm.FindControl<Label>("lblStrength").Visible, Is.False);
         }
 
         [Test]
