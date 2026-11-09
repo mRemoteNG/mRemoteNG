@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #2496: fixed use pwfile instead of cleartext password for putty connections 
 
 ### Added
+- added a "show password" eye to the password dialog; while the new password is shown, it does not need to be typed again in Verify
 - added a warning when a connection's hostname is already used by another connection, listing where the existing ones are in the tree
 - changed connection tree search to filter the tree by default instead of jumping to the first match
 - #876: added Wake-on-LAN option to the connection tree context menu to wake sleeping or powered-off machines using the connection's MAC Address

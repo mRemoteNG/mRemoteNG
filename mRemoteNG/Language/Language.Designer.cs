@@ -7952,6 +7952,24 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("Verify", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Show password.
+        /// </summary>
+        internal static string ShowPassword {
+            get {
+                return ResourceManager.GetString("ShowPassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Hide password.
+        /// </summary>
+        internal static string HidePassword {
+            get {
+                return ResourceManager.GetString("HidePassword", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Verify table structure.

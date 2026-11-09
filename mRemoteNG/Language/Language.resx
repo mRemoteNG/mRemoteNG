@@ -737,6 +737,12 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="Verify" xml:space="preserve">
     <value>Verify:</value>
   </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>Show password</value>
+  </data>
+  <data name="HidePassword" xml:space="preserve">
+    <value>Hide password</value>
+  </data>
   <data name="LanguageString" xml:space="preserve">
     <value>Language</value>
   </data>
