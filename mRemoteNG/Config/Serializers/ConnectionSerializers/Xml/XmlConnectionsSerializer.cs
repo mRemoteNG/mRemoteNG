@@ -37,20 +37,21 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         private string SerializeConnectionsData(ConnectionInfo serializationTarget)
         {
-            string xml = "";
             try
             {
                 XmlConnectionsDocumentCompiler documentCompiler =
                     new(_cryptographyProvider, _connectionNodeSerializer);
                 XDocument xmlDocument = documentCompiler.CompileDocument(serializationTarget, UseFullEncryption);
-                xml = WriteXmlToString(xmlDocument);
+                return WriteXmlToString(xmlDocument);
             }
             catch (Exception ex)
             {
+                // Do not swallow the failure and return an empty string: that empty
+                // string would be written over the connection file, destroying it while
+                // reporting a successful save. Surface the error so callers can abort.
                 Runtime.MessageCollector.AddExceptionStackTrace("SaveToXml failed", ex);
+                throw;
             }
-
-            return xml;
         }
 
         private static string WriteXmlToString(XNode xmlDocument)

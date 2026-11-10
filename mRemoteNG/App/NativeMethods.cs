@@ -592,6 +592,8 @@ namespace mRemoteNG.App
         public const uint ECM_FIRST = 0x1500;
         public const uint EM_SETCUEBANNER = ECM_FIRST + 1;
         public const uint EM_GETCUEBANNER = ECM_FIRST + 2;
+        public const uint EM_SETMARGINS = 0xD3;
+        public const int EC_RIGHTMARGIN = 0x2;
 
         #endregion
 

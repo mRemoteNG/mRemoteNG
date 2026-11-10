@@ -3117,6 +3117,15 @@ namespace mRemoteNG.Resources.Language {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Use user profiles to store connections (experimental, takes effect after restart).
+        /// </summary>
+        internal static string UseUserProfiles {
+            get {
+                return ResourceManager.GetString("UseUserProfiles", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Import all open ports as selected protocol.
         /// </summary>
         internal static string ImportAllOpenPorts {
@@ -7950,6 +7959,34 @@ namespace mRemoteNG.Resources.Language {
         internal static string Verify {
             get {
                 return ResourceManager.GetString("Verify", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Stop asking for a profile password at startup?.
+        /// </summary>
+        internal static string ProfilePromptStopAsking {
+            get {
+                return ResourceManager.GetString("ProfilePromptStopAsking", resourceCulture);
+        ///   Looks up a localized string similar to Show password.
+        /// </summary>
+        internal static string ShowPassword {
+            get {
+                return ResourceManager.GetString("ShowPassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Ask for a profile password at startup.
+        /// </summary>
+        internal static string AskProfilePasswordAtStartup {
+            get {
+                return ResourceManager.GetString("AskProfilePasswordAtStartup", resourceCulture);
+        ///   Looks up a localized string similar to Hide password.
+        /// </summary>
+        internal static string HidePassword {
+            get {
+                return ResourceManager.GetString("HidePassword", resourceCulture);
             }
         }
         
