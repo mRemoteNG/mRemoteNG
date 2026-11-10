@@ -37,6 +37,17 @@ namespace mRemoteNG.Config.Serializers
             _rootNodeInfo = rootNodeInfo;
         }
 
+        /// <summary>
+        /// Used for providers that aren't built from the (engine, mode) pair above — currently only
+        /// <see cref="SymmetricEncryption.DpapiCryptographyProvider"/>, which has no engine/mode/KDF
+        /// of its own.
+        /// </summary>
+        public XmlConnectionsDecryptor(ICryptographyProvider cryptographyProvider, RootNodeInfo rootNodeInfo)
+        {
+            _cryptographyProvider = cryptographyProvider;
+            _rootNodeInfo = rootNodeInfo;
+        }
+
         public string Decrypt(string plainText)
         {
             return plainText == ""

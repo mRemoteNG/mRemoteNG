@@ -28,6 +28,23 @@ Specifies the encryption engine used for encryption.
   - Disable: ``false``
 
 
+Use DPAPI Protection
+--------------------
+.. versionadded:: v1.78.2
+
+Specifies whether the connections file is protected with Windows DPAPI (tied to the current
+Windows user account and machine) instead of a password-derived key. When enabled, the
+Encryption Engine, Block Cipher Mode and Key Derivation Iterations settings below have no effect,
+since DPAPI uses none of them. See :doc:`../howtos/dpapi_protection` for details.
+
+- **Value Name:** ``UseDpapiProtection``
+- **Value Type:** ``REG_SZ``
+- **Values:**
+
+  - Enable: ``true``
+  - Disable: ``false``
+
+
 Encryption Engine
 -----------------
 Specifies the encryption engine used for encryption.
@@ -79,4 +96,5 @@ Registry Template
   "EncryptionEngine"="AES"
   "EncryptionBlockCipherMode"="GCM"
   "EncryptCompleteConnectionsFile"="false"
+  "UseDpapiProtection"="false"
   "EncryptionKeyDerivationIterations"=dword:00009c40
