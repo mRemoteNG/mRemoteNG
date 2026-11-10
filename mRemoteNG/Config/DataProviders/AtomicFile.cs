@@ -10,8 +10,9 @@ namespace mRemoteNG.Config.DataProviders
         public static void WriteAllText(string path, string content)
         {
             string destination = Path.GetFullPath(path);
-            Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
-            string temporary = destination + "." + Guid.NewGuid().ToString("N") + ".tmp";
+            string directory = Path.GetDirectoryName(destination);
+            Directory.CreateDirectory(directory);
+            string temporary = Path.Combine(directory, Guid.NewGuid().ToString("N") + ".tmp");
             try
             {
                 using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None,
