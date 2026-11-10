@@ -196,7 +196,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 : new ConnectionInfo();
 
             node.Protocol = protocol;
-            node.Resolution = RDPResolutions.FitToWindow;
+            node.Resolution = RDPResolutions.SmartSize;
             node.RDGatewayUsageMethod = RDGatewayUsageMethod.Never;
             node.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes;
             node.RedirectSound = RDPSounds.DoNotPlay;

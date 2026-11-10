@@ -545,23 +545,9 @@ namespace mRemoteNG.UI.Forms
 
             if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
             {
-                int openConnections = 0;
-                if (pnlDock.Contents.Count > 0)
-                {
-                    foreach (IDockContent dc in pnlDock.Contents)
-                    {
-                        if (dc is not ConnectionWindow cw) continue;
-                        if (cw.Controls.Count < 1) continue;
-                        if (cw.Controls[0] is not DockPanel dp) continue;
-                        if (dp.Contents.Count > 0)
-                            openConnections += dp.Contents.Count;
-                    }
-                }
+                int openConnections = CountOpenConnections(pnlDock.Contents);
 
-                if (openConnections > 0 &&
-                    (Properties.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All |
-                     (Properties.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple &
-                      openConnections > 1) || Properties.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit))
+                if (ShouldConfirmExit(Properties.Settings.Default.ConfirmCloseConnection, openConnections))
                 {
                     DialogResult result = CTaskDialog.MessageBox(this, Application.ProductName, Language.ConfirmExitMainInstruction, "", "", "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
                     if (CTaskDialog.VerificationChecked)
@@ -598,6 +584,35 @@ namespace mRemoteNG.UI.Forms
             Shutdown.StartUpdate();
 
             Debug.Print("[END] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
+        }
+
+        /// <summary>
+        /// Counts the connection tabs in the connection panels. Other documents, like the
+        /// Options window, are shown in the same panel and stay there when hidden.
+        /// </summary>
+        internal static int CountOpenConnections(IEnumerable<IDockContent> panels)
+        {
+            int openConnections = 0;
+            foreach (IDockContent dc in panels)
+            {
+                if (dc is not ConnectionWindow cw) continue;
+                if (cw.Controls.Count < 1) continue;
+                if (cw.Controls[0] is not DockPanel dp) continue;
+                openConnections += dp.Contents.OfType<ConnectionTab>().Count();
+            }
+            return openConnections;
+        }
+
+        internal static bool ShouldConfirmExit(int confirmCloseConnection, int openConnections)
+        {
+            if (openConnections < 1) return false;
+
+            return confirmCloseConnection switch
+            {
+                (int)ConfirmCloseEnum.All or (int)ConfirmCloseEnum.Exit => true,
+                (int)ConfirmCloseEnum.Multiple => openConnections > 1,
+                _ => false
+            };
         }
 
         #endregion
