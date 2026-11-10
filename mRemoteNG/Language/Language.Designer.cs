@@ -6259,6 +6259,24 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to enable WebAuthn redirection (PluginDlls).
+        /// </summary>
+        internal static string RdpWebAuthnPluginFailed {
+            get {
+                return ResourceManager.GetString("RdpWebAuthnPluginFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WebAuthn redirection plugin not found at '{0}'.
+        /// </summary>
+        internal static string RdpWebAuthnPluginNotFound {
+            get {
+                return ResourceManager.GetString("RdpWebAuthnPluginNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RDP Set Redirect Keys Failed!.
         /// </summary>
         internal static string RdpSetRedirectKeysFailed {

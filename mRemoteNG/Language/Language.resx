@@ -1620,6 +1620,12 @@ If you run into such an error, please create a new connection file!</value>
   <data name="RdpSetRedirectionFailed" xml:space="preserve">
     <value>RDP Set Redirection Failed!</value>
   </data>
+  <data name="RdpWebAuthnPluginFailed" xml:space="preserve">
+    <value>Failed to enable WebAuthn redirection (PluginDlls)</value>
+  </data>
+  <data name="RdpWebAuthnPluginNotFound" xml:space="preserve">
+    <value>WebAuthn redirection plugin not found at '{0}'</value>
+  </data>
   <data name="RdpSetRedirectKeysFailed" xml:space="preserve">
     <value>RDP Set Redirect Keys Failed!</value>
   </data>

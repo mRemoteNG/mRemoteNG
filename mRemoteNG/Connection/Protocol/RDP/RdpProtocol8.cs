@@ -94,18 +94,18 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 if (!File.Exists(pluginPath))
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                        $"WebAuthn redirection: plugin not found at '{pluginPath}', skipping", true);
+                        string.Format(Language.RdpWebAuthnPluginNotFound, pluginPath));
                     return;
                 }
 
                 IMsTscAdvancedSettings advancedSettings = RdpClient8.AdvancedSettings;
                 advancedSettings.PluginDlls = pluginPath;
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
                     $"WebAuthn redirection: PluginDlls set to '{pluginPath}'", true);
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("WebAuthn redirection: failed to set PluginDlls", ex, MessageClass.WarningMsg, false);
+                Runtime.MessageCollector.AddExceptionMessage(Language.RdpWebAuthnPluginFailed, ex, MessageClass.WarningMsg, false);
             }
         }
 
