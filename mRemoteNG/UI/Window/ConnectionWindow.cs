@@ -213,10 +213,12 @@ namespace mRemoteNG.UI.Window
             List<InterfaceControl> controlList = new();
             try
             {
-                foreach (IDockContent dockContent in connDock.DocumentsToArray())
+                foreach (ConnectionTab tab in connDock.DocumentsToArray().OfType<ConnectionTab>())
                 {
-                    ConnectionTab tab = (ConnectionTab)dockContent;
-                    controlList.Add((InterfaceControl)tab.Tag);
+                    // Tag holds the ConnectionInfo until the protocol attaches its InterfaceControl.
+                    // Such a tab is still connecting or failed to connect: nothing to close or reconnect.
+                    if (tab.Tag is InterfaceControl interfaceControl)
+                        controlList.Add(interfaceControl);
                 }
 
                 foreach (InterfaceControl iControl in controlList)
