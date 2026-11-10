@@ -85,6 +85,67 @@ namespace mRemoteNGTests.UI.Forms
         }
 
         [Test]
+        public void PasswordIsHiddenUntilTheEyeIsClicked()
+        {
+            TextBox passwordTextBox = _passwordForm.FindControl<TextBox>("txtPassword");
+            Button showPasswordButton = _passwordForm.FindControl<Button>("btnShowPassword");
+
+            Assert.That(passwordTextBox.UseSystemPasswordChar, Is.True);
+            showPasswordButton.PerformClick();
+            Assert.That(passwordTextBox.UseSystemPasswordChar, Is.False);
+            showPasswordButton.PerformClick();
+            Assert.That(passwordTextBox.UseSystemPasswordChar, Is.True);
+        }
+
+        [Test]
+        public void ShownNewPasswordDoesNotNeedVerification()
+        {
+            _passwordForm.FindControl<Button>("btnShowPassword").PerformClick();
+            _passwordForm.FindControl<TextBox>("txtPassword").Text = "new password";
+
+            _passwordForm.FindControl<Button>("btnOK").PerformClick();
+
+            Assert.That(_passwordForm.FindControl<TextBox>("txtVerify").Enabled, Is.False);
+            Assert.That(_passwordForm.DialogResult, Is.EqualTo(DialogResult.OK));
+        }
+
+        [Test]
+        public void ShownNewPasswordMustStillBeLongEnough()
+        {
+            _passwordForm.FindControl<Button>("btnShowPassword").PerformClick();
+            _passwordForm.FindControl<TextBox>("txtPassword").Text = "ab";
+
+            _passwordForm.FindControl<Button>("btnOK").PerformClick();
+
+            Assert.That(_passwordForm.DialogResult, Is.EqualTo(DialogResult.None));
+        }
+
+        [Test]
+        public void HidingThePasswordAgainNeedsVerificationAgain()
+        {
+            Button showPasswordButton = _passwordForm.FindControl<Button>("btnShowPassword");
+            showPasswordButton.PerformClick();
+            _passwordForm.FindControl<TextBox>("txtPassword").Text = "new password";
+            showPasswordButton.PerformClick();
+
+            _passwordForm.FindControl<Button>("btnOK").PerformClick();
+
+            Assert.That(_passwordForm.FindControl<TextBox>("txtVerify").Enabled, Is.True);
+            Assert.That(_passwordForm.DialogResult, Is.EqualTo(DialogResult.None));
+        }
+
+        [Test]
+        public void ShowingThePasswordKeepsWhatWasTyped()
+        {
+            TextBox passwordTextBox = _passwordForm.FindControl<TextBox>("txtPassword");
+            passwordTextBox.Text = "typed before";
+
+            _passwordForm.FindControl<Button>("btnShowPassword").PerformClick();
+
+            Assert.That(passwordTextBox.Text, Is.EqualTo("typed before"));
+        }
+
+        [Test]
         public void PasswordFieldHasAutofocus()
         {
             // Find the password textbox control

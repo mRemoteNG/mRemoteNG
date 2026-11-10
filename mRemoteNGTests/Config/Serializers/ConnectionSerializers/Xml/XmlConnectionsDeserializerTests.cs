@@ -121,6 +121,17 @@ public class XmlConnectionsDeserializerTests
         Assert.That(folder1.IsExpanded, Is.True);
     }
 
+    [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData),
+        nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+    public void ClipboardRedirectionIsEnabledForFilesOlderThanVersion27(Datagram testData)
+    {
+        // pre-2.7 files have no RedirectClipboard attribute; mRemoteNG 1.76 and earlier always shared the clipboard
+        Setup(testData.ConfCons, testData.Password);
+        var connections = _connectionTreeModel.GetRecursiveChildList();
+        Assert.That(connections, Is.Not.Empty);
+        Assert.That(connections.Select(connection => connection.RedirectClipboard), Is.All.True);
+    }
+
     private bool ContainsNodeNamed(string name, IEnumerable<ConnectionInfo> list)
     {
         return list.Any(node => node.Name == name);
