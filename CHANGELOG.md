@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.78.2]
 ### Fixed
+- #3178: fixed "Reconnect to previously opened sessions on startup" being turned off by the "Automatically try to reconnect when disconnected from server" option, and for good after one start with /noreconnect
 - fixed the AllowExportUsernames and AllowExportPasswords registry settings not being enforced in the export dialog and CSV export, including VNC proxy and RD Gateway credentials
 - #3247: fixed the rename box in the connection tree being shifted and showing the old name behind it
 - fixed exiting mRemoteNG asking "Do you want to close all open connections?" when no connection was open, after the Options window had been opened
