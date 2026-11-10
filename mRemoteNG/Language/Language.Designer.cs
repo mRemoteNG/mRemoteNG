@@ -7968,6 +7968,10 @@ namespace mRemoteNG.Resources.Language {
         internal static string ProfilePromptStopAsking {
             get {
                 return ResourceManager.GetString("ProfilePromptStopAsking", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Show password.
         /// </summary>
         internal static string ShowPassword {
@@ -7982,6 +7986,10 @@ namespace mRemoteNG.Resources.Language {
         internal static string AskProfilePasswordAtStartup {
             get {
                 return ResourceManager.GetString("AskProfilePasswordAtStartup", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Hide password.
         /// </summary>
         internal static string HidePassword {
