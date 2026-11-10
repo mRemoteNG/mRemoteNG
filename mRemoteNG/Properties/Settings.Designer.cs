@@ -229,6 +229,18 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultRedirectWebAuthn {
+            get {
+                return ((bool)(this["ConDefaultRedirectWebAuthn"]));
+            }
+            set {
+                this["ConDefaultRedirectWebAuthn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("DoNotPlay")]
         public string ConDefaultRedirectSound {
             get {
@@ -536,6 +548,18 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["InhDefaultRedirectSmartCards"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRedirectWebAuthn {
+            get {
+                return ((bool)(this["InhDefaultRedirectWebAuthn"]));
+            }
+            set {
+                this["InhDefaultRedirectWebAuthn"] = value;
             }
         }
         

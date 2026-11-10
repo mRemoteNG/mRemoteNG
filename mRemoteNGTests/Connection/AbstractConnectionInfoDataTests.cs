@@ -380,6 +380,15 @@ public class AbstractConnectionInfoDataTests
     }
 
     [Test]
+    public void RedirectWebAuthnNotifiesOnValueChange()
+    {
+        var wasCalled = false;
+        _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
+        _testAbstractConnectionInfoData.RedirectWebAuthn = true;
+        Assert.That(wasCalled, Is.True);
+    }
+
+    [Test]
     public void RedirectSoundNotifiesOnValueChange()
     {
         var wasCalled = false;
