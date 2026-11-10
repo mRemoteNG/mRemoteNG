@@ -744,6 +744,7 @@ Connections saved in the profile are kept. You can turn the prompt back on in Op
   </data>
   <data name="AskProfilePasswordAtStartup" xml:space="preserve">
     <value>Ask for a profile password at startup</value>
+  </data>
   <data name="ShowPassword" xml:space="preserve">
     <value>Show password</value>
   </data>
