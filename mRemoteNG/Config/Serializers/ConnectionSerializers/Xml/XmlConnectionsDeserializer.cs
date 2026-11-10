@@ -69,13 +69,21 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 connectionTreeModel.AddRootNode(_rootNodeInfo);
 
 
-                if (_confVersion > 1.3 && !_isDpapiProtected)
+                if (_isDpapiProtected)
                 {
                     // DPAPI-protected files skip the password-authentication dance entirely: there is
-                    // no password to confirm. CreateDecryptor() already proved whether DPAPI can
-                    // decrypt this file's content (it throws EncryptionException(s) from
-                    // DpapiCryptographyProvider.Decrypt if the file was protected under a different
-                    // Windows account/machine), so by the time we get here, access is already settled.
+                    // no password to confirm. But the root Protected value must still actually be
+                    // decrypted here — not merely assumed decryptable — so a file protected under a
+                    // different Windows account/machine fails the whole load with a clear
+                    // EncryptionException instead of silently falling through to per-node decryption,
+                    // where each node's own catch block would swallow the failure and let a tree full
+                    // of undecryptable passwords load "successfully" (and a later save would then
+                    // overwrite the original ciphertext with garbage).
+                    string dpapiProtectedString = _xmlDocument.DocumentElement?.Attributes["Protected"]?.Value;
+                    _decryptor.VerifyDpapiProtectedRoot(dpapiProtectedString);
+                }
+                else if (_confVersion > 1.3)
+                {
                     string protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"]?.Value;
                     if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()))
                     {

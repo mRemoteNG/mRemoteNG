@@ -24,6 +24,7 @@
       <xs:attribute name="FullFileEncryption" type="xs:boolean" use="required" />
       <xs:attribute name="Protected" type="xs:string" use="required" />
       <xs:attribute name="ConfVersion" type="xs:float" use="required" />
+      <xs:attribute name="KeyProtection" type="xs:string" use="optional" />
     </xs:complexType>
   </xs:element>
 

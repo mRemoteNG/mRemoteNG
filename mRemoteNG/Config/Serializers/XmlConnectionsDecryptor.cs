@@ -107,6 +107,23 @@ namespace mRemoteNG.Config.Serializers
             return connectionsFileIsNotEncrypted || Authenticate(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString());
         }
 
+        /// <summary>
+        /// DPAPI equivalent of <see cref="ConnectionsFileIsAuthentic"/>. There is no password to try
+        /// or re-prompt for — <see cref="SymmetricEncryption.DpapiCryptographyProvider.Decrypt"/>
+        /// either unprotects the root <c>Protected</c> value (same Windows account + machine that
+        /// saved it) or throws <see cref="EncryptionException"/>, which this method lets propagate
+        /// so the caller fails the whole load instead of continuing with an unreadable root.
+        /// </summary>
+        /// <param name="protectedString">The root element's <c>Protected</c> attribute value.</param>
+        /// <exception cref="EncryptionException">
+        /// The file was protected under a different Windows user account or machine, or its DPAPI
+        /// master key changed/was removed.
+        /// </exception>
+        public void VerifyDpapiProtectedRoot(string protectedString)
+        {
+            _cryptographyProvider.Decrypt(protectedString, null);
+        }
+
         private bool Authenticate(string cipherText, SecureString password)
         {
             PasswordAuthenticator authenticator = new(_cryptographyProvider, cipherText, AuthenticationRequestor);

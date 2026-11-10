@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Connection;
@@ -103,5 +104,23 @@ public class XmlConnectionsDpapiRoundTripTests
         var provider = new DpapiCryptographyProvider();
         Assert.That(provider.Encrypt("", null), Is.EqualTo(""));
         Assert.That(provider.Decrypt("", null), Is.EqualTo(""));
+    }
+
+    [Test]
+    [Apartment(ApartmentState.STA)]
+    public void FileWithForeignDpapiRootProtectedValueFailsTheWholeLoad()
+    {
+        // Regression test for the PR review finding: a DPAPI-protected connections file whose root
+        // Protected value cannot be decrypted here (different Windows account/machine, or simply
+        // corrupted) must fail the entire Deserialize() call, not silently continue loading nodes
+        // with a tree full of undecryptable passwords that a later save would overwrite as garbage.
+        string savedXml = SaveWithDpapi();
+        string foreignProtectedValue = System.Convert.ToBase64String(new byte[] { 9, 9, 9, 9, 9, 9, 9, 9 });
+        string corruptedXml = Regex.Replace(savedXml, "Protected=\"[^\"]*\"", $"Protected=\"{foreignProtectedValue}\"");
+        Assert.That(corruptedXml, Does.Contain(foreignProtectedValue));
+
+        var deserializer = new XmlConnectionsDeserializer(() => new Optional<System.Security.SecureString>());
+
+        Assert.Throws<EncryptionException>(() => deserializer.Deserialize(corruptedXml));
     }
 }
