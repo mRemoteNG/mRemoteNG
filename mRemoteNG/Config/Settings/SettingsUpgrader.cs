@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
@@ -77,7 +78,8 @@ namespace mRemoteNG.Config.Settings
 
             // Saved now rather than on exit: a session that does not end normally would
             // otherwise upgrade again on the next start, over whatever was changed since.
-            foreach (ApplicationSettingsBase settings in AllSettings)
+            // App, which holds DoUpgrade, is saved last: a start that stops halfway upgrades again.
+            foreach (ApplicationSettingsBase settings in AllSettings.OrderBy(candidate => candidate == Properties.App.Default))
             {
                 try
                 {

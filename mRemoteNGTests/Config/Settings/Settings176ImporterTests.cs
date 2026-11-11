@@ -144,6 +144,33 @@ namespace mRemoteNGTests.Config.Settings
             Assert.That(theme.ThemeName, Is.EqualTo(newName));
         }
 
+        [TestCase("ConDefaultProtocol", "ICA")]
+        [TestCase("ConDefaultRenderingEngine", "Gecko")]
+        public void AConnectionDefaultThisVersionNoLongerHasKeepsTheDefault(string name, string value)
+        {
+            string file = WriteUserConfig(Setting(name, value));
+            ConnectionDefaultsLikeSettings defaults = new();
+
+            int imported = Settings176Importer.Import(file, [defaults], _root);
+
+            Assert.That(imported, Is.Zero);
+            Assert.That(defaults.ConDefaultProtocol, Is.EqualTo("RDP"));
+            Assert.That(defaults.ConDefaultRenderingEngine, Is.EqualTo("EdgeChromium"));
+        }
+
+        [Test]
+        public void AConnectionDefaultThisVersionHasIsImported()
+        {
+            string file = WriteUserConfig(Setting("ConDefaultProtocol", "SSH2"), Setting("ConDefaultRenderingEngine", "IE"));
+            ConnectionDefaultsLikeSettings defaults = new();
+
+            int imported = Settings176Importer.Import(file, [defaults], _root);
+
+            Assert.That(imported, Is.EqualTo(2));
+            Assert.That(defaults.ConDefaultProtocol, Is.EqualTo("SSH2"));
+            Assert.That(defaults.ConDefaultRenderingEngine, Is.EqualTo("IE"));
+        }
+
         [Test]
         public void AConnectionsFileKeptElsewhereIsOpenedFromThere()
         {
@@ -233,6 +260,23 @@ namespace mRemoteNGTests.Config.Settings
             {
                 get => (int)this[nameof(AutoSaveEveryMinutes)];
                 set => this[nameof(AutoSaveEveryMinutes)] = value;
+            }
+        }
+
+        private sealed class ConnectionDefaultsLikeSettings : ApplicationSettingsBase
+        {
+            [UserScopedSetting, DefaultSettingValue("RDP")]
+            public string ConDefaultProtocol
+            {
+                get => (string)this[nameof(ConDefaultProtocol)];
+                set => this[nameof(ConDefaultProtocol)] = value;
+            }
+
+            [UserScopedSetting, DefaultSettingValue("EdgeChromium")]
+            public string ConDefaultRenderingEngine
+            {
+                get => (string)this[nameof(ConDefaultRenderingEngine)];
+                set => this[nameof(ConDefaultRenderingEngine)] = value;
             }
         }
 
