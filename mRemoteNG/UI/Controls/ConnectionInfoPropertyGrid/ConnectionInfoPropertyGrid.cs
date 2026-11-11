@@ -378,6 +378,8 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid {
         private void UpdateInheritanceNode() {
             if (IsShowingDefaultProperties && IsShowingInheritance)
                 DefaultConnectionInheritance.Instance.SaveTo(Settings.Default, a => "InhDefault" + a);
+            else if (PropertyMode == PropertyMode.Inheritance)
+                SelectedConnectionInfo?.RaiseInheritanceChanged();
         }
 
         private void pGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e) {
