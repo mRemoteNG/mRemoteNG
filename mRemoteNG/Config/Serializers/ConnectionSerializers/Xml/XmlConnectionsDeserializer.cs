@@ -564,11 +564,21 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.Inheritance.RDGatewayExternalCredentialProvider = xmlnode.GetAttributeAsBool("InheritRDGatewayExternalCredentialProvider");
                     connectionInfo.Inheritance.RDGatewayUserViaAPI = xmlnode.GetAttributeAsBool("InheritRDGatewayUserViaAPI");
                 }
+                else
+                {
+                    // Files older than 2.7 (mRemoteNG 1.76 and earlier) have no RedirectClipboard attribute. Those
+                    // versions never set the option, so the RDP client shared the clipboard by default. Keep it shared
+                    // instead of falling back to ConDefaultRedirectClipboard (false), which silently disabled copy and
+                    // paste for every upgraded connection.
+                    connectionInfo.RedirectClipboard = true;
+                }
 
                 if (_confVersion >= 2.9)
                 {
                     connectionInfo.Color = xmlnode.GetAttributeAsString("Color");
                     connectionInfo.Inheritance.Color = xmlnode.GetAttributeAsBool("InheritColor");
+                    connectionInfo.RedirectWebAuthn = xmlnode.GetAttributeAsBool("RedirectWebAuthn");
+                    connectionInfo.Inheritance.RedirectWebAuthn = xmlnode.GetAttributeAsBool("InheritRedirectWebAuthn");
                 }
 
                 switch (_confVersion)

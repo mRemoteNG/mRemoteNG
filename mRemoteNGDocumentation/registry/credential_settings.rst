@@ -27,6 +27,10 @@ Specifies whether the export of usernames for saved connections is allowed.
 
   - Disallow: ``false``
 
+.. note::
+   If set to ``false``, the matching option in the export dialog is disabled and usernames are left out of
+   XML and CSV exports. This also applies to VNC proxy and RD Gateway usernames.
+
 
 Allow Export Passwords
 ----------------------
@@ -38,6 +42,10 @@ Specifies whether the export of passwords for saved connections is allowed.
 - **Values:**
 
   - Disallow: ``false``
+
+.. note::
+   If set to ``false``, the matching option in the export dialog is disabled and passwords are left out of
+   XML and CSV exports. This also applies to VNC proxy and RD Gateway passwords.
 
 
 Allow Save Usernames
