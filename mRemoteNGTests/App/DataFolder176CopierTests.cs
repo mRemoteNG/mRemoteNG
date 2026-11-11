@@ -63,15 +63,39 @@ namespace mRemoteNGTests.App
             Assert.That(File.ReadAllText(Path.Combine(_old, "confCons.xml")), Is.EqualTo("connections"));
         }
 
-        [Test]
-        public void LogFilesStayBehind()
+        [TestCase("mRemoteNG.log")]
+        [TestCase("mRemoteNG.log.1")]
+        [TestCase("mRemoteNG.log.5")]
+        public void LogFilesStayBehind(string log)
         {
             Write(_old, "confCons.xml", "connections");
-            Write(_old, "mRemoteNG.log", "log");
+            Write(_old, log, "log");
 
+            int copied = DataFolder176Copier.Copy(_old, _new);
+
+            Assert.That(copied, Is.EqualTo(1));
+            Assert.That(File.Exists(Path.Combine(_new, log)), Is.False);
+        }
+
+        [Test]
+        public void ACopyThatFailsIsTakenUpAgainOnTheNextStart()
+        {
+            Write(_old, "confCons.xml", "connections");
+            Write(_old, "extApps.xml", "tools");
+            Write(_old, "pnlLayout.xml", "layout");
+            // A folder where extApps.xml should go makes copying it fail.
+            string blocker = Path.Combine(_new, "extApps.xml");
+            Directory.CreateDirectory(blocker);
+
+            Assert.That(() => DataFolder176Copier.Copy(_old, _new), Throws.InstanceOf<Exception>());
+            Assert.That(File.Exists(Path.Combine(_new, "confCons.xml")), Is.False);
+
+            Directory.Delete(blocker);
             DataFolder176Copier.Copy(_old, _new);
 
-            Assert.That(File.Exists(Path.Combine(_new, "mRemoteNG.log")), Is.False);
+            Assert.That(File.ReadAllText(Path.Combine(_new, "confCons.xml")), Is.EqualTo("connections"));
+            Assert.That(File.ReadAllText(Path.Combine(_new, "extApps.xml")), Is.EqualTo("tools"));
+            Assert.That(File.ReadAllText(Path.Combine(_new, "pnlLayout.xml")), Is.EqualTo("layout"));
         }
 
         [Test]
