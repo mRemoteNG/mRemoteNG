@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [1.78.2]
 ### Fixed
 - #3570: fixed inheritance changes being lost at exit: "Apply inheritance to children", "Apply default inheritance" and the Inheritance tab of the Config panel now save the connection file like other edits
+- fixed RDP sessions in a floating panel not resizing to fit when the panel window is resized, maximized or restored
 - #3178: fixed "Reconnect to previously opened sessions on startup" being turned off by the "Automatically try to reconnect when disconnected from server" option, and for good after one start with /noreconnect
 - fixed the AllowExportUsernames and AllowExportPasswords registry settings not being enforced in the export dialog and CSV export, including VNC proxy and RD Gateway credentials
 - #3247: fixed the rename box in the connection tree being shifted and showing the old name behind it
