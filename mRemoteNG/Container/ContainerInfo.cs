@@ -293,11 +293,17 @@ namespace mRemoteNG.Container
         public void ApplyInheritancePropertiesToChildren()
         {
             IEnumerable<ConnectionInfo> children = GetRecursiveChildList();
+            bool anyChild = false;
 
             foreach (ConnectionInfo child in children)
             {
                 child.Inheritance = Inheritance.Clone(child);
+                anyChild = true;
             }
+
+            // One notification for the whole subtree, so the change is saved once rather than once per child.
+            if (anyChild)
+                RaiseInheritanceChanged();
         }
 
         private IEnumerable<ConnectionInfo> GetRecursiveFavoritChildList(ContainerInfo container)

@@ -44,6 +44,17 @@ namespace mRemoteNG.Connection
                 : value;
         }
 
+        /// <summary>
+        /// Tells the listeners of <see cref="AbstractConnectionRecord.PropertyChanged"/>, such as the save
+        /// after every edit, that the inheritance settings of this connection changed.
+        /// <see cref="ConnectionInfoInheritance"/> raises no events of its own, so whoever changes those
+        /// settings calls this once the change is done.
+        /// </summary>
+        public void RaiseInheritanceChanged()
+        {
+            RaisePropertyChangedEvent(this, new PropertyChangedEventArgs(nameof(Inheritance)));
+        }
+
         [Browsable(false)] public ProtocolList OpenConnections { get; protected set; }
 
         [Browsable(false)] public virtual bool IsContainer { get; set; }
