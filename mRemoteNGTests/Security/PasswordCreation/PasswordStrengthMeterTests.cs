@@ -21,6 +21,14 @@ namespace mRemoteNGTests.Security.PasswordCreation
         }
 
         [Test]
+        public void OverlongPasswordIsNotEstimated()
+        {
+            string password = new string('a', PasswordStrengthMeter.MaximumPasswordLength + 1);
+
+            Assert.That(PasswordStrengthMeter.Evaluate(password).Strength, Is.EqualTo(PasswordStrength.NotEstimated));
+        }
+
+        [Test]
         public void LongUncommonPassphraseIsStrong()
         {
             Assert.That(PasswordStrengthMeter.Evaluate("Tangerine-Ladder-Quartz-Mosquito-71").Strength,
