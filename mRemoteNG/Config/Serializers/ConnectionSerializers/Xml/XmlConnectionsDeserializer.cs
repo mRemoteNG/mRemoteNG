@@ -21,6 +21,7 @@ using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.Security.SymmetricEncryption;
 using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
@@ -28,9 +29,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
     [SupportedOSPlatform("windows")]
     public class XmlConnectionsDeserializer(Func<Optional<SecureString>>? authenticationRequestor = null) : IDeserializer<string, ConnectionTreeModel>
     {
+        // Marker written to the root element's KeyProtection attribute by XmlRootNodeSerializer when
+        // the file was saved with DPAPI protection.
+        private const string DpapiKeyProtectionMarker = "Dpapi";
+
         private XmlDocument _xmlDocument;
         private double _confVersion;
         private XmlConnectionsDecryptor _decryptor;
+        private bool _isDpapiProtected;
         private readonly string ConnectionFileName = "";
         // Must match the newest version written by XmlConnectionSerializerFactory,
         // otherwise the app refuses to open files it saved itself
@@ -61,8 +67,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 ConnectionTreeModel connectionTreeModel = new();
                 connectionTreeModel.AddRootNode(_rootNodeInfo);
 
-
-                if (_confVersion > 1.3)
+                if (_isDpapiProtected)
+                {
+                    string dpapiProtectedString = _xmlDocument.DocumentElement?.Attributes["Protected"]?.Value;
+                    _decryptor.VerifyDpapiProtectedRoot(dpapiProtectedString);
+                }
+                else if (_confVersion > 1.3)
                 {
                     string protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"]?.Value;
                     if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()))
@@ -132,7 +142,16 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         private void CreateDecryptor(RootNodeInfo rootNodeInfo, XmlElement? connectionsRootElement = null)
         {
-            if (_confVersion >= 2.6)
+            _isDpapiProtected = connectionsRootElement?.GetAttributeAsString("KeyProtection") == DpapiKeyProtectionMarker;
+
+            if (_isDpapiProtected)
+            {
+                _decryptor = new XmlConnectionsDecryptor(new DpapiCryptographyProvider(), rootNodeInfo)
+                {
+                    AuthenticationRequestor = AuthenticationRequestor
+                };
+            }
+            else if (_confVersion >= 2.6)
             {
                 BlockCipherEngines engine = connectionsRootElement.GetAttributeAsEnum<BlockCipherEngines>("EncryptionEngine");
                 BlockCipherModes mode = connectionsRootElement.GetAttributeAsEnum<BlockCipherModes>("BlockCipherMode");
@@ -577,6 +596,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 {
                     connectionInfo.Color = xmlnode.GetAttributeAsString("Color");
                     connectionInfo.Inheritance.Color = xmlnode.GetAttributeAsBool("InheritColor");
+                    connectionInfo.RedirectWebAuthn = xmlnode.GetAttributeAsBool("RedirectWebAuthn");
+                    connectionInfo.Inheritance.RedirectWebAuthn = xmlnode.GetAttributeAsBool("InheritRedirectWebAuthn");
                 }
 
                 switch (_confVersion)

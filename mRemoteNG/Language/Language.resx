@@ -744,11 +744,33 @@ Connections saved in the profile are kept. You can turn the prompt back on in Op
   </data>
   <data name="AskProfilePasswordAtStartup" xml:space="preserve">
     <value>Ask for a profile password at startup</value>
+  </data>
   <data name="ShowPassword" xml:space="preserve">
     <value>Show password</value>
   </data>
   <data name="HidePassword" xml:space="preserve">
     <value>Hide password</value>
+  </data>
+  <data name="PasswordStrength" xml:space="preserve">
+    <value>Strength: {0}</value>
+  </data>
+  <data name="PasswordStrengthWeak" xml:space="preserve">
+    <value>Weak</value>
+  </data>
+  <data name="PasswordStrengthFair" xml:space="preserve">
+    <value>Fair</value>
+  </data>
+  <data name="PasswordStrengthGood" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="PasswordStrengthStrong" xml:space="preserve">
+    <value>Strong</value>
+  </data>
+  <data name="PasswordStrengthNotEstimated" xml:space="preserve">
+    <value>Not estimated (over 256 characters)</value>
+  </data>
+  <data name="PasswordStrengthUnavailable" xml:space="preserve">
+    <value>Unable to estimate</value>
   </data>
   <data name="LanguageString" xml:space="preserve">
     <value>Language</value>
@@ -1010,7 +1032,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>Both passwords must match.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>The password must be at least 3 characters long.</value>
+    <value>The password must be at least 4 characters long.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>Please fill all fields</value>
@@ -1164,6 +1186,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="PropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Select whether local smart cards should be available on the remote host.</value>
+  </data>
+  <data name="PropertyDescriptionRedirectWebAuthn" xml:space="preserve">
+    <value>Select whether WebAuthn requests (passkeys, Windows Hello, FIDO2 security keys) made in the remote session should be redirected to this computer. Requires Windows 11 22H2 / Windows Server 2025 or later on the remote host.</value>
   </data>
   <data name="PropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Select how remote sound should be redirected.</value>
@@ -1632,6 +1657,12 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="RdpSetRedirectionFailed" xml:space="preserve">
     <value>RDP Set Redirection Failed!</value>
+  </data>
+  <data name="RdpWebAuthnPluginFailed" xml:space="preserve">
+    <value>Failed to enable WebAuthn redirection (PluginDlls)</value>
+  </data>
+  <data name="RdpWebAuthnPluginNotFound" xml:space="preserve">
+    <value>WebAuthn redirection plugin not found at '{0}'</value>
   </data>
   <data name="RdpSetRedirectKeysFailed" xml:space="preserve">
     <value>RDP Set Redirect Keys Failed!</value>
@@ -2424,6 +2455,9 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="RedirectSmartCards" xml:space="preserve">
     <value>Smart Cards</value>
+  </data>
+  <data name="RedirectWebAuthn" xml:space="preserve">
+    <value>WebAuthn (Windows Hello / security keys)</value>
   </data>
   <data name="ApplyInheritanceToChildren" xml:space="preserve">
     <value>Apply inheritance to children</value>

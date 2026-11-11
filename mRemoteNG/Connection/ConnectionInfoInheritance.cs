@@ -430,6 +430,12 @@ namespace mRemoteNG.Connection
         public bool RedirectSmartCards { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 7),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.RedirectWebAuthn)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRedirectWebAuthn)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool RedirectWebAuthn { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 7),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Sounds)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRedirectSounds)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]

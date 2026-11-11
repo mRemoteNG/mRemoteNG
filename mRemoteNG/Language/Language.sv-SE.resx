@@ -907,7 +907,7 @@ Om du stöter på ett sådant fel, vänligen skapa en ny anslutningsfil!</value>
     <value>Båda lösenorden måste matcha varandra.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>Lösenordet måste vara minst 3 tecken långt.</value>
+    <value>Lösenordet måste vara minst 4 tecken långt.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>Vänligen fyll i alla fält</value>

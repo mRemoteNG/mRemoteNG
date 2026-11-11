@@ -37,6 +37,17 @@ namespace mRemoteNG.Config.Serializers
             _rootNodeInfo = rootNodeInfo;
         }
 
+        /// <summary>
+        /// Used for providers that aren't built from the (engine, mode) pair above — currently only
+        /// <see cref="SymmetricEncryption.DpapiCryptographyProvider"/>, which has no engine/mode/KDF
+        /// of its own.
+        /// </summary>
+        public XmlConnectionsDecryptor(ICryptographyProvider cryptographyProvider, RootNodeInfo rootNodeInfo)
+        {
+            _cryptographyProvider = cryptographyProvider;
+            _rootNodeInfo = rootNodeInfo;
+        }
+
         public string Decrypt(string plainText)
         {
             return plainText == ""
@@ -94,6 +105,28 @@ namespace mRemoteNG.Config.Serializers
             }
 
             return connectionsFileIsNotEncrypted || Authenticate(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString());
+        }
+
+        /// <summary>
+        /// DPAPI equivalent of <see cref="ConnectionsFileIsAuthentic"/>. There is no password to try
+        /// or re-prompt for — <see cref="SymmetricEncryption.DpapiCryptographyProvider.Decrypt"/>
+        /// either unprotects the root <c>Protected</c> value (same Windows account + machine that
+        /// saved it) or throws <see cref="EncryptionException"/>, which this method lets propagate
+        /// so the caller fails the whole load instead of continuing with an unreadable root.
+        /// </summary>
+        /// <param name="protectedString">The root element's <c>Protected</c> attribute value.</param>
+        /// <exception cref="EncryptionException">
+        /// The file is missing a valid root protection marker, was protected under a different
+        /// Windows user account or machine, or its DPAPI master key changed/was removed.
+        /// </exception>
+        public void VerifyDpapiProtectedRoot(string protectedString)
+        {
+            if (string.IsNullOrEmpty(protectedString))
+                throw new EncryptionException("The DPAPI-protected connections file is missing its root protection marker.");
+
+            string decryptedMarker = _cryptographyProvider.Decrypt(protectedString, null);
+            if (decryptedMarker != "ThisIsNotProtected")
+                throw new EncryptionException("The DPAPI-protected connections file has an invalid root protection marker.");
         }
 
         private bool Authenticate(string cipherText, SecureString password)

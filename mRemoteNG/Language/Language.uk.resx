@@ -904,7 +904,7 @@
     <value>Обидва паролі повинні збігатися.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>Пароль повинен містити не менше 3 символів.</value>
+    <value>Пароль повинен містити не менше 4 символів.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>Будь ласка, заповніть всі поля</value>

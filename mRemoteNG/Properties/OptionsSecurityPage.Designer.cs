@@ -70,7 +70,19 @@ namespace mRemoteNG.Properties {
                 this["EncryptionKeyDerivationIterations"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseDpapiProtection {
+            get {
+                return ((bool)(this["UseDpapiProtection"]));
+            }
+            set {
+                this["UseDpapiProtection"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]

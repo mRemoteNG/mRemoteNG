@@ -942,7 +942,7 @@ If you run into such an error, please create a new connection file!</comment>
     <value>同じパスワードを入力してください</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>パスワードは最低３文字必要です</value>
+    <value>パスワードは最低４文字必要です</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>全て入力してください</value>

@@ -68,6 +68,22 @@ public class ValidateXmlSchemas
         AssertSerializedXmlMatchesSchema(_serializer.Serialize(model));
     }
 
+    [Test]
+    public void ValidateSchemaWithDpapiProtection()
+    {
+        // DPAPI-protected files write the extra, optional KeyProtection="Dpapi" attribute on the
+        // root Connections element — confirm the schema actually declares it (regression test for
+        // the PR review finding: DPAPI-saved files failed their own advertised schema validation).
+        var dpapiCryptographyProvider = new DpapiCryptographyProvider();
+        var connectionNodeSerializer = new XmlConnectionNodeSerializer29(
+            dpapiCryptographyProvider,
+            _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
+            new SaveFilter());
+        var dpapiSerializer = new XmlConnectionsSerializer(dpapiCryptographyProvider, connectionNodeSerializer);
+
+        AssertSerializedXmlMatchesSchema(dpapiSerializer.Serialize(_connectionTreeModel));
+    }
+
     private void AssertSerializedXmlMatchesSchema(string xml)
     {
         var sb = new StringBuilder();

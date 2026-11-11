@@ -68,6 +68,12 @@ namespace mRemoteNG.App
         /// </summary>
         public static OptionsRepositoryManager OptionsRepositoryManager { get; set; } = new();
 
+        /// <summary>
+        /// Set by the /noreconnect (/norc) command line switch: the previously opened sessions are not
+        /// reopened at this start. It is not saved, so the switch only applies to the run it was given to.
+        /// </summary>
+        public static bool NoReconnectToPreviousSessions { get; set; }
+
         #region Connections Loading/Saving
 
         public static bool TryInitializeUserProfile()

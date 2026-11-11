@@ -72,6 +72,15 @@ public class XmlConnectionsSerializerTests
         Assert.That(attributeValue, Is.EqualTo(expectedValue));
     }
 
+    [Test]
+    public void SerializeThrowsOnIllegalXmlCharacterInsteadOfReturningEmptyString()
+    {
+        // An XML-illegal control character (e.g. U+000B) in a persisted field must not
+        // be swallowed into an empty result that would overwrite the connection file.
+        var connectionInfo = new ConnectionInfo { Name = "bad\u000bname" };
+        Assert.That(() => _serializer.Serialize(connectionInfo), Throws.Exception);
+    }
+
     private ConnectionTreeModel SetupConnectionTreeModel()
     {
         /*

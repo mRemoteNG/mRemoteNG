@@ -142,6 +142,9 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                 case "redirectsmartcards":
                     connectionInfo.RedirectSmartCards = value == "1";
                     break;
+                case "redirectwebauthn":
+                    connectionInfo.RedirectWebAuthn = value == "1";
+                    break;
                 case "redirectdrives":
                     connectionInfo.RedirectDiskDrives = (value == "1" ? RDPDiskDrives.Local : RDPDiskDrives.None);
                     break;

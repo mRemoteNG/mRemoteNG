@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System;
 using System.Data;
 using System.Linq;
 using System.Runtime.Versioning;
@@ -138,6 +137,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             connectionInfo.RedirectPorts = MiscTools.GetBooleanValue(dataRow["RedirectPorts"]);
             connectionInfo.RedirectPrinters = MiscTools.GetBooleanValue(dataRow["RedirectPrinters"]);
             connectionInfo.RedirectSmartCards = MiscTools.GetBooleanValue(dataRow["RedirectSmartCards"]);
+            if (dataRow.Table.Columns.Contains("RedirectWebAuthn"))
+                connectionInfo.RedirectWebAuthn = MiscTools.GetBooleanValue(dataRow["RedirectWebAuthn"]);
             connectionInfo.RedirectSound = (RDPSounds)Enum.Parse(typeof(RDPSounds), (string)dataRow["RedirectSound"]);
             connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine), (string)dataRow["RenderingEngine"]);
             if (dataRow.Table.Columns.Contains("TerminalBackend") && Enum.TryParse(Convert.ToString(dataRow["TerminalBackend"]), out TerminalBackend terminalBackend))
@@ -222,6 +223,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             connectionInfo.Inheritance.RedirectPorts = MiscTools.GetBooleanValue(dataRow["InheritRedirectPorts"]);
             connectionInfo.Inheritance.RedirectPrinters = MiscTools.GetBooleanValue(dataRow["InheritRedirectPrinters"]);
             connectionInfo.Inheritance.RedirectSmartCards = MiscTools.GetBooleanValue(dataRow["InheritRedirectSmartCards"]);
+            if (dataRow.Table.Columns.Contains("InheritRedirectWebAuthn"))
+                connectionInfo.Inheritance.RedirectWebAuthn = MiscTools.GetBooleanValue(dataRow["InheritRedirectWebAuthn"]);
             connectionInfo.Inheritance.RedirectSound = MiscTools.GetBooleanValue(dataRow["InheritRedirectSound"]);
             connectionInfo.Inheritance.RenderingEngine = MiscTools.GetBooleanValue(dataRow["InheritRenderingEngine"]);
             if (dataRow.Table.Columns.Contains("InheritTerminalBackend"))
