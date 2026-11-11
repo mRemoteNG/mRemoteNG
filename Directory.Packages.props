@@ -38,11 +38,11 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Configuration" Version="11.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Options" Version="11.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="11.0.0" />
-    <PackageVersion Include="Microsoft.Testing.Extensions.Telemetry" Version="2.5.2" />
-    <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport.Abstractions" Version="2.5.2" />
-    <PackageVersion Include="Microsoft.Testing.Extensions.VSTestBridge" Version="2.5.2" />
-    <PackageVersion Include="Microsoft.Testing.Platform" Version="2.5.2" />
-    <PackageVersion Include="Microsoft.Testing.Platform.MSBuild" Version="2.5.2" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.Telemetry" Version="2.5.3" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport.Abstractions" Version="2.5.3" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.VSTestBridge" Version="2.5.3" />
+    <PackageVersion Include="Microsoft.Testing.Platform" Version="2.5.3" />
+    <PackageVersion Include="Microsoft.Testing.Platform.MSBuild" Version="2.5.3" />
     <PackageVersion Include="Microsoft.TestPlatform.AdapterUtilities" Version="18.11.1" />
     <PackageVersion Include="OpenTelemetry.Api" Version="1.20.1" />
     <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.20.1" />
