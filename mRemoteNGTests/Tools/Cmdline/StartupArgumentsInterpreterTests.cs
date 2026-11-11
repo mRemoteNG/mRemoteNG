@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
 using mRemoteNG.Tools.Cmdline;
@@ -12,6 +13,8 @@ namespace mRemoteNGTests.Tools.Cmdline
         private string _originalConnectionFilePath;
         private string _originalBackupLocation;
         private bool _originalLoadConsFromCustomLocation;
+        private bool _originalNoReconnect;
+        private bool _originalNoReconnectToPreviousSessions;
         private string _testDirectory;
 
         [SetUp]
@@ -20,6 +23,8 @@ namespace mRemoteNGTests.Tools.Cmdline
             _originalConnectionFilePath = OptionsConnectionsPage.Default.ConnectionFilePath;
             _originalBackupLocation = OptionsBackupPage.Default.BackupLocation;
             _originalLoadConsFromCustomLocation = OptionsBackupPage.Default.LoadConsFromCustomLocation;
+            _originalNoReconnect = OptionsAdvancedPage.Default.NoReconnect;
+            _originalNoReconnectToPreviousSessions = Runtime.NoReconnectToPreviousSessions;
             _testDirectory = Path.Combine(Path.GetTempPath(), $"mRemoteNG command line {Guid.NewGuid()}");
             Directory.CreateDirectory(_testDirectory);
         }
@@ -30,6 +35,8 @@ namespace mRemoteNGTests.Tools.Cmdline
             OptionsConnectionsPage.Default.ConnectionFilePath = _originalConnectionFilePath;
             OptionsBackupPage.Default.BackupLocation = _originalBackupLocation;
             OptionsBackupPage.Default.LoadConsFromCustomLocation = _originalLoadConsFromCustomLocation;
+            OptionsAdvancedPage.Default.NoReconnect = _originalNoReconnect;
+            Runtime.NoReconnectToPreviousSessions = _originalNoReconnectToPreviousSessions;
             Directory.Delete(_testDirectory, true);
         }
 
@@ -45,6 +52,21 @@ namespace mRemoteNGTests.Tools.Cmdline
 
             Assert.That(OptionsConnectionsPage.Default.ConnectionFilePath, Is.EqualTo(customConnectionFile));
             Assert.That(OptionsBackupPage.Default.BackupLocation, Is.EqualTo(customConnectionFile));
+        }
+
+        [TestCase("/noreconnect")]
+        [TestCase("/norc")]
+        public void ParseArguments_NoReconnect_SkipsPreviousSessionsWithoutChangingTheSavedOption(string argument)
+        {
+            OptionsAdvancedPage.Default.NoReconnect = false;
+            Runtime.NoReconnectToPreviousSessions = false;
+
+            StartupArgumentsInterpreter interpreter = new(new MessageCollector());
+            interpreter.ParseArguments(new[] { "mRemoteNG.exe", argument });
+
+            Assert.That(Runtime.NoReconnectToPreviousSessions, Is.True);
+            // The saved option is the "reconnect automatically when disconnected" checkbox (#3178)
+            Assert.That(OptionsAdvancedPage.Default.NoReconnect, Is.False);
         }
 
         [Test]

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using mRemoteNG.App;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Security;
@@ -28,23 +27,22 @@ namespace mRemoteNG.Config.Connections
 
         public void Save(ConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")
         {
-            try
-            {
-                ICryptographyProvider cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
-                XmlConnectionSerializerFactory serializerFactory = new();
+            ICryptographyProvider cryptographyProvider = new ConnectionsFileCryptoProviderFactory().Build();
+            XmlConnectionSerializerFactory serializerFactory = new();
 
-                Serializers.ISerializer<Connection.ConnectionInfo, string> xmlConnectionsSerializer = serializerFactory.Build(cryptographyProvider, connectionTreeModel, _saveFilter, Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile);
+            Serializers.ISerializer<Connection.ConnectionInfo, string> xmlConnectionsSerializer = serializerFactory.Build(cryptographyProvider, connectionTreeModel, _saveFilter, Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile);
 
-                RootNodeInfo rootNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
-                string xml = xmlConnectionsSerializer.Serialize(rootNode);
+            RootNodeInfo rootNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
+            string xml = xmlConnectionsSerializer.Serialize(rootNode);
 
-                FileDataProviderWithRollingBackup fileDataProvider = new(_connectionFileName);
-                fileDataProvider.Save(xml);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector?.AddExceptionStackTrace("SaveToXml failed", ex);
-            }
+            // Refuse to overwrite the connection file with an empty document. An empty
+            // result indicates a serialization failure; writing it would destroy the file
+            // (and rotate the last good backup out) while the save still reports success.
+            if (string.IsNullOrWhiteSpace(xml))
+                throw new InvalidOperationException($"Connection serialization produced no output; refusing to overwrite {_connectionFileName}");
+
+            FileDataProviderWithRollingBackup fileDataProvider = new(_connectionFileName);
+            fileDataProvider.Save(xml);
         }
     }
 }

@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.78.2]
 ### Fixed
+- #3570: fixed inheritance changes being lost at exit: "Apply inheritance to children", "Apply default inheritance" and the Inheritance tab of the Config panel now save the connection file like other edits
+- fixed RDP sessions in a floating panel not resizing to fit when the panel window is resized, maximized or restored
+- #3178: fixed "Reconnect to previously opened sessions on startup" being turned off by the "Automatically try to reconnect when disconnected from server" option, and for good after one start with /noreconnect
+- fixed the AllowExportUsernames and AllowExportPasswords registry settings not being enforced in the export dialog and CSV export, including VNC proxy and RD Gateway credentials
+- #3247: fixed the rename box in the connection tree being shifted and showing the old name behind it
+- fixed exiting mRemoteNG asking "Do you want to close all open connections?" when no connection was open, after the Options window had been opened
+- #3301: fixed an unhandled exception that closed mRemoteNG when the Config panel was closed while the host status check was still running
+- #3580: fixed a "Profile password" prompt on every startup; user profiles are now opt-in (UseUserProfiles, off by default) and an existing profile store still prompts
+- fixed clipboard sharing being turned off for every RDP connection loaded from a connection file saved by 1.76 or earlier (format 2.6 and older)
 - fixed the new password dialog accepting an empty, too short or mismatched password when clicking OK
 - #2154: fixed "Alert on Idle Disconnect" and "Disable Cursor Blinking" showing the labels of other RDP properties in the Config panel
 - fixed connection tree search bar ignoring the "place search bar above connection tree" setting at startup

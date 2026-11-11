@@ -220,6 +220,14 @@ public class RemoteDesktopConnectionDeserializerTests
         Assert.That(connectionInfo.UseCredSsp, Is.EqualTo(expected));
     }
 
+    [TestCase("0", false)]
+    [TestCase("1", true)]
+    public void WebAuthnRedirectionImported(string value, bool expected)
+    {
+        var connectionInfo = Import("full address:s:host", $"redirectwebauthn:i:{value}");
+        Assert.That(connectionInfo.RedirectWebAuthn, Is.EqualTo(expected));
+    }
+
     [Test]
     public void GatewayUsernameAndDomainImported()
     {

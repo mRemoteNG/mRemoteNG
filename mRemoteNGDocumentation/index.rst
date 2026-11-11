@@ -32,6 +32,7 @@ Welcome to mRemoteNG's documentation!
    howtos/bulk_connections.rst
    howtos/vmrdp.rst
    howtos/credvault.rst
+   howtos/dpapi_protection.rst
    howtos/dynamic_host.rst
    howtos/cyberark-psm.rst
 

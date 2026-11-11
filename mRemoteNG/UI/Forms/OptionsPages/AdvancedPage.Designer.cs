@@ -46,6 +46,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkLoadBalanceInfoUseUtf8 = new MrngCheckBox();
             chkNoReconnect = new MrngCheckBox();
             chkShowPuttySessionsInTree = new MrngCheckBox();
+            chkUseUserProfiles = new MrngCheckBox();
             ((System.ComponentModel.ISupportInitialize)numPuttyWaitTime).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numUVNCSCPort).BeginInit();
             SuspendLayout();
@@ -209,11 +210,24 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowPuttySessionsInTree.TabIndex = 12;
             chkShowPuttySessionsInTree.Text = "Show PuTTY saved sessions in tree";
             chkShowPuttySessionsInTree.UseVisualStyleBackColor = true;
-            // 
+            //
+            // chkUseUserProfiles
+            //
+            chkUseUserProfiles._mice = MrngCheckBox.MouseState.OUT;
+            chkUseUserProfiles.AutoSize = true;
+            chkUseUserProfiles.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            chkUseUserProfiles.Location = new System.Drawing.Point(9, 266);
+            chkUseUserProfiles.Name = "chkUseUserProfiles";
+            chkUseUserProfiles.Size = new System.Drawing.Size(430, 17);
+            chkUseUserProfiles.TabIndex = 13;
+            chkUseUserProfiles.Text = "Use user profiles to store connections (experimental, takes effect after restart)";
+            chkUseUserProfiles.UseVisualStyleBackColor = true;
+            //
             // AdvancedPage
-            // 
+            //
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            Controls.Add(chkUseUserProfiles);
             Controls.Add(chkShowPuttySessionsInTree);
             Controls.Add(chkNoReconnect);
             Controls.Add(chkLoadBalanceInfoUseUtf8);
@@ -251,5 +265,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private MrngCheckBox chkLoadBalanceInfoUseUtf8;
         internal MrngCheckBox chkNoReconnect;
         internal MrngCheckBox chkShowPuttySessionsInTree;
+        internal MrngCheckBox chkUseUserProfiles;
     }
 }
