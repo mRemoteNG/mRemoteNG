@@ -88,14 +88,14 @@
     <PackageVersion Include="SSH.NET" Version="2026.0.0" />
     <PackageVersion Include="System.Buffers" Version="4.6.1" />
     <PackageVersion Include="System.Configuration.ConfigurationManager" Version="11.0.0" />
-    <PackageVersion Include="System.Collections.Immutable" Version="10.0.15" />
+    <PackageVersion Include="System.Collections.Immutable" Version="11.0.0" />
     <PackageVersion Include="System.Console" Version="4.3.1" />
     <PackageVersion Include="System.Data.Common" Version="4.3.0" />
     <PackageVersion Include="System.Data.Odbc" Version="11.0.0" />
     <PackageVersion Include="System.Diagnostics.DiagnosticSource" Version="11.0.0" />
     <PackageVersion Include="System.Drawing.Common" Version="11.0.0" />
     <PackageVersion Include="System.Diagnostics.EventLog" Version="11.0.0" />
-    <PackageVersion Include="System.DirectoryServices" Version="10.0.15" />
+    <PackageVersion Include="System.DirectoryServices" Version="11.0.0" />
     <PackageVersion Include="System.Dynamic.Runtime" Version="4.3.0" />
     <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.23.0" />
     <PackageVersion Include="Microsoft.IdentityModel.Protocols" Version="8.23.0" />
@@ -111,7 +111,7 @@
     <PackageVersion Include="System.Reflection.Emit" Version="4.7.0" />
     <PackageVersion Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
     <PackageVersion Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
-    <PackageVersion Include="System.Reflection.Metadata" Version="10.0.15" />
+    <PackageVersion Include="System.Reflection.Metadata" Version="11.0.0" />
     <PackageVersion Include="System.Reflection.TypeExtensions" Version="4.7.0" />
     <PackageVersion Include="System.Resources.ResourceManager" Version="4.3.0" />
     <PackageVersion Include="System.Runtime" Version="4.3.1" />
@@ -126,7 +126,7 @@
     <PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
     <PackageVersion Include="System.Security.Permissions" Version="11.0.0" />
     <PackageVersion Include="System.Security.Principal.Windows" Version="5.0.0" />
-    <PackageVersion Include="System.Text.Encoding.CodePages" Version="10.0.15" />
+    <PackageVersion Include="System.Text.Encoding.CodePages" Version="11.0.0" />
     <PackageVersion Include="System.Text.Json" Version="11.0.0" />
     <PackageVersion Include="System.Text.RegularExpressions" Version="4.3.1" />
     <PackageVersion Include="System.Threading.RateLimiting" Version="11.0.0" />
