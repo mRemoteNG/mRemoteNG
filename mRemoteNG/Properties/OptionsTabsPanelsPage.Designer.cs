@@ -166,5 +166,17 @@ namespace mRemoteNG.Properties {
                 this["BindConnectionsAndConfigPanels"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SendToScreenRdpFullscreen {
+            get {
+                return ((bool)(this["SendToScreenRdpFullscreen"]));
+            }
+            set {
+                this["SendToScreenRdpFullscreen"] = value;
+            }
+        }
     }
 }

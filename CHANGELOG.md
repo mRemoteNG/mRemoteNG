@@ -36,6 +36,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #2496: fixed use pwfile instead of cleartext password for putty connections 
 
 ### Added
+- "Send To" a screen on a panel tab now fills that screen; right-click a screen to also switch RDP to fullscreen (an option in Tabs & Panels makes fullscreen the default), and hovering a screen entry highlights that monitor
 - added a password strength rating (zxcvbn) when setting a new password; new passwords must now be at least 4 characters
 - added a "show password" eye to the password dialog; while the new password is shown, it does not need to be typed again in Verify
 - added a warning when a connection's hostname is already used by another connection, listing where the existing ones are in the tree
