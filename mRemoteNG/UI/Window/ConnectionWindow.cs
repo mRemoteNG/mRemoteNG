@@ -406,7 +406,7 @@ namespace mRemoteNG.UI.Window
             // Protocols follow the main window's ResizeEnd themselves. A floating panel is a separate
             // top-level window, so tell the connections it hosts when it has finished resizing.
             if (DockState == DockState.Float)
-                NotifyConnectionsOfHostResize(sender, e);
+                NotifyConnectionsOfHostResize((Form)sender, e);
         }
 
         private bool _hostResizeInProgress;
@@ -416,15 +416,15 @@ namespace mRemoteNG.UI.Window
             // Size changes that are not part of a user drag (maximize/restore, or code setting the
             // floating window's bounds) never raise ResizeEnd, so treat each of them as finished.
             if (!_hostResizeInProgress)
-                NotifyConnectionsOfHostResize(sender, e);
+                NotifyConnectionsOfHostResize((Form)sender, e);
         }
 
-        private void NotifyConnectionsOfHostResize(object sender, EventArgs e)
+        private void NotifyConnectionsOfHostResize(Form host, EventArgs e)
         {
             foreach (IDockContent dockContent in connDock.DocumentsToArray())
             {
                 if (dockContent is ConnectionTab { Tag: InterfaceControl interfaceControl })
-                    interfaceControl.Protocol?.HostResizeEnd(sender, e);
+                    interfaceControl.Protocol?.HostResizeEnd(host, e);
             }
         }
 
