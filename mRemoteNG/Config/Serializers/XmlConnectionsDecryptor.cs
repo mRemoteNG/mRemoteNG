@@ -116,12 +116,17 @@ namespace mRemoteNG.Config.Serializers
         /// </summary>
         /// <param name="protectedString">The root element's <c>Protected</c> attribute value.</param>
         /// <exception cref="EncryptionException">
-        /// The file was protected under a different Windows user account or machine, or its DPAPI
-        /// master key changed/was removed.
+        /// The file is missing a valid root protection marker, was protected under a different
+        /// Windows user account or machine, or its DPAPI master key changed/was removed.
         /// </exception>
         public void VerifyDpapiProtectedRoot(string protectedString)
         {
-            _cryptographyProvider.Decrypt(protectedString, null);
+            if (string.IsNullOrEmpty(protectedString))
+                throw new EncryptionException("The DPAPI-protected connections file is missing its root protection marker.");
+
+            string decryptedMarker = _cryptographyProvider.Decrypt(protectedString, null);
+            if (decryptedMarker != "ThisIsNotProtected")
+                throw new EncryptionException("The DPAPI-protected connections file has an invalid root protection marker.");
         }
 
         private bool Authenticate(string cipherText, SecureString password)

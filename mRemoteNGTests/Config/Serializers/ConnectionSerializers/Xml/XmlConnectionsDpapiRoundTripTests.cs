@@ -123,4 +123,30 @@ public class XmlConnectionsDpapiRoundTripTests
 
         Assert.Throws<EncryptionException>(() => deserializer.Deserialize(corruptedXml));
     }
+
+    [TestCase("", false)]
+    [TestCase(null, true)]
+    [Apartment(ApartmentState.STA)]
+    public void FileWithMissingOrEmptyDpapiRootProtectedValueFailsWholeLoad(string protectedValue, bool removeAttribute)
+    {
+        string savedXml = SaveWithDpapi();
+        string corruptedXml = removeAttribute
+            ? Regex.Replace(savedXml, " Protected=\"[^\"]*\"", "")
+            : Regex.Replace(savedXml, "Protected=\"[^\"]*\"", $"Protected=\"{protectedValue}\"");
+        var deserializer = new XmlConnectionsDeserializer(() => new Optional<System.Security.SecureString>());
+
+        Assert.Throws<EncryptionException>(() => deserializer.Deserialize(corruptedXml));
+    }
+
+    [Test]
+    [Apartment(ApartmentState.STA)]
+    public void FileWithUnexpectedDpapiRootMarkerFailsWholeLoad()
+    {
+        string savedXml = SaveWithDpapi();
+        string invalidProtectedValue = new DpapiCryptographyProvider().Encrypt("unexpected-root-marker", null);
+        string corruptedXml = Regex.Replace(savedXml, "Protected=\"[^\"]*\"", $"Protected=\"{invalidProtectedValue}\"");
+        var deserializer = new XmlConnectionsDeserializer(() => new Optional<System.Security.SecureString>());
+
+        Assert.Throws<EncryptionException>(() => deserializer.Deserialize(corruptedXml));
+    }
 }
