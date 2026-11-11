@@ -8,9 +8,9 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using mRemoteNG.Properties;
 using System.Runtime.Versioning;
+using mRemoteNG.Security;
 #if !PORTABLE
 using mRemoteNG.Tools;
-using mRemoteNG.Security;
 
 #else
 using System.Windows.Forms;
