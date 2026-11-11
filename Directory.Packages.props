@@ -50,7 +50,7 @@
     <PackageVersion Include="SQLite" Version="3.54.1" />
     <PackageVersion Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.5" />
     <PackageVersion Include="SQLitePCLRaw.lib.e_sqlite3" Version="3.53.3" />
-    <PackageVersion Include="Microsoft.Data.SqlClient.SNI" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Data.SqlClient.SNI" Version="7.1.2" />
     <PackageVersion Include="Microsoft.Extensions.DependencyModel" Version="11.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="11.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.11.1" />
