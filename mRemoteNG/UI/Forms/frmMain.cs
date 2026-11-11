@@ -122,6 +122,19 @@ namespace mRemoteNG.UI.Forms
             Logger.Instance.Log?.Debug("[FrmMain.RecreateOptionsForm] New OptionsForm created");
         }
 
+        protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Alt | Keys.Menu))
+            {
+                if (!msMain.Visible)
+                {
+                    msMain.Visible = true;
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         internal FullscreenHandler Fullscreen { get; set; }
 
         //Added theming support
