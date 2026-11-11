@@ -95,6 +95,7 @@ namespace mRemoteNG.Connection
         private bool _redirectClipboard;
         private bool _redirectPorts;
         private bool _redirectSmartCards;
+        private bool _redirectWebAuthn;
         private RDPSounds _redirectSound;
         private RDPSoundQuality _soundQuality;
         private bool _redirectAudioCapture;
@@ -886,6 +887,17 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("RedirectSmartCards", _redirectSmartCards);
             set => SetField(ref _redirectSmartCards, value, "RedirectSmartCards");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RedirectWebAuthn)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectWebAuthn)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public bool RedirectWebAuthn
+        {
+            get => GetPropertyValue("RedirectWebAuthn", _redirectWebAuthn);
+            set => SetField(ref _redirectWebAuthn, value, "RedirectWebAuthn");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),

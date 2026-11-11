@@ -30,8 +30,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
     public class XmlConnectionsDeserializer(Func<Optional<SecureString>>? authenticationRequestor = null) : IDeserializer<string, ConnectionTreeModel>
     {
         // Marker written to the root element's KeyProtection attribute by XmlRootNodeSerializer when
-        // the file was saved with DPAPI protection. Absent/empty on every file saved before this
-        // feature existed, so old files parse exactly as before.
+        // the file was saved with DPAPI protection.
         private const string DpapiKeyProtectionMarker = "Dpapi";
 
         private XmlDocument _xmlDocument;
@@ -68,17 +67,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 ConnectionTreeModel connectionTreeModel = new();
                 connectionTreeModel.AddRootNode(_rootNodeInfo);
 
-
                 if (_isDpapiProtected)
                 {
-                    // DPAPI-protected files skip the password-authentication dance entirely: there is
-                    // no password to confirm. But the root Protected value must still actually be
-                    // decrypted here — not merely assumed decryptable — so a file protected under a
-                    // different Windows account/machine fails the whole load with a clear
-                    // EncryptionException instead of silently falling through to per-node decryption,
-                    // where each node's own catch block would swallow the failure and let a tree full
-                    // of undecryptable passwords load "successfully" (and a later save would then
-                    // overwrite the original ciphertext with garbage).
                     string dpapiProtectedString = _xmlDocument.DocumentElement?.Attributes["Protected"]?.Value;
                     _decryptor.VerifyDpapiProtectedRoot(dpapiProtectedString);
                 }
@@ -156,9 +146,6 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
             if (_isDpapiProtected)
             {
-                // DPAPI needs no password and no KDF — ProtectedData.Unprotect either succeeds
-                // (same Windows account + machine that encrypted it) or throws EncryptionException
-                // with a clear message (see DpapiCryptographyProvider.Decrypt).
                 _decryptor = new XmlConnectionsDecryptor(new DpapiCryptographyProvider(), rootNodeInfo)
                 {
                     AuthenticationRequestor = AuthenticationRequestor
@@ -609,6 +596,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 {
                     connectionInfo.Color = xmlnode.GetAttributeAsString("Color");
                     connectionInfo.Inheritance.Color = xmlnode.GetAttributeAsBool("InheritColor");
+                    connectionInfo.RedirectWebAuthn = xmlnode.GetAttributeAsBool("RedirectWebAuthn");
+                    connectionInfo.Inheritance.RedirectWebAuthn = xmlnode.GetAttributeAsBool("InheritRedirectWebAuthn");
                 }
 
                 switch (_confVersion)

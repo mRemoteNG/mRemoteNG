@@ -53,6 +53,7 @@
         public TType RedirectClipboard { get; set; }
         public TType RedirectPorts { get; set; }
 		public TType RedirectSmartCards { get; set; }
+		public TType RedirectWebAuthn { get; set; }
 		public TType RedirectSound { get; set; }
 		public TType SoundQuality { get; set; }
 		public TType RedirectAudioCapture { get; set; }

@@ -77,6 +77,9 @@ namespace mRemoteNG.UI.Tabs
         private const int _DocumentIconHeight = 16;
         private const int _DocumentIconWidth = 16;
         private const int _DocumentTextGapRight = 6;
+        private const int _DocumentActionButtonGap = 3;
+        private const int _DocumentActionButtonSpacing = 1;
+        private const int _DocumentActionButtonLegacySize = 15;
 
         #endregion
 
@@ -88,7 +91,6 @@ namespace mRemoteNG.UI.Tabs
         private Font m_font;
         private Font m_boldFont;
         private Font m_documentTextFont;
-        private Font m_documentBoldFont;
         private int m_startDisplayingTab;
         private bool m_documentTabsOverflow;
         private static string m_toolTipSelect;
@@ -205,29 +207,11 @@ namespace mRemoteNG.UI.Tabs
                 else if (!Equals(m_font, TextFont))
                 {
                     m_documentTextFont.Dispose();
-                    m_documentBoldFont?.Dispose();
                     m_font = TextFont;
                     m_documentTextFont = new Font(TextFont, TextFont.Style);
-                    m_documentBoldFont = null;
                 }
 
                 return m_documentTextFont;
-            }
-        }
-
-        private Font BoldFont
-        {
-            get
-            {
-                if (IsDisposed)
-                    return null;
-
-                if (m_documentBoldFont == null)
-                {
-                    m_documentBoldFont = new Font(DocumentTextFont, FontStyle.Bold);
-                }
-
-                return m_documentBoldFont;
             }
         }
 
@@ -319,7 +303,15 @@ namespace mRemoteNG.UI.Tabs
             }
         }
 
-        private static int DocumentTabMaxWidth => _DocumentTabMaxWidth;
+        /// <summary>
+        /// The widest a document tab may get, scaled to the current DPI so that a long
+        /// name gets the same room on a high-DPI display as on a 96 DPI one.
+        /// </summary>
+        private int DocumentTabMaxWidth => LogicalToDeviceUnits(_DocumentTabMaxWidth);
+
+        private static int DocumentActionButtonGap => _DocumentActionButtonGap;
+
+        private static int DocumentActionButtonSpacing => _DocumentActionButtonSpacing;
 
         private static int DocumentButtonGapTop => _DocumentButtonGapTop;
 
@@ -388,12 +380,6 @@ namespace mRemoteNG.UI.Tabs
                 {
                     m_documentTextFont.Dispose();
                     m_documentTextFont = null;
-                }
-
-                if (m_documentBoldFont != null)
-                {
-                    m_documentBoldFont.Dispose();
-                    m_documentBoldFont = null;
                 }
 
             }
@@ -729,24 +715,82 @@ namespace mRemoteNG.UI.Tabs
                  + ToolWindowImageGapRight + ToolWindowTextGapRight;
         }
 
-        private const int TAB_CLOSE_BUTTON_WIDTH = 30;
-
         private int GetMaxTabWidth_Document(int index)
         {
             IDockContent content = Tabs[index].Content;
             int height = GetTabRectangle_Document(index).Height;
-            Size sizeText = TextRenderer.MeasureText(content.DockHandler.TabText, BoldFont,
-                                                    new Size(DocumentTabMaxWidth, height), DocumentTextFormat);
+            return MeasureDocumentTabText(content, height).Width + GetDocumentTabReservedWidth(content, height);
+        }
 
-            int width;
+        /// <summary>
+        /// The width of a document tab that is not available to its text, so that a tab
+        /// sized for a name leaves <see cref="GetDocumentTextRectangle(int)"/> exactly that wide.
+        /// </summary>
+        private int GetDocumentTabReservedWidth(IDockContent content, int tabHeight)
+        {
+            int width = DocumentIconGapLeft + DocumentTextGapRight + GetDocumentActionButtonsWidth(content, tabHeight);
             if (DockPane.DockPanel.ShowDocumentIcon)
-                width = sizeText.Width + DocumentIconWidth + DocumentIconGapLeft + DocumentIconGapRight +
-                        DocumentTextGapRight;
-            else
-                width = sizeText.Width + DocumentIconGapLeft + DocumentTextGapRight;
-
-            width += TAB_CLOSE_BUTTON_WIDTH;
+                width += DocumentIconWidth + DocumentIconGapRight;
             return width;
+        }
+
+        /// <summary>
+        /// Measures the tab text with the font and format <see cref="DrawTab_Document"/> draws it with.
+        /// </summary>
+        internal Size MeasureDocumentTabText(IDockContent content)
+        {
+            return MeasureDocumentTabText(content, GetTabRectangle_Document(Tabs.IndexOf(content)).Height);
+        }
+
+        private Size MeasureDocumentTabText(IDockContent content, int tabHeight)
+        {
+            return TextRenderer.MeasureText(content.DockHandler.TabText, DocumentTextFont,
+                                            new Size(int.MaxValue, tabHeight), DocumentTextFormat);
+        }
+
+        /// <summary>
+        /// The part of a document tab the text may be drawn in: the tab minus the icon,
+        /// the action buttons and the gaps around them.
+        /// </summary>
+        internal Rectangle GetDocumentTextRectangle(int index)
+        {
+            return GetDocumentTextRectangle(GetTabRectangle_Document(index), Tabs[index].Content);
+        }
+
+        private Rectangle GetDocumentTextRectangle(Rectangle rectTab, IDockContent content)
+        {
+            Rectangle rectIcon = GetDocumentIconRectangle(rectTab);
+            Rectangle rectText = PatchController.EnableHighDpi == true
+                ? new Rectangle(
+                                rectTab.X + DocumentIconGapLeft,
+                                rectTab.Y + rectTab.Height - DocumentIconGapBottom - DocumentTextFont.Height,
+                                DocumentIconWidth, DocumentTextFont.Height)
+                : rectIcon;
+            if (DockPane.DockPanel.ShowDocumentIcon)
+            {
+                rectText.X += rectIcon.Width + DocumentIconGapRight;
+                rectText.Y = rectTab.Y;
+            }
+            rectText.Height = rectTab.Height;
+
+            Rectangle rectCloseButton = GetCloseButtonRect(rectTab, content);
+            Rectangle rectMinimizeButton = GetMinimizeButtonRect(rectTab, content);
+            int textRight = rectTab.Right - DocumentTextGapRight;
+            if (!rectCloseButton.IsEmpty)
+                textRight = Math.Min(textRight, rectCloseButton.Left - DocumentTextGapRight);
+            if (!rectMinimizeButton.IsEmpty)
+                textRight = Math.Min(textRight, rectMinimizeButton.Left - DocumentTextGapRight);
+            rectText.Width = Math.Max(0, textRight - rectText.X);
+
+            return rectText;
+        }
+
+        private static Rectangle GetDocumentIconRectangle(Rectangle rectTab)
+        {
+            return new Rectangle(
+                                 rectTab.X + DocumentIconGapLeft,
+                                 rectTab.Y + rectTab.Height - DocumentIconGapBottom - DocumentIconHeight,
+                                 DocumentIconWidth, DocumentIconHeight);
         }
 
         private void DrawTabStrip(Graphics g)
@@ -995,31 +1039,8 @@ namespace mRemoteNG.UI.Tabs
 
             Rectangle rectCloseButton = GetCloseButtonRect(rect, tab.Content);
             Rectangle rectMinimizeButton = GetMinimizeButtonRect(rect, tab.Content);
-            Rectangle rectIcon = new(
-                                         rect.X + DocumentIconGapLeft,
-                                         rect.Y + rect.Height - DocumentIconGapBottom - DocumentIconHeight,
-                                         DocumentIconWidth, DocumentIconHeight);
-            Rectangle rectText = PatchController.EnableHighDpi == true
-                ? new Rectangle(
-                                rect.X + DocumentIconGapLeft,
-                                rect.Y + rect.Height - DocumentIconGapBottom - DocumentTextFont.Height,
-                                DocumentIconWidth, DocumentTextFont.Height)
-                : rectIcon;
-            if (DockPane.DockPanel.ShowDocumentIcon)
-            {
-                rectText.X += rectIcon.Width + DocumentIconGapRight;
-                rectText.Y = rect.Y;
-                rectText.Height = rect.Height;
-            }
-            else
-                rectText.Height = rect.Height;
-
-            int textRight = rect.Right - DocumentTextGapRight;
-            if (!rectCloseButton.IsEmpty)
-                textRight = Math.Min(textRight, rectCloseButton.Left - DocumentTextGapRight);
-            if (!rectMinimizeButton.IsEmpty)
-                textRight = Math.Min(textRight, rectMinimizeButton.Left - DocumentTextGapRight);
-            rectText.Width = Math.Max(0, textRight - rectText.X);
+            Rectangle rectIcon = GetDocumentIconRectangle(rect);
+            Rectangle rectText = GetDocumentTextRectangle(rect, tab.Content);
 
             Rectangle rectTab = DrawHelper.RtlTransform(this, rect);
             Rectangle rectBack = DrawHelper.RtlTransform(this, rect);
@@ -1302,23 +1323,41 @@ namespace mRemoteNG.UI.Tabs
 
         private Rectangle GetRightAlignedDocumentButtonRect(Rectangle rectTab)
         {
-            const int gap = 3;
-            int imageSize = PatchController.EnableHighDpi == true ? rectTab.Height - gap * 2 : 15;
+            int imageSize = GetDocumentActionButtonSize(rectTab.Height);
             int rightEdge = Math.Min(rectTab.Right, TabsRectangle.Right);
-            return new Rectangle(rightEdge - imageSize - gap - 1, rectTab.Y + gap, imageSize,
-                                 imageSize);
+            return new Rectangle(rightEdge - imageSize - DocumentActionButtonGap - 1, rectTab.Y + DocumentActionButtonGap,
+                                 imageSize, imageSize);
+        }
+
+        private static int GetDocumentActionButtonSize(int tabHeight)
+        {
+            return PatchController.EnableHighDpi == true
+                ? tabHeight - DocumentActionButtonGap * 2
+                : _DocumentActionButtonLegacySize;
+        }
+
+        /// <summary>
+        /// Width taken up at the right edge of a document tab by the close and minimize
+        /// buttons, laid out as <see cref="GetCloseButtonRect"/> and
+        /// <see cref="GetMinimizeButtonRect"/> place them. Zero when the tab shows neither.
+        /// </summary>
+        private int GetDocumentActionButtonsWidth(IDockContent content, int tabHeight)
+        {
+            int buttonCount = (ShouldShowCloseButton(content) ? 1 : 0) + (CanShowMinimizeButton(content) ? 1 : 0);
+            if (buttonCount == 0)
+                return 0;
+
+            int buttonSize = GetDocumentActionButtonSize(tabHeight);
+            return DocumentActionButtonGap + 1 + buttonSize + (buttonCount - 1) * (DocumentActionButtonSpacing + buttonSize);
         }
 
         private Rectangle GetMinimizeButtonRect(Rectangle rectTab, IDockContent content)
         {
-            if (Appearance != DockPane.AppearanceStyle.Document ||
-                content is not ConnectionTab connectionTab ||
-                !connectionTab.CanMinimizeToBottomAutoHide())
+            if (Appearance != DockPane.AppearanceStyle.Document || !CanShowMinimizeButton(content))
             {
                 return Rectangle.Empty;
             }
 
-            const int buttonGap = 1;
             Rectangle closeButtonRect = GetCloseButtonRect(rectTab, content);
             if (closeButtonRect.IsEmpty)
             {
@@ -1326,9 +1365,14 @@ namespace mRemoteNG.UI.Tabs
                 return rightAlignedButtonRect.Left >= rectTab.Left ? rightAlignedButtonRect : Rectangle.Empty;
             }
 
-            Rectangle minimizeButtonRect = new(closeButtonRect.X - closeButtonRect.Width - buttonGap, closeButtonRect.Y,
-                                               closeButtonRect.Width, closeButtonRect.Height);
+            Rectangle minimizeButtonRect = new(closeButtonRect.X - closeButtonRect.Width - DocumentActionButtonSpacing,
+                                               closeButtonRect.Y, closeButtonRect.Width, closeButtonRect.Height);
             return minimizeButtonRect.Left >= rectTab.Left ? minimizeButtonRect : closeButtonRect;
+        }
+
+        private static bool CanShowMinimizeButton(IDockContent content)
+        {
+            return content is ConnectionTab connectionTab && connectionTab.CanMinimizeToBottomAutoHide();
         }
 
         private bool ShouldShowCloseButton(IDockContent content)

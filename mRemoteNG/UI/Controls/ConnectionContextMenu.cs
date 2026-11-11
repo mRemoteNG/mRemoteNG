@@ -1137,6 +1137,7 @@ namespace mRemoteNG.UI.Controls
                 return;
 
             DefaultConnectionInheritance.Instance.SaveTo(_connectionTree.SelectedNode.Inheritance);
+            _connectionTree.SelectedNode.RaiseInheritanceChanged();
         }
 
         #endregion
