@@ -115,6 +115,9 @@ namespace mRemoteNG.Config.Settings
             // 1.76 wrote its default log path into the file; this version logs elsewhere.
             if (name == "LogFilePath" && serialized.StartsWith(oldDataFolder, StringComparison.OrdinalIgnoreCase))
                 return false;
+            if ((name == "ConDefaultRenderingEngine" && serialized == "Gecko")
+                || (name == "ConDefaultProtocol" && serialized == "ICA"))
+                return false;
             if (name == "ThemeName" && RenamedThemes.TryGetValue(serialized, out string? themeName))
                 serialized = themeName;
             return true;
