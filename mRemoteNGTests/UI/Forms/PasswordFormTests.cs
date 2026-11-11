@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Diagnostics;
+using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.UI.Forms;
 using mRemoteNGTests.TestHelpers;
@@ -189,9 +191,34 @@ namespace mRemoteNGTests.UI.Forms
             Assert.That(strengthLabel.Visible, Is.False);
 
             _passwordForm.FindControl<TextBox>("txtPassword").Text = "password";
+            WaitForStrengthLabel(strengthLabel);
 
             Assert.That(strengthLabel.Visible, Is.True);
             Assert.That(strengthLabel.Text, Is.EqualTo("Strength: Weak"));
+        }
+
+        [Test]
+        [SetUICulture("en-US")]
+        public void VeryLongPasswordIsNotScoredAndDialogRemainsResponsive()
+        {
+            _passwordForm.FindControl<TextBox>("txtPassword").Text = new string('a', 10000);
+
+            Label strengthLabel = _passwordForm.FindControl<Label>("lblStrength");
+            Assert.That(strengthLabel.Text, Does.Contain("Not estimated"));
+
+            _passwordForm.FindControl<Button>("btnCancel").PerformClick();
+
+            Assert.That(_passwordForm.Visible, Is.False);
+        }
+
+        private static void WaitForStrengthLabel(Label strengthLabel)
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            while (string.IsNullOrEmpty(strengthLabel.Text) && stopwatch.Elapsed < TimeSpan.FromSeconds(5))
+            {
+                Application.DoEvents();
+                Thread.Sleep(10);
+            }
         }
 
         [Test]

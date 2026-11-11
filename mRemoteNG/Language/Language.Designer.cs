@@ -8015,7 +8015,25 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("PasswordStrengthStrong", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Not estimated (over 256 characters).
+        /// </summary>
+        internal static string PasswordStrengthNotEstimated {
+            get {
+                return ResourceManager.GetString("PasswordStrengthNotEstimated", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to estimate.
+        /// </summary>
+        internal static string PasswordStrengthUnavailable {
+            get {
+                return ResourceManager.GetString("PasswordStrengthUnavailable", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Verify table structure.
         /// </summary>

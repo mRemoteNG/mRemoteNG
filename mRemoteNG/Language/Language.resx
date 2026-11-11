@@ -758,6 +758,12 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="PasswordStrengthStrong" xml:space="preserve">
     <value>Strong</value>
   </data>
+  <data name="PasswordStrengthNotEstimated" xml:space="preserve">
+    <value>Not estimated (over 256 characters)</value>
+  </data>
+  <data name="PasswordStrengthUnavailable" xml:space="preserve">
+    <value>Unable to estimate</value>
+  </data>
   <data name="LanguageString" xml:space="preserve">
     <value>Language</value>
   </data>
