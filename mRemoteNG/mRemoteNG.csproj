@@ -156,6 +156,7 @@
     <PackageReference Include="System.Management" />
     <PackageReference Include="System.Threading.RateLimiting" />
     <PackageReference Include="VncSharpCore" />
+    <PackageReference Include="zxcvbn-core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Language\Language.Designer.cs">

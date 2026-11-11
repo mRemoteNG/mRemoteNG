@@ -934,7 +934,7 @@
     <value>Оба пароля должны совпадать.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>Пароль должен содержать не менее 3 символов.</value>
+    <value>Пароль должен содержать не менее 4 символов.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>Пожалуйста, заполните все поля</value>

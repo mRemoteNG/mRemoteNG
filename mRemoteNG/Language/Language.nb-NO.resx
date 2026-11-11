@@ -913,7 +913,7 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
     <value>Begge passordene må være like.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>Passordet må være minst 3 tegn langt.</value>
+    <value>Passordet må være minst 4 tegn langt.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>Vennligst fyll inn alle felt</value>

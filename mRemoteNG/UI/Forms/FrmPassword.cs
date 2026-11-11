@@ -3,6 +3,7 @@ using System.Security;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Security;
+using mRemoteNG.Security.PasswordCreation;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Resources.Language;
@@ -17,7 +18,13 @@ namespace mRemoteNG.UI.Forms
         private readonly string _passwordName;
         private SecureString _password = new();
         private readonly Button _btnShowPassword = new();
+        private readonly Label _lblStrength = new();
         private ToolTip _toolTip;
+
+        /// <summary>
+        /// Shortest new password accepted; the shortest common PIN length.
+        /// </summary>
+        internal const int MinimumPasswordLength = 4;
 
         /// <summary>
         /// True while the password is shown in plain text. The verify box
@@ -47,6 +54,7 @@ namespace mRemoteNG.UI.Forms
             _passwordName = passwordName;
             NewPasswordMode = newPasswordMode;
             AddShowPasswordButton();
+            AddStrengthLabel();
         }
 
         /// <summary>
@@ -74,15 +82,13 @@ namespace mRemoteNG.UI.Forms
             ApplyTheme();
             DisplayProperties display = new();
             pbLock.Image = display.ScaleImage(pbLock.Image);
-            Height = tableLayoutPanel1.Height;
 
-            if (NewPasswordMode)
+            if (!NewPasswordMode)
             {
-                txtPassword.Focus();
-                return;
+                lblVerify.Visible = false;
+                txtVerify.Visible = false;
             }
-            lblVerify.Visible = false;
-            txtVerify.Visible = false;
+            FitToContents();
             txtPassword.Focus();
         }
 
@@ -149,7 +155,7 @@ namespace mRemoteNG.UI.Forms
 
         private bool VerifyNewPassword()
         {
-            if (txtPassword.Text.Length >= 3)
+            if (txtPassword.Text.Length >= MinimumPasswordLength)
             {
                 if (PasswordShown || txtPassword.Text == txtVerify.Text)
                     return true;
@@ -203,6 +209,46 @@ namespace mRemoteNG.UI.Forms
             _toolTip.SetToolTip(_btnShowPassword, text);
         }
 
+        private void AddStrengthLabel()
+        {
+            _lblStrength.Name = "lblStrength";
+            _lblStrength.AutoSize = true;
+            _lblStrength.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            _lblStrength.Visible = false;
+            tableLayoutPanel1.Controls.Add(_lblStrength, 2, 3);
+            txtPassword.TextChanged += (_, _) => UpdateStrength();
+        }
+
+        private void UpdateStrength()
+        {
+            if (!NewPasswordMode)
+                return;
+
+            string[] userInputs = { Environment.UserName, Environment.MachineName, "mRemoteNG" };
+            PasswordStrengthResult result = PasswordStrengthMeter.Evaluate(txtPassword.Text, userInputs);
+            _lblStrength.Visible = result.Strength != PasswordStrength.None;
+            _lblStrength.Text = string.Format(Language.PasswordStrength, StrengthText(result.Strength));
+            _lblStrength.ForeColor = StrengthColor(result.Strength);
+            _toolTip.SetToolTip(_lblStrength, result.Advice);
+        }
+
+        private static string StrengthText(PasswordStrength strength) => strength switch
+        {
+            PasswordStrength.Weak => Language.PasswordStrengthWeak,
+            PasswordStrength.Fair => Language.PasswordStrengthFair,
+            PasswordStrength.Good => Language.PasswordStrengthGood,
+            PasswordStrength.Strong => Language.PasswordStrengthStrong,
+            _ => string.Empty
+        };
+
+        private static System.Drawing.Color StrengthColor(PasswordStrength strength) => strength switch
+        {
+            PasswordStrength.Weak => System.Drawing.Color.Red,
+            PasswordStrength.Fair => System.Drawing.Color.DarkOrange,
+            PasswordStrength.Good => System.Drawing.Color.OliveDrab,
+            _ => System.Drawing.Color.ForestGreen
+        };
+
         private static void SetRightMargin(TextBox textBox, int margin)
         {
             NativeMethods.SendMessage(textBox.Handle, (int)NativeMethods.EM_SETMARGINS,
@@ -211,13 +257,27 @@ namespace mRemoteNG.UI.Forms
 
         private void ShowStatus(string status)
         {
-            lblStatus.Visible = true;
             lblStatus.Text = status;
+            lblStatus.Visible = true;
+            FitToContents();
         }
 
         private void HideStatus()
         {
+            if (!lblStatus.Visible)
+                return;
             lblStatus.Visible = false;
+            FitToContents();
+        }
+
+        /// <summary>
+        /// Sizes the window to its contents, so a status message that wraps
+        /// never squeezes the OK and Cancel buttons.
+        /// </summary>
+        private void FitToContents()
+        {
+            int height = tableLayoutPanel1.GetPreferredSize(new System.Drawing.Size(ClientSize.Width, 0)).Height;
+            ClientSize = new System.Drawing.Size(ClientSize.Width, height);
         }
 
         #endregion

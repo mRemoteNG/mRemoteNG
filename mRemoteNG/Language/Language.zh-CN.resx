@@ -934,7 +934,7 @@
     <value>两个密码必须匹配。</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>密码必须至少有 3 个字符。</value>
+    <value>密码必须至少有 4 个字符。</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>请填写所有字段</value>

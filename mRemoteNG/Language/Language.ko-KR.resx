@@ -927,7 +927,7 @@
     <value>두 암호가 일치해야합니다.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>암호는 3 자 이상이어야합니다.</value>
+    <value>암호는 4 자 이상이어야합니다.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>모든 입력란을 채우십시오.</value>
