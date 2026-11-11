@@ -26,6 +26,7 @@ namespace mRemoteNG.UI.Forms
         private ToolTip _toolTip;
         private StrengthEvaluationRequest _pendingStrengthEvaluation;
         private long _strengthVersion;
+        private long _activeStrengthVersion;
         private bool _isClosing;
 
         private sealed record StrengthEvaluationRequest(long Version, string Password);
@@ -249,7 +250,7 @@ namespace mRemoteNG.UI.Forms
 
             _strengthDebounceTimer.Stop();
             _pendingStrengthEvaluation = null;
-            long version = ++_strengthVersion;
+            _strengthVersion++;
             string password = txtPassword.Text;
 
             if (password.Length == 0)
@@ -279,6 +280,12 @@ namespace mRemoteNG.UI.Forms
                 return;
             }
 
+            StartStrengthEvaluation(request);
+        }
+
+        private void StartStrengthEvaluation(StrengthEvaluationRequest request)
+        {
+            _activeStrengthVersion = request.Version;
             _strengthWorker.RunWorkerAsync(request);
         }
 
@@ -294,12 +301,9 @@ namespace mRemoteNG.UI.Forms
         {
             if (e.Error != null)
             {
-                StrengthEvaluationRequest request = (StrengthEvaluationRequest)e.UserState;
-                if (request.Version == _strengthVersion && !_isClosing && !IsDisposed)
-                {
-                    Logger.Instance.Log.Error("Unable to estimate password strength.", e.Error);
+                Logger.Instance.Log.Error($"Unable to estimate password strength ({e.Error.GetType().Name}).");
+                if (_activeStrengthVersion == _strengthVersion && !_isClosing && !IsDisposed)
                     ShowStrengthUnavailable();
-                }
             }
             else if (!e.Cancelled && !_isClosing && !IsDisposed)
             {
@@ -311,7 +315,7 @@ namespace mRemoteNG.UI.Forms
             StrengthEvaluationRequest pending = _pendingStrengthEvaluation;
             _pendingStrengthEvaluation = null;
             if (pending != null && pending.Version == _strengthVersion && !_isClosing && !IsDisposed)
-                _strengthWorker.RunWorkerAsync(pending);
+                StartStrengthEvaluation(pending);
         }
 
         private void ShowStrengthUnavailable()

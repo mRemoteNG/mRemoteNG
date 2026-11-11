@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.UI.Forms;
@@ -209,6 +211,21 @@ namespace mRemoteNGTests.UI.Forms
             _passwordForm.FindControl<Button>("btnCancel").PerformClick();
 
             Assert.That(_passwordForm.Visible, Is.False);
+        }
+
+        [Test]
+        [SetUICulture("en-US")]
+        public void StrengthEvaluationFailureShowsUnavailableWithoutCrashing()
+        {
+            _passwordForm.FindControl<TextBox>("txtPassword").Text = "password";
+            const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+            typeof(FrmPassword).GetField("_activeStrengthVersion", flags).SetValue(_passwordForm, 1L);
+            var completed = new RunWorkerCompletedEventArgs(null, new InvalidOperationException(), false);
+
+            typeof(FrmPassword).GetMethod("StrengthWorker_RunWorkerCompleted", flags)
+                .Invoke(_passwordForm, new object[] { null, completed });
+
+            Assert.That(_passwordForm.FindControl<Label>("lblStrength").Text, Is.EqualTo("Strength: Unable to estimate"));
         }
 
         private static void WaitForStrengthLabel(Label strengthLabel)
