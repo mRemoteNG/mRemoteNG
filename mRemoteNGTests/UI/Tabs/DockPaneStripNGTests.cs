@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Windows.Forms;
 using System.Linq;
@@ -32,6 +33,19 @@ namespace mRemoteNGTests.UI.Tabs
 
             var thread = new Thread(() =>
             {
+                // An exception thrown inside a window procedure must fail the test. Without a
+                // handler WinForms shows a ThreadExceptionDialog that nobody answers; when the
+                // timeout below unwinds it, WinForms exits the application, closes every open
+                // form, and a second exception from there crashes the test host. The handler is
+                // per thread, so it does not affect other fixtures. ThrowException mode is no
+                // alternative: on .NET the exception cannot cross the native window procedure
+                // frame and the runtime fails fast.
+                Application.ThreadException += (_, args) =>
+                {
+                    caught ??= args.Exception;
+                    Application.ExitThread();
+                };
+
                 pump = new Form
                 {
                     ShowInTaskbar = false,
@@ -50,7 +64,9 @@ namespace mRemoteNGTests.UI.Tabs
                     }
                     catch (Exception ex)
                     {
-                        caught = ex;
+                        // The first exception is the one to report; a window procedure may already
+                        // have recorded one through the ThreadException handler above.
+                        caught ??= ex;
                     }
                     finally
                     {
@@ -58,7 +74,17 @@ namespace mRemoteNGTests.UI.Tabs
                     }
                 }));
 
-                Application.Run(new ApplicationContext());
+                try
+                {
+                    Application.Run(new ApplicationContext());
+                }
+                catch (Exception ex)
+                {
+                    // Thrown by the message loop itself rather than by testAction; without this it
+                    // would take the thread down unreported and leave the test to time out.
+                    caught ??= ex;
+                }
+
                 pump.Dispose();
             })
             {
@@ -89,7 +115,7 @@ namespace mRemoteNGTests.UI.Tabs
             }
 
             if (caught != null)
-                throw caught;
+                ExceptionDispatchInfo.Capture(caught).Throw(); // Keeps the stack trace of the pump thread.
         }
 
         [Test]
@@ -337,6 +363,48 @@ namespace mRemoteNGTests.UI.Tabs
         });
 
         [Test]
+        public void ClosingAConnectionTabBeforeItsProtocolAttaches_DoesNotThrow() => RunWithMessagePump(() =>
+        {
+            using var hostForm = new Form
+            {
+                Width = 800,
+                Height = 600,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(-10000, -10000)
+            };
+
+            var dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill,
+                DocumentStyle = DocumentStyle.DockingWindow,
+                Theme = new VS2015LightTheme()
+            };
+
+            dockPanel.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+
+            hostForm.Controls.Add(dockPanel);
+            hostForm.Show();
+
+            using var panelHost = new DockContent();
+            using var connectionWindow = new ConnectionWindow(panelHost);
+            connectionWindow.Show(dockPanel, DockState.Document);
+
+            // AddConnectionTab stores the ConnectionInfo in Tag; the protocol replaces it with its
+            // InterfaceControl only once it initializes. The tab can be closed before that happens,
+            // e.g. when the protocol could not be created or the user closes it while it connects.
+            ConnectionTab connectionTab = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "Not yet connected" });
+            connectionTab.silentClose = true;
+            Application.DoEvents();
+
+            Assert.DoesNotThrow(() =>
+            {
+                connectionTab.Close();
+                Application.DoEvents();
+            }, "Closing a connection tab before its protocol attached must not throw");
+        });
+
+        [Test]
         public void RestoringDockAreasWhileStillMinimized_DoesNotThrow() => RunWithMessagePump(() =>
         {
             using var hostForm = new Form
@@ -501,6 +569,9 @@ namespace mRemoteNGTests.UI.Tabs
             Assert.That(targetPane.DockPanel, Is.SameAs(connectionWindow.connDock), "Floating pane should remain attached while the replacement is opened");
 
             ConnectionTab replacement = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "Doc2" }, reconnectPlacement.targetPane, reconnectPlacement.targetContentIndex);
+            // Disposing the connection window closes its floating window, which closes the tabs it
+            // holds. Closing without it asks for confirmation, and a dialog nobody answers holds the test.
+            replacement.protocolClose = true;
             placeholder.Close();
             Application.DoEvents();
 

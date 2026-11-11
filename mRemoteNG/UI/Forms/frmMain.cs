@@ -235,6 +235,12 @@ namespace mRemoteNG.UI.Forms
  
             SetMenuDependencies();
 
+            // Must be set before LoadPanelsFromXml(): on a first run with no saved pnlLayout.xml,
+            // LoadPanelsFromXml() falls back to SetDefaultLayout() -> EnsureGeneralPanel() ->
+            // PanelAdder.AddPanel(), which adds the new panel to Runtime.WindowList — a
+            // NullReferenceException if that list hasn't been created yet.
+            Runtime.WindowList = [];
+
             DockPanelLayoutLoader uiLoader = new(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
 
@@ -245,8 +251,6 @@ namespace mRemoteNG.UI.Forms
             ProgramRoot.UiCultureChanged += OnUiCultureChanged;
 
             _fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
-
-            Runtime.WindowList = [];
 
             if (Properties.App.Default.ResetPanels)
                 SetDefaultLayout();

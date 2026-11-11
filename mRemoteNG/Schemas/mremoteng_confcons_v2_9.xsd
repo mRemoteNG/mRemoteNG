@@ -82,6 +82,7 @@
     <xs:attribute name="RedirectPrinters" type="xs:boolean" use="required" />
     <xs:attribute name="RedirectClipboard" type="xs:boolean" use="required" />
     <xs:attribute name="RedirectSmartCards" type="xs:boolean" use="required" />
+    <xs:attribute name="RedirectWebAuthn" type="xs:boolean" use="optional" />
     <xs:attribute name="RedirectSound" type="xs:string" use="required" />
     <xs:attribute name="SoundQuality" type="xs:string" use="required" />
     <xs:attribute name="RedirectAudioCapture" type="xs:boolean" use="required" />
@@ -146,6 +147,7 @@
     <xs:attribute name="InheritRedirectPrinters" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRedirectClipboard" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRedirectSmartCards" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRedirectWebAuthn" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRedirectSound" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritSoundQuality" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRedirectAudioCapture" type="xs:boolean" use="optional" />

@@ -5206,6 +5206,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select whether WebAuthn requests (passkeys, Windows Hello, FIDO2 security keys) made in the remote session should be redirected to this computer.
+        /// </summary>
+        internal static string PropertyDescriptionRedirectWebAuthn {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionRedirectWebAuthn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select how remote sound should be redirected..
         /// </summary>
         internal static string PropertyDescriptionRedirectSounds {
@@ -6259,6 +6268,24 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to enable WebAuthn redirection (PluginDlls).
+        /// </summary>
+        internal static string RdpWebAuthnPluginFailed {
+            get {
+                return ResourceManager.GetString("RdpWebAuthnPluginFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WebAuthn redirection plugin not found at '{0}'.
+        /// </summary>
+        internal static string RdpWebAuthnPluginNotFound {
+            get {
+                return ResourceManager.GetString("RdpWebAuthnPluginNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RDP Set Redirect Keys Failed!.
         /// </summary>
         internal static string RdpSetRedirectKeysFailed {
@@ -6426,6 +6453,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string RedirectSmartCards {
             get {
                 return ResourceManager.GetString("RedirectSmartCards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WebAuthn (Windows Hello / security keys).
+        /// </summary>
+        internal static string RedirectWebAuthn {
+            get {
+                return ResourceManager.GetString("RedirectWebAuthn", resourceCulture);
             }
         }
         
@@ -7968,6 +8004,10 @@ namespace mRemoteNG.Resources.Language {
         internal static string ProfilePromptStopAsking {
             get {
                 return ResourceManager.GetString("ProfilePromptStopAsking", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Show password.
         /// </summary>
         internal static string ShowPassword {
@@ -7982,6 +8022,10 @@ namespace mRemoteNG.Resources.Language {
         internal static string AskProfilePasswordAtStartup {
             get {
                 return ResourceManager.GetString("AskProfilePasswordAtStartup", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Hide password.
         /// </summary>
         internal static string HidePassword {
