@@ -162,7 +162,9 @@ namespace mRemoteNG.UI.Window
                 new RootNodeExpander()
             };
 
-            if (Properties.OptionsStartupExitPage.Default.OpenConsFromLastSession && !Properties.OptionsAdvancedPage.Default.NoReconnect)
+            // OptionsAdvancedPage.NoReconnect is the "reconnect automatically when disconnected" option,
+            // not a reason to skip the previous sessions (#3178)
+            if (Properties.OptionsStartupExitPage.Default.OpenConsFromLastSession && !Runtime.NoReconnectToPreviousSessions)
                 actions.Add(new PreviousSessionOpener(Runtime.ConnectionInitiator));
 
             ConnectionTree.PostSetupActions = actions;

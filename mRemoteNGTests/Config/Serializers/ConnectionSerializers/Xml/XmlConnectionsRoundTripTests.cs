@@ -29,16 +29,17 @@ public class XmlConnectionsRoundTripTests
     {
         _model = new ConnectionTreeModel();
         _root = new RootNodeInfo(RootNodeType.Connection);
-        var folder = new ContainerInfo { Name = "folder", Color = "Blue" };
+        var folder = new ContainerInfo { Name = "folder", Color = "Blue", RedirectWebAuthn = true };
         _connection = new ConnectionInfo
         {
             Name = "con1",
             Hostname = "server01",
             Username = "user1",
             TerminalBackend = TerminalBackend.WindowsTerminal,
-            Color = "Red"
+            Color = "Red",
+            RedirectWebAuthn = true
         };
-        var inheritingConnection = new ConnectionInfo { Name = "con2", Inheritance = { Color = true } };
+        var inheritingConnection = new ConnectionInfo { Name = "con2", Inheritance = { Color = true, RedirectWebAuthn = true } };
         _root.AddChild(folder);
         folder.AddChild(_connection);
         folder.AddChild(inheritingConnection);
@@ -91,5 +92,44 @@ public class XmlConnectionsRoundTripTests
         Assert.That(loadedConnection.Color, Is.EqualTo("Red"));
         Assert.That(loadedInheriting.Inheritance.Color, Is.True);
         Assert.That(loadedInheriting.Color, Is.EqualTo("Blue"));
+    }
+
+    [Test]
+    [Apartment(ApartmentState.STA)]
+    public void SavedRedirectWebAuthnAndItsInheritanceAreLoadedBack()
+    {
+        string savedXml = SaveLikeTheApp();
+
+        var deserializer = new XmlConnectionsDeserializer(() => _root.PasswordString.ConvertToSecureString());
+        ConnectionTreeModel loaded = deserializer.Deserialize(savedXml);
+
+        ConnectionInfo loadedConnection = loaded.GetRecursiveChildList().Single(c => c.Name == "con1");
+        ConnectionInfo loadedInheriting = loaded.GetRecursiveChildList().Single(c => c.Name == "con2");
+        Assert.That(loadedConnection.RedirectWebAuthn, Is.True);
+        Assert.That(loadedConnection.Inheritance.RedirectWebAuthn, Is.False);
+        Assert.That(loadedInheriting.Inheritance.RedirectWebAuthn, Is.True);
+        Assert.That(loadedInheriting.RedirectWebAuthn, Is.True, "inherited from the folder");
+    }
+
+    [Test]
+    [Apartment(ApartmentState.STA)]
+    public void FileWithoutRedirectWebAuthnAttributesLoadsWithItDisabled()
+    {
+        // A 2.9 file written before the attribute existed has neither attribute.
+        var xml = SecureXmlHelper.LoadXmlFromString(SaveLikeTheApp());
+        foreach (System.Xml.XmlElement node in xml.SelectNodes("//Node"))
+        {
+            node.RemoveAttribute("RedirectWebAuthn");
+            node.RemoveAttribute("InheritRedirectWebAuthn");
+        }
+
+        var deserializer = new XmlConnectionsDeserializer(() => _root.PasswordString.ConvertToSecureString());
+        ConnectionTreeModel loaded = deserializer.Deserialize(xml.OuterXml);
+
+        ConnectionInfo loadedConnection = loaded.GetRecursiveChildList().Single(c => c.Name == "con1");
+        ConnectionInfo loadedInheriting = loaded.GetRecursiveChildList().Single(c => c.Name == "con2");
+        Assert.That(loadedConnection.RedirectWebAuthn, Is.False);
+        Assert.That(loadedInheriting.RedirectWebAuthn, Is.False);
+        Assert.That(loadedInheriting.Inheritance.RedirectWebAuthn, Is.False);
     }
 }

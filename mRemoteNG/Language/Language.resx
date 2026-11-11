@@ -737,6 +737,20 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="Verify" xml:space="preserve">
     <value>Verify:</value>
   </data>
+  <data name="ProfilePromptStopAsking" xml:space="preserve">
+    <value>Stop asking for a profile password at startup?
+
+Connections saved in the profile are kept. You can turn the prompt back on in Options &gt; Startup/Exit.</value>
+  </data>
+  <data name="AskProfilePasswordAtStartup" xml:space="preserve">
+    <value>Ask for a profile password at startup</value>
+  </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>Show password</value>
+  </data>
+  <data name="HidePassword" xml:space="preserve">
+    <value>Hide password</value>
+  </data>
   <data name="LanguageString" xml:space="preserve">
     <value>Language</value>
   </data>
@@ -1152,6 +1166,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Select whether local smart cards should be available on the remote host.</value>
   </data>
+  <data name="PropertyDescriptionRedirectWebAuthn" xml:space="preserve">
+    <value>Select whether WebAuthn requests (passkeys, Windows Hello, FIDO2 security keys) made in the remote session should be redirected to this computer. Requires Windows 11 22H2 / Windows Server 2025 or later on the remote host.</value>
+  </data>
   <data name="PropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Select how remote sound should be redirected.</value>
   </data>
@@ -1389,6 +1406,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="UseRedirectionServerName" xml:space="preserve">
     <value>Use Redirection Server Name</value>
   </data>
+  <data name="UseUserProfiles" xml:space="preserve">
+    <value>Use user profiles to store connections (experimental, takes effect after restart)</value>
+  </data>
   <data name="ClearCachedRdpCredentials" xml:space="preserve">
     <value>Clear Cached RDP Credentials</value>
   </data>
@@ -1616,6 +1636,12 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="RdpSetRedirectionFailed" xml:space="preserve">
     <value>RDP Set Redirection Failed!</value>
+  </data>
+  <data name="RdpWebAuthnPluginFailed" xml:space="preserve">
+    <value>Failed to enable WebAuthn redirection (PluginDlls)</value>
+  </data>
+  <data name="RdpWebAuthnPluginNotFound" xml:space="preserve">
+    <value>WebAuthn redirection plugin not found at '{0}'</value>
   </data>
   <data name="RdpSetRedirectKeysFailed" xml:space="preserve">
     <value>RDP Set Redirect Keys Failed!</value>
@@ -2396,6 +2422,9 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="RedirectSmartCards" xml:space="preserve">
     <value>Smart Cards</value>
+  </data>
+  <data name="RedirectWebAuthn" xml:space="preserve">
+    <value>WebAuthn (Windows Hello / security keys)</value>
   </data>
   <data name="ApplyInheritanceToChildren" xml:space="preserve">
     <value>Apply inheritance to children</value>
