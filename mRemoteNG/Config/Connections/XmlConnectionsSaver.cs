@@ -35,14 +35,6 @@ namespace mRemoteNG.Config.Connections
             RootNodeInfo rootNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
             string xml = xmlConnectionsSerializer.Serialize(rootNode);
 
-                FileDataProviderWithRollingBackup fileDataProvider = new(_connectionFileName);
-                fileDataProvider.Save(xml);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector?.AddExceptionStackTrace("SaveToXml failed", ex);
-                throw;
-            }
             // Refuse to overwrite the connection file with an empty document. An empty
             // result indicates a serialization failure; writing it would destroy the file
             // (and rotate the last good backup out) while the save still reports success.

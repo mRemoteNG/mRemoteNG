@@ -58,14 +58,18 @@ namespace mRemoteNG.Config.DataProviders
         {
             try
             {
-                CreateMissingDirectories();
-                AtomicFile.WriteAllText(FilePath, content);
+                WriteContent(content);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace($"Failed to save file {FilePath}", ex);
-                throw;
             }
+        }
+
+        protected void WriteContent(string content)
+        {
+            CreateMissingDirectories();
+            AtomicFile.WriteAllText(FilePath, content);
         }
 
         public virtual void MoveTo(string newPath)
