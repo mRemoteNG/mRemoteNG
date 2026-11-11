@@ -104,6 +104,15 @@ namespace mRemoteNG.Connection.Protocol
         {
         }
 
+        /// <summary>
+        /// Called when the window hosting this connection has finished changing size, for hosts whose
+        /// resize the protocol does not observe itself (such as a floating connection panel).
+        /// </summary>
+        internal void HostResizeEnd(object sender, EventArgs e)
+        {
+            ResizeEnd(sender, e);
+        }
+
         public virtual bool Initialize()
         {
             try

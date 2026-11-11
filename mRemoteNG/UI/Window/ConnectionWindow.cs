@@ -292,6 +292,7 @@ namespace mRemoteNG.UI.Window
 
                         DockHandler.FloatPane.FloatWindow.ResizeBegin += Connection_ResizeBegin;
                         DockHandler.FloatPane.FloatWindow.ResizeEnd += Connection_ResizeEnd;
+                        DockHandler.FloatPane.FloatWindow.SizeChanged += FloatWindow_SizeChanged;
                         _floatHandlersAdded = true;
                         break;
                     }
@@ -301,6 +302,7 @@ namespace mRemoteNG.UI.Window
                         {
                             DockHandler.FloatPane.FloatWindow.ResizeBegin -= Connection_ResizeBegin;
                             DockHandler.FloatPane.FloatWindow.ResizeEnd -= Connection_ResizeEnd;
+                            DockHandler.FloatPane.FloatWindow.SizeChanged -= FloatWindow_SizeChanged;
                             _floatHandlersAdded = false;
                         }
 
@@ -390,6 +392,7 @@ namespace mRemoteNG.UI.Window
 
         private void Connection_ResizeBegin(object sender, EventArgs e)
         {
+            _hostResizeInProgress = true;
             ResizeBegin?.Invoke(this, e);
         }
 
@@ -397,7 +400,32 @@ namespace mRemoteNG.UI.Window
 
         private void Connection_ResizeEnd(object sender, EventArgs e)
         {
+            _hostResizeInProgress = false;
             ResizeEnd?.Invoke(sender, e);
+
+            // Protocols follow the main window's ResizeEnd themselves. A floating panel is a separate
+            // top-level window, so tell the connections it hosts when it has finished resizing.
+            if (DockState == DockState.Float)
+                NotifyConnectionsOfHostResize(sender, e);
+        }
+
+        private bool _hostResizeInProgress;
+
+        private void FloatWindow_SizeChanged(object sender, EventArgs e)
+        {
+            // Size changes that are not part of a user drag (maximize/restore, or code setting the
+            // floating window's bounds) never raise ResizeEnd, so treat each of them as finished.
+            if (!_hostResizeInProgress)
+                NotifyConnectionsOfHostResize(sender, e);
+        }
+
+        private void NotifyConnectionsOfHostResize(object sender, EventArgs e)
+        {
+            foreach (IDockContent dockContent in connDock.DocumentsToArray())
+            {
+                if (dockContent is ConnectionTab { Tag: InterfaceControl interfaceControl })
+                    interfaceControl.Protocol?.HostResizeEnd(sender, e);
+            }
         }
 
         internal void NavigateToNextTab()
