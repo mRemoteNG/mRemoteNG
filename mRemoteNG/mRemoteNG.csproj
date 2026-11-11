@@ -691,22 +691,25 @@
       <Culture>zh-TW</Culture>
     </AppSatelliteResourceAssemblies>
   </ItemGroup>
-  <Target Name="RelocateSatelliteAssembliesToLanguagesFolder" AfterTargets="Build">
+  <Target Name="RelocateBuiltSatelliteAssembliesToLanguagesFolder" AfterTargets="Build">
     <ItemGroup>
       <BuiltSatelliteResourceAssemblies Include="@(AppSatelliteResourceAssemblies->'$(OutDir)%(Culture)\mRemoteNG.resources.dll')" />
-      <PublishedSatelliteResourceAssemblies Include="@(AppSatelliteResourceAssemblies->'$(PublishDir)%(Culture)\mRemoteNG.resources.dll')" Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
       <BuiltSatelliteCultureDirectories Include="@(AppSatelliteResourceAssemblies->'$(OutDir)%(Culture)')" />
-      <PublishedSatelliteCultureDirectories Include="@(AppSatelliteResourceAssemblies->'$(PublishDir)%(Culture)')" Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
     </ItemGroup>
 
     <Copy SourceFiles="@(BuiltSatelliteResourceAssemblies)" DestinationFiles="@(AppSatelliteResourceAssemblies->'$(OutDir)Languages\%(Culture)\mRemoteNG.resources.dll')" SkipUnchangedFiles="true" />
-
-    <Copy SourceFiles="@(PublishedSatelliteResourceAssemblies)" DestinationFiles="@(AppSatelliteResourceAssemblies->'$(PublishDir)Languages\%(Culture)\mRemoteNG.resources.dll')" SkipUnchangedFiles="true" Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
-
     <Delete Files="@(BuiltSatelliteResourceAssemblies)" />
-    <Delete Files="@(PublishedSatelliteResourceAssemblies)" Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
     <RemoveDir Directories="@(BuiltSatelliteCultureDirectories)" />
-    <RemoveDir Directories="@(PublishedSatelliteCultureDirectories)" Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
+  </Target>
+  <Target Name="RelocatePublishedSatelliteAssembliesToLanguagesFolder" AfterTargets="Publish">
+    <ItemGroup>
+      <PublishedSatelliteResourceAssemblies Include="@(AppSatelliteResourceAssemblies->'$(PublishDir)%(Culture)\mRemoteNG.resources.dll')" />
+      <PublishedSatelliteCultureDirectories Include="@(AppSatelliteResourceAssemblies->'$(PublishDir)%(Culture)')" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(PublishedSatelliteResourceAssemblies)" DestinationFiles="@(AppSatelliteResourceAssemblies->'$(PublishDir)Languages\%(Culture)\mRemoteNG.resources.dll')" SkipUnchangedFiles="true" />
+    <Delete Files="@(PublishedSatelliteResourceAssemblies)" />
+    <RemoveDir Directories="@(PublishedSatelliteCultureDirectories)" />
   </Target>
   <Target Name="PublishAfterBuild" AfterTargets="Build" Condition="'$(Configuration)' == 'Release Self-Contained'">
     <Message Text="Publishing self-contained application for $(Platform)..." Importance="high" />
