@@ -6,7 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="AWSSDK.Core" Version="4.1.0" />
-    <PackageVersion Include="AWSSDK.EC2" Version="4.1.0" />
+    <PackageVersion Include="AWSSDK.EC2" Version="4.1.1" />
     <PackageVersion Include="Azure.Core" Version="1.65.0" />
     <PackageVersion Include="BouncyCastle.Cryptography" Version="2.7.0" />
     <PackageVersion Include="Castle.Core" Version="5.2.1" />
