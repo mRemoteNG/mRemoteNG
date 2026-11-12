@@ -7909,7 +7909,7 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use SQL Server to load &amp;&amp; save connections.
+        ///   Looks up a localized string similar to Use a database to load &amp;&amp; save connections.
         /// </summary>
         internal static string UseSQLServer {
             get {

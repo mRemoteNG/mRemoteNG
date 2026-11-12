@@ -127,14 +127,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             lblRegistrySettingsUsedInfo.BackColor = System.Drawing.SystemColors.ControlLight;
             lblRegistrySettingsUsedInfo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            lblRegistrySettingsUsedInfo.Dock = System.Windows.Forms.DockStyle.Top;
             lblRegistrySettingsUsedInfo.ForeColor = System.Drawing.Color.IndianRed;
-            lblRegistrySettingsUsedInfo.Location = new System.Drawing.Point(3, 46);
+            lblRegistrySettingsUsedInfo.Location = new System.Drawing.Point(0, 46);
             lblRegistrySettingsUsedInfo.Name = "lblRegistrySettingsUsedInfo";
             lblRegistrySettingsUsedInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
             lblRegistrySettingsUsedInfo.Size = new System.Drawing.Size(1128, 30);
             lblRegistrySettingsUsedInfo.TabIndex = 24;
             lblRegistrySettingsUsedInfo.Text = "Some settings are configured by your Administrator. Please contact your administrator for more information.";
             lblRegistrySettingsUsedInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            lblRegistrySettingsUsedInfo.Visible = false;
             // 
             // lblSectionName
             // 
@@ -1152,11 +1154,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkUseSQLServer
             // 
-            chkUseSQLServer.AutoSize = true;
+            chkUseSQLServer.Dock = System.Windows.Forms.DockStyle.Top;
             chkUseSQLServer.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            chkUseSQLServer.Location = new System.Drawing.Point(15, 82);
+            chkUseSQLServer.Location = new System.Drawing.Point(0, 46);
             chkUseSQLServer.Name = "chkUseSQLServer";
-            chkUseSQLServer.Size = new System.Drawing.Size(211, 23);
+            chkUseSQLServer.Padding = new System.Windows.Forms.Padding(15, 4, 0, 4);
+            chkUseSQLServer.Size = new System.Drawing.Size(656, 31);
             chkUseSQLServer.TabIndex = 34;
             chkUseSQLServer.Text = "Enable SQL Server Integration:";
             chkUseSQLServer.UseVisualStyleBackColor = true;
@@ -1166,10 +1169,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            Controls.Add(chkUseSQLServer);
+            // Docked from the last added down: title, administrator notice, checkbox, server block
             Controls.Add(pnlServerBlock);
-            Controls.Add(lblSectionName);
+            Controls.Add(chkUseSQLServer);
             Controls.Add(lblRegistrySettingsUsedInfo);
+            Controls.Add(lblSectionName);
             Margin = new System.Windows.Forms.Padding(4);
             Name = "SqlServerPage";
             Size = new System.Drawing.Size(656, 490);
