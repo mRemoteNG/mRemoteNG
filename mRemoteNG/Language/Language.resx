@@ -2181,6 +2181,9 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
     <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
   </data>
+  <data name="RdpSendDesktopScaleFactor" xml:space="preserve">
+    <value>Send my display scaling (DPI) to the remote computer (disable if the remote desktop appears zoomed in, e.g. GNOME Remote Desktop on Linux)</value>
+  </data>
   <data name="TimeoutInSeconds" xml:space="preserve">
     <value>Timeout [seconds]</value>
   </data>

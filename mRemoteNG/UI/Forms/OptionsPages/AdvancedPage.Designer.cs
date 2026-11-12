@@ -44,6 +44,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblSeconds = new MrngLabel();
             btnBrowseCustomPuttyPath = new MrngButton();
             chkLoadBalanceInfoUseUtf8 = new MrngCheckBox();
+            chkSendDesktopScaleFactor = new MrngCheckBox();
             chkNoReconnect = new MrngCheckBox();
             chkShowPuttySessionsInTree = new MrngCheckBox();
             chkUseUserProfiles = new MrngCheckBox();
@@ -186,6 +187,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkLoadBalanceInfoUseUtf8.Text = "Use UTF8 encoding for RDP \"Load Balance Info\" property";
             chkLoadBalanceInfoUseUtf8.UseVisualStyleBackColor = true;
             // 
+            // chkSendDesktopScaleFactor
+            // 
+            chkSendDesktopScaleFactor._mice = MrngCheckBox.MouseState.OUT;
+            chkSendDesktopScaleFactor.AutoSize = true;
+            chkSendDesktopScaleFactor.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            chkSendDesktopScaleFactor.Location = new System.Drawing.Point(9, 290);
+            chkSendDesktopScaleFactor.Name = "chkSendDesktopScaleFactor";
+            chkSendDesktopScaleFactor.Size = new System.Drawing.Size(430, 17);
+            chkSendDesktopScaleFactor.TabIndex = 14;
+            chkSendDesktopScaleFactor.Text = "Send my display scaling (DPI) to the remote computer";
+            chkSendDesktopScaleFactor.UseVisualStyleBackColor = true;
+            // 
             // chkNoReconnect
             // 
             chkNoReconnect._mice = MrngCheckBox.MouseState.OUT;
@@ -231,6 +244,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Controls.Add(chkShowPuttySessionsInTree);
             Controls.Add(chkNoReconnect);
             Controls.Add(chkLoadBalanceInfoUseUtf8);
+            Controls.Add(chkSendDesktopScaleFactor);
             Controls.Add(lblMaximumPuttyWaitTime);
             Controls.Add(chkAutomaticReconnect);
             Controls.Add(numPuttyWaitTime);
@@ -263,6 +277,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal Controls.MrngLabel lblSeconds;
         internal MrngButton btnBrowseCustomPuttyPath;
         private MrngCheckBox chkLoadBalanceInfoUseUtf8;
+        private MrngCheckBox chkSendDesktopScaleFactor;
         internal MrngCheckBox chkNoReconnect;
         internal MrngCheckBox chkShowPuttySessionsInTree;
         internal MrngCheckBox chkUseUserProfiles;

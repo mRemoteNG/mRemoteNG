@@ -40,7 +40,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
         protected readonly FrmMain _frmMain = FrmMain.Default;
         protected bool loginComplete;
         private bool _alertOnIdleDisconnect;
-        protected uint DesktopScaleFactor => (uint)(_displayProperties.ResolutionScalingFactor.Width * 100);
+        protected uint DesktopScaleFactor =>
+            Properties.OptionsAdvancedPage.Default.RdpSendDesktopScaleFactor
+                ? (uint)(_displayProperties.ResolutionScalingFactor.Width * 100)
+                : 100;
         protected readonly uint DeviceScaleFactor = 100;
         protected readonly uint Orientation = 0;
         private AxHost AxHost => (AxHost)Control;
