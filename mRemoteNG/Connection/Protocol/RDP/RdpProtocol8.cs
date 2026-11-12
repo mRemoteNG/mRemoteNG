@@ -151,16 +151,23 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         protected override void ResizeEnd(object sender, EventArgs e)
         {
-            if (_frmMain == null) return;
+            if (_frmMain == null || _frmMain.WindowState == FormWindowState.Minimized) return;
 
-            // Skip resize when minimized
-            if (_frmMain.WindowState == FormWindowState.Minimized) return;
-
-            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                $"ResizeEnd() called - WindowState={_frmMain.WindowState}");
-
-            // Update window state tracking
             LastWindowState = _frmMain.WindowState;
+            ResizeEndForWindow(_frmMain);
+        }
+
+        internal override void HostResizeEnd(Form host, EventArgs e)
+        {
+            if (host.WindowState == FormWindowState.Minimized) return;
+
+            ResizeEndForWindow(host);
+        }
+
+        private void ResizeEndForWindow(Form host)
+        {
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                $"ResizeEnd() called - WindowState={host.WindowState}");
 
             // Update control size immediately (no flicker)
             DoResizeControl();

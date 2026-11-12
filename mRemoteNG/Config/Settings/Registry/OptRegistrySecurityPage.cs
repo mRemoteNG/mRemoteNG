@@ -15,6 +15,14 @@ namespace mRemoteNG.Config.Settings.Registry
         public WinRegistryEntry<bool> EncryptCompleteConnectionsFile { get; private set; }
 
         /// <summary>
+        /// Specifies whether the connections file is protected with Windows DPAPI
+        /// (<see cref="mRemoteNG.Security.SymmetricEncryption.DpapiCryptographyProvider"/>) instead of a
+        /// password-derived key. When set, the Encryption Engine / Block Cipher Mode / KDF Iterations
+        /// settings below have no effect, since DPAPI uses none of them.
+        /// </summary>
+        public WinRegistryEntry<bool> UseDpapiProtection { get; private set; }
+
+        /// <summary>
         /// Specifies the encryption engine used for encryption.
         /// </summary>
         public WinRegistryEntry<string> EncryptionEngine { get; private set; }
@@ -29,13 +37,23 @@ namespace mRemoteNG.Config.Settings.Registry
         /// </summary>
         public WinRegistryEntry<int> EncryptionKeyDerivationIterations { get; private set; }
 
-        public OptRegistrySecurityPage()
+        public OptRegistrySecurityPage() : this(WindowsRegistryInfo.Hive, WindowsRegistryInfo.SecurityOptions)
         {
-            
-            RegistryHive hive = WindowsRegistryInfo.Hive;
-            string subKey = WindowsRegistryInfo.SecurityOptions;
+        }
 
+        /// <summary>
+        /// Initializes a new instance reading from an explicit hive/subkey instead of the production
+        /// <see cref="WindowsRegistryInfo.Hive"/>/<see cref="WindowsRegistryInfo.SecurityOptions"/>
+        /// location. Internal so tests (<c>InternalsVisibleTo("mRemoteNGTests")</c>) can exercise this
+        /// class against a throwaway <see cref="RegistryHive.CurrentUser"/> path instead of
+        /// <see cref="RegistryHive.LocalMachine"/>, which would require administrator rights to write.
+        /// </summary>
+        /// <param name="hive">The registry hive to read settings from.</param>
+        /// <param name="subKey">The registry subkey to read settings from.</param>
+        internal OptRegistrySecurityPage(RegistryHive hive, string subKey)
+        {
             EncryptCompleteConnectionsFile = new WinRegistryEntry<bool>(hive, subKey, nameof(EncryptCompleteConnectionsFile)).Read();
+            UseDpapiProtection = new WinRegistryEntry<bool>(hive, subKey, nameof(UseDpapiProtection)).Read();
             EncryptionEngine = new WinRegistryEntry<string>(hive, subKey, nameof(EncryptionEngine)).Read();
             EncryptionBlockCipherMode = new WinRegistryEntry<string>(hive, subKey, nameof(EncryptionBlockCipherMode)).Read();
             EncryptionKeyDerivationIterations = new WinRegistryEntry<int>(hive, subKey, nameof(EncryptionKeyDerivationIterations)).Read();
@@ -65,6 +83,7 @@ namespace mRemoteNG.Config.Settings.Registry
         private void Apply()
         {
             ApplyEncryptCompleteConnectionsFile();
+            ApplyUseDpapiProtection();
             ApplyEncryptionEngine();
             ApplyEncryptionBlockCipherMode();
             ApplyEncryptionKeyDerivationIterations();
@@ -74,6 +93,12 @@ namespace mRemoteNG.Config.Settings.Registry
         {
             if (EncryptCompleteConnectionsFile.IsSet)
                 Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile = EncryptCompleteConnectionsFile.Value;
+        }
+
+        private void ApplyUseDpapiProtection()
+        {
+            if (UseDpapiProtection.IsSet)
+                Properties.OptionsSecurityPage.Default.UseDpapiProtection = UseDpapiProtection.Value;
         }
 
         private void ApplyEncryptionEngine()

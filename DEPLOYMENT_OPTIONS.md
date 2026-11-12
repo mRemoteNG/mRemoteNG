@@ -8,7 +8,7 @@ This document explains the two deployment options for mRemoteNG and how to build
 **File suffix: `-FD.zip`**
 
 - **Size**: ~15-25 MB
-- **Requirements**: User must have .NET 10 Desktop Runtime installed
+- **Requirements**: User must have .NET 11 Desktop Runtime installed
 - **Startup**: Application checks for .NET runtime and prompts user to download if missing
 - **Use case**: Standard release for users comfortable installing prerequisites
 
@@ -16,7 +16,7 @@ This document explains the two deployment options for mRemoteNG and how to build
 **File suffix: `-SC.zip`**
 
 - **Size**: ~80-150 MB
-- **Requirements**: None - includes .NET 10 runtime
+- **Requirements**: None - includes .NET 11 runtime
 - **Startup**: No runtime checks performed (runtime is bundled)
 - **Use case**: Portable version for users who want zero installation/configuration
 
@@ -74,7 +74,7 @@ The workflow runs when:
 ### Release Output
 
 All four zip files are uploaded to a single GitHub Release with clear descriptions:
-- Framework-Dependent versions are marked as requiring .NET 10 Runtime
+- Framework-Dependent versions are marked as requiring .NET 11 Runtime
 - Self-Contained versions are marked as portable/no installation needed
 
 ## Code Changes
@@ -97,7 +97,7 @@ When building with `-p:DefineConstants="SELF_CONTAINED"`, the runtime checks are
 ### For Users
 
 **Choose Framework-Dependent (FD) if:**
-- You don't mind installing .NET 10 Desktop Runtime once
+- You don't mind installing .NET 11 Desktop Runtime once
 - You want smaller download size
 - You're using multiple .NET applications (runtime is shared)
 
@@ -140,18 +140,20 @@ Typical build sizes:
 | x64     | ~18 MB              | ~95 MB         |
 | ARM64   | ~18 MB              | ~95 MB         |
 
-*Note: Self-contained includes entire .NET 10 runtime (~80 MB overhead)*
+*Note: Self-contained includes entire .NET 11 runtime (~80 MB overhead)*
 
 ## Testing
 
+Use an isolated test machine without the .NET 11 Desktop Runtime installed.
+
 ### Framework-Dependent Build
-1. Uninstall .NET 10 Runtime (if installed)
+1. Confirm .NET 11 Desktop Runtime is absent
 2. Run mRemoteNG.exe
-3. Should prompt to download .NET 10 Runtime
+3. Should prompt to download .NET 11 Runtime
 4. Install runtime and verify app launches
 
 ### Self-Contained Build
-1. Uninstall .NET 10 Runtime (if installed)
+1. Confirm .NET 11 Desktop Runtime is absent
 2. Run mRemoteNG.exe
 3. Should launch immediately without runtime check
 4. Verify full functionality

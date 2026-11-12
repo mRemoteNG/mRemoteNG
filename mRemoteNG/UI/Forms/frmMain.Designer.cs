@@ -239,23 +239,10 @@ namespace mRemoteNG.UI.Forms
             this.tsContainer.TopToolStripPanel.PerformLayout();
             this.tsContainer.ResumeLayout(false);
             this.tsContainer.PerformLayout();
-            this.ResumeLayout(false);
+			this.ResumeLayout(false);
 		}
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == (Keys.Alt | Keys.Menu))
-            {
-                if(!msMain.Visible)
-                {
-                    msMain.Visible = true;
-                }
-            }
-
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
-
-        internal WeifenLuo.WinFormsUI.Docking.DockPanel pnlDock;
+		internal WeifenLuo.WinFormsUI.Docking.DockPanel pnlDock;
 		internal System.Windows.Forms.MenuStrip msMain;
 		internal System.Windows.Forms.ToolStripContainer tsContainer;
 		internal System.Windows.Forms.Timer tmrAutoSave;

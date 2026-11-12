@@ -1,4 +1,8 @@
-﻿using System.Threading;
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.UI.Forms;
 using mRemoteNGTests.TestHelpers;
@@ -48,6 +52,7 @@ namespace mRemoteNGTests.UI.Forms
 
         [TestCase("", "")]
         [TestCase("ab", "ab")]
+        [TestCase("abc", "abc")]
         [TestCase("new password", "different password")]
         public void InvalidNewPasswordDoesNotAcceptDialog(string password, string confirmation)
         {
@@ -143,6 +148,105 @@ namespace mRemoteNGTests.UI.Forms
             _passwordForm.FindControl<Button>("btnShowPassword").PerformClick();
 
             Assert.That(passwordTextBox.Text, Is.EqualTo("typed before"));
+        }
+
+        [TestCase(true)]
+        [TestCase(false)]
+        public void ButtonsAreFullyVisibleBeforeAndAfterAStatusMessage(bool newPasswordMode)
+        {
+            using FrmPassword form = new(newPasswordMode: newPasswordMode);
+            form.Show();
+            AssertButtonsVisible(form);
+
+            form.FindControl<TextBox>("txtPassword").Text = newPasswordMode ? "abc" : "";
+            if (newPasswordMode)
+                form.FindControl<Button>("btnOK").PerformClick();
+            AssertButtonsVisible(form);
+        }
+
+        private static void AssertButtonsVisible(Form form)
+        {
+            foreach (string name in new[] { "btnOK", "btnCancel" })
+            {
+                Button button = form.FindControl<Button>(name);
+                System.Drawing.Rectangle bounds = form.RectangleToClient(button.RectangleToScreen(button.ClientRectangle));
+                Assert.That(form.ClientRectangle.Contains(bounds), Is.True, $"{name} is cut off: {bounds} in {form.ClientRectangle}");
+            }
+        }
+
+        [Test]
+        public void FourCharacterNewPasswordIsAccepted()
+        {
+            _passwordForm.FindControl<TextBox>("txtPassword").Text = "abcd";
+            _passwordForm.FindControl<TextBox>("txtVerify").Text = "abcd";
+
+            _passwordForm.FindControl<Button>("btnOK").PerformClick();
+
+            Assert.That(_passwordForm.DialogResult, Is.EqualTo(DialogResult.OK));
+        }
+
+        [Test]
+        [SetUICulture("en-US")]
+        public void TypingANewPasswordShowsItsStrength()
+        {
+            Label strengthLabel = _passwordForm.FindControl<Label>("lblStrength");
+            Assert.That(strengthLabel.Visible, Is.False);
+
+            _passwordForm.FindControl<TextBox>("txtPassword").Text = "password";
+            WaitForStrengthLabel(strengthLabel);
+
+            Assert.That(strengthLabel.Visible, Is.True);
+            Assert.That(strengthLabel.Text, Is.EqualTo("Strength: Weak"));
+        }
+
+        [Test]
+        [SetUICulture("en-US")]
+        public void VeryLongPasswordIsNotScoredAndDialogRemainsResponsive()
+        {
+            _passwordForm.FindControl<TextBox>("txtPassword").Text = new string('a', 10000);
+
+            Label strengthLabel = _passwordForm.FindControl<Label>("lblStrength");
+            Assert.That(strengthLabel.Text, Does.Contain("Not estimated"));
+
+            _passwordForm.FindControl<Button>("btnCancel").PerformClick();
+
+            Assert.That(_passwordForm.Visible, Is.False);
+        }
+
+        [Test]
+        [SetUICulture("en-US")]
+        public void StrengthEvaluationFailureShowsUnavailableWithoutCrashing()
+        {
+            _passwordForm.FindControl<TextBox>("txtPassword").Text = "password";
+            const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+            typeof(FrmPassword).GetField("_activeStrengthVersion", flags).SetValue(_passwordForm, 1L);
+            var completed = new RunWorkerCompletedEventArgs(null, new InvalidOperationException(), false);
+
+            typeof(FrmPassword).GetMethod("StrengthWorker_RunWorkerCompleted", flags)
+                .Invoke(_passwordForm, new object[] { null, completed });
+
+            Assert.That(_passwordForm.FindControl<Label>("lblStrength").Text, Is.EqualTo("Strength: Unable to estimate"));
+        }
+
+        private static void WaitForStrengthLabel(Label strengthLabel)
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            while (string.IsNullOrEmpty(strengthLabel.Text) && stopwatch.Elapsed < TimeSpan.FromSeconds(5))
+            {
+                Application.DoEvents();
+                Thread.Sleep(10);
+            }
+        }
+
+        [Test]
+        public void ExistingPasswordDoesNotShowStrength()
+        {
+            using FrmPassword existingPasswordForm = new(newPasswordMode: false);
+            existingPasswordForm.Show();
+
+            existingPasswordForm.FindControl<TextBox>("txtPassword").Text = "password";
+
+            Assert.That(existingPasswordForm.FindControl<Label>("lblStrength").Visible, Is.False);
         }
 
         [Test]

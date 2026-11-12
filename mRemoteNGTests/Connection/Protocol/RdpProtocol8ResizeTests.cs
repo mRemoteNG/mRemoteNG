@@ -1,6 +1,7 @@
 using System.Threading;
 using System;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -355,6 +356,77 @@ namespace mRemoteNGTests.Connection.Protocol
             Assert.That(() => protocol.CallUpdateSessionDisplaySettings(1024, 768), Throws.Nothing);
         }
 
+        [TestCase(FormWindowState.Minimized, FormWindowState.Normal, true)]
+        [TestCase(FormWindowState.Minimized, FormWindowState.Maximized, true)]
+        [TestCase(FormWindowState.Normal, FormWindowState.Minimized, false)]
+        [TestCase(FormWindowState.Minimized, FormWindowState.Minimized, false)]
+        public void HostResizeEnd_UsesFloatingHostState(FormWindowState mainState, FormWindowState hostState, bool expectedResize)
+        {
+            var protocol = new ExposedRdpProtocol8();
+            var main = protocol.MainForm;
+            var originalState = main.WindowState;
+            using var host = new Form { WindowState = hostState };
+            using var control = new Panel { Size = new Size(100, 100) };
+            var timer = protocol.ResizeTimer;
+            timer.Interval = 60000;
+            protocol.InterfaceControl = _interfaceControl;
+            protocol.SetControl(control);
+            protocol.SetLastWindowState(FormWindowState.Maximized);
+
+            try
+            {
+                main.WindowState = mainState;
+                protocol.HostResizeEnd(host, EventArgs.Empty);
+
+                Assert.Multiple(() =>
+                {
+                    Assert.That(timer.Enabled, Is.EqualTo(expectedResize));
+                    Assert.That(control.Size, Is.EqualTo(expectedResize ? _interfaceControl.Size : new Size(100, 100)));
+                    Assert.That(protocol.WindowStateBeforeResize, Is.EqualTo(FormWindowState.Maximized));
+                });
+            }
+            finally
+            {
+                timer.Dispose();
+                main.WindowState = originalState;
+                protocol.Dispose();
+            }
+        }
+
+        [TestCase(FormWindowState.Minimized, false)]
+        [TestCase(FormWindowState.Normal, true)]
+        public void ResizeEnd_UsesMainStateForDockedEvents(FormWindowState mainState, bool expectedResize)
+        {
+            var protocol = new ExposedRdpProtocol8();
+            var main = protocol.MainForm;
+            var originalState = main.WindowState;
+            using var control = new Panel { Size = new Size(100, 100) };
+            var timer = protocol.ResizeTimer;
+            timer.Interval = 60000;
+            protocol.InterfaceControl = _interfaceControl;
+            protocol.SetControl(control);
+            protocol.SetLastWindowState(FormWindowState.Maximized);
+
+            try
+            {
+                main.WindowState = mainState;
+                protocol.CallResizeEnd(_testForm);
+
+                Assert.Multiple(() =>
+                {
+                    Assert.That(timer.Enabled, Is.EqualTo(expectedResize));
+                    Assert.That(control.Size, Is.EqualTo(expectedResize ? _interfaceControl.Size : new Size(100, 100)));
+                    Assert.That(protocol.WindowStateBeforeResize, Is.EqualTo(expectedResize ? mainState : FormWindowState.Maximized));
+                });
+            }
+            finally
+            {
+                timer.Dispose();
+                main.WindowState = originalState;
+                protocol.Dispose();
+            }
+        }
+
         /// <summary>
         /// Testable version of RdpProtocol8 that exposes resize methods for testing
         /// </summary>
@@ -446,6 +518,15 @@ namespace mRemoteNGTests.Connection.Protocol
 
         private class ExposedRdpProtocol8 : RdpProtocol8
         {
+            public Form MainForm => _frmMain;
+            public FormWindowState WindowStateBeforeResize => LastWindowState;
+            public System.Timers.Timer ResizeTimer => (System.Timers.Timer)typeof(RdpProtocol8)
+                .GetField("_resizeDebounceTimer", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(this);
+
+            public void SetControl(Control control) => Control = control;
+            public void SetLastWindowState(FormWindowState state) => LastWindowState = state;
+            public void CallResizeEnd(object sender) => ResizeEnd(sender, EventArgs.Empty);
+
             public void CallUpdateSessionDisplaySettings(uint width, uint height)
             {
                 UpdateSessionDisplaySettings(width, height);

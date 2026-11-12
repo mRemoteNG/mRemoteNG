@@ -751,6 +751,27 @@ Connections saved in the profile are kept. You can turn the prompt back on in Op
   <data name="HidePassword" xml:space="preserve">
     <value>Hide password</value>
   </data>
+  <data name="PasswordStrength" xml:space="preserve">
+    <value>Strength: {0}</value>
+  </data>
+  <data name="PasswordStrengthWeak" xml:space="preserve">
+    <value>Weak</value>
+  </data>
+  <data name="PasswordStrengthFair" xml:space="preserve">
+    <value>Fair</value>
+  </data>
+  <data name="PasswordStrengthGood" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="PasswordStrengthStrong" xml:space="preserve">
+    <value>Strong</value>
+  </data>
+  <data name="PasswordStrengthNotEstimated" xml:space="preserve">
+    <value>Not estimated (over 256 characters)</value>
+  </data>
+  <data name="PasswordStrengthUnavailable" xml:space="preserve">
+    <value>Unable to estimate</value>
+  </data>
   <data name="LanguageString" xml:space="preserve">
     <value>Language</value>
   </data>
@@ -1011,7 +1032,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>Both passwords must match.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>The password must be at least 3 characters long.</value>
+    <value>The password must be at least 4 characters long.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>Please fill all fields</value>
@@ -1741,6 +1762,18 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="SendTo" xml:space="preserve">
     <value>Send To...</value>
+  </data>
+  <data name="SendToRightClickFullscreenHint" xml:space="preserve">
+    <value>Right-click to also switch RDP to fullscreen</value>
+  </data>
+  <data name="SendToRightClickWindowedHint" xml:space="preserve">
+    <value>Right-click to send without switching RDP to fullscreen</value>
+  </data>
+  <data name="SendToScreenUsesRdpFullscreen" xml:space="preserve">
+    <value>"Send To" a screen switches RDP connections to fullscreen</value>
+  </data>
+  <data name="PrimaryScreen" xml:space="preserve">
+    <value>Primary</value>
   </data>
   <data name="SetHostnameLikeDisplayName" xml:space="preserve">
     <value>Set hostname like display name when creating or renaming connections</value>

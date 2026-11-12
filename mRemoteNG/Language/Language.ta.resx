@@ -940,7 +940,7 @@
     <value>இரண்டு கடவுச்சொற்களும் பொருந்த வேண்டும்.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>கடவுச்சொல் குறைந்தது 3 எழுத்துக்கள் நீளமாக இருக்க வேண்டும்.</value>
+    <value>கடவுச்சொல் குறைந்தது 4 எழுத்துக்கள் நீளமாக இருக்க வேண்டும்.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>எல்லா புலங்களையும் நிரப்பு</value>

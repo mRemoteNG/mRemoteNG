@@ -7,7 +7,7 @@ mRemoteNG is an open-source, multi-protocol, tabbed remote connections manager f
 ## Technology Stack
 
 - **Language**: C# with latest stable language version
-- **Framework**: .NET 10.0 for Windows (net10.0-windows10.0.26100.0)
+- **Framework**: .NET 11.0 for Windows (net11.0-windows10.0.26100.0)
 - **UI Framework**: Windows Forms with WPF support
 - **Target Platforms**: x64 and ARM64
 - **Testing Framework**: NUnit with NSubstitute for mocking
@@ -17,7 +17,7 @@ mRemoteNG is an open-source, multi-protocol, tabbed remote connections manager f
 
 ### Prerequisites
 - Visual Studio 2026 (version 18.4.0 or later)
-- .NET 10.0 Desktop Runtime
+- .NET 11.0 SDK and Desktop Runtime
 - Windows 10/11 or Windows Server 2022+
 
 ### Build Commands
