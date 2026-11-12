@@ -245,6 +245,8 @@ namespace mRemoteNG.UI.Forms
 
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters);
+            _ = AppWindows.ErrorsForm.lvErrorCollector.Handle;
+            MessageCollectorSetup.WriteCollectedMessages(messageCollector, _messageWriters);
  
             Startup.Instance.InitializeProgram(messageCollector);
             Runtime.PluginService.LoadPlugins();
