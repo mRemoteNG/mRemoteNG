@@ -113,6 +113,11 @@ namespace mRemoteNG.UI.Window
                 _optionsForm.Dock = DockStyle.Fill;
                 _optionsForm.CloseRequested += OnOptionsFormCloseRequested;
                 Controls.Add(_optionsForm);
+
+                // FrmOptions is created and its pages loaded while the main window
+                // starts, so settings changed after that (e.g. at a startup prompt)
+                // would show stale on the first open.
+                _optionsForm.ReloadAllSettings();
             }
 
             if (!_optionsForm.Visible)

@@ -3117,6 +3117,15 @@ namespace mRemoteNG.Resources.Language {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Use user profiles to store connections (experimental, takes effect after restart).
+        /// </summary>
+        internal static string UseUserProfiles {
+            get {
+                return ResourceManager.GetString("UseUserProfiles", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Import all open ports as selected protocol.
         /// </summary>
         internal static string ImportAllOpenPorts {
@@ -3500,6 +3509,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string LoadBalanceInfoUseUtf8 {
             get {
                 return ResourceManager.GetString("LoadBalanceInfoUseUtf8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send my display scaling (DPI) to the remote computer (disable if the remote desktop appears zoomed in, e.g. GNOME Remote Desktop on Linux).
+        /// </summary>
+        internal static string RdpSendDesktopScaleFactor {
+            get {
+                return ResourceManager.GetString("RdpSendDesktopScaleFactor", resourceCulture);
             }
         }
         
@@ -4441,7 +4459,7 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The password must be at least 3 characters long..
+        ///   Looks up a localized string similar to The password must be at least 4 characters long..
         /// </summary>
         internal static string PasswordStatusTooShort {
             get {
@@ -4617,6 +4635,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string PreviousSession {
             get {
                 return ResourceManager.GetString("PreviousSession", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Primary.
+        /// </summary>
+        internal static string PrimaryScreen {
+            get {
+                return ResourceManager.GetString("PrimaryScreen", resourceCulture);
             }
         }
         
@@ -5193,6 +5220,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string PropertyDescriptionRedirectSmartCards {
             get {
                 return ResourceManager.GetString("PropertyDescriptionRedirectSmartCards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select whether WebAuthn requests (passkeys, Windows Hello, FIDO2 security keys) made in the remote session should be redirected to this computer.
+        /// </summary>
+        internal static string PropertyDescriptionRedirectWebAuthn {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionRedirectWebAuthn", resourceCulture);
             }
         }
         
@@ -6250,6 +6286,24 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to enable WebAuthn redirection (PluginDlls).
+        /// </summary>
+        internal static string RdpWebAuthnPluginFailed {
+            get {
+                return ResourceManager.GetString("RdpWebAuthnPluginFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WebAuthn redirection plugin not found at '{0}'.
+        /// </summary>
+        internal static string RdpWebAuthnPluginNotFound {
+            get {
+                return ResourceManager.GetString("RdpWebAuthnPluginNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RDP Set Redirect Keys Failed!.
         /// </summary>
         internal static string RdpSetRedirectKeysFailed {
@@ -6417,6 +6471,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string RedirectSmartCards {
             get {
                 return ResourceManager.GetString("RedirectSmartCards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WebAuthn (Windows Hello / security keys).
+        /// </summary>
+        internal static string RedirectWebAuthn {
+            get {
+                return ResourceManager.GetString("RedirectWebAuthn", resourceCulture);
             }
         }
         
@@ -6716,6 +6779,33 @@ namespace mRemoteNG.Resources.Language {
         internal static string SendTo {
             get {
                 return ResourceManager.GetString("SendTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right-click to also switch RDP to fullscreen.
+        /// </summary>
+        internal static string SendToRightClickFullscreenHint {
+            get {
+                return ResourceManager.GetString("SendToRightClickFullscreenHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right-click to send without switching RDP to fullscreen.
+        /// </summary>
+        internal static string SendToRightClickWindowedHint {
+            get {
+                return ResourceManager.GetString("SendToRightClickWindowedHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Send To&quot; a screen switches RDP connections to fullscreen.
+        /// </summary>
+        internal static string SendToScreenUsesRdpFullscreen {
+            get {
+                return ResourceManager.GetString("SendToScreenUsesRdpFullscreen", resourceCulture);
             }
         }
         
@@ -7952,7 +8042,106 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("Verify", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Stop asking for a profile password at startup?.
+        /// </summary>
+        internal static string ProfilePromptStopAsking {
+            get {
+                return ResourceManager.GetString("ProfilePromptStopAsking", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Show password.
+        /// </summary>
+        internal static string ShowPassword {
+            get {
+                return ResourceManager.GetString("ShowPassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Ask for a profile password at startup.
+        /// </summary>
+        internal static string AskProfilePasswordAtStartup {
+            get {
+                return ResourceManager.GetString("AskProfilePasswordAtStartup", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Hide password.
+        /// </summary>
+        internal static string HidePassword {
+            get {
+                return ResourceManager.GetString("HidePassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Strength: {0}.
+        /// </summary>
+        internal static string PasswordStrength {
+            get {
+                return ResourceManager.GetString("PasswordStrength", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Weak.
+        /// </summary>
+        internal static string PasswordStrengthWeak {
+            get {
+                return ResourceManager.GetString("PasswordStrengthWeak", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Fair.
+        /// </summary>
+        internal static string PasswordStrengthFair {
+            get {
+                return ResourceManager.GetString("PasswordStrengthFair", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Good.
+        /// </summary>
+        internal static string PasswordStrengthGood {
+            get {
+                return ResourceManager.GetString("PasswordStrengthGood", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Strong.
+        /// </summary>
+        internal static string PasswordStrengthStrong {
+            get {
+                return ResourceManager.GetString("PasswordStrengthStrong", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Not estimated (over 256 characters).
+        /// </summary>
+        internal static string PasswordStrengthNotEstimated {
+            get {
+                return ResourceManager.GetString("PasswordStrengthNotEstimated", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to estimate.
+        /// </summary>
+        internal static string PasswordStrengthUnavailable {
+            get {
+                return ResourceManager.GetString("PasswordStrengthUnavailable", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Verify table structure.
         /// </summary>

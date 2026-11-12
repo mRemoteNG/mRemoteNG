@@ -927,7 +927,7 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
     <value>Obě hesla musejí být stejná.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>helso musí být dlouhé alespoň 3 znaky.</value>
+    <value>helso musí být dlouhé alespoň 4 znaky.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>Prosím vyplňte všechna vstupní pole</value>

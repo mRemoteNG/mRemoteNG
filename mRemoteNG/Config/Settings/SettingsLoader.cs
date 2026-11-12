@@ -45,8 +45,6 @@ namespace mRemoteNG.Config.Settings
         {
             try
             {
-                EnsureSettingsAreSavedInNewestVersion();
-
                 SetSupportedCulture();
                 SetApplicationWindowPositionAndSize();
                 SetKioskMode();
@@ -138,33 +136,6 @@ namespace mRemoteNG.Config.Settings
         private static void SetPuttyPath()
         {
             PuttyBase.PuttyPath = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath ? Properties.OptionsAdvancedPage.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
-        }
-
-        private void EnsureSettingsAreSavedInNewestVersion()
-        {
-            // TODO: is this ever true and run?
-            if (Properties.App.Default.DoUpgrade)
-                UpgradeSettingsVersion();
-        }
-
-        private void UpgradeSettingsVersion()
-        {
-            try
-            {
-                Properties.Settings.Default.Save();
-                Properties.Settings.Default.Upgrade();
-            }
-            catch (Exception ex)
-            {
-                _messageCollector.AddExceptionMessage("Settings.Upgrade() failed", ex);
-            }
-
-            Properties.App.Default.DoUpgrade = false;
-
-            // Clear pending update flag
-            // This is used for automatic updates, not for settings migration, but it
-            // needs to be cleared here because we know that we just updated.
-            Properties.OptionsUpdatesPage.Default.UpdatePending = false;
         }
 
         private void SetToolbarsDefault()

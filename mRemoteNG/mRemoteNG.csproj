@@ -8,7 +8,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
+    <TargetFramework>net11.0-windows10.0.26100.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <TransformOnBuild>true</TransformOnBuild>
     <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
@@ -132,18 +132,27 @@
     <PackageReference Include="Google.Protobuf" />
     <PackageReference Include="log4net" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
+    <PackageReference Include="Microsoft.Bcl.Cryptography" />
     <PackageReference Include="Microsoft.Data.SqlClient" />
     <PackageReference Include="Microsoft.Data.Sqlite" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
     <PackageReference Include="Microsoft.Web.WebView2" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" />
     <PackageReference Include="MySql.Data" />
+    <PackageReference Include="OpenTelemetry.PersistentStorage.FileSystem" />
+    <PackageReference Include="SQLite" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" />
     <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" />
+    <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" />
     <PackageReference Include="System.Data.Odbc" />
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="SSH.NET" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
     <PackageReference Include="System.Management" />
+    <PackageReference Include="System.Threading.RateLimiting" />
     <PackageReference Include="VncSharpCore" />
+    <PackageReference Include="zxcvbn-core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Language\Language.Designer.cs">
@@ -550,10 +559,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="154.0.34" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="156.0.15" />
   </ItemGroup>
   <ItemGroup Condition="'$(Platform)'=='arm64'">
-    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="154.0.34" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="156.0.15" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
@@ -679,31 +688,25 @@
       <Culture>zh-TW</Culture>
     </AppSatelliteResourceAssemblies>
   </ItemGroup>
-  <Target Name="RelocateSatelliteAssembliesToLanguagesFolder" AfterTargets="Build">
+  <Target Name="RelocateBuiltSatelliteAssembliesToLanguagesFolder" AfterTargets="Build">
     <ItemGroup>
       <BuiltSatelliteResourceAssemblies Include="@(AppSatelliteResourceAssemblies->'$(OutDir)%(Culture)\mRemoteNG.resources.dll')" />
-      <PublishedSatelliteResourceAssemblies Include="@(AppSatelliteResourceAssemblies->'$(PublishDir)%(Culture)\mRemoteNG.resources.dll')"
-                                          Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
       <BuiltSatelliteCultureDirectories Include="@(AppSatelliteResourceAssemblies->'$(OutDir)%(Culture)')" />
-      <PublishedSatelliteCultureDirectories Include="@(AppSatelliteResourceAssemblies->'$(PublishDir)%(Culture)')"
-                                          Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
     </ItemGroup>
 
-    <Copy SourceFiles="@(BuiltSatelliteResourceAssemblies)"
-          DestinationFiles="@(AppSatelliteResourceAssemblies->'$(OutDir)Languages\%(Culture)\mRemoteNG.resources.dll')"
-          SkipUnchangedFiles="true" />
-
-    <Copy SourceFiles="@(PublishedSatelliteResourceAssemblies)"
-          DestinationFiles="@(AppSatelliteResourceAssemblies->'$(PublishDir)Languages\%(Culture)\mRemoteNG.resources.dll')"
-          SkipUnchangedFiles="true"
-          Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
-
+    <Copy SourceFiles="@(BuiltSatelliteResourceAssemblies)" DestinationFiles="@(AppSatelliteResourceAssemblies->'$(OutDir)Languages\%(Culture)\mRemoteNG.resources.dll')" SkipUnchangedFiles="true" />
     <Delete Files="@(BuiltSatelliteResourceAssemblies)" />
-    <Delete Files="@(PublishedSatelliteResourceAssemblies)"
-            Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
     <RemoveDir Directories="@(BuiltSatelliteCultureDirectories)" />
-    <RemoveDir Directories="@(PublishedSatelliteCultureDirectories)"
-               Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)')" />
+  </Target>
+  <Target Name="RelocatePublishedSatelliteAssembliesToLanguagesFolder" AfterTargets="Publish">
+    <ItemGroup>
+      <PublishedSatelliteResourceAssemblies Include="@(AppSatelliteResourceAssemblies->'$(PublishDir)%(Culture)\mRemoteNG.resources.dll')" />
+      <PublishedSatelliteCultureDirectories Include="@(AppSatelliteResourceAssemblies->'$(PublishDir)%(Culture)')" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(PublishedSatelliteResourceAssemblies)" DestinationFiles="@(AppSatelliteResourceAssemblies->'$(PublishDir)Languages\%(Culture)\mRemoteNG.resources.dll')" SkipUnchangedFiles="true" />
+    <Delete Files="@(PublishedSatelliteResourceAssemblies)" />
+    <RemoveDir Directories="@(PublishedSatelliteCultureDirectories)" />
   </Target>
   <Target Name="PublishAfterBuild" AfterTargets="Build" Condition="'$(Configuration)' == 'Release Self-Contained'">
     <Message Text="Publishing self-contained application for $(Platform)..." Importance="high" />
@@ -715,6 +718,5 @@
     <RemoveDir Directories="$(TempBuildDir)" />
     <RemoveDir Directories="$(ProjectDir)bin\x64\Release Self-Contained" />
   </Target>
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets"
-          Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets')" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v18.0\TextTemplating\Microsoft.TextTemplating.targets')" />
 </Project>

@@ -907,7 +907,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Die beide Passwörter müssen übereinstimmen.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>Das Passwort muss mindestens 3 Zeichen lang sein.</value>
+    <value>Das Passwort muss mindestens 4 Zeichen lang sein.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>Bitte alle Felder ausfüllen!</value>

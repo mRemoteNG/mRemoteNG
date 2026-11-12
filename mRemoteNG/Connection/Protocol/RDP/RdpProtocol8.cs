@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using AxMSTSCLib;
 using mRemoteNG.App;
@@ -68,8 +69,44 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 }
                 SetExtendedProperty("RedirectedAuthentication", true);
             }
-            
+
+            if (connectionInfo.RedirectWebAuthn)
+            {
+                LoadWebAuthnRedirectionPlugin();
+            }
+
             return true;
+        }
+
+        /// <summary>
+        /// WebAuthn (passkey / FIDO2 / Windows Hello) redirection is implemented by the in-box
+        /// %SystemRoot%\System32\WebAuthn.dll dynamic virtual channel plugin (see the IWTSPlugin
+        /// remarks on learn.microsoft.com). mstsc.exe enables it by handing that path to
+        /// IMsTscAdvancedSettings::PluginDlls; mstscax recognises the plugin by its path and
+        /// wires it up internally. IMsRdpExtendedSettings exposes no property for it.
+        /// Requires Windows 11 22H2 / Windows Server 2025 or later on the remote side.
+        /// </summary>
+        private void LoadWebAuthnRedirectionPlugin()
+        {
+            try
+            {
+                string pluginPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "WebAuthn.dll");
+                if (!File.Exists(pluginPath))
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                        string.Format(Language.RdpWebAuthnPluginNotFound, pluginPath));
+                    return;
+                }
+
+                IMsTscAdvancedSettings advancedSettings = RdpClient8.AdvancedSettings;
+                advancedSettings.PluginDlls = pluginPath;
+                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                    $"WebAuthn redirection: PluginDlls set to '{pluginPath}'", true);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage(Language.RdpWebAuthnPluginFailed, ex, MessageClass.WarningMsg, false);
+            }
         }
 
         public override bool Fullscreen
@@ -114,16 +151,23 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         protected override void ResizeEnd(object sender, EventArgs e)
         {
-            if (_frmMain == null) return;
+            if (_frmMain == null || _frmMain.WindowState == FormWindowState.Minimized) return;
 
-            // Skip resize when minimized
-            if (_frmMain.WindowState == FormWindowState.Minimized) return;
-
-            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                $"ResizeEnd() called - WindowState={_frmMain.WindowState}");
-
-            // Update window state tracking
             LastWindowState = _frmMain.WindowState;
+            ResizeEndForWindow(_frmMain);
+        }
+
+        internal override void HostResizeEnd(Form host, EventArgs e)
+        {
+            if (host.WindowState == FormWindowState.Minimized) return;
+
+            ResizeEndForWindow(host);
+        }
+
+        private void ResizeEndForWindow(Form host)
+        {
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                $"ResizeEnd() called - WindowState={host.WindowState}");
 
             // Update control size immediately (no flicker)
             DoResizeControl();
@@ -239,13 +283,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 return;
             }
 
-            // FitToWindow: fixed resolution set at connect time, scrollbars handle overflow.
             // SmartSize: SmartSizing scales the image client-side, no session resize needed.
-            // Only Fullscreen benefits from dynamically changing the remote session resolution.
-            if (InterfaceControl.Info.Resolution != RDPResolutions.Fullscreen)
+            // FitToWindow and Fullscreen renegotiate the remote session resolution when
+            // AutomaticResize is enabled.
+            if (!SessionFollowsPanelSize(InterfaceControl.Info))
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                    $"Resize skipped for '{connectionInfo.Hostname}': Resolution is {InterfaceControl.Info.Resolution} (only Fullscreen supports dynamic resize)");
+                    $"Resize skipped for '{connectionInfo.Hostname}': Resolution is {InterfaceControl.Info.Resolution} (SmartSize scales client-side)");
                 return;
             }
 
@@ -283,8 +327,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
             // Check if controls are being disposed during shutdown
             if (Control.IsDisposed || InterfaceControl.IsDisposed) return false;
 
-            // FitToWindow: control is undocked at a fixed size with scrollbars; don't touch it.
-            if (InterfaceControl.Info.Resolution == RDPResolutions.FitToWindow)
+            // FitToWindow without automatic resize: control is undocked at a fixed size with scrollbars; don't touch it.
+            if (IsLockedAtConnectSize(InterfaceControl.Info))
                 return false;
 
             Runtime.MessageCollector?.AddMessage(MessageClass.DebugMsg,

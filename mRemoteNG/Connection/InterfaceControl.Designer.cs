@@ -26,6 +26,9 @@
         //It can be modified using the Windows Form Designer.
         //Do not modify it using the code editor.
         [System.Diagnostics.DebuggerStepThrough()]
-        private void InitializeComponent() => components = new System.ComponentModel.Container();
+        private void InitializeComponent()
+        {
+            components = new System.ComponentModel.Container();
+        }
     }
 }

@@ -73,10 +73,6 @@ namespace mRemoteNG.UI.Forms
             // 
             this.chkUsername._mice = MrngCheckBox.MouseState.HOVER;
             this.chkUsername.AutoSize = true;
-            this.chkUsername.Checked = CommonRegistrySettings.AllowExportUsernames;
-            this.chkUsername.CheckState = CommonRegistrySettings.AllowExportUsernames ?
-                              System.Windows.Forms.CheckState.Checked :
-                              System.Windows.Forms.CheckState.Unchecked;
             this.chkUsername.Location = new System.Drawing.Point(15, 32);
             this.chkUsername.Name = "chkUsername";
             this.chkUsername.Size = new System.Drawing.Size(77, 17);
@@ -89,10 +85,6 @@ namespace mRemoteNG.UI.Forms
             // 
             this.chkPassword._mice = MrngCheckBox.MouseState.HOVER;
             this.chkPassword.AutoSize = true;
-            this.chkPassword.Checked = CommonRegistrySettings.AllowExportPasswords;
-            this.chkPassword.CheckState = CommonRegistrySettings.AllowExportPasswords ?
-                              System.Windows.Forms.CheckState.Checked :
-                              System.Windows.Forms.CheckState.Unchecked;
             this.chkPassword.Location = new System.Drawing.Point(15, 55);
             this.chkPassword.Name = "chkPassword";
             this.chkPassword.Size = new System.Drawing.Size(75, 17);

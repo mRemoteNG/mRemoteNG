@@ -50,11 +50,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkAutomaticReconnect.Text = Language.DisplayReconnectionDialog;
             chkNoReconnect.Text = Language.CheckboxAutomaticReconnect;
             chkLoadBalanceInfoUseUtf8.Text = Language.LoadBalanceInfoUseUtf8;
+            chkSendDesktopScaleFactor.Text = Language.RdpSendDesktopScaleFactor;
             lblConfigurePuttySessions.Text = Language.PuttySessionsConfig;
             btnLaunchPutty.Text = Language.ButtonLaunchPutty;
             btnBrowseCustomPuttyPath.Text = Language._Browse;
             chkUseCustomPuttyPath.Text = Language.CheckboxPuttyPath;
             chkShowPuttySessionsInTree.Text = Language.ShowPuttySessionsInTree;
+            chkUseUserProfiles.Text = Language.UseUserProfiles;
             lblUVNCSCPort.Text = Language.UltraVNCSCListeningPort;
         }
 
@@ -65,6 +67,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkNoReconnect.Enabled = Properties.OptionsAdvancedPage.Default.ReconnectOnDisconnect;
 
             chkLoadBalanceInfoUseUtf8.Checked = Properties.OptionsAdvancedPage.Default.RdpLoadBalanceInfoUseUtf8;
+            chkSendDesktopScaleFactor.Checked = Properties.OptionsAdvancedPage.Default.RdpSendDesktopScaleFactor;
             numPuttyWaitTime.Value = Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime;
 
             chkUseCustomPuttyPath.Checked = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath;
@@ -73,6 +76,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             SetPuttyLaunchButtonEnabled();
 
             numUVNCSCPort.Value = Properties.OptionsAdvancedPage.Default.UVNCSCPort;
+            chkUseUserProfiles.Checked = Properties.OptionsAdvancedPage.Default.UseUserProfiles;
         }
 
         public override void SaveSettings()
@@ -80,6 +84,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsAdvancedPage.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
             Properties.OptionsAdvancedPage.Default.NoReconnect = chkNoReconnect.Checked;
             Properties.OptionsAdvancedPage.Default.RdpLoadBalanceInfoUseUtf8 = chkLoadBalanceInfoUseUtf8.Checked;
+            Properties.OptionsAdvancedPage.Default.RdpSendDesktopScaleFactor = chkSendDesktopScaleFactor.Checked;
 
             bool puttyPathChanged = false;
             if (Properties.OptionsAdvancedPage.Default.CustomPuttyPath != txtCustomPuttyPath.Text)
@@ -115,6 +120,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime = (int)numPuttyWaitTime.Value;
             Properties.OptionsAdvancedPage.Default.UVNCSCPort = (int)numUVNCSCPort.Value;
+            Properties.OptionsAdvancedPage.Default.UseUserProfiles = chkUseUserProfiles.Checked;
         }
 
         #endregion

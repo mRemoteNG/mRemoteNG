@@ -3,12 +3,12 @@ using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Tabs;
+using mRemoteNG.Security;
 using MSTSCLib;
 using System;
 using System.Diagnostics;
@@ -40,7 +40,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
         protected readonly FrmMain _frmMain = FrmMain.Default;
         protected bool loginComplete;
         private bool _alertOnIdleDisconnect;
-        protected uint DesktopScaleFactor => (uint)(_displayProperties.ResolutionScalingFactor.Width * 100);
+        protected uint DesktopScaleFactor =>
+            Properties.OptionsAdvancedPage.Default.RdpSendDesktopScaleFactor
+                ? (uint)(_displayProperties.ResolutionScalingFactor.Width * 100)
+                : 100;
         protected readonly uint DeviceScaleFactor = 100;
         protected readonly uint Orientation = 0;
         private AxHost AxHost => (AxHost)Control;
@@ -683,8 +686,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                         {
                             if (Properties.OptionsCredentialsPage.Default.DefaultPassword != "")
                             {
-                                LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-                                _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
+                                _rdpClient.AdvancedSettings2.ClearTextPassword = OptionPasswords.Unprotect(Properties.OptionsCredentialsPage.Default.DefaultPassword);
                             }
                         }
                     }
@@ -720,6 +722,25 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 || (!connectionInfo.UseRestrictedAdmin && !connectionInfo.UseRCG);
         }
 
+        /// <summary>
+        /// Whether the remote session resolution is renegotiated to follow the panel
+        /// (or the screen, while in fullscreen) after the connection is established.
+        /// SmartSize scales the image client-side and never resizes the session.
+        /// </summary>
+        internal static bool SessionFollowsPanelSize(ConnectionInfo info)
+        {
+            return info.AutomaticResize && info.Resolution != RDPResolutions.SmartSize;
+        }
+
+        /// <summary>
+        /// Whether both the control and the remote session stay at the size they had
+        /// when the connection was established, with scrollbars handling the overflow.
+        /// </summary>
+        internal static bool IsLockedAtConnectSize(ConnectionInfo info)
+        {
+            return info.Resolution == RDPResolutions.FitToWindow && !info.AutomaticResize;
+        }
+
         private void SetResolution()
         {
             try
@@ -739,10 +760,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 switch (InterfaceControl.Info.Resolution)
                 {
                     case RDPResolutions.FitToWindow:
-                        // Lock the RDP session to the current content area size.
-                        // The control is undocked so it keeps this fixed size;
-                        // AutoScroll on the parent panel provides scrollbars
-                        // when the panel shrinks below the session resolution.
+                        // Connect at the current content area size.
                         // Use DisplayRectangle to respect Padding (connection frame border).
                         var fitRect = InterfaceControl.DisplayRectangle;
                         _rdpClient.DesktopWidth = fitRect.Width;
@@ -750,8 +768,21 @@ namespace mRemoteNG.Connection.Protocol.RDP
                         Control.Dock = DockStyle.None;
                         Control.Location = fitRect.Location;
                         Control.Size = fitRect.Size;
-                        InterfaceControl.AutoScroll = true;
-                        InterfaceControl.AutoScrollMinSize = fitRect.Size;
+                        if (IsLockedAtConnectSize(InterfaceControl.Info))
+                        {
+                            // The control keeps this fixed size; AutoScroll on the
+                            // parent panel provides scrollbars when the panel shrinks
+                            // below the session resolution.
+                            InterfaceControl.AutoScroll = true;
+                            InterfaceControl.AutoScrollMinSize = fitRect.Size;
+                        }
+                        else
+                        {
+                            // Automatic resize: the control follows the panel and the
+                            // session resolution is renegotiated to match on every resize
+                            // (see RdpProtocol8.DoResizeClient). Same anchoring as SmartSize.
+                            Control.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+                        }
                         break;
                     case RDPResolutions.SmartSize:
                         // Connect at the full screen resolution so the remote

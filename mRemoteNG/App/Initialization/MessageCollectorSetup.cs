@@ -29,6 +29,24 @@ namespace mRemoteNG.App.Initialization
             };
         }
 
+        /// <summary>
+        /// Writes the messages collected before the writers existed, from the settings loader and
+        /// from anything that ran before the main form. SetupMessageCollector only passes on the
+        /// messages added after it.
+        /// </summary>
+        public static void WriteCollectedMessages(MessageCollector messageCollector, IList<IMessageWriter> messageWriterList)
+        {
+            IMessage[] messages = messageCollector.Messages.ToArray();
+
+            foreach (IMessageWriter printer in messageWriterList)
+            {
+                foreach (IMessage message in messages)
+                {
+                    printer.Write(message);
+                }
+            }
+        }
+
         public static void BuildMessageWritersFromSettings(IList<IMessageWriter> messageWriterList)
         {
 #if DEBUG

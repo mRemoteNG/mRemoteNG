@@ -937,7 +937,7 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
     <value>Oba hasła muszą być takie same.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>Hasło musi mieć dugość conajmniej 3 znaków.</value>
+    <value>Hasło musi mieć dugość conajmniej 4 znaków.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>Wypełnij wszystkie pola</value>

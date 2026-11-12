@@ -213,10 +213,12 @@ namespace mRemoteNG.UI.Window
             List<InterfaceControl> controlList = new();
             try
             {
-                foreach (IDockContent dockContent in connDock.DocumentsToArray())
+                foreach (ConnectionTab tab in connDock.DocumentsToArray().OfType<ConnectionTab>())
                 {
-                    ConnectionTab tab = (ConnectionTab)dockContent;
-                    controlList.Add((InterfaceControl)tab.Tag);
+                    // Tag holds the ConnectionInfo until the protocol attaches its InterfaceControl.
+                    // Such a tab is still connecting or failed to connect: nothing to close or reconnect.
+                    if (tab.Tag is InterfaceControl interfaceControl)
+                        controlList.Add(interfaceControl);
                 }
 
                 foreach (InterfaceControl iControl in controlList)
@@ -290,6 +292,7 @@ namespace mRemoteNG.UI.Window
 
                         DockHandler.FloatPane.FloatWindow.ResizeBegin += Connection_ResizeBegin;
                         DockHandler.FloatPane.FloatWindow.ResizeEnd += Connection_ResizeEnd;
+                        DockHandler.FloatPane.FloatWindow.SizeChanged += FloatWindow_SizeChanged;
                         _floatHandlersAdded = true;
                         break;
                     }
@@ -299,6 +302,7 @@ namespace mRemoteNG.UI.Window
                         {
                             DockHandler.FloatPane.FloatWindow.ResizeBegin -= Connection_ResizeBegin;
                             DockHandler.FloatPane.FloatWindow.ResizeEnd -= Connection_ResizeEnd;
+                            DockHandler.FloatPane.FloatWindow.SizeChanged -= FloatWindow_SizeChanged;
                             _floatHandlersAdded = false;
                         }
 
@@ -388,6 +392,7 @@ namespace mRemoteNG.UI.Window
 
         private void Connection_ResizeBegin(object sender, EventArgs e)
         {
+            _hostResizeInProgress = true;
             ResizeBegin?.Invoke(this, e);
         }
 
@@ -395,7 +400,32 @@ namespace mRemoteNG.UI.Window
 
         private void Connection_ResizeEnd(object sender, EventArgs e)
         {
+            _hostResizeInProgress = false;
             ResizeEnd?.Invoke(sender, e);
+
+            // Protocols follow the main window's ResizeEnd themselves. A floating panel is a separate
+            // top-level window, so tell the connections it hosts when it has finished resizing.
+            if (DockState == DockState.Float)
+                NotifyConnectionsOfHostResize((Form)sender, e);
+        }
+
+        private bool _hostResizeInProgress;
+
+        private void FloatWindow_SizeChanged(object sender, EventArgs e)
+        {
+            // Size changes that are not part of a user drag (maximize/restore, or code setting the
+            // floating window's bounds) never raise ResizeEnd, so treat each of them as finished.
+            if (!_hostResizeInProgress)
+                NotifyConnectionsOfHostResize((Form)sender, e);
+        }
+
+        private void NotifyConnectionsOfHostResize(Form host, EventArgs e)
+        {
+            foreach (IDockContent dockContent in connDock.DocumentsToArray())
+            {
+                if (dockContent is ConnectionTab { Tag: InterfaceControl interfaceControl })
+                    interfaceControl.Protocol?.HostResizeEnd(host, e);
+            }
         }
 
         internal void NavigateToNextTab()
@@ -695,6 +725,21 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("ToggleFullscreen (UI.Window.ConnectionWindow) failed",
+                                                             ex);
+            }
+        }
+
+        public void EnterRdpFullscreen()
+        {
+            try
+            {
+                InterfaceControl interfaceControl = GetInterfaceControl();
+                if (interfaceControl?.Protocol is RdpProtocol rdp && !rdp.Fullscreen)
+                    rdp.ToggleFullscreen();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("EnterRdpFullscreen (UI.Window.ConnectionWindow) failed",
                                                              ex);
             }
         }

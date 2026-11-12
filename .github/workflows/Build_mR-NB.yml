@@ -75,10 +75,10 @@ jobs:
             exit 1
           }
 
-      - name: (02) Install .NET 10 SDK
+      - name: (02) Install .NET 11 SDK
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: '11.0.x'
 
       - name: (03) Set up MSBuild
         uses: microsoft/setup-msbuild@v3
@@ -393,7 +393,7 @@ jobs:
           }
 
       - name: Create combined release
-        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3
+        uses: softprops/action-gh-release@8a0cd651e5b2365bd640854a3fa5dfc70e4875f3 # v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -405,14 +405,14 @@ jobs:
             
             ### 📦 Available Downloads
             
-            **Framework-Dependent (FD)** - Requires .NET 10 Runtime installed:
+            **Framework-Dependent (FD)** - Requires .NET 11 Runtime installed:
             - Smaller download size (~15-25 MB)
-            - Requires .NET 10 Desktop Runtime on user machine
+            - Requires .NET 11 Desktop Runtime on user machine
             - Files: `*-FD.zip`
-            
+
             **Self-Contained (SC)** - Portable, no installation required:
             - Larger download size (~80-150 MB)
-            - Includes .NET 10 runtime - no installation needed
+            - Includes .NET 11 runtime - no installation needed
             - Files: `*-SC.zip`
             
             Both versions are available for **x64** and **ARM64** architectures.

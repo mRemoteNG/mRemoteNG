@@ -78,7 +78,9 @@ For a detailed feature list and general usage support, refer to the [Documentati
 
 ## Build environment
 
-This project must be built on Windows using Visual Studio 2026 tooling. Use the MSBuild.exe from the Visual Studio 2026 installation instead of the .NET Core `dotnet build` fallback; the Windows desktop project requires the Visual Studio build environment and COM/desktop targets.
+This project must be built on Windows using Visual Studio 2026 tooling and the .NET 11 SDK. Use the MSBuild.exe from the Visual Studio 2026 installation instead of the .NET Core `dotnet build` fallback; the Windows desktop project requires the Visual Studio build environment and COM/desktop targets.
+
+The application, libraries, plugins, and tests target .NET 11. The WiX installer custom actions remain on .NET Framework 4.8.1 for DTF hosting compatibility.
 
 For local builds, prefer:
 
@@ -103,11 +105,11 @@ Then copy the generated plugin DLLs into the app plugin folder, while keeping th
 The example below uses the x64 output path. For ARM64 builds, replace `x64` with `arm64`.
 
 ```powershell
-Copy-Item .\mRemoteNG.PluginContracts\bin\x64\Release\net10.0-windows10.0.26100.0\mRp.Contracts.dll .\mRemoteNG\bin\x64\Release\Assemblies\
-Copy-Item .\mRemoteNG.Plugins.PortScan\bin\x64\Release\net10.0-windows10.0.26100.0\mRp.PortScan.dll .\mRemoteNG\bin\x64\Release\Plugins\
-Copy-Item .\mRemoteNG.Plugins.SshTransfer\bin\x64\Release\net10.0-windows10.0.26100.0\mRp.SshTransfer.dll .\mRemoteNG\bin\x64\Release\Plugins\
-Copy-Item .\mRemoteNG.Plugins.AWS\bin\x64\Release\net10.0-windows10.0.26100.0\mRp.AWS.dll .\mRemoteNG\bin\x64\Release\Plugins\
-Copy-Item .\mRemoteNG.Plugins.MultiAddress\bin\x64\Release\net10.0-windows10.0.26100.0\mRp.MultiAddress.dll .\mRemoteNG\bin\x64\Release\Plugins\
+Copy-Item .\mRemoteNG.PluginContracts\bin\x64\Release\net11.0-windows10.0.26100.0\mRp.Contracts.dll .\mRemoteNG\bin\x64\Release\Assemblies\
+Copy-Item .\mRemoteNG.Plugins.PortScan\bin\x64\Release\net11.0-windows10.0.26100.0\mRp.PortScan.dll .\mRemoteNG\bin\x64\Release\Plugins\
+Copy-Item .\mRemoteNG.Plugins.SshTransfer\bin\x64\Release\net11.0-windows10.0.26100.0\mRp.SshTransfer.dll .\mRemoteNG\bin\x64\Release\Plugins\
+Copy-Item .\mRemoteNG.Plugins.AWS\bin\x64\Release\net11.0-windows10.0.26100.0\mRp.AWS.dll .\mRemoteNG\bin\x64\Release\Plugins\
+Copy-Item .\mRemoteNG.Plugins.MultiAddress\bin\x64\Release\net11.0-windows10.0.26100.0\mRp.MultiAddress.dll .\mRemoteNG\bin\x64\Release\Plugins\
 ```
 
 See [README.plugins.md](README.plugins.md) for the full workflow and details.
@@ -133,7 +135,7 @@ You will need to compile it yourself using Visual Studio.
 
 Make sure you have the latest version installed:
 
-* [Microsoft .NET Desktop Runtime 10.0](https://dotnet.microsoft.com/download/dotnet/10.0)
+* [Microsoft .NET Desktop Runtime 11.0](https://dotnet.microsoft.com/download/dotnet/11.0)
 * Microsoft Visual C++ Redistributable 2015–2026 is needed:
  - [x64](https://aka.ms/vs/18/release/vc_redist.x64.exe)
  - [ARM64](https://aka.ms/vs/18/release/vc_redist.arm64.exe)
