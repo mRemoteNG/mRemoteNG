@@ -73,6 +73,6 @@ namespace mRemoteNG.App.Initialization
 
         /// <summary>The log, and the numbered files log4net rolls it over to: mRemoteNG.log.1 and on.</summary>
         private static bool IsLog(string file) =>
-            Regex.IsMatch(Path.GetFileName(file), @"\.log(\.\d+)?$", RegexOptions.IgnoreCase);
+            Regex.IsMatch(Path.GetFileName(file), @"\.log(\.\d+)?$", RegexOptions.IgnoreCase, TimeSpan.FromSeconds(1));
     }
 }
