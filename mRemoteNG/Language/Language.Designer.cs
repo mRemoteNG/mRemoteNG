@@ -3513,6 +3513,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send my display scaling (DPI) to the remote computer (disable if the remote desktop appears zoomed in, e.g. GNOME Remote Desktop on Linux).
+        /// </summary>
+        internal static string RdpSendDesktopScaleFactor {
+            get {
+                return ResourceManager.GetString("RdpSendDesktopScaleFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load from SQL failed.
         /// </summary>
         internal static string LoadFromSqlFailed {
