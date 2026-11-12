@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Option to stop sending the local display scaling factor (DPI) to RDP servers that scale the whole remote desktop with it (e.g. GNOME Remote Desktop on Linux, where a 125% Windows host made the remote desktop appear 25% larger); the option is on by default, so existing behaviour is unchanged
 ### Fixed
+- fixed connection files being truncated when a save fails; files are now written to a temporary file and replaced only after a complete write, and save errors are reported instead of being ignored
 - #3570: fixed inheritance changes being lost at exit: "Apply inheritance to children", "Apply default inheritance" and the Inheritance tab of the Config panel now save the connection file like other edits
 - fixed RDP sessions in a floating panel not resizing to fit when the panel window is resized, maximized or restored
 - fixed the messages raised while mRemoteNG starts, before the main window loads, never reaching the log or the Notifications panel
