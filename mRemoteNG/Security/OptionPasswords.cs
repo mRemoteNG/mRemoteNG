@@ -74,8 +74,10 @@ namespace mRemoteNG.Security
 
         /// <summary>
         /// Moves the passwords an earlier version saved in the old form over to DPAPI, and saves
-        /// them. A value the registry sets is moved too, and set again from the registry at the
-        /// next start. Never throws: a failure is reported, and the passwords stay readable.
+        /// them. Where DPAPI is not available they stay in the old form, and the move is tried again
+        /// at the next start. A value the registry sets is put back later in the start, in the old
+        /// form the registry holds it in. Never throws: any other failure is reported, and the
+        /// passwords stay readable.
         /// </summary>
         public static void ProtectStoredPasswords(MessageCollector messageCollector)
         {
