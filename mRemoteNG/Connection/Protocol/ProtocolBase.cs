@@ -2,6 +2,7 @@
 using mRemoteNG.Tools;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using mRemoteNG.UI.Tabs;
 using System.Runtime.Versioning;
@@ -112,6 +113,13 @@ namespace mRemoteNG.Connection.Protocol
         {
             ResizeEnd(host, e);
         }
+
+        /// <summary>
+        /// Called before <see cref="Initialize"/>, on the UI thread, to read the credentials that can take a
+        /// while to come, such as those from the 1Password CLI, without blocking it. <see cref="Initialize"/>
+        /// and <see cref="Connect"/> then use what was read.
+        /// </summary>
+        public virtual Task ReadExternalCredentialsAsync() => Task.CompletedTask;
 
         public virtual bool Initialize()
         {

@@ -18,6 +18,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -32,6 +33,8 @@ namespace mRemoteNG.Connection.Protocol
         private readonly DisplayProperties _display = new();
         private Panel? _puttyContainerPanel; // Panel to hold PuTTY with margins
         private string? _temporaryPrivateKeyPath;
+        // Read from 1Password by ReadExternalCredentialsAsync, and used once by Connect
+        private ExternalConnectors.OP.OnePasswordRead _onePasswordRead;
 
         #region Public Properties
 
@@ -350,6 +353,19 @@ namespace mRemoteNG.Connection.Protocol
             writer.Flush();
         }
 
+        /// <summary>
+        /// Reads from 1Password the item that <see cref="Connect"/> will ask for, under the same conditions, so
+        /// that the UI thread is not blocked while op waits (#3628).
+        /// </summary>
+        public override async Task ReadExternalCredentialsAsync()
+        {
+            ConnectionInfo info = InterfaceControl.Info;
+            if (info is PuttySessionInfo || PuttyProtocol != Putty_Protocol.ssh) return;
+            if (info.ExternalCredentialProvider != ExternalCredentialProvider.OnePassword) return;
+
+            _onePasswordRead = await ExternalConnectors.OP.OnePasswordCli.ReadPasswordAsync($"{info.UserViaAPI}");
+        }
+
         public override bool Connect()
         {
             string optionalTemporaryPrivateKeyPath = ""; // path to ppk file instead of password. only temporary (extracted from credential vault).
@@ -425,7 +441,10 @@ namespace mRemoteNG.Connection.Protocol
                         else if (InterfaceControl.Info?.ExternalCredentialProvider == ExternalCredentialProvider.OnePassword) {
                             try
                             {
-                                ExternalConnectors.OP.OnePasswordCli.ReadPassword($"{UserViaAPI}", out username, out password, out _, out privatekey);
+                                string domain = "";
+                                ExternalConnectors.OP.OnePasswordRead readAhead = _onePasswordRead;
+                                _onePasswordRead = null;
+                                ExternalConnectors.OP.OnePasswordCli.ReadPassword(readAhead, $"{UserViaAPI}", ref username, ref password, ref domain, ref privatekey);
                             }
                             catch (ExternalConnectors.OP.OnePasswordCliException ex)
                             {

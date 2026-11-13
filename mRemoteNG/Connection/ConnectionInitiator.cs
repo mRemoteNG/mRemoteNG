@@ -147,6 +147,14 @@ namespace mRemoteNG.Connection
                     BuildConnectionInterfaceController(connectionInfoSshTunnel, protocolSshTunnel, connectionContainer);
                     protocolSshTunnel.InterfaceControl.OriginalInfo = connectionInfoSshTunnel;
 
+                    // The UI thread stays free while credentials are read from 1Password (#3628), so the tab can be closed meanwhile
+                    await protocolSshTunnel.ReadExternalCredentialsAsync();
+                    if (protocolSshTunnel.InterfaceControl.IsDisposed)
+                    {
+                        protocolSshTunnel.Close();
+                        return;
+                    }
+
                     if (protocolSshTunnel.Initialize() == false)
                     {
                         protocolSshTunnel.Close();
@@ -225,6 +233,14 @@ namespace mRemoteNG.Connection
                 newProtocol.InterfaceControl.SSHTunnelInfo = connectionInfoSshTunnel;
 
                 newProtocol.Force = force;
+
+                // The UI thread stays free while credentials are read from 1Password (#3628), so the tab can be closed meanwhile
+                await newProtocol.ReadExternalCredentialsAsync();
+                if (newProtocol.InterfaceControl.IsDisposed)
+                {
+                    newProtocol.Close();
+                    return;
+                }
 
                 if (newProtocol.Initialize() == false)
                 {

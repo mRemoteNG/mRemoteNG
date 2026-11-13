@@ -14,6 +14,13 @@ public class OnePasswordCli
 {
 	private const string OnePasswordCliExecutable = "op.exe";
 
+	// A last resort if op never finishes. op gives up by itself on an authorization nobody answers, after
+	// about two minutes (#3628), and its own message says more than this timeout would.
+	private const int CommandTimeoutMilliseconds = 180_000;
+
+	// Reads run one at a time, so that connections opened together do not start op in parallel.
+	private static readonly SemaphoreSlim AsyncReads = new(1, 1);
+
 	// Username / password purpose metadata is used on Login category item fields
 	private const string UserNamePurpose = "USERNAME";
 	private const string PasswordPurpose = "PASSWORD";
@@ -48,6 +55,37 @@ public class OnePasswordCli
 		var account = queryParams["account"];
 		var item = WebUtility.UrlDecode(inputUrl.AbsolutePath.TrimStart('/'));
 		ItemGet(item, vault, account, out username, out password, out domain, out privateKey);
+	}
+
+	/// <summary>
+	/// Reads <paramref name="input"/> like <see cref="ReadPassword(string, out string, out string, out string, out string)"/>,
+	/// on a thread pool thread, so that the caller's thread is free while op waits, for instance for the
+	/// 1Password authorization prompt, which stays blank while the UI thread of mRemoteNG is blocked (#3628).
+	/// It does not throw: what ReadPassword throws is kept in the result, and thrown when the result is used.
+	/// </summary>
+	public static async Task<OnePasswordRead> ReadPasswordAsync(string input)
+	{
+		await AsyncReads.WaitAsync().ConfigureAwait(false);
+		try
+		{
+			return await Task.Run(() => new OnePasswordRead(input)).ConfigureAwait(false);
+		}
+		finally
+		{
+			AsyncReads.Release();
+		}
+	}
+
+	/// <summary>
+	/// Reads <paramref name="input"/> like <see cref="ReadPassword(string, out string, out string, out string, out string)"/>,
+	/// but uses <paramref name="readAhead"/> instead when it is a read of the same reference.
+	/// </summary>
+	public static void ReadPassword(OnePasswordRead? readAhead, string input, ref string username, ref string password, ref string domain, ref string privateKey)
+	{
+		if (readAhead != null && readAhead.Input == input)
+			readAhead.Apply(ref username, ref password, ref domain, ref privateKey);
+		else
+			ReadPassword(input, out username, out password, out domain, out privateKey);
 	}
 
 	private static void ItemGet(string item, string? vault, string? account, out string username, out string password, out string domain, out string privateKey)
@@ -103,8 +141,8 @@ public class OnePasswordCli
 		 	string.Empty;
     }
 
-    private static int RunCommand(string command, IReadOnlyCollection<string> arguments, out string output,
-		out string error)
+    internal static int RunCommand(string command, IReadOnlyCollection<string> arguments, out string output,
+		out string error, int timeoutMilliseconds = CommandTimeoutMilliseconds)
 	{
 		var processStartInfo = new ProcessStartInfo
 		{
@@ -123,9 +161,17 @@ public class OnePasswordCli
 		using var process = new Process();
 		process.StartInfo = processStartInfo;
 		process.Start();
-		output = process.StandardOutput.ReadToEnd();
-		error = process.StandardError.ReadToEnd();
-		process.WaitForExit();
+		// Both pipes are read at once: reading one to the end first hangs if op fills the other one meanwhile.
+		Task<string> outputTask = process.StandardOutput.ReadToEndAsync();
+		Task<string> errorTask = process.StandardError.ReadToEndAsync();
+		if (!process.WaitForExit(timeoutMilliseconds))
+		{
+			process.Kill(entireProcessTree: true);
+			throw new OnePasswordCliException($"{command} did not finish within {timeoutMilliseconds / 1000} seconds and was stopped",
+				command + " " + string.Join(' ', arguments));
+		}
+		output = outputTask.GetAwaiter().GetResult();
+		error = errorTask.GetAwaiter().GetResult();
 		return process.ExitCode;
 	}
 }
