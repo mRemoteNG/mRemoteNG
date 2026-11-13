@@ -35,6 +35,7 @@ using System.Linq;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Settings.Registry;
+using mRemoteNG.Security;
 using System.Threading; // ADDED
 #endregion
 
@@ -120,6 +121,19 @@ namespace mRemoteNG.UI.Forms
             // Create a new instance
             OptionsForm = new FrmOptions();
             Logger.Instance.Log?.Debug("[FrmMain.RecreateOptionsForm] New OptionsForm created");
+        }
+
+        protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Alt | Keys.Menu))
+            {
+                if (!msMain.Visible)
+                {
+                    msMain.Visible = true;
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         internal FullscreenHandler Fullscreen { get; set; }
@@ -226,9 +240,13 @@ namespace mRemoteNG.UI.Forms
 
             SettingsLoader settingsLoader = new(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, msMain);
             settingsLoader.LoadSettings();
+            // A step of its own: LoadSettings stops at its first failure, and this must not depend on the rest.
+            OptionPasswords.ProtectStoredPasswords(messageCollector);
 
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters);
+            _ = AppWindows.ErrorsForm.lvErrorCollector.Handle;
+            MessageCollectorSetup.WriteCollectedMessages(messageCollector, _messageWriters);
  
             Startup.Instance.InitializeProgram(messageCollector);
             Runtime.PluginService.LoadPlugins();
@@ -565,6 +583,13 @@ namespace mRemoteNG.UI.Forms
                         return;
                     }
                 }
+            }
+
+            // Changed options would otherwise be lost without a question (#3249)
+            if (AppWindows.OptionsFormWindow?.ConfirmUnsavedChanges() == false)
+            {
+                e.Cancel = true;
+                return;
             }
 
             ProgramRoot.UiCultureChanged -= OnUiCultureChanged;

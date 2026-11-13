@@ -652,6 +652,127 @@ namespace mRemoteNGTests.UI.Tabs
             Assert.That(GetRectangleProperty(dockPaneStrip, "ActiveMinimize"), Is.EqualTo(visualMinimizeButtonRect), "Minimize hover rectangle should use visual RTL coordinates");
         });
 
+        [Test]
+        public void DocumentTabText_GetsAtLeastTheWidthItWasMeasuredAt() => RunWithMessagePump(() =>
+        {
+            (Form hostForm, DockPanel dockPanel) = ShowHostedDockPanel();
+            using (hostForm)
+            {
+                // A plain document carries only the close button; connection tabs carry the
+                // close and the minimize button, which is where the sizing used to fall short.
+                var logsDocument = new DockContent { Text = "Logs", TabText = "Logs", CloseButton = true, CloseButtonVisible = true };
+                var shortName = CreateConnectionTab("SRV");
+                var mediumName = CreateConnectionTab("Build agent 7");
+
+                logsDocument.Show(dockPanel, DockState.Document);
+                shortName.Show(dockPanel, DockState.Document);
+                mediumName.Show(dockPanel, DockState.Document);
+                Application.DoEvents();
+
+                DockPaneStripNG dockPaneStrip = FindDockPaneStripNG(dockPanel);
+                Assert.That(dockPaneStrip, Is.Not.Null, "Could not find DockPaneStripNG control");
+                dockPaneStrip.Refresh();
+                Application.DoEvents();
+
+                Assert.Multiple(() =>
+                {
+                    AssertTextFitsItsRectangle(dockPaneStrip, 0, logsDocument);
+                    AssertTextFitsItsRectangle(dockPaneStrip, 1, shortName);
+                    AssertTextFitsItsRectangle(dockPaneStrip, 2, mediumName);
+                });
+            }
+        });
+
+        [Test]
+        public void DocumentTabWidth_GrowsWithTheLengthOfTheName() => RunWithMessagePump(() =>
+        {
+            (Form hostForm, DockPanel dockPanel) = ShowHostedDockPanel();
+            using (hostForm)
+            {
+                var shortName = CreateConnectionTab("SRV");
+                var mediumName = CreateConnectionTab("Build agent 7");
+                var longName = CreateConnectionTab("Production database cluster in the Frankfurt data centre");
+
+                shortName.Show(dockPanel, DockState.Document);
+                mediumName.Show(dockPanel, DockState.Document);
+                longName.Show(dockPanel, DockState.Document);
+                Application.DoEvents();
+
+                DockPaneStripNG dockPaneStrip = FindDockPaneStripNG(dockPanel);
+                Assert.That(dockPaneStrip, Is.Not.Null, "Could not find DockPaneStripNG control");
+                dockPaneStrip.Refresh();
+                Application.DoEvents();
+
+                int shortWidth = GetTabWidth(dockPaneStrip, 0);
+                int mediumWidth = GetTabWidth(dockPaneStrip, 1);
+                int longWidth = GetTabWidth(dockPaneStrip, 2);
+
+                Assert.Multiple(() =>
+                {
+                    Assert.That(mediumWidth, Is.GreaterThan(shortWidth), "A longer name should get a wider tab");
+                    Assert.That(longWidth, Is.GreaterThan(mediumWidth), "A longer name should get a wider tab");
+                    Assert.That(longWidth, Is.EqualTo(dockPaneStrip.LogicalToDeviceUnits(200)),
+                                "A very long name should be capped at the DPI-scaled maximum tab width");
+                });
+            }
+        });
+
+        private static (Form hostForm, DockPanel dockPanel) ShowHostedDockPanel()
+        {
+            var hostForm = new Form
+            {
+                Width = 800,
+                Height = 600,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(-10000, -10000)
+            };
+
+            var dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill,
+                DocumentStyle = DocumentStyle.DockingWindow,
+                Theme = new VS2015LightTheme()
+            };
+
+            dockPanel.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+
+            hostForm.Controls.Add(dockPanel);
+            hostForm.Show();
+
+            return (hostForm, dockPanel);
+        }
+
+        private static ConnectionTab CreateConnectionTab(string name)
+        {
+            return new ConnectionTab
+            {
+                Text = name,
+                TabText = name,
+                CloseButton = true,
+                CloseButtonVisible = true,
+                DockAreas = DockAreas.Document | DockAreas.Float
+            };
+        }
+
+        private static void AssertTextFitsItsRectangle(DockPaneStripNG dockPaneStrip, int index, IDockContent content)
+        {
+            Rectangle textRectangle = dockPaneStrip.GetDocumentTextRectangle(index);
+            int measuredWidth = dockPaneStrip.MeasureDocumentTabText(content).Width;
+
+            Assert.That(textRectangle.Width, Is.GreaterThanOrEqualTo(measuredWidth),
+                        $"The text rectangle of \"{content.DockHandler.TabText}\" is narrower than the text it was sized for");
+        }
+
+        private static int GetTabWidth(DockPaneStripNG dockPaneStrip, int index)
+        {
+            object tab = GetTabAtIndex(dockPaneStrip, index);
+            PropertyInfo tabWidthProperty = tab.GetType().GetProperty("TabWidth");
+            Assert.That(tabWidthProperty, Is.Not.Null, "Could not find TabWidth property");
+
+            return (int)tabWidthProperty.GetValue(tab);
+        }
+
         private static DockPaneStripNG FindDockPaneStripNG(Control parent)
         {
             foreach (Control c in parent.Controls)

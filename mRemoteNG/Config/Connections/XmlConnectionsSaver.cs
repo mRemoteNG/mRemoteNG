@@ -27,7 +27,7 @@ namespace mRemoteNG.Config.Connections
 
         public void Save(ConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")
         {
-            ICryptographyProvider cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
+            ICryptographyProvider cryptographyProvider = new ConnectionsFileCryptoProviderFactory().Build();
             XmlConnectionSerializerFactory serializerFactory = new();
 
             Serializers.ISerializer<Connection.ConnectionInfo, string> xmlConnectionsSerializer = serializerFactory.Build(cryptographyProvider, connectionTreeModel, _saveFilter, Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile);

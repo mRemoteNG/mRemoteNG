@@ -1,5 +1,6 @@
 ﻿﻿using Microsoft.IdentityModel.Tokens;
 
+using mRemoteNG.App.Initialization;
 using mRemoteNG.App.Update;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Messages;
@@ -94,6 +95,9 @@ namespace mRemoteNG.App
                     Environment.Exit(0);
                 }
             }
+
+            // On a new version's first start, carry the options over before anything reads one.
+            SettingsUpgrader.UpgradeIfNeeded(Runtime.MessageCollector);
 
             Lazy<bool> singleInstanceOption = new(() => Properties.OptionsStartupExitPage.Default.SingleInstance);
             if (singleInstanceOption.Value)
@@ -250,6 +254,10 @@ namespace mRemoteNG.App
         private static void StartApplication()
         {
             CatchAllUnhandledExceptions();
+
+            // After an upgrade from 1.76, bring its files over before anything reads the data folder.
+            DataFolder176Copier.CopyIfNeeded(Runtime.MessageCollector);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

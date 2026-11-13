@@ -43,6 +43,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowProtocolOnTabs = new MrngCheckBox();
             chkCreateEmptyPanelOnStart = new MrngCheckBox();
             chkBindConnectionsAndConfigPanels = new MrngCheckBox();
+            chkSendToScreenRdpFullscreen = new MrngCheckBox();
             txtBoxPanelName = new MrngTextBox();
             lblPanelName = new MrngLabel();
             pnlOptions = new System.Windows.Forms.Panel();
@@ -172,6 +173,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkBindConnectionsAndConfigPanels.Text = "Bind Connections and Config panels together when auto-hidden";
             chkBindConnectionsAndConfigPanels.UseVisualStyleBackColor = true;
             // 
+            // chkSendToScreenRdpFullscreen
+            // 
+            chkSendToScreenRdpFullscreen._mice = MrngCheckBox.MouseState.OUT;
+            chkSendToScreenRdpFullscreen.AutoSize = true;
+            chkSendToScreenRdpFullscreen.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkSendToScreenRdpFullscreen.Location = new System.Drawing.Point(3, 233);
+            chkSendToScreenRdpFullscreen.Name = "chkSendToScreenRdpFullscreen";
+            chkSendToScreenRdpFullscreen.Size = new System.Drawing.Size(303, 17);
+            chkSendToScreenRdpFullscreen.TabIndex = 10;
+            chkSendToScreenRdpFullscreen.Text = "\"Send To\" a screen switches RDP connections to fullscreen";
+            chkSendToScreenRdpFullscreen.UseVisualStyleBackColor = true;
+            // 
             // txtBoxPanelName
             // 
             txtBoxPanelName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -198,6 +211,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlOptions.Controls.Add(chkDoubleClickClosesTab);
             pnlOptions.Controls.Add(chkCreateEmptyPanelOnStart);
             pnlOptions.Controls.Add(chkBindConnectionsAndConfigPanels);
+            pnlOptions.Controls.Add(chkSendToScreenRdpFullscreen);
             pnlOptions.Controls.Add(chkShowLogonInfoOnTabs);
             pnlOptions.Controls.Add(chkAlwaysShowPanelSelectionDlg);
             pnlOptions.Controls.Add(chkAlwaysShowConnectionTabs);
@@ -206,7 +220,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlOptions.Dock = System.Windows.Forms.DockStyle.Top;
             pnlOptions.Location = new System.Drawing.Point(0, 30);
             pnlOptions.Name = "pnlOptions";
-            pnlOptions.Size = new System.Drawing.Size(610, 240);
+            pnlOptions.Size = new System.Drawing.Size(610, 263);
             pnlOptions.TabIndex = 10;
             // 
             // lblRegistrySettingsUsedInfo
@@ -245,6 +259,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal MrngCheckBox chkShowProtocolOnTabs;
         private MrngCheckBox chkCreateEmptyPanelOnStart;
         private MrngCheckBox chkBindConnectionsAndConfigPanels;
+        private MrngCheckBox chkSendToScreenRdpFullscreen;
         private Controls.MrngTextBox txtBoxPanelName;
         private Controls.MrngLabel lblPanelName;
         private System.Windows.Forms.Panel pnlOptions;

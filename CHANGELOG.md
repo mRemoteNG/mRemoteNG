@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.78.2]
 ### Fixed
+- #3249: fixed SQL Server options saving an empty server, a replaced user name or the wrong database type, re-applying unchanged settings on OK, and losing changed options without a question when mRemoteNG exits
+### Added
+- Option to stop sending the local display scaling factor (DPI) to RDP servers that scale the whole remote desktop with it (e.g. GNOME Remote Desktop on Linux, where a 125% Windows host made the remote desktop appear 25% larger); the option is on by default, so existing behaviour is unchanged
+### Fixed
+- fixed connection files being truncated when a save fails; files are now written to a temporary file and replaced only after a complete write, and save errors are reported instead of being ignored
+- #3570: fixed inheritance changes being lost at exit: "Apply inheritance to children", "Apply default inheritance" and the Inheritance tab of the Config panel now save the connection file like other edits
+- fixed RDP sessions in a floating panel not resizing to fit when the panel window is resized, maximized or restored
+- fixed the messages raised while mRemoteNG starts, before the main window loads, never reaching the log or the Notifications panel
 - #3178: fixed "Reconnect to previously opened sessions on startup" being turned off by the "Automatically try to reconnect when disconnected from server" option, and for good after one start with /noreconnect
 - fixed the AllowExportUsernames and AllowExportPasswords registry settings not being enforced in the export dialog and CSV export, including VNC proxy and RD Gateway credentials
 - #3247: fixed the rename box in the connection tree being shifted and showing the old name behind it
@@ -34,6 +42,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #2496: fixed use pwfile instead of cleartext password for putty connections 
 
 ### Added
+- "Send To" a screen on a panel tab now fills that screen; right-click a screen to also switch RDP to fullscreen (an option in Tabs & Panels makes fullscreen the default), and hovering a screen entry highlights that monitor
+- added a password strength rating (zxcvbn) when setting a new password; new passwords must now be at least 4 characters
 - added a "show password" eye to the password dialog; while the new password is shown, it does not need to be typed again in Verify
 - added a warning when a connection's hostname is already used by another connection, listing where the existing ones are in the tree
 - changed connection tree search to filter the tree by default instead of jumping to the first match

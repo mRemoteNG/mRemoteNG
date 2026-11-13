@@ -3,12 +3,12 @@ using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Tabs;
+using mRemoteNG.Security;
 using MSTSCLib;
 using System;
 using System.Diagnostics;
@@ -40,7 +40,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
         protected readonly FrmMain _frmMain = FrmMain.Default;
         protected bool loginComplete;
         private bool _alertOnIdleDisconnect;
-        protected uint DesktopScaleFactor => (uint)(_displayProperties.ResolutionScalingFactor.Width * 100);
+        protected uint DesktopScaleFactor =>
+            Properties.OptionsAdvancedPage.Default.RdpSendDesktopScaleFactor
+                ? (uint)(_displayProperties.ResolutionScalingFactor.Width * 100)
+                : 100;
         protected readonly uint DeviceScaleFactor = 100;
         protected readonly uint Orientation = 0;
         private AxHost AxHost => (AxHost)Control;
@@ -683,8 +686,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                         {
                             if (Properties.OptionsCredentialsPage.Default.DefaultPassword != "")
                             {
-                                LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-                                _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
+                                _rdpClient.AdvancedSettings2.ClearTextPassword = OptionPasswords.Unprotect(Properties.OptionsCredentialsPage.Default.DefaultPassword);
                             }
                         }
                     }

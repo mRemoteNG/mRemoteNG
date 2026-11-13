@@ -93,6 +93,15 @@ namespace mRemoteNGTests.Connection
             Assert.That(nameOfModifiedProperty, Is.EqualTo("OpenConnections"));
         }
 
+        [Test]
+        public void RaiseInheritanceChangedRaisesPropertyChangedForInheritance()
+        {
+            var changedProperties = new List<string>();
+            _connectionInfo.PropertyChanged += (sender, args) => changedProperties.Add(args.PropertyName);
+            _connectionInfo.RaiseInheritanceChanged();
+            Assert.That(changedProperties, Is.EqualTo(new[] { nameof(ConnectionInfo.Inheritance) }));
+        }
+
 	    [TestCaseSource(typeof(InheritancePropertyProvider), nameof(InheritancePropertyProvider.GetProperties))]
 	    public void MovingAConnectionFromUnderRootNodeToUnderADifferentNodeEnablesInheritance(PropertyInfo property)
 	    {

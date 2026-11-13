@@ -4,12 +4,12 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Update;
 using mRemoteNG.Properties;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Settings.Registry;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -82,9 +82,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkUseProxyAuthentication.Checked = Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication;
             tblProxyAuthentication.Enabled = Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication;
             txtProxyUsername.Text = Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser;
-            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-            txtProxyPassword.Text =
-                cryptographyProvider.Decrypt(Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass, Runtime.EncryptionKey);
+            txtProxyPassword.Text = OptionPasswords.Unprotect(Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass);
 
             btnTestProxy.Enabled = Properties.OptionsUpdatesPage.Default.UpdateUseProxy;
         }
@@ -125,8 +123,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication = chkUseProxyAuthentication.Checked;
             Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser = txtProxyUsername.Text;
-            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-            Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass = cryptographyProvider.Encrypt(txtProxyPassword.Text, Runtime.EncryptionKey);
+            Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass = OptionPasswords.Protect(txtProxyPassword.Text);
 
             // Mark that the user has explicitly configured their update preference so the
             // first-run preference prompt does not appear again.

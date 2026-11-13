@@ -961,7 +961,7 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
     <value>Parolalar eşleşmelidir.</value>
   </data>
   <data name="PasswordStatusTooShort" xml:space="preserve">
-    <value>Parola en az 3 karakter uzunluğunda olmalıdır.</value>
+    <value>Parola en az 4 karakter uzunluğunda olmalıdır.</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
     <value>Lütfen tüm alanları doldurun</value>

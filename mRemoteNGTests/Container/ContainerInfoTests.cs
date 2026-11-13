@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -498,6 +499,32 @@ namespace mRemoteNGTests.Container
 
 	        Assert.That(subContainer.Inheritance, Is.EqualTo(container.Inheritance).Using(comparer));
 	        Assert.That(con1.Inheritance, Is.EqualTo(container.Inheritance).Using(comparer));
+        }
+
+        [Test]
+        public void ApplyInheritancePropertiesToChildrenRaisesOneInheritanceChange()
+        {
+            var subContainer = new ContainerInfo();
+            _containerInfo.AddChild(subContainer);
+            _containerInfo.AddChild(_con1);
+            subContainer.AddChild(_con2);
+            var changedProperties = new List<string>();
+            _containerInfo.PropertyChanged += (sender, args) => changedProperties.Add(args.PropertyName);
+
+            _containerInfo.ApplyInheritancePropertiesToChildren();
+
+            Assert.That(changedProperties, Is.EqualTo(new[] { nameof(ConnectionInfo.Inheritance) }));
+        }
+
+        [Test]
+        public void ApplyInheritancePropertiesToChildrenOfAnEmptyFolderRaisesNoChange()
+        {
+            var wasCalled = false;
+            _containerInfo.PropertyChanged += (sender, args) => wasCalled = true;
+
+            _containerInfo.ApplyInheritancePropertiesToChildren();
+
+            Assert.That(wasCalled, Is.False);
         }
 	}
 }

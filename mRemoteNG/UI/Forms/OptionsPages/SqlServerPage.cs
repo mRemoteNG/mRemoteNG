@@ -3,10 +3,10 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Properties;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Settings.Registry;
+using mRemoteNG.Security;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -20,6 +20,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         #region Private Fields
         private OptRegistrySqlServerPage pageRegSettingsInstance;
         private readonly DatabaseConnectionTester _databaseConnectionTester;
+        private bool _useCurrentWindowsIdentity;
+        private const string WindowsAuthentication = "Windows Authentication";
+        private const string SqlServerAuthentication = "SQL Server Authentication";
+        private const int MsSqlIndex = 0;
+        private const int MySqlIndex = 1;
         #endregion
 
         public SqlServerPage()
@@ -29,6 +34,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.SQLDatabase_16x);
             _databaseConnectionTester = new DatabaseConnectionTester();
             pageRegSettingsInstance = new OptRegistrySqlServerPage(); // Initialize the field to avoid nullability issues
+
+            // The simple view and the advanced tabs show the same values; keep them equal so
+            // that saving stores what the user typed in either of them (#3249)
+            LinkTextBoxes(mrngTextBox2, txtSQLServer);
+            LinkTextBoxes(mrngTextBox1, txtSQLDatabaseName);
+            LinkTextBoxes(mrngTextBox4, txtSQLUsername);
+        }
+
+        private static void LinkTextBoxes(TextBox first, TextBox second)
+        {
+            first.TextChanged += (_, _) => { if (second.Text != first.Text) second.Text = first.Text; };
+            second.TextChanged += (_, _) => { if (first.Text != second.Text) first.Text = second.Text; };
         }
 
         public override string PageName
@@ -91,23 +108,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void LoadSettings()
         {
             chkUseSQLServer.Checked = Properties.OptionsDBsPage.Default.UseSQLServer;
-            txtSQLType.Text = Properties.OptionsDBsPage.Default.SQLServerType;
+            txtSQLType.SelectedIndex = ServerTypeIndex(Properties.OptionsDBsPage.Default.SQLServerType);
             txtSQLServer.Text = Properties.OptionsDBsPage.Default.SQLHost;
             txtSQLDatabaseName.Text = Properties.OptionsDBsPage.Default.SQLDatabaseName;
-            txtSQLUsername.Text = Properties.OptionsDBsPage.Default.SQLUser;
             LegacyRijndaelCryptographyProvider cryptographyProvider = new();
             txtSQLPassword.Text = cryptographyProvider.Decrypt(Properties.OptionsDBsPage.Default.SQLPass, Runtime.EncryptionKey);
+            txtSQLUsername.Text = Properties.OptionsDBsPage.Default.SQLUser;
+            txtSQLPassword.Text = OptionPasswords.Unprotect(Properties.OptionsDBsPage.Default.SQLPass);
             chkSQLReadOnly.Checked = Properties.OptionsDBsPage.Default.SQLReadOnly;
 
-            mrngTextBox2.Text = txtSQLServer.Text;
-            mrngTextBox1.Text = txtSQLDatabaseName.Text;
-            mrngTextBox4.Text = txtSQLUsername.Text;
-
-            if (string.IsNullOrWhiteSpace(txtSQLType.Text) && txtSQLType.Items.Count > 0)
-                txtSQLType.SelectedIndex = 0;
-
-            if (txtSQLAuthType.SelectedIndex == -1 && txtSQLAuthType.Items.Count > 0)
-                txtSQLAuthType.SelectedIndex = 0;
+            // The authentication type is not stored: an empty user name means Windows authentication
+            // (see MSSqlDatabaseConnector). Select it before the user name, which it may overwrite.
+            string storedUser = Properties.OptionsDBsPage.Default.SQLUser ?? string.Empty;
+            int authTypeIndex = txtSQLAuthType.Items.IndexOf(storedUser.Length == 0 ? WindowsAuthentication : SqlServerAuthentication);
+            if (authTypeIndex >= 0)
+                txtSQLAuthType.SelectedIndex = authTypeIndex;
+            if (!_useCurrentWindowsIdentity)
+                txtSQLUsername.Text = storedUser;
 
             toggleSQLPageControls(chkUseSQLServer.Checked);
             lblTestConnectionResults.Text = string.Empty;
@@ -116,21 +133,55 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void SaveSettings()
         {
             base.SaveSettings();
+
+            // Applying the settings reloads the connections from the database, so leave them
+            // alone when nothing on this page changed (#3249)
+            if (!SettingsChanged())
+                return;
+
             bool sqlServerWasPreviouslyEnabled = Properties.OptionsDBsPage.Default.UseSQLServer;
 
             Properties.OptionsDBsPage.Default.UseSQLServer = chkUseSQLServer.Checked;
-            Properties.OptionsDBsPage.Default.SQLServerType = txtSQLType.Text;
+            Properties.OptionsDBsPage.Default.SQLServerType = SelectedServerType;
             Properties.OptionsDBsPage.Default.SQLHost = txtSQLServer.Text;
             Properties.OptionsDBsPage.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
-            Properties.OptionsDBsPage.Default.SQLUser = txtSQLUsername.Text;
+            Properties.OptionsDBsPage.Default.SQLUser = UserNameToSave;
             LegacyRijndaelCryptographyProvider cryptographyProvider = new();
             Properties.OptionsDBsPage.Default.SQLPass = cryptographyProvider.Encrypt(txtSQLPassword.Text, Runtime.EncryptionKey);
+            Properties.OptionsDBsPage.Default.SQLUser = txtSQLUsername.Text;
+            Properties.OptionsDBsPage.Default.SQLPass = OptionPasswords.Protect(txtSQLPassword.Text);
             Properties.OptionsDBsPage.Default.SQLReadOnly = chkSQLReadOnly.Checked;
 
             if (Properties.OptionsDBsPage.Default.UseSQLServer)
                 ReinitializeSqlUpdater();
             else if (!Properties.OptionsDBsPage.Default.UseSQLServer && sqlServerWasPreviouslyEnabled)
                 DisableSql();
+        }
+
+        // Windows authentication is stored as an empty user name; the box only shows who will connect
+        private string UserNameToSave => _useCurrentWindowsIdentity ? string.Empty : txtSQLUsername.Text;
+
+        // The list shows descriptions; DatabaseConnectorFactory and the registry settings use these codes
+        private string SelectedServerType => txtSQLType.SelectedIndex == MySqlIndex ? "mysql" : "mssql";
+
+        private static int ServerTypeIndex(string serverType)
+        {
+            // also reads the description that earlier versions of this page stored
+            return serverType != null && serverType.StartsWith("mysql", StringComparison.OrdinalIgnoreCase) ? MySqlIndex : MsSqlIndex;
+        }
+
+        private bool SettingsChanged()
+        {
+            Properties.OptionsDBsPage settings = Properties.OptionsDBsPage.Default;
+            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
+
+            return settings.UseSQLServer != chkUseSQLServer.Checked
+                || settings.SQLReadOnly != chkSQLReadOnly.Checked
+                || (settings.SQLServerType ?? string.Empty) != SelectedServerType
+                || (settings.SQLHost ?? string.Empty) != txtSQLServer.Text
+                || (settings.SQLDatabaseName ?? string.Empty) != txtSQLDatabaseName.Text
+                || (settings.SQLUser ?? string.Empty) != UserNameToSave
+                || cryptographyProvider.Decrypt(settings.SQLPass, Runtime.EncryptionKey) != txtSQLPassword.Text;
         }
 
         public override void LoadRegistrySettings()
@@ -226,16 +277,26 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             _advancedOptionsVisible = !_advancedOptionsVisible;
             tabCtrlSQL.Visible = _advancedOptionsVisible;
+            tableLayoutPanel1.Visible = !_advancedOptionsVisible;
             btnExpandOptions.Text = _advancedOptionsVisible ? "<< Simple" : Language.AdvancedExpand;
+
+            // The tabs cover the simple view; keep the buttons and the test result below
+            // whichever view is shown, so that the simple view can be brought back
+            PlaceBelow(_advancedOptionsVisible ? tabCtrlSQL : tableLayoutPanel1);
+        }
+
+        private void PlaceBelow(Control view)
+        {
+            int top = view.Bottom + 6;
+            btnTestConnection.Top = top;
+            btnExpandOptions.Top = top;
+            imgConnectionStatus.Top = top + 5;
+            lblTestConnectionResults.Top = top + 5;
         }
 
         private async void btnTestConnection_Click(object sender, EventArgs e)
         {
-            txtSQLServer.Text = mrngTextBox2.Text;
-            txtSQLDatabaseName.Text = mrngTextBox1.Text;
-            txtSQLUsername.Text = mrngTextBox4.Text;
-
-            string type = txtSQLType.Text;
+            string type = SelectedServerType;
             string server = txtSQLServer.Text;
             string database = txtSQLDatabaseName.Text;
             string username = txtSQLUsername.Text;
@@ -306,11 +367,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             switch (selectedValue)
             {
-                case "Windows Authentication":
+                case WindowsAuthentication:
                     useCurrentWindowsIdentity = true;
                     allowUsernameEdit = false;
                     break;
-                case "SQL Server Authentication":
+                case SqlServerAuthentication:
                     showPassword = true;
                     usernameLabel = "Login:";
                     break;
@@ -335,6 +396,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     break;
             }
 
+            _useCurrentWindowsIdentity = useCurrentWindowsIdentity;
             lblSQLUsername.Text = usernameLabel;
             mrngLabel6.Text = usernameLabel;
             lblSQLUsername.Enabled = allowUsernameEdit;
