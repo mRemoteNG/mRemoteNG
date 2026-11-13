@@ -345,11 +345,11 @@ namespace mRemoteNG.Connection.Protocol
 
         internal static string CreateSecretPipeName() => $"mRemoteNGSecretPipe{Guid.NewGuid():N}";
 
-        private static async Task ServePasswordAsync(string pipeName, string password)
+        internal static async Task ServePasswordAsync(string pipeName, string password, TimeSpan timeout)
         {
             try
             {
-                using CancellationTokenSource cts = new(PasswordPipeTimeout);
+                using CancellationTokenSource cts = new(timeout);
                 using NamedPipeServerStream server = CreatePipeServer(pipeName);
                 await server.WaitForConnectionAsync(cts.Token).ConfigureAwait(false);
                 using StreamWriter writer = new(server);
@@ -511,7 +511,7 @@ namespace mRemoteNG.Connection.Protocol
                             {
                                 string pipeName = CreateSecretPipeName();
                                 // write data to pipe; times out if PuTTY never connects
-                                _ = ServePasswordAsync(pipeName, password);
+                                _ = ServePasswordAsync(pipeName, password, PasswordPipeTimeout);
                                 // start putty with piped password
                                 arguments.Add("-pwfile", $"\\\\.\\PIPE\\{pipeName}");
                                 //arguments.Add("-pw", password);
