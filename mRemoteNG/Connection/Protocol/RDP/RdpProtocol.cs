@@ -431,6 +431,25 @@ namespace mRemoteNG.Connection.Protocol.RDP
             return string.IsNullOrWhiteSpace(username);
         }
 
+        /// <summary>
+        /// The external credential provider that the RD Gateway credentials are read from when the gateway
+        /// does not use the connection's credentials. Delinea Secret Server, Passwordstate and 1Password read
+        /// the item in the gateway's own "API User ID" field, so the provider chosen for the gateway decides.
+        /// OpenBao reads with the connection's secret engine, mount and role, which the Config panel shows only
+        /// when the connection itself uses OpenBao, so the gateway uses it only then.
+        /// </summary>
+        internal static ExternalCredentialProvider GatewayCredentialProvider(ConnectionInfo info)
+        {
+            return info.RDGatewayExternalCredentialProvider switch
+            {
+                ExternalCredentialProvider.DelineaSecretServer or
+                ExternalCredentialProvider.ClickstudiosPasswordState or
+                ExternalCredentialProvider.OnePassword => info.RDGatewayExternalCredentialProvider,
+                _ when info.ExternalCredentialProvider == ExternalCredentialProvider.VaultOpenbao => ExternalCredentialProvider.VaultOpenbao,
+                _ => ExternalCredentialProvider.None
+            };
+        }
+
         private void SetRdGateway()
         {
             try
@@ -476,8 +495,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
                             string gwd = connectionInfo.RDGatewayDomain;
                             string pkey = "";
 
+                        ExternalCredentialProvider gatewayProvider = GatewayCredentialProvider(InterfaceControl.Info);
+
                         // access secret server api if necessary
-                        if (InterfaceControl.Info.RDGatewayExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
+                        if (gatewayProvider == ExternalCredentialProvider.DelineaSecretServer)
                         {
                             try
                             {
@@ -489,7 +510,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                                 Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
                             }
                         }
-                        else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.ClickstudiosPasswordState)
+                        else if (gatewayProvider == ExternalCredentialProvider.ClickstudiosPasswordState)
                         {
                             try
                             {
@@ -501,7 +522,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                                 Event_ErrorOccured(this, "Passwordstate Interface Error: " + ex.Message, 0);
                             }
                         }
-                        else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.OnePassword)
+                        else if (gatewayProvider == ExternalCredentialProvider.OnePassword)
                         {
                             try
                             {
@@ -514,7 +535,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ECPOnePasswordReadFailed + Environment.NewLine + ex.Message);
                             }
                         }
-                        else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.VaultOpenbao)
+                        else if (gatewayProvider == ExternalCredentialProvider.VaultOpenbao)
                         {
                             try {
                                 if (connectionInfo.VaultOpenbaoSecretEngine == VaultOpenbaoSecretEngine.Kv)
