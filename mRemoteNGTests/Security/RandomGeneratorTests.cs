@@ -13,6 +13,14 @@ namespace mRemoteNGTests.Security
         }
 
         [Test]
+        public void CanProduceLastAvailableCharacter()
+        {
+            // '?' is the last character in the pool and could never be chosen before
+            var text = RandomGenerator.RandomString(20_000);
+            Assert.That(text, Does.Contain("?"));
+        }
+
+        [Test]
         public void StringsDiffer()
         {
             var text1 = RandomGenerator.RandomString(8);

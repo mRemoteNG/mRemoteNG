@@ -4,8 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.78.2]
 ### Fixed
+- fixed app hanging on exit when PuTTY never read the password pipe; the pipe now times out and its name is no longer guessable
+- fixed the default disk drive redirection for new RDP connections coming back as "All" after a restart when "Local" or "Custom" was chosen, and an error about it in the log at every start
+- fixed random string generator never picking the last character of its pool
 - #3249: fixed SQL Server options saving an empty server, a replaced user name or the wrong database type, re-applying unchanged settings on OK, and losing changed options without a question when mRemoteNG exits
 - #3628: fixed mRemoteNG and 1Password both hanging when a connection takes its credentials from 1Password and the CLI asks for authorization; credentials are now read from 1Password before the connection starts, without blocking the UI, and `op` is stopped if it has not finished after 3 minutes
+- fixed opening a connection that is already open, "Disconnect All But This" and "Disconnect Tabs To The Right" failing while the Options window is open in the same connection panel
 ### Added
 - Option to stop sending the local display scaling factor (DPI) to RDP servers that scale the whole remote desktop with it (e.g. GNOME Remote Desktop on Linux, where a 125% Windows host made the remote desktop appear 25% larger); the option is on by default, so existing behaviour is unchanged
 ### Fixed

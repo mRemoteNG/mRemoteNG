@@ -308,7 +308,8 @@ namespace mRemoteNG.Connection
                 if (!(connectionWindow.Controls[0] is DockPanel cwDp)) continue;
                 foreach (IDockContent dockContent in cwDp.Documents)
                 {
-                    ConnectionTab tab = (ConnectionTab)dockContent;
+                    // A connection panel can also hold the Options window and plugin windows.
+                    if (dockContent is not ConnectionTab tab) continue;
                     InterfaceControl ic = InterfaceControl.FindInterfaceControl(tab);
                     if (ic == null) continue;
                     if (ic.Info == connectionInfo || ic.OriginalInfo == connectionInfo)

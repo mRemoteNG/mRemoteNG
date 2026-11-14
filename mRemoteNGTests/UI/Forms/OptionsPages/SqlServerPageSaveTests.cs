@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Properties;
+using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms.OptionsPages;
 using NUnit.Framework;
@@ -193,6 +194,35 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
             // applying would replace the synchronizer and reload the connections from the database
             page.SaveSettings();
 
+            Assert.That(Runtime.ConnectionsService.RemoteConnectionsSyncronizer, Is.Null);
+        }
+
+        [Test]
+        public void WindowsAuthenticationStaysEmptyWhenAnotherFieldChanges()
+        {
+            StoreSettings(false, "sql01.example.local", "mRemoteNG", "", "");
+            SqlServerPage page = LoadPage();
+
+            page.txtSQLServer.Text = "sql02.example.local";
+            page.SaveSettings();
+
+            Assert.That(OptionsDBsPage.Default.SQLHost, Is.EqualTo("sql02.example.local"));
+            Assert.That(OptionsDBsPage.Default.SQLUser, Is.Empty);
+        }
+
+        [Test]
+        public void PasswordStoredWithDpapiIsShownAndKept()
+        {
+            // the form OptionPasswords stores since the option passwords moved to DPAPI
+            StoreSettings(true, "sql01.example.local", "mRemoteNG", "mrng_login", "");
+            OptionsDBsPage.Default.SQLPass = OptionPasswords.Protect("secret");
+            Runtime.ConnectionsService.RemoteConnectionsSyncronizer = null;
+            SqlServerPage page = LoadPage();
+
+            Assert.That(page.txtSQLPassword.Text, Is.EqualTo("secret"));
+            page.SaveSettings();
+
+            Assert.That(OptionPasswords.Unprotect(OptionsDBsPage.Default.SQLPass), Is.EqualTo("secret"));
             Assert.That(Runtime.ConnectionsService.RemoteConnectionsSyncronizer, Is.Null);
         }
     }
