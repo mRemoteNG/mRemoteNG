@@ -85,6 +85,42 @@ public class ConnectionsFileFormatCopyTests
         Assert.That(File.Exists(_copyPath), Is.True);
     }
 
+    [Test]
+    public void CopyIsKeptWhenTheRollingBackupsAlsoEndInBak()
+    {
+        string format = mRemoteNG.Properties.OptionsBackupPage.Default.BackupFileNameFormat;
+        mRemoteNG.Properties.OptionsBackupPage.Default.BackupFileNameFormat = "{0}.{1:yyyyMMdd-HHmmssffff}.bak";
+        try
+        {
+            File.WriteAllText(_filePath, File26);
+            Save();
+            string rollingBackup = string.Format(mRemoteNG.Properties.OptionsBackupPage.Default.BackupFileNameFormat, _filePath, DateTime.Now.AddMinutes(1));
+            File.WriteAllText(rollingBackup, File26);
+
+            new FileBackupPruner().PruneBackupFiles(_filePath, 0);
+
+            Assert.That(File.Exists(rollingBackup), Is.False, "The pruning did not run.");
+            Assert.That(File.Exists(_copyPath), Is.True);
+        }
+        finally
+        {
+            mRemoteNG.Properties.OptionsBackupPage.Default.BackupFileNameFormat = format;
+        }
+    }
+
+    [TestCase("confCons.xml.v2.6.bak", true)]
+    [TestCase("CONFCONS.XML.V2.6.BAK", true)]
+    [TestCase("confCons.xml.v10.12.bak", true)]
+    [TestCase("confCons.xml.20261114-1200000000.bak", false)]
+    [TestCase("confCons.xml.v2.6.1.bak", false)]
+    [TestCase("confCons.xml.v.bak", false)]
+    [TestCase("other.xml.v2.6.bak", false)]
+    [TestCase("confCons.xml.v2.6.backup", false)]
+    public void OnlyFormatCopiesOfTheFileAreRecognised(string candidate, bool expected)
+    {
+        Assert.That(ConnectionsFileFormatCopy.IsCopyOf(_filePath, Path.Combine(_directory, candidate)), Is.EqualTo(expected));
+    }
+
     [TestCase("<Connections ConfVersion=\"2.6\" />", "2.6")]
     [TestCase("<Connections ConfVersion=\"2,6\" />", "2.6")]
     [TestCase("<?xml version=\"1.0\" encoding=\"utf-8\"?><mrng:Connections xmlns:mrng=\"http://mremoteng.org\" FullFileEncryption=\"true\" ConfVersion=\"2.9\">encrypted</mrng:Connections>", "2.9")]

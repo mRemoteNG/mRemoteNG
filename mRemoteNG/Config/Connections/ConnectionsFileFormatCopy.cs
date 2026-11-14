@@ -9,7 +9,8 @@ namespace mRemoteNG.Config.Connections
     /// <summary>
     /// Keeps a copy of a connections file before it is saved in a newer format, which the versions
     /// of mRemoteNG that wrote it cannot open. The copy is named after the format it is in, such as
-    /// confCons.xml.v2.6.bak, so the pruning of the rolling backups never matches or deletes it.
+    /// confCons.xml.v2.6.bak, and the pruning of the rolling backups skips it whatever the backup
+    /// file name format is.
     /// </summary>
     [SupportedOSPlatform("windows")]
     public static class ConnectionsFileFormatCopy
@@ -33,6 +34,23 @@ namespace mRemoteNG.Config.Connections
             PathValidator.ValidatePathOrThrow(copyPath, nameof(copyPath));
             File.Copy(filePath, copyPath);
             return copyPath;
+        }
+
+        /// <summary>
+        /// True when candidatePath is a copy this class made of filePath, named filePath.vX.Y.bak.
+        /// </summary>
+        internal static bool IsCopyOf(string filePath, string candidatePath)
+        {
+            string prefix = Path.GetFileName(filePath) + ".v";
+            const string suffix = ".bak";
+            string name = Path.GetFileName(candidatePath);
+            if (name.Length <= prefix.Length + suffix.Length
+                || !name.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
+                || !name.EndsWith(suffix, StringComparison.OrdinalIgnoreCase))
+                return false;
+
+            string version = name.Substring(prefix.Length, name.Length - prefix.Length - suffix.Length);
+            return Version.TryParse(version, out Version parsed) && parsed.Build == -1;
         }
 
         /// <summary>
