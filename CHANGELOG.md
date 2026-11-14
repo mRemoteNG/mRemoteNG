@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - fixed the default disk drive redirection for new RDP connections coming back as "All" after a restart when "Local" or "Custom" was chosen, and an error about it in the log at every start
 - fixed random string generator never picking the last character of its pool
 - #3249: fixed SQL Server options saving an empty server, a replaced user name or the wrong database type, re-applying unchanged settings on OK, and losing changed options without a question when mRemoteNG exits
+- #3628: fixed mRemoteNG and 1Password both hanging when a connection takes its credentials from 1Password and the CLI asks for authorization; credentials are now read from 1Password before the connection starts, without blocking the UI, and `op` is stopped if it has not finished after 3 minutes
 - fixed opening a connection that is already open, "Disconnect All But This" and "Disconnect Tabs To The Right" failing while the Options window is open in the same connection panel
 ### Added
 - #3581: before a connection file is first saved in a newer format, which older versions of mRemoteNG cannot open, a copy of it is kept in its earlier format, named after that format (e.g. confCons.xml.v2.6.bak), and the pruning of rolling backups never deletes it

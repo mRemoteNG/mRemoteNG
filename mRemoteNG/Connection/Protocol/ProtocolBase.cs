@@ -2,6 +2,7 @@
 using mRemoteNG.Tools;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using mRemoteNG.UI.Tabs;
 using System.Runtime.Versioning;
@@ -112,6 +113,14 @@ namespace mRemoteNG.Connection.Protocol
         {
             ResizeEnd(host, e);
         }
+
+        /// <summary>
+        /// Called on the UI thread before the protocol is attached to its tab, to read the credentials of
+        /// <paramref name="info"/> that can take a while to come, such as those from the 1Password CLI, without
+        /// blocking it. <see cref="Initialize"/> and <see cref="Connect"/> then use what was read. Nothing in the
+        /// UI can reach the protocol meanwhile, since it has no <see cref="InterfaceControl"/> yet.
+        /// </summary>
+        public virtual Task ReadExternalCredentialsAsync(ConnectionInfo info) => Task.CompletedTask;
 
         public virtual bool Initialize()
         {

@@ -16,6 +16,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 
@@ -40,6 +41,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
         protected readonly FrmMain _frmMain = FrmMain.Default;
         protected bool loginComplete;
         private bool _alertOnIdleDisconnect;
+        // Read from 1Password by ReadExternalCredentialsAsync, and used once by SetCredentials and SetRdGateway
+        private ExternalConnectors.OP.OnePasswordRead _onePasswordRead;
+        private ExternalConnectors.OP.OnePasswordRead _onePasswordGatewayRead;
         protected uint DesktopScaleFactor =>
             Properties.OptionsAdvancedPage.Default.RdpSendDesktopScaleFactor
                 ? (uint)(_displayProperties.ResolutionScalingFactor.Width * 100)
@@ -134,6 +138,25 @@ namespace mRemoteNG.Connection.Protocol.RDP
         protected virtual AxHost CreateActiveXRdpClientControl()
         {
             return new AxMsRdpClient6NotSafeForScripting();
+        }
+
+        /// <summary>
+        /// Reads from 1Password the items that <see cref="SetCredentials"/> and <see cref="SetRdGateway"/> will ask
+        /// for, under the same conditions, so that the UI thread is not blocked while op waits (#3628).
+        /// </summary>
+        public override async Task ReadExternalCredentialsAsync(ConnectionInfo info)
+        {
+            if (Force.HasFlag(ConnectionInfo.Force.NoCredentials)) return;
+            if (info.ExternalCredentialProvider != ExternalCredentialProvider.OnePassword) return;
+
+            _onePasswordRead = await ExternalConnectors.OP.OnePasswordCli.ReadPasswordAsync($"{info.UserViaAPI}");
+
+            // SetRdGateway reads the gateway item from 1Password when the connection's provider is 1Password
+            // and the gateway's is not Delinea Secret Server
+            if (info.RDGatewayUsageMethod != RDGatewayUsageMethod.Never
+                && info.RDGatewayUseConnectionCredentials is not (RDGatewayUseConnectionCredentials.Yes or RDGatewayUseConnectionCredentials.SmartCard)
+                && info.RDGatewayExternalCredentialProvider != ExternalCredentialProvider.DelineaSecretServer)
+                _onePasswordGatewayRead = await ExternalConnectors.OP.OnePasswordCli.ReadPasswordAsync($"{info.RDGatewayUserViaAPI}");
         }
 
         public override bool Initialize()
@@ -506,7 +529,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
                             try
                             {
                                 string RDGUserViaAPI = InterfaceControl.Info.RDGatewayUserViaAPI;
-                                ExternalConnectors.OP.OnePasswordCli.ReadPassword($"{RDGUserViaAPI}", out gwu, out gwp, out gwd, out pkey);
+                                ExternalConnectors.OP.OnePasswordRead readAhead = _onePasswordGatewayRead;
+                                _onePasswordGatewayRead = null;
+                                ExternalConnectors.OP.OnePasswordCli.ReadPassword(readAhead, $"{RDGUserViaAPI}", ref gwu, ref gwp, ref gwd, ref pkey);
                             }
                             catch (ExternalConnectors.OP.OnePasswordCliException ex)
                             {
@@ -628,7 +653,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 {
                     try
                     {
-                        ExternalConnectors.OP.OnePasswordCli.ReadPassword($"{userViaApi}", out userName, out password, out domain, out pkey);
+                        ExternalConnectors.OP.OnePasswordRead readAhead = _onePasswordRead;
+                        _onePasswordRead = null;
+                        ExternalConnectors.OP.OnePasswordCli.ReadPassword(readAhead, $"{userViaApi}", ref userName, ref password, ref domain, ref pkey);
                     }
                     catch (ExternalConnectors.OP.OnePasswordCliException ex)
                     {
