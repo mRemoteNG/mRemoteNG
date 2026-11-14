@@ -38,8 +38,8 @@
     <Setting Name="ConDefaultRedirectKeys" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ConDefaultRedirectDiskDrives" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="ConDefaultRedirectDiskDrives" Type="System.String" Scope="User">
+      <Value Profile="(Default)">None</Value>
     </Setting>
     <Setting Name="ConDefaultRedirectPrinters" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
