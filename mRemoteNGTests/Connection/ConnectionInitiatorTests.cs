@@ -77,7 +77,9 @@ namespace mRemoteNGTests.Connection
             var connectionInfo = new ConnectionInfo
             {
                 Name = "Test Connection",
-                Hostname = "192.168.1.1", // Valid hostname
+                // TEST-NET-1 (RFC 5737), reserved for documentation: the RDP connection the test
+                // opens can't reach a real device, such as the router of the network it runs on.
+                Hostname = "192.0.2.1",
                 Protocol = ProtocolType.RDP
             };
 
