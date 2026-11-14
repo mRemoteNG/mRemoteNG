@@ -432,20 +432,27 @@ namespace mRemoteNG.Connection.Protocol.RDP
         }
 
         /// <summary>
-        /// The external credential provider that the RD Gateway credentials are read from when the gateway
-        /// does not use the connection's credentials. Delinea Secret Server, Passwordstate and 1Password read
-        /// the item in the gateway's own "API User ID" field, so the provider chosen for the gateway decides.
-        /// OpenBao reads with the connection's secret engine, mount and role, which the Config panel shows only
-        /// when the connection itself uses OpenBao, so the gateway uses it only then.
+        /// The external credential provider that the RD Gateway credentials are read from, or None. Only the
+        /// "different username and password" and "external credential provider" modes read them from one.
+        /// Delinea Secret Server, Passwordstate and 1Password read the item in the gateway's own "API User ID"
+        /// field, so the provider chosen for the gateway decides. OpenBao reads with the connection's secret
+        /// engine, mount and role, which the Config panel shows only when the connection itself uses OpenBao,
+        /// so the gateway uses it only then. In the "external credential provider" mode the typed gateway
+        /// fields are hidden, so a gateway left without a provider of its own uses the connection's.
         /// </summary>
         internal static ExternalCredentialProvider GatewayCredentialProvider(ConnectionInfo info)
         {
+            RDGatewayUseConnectionCredentials mode = info.RDGatewayUseConnectionCredentials;
+            if (mode is not (RDGatewayUseConnectionCredentials.No or RDGatewayUseConnectionCredentials.ExternalCredentialProvider))
+                return ExternalCredentialProvider.None;
+
             return info.RDGatewayExternalCredentialProvider switch
             {
                 ExternalCredentialProvider.DelineaSecretServer or
                 ExternalCredentialProvider.ClickstudiosPasswordState or
                 ExternalCredentialProvider.OnePassword => info.RDGatewayExternalCredentialProvider,
-                _ when info.ExternalCredentialProvider == ExternalCredentialProvider.VaultOpenbao => ExternalCredentialProvider.VaultOpenbao,
+                ExternalCredentialProvider.VaultOpenbao when info.ExternalCredentialProvider == ExternalCredentialProvider.VaultOpenbao => ExternalCredentialProvider.VaultOpenbao,
+                ExternalCredentialProvider.None when mode == RDGatewayUseConnectionCredentials.ExternalCredentialProvider => info.ExternalCredentialProvider,
                 _ => ExternalCredentialProvider.None
             };
         }
@@ -532,6 +539,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
                             catch (ExternalConnectors.OP.OnePasswordCliException ex)
                             {
                                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.ECPOnePasswordCommandLine + ": " + ex.Arguments);
+                                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ECPOnePasswordReadFailed + Environment.NewLine + ex.Message);
+                            }
+                            catch (Exception ex)
+                            {
+                                // Such as UriFormatException for an empty or malformed reference, or op not being installed
                                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ECPOnePasswordReadFailed + Environment.NewLine + ex.Message);
                             }
                         }
