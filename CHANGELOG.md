@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - fixed random string generator never picking the last character of its pool
 - #3249: fixed SQL Server options saving an empty server, a replaced user name or the wrong database type, re-applying unchanged settings on OK, and losing changed options without a question when mRemoteNG exits
 - fixed opening a connection that is already open, "Disconnect All But This" and "Disconnect Tabs To The Right" failing while the Options window is open in the same connection panel
+- fixed the RD Gateway taking its credentials from the connection's external credential provider instead of its own for 1Password and Passwordstate: a gateway set to either was not read from it unless the connection used the same provider, and on a connection using 1Password a gateway with typed credentials got none
 ### Added
 - #3581: before a connection file is first saved in a newer format, which older versions of mRemoteNG cannot open, a copy of it is kept in its earlier format, named after that format (e.g. confCons.xml.v2.6.bak), and the pruning of rolling backups never deletes it
 - Option to stop sending the local display scaling factor (DPI) to RDP servers that scale the whole remote desktop with it (e.g. GNOME Remote Desktop on Linux, where a 125% Windows host made the remote desktop appear 25% larger); the option is on by default, so existing behaviour is unchanged
