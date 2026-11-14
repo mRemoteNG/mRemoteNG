@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using mRemoteNG.App;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
+using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
@@ -40,6 +42,11 @@ namespace mRemoteNG.Config.Connections
             // (and rotate the last good backup out) while the save still reports success.
             if (string.IsNullOrWhiteSpace(xml))
                 throw new InvalidOperationException($"Connection serialization produced no output; refusing to overwrite {_connectionFileName}");
+
+            string formatCopy = ConnectionsFileFormatCopy.KeepIfUpgrading(_connectionFileName, xml);
+            if (formatCopy != null)
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                    $"Kept a copy of {_connectionFileName} in its earlier format as {formatCopy}, because older versions of mRemoteNG cannot open the format it is saved in now");
 
             FileDataProviderWithRollingBackup fileDataProvider = new(_connectionFileName);
             fileDataProvider.Save(xml);
