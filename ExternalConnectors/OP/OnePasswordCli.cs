@@ -59,6 +59,20 @@ public class OnePasswordCli
 
 	/// <summary>
 	/// Reads <paramref name="input"/> like <see cref="ReadPassword(string, out string, out string, out string, out string)"/>,
+	/// unless there is a <paramref name="readAhead"/>, which is used even if the reference was changed while it was read:
+	/// the connection keeps the reference it had when it was opened, and reading again here would run op on the UI
+	/// thread (#3628).
+	/// </summary>
+	public static void ReadPassword(OnePasswordRead? readAhead, string input, ref string username, ref string password, ref string domain, ref string privateKey)
+	{
+		if (readAhead != null)
+			readAhead.Apply(ref username, ref password, ref domain, ref privateKey);
+		else
+			ReadPassword(input, out username, out password, out domain, out privateKey);
+	}
+
+	/// <summary>
+	/// Reads <paramref name="input"/> like <see cref="ReadPassword(string, out string, out string, out string, out string)"/>,
 	/// on a thread pool thread, so that the caller's thread is free while op waits, for instance for the
 	/// 1Password authorization prompt, which stays blank while the UI thread of mRemoteNG is blocked (#3628).
 	/// It does not throw: what ReadPassword throws is kept in the result, and thrown when the result is used.
@@ -74,20 +88,6 @@ public class OnePasswordCli
 		{
 			AsyncReads.Release();
 		}
-	}
-
-	/// <summary>
-	/// Reads <paramref name="input"/> like <see cref="ReadPassword(string, out string, out string, out string, out string)"/>,
-	/// unless there is a <paramref name="readAhead"/>, which is used even if the reference was changed while it was read:
-	/// the connection keeps the reference it had when it was opened, and reading again here would run op on the UI
-	/// thread (#3628).
-	/// </summary>
-	public static void ReadPassword(OnePasswordRead? readAhead, string input, ref string username, ref string password, ref string domain, ref string privateKey)
-	{
-		if (readAhead != null)
-			readAhead.Apply(ref username, ref password, ref domain, ref privateKey);
-		else
-			ReadPassword(input, out username, out password, out domain, out privateKey);
 	}
 
 	private static void ItemGet(string item, string? vault, string? account, out string username, out string password, out string domain, out string privateKey)
