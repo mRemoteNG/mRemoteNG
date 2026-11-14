@@ -358,11 +358,11 @@ namespace mRemoteNG.Connection.Protocol
             }
             catch (OperationCanceledException)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "PuTTY did not read the password pipe in time; the password was not sent.", true);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.PuttyPasswordPipeTimedOut, true);
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("Error serving the password pipe to PuTTY", ex, MessageClass.WarningMsg, false);
+                Runtime.MessageCollector.AddExceptionMessage(Language.PuttyPasswordPipeFailed, ex, MessageClass.WarningMsg, false);
             }
         }
 
