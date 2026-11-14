@@ -441,9 +441,15 @@ namespace mRemoteNG.Connection
                     connDetail = "UNKNOWN";
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.ConnenctionClosedByUser, connDetail, prot.InterfaceControl.Info.Protocol, Environment.UserName));
-                prot.InterfaceControl.OriginalInfo.OpenConnections.Remove(prot);
-                if (_activeConnections.Contains(prot.InterfaceControl.Info.ConstantID))
+                // Only a protocol that connected is in both lists. One closed before that, such as another
+                // attempt at the same connection whose tab was closed while 1Password was read, shares the
+                // ID of the attempt that connected and must not remove it.
+                ProtocolList openConnections = prot.InterfaceControl.OriginalInfo.OpenConnections;
+                if (openConnections.Contains(prot))
+                {
+                    openConnections.Remove(prot);
                     _activeConnections.Remove(prot.InterfaceControl.Info.ConstantID);
+                }
 
                 if (prot.InterfaceControl.Info.PostExtApp == "") return;
                 Tools.ExternalTool extA = Runtime.ExternalToolsService.GetExtAppByName(prot.InterfaceControl.Info.PostExtApp);
