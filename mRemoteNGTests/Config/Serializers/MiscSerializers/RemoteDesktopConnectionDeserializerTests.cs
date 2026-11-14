@@ -183,12 +183,12 @@ public class RemoteDesktopConnectionDeserializerTests
         Assert.That(connectionInfo.RDPStartProgram, Is.EqualTo(ExpectedStartProgram));
     }
 
-    //[Test]
-    //public void GatewayHostnameImportedCorrectly()
-    //{
-    //    var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
-    //    Assert.That(connectionInfo.RDGatewayHostname, Is.EqualTo(_expectedGatewayHostname));
-    //}
+    [Test]
+    public void GatewayHostnameImportedCorrectly()
+    {
+        var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+        Assert.That(connectionInfo.RDGatewayHostname, Is.EqualTo(ExpectedGatewayHostname));
+    }
 
     private static ConnectionInfo Import(params string[] lines)
     {
