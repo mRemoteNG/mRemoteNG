@@ -18,6 +18,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -338,16 +339,31 @@ namespace mRemoteNG.Connection.Protocol
             return PuttyProcess?.HasExited == false;
         }
 
-        public void CreatePipe(object oData)
+        // How long PuTTY gets to open the password pipe before we give up, so a PuTTY that
+        // never starts does not leave the password waiting in memory forever.
+        internal static readonly TimeSpan PasswordPipeTimeout = TimeSpan.FromSeconds(30);
+
+        internal static string CreateSecretPipeName() => $"mRemoteNGSecretPipe{Guid.NewGuid():N}";
+
+        internal static async Task ServePasswordAsync(string pipeName, string password, TimeSpan timeout)
         {
-            string data = (string)oData;
-            string random = data[..8];
-            string password = data[8..];
-            using NamedPipeServerStream server = CreatePipeServer($"mRemoteNGSecretPipe{random}");
-            server.WaitForConnection();
-            using StreamWriter writer = new(server);
-            writer.Write(password);
-            writer.Flush();
+            try
+            {
+                using CancellationTokenSource cts = new(timeout);
+                using NamedPipeServerStream server = CreatePipeServer(pipeName);
+                await server.WaitForConnectionAsync(cts.Token).ConfigureAwait(false);
+                using StreamWriter writer = new(server);
+                await writer.WriteAsync(password).ConfigureAwait(false);
+                await writer.FlushAsync(cts.Token).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.PuttyPasswordPipeTimedOut, true);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage(Language.PuttyPasswordPipeFailed, ex, MessageClass.WarningMsg, false);
+            }
         }
 
         public override bool Connect()
@@ -493,12 +509,11 @@ namespace mRemoteNG.Connection.Protocol
 
                             if (!string.IsNullOrEmpty(password))
                             {
-                                string random = string.Join("", Guid.NewGuid().ToString("n").Take(8));
-                                // write data to pipe
-                                Thread thread = new(new ParameterizedThreadStart(CreatePipe));
-                                thread.Start($"{random}{password}");
+                                string pipeName = CreateSecretPipeName();
+                                // write data to pipe; times out if PuTTY never connects
+                                _ = ServePasswordAsync(pipeName, password, PasswordPipeTimeout);
                                 // start putty with piped password
-                                arguments.Add("-pwfile", $"\\\\.\\PIPE\\mRemoteNGSecretPipe{random}");
+                                arguments.Add("-pwfile", $"\\\\.\\PIPE\\{pipeName}");
                                 //arguments.Add("-pw", password);
                             }
                         }
@@ -509,8 +524,7 @@ namespace mRemoteNG.Connection.Protocol
                                 return false;
                             }
                             arguments.Add("-auth-plugin");
-                            string random = string.Join("", Guid.NewGuid().ToString("n").Take(8));
-                            string pipename = $"mRemoteNGSecretPipe{random}";
+                            string pipename = CreateSecretPipeName();
                             AddArgumentString(arguments, $"\"{App.Info.GeneralAppInfo.HomePath}\\vault-ssh-helper-plugin.exe\" {username} --pipeName={pipename}");
                             System.Threading.Tasks.Task.Run(async () => {
                                 using NamedPipeServerStream server = CreatePipeServer(pipename);

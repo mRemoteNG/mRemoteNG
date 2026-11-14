@@ -446,9 +446,7 @@ namespace mRemoteNG.Connection
         private void SetRedirectDefaults()
         {
             RedirectKeys = Settings.Default.ConDefaultRedirectKeys;
-            RedirectDiskDrives = Settings.Default.ConDefaultRedirectDiskDrives 
-                ? RDPDiskDrives.All 
-                : RDPDiskDrives.None;
+            RedirectDiskDrives = RdpDiskDrivesSetting.Parse(Settings.Default.ConDefaultRedirectDiskDrives);
             RedirectDiskDrivesCustom = Settings.Default.ConDefaultRedirectDiskDrivesCustom;
             RedirectPrinters = Settings.Default.ConDefaultRedirectPrinters;
             RedirectClipboard = Settings.Default.ConDefaultRedirectClipboard;
