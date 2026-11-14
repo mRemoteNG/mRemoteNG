@@ -84,7 +84,7 @@
     <PackageVersion Include="runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl" Version="4.3.3" />
     <PackageVersion Include="SQLitePCLRaw.provider.e_sqlite3" Version="3.0.5" />
     <PackageVersion Include="SpecFlow.NUnit" Version="3.9.74" />
-    <PackageVersion Include="SSH.NET" Version="2026.0.0" />
+    <PackageVersion Include="SSH.NET" Version="2026.0.1" />
     <PackageVersion Include="System.Buffers" Version="4.6.1" />
     <PackageVersion Include="System.Configuration.ConfigurationManager" Version="11.0.0" />
     <PackageVersion Include="System.Collections.Immutable" Version="11.0.0" />
