@@ -66,13 +66,22 @@ public class OnePasswordCliTests
     }
 
     [Test]
-    public async Task ReadAheadOfAnotherReferenceIsNotUsed()
+    public async Task ReadAheadIsUsedEvenIfTheReferenceChanged()
     {
         OnePasswordRead readAhead = await OnePasswordCli.ReadPasswordAsync(NotAReference);
         string username = "", password = "", domain = "", privateKey = "";
 
-        // Reading null throws ArgumentNullException; the read ahead would throw UriFormatException.
-        Assert.Throws<ArgumentNullException>(() =>
+        // The read ahead throws UriFormatException; reading null would throw ArgumentNullException.
+        Assert.Throws<UriFormatException>(() =>
             OnePasswordCli.ReadPassword(readAhead, null, ref username, ref password, ref domain, ref privateKey));
+    }
+
+    [Test]
+    public void WithoutAReadAheadTheReferenceIsRead()
+    {
+        string username = "", password = "", domain = "", privateKey = "";
+
+        Assert.Throws<ArgumentNullException>(() =>
+            OnePasswordCli.ReadPassword(null, null, ref username, ref password, ref domain, ref privateKey));
     }
 }

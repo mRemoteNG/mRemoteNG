@@ -78,11 +78,13 @@ public class OnePasswordCli
 
 	/// <summary>
 	/// Reads <paramref name="input"/> like <see cref="ReadPassword(string, out string, out string, out string, out string)"/>,
-	/// but uses <paramref name="readAhead"/> instead when it is a read of the same reference.
+	/// unless there is a <paramref name="readAhead"/>, which is used even if the reference was changed while it was read:
+	/// the connection keeps the reference it had when it was opened, and reading again here would run op on the UI
+	/// thread (#3628).
 	/// </summary>
 	public static void ReadPassword(OnePasswordRead? readAhead, string input, ref string username, ref string password, ref string domain, ref string privateKey)
 	{
-		if (readAhead != null && readAhead.Input == input)
+		if (readAhead != null)
 			readAhead.Apply(ref username, ref password, ref domain, ref privateKey);
 		else
 			ReadPassword(input, out username, out password, out domain, out privateKey);
