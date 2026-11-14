@@ -144,9 +144,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
         /// Reads from 1Password the items that <see cref="SetCredentials"/> and <see cref="SetRdGateway"/> will ask
         /// for, under the same conditions, so that the UI thread is not blocked while op waits (#3628).
         /// </summary>
-        public override async Task ReadExternalCredentialsAsync()
+        public override async Task ReadExternalCredentialsAsync(ConnectionInfo info)
         {
-            ConnectionInfo info = InterfaceControl.Info;
             if (Force.HasFlag(ConnectionInfo.Force.NoCredentials)) return;
             if (info.ExternalCredentialProvider != ExternalCredentialProvider.OnePassword) return;
 

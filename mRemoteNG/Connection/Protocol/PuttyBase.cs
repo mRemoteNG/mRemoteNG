@@ -372,9 +372,8 @@ namespace mRemoteNG.Connection.Protocol
         /// Reads from 1Password the item that <see cref="Connect"/> will ask for, under the same conditions, so
         /// that the UI thread is not blocked while op waits (#3628).
         /// </summary>
-        public override async Task ReadExternalCredentialsAsync()
+        public override async Task ReadExternalCredentialsAsync(ConnectionInfo info)
         {
-            ConnectionInfo info = InterfaceControl.Info;
             if (info is PuttySessionInfo || PuttyProtocol != Putty_Protocol.ssh) return;
             if (info.ExternalCredentialProvider != ExternalCredentialProvider.OnePassword) return;
 

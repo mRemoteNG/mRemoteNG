@@ -115,11 +115,12 @@ namespace mRemoteNG.Connection.Protocol
         }
 
         /// <summary>
-        /// Called before <see cref="Initialize"/>, on the UI thread, to read the credentials that can take a
-        /// while to come, such as those from the 1Password CLI, without blocking it. <see cref="Initialize"/>
-        /// and <see cref="Connect"/> then use what was read.
+        /// Called on the UI thread before the protocol is attached to its tab, to read the credentials of
+        /// <paramref name="info"/> that can take a while to come, such as those from the 1Password CLI, without
+        /// blocking it. <see cref="Initialize"/> and <see cref="Connect"/> then use what was read. Nothing in the
+        /// UI can reach the protocol meanwhile, since it has no <see cref="InterfaceControl"/> yet.
         /// </summary>
-        public virtual Task ReadExternalCredentialsAsync() => Task.CompletedTask;
+        public virtual Task ReadExternalCredentialsAsync(ConnectionInfo info) => Task.CompletedTask;
 
         public virtual bool Initialize()
         {
