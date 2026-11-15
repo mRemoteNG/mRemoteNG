@@ -41,6 +41,8 @@ namespace mRemoteNG.Connection.Protocol
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, cProt));
         }
 
+        public bool Contains(ProtocolBase cProt) => List.Contains(cProt);
+
         public void Remove(ProtocolBase cProt)
         {
             try

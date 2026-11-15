@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - fixed the default disk drive redirection for new RDP connections coming back as "All" after a restart when "Local" or "Custom" was chosen, and an error about it in the log at every start
 - fixed random string generator never picking the last character of its pool
 - #3249: fixed SQL Server options saving an empty server, a replaced user name or the wrong database type, re-applying unchanged settings on OK, and losing changed options without a question when mRemoteNG exits
+- #3628: fixed mRemoteNG and 1Password both hanging when a connection takes its credentials from 1Password and the CLI asks for authorization; credentials are now read from 1Password before the connection starts, without blocking the UI, and `op` is stopped if it has not finished after 3 minutes
 - fixed opening a connection that is already open, "Disconnect All But This" and "Disconnect Tabs To The Right" failing while the Options window is open in the same connection panel
 - fixed the RD Gateway taking its credentials from the connection's external credential provider instead of its own for 1Password and Passwordstate: a gateway set to either was not read from it unless the connection used the same provider, and on a connection using 1Password a gateway with typed credentials got none
 ### Added

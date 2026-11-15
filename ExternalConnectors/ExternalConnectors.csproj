@@ -23,6 +23,9 @@
     <PackageReference Include="VaultSharp" />
   </ItemGroup>
   <ItemGroup>
+    <InternalsVisibleTo Include="mRemoteNGTests" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="AWS\AWSConnectionForm.cs" />
     <Compile Update="CPS\CPSConnectionForm.cs" />
     <Compile Update="DSS\SSConnectionForm.cs" />
