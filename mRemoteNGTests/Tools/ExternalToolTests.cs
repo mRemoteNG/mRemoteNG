@@ -34,9 +34,8 @@ namespace mRemoteNGTests.Tools
             setProcessPropertiesMethod.Invoke(externalTool, new object[] { process, connectionInfo });
 
             // Assert
-            // Not elevated, the arguments go one by one into ArgumentList. The equals sign is not
-            // a shell metacharacter, so the password arrives whole and unescaped, in one argument.
-            Assert.That(process.StartInfo.ArgumentList, Does.Contain("Z-3=Wv99/Aq"));
+            // '=' is not a shell metacharacter, so the password is passed unchanged
+            Assert.That(process.StartInfo.Arguments, Is.EqualTo("-u testuser -p Z-3=Wv99/Aq -h testhost"));
         }
 
         [Test]
@@ -64,9 +63,8 @@ namespace mRemoteNGTests.Tools
 
             // Assert
             // The password should be present in the arguments (possibly escaped)
-            var arguments = string.Join(" ", process.StartInfo.ArgumentList);
-            Assert.That(arguments, Does.Contain("P@ss"));
-            Assert.That(arguments, Does.Contain("W0rd"));
+            Assert.That(process.StartInfo.Arguments, Does.Contain("P@ss"));
+            Assert.That(process.StartInfo.Arguments, Does.Contain("W0rd"));
         }
 
         [Test]
@@ -94,7 +92,7 @@ namespace mRemoteNGTests.Tools
             setProcessPropertiesMethod.Invoke(externalTool, new object[] { process, connectionInfo });
 
             // Assert
-            var arguments = string.Join(" ", process.StartInfo.ArgumentList);
+            var arguments = process.StartInfo.Arguments;
             Assert.That(arguments, Does.Contain("myhost.com"));
             Assert.That(arguments, Does.Contain("8080"));
             Assert.That(arguments, Does.Contain("admin"));
@@ -124,13 +122,8 @@ namespace mRemoteNGTests.Tools
             var setProcessPropertiesMethod = SetProcessPropertiesMethod();
             setProcessPropertiesMethod.Invoke(externalTool, new object[] { process, connectionInfo });
 
-            // Assert - When not elevated, arguments should be in ArgumentList
-            if (!externalTool.RunElevated)
-            {
-                Assert.That(process.StartInfo.ArgumentList.Count, Is.GreaterThan(0));
-                // Arguments with spaces should be preserved in ArgumentList
-                Assert.That(process.StartInfo.ArgumentList, Does.Contain("test host").Or.Contain("--host"));
-            }
+            // Assert - the user's quotes are kept, so each value stays one argument
+            Assert.That(process.StartInfo.Arguments, Is.EqualTo("--host \"test host\" --user \"user name\""));
         }
 
         [Test]

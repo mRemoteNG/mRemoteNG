@@ -32,6 +32,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - fixed connection tree filter hiding matches inside collapsed folders; folders opened by the filter are collapsed again when the search is cleared
 - #3560: fixed "Invalid executable path" for PuTTY and external tools installed under "Program Files (x86)"
 - : fixed connection files saved by this version (format 2.9) being rejected on load as "Incompatible connection file format"
+- #3044: fixed external tool variables being split at commas, semicolons, equals signs and spaces when the tool is a batch file, and quotes around variables in the tool's arguments being ignored
 - #3367: fixed cross-thread crash when closing the splash screen on a startup error
 - #2939: fixed SQL injection vulnerabilities via parameterized queries 
 - #2940: fixed for Possible command injection via Process.Start 
