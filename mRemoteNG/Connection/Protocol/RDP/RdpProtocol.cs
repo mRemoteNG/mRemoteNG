@@ -147,15 +147,14 @@ namespace mRemoteNG.Connection.Protocol.RDP
         public override async Task ReadExternalCredentialsAsync(ConnectionInfo info)
         {
             if (Force.HasFlag(ConnectionInfo.Force.NoCredentials)) return;
-            if (info.ExternalCredentialProvider != ExternalCredentialProvider.OnePassword) return;
 
-            _onePasswordRead = await ExternalConnectors.OP.OnePasswordCli.ReadPasswordAsync($"{info.UserViaAPI}");
+            if (info.ExternalCredentialProvider == ExternalCredentialProvider.OnePassword)
+                _onePasswordRead = await ExternalConnectors.OP.OnePasswordCli.ReadPasswordAsync($"{info.UserViaAPI}");
 
-            // SetRdGateway reads the gateway item from 1Password when the connection's provider is 1Password
-            // and the gateway's is not Delinea Secret Server
+            // The gateway's provider does not depend on the connection's: a gateway can use 1Password on a
+            // connection that does not, and the other way around
             if (info.RDGatewayUsageMethod != RDGatewayUsageMethod.Never
-                && info.RDGatewayUseConnectionCredentials is not (RDGatewayUseConnectionCredentials.Yes or RDGatewayUseConnectionCredentials.SmartCard)
-                && info.RDGatewayExternalCredentialProvider != ExternalCredentialProvider.DelineaSecretServer)
+                && GatewayCredentialProvider(info) == ExternalCredentialProvider.OnePassword)
                 _onePasswordGatewayRead = await ExternalConnectors.OP.OnePasswordCli.ReadPasswordAsync($"{info.RDGatewayUserViaAPI}");
         }
 
