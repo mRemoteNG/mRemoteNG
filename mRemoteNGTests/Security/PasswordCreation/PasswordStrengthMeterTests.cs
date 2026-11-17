@@ -44,9 +44,10 @@ namespace mRemoteNGTests.Security.PasswordCreation
         [Test]
         public void PasswordMadeFromTheUserNameRatesLower()
         {
-            const string password = "bobsecord1987";
+            // an invented user name, so no zxcvbn dictionary already contains it
+            const string password = "qorvantel1987";
             PasswordStrength withoutUserInputs = PasswordStrengthMeter.Evaluate(password).Strength;
-            PasswordStrength withUserInputs = PasswordStrengthMeter.Evaluate(password, new[] { "bobsecord" }).Strength;
+            PasswordStrength withUserInputs = PasswordStrengthMeter.Evaluate(password, new[] { "qorvantel" }).Strength;
 
             Assert.That(withUserInputs, Is.LessThan(withoutUserInputs));
         }
