@@ -1499,6 +1499,12 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PuttyKillFailed" xml:space="preserve">
     <value>Killing Putty Process failed!</value>
   </data>
+  <data name="PuttyPasswordPipeFailed" xml:space="preserve">
+    <value>Error serving the password pipe to PuTTY</value>
+  </data>
+  <data name="PuttyPasswordPipeTimedOut" xml:space="preserve">
+    <value>PuTTY did not read the password pipe in time; the password was not sent.</value>
+  </data>
   <data name="PanelHandle" xml:space="preserve">
     <value>Panel Handle: {0}</value>
   </data>

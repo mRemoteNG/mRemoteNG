@@ -1,9 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Threading;
+using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.Connection
@@ -77,7 +82,9 @@ namespace mRemoteNGTests.Connection
             var connectionInfo = new ConnectionInfo
             {
                 Name = "Test Connection",
-                Hostname = "192.168.1.1", // Valid hostname
+                // TEST-NET-1 (RFC 5737), reserved for documentation: the RDP connection the test
+                // opens can't reach a real device, such as the router of the network it runs on.
+                Hostname = "192.0.2.1",
                 Protocol = ProtocolType.RDP
             };
 
@@ -95,6 +102,47 @@ namespace mRemoteNGTests.Connection
             Assert.That(hostnameErrors, Is.Empty, 
                 "Should not have hostname error when hostname is provided");
         }
+
+        [Test]
+        [Apartment(ApartmentState.STA)]
+        public void ClosingAnAttemptThatNeverConnected_KeepsTheConnectedOneActive()
+        {
+            var connectionInfo = new ConnectionInfo { Name = "Test Connection", Hostname = "server.example" };
+            using var parent = new Panel();
+            ProtocolBase connected = NewProtocol(parent, connectionInfo);
+            ProtocolBase neverConnected = NewProtocol(parent, connectionInfo);
+            // As OpenConnection does once Connect succeeds.
+            connectionInfo.OpenConnections.Add(connected);
+            ActiveConnectionsList().Add(connectionInfo.ConstantID);
+
+            RaiseClosed(neverConnected);
+
+            Assert.That(_connectionInitiator.ActiveConnections, Does.Contain(connectionInfo.ConstantID));
+            Assert.That(connectionInfo.OpenConnections.Count, Is.EqualTo(1));
+
+            RaiseClosed(connected);
+
+            Assert.That(_connectionInitiator.ActiveConnections, Does.Not.Contain(connectionInfo.ConstantID));
+            Assert.That(connectionInfo.OpenConnections.Count, Is.Zero);
+        }
+
+        private static ProtocolBase NewProtocol(Control parent, ConnectionInfo connectionInfo)
+        {
+            ProtocolBase protocol = Substitute.For<ProtocolBase>();
+            protocol.InterfaceControl = new InterfaceControl(parent, protocol, connectionInfo) { OriginalInfo = connectionInfo };
+            return protocol;
+        }
+
+        private List<string> ActiveConnectionsList() =>
+            (List<string>)typeof(ConnectionInitiator)
+                .GetField("_activeConnections", BindingFlags.NonPublic | BindingFlags.Instance)!
+                .GetValue(_connectionInitiator);
+
+        // What Close does from its background thread
+        private void RaiseClosed(ProtocolBase protocol) =>
+            typeof(ConnectionInitiator)
+                .GetMethod("Prot_Event_Closed", BindingFlags.NonPublic | BindingFlags.Instance)!
+                .Invoke(_connectionInitiator, [protocol]);
 
         /// <summary>
         /// Polls the message collector for a message of the specified class

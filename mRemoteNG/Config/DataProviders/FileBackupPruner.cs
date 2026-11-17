@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using mRemoteNG.Config.Connections;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.DataProviders
@@ -17,7 +18,10 @@ namespace mRemoteNG.Config.DataProviders
                 return;
 
             string searchPattern = string.Format(Properties.OptionsBackupPage.Default.BackupFileNameFormat, fileName, "*");
-            string[] files = Directory.GetFiles(directoryName, searchPattern);
+            // A custom format such as {0}.{1}.bak also matches the copy kept before a format upgrade.
+            string[] files = Directory.GetFiles(directoryName, searchPattern)
+                                      .Where(f => !ConnectionsFileFormatCopy.IsCopyOf(filePath, f))
+                                      .ToArray();
 
             if (files.Length <= maxBackupsToKeep)
                 return;

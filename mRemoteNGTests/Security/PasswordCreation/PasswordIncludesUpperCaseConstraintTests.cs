@@ -8,38 +8,38 @@ namespace mRemoteNGTests.Security.PasswordCreation
 {
     public class PasswordIncludesUpperCaseConstraintTests
     {
-        private PasswordIncludesUpperCaseConstraint _lowerCaseConstraint;
+        private PasswordIncludesUpperCaseConstraint _upperCaseConstraint;
 
         [Test]
-        public void PasswordThatExceedsMinimumLowerCasePassesValidation()
+        public void PasswordThatExceedsMinimumUpperCasePassesValidation()
         {
             var password = "HELLO".ConvertToSecureString();
-            _lowerCaseConstraint = new PasswordIncludesUpperCaseConstraint();
-            Assert.That(_lowerCaseConstraint.Validate(password), Is.True);
+            _upperCaseConstraint = new PasswordIncludesUpperCaseConstraint();
+            Assert.That(_upperCaseConstraint.Validate(password), Is.True);
         }
 
         [Test]
-        public void PasswordThatMeetsMinimumLowerCasePassesValidation()
+        public void PasswordThatMeetsMinimumUpperCasePassesValidation()
         {
             var password = "HELLO".ConvertToSecureString();
-            _lowerCaseConstraint = new PasswordIncludesUpperCaseConstraint(5);
-            Assert.That(_lowerCaseConstraint.Validate(password), Is.True);
+            _upperCaseConstraint = new PasswordIncludesUpperCaseConstraint(5);
+            Assert.That(_upperCaseConstraint.Validate(password), Is.True);
         }
 
         [Test]
-        public void PasswordWithFewerThanMinimumLowerCaseFailsValidation()
+        public void PasswordWithFewerThanMinimumUpperCaseFailsValidation()
         {
             var password = "Hello".ConvertToSecureString();
-            _lowerCaseConstraint = new PasswordIncludesUpperCaseConstraint(2);
-            Assert.That(_lowerCaseConstraint.Validate(password), Is.False);
+            _upperCaseConstraint = new PasswordIncludesUpperCaseConstraint(2);
+            Assert.That(_upperCaseConstraint.Validate(password), Is.False);
         }
 
         [Test]
         public void PasswordWithoutUpperCaseFailsValidation()
         {
             var password = "hello".ConvertToSecureString();
-            _lowerCaseConstraint = new PasswordIncludesUpperCaseConstraint();
-            Assert.That(_lowerCaseConstraint.Validate(password), Is.False);
+            _upperCaseConstraint = new PasswordIncludesUpperCaseConstraint();
+            Assert.That(_upperCaseConstraint.Validate(password), Is.False);
         }
 
         [Test]

@@ -5692,6 +5692,24 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error serving the password pipe to PuTTY.
+        /// </summary>
+        internal static string PuttyPasswordPipeFailed {
+            get {
+                return ResourceManager.GetString("PuttyPasswordPipeFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PuTTY did not read the password pipe in time; the password was not sent..
+        /// </summary>
+        internal static string PuttyPasswordPipeTimedOut {
+            get {
+                return ResourceManager.GetString("PuttyPasswordPipeTimedOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Putty Resize Failed!.
         /// </summary>
         internal static string PuttyResizeFailed {

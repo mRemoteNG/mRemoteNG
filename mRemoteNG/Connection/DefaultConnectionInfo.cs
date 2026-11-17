@@ -4,6 +4,7 @@ using System.Linq;
 using System.Configuration;
 using System.Runtime.Versioning;
 using mRemoteNG.App;
+using mRemoteNG.Connection.Protocol.RDP;
 
 
 namespace mRemoteNG.Connection
@@ -36,6 +37,12 @@ namespace mRemoteNG.Connection
                         throw new SettingsPropertyNotFoundException($"No property with name '{expectedPropertyName}' found.");
 
                     object valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
+
+                    if (property.PropertyType == typeof(RDPDiskDrives))
+                    {
+                        property.SetValue(Instance, RdpDiskDrivesSetting.Parse(valueFromSource?.ToString()), null);
+                        continue;
+                    }
 
                     if (property.PropertyType.IsEnum)
                     {

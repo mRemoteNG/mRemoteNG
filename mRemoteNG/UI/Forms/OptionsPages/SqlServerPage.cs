@@ -111,9 +111,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtSQLType.SelectedIndex = ServerTypeIndex(Properties.OptionsDBsPage.Default.SQLServerType);
             txtSQLServer.Text = Properties.OptionsDBsPage.Default.SQLHost;
             txtSQLDatabaseName.Text = Properties.OptionsDBsPage.Default.SQLDatabaseName;
-            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-            txtSQLPassword.Text = cryptographyProvider.Decrypt(Properties.OptionsDBsPage.Default.SQLPass, Runtime.EncryptionKey);
-            txtSQLUsername.Text = Properties.OptionsDBsPage.Default.SQLUser;
             txtSQLPassword.Text = OptionPasswords.Unprotect(Properties.OptionsDBsPage.Default.SQLPass);
             chkSQLReadOnly.Checked = Properties.OptionsDBsPage.Default.SQLReadOnly;
 
@@ -146,9 +143,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsDBsPage.Default.SQLHost = txtSQLServer.Text;
             Properties.OptionsDBsPage.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
             Properties.OptionsDBsPage.Default.SQLUser = UserNameToSave;
-            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-            Properties.OptionsDBsPage.Default.SQLPass = cryptographyProvider.Encrypt(txtSQLPassword.Text, Runtime.EncryptionKey);
-            Properties.OptionsDBsPage.Default.SQLUser = txtSQLUsername.Text;
             Properties.OptionsDBsPage.Default.SQLPass = OptionPasswords.Protect(txtSQLPassword.Text);
             Properties.OptionsDBsPage.Default.SQLReadOnly = chkSQLReadOnly.Checked;
 
@@ -173,7 +167,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private bool SettingsChanged()
         {
             Properties.OptionsDBsPage settings = Properties.OptionsDBsPage.Default;
-            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
 
             return settings.UseSQLServer != chkUseSQLServer.Checked
                 || settings.SQLReadOnly != chkSQLReadOnly.Checked
@@ -181,7 +174,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 || (settings.SQLHost ?? string.Empty) != txtSQLServer.Text
                 || (settings.SQLDatabaseName ?? string.Empty) != txtSQLDatabaseName.Text
                 || (settings.SQLUser ?? string.Empty) != UserNameToSave
-                || cryptographyProvider.Decrypt(settings.SQLPass, Runtime.EncryptionKey) != txtSQLPassword.Text;
+                || OptionPasswords.Unprotect(settings.SQLPass) != txtSQLPassword.Text;
         }
 
         public override void LoadRegistrySettings()

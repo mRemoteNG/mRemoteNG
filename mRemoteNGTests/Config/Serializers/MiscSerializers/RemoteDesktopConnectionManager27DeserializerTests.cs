@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Xml;
 using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
+using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
 
@@ -89,6 +94,20 @@ public class RemoteDesktopConnectionManager27DeserializerTests
             .First();
 
         Assert.That(propSelector(connection), Is.EqualTo(expectedValue));
+    }
+
+    [Test]
+    public void ConnectionPasswordImported()
+    {
+        var connection = FirstConnectionOfGroup1(ImportWithPasswordsProtectedHere());
+        Assert.That(connection.Password, Is.EqualTo(ExpectedPassword));
+    }
+
+    [Test]
+    public void ConnectionGatewayPasswordImported()
+    {
+        var connection = FirstConnectionOfGroup1(ImportWithPasswordsProtectedHere());
+        Assert.That(connection.RDGatewayPassword, Is.EqualTo(ExpectedGatewayPassword));
     }
 
     [TestCaseSource(nameof(NullPropertyValues))]
@@ -247,4 +266,25 @@ public class RemoteDesktopConnectionManager27DeserializerTests
                 nameof(ConnectionInfo.RedirectDiskDrives))
         };
     }
+
+    // The passwords in the file are protected with DPAPI for the Windows account that saved it, which
+    // no other account can read, so the tests put in the same passwords protected for their own account.
+    private ConnectionTreeModel ImportWithPasswordsProtectedHere()
+    {
+        XmlDocument document = SecureXmlHelper.LoadXmlFromString(_connectionFileContents);
+        document.SelectSingleNode("//server/logonCredentials/password").InnerText = ProtectForThisAccount(ExpectedPassword);
+        document.SelectSingleNode("//server/gatewaySettings/password").InnerText = ProtectForThisAccount(ExpectedGatewayPassword);
+        return new RemoteDesktopConnectionManagerDeserializer().Deserialize(document.OuterXml);
+    }
+
+    private static string ProtectForThisAccount(string password) =>
+        Convert.ToBase64String(ProtectedData.Protect(Encoding.Unicode.GetBytes(password), null, DataProtectionScope.CurrentUser));
+
+    private static ConnectionInfo FirstConnectionOfGroup1(ConnectionTreeModel connectionTreeModel) =>
+        connectionTreeModel
+            .GetRecursiveChildList()
+            .OfType<ContainerInfo>()
+            .First(node => node.Name == "Group1")
+            .Children
+            .First();
 }

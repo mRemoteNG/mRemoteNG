@@ -16,6 +16,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 
@@ -40,6 +41,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
         protected readonly FrmMain _frmMain = FrmMain.Default;
         protected bool loginComplete;
         private bool _alertOnIdleDisconnect;
+        // Read from 1Password by ReadExternalCredentialsAsync, and used once by SetCredentials and SetRdGateway
+        private ExternalConnectors.OP.OnePasswordRead _onePasswordRead;
+        private ExternalConnectors.OP.OnePasswordRead _onePasswordGatewayRead;
         protected uint DesktopScaleFactor =>
             Properties.OptionsAdvancedPage.Default.RdpSendDesktopScaleFactor
                 ? (uint)(_displayProperties.ResolutionScalingFactor.Width * 100)
@@ -134,6 +138,24 @@ namespace mRemoteNG.Connection.Protocol.RDP
         protected virtual AxHost CreateActiveXRdpClientControl()
         {
             return new AxMsRdpClient6NotSafeForScripting();
+        }
+
+        /// <summary>
+        /// Reads from 1Password the items that <see cref="SetCredentials"/> and <see cref="SetRdGateway"/> will ask
+        /// for, under the same conditions, so that the UI thread is not blocked while op waits (#3628).
+        /// </summary>
+        public override async Task ReadExternalCredentialsAsync(ConnectionInfo info)
+        {
+            if (Force.HasFlag(ConnectionInfo.Force.NoCredentials)) return;
+
+            if (info.ExternalCredentialProvider == ExternalCredentialProvider.OnePassword)
+                _onePasswordRead = await ExternalConnectors.OP.OnePasswordCli.ReadPasswordAsync($"{info.UserViaAPI}");
+
+            // The gateway's provider does not depend on the connection's: a gateway can use 1Password on a
+            // connection that does not, and the other way around
+            if (info.RDGatewayUsageMethod != RDGatewayUsageMethod.Never
+                && GatewayCredentialProvider(info) == ExternalCredentialProvider.OnePassword)
+                _onePasswordGatewayRead = await ExternalConnectors.OP.OnePasswordCli.ReadPasswordAsync($"{info.RDGatewayUserViaAPI}");
         }
 
         public override bool Initialize()
@@ -431,6 +453,32 @@ namespace mRemoteNG.Connection.Protocol.RDP
             return string.IsNullOrWhiteSpace(username);
         }
 
+        /// <summary>
+        /// The external credential provider that the RD Gateway credentials are read from, or None. Only the
+        /// "different username and password" and "external credential provider" modes read them from one.
+        /// Delinea Secret Server, Passwordstate and 1Password read the item in the gateway's own "API User ID"
+        /// field, so the provider chosen for the gateway decides. OpenBao reads with the connection's secret
+        /// engine, mount and role, which the Config panel shows only when the connection itself uses OpenBao,
+        /// so the gateway uses it only then. In the "external credential provider" mode the typed gateway
+        /// fields are hidden, so a gateway left without a provider of its own uses the connection's.
+        /// </summary>
+        internal static ExternalCredentialProvider GatewayCredentialProvider(ConnectionInfo info)
+        {
+            RDGatewayUseConnectionCredentials mode = info.RDGatewayUseConnectionCredentials;
+            if (mode is not (RDGatewayUseConnectionCredentials.No or RDGatewayUseConnectionCredentials.ExternalCredentialProvider))
+                return ExternalCredentialProvider.None;
+
+            return info.RDGatewayExternalCredentialProvider switch
+            {
+                ExternalCredentialProvider.DelineaSecretServer or
+                ExternalCredentialProvider.ClickstudiosPasswordState or
+                ExternalCredentialProvider.OnePassword => info.RDGatewayExternalCredentialProvider,
+                ExternalCredentialProvider.VaultOpenbao when info.ExternalCredentialProvider == ExternalCredentialProvider.VaultOpenbao => ExternalCredentialProvider.VaultOpenbao,
+                ExternalCredentialProvider.None when mode == RDGatewayUseConnectionCredentials.ExternalCredentialProvider => info.ExternalCredentialProvider,
+                _ => ExternalCredentialProvider.None
+            };
+        }
+
         private void SetRdGateway()
         {
             try
@@ -476,8 +524,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
                             string gwd = connectionInfo.RDGatewayDomain;
                             string pkey = "";
 
+                        ExternalCredentialProvider gatewayProvider = GatewayCredentialProvider(InterfaceControl.Info);
+
                         // access secret server api if necessary
-                        if (InterfaceControl.Info.RDGatewayExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
+                        if (gatewayProvider == ExternalCredentialProvider.DelineaSecretServer)
                         {
                             try
                             {
@@ -489,7 +539,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                                 Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
                             }
                         }
-                        else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.ClickstudiosPasswordState)
+                        else if (gatewayProvider == ExternalCredentialProvider.ClickstudiosPasswordState)
                         {
                             try
                             {
@@ -501,20 +551,27 @@ namespace mRemoteNG.Connection.Protocol.RDP
                                 Event_ErrorOccured(this, "Passwordstate Interface Error: " + ex.Message, 0);
                             }
                         }
-                        else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.OnePassword)
+                        else if (gatewayProvider == ExternalCredentialProvider.OnePassword)
                         {
                             try
                             {
                                 string RDGUserViaAPI = InterfaceControl.Info.RDGatewayUserViaAPI;
-                                ExternalConnectors.OP.OnePasswordCli.ReadPassword($"{RDGUserViaAPI}", out gwu, out gwp, out gwd, out pkey);
+                                ExternalConnectors.OP.OnePasswordRead readAhead = _onePasswordGatewayRead;
+                                _onePasswordGatewayRead = null;
+                                ExternalConnectors.OP.OnePasswordCli.ReadPassword(readAhead, $"{RDGUserViaAPI}", ref gwu, ref gwp, ref gwd, ref pkey);
                             }
                             catch (ExternalConnectors.OP.OnePasswordCliException ex)
                             {
                                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.ECPOnePasswordCommandLine + ": " + ex.Arguments);
                                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ECPOnePasswordReadFailed + Environment.NewLine + ex.Message);
                             }
+                            catch (Exception ex)
+                            {
+                                // Such as UriFormatException for an empty or malformed reference, or op not being installed
+                                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ECPOnePasswordReadFailed + Environment.NewLine + ex.Message);
+                            }
                         }
-                        else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.VaultOpenbao)
+                        else if (gatewayProvider == ExternalCredentialProvider.VaultOpenbao)
                         {
                             try {
                                 if (connectionInfo.VaultOpenbaoSecretEngine == VaultOpenbaoSecretEngine.Kv)
@@ -628,7 +685,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 {
                     try
                     {
-                        ExternalConnectors.OP.OnePasswordCli.ReadPassword($"{userViaApi}", out userName, out password, out domain, out pkey);
+                        ExternalConnectors.OP.OnePasswordRead readAhead = _onePasswordRead;
+                        _onePasswordRead = null;
+                        ExternalConnectors.OP.OnePasswordCli.ReadPassword(readAhead, $"{userViaApi}", ref userName, ref password, ref domain, ref pkey);
                     }
                     catch (ExternalConnectors.OP.OnePasswordCliException ex)
                     {

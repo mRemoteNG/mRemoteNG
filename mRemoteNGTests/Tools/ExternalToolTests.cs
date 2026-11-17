@@ -30,11 +30,8 @@ namespace mRemoteNGTests.Tools
 
             // Act
             var process = new Process();
-            var setProcessPropertiesMethod = typeof(ExternalTool).GetMethod(
-                "SetProcessProperties",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
-            setProcessPropertiesMethod?.Invoke(externalTool, new object[] { process, connectionInfo });
+            var setProcessPropertiesMethod = SetProcessPropertiesMethod();
+            setProcessPropertiesMethod.Invoke(externalTool, new object[] { process, connectionInfo });
 
             // Assert
             // Not elevated, the arguments go one by one into ArgumentList. The equals sign is not
@@ -62,11 +59,8 @@ namespace mRemoteNGTests.Tools
 
             // Act
             var process = new Process();
-            var setProcessPropertiesMethod = typeof(ExternalTool).GetMethod(
-                "SetProcessProperties",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
-            setProcessPropertiesMethod?.Invoke(externalTool, new object[] { process, connectionInfo });
+            var setProcessPropertiesMethod = SetProcessPropertiesMethod();
+            setProcessPropertiesMethod.Invoke(externalTool, new object[] { process, connectionInfo });
 
             // Assert
             // The password should be present in the arguments (possibly escaped)
@@ -96,11 +90,8 @@ namespace mRemoteNGTests.Tools
 
             // Act
             var process = new Process();
-            var setProcessPropertiesMethod = typeof(ExternalTool).GetMethod(
-                "SetProcessProperties",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
-            setProcessPropertiesMethod?.Invoke(externalTool, new object[] { process, connectionInfo });
+            var setProcessPropertiesMethod = SetProcessPropertiesMethod();
+            setProcessPropertiesMethod.Invoke(externalTool, new object[] { process, connectionInfo });
 
             // Assert
             var arguments = string.Join(" ", process.StartInfo.ArgumentList);
@@ -130,11 +121,8 @@ namespace mRemoteNGTests.Tools
 
             // Act
             var process = new Process();
-            var setProcessPropertiesMethod = typeof(ExternalTool).GetMethod(
-                "SetProcessProperties",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
-            setProcessPropertiesMethod?.Invoke(externalTool, new object[] { process, connectionInfo });
+            var setProcessPropertiesMethod = SetProcessPropertiesMethod();
+            setProcessPropertiesMethod.Invoke(externalTool, new object[] { process, connectionInfo });
 
             // Assert - When not elevated, arguments should be in ArgumentList
             if (!externalTool.RunElevated)
@@ -159,12 +147,9 @@ namespace mRemoteNGTests.Tools
 
             // Act & Assert
             var process = new Process();
-            var setProcessPropertiesMethod = typeof(ExternalTool).GetMethod(
-                "SetProcessProperties",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            var setProcessPropertiesMethod = SetProcessPropertiesMethod();
             
-            Assert.DoesNotThrow(() => setProcessPropertiesMethod?.Invoke(externalTool, new object[] { process, connectionInfo }));
+            Assert.DoesNotThrow(() => setProcessPropertiesMethod.Invoke(externalTool, new object[] { process, connectionInfo }));
         }
 
         [Test]
@@ -181,13 +166,10 @@ namespace mRemoteNGTests.Tools
 
             // Act & Assert
             var process = new Process();
-            var setProcessPropertiesMethod = typeof(ExternalTool).GetMethod(
-                "SetProcessProperties",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            var setProcessPropertiesMethod = SetProcessPropertiesMethod();
 
             var ex = Assert.Throws<TargetInvocationException>(() => 
-                setProcessPropertiesMethod?.Invoke(externalTool, new object[] { process, connectionInfo }));
+                setProcessPropertiesMethod.Invoke(externalTool, new object[] { process, connectionInfo }));
             Assert.That(ex.InnerException, Is.TypeOf<ArgumentException>());
         }
 
@@ -206,11 +188,8 @@ namespace mRemoteNGTests.Tools
 
             // Act
             var process = new Process();
-            var setProcessPropertiesMethod = typeof(ExternalTool).GetMethod(
-                "SetProcessProperties",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
-            setProcessPropertiesMethod?.Invoke(externalTool, new object[] { process, connectionInfo });
+            var setProcessPropertiesMethod = SetProcessPropertiesMethod();
+            setProcessPropertiesMethod.Invoke(externalTool, new object[] { process, connectionInfo });
 
             // Assert
             Assert.That(process.StartInfo.UseShellExecute, Is.True);
@@ -232,11 +211,8 @@ namespace mRemoteNGTests.Tools
 
             // Act
             var process = new Process();
-            var setProcessPropertiesMethod = typeof(ExternalTool).GetMethod(
-                "SetProcessProperties",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
-            setProcessPropertiesMethod?.Invoke(externalTool, new object[] { process, connectionInfo });
+            var setProcessPropertiesMethod = SetProcessPropertiesMethod();
+            setProcessPropertiesMethod.Invoke(externalTool, new object[] { process, connectionInfo });
 
             // Assert
             Assert.That(process.StartInfo.UseShellExecute, Is.False);
@@ -252,6 +228,14 @@ namespace mRemoteNGTests.Tools
             externalTool.Category = "PowerShell";
 
             Assert.That(changedProperty, Is.EqualTo(nameof(ExternalTool.Category)));
+        }
+
+        // Fails instead of skipping the call when SetProcessProperties is renamed or removed.
+        private static MethodInfo SetProcessPropertiesMethod()
+        {
+            MethodInfo method = typeof(ExternalTool).GetMethod("SetProcessProperties", BindingFlags.NonPublic | BindingFlags.Instance);
+            Assert.That(method, Is.Not.Null, "ExternalTool.SetProcessProperties was not found");
+            return method;
         }
     }
 }

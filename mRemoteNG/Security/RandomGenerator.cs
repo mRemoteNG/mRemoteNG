@@ -17,7 +17,7 @@ namespace mRemoteNG.Security
                 @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+|[]{};:',./<>?";
             for (int x = 0; x < length; x++)
             {
-                int randomIndex = randomGen.Next(availableChars.Length - 1);
+                int randomIndex = randomGen.Next(availableChars.Length);
                 stringBuilder.Append(availableChars[randomIndex]);
             }
 

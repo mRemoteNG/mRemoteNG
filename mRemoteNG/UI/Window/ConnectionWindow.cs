@@ -376,8 +376,7 @@ namespace mRemoteNG.UI.Window
             {
                 foreach (IDockContent dockContent in connDock.Documents.ToArray())
                 {
-                    ConnectionTab tabP = (ConnectionTab)dockContent;
-                    if (tabP.Tag == null) continue;
+                    if (dockContent is not ConnectionTab tabP || tabP.Tag == null) continue;
                     tabP.silentClose = true;
                     tabP.Close();
                 }
@@ -853,8 +852,8 @@ namespace mRemoteNG.UI.Window
 
             foreach (IDockContent dockContent in connDock.Documents.ToArray())
             {
-                ConnectionTab tab = (ConnectionTab)dockContent;
-                if (selectedTab != tab)
+                // Only connections are closed; the Options window and plugin windows stay open.
+                if (dockContent is ConnectionTab tab && selectedTab != tab)
                 {
                     tab.Close();
                 }
@@ -873,7 +872,7 @@ namespace mRemoteNG.UI.Window
                 List<ConnectionTab> connectionsToClose = new();
                 foreach (IDockContent dockContent in dockPane.Contents)
                 {
-                    ConnectionTab tab = (ConnectionTab)dockContent;
+                    if (dockContent is not ConnectionTab tab) continue;
                     if (pastTabToKeepAlive)
                         connectionsToClose.Add(tab);
 
