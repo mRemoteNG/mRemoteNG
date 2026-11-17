@@ -3,6 +3,11 @@
 ## Current mRemoteNG dev team
 [Dimitrij Gorodeckij](https://github.com/Kvarkas)
 
+## Contributors
+[Robert C Secord III](https://github.com/SmearODeer) - fixes, and the enterprise database, access model and security design (#3632)  
+[Razvan Cremenescu](https://github.com/cremenescu)  
+[Sassy Lily](https://github.com/sassy-lily)
+
 ## Past Contributors
 [David Sparer](http://github.com/sparerd)  
 [Sean Kaim](http://github.com/kmscode)  
