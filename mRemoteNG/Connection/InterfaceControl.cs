@@ -69,6 +69,16 @@ namespace mRemoteNG.Connection
         {
             switch (m.Msg)
             {
+                case WM_NCCALCSIZE when HasFrameColor && m.WParam == IntPtr.Zero:
+                    base.WndProc(ref m);
+                    RECT clientRect = Marshal.PtrToStructure<RECT>(m.LParam);
+                    clientRect.left += FrameBorderWidth;
+                    clientRect.top += FrameBorderWidth;
+                    clientRect.right -= FrameBorderWidth;
+                    clientRect.bottom -= FrameBorderWidth;
+                    Marshal.StructureToPtr(clientRect, m.LParam, false);
+                    m.Result = IntPtr.Zero;
+                    return;
                 case WM_NCCALCSIZE when HasFrameColor && m.WParam != IntPtr.Zero:
                     // Reserve the frame width as non-client area so child controls cannot paint over it.
                     base.WndProc(ref m);
