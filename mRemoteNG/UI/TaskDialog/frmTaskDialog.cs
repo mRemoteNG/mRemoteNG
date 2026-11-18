@@ -83,6 +83,12 @@ namespace mRemoteNG.UI.TaskDialog
 
         public int DefaultButtonIndex { get; set; }
 
+        /// <summary>
+        /// For <see cref="ETaskDialogButtons.YesNo"/>: make No the button that Enter presses and
+        /// that has focus, for questions where Yes loses work (e.g. logging off a session).
+        /// </summary>
+        public bool DefaultToNo { get; set; }
+
         public string RadioButtons { get; set; } = "";
 
         public int RadioButtonIndex
@@ -299,9 +305,9 @@ namespace mRemoteNG.UI.TaskDialog
                     bt2.DialogResult = DialogResult.Yes;
                     bt3.Text = Language.No;
                     bt3.DialogResult = DialogResult.No;
-                    AcceptButton = bt2;
+                    AcceptButton = DefaultToNo ? bt3 : bt2;
                     CancelButton = bt3;
-                    _focusControl = bt2;
+                    _focusControl = DefaultToNo ? bt3 : bt2;
                     break;
                 case ETaskDialogButtons.YesNoCancel:
                     bt1.Text = Language.Yes;

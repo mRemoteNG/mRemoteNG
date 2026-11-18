@@ -83,6 +83,42 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
         }
 
         [Test]
+        public void ConfirmSessionLogOffSetting_DefaultsToEnabled()
+        {
+            // Logging off throws away unsaved work in the session, so a fresh installation asks first.
+            OptionsAdvancedPage defaults = new();
+            Assert.That(defaults.ConfirmSessionLogOff, Is.True);
+        }
+
+        [Test]
+        public void ConfirmSessionLogOffCheckBox_ShowsTheSettingAndSavesIt()
+        {
+            bool originalValue = OptionsAdvancedPage.Default.ConfirmSessionLogOff;
+            try
+            {
+                // "Don't ask again" in the confirmation turns the setting off ...
+                OptionsAdvancedPage.Default.ConfirmSessionLogOff = false;
+                ListViewTester listViewTester = new("lstOptionPages", _optionsForm);
+                listViewTester.Select("Advanced");
+                _optionsForm.ReloadAllSettings();
+
+                CheckBox confirmCheckBox = _optionsForm.FindControl<CheckBox>("chkConfirmSessionLogOff");
+                Assert.That(confirmCheckBox.Text, Is.EqualTo("Ask before logging off a session"));
+                Assert.That(confirmCheckBox.Checked, Is.False);
+
+                // ... and ticking the box again brings the confirmation back.
+                confirmCheckBox.Checked = true;
+                _optionsForm.SaveAllOptions();
+
+                Assert.That(OptionsAdvancedPage.Default.ConfirmSessionLogOff, Is.True);
+            }
+            finally
+            {
+                OptionsAdvancedPage.Default.ConfirmSessionLogOff = originalValue;
+            }
+        }
+
+        [Test]
         public void SavingAdvancedPagePersistsPuttySessionsVisibilitySetting()
         {
             bool originalValue = OptionsAdvancedPage.Default.ShowPuttySessionsInTree;

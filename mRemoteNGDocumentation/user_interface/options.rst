@@ -248,3 +248,6 @@ Advanced
    * - Maximum PuTTY and integrated external tools wait time
      - 2 seconds
      -
+   * - Ask before logging off a session
+     - On
+     - Asks before **Log off** ends a session (see :ref:`log-off-a-session`). Ticking "Do not show this message again" when answering Yes turns this off; tick it here to be asked again.

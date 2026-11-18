@@ -23,7 +23,7 @@ using System.Windows.Forms;
 namespace mRemoteNG.Connection.Protocol.RDP
 {
     [SupportedOSPlatform("windows")]
-    public class RdpProtocol : ProtocolBase, ISupportsViewOnly
+    public class RdpProtocol : ProtocolBase, ISupportsViewOnly, ISupportsLogOff
     {
         /* RDP v8 requires Windows 7 with:
          * https://support.microsoft.com/en-us/kb/2592687
@@ -336,6 +336,51 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.RdpFocusFailed, ex);
             }
         }
+
+        #region Log off
+
+        /// <summary>
+        /// Log off needs a live session to type into; the RDP control reports 1 while connected.
+        /// </summary>
+        public bool CanLogOff => _rdpClient != null && Control is AxHost && _rdpClient.Connected == 1;
+
+        /// <summary>
+        /// Logs the Windows user off by typing Win+R, "logoff", Enter into the session
+        /// (see <see cref="RdpLogOffKeys"/> for why typing, and its limits).
+        /// </summary>
+        public async Task LogOffAsync()
+        {
+            if (!CanLogOff)
+                return;
+
+            IMsRdpClientNonScriptable keyboard = (IMsRdpClientNonScriptable)((AxHost)Control).GetOcx();
+
+            // The keys go to the session the RDP control has focus for; the confirmation
+            // dialog took focus away, so give it back first.
+            Focus();
+            SendKeys(keyboard, RdpLogOffKeys.OpenRunBox);
+            await Task.Delay(RdpLogOffKeys.RunBoxOpenDelay);
+
+            // The tab may have been closed or the session dropped while we waited.
+            if (!CanLogOff)
+                return;
+
+            SendKeys(keyboard, RdpLogOffKeys.TypeLogOffAndEnter);
+        }
+
+        internal static void SendKeys(IMsRdpClientNonScriptable keyboard, System.Collections.Generic.IEnumerable<RdpLogOffKeys.Key> keys)
+        {
+            // The generated interop declares SendKeys' two arrays as single "ref" values, so only the
+            // first element of an array would reach the control. Sending one key per call avoids that.
+            foreach (RdpLogOffKeys.Key key in keys)
+            {
+                bool keyUp = key.KeyUp;
+                int keyData = key.KeyData;
+                keyboard.SendKeys(1, ref keyUp, ref keyData);
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// Determines if this version of the RDP client

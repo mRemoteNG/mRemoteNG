@@ -154,5 +154,17 @@ namespace mRemoteNG.Properties {
                 this["UseUserProfiles"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ConfirmSessionLogOff {
+            get {
+                return ((bool)(this["ConfirmSessionLogOff"]));
+            }
+            set {
+                this["ConfirmSessionLogOff"] = value;
+            }
+        }
     }
 }

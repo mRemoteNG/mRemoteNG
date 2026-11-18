@@ -57,6 +57,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkUseCustomPuttyPath.Text = Language.CheckboxPuttyPath;
             chkShowPuttySessionsInTree.Text = Language.ShowPuttySessionsInTree;
             chkUseUserProfiles.Text = Language.UseUserProfiles;
+            chkConfirmSessionLogOff.Text = Language.AskBeforeLogOff;
             lblUVNCSCPort.Text = Language.UltraVNCSCListeningPort;
         }
 
@@ -77,6 +78,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             numUVNCSCPort.Value = Properties.OptionsAdvancedPage.Default.UVNCSCPort;
             chkUseUserProfiles.Checked = Properties.OptionsAdvancedPage.Default.UseUserProfiles;
+            // Unticked by "Don't ask again" in the log off confirmation; ticking it again
+            // brings the confirmation (and its "Don't ask again" choice) back.
+            chkConfirmSessionLogOff.Checked = Properties.OptionsAdvancedPage.Default.ConfirmSessionLogOff;
         }
 
         public override void SaveSettings()
@@ -121,6 +125,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime = (int)numPuttyWaitTime.Value;
             Properties.OptionsAdvancedPage.Default.UVNCSCPort = (int)numUVNCSCPort.Value;
             Properties.OptionsAdvancedPage.Default.UseUserProfiles = chkUseUserProfiles.Checked;
+            Properties.OptionsAdvancedPage.Default.ConfirmSessionLogOff = chkConfirmSessionLogOff.Checked;
         }
 
         #endregion

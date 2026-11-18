@@ -8393,5 +8393,59 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Log off.
+        /// </summary>
+        internal static string LogOff {
+            get {
+                return ResourceManager.GetString("LogOff", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Log off this session.
+        /// </summary>
+        internal static string LogOffTabIconToolTip {
+            get {
+                return ResourceManager.GetString("LogOffTabIconToolTip", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Log off {0}?.
+        /// </summary>
+        internal static string ConfirmLogOffInstruction {
+            get {
+                return ResourceManager.GetString("ConfirmLogOffInstruction", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Unsaved work in that session will be lost..
+        /// </summary>
+        internal static string ConfirmLogOffContent {
+            get {
+                return ResourceManager.GetString("ConfirmLogOffContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Ask before logging off a session.
+        /// </summary>
+        internal static string AskBeforeLogOff {
+            get {
+                return ResourceManager.GetString("AskBeforeLogOff", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Could not log off {0}.
+        /// </summary>
+        internal static string LogOffFailed {
+            get {
+                return ResourceManager.GetString("LogOffFailed", resourceCulture);
+            }
+        }
     }
 }

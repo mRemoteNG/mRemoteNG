@@ -3049,4 +3049,22 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="MultiAddressHostnameDidNotMatchIp" xml:space="preserve">
     <value>Multi-address plugin: the saved hostname for '{0}' did not match the saved IP address. Using the saved IP address.</value>
   </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Log off</value>
+  </data>
+  <data name="LogOffTabIconToolTip" xml:space="preserve">
+    <value>Log off this session</value>
+  </data>
+  <data name="ConfirmLogOffInstruction" xml:space="preserve">
+    <value>Log off {0}?</value>
+  </data>
+  <data name="ConfirmLogOffContent" xml:space="preserve">
+    <value>Unsaved work in that session will be lost.</value>
+  </data>
+  <data name="AskBeforeLogOff" xml:space="preserve">
+    <value>Ask before logging off a session</value>
+  </data>
+  <data name="LogOffFailed" xml:space="preserve">
+    <value>Could not log off {0}</value>
+  </data>
 </root>

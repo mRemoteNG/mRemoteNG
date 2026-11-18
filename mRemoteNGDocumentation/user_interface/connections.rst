@@ -51,6 +51,40 @@ Works like a sort or a refresh to get connection in ascending order.
 (Descending order is note supported yet) When you have been moving around in the tree of connections,
 just click this item to refresh the list and get everything in ascending ordering.
 
+.. _log-off-a-session:
+
+Log off a session
+=================
+
+Closing a tab only disconnects: an RDP session keeps running on the server, with its programs and
+open files, until someone logs it off. **Log off** ends the session itself.
+
+- Click the **icon at the left of the connection's tab**. When the connection can log off, the icon
+  is framed and its tooltip says "Log off this session" as the mouse moves over it.
+- Or right-click the tab and choose **Log off**.
+
+mRemoteNG asks first, with **No** as the default, because unsaved work in the session is lost.
+"Do not show this message again" stops the question; turn it back on in
+**Options > Advanced > Ask before logging off a session**.
+
+How it works, and its limits:
+
+- **RDP (Windows):** mRemoteNG types the keys a user would: :kbd:`Win+R`, ``logoff`` and
+  :kbd:`Enter`. So the session has to accept keystrokes:
+
+  - It does **not** work while the session is locked: unlock it first.
+  - It does not work where Group Policy removes the Run box (:kbd:`Win+R`), or on Server Core,
+    which has no Run box.
+  - The keys are sent by position, so the session's keyboard layout has to put ``l o g f`` where
+    QWERTY, QWERTZ and AZERTY keyboards do (not, for example, Dvorak).
+  - RDP to Linux (e.g. xrdp) is not supported.
+
+- **SSH, Telnet and rlogin:** mRemoteNG types ``exit`` and :kbd:`Enter` into the shell. Inside a
+  nested shell (``sudo -s``, ``su``) that only leaves the nested shell, and inside a program such
+  as an editor it is typed as text, so return to the login shell first.
+
+- Raw, serial, VNC and other connections don't offer Log off.
+
 Configuration
 =============
 
