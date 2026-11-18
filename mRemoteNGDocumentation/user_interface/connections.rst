@@ -69,14 +69,16 @@ mRemoteNG asks first, with **No** as the default, because unsaved work in the se
 
 How it works, and its limits:
 
-- **RDP (Windows):** mRemoteNG types the keys a user would: :kbd:`Win+R`, ``logoff`` and
-  :kbd:`Enter`. So the session has to accept keystrokes:
+- **RDP (Windows):** mRemoteNG types the keys a user would: :kbd:`Win+R`, ``shutdown /l /f`` and
+  :kbd:`Enter`. This is a **forced** log off: open programs are closed without asking, so it can't
+  hang on a "save changes?" question nobody sees. Unsaved work in the session is lost.
+  Because it types, the session has to accept keystrokes:
 
   - It does **not** work while the session is locked: unlock it first.
   - It does not work where Group Policy removes the Run box (:kbd:`Win+R`), or on Server Core,
     which has no Run box.
-  - The keys are sent by position, so the session's keyboard layout has to put ``l o g f`` where
-    QWERTY, QWERTZ and AZERTY keyboards do (not, for example, Dvorak).
+  - The keys are looked up in your current keyboard layout, which RDP also uses for the session
+    by default. If the session uses a different layout, the command may be typed wrongly.
   - RDP to Linux (e.g. xrdp) is not supported.
 
 - **SSH, Telnet and rlogin:** mRemoteNG types ``exit`` and :kbd:`Enter` into the shell. Inside a

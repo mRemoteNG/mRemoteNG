@@ -11,6 +11,7 @@ using mRemoteNG.UI.Tabs;
 using mRemoteNG.Security;
 using MSTSCLib;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -345,8 +346,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
         public bool CanLogOff => _rdpClient != null && Control is AxHost && _rdpClient.Connected == 1;
 
         /// <summary>
-        /// Logs the Windows user off by typing Win+R, "logoff", Enter into the session
-        /// (see <see cref="RdpLogOffKeys"/> for why typing, and its limits).
+        /// Logs the Windows user off by typing Win+R, "shutdown /l /f", Enter into the session
+        /// (see <see cref="RdpLogOffKeys"/> for why typing, why forced, and the limits).
         /// </summary>
         public async Task LogOffAsync()
         {
@@ -355,20 +356,27 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
             IMsRdpClientNonScriptable keyboard = (IMsRdpClientNonScriptable)((AxHost)Control).GetOcx();
 
+            // The session types with the client's keyboard layout, so the keys are looked up in it.
+            // Build everything before sending anything: a layout that can't type the command must
+            // not leave a Run box open in the session.
+            IntPtr keyboardLayout = InputLanguage.CurrentInputLanguage.Handle;
+            IReadOnlyList<RdpLogOffKeys.Key> openRunBox = RdpLogOffKeys.OpenRunBox(keyboardLayout);
+            IReadOnlyList<RdpLogOffKeys.Key> typeCommand = RdpLogOffKeys.TypeLogOffCommand(keyboardLayout);
+
             // The keys go to the session the RDP control has focus for; the confirmation
             // dialog took focus away, so give it back first.
             Focus();
-            SendKeys(keyboard, RdpLogOffKeys.OpenRunBox);
+            SendKeys(keyboard, openRunBox);
             await Task.Delay(RdpLogOffKeys.RunBoxOpenDelay);
 
             // The tab may have been closed or the session dropped while we waited.
             if (!CanLogOff)
                 return;
 
-            SendKeys(keyboard, RdpLogOffKeys.TypeLogOffAndEnter);
+            SendKeys(keyboard, typeCommand);
         }
 
-        internal static void SendKeys(IMsRdpClientNonScriptable keyboard, System.Collections.Generic.IEnumerable<RdpLogOffKeys.Key> keys)
+        internal static void SendKeys(IMsRdpClientNonScriptable keyboard, IEnumerable<RdpLogOffKeys.Key> keys)
         {
             // The generated interop declares SendKeys' two arrays as single "ref" values, so only the
             // first element of an array would reach the control. Sending one key per call avoids that.
