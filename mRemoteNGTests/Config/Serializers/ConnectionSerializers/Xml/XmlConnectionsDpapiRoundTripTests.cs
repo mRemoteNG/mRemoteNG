@@ -149,4 +149,20 @@ public class XmlConnectionsDpapiRoundTripTests
 
         Assert.Throws<EncryptionException>(() => deserializer.Deserialize(corruptedXml));
     }
+
+    // The loader warns about the default key only for a file that is not protected with DPAPI.
+    [Test]
+    [Apartment(ApartmentState.STA)]
+    public void DeserializerTellsWhetherTheFileIsProtectedWithDpapi()
+    {
+        var dpapiDeserializer = new XmlConnectionsDeserializer(() => new Optional<System.Security.SecureString>());
+        dpapiDeserializer.Deserialize(SaveWithDpapi());
+
+        string passwordProtectedXml = new XmlConnectionSerializerFactory().Build(new AeadCryptographyProvider(), _model).Serialize(_root);
+        var passwordDeserializer = new XmlConnectionsDeserializer(() => new Optional<System.Security.SecureString>());
+        passwordDeserializer.Deserialize(passwordProtectedXml);
+
+        Assert.That(dpapiDeserializer.IsDpapiProtected, Is.True);
+        Assert.That(passwordDeserializer.IsDpapiProtected, Is.False);
+    }
 }

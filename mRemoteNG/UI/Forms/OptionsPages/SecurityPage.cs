@@ -197,17 +197,21 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             if (string.IsNullOrEmpty(txtPasswdGenerator.Text)) return;
 
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-
             try
             {
-                // Encrypt and set the clipboard content
-                string encryptedText = cryptographyProvider.Encrypt(txtPasswdGenerator.Text, Runtime.EncryptionKey);
+                // Only this computer can decrypt the value; see OptionPasswords.ProtectForThisComputer.
+                string encryptedText = OptionPasswords.ProtectForThisComputer(txtPasswdGenerator.Text);
                 System.Windows.Clipboard.SetText(encryptedText);
             }
             catch (System.Runtime.InteropServices.COMException)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Failed to set clipboard content. Please try again.");
+                return;
+            }
+            catch (System.Security.Cryptography.CryptographicException ex)
+            {
+                // DPAPI is not available in every logon session.
+                Runtime.MessageCollector.AddExceptionMessage("Failed to encrypt the password for this computer.", ex, Messages.MessageClass.ErrorMsg, false);
                 return;
             }
 

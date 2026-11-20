@@ -71,7 +71,8 @@ Specifies the password for accessing the SQL Server.
 - **Value Type:** ``REG_SZ``
 
 
-.. warning::
+.. note::
+  The value is a password encrypted for this computer, see :ref:`Encrypted Passwords <registry_encrypted_passwords>`.
   Plain-text passwords are not supported.
 
 

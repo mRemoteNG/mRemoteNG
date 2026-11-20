@@ -2,7 +2,7 @@
 using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
-using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Security;
 using mRemoteNG.Tools.WindowsRegistry;
 
 namespace mRemoteNG.Config.Settings.Registry
@@ -140,20 +140,11 @@ namespace mRemoteNG.Config.Settings.Registry
         {
             if (DefaultPassword.IsSet && DefaultPasswordEnabled)
             {
-                try
-                {
-                    LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-                    string decryptedPassword;
-                    string defaultPassword = DefaultPassword.Value;
-
-                    decryptedPassword = cryptographyProvider.Decrypt(defaultPassword, Runtime.EncryptionKey);
+                string defaultPassword = OptionPasswords.FromRegistry(DefaultPassword.Value, nameof(DefaultPassword), Runtime.MessageCollector);
+                if (defaultPassword != null)
                     Properties.OptionsCredentialsPage.Default.DefaultPassword = defaultPassword;
-                }
-                catch
-                {
-                    // Fire-and-forget: The DefaultPassword in the registry is not encrypted.
+                else
                     DefaultPassword.Clear();
-                }
             }
             else if (!DefaultPasswordEnabled)
             {
