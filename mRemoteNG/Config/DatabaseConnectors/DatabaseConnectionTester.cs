@@ -9,9 +9,9 @@ namespace mRemoteNG.Config.DatabaseConnectors
     /// A helper class for testing database connectivity.
     /// </summary>
     [SupportedOSPlatform("windows")]
-    public class DatabaseConnectionTester
+    public static class DatabaseConnectionTester
     {
-        public async Task<ConnectionTestResult> TestConnectivity(string type, string server, string database, string username, string password, bool trustServerCertificate = false)
+        public static async Task<ConnectionTestResult> TestConnectivity(string type, string server, string database, string username, string password, bool trustServerCertificate = false)
         {
             try
             {

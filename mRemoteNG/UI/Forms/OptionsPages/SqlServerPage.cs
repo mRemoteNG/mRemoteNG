@@ -19,7 +19,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
         #region Private Fields
         private OptRegistrySqlServerPage pageRegSettingsInstance;
-        private readonly DatabaseConnectionTester _databaseConnectionTester;
         private bool _useCurrentWindowsIdentity;
         private const string WindowsAuthentication = "Windows Authentication";
         private const string SqlServerAuthentication = "SQL Server Authentication";
@@ -32,7 +31,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             InitializeComponent();
             ApplyTheme();
             PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.SQLDatabase_16x);
-            _databaseConnectionTester = new DatabaseConnectionTester();
             pageRegSettingsInstance = new OptRegistrySqlServerPage(); // Initialize the field to avoid nullability issues
 
             // The simple view and the advanced tabs show the same values; keep them equal so
@@ -307,7 +305,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             // Replace the hardcoded connection string with the actual parameters
             string connectionString = $"Data Source={server};Initial Catalog={database};User ID={username};Password={password}";
-            ConnectionTestResult connectionTestResult = await _databaseConnectionTester.TestConnectivity(type, server, database, username, password, chkSQLTrustServerCertificate.Checked);
+            ConnectionTestResult connectionTestResult = await DatabaseConnectionTester.TestConnectivity(type, server, database, username, password, chkSQLTrustServerCertificate.Checked);
 
             btnTestConnection.Enabled = true;
 
