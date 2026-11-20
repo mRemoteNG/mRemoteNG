@@ -63,6 +63,9 @@ namespace mRemoteNG.Security.SymmetricEncryption
         /// <summary>A new random salt, for a connection list that has none yet.</summary>
         public static byte[] NewSalt() => RandomNumberGenerator.GetBytes(SaltSizeInBytes);
 
+        /// <summary>AES-GCM under a new random salt and the default iteration count.</summary>
+        public static DerivedKeyCryptographyProvider WithNewSalt() => new(NewSalt(), DefaultIterations);
+
         public byte[] Salt => (byte[])_salt.Clone();
 
         public int BlockSizeInBytes => _aeadBlockCipher.GetBlockSize();

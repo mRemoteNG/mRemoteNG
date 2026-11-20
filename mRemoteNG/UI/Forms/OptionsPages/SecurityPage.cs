@@ -166,8 +166,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             BlockCipherEngines engine = (BlockCipherEngines)comboBoxEncryptionEngine.SelectedItem;
             BlockCipherModes mode = (BlockCipherModes)comboBoxBlockCipher.SelectedItem;
-            ICryptographyProvider cryptographyProvider = new CryptoProviderFactory(engine, mode).Build();
-            cryptographyProvider.KeyDerivationIterations = (int)numberBoxKdfIterations.Value;
+            // Measured the way the connections file is saved: the key is derived once for the file,
+            // at the default iteration count rather than the per-value one set here.
+            ICryptographyProvider cryptographyProvider = new CryptoProviderFactory(engine, mode)
+                .BuildWithKeyDerivedOnce(DerivedKeyCryptographyProvider.NewSalt(), DerivedKeyCryptographyProvider.DefaultIterations);
 
             XmlConnectionSerializerFactory serializerFactory = new();
             Config.Serializers.ISerializer<Connection.ConnectionInfo, string> serializer = serializerFactory.Build(cryptographyProvider, connectionTree, useFullEncryption: chkEncryptCompleteFile.Checked);
@@ -180,7 +182,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             MessageBox.Show(this,
                 string.Format(Language.EncryptionTestResultMessage,
-                nodeCount, engine, mode, numberBoxKdfIterations.Value, timer.Elapsed.TotalSeconds),
+                nodeCount, engine, mode, cryptographyProvider.KeyDerivationIterations, timer.Elapsed.TotalSeconds),
                 Language.EncryptionTest,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);

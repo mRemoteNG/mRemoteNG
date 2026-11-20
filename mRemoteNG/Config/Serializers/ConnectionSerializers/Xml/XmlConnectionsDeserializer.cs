@@ -15,6 +15,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Plugins;
 using mRemoteNG.Security;
+using mRemoteNG.Security.Factories;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -40,7 +41,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         private readonly string ConnectionFileName = "";
         // Must match the newest version written by XmlConnectionSerializerFactory,
         // otherwise the app refuses to open files it saved itself
-        internal const double MaxSupportedConfVersion = 2.9;
+        internal const double MaxSupportedConfVersion = 3.0;
         private readonly RootNodeInfo _rootNodeInfo = new(RootNodeType.Connection);
         // Ids handed out while reading the current file, to keep each one unique.
         private readonly HashSet<string> _connectionIds = new(StringComparer.Ordinal);
@@ -156,12 +157,22 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 BlockCipherEngines engine = connectionsRootElement.GetAttributeAsEnum<BlockCipherEngines>("EncryptionEngine");
                 BlockCipherModes mode = connectionsRootElement.GetAttributeAsEnum<BlockCipherModes>("BlockCipherMode");
                 int keyDerivationIterations = connectionsRootElement.GetAttributeAsInt("KdfIterations");
+                string salt = connectionsRootElement.GetAttributeAsString("KdfSalt");
 
-                _decryptor = new XmlConnectionsDecryptor(engine, mode, rootNodeInfo)
-                {
-                    AuthenticationRequestor = AuthenticationRequestor,
-                    KeyDerivationIterations = keyDerivationIterations
-                };
+                // With a salt on the root (format 3.0) the key is derived once for the file;
+                // without one, a key is derived for each value from the salt stored with it.
+                _decryptor = string.IsNullOrEmpty(salt)
+                    ? new XmlConnectionsDecryptor(engine, mode, rootNodeInfo)
+                    {
+                        AuthenticationRequestor = AuthenticationRequestor,
+                        KeyDerivationIterations = keyDerivationIterations
+                    }
+                    : new XmlConnectionsDecryptor(
+                        new CryptoProviderFactory(engine, mode).BuildWithKeyDerivedOnce(Convert.FromBase64String(salt), keyDerivationIterations),
+                        rootNodeInfo)
+                    {
+                        AuthenticationRequestor = AuthenticationRequestor
+                    };
             }
             else
             {

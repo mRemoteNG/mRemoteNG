@@ -511,6 +511,9 @@ Starting with new connections file.</value>
   <data name="ErrorBadDatabaseVersion" xml:space="preserve">
     <value>The database version {0} is not compatible with this version of {1}.</value>
   </data>
+  <data name="ErrorNewerDatabaseVersion" xml:space="preserve">
+    <value>The connections in the database are stored in version {0}, which this version of mRemoteNG cannot read: it reads up to version {1}. Update mRemoteNG to open them.</value>
+  </data>
   <data name="ErrorConnectionListSaveFailed" xml:space="preserve">
     <value>The connection list could not be saved.</value>
   </data>

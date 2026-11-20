@@ -128,6 +128,23 @@ public class XmlRootNodeSerializerTests
     }
 
     [Test]
+    public void SaltSerializedWhenTheKeyIsDerivedOnceForTheFile()
+    {
+        byte[] salt = DerivedKeyCryptographyProvider.NewSalt();
+        var cryptoProvider = new DerivedKeyCryptographyProvider(salt, 1000);
+        var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, cryptoProvider, _version);
+        var attributeValue = element.Attribute(XName.Get("KdfSalt"))?.Value ?? "";
+        Assert.That(Convert.FromBase64String(attributeValue), Is.EqualTo(salt));
+    }
+
+    [Test]
+    public void NoSaltSerializedWhenAKeyIsDerivedForEachValue()
+    {
+        var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
+        Assert.That(element.Attribute(XName.Get("KdfSalt")), Is.Null);
+    }
+
+    [Test]
     public void ConfVersionSerialized()
     {
         var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);

@@ -52,6 +52,15 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                     Export = dbDataReader["Export"].Equals(1),
                     ConfVersion = new Version(Convert.ToString(dbDataReader["confVersion"], CultureInfo.InvariantCulture) ?? string.Empty)
                 };
+
+                // A database before version 3.4 has neither column.
+                if (HasColumn(dbDataReader, "KdfSalt") && dbDataReader["KdfSalt"] is string salt && salt != "")
+                {
+                    metaData.KdfSalt = Convert.FromBase64String(salt);
+                    metaData.KdfIterations = dbDataReader["KdfIterations"] is DBNull
+                        ? DerivedKeyCryptographyProvider.DefaultIterations
+                        : Convert.ToInt32(dbDataReader["KdfIterations"], CultureInfo.InvariantCulture);
+                }
             }
             catch (Exception ex)
             {
@@ -67,11 +76,13 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             return metaData;
         }
 
-        public void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
+        /// <param name="cryptographyProvider">
+        /// The provider the passwords of this database are encrypted with: its salt is written
+        /// along, so it must be the one the database already has, or a new one for a new database.
+        /// </param>
+        public void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector, DerivedKeyCryptographyProvider cryptographyProvider)
         {
             // TODO: use transaction
-
-            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
 
             string strProtected;
 
@@ -99,7 +110,17 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             if (rootTreeNode != null)
             {
                 cmd = databaseConnector.DbCommand(
-                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(@Name, 0, @Protected, @ConfVersion)");
+                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion, KdfSalt, KdfIterations) VALUES(@Name, 0, @Protected, @ConfVersion, @KdfSalt, @KdfIterations)");
+
+                DbParameter saltParam = cmd.CreateParameter();
+                saltParam.ParameterName = "@KdfSalt";
+                saltParam.Value = Convert.ToBase64String(cryptographyProvider.Salt);
+                cmd.Parameters.Add(saltParam);
+
+                DbParameter iterationsParam = cmd.CreateParameter();
+                iterationsParam.ParameterName = "@KdfIterations";
+                iterationsParam.Value = cryptographyProvider.KeyDerivationIterations;
+                cmd.Parameters.Add(iterationsParam);
 
                 DbParameter nameParam = cmd.CreateParameter();
                 nameParam.ParameterName = "@Name";
@@ -122,6 +143,17 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
             }
+        }
+
+        private static bool HasColumn(DbDataReader reader, string name)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (string.Equals(reader.GetName(i), name, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+
+            return false;
         }
 
         private bool IsValidTableName(string tableName)
@@ -422,7 +454,9 @@ CREATE TABLE [dbo].[tblRoot] (
         [Name] [varchar] (2048) NOT NULL,
         [Export] [bit] NOT NULL,
         [Protected] [varchar] (4048) NOT NULL,
-        [ConfVersion] [varchar] (15) NOT NULL
+        [ConfVersion] [varchar] (15) NOT NULL,
+        [KdfSalt] [varchar] (64) NULL,
+        [KdfIterations] [int] NULL
 ) ON [PRIMARY]
 
 CREATE TABLE [dbo].[tblUpdate] (
@@ -641,7 +675,9 @@ CREATE TABLE `tblRoot` (
     `Name` varchar(2048) NOT NULL,
     `Export` tinyint NOT NULL,
     `Protected` varchar(4048) NOT NULL,
-    `ConfVersion` varchar(15) NOT NULL
+    `ConfVersion` varchar(15) NOT NULL,
+    `KdfSalt` varchar(64) DEFAULT NULL,
+    `KdfIterations` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
