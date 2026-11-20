@@ -76,8 +76,13 @@ namespace mRemoteNG.UI.Tabs
             return proceed;
         }
 
+        private static readonly System.Collections.Generic.HashSet<ISupportsLogOff> _logOffsInProgress = new();
+
         private static async Task LogOffAsync(ISupportsLogOff logOff, string name)
         {
+            if (!_logOffsInProgress.Add(logOff))
+                return;
+
             try
             {
                 await logOff.LogOffAsync();
@@ -85,6 +90,10 @@ namespace mRemoteNG.UI.Tabs
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage(string.Format(Language.LogOffFailed, name), ex);
+            }
+            finally
+            {
+                _logOffsInProgress.Remove(logOff);
             }
         }
 
