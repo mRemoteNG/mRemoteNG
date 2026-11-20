@@ -52,6 +52,19 @@ namespace mRemoteNG.Config.Serializers.Versioning
             DerivedKeyCryptographyProvider newProvider = DerivedKeyCryptographyProvider.WithNewSalt();
 
             using DbTransaction transaction = _databaseConnector.DbConnection().BeginTransaction(IsolationLevel.Serializable);
+            using (DbCommand versionCommand = Command(
+                IsMsSql
+                    ? "SELECT ConfVersion FROM tblRoot WITH (UPDLOCK, HOLDLOCK)"
+                    : "SELECT ConfVersion FROM tblRoot FOR UPDATE",
+                transaction))
+            {
+                Version currentVersion = new((string)versionCommand.ExecuteScalar());
+                if (currentVersion >= _version)
+                {
+                    transaction.Commit();
+                    return currentVersion;
+                }
+            }
             ReencryptConnections(transaction, oldProvider, newProvider);
             UpdateRoot(transaction, oldProvider, newProvider);
             transaction.Commit();
