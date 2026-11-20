@@ -45,11 +45,24 @@ namespace mRemoteNG.Config.Settings.Registry
         /// </summary>
         public WinRegistryEntry<bool> SQLReadOnly { get; private set; }
 
-        public OptRegistrySqlServerPage()
-        {
-            RegistryHive hive = WindowsRegistryInfo.Hive;
-            string subKey = WindowsRegistryInfo.SQLServerOptions;
+        /// <summary>
+        /// Specifies whether the SQL Server certificate is accepted without validation.
+        /// </summary>
+        public WinRegistryEntry<bool> SQLTrustServerCertificate { get; private set; }
 
+        public OptRegistrySqlServerPage() : this(WindowsRegistryInfo.Hive, WindowsRegistryInfo.SQLServerOptions)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance reading from an explicit hive/subkey instead of the production
+        /// <see cref="WindowsRegistryInfo.Hive"/>/<see cref="WindowsRegistryInfo.SQLServerOptions"/>
+        /// location, so tests can use a throwaway <see cref="RegistryHive.CurrentUser"/> path.
+        /// </summary>
+        /// <param name="hive">The registry hive to read settings from.</param>
+        /// <param name="subKey">The registry subkey to read settings from.</param>
+        internal OptRegistrySqlServerPage(RegistryHive hive, string subKey)
+        {
             UseSQLServer = new WinRegistryEntry<bool>(hive, subKey, nameof(UseSQLServer)).Read();
             SQLServerType = new WinRegistryEntry<string>(hive, subKey, nameof(SQLServerType)).Read();
             SQLHost = new WinRegistryEntry<string>(hive, subKey, nameof(SQLHost)).Read();
@@ -57,6 +70,7 @@ namespace mRemoteNG.Config.Settings.Registry
             SQLUser = new WinRegistryEntry<string>(hive, subKey, nameof(SQLUser)).Read();
             SQLPassword = new WinRegistryEntry<string>(hive, subKey, nameof(SQLPassword)).Read();
             SQLReadOnly = new WinRegistryEntry<bool>(hive, subKey, nameof(SQLReadOnly)).Read();
+            SQLTrustServerCertificate = new WinRegistryEntry<bool>(hive, subKey, nameof(SQLTrustServerCertificate)).Read();
 
             SetupValidation();
             Apply();
@@ -91,6 +105,7 @@ namespace mRemoteNG.Config.Settings.Registry
             ApplySQLUser();
             ApplySQLPassword();
             ApplySQLReadOnly();
+            ApplySQLTrustServerCertificate();
         }
 
         private void ApplyUseSQLServer()
@@ -149,6 +164,12 @@ namespace mRemoteNG.Config.Settings.Registry
         {
             if (SQLReadOnly.IsSet)
                 Properties.OptionsDBsPage.Default.SQLReadOnly = SQLReadOnly.Value;
+        }
+
+        private void ApplySQLTrustServerCertificate()
+        {
+            if (SQLTrustServerCertificate.IsSet)
+                Properties.OptionsDBsPage.Default.SQLTrustServerCertificate = SQLTrustServerCertificate.Value;
         }
     }
 }

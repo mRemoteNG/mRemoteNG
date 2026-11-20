@@ -6,6 +6,7 @@
         ServerNotAccessible,
         UnknownDatabase,
         CredentialsRejected,
-        UnknownError
+        UnknownError,
+        ServerCertificateNotTrusted
     }
 }

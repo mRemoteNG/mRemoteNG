@@ -6837,6 +6837,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The server certificate is not trusted. Install a trusted certificate on the server, or select Trust server certificate on the Security tab (Advanced)..
+        /// </summary>
+        internal static string ServerCertificateNotTrusted {
+            get {
+                return ResourceManager.GetString("ServerCertificateNotTrusted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Server name or IP:.
         /// </summary>
         internal static string ServerNameOrIp {

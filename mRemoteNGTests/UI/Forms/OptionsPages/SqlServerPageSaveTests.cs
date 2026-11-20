@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms.OptionsPages;
@@ -28,6 +29,7 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
         private string _user;
         private string _pass;
         private bool _readOnly;
+        private bool _trustServerCertificate;
         private RemoteConnectionsSyncronizer _synchronizer;
         private SqlServerPage _page;
 
@@ -42,6 +44,7 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
             _user = settings.SQLUser;
             _pass = settings.SQLPass;
             _readOnly = settings.SQLReadOnly;
+            _trustServerCertificate = settings.SQLTrustServerCertificate;
             _synchronizer = Runtime.ConnectionsService.RemoteConnectionsSyncronizer;
         }
 
@@ -59,6 +62,7 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
             settings.SQLUser = _user;
             settings.SQLPass = _pass;
             settings.SQLReadOnly = _readOnly;
+            settings.SQLTrustServerCertificate = _trustServerCertificate;
             Runtime.ConnectionsService.RemoteConnectionsSyncronizer = _synchronizer;
         }
 
@@ -72,6 +76,7 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
             settings.SQLUser = user;
             settings.SQLPass = new LegacyRijndaelCryptographyProvider().Encrypt(password, Runtime.EncryptionKey);
             settings.SQLReadOnly = false;
+            settings.SQLTrustServerCertificate = false;
         }
 
         private SqlServerPage LoadPage()
@@ -224,6 +229,49 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
 
             Assert.That(OptionPasswords.Unprotect(OptionsDBsPage.Default.SQLPass), Is.EqualTo("secret"));
             Assert.That(Runtime.ConnectionsService.RemoteConnectionsSyncronizer, Is.Null);
+        }
+
+        [Test]
+        public void TrustServerCertificateIsShownAndSaved()
+        {
+            StoreSettings(false, "sql01.example.local", "mRemoteNG", "mrng_login", "secret");
+            OptionsDBsPage.Default.SQLTrustServerCertificate = true;
+            SqlServerPage page = LoadPage();
+            CheckBox trust = (CheckBox)page.Controls.Find("chkSQLTrustServerCertificate", true).Single();
+
+            Assert.That(trust.Checked, Is.True);
+            trust.Checked = false;
+            page.SaveSettings();
+
+            Assert.That(OptionsDBsPage.Default.SQLTrustServerCertificate, Is.False);
+        }
+
+        [Test]
+        public void UntrustedCertificateMessageFitsBelowTheAdvancedView()
+        {
+            StoreSettings(true, "", "", "", "");
+            SqlServerPage page = LoadPage();
+            page.Size = new System.Drawing.Size(656, 500);
+            page.CreateControl();
+
+            Control expandButton = page.Controls.Find("btnExpandOptions", true).Single();
+            Control testButton = page.Controls.Find("btnTestConnection", true).Single();
+            Control serverBlock = page.Controls.Find("pnlServerBlock", true).Single();
+            Control result = page.Controls.Find("lblTestConnectionResults", true).Single();
+            MethodInfo click = typeof(SqlServerPage).GetMethod("btnExpandOptions_Click", BindingFlags.NonPublic | BindingFlags.Instance);
+            click.Invoke(page, [expandButton, EventArgs.Empty]);
+
+            // the longest result Test connection shows, with the least room left below the tabs
+            string message = Language.ConnectionOpenFailed + Environment.NewLine + Language.ServerCertificateNotTrusted;
+            System.Drawing.Size needed = TextRenderer.MeasureText(message, result.Font,
+                new System.Drawing.Size(result.Width, int.MaxValue), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(needed.Height, Is.LessThanOrEqualTo(result.Height), "the message is cut off");
+                Assert.That(result.Bottom, Is.LessThanOrEqualTo(serverBlock.ClientSize.Height), "the result runs past the server block");
+                Assert.That(result.Right, Is.LessThan(testButton.Left), "the result runs under Test connection");
+            });
         }
     }
 }
