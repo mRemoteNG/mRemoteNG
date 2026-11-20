@@ -52,7 +52,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             tabPage3 = new System.Windows.Forms.TabPage();
             tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            mrngCheckBox5 = new MrngCheckBox();
+            chkSQLTrustServerCertificate = new MrngCheckBox();
             mrngLabel7 = new MrngLabel();
             mrngTextBox5 = new MrngTextBox();
             mrngLabel3 = new MrngLabel();
@@ -512,10 +512,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // tableLayoutPanel3
             // 
+            tableLayoutPanel3.AutoScroll = true;
             tableLayoutPanel3.ColumnCount = 2;
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel3.Controls.Add(mrngCheckBox5, 1, 8);
+            tableLayoutPanel3.Controls.Add(chkSQLTrustServerCertificate, 1, 8);
             tableLayoutPanel3.Controls.Add(mrngLabel7, 0, 8);
             tableLayoutPanel3.Controls.Add(mrngTextBox5, 1, 7);
             tableLayoutPanel3.Controls.Add(mrngLabel3, 0, 7);
@@ -549,17 +550,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tableLayoutPanel3.Size = new System.Drawing.Size(600, 227);
             tableLayoutPanel3.TabIndex = 23;
             // 
-            // mrngCheckBox5
+            // chkSQLTrustServerCertificate
             // 
-            mrngCheckBox5._mice = MrngCheckBox.MouseState.OUT;
-            mrngCheckBox5.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            mrngCheckBox5.AutoSize = true;
-            mrngCheckBox5.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            mrngCheckBox5.Location = new System.Drawing.Point(163, 211);
-            mrngCheckBox5.Name = "mrngCheckBox5";
-            mrngCheckBox5.Size = new System.Drawing.Size(15, 20);
-            mrngCheckBox5.TabIndex = 33;
-            mrngCheckBox5.UseVisualStyleBackColor = true;
+            chkSQLTrustServerCertificate._mice = MrngCheckBox.MouseState.OUT;
+            chkSQLTrustServerCertificate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            chkSQLTrustServerCertificate.AutoSize = true;
+            chkSQLTrustServerCertificate.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            chkSQLTrustServerCertificate.Location = new System.Drawing.Point(163, 211);
+            chkSQLTrustServerCertificate.Name = "chkSQLTrustServerCertificate";
+            chkSQLTrustServerCertificate.Size = new System.Drawing.Size(15, 20);
+            chkSQLTrustServerCertificate.TabIndex = 33;
+            chkSQLTrustServerCertificate.UseVisualStyleBackColor = true;
             // 
             // mrngLabel7
             // 
@@ -1009,10 +1010,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // lblTestConnectionResults
             // 
-            lblTestConnectionResults.AutoSize = true;
             lblTestConnectionResults.Location = new System.Drawing.Point(34, 113);
             lblTestConnectionResults.Name = "lblTestConnectionResults";
-            lblTestConnectionResults.Size = new System.Drawing.Size(124, 13);
+            lblTestConnectionResults.Size = new System.Drawing.Size(370, 45);
             lblTestConnectionResults.TabIndex = 31;
             lblTestConnectionResults.Text = "Test connection details";
             // 
@@ -1026,6 +1026,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnTestConnection.TabIndex = 30;
             btnTestConnection.Text = "Test Connection";
             btnTestConnection.UseVisualStyleBackColor = true;
+            btnTestConnection.Click += btnTestConnection_Click;
             // 
             // btnExpandOptions
             // 
@@ -1253,7 +1254,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private ComboBox mrngComboBox2;
         private MrngCheckBox mrngCheckBox2;
         internal MrngLabel mrngLabel12;
-        private MrngCheckBox mrngCheckBox5;
+        private MrngCheckBox chkSQLTrustServerCertificate;
         internal MrngLabel mrngLabel7;
         internal MrngTextBox mrngTextBox5;
         internal MrngLabel mrngLabel3;

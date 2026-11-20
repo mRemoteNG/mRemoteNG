@@ -2154,6 +2154,9 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="ServerNotAccessible" xml:space="preserve">
     <value>Server '{0}' was not accessible.</value>
   </data>
+  <data name="ServerCertificateNotTrusted" xml:space="preserve">
+    <value>The server certificate is not trusted. Install a trusted certificate on the server, or select Trust server certificate on the Security tab (Advanced).</value>
+  </data>
   <data name="ConnectionSuccessful" xml:space="preserve">
     <value>Connection successful</value>
   </data>
