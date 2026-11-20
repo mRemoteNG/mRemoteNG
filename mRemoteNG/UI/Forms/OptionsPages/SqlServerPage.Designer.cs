@@ -512,6 +512,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // tableLayoutPanel3
             // 
+            tableLayoutPanel3.AutoScroll = true;
             tableLayoutPanel3.ColumnCount = 2;
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1025,6 +1026,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnTestConnection.TabIndex = 30;
             btnTestConnection.Text = "Test Connection";
             btnTestConnection.UseVisualStyleBackColor = true;
+            btnTestConnection.Click += btnTestConnection_Click;
             // 
             // btnExpandOptions
             // 

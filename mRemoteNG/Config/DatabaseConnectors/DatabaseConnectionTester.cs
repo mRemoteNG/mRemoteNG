@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
@@ -24,14 +25,22 @@ namespace mRemoteNG.Config.DatabaseConnectors
             }
         }
 
+        /// <summary>
+        /// What the certificate validation of the server reports, from .NET (SslStream) and from the
+        /// managed network layer of Microsoft.Data.SqlClient.
+        /// </summary>
+        private static readonly string[] CertificateFailures =
+        [
+            "remote certificate",
+            "Certificate failed chain validation",
+            "Certificate name mismatch",
+            "Certificate not available while validating",
+        ];
+
         internal static ConnectionTestResult ResultFor(Exception ex)
         {
             string message = ex.Message;
-            // TLS failures name the certificate, or the principal name when it does not match the server
-            if ((message.Contains("SSL Provider", StringComparison.OrdinalIgnoreCase)
-                    && (message.Contains("certificate", StringComparison.OrdinalIgnoreCase)
-                        || message.Contains("target principal name", StringComparison.OrdinalIgnoreCase)))
-                || message.Contains("The remote certificate was rejected", StringComparison.OrdinalIgnoreCase))
+            if (IsCertificateFailure(ex))
                 return ConnectionTestResult.ServerCertificateNotTrusted;
             if (message.Contains("server was not found", StringComparison.OrdinalIgnoreCase)
                 || message.Contains("network-related", StringComparison.OrdinalIgnoreCase)
@@ -44,6 +53,31 @@ namespace mRemoteNG.Config.DatabaseConnectors
                 || message.Contains("Access denied", StringComparison.OrdinalIgnoreCase))
                 return ConnectionTestResult.CredentialsRejected;
             return ConnectionTestResult.UnknownError;
+        }
+
+        /// <summary>
+        /// Only errors of the TLS layer count: the word certificate alone can be part of a login
+        /// or database name in an ordinary failure.
+        /// </summary>
+        private static bool IsCertificateFailure(Exception ex)
+        {
+            for (Exception current = ex; current != null; current = current.InnerException)
+            {
+                string message = current.Message;
+
+                // The native network layer reports TLS failures under the SSL provider, a server name
+                // that does not match the certificate as the target principal name. Outside it that
+                // phrase is a Kerberos error of Windows authentication, not a certificate one.
+                if (message.Contains("provider: SSL Provider", StringComparison.OrdinalIgnoreCase)
+                    && (message.Contains("certificate", StringComparison.OrdinalIgnoreCase)
+                        || message.Contains("target principal name", StringComparison.OrdinalIgnoreCase)))
+                    return true;
+
+                if (CertificateFailures.Any(failure => message.Contains(failure, StringComparison.OrdinalIgnoreCase)))
+                    return true;
+            }
+
+            return false;
         }
     }
 }

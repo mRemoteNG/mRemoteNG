@@ -273,5 +273,46 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
                 Assert.That(result.Right, Is.LessThan(testButton.Left), "the result runs under Test connection");
             });
         }
+
+        [Test]
+        public void TestConnectionRunsItsHandler()
+        {
+            SqlServerPage page = LoadPage();
+            Control testButton = page.Controls.Find("btnTestConnection", true).Single();
+
+            // A control keeps its Click handlers in its Events list, under a key private to Control
+            FieldInfo clickKey = typeof(Control).GetField("s_clickEvent", BindingFlags.NonPublic | BindingFlags.Static);
+            Assert.That(clickKey, Is.Not.Null, "Control no longer names its click key s_clickEvent");
+            PropertyInfo events = typeof(System.ComponentModel.Component).GetProperty("Events", BindingFlags.NonPublic | BindingFlags.Instance);
+            Delegate handlers = ((System.ComponentModel.EventHandlerList)events.GetValue(testButton))[clickKey.GetValue(null)];
+
+            Assert.That(handlers?.GetInvocationList().Select(handler => handler.Method.Name), Does.Contain("btnTestConnection_Click"));
+        }
+
+        [Test]
+        public void TrustServerCertificateCanBeReachedOnTheSecurityTab()
+        {
+            StoreSettings(true, "", "", "", "");
+            SqlServerPage page = LoadPage();
+            page.Size = new System.Drawing.Size(656, 500);
+            page.CreateControl();
+
+            Control expandButton = page.Controls.Find("btnExpandOptions", true).Single();
+            MethodInfo click = typeof(SqlServerPage).GetMethod("btnExpandOptions_Click", BindingFlags.NonPublic | BindingFlags.Instance);
+            click.Invoke(page, [expandButton, EventArgs.Empty]);
+            TabControl tabs = (TabControl)page.Controls.Find("tabCtrlSQL", true).Single();
+            Control checkBox = page.Controls.Find("chkSQLTrustServerCertificate", true).Single();
+            tabs.SelectedTab = (TabPage)page.Controls.Find("tabPage3", true).Single();
+            ScrollableControl table = (ScrollableControl)checkBox.Parent;
+            table.PerformLayout();
+
+            // In view, or within the area the table scrolls over
+            int bottomInContent = checkBox.Bottom - table.AutoScrollPosition.Y;
+            bool inView = checkBox.Bottom <= table.ClientSize.Height;
+            bool scrollsToIt = table.AutoScroll && bottomInContent <= table.DisplayRectangle.Height;
+
+            Assert.That(inView || scrollsToIt, Is.True,
+                $"the checkbox ends at {checkBox.Bottom}, the table shows {table.ClientSize.Height} and scrolls: {table.AutoScroll}");
+        }
     }
 }
