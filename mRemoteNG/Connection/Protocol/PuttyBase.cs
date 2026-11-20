@@ -26,7 +26,7 @@ using System.Windows.Forms;
 namespace mRemoteNG.Connection.Protocol
 {
     [SupportedOSPlatform("windows")]
-    public class PuttyBase : ProtocolBase
+    public class PuttyBase : ProtocolBase, ISupportsLogOff
     {
         private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
         private bool _isPuttyNg;
@@ -49,6 +49,28 @@ namespace mRemoteNG.Connection.Protocol
         public static string? PuttyPath { get; set; }
 
         public bool Focused => NativeMethods.GetForegroundWindow() == PuttyHandle;
+
+        /// <summary>
+        /// SSH, Telnet and rlogin end in a login shell, which "exit" logs off. Raw and serial
+        /// connections have no shell of their own to end, so they don't offer log off.
+        /// </summary>
+        public bool CanLogOff => PuttyHandle != IntPtr.Zero && PuttyProtocol is Putty_Protocol.ssh or Putty_Protocol.telnet or Putty_Protocol.rlogin;
+
+        /// <summary>
+        /// Logs off by typing "exit" and Enter into the shell, the same way the opening command
+        /// is typed after connecting. When the shell ends, PuTTY closes the connection and the tab.
+        /// "exit" reaches whatever runs in the foreground: inside a nested shell (sudo -s, su) it
+        /// only leaves that shell, and inside an editor it would be typed as text.
+        /// </summary>
+        public Task LogOffAsync()
+        {
+            if (!CanLogOff)
+                return Task.CompletedTask;
+
+            NativeMethods.SetForegroundWindow(PuttyHandle);
+            SendKeys.SendWait("exit\n");
+            return Task.CompletedTask;
+        }
 
         #endregion
 

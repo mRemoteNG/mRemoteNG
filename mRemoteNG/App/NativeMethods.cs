@@ -21,6 +21,19 @@ namespace mRemoteNG.App
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr CreatePopupMenu();
 
+        /// <summary>
+        /// The virtual key (low byte) and Shift/Ctrl/Alt state (high byte) that type
+        /// <paramref name="ch"/> on keyboard layout <paramref name="dwhkl"/>; -1 if it can't be typed.
+        /// </summary>
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        internal static extern short VkKeyScanEx(char ch, IntPtr dwhkl);
+
+        /// <summary>Translates between virtual keys and scan codes on keyboard layout <paramref name="dwhkl"/>.</summary>
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        internal static extern uint MapVirtualKeyEx(uint uCode, uint uMapType, IntPtr dwhkl);
+
+        internal const uint MAPVK_VK_TO_VSC = 0;
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr FindWindowEx(IntPtr parentHandle,
                                                    IntPtr childAfter,

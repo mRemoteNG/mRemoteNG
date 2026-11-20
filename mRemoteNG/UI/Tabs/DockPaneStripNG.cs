@@ -1119,7 +1119,18 @@ namespace mRemoteNG.UI.Tabs
                 g.DrawImage(image, rectCloseButtonVisual);
 
             if (rectTab.Contains(rectIcon) && DockPane.DockPanel.ShowDocumentIcon)
+            {
+                // The icon under the mouse is a Log off button: frame it, the way the close
+                // button is highlighted, so it reads as clickable before anyone clicks it.
+                if (!ActiveLogOffIcon.IsEmpty && ActiveLogOffIcon == rectIcon)
+                {
+                    Rectangle frame = Rectangle.Inflate(rectIcon, 1, 1);
+                    using Pen framePen = new(DockPane.DockPanel.Theme.ColorPalette.TabButtonSelectedActiveHovered.Border);
+                    g.DrawRectangle(framePen, frame.X, frame.Y, frame.Width - 1, frame.Height - 1);
+                }
+
                 g.DrawIcon(tab.Content.DockHandler.Icon, rectIcon);
+            }
         }
 
         private Color? GetCustomTabColor(IDockContent content)
@@ -1172,8 +1183,9 @@ namespace mRemoteNG.UI.Tabs
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-            // suspend drag if mouse is down on an action button.
-            m_suspendDrag = ActiveCloseHitTest(e.Location) || ActiveMinimizeHitTest(e.Location);
+            // suspend drag if mouse is down on an action button (the Log off icon counts as one).
+            m_suspendDrag = ActiveCloseHitTest(e.Location) || ActiveMinimizeHitTest(e.Location) ||
+                            (!ActiveLogOffIcon.IsEmpty && ActiveLogOffIcon.Contains(e.Location));
             if (!IsMouseDown)
                 IsMouseDown = true;
         }
@@ -1217,14 +1229,24 @@ namespace mRemoteNG.UI.Tabs
                         bool closeUpdated = SetActiveClose(closeButtonRect.IntersectsWith(mouseRect)
                                                                ? closeButtonRect
                                                                : Rectangle.Empty);
-                        buttonUpdate = minimizeUpdated || closeUpdated;
+
+                        // The tab's icon doubles as a Log off button. Hovering it highlights the
+                        // icon and says so in the tooltip, so the button isn't a hidden trap.
+                        Rectangle logOffIconRect = GetLogOffIconRect(tab);
+                        bool overLogOffIcon = logOffIconRect.IntersectsWith(mouseRect);
+                        bool logOffUpdated = SetActiveLogOffIcon(overLogOffIcon ? logOffIconRect : Rectangle.Empty);
+                        if (overLogOffIcon)
+                            toolTip = Language.LogOffTabIconToolTip;
+
+                        buttonUpdate = minimizeUpdated || closeUpdated || logOffUpdated;
                     }
                 }
             }
             else
             {
                 tabUpdate = SetMouseOverTab(null);
-                buttonUpdate = SetActiveMinimize(Rectangle.Empty) || SetActiveClose(Rectangle.Empty);
+                // "|", not "||": every hover state must be cleared, not just the first that changed.
+                buttonUpdate = SetActiveMinimize(Rectangle.Empty) | SetActiveClose(Rectangle.Empty) | SetActiveLogOffIcon(Rectangle.Empty);
             }
 
             if (tabUpdate || buttonUpdate)
@@ -1245,10 +1267,43 @@ namespace mRemoteNG.UI.Tabs
             int indexHit = HitTest();
             if (indexHit > -1)
             {
+                if (TabLogOffIconHit(indexHit))
+                    return;
                 if (TabMinimizeButtonHit(indexHit))
                     return;
                 TabCloseButtonHit(indexHit);
             }
+        }
+
+        /// <summary>
+        /// A click on the icon of a connection that can log off asks to log it off; see
+        /// <see cref="SessionLogOff"/>, which the tab's right-click menu uses too.
+        /// </summary>
+        private bool TabLogOffIconHit(int index)
+        {
+            if (ActiveLogOffIcon.IsEmpty || Tabs[index].Content is not ConnectionTab connectionTab)
+                return false;
+
+            Point mousePos = PointToClient(MousePosition);
+            if (!GetTabBounds(Tabs[index]).Contains(ActiveLogOffIcon) || !ActiveLogOffIcon.Contains(mousePos))
+                return false;
+
+            SessionLogOff.Request(connectionTab, FindForm());
+            return true;
+        }
+
+        /// <summary>
+        /// Where the tab's icon is drawn, when that icon works as a Log off button: document tabs
+        /// that show icons, for a connection that can log off right now. Empty otherwise.
+        /// </summary>
+        private Rectangle GetLogOffIconRect(MremoteNGTab tab)
+        {
+            if (Appearance != DockPane.AppearanceStyle.Document || !DockPane.DockPanel.ShowDocumentIcon ||
+                tab.Rectangle == null || tab.Content is not ConnectionTab connectionTab ||
+                !SessionLogOff.CanLogOff(connectionTab))
+                return Rectangle.Empty;
+
+            return DrawHelper.RtlTransform(this, GetDocumentIconRectangle(tab.Rectangle.Value));
         }
 
         private void TabCloseButtonHit(int index)
@@ -1558,6 +1613,18 @@ namespace mRemoteNG.UI.Tabs
 
         private Rectangle ActiveMinimize { get; set; }
 
+        /// <summary>The icon under the mouse that works as a Log off button, or empty.</summary>
+        private Rectangle ActiveLogOffIcon { get; set; }
+
+        private bool SetActiveLogOffIcon(Rectangle rectangle)
+        {
+            if (ActiveLogOffIcon == rectangle)
+                return false;
+
+            ActiveLogOffIcon = rectangle;
+            return true;
+        }
+
         private bool SetActiveClose(Rectangle rectangle)
         {
             if (ActiveClose == rectangle)
@@ -1588,7 +1655,8 @@ namespace mRemoteNG.UI.Tabs
         protected override void OnMouseLeave(EventArgs e)
         {
             bool tabUpdate = SetMouseOverTab(null);
-            bool buttonUpdate = SetActiveMinimize(Rectangle.Empty) || SetActiveClose(Rectangle.Empty);
+            // "|", not "||": every hover state must be cleared, not just the first that changed.
+            bool buttonUpdate = SetActiveMinimize(Rectangle.Empty) | SetActiveClose(Rectangle.Empty) | SetActiveLogOffIcon(Rectangle.Empty);
             if (tabUpdate || buttonUpdate)
                 Invalidate();
 

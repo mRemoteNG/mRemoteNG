@@ -48,6 +48,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkNoReconnect = new MrngCheckBox();
             chkShowPuttySessionsInTree = new MrngCheckBox();
             chkUseUserProfiles = new MrngCheckBox();
+            chkConfirmSessionLogOff = new MrngCheckBox();
             ((System.ComponentModel.ISupportInitialize)numPuttyWaitTime).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numUVNCSCPort).BeginInit();
             SuspendLayout();
@@ -236,10 +237,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkUseUserProfiles.Text = "Use user profiles to store connections (experimental, takes effect after restart)";
             chkUseUserProfiles.UseVisualStyleBackColor = true;
             //
+            // chkConfirmSessionLogOff
+            //
+            chkConfirmSessionLogOff._mice = MrngCheckBox.MouseState.OUT;
+            chkConfirmSessionLogOff.AutoSize = true;
+            chkConfirmSessionLogOff.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            chkConfirmSessionLogOff.Location = new System.Drawing.Point(9, 314);
+            chkConfirmSessionLogOff.Name = "chkConfirmSessionLogOff";
+            chkConfirmSessionLogOff.Size = new System.Drawing.Size(430, 17);
+            chkConfirmSessionLogOff.TabIndex = 15;
+            chkConfirmSessionLogOff.Text = "Ask before logging off a session";
+            chkConfirmSessionLogOff.UseVisualStyleBackColor = true;
+            //
             // AdvancedPage
             //
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            Controls.Add(chkConfirmSessionLogOff);
             Controls.Add(chkUseUserProfiles);
             Controls.Add(chkShowPuttySessionsInTree);
             Controls.Add(chkNoReconnect);
@@ -281,5 +295,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal MrngCheckBox chkNoReconnect;
         internal MrngCheckBox chkShowPuttySessionsInTree;
         internal MrngCheckBox chkUseUserProfiles;
+        internal MrngCheckBox chkConfirmSessionLogOff;
     }
 }

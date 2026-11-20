@@ -17,6 +17,7 @@ namespace mRemoteNG.UI.Window
         private ToolStripMenuItem cmenTabDuplicateTab;
         private ToolStripMenuItem cmenTabMinimize;
         private ToolStripMenuItem cmenTabDisconnect;
+        private ToolStripMenuItem cmenTabLogOff;
         private ToolStripMenuItem cmenTabDisconnectOthers;
         private ToolStripMenuItem cmenTabDisconnectOthersRight;
         private ToolStripMenuItem cmenTabSmartSize;
@@ -38,6 +39,7 @@ namespace mRemoteNG.UI.Window
             this.cmenTab = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmenTabReconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabDisconnect = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmenTabLogOff = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabMinimize = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabDisconnectOthers = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabDisconnectOthersRight = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,6 +77,7 @@ namespace mRemoteNG.UI.Window
             this.cmenTab.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmenTabReconnect,
             this.cmenTabDisconnect,
+            this.cmenTabLogOff,
             this.cmenTabMinimize,
             this.cmenTabDisconnectOthers,
             this.cmenTabDisconnectOthersRight,
@@ -108,6 +111,12 @@ namespace mRemoteNG.UI.Window
             this.cmenTabDisconnect.Name = "cmenTabDisconnect";
             this.cmenTabDisconnect.Size = new System.Drawing.Size(230, 22);
             this.cmenTabDisconnect.Text = "Disconnect";
+            // 
+            // cmenTabLogOff
+            // 
+            this.cmenTabLogOff.Name = "cmenTabLogOff";
+            this.cmenTabLogOff.Size = new System.Drawing.Size(230, 22);
+            this.cmenTabLogOff.Text = "Log off";
             // 
             // cmenTabMinimize
             // 

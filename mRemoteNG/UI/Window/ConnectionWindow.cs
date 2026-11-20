@@ -96,6 +96,7 @@ namespace mRemoteNG.UI.Window
             cmenTabDuplicateTab.Click += (sender, args) => DuplicateTab();
             cmenTabReconnect.Click += (sender, args) => Reconnect();
             cmenTabDisconnect.Click += (sender, args) => CloseTabMenu();
+            cmenTabLogOff.Click += (sender, args) => SessionLogOff.Request(GetSelectedConnectionTab(), this);
             cmenTabMinimize.Click += (sender, args) => MinimizeTabMenu();
             cmenTabDisconnectOthers.Click += (sender, args) => CloseOtherTabs();
             cmenTabDisconnectOthersRight.Click += (sender, args) => CloseOtherTabsToTheRight();
@@ -330,6 +331,7 @@ namespace mRemoteNG.UI.Window
             cmenTabDuplicateTab.Text = Language.DuplicateTab;
             cmenTabReconnect.Text = Language.Reconnect;
             cmenTabDisconnect.Text = Language.Disconnect;
+            cmenTabLogOff.Text = Language.LogOff;
             cmenTabMinimize.Text = Language.MinimizeTab;
             cmenTabDisconnectOthers.Text = Language.DisconnectOthers;
             cmenTabDisconnectOthersRight.Text = Language.DisconnectOthersRight;
@@ -573,6 +575,12 @@ namespace mRemoteNG.UI.Window
                 }
 
                 cmenTabPuttySettings.Visible = interfaceControl.Protocol is PuttyBase;
+
+                // Shown for every protocol that can log off (RDP; SSH, Telnet and rlogin through
+                // PuTTY), but only usable while there is a session to type into.
+                ConnectionTab selectedTab = GetSelectedConnectionTab();
+                cmenTabLogOff.Visible = SessionLogOff.SupportsLogOff(selectedTab);
+                cmenTabLogOff.Enabled = SessionLogOff.CanLogOff(selectedTab);
 
                 AddExternalApps();
             }

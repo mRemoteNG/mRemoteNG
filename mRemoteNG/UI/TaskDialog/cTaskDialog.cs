@@ -42,7 +42,7 @@ namespace mRemoteNG.UI.TaskDialog
         #region [ShowTaskDialogBox]
 
         [SupportedOSPlatform("windows")]
-        public static DialogResult ShowTaskDialogBox(IWin32Window owner, string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText, string radioButtons, string commandButtons, ETaskDialogButtons buttons, ESysIcons mainIcon, ESysIcons footerIcon, int defaultIndex)
+        public static DialogResult ShowTaskDialogBox(IWin32Window owner, string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText, string radioButtons, string commandButtons, ETaskDialogButtons buttons, ESysIcons mainIcon, ESysIcons footerIcon, int defaultIndex, bool defaultToNo = false)
         {
             DialogResult result;
             OnTaskDialogShown?.Invoke(null, EventArgs.Empty);
@@ -62,6 +62,7 @@ namespace mRemoteNG.UI.TaskDialog
                 td.VerificationText = verificationText;
                 td.Width = EmulatedFormWidth;
                 td.DefaultButtonIndex = defaultIndex;
+                td.DefaultToNo = defaultToNo;
                 td.BuildForm();
                 result = td.ShowDialog(owner);
 
@@ -139,6 +140,17 @@ namespace mRemoteNG.UI.TaskDialog
         public static DialogResult MessageBox(string title, string mainInstruction, string content, ETaskDialogButtons buttons, ESysIcons mainIcon)
         {
             return MessageBox(null, title, mainInstruction, content, "", "", "", buttons, mainIcon, ESysIcons.Information);
+        }
+
+        /// <summary>
+        /// A Yes/No question where No is the default (Enter and focus), with an optional
+        /// verification checkbox such as "Do not show this message again". Use it when
+        /// answering Yes by accident would lose the user's work.
+        /// </summary>
+        [SupportedOSPlatform("windows")]
+        public static DialogResult YesNoDefaultNo(IWin32Window owner, string title, string mainInstruction, string content, string verificationText, ESysIcons mainIcon)
+        {
+            return ShowTaskDialogBox(owner, title, mainInstruction, content, "", "", verificationText, "", "", ETaskDialogButtons.YesNo, mainIcon, mainIcon, 0, defaultToNo: true);
         }
 
         //--------------------------------------------------------------------------------
