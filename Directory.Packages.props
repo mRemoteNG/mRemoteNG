@@ -55,7 +55,7 @@
     <PackageVersion Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
     <PackageVersion Include="Microsoft.NETCore.Targets" Version="5.0.0" />
     <PackageVersion Include="Microsoft.VisualStudio.TextTemplating.VSHost" Version="18.12.1606" />
-    <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.4314.35" />
+    <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.4370.26" />
     <PackageVersion Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.161" />
     <PackageVersion Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
     <PackageVersion Include="MySql.Data" Version="26.10.0" />
