@@ -163,7 +163,7 @@ public class DerivedKeyCryptographyProviderTests
     {
         DerivedKeyCryptographyProvider provider = Provider();
         string cipherText = provider.Encrypt("secret", _password);
-        provider.Salt[0] ^= 1;
+        provider.GetSalt()[0] ^= 1;
 
         Assert.That(provider.Decrypt(cipherText, _password), Is.EqualTo("secret"));
     }

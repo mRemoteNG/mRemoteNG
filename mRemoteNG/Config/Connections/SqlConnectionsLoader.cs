@@ -104,7 +104,7 @@ namespace mRemoteNG.Config.Connections
 
         private SqlConnectionListMetaData HandleFirstRun(SqlDatabaseMetaDataRetriever metaDataRetriever, IDatabaseConnector connector)
         {
-	        metaDataRetriever.WriteDatabaseMetaData(new RootNodeInfo(RootNodeType.Connection), connector, DerivedKeyCryptographyProvider.WithNewSalt());
+	        SqlDatabaseMetaDataRetriever.WriteDatabaseMetaData(new RootNodeInfo(RootNodeType.Connection), connector, DerivedKeyCryptographyProvider.WithNewSalt());
 	        return metaDataRetriever.GetDatabaseMetaData(connector);
 		}
     }

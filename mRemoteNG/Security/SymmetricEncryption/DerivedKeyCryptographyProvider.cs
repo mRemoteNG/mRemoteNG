@@ -66,7 +66,8 @@ namespace mRemoteNG.Security.SymmetricEncryption
         /// <summary>AES-GCM under a new random salt and the default iteration count.</summary>
         public static DerivedKeyCryptographyProvider WithNewSalt() => new(NewSalt(), DefaultIterations);
 
-        public byte[] Salt => (byte[])_salt.Clone();
+        /// <summary>A copy of the salt, so the caller cannot change the one the key comes from.</summary>
+        public byte[] GetSalt() => (byte[])_salt.Clone();
 
         public int BlockSizeInBytes => _aeadBlockCipher.GetBlockSize();
 
@@ -84,7 +85,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 return "";
 
             string password = PasswordOf(encryptionKey);
-            byte[] key = DerivedKeys.Find(password, _salt, KeyDerivationIterations) ?? DeriveKey(password, _salt, KeyDerivationIterations);
+            byte[] key = KeyFor(password);
 
             byte[] nonce = RandomNumberGenerator.GetBytes(_nonceSizeInBytes);
             byte[] message = Encoding.UTF8.GetBytes(plainText);
@@ -124,7 +125,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 throw new EncryptionException(Language.ErrorDecryptionFailed);
 
             string password = PasswordOf(decryptionKey);
-            byte[] key = DerivedKeys.Find(password, _salt, KeyDerivationIterations) ?? DeriveKey(password, _salt, KeyDerivationIterations);
+            byte[] key = KeyFor(password);
 
             byte[] plainText;
             lock (_aeadBlockCipher)
@@ -150,6 +151,11 @@ namespace mRemoteNG.Security.SymmetricEncryption
             DerivedKeys.Remember(password, _salt, KeyDerivationIterations, key);
             return Encoding.UTF8.GetString(plainText);
         }
+
+        private byte[] KeyFor(string password) =>
+            DerivedKeys.TryFind(password, _salt, KeyDerivationIterations, out byte[] key)
+                ? key
+                : DeriveKey(password, _salt, KeyDerivationIterations);
 
         private static string PasswordOf(SecureString key)
         {
@@ -181,11 +187,11 @@ namespace mRemoteNG.Security.SymmetricEncryption
             private const int Capacity = 16;
             private static readonly Dictionary<string, byte[]> Keys = new(StringComparer.Ordinal);
 
-            public static byte[] Find(string password, byte[] salt, int iterations)
+            public static bool TryFind(string password, byte[] salt, int iterations, out byte[] key)
             {
                 string id = IdOf(password, salt, iterations);
                 lock (Keys)
-                    return Keys.TryGetValue(id, out byte[] key) ? key : null;
+                    return Keys.TryGetValue(id, out key);
             }
 
             public static void Remember(string password, byte[] salt, int iterations, byte[] key)

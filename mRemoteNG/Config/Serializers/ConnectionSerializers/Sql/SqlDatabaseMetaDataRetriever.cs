@@ -80,7 +80,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
         /// The provider the passwords of this database are encrypted with: its salt is written
         /// along, so it must be the one the database already has, or a new one for a new database.
         /// </param>
-        public void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector, DerivedKeyCryptographyProvider cryptographyProvider)
+        public static void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector, DerivedKeyCryptographyProvider cryptographyProvider)
         {
             if (rootTreeNode == null)
             {
@@ -108,7 +108,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             AddParameter(cmd, "@Name", rootTreeNode.Name);
             AddParameter(cmd, "@Protected", strProtected);
             AddParameter(cmd, "@ConfVersion", ConnectionsFileInfo.ConnectionFileVersion.ToString());
-            AddParameter(cmd, "@KdfSalt", Convert.ToBase64String(cryptographyProvider.Salt));
+            AddParameter(cmd, "@KdfSalt", Convert.ToBase64String(cryptographyProvider.GetSalt()));
             AddParameter(cmd, "@KdfIterations", cryptographyProvider.KeyDerivationIterations);
             cmd.ExecuteNonQuery();
         }

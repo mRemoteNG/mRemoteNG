@@ -153,7 +153,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
             const string update = "UPDATE tblRoot SET Protected = @Protected, KdfSalt = @KdfSalt, KdfIterations = @KdfIterations, ConfVersion = @ConfVersion;";
             using DbCommand command = Command(IsMsSql ? update : $"SET SQL_SAFE_UPDATES=0; {update} SET SQL_SAFE_UPDATES=1;", transaction);
             AddParameter(command, "@Protected", Reencrypt(protectedValue, oldProvider, newProvider, _password));
-            AddParameter(command, "@KdfSalt", Convert.ToBase64String(newProvider.Salt));
+            AddParameter(command, "@KdfSalt", Convert.ToBase64String(newProvider.GetSalt()));
             AddParameter(command, "@KdfIterations", newProvider.KeyDerivationIterations);
             AddParameter(command, "@ConfVersion", _version.ToString());
             command.ExecuteNonQuery();

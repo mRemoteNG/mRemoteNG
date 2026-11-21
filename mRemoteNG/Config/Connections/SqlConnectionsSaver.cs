@@ -59,7 +59,7 @@ namespace mRemoteNG.Config.Connections
                 // Write it before the version check instead of dereferencing null.
                 if (metaData == null)
                 {
-                    metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector, DerivedKeyCryptographyProvider.WithNewSalt());
+                    SqlDatabaseMetaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector, DerivedKeyCryptographyProvider.WithNewSalt());
                     metaData = metaDataRetriever.GetDatabaseMetaData(dbConnector);
                 }
 
@@ -85,7 +85,7 @@ namespace mRemoteNG.Config.Connections
                     return;
                 }
 
-                metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector, cryptographyProvider);
+                SqlDatabaseMetaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector, cryptographyProvider);
                 UpdateConnectionsTable(rootTreeNode, dbConnector, cryptographyProvider);
                 UpdateUpdatesTable(dbConnector);
 

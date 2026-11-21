@@ -66,7 +66,7 @@ namespace mRemoteNGTests.Security
             Assert.That(cryptoProvider, Is.Not.Null);
             Assert.Multiple(() =>
             {
-                Assert.That(cryptoProvider.Salt, Is.EqualTo(salt));
+                Assert.That(cryptoProvider.GetSalt(), Is.EqualTo(salt));
                 Assert.That(cryptoProvider.CipherEngine, Is.EqualTo(BlockCipherEngines.Serpent));
                 Assert.That(cryptoProvider.CipherMode, Is.EqualTo(BlockCipherModes.EAX));
                 Assert.That(cryptoProvider.KeyDerivationIterations, Is.EqualTo(1234));

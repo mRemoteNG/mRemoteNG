@@ -115,13 +115,13 @@ public class SqlDatabaseMetaDataRetrieverTests
         RecordingDatabaseConnector connector = new(rowsInRoot: 1);
         DerivedKeyCryptographyProvider provider = new(DerivedKeyCryptographyProvider.NewSalt(), 1000);
 
-        new SqlDatabaseMetaDataRetriever().WriteDatabaseMetaData(new RootNodeInfo(RootNodeType.Connection), connector, provider);
+        SqlDatabaseMetaDataRetriever.WriteDatabaseMetaData(new RootNodeInfo(RootNodeType.Connection), connector, provider);
 
         Assert.Multiple(() =>
         {
             Assert.That(connector.Executed.Select(command => command.Text), Has.None.Contains("TRUNCATE"));
             Assert.That(connector.Executed.Last().Text, Does.Contain("UPDATE tblRoot SET"));
-            Assert.That(connector.Executed.Last().Parameters["@KdfSalt"], Is.EqualTo(Convert.ToBase64String(provider.Salt)));
+            Assert.That(connector.Executed.Last().Parameters["@KdfSalt"], Is.EqualTo(Convert.ToBase64String(provider.GetSalt())));
         });
     }
 
@@ -131,13 +131,13 @@ public class SqlDatabaseMetaDataRetrieverTests
         RecordingDatabaseConnector connector = new(rowsInRoot: 0);
         DerivedKeyCryptographyProvider provider = new(DerivedKeyCryptographyProvider.NewSalt(), 1000);
 
-        new SqlDatabaseMetaDataRetriever().WriteDatabaseMetaData(new RootNodeInfo(RootNodeType.Connection), connector, provider);
+        SqlDatabaseMetaDataRetriever.WriteDatabaseMetaData(new RootNodeInfo(RootNodeType.Connection), connector, provider);
 
         Assert.Multiple(() =>
         {
             Assert.That(connector.Executed.Select(command => command.Text), Has.None.Contains("TRUNCATE"));
             Assert.That(connector.Executed.Last().Text, Does.StartWith("INSERT INTO tblRoot"));
-            Assert.That(connector.Executed.Last().Parameters["@KdfSalt"], Is.EqualTo(Convert.ToBase64String(provider.Salt)));
+            Assert.That(connector.Executed.Last().Parameters["@KdfSalt"], Is.EqualTo(Convert.ToBase64String(provider.GetSalt())));
         });
     }
 

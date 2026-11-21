@@ -32,7 +32,7 @@ public class SqlConnectionListMetaDataTests
         Assert.That(provider, Is.Not.Null);
         Assert.Multiple(() =>
         {
-            Assert.That(provider.Salt, Is.EqualTo(salt));
+            Assert.That(provider.GetSalt(), Is.EqualTo(salt));
             Assert.That(provider.KeyDerivationIterations, Is.EqualTo(1000));
         });
     }
