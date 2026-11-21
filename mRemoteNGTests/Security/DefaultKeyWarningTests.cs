@@ -1,7 +1,13 @@
+using System;
+using System.IO;
 using System.Linq;
+using mRemoteNG.App;
+using mRemoteNG.Config;
+using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -110,4 +116,39 @@ public class DefaultKeyWarningTests
 
         Assert.That(Warnings, Is.EqualTo(2));
     }
+
+    // A password added during the session is saved under the default key before the next load.
+    [Test]
+    public void SavingAPasswordUnderTheDefaultKeyWarnsAboutIt()
+    {
+        Assert.That(WarningsAfterSaving(useDpapi: false), Is.EqualTo(1));
+    }
+
+    [Test]
+    public void SavingWithDpapiDoesNotWarn()
+    {
+        Assert.That(WarningsAfterSaving(useDpapi: true), Is.Zero);
+    }
+
+    private int WarningsAfterSaving(bool useDpapi)
+    {
+        string directory = Path.Combine(Path.GetTempPath(), "mrng-default-key-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(directory);
+        bool previousDpapi = mRemoteNG.Properties.OptionsSecurityPage.Default.UseDpapiProtection;
+        int before = FileWarningsIn(Runtime.MessageCollector);
+        try
+        {
+            mRemoteNG.Properties.OptionsSecurityPage.Default.UseDpapiProtection = useDpapi;
+            new XmlConnectionsSaver(Path.Combine(directory, "confCons.xml"), new SaveFilter()).Save(_model);
+            return FileWarningsIn(Runtime.MessageCollector) - before;
+        }
+        finally
+        {
+            mRemoteNG.Properties.OptionsSecurityPage.Default.UseDpapiProtection = previousDpapi;
+            Directory.Delete(directory, true);
+        }
+    }
+
+    private static int FileWarningsIn(MessageCollector messageCollector) =>
+        messageCollector.Messages.Count(m => m.Text == Language.WarningDefaultKeyConnectionsFile);
 }

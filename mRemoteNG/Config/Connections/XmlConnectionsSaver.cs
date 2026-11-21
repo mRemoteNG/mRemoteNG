@@ -6,6 +6,7 @@ using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
+using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Properties;
@@ -50,6 +51,8 @@ namespace mRemoteNG.Config.Connections
 
             FileDataProviderWithRollingBackup fileDataProvider = new(_connectionFileName);
             fileDataProvider.Save(xml);
+
+            DefaultKeyWarning.ForConnectionsFile(connectionTreeModel, cryptographyProvider is DpapiCryptographyProvider, Runtime.MessageCollector);
         }
     }
 }

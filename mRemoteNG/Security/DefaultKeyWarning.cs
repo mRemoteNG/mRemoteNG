@@ -13,7 +13,8 @@ namespace mRemoteNG.Security
     /// A connection list whose root node has no password of its own encrypts its passwords under
     /// the default key, which is public, so the encryption only hides them. This says so in the
     /// Notifications panel, once a session for the connections file and once for the database,
-    /// when the list has passwords stored in it.
+    /// when the list has passwords stored in it: after a load, or after a save, since a password
+    /// added or a root password taken off during the session is saved under the default key too.
     /// </summary>
     [SupportedOSPlatform("windows")]
     public static class DefaultKeyWarning
@@ -21,22 +22,22 @@ namespace mRemoteNG.Security
         private static int _connectionsFileWarned;
         private static int _databaseWarned;
 
-        /// <param name="connectionTree">The connections just loaded from the file.</param>
+        /// <param name="connectionTree">The connections just loaded from the file or saved to it.</param>
         /// <param name="dpapiProtected">True for a file protected with DPAPI, which uses no key of its own.</param>
         /// <param name="messageCollector">Where the warning goes.</param>
         public static void ForConnectionsFile(ConnectionTreeModel connectionTree, bool dpapiProtected, MessageCollector messageCollector)
         {
-            if (dpapiProtected || !Applies(connectionTree)) return;
+            if (dpapiProtected || Volatile.Read(ref _connectionsFileWarned) == 1 || !Applies(connectionTree)) return;
             if (Interlocked.Exchange(ref _connectionsFileWarned, 1) == 1) return;
 
             messageCollector.AddMessage(MessageClass.WarningMsg, Language.WarningDefaultKeyConnectionsFile);
         }
 
-        /// <param name="connectionTree">The connections just loaded from the database.</param>
+        /// <param name="connectionTree">The connections just loaded from the database or saved to it.</param>
         /// <param name="messageCollector">Where the warning goes.</param>
         public static void ForDatabase(ConnectionTreeModel connectionTree, MessageCollector messageCollector)
         {
-            if (!Applies(connectionTree)) return;
+            if (Volatile.Read(ref _databaseWarned) == 1 || !Applies(connectionTree)) return;
             if (Interlocked.Exchange(ref _databaseWarned, 1) == 1) return;
 
             messageCollector.AddMessage(MessageClass.WarningMsg, Language.WarningDefaultKeyDatabase);
