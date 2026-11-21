@@ -51,7 +51,7 @@ namespace mRemoteNG.Config.Connections
             using (IDatabaseConnector dbConnector = DatabaseConnectorFactory.DatabaseConnectorFromSettings())
             {
                 dbConnector.Connect();
-                SqlDatabaseVersionVerifier databaseVersionVerifier = new(dbConnector);
+                SqlDatabaseVersionVerifier databaseVersionVerifier = new(dbConnector, rootTreeNode.PasswordString.ConvertToSecureString());
                 SqlDatabaseMetaDataRetriever metaDataRetriever = new();
                 SqlConnectionListMetaData metaData = metaDataRetriever.GetDatabaseMetaData(dbConnector);
 
@@ -59,7 +59,7 @@ namespace mRemoteNG.Config.Connections
                 // Write it before the version check instead of dereferencing null.
                 if (metaData == null)
                 {
-                    metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector);
+                    SqlDatabaseMetaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector, DerivedKeyCryptographyProvider.WithNewSalt());
                     metaData = metaDataRetriever.GetDatabaseMetaData(dbConnector);
                 }
 
@@ -75,8 +75,18 @@ namespace mRemoteNG.Config.Connections
                     return;
                 }
 
-                metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector);
-                UpdateConnectionsTable(rootTreeNode, dbConnector);
+                // The upgrade to 3.4, when it just ran, gave the database its salt.
+                if (metaData.KdfSalt == null)
+                    metaData = metaDataRetriever.GetDatabaseMetaData(dbConnector);
+
+                if (metaData?.CryptographyProvider() is not DerivedKeyCryptographyProvider cryptographyProvider)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ErrorConnectionListSaveFailed);
+                    return;
+                }
+
+                SqlDatabaseMetaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector, cryptographyProvider);
+                UpdateConnectionsTable(rootTreeNode, dbConnector, cryptographyProvider);
                 UpdateUpdatesTable(dbConnector);
 
             }
@@ -114,61 +124,11 @@ namespace mRemoteNG.Config.Connections
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Saved local connection properties");
         }
 
-        private void UpdateRootNodeTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
-        {
-            // TODO: use transaction, but method not used at all?
-            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-            string strProtected;
-            if (rootTreeNode != null)
-            {
-                if (rootTreeNode.Password)
-                {
-                    System.Security.SecureString password = rootTreeNode.PasswordString.ConvertToSecureString();
-                    strProtected = cryptographyProvider.Encrypt("ThisIsProtected", password);
-                }
-                else
-                {
-                    strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
-                }
-            }
-            else
-            {
-                strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
-            }
-
-            System.Data.Common.DbCommand dbQuery = databaseConnector.DbCommand("TRUNCATE TABLE tblRoot");
-            dbQuery.ExecuteNonQuery();
-
-            if (rootTreeNode != null)
-            {
-                dbQuery = databaseConnector.DbCommand(
-                    "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(@Name, 0, @Protected, @Version)");
-                DbParameter nameParam = dbQuery.CreateParameter();
-                nameParam.ParameterName = "@Name";
-                nameParam.Value = rootTreeNode.Name;
-                DbParameter protectedParam = dbQuery.CreateParameter();
-                protectedParam.ParameterName = "@Protected";
-                protectedParam.Value = strProtected;
-                DbParameter versionParam = dbQuery.CreateParameter();
-                versionParam.ParameterName = "@Version";
-                versionParam.Value = ConnectionsFileInfo.ConnectionFileVersion;
-                dbQuery.Parameters.Add(nameParam);
-                dbQuery.Parameters.Add(protectedParam);
-                dbQuery.Parameters.Add(versionParam);
-                dbQuery.ExecuteNonQuery();
-            }
-            else
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
-            }
-        }
-
-        private void UpdateConnectionsTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
+        private void UpdateConnectionsTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector, ICryptographyProvider cryptoProvider)
         {
             SqlDataProvider dataProvider = new(databaseConnector);
             DataTable currentDataTable = dataProvider.Load();
 
-            LegacyRijndaelCryptographyProvider cryptoProvider = new();
             DataTableSerializer serializer = new(_saveFilter, cryptoProvider, rootTreeNode.PasswordString.ConvertToSecureString());
             serializer.SetSourceDataTable(currentDataTable);
 

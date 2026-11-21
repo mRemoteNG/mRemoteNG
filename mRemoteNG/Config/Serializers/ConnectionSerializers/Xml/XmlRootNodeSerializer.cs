@@ -23,6 +23,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute(XName.Get("EncryptionEngine"), cryptographyProvider.CipherEngine));
             element.Add(new XAttribute(XName.Get("BlockCipherMode"), cryptographyProvider.CipherMode));
             element.Add(new XAttribute(XName.Get("KdfIterations"), cryptographyProvider.KeyDerivationIterations));
+            // The key is derived once for the whole file from this salt (file format 3.0); without
+            // it, readers derive a key for each value, from the salt stored with that value.
+            if (cryptographyProvider is DerivedKeyCryptographyProvider derivedKeyProvider)
+                element.Add(new XAttribute(XName.Get("KdfSalt"), Convert.ToBase64String(derivedKeyProvider.GetSalt())));
             element.Add(new XAttribute(XName.Get("FullFileEncryption"), fullFileEncryption.ToString().ToLowerInvariant()));
             if (cryptographyProvider is DpapiCryptographyProvider)
                 element.Add(new XAttribute(XName.Get("KeyProtection"), "Dpapi"));

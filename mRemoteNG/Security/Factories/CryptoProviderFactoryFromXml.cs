@@ -27,9 +27,14 @@ namespace mRemoteNG.Security.Factories
                                                             _element?.Attribute("EncryptionEngine")?.Value ?? "");
                 BlockCipherModes mode = (BlockCipherModes)Enum.Parse(typeof(BlockCipherModes),
                                                         _element?.Attribute("BlockCipherMode")?.Value ?? "");
-                cryptoProvider = new CryptoProviderFactory(engine, mode).Build();
-
                 int keyDerivationIterations = int.Parse(_element?.Attribute("KdfIterations")?.Value ?? "");
+
+                // A connections file from format 3.0 on has one salt for the whole file.
+                string salt = _element?.Attribute("KdfSalt")?.Value;
+                if (!string.IsNullOrEmpty(salt))
+                    return new CryptoProviderFactory(engine, mode).BuildWithKeyDerivedOnce(Convert.FromBase64String(salt), keyDerivationIterations);
+
+                cryptoProvider = new CryptoProviderFactory(engine, mode).Build();
                 cryptoProvider.KeyDerivationIterations = keyDerivationIterations;
             }
             catch (Exception)

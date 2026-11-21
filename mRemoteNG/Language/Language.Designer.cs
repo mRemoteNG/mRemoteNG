@@ -2469,6 +2469,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The connections in the database are stored in version {0}, which this version of mRemoteNG cannot read: it reads up to version {1}. Update mRemoteNG to open them..
+        /// </summary>
+        internal static string ErrorNewerDatabaseVersion {
+            get {
+                return ResourceManager.GetString("ErrorNewerDatabaseVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Platform error: {0}.
         /// </summary>
         internal static string ErrorPlatformNotSupported {

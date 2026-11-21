@@ -52,6 +52,15 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                     Export = dbDataReader["Export"].Equals(1),
                     ConfVersion = new Version(Convert.ToString(dbDataReader["confVersion"], CultureInfo.InvariantCulture) ?? string.Empty)
                 };
+
+                // A database before version 3.4 has neither column.
+                if (HasColumn(dbDataReader, "KdfSalt") && dbDataReader["KdfSalt"] is string salt && salt != "")
+                {
+                    metaData.KdfSalt = Convert.FromBase64String(salt);
+                    metaData.KdfIterations = dbDataReader["KdfIterations"] is DBNull
+                        ? DerivedKeyCryptographyProvider.DefaultIterations
+                        : Convert.ToInt32(dbDataReader["KdfIterations"], CultureInfo.InvariantCulture);
+                }
             }
             catch (Exception ex)
             {
@@ -67,61 +76,75 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             return metaData;
         }
 
-        public void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
+        /// <param name="cryptographyProvider">
+        /// The provider the passwords of this database are encrypted with: its salt is written
+        /// along, so it must be the one the database already has, or a new one for a new database.
+        /// </param>
+        public static void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector, DerivedKeyCryptographyProvider cryptographyProvider)
         {
-            // TODO: use transaction
-
-            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
+            if (rootTreeNode == null)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
+                return;
+            }
 
             string strProtected;
 
-            if (rootTreeNode != null)
+            if (rootTreeNode.Password)
             {
-                if (rootTreeNode.Password)
-                {
-                    SecureString password = rootTreeNode.PasswordString.ConvertToSecureString();
+                SecureString password = rootTreeNode.PasswordString.ConvertToSecureString();
 
-                    strProtected = cryptographyProvider.Encrypt("ThisIsProtected", password);
-                }
-                else
-                {
-                    strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
-                }
+                strProtected = cryptographyProvider.Encrypt("ThisIsProtected", password);
             }
             else
             {
                 strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
             }
 
-            DbCommand cmd = databaseConnector.DbCommand("TRUNCATE TABLE tblRoot");
+            // The root row holds the salt of every password in the database. Emptying the table
+            // and inserting the row again would lose the salt, and the passwords with it, if
+            // anything failed in between, so a row that is there is changed in one statement.
+            DbCommand cmd = databaseConnector.DbCommand(HasRootRow(databaseConnector) ? UpdateRootRow(databaseConnector) : InsertRootRow);
+            AddParameter(cmd, "@Name", rootTreeNode.Name);
+            AddParameter(cmd, "@Protected", strProtected);
+            AddParameter(cmd, "@ConfVersion", ConnectionsFileInfo.ConnectionFileVersion.ToString());
+            AddParameter(cmd, "@KdfSalt", Convert.ToBase64String(cryptographyProvider.GetSalt()));
+            AddParameter(cmd, "@KdfIterations", cryptographyProvider.KeyDerivationIterations);
             cmd.ExecuteNonQuery();
+        }
 
-            if (rootTreeNode != null)
+        private const string InsertRootRow =
+            "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion, KdfSalt, KdfIterations) VALUES(@Name, 0, @Protected, @ConfVersion, @KdfSalt, @KdfIterations)";
+
+        private static string UpdateRootRow(IDatabaseConnector databaseConnector)
+        {
+            const string update = "UPDATE tblRoot SET Name = @Name, Export = 0, Protected = @Protected, ConfVersion = @ConfVersion, KdfSalt = @KdfSalt, KdfIterations = @KdfIterations;";
+            return databaseConnector is MSSqlDatabaseConnector ? update : $"SET SQL_SAFE_UPDATES=0; {update} SET SQL_SAFE_UPDATES=1;";
+        }
+
+        private static bool HasRootRow(IDatabaseConnector databaseConnector)
+        {
+            using DbCommand count = databaseConnector.DbCommand("SELECT COUNT(*) FROM tblRoot");
+            return Convert.ToInt32(count.ExecuteScalar(), CultureInfo.InvariantCulture) > 0;
+        }
+
+        private static void AddParameter(DbCommand command, string name, object value)
+        {
+            DbParameter parameter = command.CreateParameter();
+            parameter.ParameterName = name;
+            parameter.Value = value;
+            command.Parameters.Add(parameter);
+        }
+
+        private static bool HasColumn(DbDataReader reader, string name)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
             {
-                cmd = databaseConnector.DbCommand(
-                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(@Name, 0, @Protected, @ConfVersion)");
-
-                DbParameter nameParam = cmd.CreateParameter();
-                nameParam.ParameterName = "@Name";
-                nameParam.Value = rootTreeNode.Name;
-                cmd.Parameters.Add(nameParam);
-
-                DbParameter protectedParam = cmd.CreateParameter();
-                protectedParam.ParameterName = "@Protected";
-                protectedParam.Value = strProtected;
-                cmd.Parameters.Add(protectedParam);
-
-                DbParameter confVersionParam = cmd.CreateParameter();
-                confVersionParam.ParameterName = "@ConfVersion";
-                confVersionParam.Value = ConnectionsFileInfo.ConnectionFileVersion.ToString();
-                cmd.Parameters.Add(confVersionParam);
-
-                cmd.ExecuteNonQuery();
+                if (string.Equals(reader.GetName(i), name, StringComparison.OrdinalIgnoreCase))
+                    return true;
             }
-            else
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
-            }
+
+            return false;
         }
 
         private bool IsValidTableName(string tableName)
@@ -422,7 +445,9 @@ CREATE TABLE [dbo].[tblRoot] (
         [Name] [varchar] (2048) NOT NULL,
         [Export] [bit] NOT NULL,
         [Protected] [varchar] (4048) NOT NULL,
-        [ConfVersion] [varchar] (15) NOT NULL
+        [ConfVersion] [varchar] (15) NOT NULL,
+        [KdfSalt] [varchar] (64) NULL,
+        [KdfIterations] [int] NULL
 ) ON [PRIMARY]
 
 CREATE TABLE [dbo].[tblUpdate] (
@@ -641,7 +666,9 @@ CREATE TABLE `tblRoot` (
     `Name` varchar(2048) NOT NULL,
     `Export` tinyint NOT NULL,
     `Protected` varchar(4048) NOT NULL,
-    `ConfVersion` varchar(15) NOT NULL
+    `ConfVersion` varchar(15) NOT NULL,
+    `KdfSalt` varchar(64) DEFAULT NULL,
+    `KdfIterations` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
