@@ -94,6 +94,19 @@ Shell Metacharacter Escaping
 To disable both argument splitting and shell metacharacter escaping for a variable, precede its name with an exclamation point (!).
 For example, %!USERFIELD%. This is not recommended and may cause unexpected results.
 
+Batch Files and cmd
+-------------------
+
+When the Filename is a batch file (.cmd or .bat) or cmd itself, cmd.exe reads the arguments. It also splits
+arguments at commas (,), semicolons (;) and equals signs (=). For these tools:
+
+- A variable inside quotation marks, for example ``"%PASSWORD%"``, has its quotation marks doubled and its
+  percent signs protected. Nothing else is escaped, because cmd takes the other metacharacters literally inside quotes.
+- A variable outside quotation marks whose value contains a space, tab, comma, semicolon, equals sign or quotation mark
+  is put in quotation marks for you, so it is passed as one argument. In the batch file, use %~1 instead of %1
+  to read the value without the quotation marks.
+- %!USERFIELD% outside quotation marks is still inserted unchanged.
+
 Only variables that have been expanded will be escaped. It is up to you to escape the rest of the arguments.
 
 See Also

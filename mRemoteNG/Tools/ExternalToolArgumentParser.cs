@@ -13,6 +13,16 @@ namespace mRemoteNG.Tools
     {
         private readonly ConnectionInfo _connectionInfo = connectionInfo;
 
+        // cmd.exe splits arguments on these even when they are caret-escaped
+        private static readonly char[] CmdArgumentSeparators = [' ', '\t', ',', ';', '=', '"'];
+
+        /// <summary>
+        /// Set when the arguments are parsed by cmd.exe (cmd itself, or a .cmd/.bat file).
+        /// A value that cmd would split into several arguments is then quoted (unless it uses
+        /// %!NAME%), and values already inside quotes are escaped so they cannot end them.
+        /// </summary>
+        public bool QuoteValuesForCmd { get; init; }
+
         public string ParseArguments(string input)
         {
             List<Replacement> replacements = BuildReplacementList(input);
@@ -117,15 +127,31 @@ namespace mRemoteNG.Tools
                         ? input.Substring(tokenEnd + 1, 1).ToCharArray()[0]
                         : '\0';
 
-                    if (escape == EscapeType.All)
+                    bool insideQuotes = IsInsideQuotes(input, tokenStart);
+                    if (QuoteValuesForCmd && insideQuotes)
                     {
-                        replacementValue = CommandLineArguments.EscapeBackslashes(replacementValue);
-                        if (trailing == '\'')
-                            replacementValue = CommandLineArguments.EscapeBackslashesForTrailingQuote(replacementValue);
+                        // Inside quotes cmd takes & | < > ^ literally, so caret escaping would show up in
+                        // the value. Escape only what could end the quotes or expand a variable. This
+                        // applies to %!NAME% too, so a value can never break out and run a command.
+                        replacementValue = EscapeForCmdQuotes(replacementValue);
                     }
+                    else if (QuoteValuesForCmd && escape != EscapeType.None &&
+                             replacementValue.IndexOfAny(CmdArgumentSeparators) >= 0)
+                    {
+                        replacementValue = "\"" + EscapeForCmdQuotes(replacementValue) + "\"";
+                    }
+                    else
+                    {
+                        if (escape == EscapeType.All)
+                        {
+                            replacementValue = CommandLineArguments.EscapeBackslashes(replacementValue);
+                            if (trailing == '"')
+                                replacementValue = CommandLineArguments.EscapeBackslashesForTrailingQuote(replacementValue);
+                        }
 
-                    if (escape == EscapeType.All || escape == EscapeType.ShellMetacharacters)
-                        replacementValue = CommandLineArguments.EscapeShellMetacharacters(replacementValue);
+                        if (escape == EscapeType.All || escape == EscapeType.ShellMetacharacters)
+                            replacementValue = CommandLineArguments.EscapeShellMetacharacters(replacementValue);
+                    }
 
                     replacements.Add(new Replacement(tokenStart, tokenLength, replacementValue));
                     index = tokenEnd + 1;
@@ -137,6 +163,28 @@ namespace mRemoteNG.Tools
             } while (true);
 
             return replacements;
+        }
+
+        private static bool IsInsideQuotes(string input, int position)
+        {
+            int quotes = 0;
+            for (int i = 0; i < position; i++)
+            {
+                if (input[i] == '"')
+                    quotes++;
+            }
+
+            return quotes % 2 == 1;
+        }
+
+        /// <summary>
+        /// Escapes a value placed inside double quotes on a cmd.exe command line: embedded quotes
+        /// are doubled so they cannot close the argument, and % becomes %%cd:~,% (which cmd
+        /// expands to %) so environment variables in the value are not expanded.
+        /// </summary>
+        private static string EscapeForCmdQuotes(string value)
+        {
+            return value.Replace("\"", "\"\"").Replace("%", "%%cd:~,%");
         }
 
         private EscapeType DetermineEscapeType(string token)
