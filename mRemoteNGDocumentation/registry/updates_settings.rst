@@ -176,7 +176,8 @@ Represents the authentication password for the proxy.
     If **UseProxyForUpdates** and **ProxyAuthUser** is ``false``, these settings do not take effect.
 
 
-.. warning::
+.. note::
+  The value is a password encrypted for this computer, see :ref:`Encrypted Passwords <registry_encrypted_passwords>`.
   Plain-text passwords are not supported.
 
 

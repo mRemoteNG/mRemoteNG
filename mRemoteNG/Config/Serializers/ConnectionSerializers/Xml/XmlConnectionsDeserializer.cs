@@ -37,6 +37,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         private double _confVersion;
         private XmlConnectionsDecryptor _decryptor;
         private bool _isDpapiProtected;
+
+        /// <summary>True when the file just read is protected with DPAPI instead of a key derived from a password.</summary>
+        internal bool IsDpapiProtected => _isDpapiProtected;
         private readonly string ConnectionFileName = "";
         // Must match the newest version written by XmlConnectionSerializerFactory,
         // otherwise the app refuses to open files it saved itself

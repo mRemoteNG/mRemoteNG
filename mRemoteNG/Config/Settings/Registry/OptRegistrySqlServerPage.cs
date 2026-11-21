@@ -2,7 +2,7 @@
 using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
-using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Security;
 using mRemoteNG.Tools.WindowsRegistry;
 
 namespace mRemoteNG.Config.Settings.Registry
@@ -128,20 +128,9 @@ namespace mRemoteNG.Config.Settings.Registry
         {
             if (SQLPassword.IsSet)
             {
-                // Prevents potential issues when using SQLPass later.
-                try
-                {
-                    LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-                    string decryptedPassword;
-                    string sqlPassword = SQLPassword.Value;
-                    decryptedPassword = cryptographyProvider.Decrypt(sqlPassword, Runtime.EncryptionKey);
-
+                string sqlPassword = OptionPasswords.FromRegistry(SQLPassword.Value, nameof(SQLPassword), Runtime.MessageCollector);
+                if (sqlPassword != null)
                     Properties.OptionsDBsPage.Default.SQLPass = sqlPassword;
-                }
-                catch
-                {
-                    // Fire-and-forget: The password in the registry is not encrypted.
-                }
             }
         }
 

@@ -1,4 +1,6 @@
-﻿using mRemoteNG.Config.DataProviders;
+﻿using mRemoteNG.App;
+using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using System;
@@ -30,7 +32,9 @@ namespace mRemoteNG.Config.Connections
             FileDataProvider dataProvider = new(_connectionFilePath);
             string xmlString = dataProvider.Load();
             XmlConnectionsDeserializer deserializer = new(PromptForPassword);
-            return deserializer.Deserialize(xmlString);
+            ConnectionTreeModel connectionTree = deserializer.Deserialize(xmlString);
+            DefaultKeyWarning.ForConnectionsFile(connectionTree, deserializer.IsDpapiProtected, Runtime.MessageCollector);
+            return connectionTree;
         }
 
         private Optional<SecureString> PromptForPassword()
