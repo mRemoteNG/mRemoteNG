@@ -17,6 +17,7 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenReconnectAll;
         private ToolStripSeparator _mMenViewSep1;
         public ToolStripMenuItem _mMenViewErrorsAndInfos;
+        private ToolStripMenuItem _mMenViewConnectionSearch;
         public ToolStripMenuItem _mMenViewFileMenu;
         private ToolStripMenuItem _mMenViewAddConnectionPanel;
         private ToolStripSeparator _mMenViewSep2;
@@ -49,6 +50,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewSep1 = new ToolStripSeparator();
             _mMenViewFileMenu = new ToolStripMenuItem();
             _mMenViewErrorsAndInfos = new ToolStripMenuItem();
+            _mMenViewConnectionSearch = new ToolStripMenuItem();
             _mMenViewResetLayout = new ToolStripMenuItem();
             _mMenViewLockToolbars = new ToolStripMenuItem();
             _mMenViewSep2 = new ToolStripSeparator();
@@ -65,6 +67,7 @@ namespace mRemoteNG.UI.Menu
             {
                 _mMenViewFileMenu,
                 _mMenViewErrorsAndInfos,
+                _mMenViewConnectionSearch,
                 _mMenViewQuickConnectToolbar,
                 _mMenViewExtAppsToolbar,
                 _mMenViewMultiSshToolbar,
@@ -128,6 +131,13 @@ namespace mRemoteNG.UI.Menu
             _mMenViewErrorsAndInfos.Text = Language.Notifications;
             _mMenViewErrorsAndInfos.Click += mMenViewErrorsAndInfos_Click;
             // 
+            // mMenViewConnectionSearch
+            // 
+            _mMenViewConnectionSearch.Name = "mMenViewConnectionSearch";
+            _mMenViewConnectionSearch.Size = new System.Drawing.Size(228, 22);
+            _mMenViewConnectionSearch.Text = Language.ConnectionSearch;
+            _mMenViewConnectionSearch.Click += mMenViewConnectionSearch_Click;
+            // 
             // mMenViewResetLayout
             // 
             _mMenViewResetLayout.Name = "mMenViewResetLayout";
@@ -186,6 +196,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewAddConnectionPanel.Text = Language.AddConnectionPanel;
             _mMenViewConnectionPanels.Text = Language.ConnectionPanels;
             _mMenViewErrorsAndInfos.Text = Language.Notifications;
+            _mMenViewConnectionSearch.Text = Language.ConnectionSearch;
             _mMenViewResetLayout.Text = Language.ResetLayout;
             _mMenViewLockToolbars.Text = Language.LockToolbars;
             _mMenViewQuickConnectToolbar.Text = Language.QuickConnectToolbar;
@@ -199,6 +210,7 @@ namespace mRemoteNG.UI.Menu
         internal void mMenView_DropDownOpening(object sender, EventArgs e)
         {
             _mMenViewErrorsAndInfos.Checked = !AppWindows.ErrorsForm.IsHidden;
+            _mMenViewConnectionSearch.Checked = AppWindows.ExistingSearchForm?.IsShowing == true;
             _mMenViewLockToolbars.Checked = Settings.Default.LockToolbars;
 
             _mMenViewExtAppsToolbar.Checked = TsExternalTools.Visible;
@@ -235,6 +247,17 @@ namespace mRemoteNG.UI.Menu
                 AppWindows.ErrorsForm.Hide();
                 _mMenViewErrorsAndInfos.Checked = false;
             }
+        }
+
+        private void mMenViewConnectionSearch_Click(object sender, EventArgs e)
+        {
+            ConnectionSearchWindow searchWindow = AppWindows.SearchForm;
+            if (searchWindow.IsShowing)
+                searchWindow.Hide();
+            else
+                searchWindow.ShowIn(MainForm.pnlDock);
+
+            _mMenViewConnectionSearch.Checked = searchWindow.IsShowing;
         }
 
         private void mMenViewFileMenu_Click(object sender, EventArgs e)

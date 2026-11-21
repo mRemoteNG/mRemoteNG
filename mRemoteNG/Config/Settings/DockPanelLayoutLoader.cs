@@ -79,6 +79,9 @@ namespace mRemoteNG.Config.Settings
 
                 if (persistString == typeof(ErrorAndInfoWindow).ToString())
                     return AppWindows.ErrorsForm;
+
+                if (persistString == typeof(ConnectionSearchWindow).ToString())
+                    return AppWindows.SearchForm;
             }
             catch (Exception ex)
             {

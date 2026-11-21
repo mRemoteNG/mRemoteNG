@@ -429,6 +429,9 @@
   <data name="Connections" xml:space="preserve">
     <value>Connections</value>
   </data>
+  <data name="ConnectionSearch" xml:space="preserve">
+    <value>Connection Search</value>
+  </data>
   <data name="ConnectionSetDefaultPortFailed" xml:space="preserve">
     <value>Couldn't set default port!</value>
   </data>

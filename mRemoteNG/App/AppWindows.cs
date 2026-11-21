@@ -461,6 +461,13 @@ namespace mRemoteNG.App
 
         internal static ConnectionTreeWindow? ExistingTreeForm => _treeForm;
 
+        private static ConnectionSearchWindow? _searchForm;
+
+        internal static ConnectionSearchWindow SearchForm =>
+            _searchForm is { IsDisposed: false } ? _searchForm : (_searchForm = new ConnectionSearchWindow(TreeForm));
+
+        internal static ConnectionSearchWindow? ExistingSearchForm => _searchForm;
+
         internal static ConfigWindow ConfigForm { get; set; } = new ConfigWindow();
         internal static ErrorAndInfoWindow ErrorsForm { get; set; } = new ErrorAndInfoWindow();
         internal static UpdateWindow UpdateForm { get; set; } = new UpdateWindow();

@@ -69,7 +69,53 @@ namespace mRemoteNG.UI.Window
 
         private void PlaceSearchBar(bool placeSearchBarAboveConnectionTree)
         {
+            // The option only applies while the search bar is in this window, not in the search window
+            if (!SearchBarIsHostedHere)
+                return;
+
             searchBoxLayoutPanel.Dock = placeSearchBarAboveConnectionTree ? DockStyle.Top : DockStyle.Bottom;
+        }
+
+        /// <summary>
+        /// The search bar sits in this window unless <see cref="ConnectionSearchWindow"/> is showing it.
+        /// There is only one search bar, so the search text and its handlers stay the same wherever it is.
+        /// </summary>
+        internal bool SearchBarIsHostedHere => searchBoxLayoutPanel.Parent == this;
+
+        internal void MoveSearchBarTo(Control host)
+        {
+            if (IsDisposed || host == null || searchBoxLayoutPanel.Parent == host)
+                return;
+
+            SuspendLayout();
+            host.SuspendLayout();
+            searchBoxLayoutPanel.Parent = host;
+            searchBoxLayoutPanel.Dock = DockStyle.Top;
+            host.ResumeLayout(true);
+            ResumeLayout(true);
+        }
+
+        internal void ReturnSearchBar()
+        {
+            if (IsDisposed || searchBoxLayoutPanel.IsDisposed || SearchBarIsHostedHere)
+                return;
+
+            SuspendLayout();
+            Controls.Add(searchBoxLayoutPanel);
+            // Docked controls are laid out from the highest z-order index down. Keep the search bar
+            // between the menu strip (docked first) and the tree (which fills the space left over).
+            Controls.SetChildIndex(searchBoxLayoutPanel, Controls.GetChildIndex(ConnectionTree) + 1);
+            PlaceSearchBar(Settings.Default.PlaceSearchBarAboveConnectionTree);
+            ResumeLayout(true);
+        }
+
+        private void FocusSearchBox()
+        {
+            // The search bar may be in the search window, which can be floating or auto-hidden
+            if (!SearchBarIsHostedHere && searchBoxLayoutPanel.Parent is DockContent searchWindow)
+                searchWindow.Activate();
+
+            txtSearch.Focus();
         }
 
 
@@ -372,7 +418,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 if (!char.IsLetterOrDigit(e.KeyChar)) return;
-                txtSearch.Focus();
+                FocusSearchBox();
                 txtSearch.Text = e.KeyChar.ToString();
                 txtSearch.SelectionStart = txtSearch.TextLength;
             }
@@ -395,7 +441,7 @@ namespace mRemoteNG.UI.Window
                 }
                 else if (e.Control && e.KeyCode == Keys.F)
                 {
-                    txtSearch.Focus();
+                    FocusSearchBox();
                     txtSearch.SelectAll();
                     e.Handled = true;
                 }
