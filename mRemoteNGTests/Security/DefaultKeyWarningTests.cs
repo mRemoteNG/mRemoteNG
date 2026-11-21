@@ -66,6 +66,17 @@ public class DefaultKeyWarningTests
         Assert.That(DefaultKeyWarning.Applies(_model), Is.True);
     }
 
+    // The file keeps the access token encrypted like the passwords, and the RDP connection
+    // authenticates to the gateway with it.
+    [Test]
+    public void AppliesToAGatewayAccessTokenToo()
+    {
+        _connection.Password = "";
+        _connection.RDGatewayAccessToken = "a gateway access token";
+
+        Assert.That(DefaultKeyWarning.Applies(_model), Is.True);
+    }
+
     [Test]
     public void DoesNotApplyToAnEmptyList()
     {

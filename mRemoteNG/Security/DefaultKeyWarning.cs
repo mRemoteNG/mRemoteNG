@@ -42,7 +42,10 @@ namespace mRemoteNG.Security
             messageCollector.AddMessage(MessageClass.WarningMsg, Language.WarningDefaultKeyDatabase);
         }
 
-        /// <summary>True when the root node has no password of its own and a connection or folder has a password stored.</summary>
+        /// <summary>
+        /// True when the root node has no password of its own and a connection or folder has a
+        /// password or an RD Gateway access token stored, both encrypted under the root's key.
+        /// </summary>
         internal static bool Applies(ConnectionTreeModel connectionTree)
         {
             RootNodeInfo root = connectionTree?.RootNodes.OfType<RootNodeInfo>().FirstOrDefault(node => node.Type == RootNodeType.Connection);
@@ -54,7 +57,8 @@ namespace mRemoteNG.Security
         private static bool HasStoredPassword(ConnectionInfo connection) =>
             !string.IsNullOrEmpty(connection.Password)
             || !string.IsNullOrEmpty(connection.RDGatewayPassword)
-            || !string.IsNullOrEmpty(connection.VNCProxyPassword);
+            || !string.IsNullOrEmpty(connection.VNCProxyPassword)
+            || !string.IsNullOrEmpty(connection.RDGatewayAccessToken);
 
         internal static void Reset()
         {

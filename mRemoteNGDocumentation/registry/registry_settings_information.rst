@@ -92,7 +92,7 @@ For the same reason a value made on one computer does not work on another, and a
 computer does not work: make the value on each computer, with a script run there.
 
 On the computer itself, the Secure Key Generator in Options > Security makes the value and copies it to the clipboard.
-With Windows PowerShell 5.1 a script makes it this way:
+With Windows PowerShell 5.1 a script makes it this way, and creates the key on a computer that does not have it yet:
 
 .. code:: powershell
 
@@ -102,7 +102,9 @@ With Windows PowerShell 5.1 a script makes it this way:
     $entropy = [Text.Encoding]::UTF8.GetBytes('mRemoteNG registry password')
     $protected = [Security.Cryptography.ProtectedData]::Protect($bytes, $entropy, 'LocalMachine')
     $value = 'dpapi-machine:' + [Convert]::ToBase64String($protected)
-    Set-ItemProperty -Path 'HKLM:\SOFTWARE\mRemoteNG\SQLServer\Options' -Name 'SQLPassword' -Value $value
+    $key = 'HKLM:\SOFTWARE\mRemoteNG\SQLServer\Options'
+    if (-not (Test-Path $key)) { New-Item -Path $key -Force | Out-Null }
+    Set-ItemProperty -Path $key -Name 'SQLPassword' -Value $value
 
 A value made by an earlier version, with the generator encrypting it under the default key, still works, with a
 warning in the Notifications panel: the default key is public, so anyone with a copy of the value can decrypt it, on
