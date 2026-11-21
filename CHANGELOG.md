@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.78.2]
 ### Fixed
+- fixed connection panels staying open and empty after their last connection closed (by its close button, Disconnect or the end of the session); a panel other than General now closes when nothing is left in it, as in 1.76
 - fixed app hanging on exit when PuTTY never read the password pipe; the pipe now times out and its name is no longer guessable
 - fixed the default disk drive redirection for new RDP connections coming back as "All" after a restart when "Local" or "Custom" was chosen, and an error about it in the log at every start
 - fixed random string generator never picking the last character of its pool

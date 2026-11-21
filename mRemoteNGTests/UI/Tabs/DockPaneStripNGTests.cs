@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
@@ -360,6 +361,97 @@ namespace mRemoteNGTests.UI.Tabs
                 connectionTab.Close();
                 Application.DoEvents();
             }, "Closing a connection tab while minimized to bottom auto-hide must not throw");
+        });
+
+        [TestCase("Servers", 1, 0, true, TestName = "Closing the only tab closes its panel")]
+        [TestCase("Servers", 2, 1, false, TestName = "Closing one of two tabs keeps the panel")]
+        [TestCase("General", 1, 0, false, TestName = "The General panel stays when empty")]
+        public void PanelClosesWithItsLastTab(string panelName, int tabsOpened, int tabsLeft, bool panelCloses) => RunWithMessagePump(() =>
+        {
+            using var hostForm = new Form
+            {
+                Width = 800,
+                Height = 600,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(-10000, -10000)
+            };
+
+            var dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill,
+                DocumentStyle = DocumentStyle.DockingWindow,
+                Theme = new VS2015LightTheme()
+            };
+            dockPanel.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+            hostForm.Controls.Add(dockPanel);
+            hostForm.Show();
+
+            using var panelHost = new DockContent();
+            using var connectionWindow = new ConnectionWindow(panelHost, panelName);
+            connectionWindow.Show(dockPanel, DockState.Document);
+
+            List<ConnectionTab> tabs = new();
+            for (int i = 0; i < tabsOpened; i++)
+            {
+                ConnectionTab tab = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = $"Server{i}" });
+                tab.silentClose = true;
+                tabs.Add(tab);
+            }
+            Application.DoEvents();
+
+            // Close tabs until tabsLeft remain, the way the X button or the end of a session does.
+            for (int i = tabsLeft; i < tabsOpened; i++)
+                tabs[i].Close();
+            // The panel is closed after the tab has finished closing, from the message queue.
+            for (int i = 0; i < 5; i++)
+                Application.DoEvents();
+
+            Assert.That(connectionWindow.IsDisposed, Is.EqualTo(panelCloses),
+                panelCloses ? "an empty panel must close with its last connection" : "the panel must stay open");
+        });
+
+        [Test]
+        public void PanelClosesWhenItsLastTabLeavesAfterItsCloseBegan() => RunWithMessagePump(() =>
+        {
+            // An RDP tab can leave its panel well after its close began, while the RDP control is
+            // torn down. Whenever the last tab leaves, the panel must notice and close.
+            using var hostForm = new Form
+            {
+                Width = 800,
+                Height = 600,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(-10000, -10000)
+            };
+
+            var dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill,
+                DocumentStyle = DocumentStyle.DockingWindow,
+                Theme = new VS2015LightTheme()
+            };
+            dockPanel.Theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
+            hostForm.Controls.Add(dockPanel);
+            hostForm.Show();
+
+            using var panelHost = new DockContent();
+            using var connectionWindow = new ConnectionWindow(panelHost, "Corp.SBP.COM");
+            connectionWindow.Show(dockPanel, DockState.Document);
+            ConnectionTab tab = connectionWindow.AddConnectionTab(new ConnectionInfo { Name = "sbp-inf-dc01" });
+            Application.DoEvents();
+
+            for (int i = 0; i < 5; i++)
+                Application.DoEvents();
+            Assert.That(connectionWindow.IsDisposed, Is.False, "the panel must stay while the tab is in it");
+
+            // The tab leaves the panel on its own, not through the tab's close.
+            tab.DockHandler.DockPanel = null;
+            for (int i = 0; i < 5; i++)
+                Application.DoEvents();
+
+            Assert.That(connectionWindow.IsDisposed, Is.True, "the panel must close once its last tab has left");
+            tab.Dispose();
         });
 
         [Test]
