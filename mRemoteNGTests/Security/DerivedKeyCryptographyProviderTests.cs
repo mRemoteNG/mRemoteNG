@@ -111,6 +111,21 @@ public class DerivedKeyCryptographyProviderTests
         Assert.Throws<EncryptionException>(() => Provider(DerivedKeyCryptographyProvider.NewSalt()).Decrypt(cipherText, _password));
     }
 
+    // A salt can be longer than the minimum. One that ends with the start of another password
+    // must not find the key kept for that password and the shorter salt.
+    [Test]
+    public void KeyKeptForAnotherSaltIsNotUsed()
+    {
+        DerivedKeyCryptographyProvider first = Provider();
+        DerivedKeyCryptographyProvider second = Provider([.. _salt, .. Encoding.UTF8.GetBytes("prefix")]);
+        first.Encrypt("secret", "prefixpassword".ConvertToSecureString());
+
+        string cipherText = second.Encrypt("secret", "password".ConvertToSecureString());
+
+        Assert.Throws<EncryptionException>(() => first.Decrypt(cipherText, "prefixpassword".ConvertToSecureString()));
+        Assert.That(second.Decrypt(cipherText, "password".ConvertToSecureString()), Is.EqualTo("secret"));
+    }
+
     [Test]
     public void ChangedValueIsRejected()
     {

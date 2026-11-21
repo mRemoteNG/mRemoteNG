@@ -173,8 +173,8 @@ namespace mRemoteNG.Security.SymmetricEncryption
         }
 
         /// <summary>
-        /// The keys derived in this session, found by the iteration count and a hash of the salt
-        /// and the password, so the password itself is not kept here a second time.
+        /// The keys derived in this session, found by the iteration count, the salt and a hash of
+        /// the salt and the password, so the password itself is not kept here a second time.
         /// </summary>
         private static class DerivedKeys
         {
@@ -207,7 +207,9 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 Buffer.BlockCopy(passwordBytes, 0, input, salt.Length, passwordBytes.Length);
                 try
                 {
-                    return iterations + ":" + Convert.ToBase64String(SHA256.HashData(input));
+                    // The salt is there on its own too: its length varies, so the hash alone would
+                    // not tell where the salt ends and the password begins.
+                    return iterations + ":" + Convert.ToBase64String(salt) + ":" + Convert.ToBase64String(SHA256.HashData(input));
                 }
                 finally
                 {

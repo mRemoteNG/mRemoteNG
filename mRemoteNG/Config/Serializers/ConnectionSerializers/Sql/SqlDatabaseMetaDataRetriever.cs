@@ -82,67 +82,58 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
         /// </param>
         public void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector, DerivedKeyCryptographyProvider cryptographyProvider)
         {
-            // TODO: use transaction
+            if (rootTreeNode == null)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
+                return;
+            }
 
             string strProtected;
 
-            if (rootTreeNode != null)
+            if (rootTreeNode.Password)
             {
-                if (rootTreeNode.Password)
-                {
-                    SecureString password = rootTreeNode.PasswordString.ConvertToSecureString();
+                SecureString password = rootTreeNode.PasswordString.ConvertToSecureString();
 
-                    strProtected = cryptographyProvider.Encrypt("ThisIsProtected", password);
-                }
-                else
-                {
-                    strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
-                }
+                strProtected = cryptographyProvider.Encrypt("ThisIsProtected", password);
             }
             else
             {
                 strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
             }
 
-            DbCommand cmd = databaseConnector.DbCommand("TRUNCATE TABLE tblRoot");
+            // The root row holds the salt of every password in the database. Emptying the table
+            // and inserting the row again would lose the salt, and the passwords with it, if
+            // anything failed in between, so a row that is there is changed in one statement.
+            DbCommand cmd = databaseConnector.DbCommand(HasRootRow(databaseConnector) ? UpdateRootRow(databaseConnector) : InsertRootRow);
+            AddParameter(cmd, "@Name", rootTreeNode.Name);
+            AddParameter(cmd, "@Protected", strProtected);
+            AddParameter(cmd, "@ConfVersion", ConnectionsFileInfo.ConnectionFileVersion.ToString());
+            AddParameter(cmd, "@KdfSalt", Convert.ToBase64String(cryptographyProvider.Salt));
+            AddParameter(cmd, "@KdfIterations", cryptographyProvider.KeyDerivationIterations);
             cmd.ExecuteNonQuery();
+        }
 
-            if (rootTreeNode != null)
-            {
-                cmd = databaseConnector.DbCommand(
-                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion, KdfSalt, KdfIterations) VALUES(@Name, 0, @Protected, @ConfVersion, @KdfSalt, @KdfIterations)");
+        private const string InsertRootRow =
+            "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion, KdfSalt, KdfIterations) VALUES(@Name, 0, @Protected, @ConfVersion, @KdfSalt, @KdfIterations)";
 
-                DbParameter saltParam = cmd.CreateParameter();
-                saltParam.ParameterName = "@KdfSalt";
-                saltParam.Value = Convert.ToBase64String(cryptographyProvider.Salt);
-                cmd.Parameters.Add(saltParam);
+        private static string UpdateRootRow(IDatabaseConnector databaseConnector)
+        {
+            const string update = "UPDATE tblRoot SET Name = @Name, Export = 0, Protected = @Protected, ConfVersion = @ConfVersion, KdfSalt = @KdfSalt, KdfIterations = @KdfIterations;";
+            return databaseConnector is MSSqlDatabaseConnector ? update : $"SET SQL_SAFE_UPDATES=0; {update} SET SQL_SAFE_UPDATES=1;";
+        }
 
-                DbParameter iterationsParam = cmd.CreateParameter();
-                iterationsParam.ParameterName = "@KdfIterations";
-                iterationsParam.Value = cryptographyProvider.KeyDerivationIterations;
-                cmd.Parameters.Add(iterationsParam);
+        private static bool HasRootRow(IDatabaseConnector databaseConnector)
+        {
+            using DbCommand count = databaseConnector.DbCommand("SELECT COUNT(*) FROM tblRoot");
+            return Convert.ToInt32(count.ExecuteScalar(), CultureInfo.InvariantCulture) > 0;
+        }
 
-                DbParameter nameParam = cmd.CreateParameter();
-                nameParam.ParameterName = "@Name";
-                nameParam.Value = rootTreeNode.Name;
-                cmd.Parameters.Add(nameParam);
-
-                DbParameter protectedParam = cmd.CreateParameter();
-                protectedParam.ParameterName = "@Protected";
-                protectedParam.Value = strProtected;
-                cmd.Parameters.Add(protectedParam);
-
-                DbParameter confVersionParam = cmd.CreateParameter();
-                confVersionParam.ParameterName = "@ConfVersion";
-                confVersionParam.Value = ConnectionsFileInfo.ConnectionFileVersion.ToString();
-                cmd.Parameters.Add(confVersionParam);
-
-                cmd.ExecuteNonQuery();
-            }
-            else
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
-            }
+        private static void AddParameter(DbCommand command, string name, object value)
+        {
+            DbParameter parameter = command.CreateParameter();
+            parameter.ParameterName = name;
+            parameter.Value = value;
+            command.Parameters.Add(parameter);
         }
 
         private static bool HasColumn(DbDataReader reader, string name)
