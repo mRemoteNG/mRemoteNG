@@ -1486,6 +1486,30 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultUseRCG"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultUseEntraSso {
+            get {
+                return ((bool)(this["ConDefaultUseEntraSso"]));
+            }
+            set {
+                this["ConDefaultUseEntraSso"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultUseEntraSso {
+            get {
+                return ((bool)(this["InhDefaultUseEntraSso"]));
+            }
+            set {
+                this["InhDefaultUseEntraSso"] = value;
+            }
+        }
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

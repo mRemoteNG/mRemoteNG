@@ -385,6 +385,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             RedirectKeys = connectionInfo.RedirectKeys;
             SetRedirection();
             SetAuthenticationLevel();
+            SetEntraSso();
             SetLoadBalanceInfo();
             SetRdGateway();
             ViewOnly = Force.HasFlag(ConnectionInfo.Force.ViewOnly);
@@ -587,6 +588,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
             try
             {
                 if (Force.HasFlag(ConnectionInfo.Force.NoCredentials))
+                {
+                    return;
+                }
+
+                // Entra ID SSO : aucun identifiant fourni à la session RDP
+                if (connectionInfo.UseEntraSso)
                 {
                     return;
                 }
@@ -931,6 +938,27 @@ namespace mRemoteNG.Connection.Protocol.RDP
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.RdpSetAuthenticationLevelFailed, ex);
+            }
+        }
+
+        /// <summary>
+        /// Microsoft Entra ID single sign-on (RDS AAD authentication). Requires CredSSP and
+        /// server authentication, so these are enforced when the option is enabled.
+        /// </summary>
+        private void SetEntraSso()
+        {
+            if (!connectionInfo.UseEntraSso) return;
+
+            try
+            {
+                _rdpClient.AdvancedSettings7.EnableCredSspSupport = true;
+                if (_rdpClient.AdvancedSettings5.AuthenticationLevel < 2)
+                    _rdpClient.AdvancedSettings5.AuthenticationLevel = 2;
+                SetExtendedProperty("EnableRdsAadAuth", true);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("Unable to enable Entra ID SSO.", ex);
             }
         }
 

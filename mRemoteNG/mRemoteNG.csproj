@@ -5,6 +5,7 @@
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
     <NoWarn>$(NoWarn);NU1701;CA1416;CS0067;CS0414;CS0618;CS8597;CS8600;CS8601;CS8602;CS8603;CS8604;CS8605;CS8618;CS8622;CS8625;CS8632;CS8764;CS8765;CS8767;CS8777;SYSLIB0060</NoWarn>
     <Nullable>disable</Nullable>
+    <ApplicationManifest>Properties\entra.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
     <OutputType>WinExe</OutputType>

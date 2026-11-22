@@ -5368,6 +5368,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sign in with Microsoft Entra ID single sign-on (RDS AAD authentication).
+        /// </summary>
+        internal static string PropertyDescriptionUseEntraSso {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionUseEntraSso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use the redirection server name instead of the connection hostname for RDP connections..
         /// </summary>
         internal static string PropertyDescriptionUseRedirectionServerName {
@@ -7788,6 +7797,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string UseRCG {
             get {
                 return ResourceManager.GetString("UseRCG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Entra ID SSO.
+        /// </summary>
+        internal static string UseEntraSso {
+            get {
+                return ResourceManager.GetString("UseEntraSso", resourceCulture);
             }
         }
         

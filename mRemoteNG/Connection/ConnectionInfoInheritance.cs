@@ -230,6 +230,12 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool UseRCG { get; set; }
 
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.UseEntraSso)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUseEntraSso)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UseEntraSso { get; set; }
+
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.UseRedirectionServerName)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUseRedirectionServerName)),

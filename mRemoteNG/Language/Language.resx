@@ -1208,6 +1208,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyDescriptionUseRCG" xml:space="preserve">
     <value>Use Remote Credential Guard to tunnel authentication on target back to source through the RDP channel. Kerberos requests are redirected back to the connecting device, so credentials are never sent to the remote host. Recommended for AD Protected Users accounts where NTLM authentication is disabled. Requires both client and server to be domain-joined.</value>
   </data>
+  <data name="PropertyDescriptionUseEntraSso" xml:space="preserve">
+    <value>Sign in with Microsoft Entra ID single sign-on (RDS AAD authentication). Requires CredSSP and a Microsoft Entra joined or hybrid joined remote host with Entra authentication enabled for RDP.</value>
+  </data>
   <data name="PropertyDescriptionUseRedirectionServerName" xml:space="preserve">
     <value>Use the redirection server name instead of the connection hostname for RDP connections.</value>
   </data>
@@ -1402,6 +1405,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="UseRCG" xml:space="preserve">
     <value>Use Remote Credential Guard</value>
+  </data>
+  <data name="UseEntraSso" xml:space="preserve">
+    <value>Use Entra ID SSO</value>
   </data>
   <data name="UseRedirectionServerName" xml:space="preserve">
     <value>Use Redirection Server Name</value>
