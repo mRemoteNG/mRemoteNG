@@ -12,6 +12,7 @@ enabled by choosing another theme rather then the default (vs2015light) one.
 .. toctree::
    :maxdepth: 1
 
+   themes/catppuccinMocha.rst
    themes/darculaNG.rst
    themes/vs2012Blue.rst
    themes/vs2012Dark.rst

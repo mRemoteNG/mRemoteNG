@@ -8,7 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - added a theme-aware RDP connecting panel
 ### Fixed
 - matched dotted connection-tree guides to the active theme border color
-### Fixed
 - fixed app hanging on exit when PuTTY never read the password pipe; the pipe now times out and its name is no longer guessable
 - fixed the default disk drive redirection for new RDP connections coming back as "All" after a restart when "Local" or "Custom" was chosen, and an error about it in the log at every start
 - fixed random string generator never picking the last character of its pool
