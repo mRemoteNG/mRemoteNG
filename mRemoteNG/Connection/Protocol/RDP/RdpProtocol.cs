@@ -52,7 +52,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         protected readonly uint DeviceScaleFactor = 100;
         protected readonly uint Orientation = 0;
         private AxHost AxHost => (AxHost)Control;
-
+        private bool _entraSsoRetried;
 
         #region Properties
 
@@ -1139,6 +1139,25 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private void RDPEvent_OnDisconnected(int discReason)
         {
             const int UI_ERR_NORMAL_DISCONNECT = 0xB08;
+            // Entra ID SSO : la 1re tentative peut échouer pendant la saisie du mot de passe ; on réessaie une fois
+            if (connectionInfo.UseEntraSso && !loginComplete && !_entraSsoRetried && discReason != UI_ERR_NORMAL_DISCONNECT)
+            {
+                _entraSsoRetried = true;
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Entra ID SSO: first attempt failed (code " + discReason + "), retrying once");
+                Control.BeginInvoke(new Action(() =>
+                {
+                    try
+                    {
+                        _rdpClient.Connect();
+                    }
+                    catch (Exception ex)
+                    {
+                        Runtime.MessageCollector.AddExceptionStackTrace("Entra ID SSO retry failed.", ex);
+                        Close();
+                    }
+                }));
+                return;
+            }
             if (discReason != UI_ERR_NORMAL_DISCONNECT)
             {
                 string reason = _rdpClient.GetErrorDescription((uint)discReason, (uint)_rdpClient.ExtendedDisconnectReason);
