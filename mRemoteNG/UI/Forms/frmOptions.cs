@@ -4,6 +4,7 @@ using mRemoteNG.UI.Forms.OptionsPages;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
@@ -21,6 +22,7 @@ namespace mRemoteNG.UI.Forms
         private readonly List<OptionsPage> _optionPages = [];
         private string _pageName;
         private readonly DisplayProperties _display = new();
+        private Dictionary<OptionsPage, Bitmap> _pageImages = [];
         private readonly List<string> _optionPageObjectNames;
         private bool _isLoading = true;
         private bool _isInitialized = false;
@@ -100,6 +102,8 @@ namespace mRemoteNG.UI.Forms
             btnCancel.Text = Language._Cancel;
             btnApply.Text = Language.Apply;
             ApplyTheme();
+            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            lstOptionPages.DpiChangedAfterParent += (_, _) => RefreshPageImages();
             lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;
             lstOptionPages.SelectedIndex = 0;
             Logger.Instance.Log?.Debug($"[FrmOptions_Load] Selected index set to 0");
@@ -130,6 +134,7 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyTheme()
         {
+            RefreshPageImages();
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
             BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
@@ -325,8 +330,49 @@ namespace mRemoteNG.UI.Forms
 
         private object ImageGetter(object rowobject)
         {
-            OptionsPage page = rowobject as OptionsPage;
-            return page?.PageIcon == null ? _display.ScaleImage(Properties.Resources.F1Help_16x) : _display.ScaleImage(page.PageIcon);
+            if (rowobject is not OptionsPage page) return null!;
+            if (_pageImages.TryGetValue(page, out Bitmap? cached)) return cached;
+
+            ThemeManager manager = ThemeManager.getInstance();
+            Bitmap? image = null;
+            if (manager.ActiveAndExtended)
+            {
+                string glyph = page switch
+                {
+                    StartupExitPage => "Run_16x",
+                    AppearancePage => "Panel_16x",
+                    ConnectionsPage => "Monitor_16x",
+                    TabsPanelsPage => "Tab_16x",
+                    NotificationsPage => "LogError_16x",
+                    CredentialsPage => "Key_16x",
+                    SqlServerPage => "SQLDatabase_16x",
+                    UpdatesPage => "RunUpdate_16x",
+                    ThemePage => "AppearanceEditor_16x",
+                    SecurityPage => "Lock_16x",
+                    PluginsPage => "OptionsPlugins",
+                    AdvancedPage => "Settings_16x",
+                    BackupPage => "DocumentsFolder_16x",
+                    _ => "Settings_16x"
+                };
+                int size = Math.Clamp((int)Math.Round(16 * lstOptionPages.DeviceDpi / 96d), 1, 256);
+                image = ThemeIcons.Create(glyph, manager.ActiveTheme, true, size);
+            }
+            if (image == null)
+            {
+                using Bitmap? stock = page.PageIcon?.ToBitmap();
+                image = _display.ScaleImage(stock ?? Properties.Resources.F1Help_16x);
+            }
+            _pageImages.Add(page, image);
+            return image;
+        }
+
+        private void RefreshPageImages()
+        {
+            if (Disposing || IsDisposed || _pageImages.Count == 0) return;
+            var previous = _pageImages;
+            _pageImages = [];
+            lstOptionPages.RefreshObjects(_optionPages);
+            foreach (Bitmap image in previous.Values) image.Dispose();
         }
 
         public void SetActivatedPage(string? pageName = default)

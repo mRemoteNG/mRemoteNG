@@ -3,6 +3,10 @@ using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Linq;
 using System.Runtime.Versioning;
+using System.Drawing;
+using System.Globalization;
+using System.Xml;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.Themes
 {
@@ -48,6 +52,9 @@ namespace mRemoteNG.Themes
             byte[] bytesIn = File.ReadAllBytes(themeToUpdate.URI);
             MremoteNGPaletteManipulator manipulator = new(bytesIn, themeToUpdate.ExtendedPalette);
             byte[] bytesOut = manipulator.mergePalette(themeToUpdate.ExtendedPalette);
+            XmlDocument metadata = ReadMetadata(bytesOut);
+            WriteIconMetadata((XmlElement)metadata.SelectSingleNode("/Themes/Theme")!, themeToUpdate);
+            using (MemoryStream output = new()) { metadata.Save(output); bytesOut = output.ToArray(); }
             File.WriteAllBytes(themeToUpdate.URI, bytesOut);
         }
 
@@ -69,6 +76,12 @@ namespace mRemoteNG.Themes
             MremoteNGPaletteManipulator extColorLoader = new(bytes, defaultTheme?.ExtendedPalette);
             ThemeInfo loadedTheme = new(Path.GetFileNameWithoutExtension(filename), themeBaseLoad, filename,
                                             VisualStudioToolStripExtender.VsVersion.Vs2015, extColorLoader.getColors());
+            XmlDocument metadata = ReadMetadata(bytes);
+            XmlElement? root = metadata.SelectSingleNode("/Themes/Theme") as XmlElement;
+            loadedTheme.UseFluentIcons = root?.GetAttribute("IconStyle").Equals("Fluent", StringComparison.OrdinalIgnoreCase) == true;
+            loadedTheme.UseComfortableSpacing = root?.GetAttribute("Density").Equals("Comfortable", StringComparison.OrdinalIgnoreCase) == true;
+            loadedTheme.IconColor = ParseIconColor(root?.GetAttribute("IconColor"));
+            loadedTheme.DisabledIconColor = ParseIconColor(root?.GetAttribute("IconDisabledColor"));
             if (new[] {"darcula", "vs2015blue", "vs2015dark", "vs2015light"}.Contains(
                                                                                       Path
                                                                                           .GetFileNameWithoutExtension(filename))
@@ -79,6 +92,25 @@ namespace mRemoteNG.Themes
 
             loadedTheme.IsExtendable = true;
             return loadedTheme;
+        }
+
+        private static Color ParseIconColor(string? value) => value?.Length == 8
+            && uint.TryParse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out uint argb)
+            && (argb >> 24) != 0 ? Color.FromArgb(unchecked((int)argb)) : Color.Empty;
+
+        private static XmlDocument ReadMetadata(byte[] bytes)
+        {
+            using MemoryStream stream = new(bytes);
+            using StreamReader reader = new(stream);
+            return SecureXmlHelper.LoadXmlFromString(reader.ReadToEnd());
+        }
+
+        private static void WriteIconMetadata(XmlElement root, ThemeInfo theme)
+        {
+            if (theme.UseComfortableSpacing) root.SetAttribute("Density", "Comfortable"); else root.RemoveAttribute("Density");
+            if (theme.UseFluentIcons) root.SetAttribute("IconStyle", "Fluent"); else root.RemoveAttribute("IconStyle");
+            if (!theme.IconColor.IsEmpty) root.SetAttribute("IconColor", unchecked((uint)theme.IconColor.ToArgb()).ToString("X8")); else root.RemoveAttribute("IconColor");
+            if (!theme.DisabledIconColor.IsEmpty) root.SetAttribute("IconDisabledColor", unchecked((uint)theme.DisabledIconColor.ToArgb()).ToString("X8")); else root.RemoveAttribute("IconDisabledColor");
         }
 
         /*

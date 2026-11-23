@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net11.0-windows10.0.26100.0</TargetFramework>
     <LangVersion>preview</LangVersion>
@@ -72,5 +72,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\mRemoteNG\Themes\Catppuccin Mocha.vstheme" Link="Themes\Catppuccin Mocha.vstheme" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

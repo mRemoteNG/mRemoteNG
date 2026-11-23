@@ -144,10 +144,10 @@ namespace mRemoteNG.UI.Window
                 {
                     Tag = connectionInfo,
                     DockAreas = DockAreas.Document | DockAreas.Float,
-                    Icon = ConnectionIcon.FromString(connectionInfo.Icon),
                     TabText = titleText,
                     TabPageContextMenuStrip = cmenTab
                 };
+                global::mRemoteNG.Themes.ThemeIcons.BindConnectionTab(conTab, connectionInfo);
 
                 //if (Settings.Default.AlwaysShowConnectionTabs == false)
                 // TODO: See if we can make this work with DPS...

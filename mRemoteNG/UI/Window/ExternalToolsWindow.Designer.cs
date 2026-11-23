@@ -231,7 +231,7 @@ namespace mRemoteNG.UI.Window
             // 
             // NewToolMenuItem
             // 
-            this.NewToolMenuItem.Image = global::mRemoteNG.Properties.Resources.Add_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.NewToolMenuItem, "Add_16x");
             this.NewToolMenuItem.Name = "NewToolMenuItem";
             this.NewToolMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F4)));
             this.NewToolMenuItem.Size = new System.Drawing.Size(219, 22);
@@ -241,7 +241,7 @@ namespace mRemoteNG.UI.Window
             // DeleteToolMenuItem
             // 
             this.DeleteToolMenuItem.Enabled = false;
-            this.DeleteToolMenuItem.Image = global::mRemoteNG.Properties.Resources.Remove_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.DeleteToolMenuItem, "Remove_16x");
             this.DeleteToolMenuItem.Name = "DeleteToolMenuItem";
             this.DeleteToolMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.DeleteToolMenuItem.Size = new System.Drawing.Size(219, 22);
@@ -256,7 +256,7 @@ namespace mRemoteNG.UI.Window
             // LaunchToolMenuItem
             // 
             this.LaunchToolMenuItem.Enabled = false;
-            this.LaunchToolMenuItem.Image = global::mRemoteNG.Properties.Resources.Run_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.LaunchToolMenuItem, "Run_16x");
             this.LaunchToolMenuItem.Name = "LaunchToolMenuItem";
             this.LaunchToolMenuItem.Size = new System.Drawing.Size(219, 22);
             this.LaunchToolMenuItem.Text = "Launch External Tool";
@@ -559,7 +559,7 @@ namespace mRemoteNG.UI.Window
             // 
             // NewToolToolstripButton
             // 
-            this.NewToolToolstripButton.Image = global::mRemoteNG.Properties.Resources.Add_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.NewToolToolstripButton, "Add_16x");
             this.NewToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.NewToolToolstripButton.Name = "NewToolToolstripButton";
             this.NewToolToolstripButton.Size = new System.Drawing.Size(51, 22);
@@ -569,7 +569,7 @@ namespace mRemoteNG.UI.Window
             // DeleteToolToolstripButton
             // 
             this.DeleteToolToolstripButton.Enabled = false;
-            this.DeleteToolToolstripButton.Image = global::mRemoteNG.Properties.Resources.Remove_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.DeleteToolToolstripButton, "Remove_16x");
             this.DeleteToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.DeleteToolToolstripButton.Name = "DeleteToolToolstripButton";
             this.DeleteToolToolstripButton.Size = new System.Drawing.Size(60, 22);
@@ -584,7 +584,7 @@ namespace mRemoteNG.UI.Window
             // LaunchToolToolstripButton
             // 
             this.LaunchToolToolstripButton.Enabled = false;
-            this.LaunchToolToolstripButton.Image = global::mRemoteNG.Properties.Resources.Run_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.LaunchToolToolstripButton, "Run_16x");
             this.LaunchToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.LaunchToolToolstripButton.Name = "LaunchToolToolstripButton";
             this.LaunchToolToolstripButton.Size = new System.Drawing.Size(66, 22);

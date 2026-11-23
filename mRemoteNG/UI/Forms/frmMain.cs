@@ -145,6 +145,7 @@ namespace mRemoteNG.UI.Forms
         {
             _showFullPathInTitle = Properties.OptionsAppearancePage.Default.ShowCompleteConsPathInTitle;
             InitializeComponent();
+            _quickConnectToolStrip.ConfigureAppearanceActions(msMain.Items);
 
             Screen targetScreen = (Screen.AllScreens.Length > 1) ? Screen.AllScreens[1] : Screen.AllScreens[0];
 
@@ -261,6 +262,11 @@ namespace mRemoteNG.UI.Forms
 
             DockPanelLayoutLoader uiLoader = new(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
+            if (FluentAppearance.Enabled(_themeManager))
+            {
+                _quickConnectToolStrip.Visible = true;
+                viewMenu._mMenViewQuickConnectToolbar.Checked = true;
+            }
 
             LockToolbarPositions(Properties.Settings.Default.LockToolbars);
             Properties.Settings.Default.PropertyChanged += OnApplicationSettingChanged;
@@ -430,10 +436,19 @@ namespace mRemoteNG.UI.Forms
         private void ApplyTheme()
         {
             _themeManager.ApplyThemeToTitleBar(this);
+            bool comfortable = FluentAppearance.Enabled(_themeManager);
+            FluentAppearance.ApplyFont(msMain, comfortable);
+            _quickConnectToolStrip.Visible = comfortable || Properties.Settings.Default.ViewMenuQuickConnect;
 
             if (!_themeManager.ThemingActive)
             {
                 pnlDock.Theme = _themeManager.DefaultTheme.Theme;
+                BackColor = SystemColors.Control;
+                ForeColor = SystemColors.ControlText;
+                tsContainer.TopToolStripPanel.BackColor = SystemColors.Control;
+                foreach (ToolStrip strip in new ToolStrip[] { msMain, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip })
+                    vsToolStripExtender.SetStyle(strip, _themeManager.DefaultTheme.Version, _themeManager.DefaultTheme.Theme);
+                _quickConnectToolStrip.RefreshAppearance();
                 return;
             }
 
@@ -455,6 +470,7 @@ namespace mRemoteNG.UI.Forms
                 vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
                 vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
                 vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                _quickConnectToolStrip.RefreshAppearance();
 
                 if (!_themeManager.ActiveAndExtended) return;
                 tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
@@ -926,7 +942,12 @@ namespace mRemoteNG.UI.Forms
             pnlDock.Visible = false;
 
             AppWindows.TreeForm.Show(pnlDock, DockState.DockLeft);
-            AppWindows.ConfigForm.Show(pnlDock, DockState.DockLeft);
+            if (FluentAppearance.Enabled(_themeManager))
+            {
+                AppWindows.ConfigForm.Show(AppWindows.TreeForm.Pane, DockAlignment.Bottom, 0.58);
+                pnlDock.DockLeftPortion = 235 * DeviceDpi / 96d;
+            }
+            else AppWindows.ConfigForm.Show(pnlDock, DockState.DockLeft);
             AppWindows.ConfigForm.Activate();
             AppWindows.ErrorsForm.Show(pnlDock, DockState.DockBottomAutoHide);
             viewMenu._mMenViewErrorsAndInfos.Checked = true;
@@ -1008,7 +1029,7 @@ namespace mRemoteNG.UI.Forms
                 viewMenu._mMenViewMultiSshToolbar.Checked = false;
             }
 
-            if (Properties.Settings.Default.ViewMenuQuickConnect == true)
+            if (Properties.Settings.Default.ViewMenuQuickConnect || FluentAppearance.Enabled(_themeManager))
             {
                 viewMenu.TsQuickConnect.Visible = true;
                 viewMenu._mMenViewQuickConnectToolbar.Checked = true;

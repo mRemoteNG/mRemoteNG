@@ -23,7 +23,13 @@ namespace mRemoteNG.UI.Controls
         {
             base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ActiveAndExtended) return;
+            if (!_themeManager.ActiveAndExtended)
+            {
+                ForeColor = SystemColors.WindowText;
+                BackColor = ReadOnly || !Enabled ? SystemColors.Control : SystemColors.Window;
+                Invalidate();
+                return;
+            }
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor(ReadOnly
                                                                                ? "TextBox_Disabled_Background"
@@ -33,7 +39,6 @@ namespace mRemoteNG.UI.Controls
 
         protected override void OnEnabledChanged(EventArgs e)
         {
-            _themeManager = ThemeManager.getInstance();
             _themeManager = ThemeManager.getInstance();
             if (_themeManager.ActiveAndExtended)
             {

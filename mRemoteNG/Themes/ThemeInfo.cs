@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.Versioning;
 using WeifenLuo.WinFormsUI.Docking;
@@ -71,7 +72,11 @@ namespace mRemoteNG.Themes
             ThemeInfo clonedObj = new(_name, _theme, _URI, _version, extPalette)
             {
                 IsExtendable = IsExtendable,
-                IsThemeBase = IsThemeBase
+                IsThemeBase = IsThemeBase,
+                UseFluentIcons = UseFluentIcons,
+                UseComfortableSpacing = UseComfortableSpacing,
+                IconColor = IconColor,
+                DisabledIconColor = DisabledIconColor
             };
 
             return clonedObj;
@@ -155,6 +160,11 @@ namespace mRemoteNG.Themes
         }
 
         public bool IsThemeBase { get; set; }
+
+        [Browsable(false)] public bool UseFluentIcons { get; set; }
+        [Browsable(false)] public bool UseComfortableSpacing { get; set; }
+        [Browsable(false)] public Color IconColor { get; set; }
+        [Browsable(false)] public Color DisabledIconColor { get; set; }
 
         public bool IsExtendable { get; set; }
 

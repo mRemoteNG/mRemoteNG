@@ -69,7 +69,8 @@ namespace mRemoteNG.UI.Window
 
         private void PlaceSearchBar(bool placeSearchBarAboveConnectionTree)
         {
-            searchBoxLayoutPanel.Dock = placeSearchBarAboveConnectionTree ? DockStyle.Top : DockStyle.Bottom;
+            bool comfortable = FluentAppearance.Enabled(ThemeManager.getInstance());
+            searchBoxLayoutPanel.Dock = placeSearchBarAboveConnectionTree && !comfortable ? DockStyle.Top : DockStyle.Bottom;
         }
 
 
@@ -86,6 +87,7 @@ namespace mRemoteNG.UI.Window
             txtSearch.MinimumSize = new Size(0, 14);
             txtSearch.Size = new Size(txtSearch.Size.Width, 14);
             txtSearch.Multiline = false;
+            ApplyTheme();
         }
 
         private void ApplyLanguage()
@@ -118,24 +120,33 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if (!_themeManager.ThemingActive)
-                return;
-
+            bool comfortable = FluentAppearance.Enabled(_themeManager);
+            FluentAppearance.ApplyFont(txtSearch, comfortable);
+            searchBoxLayoutPanel.Height = (int)Math.Round((comfortable ? 32 : 21) * DeviceDpi / 96d);
+            PlaceSearchBar(Settings.Default.PlaceSearchBarAboveConnectionTree);
             ThemeInfo activeTheme = _themeManager.ActiveTheme;
             vsToolStripExtender.SetStyle(msMain, activeTheme.Version, activeTheme.Theme);
             vsToolStripExtender.SetStyle(ConnectionTree.ContextMenuStrip, activeTheme.Version,
                 activeTheme.Theme);
+            FluentAppearance.ApplyStrip(msMain, activeTheme, comfortable);
 
             if (!_themeManager.ActiveAndExtended)
+            {
+                searchBoxLayoutPanel.BackColor = SystemColors.Control;
+                searchBoxLayoutPanel.ForeColor = SystemColors.ControlText;
+                txtSearch.BackColor = SystemColors.Window;
+                txtSearch.ForeColor = SystemColors.WindowText;
+                pbSearch.BackColor = SystemColors.Control;
                 return;
+            }
 
             // connection search area
-            searchBoxLayoutPanel.BackColor = activeTheme.ExtendedPalette.getColor("Dialog_Background");
+            searchBoxLayoutPanel.BackColor = activeTheme.ExtendedPalette.getColor(comfortable ? "List_Header_Background" : "Dialog_Background");
             searchBoxLayoutPanel.ForeColor = activeTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            txtSearch.BackColor = activeTheme.ExtendedPalette.getColor("TextBox_Background");
+            txtSearch.BackColor = activeTheme.ExtendedPalette.getColor(comfortable ? "List_Header_Background" : "TextBox_Background");
             txtSearch.ForeColor = activeTheme.ExtendedPalette.getColor("TextBox_Foreground");
             //Picturebox needs to be manually themed
-            pbSearch.BackColor = activeTheme.ExtendedPalette.getColor("TreeView_Background");
+            pbSearch.BackColor = searchBoxLayoutPanel.BackColor;
         }
 
         #endregion
@@ -219,13 +230,13 @@ namespace mRemoteNG.UI.Window
                 if (_sortedAz)
                 {
                     ConnectionTree.SortRecursive(ConnectionTree.GetRootConnectionNode(), ListSortDirection.Ascending);
-                    mMenSort.Image = Properties.Resources.SortDescending_16x;
+                    global::mRemoteNG.Themes.ThemeIcons.Bind(mMenSort, "SortDescending_16x");
                     _sortedAz = false;
                 }
                 else
                 {
                     ConnectionTree.SortRecursive(ConnectionTree.GetRootConnectionNode(), ListSortDirection.Descending);
-                    mMenSort.Image = Properties.Resources.SortAscending_16x;
+                    global::mRemoteNG.Themes.ThemeIcons.Bind(mMenSort, "SortAscending_16x");
                     _sortedAz = true;
                 }
             };

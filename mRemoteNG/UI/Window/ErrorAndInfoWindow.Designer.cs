@@ -99,7 +99,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cMenMCCopy
             // 
-            this.cMenMCCopy.Image = global::mRemoteNG.Properties.Resources.Copy_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.cMenMCCopy, "Copy_16x");
             this.cMenMCCopy.Name = "cMenMCCopy";
             this.cMenMCCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.cMenMCCopy.Size = new System.Drawing.Size(140, 22);
@@ -108,7 +108,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cMenMCDelete
             // 
-            this.cMenMCDelete.Image = global::mRemoteNG.Properties.Resources.Close_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.cMenMCDelete, "Close_16x");
             this.cMenMCDelete.Name = "cMenMCDelete";
             this.cMenMCDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.cMenMCDelete.Size = new System.Drawing.Size(140, 22);
