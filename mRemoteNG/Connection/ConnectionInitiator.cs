@@ -336,11 +336,19 @@ namespace mRemoteNG.Connection
             return null;
         }
 
+        // Panels already given their placement from the previous session, so it is applied once per panel
+        private readonly System.Runtime.CompilerServices.ConditionalWeakTable<ConnectionWindow, object> _placedPanels = new();
+
         /// <summary>
         /// Opens a connection in the named panel, creating the panel when there is none by that name.
         /// Used to reopen the connections of the previous session in the panels they were in.
         /// </summary>
-        public void OpenConnectionInPanel(ConnectionInfo connectionInfo, string panelName)
+        /// <param name="floatingPlacement">
+        /// Where the panel's window was when it was floating at the end of the previous session; null when
+        /// it was docked. Applied the first time the panel is used here.
+        /// </param>
+        public void OpenConnectionInPanel(ConnectionInfo connectionInfo, string panelName,
+                                          FloatingPanelPlacement floatingPlacement = null)
         {
             if (connectionInfo == null)
                 return;
@@ -349,7 +357,13 @@ namespace mRemoteNG.Connection
             if (!string.IsNullOrEmpty(panelName))
             {
                 panel = Runtime.WindowList.FromString(panelName) as ConnectionWindow
-                        ?? _panelAdder.AddPanel(panelName, showImmediately: true);
+                        ?? _panelAdder.AddPanel(panelName, showImmediately: floatingPlacement == null);
+
+                if (panel != null && floatingPlacement != null && !_placedPanels.TryGetValue(panel, out _))
+                {
+                    _placedPanels.Add(panel, null);
+                    panel.ShowFloating(FrmMain.Default.pnlDock, floatingPlacement);
+                }
             }
 
             OpenConnection(connectionInfo, ConnectionInfo.Force.None, panel);

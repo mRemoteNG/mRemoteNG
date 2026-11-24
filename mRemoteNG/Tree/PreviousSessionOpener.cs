@@ -2,6 +2,7 @@
 using mRemoteNG.Container;
 using System;
 using System.Collections.Generic;
+using mRemoteNG.UI.Panels;
 using System.Linq;
 using mRemoteNG.UI.Controls.ConnectionTree;
 using System.Runtime.Versioning;
@@ -12,7 +13,7 @@ namespace mRemoteNG.Tree
     public class PreviousSessionOpener : IConnectionTreeDelegate
     {
         private readonly IConnectionInitiator _connectionInitiator;
-        private readonly Func<IReadOnlyDictionary<string, string>>? _loadSessionPanels;
+        private readonly Func<SessionPanels>? _loadSessionPanels;
 
         public PreviousSessionOpener(IConnectionInitiator connectionInitiator)
             : this(connectionInitiator, null)
@@ -21,11 +22,12 @@ namespace mRemoteNG.Tree
 
         /// <param name="connectionInitiator">Opens the connections.</param>
         /// <param name="loadSessionPanels">
-        /// Reads the panel each connection was in at the end of the previous session, by connection Id.
-        /// Called only when there are connections to reopen. Connections without a panel open as usual.
+        /// Reads the panel each connection was in at the end of the previous session, and where the
+        /// floating panels were. Called only when there are connections to reopen. Connections without a
+        /// panel open as usual.
         /// </param>
         public PreviousSessionOpener(IConnectionInitiator connectionInitiator,
-                                     Func<IReadOnlyDictionary<string, string>>? loadSessionPanels)
+                                     Func<SessionPanels>? loadSessionPanels)
         {
             if (connectionInitiator == null)
                 throw new ArgumentNullException(nameof(connectionInitiator));
@@ -47,16 +49,20 @@ namespace mRemoteNG.Tree
             if (connectionsToReopen.Count == 0)
                 return;
 
-            IReadOnlyDictionary<string, string> sessionPanels =
-                _loadSessionPanels?.Invoke() ?? new Dictionary<string, string>();
+            SessionPanels sessionPanels = _loadSessionPanels?.Invoke() ?? SessionPanels.Empty;
 
             foreach (ConnectionInfo connectionInfo in connectionsToReopen)
             {
-                if (sessionPanels.TryGetValue(connectionInfo.ConstantID, out string? panelName) &&
+                if (sessionPanels.ConnectionPanels.TryGetValue(connectionInfo.ConstantID, out string? panelName) &&
                     !string.IsNullOrEmpty(panelName))
-                    _connectionInitiator.OpenConnectionInPanel(connectionInfo, panelName);
+                {
+                    sessionPanels.FloatingPanels.TryGetValue(panelName, out FloatingPanelPlacement? placement);
+                    _connectionInitiator.OpenConnectionInPanel(connectionInfo, panelName, placement);
+                }
                 else
+                {
                     _connectionInitiator.OpenConnection(connectionInfo);
+                }
             }
         }
     }

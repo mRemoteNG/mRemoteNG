@@ -298,6 +298,7 @@ namespace mRemoteNG.UI.Window
                         DockHandler.FloatPane.FloatWindow.ResizeEnd += Connection_ResizeEnd;
                         DockHandler.FloatPane.FloatWindow.SizeChanged += FloatWindow_SizeChanged;
                         _floatHandlersAdded = true;
+                        SizeFirstFloatLikeDocked();
                         break;
                     }
                 case DockState.Document:
@@ -313,9 +314,64 @@ namespace mRemoteNG.UI.Window
                         FrmMain.Default.ResizeBegin += Connection_ResizeBegin;
                         FrmMain.Default.ResizeEnd += Connection_ResizeEnd;
                         _documentHandlersAdded = true;
+                        RememberDockedSize();
                         break;
                     }
             }
+        }
+
+        // The size of the panel's pane while docked, used for the floating window the first time it floats
+        private Size? _dockedPaneSize;
+
+        // Set once the floating window has a size of its own: from the first float, a restored session,
+        // or Send to screen. After that, floating again keeps the floating window's size.
+        private bool _floatWindowSized;
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            RememberDockedSize();
+        }
+
+        private void RememberDockedSize()
+        {
+            if (DockState == DockState.Document && Pane is { Width: > 0, Height: > 0 } pane)
+                _dockedPaneSize = pane.Size;
+        }
+
+        /// <summary>
+        /// DockPanelSuite opens a new floating window at a small default size. The first time this panel
+        /// floats, size its window like the docked panel instead, unless something else sized it first,
+        /// as Send to screen does right after floating the panel.
+        /// </summary>
+        private void SizeFirstFloatLikeDocked()
+        {
+            if (_floatWindowSized)
+                return;
+            _floatWindowSized = true;
+
+            if (_dockedPaneSize is not { } dockedSize || DockHandler.FloatPane?.FloatWindow is not { } floatWindow)
+                return;
+
+            Size sizeWhenFloated = floatWindow.Size;
+            BeginInvoke(new Action(() =>
+            {
+                if (floatWindow.IsDisposed || floatWindow.Size != sizeWhenFloated ||
+                    floatWindow.WindowState != FormWindowState.Normal)
+                    return;
+
+                floatWindow.ClientSize = dockedSize;
+                floatWindow.Bounds = FloatWindowBounds.KeepOnScreen(floatWindow.Bounds);
+            }));
+        }
+
+        /// <summary>Shows the panel floating, at the placement saved for it at the end of the previous session.</summary>
+        internal void ShowFloating(DockPanel dockPanel, FloatingPanelPlacement placement)
+        {
+            _floatWindowSized = true;
+            Show(dockPanel, FloatWindowBounds.KeepOnScreen(placement.Bounds));
+            if (placement.Maximized && DockHandler.FloatPane?.FloatWindow is { } floatWindow)
+                floatWindow.WindowState = FormWindowState.Maximized;
         }
 
         private void ApplyLanguage()
