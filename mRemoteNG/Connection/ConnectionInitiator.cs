@@ -78,8 +78,63 @@ namespace mRemoteNG.Connection
             int? targetContentIndex = null,
             DockContent? targetPanePlaceholder = null)
         {
+            await OpenConnectionCoreAsync(connectionInfo, force, conForm, targetPane, targetContentIndex,
+                                          targetPanePlaceholder, null);
+        }
+
+        /// <summary>
+        /// Opens a connection and completes once it has connected, failed or been closed, or after a time
+        /// limit for protocols that do not report back. Used to reopen the connections of the previous
+        /// session one at a time.
+        /// </summary>
+        /// <param name="panelName">
+        /// The panel to open the connection in, created when there is none by that name; null to choose the
+        /// panel as usual.
+        /// </param>
+        /// <param name="floatingPlacement">
+        /// Where the panel's window was when it was floating at the end of the previous session; null when
+        /// it was docked. Applied the first time the panel is used here.
+        /// </param>
+        /// <returns>True when the connection connected.</returns>
+        public async System.Threading.Tasks.Task<bool> OpenConnectionAndWaitAsync(
+            ConnectionInfo connectionInfo,
+            string panelName = null,
+            FloatingPanelPlacement floatingPlacement = null)
+        {
+            if (connectionInfo == null || FrmMain.Default.IsClosing)
+                return false;
+
+            ConnectionWindow panel = GetOrCreateSessionPanel(panelName, floatingPlacement);
+            ConnectionOutcome outcome = new();
+            _ = OpenConnectionCoreAsync(connectionInfo, ConnectionInfo.Force.None, panel, null, null, null, outcome);
+
+            System.Threading.Tasks.Task finished = await System.Threading.Tasks.Task.WhenAny(
+                outcome.Task, System.Threading.Tasks.Task.Delay(OutcomeWaitLimit));
+            return finished == outcome.Task && outcome.Task.Result;
+        }
+
+        /// <summary>
+        /// How long to wait for a connection to report back. RDP gives up after its connection timeout,
+        /// which includes the time its login prompt is open; the rest covers the up to 60 seconds an SSH
+        /// tunnel may take before the connection starts.
+        /// </summary>
+        private static System.TimeSpan OutcomeWaitLimit =>
+            System.TimeSpan.FromSeconds(System.Math.Max(Settings.Default.ConRDPOverallConnectionTimeout, 20) + 90);
+
+        private async System.Threading.Tasks.Task OpenConnectionCoreAsync(
+            ConnectionInfo connectionInfo,
+            ConnectionInfo.Force force,
+            ConnectionWindow conForm,
+            DockPane targetPane,
+            int? targetContentIndex,
+            DockContent? targetPanePlaceholder,
+            ConnectionOutcome outcome)
+        {
             if (connectionInfo == null)
+            {
+                outcome?.AttemptEnded();
                 return;
+            }
 
             ConnectionTab openingTab = null;
             try
@@ -236,6 +291,8 @@ namespace mRemoteNG.Connection
                 }
 
                 ProtocolBase newProtocol = protocolFactory.CreateProtocol(connectionInfo);
+                // Before Connect: most protocols report Connected from inside it
+                outcome?.Watch(newProtocol);
                 SetConnectionFormEventHandlers(newProtocol, connectionForm);
                 SetConnectionEventHandlers(newProtocol);
                 // in case of connection through SSH tunnel the container is already defined and must be use, else it needs to be created here
@@ -271,6 +328,7 @@ namespace mRemoteNG.Connection
                 connectionInfoOriginal.OpenConnections.Add(newProtocol);
                 _activeConnections.Add(connectionInfo.ConstantID);
                 FrmMain.Default.SelectedConnection = connectionInfo;
+                outcome?.ConnectStarted();
             }
             catch (Exception ex)
             {
@@ -278,6 +336,7 @@ namespace mRemoteNG.Connection
             }
             finally
             {
+                outcome?.AttemptEnded();
                 if (openingTab != null)
                     _openingTabs.Remove(openingTab);
                 if (targetPanePlaceholder is { IsDisposed: false })
@@ -340,33 +399,55 @@ namespace mRemoteNG.Connection
         private readonly System.Runtime.CompilerServices.ConditionalWeakTable<ConnectionWindow, object> _placedPanels = new();
 
         /// <summary>
-        /// Opens a connection in the named panel, creating the panel when there is none by that name.
-        /// Used to reopen the connections of the previous session in the panels they were in.
+        /// The named panel, created when there is none by that name, and shown floating at the placement
+        /// from the previous session the first time it is used. Null when no panel is named.
         /// </summary>
-        /// <param name="floatingPlacement">
-        /// Where the panel's window was when it was floating at the end of the previous session; null when
-        /// it was docked. Applied the first time the panel is used here.
-        /// </param>
-        public void OpenConnectionInPanel(ConnectionInfo connectionInfo, string panelName,
-                                          FloatingPanelPlacement floatingPlacement = null)
+        private ConnectionWindow GetOrCreateSessionPanel(string panelName, FloatingPanelPlacement floatingPlacement)
         {
-            if (connectionInfo == null)
-                return;
+            if (string.IsNullOrEmpty(panelName))
+                return null;
 
-            ConnectionWindow panel = null;
-            if (!string.IsNullOrEmpty(panelName))
+            ConnectionWindow panel = Runtime.WindowList.FromString(panelName) as ConnectionWindow
+                                     ?? _panelAdder.AddPanel(panelName, showImmediately: floatingPlacement == null);
+
+            if (panel != null && floatingPlacement != null && !_placedPanels.TryGetValue(panel, out _))
             {
-                panel = Runtime.WindowList.FromString(panelName) as ConnectionWindow
-                        ?? _panelAdder.AddPanel(panelName, showImmediately: floatingPlacement == null);
-
-                if (panel != null && floatingPlacement != null && !_placedPanels.TryGetValue(panel, out _))
-                {
-                    _placedPanels.Add(panel, null);
-                    panel.ShowFloating(FrmMain.Default.pnlDock, floatingPlacement);
-                }
+                _placedPanels.Add(panel, null);
+                panel.ShowFloating(FrmMain.Default.pnlDock, floatingPlacement);
             }
 
-            OpenConnection(connectionInfo, ConnectionInfo.Force.None, panel);
+            return panel;
+        }
+
+        /// <summary>
+        /// The outcome of one attempt to open a connection: true once it connected, false once it failed,
+        /// was closed, or ended before it started connecting.
+        /// </summary>
+        internal sealed class ConnectionOutcome
+        {
+            private readonly System.Threading.Tasks.TaskCompletionSource<bool> _completion =
+                new(System.Threading.Tasks.TaskCreationOptions.RunContinuationsAsynchronously);
+            private bool _connectStarted;
+
+            public System.Threading.Tasks.Task<bool> Task => _completion.Task;
+
+            public void Watch(ProtocolBase protocol)
+            {
+                protocol.Connected += _ => _completion.TrySetResult(true);
+                protocol.Disconnected += (_, _, _) => _completion.TrySetResult(false);
+                protocol.ErrorOccured += (_, _, _) => _completion.TrySetResult(false);
+                protocol.Closed += _ => _completion.TrySetResult(false);
+            }
+
+            /// <summary>Connect returned true; the protocol reports how it ends.</summary>
+            public void ConnectStarted() => _connectStarted = true;
+
+            /// <summary>OpenConnection is done with the attempt. Unless it started connecting, it failed.</summary>
+            public void AttemptEnded()
+            {
+                if (!_connectStarted)
+                    _completion.TrySetResult(false);
+            }
         }
 
         /// <summary>

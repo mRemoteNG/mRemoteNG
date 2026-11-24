@@ -25,8 +25,15 @@ namespace mRemoteNG.Connection
             int? targetContentIndex = null,
             DockContent? targetPanePlaceholder = null);
 
-        void OpenConnectionInPanel(ConnectionInfo connectionInfo, string panelName,
-                                   FloatingPanelPlacement? floatingPlacement = null);
+        /// <summary>
+        /// Opens a connection and completes once it has connected, failed or been closed, or after a time limit.
+        /// </summary>
+        /// <param name="panelName">The panel to open it in, created when needed; null to choose as usual.</param>
+        /// <param name="floatingPlacement">Where that panel's window was when it was floating; null when docked.</param>
+        /// <returns>True when the connection connected.</returns>
+        System.Threading.Tasks.Task<bool> OpenConnectionAndWaitAsync(ConnectionInfo connectionInfo,
+                                                                     string? panelName = null,
+                                                                     FloatingPanelPlacement? floatingPlacement = null);
 
         bool SwitchToOpenConnection(ConnectionInfo connectionInfo);
     }

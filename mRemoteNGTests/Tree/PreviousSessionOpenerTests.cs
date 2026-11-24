@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading.Tasks;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.Connection;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls.ConnectionTree;
 using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 
 
@@ -22,16 +24,19 @@ namespace mRemoteNGTests.Tree
         public void Setup()
         {
             _connectionInitiator = Substitute.For<IConnectionInitiator>();
+            _connectionInitiator.OpenConnectionAndWaitAsync(default, default, default)
+                                .ReturnsForAnyArgs(Task.FromResult(true));
             _previousSessionOpener = new PreviousSessionOpener(_connectionInitiator);
             _connectionTree = Substitute.For<IConnectionTree>();
             _connectionTree.GetRootConnectionNode().Returns(BuildTree());
         }
 
         [Test]
-        public void AllRequestedSessionsAreReopened()
+        public async Task AllRequestedSessionsAreReopened()
         {
-            _previousSessionOpener.Execute(_connectionTree);
-            _connectionInitiator.ReceivedWithAnyArgs(2).OpenConnection(new ConnectionInfo());
+            await _previousSessionOpener.ReopenAsync(_connectionTree);
+
+            await _connectionInitiator.ReceivedWithAnyArgs(2).OpenConnectionAndWaitAsync(default, default, default);
         }
 
         [Test]
@@ -42,7 +47,7 @@ namespace mRemoteNGTests.Tree
         }
 
         [Test]
-        public void ConnectionsReopenInThePanelTheyWereIn()
+        public async Task ConnectionsReopenInThePanelTheyWereIn()
         {
             RootNodeInfo root = new(RootNodeType.Connection);
             ConnectionInfo inProd = new() { PleaseConnect = true };
@@ -53,15 +58,14 @@ namespace mRemoteNGTests.Tree
             PreviousSessionOpener opener = new(_connectionInitiator,
                 () => Panels(new Dictionary<string, string> { [inProd.ConstantID] = "Prod" }));
 
-            opener.Execute(_connectionTree);
+            await opener.ReopenAsync(_connectionTree);
 
-            _connectionInitiator.Received(1).OpenConnectionInPanel(inProd, "Prod", null);
-            _connectionInitiator.DidNotReceive().OpenConnection(inProd);
-            _connectionInitiator.Received(1).OpenConnection(withoutPanel);
+            await _connectionInitiator.Received(1).OpenConnectionAndWaitAsync(inProd, "Prod", null);
+            await _connectionInitiator.Received(1).OpenConnectionAndWaitAsync(withoutPanel, null, null);
         }
 
         [Test]
-        public void FloatingPanelsGetTheirPlacement()
+        public async Task FloatingPanelsGetTheirPlacement()
         {
             RootNodeInfo root = new(RootNodeType.Connection);
             ConnectionInfo server = new() { PleaseConnect = true };
@@ -72,13 +76,13 @@ namespace mRemoteNGTests.Tree
                 () => Panels(new Dictionary<string, string> { [server.ConstantID] = "Floating" },
                              new Dictionary<string, FloatingPanelPlacement> { ["Floating"] = placement }));
 
-            opener.Execute(_connectionTree);
+            await opener.ReopenAsync(_connectionTree);
 
-            _connectionInitiator.Received(1).OpenConnectionInPanel(server, "Floating", placement);
+            await _connectionInitiator.Received(1).OpenConnectionAndWaitAsync(server, "Floating", placement);
         }
 
         [Test]
-        public void SessionPanelsAreNotReadWhenThereIsNothingToReopen()
+        public async Task SessionPanelsAreNotReadWhenThereIsNothingToReopen()
         {
             RootNodeInfo root = new(RootNodeType.Connection);
             root.AddChild(new ConnectionInfo());
@@ -90,10 +94,52 @@ namespace mRemoteNGTests.Tree
                 return SessionPanels.Empty;
             });
 
-            opener.Execute(_connectionTree);
+            await opener.ReopenAsync(_connectionTree);
 
             Assert.That(panelsRead, Is.False);
-            _connectionInitiator.DidNotReceiveWithAnyArgs().OpenConnectionInPanel(default, default, default);
+            await _connectionInitiator.DidNotReceiveWithAnyArgs().OpenConnectionAndWaitAsync(default, default, default);
+        }
+
+        [Test]
+        public async Task EachConnectionWaitsForTheOneBefore()
+        {
+            RootNodeInfo root = new(RootNodeType.Connection);
+            ConnectionInfo first = new() { PleaseConnect = true };
+            ConnectionInfo second = new() { PleaseConnect = true };
+            root.AddChild(first);
+            root.AddChild(second);
+            _connectionTree.GetRootConnectionNode().Returns(root);
+            TaskCompletionSource<bool> firstOutcome = new();
+            _connectionInitiator.OpenConnectionAndWaitAsync(first, Arg.Any<string>(), Arg.Any<FloatingPanelPlacement>())
+                                .Returns(firstOutcome.Task);
+
+            Task reopening = _previousSessionOpener.ReopenAsync(_connectionTree);
+
+            await _connectionInitiator.Received(1).OpenConnectionAndWaitAsync(first, null, null);
+            await _connectionInitiator.DidNotReceive().OpenConnectionAndWaitAsync(second, Arg.Any<string>(), Arg.Any<FloatingPanelPlacement>());
+
+            // The first connection timed out at its login prompt: the next one still opens
+            firstOutcome.SetResult(false);
+            await reopening;
+
+            await _connectionInitiator.Received(1).OpenConnectionAndWaitAsync(second, null, null);
+        }
+
+        [Test]
+        public async Task AConnectionThatThrowsDoesNotStopTheOthers()
+        {
+            RootNodeInfo root = new(RootNodeType.Connection);
+            ConnectionInfo failing = new() { PleaseConnect = true, Name = "failing" };
+            ConnectionInfo next = new() { PleaseConnect = true };
+            root.AddChild(failing);
+            root.AddChild(next);
+            _connectionTree.GetRootConnectionNode().Returns(root);
+            _connectionInitiator.OpenConnectionAndWaitAsync(failing, Arg.Any<string>(), Arg.Any<FloatingPanelPlacement>())
+                                .ThrowsAsync(new InvalidOperationException("test"));
+
+            await _previousSessionOpener.ReopenAsync(_connectionTree);
+
+            await _connectionInitiator.Received(1).OpenConnectionAndWaitAsync(next, null, null);
         }
 
         private static SessionPanels Panels(Dictionary<string, string> connectionPanels,

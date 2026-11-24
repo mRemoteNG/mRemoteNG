@@ -1,14 +1,26 @@
-﻿using mRemoteNG.Connection;
+﻿using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using System;
 using System.Collections.Generic;
 using mRemoteNG.UI.Panels;
 using System.Linq;
+using System.Threading.Tasks;
 using mRemoteNG.UI.Controls.ConnectionTree;
 using System.Runtime.Versioning;
 
 namespace mRemoteNG.Tree
 {
+    /// <summary>
+    /// Reopens the connections that were open at the end of the previous session, in the panels they were in.
+    /// </summary>
+    /// <remarks>
+    /// The connections are opened one at a time, each once the one before has connected, failed or been
+    /// closed. A connection can ask for credentials, and an RDP connection that waits behind another
+    /// connection's login prompt runs out of time (the RDP connection timeout counts the time its own
+    /// prompt waits too). Opened all at once, several RDP connections without saved credentials showed
+    /// their prompts together and most of them timed out before they could be answered.
+    /// </remarks>
     [SupportedOSPlatform("windows")]
     public class PreviousSessionOpener : IConnectionTreeDelegate
     {
@@ -35,17 +47,26 @@ namespace mRemoteNG.Tree
             _loadSessionPanels = loadSessionPanels;
         }
 
+        /// <summary>
+        /// Starts reopening the connections and returns; they open one after another in the background
+        /// of the UI thread.
+        /// </summary>
         public void Execute(IConnectionTree connectionTree)
         {
-            System.Collections.Generic.IEnumerable<ConnectionInfo> connectionInfoList = connectionTree.GetRootConnectionNode().GetRecursiveChildList()
+            _ = ReopenAsync(connectionTree);
+        }
+
+        /// <summary>Reopens the connections one at a time. Completes when the last one is done.</summary>
+        internal async Task ReopenAsync(IConnectionTree connectionTree)
+        {
+            IEnumerable<ConnectionInfo> connectionInfoList = connectionTree.GetRootConnectionNode().GetRecursiveChildList()
                                                    .Where(node => !(node is ContainerInfo));
-            System.Collections.Generic.IEnumerable<ConnectionInfo> previouslyOpenedConnections = connectionInfoList
+            List<ConnectionInfo> connectionsToReopen = connectionInfoList
                 .Where(item =>
                            item.PleaseConnect &&
                            //ignore items that have already connected
-                           !_connectionInitiator.ActiveConnections.Contains(item.ConstantID));
-
-            List<ConnectionInfo> connectionsToReopen = previouslyOpenedConnections.ToList();
+                           !_connectionInitiator.ActiveConnections.Contains(item.ConstantID))
+                .ToList();
             if (connectionsToReopen.Count == 0)
                 return;
 
@@ -53,15 +74,24 @@ namespace mRemoteNG.Tree
 
             foreach (ConnectionInfo connectionInfo in connectionsToReopen)
             {
-                if (sessionPanels.ConnectionPanels.TryGetValue(connectionInfo.ConstantID, out string? panelName) &&
-                    !string.IsNullOrEmpty(panelName))
+                string? panelName = null;
+                FloatingPanelPlacement? placement = null;
+                if (sessionPanels.ConnectionPanels.TryGetValue(connectionInfo.ConstantID, out string? savedPanel) &&
+                    !string.IsNullOrEmpty(savedPanel))
                 {
-                    sessionPanels.FloatingPanels.TryGetValue(panelName, out FloatingPanelPlacement? placement);
-                    _connectionInitiator.OpenConnectionInPanel(connectionInfo, panelName, placement);
+                    panelName = savedPanel;
+                    sessionPanels.FloatingPanels.TryGetValue(savedPanel, out placement);
                 }
-                else
+
+                try
                 {
-                    _connectionInitiator.OpenConnection(connectionInfo);
+                    await _connectionInitiator.OpenConnectionAndWaitAsync(connectionInfo, panelName, placement);
+                }
+                catch (Exception ex)
+                {
+                    // One connection that cannot be reopened must not keep the others closed
+                    Runtime.MessageCollector?.AddExceptionMessage(
+                        "Reopening " + connectionInfo.Name + " from the previous session failed", ex);
                 }
             }
         }
