@@ -24,6 +24,8 @@ namespace mRemoteNG.Connection
             int? targetContentIndex = null,
             DockContent? targetPanePlaceholder = null);
 
+        void OpenConnectionInPanel(ConnectionInfo connectionInfo, string panelName);
+
         bool SwitchToOpenConnection(ConnectionInfo connectionInfo);
     }
 }

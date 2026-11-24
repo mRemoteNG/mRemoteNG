@@ -109,9 +109,9 @@ namespace mRemoteNG.Connection
                 }
 
                 ProtocolFactory protocolFactory = new();
-                string connectionPanel = SetConnectionPanel(connectionInfo, force);
+                string connectionPanel = SetConnectionPanel(connectionInfo, force, out ConnectionWindow selectedPanel);
                 if (string.IsNullOrEmpty(connectionPanel)) return;
-                ConnectionWindow connectionForm = SetConnectionForm(conForm, connectionPanel);
+                ConnectionWindow connectionForm = SetConnectionForm(conForm ?? selectedPanel, connectionPanel);
                 Control connectionContainer = null;
 
                 // Handle connection through SSH tunnel:
@@ -336,20 +336,69 @@ namespace mRemoteNG.Connection
             return null;
         }
 
-        private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
+        /// <summary>
+        /// Opens a connection in the named panel, creating the panel when there is none by that name.
+        /// Used to reopen the connections of the previous session in the panels they were in.
+        /// </summary>
+        public void OpenConnectionInPanel(ConnectionInfo connectionInfo, string panelName)
         {
-            if (connectionInfo.Panel != "" && !force.HasFlag(ConnectionInfo.Force.OverridePanel) && !Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelSelectionDlg)
-                return connectionInfo.Panel;
+            if (connectionInfo == null)
+                return;
 
-            if (!Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelSelectionDlg)
+            ConnectionWindow panel = null;
+            if (!string.IsNullOrEmpty(panelName))
             {
-                return PanelAdder.DefaultPanelName;
+                panel = Runtime.WindowList.FromString(panelName) as ConnectionWindow
+                        ?? _panelAdder.AddPanel(panelName, showImmediately: true);
             }
 
-            FrmChoosePanel frmPnl = new();
-            return frmPnl.ShowDialog() == DialogResult.OK
-                ? frmPnl.Panel
-                : null;
+            OpenConnection(connectionInfo, ConnectionInfo.Force.None, panel);
+        }
+
+        /// <summary>
+        /// Chooses the panel a connection opens in, in this order: the panel selection dialog, when it is
+        /// always shown or "Choose panel before connecting" was used; the connection's own Panel, when it
+        /// names a panel other than the default one; the connection panel selected last; the default panel.
+        /// </summary>
+        /// <param name="selectedPanel">
+        /// The selected panel when that is the choice. It is passed on as the window itself, as two panels
+        /// can share a name.
+        /// </param>
+        /// <returns>The panel name, or null when the panel selection dialog was cancelled.</returns>
+        private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force, out ConnectionWindow selectedPanel)
+        {
+            selectedPanel = null;
+
+            if (Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelSelectionDlg ||
+                force.HasFlag(ConnectionInfo.Force.OverridePanel))
+            {
+                FrmChoosePanel frmPnl = new();
+                return frmPnl.ShowDialog() == DialogResult.OK
+                    ? frmPnl.Panel
+                    : null;
+            }
+
+            if (HasOwnPanel(connectionInfo))
+                return connectionInfo.Panel;
+
+            selectedPanel = GetSelectedPanel();
+            return selectedPanel?.PanelName ?? PanelAdder.DefaultPanelName;
+        }
+
+        /// <summary>
+        /// New connections get the default panel's name as their Panel, so only another name is a panel
+        /// chosen for the connection. Connections with the default name open in the selected panel.
+        /// </summary>
+        internal static bool HasOwnPanel(ConnectionInfo connectionInfo)
+        {
+            return !string.IsNullOrEmpty(connectionInfo.Panel) &&
+                   !string.Equals(connectionInfo.Panel, PanelAdder.DefaultPanelName, System.StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static ConnectionWindow GetSelectedPanel()
+        {
+            ConnectionWindow panel = TabHelper.Instance.CurrentPanel;
+            return panel is { IsDisposed: false, IsHidden: false, DockPanel: not null } ? panel : null;
         }
 
         private ConnectionWindow SetConnectionForm(ConnectionWindow conForm, string connectionPanel)

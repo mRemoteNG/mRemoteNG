@@ -36,6 +36,9 @@ namespace mRemoteNG.UI.Window
 
         public bool IsGeneralPanel => string.Equals(TabText, PanelAdder.DefaultPanelName, StringComparison.OrdinalIgnoreCase);
 
+        /// <summary>The panel's name as the user typed it; the tab text doubles each "&amp;".</summary>
+        internal string PanelName => TabText.Replace("&&", "&");
+
         #region Public Methods
 
         public ConnectionWindow(DockContent panel, string formText = "")
