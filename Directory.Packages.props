@@ -140,7 +140,7 @@
     <PackageVersion Include="WixToolset.Netfx.wixext" Version="7.0.1" />
     <PackageVersion Include="WixToolset.UI.wixext" Version="7.0.1" />
     <PackageVersion Include="WixToolset.Util.wixext" Version="7.0.1" />
-    <PackageVersion Include="ZstdSharp.Port" Version="0.8.8" />
+    <PackageVersion Include="ZstdSharp.Port" Version="0.9.1" />
     <PackageVersion Include="zxcvbn-core" Version="7.0.92" />
   </ItemGroup>
 </Project>
