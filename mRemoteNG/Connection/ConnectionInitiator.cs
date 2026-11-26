@@ -78,8 +78,63 @@ namespace mRemoteNG.Connection
             int? targetContentIndex = null,
             DockContent? targetPanePlaceholder = null)
         {
+            await OpenConnectionCoreAsync(connectionInfo, force, conForm, targetPane, targetContentIndex,
+                                          targetPanePlaceholder, null);
+        }
+
+        /// <summary>
+        /// Opens a connection and completes once it has connected, failed or been closed, or after a time
+        /// limit for protocols that do not report back. Used to reopen the connections of the previous
+        /// session one at a time.
+        /// </summary>
+        /// <param name="panelName">
+        /// The panel to open the connection in, created when there is none by that name; null to choose the
+        /// panel as usual.
+        /// </param>
+        /// <param name="floatingPlacement">
+        /// Where the panel's window was when it was floating at the end of the previous session; null when
+        /// it was docked. Applied the first time the panel is used here.
+        /// </param>
+        /// <returns>True when the connection connected.</returns>
+        public async System.Threading.Tasks.Task<bool> OpenConnectionAndWaitAsync(
+            ConnectionInfo connectionInfo,
+            string panelName = null,
+            FloatingPanelPlacement floatingPlacement = null)
+        {
+            if (connectionInfo == null || FrmMain.Default.IsClosing)
+                return false;
+
+            ConnectionWindow panel = GetOrCreateSessionPanel(panelName, floatingPlacement);
+            ConnectionOutcome outcome = new();
+            _ = OpenConnectionCoreAsync(connectionInfo, ConnectionInfo.Force.None, panel, null, null, null, outcome);
+
+            System.Threading.Tasks.Task finished = await System.Threading.Tasks.Task.WhenAny(
+                outcome.Task, System.Threading.Tasks.Task.Delay(OutcomeWaitLimit));
+            return finished == outcome.Task && outcome.Task.Result;
+        }
+
+        /// <summary>
+        /// How long to wait for a connection to report back. RDP gives up after its connection timeout,
+        /// which includes the time its login prompt is open; the rest covers the up to 60 seconds an SSH
+        /// tunnel may take before the connection starts.
+        /// </summary>
+        private static System.TimeSpan OutcomeWaitLimit =>
+            System.TimeSpan.FromSeconds(System.Math.Max(Settings.Default.ConRDPOverallConnectionTimeout, 20) + 90);
+
+        private async System.Threading.Tasks.Task OpenConnectionCoreAsync(
+            ConnectionInfo connectionInfo,
+            ConnectionInfo.Force force,
+            ConnectionWindow conForm,
+            DockPane targetPane,
+            int? targetContentIndex,
+            DockContent? targetPanePlaceholder,
+            ConnectionOutcome outcome)
+        {
             if (connectionInfo == null)
+            {
+                outcome?.AttemptEnded();
                 return;
+            }
 
             ConnectionTab openingTab = null;
             try
@@ -109,9 +164,9 @@ namespace mRemoteNG.Connection
                 }
 
                 ProtocolFactory protocolFactory = new();
-                string connectionPanel = SetConnectionPanel(connectionInfo, force);
+                string connectionPanel = SetConnectionPanel(connectionInfo, force, out ConnectionWindow selectedPanel);
                 if (string.IsNullOrEmpty(connectionPanel)) return;
-                ConnectionWindow connectionForm = SetConnectionForm(conForm, connectionPanel);
+                ConnectionWindow connectionForm = SetConnectionForm(conForm ?? selectedPanel, connectionPanel);
                 Control connectionContainer = null;
 
                 // Handle connection through SSH tunnel:
@@ -236,6 +291,8 @@ namespace mRemoteNG.Connection
                 }
 
                 ProtocolBase newProtocol = protocolFactory.CreateProtocol(connectionInfo);
+                // Before Connect: most protocols report Connected from inside it
+                outcome?.Watch(newProtocol);
                 SetConnectionFormEventHandlers(newProtocol, connectionForm);
                 SetConnectionEventHandlers(newProtocol);
                 // in case of connection through SSH tunnel the container is already defined and must be use, else it needs to be created here
@@ -271,6 +328,7 @@ namespace mRemoteNG.Connection
                 connectionInfoOriginal.OpenConnections.Add(newProtocol);
                 _activeConnections.Add(connectionInfo.ConstantID);
                 FrmMain.Default.SelectedConnection = connectionInfo;
+                outcome?.ConnectStarted();
             }
             catch (Exception ex)
             {
@@ -278,6 +336,7 @@ namespace mRemoteNG.Connection
             }
             finally
             {
+                outcome?.AttemptEnded();
                 if (openingTab != null)
                     _openingTabs.Remove(openingTab);
                 if (targetPanePlaceholder is { IsDisposed: false })
@@ -336,20 +395,105 @@ namespace mRemoteNG.Connection
             return null;
         }
 
-        private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
-        {
-            if (connectionInfo.Panel != "" && !force.HasFlag(ConnectionInfo.Force.OverridePanel) && !Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelSelectionDlg)
-                return connectionInfo.Panel;
+        // Panels already given their placement from the previous session, so it is applied once per panel
+        private readonly System.Runtime.CompilerServices.ConditionalWeakTable<ConnectionWindow, object> _placedPanels = new();
 
-            if (!Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelSelectionDlg)
+        /// <summary>
+        /// The named panel, created when there is none by that name, and shown floating at the placement
+        /// from the previous session the first time it is used. Null when no panel is named.
+        /// </summary>
+        private ConnectionWindow GetOrCreateSessionPanel(string panelName, FloatingPanelPlacement floatingPlacement)
+        {
+            if (string.IsNullOrEmpty(panelName))
+                return null;
+
+            ConnectionWindow panel = Runtime.WindowList.FromString(panelName) as ConnectionWindow
+                                     ?? _panelAdder.AddPanel(panelName, showImmediately: floatingPlacement == null);
+
+            if (panel != null && floatingPlacement != null && !_placedPanels.TryGetValue(panel, out _))
             {
-                return PanelAdder.DefaultPanelName;
+                _placedPanels.Add(panel, null);
+                panel.ShowFloating(FrmMain.Default.pnlDock, floatingPlacement);
             }
 
-            FrmChoosePanel frmPnl = new();
-            return frmPnl.ShowDialog() == DialogResult.OK
-                ? frmPnl.Panel
-                : null;
+            return panel;
+        }
+
+        /// <summary>
+        /// The outcome of one attempt to open a connection: true once it connected, false once it failed,
+        /// was closed, or ended before it started connecting.
+        /// </summary>
+        internal sealed class ConnectionOutcome
+        {
+            private readonly System.Threading.Tasks.TaskCompletionSource<bool> _completion =
+                new(System.Threading.Tasks.TaskCreationOptions.RunContinuationsAsynchronously);
+            private bool _connectStarted;
+
+            public System.Threading.Tasks.Task<bool> Task => _completion.Task;
+
+            public void Watch(ProtocolBase protocol)
+            {
+                protocol.Connected += _ => _completion.TrySetResult(true);
+                protocol.Disconnected += (_, _, _) => _completion.TrySetResult(false);
+                protocol.ErrorOccured += (_, _, _) => _completion.TrySetResult(false);
+                protocol.Closed += _ => _completion.TrySetResult(false);
+            }
+
+            /// <summary>Connect returned true; the protocol reports how it ends.</summary>
+            public void ConnectStarted() => _connectStarted = true;
+
+            /// <summary>OpenConnection is done with the attempt. Unless it started connecting, it failed.</summary>
+            public void AttemptEnded()
+            {
+                if (!_connectStarted)
+                    _completion.TrySetResult(false);
+            }
+        }
+
+        /// <summary>
+        /// Chooses the panel a connection opens in, in this order: the panel selection dialog, when it is
+        /// always shown or "Choose panel before connecting" was used; the connection's own Panel, when it
+        /// names a panel other than the default one; the connection panel selected last; the default panel.
+        /// </summary>
+        /// <param name="selectedPanel">
+        /// The selected panel when that is the choice. It is passed on as the window itself, as two panels
+        /// can share a name.
+        /// </param>
+        /// <returns>The panel name, or null when the panel selection dialog was cancelled.</returns>
+        private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force, out ConnectionWindow selectedPanel)
+        {
+            selectedPanel = null;
+
+            if (Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelSelectionDlg ||
+                force.HasFlag(ConnectionInfo.Force.OverridePanel))
+            {
+                FrmChoosePanel frmPnl = new();
+                return frmPnl.ShowDialog() == DialogResult.OK
+                    ? frmPnl.Panel
+                    : null;
+            }
+
+            if (HasOwnPanel(connectionInfo))
+                return connectionInfo.Panel;
+
+            selectedPanel = GetSelectedPanel();
+            return selectedPanel?.PanelName ?? PanelAdder.DefaultPanelName;
+        }
+
+        /// <summary>
+        /// New connections get the default panel's name as their Panel, so only another name is a panel
+        /// chosen for the connection. Connections with the default name open in the selected panel.
+        /// </summary>
+        internal static bool HasOwnPanel(ConnectionInfo connectionInfo)
+        {
+            return !string.IsNullOrEmpty(connectionInfo.Panel) &&
+                   !string.Equals(connectionInfo.Panel, PanelAdder.DefaultPanelName, System.StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static ConnectionWindow GetSelectedPanel()
+        {
+            ConnectionWindow panel = TabHelper.Instance.CurrentPanel;
+            return panel is { IsDisposed: false, IsHidden: false, DockPanel: not null } ? panel : null;
         }
 
         private ConnectionWindow SetConnectionForm(ConnectionWindow conForm, string connectionPanel)
