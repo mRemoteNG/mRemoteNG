@@ -58,7 +58,38 @@ namespace mRemoteNG.UI.Window
             connDock.ShowDocumentIcon = true;
 
             connDock.ActiveContentChanged += ConnDockOnActiveContentChanged;
+            connDock.ContentRemoved += ConnDock_ContentRemoved;
         }
+
+        /// <summary>
+        /// Closes this panel once the last thing docked in it has gone, as 1.76 did; the General
+        /// panel always stays. This runs when a tab has really left the panel, which for RDP can
+        /// be well after its close began, while the RDP control is torn down. Checking at the start
+        /// of the close found the tab still there, and the panel was left open and empty.
+        /// </summary>
+        private void ConnDock_ContentRemoved(object sender, DockContentEventArgs e)
+        {
+            if (IsGeneralPanel || IsDisposed || Disposing || !IsHandleCreated)
+                return;
+
+            // Let the removal finish first; the panel's own close then finds nothing left to close.
+            BeginInvoke(() =>
+            {
+                if (IsDisposed || Disposing || FrmMain.Default == null || FrmMain.Default.IsClosing || HasDockedContent())
+                    return;
+
+                FrmMain.Default.ShowHidePanelTabs(this);
+                Close();
+            });
+        }
+
+        /// <summary>
+        /// Whether anything is still docked in this panel: a connection (also minimized to the
+        /// bottom or floating), a plugin window or a reconnect placeholder. Hidden content such as
+        /// a used reconnect placeholder doesn't count.
+        /// </summary>
+        private bool HasDockedContent() =>
+            connDock.Contents.Any(content => content.DockHandler.DockState is not (DockState.Hidden or DockState.Unknown));
 
         private InterfaceControl GetInterfaceControl()
         {

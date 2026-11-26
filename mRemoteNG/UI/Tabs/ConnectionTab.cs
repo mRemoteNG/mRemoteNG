@@ -174,19 +174,8 @@ namespace mRemoteNG.UI.Tabs
                 RestoreDockAreasAfterMinimize();
             }
 
-            if (e.Cancel || FrmMain.Default == null || FrmMain.Default.IsClosing)
-                return;
-
-            ConnectionWindow parentWindow = FindForm() as ConnectionWindow;
-            if (parentWindow == null || parentWindow.IsGeneralPanel)
-                return;
-
-            IDockContent[] remainingDocuments = DockPanel?.DocumentsToArray() ?? [];
-            if (remainingDocuments.Length > 1)
-                return;
-
-            FrmMain.Default?.ShowHidePanelTabs(this);
-            parentWindow.Close();
+            // Closing the panel once its last connection is gone is up to the panel itself
+            // (ConnectionWindow.ConnDock_ContentRemoved): only it knows when the tab has really left.
         }
 
 
