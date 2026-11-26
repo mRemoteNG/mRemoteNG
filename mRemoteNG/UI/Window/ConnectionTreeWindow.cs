@@ -15,6 +15,7 @@ using mRemoteNG.Tree.ClickHandlers;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.ConnectionTree;
+using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
@@ -165,7 +166,8 @@ namespace mRemoteNG.UI.Window
             // OptionsAdvancedPage.NoReconnect is the "reconnect automatically when disconnected" option,
             // not a reason to skip the previous sessions (#3178)
             if (Properties.OptionsStartupExitPage.Default.OpenConsFromLastSession && !Runtime.NoReconnectToPreviousSessions)
-                actions.Add(new PreviousSessionOpener(Runtime.ConnectionInitiator));
+                actions.Add(new PreviousSessionOpener(Runtime.ConnectionInitiator,
+                                                      () => SessionPanelStore.ForSettingsFolder().Load()));
 
             ConnectionTree.PostSetupActions = actions;
         }

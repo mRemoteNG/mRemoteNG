@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using mRemoteNG.Container;
+using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -23,6 +24,9 @@ namespace mRemoteNG.Connection
             DockPane? targetPane = null,
             int? targetContentIndex = null,
             DockContent? targetPanePlaceholder = null);
+
+        void OpenConnectionInPanel(ConnectionInfo connectionInfo, string panelName,
+                                   FloatingPanelPlacement? floatingPlacement = null);
 
         bool SwitchToOpenConnection(ConnectionInfo connectionInfo);
     }

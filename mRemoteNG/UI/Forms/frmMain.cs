@@ -145,6 +145,7 @@ namespace mRemoteNG.UI.Forms
         {
             _showFullPathInTitle = Properties.OptionsAppearancePage.Default.ShowCompleteConsPathInTitle;
             InitializeComponent();
+            pnlDock.ActiveContentChanged += PnlDock_ActiveContentChanged;
 
             Screen targetScreen = (Screen.AllScreens.Length > 1) ? Screen.AllScreens[1] : Screen.AllScreens[0];
 
@@ -598,6 +599,10 @@ namespace mRemoteNG.UI.Forms
 
             if (Runtime.WindowList != null)
             {
+                // Before the panels close: the connections of this session reopen in them next time
+                SessionPanelStore.ForSettingsFolder().Save(
+                    SessionPanelStore.Collect(Runtime.WindowList.OfType<ConnectionWindow>().ToList()));
+
                 foreach (BaseWindow window in Runtime.WindowList)
                 {
                     window.Close();
@@ -828,6 +833,16 @@ namespace mRemoteNG.UI.Forms
         {
             ActivateConnection();
             sessionsMenu.UpdateMenuState();
+        }
+
+        /// <summary>
+        /// Remembers the connection panel selected last, which connections open in. Docked panels are
+        /// documents and floating ones are not, so this follows the active content, not the active document.
+        /// </summary>
+        private void PnlDock_ActiveContentChanged(object sender, EventArgs e)
+        {
+            if (pnlDock.ActiveContent is ConnectionWindow connectionWindow)
+                TabHelper.Instance.CurrentPanel = connectionWindow;
         }
 
         internal void UpdateWindowTitle()
