@@ -1420,6 +1420,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connection Search.
+        /// </summary>
+        internal static string ConnectionSearch {
+            get {
+                return ResourceManager.GetString("ConnectionSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daily.
         /// </summary>
         internal static string ConnectionsBackupFrequencyDaily {

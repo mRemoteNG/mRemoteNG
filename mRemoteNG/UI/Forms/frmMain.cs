@@ -353,6 +353,7 @@ namespace mRemoteNG.UI.Forms
             UpdateWindowTitle();
             AppWindows.TreeForm?.RefreshUiLanguage();
             AppWindows.ConfigForm?.RefreshUiLanguage();
+            AppWindows.ExistingSearchForm?.RefreshUiLanguage();
             AppWindows.ErrorsForm?.RefreshUiLanguage();
             AppWindows.UpdateForm?.RefreshUiLanguage();
             AppWindows.OptionsFormWindow?.RefreshUiLanguage();
@@ -930,6 +931,9 @@ namespace mRemoteNG.UI.Forms
             AppWindows.ConfigForm.Activate();
             AppWindows.ErrorsForm.Show(pnlDock, DockState.DockBottomAutoHide);
             viewMenu._mMenViewErrorsAndInfos.Checked = true;
+            // The default layout keeps the search bar in the Connections window
+            if (AppWindows.ExistingSearchForm?.IsShowing == true)
+                AppWindows.ExistingSearchForm.Hide();
 
             ShowFileMenu();
 
