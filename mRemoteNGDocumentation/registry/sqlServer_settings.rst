@@ -87,6 +87,20 @@ Specifies whether the SQL connection is read-only.
   - Disable: ``false``
 
 
+SQL Trust Server Certificate
+----------------------------
+Specifies whether the SQL Server certificate is accepted without validation. Applies to Microsoft SQL Server
+connections, which are always encrypted. Enable it only for a server whose certificate this computer does not
+trust, such as a self-signed one.
+
+- **Value Name:** ``SQLTrustServerCertificate``
+- **Value Type:** ``REG_SZ``
+- **Values:**
+
+  - Enable: ``true``
+  - Disable: ``false``
+
+
 Registry Template
 =================
 
@@ -100,6 +114,7 @@ Registry Template
     "UseSQLServer"="false"
     "SQLDatabaseName"=""
     "SQLReadOnly"="true"
+    "SQLTrustServerCertificate"="false"
     "SQLUser_"=""
     "SQLServerType_"="MSSQL"
     "SQLHost_"=""

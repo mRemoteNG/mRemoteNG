@@ -16,6 +16,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
         private readonly string _dbCatalog;
         private readonly string _dbUsername;
         private readonly string _dbPassword;
+        private readonly bool _trustServerCertificate;
 
         public DbConnection DbConnection()
         {
@@ -30,11 +31,19 @@ namespace mRemoteNG.Config.DatabaseConnectors
         public bool IsConnected => (_dbConnection.State == ConnectionState.Open);
 
         public MSSqlDatabaseConnector(string sqlServer, string catalog, string username, string password)
+            : this(sqlServer, catalog, username, password, false)
+        {
+        }
+
+        // The server certificate is validated unless trustServerCertificate is set, which the user
+        // chooses for a server whose certificate this computer does not trust, such as a self-signed one.
+        public MSSqlDatabaseConnector(string sqlServer, string catalog, string username, string password, bool trustServerCertificate)
         {
             _dbHost = sqlServer;
             _dbCatalog = catalog;
             _dbUsername = username;
             _dbPassword = password;
+            _trustServerCertificate = trustServerCertificate;
             Initialize();
         }
 
@@ -67,7 +76,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
                 Password = _dbPassword,
                 IntegratedSecurity = false,
                 Encrypt = true,
-                TrustServerCertificate = true,
+                TrustServerCertificate = _trustServerCertificate,
                 ConnectTimeout = 30,
                 MultipleActiveResultSets = true
             }.ToString();
@@ -79,7 +88,9 @@ namespace mRemoteNG.Config.DatabaseConnectors
             {
                 DataSource = _dbHost,
                 InitialCatalog = _dbCatalog,
-                IntegratedSecurity = true
+                IntegratedSecurity = true,
+                Encrypt = true,
+                TrustServerCertificate = _trustServerCertificate
             }.ToString();
         }
 

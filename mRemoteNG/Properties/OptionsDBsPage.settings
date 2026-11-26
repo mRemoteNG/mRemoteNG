@@ -14,6 +14,9 @@
     <Setting Name="SQLReadOnly" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="SQLTrustServerCertificate" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="SQLDatabaseName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

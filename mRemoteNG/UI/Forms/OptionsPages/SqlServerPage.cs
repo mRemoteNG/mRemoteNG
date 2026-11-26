@@ -19,7 +19,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
         #region Private Fields
         private OptRegistrySqlServerPage pageRegSettingsInstance;
-        private readonly DatabaseConnectionTester _databaseConnectionTester;
         private bool _useCurrentWindowsIdentity;
         private const string WindowsAuthentication = "Windows Authentication";
         private const string SqlServerAuthentication = "SQL Server Authentication";
@@ -32,7 +31,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             InitializeComponent();
             ApplyTheme();
             PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.SQLDatabase_16x);
-            _databaseConnectionTester = new DatabaseConnectionTester();
             pageRegSettingsInstance = new OptRegistrySqlServerPage(); // Initialize the field to avoid nullability issues
 
             // The simple view and the advanced tabs show the same values; keep them equal so
@@ -113,6 +111,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtSQLDatabaseName.Text = Properties.OptionsDBsPage.Default.SQLDatabaseName;
             txtSQLPassword.Text = OptionPasswords.Unprotect(Properties.OptionsDBsPage.Default.SQLPass);
             chkSQLReadOnly.Checked = Properties.OptionsDBsPage.Default.SQLReadOnly;
+            chkSQLTrustServerCertificate.Checked = Properties.OptionsDBsPage.Default.SQLTrustServerCertificate;
 
             // The authentication type is not stored: an empty user name means Windows authentication
             // (see MSSqlDatabaseConnector). Select it before the user name, which it may overwrite.
@@ -145,6 +144,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsDBsPage.Default.SQLUser = UserNameToSave;
             Properties.OptionsDBsPage.Default.SQLPass = OptionPasswords.Protect(txtSQLPassword.Text);
             Properties.OptionsDBsPage.Default.SQLReadOnly = chkSQLReadOnly.Checked;
+            Properties.OptionsDBsPage.Default.SQLTrustServerCertificate = chkSQLTrustServerCertificate.Checked;
 
             if (Properties.OptionsDBsPage.Default.UseSQLServer)
                 ReinitializeSqlUpdater();
@@ -170,6 +170,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             return settings.UseSQLServer != chkUseSQLServer.Checked
                 || settings.SQLReadOnly != chkSQLReadOnly.Checked
+                || settings.SQLTrustServerCertificate != chkSQLTrustServerCertificate.Checked
                 || (settings.SQLServerType ?? string.Empty) != SelectedServerType
                 || (settings.SQLHost ?? string.Empty) != txtSQLServer.Text
                 || (settings.SQLDatabaseName ?? string.Empty) != txtSQLDatabaseName.Text
@@ -227,6 +228,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             if (pageRegSettingsInstance.SQLReadOnly.IsSet)
                 DisableControl(chkSQLReadOnly);
+
+            if (pageRegSettingsInstance.SQLTrustServerCertificate.IsSet)
+                DisableControl(chkSQLTrustServerCertificate);
         }
 
         private static void ReinitializeSqlUpdater()
@@ -301,7 +305,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             // Replace the hardcoded connection string with the actual parameters
             string connectionString = $"Data Source={server};Initial Catalog={database};User ID={username};Password={password}";
-            ConnectionTestResult connectionTestResult = await _databaseConnectionTester.TestConnectivity(type, server, database, username, password);
+            ConnectionTestResult connectionTestResult = await DatabaseConnectionTester.TestConnectivity(type, server, database, username, password, chkSQLTrustServerCertificate.Checked);
 
             btnTestConnection.Enabled = true;
 
@@ -325,6 +329,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     UpdateConnectionImage(false);
                     lblTestConnectionResults.Text =
                         BuildTestFailedMessage(string.Format(Language.DatabaseNotAvailable, database));
+                    break;
+                case ConnectionTestResult.ServerCertificateNotTrusted:
+                    UpdateConnectionImage(false);
+                    lblTestConnectionResults.Text = BuildTestFailedMessage(Language.ServerCertificateNotTrusted);
                     break;
                 case ConnectionTestResult.UnknownError:
                     UpdateConnectionImage(false);

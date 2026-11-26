@@ -15,18 +15,19 @@ namespace mRemoteNG.Config.DatabaseConnectors
             string sqlCatalog = Properties.OptionsDBsPage.Default.SQLDatabaseName;
             string sqlUsername = Properties.OptionsDBsPage.Default.SQLUser;
             string sqlPassword = OptionPasswords.Unprotect(Properties.OptionsDBsPage.Default.SQLPass);
+            bool trustServerCertificate = Properties.OptionsDBsPage.Default.SQLTrustServerCertificate;
 
-            return DatabaseConnector(sqlType, sqlHost, sqlCatalog, sqlUsername, sqlPassword);
+            return DatabaseConnector(sqlType, sqlHost, sqlCatalog, sqlUsername, sqlPassword, trustServerCertificate);
         }
 
-        public static IDatabaseConnector DatabaseConnector(string type, string server, string database, string username, string password)
+        public static IDatabaseConnector DatabaseConnector(string type, string server, string database, string username, string password, bool trustServerCertificate = false)
         {
             return type switch
             {
                 "mysql" => new MySqlDatabaseConnector(server, database, username, password),
                 "odbc" => throw new NotSupportedException("ODBC database connections are not supported for schema initialization. Please use a supported database backend."),
-                "mssql" => new MSSqlDatabaseConnector(server, database, username, password),
-                _ => new MSSqlDatabaseConnector(server, database, username, password)
+                "mssql" => new MSSqlDatabaseConnector(server, database, username, password, trustServerCertificate),
+                _ => new MSSqlDatabaseConnector(server, database, username, password, trustServerCertificate)
             };
         }
     }
