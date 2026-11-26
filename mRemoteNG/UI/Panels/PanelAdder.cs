@@ -21,8 +21,10 @@ namespace mRemoteNG.UI.Panels
             try
             {
                 ConnectionWindow connectionForm = new(new DockContent());
-                BuildConnectionWindowContextMenu(connectionForm);
+                // The title decides whether this is the General panel, which cannot be closed, so it has
+                // to be set before the context menu is built.
                 SetConnectionWindowTitle(title, connectionForm);
+                BuildConnectionWindowContextMenu(connectionForm);
                 // Only show immediately if requested (for user-created empty panels)
                 // When opening connections, we defer showing until first tab is added
                 if (showImmediately)
@@ -56,9 +58,13 @@ namespace mRemoteNG.UI.Panels
 
         private static void SetConnectionWindowTitle(string title, ConnectionWindow connectionForm)
         {
+            // An unnamed panel keeps the window's own default name (New Panel). Naming it General would
+            // create a second, unclosable General panel.
             if (string.IsNullOrEmpty(title))
-                title = DefaultPanelName;
+                return;
             connectionForm.SetFormText(title.Replace("&", "&&"));
+            connectionForm.CloseButton = !connectionForm.IsGeneralPanel;
+            connectionForm.CloseButtonVisible = !connectionForm.IsGeneralPanel;
         }
 
         private static void BuildConnectionWindowContextMenu(DockContent pnlcForm)
