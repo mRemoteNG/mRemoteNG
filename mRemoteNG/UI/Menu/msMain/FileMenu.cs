@@ -61,7 +61,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileNew
             // 
-            _mMenFileNew.Image = Properties.Resources.NewFile_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(_mMenFileNew, "NewFile_16x");
             _mMenFileNew.Name = "mMenFileNew";
             _mMenFileLoad.ShortcutKeys = Keys.Control | Keys.N;
             _mMenFileNew.Size = new System.Drawing.Size(281, 22);
@@ -70,7 +70,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileLoad
             // 
-            _mMenFileLoad.Image = Properties.Resources.OpenFile_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(_mMenFileLoad, "OpenFile_16x");
             _mMenFileLoad.Name = "mMenFileLoad";
             _mMenFileLoad.ShortcutKeys = Keys.Control | Keys.O;
             _mMenFileLoad.Size = new System.Drawing.Size(281, 22);
@@ -106,7 +106,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsOptions
             // 
-            _mMenToolsOptions.Image = Properties.Resources.Settings_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(_mMenToolsOptions, "Settings_16x");
             _mMenToolsOptions.Name = "mMenToolsOptions";
             _mMenToolsOptions.Size = new System.Drawing.Size(184, 22);
             _mMenToolsOptions.Text = Language.Options;
@@ -114,7 +114,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileExit
             // 
-            _mMenFileExit.Image = Properties.Resources.CloseSolution_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(_mMenFileExit, "CloseSolution_16x");
             _mMenFileExit.Name = "mMenFileExit";
             _mMenFileExit.ShortcutKeys = Keys.Alt | Keys.F4;
             _mMenFileExit.Size = new System.Drawing.Size(281, 22);

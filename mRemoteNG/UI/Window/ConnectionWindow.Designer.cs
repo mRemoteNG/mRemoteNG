@@ -107,7 +107,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cmenTabDisconnect
             // 
-            this.cmenTabDisconnect.Image = global::mRemoteNG.Properties.Resources.Remove_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.cmenTabDisconnect, "Remove_16x");
             this.cmenTabDisconnect.Name = "cmenTabDisconnect";
             this.cmenTabDisconnect.Size = new System.Drawing.Size(230, 22);
             this.cmenTabDisconnect.Text = "Disconnect";
@@ -127,28 +127,28 @@ namespace mRemoteNG.UI.Window
             // 
             // cmenTabDisconnectOthers
             // 
-            this.cmenTabDisconnectOthers.Image = global::mRemoteNG.Properties.Resources.Remove_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.cmenTabDisconnectOthers, "Remove_16x");
             this.cmenTabDisconnectOthers.Name = "cmenTabDisconnectOthers";
             this.cmenTabDisconnectOthers.Size = new System.Drawing.Size(230, 22);
             this.cmenTabDisconnectOthers.Text = "Disconnect Other Tabs";
             // 
             // cmenTabDisconnectOthersRight
             // 
-            this.cmenTabDisconnectOthersRight.Image = global::mRemoteNG.Properties.Resources.Remove_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.cmenTabDisconnectOthersRight, "Remove_16x");
             this.cmenTabDisconnectOthersRight.Name = "cmenTabDisconnectOthersRight";
             this.cmenTabDisconnectOthersRight.Size = new System.Drawing.Size(230, 22);
             this.cmenTabDisconnectOthersRight.Text = "Disconnect Tabs To The Right";
             // 
             // cmenTabRenameTab
             // 
-            this.cmenTabRenameTab.Image = global::mRemoteNG.Properties.Resources.Rename_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.cmenTabRenameTab, "Rename_16x");
             this.cmenTabRenameTab.Name = "cmenTabRenameTab";
             this.cmenTabRenameTab.Size = new System.Drawing.Size(230, 22);
             this.cmenTabRenameTab.Text = "Rename Tab";
             // 
             // cmenTabDuplicateTab
             // 
-            this.cmenTabDuplicateTab.Image = global::mRemoteNG.Properties.Resources.Add_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.cmenTabDuplicateTab, "Add_16x");
             this.cmenTabDuplicateTab.Name = "cmenTabDuplicateTab";
             this.cmenTabDuplicateTab.Size = new System.Drawing.Size(230, 22);
             this.cmenTabDuplicateTab.Text = "Duplicate Tab";
@@ -160,7 +160,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cmenTabFullscreen
             // 
-            this.cmenTabFullscreen.Image = global::mRemoteNG.Properties.Resources.FullScreen_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.cmenTabFullscreen, "FullScreen_16x");
             this.cmenTabFullscreen.Name = "cmenTabFullscreen";
             this.cmenTabFullscreen.Size = new System.Drawing.Size(230, 22);
             this.cmenTabFullscreen.Text = "Fullscreen (RDP)";
@@ -174,7 +174,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cmenTabViewOnly
             // 
-            this.cmenTabViewOnly.Image = global::mRemoteNG.Properties.Resources.Monitor_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.cmenTabViewOnly, "Monitor_16x");
             this.cmenTabViewOnly.Name = "cmenTabViewOnly";
             this.cmenTabViewOnly.Size = new System.Drawing.Size(230, 22);
             this.cmenTabViewOnly.Text = "View Only (VNC)";
@@ -189,7 +189,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cmenTabRefreshScreen
             // 
-            this.cmenTabRefreshScreen.Image = global::mRemoteNG.Properties.Resources.Refresh_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.cmenTabRefreshScreen, "Refresh_16x");
             this.cmenTabRefreshScreen.Name = "cmenTabRefreshScreen";
             this.cmenTabRefreshScreen.Size = new System.Drawing.Size(230, 22);
             this.cmenTabRefreshScreen.Text = "Refresh Screen (VNC)";

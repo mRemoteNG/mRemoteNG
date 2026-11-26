@@ -76,8 +76,15 @@ namespace mRemoteNG.Themes
 
         private void SetActive()
         {
-            if (themes[Properties.OptionsThemePage.Default.ThemeName] is ThemeInfo savedTheme)
+            string savedName = Properties.OptionsThemePage.Default.ThemeName;
+            if (themes[savedName] is ThemeInfo savedTheme)
                 ActiveTheme = savedTheme;
+            else if ((savedName is "Catppuccin Mocha Comfortable" or "Catppuccin Mocha Fluent")
+                && themes["Catppuccin Mocha"] is ThemeInfo mocha)
+            {
+                ActiveTheme = mocha;
+                Properties.OptionsThemePage.Default.Save();
+            }
             else
             {
                 ActiveTheme = DefaultTheme;

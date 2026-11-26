@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using mRemoteNG.Themes;
 using System.Linq;
 using System.Collections.Generic;
+using System.Globalization;
 using BrightIdeasSoftware;
 using mRemoteNG.Properties;
 using mRemoteNG.UI.TaskDialog;
@@ -201,7 +202,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             foreach (KeyValuePair<string, System.Drawing.Color> colorElem in ti.ExtendedPalette.ExtColorPalette)
             {
-                string display = ColorKeyDisplayName(colorElem.Key);
+                string display = ColorKeyDisplayName(colorElem.Key, Language.Culture ?? CultureInfo.CurrentUICulture);
                 listPalette.AddObject(new PseudoKeyColor(colorElem.Key, colorElem.Value, display));
             }
         }
@@ -211,9 +212,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         /// localized, human-readable label shown in the theme color list.
         /// Falls back to the raw key when no mapping is defined.
         /// </summary>
-        private static string ColorKeyDisplayName(string key)
+        internal static string ColorKeyDisplayName(string key, CultureInfo culture)
         {
-            return ColorKeyJaMap.TryGetValue(key, out var jp) ? jp : key;
+            if (!ColorKeyJaMap.TryGetValue(key, out string japaneseLabel))
+                return key;
+            if (culture.TwoLetterISOLanguageName == "ja")
+                return japaneseLabel;
+
+            int separator = key.LastIndexOf('_');
+            if (separator < 0) return key;
+            return key[..separator].Replace('_', ' ') + ": " + key[(separator + 1)..];
         }
 
         // Japanese display labels for the palette keys defined in

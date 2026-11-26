@@ -50,7 +50,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsExternalApps
             // 
-            _mMenToolsExternalApps.Image = Properties.Resources.Console_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(_mMenToolsExternalApps, "Console_16x");
             _mMenToolsExternalApps.Name = "mMenToolsExternalApps";
             _mMenToolsExternalApps.Size = new System.Drawing.Size(184, 22);
             _mMenToolsExternalApps.Text = Language.ExternalTool;

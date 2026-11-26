@@ -3,9 +3,11 @@ using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Tabs;
 using mRemoteNG.Security;
@@ -13,6 +15,7 @@ using MSTSCLib;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -35,6 +38,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
          */
 
         private MsRdpClient6NotSafeForScripting _rdpClient; // lowest version supported
+        private RdpConnectingPanel _connectingPanel;
+        private ThemeManager _connectingThemeManager;
         protected virtual RdpVersion RdpProtocolVersion => RDP.RdpVersion.Rdc6;
         protected ConnectionInfo connectionInfo;
         protected Version RdpVersion;
@@ -164,10 +169,19 @@ namespace mRemoteNG.Connection.Protocol.RDP
             connectionInfo = InterfaceControl.Info;
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Requesting RDP version: {connectionInfo.RdpVersion}. Using: {RdpProtocolVersion}");
             Control = CreateActiveXRdpClientControl();
-            base.Initialize();
-
+            bool initialized = false;
             try
             {
+                // Install the cover before parenting/creating the native RDP window.
+                _connectingPanel = new RdpConnectingPanel(InterfaceControl, Language.Connecting);
+                _connectingThemeManager = ThemeManager.getInstance();
+                _connectingThemeManager.ThemeChanged += ApplyConnectingPanelTheme;
+                _connectingPanel.Disposed += ConnectingPanel_Disposed;
+                ApplyConnectingPanelTheme();
+                _connectingPanel.ShowConnecting();
+
+                if (!base.Initialize()) return false;
+                _connectingPanel.ShowConnecting();
                 if (!InitializeActiveXControl()) return false;
 
                 RdpVersion = new Version(_rdpClient.Version);
@@ -176,12 +190,55 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 SetRdpClientProperties();
 
+                initialized = true;
                 return true;
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.RdpSetPropsFailed, ex);
                 return false;
+            }
+            finally
+            {
+                if (!initialized)
+                    DisposeConnectingPanel();
+            }
+        }
+
+        private void ApplyConnectingPanelTheme()
+        {
+            RdpConnectingPanel panel = _connectingPanel;
+            ThemeManager themeManager = _connectingThemeManager;
+            if (panel == null || themeManager == null)
+                return;
+
+            bool extended = themeManager.ActiveAndExtended;
+            ExtendedColorPalette palette = themeManager.ActiveTheme.ExtendedPalette;
+            panel.ApplyColors(
+                extended ? palette.getColor("Tab_Item_Background") : SystemColors.Control,
+                extended ? palette.getColor("Dialog_Foreground") : SystemColors.ControlText);
+        }
+
+        private void ConnectingPanel_Disposed(object sender, EventArgs e)
+        {
+            if (ReferenceEquals(sender, _connectingPanel))
+                DisposeConnectingPanel();
+        }
+
+        private void DisposeConnectingPanel()
+        {
+            if (_connectingThemeManager != null)
+            {
+                _connectingThemeManager.ThemeChanged -= ApplyConnectingPanelTheme;
+                _connectingThemeManager = null;
+            }
+
+            RdpConnectingPanel panel = _connectingPanel;
+            _connectingPanel = null;
+            if (panel != null)
+            {
+                panel.Disposed -= ConnectingPanel_Disposed;
+                panel.DisposeOnUiThread();
             }
         }
 
@@ -229,6 +286,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
             try
             {
+                _connectingPanel?.ShowConnecting();
                 _rdpClient.Connect();
                 base.Connect();
 
@@ -236,6 +294,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             }
             catch (Exception ex)
             {
+                _connectingPanel?.Dismiss();
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.ConnectionOpenFailed, ex);
             }
 
@@ -257,6 +316,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         public override void Close()
         {
+            DisposeConnectingPanel();
             try
             {
                 if (_rdpClient != null)
@@ -1099,12 +1159,15 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         private void RDPEvent_OnFatalError(int errorCode)
         {
+            _connectingPanel?.Dismiss();
             string errorMsg = RdpErrorCodes.GetError(errorCode);
             Event_ErrorOccured(this, errorMsg, errorCode);
         }
 
         private void RDPEvent_OnDisconnected(int discReason)
         {
+            // Do not cover the existing reconnect controls or disconnection messages.
+            _connectingPanel?.Dismiss();
             const int UI_ERR_NORMAL_DISCONNECT = 0xB08;
             if (discReason != UI_ERR_NORMAL_DISCONNECT)
             {
@@ -1130,11 +1193,14 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         private void RDPEvent_OnConnecting()
         {
+            _connectingPanel?.ShowConnecting();
             Event_Connecting(this);
         }
 
         private void RDPEvent_OnConnected()
         {
+            // OnLoginComplete is too late: the user may need to interact with remote logon.
+            _connectingPanel?.Dismiss();
             Event_Connected(this);
         }
 

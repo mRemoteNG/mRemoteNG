@@ -29,6 +29,35 @@ namespace mRemoteNG.UI.Controls
         private readonly ThemeManager _themeManager;
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
         private readonly DisplayProperties _display;
+        private readonly List<ToolStripItem> _appearanceActions = new();
+        internal void RefreshAppearance() => ApplyTheme();
+
+        internal void ConfigureAppearanceActions(ToolStripItemCollection menus)
+        {
+            if (_appearanceActions.Count != 0) return;
+            void Add(string key, string text, Action action)
+            {
+                ToolStripButton button = new() { DisplayStyle = ToolStripItemDisplayStyle.Image, Text = text, AccessibleName = text, ToolTipText = text };
+                ThemeIcons.Bind(button, key);
+                button.Click += (_, _) => action();
+                Items.Insert(_appearanceActions.Count, button);
+                _appearanceActions.Add(button);
+            }
+            Add("AddItem_16x", Language.NewConnection, () => AppWindows.TreeForm.ConnectionTree.AddConnection());
+            Add("AddFolder_16x", Language.NewFolder, () => AppWindows.TreeForm.ConnectionTree.AddFolder());
+            foreach (var entry in new[] { ("mMenFileLoad", "OpenFile_16x"), ("mMenFileSave", "Save_16x"), ("mMenToolsOptions", "Settings_16x") })
+            {
+                ToolStripItem source = menus.Find(entry.Item1, true).FirstOrDefault();
+                if (source == null) continue;
+                Add(entry.Item2, source.Text, source.PerformClick);
+                ToolStripItem target = _appearanceActions[_appearanceActions.Count - 1];
+                target.Enabled = source.Enabled;
+                source.EnabledChanged += (_, _) => { if (!target.IsDisposed) target.Enabled = source.Enabled; };
+            }
+            ToolStripSeparator separator = new();
+            Items.Insert(_appearanceActions.Count, separator); _appearanceActions.Add(separator);
+            ApplyTheme();
+        }
 
 
         public QuickConnectToolStrip()
@@ -97,7 +126,7 @@ namespace mRemoteNG.UI.Controls
             // btnQuickConnect
             // 
             _btnQuickConnect.DropDown = _mnuQuickConnectProtocol;
-            _btnQuickConnect.Image = Properties.Resources.Run_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(_btnQuickConnect, "Run_16x");
             _btnQuickConnect.ImageTransparentColor = Color.Magenta;
             _btnQuickConnect.Margin = new Padding(0, 1, 3, 2);
             _btnQuickConnect.Name = "btnQuickConnect";
@@ -118,7 +147,7 @@ namespace mRemoteNG.UI.Controls
             // 
             _btnConnections.DisplayStyle = ToolStripItemDisplayStyle.Image;
             _btnConnections.DropDown = _mnuConnections;
-            _btnConnections.Image = Properties.Resources.ASPWebSite_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(_btnConnections, "ASPWebSite_16x");
             _btnConnections.ImageScaling = ToolStripItemImageScaling.SizeToFit;
             _btnConnections.ImageTransparentColor = Color.Magenta;
             _btnConnections.Name = "btnConnections";
@@ -137,7 +166,18 @@ namespace mRemoteNG.UI.Controls
 
         private void ApplyTheme()
         {
-            if (!_themeManager.ThemingActive) return;
+            bool comfortable = FluentAppearance.Enabled(_themeManager);
+            foreach (ToolStripItem item in _appearanceActions) item.Visible = comfortable;
+            FluentAppearance.ApplyStrip(this, _themeManager.ActiveTheme, comfortable);
+            FluentAppearance.ApplyFont(_cmbQuickConnect.ComboBox, comfortable);
+            if (!_themeManager.ThemingActive)
+            {
+                _cmbQuickConnect.BackColor = SystemColors.Window;
+                _cmbQuickConnect.ForeColor = SystemColors.WindowText;
+                vsToolStripExtender.SetStyle(_mnuQuickConnectProtocol, _themeManager.DefaultTheme.Version, _themeManager.DefaultTheme.Theme);
+                vsToolStripExtender.SetStyle(_mnuConnections, _themeManager.DefaultTheme.Version, _themeManager.DefaultTheme.Theme);
+                return;
+            }
             vsToolStripExtender.SetStyle(_mnuQuickConnectProtocol, _themeManager.ActiveTheme.Version,
                                          _themeManager.ActiveTheme.Theme);
             vsToolStripExtender.SetStyle(_mnuConnections, _themeManager.ActiveTheme.Version,
@@ -250,6 +290,7 @@ namespace mRemoteNG.UI.Controls
             _btnConnections.DropDownItems.AddRange(rootMenuItems);
 
             ToolStripMenuItem favorites = new(Language.Favorites, Properties.Resources.Favorite_16x);
+            ThemeIcons.Bind(favorites, "Favorite_16x");
             List<ContainerInfo> rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
             List<ToolStripMenuItem> favoritesList = [];
 
@@ -260,9 +301,9 @@ namespace mRemoteNG.UI.Controls
                     ToolStripMenuItem favoriteMenuItem = new()
                     {
                         Text = containerInfo.Name,
-                        Tag = containerInfo,
-                        Image = containerInfo.OpenConnections.Count > 0 ? Properties.Resources.Run_16x : Properties.Resources.Stop_16x
+                        Tag = containerInfo
                     };
+                    ThemeIcons.Bind(favoriteMenuItem, containerInfo.OpenConnections.Count > 0 ? "Run_16x" : "Stop_16x");
                     favoriteMenuItem.MouseUp += ConnectionsMenuItem_MouseUp;
                     favoritesList.Add(favoriteMenuItem);
                 }

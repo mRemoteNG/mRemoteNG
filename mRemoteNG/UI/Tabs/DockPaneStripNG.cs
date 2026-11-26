@@ -190,7 +190,9 @@ namespace mRemoteNG.UI.Tabs
 
         private IContainer Components { get; }
 
-        public Font TextFont => DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.TextFont;
+        public Font TextFont => mRemoteNG.Themes.FluentAppearance.Enabled(mRemoteNG.Themes.ThemeManager.getInstance())
+            ? mRemoteNG.Themes.FluentAppearance.FontFor(this, DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.TextFont, true)
+            : DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.TextFont;
 
         private Font DocumentTextFont
         {

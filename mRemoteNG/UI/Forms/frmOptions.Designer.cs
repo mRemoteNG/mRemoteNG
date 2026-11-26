@@ -28,6 +28,11 @@ namespace mRemoteNG.UI.Forms
                 components?.Dispose();
             }
             base.Dispose(disposing);
+            if (disposing)
+            {
+                foreach (var image in _pageImages.Values) image.Dispose();
+                _pageImages.Clear();
+            }
         }
 
         #region Windows Form Designer generated code

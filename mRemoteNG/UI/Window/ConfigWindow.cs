@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
@@ -127,7 +128,7 @@ namespace mRemoteNG.UI.Window
             //btnShowInheritance
             //
             _btnShowInheritance.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            _btnShowInheritance.Image = Properties.Resources.Schema_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(_btnShowInheritance, "Schema_16x");
             _btnShowInheritance.ImageTransparentColor = Color.Magenta;
             _btnShowInheritance.Name = "_btnShowInheritance";
             _btnShowInheritance.Size = new Size(23, 22);
@@ -136,7 +137,7 @@ namespace mRemoteNG.UI.Window
             //btnShowDefaultInheritance
             //
             _btnShowDefaultInheritance.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            _btnShowDefaultInheritance.Image = Properties.Resources.ViewDownBySchema_16x;
+            ThemeIcons.Bind(_btnShowDefaultInheritance, "ViewDownBySchema_16x");
             _btnShowDefaultInheritance.ImageTransparentColor = Color.Magenta;
             _btnShowDefaultInheritance.Name = "_btnShowDefaultInheritance";
             _btnShowDefaultInheritance.Size = new Size(23, 22);
@@ -147,7 +148,7 @@ namespace mRemoteNG.UI.Window
             _btnShowProperties.Checked = true;
             _btnShowProperties.CheckState = CheckState.Checked;
             _btnShowProperties.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            _btnShowProperties.Image = Properties.Resources.Property_16x;
+            ThemeIcons.Bind(_btnShowProperties, "Property_16x");
             _btnShowProperties.ImageTransparentColor = Color.Magenta;
             _btnShowProperties.Name = "_btnShowProperties";
             _btnShowProperties.Size = new Size(23, 22);
@@ -156,7 +157,7 @@ namespace mRemoteNG.UI.Window
             //btnShowDefaultProperties
             //
             _btnShowDefaultProperties.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            _btnShowDefaultProperties.Image = Properties.Resources.ExtendedProperty_16x;
+            ThemeIcons.Bind(_btnShowDefaultProperties, "ExtendedProperty_16x");
             _btnShowDefaultProperties.ImageTransparentColor = Color.Magenta;
             _btnShowDefaultProperties.Name = "_btnShowDefaultProperties";
             _btnShowDefaultProperties.Size = new Size(23, 22);
@@ -305,7 +306,22 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ActiveAndExtended) return;
+            if (!ThemeManager.getInstance().ActiveAndExtended)
+            {
+                _pGrid.BackColor = System.Drawing.SystemColors.Control;
+                _pGrid.ForeColor = System.Drawing.SystemColors.ControlText;
+                _pGrid.ViewBackColor = System.Drawing.SystemColors.Window;
+                _pGrid.ViewForeColor = System.Drawing.SystemColors.WindowText;
+                _pGrid.LineColor = System.Drawing.SystemColors.Control;
+                _pGrid.HelpBackColor = System.Drawing.SystemColors.Control;
+                _pGrid.HelpForeColor = System.Drawing.SystemColors.ControlText;
+                _pGrid.CategoryForeColor = System.Drawing.SystemColors.ControlText;
+                _pGrid.CommandsBackColor = System.Drawing.SystemColors.Control;
+                _pGrid.CommandsForeColor = System.Drawing.SystemColors.ControlText;
+                _pGrid.CommandsDisabledLinkColor = System.Drawing.SystemColors.GrayText;
+                ApplyAppearance();
+                return;
+            }
             _pGrid.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             _pGrid.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
             _pGrid.ViewBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Background");
@@ -320,6 +336,25 @@ namespace mRemoteNG.UI.Window
                 _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Background");
             _pGrid.CommandsForeColor =
                 _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground");
+            ApplyAppearance();
+        }
+
+        private void ApplyAppearance()
+        {
+            ThemeManager manager = ThemeManager.getInstance();
+            bool enabled = FluentAppearance.Enabled(manager);
+            FluentAppearance.ApplyGrid(_pGrid, manager.ActiveTheme, enabled);
+            ToolStrip strip = _pGrid.Controls.OfType<ToolStrip>().FirstOrDefault();
+            if (strip == null) return;
+            Dictionary<ToolStripItem, string> glyphs = new();
+            if (strip.Items.Count >= 2)
+            {
+                glyphs[strip.Items[0]] = "Properties_16x";
+                glyphs[strip.Items[1]] = "SortAscending_16x";
+            }
+            // Render the built-in sort images without replacing images owned by
+            // PropertyGrid's DPI-aware ImageList.
+            FluentAppearance.ApplyStrip(strip, manager.ActiveTheme, enabled, glyphs, compact: true);
         }
 
         private void UpdateTopRow()
@@ -395,11 +430,9 @@ namespace mRemoteNG.UI.Window
                 !_pGrid.IsShowingDefaultProperties &&
                 !_pGrid.RootNodeSelected;
 
-            _btnIcon.Image = _btnIcon.Enabled
-                ? ConnectionIcon
-                    .FromString(_pGrid.SelectedConnectionInfo?.Icon)?
-                    .ToBitmap()
-                : null;
+            ThemeIcons.Unbind(_btnIcon);
+            if (_btnIcon.Enabled) ThemeIcons.BindConnectionIcon(_btnIcon, _pGrid.SelectedConnectionInfo);
+            else _btnIcon.Image = null;
         }
 
         private void AddToolStripItems()
@@ -448,6 +481,7 @@ namespace mRemoteNG.UI.Window
                 if (propertyGridToolStrip.Items.Count == expectedToolStripItemCount) return;
                 propertyGridToolStrip.AllowMerge = true;
                 ToolStripManager.Merge(customToolStrip, propertyGridToolStrip);
+                ApplyAppearance();
             }
             catch (Exception ex)
             {
@@ -477,9 +511,7 @@ namespace mRemoteNG.UI.Window
             {
                 if (e.ChangedItem.Label == Language.Icon)
                 {
-                    Icon conIcon = ConnectionIcon.FromString(_pGrid.SelectedConnectionInfo.Icon);
-                    if (conIcon != null)
-                        _btnIcon.Image = conIcon.ToBitmap();
+                    UpdateIconButton();
                 }
                 else if (e.ChangedItem.Label == Language.HostnameIp)
                 {
@@ -568,9 +600,9 @@ namespace mRemoteNG.UI.Window
                 Icon connectionIcon = ConnectionIcon.FromString(iconName);
                 if (connectionIcon == null) return;
 
-                _btnIcon.Image = connectionIcon.ToBitmap();
-
                 connectionInfo.Icon = iconName;
+                connectionIcon.Dispose();
+                UpdateIconButton();
                 _pGrid.Refresh();
 
                 Runtime.ConnectionsService.SaveConnectionsAsync();

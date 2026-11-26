@@ -97,7 +97,7 @@ namespace mRemoteNG.UI.Window
             // mMenAddConnection
             // 
             this.mMenAddConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenAddConnection.Image = global::mRemoteNG.Properties.Resources.AddItem_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.mMenAddConnection, "AddItem_16x");
             this.mMenAddConnection.Name = "mMenAddConnection";
             this.mMenAddConnection.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
             this.mMenAddConnection.Size = new System.Drawing.Size(24, 20);
@@ -106,7 +106,7 @@ namespace mRemoteNG.UI.Window
             // mMenAddFolder
             // 
             this.mMenAddFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenAddFolder.Image = global::mRemoteNG.Properties.Resources.AddFolder_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.mMenAddFolder, "AddFolder_16x");
             this.mMenAddFolder.Name = "mMenAddFolder";
             this.mMenAddFolder.Size = new System.Drawing.Size(28, 20);
             this.mMenAddFolder.Click += new System.EventHandler(this.CMenTreeAddFolder_Click);
@@ -114,7 +114,7 @@ namespace mRemoteNG.UI.Window
             // mMenAddRoot
             // 
             this.mMenAddRoot.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenAddRoot.Image = global::mRemoteNG.Properties.Resources.ASPWebSite_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.mMenAddRoot, "ASPWebSite_16x");
             this.mMenAddRoot.Name = "mMenAddRoot";
             this.mMenAddRoot.Size = new System.Drawing.Size(28, 20);
             this.mMenAddRoot.Click += new System.EventHandler(this.CMenTreeAddRoot_Click);
@@ -122,7 +122,7 @@ namespace mRemoteNG.UI.Window
             // mMenViewExpandAllFolders
             // 
             this.mMenViewExpandAllFolders.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenViewExpandAllFolders.Image = global::mRemoteNG.Properties.Resources.ExpandAll_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.mMenViewExpandAllFolders, "ExpandAll_16x");
             this.mMenViewExpandAllFolders.Name = "mMenViewExpandAllFolders";
             this.mMenViewExpandAllFolders.Size = new System.Drawing.Size(28, 20);
             this.mMenViewExpandAllFolders.Text = "Expand all folders";
@@ -130,7 +130,7 @@ namespace mRemoteNG.UI.Window
             // mMenViewCollapseAllFolders
             // 
             this.mMenViewCollapseAllFolders.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenViewCollapseAllFolders.Image = global::mRemoteNG.Properties.Resources.CollapseAll_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.mMenViewCollapseAllFolders, "CollapseAll_16x");
             this.mMenViewCollapseAllFolders.Name = "mMenViewCollapseAllFolders";
             this.mMenViewCollapseAllFolders.Size = new System.Drawing.Size(28, 20);
             this.mMenViewCollapseAllFolders.Text = "Collapse all folders";
@@ -138,14 +138,14 @@ namespace mRemoteNG.UI.Window
             // mMenSortAscending
             // 
             this.mMenSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenSort.Image = global::mRemoteNG.Properties.Resources.SortAscending_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.mMenSort, "SortAscending_16x");
             this.mMenSort.Name = "mMenSort";
             this.mMenSort.Size = new System.Drawing.Size(28, 20);
             // 
             // mMenFavorites
             // 
             this.mMenFavorites.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenFavorites.Image = global::mRemoteNG.Properties.Resources.Favorite_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.mMenFavorites, "Favorite_16x");
             this.mMenFavorites.Name = "mMenFavorites";
             this.mMenFavorites.Size = new System.Drawing.Size(28, 20);
             this.mMenFavorites.Text = "Favorites";
@@ -157,7 +157,7 @@ namespace mRemoteNG.UI.Window
             // pbSearch
             // 
             this.pbSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbSearch.Image = global::mRemoteNG.Properties.Resources.Search_16x;
+            global::mRemoteNG.Themes.ThemeIcons.Bind(this.pbSearch, "Search_16x");
             this.pbSearch.Location = new System.Drawing.Point(0, 0);
             this.pbSearch.Margin = new System.Windows.Forms.Padding(0);
             this.pbSearch.Name = "pbSearch";

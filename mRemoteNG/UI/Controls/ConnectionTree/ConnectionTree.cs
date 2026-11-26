@@ -30,6 +30,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
         private readonly StatusImageList _statusImageList = new();
         private ThemeManager _themeManager;
+        private readonly int _originalRowHeight;
 
         private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new();
 
@@ -100,6 +101,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             InitializeComponent();
             SetupConnectionTreeView();
             UseOverlays = false;
+            _originalRowHeight = RowHeight;
             _themeManager = ThemeManager.getInstance();
             _themeManager.ThemeChanged += ThemeManagerOnThemeChanged;
             ApplyTheme();
@@ -113,8 +115,24 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         private void ApplyTheme()
         {
+            bool comfortable = FluentAppearance.Enabled(_themeManager);
+            FluentAppearance.ApplyFont(this, comfortable);
+            RowHeight = comfortable ? Math.Max(24, (int)Math.Round(24 * DeviceDpi / 96d)) : _originalRowHeight;
+            _statusImageList.ApplyTheme(DeviceDpi);
+            TreeColumnRenderer.LinePen.Color = _themeManager.ActiveAndExtended
+                ? _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Border")
+                : System.Drawing.SystemColors.ControlDark;
+            Invalidate();
             if (!_themeManager.ActiveAndExtended)
+            {
+                BackColor = System.Drawing.SystemColors.Window;
+                ForeColor = System.Drawing.SystemColors.WindowText;
+                SelectedBackColor = System.Drawing.SystemColors.Highlight;
+                SelectedForeColor = System.Drawing.SystemColors.HighlightText;
+                UnfocusedSelectedBackColor = System.Drawing.SystemColors.Control;
+                UnfocusedSelectedForeColor = System.Drawing.SystemColors.ControlText;
                 return;
+            }
 
             ExtendedColorPalette themePalette = _themeManager.ActiveTheme.ExtendedPalette;
 
@@ -124,6 +142,12 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             SelectedForeColor = themePalette.getColor("Treeview_SelectedItem_Active_Foreground");
             UnfocusedSelectedBackColor = themePalette.getColor("Treeview_SelectedItem_Inactive_Background");
             UnfocusedSelectedForeColor = themePalette.getColor("Treeview_SelectedItem_Inactive_Foreground");
+        }
+
+        protected override void OnDpiChangedAfterParent(EventArgs e)
+        {
+            base.OnDpiChangedAfterParent(e);
+            if (_themeManager != null) ApplyTheme();
         }
 
         protected override void Dispose(bool disposing)
