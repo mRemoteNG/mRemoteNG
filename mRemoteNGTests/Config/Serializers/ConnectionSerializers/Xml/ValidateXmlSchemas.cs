@@ -84,10 +84,28 @@ public class ValidateXmlSchemas
         AssertSerializedXmlMatchesSchema(dpapiSerializer.Serialize(_connectionTreeModel));
     }
 
-    private void AssertSerializedXmlMatchesSchema(string xml)
+    [Test]
+    public void ValidateSchemaOfFormat30WithTheKeyDerivedOnce()
+    {
+        // Format 3.0 adds the salt of the file, KdfSalt, on the root Connections element.
+        var cryptographyProvider = new DerivedKeyCryptographyProvider(DerivedKeyCryptographyProvider.NewSalt(), 1000);
+        var connectionNodeSerializer = new XmlConnectionNodeSerializer30(
+            cryptographyProvider,
+            _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
+            new SaveFilter());
+        var serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer);
+        string xml = serializer.Serialize(_connectionTreeModel);
+
+        Assert.That(xml, Does.Contain("KdfSalt="));
+        AssertSerializedXmlMatchesSchema(xml, serializer.Version);
+    }
+
+    private void AssertSerializedXmlMatchesSchema(string xml) => AssertSerializedXmlMatchesSchema(xml, _serializer.Version);
+
+    private void AssertSerializedXmlMatchesSchema(string xml, System.Version version)
     {
         var sb = new StringBuilder();
-        var schemaFileName = $"mremoteng_confcons_v{_serializer.Version.Major}_{_serializer.Version.Minor}.xsd";
+        var schemaFileName = $"mremoteng_confcons_v{version.Major}_{version.Minor}.xsd";
         var schemaFile = GetTargetPath(schemaFileName);
         _xmlReaderSettings.Schemas.Add("http://mremoteng.org", schemaFile);
         _xmlReaderSettings.ValidationEventHandler += (sender, args) =>

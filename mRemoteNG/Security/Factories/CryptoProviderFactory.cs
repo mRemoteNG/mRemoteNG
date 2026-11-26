@@ -21,6 +21,12 @@ namespace mRemoteNG.Security.Factories
             return new AeadCryptographyProvider(_aeadBlockCipher);
         }
 
+        /// <summary>The same cipher, under one key derived from the salt for the whole connection list.</summary>
+        public DerivedKeyCryptographyProvider BuildWithKeyDerivedOnce(byte[] salt, int iterations)
+        {
+            return new DerivedKeyCryptographyProvider(_aeadBlockCipher, salt, iterations);
+        }
+
         private static IBlockCipher ChooseBlockCipherEngine(BlockCipherEngines engine)
         {
             return engine switch

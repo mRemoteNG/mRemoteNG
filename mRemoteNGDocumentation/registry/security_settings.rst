@@ -73,7 +73,10 @@ Specifies the block cipher mode used for encryption.
 
 Encryption Key Derivation Iterations
 ------------------------------------
-Specifies the number of iterations used in the encryption key derivation process.
+Specifies the number of iterations used to derive the key of each encrypted value in the credential
+repository list and the user profile store. It does not apply to the connections file: from file
+format 3.0 on, the key of a connections file is derived once for the whole file, with 600,000
+iterations and a salt written in the file.
 
 - **Value Name:** ``EncryptionKeyDerivationIterations``
 - **Value Type:** ``REG_DWORD``

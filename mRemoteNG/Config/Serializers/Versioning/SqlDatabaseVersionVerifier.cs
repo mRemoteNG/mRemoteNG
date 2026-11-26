@@ -4,16 +4,38 @@ using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 using mRemoteNG.Resources.Language;
 using System;
+using System.Collections.Generic;
 using System.Runtime.Versioning;
+using System.Security;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
     [SupportedOSPlatform("windows")]
-    public class SqlDatabaseVersionVerifier(IDatabaseConnector databaseConnector)
+    public class SqlDatabaseVersionVerifier
     {
-        private readonly Version _currentSupportedVersion = new(3, 3);
+        /// <summary>The newest database version this version reads and writes.</summary>
+        public static Version SupportedVersion => ConnectionsFileInfo.ConnectionFileVersion;
 
-        private readonly IDatabaseConnector _databaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
+        private readonly Version _currentSupportedVersion = SupportedVersion;
+
+        private readonly IDatabaseConnector _databaseConnector;
+        private readonly SecureString _password;
+
+        public SqlDatabaseVersionVerifier(IDatabaseConnector databaseConnector)
+            : this(databaseConnector, null)
+        {
+        }
+
+        /// <param name="databaseConnector">The database to verify.</param>
+        /// <param name="password">
+        /// The password the connection list was opened with, which moving the stored passwords to
+        /// version 3.4 needs. Without it a database before 3.4 is not upgraded past 3.3.
+        /// </param>
+        public SqlDatabaseVersionVerifier(IDatabaseConnector databaseConnector, SecureString password)
+        {
+            _databaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
+            _password = password;
+        }
 
         public bool VerifyDatabaseVersion(Version dbVersion)
         {
@@ -26,7 +48,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
                     return true;
                 }
 
-                IVersionUpgrader[] dbUpgraders = new IVersionUpgrader[]
+                List<IVersionUpgrader> dbUpgraders = new()
                 {
                     new SqlVersion22To23Upgrader(_databaseConnector),
                     new SqlVersion23To24Upgrader(_databaseConnector),
@@ -40,6 +62,8 @@ namespace mRemoteNG.Config.Serializers.Versioning
                     new SqlVersion31To32Upgrader(_databaseConnector),
                     new SqlVersion32To33Upgrader(_databaseConnector),
                 };
+                if (_password != null)
+                    dbUpgraders.Add(new SqlVersion33To34Upgrader(_databaseConnector, _password));
 
                 foreach (IVersionUpgrader upgrader in dbUpgraders)
                 {
