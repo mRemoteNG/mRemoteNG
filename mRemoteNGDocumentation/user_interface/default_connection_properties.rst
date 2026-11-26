@@ -68,7 +68,8 @@ Applying default inheritance to an existing item
 ------------------------------------------------
 To reset an existing connection or folder to the default inheritance settings, right click it in the connection tree and select
 :menuselection:`Inheritance --> Apply default inheritance`.
-This replaces all inheritance settings of that item with the current default inheritance. Property values are not changed.
+This replaces all inheritance settings of that item with the current default inheritance. Locally stored property values are not overwritten,
+but the effective values used by the connection can change when inheritance is enabled or disabled.
 
 Quick Connections
 -----------------
@@ -80,4 +81,5 @@ Connections and folders created by an import start with the default inheritance 
 (but not all) properties, such as protocol and the RDP display and redirection settings. Username, domain, password and hostname are not taken from the defaults.
 Any value that the imported file provides replaces the default.
 Some import formats set their own inheritance, for example importing from an mRemoteNG connection file keeps the inheritance stored in that file,
-and the Active Directory import turns on inheritance for every property except Description.
+and the Active Directory import turns on inheritance for every property except Description on imported connections.
+Imported Active Directory folders retain the default inheritance settings.
