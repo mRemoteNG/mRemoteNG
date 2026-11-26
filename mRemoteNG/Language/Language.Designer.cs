@@ -4378,11 +4378,29 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Generate an encrypted password suitable for registry settings..
+        ///   Looks up a localized string similar to Generate an encrypted password for the registry settings of this computer. Only this computer can decrypt it, so generate it on each computer that uses it..
         /// </summary>
         internal static string PasswdGenDescription {
             get {
                 return ResourceManager.GetString("PasswdGenDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The {0} value in the registry is encrypted with the default key, which is public, so anyone with a copy of the value can decrypt it, on any computer. Generate it again on this computer with the Secure Key Generator in Options &gt; Security, or with the script in the documentation of the registry settings..
+        /// </summary>
+        internal static string RegistryPasswordOldForm {
+            get {
+                return ResourceManager.GetString("RegistryPasswordOldForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The {0} value in the registry was protected on another computer and cannot be read on this one, so it is not used. Generate it on this computer..
+        /// </summary>
+        internal static string RegistryPasswordOtherComputer {
+            get {
+                return ResourceManager.GetString("RegistryPasswordOtherComputer", resourceCulture);
             }
         }
         
@@ -8292,6 +8310,24 @@ namespace mRemoteNG.Resources.Language {
         internal static string Warnings {
             get {
                 return ResourceManager.GetString("Warnings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The passwords in the connections file are encrypted with the default key, which is public: anyone who gets a copy of the file can decrypt them. To protect them, set a password on the root node of the connection tree (Password protect), or turn on DPAPI protection in Options &gt; Security..
+        /// </summary>
+        internal static string WarningDefaultKeyConnectionsFile {
+            get {
+                return ResourceManager.GetString("WarningDefaultKeyConnectionsFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The passwords in the SQL database are encrypted with the default key, which is public: anyone who can read the database can decrypt them. To protect them, set a password on the root node of the connection tree (Password protect)..
+        /// </summary>
+        internal static string WarningDefaultKeyDatabase {
+            get {
+                return ResourceManager.GetString("WarningDefaultKeyDatabase", resourceCulture);
             }
         }
         

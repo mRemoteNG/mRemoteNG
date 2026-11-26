@@ -82,6 +82,7 @@ namespace mRemoteNG.Config.Connections
             }
 
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Saved connections to database");
+            DefaultKeyWarning.ForDatabase(connectionTreeModel, Runtime.MessageCollector);
         }
 
         /// <summary>

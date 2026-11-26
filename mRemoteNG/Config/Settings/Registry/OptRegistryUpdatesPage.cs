@@ -2,7 +2,7 @@
 using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
-using mRemoteNG.Security.SymmetricEncryption;
+using mRemoteNG.Security;
 using mRemoteNG.Tools.WindowsRegistry;
 
 namespace mRemoteNG.Config.Settings.Registry
@@ -218,19 +218,10 @@ namespace mRemoteNG.Config.Settings.Registry
 
                 if (ProxyAuthPass.IsSet && UseProxyAuthentication.Value)
                 {
-                    try
-                    {
-                        LegacyRijndaelCryptographyProvider cryptographyProvider = new();
-                        string decryptedPassword;
-                        string proxyAuthPass = ProxyAuthPass.Value;
-                        decryptedPassword = cryptographyProvider.Decrypt(proxyAuthPass, Runtime.EncryptionKey);
-
-                        Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass = decryptedPassword;
-                    }
-                    catch
-                    {
-                        // The password in the registry is not encrypted.
-                    }
+                    // Kept encrypted, like the other passwords in the options: whoever reads it decrypts it.
+                    string proxyAuthPass = OptionPasswords.FromRegistry(ProxyAuthPass.Value, nameof(ProxyAuthPass), Runtime.MessageCollector);
+                    if (proxyAuthPass != null)
+                        Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass = proxyAuthPass;
                 }
             }
         }

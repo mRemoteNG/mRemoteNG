@@ -80,6 +80,37 @@ The Windows Registry is a crucial component for system configuration. Here's a g
    - Provide a name for the shortcut and click "Finish."
 
 
+.. _registry_encrypted_passwords:
+
+Encrypted Passwords
+===================
+
+The password values, ``SQLPassword``, ``DefaultPassword`` and ``ProxyAuthPass``, take a password encrypted for the
+computer they are set on, with Windows DPAPI for the machine: any user of that computer can decrypt it, but a copy of
+the value does not open on another computer, so a registry export taken elsewhere does not give the password away.
+For the same reason a value made on one computer does not work on another, and a policy that sets one value on every
+computer does not work: make the value on each computer, with a script run there.
+
+On the computer itself, the Secure Key Generator in Options > Security makes the value and copies it to the clipboard.
+With Windows PowerShell 5.1 a script makes it this way, and creates the key on a computer that does not have it yet:
+
+.. code:: powershell
+
+    Add-Type -AssemblyName System.Security
+    $password = Read-Host -AsSecureString 'Password'
+    $bytes = [Text.Encoding]::UTF8.GetBytes([Net.NetworkCredential]::new('', $password).Password)
+    $entropy = [Text.Encoding]::UTF8.GetBytes('mRemoteNG registry password')
+    $protected = [Security.Cryptography.ProtectedData]::Protect($bytes, $entropy, 'LocalMachine')
+    $value = 'dpapi-machine:' + [Convert]::ToBase64String($protected)
+    $key = 'HKLM:\SOFTWARE\mRemoteNG\SQLServer\Options'
+    if (-not (Test-Path $key)) { New-Item -Path $key -Force | Out-Null }
+    Set-ItemProperty -Path $key -Name 'SQLPassword' -Value $value
+
+A value made by an earlier version, with the generator encrypting it under the default key, still works, with a
+warning in the Notifications panel: the default key is public, so anyone with a copy of the value can decrypt it, on
+any computer. Make it again to protect it.
+
+
 .. _disclaimer:
 
 Disclaimer

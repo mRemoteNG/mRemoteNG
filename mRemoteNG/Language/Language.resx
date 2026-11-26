@@ -1986,6 +1986,12 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="Warnings" xml:space="preserve">
     <value>Warnings</value>
   </data>
+  <data name="WarningDefaultKeyConnectionsFile" xml:space="preserve">
+    <value>The passwords in the connections file are encrypted with the default key, which is public: anyone who gets a copy of the file can decrypt them. To protect them, set a password on the root node of the connection tree (Password protect), or turn on DPAPI protection in Options &gt; Security.</value>
+  </data>
+  <data name="WarningDefaultKeyDatabase" xml:space="preserve">
+    <value>The passwords in the SQL database are encrypted with the default key, which is public: anyone who can read the database can decrypt them. To protect them, set a password on the root node of the connection tree (Password protect).</value>
+  </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
@@ -2798,7 +2804,13 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <value>Copy to Clipboard</value>
   </data>
   <data name="PasswdGenDescription" xml:space="preserve">
-    <value>Generate an encrypted password suitable for registry settings.</value>
+    <value>Generate an encrypted password for the registry settings of this computer. Only this computer can decrypt it, so generate it on each computer that uses it.</value>
+  </data>
+  <data name="RegistryPasswordOldForm" xml:space="preserve">
+    <value>The {0} value in the registry is encrypted with the default key, which is public, so anyone with a copy of the value can decrypt it, on any computer. Generate it again on this computer with the Secure Key Generator in Options &gt; Security, or with the script in the documentation of the registry settings.</value>
+  </data>
+  <data name="RegistryPasswordOtherComputer" xml:space="preserve">
+    <value>The {0} value in the registry was protected on another computer and cannot be read on this one, so it is not used. Generate it on this computer.</value>
   </data>
   <data name="MakeABackup" xml:space="preserve">
     <value>Make a backup</value>

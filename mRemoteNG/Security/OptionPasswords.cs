@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Text;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.Security
@@ -16,8 +18,9 @@ namespace mRemoteNG.Security
     /// anyone who could read user.config could decrypt them. Installed builds now protect them
     /// with DPAPI for the current Windows user, which suits user.config, kept per user and per
     /// machine anyway. The old form is still read: values saved by an earlier version, and the
-    /// ones an administrator puts in the registry. Portable builds keep the old form, since
-    /// their settings travel with the executable to other machines and users.
+    /// ones an administrator put in the registry before it could take them protected with DPAPI
+    /// for the machine. Portable builds keep the old form, since their settings travel with the
+    /// executable to other machines and users.
     /// </summary>
     [SupportedOSPlatform("windows")]
     public static class OptionPasswords
@@ -26,6 +29,17 @@ namespace mRemoteNG.Security
 
         /// <summary>Ties a protected value to this use, so DPAPI data made for anything else does not open here.</summary>
         private static readonly byte[] Entropy = Encoding.UTF8.GetBytes("mRemoteNG option password");
+
+        private const string ComputerDpapiPrefix = "dpapi-machine:";
+
+        /// <summary>
+        /// The same for a password in the registry. The script in the documentation of the registry
+        /// settings passes these bytes too, so changing them breaks the values made with it.
+        /// </summary>
+        private static readonly byte[] RegistryEntropy = Encoding.UTF8.GetBytes("mRemoteNG registry password");
+
+        /// <summary>The registry values already reported in this session, so each is reported once.</summary>
+        private static readonly HashSet<string> ReportedRegistryValues = new(StringComparer.Ordinal);
 
         public static string Protect(string plainText) => Protect(plainText, Runtime.IsPortableEdition);
 
@@ -57,12 +71,18 @@ namespace mRemoteNG.Security
         public static string Unprotect(string stored)
         {
             if (string.IsNullOrEmpty(stored)) return "";
+            if (IsProtectedForAComputer(stored))
+                return UnprotectDpapi(stored.Substring(ComputerDpapiPrefix.Length), RegistryEntropy, DataProtectionScope.LocalMachine);
             if (!IsProtected(stored)) return new LegacyRijndaelCryptographyProvider().Decrypt(stored, Runtime.EncryptionKey);
 
+            return UnprotectDpapi(stored.Substring(DpapiPrefix.Length), Entropy, DataProtectionScope.CurrentUser);
+        }
+
+        private static string UnprotectDpapi(string base64, byte[] entropy, DataProtectionScope scope)
+        {
             try
             {
-                byte[] protectedBytes = Convert.FromBase64String(stored.Substring(DpapiPrefix.Length));
-                return Encoding.UTF8.GetString(ProtectedData.Unprotect(protectedBytes, Entropy, DataProtectionScope.CurrentUser));
+                return Encoding.UTF8.GetString(ProtectedData.Unprotect(Convert.FromBase64String(base64), entropy, scope));
             }
             catch (Exception ex) when (ex is CryptographicException or FormatException)
             {
@@ -71,6 +91,91 @@ namespace mRemoteNG.Security
         }
 
         internal static bool IsProtected(string stored) => stored.StartsWith(DpapiPrefix, StringComparison.Ordinal);
+
+        internal static bool IsProtectedForAComputer(string stored) => stored.StartsWith(ComputerDpapiPrefix, StringComparison.Ordinal);
+
+        /// <summary>
+        /// A password for the registry settings of this computer, protected with DPAPI for the
+        /// machine: any user of this computer can read it, but the value copied to another
+        /// computer, in a registry export for one, does not open there. The default key of the old
+        /// form is public, so that form protected nothing.
+        /// </summary>
+        public static string ProtectForThisComputer(string plainText)
+        {
+            if (string.IsNullOrEmpty(plainText)) return "";
+
+            byte[] protectedBytes = ProtectedData.Protect(Encoding.UTF8.GetBytes(plainText), RegistryEntropy, DataProtectionScope.LocalMachine);
+            return ComputerDpapiPrefix + Convert.ToBase64String(protectedBytes);
+        }
+
+        /// <summary>
+        /// The form a password set in the registry is kept in the options, or null when it cannot
+        /// be used: a value protected on another computer, or one that is not encrypted at all, as
+        /// plain-text passwords never were taken. A value in the old form is still taken, with a
+        /// warning, so the policies already deployed keep working until they are generated again.
+        /// </summary>
+        public static string FromRegistry(string stored, string valueName, MessageCollector messageCollector)
+        {
+            if (string.IsNullOrEmpty(stored)) return null;
+
+            if (IsProtectedForAComputer(stored))
+            {
+                if (Unprotect(stored) != "") return stored;
+
+                ReportOnce(messageCollector, valueName, string.Format(Language.RegistryPasswordOtherComputer, valueName));
+                return null;
+            }
+
+            if (!HasTheLegacyForm(stored)) return null;
+
+            try
+            {
+                new LegacyRijndaelCryptographyProvider().Decrypt(stored, Runtime.EncryptionKey);
+            }
+            catch (EncryptionException)
+            {
+                return null;
+            }
+
+            ReportOnce(messageCollector, valueName, string.Format(Language.RegistryPasswordOldForm, valueName));
+            return stored;
+        }
+
+        /// <summary>
+        /// The old form is the base64 of a 16-byte IV followed by whole AES blocks. Base64 decoding
+        /// skips spaces, so without this check a short value typed in clear can decode, and decrypt
+        /// to nothing, as if it were one.
+        /// </summary>
+        private static bool HasTheLegacyForm(string stored)
+        {
+            byte[] bytes;
+            try
+            {
+                bytes = Convert.FromBase64String(stored);
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+
+            return bytes.Length >= 32 && bytes.Length % 16 == 0;
+        }
+
+        private static void ReportOnce(MessageCollector messageCollector, string valueName, string message)
+        {
+            lock (ReportedRegistryValues)
+            {
+                if (!ReportedRegistryValues.Add(valueName)) return;
+            }
+
+            messageCollector.AddMessage(MessageClass.WarningMsg, message);
+        }
+
+        internal static void ForgetReportedRegistryValues()
+        {
+            lock (ReportedRegistryValues)
+                ReportedRegistryValues.Clear();
+        }
 
         /// <summary>
         /// Moves the passwords an earlier version saved in the old form over to DPAPI, and saves
@@ -103,7 +208,8 @@ namespace mRemoteNG.Security
         /// <summary>The DPAPI form of a value in the old form; anything else as it is.</summary>
         internal static string Reprotect(string stored)
         {
-            if (string.IsNullOrEmpty(stored) || IsProtected(stored)) return stored;
+            // A value protected for this computer comes from the registry, which keeps setting it.
+            if (string.IsNullOrEmpty(stored) || IsProtected(stored) || IsProtectedForAComputer(stored)) return stored;
 
             try
             {
