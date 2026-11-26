@@ -167,34 +167,21 @@ namespace mRemoteNG.Tools
             PathValidator.ValidateExecutablePathOrThrow(parsedFileName, nameof(FileName));
             
             // When RunElevated is true, we must use UseShellExecute = true for the "runas" verb
-            // When false, we use UseShellExecute = false for better security with ArgumentList
+            // When false, the tool is started directly, not through the shell
             process.StartInfo.UseShellExecute = RunElevated;
             process.StartInfo.FileName = parsedFileName;
-            
+
+            // Arguments is a command line that the user quotes and the parser escapes (see
+            // variables_reference.rst), so pass it through unchanged. Re-splitting it here
+            // dropped the user's quotes, so a value could not be kept as one argument (#3044).
+            ExternalToolArgumentParser commandLineParser = new(startConnectionInfo)
+            {
+                QuoteValuesForCmd = IsRunByCmd(parsedFileName)
+            };
+            process.StartInfo.Arguments = commandLineParser.ParseArguments(Arguments);
+
             if (RunElevated)
-            {
-                // With UseShellExecute = true, we must use Arguments property, not ArgumentList
-                // The argument parser already handles escaping properly
-                process.StartInfo.Arguments = argParser.ParseArguments(Arguments);
                 process.StartInfo.Verb = "runas";
-            }
-            else
-            {
-                // With UseShellExecute = false, use ArgumentList for better security
-                // Parse arguments using CommandLineArguments for proper splitting
-                var cmdLineArgs = new Cmdline.CommandLineArguments { EscapeForShell = false };
-                string parsedArguments = argParser.ParseArguments(Arguments);
-                
-                // Split arguments respecting quotes
-                var argumentParts = SplitCommandLineArguments(parsedArguments);
-                foreach (var arg in argumentParts)
-                {
-                    if (!string.IsNullOrWhiteSpace(arg))
-                    {
-                        process.StartInfo.ArgumentList.Add(arg);
-                    }
-                }
-            }
             
             if (WorkingDir != "") 
             {
@@ -205,52 +192,17 @@ namespace mRemoteNG.Tools
         }
         
         /// <summary>
-        /// Splits command line arguments respecting quotes
+        /// True when cmd.exe parses the arguments: cmd itself, or a batch file, which Windows
+        /// runs through cmd.exe. cmd splits arguments on , ; = as well as spaces.
         /// </summary>
-        private static List<string> SplitCommandLineArguments(string arguments)
+        private static bool IsRunByCmd(string fileName)
         {
-            List<string> result = new();
-            if (string.IsNullOrWhiteSpace(arguments))
-                return result;
-            
-            bool inQuotes = false;
-            int startIndex = 0;
-            
-            for (int i = 0; i < arguments.Length; i++)
-            {
-                char c = arguments[i];
-                
-                if (c == '"')
-                {
-                    inQuotes = !inQuotes;
-                }
-                else if (c == ' ' && !inQuotes)
-                {
-                    if (i > startIndex)
-                    {
-                        string arg = arguments.Substring(startIndex, i - startIndex).Trim();
-                        // Remove surrounding quotes if present
-                        if (arg.StartsWith("\"") && arg.EndsWith("\"") && arg.Length > 1)
-                            arg = arg.Substring(1, arg.Length - 2);
-                        if (!string.IsNullOrWhiteSpace(arg))
-                            result.Add(arg);
-                    }
-                    startIndex = i + 1;
-                }
-            }
-            
-            // Add the last argument
-            if (startIndex < arguments.Length)
-            {
-                string arg = arguments.Substring(startIndex).Trim();
-                // Remove surrounding quotes if present
-                if (arg.StartsWith("\"") && arg.EndsWith("\"") && arg.Length > 1)
-                    arg = arg.Substring(1, arg.Length - 2);
-                if (!string.IsNullOrWhiteSpace(arg))
-                    result.Add(arg);
-            }
-            
-            return result;
+            string extension = Path.GetExtension(fileName);
+            string name = Path.GetFileNameWithoutExtension(fileName);
+            return extension.Equals(".cmd", StringComparison.OrdinalIgnoreCase) ||
+                   extension.Equals(".bat", StringComparison.OrdinalIgnoreCase) ||
+                   (name.Equals("cmd", StringComparison.OrdinalIgnoreCase) &&
+                    (extension.Length == 0 || extension.Equals(".exe", StringComparison.OrdinalIgnoreCase)));
         }
 
         private void StartIntegrated()
