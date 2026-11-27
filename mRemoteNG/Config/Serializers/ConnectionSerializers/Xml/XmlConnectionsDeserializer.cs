@@ -88,7 +88,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     if (fullFileEncryptionValue)
                     {
                         string decryptedContent = _decryptor.Decrypt(rootXmlElement.InnerText);
-                        rootXmlElement.InnerXml = decryptedContent;
+                        SecureXmlHelper.ReplaceInnerXml(rootXmlElement, decryptedContent);
                     }
                 }
 

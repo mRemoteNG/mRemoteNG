@@ -3087,4 +3087,8 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="AgentControlStartFailed" xml:space="preserve"><value>Could not start local control.</value></data>
   <data name="AgentControlScopedGrant" xml:space="preserve"><value>Grant 5-minute read and preview access to selected connection</value></data>
   <data name="AgentControlScopedGrantCreated" xml:space="preserve"><value>Temporary grant ID: {0}. It can read and preview safe information for the selected connection for five minutes.</value></data>
-  <data name="AgentControlChooseTarget" xml:space="preserve"><value>Choose a connection before granting access.</value></data></root>
+  <data name="AgentControlChooseTarget" xml:space="preserve"><value>Choose a connection before granting access.</value></data>
+  <data name="AgentControlStopFailed" xml:space="preserve">
+    <value>Access was revoked, but local control could not stop cleanly.</value>
+  </data>
+</root>

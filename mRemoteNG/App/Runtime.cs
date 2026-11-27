@@ -224,15 +224,6 @@ namespace mRemoteNG.App
                 ConnectionsService.IsConnectionsFileLoaded = false;
                 ConnectionsService.LoadConnections(Properties.OptionsDBsPage.Default.UseSQLServer, false, connectionFileName);
 
-                if (!Properties.OptionsDBsPage.Default.UseSQLServer &&
-                    !withDialog &&
-                    !ConnectionsService.IsConnectionsFileLoaded &&
-                    TryRecoverConnectionsFile(connectionFileName))
-                {
-                    ConnectionsService.RemoteConnectionsSyncronizer?.Enable();
-                    return;
-                }
-
                 if (Properties.OptionsDBsPage.Default.UseSQLServer)
                 {
                     ConnectionsService.LastSqlUpdate = DateTime.Now.ToUniversalTime();
@@ -248,6 +239,14 @@ namespace mRemoteNG.App
             catch (Exception ex)
             {
                 ProgramRoot.CloseSplash();
+
+                if (ConnectionsService.ProfileDataProvider is null &&
+                    CanRecoverConnectionsFile(ex, Properties.OptionsDBsPage.Default.UseSQLServer, withDialog) &&
+                    TryRecoverConnectionsFile(connectionFileName))
+                {
+                    ConnectionsService.RemoteConnectionsSyncronizer?.Enable();
+                    return;
+                }
 
                 if (Properties.OptionsDBsPage.Default.UseSQLServer)
                 {
@@ -334,6 +333,11 @@ namespace mRemoteNG.App
                     Application.Exit();
                 }
             }
+        }
+
+        internal static bool CanRecoverConnectionsFile(Exception error, bool useDatabase, bool withDialog)
+        {
+            return !useDatabase && !withDialog && error is System.Xml.XmlException or FileNotFoundException;
         }
 
         private static bool TryRecoverConnectionsFile(string connectionFileName)

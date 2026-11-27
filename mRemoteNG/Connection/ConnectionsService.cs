@@ -130,9 +130,6 @@ namespace mRemoteNG.Connection
         /// <param name="connectionFileName"></param>
         public void LoadConnections(bool useDatabase, bool import, string connectionFileName)
         {
-            ConnectionTreeModel oldConnectionTreeModel = ConnectionTreeModel;
-            bool oldIsUsingDatabaseValue = UsingDatabase;
-
             IConnectionsLoader connectionLoader;
             if (ProfileDataProvider is not null)
                 connectionLoader = new ProfileConnectionsLoader(ProfileDataProvider);
@@ -152,6 +149,43 @@ namespace mRemoteNG.Connection
                 return;
             }
 
+            ApplyLoadedConnections(newConnectionTreeModel, useDatabase, import, connectionFileName);
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Connections loaded using {connectionLoader.GetType().Name}");
+        }
+
+        public bool TryReloadSqlConnections()
+        {
+            return TryReloadSqlConnections(new SqlConnectionsLoader(_localConnectionPropertiesSerializer,
+                _localConnectionPropertiesDataProvider), action => UI.Forms.FrmMain.Default.Invoke(action));
+        }
+
+        internal bool TryReloadSqlConnections(IConnectionsLoader loader, Action<Action> dispatch)
+        {
+            ConnectionTreeModel expectedModel = ConnectionTreeModel;
+            if (ProfileDataProvider != null || !UsingDatabase || expectedModel == null || expectedModel.HasPendingSqlChanges) return false;
+            long generation = expectedModel.SqlEditGeneration;
+            long? revision = expectedModel.SqlTreeRevision;
+            ConnectionTreeModel candidate = loader.Load();
+            if (candidate == null) return false;
+            bool applied = false;
+            dispatch(() =>
+            {
+                // Check and publish on the UI thread, where user edits are applied.
+                if (!UsingDatabase || !ReferenceEquals(ConnectionTreeModel, expectedModel) ||
+                    expectedModel.HasPendingSqlChanges || expectedModel.SqlEditGeneration != generation ||
+                    expectedModel.SqlTreeRevision != revision) return;
+                ApplyLoadedConnections(candidate, true, false, string.Empty);
+                LastSqlUpdate = DateTime.UtcNow;
+                applied = true;
+            });
+            return applied;
+        }
+
+        private void ApplyLoadedConnections(ConnectionTreeModel newConnectionTreeModel, bool useDatabase,
+            bool import, string connectionFileName)
+        {
+            ConnectionTreeModel oldConnectionTreeModel = ConnectionTreeModel;
+            bool oldIsUsingDatabaseValue = UsingDatabase;
             IsConnectionsFileLoaded = true;
             ConnectionFileName = connectionFileName;
             Properties.OptionsConnectionsPage.Default.ConnectionFilePath = connectionFileName;
@@ -168,7 +202,7 @@ namespace mRemoteNG.Connection
             ConnectionTreeModel = newConnectionTreeModel;
             UpdateCustomConsPathSetting(connectionFileName);
             RaiseConnectionsLoadedEvent(oldConnectionTreeModel, newConnectionTreeModel, oldIsUsingDatabaseValue, useDatabase, connectionFileName);
-            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Connections loaded using {connectionLoader.GetType().Name}");
+
         }
 
         /// <summary>

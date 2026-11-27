@@ -64,6 +64,7 @@ namespace mRemoteNG.Config.Connections
             connectionTree.SqlTreeRevision = revision;
             connectionTree.RootNodes.OfType<RootNodeInfo>().First().Name = metaData.Name;
             ApplyLocalConnectionProperties(connectionTree.RootNodes.First(i => i is RootNodeInfo));
+            connectionTree.MarkSqlChangesSaved(connectionTree.SqlEditGeneration);
             return connectionTree;
         }
 

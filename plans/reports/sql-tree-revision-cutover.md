@@ -15,6 +15,8 @@ This migration is deliberately manual. The application refuses to save a shared 
 ```sql
 SET XACT_ABORT ON;
 BEGIN TRANSACTION;
+IF (SELECT COUNT(*) FROM dbo.tblRoot) <> 1 OR EXISTS (SELECT 1 FROM dbo.tblRoot WHERE ConfVersion <> '3.3')
+    THROW 51002, 'Expected exactly one schema 3.3 root row; stop and inspect the database.', 1;
 IF OBJECT_ID(N'dbo.tblTreeRevision', N'U') IS NOT NULL
     THROW 51000, 'Revision table already exists; stop and inspect the database.', 1;
 CREATE TABLE dbo.tblTreeRevision (

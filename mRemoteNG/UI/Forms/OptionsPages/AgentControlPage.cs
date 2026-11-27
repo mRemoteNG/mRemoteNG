@@ -18,6 +18,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private readonly Button _revoke = new() { AutoSize = true };
         private readonly Label _grantValue = new() { AutoSize = true, MaximumSize = new Size(620, 0) };
         private readonly AgentControlRuntime _runtime;
+        private bool _stopping;
 
         public AgentControlPage(AgentControlRuntime runtime)
         {
@@ -49,7 +50,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             _grant.Click += GrantClicked;
             _scopedGrant.Click += ScopedGrantClicked;
             _revoke.Click += RevokeClicked;
-            layout.Controls.AddRange([_description, _enable, _grant, _targets, _scopedGrant, _grantValue, _revoke]);
+            layout.Controls.AddRange([_description, _enable, _grant, _targets, _scopedGrant, _revoke, _grantValue]);
             Controls.Add(layout);
             ApplyTheme();
         }
@@ -66,8 +67,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             _revoke.Text = Text("AgentControlRevoke", "Revoke all access and stop");
         }
 
-        private void EnableChanged(object sender, EventArgs e)
+        private async void EnableChanged(object sender, EventArgs e)
         {
+            if (_stopping) return;
             if (_enable.Checked)
             {
                 DialogResult answer = MessageBox.Show(this,
@@ -87,13 +89,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
                 catch
                 {
+                    _enable.CheckedChanged -= EnableChanged;
                     _enable.Checked = false;
+                    _enable.CheckedChanged += EnableChanged;
                     _grantValue.Text = Text("AgentControlStartFailed", "Could not start local control.");
                 }
             }
             else
             {
-                RevokeAndStop();
+                await RevokeAndStopAsync();
             }
             _grant.Enabled = _runtime.IsEnabled;
             _revoke.Enabled = _runtime.IsEnabled;
@@ -131,21 +135,32 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
         }
 
-        private void RevokeClicked(object sender, EventArgs e)
+        private async void RevokeClicked(object sender, EventArgs e)
         {
-            RevokeAndStop();
-            _description.Text = DescriptionText();
-            _enable.Checked = false;
-            _grant.Enabled = false;
-            _scopedGrant.Enabled = false;
-            _revoke.Enabled = false;
-            _grantValue.Text = Text("AgentControlNoGrant", "No active grant issued by this page.");
+            await RevokeAndStopAsync();
         }
 
-        private void RevokeAndStop()
+        internal async Task RevokeAndStopAsync()
         {
-            Task task = _runtime.DisableAndRevokeAsync();
-            task.GetAwaiter().GetResult();
+            if (_stopping) return;
+            _stopping = true;
+            _enable.Enabled = _grant.Enabled = _scopedGrant.Enabled = _revoke.Enabled = false;
+            try
+            {
+                await _runtime.DisableAndRevokeAsync();
+                _grantValue.Text = Text("AgentControlNoGrant", "No active grant issued by this page.");
+            }
+            catch
+            {
+                _grantValue.Text = Text("AgentControlStopFailed", "Access was revoked, but local control could not stop cleanly.");
+            }
+            finally
+            {
+                _enable.Checked = false;
+                _description.Text = DescriptionText();
+                _enable.Enabled = true;
+                _stopping = false;
+            }
         }
 
         private string DescriptionText() => _runtime.IsEnabled

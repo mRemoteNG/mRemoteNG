@@ -34,6 +34,7 @@ namespace mRemoteNG.Config.Connections
 
         public void Save(ConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")
         {
+            long editGeneration = connectionTreeModel.SqlEditGeneration;
             RootNodeInfo rootTreeNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
 
             UpdateLocalConnectionProperties(rootTreeNode);
@@ -93,6 +94,7 @@ namespace mRemoteNG.Config.Connections
                 transaction.Commit();
                 connectionTreeModel.SqlTreeRevision = checked(currentRevision + 1);
                 connectionTreeModel.HasSqlSaveConflict = false;
+                connectionTreeModel.MarkSqlChangesSaved(editGeneration);
 
             }
 

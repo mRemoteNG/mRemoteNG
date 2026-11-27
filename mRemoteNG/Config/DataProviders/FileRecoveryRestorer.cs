@@ -55,7 +55,7 @@ namespace mRemoteNG.Config.DataProviders
                         Convert.FromHexString(actualCandidateHash), Convert.FromHexString(expectedCandidateSha256)))
                     throw new IOException("The recovery candidate changed after it was inspected.");
 
-                using (FileStream staged = new(temporaryPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                using (FileStream staged = AtomicFile.CreatePrivateStagingFile(temporaryPath))
                 {
                     staged.Write(validatedBytes);
                     staged.Flush(true);

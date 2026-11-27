@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.Common;
 using System.Linq;
+using System.IO;
+using System.Text.RegularExpressions;
 using System.Security;
 using System.Threading;
 using System.Threading.Tasks;
@@ -239,7 +241,7 @@ namespace mRemoteNGTests.Config.Connections
             Saver().Save(writer);
             Assert.Throws<InvalidOperationException>(() => Saver().Save(draft));
             int reloads = 0;
-            using RemoteConnectionsSyncronizer synchronizer = new(Checker(), () => reloads++, () => draft);
+            using RemoteConnectionsSyncronizer synchronizer = new(Checker(), () => { reloads++; return true; }, () => draft);
             ConnectionsUpdateAvailableEventArgs update = null;
             synchronizer.ConnectionsUpdateAvailable += (_, args) => update = args;
             Assert.That(synchronizer.IsUpdateAvailable(), Is.True, "The remote update must actually be detected.");
@@ -252,6 +254,147 @@ namespace mRemoteNGTests.Config.Connections
             Assert.That(synchronizer.IsUpdateAvailable(), Is.True);
             synchronizer.Disable();
             Assert.That(reloads, Is.EqualTo(1), "Explicitly loading a fresh model allows synchronization again.");
+        }
+
+        [Test]
+        public void Synchronize_BeforeSave_DoesNotReplaceDirtyDraft()
+        {
+            ConnectionTreeModel draft = Loader().Load();
+            draft.GetRecursiveChildList().Single().Name = "Unsaved before synchronization";
+            ConnectionTreeModel writer = Loader().Load();
+            Saver().Save(writer);
+            int reloads = 0;
+            using RemoteConnectionsSyncronizer synchronizer = new(Checker(),
+                () => { reloads++; return true; }, () => draft);
+            ConnectionsUpdateAvailableEventArgs update = null;
+            synchronizer.ConnectionsUpdateAvailable += (_, args) => update = args;
+            Assert.That(synchronizer.IsUpdateAvailable(), Is.True);
+            Assert.That(update.Handled, Is.False);
+            Assert.That(reloads, Is.Zero);
+            Assert.That(draft.HasPendingSqlChanges, Is.True);
+            Saver().Save(writer);
+        }
+
+        [Test]
+        public void Save_SuccessClearsDirtyState_WhileFailedSaveRetainsIt()
+        {
+            ConnectionTreeModel draft = Loader().Load();
+            Assert.That(draft.HasPendingSqlChanges, Is.False);
+            draft.GetRecursiveChildList().Single().Name = "Changed draft";
+            Assert.That(draft.HasPendingSqlChanges, Is.True);
+            Saver().Save(draft);
+            Assert.That(draft.HasPendingSqlChanges, Is.False);
+            ConnectionTreeModel stale = Loader().Load();
+            draft.GetRecursiveChildList().Single().Name = "Next generation";
+            Saver().Save(draft);
+            stale.GetRecursiveChildList().Single().Name = "Rejected draft";
+            Assert.Throws<InvalidOperationException>(() => Saver().Save(stale));
+            Assert.That(stale.HasPendingSqlChanges, Is.True);
+        }
+
+        [Test]
+        public void Cutover_Standard33Schema_PreservesDataAndSupportsRevisionConflicts()
+        {
+            PrepareUpstream33Schema();
+            SqlConnectionListMetaData before = Metadata();
+            DateTime marker = UpdateMarker();
+            string encryptedPassword = Scalar("SELECT Password FROM tblCons").ToString();
+            Assert.That(before.ConfVersion, Is.EqualTo(new Version(3, 3)));
+            Assert.Throws<InvalidOperationException>(() => Loader().Load(), "The new writer must reject 3.3 before cutover.");
+            ApplyDocumentedCutover();
+            Assert.That(Metadata().Name, Is.EqualTo(before.Name));
+            Assert.That(Metadata().Protected, Is.EqualTo(before.Protected));
+            Assert.That(Metadata().ConfVersion, Is.EqualTo(new Version(3, 4)));
+            Assert.That(Scalar("SELECT Password FROM tblCons"), Is.EqualTo(encryptedPassword));
+            Assert.That(UpdateMarker(), Is.EqualTo(marker));
+            ConnectionTreeModel first = Loader().Load();
+            ConnectionTreeModel stale = Loader().Load();
+            Assert.That(first.SqlTreeRevision, Is.Zero);
+            Assert.That(first.GetRecursiveChildList().Single().Password, Is.EqualTo("Synthetic-host-secret"));
+            first.GetRecursiveChildList().Single().Name = "After migration";
+            Saver().Save(first);
+            Assert.That(first.SqlTreeRevision, Is.EqualTo(1));
+            stale.GetRecursiveChildList().Single().Name = "Stale migrated draft";
+            Assert.Throws<InvalidOperationException>(() => Saver().Save(stale));
+            Assert.That(Loader().Load().GetRecursiveChildList().Single().Name, Is.EqualTo("After migration"));
+            Assert.Throws<DbException>(ApplyDocumentedCutover, "A rerun must stop without resetting the revision.");
+            Assert.That(Loader().Load().SqlTreeRevision, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Cutover_BeforeFirst34Save_RollbackRetainsOriginal33Data()
+        {
+            PrepareUpstream33Schema();
+            string encryptedPassword = Scalar("SELECT Password FROM tblCons").ToString();
+            ApplyDocumentedCutover();
+            Assert.That(Scalar("SELECT Revision FROM tblTreeRevision").ToString(), Is.EqualTo("0"));
+            // Rehearse the documented rollback only before any 3.4 save, with all test writers stopped.
+            Execute("DROP TABLE tblTreeRevision; UPDATE tblRoot SET ConfVersion='3.3';");
+            Assert.That(Metadata().ConfVersion, Is.EqualTo(new Version(3, 3)));
+            Assert.That(Scalar("SELECT Password FROM tblCons"), Is.EqualTo(encryptedPassword));
+            Assert.That(Scalar("SELECT Name FROM tblCons"), Is.EqualTo("Original connection"));
+            Assert.Throws<InvalidOperationException>(() => Loader().Load());
+        }
+
+        private void PrepareUpstream33Schema()
+        {
+            // Upstream e1fcb6a1 differs only by these two columns and the revision table in its schema DDL.
+            Execute("DROP TABLE tblTreeRevision;");
+            if (backend == "mssql")
+            {
+                Execute("DECLARE @sql nvarchar(max) = N''; " +
+                    "SELECT @sql = @sql + N'ALTER TABLE dbo.tblCons DROP CONSTRAINT ' + QUOTENAME(d.name) + N';' " +
+                    "FROM sys.default_constraints d JOIN sys.columns c ON c.object_id=d.parent_object_id AND c.column_id=d.parent_column_id " +
+                    "WHERE d.parent_object_id=OBJECT_ID(N'dbo.tblCons') AND c.name IN ('EnvironmentTags','InheritEnvironmentTags'); " +
+                    "EXEC sys.sp_executesql @sql;");
+            }
+            Execute(backend == "mssql"
+                ? "ALTER TABLE tblCons DROP COLUMN EnvironmentTags, InheritEnvironmentTags;"
+                : "ALTER TABLE tblCons DROP COLUMN EnvironmentTags, DROP COLUMN InheritEnvironmentTags;");
+            Execute("UPDATE tblRoot SET ConfVersion='3.3';");
+        }
+
+        private void ApplyDocumentedCutover()
+        {
+            using Stream resource = typeof(SqlPersistenceIntegrationTests).Assembly.GetManifestResourceStream("SqlTreeRevisionCutover");
+            using StreamReader reader = new(resource);
+            MatchCollection scripts = Regex.Matches(reader.ReadToEnd(), @"```sql\r?\n([\s\S]*?)```");
+            Assert.That(scripts, Has.Count.EqualTo(2));
+            Execute(scripts[backend == "mssql" ? 0 : 1].Groups[1].Value);
+        }
+
+        private object Scalar(string sql)
+        {
+            using IDatabaseConnector connector = Connector();
+            connector.Connect();
+            using DbCommand command = connector.DbCommand(sql);
+            return command.ExecuteScalar();
+        }
+
+        [Test]
+        public void UpdateCheck_CommitAfterSnapshot_IgnoresLocalClockAndEqualUpdateMarkers()
+        {
+            ConnectionTreeModel captured = Loader().Load();
+            DateTime originalMarker = UpdateMarker();
+            ConnectionTreeModel writer = Loader().Load();
+            writer.GetRecursiveChildList().Single().Name = "Committed after snapshot";
+            Saver().Save(writer);
+            // Force the same marker to cover timestamp collisions as well as publication-time races.
+            using (IDatabaseConnector connector = Connector())
+            {
+                connector.Connect();
+                using DbCommand command = connector.DbCommand("UPDATE tblUpdate SET LastUpdate=@marker");
+                DbParameter parameter = command.CreateParameter();
+                parameter.ParameterName = "@marker";
+                parameter.Value = originalMarker;
+                command.Parameters.Add(parameter);
+                command.ExecuteNonQuery();
+            }
+            using SqlConnectionsUpdateChecker checker = new(() => Connector(), () => DateTime.UtcNow.AddDays(1),
+                () => captured.SqlTreeRevision);
+            Assert.That(checker.IsUpdateAvailable(), Is.True);
+            captured = Loader().Load();
+            Assert.That(checker.IsUpdateAvailable(), Is.False);
         }
 
         private SqlConnectionsLoader Loader(Func<Optional<SecureString>> authenticate = null) =>

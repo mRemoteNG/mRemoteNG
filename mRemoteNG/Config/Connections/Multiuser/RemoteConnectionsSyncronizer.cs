@@ -13,7 +13,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
     {
         private readonly System.Timers.Timer _updateTimer;
         private readonly IConnectionsUpdateChecker _updateChecker;
-        private readonly Action _reloadConnections;
+        private readonly Func<bool> _reloadConnections;
         private readonly Func<ConnectionTreeModel> _currentModel;
 
         public double TimerIntervalInMilliseconds
@@ -21,11 +21,11 @@ namespace mRemoteNG.Config.Connections.Multiuser
             get { return _updateTimer.Interval; }
         }
 
-        public RemoteConnectionsSyncronizer(IConnectionsUpdateChecker updateChecker, Action reloadConnections = null,
+        public RemoteConnectionsSyncronizer(IConnectionsUpdateChecker updateChecker, Func<bool> reloadConnections = null,
             Func<ConnectionTreeModel> currentModel = null)
         {
             _updateChecker = updateChecker;
-            _reloadConnections = reloadConnections ?? (() => Runtime.ConnectionsService.LoadConnections(true, false, ""));
+            _reloadConnections = reloadConnections ?? (() => Runtime.ConnectionsService.TryReloadSqlConnections());
             _currentModel = currentModel ?? (() => Runtime.ConnectionsService.ConnectionTreeModel);
             _updateTimer = new System.Timers.Timer(3000);
             SetEventListeners();
@@ -42,10 +42,9 @@ namespace mRemoteNG.Config.Connections.Multiuser
 
         private void Load(object sender, ConnectionsUpdateAvailableEventArgs args)
         {
-            if (_currentModel()?.HasSqlSaveConflict == true)
+            if (_currentModel()?.HasPendingSqlChanges == true)
                 return;
-            _reloadConnections();
-            args.Handled = true;
+            args.Handled = _reloadConnections();
         }
 
         public void Enable()

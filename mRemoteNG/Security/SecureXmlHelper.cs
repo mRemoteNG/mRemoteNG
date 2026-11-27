@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Xml;
 
 namespace mRemoteNG.Security
@@ -72,15 +72,42 @@ namespace mRemoteNG.Security
             }
         }
 
-        private static void ValidateDocumentBudget(XmlReader reader)
+        public static void ReplaceInnerXml(XmlElement root, string content)
         {
-            int elements = 0;
+            XmlDocument owner = root.OwnerDocument;
+            XmlNamespaceManager namespaces = new(owner.NameTable);
+            foreach (XmlAttribute attribute in root.Attributes)
+            {
+                if (attribute.Prefix == "xmlns") namespaces.AddNamespace(attribute.LocalName, attribute.Value);
+                else if (attribute.Name == "xmlns") namespaces.AddNamespace("", attribute.Value);
+            }
+            XmlParserContext context = new(owner.NameTable, namespaces, null, XmlSpace.None);
+            XmlReaderSettings settings = CreateSecureReaderSettings();
+            settings.ConformanceLevel = ConformanceLevel.Fragment;
+            using (XmlReader reader = XmlReader.Create(new StringReader(content), settings, context))
+                ValidateDocumentBudget(reader, depthOffset: 1, elements: 1);
+
+            XmlDocumentFragment fragment = owner.CreateDocumentFragment();
+            using (XmlReader reader = XmlReader.Create(new StringReader(content), settings, context))
+            {
+                while (!reader.EOF)
+                {
+                    XmlNode node = owner.ReadNode(reader);
+                    if (node != null) fragment.AppendChild(node);
+                }
+            }
+            while (root.HasChildNodes) root.RemoveChild(root.FirstChild);
+            root.AppendChild(fragment);
+        }
+
+        private static void ValidateDocumentBudget(XmlReader reader, int depthOffset = 0, int elements = 0)
+        {
             while (reader.Read())
             {
                 if (reader.NodeType != XmlNodeType.Element)
                     continue;
 
-                if (reader.Depth >= MaxElementDepth)
+                if (reader.Depth + depthOffset >= MaxElementDepth)
                     throw new XmlException($"XML nesting exceeds the {MaxElementDepth} element depth limit.");
                 if (++elements > MaxElementCount)
                     throw new XmlException($"XML element count exceeds the {MaxElementCount} element limit.");

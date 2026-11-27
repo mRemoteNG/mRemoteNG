@@ -1,0 +1,82 @@
+name: Validate desktop builds and installer
+on:
+  pull_request:
+  push:
+    branches:
+      - 'codex/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  desktop:
+    name: Native ${{ matrix.platform }} build and tests
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: x64
+            runner: windows-2025-vs2026
+            test_platform: x64
+          - platform: arm64
+            runner: windows-11-vs2026-arm
+            test_platform: ARM64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '11.0.x'
+      - uses: microsoft/setup-msbuild@v3
+        with:
+          msbuild-architecture: ${{ matrix.platform }}
+      - name: Verify native runtime and transform assembly metadata
+        shell: pwsh
+        run: |
+          $info = & dotnet --info
+          if ($LASTEXITCODE -ne 0 -or -not ($info -match '^\s*Architecture:\s+${{ matrix.platform }}\s*$')) {
+            throw 'The .NET host must run natively for this architecture.'
+          }
+          dotnet tool install --tool-path "$env:RUNNER_TEMP/t4" dotnet-t4
+          if ($LASTEXITCODE -ne 0) { throw 'T4 tooling installation failed.' }
+          & "$env:RUNNER_TEMP/t4/t4.exe" mRemoteNG/Properties/AssemblyInfo.tt -P platformType=${{ matrix.platform }} -r:mRemoteNG/libs/Microsoft.VisualStudio.Interop.dll
+          if ($LASTEXITCODE -ne 0) { throw 'Assembly metadata generation failed.' }
+      - name: Restore and build application and tests
+        shell: pwsh
+        run: |
+          dotnet restore mRemoteNGTests/mRemoteNGTests.csproj -p:Configuration=Release -p:Platform=${{ matrix.platform }}
+          if ($LASTEXITCODE -ne 0) { throw 'Restore failed.' }
+          msbuild mRemoteNGTests/mRemoteNGTests.csproj -m -p:Configuration=Release -p:Platform=${{ matrix.platform }} -verbosity:minimal
+          if ($LASTEXITCODE -ne 0) { throw 'Native build failed.' }
+      - name: Run NUnit on the native test host
+        shell: pwsh
+        run: |
+          dotnet test mRemoteNGTests/mRemoteNGTests.csproj -c Release -p:Platform=${{ matrix.platform }} --no-build --no-restore --results-directory "$env:RUNNER_TEMP/test-results" --logger 'trx;LogFileName=desktop.trx' -- RunConfiguration.TargetPlatform=${{ matrix.test_platform }}
+          if ($LASTEXITCODE -ne 0) { throw 'NUnit tests failed.' }
+      - name: Build x64 installer and verify every application file
+        if: matrix.platform == 'x64'
+        shell: pwsh
+        run: |
+          msbuild mRemoteNGInstaller/Installer/Installer.wixproj -restore -p:Configuration=Release -p:Platform=x64 -verbosity:minimal
+          if ($LASTEXITCODE -ne 0) { throw 'Installer build failed.' }
+          $installer = Get-ChildItem mRemoteNGInstaller/Installer/bin/x64/Release -Filter '*.msi' -Recurse -File
+          if (@($installer).Count -ne 1) { throw 'Expected one x64 MSI.' }
+          ./Tools/Test-InstallerPayload.ps1 -InstallerPath $installer.FullName -ApplicationDirectory mRemoteNG/bin/x64/Release -OutputDirectory "$env:RUNNER_TEMP/installer-validation"
+      - name: Save test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: desktop-tests-${{ matrix.platform }}
+          path: ${{ runner.temp }}/test-results
+          if-no-files-found: warn
+      - name: Save unsigned x64 installer and payload report
+        if: success() && matrix.platform == 'x64'
+        uses: actions/upload-artifact@v7
+        with:
+          name: unsigned-x64-installer
+          path: |
+            mRemoteNGInstaller/Installer/bin/x64/Release/**/*.msi
+            ${{ runner.temp }}/installer-validation/validation.json
+          compression-level: 0

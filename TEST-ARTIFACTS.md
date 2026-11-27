@@ -16,4 +16,20 @@ The runner creates fresh SQL Server 2019 Developer and MySQL 8.4 containers, gen
 
 `SqlPersistenceIntegrationTests` is opt-in and skipped during ordinary test runs. It requires the runner's `MREMOTENG_DISPOSABLE_SQL=1` profile, explicit loopback endpoints and a synthetic password. Each test creates a uniquely named `mremoteng_test_<guid>` database, then drops it. No saved connection factory or saved credentials are used. The tests temporarily change only in-memory SQL type/read-only/database-name options and restore them without saving settings.
 
-The tests exercise production loading, saving and synchronization, including concurrent writers, late rollback, password rotation during authentication, revision overflow, unsupported writer protocols and draft retention. They bootstrap a new schema; they do not validate a production schema cutover or backward migration. Existing shared databases still require the coordinated schema 3.4 cutover described in the implementation plan; do not point this profile at them.
+The tests exercise production loading, saving and synchronization, including concurrent writers, late rollback, password rotation during authentication, revision overflow, unsupported writer protocols and draft retention. They also reconstruct the standard upstream 3.3 schema shape, execute the documented cutover SQL, check encrypted data preservation and stale-writer rejection, and rehearse rollback before the first 3.4 save. They do not touch production backups or rehearse rollback after newer edits. Existing shared databases still require the coordinated schema 3.4 cutover described in the implementation plan; do not point this profile at them.
+
+
+## Native desktop and installer checks
+
+`.github/workflows/Validate_mRemoteNG.yml` builds and tests Release on native x64
+and ARM64 Windows hosts. It verifies the .NET host architecture and requests the
+matching test host. Opt-in disposable SQL fixtures remain skipped in this job.
+
+The x64 job also builds an unsigned WiX MSI and runs `Tools/Test-InstallerPayload.ps1`.
+The script extracts the MSI without installing it, checks every non-PDB application
+file by relative path and SHA-256, and compares the application and MSI version.
+Pass `-InstallerPath`, `-ApplicationDirectory` and a new `-OutputDirectory`; local
+output should be under `C:\data\tests\tools-mRemoteNG`. The output contains the
+extracted payload and `validation.json`. CI uploads the MSI and validation report.
+ARM64 application testing does not imply ARM64 installer support; the existing DTF
+custom action project and MSI remain x64.
