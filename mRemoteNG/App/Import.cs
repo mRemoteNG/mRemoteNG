@@ -9,6 +9,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Tools;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using System.Threading;
 
 namespace mRemoteNG.App
 {
@@ -75,8 +76,8 @@ namespace mRemoteNG.App
                         if (openFileDialog.ShowDialog() != DialogResult.OK)
                             return;
 
-                        RemoteDesktopManagerImporter importer = new();
-                        importer.Import(openFileDialog.FileName, importDestinationContainer);
+                        IConnectionImporter<string> importer = new RemoteDesktopManagerImporter();
+                        importer.Import(openFileDialog.FileName, importDestinationContainer, CancellationToken.None);
                     }
                 }
             }
@@ -90,16 +91,17 @@ namespace mRemoteNG.App
 	        IEnumerable<string> filePaths,
 	        ContainerInfo importDestinationContainer,
 	        ConnectionsService connectionsService,
-	        Action<string>? exceptionAction = null)
+	        Action<string>? exceptionAction = null, CancellationToken cancellationToken = default)
         {
 	        using (connectionsService.BatchedSavingContext())
 	        {
 		        foreach (string fileName in filePaths)
 		        {
+                    cancellationToken.ThrowIfCancellationRequested();
 			        try
 			        {
                         IConnectionImporter<string> importer = BuildConnectionImporterFromFileExtension(fileName);
-				        importer.Import(fileName, importDestinationContainer);
+				        importer.Import(fileName, importDestinationContainer, cancellationToken);
 			        }
 			        catch (Exception ex)
 			        {
@@ -112,13 +114,14 @@ namespace mRemoteNG.App
 
         public static void ImportFromActiveDirectory(string ldapPath,
                                                      ContainerInfo importDestinationContainer,
-                                                     bool importSubOu)
+                                                     bool importSubOu, CancellationToken cancellationToken = default)
         {
             try
             {
 	            using (Runtime.ConnectionsService.BatchedSavingContext())
 	            {
-					ActiveDirectoryImporter.Import(ldapPath, importDestinationContainer, importSubOu);
+                    ImportStager.Run(importDestinationContainer, cancellationToken,
+                        staged => ActiveDirectoryImporter.Import(ldapPath, staged, importSubOu));
 	            }
             }
             catch (Exception ex)
@@ -135,8 +138,8 @@ namespace mRemoteNG.App
             {
 	            using (Runtime.ConnectionsService.BatchedSavingContext())
 	            {
-                    PortScanImporter importer = new(protocol);
-					importer.Import(hosts, importDestinationContainer);
+                    IConnectionImporter<IEnumerable<ScanHost>> importer = new PortScanImporter(protocol);
+					importer.Import(hosts, importDestinationContainer, CancellationToken.None);
 	            }
             }
             catch (Exception ex)
@@ -145,13 +148,14 @@ namespace mRemoteNG.App
             }
         }
 
-        internal static void ImportFromPutty(ContainerInfo selectedNodeAsContainer)
+        internal static void ImportFromPutty(ContainerInfo selectedNodeAsContainer, CancellationToken cancellationToken = default)
         {
             try
             {
                 using (Runtime.ConnectionsService.BatchedSavingContext())
                 {
-                    RegistryImporter.Import("Software\\SimonTatham\\PuTTY\\Sessions", selectedNodeAsContainer);
+                    ImportStager.Run(selectedNodeAsContainer, cancellationToken,
+                        staged => RegistryImporter.Import("Software\\SimonTatham\\PuTTY\\Sessions", staged));
                 }
             }
             catch (Exception ex)

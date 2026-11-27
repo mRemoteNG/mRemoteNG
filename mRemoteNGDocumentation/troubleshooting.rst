@@ -81,3 +81,20 @@ you will need to revert to a previous version.
 - Find the most recent backup file that appears to have data (>1KB in size).
 - Rename or delete the corrupted `confCons.xml` file.
 - Rename the chosen backup file to remove the date stamp and .backup suffix. Unless you set a custom path, your backup file should now be named `confCons.xml`.
+
+Connection file recovery and limits
+===================================
+
+If the startup XML file is missing or malformed, mRemoteNG can offer validated
+backup generations for explicit selection. Recovery retains the replaced file.
+A cancelled password prompt, unavailable encryption key or unsupported format
+must be resolved separately and does not automatically trigger corruption recovery.
+
+Encrypted full-file content is subject to the same XML limits as normal files:
+64 MiB of characters, fewer than 128 nested child levels and 250,000 elements
+including the root. Files exceeding these limits are rejected before a tree is
+attached. Atomic writes and recovery staging files are private to the current
+Windows user and SYSTEM. Replacing an existing file preserves its access rules.
+
+Local AI access can be revoked from the options page. Revocation invalidates
+grants immediately and lets pending UI requests finish while the pipe shuts down.

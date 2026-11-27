@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.Versioning;
@@ -14,6 +15,31 @@ namespace mRemoteNG.Tree
     public sealed class ConnectionTreeModel : INotifyCollectionChanged, INotifyPropertyChanged
     {
         public List<ContainerInfo> RootNodes { get; } = [];
+
+        /// <summary>Revision observed with the shared SQL snapshot; null for non-SQL models.</summary>
+        public long? SqlTreeRevision { get; set; }
+
+        /// <summary>Block automatic replacement until the conflicted draft is explicitly reloaded.</summary>
+        public bool HasSqlSaveConflict
+        {
+            get => _hasSqlSaveConflict;
+            internal set => _hasSqlSaveConflict = value;
+        }
+        private volatile bool _hasSqlSaveConflict;
+
+        private long _sqlEditGeneration;
+        private long _sqlSavedGeneration;
+        internal long SqlEditGeneration => Interlocked.Read(ref _sqlEditGeneration);
+        public bool HasPendingSqlChanges => HasSqlSaveConflict || SqlEditGeneration != Interlocked.Read(ref _sqlSavedGeneration);
+
+        internal void MarkSqlChangesSaved(long generation) => Interlocked.Exchange(ref _sqlSavedGeneration, generation);
+
+        private void TrackSqlEdit(object sender)
+        {
+            if (sender is ConnectionInfo connection && connection.GetRootParent() is RootNodeInfo root &&
+                root.Type != RootNodeType.Connection) return;
+            Interlocked.Increment(ref _sqlEditGeneration);
+        }
 
         public void AddRootNode(ContainerInfo rootNode)
         {
@@ -116,11 +142,16 @@ namespace mRemoteNG.Tree
 
         private void RaiseCollectionChangedEvent(object? sender, NotifyCollectionChangedEventArgs args)
         {
+            TrackSqlEdit(sender);
             CollectionChanged?.Invoke(sender, args);
         }
 
         private void RaisePropertyChangedEvent(object? sender, PropertyChangedEventArgs args)
         {
+            if (args.PropertyName != nameof(ConnectionInfo.OpenConnections) &&
+                args.PropertyName != nameof(ContainerInfo.IsExpanded) &&
+                args.PropertyName != nameof(ConnectionInfo.Favorite))
+                TrackSqlEdit(sender);
             PropertyChanged?.Invoke(sender, args);
         }
     }

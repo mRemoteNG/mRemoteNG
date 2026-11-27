@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Data.SqlTypes;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
@@ -9,7 +8,6 @@ using System.Security;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
-using MySql.Data.Types;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 
@@ -93,29 +91,9 @@ namespace mRemoteNG.Tools
 			}
 		}
 
-		public static Type DBTimeStampType()
-		{
-			switch (Properties.OptionsDBsPage.Default.SQLServerType)
-			{
-				case "mysql":
-					return typeof(MySqlDateTime);
-				case "mssql":
-				default:
-					return typeof(SqlDateTime);
-			}
-		}
+        public static Type DBTimeStampType() => typeof(DateTime);
 
-		public static object DBTimeStampNow()
-		{
-			switch (Properties.OptionsDBsPage.Default.SQLServerType)
-			{
-				case "mysql":
-					return new MySqlDateTime(DateTime.Now.ToUniversalTime());
-				case "mssql":
-				default:
-					return DateTime.Now.ToUniversalTime();
-			}
-		}
+        public static object DBTimeStampNow() => DateTime.UtcNow;
 
         public static string PrepareValueForDB(string Text)
         {

@@ -16,10 +16,11 @@ using System.Runtime.Versioning;
 namespace mRemoteNG.Config.Serializers.MiscSerializers
 {
     [SupportedOSPlatform("windows")]
-    public class ActiveDirectoryDeserializer(string ldapPath, bool importSubOu)
+    public class ActiveDirectoryDeserializer(string ldapPath, bool importSubOu, ImportBudget budget)
     {
         private readonly string _ldapPath = SanitizeLdapPath(ldapPath.ThrowIfNullOrEmpty(nameof(ldapPath)));
         private readonly bool _importSubOu = importSubOu;
+        private readonly ImportBudget _budget = budget ?? throw new ArgumentNullException(nameof(budget));
 
         private static string SanitizeLdapPath(string ldapPath)
         {
@@ -73,6 +74,8 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private void ImportContainers(string ldapPath, ContainerInfo parentContainer)
         {
+            using IDisposable depth = _budget.EnterDepth();
+            _budget.ConsumeNode();
             Match match = Regex.Match(ldapPath, "ou=([^,]*)", RegexOptions.IgnoreCase);
             string name = match.Success ? match.Groups[1].Captures[0].Value : Language.ActiveDirectory;
 
@@ -92,11 +95,14 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                     ldapSearcher.SearchRoot = new DirectoryEntry(ldapPath);
                     ldapSearcher.Filter = ldapFilter;
                     ldapSearcher.SearchScope = SearchScope.OneLevel;
+                    ldapSearcher.PageSize = 500;
+                    ldapSearcher.SizeLimit = ImportBudget.MaximumNodes + 1;
                     ldapSearcher.PropertiesToLoad.AddRange(new[] {"securityEquals", "cn", "objectClass"});
 
                     SearchResultCollection ldapResults = ldapSearcher.FindAll();
                     foreach (SearchResult ldapResult in ldapResults)
                     {
+                        _budget.ConsumeNode();
                         using (DirectoryEntry directoryEntry = ldapResult.GetDirectoryEntry())
                         {
                             if (directoryEntry.Properties["objectClass"].Contains("organizationalUnit"))
@@ -105,7 +111,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                                 if (!_importSubOu) continue;
 
                                 // TODO - this is a circular call. A deserializer should not call an importer
-                                ActiveDirectoryImporter.Import(ldapResult.Path, parentContainer, _importSubOu);
+                                ActiveDirectoryImporter.Import(ldapResult.Path, parentContainer, _importSubOu, _budget);
                                 continue;
                             }
 
@@ -117,6 +123,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.", ex);
+                throw;
             }
         }
 

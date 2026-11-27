@@ -1,7 +1,6 @@
-﻿using System.IO;
+using System.IO;
 using System.Linq;
 using System.Runtime.Versioning;
-using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Container;
 
@@ -13,11 +12,11 @@ namespace mRemoteNG.Config.Import
     {
         public void Import(string fileName, ContainerInfo destinationContainer)
         {
-            FileDataProvider dataProvider = new(fileName);
-            string content = dataProvider.Load();
+            string content = ImportFileReader.ReadText(fileName);
 
             RemoteDesktopConnectionDeserializer deserializer = new();
             Tree.ConnectionTreeModel connectionTreeModel = deserializer.Deserialize(content);
+            ImportBudget.ValidateTree(connectionTreeModel);
 
             Connection.ConnectionInfo importedConnection = connectionTreeModel.RootNodes.First().Children.First();
 

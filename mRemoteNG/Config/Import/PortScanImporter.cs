@@ -16,13 +16,18 @@ namespace mRemoteNG.Config.Import
 
         public void Import(IEnumerable<ScanHost> hosts, ContainerInfo destinationContainer)
         {
+            if (hosts == null) throw new System.ArgumentNullException(nameof(hosts));
+            ScanHost[] boundedHosts = hosts.Take(ImportBudget.MaximumNodes + 1).ToArray();
+            if (boundedHosts.Length > ImportBudget.MaximumNodes)
+                throw new System.IO.InvalidDataException($"Import exceeds the {ImportBudget.MaximumNodes} node limit.");
             PortScanDeserializer deserializer = new(_targetProtocolType);
-            Tree.ConnectionTreeModel connectionTreeModel = deserializer.Deserialize(hosts);
+            Tree.ConnectionTreeModel connectionTreeModel = deserializer.Deserialize(boundedHosts);
+            ImportBudget.ValidateTree(connectionTreeModel);
 
             ContainerInfo importedRootNode = connectionTreeModel.RootNodes.First();
             if (importedRootNode == null) return;
             Connection.ConnectionInfo[] childrenToAdd = importedRootNode.Children.ToArray();
-            destinationContainer.AddChildRange(childrenToAdd);
+            destinationContainer.AddChildrenAtomically(childrenToAdd);
         }
     }
 }

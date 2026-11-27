@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Runtime.Versioning;
 using mRemoteNG.App;
-using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Csv;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
@@ -24,13 +23,13 @@ namespace mRemoteNG.Config.Import
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
                                                     $"Unable to import file. File does not exist. Path: {filePath}");
 
-            FileDataProvider dataProvider = new(filePath);
-            string xmlString = dataProvider.Load();
+            string xmlString = ImportFileReader.ReadText(filePath);
             CsvConnectionsDeserializerMremotengFormat xmlConnectionsDeserializer = new();
             Tree.ConnectionTreeModel connectionTreeModel = xmlConnectionsDeserializer.Deserialize(xmlString);
+            ImportBudget.ValidateTree(connectionTreeModel);
 
             ContainerInfo rootImportContainer = new() { Name = Path.GetFileNameWithoutExtension(filePath)};
-            rootImportContainer.AddChildRange(connectionTreeModel.RootNodes.First().Children.ToArray());
+            rootImportContainer.AddChildrenAtomically(connectionTreeModel.RootNodes[0].Children.ToArray());
             destinationContainer.AddChild(rootImportContainer);
         }
     }

@@ -59,7 +59,8 @@ namespace mRemoteNG.UI.Forms
                 nameof(SecurityPage),
                 nameof(PluginsPage),
                 nameof(AdvancedPage),
-                nameof(BackupPage)
+                nameof(BackupPage),
+                nameof(AgentControlPage)
             };
 
 #if DEBUG
@@ -296,6 +297,11 @@ namespace mRemoteNG.UI.Forms
                         if (Properties.OptionsBackupPage.Default.cbBacupPageInOptionMenu ||
                             Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
                             page = new BackupPage { Dock = DockStyle.Fill };
+                        break;
+                    }
+                case "AgentControlPage":
+                    {
+                        page = new AgentControlPage(Runtime.AgentControlRuntime) { Dock = DockStyle.Fill };
                         break;
                     }
 #if DEBUG

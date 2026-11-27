@@ -52,6 +52,19 @@ public class FileDataProviderTests
     }
 
     [Test]
+    public void ConnectionSave_WhenDestinationIsLocked_ThrowsAndKeepsPreviousGeneration()
+    {
+        File.WriteAllText(_testFilePath, "previous generation");
+        FileDataProviderWithRollingBackup provider = new(_testFilePath);
+        using FileStream lockFile = new(_testFilePath, FileMode.Open, FileAccess.Read, FileShare.None);
+
+        Assert.Throws<IOException>(() => provider.Save("replacement generation"));
+        lockFile.Dispose();
+        Assert.That(File.ReadAllText(_testFilePath), Is.EqualTo("previous generation"));
+        Assert.That(Directory.GetFiles(_testFileDirectory, "*.tmp"), Is.Empty);
+    }
+
+    [Test]
     public void SaveCreatesDirectoriesThatDontExist()
     {
         var folder1 = Guid.NewGuid().ToString();

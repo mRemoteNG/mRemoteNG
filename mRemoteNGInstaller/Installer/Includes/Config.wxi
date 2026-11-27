@@ -3,8 +3,8 @@
   <?define Company = "Profi-Kom Ltd." ?>
   <?define UpgradeCode = "dd678a54-ca75-4791-8dfe-d818095684f8" ?>
   <?define ProductCode = "*" ?>
-  <?define ProductVersion = "1.78.2.0" ?>
-  <?define ProductVersionDisplay = "1.78.2-dev" ?>
+  <?define ProductVersion = "1.78.4.0" ?>
+  <?define ProductVersionDisplay = "1.78.4-dev" ?>
   <?define ProductLanguage = 1033 ?>
   <?define ExeProcessName = "$(var.ProductName).exe" ?>
 

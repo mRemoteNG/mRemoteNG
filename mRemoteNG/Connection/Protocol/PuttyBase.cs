@@ -154,7 +154,7 @@ namespace mRemoteNG.Connection.Protocol
 
                 try
                 {
-                    using (FileStream stream = new(candidatePath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                    using (FileStream stream = mRemoteNG.Config.DataProviders.AtomicFile.CreatePrivateStagingFile(candidatePath))
                     {
                         created = true;
                         using StreamWriter writer = new(stream);

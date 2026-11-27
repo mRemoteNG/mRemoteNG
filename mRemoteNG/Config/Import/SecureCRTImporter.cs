@@ -1,5 +1,4 @@
 ﻿using mRemoteNG.App;
-using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Container;
@@ -31,13 +30,13 @@ namespace mRemoteNG.Config.Import
                                                     $"Unable to import file. File does not exist. Path: {fileName}");
 
 
-            FileDataProvider dataProvider = new(fileName);
-            string content = dataProvider.Load();
+            string content = ImportFileReader.ReadText(fileName);
             SecureCRTFileDeserializer deserializer = new();
             ConnectionTreeModel connectionTreeModel = deserializer.Deserialize(content);
+            ImportBudget.ValidateTree(connectionTreeModel);
 
             ContainerInfo rootImportContainer = new() { Name = Path.GetFileNameWithoutExtension(fileName) };
-            rootImportContainer.AddChildRange(connectionTreeModel.RootNodes.First().Children.ToArray());
+            rootImportContainer.AddChildrenAtomically(connectionTreeModel.RootNodes[0].Children.ToArray());
             destinationContainer.AddChild(rootImportContainer);
         }
     }

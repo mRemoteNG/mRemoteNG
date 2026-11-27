@@ -24,14 +24,17 @@ using mRemoteNG.Config.Serializers.ConnectionSerializers.Sql;
 namespace mRemoteNG.Config.Connections
 {
     [SupportedOSPlatform("windows")]
-    public class SqlConnectionsSaver(SaveFilter saveFilter, ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> localPropertieSerializer, IDataProvider<string> localPropertiesDataProvider) : ISaver<ConnectionTreeModel>
+    public class SqlConnectionsSaver(SaveFilter saveFilter, ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> localPropertieSerializer, IDataProvider<string> localPropertiesDataProvider,
+        Func<IDatabaseConnector> connectorFactory = null) : ISaver<ConnectionTreeModel>
     {
         private readonly SaveFilter _saveFilter = saveFilter ?? throw new ArgumentNullException(nameof(saveFilter));
         private readonly ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> _localPropertiesSerializer = localPropertieSerializer.ThrowIfNull(nameof(localPropertieSerializer));
         private readonly IDataProvider<string> _dataProvider = localPropertiesDataProvider.ThrowIfNull(nameof(localPropertiesDataProvider));
+        private readonly Func<IDatabaseConnector> _connectorFactory = connectorFactory ?? DatabaseConnectorFactory.DatabaseConnectorFromSettings;
 
         public void Save(ConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")
         {
+            long editGeneration = connectionTreeModel.SqlEditGeneration;
             RootNodeInfo rootTreeNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
 
             UpdateLocalConnectionProperties(rootTreeNode);
@@ -48,7 +51,7 @@ namespace mRemoteNG.Config.Connections
                 return;
             }
 
-            using (IDatabaseConnector dbConnector = DatabaseConnectorFactory.DatabaseConnectorFromSettings())
+            using (IDatabaseConnector dbConnector = _connectorFactory())
             {
                 dbConnector.Connect();
                 SqlDatabaseVersionVerifier databaseVersionVerifier = new(dbConnector);
@@ -59,7 +62,7 @@ namespace mRemoteNG.Config.Connections
                 // Write it before the version check instead of dereferencing null.
                 if (metaData == null)
                 {
-                    metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector);
+                    SqlDatabaseMetaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector);
                     metaData = metaDataRetriever.GetDatabaseMetaData(dbConnector);
                 }
 
@@ -75,9 +78,23 @@ namespace mRemoteNG.Config.Connections
                     return;
                 }
 
-                metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector);
-                UpdateConnectionsTable(rootTreeNode, dbConnector);
-                UpdateUpdatesTable(dbConnector);
+                if (connectionTreeModel.SqlTreeRevision == null)
+                    throw new InvalidOperationException("SQL tree revision is unavailable; reload the shared tree before saving.");
+                using DbTransaction transaction = dbConnector.DbConnection().BeginTransaction(System.Data.IsolationLevel.Serializable);
+                long currentRevision = SqlTreeRevisionStore.ReadRevision(dbConnector, transaction, lockForWrite: true);
+                if (currentRevision != connectionTreeModel.SqlTreeRevision.Value)
+                {
+                    connectionTreeModel.HasSqlSaveConflict = true;
+                    throw new InvalidOperationException("Shared SQL tree changed since it was loaded. The draft was retained.");
+                }
+                SqlDatabaseMetaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector, transaction);
+                UpdateConnectionsTable(rootTreeNode, dbConnector, transaction);
+                UpdateUpdatesTable(dbConnector, transaction);
+                SqlTreeRevisionStore.AdvanceRevision(dbConnector, transaction, currentRevision);
+                transaction.Commit();
+                connectionTreeModel.SqlTreeRevision = checked(currentRevision + 1);
+                connectionTreeModel.HasSqlSaveConflict = false;
+                connectionTreeModel.MarkSqlChangesSaved(editGeneration);
 
             }
 
@@ -136,7 +153,7 @@ namespace mRemoteNG.Config.Connections
                 strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
             }
 
-            System.Data.Common.DbCommand dbQuery = databaseConnector.DbCommand("TRUNCATE TABLE tblRoot");
+            System.Data.Common.DbCommand dbQuery = databaseConnector.DbCommand("DELETE FROM tblRoot");
             dbQuery.ExecuteNonQuery();
 
             if (rootTreeNode != null)
@@ -163,10 +180,10 @@ namespace mRemoteNG.Config.Connections
             }
         }
 
-        private void UpdateConnectionsTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
+        private void UpdateConnectionsTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector, DbTransaction transaction)
         {
             SqlDataProvider dataProvider = new(databaseConnector);
-            DataTable currentDataTable = dataProvider.Load();
+            DataTable currentDataTable = dataProvider.Load(transaction);
 
             LegacyRijndaelCryptographyProvider cryptoProvider = new();
             DataTableSerializer serializer = new(_saveFilter, cryptoProvider, rootTreeNode.PasswordString.ConvertToSecureString());
@@ -174,20 +191,19 @@ namespace mRemoteNG.Config.Connections
 
             DataTable dataTable = serializer.Serialize(rootTreeNode);
             
-            dataProvider.Save(dataTable);
+            dataProvider.Save(dataTable, transaction);
         }
 
-        private void UpdateUpdatesTable(IDatabaseConnector databaseConnector)
+        private static void UpdateUpdatesTable(IDatabaseConnector databaseConnector, DbTransaction transaction)
         {
-            // TODO: use transaction
-            System.Data.Common.DbCommand dbQuery = databaseConnector.DbCommand("TRUNCATE TABLE tblUpdate");
+            System.Data.Common.DbCommand dbQuery = databaseConnector.DbCommand("DELETE FROM tblUpdate");
+            dbQuery.Transaction = transaction;
             dbQuery.ExecuteNonQuery();
             dbQuery = databaseConnector.DbCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(@LastUpdate)");
+            dbQuery.Transaction = transaction;
             
             DbParameter lastUpdateParam = dbQuery.CreateParameter();
             lastUpdateParam.ParameterName = "@LastUpdate";
-            // Use DBTimeStampNow() instead of DBDate() - the column is datetime type, not string
-            // DBTimeStampNow() returns the database-specific .NET type: DateTime for MSSQL, MySqlDateTime for MySQL
             lastUpdateParam.Value = MiscTools.DBTimeStampNow();
             dbQuery.Parameters.Add(lastUpdateParam);
             

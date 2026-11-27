@@ -90,6 +90,21 @@ For local builds, prefer:
 
 If your installation path differs, locate the VS2026 MSBuild from `vswhere.exe` first and then call that `MSBuild.exe` explicitly.
 
+The PR validation workflow runs Release builds and NUnit on native x64 and ARM64
+Windows runners. Disposable SQL tests require the separate local test profile.
+The x64 job also builds an unsigned MSI and checks every application payload hash.
+Installer custom actions currently support x64; this does not produce an ARM64 MSI.
+
+To repeat the installer check after building Release x64:
+
+```powershell
+./Tools/Test-InstallerPayload.ps1 -InstallerPath <built-msi> -ApplicationDirectory mRemoteNG/bin/x64/Release -OutputDirectory <new-test-output-directory>
+```
+
+Use a new output directory for each check. This extracts the MSI for inspection
+without installing it. The framework-dependent application needs the .NET 11
+Desktop Runtime installed separately.
+
 ## Plugin development workflow
 
 Plugin projects are built from a separate plugin-only solution and loaded from the app's plugin folder at runtime.

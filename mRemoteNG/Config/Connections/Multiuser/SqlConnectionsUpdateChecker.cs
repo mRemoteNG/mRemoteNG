@@ -14,13 +14,18 @@ namespace mRemoteNG.Config.Connections.Multiuser
     {
         private readonly IDatabaseConnector _dbConnector;
         private readonly DbCommand _dbQuery;
-        private DateTime LastUpdateTime => Runtime.ConnectionsService.LastSqlUpdate;
+        private readonly Func<DateTime> _lastUpdateTime;
+        private readonly Func<long?> _lastRevision;
+        private DateTime LastUpdateTime => _lastUpdateTime();
         private DateTime _lastDatabaseUpdateTime;
 
 
-        public SqlConnectionsUpdateChecker()
+        public SqlConnectionsUpdateChecker(Func<IDatabaseConnector> connectorFactory = null, Func<DateTime> lastUpdateTime = null,
+            Func<long?> lastRevision = null)
         {
-            _dbConnector = DatabaseConnectorFactory.DatabaseConnectorFromSettings();
+            _dbConnector = (connectorFactory ?? DatabaseConnectorFactory.DatabaseConnectorFromSettings)();
+            _lastUpdateTime = lastUpdateTime ?? (() => Runtime.ConnectionsService.LastSqlUpdate);
+            _lastRevision = lastRevision ?? (() => Runtime.ConnectionsService.ConnectionTreeModel?.SqlTreeRevision);
             _dbQuery = _dbConnector.DbCommand("SELECT * FROM tblUpdate");
             _lastDatabaseUpdateTime = default(DateTime);
         }
@@ -58,6 +63,25 @@ namespace mRemoteNG.Config.Connections.Multiuser
         private bool DatabaseIsMoreUpToDateThanUs()
         {
             DateTime lastUpdateInDb = GetLastUpdateTimeFromDbResponse();
+            long? revision = _lastRevision();
+            if (revision.HasValue)
+            {
+                try
+                {
+                    _dbConnector.Connect();
+                    return SqlTreeRevisionStore.ReadRevision(_dbConnector, null) != revision.Value;
+                }
+                catch (Exception error)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                        "Unable to check the shared SQL tree revision: " + error.GetType().Name, true);
+                    return false;
+                }
+                finally
+                {
+                    _dbConnector.Disconnect();
+                }
+            }
             bool amTheLastoneUpdated = CheckIfIAmTheLastOneUpdated(lastUpdateInDb);
             return (lastUpdateInDb > LastUpdateTime && !amTheLastoneUpdated);
         }

@@ -37,9 +37,9 @@ namespace mRemoteNGTests.UI.Forms
         {
 #if DEBUG
             // Options Management is added to debug builds only.
-            const int pages = 14;
+            const int pages = 15;
 #else
-            const int pages = 13;
+            const int pages = 14;
 #endif
             ListViewTester listViewTester = new("lstOptionPages", _optionsForm);
             Assert.That(listViewTester.Items.Count, Is.EqualTo(pages));

@@ -17,7 +17,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
     [SupportedOSPlatform("windows")]
     public class SqlDatabaseMetaDataRetriever
     {
-        public SqlConnectionListMetaData GetDatabaseMetaData(IDatabaseConnector databaseConnector)
+        public SqlConnectionListMetaData GetDatabaseMetaData(IDatabaseConnector databaseConnector, DbTransaction transaction = null)
         {
             SqlConnectionListMetaData metaData;
             DbDataReader dbDataReader = null;
@@ -27,13 +27,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 if (!databaseConnector.IsConnected)
                     databaseConnector.Connect();
 
-                if (!DoesDbTableExist(databaseConnector, "tblRoot"))
+                if (transaction == null && !DoesDbTableExist(databaseConnector, "tblRoot"))
                 {
                     // database exists but is empty, initialize it with the schema
                     InitializeDatabaseSchema(databaseConnector);
                 }
 
                 DbCommand dbCommand = databaseConnector.DbCommand("SELECT * FROM tblRoot");
+                dbCommand.Transaction = transaction;
                 dbDataReader = dbCommand.ExecuteReader();
                 if (!dbDataReader.HasRows)
                 {
@@ -67,10 +68,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             return metaData;
         }
 
-        public void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
+        public static void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector, DbTransaction transaction = null)
         {
-            // TODO: use transaction
-
             LegacyRijndaelCryptographyProvider cryptographyProvider = new();
 
             string strProtected;
@@ -93,7 +92,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
             }
 
-            DbCommand cmd = databaseConnector.DbCommand("TRUNCATE TABLE tblRoot");
+            // DELETE remains transactional on MySQL; TRUNCATE implicitly commits.
+            DbCommand cmd = databaseConnector.DbCommand("DELETE FROM tblRoot");
+            cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
 
             if (rootTreeNode != null)
@@ -101,6 +102,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 cmd = databaseConnector.DbCommand(
                         "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(@Name, 0, @Protected, @ConfVersion)");
 
+                cmd.Transaction = transaction;
                 DbParameter nameParam = cmd.CreateParameter();
                 nameParam.ParameterName = "@Name";
                 nameParam.Value = rootTreeNode.Name;
@@ -116,6 +118,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 confVersionParam.Value = ConnectionsFileInfo.ConnectionFileVersion.ToString();
                 cmd.Parameters.Add(confVersionParam);
 
+                cmd.Transaction = transaction;
                 cmd.ExecuteNonQuery();
             }
             else
@@ -273,6 +276,8 @@ CREATE TABLE [dbo].[tblCons] (
     [EnableFontSmoothing] bit NOT NULL,
     [ExtApp] varchar(256),
     [Favorite] tinyint NOT NULL,
+    [EnvironmentTags] varchar(2048) NOT NULL DEFAULT '',
+    [InheritEnvironmentTags] bit NOT NULL DEFAULT 0,
     [Hostname] varchar(512),
     [Icon] varchar(128) NOT NULL,
     [LoadBalanceInfo] varchar(1024),
@@ -481,6 +486,8 @@ CREATE TABLE `tblCons` (
     `EnableFontSmoothing` tinyint NOT NULL,
     `ExtApp` varchar(256) DEFAULT NULL,
     `Favorite` tinyint NOT NULL,
+    `EnvironmentTags` varchar(2048) NOT NULL DEFAULT '',
+    `InheritEnvironmentTags` tinyint NOT NULL DEFAULT 0,
     `Hostname` varchar(512) DEFAULT NULL,
     `Icon` varchar(128) NOT NULL,
     `LoadBalanceInfo` varchar(1024) DEFAULT NULL,
@@ -676,6 +683,11 @@ CREATE TABLE `tblUpdate` (
 
             DbCommand cmd = databaseConnector.DbCommand(sql);
             cmd.ExecuteNonQuery();
+            string revisionSchema = databaseConnector.GetType() == typeof(MSSqlDatabaseConnector)
+                ? "CREATE TABLE dbo.tblTreeRevision (Id int NOT NULL PRIMARY KEY CHECK (Id = 1), Revision bigint NOT NULL, MinimumWriterProtocol int NOT NULL);"
+                : "CREATE TABLE tblTreeRevision (Id int NOT NULL PRIMARY KEY, Revision bigint NOT NULL, MinimumWriterProtocol int NOT NULL, CHECK (Id = 1)) ENGINE=InnoDB;";
+            databaseConnector.DbCommand(revisionSchema).ExecuteNonQuery();
+            databaseConnector.DbCommand("INSERT INTO tblTreeRevision (Id, Revision, MinimumWriterProtocol) VALUES (1, 0, 1)").ExecuteNonQuery();
         }
         
     }

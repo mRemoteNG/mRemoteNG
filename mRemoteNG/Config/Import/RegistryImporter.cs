@@ -28,7 +28,10 @@ namespace mRemoteNG.Config.Import
                 {
                     if (key != null)
                     {
-                        foreach (string sub in key.GetSubKeyNames())
+                        string[] subKeys = key.GetSubKeyNames();
+                        if (subKeys.Length > ImportBudget.MaximumNodes)
+                            throw new System.IO.InvalidDataException($"Import exceeds the {ImportBudget.MaximumNodes} node limit.");
+                        foreach (string sub in subKeys)
                         {
                             if (sub.EndsWith("Default%20Settings")) continue;
                             using RegistryKey subkey = key.OpenSubKey(sub);
@@ -36,6 +39,8 @@ namespace mRemoteNG.Config.Import
                             string connName = subkey.Name[(key.Name.Length + 1)..];
                             if (!string.IsNullOrEmpty(Hostname))
                             {
+                                if (Hostname.Length > ImportFileReader.MaximumCharacters || connName.Length > ImportFileReader.MaximumCharacters)
+                                    throw new System.IO.InvalidDataException("An imported registry field exceeds the character limit.");
                                 int Port = 22;
                                 string Username = string.Empty;
 
@@ -63,7 +68,6 @@ namespace mRemoteNG.Config.Import
                                     Hostname = Hostname,
                                     Port = Port == 0 ? 22 : Port,
                                     Protocol = Protocol,
-                                    Parent = destinationContainer,
                                     Username = string.IsNullOrEmpty(Username) ? string.Empty : Username
                                 });
                             }

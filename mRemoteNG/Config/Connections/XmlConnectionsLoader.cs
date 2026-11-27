@@ -27,8 +27,9 @@ namespace mRemoteNG.Config.Connections
 
         public ConnectionTreeModel Load()
         {
-            FileDataProvider dataProvider = new(_connectionFilePath);
-            string xmlString = dataProvider.Load();
+            string xmlString = File.ReadAllText(_connectionFilePath);
+            if (string.IsNullOrWhiteSpace(xmlString))
+                throw new System.Xml.XmlException("The connection file is empty.");
             XmlConnectionsDeserializer deserializer = new(PromptForPassword);
             return deserializer.Deserialize(xmlString);
         }
