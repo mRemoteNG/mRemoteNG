@@ -1,6 +1,7 @@
-﻿using NUnit.Framework;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using NUnit.Framework;
 
 namespace mRemoteNGTests
 {
@@ -30,7 +31,8 @@ namespace mRemoteNGTests
             "";
             #endif
             var path = Path.GetDirectoryName(sourceFilePath);
-            var filePath = $"{path}\\..\\mRemoteNG\\bin\\x64\\{debugOrRelease}{normalOrPortable}\\mRemoteNG.exe";
+            var platform = RuntimeInformation.ProcessArchitecture.ToString().ToLowerInvariant();
+            var filePath = $"{path}\\..\\mRemoteNG\\bin\\{platform}\\{debugOrRelease}{normalOrPortable}\\mRemoteNG.exe";
             return filePath;
         }
 
