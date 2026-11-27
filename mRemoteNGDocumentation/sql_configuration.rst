@@ -31,3 +31,18 @@ Steps to configure mRemoteNG for SQL
 - Click OK to apply the changes. The main window title should now change to "mRemoteNG | SQL Server".
 - Now click on File - Save to update the tables on your SQL Server with the data from the loaded connections xml file. (Do not click File - New, this doesn't work yet)
 - You should now be able to do everything you were able to do with the XML storage plus see the changes live on another mRemoteNG instance that is connected to the same Database.
+
+Concurrent edits
+================
+
+Shared trees use schema 3.4 and a revision recorded when the tree is loaded.
+If another writer saves that revision first, your save is rejected and your
+draft stays in memory. Automatic synchronization will not replace that draft.
+Preserve the edits you need before explicitly reloading the shared tree;
+reloading discards the draft and resumes automatic synchronization.
+
+Root metadata, connection rows, the update marker and the next revision are
+saved in one transaction. Loading captures the root metadata, encrypted rows
+and revision together, then prompts for the password for that captured version.
+Existing shared databases require a coordinated schema cutover before use;
+the disposable integration test profile does not perform that cutover.

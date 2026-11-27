@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## [1.78.4-dev] - Unreleased
+### Added
+- Bounded and atomic handling for selected file-based connection imports.
+- Session-only, opt-in local control for safe connection inventory, reviewed read-only previews, short-lived scoped grants, and operation receipts.
+- SQL shared-tree revision checks within serializable load/save transactions, gated by schema version 3.4 and a coordinated cutover.
+- Explicit connections-file recovery selection and atomic restoration from validated backups.
+
+### Fixed
+- SQL saves retain conflicted drafts, roll back root metadata with connection rows, and load authentication metadata from the same revision snapshot.
+- Pinned repository SDK selection to the upstream .NET 11 target.
+- Connection file commits now use same-directory atomic replacement and propagate storage failures.
+
 ## [1.78.2]
 ### Fixed
 - fixed app hanging on exit when PuTTY never read the password pipe; the pipe now times out and its name is no longer guessable

@@ -14,13 +14,15 @@ namespace mRemoteNG.Config.Connections.Multiuser
     {
         private readonly IDatabaseConnector _dbConnector;
         private readonly DbCommand _dbQuery;
-        private DateTime LastUpdateTime => Runtime.ConnectionsService.LastSqlUpdate;
+        private readonly Func<DateTime> _lastUpdateTime;
+        private DateTime LastUpdateTime => _lastUpdateTime();
         private DateTime _lastDatabaseUpdateTime;
 
 
-        public SqlConnectionsUpdateChecker()
+        public SqlConnectionsUpdateChecker(Func<IDatabaseConnector> connectorFactory = null, Func<DateTime> lastUpdateTime = null)
         {
-            _dbConnector = DatabaseConnectorFactory.DatabaseConnectorFromSettings();
+            _dbConnector = (connectorFactory ?? DatabaseConnectorFactory.DatabaseConnectorFromSettings)();
+            _lastUpdateTime = lastUpdateTime ?? (() => Runtime.ConnectionsService.LastSqlUpdate);
             _dbQuery = _dbConnector.DbCommand("SELECT * FROM tblUpdate");
             _lastDatabaseUpdateTime = default(DateTime);
         }

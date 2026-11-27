@@ -26,7 +26,7 @@ using System.Resources;
 <#
     int major = 1;
     int minor = 78;
-    int revision = 2;
+    int revision = 4;
     string channel = "Nightly Build";
     DateTime lastReleaseDate = new DateTime(2019, 9, 2);
     TimeSpan elapsed = DateTime.UtcNow - lastReleaseDate;

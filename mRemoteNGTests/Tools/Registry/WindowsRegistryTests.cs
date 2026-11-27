@@ -13,9 +13,8 @@ namespace mRemoteNGTests.Tools.Registry
     [SupportedOSPlatform("windows")]
     internal class WindowsRegistryTests : WinRegistry
     {
-        private const string TestRoot = @"Software\mRemoteNGTest";
+        private readonly string _testPath = $@"Software\mRemoteNGTest\WinRegistryTests_{Guid.NewGuid():N}";
         private const RegistryHive TestHive = RegistryHive.CurrentUser;
-        private const string TestPath = $"{TestRoot}\\WinRegistryTests";
 
         [SetUp]
         public void Setup()
@@ -180,7 +179,7 @@ namespace mRemoteNGTests.Tools.Registry
         {
             const string testName = "TestValue";
             const string testValue = "Test1";
-            const string testPath = TestPath + @"\SetValue";
+            string testPath = _testPath + @"\SetValue";
             Assert.DoesNotThrow(() => SetValue(TestHive, testPath, testName, testValue, RegistryValueKind.String));
  
             string key = GetStringValue(TestHive, testPath, testName, testValue);
@@ -192,7 +191,7 @@ namespace mRemoteNGTests.Tools.Registry
         {
             const string testName = "TestValue";
             const string testValue = "Test2";
-            const string testPath = TestPath + @"\SetValue";
+            string testPath = _testPath + @"\SetValue";
             Assert.DoesNotThrow(() => SetValue(TestHive, testPath, testName, testValue, RegistryValueKind.String));
 
             string key = GetStringValue(TestHive, testPath, testName, testValue);
@@ -204,7 +203,7 @@ namespace mRemoteNGTests.Tools.Registry
         {
             const string? testName = null;
             const string testValue = "SetDefault";
-            const string testPath = TestPath + @"\SetValue";
+            string testPath = _testPath + @"\SetValue";
 
             Assert.DoesNotThrow(() => SetValue(TestHive, testPath, testName, testValue, RegistryValueKind.Unknown));
 
@@ -219,14 +218,14 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void CreateKey_NewKey_CreatesKeySuccessfully()
         {
-            const string testPath = TestPath + @"\TestSubKey";
+            string testPath = _testPath + @"\TestSubKey";
             Assert.DoesNotThrow(() => CreateKey(TestHive, testPath));
         }
 
         [Test]
         public void CreateKey_ExistingKey_DoesNotThrow()
         {
-            const string testPath = TestPath + @"\ExistingSubKey";
+            string testPath = _testPath + @"\ExistingSubKey";
             CreateKey(TestHive, testPath);
             Assert.DoesNotThrow(() => CreateKey(TestHive, testPath));
         }
@@ -244,10 +243,10 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetSubKeyNames_ExistingKey_ReturnsSubKeyNames()
         {
-            const string testPath = TestPath + @"\GetSubKeyNames";
-            const string testSubKey1 = testPath + @"\subkey1";
-            const string testSubKey2 = testPath + @"\subkey2";
-            const string testSubKey3 = testPath + @"\subkey3";
+            string testPath = _testPath + @"\GetSubKeyNames";
+            string testSubKey1 = testPath + @"\subkey1";
+            string testSubKey2 = testPath + @"\subkey2";
+            string testSubKey3 = testPath + @"\subkey3";
 
             CreateKey(TestHive, testSubKey1);
             CreateKey(TestHive, testSubKey2);
@@ -275,7 +274,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetValue_RetrieveValue_ReturnsValue()
         {
-            const string testPath = TestPath + @"\GetValue";
+            string testPath = _testPath + @"\GetValue";
             const string testName = "TestValue";
             const string testValue = "Test";
 
@@ -288,7 +287,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetValue_RetrieveDefault_RetrunsValue()
         {
-            const string testPath = TestPath + @"\GetValue";
+            string testPath = _testPath + @"\GetValue";
             const string testName = "";
             const string testValue = "TestDefault{098f2470-bae0-11cd-b579-08002b30bfeb}";
 
@@ -301,7 +300,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetValue_NonExistingValue_ReturnsNull()
         {
-            const string testPath = TestPath + @"\GetValue";
+            string testPath = _testPath + @"\GetValue";
             const string nonExistingName = "NonExistingValue";
 
             string key = GetValue(TestHive, testPath, nonExistingName);
@@ -311,7 +310,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void SetAndGetDefaultValue_RetrieveValue_ReturnsValue()
         {
-            const string testPath = TestPath + @"\DefautValue";
+            string testPath = _testPath + @"\DefautValue";
             const string testValue = "DefaultTestTestValue";
 
             Assert.DoesNotThrow(() => SetDefaultValue(TestHive, testPath, testValue));
@@ -327,7 +326,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetStringValue_RetrieveValue_ReturnsValue()
         {
-            const string testPath = TestPath + @"\GetStringValue";
+            string testPath = _testPath + @"\GetStringValue";
             const string testName = "TestValue";
             const string testValue = "Test";
 
@@ -340,7 +339,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetStringValue_RetrieveDefault_ReturnsValue()
         {
-            const string testPath = TestPath + @"\GetStringValue";
+            string testPath = _testPath + @"\GetStringValue";
             const string testName = "";
             const string testValue = "TestDefault{098f2470-bae0-11cd-b579-08002b30bfeb}";
 
@@ -353,7 +352,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetStringValue_NonExistingValue_ReturnsNull()
         {
-            const string testPath = TestPath + @"\GetStringValue";
+            string testPath = _testPath + @"\GetStringValue";
             const string nonExistingName = "NonExistingValue";
 
             var key = GetStringValue(TestHive, testPath, nonExistingName);
@@ -363,7 +362,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetStringValue_NonExistingValue_ReturnsDefault()
         {
-            const string testPath = TestPath + @"\GetStringValue";
+            string testPath = _testPath + @"\GetStringValue";
             const string nonExistingName = "NonExistingValue";
             const string defaultValue = "DefaultValue";
 
@@ -378,7 +377,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetBoolValue_FromString_ReturnsTrue()
         {
-            const string testPath = TestPath + @"\GetBoolValue";
+            string testPath = _testPath + @"\GetBoolValue";
             const string testName = "strBool_true";
             const string testValue = "true";
             Assert.DoesNotThrow(() => SetValue(TestHive, testPath, testName, testValue, RegistryValueKind.String));
@@ -390,7 +389,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetBoolValue_FromString_ReturnsFalse()
         {
-            const string testPath = TestPath + @"\GetBoolValue";
+            string testPath = _testPath + @"\GetBoolValue";
             const string testName = "strBool_false";
             const string testValue = "false";
             Assert.DoesNotThrow(() => SetValue(TestHive, testPath, testName, testValue, RegistryValueKind.String));
@@ -402,7 +401,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetBoolValue_FromDword_ReturnsFalse()
         {
-            const string testPath = TestPath + @"\GetBoolValue";
+            string testPath = _testPath + @"\GetBoolValue";
             const string testName = "intBool_false";
             const int testValue = 0;
             Assert.DoesNotThrow(() => SetValue(TestHive, testPath, testName, testValue, RegistryValueKind.DWord));
@@ -414,7 +413,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetBoolValue_FromDword_ReturnsTrue()
         {
-            const string testPath = TestPath + @"\GetBoolValue";
+            string testPath = _testPath + @"\GetBoolValue";
             const string testName = "intBool_true";
             const int testValue = 1;
             Assert.DoesNotThrow(() => SetValue(TestHive, testPath, testName, testValue, RegistryValueKind.DWord));
@@ -426,7 +425,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetBoolValue_NonExistingValue_ReturnsFalse()
         {
-            const string testPath = TestPath + @"\GetStringValue";
+            string testPath = _testPath + @"\GetStringValue";
             const string nonExistingName = "NonExistingValue";
 
             var key = GetBoolValue(TestHive, testPath, nonExistingName);
@@ -440,7 +439,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetIntegerValue_RetrieveValue_ReturnsValue()
         {
-            const string testPath = TestPath + @"\GetIntegerValue";
+            string testPath = _testPath + @"\GetIntegerValue";
             const string testName = "ExistingDword";
             const int testValue = 2;
             Assert.DoesNotThrow(() => SetValue(TestHive, testPath, testName, testValue, RegistryValueKind.DWord));
@@ -452,7 +451,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetIntegerValue_NonExistingValue_ReturnsZero()
         {
-            const string testPath = TestPath + @"\GetStringValue";
+            string testPath = _testPath + @"\GetStringValue";
             const string nonExistingName = "NonExistingValue";
 
             var key = GetIntegerValue(TestHive, testPath, nonExistingName);
@@ -462,7 +461,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetIntegerValue_NotExistingKey_ReturnsDefault()
         {
-            const string testPath = TestPath + @"\GetStringValue";
+            string testPath = _testPath + @"\GetStringValue";
             const string testName = "NotExistingDword";
 
             var key = GetIntegerValue(TestHive, testPath, testName, 12); // set default to true
@@ -478,7 +477,7 @@ namespace mRemoteNGTests.Tools.Registry
         {
             const string testName = "TestValue";
             const int testValue = 2011;
-            const string testPath = TestPath + @"\GetRegistryEntry";
+            string testPath = _testPath + @"\GetRegistryEntry";
             Assert.DoesNotThrow(() => SetValue(TestHive, testPath, testName, testValue, RegistryValueKind.DWord));
 
             var entry = GetEntry(TestHive, testPath, testName);
@@ -500,7 +499,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetRegistryEntries_ReturnsCorrectEntries()
         {
-            const string testPath = TestPath + @"\GetRegistryEntries";
+            string testPath = _testPath + @"\GetRegistryEntries";
             const string testNamePrefix = "TestEntry";
             const string testValue = "winRegEntriesTest";
 
@@ -510,7 +509,7 @@ namespace mRemoteNGTests.Tools.Registry
                 Assert.DoesNotThrow(() => SetValue(TestHive, testPath, testName, testValue, RegistryValueKind.String));
             }
 
-            const string testPathSubkeys = testPath + @"\Subkey";
+            string testPathSubkeys = testPath + @"\Subkey";
             const string testNameSubKey = "TestSubEntry";
             Assert.DoesNotThrow(() => SetValue(TestHive, testPathSubkeys, testNameSubKey, testValue, RegistryValueKind.String));
 
@@ -542,7 +541,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetRegistryEntriesRecursive_ReturnsCorrectEntries()
         {
-            const string testPath = TestPath + @"\GetRegistryEntriesRecursive";
+            string testPath = _testPath + @"\GetRegistryEntriesRecursive";
             const string testNamePrefix = "TestEntry";
             const string testValue = "winRegEntriesTest";
 
@@ -552,7 +551,7 @@ namespace mRemoteNGTests.Tools.Registry
                 Assert.DoesNotThrow(() => SetValue(TestHive, testPath, testName, testValue, RegistryValueKind.String));
             }
 
-            const string testSubkeyPath = testPath + @"\Subkey";
+            string testSubkeyPath = testPath + @"\Subkey";
             const string testNameSubKey = "TestSubEntry";
             Assert.DoesNotThrow(() => SetValue(TestHive, testSubkeyPath, testNameSubKey, testValue, RegistryValueKind.String));
 
@@ -583,7 +582,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void DeleteRegistryValue_DeletesValue()
         {
-            const string testPath = TestPath + @"\DeleteRegistryValue";
+            string testPath = _testPath + @"\DeleteRegistryValue";
             const string testName01 = "TestValue01";
             const string testName02 = "TestValue02";
 
@@ -604,7 +603,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void DeleteTree_RemovesKeyAndSubkeys()
         {
-            const string testPath = TestPath + @"\DeleteTree";
+            string testPath = _testPath + @"\DeleteTree";
             Assert.DoesNotThrow(() => SetValue(TestHive, $"{testPath}\\Subkey0", "Test", "Test", RegistryValueKind.String));
             Assert.DoesNotThrow(() => SetValue(TestHive, $"{testPath}\\Subkey1", "Test", "Test", RegistryValueKind.String));
             Assert.DoesNotThrow(() => SetValue(TestHive, $"{testPath}\\Subkey2", "Test", "Test", RegistryValueKind.String));
@@ -752,7 +751,7 @@ namespace mRemoteNGTests.Tools.Registry
         public void Cleanup()
         {
             // Delete all created tests
-            DeleteTree(TestHive, TestPath);
+            DeleteTree(TestHive, _testPath);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Runtime.Versioning;
 using System.Timers;
+using mRemoteNG.Tree;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -12,15 +13,20 @@ namespace mRemoteNG.Config.Connections.Multiuser
     {
         private readonly System.Timers.Timer _updateTimer;
         private readonly IConnectionsUpdateChecker _updateChecker;
+        private readonly Action _reloadConnections;
+        private readonly Func<ConnectionTreeModel> _currentModel;
 
         public double TimerIntervalInMilliseconds
         {
             get { return _updateTimer.Interval; }
         }
 
-        public RemoteConnectionsSyncronizer(IConnectionsUpdateChecker updateChecker)
+        public RemoteConnectionsSyncronizer(IConnectionsUpdateChecker updateChecker, Action reloadConnections = null,
+            Func<ConnectionTreeModel> currentModel = null)
         {
             _updateChecker = updateChecker;
+            _reloadConnections = reloadConnections ?? (() => Runtime.ConnectionsService.LoadConnections(true, false, ""));
+            _currentModel = currentModel ?? (() => Runtime.ConnectionsService.ConnectionTreeModel);
             _updateTimer = new System.Timers.Timer(3000);
             SetEventListeners();
         }
@@ -36,7 +42,9 @@ namespace mRemoteNG.Config.Connections.Multiuser
 
         private void Load(object sender, ConnectionsUpdateAvailableEventArgs args)
         {
-            Runtime.ConnectionsService.LoadConnections(true, false, "");
+            if (_currentModel()?.HasSqlSaveConflict == true)
+                return;
+            _reloadConnections();
             args.Handled = true;
         }
 

@@ -21,17 +21,20 @@ namespace mRemoteNG.Config.Connections
     [SupportedOSPlatform("windows")]
     public class SqlConnectionsLoader(
         IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>> localConnectionPropertiesDeserializer,
-        IDataProvider<string> dataProvider) : IConnectionsLoader
+        IDataProvider<string> dataProvider,
+        Func<IDatabaseConnector> connectorFactory = null,
+        Func<Optional<SecureString>> authenticationRequestor = null) : IConnectionsLoader
     {
         private readonly IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>> _localConnectionPropertiesDeserializer = localConnectionPropertiesDeserializer.ThrowIfNull(nameof(localConnectionPropertiesDeserializer));
 
         private readonly IDataProvider<string> _dataProvider = dataProvider.ThrowIfNull(nameof(dataProvider));
 
-        private Func<Optional<SecureString>> AuthenticationRequestor { get; set; } = () => MiscTools.PasswordDialog("", false);
+        private readonly Func<IDatabaseConnector> _connectorFactory = connectorFactory ?? DatabaseConnectorFactory.DatabaseConnectorFromSettings;
+        private Func<Optional<SecureString>> AuthenticationRequestor { get; } = authenticationRequestor ?? (() => MiscTools.PasswordDialog("", false));
 
         public ConnectionTreeModel Load()
         {
-            IDatabaseConnector connector = DatabaseConnectorFactory.DatabaseConnectorFromSettings();
+            using IDatabaseConnector connector = _connectorFactory();
             SqlDataProvider dataProvider = new(connector);
             SqlDatabaseMetaDataRetriever metaDataRetriever = new();
             SqlDatabaseVersionVerifier databaseVersionVerifier = new(connector);
@@ -42,15 +45,25 @@ namespace mRemoteNG.Config.Connections
             if (metaData == null)
                 throw new InvalidOperationException("Could not read the connection list metadata from the database");
 
+            if (!databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion))
+                throw new InvalidOperationException("The shared SQL schema is unsupported.");
+            using System.Data.Common.DbTransaction snapshotTransaction = connector.DbConnection().BeginTransaction(System.Data.IsolationLevel.Serializable);
+            SqlTreeRevisionStore revisionStore = new();
+            long revision = revisionStore.ReadRevision(connector, snapshotTransaction);
+            metaData = metaDataRetriever.GetDatabaseMetaData(connector, snapshotTransaction)
+                ?? throw new InvalidOperationException("The shared SQL root metadata is missing.");
+            if (metaData.ConfVersion != new Version(3, 4))
+                throw new InvalidOperationException("The shared SQL schema changed while loading.");
+            System.Data.DataTable dataTable = dataProvider.Load(snapshotTransaction);
+            snapshotTransaction.Commit();
+            // Authenticate the captured generation without holding database locks during a prompt.
             Optional<SecureString> decryptionKey = GetDecryptionKey(metaData);
-
             if (!decryptionKey.Any())
                 throw new Exception("Could not load SQL connections");
-
-            databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion);
-            System.Data.DataTable dataTable = dataProvider.Load();
             DataTableDeserializer deserializer = new(cryptoProvider, decryptionKey.First());
             ConnectionTreeModel connectionTree = deserializer.Deserialize(dataTable);
+            connectionTree.SqlTreeRevision = revision;
+            connectionTree.RootNodes.OfType<RootNodeInfo>().First().Name = metaData.Name;
             ApplyLocalConnectionProperties(connectionTree.RootNodes.First(i => i is RootNodeInfo));
             return connectionTree;
         }

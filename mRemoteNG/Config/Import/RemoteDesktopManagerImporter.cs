@@ -3,7 +3,6 @@
 using System.IO;
 using System.Runtime.Versioning;
 using mRemoteNG.App;
-using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Csv.RemoteDesktopManager;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
@@ -26,16 +25,16 @@ namespace mRemoteNG.Config.Import
             if (!File.Exists(filePath))
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"Unable to import file. File does not exist. Path: {filePath}");
 
-            FileDataProvider dataProvider = new(filePath);
-            string csvString = dataProvider.Load();
+            string csvString = ImportFileReader.ReadText(filePath);
 
             if (!string.IsNullOrEmpty(csvString))
             {
                 CsvConnectionsDeserializerRdmFormat csvDeserializer = new();
                 Tree.ConnectionTreeModel connectionTreeModel = csvDeserializer.Deserialize(csvString);
+                ImportBudget.ValidateTree(connectionTreeModel);
 
                 ContainerInfo rootContainer = new() { Name = Path.GetFileNameWithoutExtension(filePath) };
-                rootContainer.AddChildRange(connectionTreeModel.RootNodes);
+                rootContainer.AddChildrenAtomically(connectionTreeModel.RootNodes);
                 destinationContainer.AddChild(rootContainer);
             }
             else

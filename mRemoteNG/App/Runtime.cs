@@ -1,5 +1,9 @@
 ﻿using mRemoteNG.App.Info;
+using mRemoteNG.App.AgentControl;
 using mRemoteNG.Config.Putty;
+using mRemoteNG.Config.Settings;
+using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
@@ -62,6 +66,9 @@ namespace mRemoteNG.App
         public static ConnectionsService ConnectionsService { get; } = new ConnectionsService(PuttySessionsManager.Instance);
         public static SqliteUserProfileStore UserProfileStore { get; private set; }
         public static UserProfileSession UserProfileSession { get; private set; }
+
+        /// <summary>Session-only local AI control; disabled until explicitly started from the options page.</summary>
+        internal static AgentControlRuntime AgentControlRuntime { get; } = new();
 
         /// <summary>
         /// Dev-only options repository manager. Only initialized in DEBUG builds.
@@ -214,7 +221,17 @@ namespace mRemoteNG.App
                     connectionFileName = ConnectionsService.GetStartupConnectionFileName();
                 }
 
+                ConnectionsService.IsConnectionsFileLoaded = false;
                 ConnectionsService.LoadConnections(Properties.OptionsDBsPage.Default.UseSQLServer, false, connectionFileName);
+
+                if (!Properties.OptionsDBsPage.Default.UseSQLServer &&
+                    !withDialog &&
+                    !ConnectionsService.IsConnectionsFileLoaded &&
+                    TryRecoverConnectionsFile(connectionFileName))
+                {
+                    ConnectionsService.RemoteConnectionsSyncronizer?.Enable();
+                    return;
+                }
 
                 if (Properties.OptionsDBsPage.Default.UseSQLServer)
                 {
@@ -316,6 +333,48 @@ namespace mRemoteNG.App
                     MessageBox.Show(FrmMain.Default, string.Format(Language.ErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, ConnectionsService.GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)), @"Could not load startup file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.Exit();
                 }
+            }
+        }
+
+        private static bool TryRecoverConnectionsFile(string connectionFileName)
+        {
+            bool loadedBeforeValidation = ConnectionsService.IsConnectionsFileLoaded;
+            try
+            {
+                FileRecoveryManager recoveryManager = new();
+                string preservedPrimary = recoveryManager.TryRestore(connectionFileName, candidates =>
+                {
+                    using FileRecoveryDialog dialog = new(candidates);
+                    return dialog.ShowDialog(FrmMain.Default) == DialogResult.OK
+                        ? dialog.SelectedCandidate
+                        : null;
+                }, candidate =>
+                {
+                    string xml = File.ReadAllText(candidate.Path, new System.Text.UTF8Encoding(false, true));
+                    XmlConnectionsDeserializer deserializer = new(() => MiscTools.PasswordDialog(Path.GetFileName(candidate.Path), false));
+                    return deserializer.Deserialize(xml) != null;
+                });
+
+                if (preservedPrimary == null)
+                    return false;
+
+                ConnectionsService.IsConnectionsFileLoaded = false;
+                ConnectionsService.LoadConnections(false, false, connectionFileName);
+                if (!ConnectionsService.IsConnectionsFileLoaded)
+                    return false;
+
+                ConnectionsService.LastFileUpdate = File.GetLastWriteTime(connectionFileName);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageCollector.AddExceptionMessage(Language.LoadFromXmlFailed, ex);
+                return false;
+            }
+            finally
+            {
+                if (!ConnectionsService.IsConnectionsFileLoaded)
+                    ConnectionsService.IsConnectionsFileLoaded = loadedBeforeValidation;
             }
         }
 

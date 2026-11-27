@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Runtime.Versioning;
 using mRemoteNG.App;
-using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using System;
 
 
 namespace mRemoteNG.Config.Import
@@ -23,16 +23,22 @@ namespace mRemoteNG.Config.Import
             }
 
             if (!File.Exists(fileName))
+            {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
                                                     $"Unable to import file. File does not exist. Path: {fileName}");
+                return;
+            }
 
-            FileDataProvider dataProvider = new(fileName);
-            string xmlString = dataProvider.Load();
+            string xmlString = ImportFileReader.ReadText(fileName);
             XmlConnectionsDeserializer xmlConnectionsDeserializer = new();
             Tree.ConnectionTreeModel connectionTreeModel = xmlConnectionsDeserializer.Deserialize(xmlString, true);
+            ImportBudget.ValidateTree(connectionTreeModel);
+
+            if (connectionTreeModel?.RootNodes.FirstOrDefault() == null)
+                throw new InvalidDataException("Import does not contain a valid connection tree.");
 
             ContainerInfo rootImportContainer = new() { Name = Path.GetFileNameWithoutExtension(fileName)};
-            rootImportContainer.AddChildRange(connectionTreeModel.RootNodes.First().Children.ToArray());
+            rootImportContainer.AddChildrenAtomically(connectionTreeModel.RootNodes.First().Children.ToArray());
             destinationContainer.AddChild(rootImportContainer);
         }
     }

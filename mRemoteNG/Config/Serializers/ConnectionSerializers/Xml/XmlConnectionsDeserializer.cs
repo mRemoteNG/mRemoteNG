@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Security;
 using System.Windows.Forms;
 using System.Xml;
@@ -151,11 +152,13 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     AuthenticationRequestor = AuthenticationRequestor
                 };
             }
-            else if (_confVersion >= 2.6)
+            else if (_confVersion >= 2.6 && connectionsRootElement != null)
             {
                 BlockCipherEngines engine = connectionsRootElement.GetAttributeAsEnum<BlockCipherEngines>("EncryptionEngine");
                 BlockCipherModes mode = connectionsRootElement.GetAttributeAsEnum<BlockCipherModes>("BlockCipherMode");
                 int keyDerivationIterations = connectionsRootElement.GetAttributeAsInt("KdfIterations");
+                if (keyDerivationIterations < 1_000 || keyDerivationIterations > 50_000)
+                    throw new InvalidDataException("The connection file requests an unsupported key derivation cost.");
 
                 _decryptor = new XmlConnectionsDecryptor(engine, mode, rootNodeInfo)
                 {

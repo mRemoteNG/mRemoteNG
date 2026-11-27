@@ -8,6 +8,9 @@ namespace mRemoteNG.Security
     /// </summary>
     public static class SecureXmlHelper
     {
+        private const long MaxCharactersInDocument = 64L * 1024 * 1024;
+        private const int MaxElementDepth = 128;
+        private const int MaxElementCount = 250_000;
         /// <summary>
         /// Creates an XmlDocument with secure settings that prevent XXE attacks
         /// </summary>
@@ -32,6 +35,13 @@ namespace mRemoteNG.Security
             using (StringReader stringReader = new StringReader(xmlContent))
             using (XmlReader reader = XmlReader.Create(stringReader, settings))
             {
+                ValidateDocumentBudget(reader);
+            }
+
+            settings = CreateSecureReaderSettings();
+            using (StringReader stringReader = new StringReader(xmlContent))
+            using (XmlReader reader = XmlReader.Create(stringReader, settings))
+            {
                 XmlDocument xmlDocument = CreateSecureXmlDocument();
                 xmlDocument.Load(reader);
                 return xmlDocument;
@@ -46,11 +56,34 @@ namespace mRemoteNG.Security
         public static XmlDocument LoadXmlFromFile(string filePath)
         {
             XmlReaderSettings settings = CreateSecureReaderSettings();
-            using (XmlReader reader = XmlReader.Create(filePath, settings))
+            using FileStream stream = new(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+            using (XmlReader reader = XmlReader.Create(stream, settings))
+            {
+                ValidateDocumentBudget(reader);
+            }
+
+            stream.Position = 0;
+            settings = CreateSecureReaderSettings();
+            using (XmlReader reader = XmlReader.Create(stream, settings))
             {
                 XmlDocument xmlDocument = CreateSecureXmlDocument();
                 xmlDocument.Load(reader);
                 return xmlDocument;
+            }
+        }
+
+        private static void ValidateDocumentBudget(XmlReader reader)
+        {
+            int elements = 0;
+            while (reader.Read())
+            {
+                if (reader.NodeType != XmlNodeType.Element)
+                    continue;
+
+                if (reader.Depth >= MaxElementDepth)
+                    throw new XmlException($"XML nesting exceeds the {MaxElementDepth} element depth limit.");
+                if (++elements > MaxElementCount)
+                    throw new XmlException($"XML element count exceeds the {MaxElementCount} element limit.");
             }
         }
 
@@ -65,6 +98,7 @@ namespace mRemoteNG.Security
                 DtdProcessing = DtdProcessing.Prohibit, // Prohibit DTD processing
                 XmlResolver = null, // Disable external entity resolution
                 MaxCharactersFromEntities = 0, // Don't allow entity expansion
+                MaxCharactersInDocument = MaxCharactersInDocument,
                 IgnoreProcessingInstructions = true, // Ignore processing instructions
                 IgnoreComments = true // Ignore comments
             };

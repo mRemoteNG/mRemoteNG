@@ -15,6 +15,17 @@ namespace mRemoteNG.Tree
     {
         public List<ContainerInfo> RootNodes { get; } = [];
 
+        /// <summary>Revision observed with the shared SQL snapshot; null for non-SQL models.</summary>
+        public long? SqlTreeRevision { get; set; }
+
+        /// <summary>Block automatic replacement until the conflicted draft is explicitly reloaded.</summary>
+        public bool HasSqlSaveConflict
+        {
+            get => _hasSqlSaveConflict;
+            internal set => _hasSqlSaveConflict = value;
+        }
+        private volatile bool _hasSqlSaveConflict;
+
         public void AddRootNode(ContainerInfo rootNode)
         {
             if (RootNodes.Contains(rootNode)) return;

@@ -3067,4 +3067,24 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="LogOffFailed" xml:space="preserve">
     <value>Could not log off {0}</value>
   </data>
-</root>
+
+  <data name="FileRecoveryTitle" xml:space="preserve"><value>Recover connections file</value></data>
+  <data name="FileRecoveryPrompt" xml:space="preserve"><value>The connections file could not be loaded. Choose a validated backup to restore. The current file will be preserved before replacement.</value></data>
+  <data name="FileRecoveryRestore" xml:space="preserve"><value>Restore selected</value></data>
+  <data name="FileRecoveryCancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="FileRecoveryNoCandidates" xml:space="preserve"><value>No structurally valid connection backups were found. The original file was left unchanged.</value></data>
+  <data name="FileRecoveryCandidateFormat" xml:space="preserve"><value>{0} - {1:g} - {2:N0} bytes</value></data>
+  <data name="AgentControlOptions" xml:space="preserve"><value>AI control</value></data>
+  <data name="AgentControlDescription" xml:space="preserve"><value>Local read-only AI access is disabled by default. Enabling it starts a current-user-only named pipe for this app session. No access grants are saved.</value></data>
+  <data name="AgentControlEnabledDescription" xml:space="preserve"><value>Local read-only control is active for this session at pipe {0}. Access is temporary and must be granted explicitly.</value></data>
+  <data name="AgentControlEnable" xml:space="preserve"><value>Enable local control for this session</value></data>
+  <data name="AgentControlEnableConfirm" xml:space="preserve"><value>This starts a local read-only control pipe for this session. Requests still require a temporary grant. Continue?</value></data>
+  <data name="AgentControlGrant" xml:space="preserve"><value>Grant 5-minute access to list allowed actions</value></data>
+  <data name="AgentControlGrantCreated" xml:space="preserve"><value>Temporary grant ID: {0}. Share it only with the intended local client; it expires in five minutes.</value></data>
+  <data name="AgentControlGrantFailed" xml:space="preserve"><value>Could not issue the temporary grant.</value></data>
+  <data name="AgentControlNoGrant" xml:space="preserve"><value>No active grant issued by this page.</value></data>
+  <data name="AgentControlRevoke" xml:space="preserve"><value>Revoke all access and stop</value></data>
+  <data name="AgentControlStartFailed" xml:space="preserve"><value>Could not start local control.</value></data>
+  <data name="AgentControlScopedGrant" xml:space="preserve"><value>Grant 5-minute read and preview access to selected connection</value></data>
+  <data name="AgentControlScopedGrantCreated" xml:space="preserve"><value>Temporary grant ID: {0}. It can read and preview safe information for the selected connection for five minutes.</value></data>
+  <data name="AgentControlChooseTarget" xml:space="preserve"><value>Choose a connection before granting access.</value></data></root>

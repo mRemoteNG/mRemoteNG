@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Xml;
 using mRemoteNG.Security;
 using NUnit.Framework;
@@ -85,6 +86,15 @@ namespace mRemoteNGTests.Security
             
             Assert.That(doc, Is.Not.Null);
             Assert.That(doc.DocumentElement?.Name, Is.EqualTo("root"));
+        }
+
+        [Test]
+        public void LoadXmlFromString_RejectsExcessiveNesting()
+        {
+            string xml = "<r>" + string.Concat(Enumerable.Repeat("<n>", 128)) + "x" +
+                         string.Concat(Enumerable.Repeat("</n>", 128)) + "</r>";
+
+            Assert.Throws<XmlException>(() => SecureXmlHelper.LoadXmlFromString(xml));
         }
     }
 }

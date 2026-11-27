@@ -24,4 +24,5 @@
   <ItemGroup>
     <ProjectReference Include="..\mRemoteNG\mRemoteNG.csproj" />
   </ItemGroup>
+  <Import Project="../TestArtifacts.targets" />
 </Project>

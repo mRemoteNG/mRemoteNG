@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <TestArtifactsRoot Condition="'$(TestArtifactsRoot)' == ''">$(TEST_ARTIFACTS_ROOT)</TestArtifactsRoot>
+    <TestArtifactsRoot Condition="'$(TestArtifactsRoot)' == ''">$(TEST_OUTPUT_ROOT)</TestArtifactsRoot>
+    <TestArtifactsRoot Condition="'$(TestArtifactsRoot)' == '' and '$(OS)' == 'Windows_NT' and '$(CI)' == ''">C:/data/tests</TestArtifactsRoot>
+    <TestArtifactsRoot Condition="'$(TestArtifactsRoot)' == ''">$(MSBuildThisFileDirectory)artifacts/tests</TestArtifactsRoot>
+    <TestRunId Condition="'$(TestRunId)' == ''">$(TEST_RUN_ID)</TestRunId>
+    <TestRunId Condition="'$(TestRunId)' == ''">$([System.Guid]::NewGuid().ToString('N'))</TestRunId>
+    <VSTestResultsDirectory>$(TestArtifactsRoot)/tools-mRemoteNG/$(TestRunId)/dotnet/$(MSBuildProjectName)/$(TargetFramework)</VSTestResultsDirectory>
+    <VSTestLogger Condition="'$(VSTestLogger)' == ''">trx</VSTestLogger>
+    <CoverletOutput>$(VSTestResultsDirectory)/coverage/</CoverletOutput>
+  </PropertyGroup>
+</Project>

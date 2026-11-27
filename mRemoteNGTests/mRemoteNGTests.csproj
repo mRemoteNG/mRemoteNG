@@ -73,4 +73,5 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <Import Project="../TestArtifacts.targets" />
 </Project>

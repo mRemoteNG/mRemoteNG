@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Runtime.Versioning;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -103,6 +104,51 @@ namespace mRemoteNG.Container
             foreach (ConnectionInfo child in newChildren)
             {
                 AddChild(child);
+            }
+        }
+
+        /// <summary>Attaches a fully staged set of detached children as one tree change.</summary>
+        public void AddChildrenAtomically(IEnumerable<ConnectionInfo> newChildren)
+        {
+            AddChildrenAtomically(newChildren, CancellationToken.None);
+        }
+
+        public void AddChildrenAtomically(IEnumerable<ConnectionInfo> newChildren, CancellationToken cancellationToken)
+        {
+            if (newChildren == null) throw new ArgumentNullException(nameof(newChildren));
+            cancellationToken.ThrowIfCancellationRequested();
+            ConnectionInfo[] children = newChildren.ToArray();
+            if (children.Any(child => child == null) || children.Distinct().Count() != children.Length)
+                throw new ArgumentException("The import contains a null or duplicate connection.", nameof(newChildren));
+            if (children.Any(Children.Contains))
+                throw new InvalidOperationException("The staged import already contains a destination child.");
+
+            // Importers may supply nodes parented by their detached parse tree. Remove them
+            // from that staging tree before publishing the batch to this container.
+            foreach (ConnectionInfo child in children)
+                child.Parent?.RemoveChild(child);
+            cancellationToken.ThrowIfCancellationRequested();
+
+            foreach (ConnectionInfo child in children)
+            {
+                child.Parent = this;
+                SubscribeToChildEvents(child);
+            }
+            Children.AddRange(children);
+            try
+            {
+                if (children.Length > 0)
+                    RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            }
+            catch
+            {
+                Children.RemoveRange(Children.Count - children.Length, children.Length);
+                foreach (ConnectionInfo child in children)
+                {
+                    UnsubscribeToChildEvents(child);
+                    child.Parent = null!;
+                }
+                throw;
             }
         }
 

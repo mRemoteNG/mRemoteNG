@@ -287,3 +287,7 @@ InstallerProjects/Installer/Resources/License.rtf
 **/mRemoteNG/Properties/AssemblyInfo.tt
 **/mRemoteNG/Properties/AssemblyInfo.cs
 /.cr/personal/FavoritesList
+
+# Generated test reports and coverage
+/artifacts/tests/
+**/TestResults/

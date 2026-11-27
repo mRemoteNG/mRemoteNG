@@ -1,4 +1,5 @@
 ﻿using mRemoteNG.Container;
+using System.Threading;
 
 namespace mRemoteNG.Config.Import
 {
@@ -6,5 +7,10 @@ namespace mRemoteNG.Config.Import
         where TSource : class
     {
         void Import(TSource source, ContainerInfo destinationContainer);
+
+        void Import(TSource source, ContainerInfo destinationContainer, CancellationToken cancellationToken)
+        {
+            ImportStager.Run(destinationContainer, cancellationToken, staged => Import(source, staged));
+        }
     }
 }
