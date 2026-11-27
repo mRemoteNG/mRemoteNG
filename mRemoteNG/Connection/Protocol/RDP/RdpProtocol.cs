@@ -52,7 +52,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         protected readonly uint DeviceScaleFactor = 100;
         protected readonly uint Orientation = 0;
         private AxHost AxHost => (AxHost)Control;
-
+        private bool _entraSsoRetried;
 
         #region Properties
 
@@ -463,6 +463,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             RedirectKeys = connectionInfo.RedirectKeys;
             SetRedirection();
             SetAuthenticationLevel();
+            SetEntraSso();
             SetLoadBalanceInfo();
             SetRdGateway();
             ViewOnly = Force.HasFlag(ConnectionInfo.Force.ViewOnly);
@@ -700,6 +701,17 @@ namespace mRemoteNG.Connection.Protocol.RDP
             try
             {
                 if (Force.HasFlag(ConnectionInfo.Force.NoCredentials))
+                {
+                    return;
+                }
+
+                if (Force.HasFlag(ConnectionInfo.Force.NoCredentials))
+                {
+                    return;
+                }
+
+                // Entra ID SSO : aucun identifiant fourni à la session RDP
+                if (connectionInfo.UseEntraSso)
                 {
                     return;
                 }
@@ -1048,6 +1060,27 @@ namespace mRemoteNG.Connection.Protocol.RDP
             }
         }
 
+        /// <summary>
+        /// Microsoft Entra ID single sign-on (RDS AAD authentication). Requires CredSSP and
+        /// server authentication, so these are enforced when the option is enabled.
+        /// </summary>
+        private void SetEntraSso()
+        {
+            if (!connectionInfo.UseEntraSso) return;
+
+            try
+            {
+                _rdpClient.AdvancedSettings7.EnableCredSspSupport = true;
+                if (_rdpClient.AdvancedSettings5.AuthenticationLevel < 2)
+                    _rdpClient.AdvancedSettings5.AuthenticationLevel = 2;
+                SetExtendedProperty("EnableRdsAadAuth", true);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("Unable to enable Entra ID SSO.", ex);
+            }
+        }
+
         private void SetLoadBalanceInfo()
         {
             if (string.IsNullOrEmpty(connectionInfo.LoadBalanceInfo))
@@ -1106,6 +1139,25 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private void RDPEvent_OnDisconnected(int discReason)
         {
             const int UI_ERR_NORMAL_DISCONNECT = 0xB08;
+            // Entra ID SSO : la 1re tentative peut échouer pendant la saisie du mot de passe ; on réessaie une fois
+            if (connectionInfo.UseEntraSso && !loginComplete && !_entraSsoRetried && discReason != UI_ERR_NORMAL_DISCONNECT)
+            {
+                _entraSsoRetried = true;
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Entra ID SSO: first attempt failed (code " + discReason + "), retrying once");
+                Control.BeginInvoke(new Action(() =>
+                {
+                    try
+                    {
+                        _rdpClient.Connect();
+                    }
+                    catch (Exception ex)
+                    {
+                        Runtime.MessageCollector.AddExceptionStackTrace("Entra ID SSO retry failed.", ex);
+                        Close();
+                    }
+                }));
+                return;
+            }
             if (discReason != UI_ERR_NORMAL_DISCONNECT)
             {
                 string reason = _rdpClient.GetErrorDescription((uint)discReason, (uint)_rdpClient.ExtendedDisconnectReason);

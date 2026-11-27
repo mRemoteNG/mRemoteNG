@@ -61,6 +61,7 @@ namespace mRemoteNG.Connection
         private bool _useCredSsp;
         private bool _useRestrictedAdmin;
         private bool _useRCG;
+        private bool _useEntraSso;
         private bool _useVmId;
         private bool _useRedirectionServerName;
 
@@ -540,6 +541,17 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("UseRCG", _useRCG);
             set => SetField(ref _useRCG, value, "UseRCG");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.UseEntraSso)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUseEntraSso)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public bool UseEntraSso
+        {
+            get => GetPropertyValue("UseEntraSso", _useEntraSso);
+            set => SetField(ref _useEntraSso, value, "UseEntraSso");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
