@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.ComponentModel;
 using System.Net.Sockets;
@@ -27,6 +28,13 @@ namespace mRemoteNG.Connection.Protocol.VNC
         private static readonly ManualResetEvent TimeoutObject = new(false);
         private static readonly object _testConnectLock = new();
 
+        // Stall recovery: see VncStallWatchdog for why a frozen session needs a reconnect.
+        private static readonly TimeSpan StallCheckInterval = TimeSpan.FromSeconds(5);
+        private readonly Stopwatch _clock = Stopwatch.StartNew();
+        private readonly VncStallWatchdog _watchdog;
+        private readonly System.Windows.Forms.Timer _stallTimer;
+        private bool _reconnecting;
+
         #endregion
 
         #region Public Methods
@@ -34,6 +42,10 @@ namespace mRemoteNG.Connection.Protocol.VNC
         public ProtocolVNC()
         {
             Control = new VncSharpCore.RemoteDesktop();
+            _watchdog = new VncStallWatchdog(() => _clock.Elapsed, VncStallWatchdog.DefaultStallTimeout,
+                                             VncStallWatchdog.DefaultMaxReconnects);
+            _stallTimer = new System.Windows.Forms.Timer { Interval = (int)StallCheckInterval.TotalMilliseconds };
+            _stallTimer.Tick += StallTimer_Tick;
         }
 
         public override bool Initialize()
@@ -45,6 +57,10 @@ namespace mRemoteNG.Connection.Protocol.VNC
                 _vnc = Control as VncSharpCore.RemoteDesktop;
                 _info = InterfaceControl.Info;
                 _vnc.VncPort = _info.Port;
+                // RemoteDesktop invalidates the region it has just drawn for every update
+                // rectangle, so Invalidated is the per-frame heartbeat. It exposes no
+                // dedicated update event.
+                _vnc.Invalidated += VNCEvent_FrameDrawn;
 
                 return true;
             }
@@ -63,7 +79,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
             try
             {
                 if (TestConnect(_info.Hostname, _info.Port, 500))
-                    _vnc.Connect(_info.Hostname, _info.VNCViewOnly, _info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
+                    ConnectVnc();
             }
             catch (Exception ex)
             {
@@ -78,6 +94,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
         public override void Disconnect()
         {
+            StopStallWatch();
             try
             {
                 _vnc.Disconnect();
@@ -137,9 +154,87 @@ namespace mRemoteNG.Connection.Protocol.VNC
             }
         }
 
+        public override void Close()
+        {
+            StopStallWatch();
+            base.Close();
+        }
+
         #endregion
 
         #region Private Methods
+
+        // The single place the control is connected, so the first connection and a stall
+        // reconnect take the same path.
+        private void ConnectVnc()
+        {
+            _vnc.Connect(_info.Hostname, _info.VNCViewOnly, _info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
+        }
+
+        private void StopStallWatch()
+        {
+            _stallTimer.Stop();
+            _watchdog.Stop();
+        }
+
+        private void StallTimer_Tick(object sender, EventArgs e)
+        {
+            switch (_watchdog.Check())
+            {
+                case VncStallAction.Reconnect:
+                    ReconnectAfterStall();
+                    break;
+                case VncStallAction.GiveUp:
+                    _stallTimer.Stop();
+                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+                                                        $"VNC session to {_info.Hostname} stopped updating and did not recover after {_watchdog.MaxReconnects} reconnects.");
+                    break;
+            }
+        }
+
+        // Runs on the UI thread (timer tick). Disconnect() joins VncSharp's worker for up to
+        // three seconds, so the tab can pause briefly before the new connection draws.
+        private void ReconnectAfterStall()
+        {
+            _stallTimer.Stop();
+            // Not log-only: whether a warning reaches the Notifications panel or a popup is the
+            // user's notification setting, as for any other warning.
+            Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+                                                $"VNC session to {_info.Hostname} stopped updating for {_watchdog.StallTimeout.TotalSeconds:0} seconds; reconnecting.");
+
+            // RemoteDesktop.Disconnect raises ConnectionLost, whose handler closes the tab.
+            // This is a reconnect, so keep the tab.
+            _reconnecting = true;
+            try
+            {
+                if (_vnc.IsConnected)
+                    _vnc.Disconnect();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+                                                    Language.VncConnectionDisconnectFailed + Environment.NewLine +
+                                                    ex.Message, true);
+            }
+            finally
+            {
+                _reconnecting = false;
+            }
+
+            try
+            {
+                // Not through Connect(): that also re-registers the event handlers, which
+                // are still attached.
+                ConnectVnc();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+                                                    Language.ConnectionOpenFailed + Environment.NewLine +
+                                                    ex.Message);
+                VNCEvent_Disconnected(this, EventArgs.Empty);
+            }
+        }
 
         private void SetEventHandlers()
         {
@@ -223,10 +318,19 @@ namespace mRemoteNG.Connection.Protocol.VNC
         {
             Event_Connected(this);
             _vnc.AutoScroll = _info.VNCSmartSizeMode == SmartSizeMode.SmartSNo;
+            _watchdog.Start();
+            _stallTimer.Start();
+        }
+
+        private void VNCEvent_FrameDrawn(object sender, System.Windows.Forms.InvalidateEventArgs e)
+        {
+            _watchdog.FrameReceived();
         }
 
         private void VNCEvent_Disconnected(object sender, EventArgs e)
         {
+            if (_reconnecting) return;
+            StopStallWatch();
             FrmMain.ClipboardChanged -= VNCEvent_ClipboardChanged;
             Event_Disconnected(this, @"VncSharp Disconnected.", null);
             Close();
