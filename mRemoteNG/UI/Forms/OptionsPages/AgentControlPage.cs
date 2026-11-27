@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,7 +37,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             _enable.Text = Text("AgentControlEnable", "Enable local control for this session");
             _grant.Text = Text("AgentControlGrant", "Grant 5-minute access to list allowed actions");
             _scopedGrant.Text = Text("AgentControlScopedGrant", "Grant 5-minute read and preview access to selected connection");
-            foreach (AgentControlTargetOption target in _runtime.GetAvailableTargets())
+            foreach (AgentControlTargetOption target in AgentControlRuntime.GetAvailableTargets())
                 _targets.Items.Add(target);
             _revoke.Text = Text("AgentControlRevoke", "Revoke all access and stop");
             _grantValue.Text = Text("AgentControlNoGrant", "No active grant issued by this page.");

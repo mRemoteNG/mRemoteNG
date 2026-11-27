@@ -146,7 +146,7 @@ namespace mRemoteNG.Container
                 foreach (ConnectionInfo child in children)
                 {
                     UnsubscribeToChildEvents(child);
-                    child.Parent = null!;
+                    child.Parent = null;
                 }
                 throw;
             }

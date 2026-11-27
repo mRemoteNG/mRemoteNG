@@ -48,8 +48,7 @@ namespace mRemoteNG.Config.Connections
             if (!databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion))
                 throw new InvalidOperationException("The shared SQL schema is unsupported.");
             using System.Data.Common.DbTransaction snapshotTransaction = connector.DbConnection().BeginTransaction(System.Data.IsolationLevel.Serializable);
-            SqlTreeRevisionStore revisionStore = new();
-            long revision = revisionStore.ReadRevision(connector, snapshotTransaction);
+            long revision = SqlTreeRevisionStore.ReadRevision(connector, snapshotTransaction);
             metaData = metaDataRetriever.GetDatabaseMetaData(connector, snapshotTransaction)
                 ?? throw new InvalidOperationException("The shared SQL root metadata is missing.");
             if (metaData.ConfVersion != new Version(3, 4))
@@ -100,7 +99,7 @@ namespace mRemoteNG.Config.Connections
 
         private SqlConnectionListMetaData HandleFirstRun(SqlDatabaseMetaDataRetriever metaDataRetriever, IDatabaseConnector connector)
         {
-	        metaDataRetriever.WriteDatabaseMetaData(new RootNodeInfo(RootNodeType.Connection), connector);
+	        SqlDatabaseMetaDataRetriever.WriteDatabaseMetaData(new RootNodeInfo(RootNodeType.Connection), connector);
 	        return metaDataRetriever.GetDatabaseMetaData(connector);
 		}
     }

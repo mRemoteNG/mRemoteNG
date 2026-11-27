@@ -29,7 +29,7 @@ namespace mRemoteNG.Config.Import
             ImportBudget.ValidateTree(connectionTreeModel);
 
             ContainerInfo rootImportContainer = new() { Name = Path.GetFileNameWithoutExtension(filePath)};
-            rootImportContainer.AddChildrenAtomically(connectionTreeModel.RootNodes.First().Children.ToArray());
+            rootImportContainer.AddChildrenAtomically(connectionTreeModel.RootNodes[0].Children.ToArray());
             destinationContainer.AddChild(rootImportContainer);
         }
     }

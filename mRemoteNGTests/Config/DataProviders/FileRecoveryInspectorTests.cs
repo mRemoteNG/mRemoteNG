@@ -36,8 +36,7 @@ namespace mRemoteNGTests.Config.DataProviders
             File.WriteAllText(outside, "valid but outside");
             try
             {
-                FileRecoveryInspector inspector = new();
-                var candidates = inspector.Inspect(primary, [primary, backup, outside], stream =>
+                var candidates = FileRecoveryInspector.Inspect(primary, [primary, backup, outside], stream =>
                 {
                     using StreamReader reader = new(stream, Encoding.UTF8, true, 1024, true);
                     return reader.ReadToEnd() == "valid generation";

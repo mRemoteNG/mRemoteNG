@@ -39,23 +39,26 @@ namespace mRemoteNG.App.AgentControl
         string StoreId, string TargetId, string State, string ResultCode, bool ChangedState, DateTime CreatedUtc,
         DateTime CompletedUtc);
 
-    public sealed record ControlError(string Code);
+    public sealed record ControlError(string Code)
+    {
+        public const string InvalidRequest = "INVALID_REQUEST";
+    }
 
     internal static class ControlRequestValidator
     {
         public static ControlError? Validate(ControlRequest request)
         {
             if (request == null)
-                return new ControlError("INVALID_REQUEST");
+                return new ControlError(ControlError.InvalidRequest);
             if (request.SchemaVersion != ControlSchema.Version)
                 return new ControlError("UNSUPPORTED_SCHEMA");
             if (string.IsNullOrWhiteSpace(request.RequestId) || request.RequestId.Length > 128 ||
                 string.IsNullOrWhiteSpace(request.Action) || request.Action.Length > 64)
-                return new ControlError("INVALID_REQUEST");
+                return new ControlError(ControlError.InvalidRequest);
             if (request.GrantId?.Length > 128 || request.StoreId?.Length > 128 || request.TargetId?.Length > 128)
-                return new ControlError("INVALID_REQUEST");
+                return new ControlError(ControlError.InvalidRequest);
             if (request.PreviewAction?.Length > 64 || request.OperationId?.Length > 128)
-                return new ControlError("INVALID_REQUEST");
+                return new ControlError(ControlError.InvalidRequest);
             return null;
         }
     }

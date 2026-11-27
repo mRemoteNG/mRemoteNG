@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
@@ -22,7 +22,7 @@ namespace mRemoteNG.App.AgentControl
         private readonly CapabilityGrantService _grants = new();
         private readonly ControlOperationRegistry _operations = new();
         private NamedPipeControlHost _host;
-        private readonly ActionRegistry _actions = new();
+        private const string ActiveStoreId = "active";
         private static readonly ControlTarget GlobalTarget = new(string.Empty, string.Empty);
 
         public bool IsEnabled => _host?.IsRunning == true;
@@ -33,7 +33,7 @@ namespace mRemoteNG.App.AgentControl
             if (IsEnabled) return;
             string pipeName = $"mRemoteNG.AgentControl.{Environment.ProcessId}.{System.Diagnostics.Process.GetCurrentProcess().SessionId}";
             PipeName = pipeName;
-            ControlRequestProcessor processor = new(_actions, _grants, GetPolicyRevision, HandleReadOnlyAction, _operations);
+            ControlRequestProcessor processor = new(_grants, GetPolicyRevision, HandleReadOnlyAction, _operations);
             _host = new NamedPipeControlHost(pipeName, processor);
             _host.Start();
         }
@@ -59,16 +59,16 @@ namespace mRemoteNG.App.AgentControl
 
         public CapabilityGrant IssueScopedReadGrant(string targetId)
         {
-            if (string.IsNullOrWhiteSpace(targetId) || targetId.Length > 128 || !TryGetConnection("active", targetId, out _))
+            if (string.IsNullOrWhiteSpace(targetId) || targetId.Length > 128 || !TryGetConnection(ActiveStoreId, targetId, out _))
                 throw new InvalidOperationException("Choose an existing connection target.");
-            ControlTarget target = new("active", targetId);
+            ControlTarget target = new(ActiveStoreId, targetId);
             return _grants.Issue(GetCurrentClientId(),
                 [ControlCapability.ActionsRead, ControlCapability.ConnectionsRead, ControlCapability.ActionsPreview,
                     ControlCapability.OperationsRead], [GlobalTarget, target], TimeSpan.FromMinutes(5),
                 GetPolicyRevision(), DateTime.UtcNow);
         }
 
-        public IReadOnlyList<AgentControlTargetOption> GetAvailableTargets()
+        public static IReadOnlyList<AgentControlTargetOption> GetAvailableTargets()
         {
             // The options page calls this on its UI thread.
             ConnectionTreeModel model = Runtime.ConnectionsService?.ConnectionTreeModel;
@@ -81,10 +81,10 @@ namespace mRemoteNG.App.AgentControl
                 .ToArray();
         }
 
-        private object HandleReadOnlyAction(ControlRequest request, ControlTarget target)
+        private static object HandleReadOnlyAction(ControlRequest request, ControlTarget target)
         {
             if (request.Action == ControlActionNames.ActionsList)
-                return _actions.List();
+                return ActionRegistry.List();
             if (request.Action == ControlActionNames.ConnectionsList)
                 return TryGetConnection(target.StoreId, target.TargetId, out SafeConnectionSummary connection)
                     ? connection
@@ -106,7 +106,7 @@ namespace mRemoteNG.App.AgentControl
         private static bool TryGetConnection(string storeId, string targetId, out SafeConnectionSummary summary)
         {
             summary = null;
-            if (storeId != "active" || string.IsNullOrWhiteSpace(targetId))
+            if (storeId != ActiveStoreId || string.IsNullOrWhiteSpace(targetId))
                 return false;
             summary = ReadInventory().FirstOrDefault(connection => connection.ConnectionId == targetId);
             return summary != null;
@@ -117,10 +117,10 @@ namespace mRemoteNG.App.AgentControl
             if (Runtime.ConnectionsService.ConnectionTreeModel == null)
                 return Array.Empty<SafeConnectionSummary>();
 
-            IReadOnlyList<SafeConnectionSummary> ReadOnUiThread()
+            static IReadOnlyList<SafeConnectionSummary> ReadOnUiThread()
             {
                 return Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveChildList()
-                    .Select(connection => new SafeConnectionSummary("active", connection.ConstantID,
+                    .Select(connection => new SafeConnectionSummary(ActiveStoreId, connection.ConstantID,
                         connection.Protocol.ToString(), "Configured", [ControlActionNames.ConnectionsList]))
                     .ToArray();
             }

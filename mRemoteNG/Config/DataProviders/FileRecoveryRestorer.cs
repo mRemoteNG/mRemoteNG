@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Security.Cryptography;
 
@@ -25,7 +25,7 @@ namespace mRemoteNG.Config.DataProviders
             ArgumentNullException.ThrowIfNull(validateReadOnly);
 
             string fullPrimary = Path.GetFullPath(primaryPath ?? throw new ArgumentNullException(nameof(primaryPath)));
-            string directory = Path.GetDirectoryName(fullPrimary)!;
+            string directory = Path.GetDirectoryName(fullPrimary);
             string fullCandidate = Path.GetFullPath(candidate.Path);
             if (!string.Equals(Path.GetDirectoryName(fullCandidate), directory, StringComparison.OrdinalIgnoreCase))
                 throw new InvalidOperationException("Recovery candidates must be in the destination directory.");
@@ -68,7 +68,7 @@ namespace mRemoteNG.Config.DataProviders
                 _commit(temporaryPath, fullPrimary, preservedPath);
 
                 committed = true;
-                return committed && File.Exists(preservedPath) ? preservedPath : null;
+                return File.Exists(preservedPath) ? preservedPath : null;
             }
             finally
             {

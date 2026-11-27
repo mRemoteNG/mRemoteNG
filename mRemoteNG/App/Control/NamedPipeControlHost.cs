@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.IO.Pipes;
 using System.Runtime.InteropServices;
@@ -30,16 +30,19 @@ namespace mRemoteNG.App.AgentControl
         public void Start()
         {
             if (_loop != null) throw new InvalidOperationException("The control host has already been started.");
-            _loop = Task.Run(() => ServeAsync(_shutdown.Token));
+            _loop = Task.Run(() => ServeAsync(_shutdown.Token), _shutdown.Token);
         }
 
         public async ValueTask DisposeAsync()
         {
-            _shutdown.Cancel();
+            await _shutdown.CancelAsync().ConfigureAwait(false);
             if (_loop != null)
             {
                 try { await _loop.ConfigureAwait(false); }
-                catch (OperationCanceledException) { }
+                catch (OperationCanceledException)
+                {
+                    // Cancellation is the expected completion path when stopping the listener.
+                }
             }
             _shutdown.Dispose();
         }

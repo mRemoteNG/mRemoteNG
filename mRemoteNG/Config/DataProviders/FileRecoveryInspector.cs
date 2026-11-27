@@ -9,17 +9,17 @@ namespace mRemoteNG.Config.DataProviders
     internal sealed record FileRecoveryCandidate(string Path, DateTime LastWriteTimeUtc, long Length, string Sha256);
 
     /// <summary>Lists sibling generations that pass a caller-supplied read-only format/decryption validator.</summary>
-    internal sealed class FileRecoveryInspector
+    internal static class FileRecoveryInspector
     {
         private const long MaximumCandidateBytes = 64L * 1024 * 1024;
 
-        public IReadOnlyList<FileRecoveryCandidate> Inspect(string primaryPath, IEnumerable<string> candidates,
+        public static IReadOnlyList<FileRecoveryCandidate> Inspect(string primaryPath, IEnumerable<string> candidates,
             Func<Stream, bool> validateReadOnly)
         {
             ArgumentNullException.ThrowIfNull(candidates);
             ArgumentNullException.ThrowIfNull(validateReadOnly);
             string fullPrimaryPath = Path.GetFullPath(primaryPath ?? throw new ArgumentNullException(nameof(primaryPath)));
-            string primaryDirectory = Path.GetDirectoryName(fullPrimaryPath)!;
+            string primaryDirectory = Path.GetDirectoryName(fullPrimaryPath);
             List<FileRecoveryCandidate> valid = new();
 
             foreach (string candidatePath in candidates.Distinct(StringComparer.OrdinalIgnoreCase))

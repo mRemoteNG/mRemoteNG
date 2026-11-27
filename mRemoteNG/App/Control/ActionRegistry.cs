@@ -5,7 +5,7 @@ using System.Linq;
 namespace mRemoteNG.App.AgentControl
 {
     /// <summary>Allowlist for the initial read-only control surface.</summary>
-    internal sealed class ActionRegistry
+    internal static class ActionRegistry
     {
         private static readonly ControlActionDescriptor[] Actions =
         [
@@ -15,9 +15,9 @@ namespace mRemoteNG.App.AgentControl
             new(ControlActionNames.OperationsGet, "operations.read", true)
         ];
 
-        public IReadOnlyList<ControlActionDescriptor> List() => Array.AsReadOnly(Actions);
+        public static IReadOnlyList<ControlActionDescriptor> List() => Array.AsReadOnly(Actions);
 
-        public bool TryGet(string name, out ControlActionDescriptor descriptor)
+        public static bool TryGet(string name, out ControlActionDescriptor descriptor)
         {
             descriptor = Actions.FirstOrDefault(action => string.Equals(action.Name, name, StringComparison.Ordinal));
             return descriptor != null;

@@ -71,9 +71,9 @@ namespace mRemoteNG.Config.Import
             private ImportBudget _budget = budget;
             public void Dispose()
             {
-                ImportBudget budget = _budget;
+                ImportBudget currentBudget = _budget;
                 _budget = null;
-                if (budget != null) budget._depth--;
+                if (currentBudget != null) currentBudget._depth--;
             }
         }
     }

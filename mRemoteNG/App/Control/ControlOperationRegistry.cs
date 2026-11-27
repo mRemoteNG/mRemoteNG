@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace mRemoteNG.App.AgentControl
 {
@@ -10,7 +11,7 @@ namespace mRemoteNG.App.AgentControl
         private const int MaximumOperations = 512;
         private static readonly TimeSpan Retention = TimeSpan.FromMinutes(15);
         private readonly Dictionary<string, ControlOperation> _operations = new(StringComparer.Ordinal);
-        private readonly object _sync = new();
+        private readonly Lock _sync = new();
 
         public ControlOperation RecordCompleted(string clientId, string grantId, string action, ControlTarget target,
             string resultCode, DateTime utcNow)

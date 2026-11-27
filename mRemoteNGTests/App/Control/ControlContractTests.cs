@@ -15,11 +15,9 @@ namespace mRemoteNGTests.App.Control
         [Test]
         public void Registry_ExposesOnlyAllowlistedReadOnlyActions()
         {
-            ActionRegistry registry = new();
-
-            Assert.That(registry.List(), Has.Count.EqualTo(4));
-            Assert.That(registry.List(), Has.All.Property(nameof(ControlActionDescriptor.ReadOnly)).True);
-            Assert.That(registry.TryGet("connection.connect", out _), Is.False);
+            Assert.That(ActionRegistry.List(), Has.Count.EqualTo(4));
+            Assert.That(ActionRegistry.List(), Has.All.Property(nameof(ControlActionDescriptor.ReadOnly)).True);
+            Assert.That(ActionRegistry.TryGet("connection.connect", out _), Is.False);
         }
 
         [Test]
@@ -28,6 +26,37 @@ namespace mRemoteNGTests.App.Control
             const string request = "{\"SchemaVersion\":1,\"RequestId\":\"r1\",\"Action\":\"actions.list\",\"Shell\":\"whoami\"}";
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ControlRequest>(request));
+        }
+
+        [TestCase("null", ControlError.InvalidRequest)]
+        [TestCase("{}", "UNSUPPORTED_SCHEMA")]
+        [TestCase("{\"SchemaVersion\":1,\"RequestId\":\"r1\",\"Action\":null}", ControlError.InvalidRequest)]
+        public void Processor_RejectsNullOrIncompleteRequestBeforeCallingAdapter(string json, string expectedError)
+        {
+            int calls = 0;
+            ControlRequestProcessor processor = new(new CapabilityGrantService(), () => 1,
+                (_, _) => { calls++; return new { safe = true }; });
+
+            using JsonDocument response = JsonDocument.Parse(processor.Process(
+                Encoding.UTF8.GetBytes(json), "synthetic-client", DateTime.UtcNow));
+
+            Assert.That(response.RootElement.GetProperty("Error").GetProperty("Code").GetString(),
+                Is.EqualTo(expectedError));
+            Assert.That(calls, Is.Zero);
+        }
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task NamedPipeHost_DisposeBeforeOrImmediatelyAfterStart_CompletesShutdown(bool start)
+        {
+            ControlRequestProcessor processor = new(new CapabilityGrantService(), () => 1, (_, _) => null);
+            NamedPipeControlHost host = new("mRemoteNG-test-" + Guid.NewGuid().ToString("N"), processor);
+            if (start)
+                host.Start();
+
+            await host.DisposeAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(5));
+
+            Assert.That(host.IsRunning, Is.False);
         }
 
         [Test]
@@ -57,7 +86,7 @@ namespace mRemoteNGTests.App.Control
         public void Processor_RejectsMissingGrantAndMalformedRequestWithoutCallingAdapter()
         {
             int calls = 0;
-            ControlRequestProcessor processor = new(new ActionRegistry(), new CapabilityGrantService(), () => 1,
+            ControlRequestProcessor processor = new(new CapabilityGrantService(), () => 1,
                 (_, _) => { calls++; return new { safe = true }; });
 
             string missingGrant = Encoding.UTF8.GetString(processor.Process(
@@ -82,7 +111,7 @@ namespace mRemoteNGTests.App.Control
                 TimeSpan.FromMinutes(3), 8, now);
             long currentPolicy = 8;
             int calls = 0;
-            ControlRequestProcessor processor = new(new ActionRegistry(), grants, () => currentPolicy,
+            ControlRequestProcessor processor = new(grants, () => currentPolicy,
                 (_, _) => { calls++; return new { safe = true }; });
             string request = JsonSerializer.Serialize(new ControlRequest(1, "r2", ControlActionNames.ActionsList, grant.GrantId));
 
@@ -102,7 +131,7 @@ namespace mRemoteNGTests.App.Control
             DateTime now = DateTime.UtcNow;
             CapabilityGrant grant = grants.Issue("S-1-client", [ControlCapability.ActionsRead],
                 [new ControlTarget(string.Empty, string.Empty)], TimeSpan.FromMinutes(2), 1, now);
-            ControlRequestProcessor processor = new(new ActionRegistry(), grants, () => 1,
+            ControlRequestProcessor processor = new(grants, () => 1,
                 (_, _) => throw new InvalidOperationException("credential=fixture-secret"));
             string request = JsonSerializer.Serialize(new ControlRequest(1, "r3", ControlActionNames.ActionsList, grant.GrantId));
 
@@ -125,7 +154,7 @@ namespace mRemoteNGTests.App.Control
                     ControlCapability.ConnectionsRead, ControlCapability.ActionsPreview, ControlCapability.OperationsRead],
                 [new ControlTarget(string.Empty, string.Empty), target], TimeSpan.FromMinutes(5), 17, now);
             int policyRevision = 17;
-            ControlRequestProcessor processor = new(new ActionRegistry(), grants, () => policyRevision,
+            ControlRequestProcessor processor = new(grants, () => policyRevision,
                 (request, scopedTarget) => request.Action switch
                 {
                     ControlActionNames.ConnectionsList => new SafeConnectionSummary(scopedTarget.StoreId,
@@ -182,8 +211,8 @@ namespace mRemoteNGTests.App.Control
             CapabilityGrantService grants = new();
             CapabilityGrant grant = grants.Issue(clientId, [ControlCapability.ActionsRead],
                 [new ControlTarget(string.Empty, string.Empty)], TimeSpan.FromMinutes(1), 1, now);
-            ControlRequestProcessor processor = new(new ActionRegistry(), grants, () => 1,
-                (request, _) => request.Action == ControlActionNames.ActionsList ? new ActionRegistry().List() : null);
+            ControlRequestProcessor processor = new(grants, () => 1,
+                (request, _) => request.Action == ControlActionNames.ActionsList ? ActionRegistry.List() : null);
             NamedPipeControlHost host = new(pipeName, processor);
             host.Start();
 

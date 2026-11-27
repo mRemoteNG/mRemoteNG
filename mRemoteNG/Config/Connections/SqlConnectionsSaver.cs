@@ -61,7 +61,7 @@ namespace mRemoteNG.Config.Connections
                 // Write it before the version check instead of dereferencing null.
                 if (metaData == null)
                 {
-                    metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector);
+                    SqlDatabaseMetaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector);
                     metaData = metaDataRetriever.GetDatabaseMetaData(dbConnector);
                 }
 
@@ -80,17 +80,16 @@ namespace mRemoteNG.Config.Connections
                 if (connectionTreeModel.SqlTreeRevision == null)
                     throw new InvalidOperationException("SQL tree revision is unavailable; reload the shared tree before saving.");
                 using DbTransaction transaction = dbConnector.DbConnection().BeginTransaction(System.Data.IsolationLevel.Serializable);
-                SqlTreeRevisionStore revisionStore = new();
-                long currentRevision = revisionStore.ReadRevision(dbConnector, transaction, lockForWrite: true);
+                long currentRevision = SqlTreeRevisionStore.ReadRevision(dbConnector, transaction, lockForWrite: true);
                 if (currentRevision != connectionTreeModel.SqlTreeRevision.Value)
                 {
                     connectionTreeModel.HasSqlSaveConflict = true;
                     throw new InvalidOperationException("Shared SQL tree changed since it was loaded. The draft was retained.");
                 }
-                metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector, transaction);
+                SqlDatabaseMetaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector, transaction);
                 UpdateConnectionsTable(rootTreeNode, dbConnector, transaction);
                 UpdateUpdatesTable(dbConnector, transaction);
-                revisionStore.AdvanceRevision(dbConnector, transaction, currentRevision);
+                SqlTreeRevisionStore.AdvanceRevision(dbConnector, transaction, currentRevision);
                 transaction.Commit();
                 connectionTreeModel.SqlTreeRevision = checked(currentRevision + 1);
                 connectionTreeModel.HasSqlSaveConflict = false;
@@ -193,7 +192,7 @@ namespace mRemoteNG.Config.Connections
             dataProvider.Save(dataTable, transaction);
         }
 
-        private void UpdateUpdatesTable(IDatabaseConnector databaseConnector, DbTransaction transaction)
+        private static void UpdateUpdatesTable(IDatabaseConnector databaseConnector, DbTransaction transaction)
         {
             System.Data.Common.DbCommand dbQuery = databaseConnector.DbCommand("DELETE FROM tblUpdate");
             dbQuery.Transaction = transaction;

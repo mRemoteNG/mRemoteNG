@@ -68,7 +68,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             return metaData;
         }
 
-        public void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector, DbTransaction transaction = null)
+        public static void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector, DbTransaction transaction = null)
         {
             LegacyRijndaelCryptographyProvider cryptographyProvider = new();
 

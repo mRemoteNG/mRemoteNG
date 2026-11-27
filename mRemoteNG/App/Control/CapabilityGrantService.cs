@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Security.Cryptography;
 
 namespace mRemoteNG.App.AgentControl
@@ -23,7 +24,7 @@ namespace mRemoteNG.App.AgentControl
     internal sealed class CapabilityGrantService
     {
         private readonly Dictionary<string, CapabilityGrant> _grants = new(StringComparer.Ordinal);
-        private readonly object _sync = new();
+        private readonly Lock _sync = new();
 
         public CapabilityGrant Issue(string clientId, IEnumerable<ControlCapability> capabilities,
             IEnumerable<ControlTarget> targets, TimeSpan lifetime, long policyRevision, DateTime utcNow)
